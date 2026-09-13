@@ -920,7 +920,7 @@
           const cls = promoted ? 'finds-card--promoted' : 'finds-card--organic';
           return `
             <a href="items/${esc(f.item_id)}.html" class="finds-card ${cls}">
-              <div class="finds-image"><img src="${imgPath(f)}" alt="${esc(f.title_zh)}" loading="lazy"></div>
+              <div class="finds-image"><img src="${imgPath(f)}" alt="${esc(f.title_zh)}" loading="lazy" onerror="this.onerror=null;this.src='/assets/images/placeholder.jpg'"></div>
               <div class="finds-title zh">${esc(f.title_zh)}</div><div class="finds-title en">${esc(f.title_en)}</div>
               <div class="finds-meta zh">${esc(f.era_zh)} · ${esc(f.category)}</div><div class="finds-meta en">${esc(f.era_en)} · ${esc(f.category)}</div>
               <div class="finds-price">${esc(f.price_display_zh || f.price_display_en)}</div>
@@ -952,7 +952,7 @@
             const card = `
               <a href="${detailUrl}" class="item-card listing-card" data-cat="${catKey(f.category)}" data-keywords="${esc([f.title_zh, f.title_en, f.era_zh, f.era_en, f.category].filter(Boolean).join(' '))}">
                 ${badgeHtml}
-                <img src="${imgSrc}" alt="${esc(f.title_zh)}" loading="lazy">
+                <img src="${imgSrc}" alt="${esc(f.title_zh)}" loading="lazy" onerror="this.onerror=null;this.src='/assets/images/placeholder.jpg'">
                 <h3>${esc(f.title_zh)}</h3>
                 <p class="text-en">${esc(f.title_en)}</p>
                 <p class="price-cn">${esc(f.price_display_zh)}</p>

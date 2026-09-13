@@ -342,6 +342,14 @@
             text-align: center;
             margin-bottom: 1.6rem;
         }
+        /* 搜索结果反馈（搜索时显示「找到 N 件藏品」/「未找到匹配藏品」） */
+        .search-result-tip {
+            font-size: .82rem;
+            color: var(--color-primary);
+            text-align: center;
+            margin: -.8rem 0 1.6rem;
+            font-weight: 600;
+        }
         /* ---------- Section headers ---------- */
         .section-head2 { margin-bottom: 1.4rem; display: flex; align-items: flex-end; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
         .section-head2 .title { font-size: 1.3rem; font-weight: 700; color: var(--color-text); }
@@ -433,10 +441,10 @@
             font-size: .82rem;
             color: var(--color-text-secondary);
         }
-        /* ---------- Badge (used by renderCards) ---------- */
+        /* ---------- Badge ----------
+           2026-09-14：卡片图片上的「今日发现置顶 / 编辑精选」文字标签已按要求移除，
+           对应的 .badge-top / .badge-editor 规则一并删除。.badge 基础样式保留备用。 */
         .badge { position: absolute; top: 8px; left: 8px; padding: 3px 8px; font-size: 12px; border-radius: 4px; color: #fff; z-index: 2; }
-        .badge-top { background: #B82222; }
-        .badge-editor { background: #224488; top: 32px; }
         .listing-card { position: relative; cursor: pointer; overflow: hidden; border-radius: 8px; background: var(--color-primary-light); text-decoration: none; transition: .25s; min-height: 300px; display: flex; flex-direction: column; }
         .listing-card:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(37,34,30,.14); }
         .listing-card img { width: 100%; height: auto; max-height: 220px; object-fit: cover; display: block; }
@@ -665,7 +673,10 @@
                 <a href="#new-listings" class="hero-btn"><span class="zh">浏览藏品</span><span class="en">Browse Listings</span></a>
                 <div class="search-box">
                     <input type="text" id="searchInput" placeholder="" />
-                    <button onclick="doSearch()">🔍</button>
+                    <button type="button" onclick="doSearch()" aria-label="search">🔍</button>
+                </div>
+                <div id="searchResultTip" class="search-result-tip" role="status" aria-live="polite" style="display:none;">
+                    <span class="zh"></span><span class="en"></span>
                 </div>
                 <div class="search-tip zh">瓷器 · 玉器 · 钱币 · 书画 · 杂项</div>
                 <div class="search-tip en">Porcelain · Jade · Coins · Paintings · Miscellaneous</div>
@@ -865,21 +876,97 @@
             document.body.dataset.lang = currentLang;
             document.querySelector('.lang-btn').textContent = currentLang === 'zh' ? 'EN' : '中';
             updateSearchPlaceholder();
+            // 切换语言后同步刷新搜索结果文案
+            if (document.getElementById('searchInput').value.trim()) filterAll();
         }
+
+        /* ===== 搜索：覆盖首页三个区块（今日发现 / 编辑精选 / 最新上架） ===== */
+        // 首页三处卡片列表的选择器
+        const SEARCH_GROUPS = [
+            '#todayFindsGrid .finds-card',
+            '#editorPicksGrid .expert-mini-card',
+            '#itemList .item-card',
+        ];
+        // 记录第一个命中的卡片，供点击搜索/回车后滚动定位
+        let firstMatchEl = null;
+
+        // 取卡片的可搜索文本。用 textContent 而不是 innerText：
+        // innerText 在被 display:none 隐藏后返回空串，会导致二次搜索失效。
+        function searchHaystack(card) {
+            const alt = card.querySelector('img')?.alt || '';
+            return ((card.dataset.keywords || '') + ' ' + alt + ' ' + card.textContent).toLowerCase();
+        }
+
         function filterAll() {
             const kw = document.getElementById('searchInput').value.trim().toLowerCase();
-            document.querySelectorAll('#itemList .item-card').forEach(card => {
-                const okCat = currentCat === 'all' || card.dataset.cat === currentCat;
-                const okKw = !kw || card.dataset.keywords?.toLowerCase().includes(kw) || card.innerText.toLowerCase().includes(kw);
-                card.style.display = okCat && okKw ? '' : 'none';
+            let visible = 0;
+            firstMatchEl = null;
+
+            SEARCH_GROUPS.forEach(sel => {
+                document.querySelectorAll(sel).forEach(card => {
+                    const okCat = currentCat === 'all' || card.dataset.cat === currentCat;
+                    const okKw = !kw || searchHaystack(card).includes(kw);
+                    const ok = okCat && okKw;
+                    card.style.display = ok ? '' : 'none';
+                    if (ok) {
+                        visible++;
+                        if (!firstMatchEl) firstMatchEl = card;
+                    }
+                });
             });
-            checkNoResult();
+
+            showSearchTip(kw, visible);
+            checkNoResult(kw);
+
+            // 今日发现 / 编辑精选 区块整块为空时收起区块标题，避免出现"空标题"
+            ['todayFindsGrid', 'editorPicksGrid'].forEach(id => {
+                const grid = document.getElementById(id);
+                if (!grid) return;
+                const sec = grid.closest('section');
+                if (!sec) return;
+                const anyVisible = Array.from(grid.querySelectorAll('a')).some(a => a.style.display !== 'none');
+                sec.style.display = (kw && !anyVisible) ? 'none' : '';
+            });
+
+            return visible;
         }
-        function doSearch() { filterAll(); }
-        function checkNoResult() {
+
+        // 搜索反馈：有结果报数量，无结果给出可操作提示
+        function showSearchTip(kw, visible) {
+            const tip = document.getElementById('searchResultTip');
+            if (!tip) return;
+            if (!kw) { tip.style.display = 'none'; return; }
+            const zh = tip.querySelector('.zh'), en = tip.querySelector('.en');
+            if (visible > 0) {
+                zh.textContent = `找到 ${visible} 件藏品`;
+                en.textContent = `${visible} item${visible > 1 ? 's' : ''} found`;
+            } else {
+                zh.textContent = '未找到匹配藏品，试试「青花」「玉器」「钱币」等关键词';
+                en.textContent = 'No match. Try keywords like "porcelain", "jade", "coins".';
+            }
+            tip.style.display = 'block';
+        }
+
+        function checkNoResult(kw) {
             const visNormal = Array.from(document.querySelectorAll('#itemList .item-card')).some(c => c.style.display !== 'none');
             const noneEl = currentLang === 'zh' ? document.getElementById('noResult') : document.getElementById('noResultEn');
-            noneEl.style.display = !visNormal ? 'block' : 'none';
+            if (!noneEl) return;
+            noneEl.style.display = (!visNormal && kw) ? 'block' : 'none';
+        }
+
+        // 点击放大镜 / 按回车：过滤 + 滚动到第一个命中结果
+        function doSearch() {
+            const visible = filterAll();
+            const kw = document.getElementById('searchInput').value.trim();
+            if (!kw) {
+                document.getElementById('new-listings')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                return;
+            }
+            if (visible > 0 && firstMatchEl) {
+                firstMatchEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            } else {
+                document.getElementById('searchResultTip')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
         }
 
         //页面初始化
@@ -887,6 +974,18 @@
         if(localStorage.getItem('announceClosed') === 'yes'){
             document.getElementById('announceBar').style.display = 'none';
         }
+
+        // 搜索框事件绑定：回车触发搜索、输入即时过滤（此前只绑定了放大镜按钮，回车无效）
+        (function bindSearch(){
+            const el = document.getElementById('searchInput');
+            if (!el) return;
+            el.addEventListener('keydown', e => {
+                if (e.key === 'Enter') { e.preventDefault(); doSearch(); }
+                if (e.key === 'Escape') { el.value = ''; filterAll(); }
+            });
+            el.addEventListener('input', () => filterAll());   // 边输入边过滤，立即有反馈
+            el.addEventListener('search', () => filterAll());  // 兼容 <input type="search">
+        })();
 
         // PWA: 上线时若已提供 /sw.js 再开启；当前无该文件，先注释避免 404。
         // if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js');
@@ -918,8 +1017,9 @@
           const badgeZh = promoted ? '付费置顶' : '系统推荐';
           const badgeEn = promoted ? 'Promoted' : 'System Recommended';
           const cls = promoted ? 'finds-card--promoted' : 'finds-card--organic';
+          const kw = esc([f.title_zh, f.title_en, f.era_zh, f.era_en, f.category].filter(Boolean).join(' '));
           return `
-            <a href="items/${esc(f.item_id)}.html" class="finds-card ${cls}">
+            <a href="items/${esc(f.item_id)}.html" class="finds-card ${cls}" data-cat="${catKey(f.category)}" data-keywords="${kw}">
               <div class="finds-image"><img src="${imgPath(f)}" alt="${esc(f.title_zh)}" loading="lazy" onerror="this.onerror=null;this.src='/assets/images/placeholder.jpg'"></div>
               <div class="finds-title zh">${esc(f.title_zh)}</div><div class="finds-title en">${esc(f.title_en)}</div>
               <div class="finds-meta zh">${esc(f.era_zh)} · ${esc(f.category)}</div><div class="finds-meta en">${esc(f.era_en)} · ${esc(f.category)}</div>
@@ -930,8 +1030,9 @@
 
         // 渲染一张「编辑精选」卡片
         function renderPickCard(f) {
+          const kw = esc([f.title_zh, f.title_en, f.era_zh, f.era_en, f.category].filter(Boolean).join(' '));
           return `
-            <a href="items/${esc(f.item_id)}.html" class="expert-mini-card">
+            <a href="items/${esc(f.item_id)}.html" class="expert-mini-card" data-cat="${catKey(f.category)}" data-keywords="${kw}">
               <div class="expert-mini-badge zh">编辑精选</div><div class="expert-mini-badge en">Editor's Pick</div>
               <div class="expert-mini-title zh">${esc(f.title_zh)}</div><div class="expert-mini-title en">${esc(f.title_en)}</div>
               <div class="expert-mini-sub zh">${esc(f.era_zh)} · ${esc(f.category)}</div><div class="expert-mini-sub en">${esc(f.era_en)} · ${esc(f.category)}</div>
@@ -946,12 +1047,9 @@
           items.forEach(f => {
             const imgSrc = imgPath(f);
             const detailUrl = `/items/${esc(f.item_id)}.html`;
-            let badgeHtml = "";
-            if (f.is_today_finds) badgeHtml += `<span class="badge badge-top">今日发现置顶</span>`;
-            if (f.is_editor_picks) badgeHtml += `<span class="badge badge-editor">编辑精选</span>`;
+            // 卡片图片上不再叠加「今日发现置顶 / 编辑精选」文字标签（2026-09-14 按需求移除）
             const card = `
               <a href="${detailUrl}" class="item-card listing-card" data-cat="${catKey(f.category)}" data-keywords="${esc([f.title_zh, f.title_en, f.era_zh, f.era_en, f.category].filter(Boolean).join(' '))}">
-                ${badgeHtml}
                 <img src="${imgSrc}" alt="${esc(f.title_zh)}" loading="lazy" onerror="this.onerror=null;this.src='/assets/images/placeholder.jpg'">
                 <h3>${esc(f.title_zh)}</h3>
                 <p class="text-en">${esc(f.title_en)}</p>

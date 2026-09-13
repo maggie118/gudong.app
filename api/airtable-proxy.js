@@ -2,27 +2,22 @@
 // 部署在 Vercel 上的 Serverless Function，供 index.html / expert-picks.html /
 // sellers/*.html 里的前端 fetch('/api/airtable-proxy') 调用。
 //
-// ⚠️ 重要：Airtable 的「邀请协作者」链接（invite link）只是让人类账号加入 Base 的邀请，
-// 不能当作 API 凭证使用，程序里也没法用它来读数据。要让 Airtable 真正在网站里跑起来，
-// 需要下面这三样东西（都在 Airtable 网站上自己生成，不要发到聊天里，直接填进 Vercel 后台）：
-//
-//   1. Personal Access Token（个人访问令牌）
-//      Airtable 右上角头像 → Developer hub → Personal access tokens → Create new token
-//      Scope 至少勾选：data.records:read
-//      Access 里选中你要用的这个 Base（就是邀请链接对应的那个 Base）
-//
-//   2. Base ID（形如 appXXXXXXXXXXXXXX）
-//      打开这个 Base → Help → API documentation，页面顶部就会显示 Base ID
-//
-//   3. 表名/视图名（比如 "Items" 这张表，以及要读取哪个 View）
-//
-// 拿到以上信息后，在 Vercel 项目 → Settings → Environment Variables 里新增：
-//   AIRTABLE_TOKEN   = 你的 Personal Access Token
+// ⚠️ 需要在 Vercel 环境变量里配置（Settings → Environment Variables）：
+//   AIRTABLE_TOKEN   = Airtable Personal Access Token（Developer hub 生成，scope: data.records:read）
 //   AIRTABLE_BASE_ID = appXXXXXXXXXXXXXX
-//   AIRTABLE_TABLE   = Items   (按你实际表名改)
-// 保存后重新部署（redeploy），这个接口才会真正读到 Airtable 里的数据。
-// 在没配置这三个环境变量之前，本接口会直接返回 501，前端会自动退回到页面里写死的静态内容——
-// 这就是目前 Airtable"没有真正工作"的原因：接口还没有凭证可用。
+//   AIRTABLE_TABLE   = Items（按实际表名）
+// 未配置时本接口返回 501，前端自动退回静态后备内容。
+//
+// 2026-09-13 修复（针对卖家 lim-kee-whee 首页不显示的问题）：
+//   1. 复选框字段名不再要求精确匹配「今日发现置顶」「编辑精选」，
+//      改为「别名 + 名称包含关键词」匹配（如「今日发现」「编辑精选（付费）」等都能识别），
+//      避免 Airtable 列名稍有出入就整体读不到。
+//   2. 「最新上架」过滤掉完全没有标题和图片的空记录（此前 Airtable 里的空行
+//      会在首页渲染成 3 张空白卡片，把真正的藏品挤到后面）。
+//   3. 「最新上架」按 createdTime 倒序（真正的新品在前），最多返回 12 条。
+//   4. slugify 把 U+2011 等特殊连字符统一转成普通 "-"，
+//      保证生成的 /items/item-lim-01.html 链接与站点实际文件名一致。
+//   5. 响应新增 airtableFields（仅列名，不含数据），用于线上排查列名是否对得上。
 
 export default async function handler(req, res) {
   const { AIRTABLE_TOKEN, AIRTABLE_BASE_ID, AIRTABLE_TABLE } = process.env;
@@ -36,12 +31,24 @@ export default async function handler(req, res) {
 
   try {
     const records = await fetchAllRecords(AIRTABLE_TOKEN, AIRTABLE_BASE_ID, AIRTABLE_TABLE);
-    const items = records.map(mapRecordToItem);
+    const items = records
+      .map(mapRecordToItem)
+      // createdTime 一起带出来用于「最新上架」排序
+      .map((item, idx) => ({ ...item, _createdTime: records[idx].createdTime || '' }));
+
+    // 完全没有标题和图片的空记录：从「最新上架」里剔除
+    const filled = items.filter(i => i.title_zh || i.title_en || i.img_url || i.img_file);
 
     const payload = {
       todayFinds: items.filter(i => i.is_today_finds),
       editorPicks: items.filter(i => i.is_editor_picks),
-      newListing: items,
+      newListing: filled
+        .slice()
+        .sort((a, b) => String(b._createdTime).localeCompare(String(a._createdTime)))
+        .slice(0, 12)
+        .map(({ _createdTime, ...rest }) => rest),
+      // 调试信息：Airtable 表里实际出现的所有列名（去重，仅列名不含数据）
+      airtableFields: [...new Set(records.flatMap(r => Object.keys(r.fields || {})))],
     };
 
     res.setHeader('Cache-Control', 's-maxage=60, stale-while-revalidate=300');
@@ -75,13 +82,29 @@ async function fetchAllRecords(token, baseId, table) {
   return records;
 }
 
+// 在一条记录的所有字段里找「名字含关键词 / 命中别名」的字段，并判断它是否算勾选。
+// 兼容：复选框 true、字符串 "true"/"是"/"已购" 等非空值、链接记录/多选数组非空。
+function checkboxOn(fields, keyword, aliases = []) {
+  for (const key of Object.keys(fields)) {
+    const k = String(key).trim();
+    const hit = aliases.includes(k) || k.includes(keyword);
+    if (!hit) continue;
+    const v = fields[key];
+    if (v === true) return true;
+    if (typeof v === 'string') {
+      const s = v.trim();
+      if (s && s.toLowerCase() !== 'false' && s !== '否' && s !== '否') return true;
+    }
+    if (Array.isArray(v) && v.length > 0) return true;
+  }
+  return false;
+}
+
 // 把 Airtable 的一条 record 转成前端期望的字段格式。
-// 请根据你 Airtable 表里实际的列名调整下面 f['...'] 里的名字。
 function mapRecordToItem(record) {
   const f = record.fields || {};
 
-  // 支持 Airtable 原生「附件 Attachment」字段：直接拿它给的真实图片URL，
-  // 这样就不用手动把图片文件传去 /assets/images/ 再对文件名，从根本上避免文件名对不上、图片显示不出来的问题。
+  // 支持 Airtable 原生「附件 Attachment」字段：直接拿它给的真实图片URL
   const attachment = Array.isArray(f['照片']) && f['照片'][0];
   const img_url = attachment ? attachment.url : undefined;
 
@@ -97,11 +120,17 @@ function mapRecordToItem(record) {
     seller: f['卖家'] || f['seller'] || '',
     img_url,                       // Airtable 附件的真实URL（优先使用）
     img_file: f['本地图片文件名'] || undefined, // 备用：本地 /assets/images/ 下的文件名
-    is_today_finds: !!f['今日发现置顶'],
-    is_editor_picks: !!f['编辑精选'],
+    // 复选框：不再要求列名完全等于「今日发现置顶」「编辑精选」
+    is_today_finds: checkboxOn(f, '今日发现', ['今日发现置顶', "today's finds", 'is_today_finds']),
+    is_editor_picks: checkboxOn(f, '编辑精选', ["editor's picks", 'is_editor_picks']),
   };
 }
 
 function slugify(v) {
-  return String(v).trim().toLowerCase().replace(/\s+/g, '-');
+  return String(v)
+    .trim()
+    .toLowerCase()
+    // U+2011 不换行连字符等特殊连字符 → 普通连字符，保证与站点文件名一致
+    .replace(/[\u2010\u2011\u2012\u2013\u2014\u2015\u2212\uFE58\uFF0D]/g, '-')
+    .replace(/\s+/g, '-');
 }

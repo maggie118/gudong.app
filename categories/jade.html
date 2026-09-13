@@ -193,6 +193,10 @@ h2 { color: var(--color-text); margin-bottom: .6rem; font-size: 1.75rem; font-we
 .facet-tag:hover { border-color: var(--color-primary); color: var(--color-primary); background: var(--color-primary-light); }
 .facet-note { font-size: .76rem; color: var(--color-text-muted); margin-top: .7rem; }
 
+/* 搜索结果反馈与空态 */
+.search-result-tip { max-width: 560px; margin: -1.2rem auto 1.6rem; text-align: center; font-size: .84rem; font-weight: 600; color: var(--color-primary); }
+.no-result { text-align: center; padding: 3rem 1rem; color: var(--color-text-muted); }
+
 @media (max-width: 560px) {
     .facet-row { flex-direction: column; gap: .6rem; }
     .facet-label { width: auto; padding-top: 0; }
@@ -319,11 +323,14 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
                 <p class="cat-hero-desc en">Jade and jadeite carvings and pendants — browse listed jade pieces.</p>
 
                 <div class="search-box">
-                    <input type="text" placeholder="搜索玉器名称、年代、材质" class="zh"
-                        onkeydown="if(event.key==='Enter'){event.preventDefault();document.getElementById('items').scrollIntoView({behavior:'smooth'});}">
-                    <input type="text" placeholder="Search jade by name, era or material" class="en"
-                        onkeydown="if(event.key==='Enter'){event.preventDefault();document.getElementById('items').scrollIntoView({behavior:'smooth'});}">
-                    <button onclick="document.getElementById('items').scrollIntoView({behavior:'smooth'})" aria-label="search">🔍</button>
+                    <input type="text" id="catSearch" placeholder="搜索玉器名称、年代、材质" class="zh"
+                        onkeydown="if(event.key==='Enter'){event.preventDefault();doSearch();}">
+                    <input type="text" id="catSearchEn" placeholder="Search jade by name, era or material" class="en"
+                        onkeydown="if(event.key==='Enter'){event.preventDefault();doSearch();}">
+                    <button type="button" onclick="doSearch()" aria-label="search">🔍</button>
+                </div>
+                <div id="searchResultTip" class="search-result-tip" role="status" aria-live="polite" style="display:none;">
+                    <span class="zh"></span><span class="en"></span>
                 </div>
             </div>
 
@@ -377,6 +384,8 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
                 </a>
             </div>
             </div>
+            <div id="noResult" class="no-result zh" style="display:none;">暂无匹配藏品</div>
+            <div id="noResultEn" class="no-result en" style="display:none;">No items found</div>
         </section>
     </main>
 
@@ -410,6 +419,8 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
             const next = body.dataset.lang === 'zh' ? 'en' : 'zh';
             body.dataset.lang = next;
             document.querySelector('.lang-btn').textContent = next === 'zh' ? 'EN' : '中';
+            // 语言切换后若搜索框有内容，同步刷新结果与提示文案
+            if (window.filterItems) filterItems();
         }
         if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js');
     
@@ -453,7 +464,10 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
           if(!res.ok) throw new Error('proxy '+res.status);
           var data = await res.json();
           var all = [].concat(data.todayFinds||[], data.editorPicks||[], data.newListing||[]);
-          list = all.filter(function(it){ return it.category === TARGET_CAT; });
+          // 去重：newListing 是全集，todayFinds／editorPicks 是它的子集，直接 concat 会把同一件藏品渲染多次（2026-09-14 修复）
+          var seen = {}, uniq = [];
+          all.forEach(function(it){ var k = it.item_id || it.title_zh || JSON.stringify(it); if(!seen[k]){ seen[k] = 1; uniq.push(it); } });
+          list = uniq.filter(function(it){ return it.category === TARGET_CAT; });
         }catch(e){
           console.warn('接口不可用，保留页面静态内容：', e);
           return; // 失败保留静态演示内容作后备
@@ -528,7 +542,10 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
           if(!res.ok) throw new Error('proxy '+res.status);
           var data = await res.json();
           var all = [].concat(data.todayFinds||[], data.editorPicks||[], data.newListing||[]);
-          list = all.filter(function(it){ return it.category === TARGET_CAT; });
+          // 去重：newListing 是全集，todayFinds／editorPicks 是它的子集，直接 concat 会把同一件藏品渲染多次（2026-09-14 修复）
+          var seen = {}, uniq = [];
+          all.forEach(function(it){ var k = it.item_id || it.title_zh || JSON.stringify(it); if(!seen[k]){ seen[k] = 1; uniq.push(it); } });
+          list = uniq.filter(function(it){ return it.category === TARGET_CAT; });
         }catch(e){
           console.warn('接口不可用，保留页面静态内容：', e);
           return; // 失败保留静态演示内容作后备
@@ -539,6 +556,8 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
     })();
 
 </script>
+    <!-- 分类页通用搜索：关键词过滤 + 回车/点击触发 + 结果反馈 -->
+    <script src="../assets/js/item-search.js"></script>
 
 </body>
 </html>

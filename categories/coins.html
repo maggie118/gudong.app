@@ -106,6 +106,7 @@
         .item-cta { margin-top: auto; font-size: .78rem; color: var(--color-text-secondary); font-weight: 600; padding-top: .4rem; border-top: 1px dashed var(--color-border); }
         .item-card:hover .item-cta { color: var(--color-primary); }
         .no-result { text-align: center; padding: 3rem 1rem; color: var(--color-text-muted); grid-column: 1 / -1; }
+        .search-result-tip { text-align: center; font-size: .84rem; font-weight: 600; color: var(--color-primary); margin-top: .8rem; }
         footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-white); color: var(--color-text-secondary); margin-top: 1rem; font-size: .78rem; border-top: 1px solid var(--color-border); }
         .footer-nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 1.3rem; margin-bottom: 1.2rem; }
         .footer-nav a { color: var(--color-text-secondary); text-decoration: none; font-size: .82rem; }
@@ -177,9 +178,14 @@
                     <span class="en">Browse antique coins by era, material, or type.</span>
                 </div>
                 <div class="cat-search">
-                    <input type="text" id="catSearch" placeholder="搜索钱币名称、年号、材质" class="zh">
-                    <input type="text" id="catSearchEn" placeholder="Search coins by name, reign or material" class="en">
-                    <button onclick="doSearch()" aria-label="search">🔍</button>
+                    <input type="text" id="catSearch" placeholder="搜索钱币名称、年号、材质" class="zh"
+                        onkeydown="if(event.key==='Enter'){event.preventDefault();doSearch();}">
+                    <input type="text" id="catSearchEn" placeholder="Search coins by name, reign or material" class="en"
+                        onkeydown="if(event.key==='Enter'){event.preventDefault();doSearch();}">
+                    <button type="button" onclick="doSearch()" aria-label="search">🔍</button>
+                </div>
+                <div id="searchResultTip" class="search-result-tip" role="status" aria-live="polite" style="display:none;">
+                    <span class="zh"></span><span class="en"></span>
                 </div>
             </div>
         </section>
@@ -372,18 +378,8 @@
         let currentLang = 'zh';
         function openSidebar() { document.getElementById('sidebar').classList.add('open'); document.getElementById('sidebarOverlay').classList.add('show'); document.body.style.overflow = 'hidden'; }
         function closeSidebar() { document.getElementById('sidebar').classList.remove('open'); document.getElementById('sidebarOverlay').classList.remove('show'); document.body.style.overflow = ''; }
-        function toggleLang() { currentLang = currentLang === 'zh' ? 'en' : 'zh'; document.body.dataset.lang = currentLang; document.querySelector('.lang-btn').textContent = currentLang === 'zh' ? 'EN' : '中'; }
-        function doSearch() {
-            const kw = (currentLang === 'zh' ? document.getElementById('catSearch') : document.getElementById('catSearchEn')).value.trim().toLowerCase();
-            let visible = 0;
-            document.querySelectorAll('#itemList .item-card').forEach(card => {
-                const ok = !kw || card.dataset.keywords?.toLowerCase().includes(kw) || card.innerText.toLowerCase().includes(kw);
-                card.style.display = ok ? '' : 'none';
-                if (ok) visible++;
-            });
-            const noneEl = currentLang === 'zh' ? document.getElementById('noResult') : document.getElementById('noResultEn');
-            noneEl.style.display = visible === 0 ? 'block' : 'none';
-        }
+        function toggleLang() { currentLang = currentLang === 'zh' ? 'en' : 'zh'; document.body.dataset.lang = currentLang; document.querySelector('.lang-btn').textContent = currentLang === 'zh' ? 'EN' : '中'; if (window.filterItems) filterItems(); }
+        // 搜索逻辑统一由 ../assets/js/item-search.js 提供（关键词过滤 + 回车触发 + 结果反馈）
         if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js');
     
     /* ===== 品类动态加载：从 Airtable 接口按品类筛选 ===== */
@@ -426,7 +422,10 @@
           if(!res.ok) throw new Error('proxy '+res.status);
           var data = await res.json();
           var all = [].concat(data.todayFinds||[], data.editorPicks||[], data.newListing||[]);
-          list = all.filter(function(it){ return it.category === TARGET_CAT; });
+          // 去重：newListing 是全集，todayFinds／editorPicks 是它的子集，直接 concat 会把同一件藏品渲染多次（2026-09-14 修复）
+          var seen = {}, uniq = [];
+          all.forEach(function(it){ var k = it.item_id || it.title_zh || JSON.stringify(it); if(!seen[k]){ seen[k] = 1; uniq.push(it); } });
+          list = uniq.filter(function(it){ return it.category === TARGET_CAT; });
         }catch(e){
           console.warn('接口不可用，保留页面静态内容：', e);
           return; // 失败保留静态演示内容作后备
@@ -501,7 +500,10 @@
           if(!res.ok) throw new Error('proxy '+res.status);
           var data = await res.json();
           var all = [].concat(data.todayFinds||[], data.editorPicks||[], data.newListing||[]);
-          list = all.filter(function(it){ return it.category === TARGET_CAT; });
+          // 去重：newListing 是全集，todayFinds／editorPicks 是它的子集，直接 concat 会把同一件藏品渲染多次（2026-09-14 修复）
+          var seen = {}, uniq = [];
+          all.forEach(function(it){ var k = it.item_id || it.title_zh || JSON.stringify(it); if(!seen[k]){ seen[k] = 1; uniq.push(it); } });
+          list = uniq.filter(function(it){ return it.category === TARGET_CAT; });
         }catch(e){
           console.warn('接口不可用，保留页面静态内容：', e);
           return; // 失败保留静态演示内容作后备
@@ -512,5 +514,7 @@
     })();
 
 </script>
+    <!-- 分类页通用搜索：关键词过滤 + 回车/点击触发 + 结果反馈 -->
+    <script src="../assets/js/item-search.js"></script>
 </body>
 </html>

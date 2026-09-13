@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>大明宣德青花描金云龙纹扁瓶 | Lim Kee Whee | Gudong</title>
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#8A5A3B">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <style>
+
+:root {
+    --color-bg: #F5F2EC;
+    --color-surface: #FFFFFF;
+    --color-white: #FFFFFF;
+    --color-border: #E4DED5;
+
+    --color-primary: #8A5A3B;
+    --color-primary-dark: #68432D;
+    --color-primary-light: #F1E8DF;
+
+    --color-text: #25221E;
+    --color-text-secondary: #716B63;
+    --color-text-muted: #A49D94;
+
+    --color-gold: #B08A45;
+    --color-gold-soft: rgba(176,138,69,.10);
+    --color-bronze-muted: #9C8558;
+
+    --color-success: #526657;
+    --color-danger: #9A554B;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+    background: var(--color-bg);
+    color: var(--color-text);
+    line-height: 1.65;
+}
+
+.announce-bar {
+    background: var(--color-primary-light);
+    color: var(--color-primary-dark);
+    font-size: .8rem;
+    text-align: center;
+    padding: .55rem 2.6rem;
+    position: relative;
+    line-height: 1.4;
+}
+
+.announce-close {
+    position: absolute;
+    right: .9rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    font-size: 1.05rem;
+    line-height: 1;
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    padding: .2rem;
+}
+
+.announce-close:hover { color: var(--color-primary); }
+
+header {
+    background: rgba(255,255,255,.96);
+    backdrop-filter: blur(6px);
+    color: var(--color-text);
+    padding: 0 5%;
+    height: 68px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    border-bottom: 1px solid var(--color-border);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+}
+
+.brand { display: flex; flex-direction: column; justify-content: center; line-height: 1; flex-shrink: 0; }
+.brand h1 { font-size: 1.4rem; font-weight: 700; letter-spacing: .02em; line-height: 1.15; }
+.brand p { color: var(--color-bronze-muted); margin-top: .2rem; font-size: .62rem; letter-spacing: .2em; text-transform: uppercase; }
+
+.header-right { display: flex; align-items: center; gap: .8rem; flex-shrink: 0; }
+
+.btn-publish {
+    display: inline-flex; align-items: center; gap: .35rem;
+    background: var(--color-primary); color: #fff;
+    padding: .5rem 1.1rem; border-radius: 8px;
+    font-size: .85rem; font-weight: 600; text-decoration: none;
+    white-space: nowrap; transition: .2s;
+}
+.btn-publish:hover { background: var(--color-primary-dark); }
+
+.lang-btn {
+    border: 1px solid var(--color-border); background: transparent;
+    color: var(--color-text-secondary); padding: .3rem .68rem;
+    border-radius: 6px; cursor: pointer; font-size: .75rem;
+    letter-spacing: .04em; transition: .2s;
+}
+.lang-btn:hover { border-color: var(--color-primary); color: var(--color-primary); background: var(--color-primary-light); }
+
+.menu-toggle {
+    width: 38px; height: 38px; border: 1px solid var(--color-border);
+    background: transparent; border-radius: 8px; font-size: 1.05rem;
+    color: var(--color-text); cursor: pointer; display: flex;
+    align-items: center; justify-content: center; flex-shrink: 0; transition: .2s;
+}
+.menu-toggle:hover { border-color: var(--color-primary); color: var(--color-primary); background: var(--color-primary-light); }
+
+.sidebar-overlay {
+    position: fixed; inset: 0; background: rgba(20,17,14,.4);
+    opacity: 0; pointer-events: none; transition: opacity .25s ease; z-index: 90;
+}
+.sidebar-overlay.show { opacity: 1; pointer-events: auto; }
+
+.sidebar {
+    position: fixed; top: 0; left: 0; height: 100vh; width: 264px; max-width: 78vw;
+    background: var(--color-white); box-shadow: 4px 0 24px rgba(37,34,30,.18);
+    transform: translateX(-100%); transition: transform .3s ease; z-index: 95;
+    overflow-y: auto; padding-bottom: 2rem;
+}
+.sidebar.open { transform: translateX(0); }
+
+.sidebar-toggle-inner {
+    display: block; width: 100%; padding: .9rem 0; background: transparent;
+    border: none; border-bottom: 1px solid var(--color-border); font-size: 1.15rem;
+    color: var(--color-text-secondary); cursor: pointer; text-align: center;
+}
+.sidebar-toggle-inner:hover { color: var(--color-primary); }
+
+.sidebar-brand {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: .1rem; padding: 1.1rem 0; font-weight: 700; color: var(--color-text);
+    border-bottom: 1px solid var(--color-border);
+}
+.sidebar-brand .zh { font-size: 1.05rem; }
+.sidebar-brand .en { font-size: 1.05rem; letter-spacing: .04em; }
+
+.sidebar-nav { display: flex; flex-direction: column; padding: .3rem 0; }
+.sidebar-link { padding: .85rem 1.4rem; color: var(--color-text); text-decoration: none; font-size: .95rem; transition: .2s; }
+.sidebar-link:hover { background: var(--color-primary-light); color: var(--color-primary); }
+.sidebar-link.active { background: var(--color-primary-light); color: var(--color-primary); font-weight: 600; }
+.sidebar-group-title { padding: .85rem 1.4rem .3rem; color: var(--color-text); font-size: .95rem; font-weight: 600; }
+.sidebar-sub { display: block; padding: .55rem 1.4rem .55rem 2.2rem; color: var(--color-text-secondary); text-decoration: none; font-size: .88rem; transition: .2s; }
+.sidebar-sub:hover { color: var(--color-primary); background: var(--color-primary-light); }
+.sidebar-sub.active { color: var(--color-primary); background: var(--color-primary-light); font-weight: 600; }
+
+.container { max-width: 1200px; margin: 0 auto; padding: 3.2rem 5% 4rem; background: transparent; min-height: 70vh; }
+
+section { margin-bottom: 3.4rem; scroll-margin-top: 90px; }
+
+h2 { color: var(--color-text); margin-bottom: .6rem; font-size: 1.75rem; font-weight: 700; letter-spacing: -.02em; }
+
+.page-desc { font-size: .92rem; color: var(--color-text-secondary); margin-bottom: 2rem; max-width: 640px; }
+
+.back-link { display: inline-block; margin-bottom: 1.4rem; font-size: .85rem; color: var(--color-text-secondary); text-decoration: none; }
+.back-link:hover { color: var(--color-primary); }
+
+.goods-list { display: grid; grid-template-columns: repeat(4, 1fr); gap: .9rem; margin-top: .5rem; }
+.item-card { position: relative; display: block; aspect-ratio: 1 / 1; border-radius: 8px; overflow: hidden; background: var(--color-primary-light); text-decoration: none; transition: .25s; }
+.item-card:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(37,34,30,.14); }
+.item-card img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.item-card .price-tag { position: absolute; left: .55rem; bottom: .55rem; background: rgba(20,17,14,.62); color: #fff; padding: .32rem .6rem; border-radius: 4px; font-size: .8rem; font-weight: 700; letter-spacing: .01em; }
+.item-card .price-tag .neg { font-weight: 400; opacity: .85; font-size: .72rem; margin-left: .2rem; }
+
+.empty-state { text-align: center; padding: 3.4rem 1rem; color: var(--color-text-muted); border: 1px dashed var(--color-border); border-radius: 8px; }
+
+/* ---------- item detail page ---------- */
+.item-detail { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+.item-detail-image { aspect-ratio: 1 / 1; border-radius: 10px; overflow: hidden; background: var(--color-primary-light); }
+.item-detail-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.item-detail-meta { font-size: .88rem; color: var(--color-text-secondary); margin-bottom: .5rem; }
+.item-detail-title { font-family: Georgia, "Songti SC", "STSong", serif; font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 600; margin-bottom: .7rem; }
+.item-detail-price { font-size: 1.4rem; font-weight: 700; color: var(--color-primary); margin-bottom: 1.2rem; }
+.item-detail-desc { font-size: .92rem; color: var(--color-text); line-height: 1.8; margin-bottom: 1.6rem; }
+.contact-btn { display: inline-flex; align-items: center; gap: .5rem; background: #25D366; color: #fff; padding: .8rem 1.5rem; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: .92rem; transition: .2s; }
+.contact-btn:hover { filter: brightness(.95); }
+.disclaimer-box { margin-top: 1.6rem; padding: .9rem 1.1rem; background: var(--color-primary-light); border-radius: 8px; font-size: .78rem; color: var(--color-text-secondary); line-height: 1.6; }
+.disclaimer-box strong { color: var(--color-text); }
+
+/* ---------- seller gallery page ---------- */
+.seller-header { margin-bottom: 2.2rem; }
+.seller-stats { font-size: .82rem; color: var(--color-text-secondary); margin-top: .5rem; }
+
+footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-white); color: var(--color-text-secondary); margin-top: 1rem; font-size: .78rem; border-top: 1px solid var(--color-border); }
+.footer-nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 1.3rem; margin-bottom: 1.2rem; }
+.footer-nav a { color: var(--color-text-secondary); text-decoration: none; font-size: .82rem; }
+.footer-nav a:hover { color: var(--color-primary); }
+.footer-disclaimer { max-width: 620px; margin: 0 auto 1.1rem; font-size: .74rem; line-height: 1.65; color: var(--color-text-muted); }
+
+[data-lang="en"] .zh { display: none; }
+[data-lang="zh"] .en { display: none; }
+
+@media (max-width: 820px) {
+    header { height: 62px; gap: .6rem; }
+    .btn-publish { padding: .45rem .85rem; font-size: .8rem; }
+    .container { padding-top: 2.4rem; }
+    .item-detail { grid-template-columns: 1fr; gap: 1.6rem; }
+}
+
+@media (max-width: 560px) {
+    .brand h1 { font-size: 1.15rem; }
+    .container { padding: 2rem 4.5% 3rem; }
+    section { margin-bottom: 2.6rem; }
+    .btn-publish span.en { display: inline; }
+    .goods-list { grid-template-columns: repeat(2, 1fr); gap: .6rem; }
+    .item-card .price-tag { font-size: .68rem; padding: .22rem .45rem; }
+}
+
+
+.seller-item-card { position: relative; display: block; }
+.seller-item-name { margin-top: .5rem; font-size: .85rem; color: var(--color-text); }
+
+    </style>
+</head>
+<body data-lang="zh">
+    <div class="announce-bar" id="announceBar">
+        <span class="zh">Beta 期间，前 2 件藏品信息免费发布</span>
+        <span class="en">Beta: List your first 2 items free</span>
+        <button class="announce-close" onclick="document.getElementById('announceBar').style.display='none'" aria-label="close">×</button>
+    </div>
+
+    <header>
+        <div style="display:flex; align-items:center; gap:.9rem;">
+            <button class="menu-toggle" onclick="openSidebar()" aria-label="menu">☰</button>
+            <a href="/index.html" class="brand" style="text-decoration:none;color:inherit;">
+                <h1 class="zh">古董集</h1>
+                <h1 class="en">GUDONG</h1>
+                <p class="zh">GUDONG</p>
+            </a>
+        </div>
+
+        <div class="header-right">
+            <a href="mailto:contact@gudong.app?subject=%E5%8F%A4%E8%91%A3%E9%9B%86-%E7%94%B3%E8%AF%B7%E5%8F%91%E5%B8%83%E8%97%8F%E5%93%81" class="btn-publish">
+                <span class="zh">发布藏品信息</span><span class="en">List an Item</span>
+            </a>
+            <button class="lang-btn" onclick="toggleLang()">EN</button>
+        </div>
+    </header>
+
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+    <aside class="sidebar" id="sidebar">
+        <button class="sidebar-toggle-inner" onclick="closeSidebar()" aria-label="close menu">☰</button>
+        <div class="sidebar-brand">
+            <span class="zh">古董集</span><span class="en">GUDONG</span>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="/index.html#hero" class="sidebar-link"><span class="zh">首页</span><span class="en">Home</span></a>
+            <a href="/index.html#today-finds" class="sidebar-link"><span class="zh">今日发现</span><span class="en">Today's Finds</span></a>
+            <a href="/index.html#new-listings" class="sidebar-link"><span class="zh">最新上架</span><span class="en">New Listings</span></a>
+
+            <div class="sidebar-group-title zh">藏品库</div><div class="sidebar-group-title en">Collection</div>
+            <a href="/categories/porcelain.html" class="sidebar-sub"><span class="zh">· 瓷器</span><span class="en">· Porcelain</span></a>
+            <a href="/categories/jade.html" class="sidebar-sub"><span class="zh">· 玉器</span><span class="en">· Jade</span></a>
+            <a href="/categories/coins.html" class="sidebar-sub"><span class="zh">· 钱币</span><span class="en">· Coins</span></a>
+            <a href="/categories/paintings.html" class="sidebar-sub"><span class="zh">· 书画</span><span class="en">· Paintings &amp; Calligraphy</span></a>
+            <a href="/categories/misc.html" class="sidebar-sub"><span class="zh">· 杂项</span><span class="en">· Miscellaneous</span></a>
+
+            <a href="/expert-picks.html" class="sidebar-link"><span class="zh">编辑精选</span><span class="en">Editor's Picks</span></a>
+            <a href="/sellers/index.html" class="sidebar-link"><span class="zh">卖家展馆</span><span class="en">Dealer Galleries</span></a>
+            <a href="/pricing.html#seller-services" class="sidebar-link"><span class="zh">卖家服务</span><span class="en">Sell with Gudong</span></a>
+            <a href="/pricing.html#buyer-services" class="sidebar-link"><span class="zh">买家指南</span><span class="en">Buyer Guide</span></a>
+            <a href="/pricing.html#price-table" class="sidebar-link"><span class="zh">服务价格</span><span class="en">Pricing</span></a>
+            <a href="/about.html" class="sidebar-link"><span class="zh">关于Gudong</span><span class="en">About</span></a>
+        </nav>
+    </aside>
+
+    <main class="container">
+        <section>
+            <a href="/sellers/lim-kee-whee.html" class="back-link zh">← 返回 林记古玩 展馆</a>
+            <a href="/sellers/lim-kee-whee.html" class="back-link en">← Back to Lim Kee Whee Antiques</a>
+
+            <div class="item-detail">
+                <div class="item-detail-image">
+                    <img src="/assets/images/lim-kee-whee/item-lim-01.jpg" alt="大明宣德青花描金云龙纹扁瓶" onerror="this.onerror=null;this.src='/assets/images/placeholder.jpg'">
+                </div>
+                <div>
+                    <p class="item-detail-meta zh">明·宣德 · 瓷器 · 卖家：林记古玩 Lim Kee Whee</p>
+                    <p class="item-detail-meta en">Ming Dynasty, Xuande period · 瓷器 · Seller: Lim Kee Whee Antiques</p>
+                    <h1 class="item-detail-title zh">大明宣德青花描金云龙纹扁瓶</h1>
+                    <h1 class="item-detail-title en">Ming Xuande Blue-and-Gold Dragon Flat Vase</h1>
+                    <div class="item-detail-price">S$58,000</div>
+                    <p class="item-detail-desc zh">扁瓶造型规整，青花发色浓艳，云龙纹饰描金勾边，为宣德朝官窑典型器形之一。</p>
+                    <p class="item-detail-desc en">A well-potted flat vase with vivid underglaze blue and gilt-outlined dragon-and-cloud motifs, characteristic of Xuande-period imperial ware.</p>
+
+                    <a href="https://wa.me/6591234567?text=%E4%BD%A0%E5%A5%BD%EF%BC%8C%E6%88%91%E5%9C%A8Gudong%E4%B8%8A%E7%9C%8B%E5%88%B0%E4%BD%A0%E7%9A%84%E8%97%8F%E5%93%81%EF%BC%9Aitem-lim-01" class="contact-btn zh">💬 联系卖家 (WhatsApp)</a>
+                    <a href="https://wa.me/6591234567?text=Hi%2C%20I%27m%20interested%20in%20this%20item%20on%20Gudong%3A%20item-lim-01" class="contact-btn en">💬 Contact Seller (WhatsApp)</a>
+
+                    <div class="disclaimer-box zh"><strong>请注意：</strong>Gudong 仅提供藏品信息展示与联系引荐，不鉴定真伪、不担保成交、不代收款项。请务必当面核验实物后再行交易。</div>
+                    <div class="disclaimer-box en"><strong>Please note:</strong> Gudong only displays item information and facilitates contact — we do not authenticate items, guarantee sales, or process payments. Always inspect items in person before dealing.</div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-nav">
+            <a href="/about.html" class="zh">关于我们</a><a href="/about.html" class="en">About</a>
+            <a href="/pricing.html#buyer-services" class="zh">买家指南</a><a href="/pricing.html#buyer-services" class="en">Buyer Guide</a>
+            <a href="/pricing.html#price-table" class="zh">服务价格</a><a href="/pricing.html#price-table" class="en">Pricing</a>
+            <a href="/pricing.html#seller-services" class="zh">卖家服务</a><a href="/pricing.html#seller-services" class="en">Sell with Gudong</a>
+            <a href="/about.html#location" class="zh">联系我们</a><a href="/about.html#location" class="en">Contact</a>
+        </div>
+        <p class="footer-disclaimer zh">古董集是古董与收藏品信息发现平台。平台不提供鉴定、估价、买卖、代收款或交易服务。买卖双方应自行核实相关信息，并直接协商及完成交易。</p>
+        <p class="footer-disclaimer en">Gudong is an information and discovery platform for antiques and collectibles. We do not authenticate, appraise, sell, purchase, process payments, or participate in transactions. Buyers and sellers are responsible for conducting their own due diligence and arranging transactions directly.</p>
+        <p class="zh">© 2026 古董集 · gudong.app</p>
+        <p class="en">© 2026 Gudong · gudong.app</p>
+    </footer>
+
+    <script>
+        function openSidebar() {
+            document.getElementById('sidebar').classList.add('open');
+            document.getElementById('sidebarOverlay').classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeSidebar() {
+            document.getElementById('sidebar').classList.remove('open');
+            document.getElementById('sidebarOverlay').classList.remove('show');
+            document.body.style.overflow = '';
+        }
+        function toggleLang() {
+            const body = document.body;
+            const next = body.dataset.lang === 'zh' ? 'en' : 'zh';
+            body.dataset.lang = next;
+            document.querySelector('.lang-btn').textContent = next === 'zh' ? 'EN' : '中';
+        }
+        if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js');
+    </script>
+
+</body>
+</html>

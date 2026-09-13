@@ -433,6 +433,18 @@
             font-size: .82rem;
             color: var(--color-text-secondary);
         }
+        /* ---------- Badge (used by renderCards) ---------- */
+        .badge { position: absolute; top: 8px; left: 8px; padding: 3px 8px; font-size: 12px; border-radius: 4px; color: #fff; z-index: 2; }
+        .badge-top { background: #B82222; }
+        .badge-editor { background: #224488; top: 32px; }
+        .listing-card { position: relative; cursor: pointer; overflow: hidden; border-radius: 8px; background: var(--color-primary-light); text-decoration: none; transition: .25s; min-height: 300px; display: flex; flex-direction: column; }
+        .listing-card:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(37,34,30,.14); }
+        .listing-card img { width: 100%; height: auto; max-height: 220px; object-fit: cover; display: block; }
+        .listing-card h3 { padding: .45rem .55rem 0; font-size: .9rem; font-weight: 600; color: var(--color-text); line-height: 1.3; }
+        .listing-card .text-en { padding: 0 .55rem; font-size: .78rem; color: var(--color-text-secondary); margin-top: .12rem; }
+        .listing-card .price-cn { padding: .3rem .55rem 0; font-size: .82rem; color: var(--color-primary); font-weight: 600; }
+        .listing-card .price-en { padding: 0 .55rem .55rem; font-size: .78rem; color: var(--color-text-muted); }
+
         /* ---------- New Listings / item grid ---------- */
         .goods-list {
             display: grid;
@@ -659,6 +671,9 @@
                 <div class="search-tip en">Porcelain · Jade · Coins · Paintings · Miscellaneous</div>
             </div>
         </section>
+		<div id="today-finds-container" class="card-grid"></div>
+<div id="editor-picks-container" class="card-grid"></div>
+<div id="new-listing-container" class="card-grid"></div>
         <section id="today-finds">
             <div class="section-head2">
                 <div>
@@ -890,7 +905,12 @@
             .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
             .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
         }
-        function imgPath(f) { return f.img_file ? ('/assets/images/' + f.img_file) : '/assets/images/placeholder.jpg'; }
+        function imgPath(f) {
+          // 优先使用 Airtable 附件字段返回的真实图片URL（img_url），
+          // 没有的话再退回本地 /assets/images/ 里手动放的文件名（img_file）
+          if (f.img_url && /^https?:\/\//i.test(f.img_url)) return f.img_url;
+          return f.img_file ? ('/assets/images/' + f.img_file) : '/assets/images/placeholder.jpg';
+        }
 
         // 渲染一张「今日发现」卡片（is_today_finds=true 为付费置顶）
         function renderFindsCard(f) {
@@ -918,15 +938,28 @@
             </a>`;
         }
 
-        // 渲染一张「最新上架」卡片（保留 data-cat / data-keywords 以支持搜索）
-        function renderListingCard(f) {
-          const kw = [f.title_zh, f.title_en, f.era_zh, f.era_en, f.category].filter(Boolean).join(' ');
-          return `
-            <a href="/items/${esc(f.item_id)}.html" class="item-card" data-cat="${catKey(f.category)}" data-keywords="${esc(kw)}">
-              <img src="${imgPath(f)}" alt="${esc(f.title_zh)}" loading="lazy">
-              <div class="price-tag zh">${esc(f.price_display_zh || f.price_display_en)}</div>
-              <div class="price-tag en">${esc(f.price_display_en || f.price_display_zh)}</div>
-            </a>`;
+        // 渲染卡片（统一徽章样式，兼容今日发现 & 最新上架）
+        function renderCards(containerId, items) {
+          const container = document.getElementById(containerId);
+          if (!container) return;
+          container.innerHTML = "";
+          items.forEach(f => {
+            const imgSrc = imgPath(f);
+            const detailUrl = `/items/${esc(f.item_id)}.html`;
+            let badgeHtml = "";
+            if (f.is_today_finds) badgeHtml += `<span class="badge badge-top">今日发现置顶</span>`;
+            if (f.is_editor_picks) badgeHtml += `<span class="badge badge-editor">编辑精选</span>`;
+            const card = `
+              <a href="${detailUrl}" class="item-card listing-card" data-cat="${catKey(f.category)}" data-keywords="${esc([f.title_zh, f.title_en, f.era_zh, f.era_en, f.category].filter(Boolean).join(' '))}">
+                ${badgeHtml}
+                <img src="${imgSrc}" alt="${esc(f.title_zh)}" loading="lazy">
+                <h3>${esc(f.title_zh)}</h3>
+                <p class="text-en">${esc(f.title_en)}</p>
+                <p class="price-cn">${esc(f.price_display_zh)}</p>
+                <p class="price-en">${esc(f.price_display_en)}</p>
+              </a>`;
+            container.innerHTML += card;
+          });
         }
 
         async function loadAirtableData() {
@@ -945,7 +978,7 @@
             }
             const list = document.getElementById('itemList');
             if (list && data.newListing && data.newListing.length) {
-              list.innerHTML = data.newListing.map(renderListingCard).join('');
+              renderCards('itemList', data.newListing);
               checkNoResult();
             }
           } catch (e) {

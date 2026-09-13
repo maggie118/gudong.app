@@ -8,6 +8,15 @@
 //   AIRTABLE_TABLE   = Items（按实际表名）
 // 未配置时本接口返回 501，前端自动退回静态后备内容。
 //
+// 2026-09-14 三次修复（真凶：Airtable 里的值用了 U+2011 不换行连字符）：
+//   Airtable 表里 img_file = "item‑lim‑04.jpg"、seller_id = "lim‑kee‑whee"，
+//   中间那个"-"是 U+2011（码点 8209），肉眼与普通"-"完全一样，但：
+//     1) 前端拼出 /assets/images/item‑lim‑04.jpg → 404，首页图片全碎
+//     2) 目录探测拿 "item‑lim‑04.jpg" 去探 lim-kw/ 也是 404 → 补不上子目录
+//     3) 卖家展馆页 f.seller_id('lim‑kee‑whee') !== SELLER_ID('lim-kee-whee') → 永远不匹配
+//   现统一用 normalizeHyphens() 把 img_file / seller_id / item_id 里的特殊连字符
+//   归一化成普通 "-"；探测失败时兜底返回「带目录」的候选路径（裸文件名必定 404）。
+//
 // 2026-09-13 二次修复（首页图片全碎 / era、seller 字段为空）：
 //   上一版把字段名映射误写成了中文列名（本地图片文件名 / 年代 / 卖家），
 //   但 Airtable 表里实际是英文蛇形命名（img_file / era_zh / seller_id /
@@ -138,7 +147,13 @@ function mapRecordToItem(record) {
   const attachment = Array.isArray(f['照片']) && f['照片'][0];
   const img_url = attachment ? attachment.url : undefined;
 
-  const seller_id = pick(f, 'seller_id', '卖家', 'seller');
+  // Airtable 里的 seller_id / img_file 用的是 U+2011 不换行连字符
+  // （例如 lim‑kee‑whee、item‑lim‑04.jpg），而站点文件名、卖家展馆页的
+  // SELLER_ID 常量用的都是普通 "-"。这里统一归一化，否则：
+  //   1) 前端拼出的 /assets/images/item‑lim‑04.jpg 会 404（图片全碎）
+  //   2) 卖家展馆页 f.seller_id === SELLER_ID 永远匹配不上（一直用静态兜底）
+  const seller_id = normalizeHyphens(pick(f, 'seller_id', '卖家', 'seller'));
+  const img_file = normalizeHyphens(pick(f, 'img_file', '本地图片文件名'));
 
   return {
     item_id: slugify(pick(f, 'item_id', '编号') || record.id),
@@ -157,7 +172,7 @@ function mapRecordToItem(record) {
     seller_whatsapp: pick(f, 'seller_whatsapp') || '',
     status: pick(f, 'status') || '',
     img_url,                              // Airtable 附件的真实图片URL（优先使用）
-    img_file: pick(f, 'img_file', '本地图片文件名') || undefined, // 本地 /assets/images/ 下的相对路径，如 lim-kw/item-lim-01.jpg
+    img_file: img_file || undefined,      // 本地 /assets/images/ 下的相对路径，如 lim-kw/item-lim-01.jpg
     // 复选框：不再要求列名完全等于「今日发现置顶」「编辑精选」
     is_today_finds: checkboxOn(f, '今日发现', ['今日发现置顶', "today's finds", 'is_today_finds']),
     is_editor_picks: checkboxOn(f, '编辑精选', ["editor's picks", 'is_editor_picks']),
@@ -168,15 +183,25 @@ function mapRecordToItem(record) {
 // 如果 Airtable 里 img_file 只写了文件名（不含 '/'），需要自动补上子目录。
 // 探测顺序：<seller_id>/<文件名>（未来多卖家时的约定）→ lim-kw/<文件名>（当前站点实际目录）。
 // 探测结果按文件名缓存在模块级 Map 里，热实例内不会重复请求。
+//
+// ⚠️ 注意：Airtable 常把连字符写成 U+2011，而磁盘文件名是普通 "-"。
+// 这里先 normalizeHyphens 再探测，否则拿 "item‑lim‑04.jpg" 去探永远是 404。
 const IMG_DIR_CACHE = new Map();
 
 async function resolveImgFile(proto, host, img_file, seller_id) {
-  if (!img_file || img_file.includes('/') || !host) return img_file;
+  if (!img_file) return img_file;
+
+  // 归一化特殊连字符（含目录部分，防止 lim‑kw/item‑lim‑01.jpg 这种情况）
+  img_file = normalizeHyphens(img_file);
+  if (img_file.includes('/')) return img_file;   // 已带目录，直接用
+  if (!host) return img_file;
+
   if (IMG_DIR_CACHE.has(img_file)) return IMG_DIR_CACHE.get(img_file);
 
+  const dir = normalizeHyphens(seller_id) || '';
   const candidates = [];
-  if (seller_id) candidates.push(`${seller_id}/${img_file}`);
-  candidates.push(`lim-kw/${img_file}`);
+  if (dir) candidates.push(`${dir}/${img_file}`);
+  if (!candidates.includes(`lim-kw/${img_file}`)) candidates.push(`lim-kw/${img_file}`);
 
   for (const c of candidates) {
     try {
@@ -190,15 +215,24 @@ async function resolveImgFile(proto, host, img_file, seller_id) {
     }
   }
 
-  IMG_DIR_CACHE.set(img_file, img_file);
-  return img_file;
+  // 都探不到：兜底返回站点实际使用的目录（lim-kw/）。
+  // 注意不能用 candidates[0]（那是 <seller_id>/ 目录，如 lim-kee-whee/，当前并不存在），
+  // 否则探测失败时会回退到一个必定 404 的路径。
+  const fallback = candidates.find(c => c.startsWith('lim-kw/')) || candidates[0] || img_file;
+  IMG_DIR_CACHE.set(img_file, fallback);
+  return fallback;
+}
+
+// 把 U+2011 不换行连字符、各种长/短破折号、全角减号统一成普通 ASCII "-"。
+// Airtable 里手填/粘贴的数据经常混入这些字符，肉眼几乎看不出区别，却会让
+// 文件路径、字段比对全部失效。
+function normalizeHyphens(v) {
+  if (v === undefined || v === null) return v;
+  return String(v).replace(/[\u2010\u2011\u2012\u2013\u2014\u2015\u2212\uFE58\uFF0D]/g, '-');
 }
 
 function slugify(v) {
-  return String(v)
-    .trim()
+  return normalizeHyphens(String(v).trim())
     .toLowerCase()
-    // U+2011 不换行连字符等特殊连字符 → 普通连字符，保证与站点文件名一致
-    .replace(/[\u2010\u2011\u2012\u2013\u2014\u2015\u2212\uFE58\uFF0D]/g, '-')
     .replace(/\s+/g, '-');
 }

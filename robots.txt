@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://gudong.app/sitemap.xml
+Sitemap: https://www.gudong.app/sitemap.xml

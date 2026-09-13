@@ -362,16 +362,16 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
         function imgSrc(f) {
           const file = f.img_file || '';
           // Airtable 里若只存文件名，自动补上该卖家的图片子目录
-          const rel = file && !file.includes('/') ? 'lim-kee-whee/' + file : file;
+          const rel = file && !file.includes('/') ? 'lim-kw/' + file : file;
           return file ? ('../assets/images/' + rel) : '../assets/images/placeholder.jpg';
         }
 
         // 静态兜底数据：API 不可用时展示（与 items/item-lim-01~04.html 一致）
         const FALLBACK_ITEMS = [
-          { item_id: 'item-lim-01', title_zh: '大明宣德青花描金云龙纹扁瓶', title_en: 'Ming Xuande Blue-and-White Gilt Dragon Vase', price_display_zh: 'S$58,000', price_display_en: 'S$58,000', img_file: 'lim-kee-whee/item-lim-01.jpg' },
-          { item_id: 'item-lim-02', title_zh: '战国青铜错金乳钉双耳四足方鼎', title_en: 'Warring States Bronze Gold-Inlaid Square Ding', price_display_zh: 'S$42,000', price_display_en: 'S$42,000', img_file: 'lim-kee-whee/item-lim-02.jpg' },
-          { item_id: 'item-lim-03', title_zh: '战国错金银青铜瑞兽摆件', title_en: 'Warring States Gold-and-Silver-Inlaid Bronze Beast', price_display_zh: 'S$45,000', price_display_en: 'S$45,000', img_file: 'lim-kee-whee/item-lim-03.jpg' },
-          { item_id: 'item-lim-04', title_zh: '大清雍正年制款窑变釉贯耳瓶', title_en: 'Yongzheng Flambé Glaze Vase', price_display_zh: 'S$38,000', price_display_en: 'S$38,000', img_file: 'lim-kee-whee/item-lim-04.jpg' },
+          { item_id: 'item-lim-01', title_zh: '大明宣德青花描金云龙纹扁瓶', title_en: 'Ming Xuande Blue-and-White Gilt Dragon Vase', price_display_zh: 'S$58,000', price_display_en: 'S$58,000', img_file: 'lim-kw/item-lim-01.jpg' },
+          { item_id: 'item-lim-02', title_zh: '战国青铜错金乳钉双耳四足方鼎', title_en: 'Warring States Bronze Gold-Inlaid Square Ding', price_display_zh: 'S$42,000', price_display_en: 'S$42,000', img_file: 'lim-kw/item-lim-02.jpg' },
+          { item_id: 'item-lim-03', title_zh: '战国错金银青铜瑞兽摆件', title_en: 'Warring States Gold-and-Silver-Inlaid Bronze Beast', price_display_zh: 'S$45,000', price_display_en: 'S$45,000', img_file: 'lim-kw/item-lim-03.jpg' },
+          { item_id: 'item-lim-04', title_zh: '大清雍正年制款窑变釉贯耳瓶', title_en: 'Yongzheng Flambé Glaze Vase', price_display_zh: 'S$38,000', price_display_en: 'S$38,000', img_file: 'lim-kw/item-lim-04.jpg' },
         ];
 
         function renderSellerItem(f) {

@@ -8,6 +8,14 @@
 //   AIRTABLE_TABLE   = Items（按实际表名）
 // 未配置时本接口返回 501，前端自动退回静态后备内容。
 //
+// 2026-09-13 二次修复（首页图片全碎 / era、seller 字段为空）：
+//   上一版把字段名映射误写成了中文列名（本地图片文件名 / 年代 / 卖家），
+//   但 Airtable 表里实际是英文蛇形命名（img_file / era_zh / seller_id /
+//   title_zh / title_en / price_zh / price_en / desc_zh / desc_en …），
+//   导致 img_file 读不到 → 卡片图片全部 404，era/seller 也全是空。
+//   现改为「英文列名优先 + 中文列名兜底」（pick 函数），并补上 seller_id、
+//   desc_zh/desc_en、seller_name_en、seller_whatsapp、status 字段。
+//
 // 2026-09-13 修复（针对卖家 lim-kee-whee 首页不显示的问题）：
 //   1. 复选框字段名不再要求精确匹配「今日发现置顶」「编辑精选」，
 //      改为「别名 + 名称包含关键词」匹配（如「今日发现」「编辑精选（付费）」等都能识别），
@@ -35,6 +43,14 @@ export default async function handler(req, res) {
       .map(mapRecordToItem)
       // createdTime 一起带出来用于「最新上架」排序
       .map((item, idx) => ({ ...item, _createdTime: records[idx].createdTime || '' }));
+
+    // img_file 若是不带目录的裸文件名（如 item-lim-01.jpg），自动探测出正确的子目录，
+    // 避免前端拼出 /assets/images/item-lim-01.jpg（实际文件在 /assets/images/lim-kw/ 下）
+    const proto = req.headers['x-forwarded-proto'] || 'https';
+    const host = req.headers['x-forwarded-host'] || req.headers.host;
+    await Promise.all(items.map(async i => {
+      i.img_file = await resolveImgFile(proto, host, i.img_file, i.seller_id);
+    }));
 
     // 完全没有标题和图片的空记录：从「最新上架」里剔除
     const filled = items.filter(i => i.title_zh || i.title_en || i.img_url || i.img_file);
@@ -100,7 +116,21 @@ function checkboxOn(fields, keyword, aliases = []) {
   return false;
 }
 
+// 按顺序返回第一个「有值」的字段（跳过 undefined / null / 空字符串）。
+// 用途：Airtable 表里同一含义的列名可能是英文蛇形（img_file）也可能是中文（本地图片文件名），
+// 两种命名都支持，避免列名对不上导致整列读空。
+function pick(f, ...keys) {
+  for (const k of keys) {
+    const v = f[k];
+    if (v !== undefined && v !== null && v !== '') return v;
+  }
+  return undefined;
+}
+
 // 把 Airtable 的一条 record 转成前端期望的字段格式。
+// ⚠️ 字段名必须与 Airtable 表里实际列名一致（当前表用的是英文蛇形命名：
+//    item_id / title_zh / era_zh / category / price_zh / img_file / seller_id ...），
+//    中文列名保留为兜底，兼容早期版本的表。
 function mapRecordToItem(record) {
   const f = record.fields || {};
 
@@ -108,22 +138,60 @@ function mapRecordToItem(record) {
   const attachment = Array.isArray(f['照片']) && f['照片'][0];
   const img_url = attachment ? attachment.url : undefined;
 
+  const seller_id = pick(f, 'seller_id', '卖家', 'seller');
+
   return {
-    item_id: slugify(f['item_id'] || f['编号'] || record.id),
-    title_zh: f['标题'] || f['title_zh'] || '',
-    title_en: f['标题(英)'] || f['title_en'] || '',
-    era_zh: f['年代'] || '',
-    era_en: f['era_en'] || '',
-    category: f['品类'] || f['category'] || '杂项',
-    price_display_zh: f['价格显示'] || f['price_zh'] || '',
-    price_display_en: f['价格显示(英)'] || f['price_en'] || '',
-    seller: f['卖家'] || f['seller'] || '',
-    img_url,                       // Airtable 附件的真实URL（优先使用）
-    img_file: f['本地图片文件名'] || undefined, // 备用：本地 /assets/images/ 下的文件名
+    item_id: slugify(pick(f, 'item_id', '编号') || record.id),
+    title_zh: pick(f, 'title_zh', '标题') || '',
+    title_en: pick(f, 'title_en', '标题(英)') || '',
+    era_zh: pick(f, 'era_zh', '年代') || '',
+    era_en: pick(f, 'era_en', '年代(英)') || '',
+    category: pick(f, 'category', '品类') || '杂项',
+    price_display_zh: String(pick(f, 'price_zh', '价格显示') || ''),
+    price_display_en: String(pick(f, 'price_en', '价格显示(英)') || ''),
+    desc_zh: pick(f, 'desc_zh', '描述') || '',
+    desc_en: pick(f, 'desc_en', '描述(英)') || '',
+    seller: seller_id || '',
+    seller_id: seller_id || '',   // 卖家展馆页按 f.seller_id 筛选
+    seller_name_en: pick(f, 'seller_name_en') || '',
+    seller_whatsapp: pick(f, 'seller_whatsapp') || '',
+    status: pick(f, 'status') || '',
+    img_url,                              // Airtable 附件的真实图片URL（优先使用）
+    img_file: pick(f, 'img_file', '本地图片文件名') || undefined, // 本地 /assets/images/ 下的相对路径，如 lim-kw/item-lim-01.jpg
     // 复选框：不再要求列名完全等于「今日发现置顶」「编辑精选」
     is_today_finds: checkboxOn(f, '今日发现', ['今日发现置顶', "today's finds", 'is_today_finds']),
     is_editor_picks: checkboxOn(f, '编辑精选', ["editor's picks", 'is_editor_picks']),
   };
+}
+
+// 前端拼图片地址的规则是 '/assets/images/' + img_file。
+// 如果 Airtable 里 img_file 只写了文件名（不含 '/'），需要自动补上子目录。
+// 探测顺序：<seller_id>/<文件名>（未来多卖家时的约定）→ lim-kw/<文件名>（当前站点实际目录）。
+// 探测结果按文件名缓存在模块级 Map 里，热实例内不会重复请求。
+const IMG_DIR_CACHE = new Map();
+
+async function resolveImgFile(proto, host, img_file, seller_id) {
+  if (!img_file || img_file.includes('/') || !host) return img_file;
+  if (IMG_DIR_CACHE.has(img_file)) return IMG_DIR_CACHE.get(img_file);
+
+  const candidates = [];
+  if (seller_id) candidates.push(`${seller_id}/${img_file}`);
+  candidates.push(`lim-kw/${img_file}`);
+
+  for (const c of candidates) {
+    try {
+      const r = await fetch(`${proto}://${host}/assets/images/${c}`, { method: 'HEAD' });
+      if (r.ok) {
+        IMG_DIR_CACHE.set(img_file, c);
+        return c;
+      }
+    } catch {
+      // 探测失败不影响主流程，继续尝试下一个候选
+    }
+  }
+
+  IMG_DIR_CACHE.set(img_file, img_file);
+  return img_file;
 }
 
 function slugify(v) {

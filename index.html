@@ -454,11 +454,30 @@
         .listing-card .price-en { padding: 0 .55rem .55rem; font-size: .78rem; color: var(--color-text-muted); }
 
         /* ---------- New Listings / item grid ---------- */
+        /* 2026-09-14 调整：最新上架改为「桌面每行 6 个 / 平板 4 个 / 手机 3 个」。
+           注意：卡片同时带 .item-card 与 .listing-card 两套样式，其中 .item-card 的
+           aspect-ratio:1/1 与 .listing-card 的 min-height:300px 会互相作用，反推出
+           min-width:300px（min-width 默认 auto），使卡片撑出网格列——实测列宽 258px、
+           卡片却被撑到 300px，末列直接溢出行外。下面显式解除这些约束，改为
+           「图片按列宽等比缩放 + 文字在下方自然铺开」的高度自适应卡片。 */
         .goods-list {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: .9rem;
+            grid-template-columns: repeat(6, 1fr);
+            gap: .8rem;
             margin-top: .5rem;
+        }
+        .goods-list .item-card {
+            aspect-ratio: auto;
+            min-width: 0;
+            min-height: 0;
+            height: auto;
+        }
+        .goods-list .item-card img {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 1 / 1;
+            max-height: none;
+            object-fit: cover;
         }
         .item-card {
             position: relative;
@@ -589,6 +608,25 @@
             line-height: 1.65;
             color: var(--color-text-muted);
         }
+        .app-install-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: .25rem;
+            padding: .15rem .5rem;
+            border: 1px solid var(--color-border);
+            border-radius: 5px;
+            background: var(--color-bg);
+            color: var(--color-text-secondary);
+            text-decoration: none;
+            font-size: .68rem;
+            font-weight: 500;
+            transition: .2s;
+            cursor: pointer;
+            vertical-align: middle;
+            margin-left: .5rem;
+        }
+        .app-install-btn:hover { border-color: var(--color-primary); color: var(--color-primary); background: var(--color-primary-light); }
+        .app-install-btn svg { width: 12px; height: 12px; flex-shrink: 0; fill: currentColor; }
         [data-lang="en"] .zh { display: none; }
         [data-lang="zh"] .en { display: none; }
         @media (max-width: 820px) {
@@ -596,18 +634,20 @@
             .btn-publish { padding: .45rem .85rem; font-size: .8rem; }
             .container { padding-top: 2.4rem; }
             .finds-grid { grid-template-columns: repeat(2, 1fr); }
+            .goods-list { grid-template-columns: repeat(4, 1fr); }
         }
         @media (max-width: 560px) {
             .brand h1 { font-size: 1.15rem; }
             .container { padding: 2rem 4.5% 3rem; }
             section { margin-bottom: 3.8rem; }
             .btn-publish span.en { display: inline; }
-            .goods-list { grid-template-columns: repeat(2, 1fr); gap: .6rem; }
+            .goods-list { grid-template-columns: repeat(3, 1fr); gap: .6rem; }
             .finds-grid { grid-template-columns: repeat(2, 1fr); gap: .8rem; }
             .expert-mini-grid { grid-template-columns: 1fr; }
             .item-card .price-tag { font-size: .68rem; padding: .22rem .45rem; }
         }
     </style>
+    <link rel="apple-touch-icon" href="/assets/icons/icon-192.png">
 </head>
 <body data-lang="zh">
     <div class="announce-bar" id="announceBar">
@@ -624,7 +664,7 @@
             </a>
         </div>
         <div class="header-right">
-            <a href="mailto:contact@gudong.app?subject=%E5%8F%A4%E8%91%A3%E9%9B%86-%E7%94%B3%E8%AF%B7%E5%8F%91%E5%B8%83%E8%97%8F%E5%93%81" class="btn-publish">
+            <a href="pricing.html#seller-services" class="btn-publish">
                 <span class="zh">发布藏品信息</span><span class="en">List an Item</span>
             </a>
             <button class="lang-btn" onclick="toggleLang()">EN</button>
@@ -798,11 +838,11 @@
             <div id="noResult" class="no-result zh" style="display:none;">暂无匹配藏品</div>
             <div id="noResultEn" class="no-result en" style="display:none;">No items found</div>
             <div style="text-align:center; margin-top:2rem;">
-                <a href="mailto:contact@gudong.app?subject=%E5%8F%A4%E8%91%A3%E9%9B%86-%E7%94%B3%E8%AF%B7%E5%8F%91%E5%B8%83%E8%97%8F%E5%93%81" class="btn-publish">
+                <a href="pricing.html#seller-services" class="btn-publish">
                     <span class="zh">发布藏品信息</span><span class="en">List an Item</span>
                 </a>
-                <p class="section-note zh" style="margin-top:1rem;">目前藏品提交请通过邮件发送资料给我们，审核后将展示在平台。</p>
-                <p class="section-note en" style="margin-top:1rem;">Submit your item information via email for review before public listing.</p>
+                <p class="section-note zh" style="margin-top:1rem;">了解发布规则与收费，前往服务价格页。</p>
+                <p class="section-note en" style="margin-top:1rem;">See listing rules and pricing on the Pricing page.</p>
             </div>
         </section>
         <section id="browse">
@@ -845,8 +885,8 @@
         </div>
         <p class="footer-disclaimer zh">古董集是古董与收藏品信息发现平台。平台不提供鉴定、估价、买卖、代收款或交易服务。买卖双方应自行核实相关信息，并直接协商及完成交易。平台仅存储用户提交的公开信息，不承担藏品描述、图片的版权责任。</p>
         <p class="footer-disclaimer en">Gudong is an information and discovery platform for antiques and collectibles. We do not authenticate, appraise, sell, purchase, process payments, or participate in transactions. Buyers and sellers are responsible for conducting their own due diligence and arranging transactions directly. Platform stores user-submitted public content and assumes no copyright liability for listings text or images.</p>
-        <p class="zh">© 2026 古董集 · gudong.app</p>
-        <p class="en">© 2026 Gudong · gudong.app</p>
+        <p class="zh" style="margin-bottom:0;">© 2026 古董集 · gudong.app <a href="javascript:void(0)" id="pwaInstallBtn" class="app-install-btn" onclick="event.preventDefault();"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20h14v-2H5v2zM19 9h-4V3H9v6H5l7 7 7-7z"/></svg>安装古董.app</a></p>
+        <p class="en" style="margin-bottom:0;">© 2026 Gudong · gudong.app <a href="javascript:void(0)" class="app-install-btn" onclick="event.preventDefault();"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20h14v-2H5v2zM19 9h-4V3H9v6H5l7 7 7-7z"/></svg>Install gudong.app</a></p>
     </footer>
     <script>
         let currentLang = 'zh';
@@ -987,8 +1027,51 @@
             el.addEventListener('search', () => filterAll());  // 兼容 <input type="search">
         })();
 
-        // PWA: 上线时若已提供 /sw.js 再开启；当前无该文件，先注释避免 404。
-        // if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js');
+        // PWA: 注册 service worker，使站点可被安装
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js').then(reg => {
+                    console.log('[PWA] Service Worker registered:', reg.scope);
+                }).catch(err => {
+                    console.warn('[PWA] Service Worker registration failed:', err);
+                });
+            });
+        }
+
+        // PWA 安装：捕获 beforeinstallprompt，点击触发系统安装弹窗
+        let deferredPrompt = null;
+        const pwaBtn = document.getElementById('pwaInstallBtn');
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+        });
+        if (pwaBtn) {
+            pwaBtn.addEventListener('click', async (e) => {
+                e.preventDefault();
+                if (deferredPrompt) {
+                    // Chrome/Edge/Android: 触发系统安装弹窗
+                    deferredPrompt.prompt();
+                    const { outcome } = await deferredPrompt.userChoice;
+                    deferredPrompt = null;
+                } else {
+                    // iOS Safari 或未触发 beforeinstallprompt 的环境：显示手动安装指引
+                    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+                    const zh = (document.body.dataset.lang === 'zh');
+                    if (isIOS) {
+                        alert(zh
+                            ? 'iOS 安装方法：\n1. 点击 Safari 底部的分享按钮\n2. 选择「添加到主屏幕」\n3. 点击「添加」'
+                            : 'iOS install:\n1. Tap Safari share button\n2. Select "Add to Home Screen"\n3. Tap "Add"');
+                    } else {
+                        alert(zh
+                            ? '安装方法：\n- Chrome/Edge：点击地址栏右侧的安装图标\n- 或菜单 → 「安装古董集」'
+                            : 'Install:\n- Chrome/Edge: click the install icon in address bar\n- Or menu → "Install Gudong"');
+                    }
+                }
+            });
+        }
+        window.addEventListener('appinstalled', () => {
+            if (pwaBtn) pwaBtn.style.display = 'none';
+        });
 
         /* ===== 从 Airtable 动态加载藏品（经 Vercel 代理接口，失败时保留静态后备） ===== */
         // 中文品类 -> 浏览分类 key

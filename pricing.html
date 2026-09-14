@@ -71,6 +71,7 @@
             transition: .2s;
         }
         .btn-publish:hover { background: var(--color-primary-dark); }
+        .btn-group-gap { display:flex; gap:0.8rem; flex-wrap:wrap; margin:0.8rem 0 1.2rem; }
         .lang-btn {
             border: 1px solid var(--color-border);
             background: transparent;
@@ -205,7 +206,7 @@
             line-height: 1.6;
         }
         .guide-note b { color: var(--color-text); }
-        .table-wrap { overflow‑x:auto; }
+        .table-wrap { overflow-x:auto; }
         footer {
             text-align: center;
             padding: 2.2rem 5% 1.8rem;
@@ -224,6 +225,7 @@
         @media (max-width: 700px) {
             header { height: 62px; }
             .btn-publish { padding: .45rem .85rem; font-size: .8rem; }
+            .btn-group-gap { gap:0.6rem; }
             .container { padding: 1.6rem 5% 3rem; }
             .tab-bar { flex-direction: column; }
             .guide-panel { padding: 1.3rem 1.2rem 1.5rem; }
@@ -299,32 +301,65 @@
                 <a href="index.html#services" class="more-link zh">返回首页服务区 →</a>
                 <a href="index.html#services" class="more-link en">Back to homepage services →</a>
             </div>
+
+            <!-- 按钮组：卖家入驻、发布藏品，已填入真实链接 -->
+            <div class="btn-group-gap">
+                <a href="https://airtable.com/apprn6XDQnAm8bkaT/pagRIB741MfguMbkp/form" target="_blank" class="btn-publish">
+                    <span class="zh">卖家入驻申请</span>
+                    <span class="en">Apply as Seller</span>
+                </a>
+                <a href="https://airtable.com/apprn6XDQnAm8bkaT/pagLlGrrcpRWrcaWM/form" target="_blank" class="btn-publish">
+                    <span class="zh">发布藏品（已审核卖家）</span>
+                    <span class="en">Submit Listing (Approved Sellers)</span>
+                </a>
+            </div>
+
+            <!-- 卖家完整业务流程 -->
+            <div class="guide-row">
+                <div class="guide-row-title zh">📋 卖家完整业务流程</div>
+                <div class="guide-row-title en">📋 Full Seller Workflow</div>
+                <div class="guide-row-desc zh">
+                    <ol style="padding-left:1.2rem;margin:0.4rem 0;">
+                        <li>填写【卖家入驻申请】表单提交基础资料，等待平台人工审核；</li>
+                        <li>审核通过，平台分配唯一 <b>Seller ID（卖家编号）</b>；审核不通过将邮件告知原因；</li>
+                        <li>拿到 Seller ID 之后，使用【发布藏品】表单提交藏品资料；<strong>表单提交只是刊登申请，藏品不会立刻对外上线；</strong></li>
+                        <li>平台后台审核藏品内容，核对刊登服务费用：创始卖家消耗免费额度 / 普通卖家确认收款；</li>
+                        <li>审核与费用确认全部完成后，藏品才对外公开展示；到期藏品会被手动下架。</li>
+                    </ol>
+                    <p style="margin-top:0.5rem;">提示：未完成入驻审核的账号，无法提交藏品刊登。提交藏品表单时务必填写正确 Seller ID。</p>
+                </div>
+                <div class="guide-row-desc en">
+                    <ol style="padding-left:1.2rem;margin:0.4rem 0;">
+                        <li>Complete the seller‑onboarding application form and wait for manual review;</li>
+                        <li>Once approved, you receive your unique <b>Seller ID</b>. Rejection reasons will be sent via email;</li>
+                        <li>With valid Seller ID, submit item details via listing form. <strong>Submission is only an application; listings are NOT published automatically.</strong></li>
+                        <li>Platform reviews item content and verifies listing‑service payment / complimentary credits for Founder‑Dealers;</li>
+                        <li>Item goes public only after review and payment‑verification. Expired listings will be taken offline manually.</li>
+                    </ol>
+                    <p style="margin-top:0.5rem;">Note: Un‑approved applicants cannot submit listings. Please provide correct Seller ID inside the listing form.</p>
+                </div>
+            </div>
+
             <div class="guide-row">
                 <div class="guide-row-title zh">一、基础发布 · <span class="fee">创始卖家·2026（限定88席）</span></div>
                 <div class="guide-row-title en">1. Basic Listing · <span class="fee">Founder‑Dealer 2026 (Limited 88 seats)</span></div>
                 <div class="guide-row-desc zh">
                     「创始卖家·2026」为平台早期优质卖家身份，<strong>免费申请，无需付费购买，总名额88席，招满关闭申请通道；已有资格不受名额已满影响。</strong>
-                    <a href="{{AIRTABLE_FOUNDER_APPLY_URL}}" target="_blank" class="more-link zh">→ 填写创始卖家申请表提交资料等待审核</a>
                     <br><br>
                     创始卖家·2026：享有前2件藏品免费发布额度（有效期1年）；第3件起，每件 SGD 20 /件 /年。
                     <br>
                     普通卖家（88席名额已满之后入驻）：无免费发布额度，每件 SGD 20 /件 /半年。
                     <br><br>
                     藏品进入「最新上架」免费流量池。不开通展馆也可以正常发布藏品。
-                    <br><br>
-                    <a href="pricing.html#seller-services" class="more-link zh">→ 前往发布藏品</a>
                 </div>
                 <div class="guide-row-desc en">
                     Founder‑Dealer 2026 is an early‑adopter seller status, <strong>application is free of charge, total 88 seats. Application closes once fully allocated; existing qualified sellers retain their status.</strong>
-                    <a href="{{AIRTABLE_FOUNDER_APPLY_URL}}" target="_blank" class="more-link en">→ Complete Founder‑Dealer application for review</a>
                     <br><br>
                     Founder‑Dealer 2026: 2 complimentary listing credits (valid for 1‑year). From the 3rd item onwards: SGD 20 / item / year.
                     <br>
                     Standard Sellers (apply after 88 seats filled): No free credits. SGD 20 / item / 6‑months.
                     <br><br>
                     Listings enter the free "New Listings" pool. You may list items without purchasing a dealer‑gallery.
-                    <br><br>
-                    <a href="pricing.html#seller-services" class="more-link en">→ List your item</a>
                 </div>
             </div>
             <div class="guide-row">
@@ -361,17 +396,43 @@
                     <a href="sellers/index.html" class="more-link en">→ Browse dealer‑galleries directory</a>
                 </div>
             </div>
+            <div class="guide-row">
+                <div class="guide-row-title zh">五、可选增值信息服务（与成交无绑定）</div>
+                <div class="guide-row-title en">5. Optional Add‑on Information Services (Not conditional on sales)</div>
+                <div class="guide-row-desc zh">
+                    <b>藏品成交档案刊登：</b>卖家申报藏品成交记录（隐去买家隐私、不披露成交价），刊登至平台成交档案栏目，用于行业参考、提升卖家背书；平台不对申报内容真实性做核验。
+                    <br><br>
+                    <b>卖家专题推送包：</b>一次性邮件+社群专题曝光，最多展示6件藏品，用于推广卖家在售藏品，不限是否刚成交。
+                    <br><br>
+                    <b>卖家展厅增强包：</b>需已购买标准展馆，提供横幅、自定义模板、标签分类等页面美化能力。
+                    <br><br>
+                    <b>藏品溯源卡片刊登：</b>刊登藏品递藏来源资料，生成公开溯源信息卡片，平台不对溯源资料真伪做核验。
+                    <br><br>
+                    <span style="color:#9A554B;">重要：以上为可选增值信息展示服务。购买无需以藏品成交为前提，未成交卖家同样可以选购。平台不对卖家申报的成交事实、溯源资料做真实性核验；所有内容由卖家自行提供，仅供行业参考，不构成平台背书。购买本服务不会带来账号特权、不会改变创始卖家资格。服务仅提供线上信息刊登，不保证询盘与成交。</span>
+                </div>
+                <div class="guide-row-desc en">
+                    <b>Sales Archive Publication:</b> Seller‑submitted sales record (buyer privacy & sale price redacted) published in platform sales‑archive section for industry reference and seller credibility. Platform does not verify submitted facts.
+                    <br><br>
+                    <b>Seller Feature Broadcast Package:</b> One‑off email‑newsletter & community feature showcasing up to six items, available regardless of recent sales activity.
+                    <br><br>
+                    <b>Enhanced Gallery Package:</b> Requires active Standard‑Gallery subscription; provides banner, custom templates and tagging features for gallery‑page styling.
+                    <br><br>
+                    <b>Provenance Card Publication:</b> Publish provenance‑chain materials for an item as public reference card. Platform does not verify provenance authenticity.
+                    <br><br>
+                    <span style="color:#9A554B;">Important: These are optional value‑add information‑display services. Purchase is not conditional upon a completed sale; non‑selling sellers may also purchase. Platform does not verify the truthfulness of sales‑declarations or provenance documents submitted by sellers. All content is provided by sellers for reference only and does not constitute platform endorsement. Purchasing these services grants no account privileges and does not modify Founder‑Dealer status. Services are for online information publication only; inquiries or sales are not guaranteed.</span>
+                </div>
+            </div>
             <div class="guide-note zh">
-                <b>重要业务说明：</b>基础发布、付费置顶（今日发现插槽）、精选展示（编辑精选）、卖家展馆、优先展馆、馆内置顶藏品均为独立服务，购买其中一项不会自动包含其余服务。一件藏品可同时购买多项推广。到期前需要主动续费；不续费则服务自动降级失效。付款支持 PayNow / 银行转账，平台提供收款收据。
+                <b>重要业务说明：</b>基础发布、付费置顶（今日发现插槽）、精选展示（编辑精选）、卖家展馆、优先展馆、馆内置顶藏品以及各项可选增值服务均为独立服务，购买其中一项不会自动包含其余服务。一件藏品可同时购买多项推广。到期前需要主动续费；不续费则服务自动降级失效。付款支持 PayNow / 银行转账，平台提供收款收据。
                 <br><br>
-                <b>免责：</b>1.所有付费信息刊登 / 置顶 / 展馆，<strong>仅为线上信息曝光，不保证询盘、不保证联系、不保证成交</strong>。
+                <b>免责：</b>1.所有付费信息刊登 / 置顶 / 展馆 /增值服务，<strong>仅为线上信息曝光，不保证询盘、不保证联系、不保证成交</strong>。
 				2.平台仅提供线上信息曝光服务，不介入买卖双方实际交易，不做真伪担保，不参与资金收付。
 				3.所有藏品来源合法性责任全部归属卖家；平台只做信息展示，不做古物合规核验。
 				4.创始卖家·2026为免费审核准入身份，名额88席，招满关闭申请；已有资格卖家如发生账号冻结，席位予以释放不再保留该身份。
             </div>
             <div class="guide-note en">
                 <b>Important terms:</b> 1. All paid services provide only online information publication and exposure. No inquiries or sales are guaranteed.
-				2. Basic Listing, Today's Finds pin, Editor's Picks, Dealer‑Gallery and gallery add‑ons are independent services; purchasing one does not include others. Renew before expiry; services auto‑downgrade without renewal. Payments via PayNow / bank transfer; receipts will be issued.
+				2. Basic Listing, Today's Finds pin, Editor's Picks, Dealer‑Gallery, gallery add‑ons and optional value‑add services are independent services; purchasing one does not include others. Renew before expiry; services auto‑downgrade without renewal. Payments via PayNow / bank transfer; receipts will be issued.
 				3. Sellers warrant all listed items comply with Singapore antiquities‑related regulations and have lawful provenance.
 				4. Founder‑Dealer 2026 status is free‑application & review‑only, limited to 88 seats. Seats will be released and status revoked if account is suspended.
                 <br><br>
@@ -384,6 +445,31 @@
                 <a href="index.html#services" class="more-link zh">返回首页服务区 →</a>
                 <a href="index.html#services" class="more-link en">Back to homepage services →</a>
             </div>
+
+            <!-- 买家完整业务流程 -->
+            <div class="guide-row">
+                <div class="guide-row-title zh">📋 买家完整业务流程</div>
+                <div class="guide-row-title en">📋 Full Buyer Workflow</div>
+                <div class="guide-row-desc zh">
+                    <ol style="padding-left:1.2rem;margin:0.4rem 0;">
+                        <li>浏览平台藏品库、卖家展馆，筛选感兴趣藏品；查看报价方式（价格区间 / 一口价 / 私聊）；</li>
+                        <li>直接联系卖家，自行议价、确认货品细节、来源、交付、付款与运输安排；平台不介入交易；</li>
+                        <li>需要第三方参考意见：可购买【专家咨询】服务获取顾问书面参考意见（不构成法律鉴定）；</li>
+                        <li>找不到目标藏品：可提交需求购买【委托找货】服务，平台帮你匹配卖家藏品资源；</li>
+                        <li>全部交易、转账、物流、风险核验，均由买卖双方自行负责。</li>
+                    </ol>
+                </div>
+                <div class="guide-row-desc en">
+                    <ol style="padding-left:1.2rem;margin:0.4rem 0;">
+                        <li>Browse public listings and dealer‑galleries, filter antiques of interest, check pricing mode (range / fixed / private‑inquiry);</li>
+                        <li>Contact sellers directly to negotiate price, item details, provenance, payment and shipping. Platform will not get involved in transactions;</li>
+                        <li>For third‑party reference: purchase Expert Consultation for consultant remarks (not formal legal appraisal);</li>
+                        <li>If you cannot locate target antiques: use Sourcing Service and we match potential inventory for you;</li>
+                        <li>All payments, shipping and risk‑verification are handled solely between buyer and seller.</li>
+                    </ol>
+                </div>
+            </div>
+
                <div class="guide-row">
                 <div class="guide-row-title zh">专家咨询 <span class="fee">每件SGD 10</span></div>
                 <div class="guide-row-title en">Expert Consultation <span class="fee">SGD 10 per item</span></div>
@@ -439,6 +525,22 @@
                     <tr style="border-bottom:1px solid var(--color-border);">
                         <td style="padding:.7rem .5rem;"><span class="zh">馆内置顶藏品</span><span class="en">In‑gallery Pinned Item</span></td>
                         <td style="text-align:right;padding:.7rem .5rem;color:var(--color-primary);font-weight:600;"><span class="zh">SGD 60 / 件 / 年</span><span class="en">SGD 60 / item / yr</span></td>
+                    </tr>
+                    <tr style="border-bottom:1px solid var(--color-border);">
+                        <td style="padding:.7rem .5rem;"><span class="zh">增值：藏品成交档案刊登</span><span class="en">Add‑on: Sales Archive Publication</span></td>
+                        <td style="text-align:right;padding:.7rem .5rem;color:var(--color-primary);font-weight:600;"><span class="zh">SGD 80 / 件</span><span class="en">SGD 80 / item</span></td>
+                    </tr>
+                    <tr style="border-bottom:1px solid var(--color-border);">
+                        <td style="padding:.7rem .5rem;"><span class="zh">增值：卖家专题推送包</span><span class="en">Add‑on: Seller Feature Broadcast Package</span></td>
+                        <td style="text-align:right;padding:.7rem .5rem;color:var(--color-primary);font-weight:600;"><span class="zh">SGD 160 / 次</span><span class="en">SGD 160 / time</span></td>
+                    </tr>
+                    <tr style="border-bottom:1px solid var(--color-border);">
+                        <td style="padding:.7rem .5rem;"><span class="zh">增值：卖家展厅增强包（需已有标准展馆）</span><span class="en">Add‑on: Enhanced Gallery Package (requires Standard Gallery)</span></td>
+                        <td style="text-align:right;padding:.7rem .5rem;color:var(--color-primary);font-weight:600;"><span class="zh">SGD 220 / 年</span><span class="en">SGD 220 / yr</span></td>
+                    </tr>
+                    <tr style="border-bottom:1px solid var(--color-border);">
+                        <td style="padding:.7rem .5rem;"><span class="zh">增值：藏品溯源卡片刊登</span><span class="en">Add‑on: Provenance Card Publication</span></td>
+                        <td style="text-align:right;padding:.7rem .5rem;color:var(--color-primary);font-weight:600;"><span class="zh">SGD 60 / 件</span><span class="en">SGD 60 / item</span></td>
                     </tr>
                     <tr style="border-bottom:1px solid var(--color-border);">
                         <td style="padding:.7rem .5rem;"><span class="zh">专家咨询</span><span class="en">Expert Consultation</span></td>

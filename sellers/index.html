@@ -306,12 +306,16 @@
             box-shadow: 0 8px 20px rgba(37,34,30,.08);
         }
 
-        .gallery-card.featured {
+        /* 金边框 = 「优先展馆」标志，仅限付费购买该增值服务的卖家。
+           落位规则：完全由卡片所属分区自动决定 ——
+           卡片放进 .tier-priority 即自动带金边，移出即自动恢复普通样式。
+           不再手工加 class，从根上杜绝「档次与边框不一致」。 */
+        .tier-priority .gallery-card {
             border: 2px solid var(--color-gold);
             box-shadow: 0 0 0 3px var(--color-gold-soft);
         }
 
-        .gallery-card.featured:hover {
+        .tier-priority .gallery-card:hover {
             box-shadow: 0 0 0 3px var(--color-gold-soft), 0 10px 24px rgba(176,138,69,.22);
         }
 
@@ -465,12 +469,13 @@
         <p class="page-sub zh">独立展馆 · 专属主页 · 集中展示全部藏品</p>
         <p class="page-sub en">A standalone gallery page for each seller — all their items in one place</p>
 
-        <div class="tier-section">
+        <!-- 优先展馆（付费增值）：分区内卡片自动带金边框，无需逐张加 class -->
+        <div class="tier-section tier-priority">
             <div class="tier-title">
                 <span>🏅</span><span class="zh">优先展馆</span><span class="en">Priority Galleries</span>
             </div>
             <div class="gallery-grid">
-                <a id="he-zhentao" href="seller-he-zhentao.html" class="gallery-card featured">
+                <a id="he-zhentao" href="seller-he-zhentao.html" class="gallery-card">
                     <div class="gallery-badge zh">优先展馆</div><div class="gallery-badge en">Priority</div>
                     <div class="gallery-name zh">和珍陶</div><div class="gallery-name en">Hezhentao</div>
                     <div class="gallery-desc zh">主营明清官窑瓷器，青花、粉彩与单色釉</div>
@@ -479,7 +484,7 @@
                     <div class="gallery-stats en">3 items · Joined Jun 2024</div>
                     <div class="gallery-link zh">进入展馆 →</div><div class="gallery-link en">Visit Gallery →</div>
                 </a>
-                <a href="seller-yu-zhen-ge.html" class="gallery-card featured">
+                <a href="seller-yu-zhen-ge.html" class="gallery-card">
                     <div class="gallery-badge zh">优先展馆</div><div class="gallery-badge en">Priority</div>
                     <div class="gallery-name zh">玉珍阁</div><div class="gallery-name en">Yuzhen Ge</div>
                     <div class="gallery-desc zh">专注和田白玉与明清玉雕件</div>
@@ -488,7 +493,7 @@
                     <div class="gallery-stats en">2 items · Joined Mar 2024</div>
                     <div class="gallery-link zh">进入展馆 →</div><div class="gallery-link en">Visit Gallery →</div>
                 </a>
-                <a href="seller-mo-yun-tang.html" class="gallery-card featured">
+                <a href="seller-mo-yun-tang.html" class="gallery-card">
                     <div class="gallery-badge zh">优先展馆</div><div class="gallery-badge en">Priority</div>
                     <div class="gallery-name zh">墨韵堂</div><div class="gallery-name en">Moyun Tang</div>
                     <div class="gallery-desc zh">主收清代山水立轴与书法对联</div>
@@ -500,7 +505,8 @@
             </div>
         </div>
 
-        <div class="tier-section">
+        <!-- 标准展馆：即使卡片带「新入驻」等徽章，也无金边框 -->
+        <div class="tier-section tier-standard">
             <div class="tier-title">
                 <span>📦</span><span class="zh">标准展馆</span><span class="en">Standard Galleries</span>
             </div>
@@ -513,7 +519,7 @@
                     <div class="gallery-stats en">2 items · Joined Sep 2024</div>
                     <div class="gallery-link zh">进入展馆 →</div><div class="gallery-link en">Visit Gallery →</div>
                 </a>
-                <a href="seller-lim-kw-antiques.html" class="gallery-card featured">
+                <a href="seller-lim-kw-antiques.html" class="gallery-card">
                     <div class="gallery-badge zh">新入驻</div><div class="gallery-badge en">New</div>
                     <div class="gallery-name zh">林记古玩</div><div class="gallery-name en">Lim Kee Whee</div>
                     <div class="gallery-desc zh">专注高古青铜与明清瓷器</div>

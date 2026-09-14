@@ -1,10 +1,683 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="zh-CN">
 <head>
-<meta charset="utf-8">
-<title>无标题文档</title>
-</head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>关于 Gudong | About | Gudong.app</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#8A5A3B">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <style>
+        :root {
+            --color-bg: #F5F2EC;
+            --color-surface: #FFFFFF;
+            --color-white: #FFFFFF;
+            --color-border: #E4DED5;
 
-<body>
+            --color-primary: #8A5A3B;
+            --color-primary-dark: #68432D;
+            --color-primary-light: #F1E8DF;
+
+            --color-text: #25221E;
+            --color-text-secondary: #716B63;
+            --color-text-muted: #A49D94;
+
+            --color-gold: #B08A45;
+            --color-gold-soft: rgba(176,138,69,.10);
+            --color-bronze-muted: #9C8558;
+
+            --color-success: #526657;
+            --color-danger: #9A554B;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            background: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.65;
+        }
+
+        .announce-bar {
+            background: var(--color-primary-light);
+            color: var(--color-primary-dark);
+            font-size: .8rem;
+            text-align: center;
+            padding: .55rem 2.6rem;
+            position: relative;
+            line-height: 1.4;
+        }
+
+        .announce-close {
+            position: absolute;
+            right: .9rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            font-size: 1.05rem;
+            line-height: 1;
+            color: var(--color-text-secondary);
+            cursor: pointer;
+            padding: .2rem;
+        }
+
+        .announce-close:hover { color: var(--color-primary); }
+
+        header {
+            background: rgba(255,255,255,.96);
+            backdrop-filter: blur(6px);
+            color: var(--color-text);
+            padding: 0 5%;
+            height: 68px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1.5rem;
+            border-bottom: 1px solid var(--color-border);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+
+        .brand {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            line-height: 1;
+            flex-shrink: 0;
+        }
+
+        .brand h1 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            letter-spacing: .02em;
+            line-height: 1.15;
+        }
+
+        .brand p {
+            color: var(--color-bronze-muted);
+            margin-top: .2rem;
+            font-size: .62rem;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: .8rem;
+            flex-shrink: 0;
+        }
+
+        .btn-publish {
+            display: inline-flex;
+            align-items: center;
+            gap: .35rem;
+            background: var(--color-primary);
+            color: #fff;
+            padding: .5rem 1.1rem;
+            border-radius: 8px;
+            font-size: .85rem;
+            font-weight: 600;
+            text-decoration: none;
+            white-space: nowrap;
+            transition: .2s;
+        }
+
+        .btn-publish:hover { background: var(--color-primary-dark); }
+
+        .lang-btn {
+            border: 1px solid var(--color-border);
+            background: transparent;
+            color: var(--color-text-secondary);
+            padding: .3rem .68rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: .75rem;
+            letter-spacing: .04em;
+            transition: .2s;
+        }
+
+        .lang-btn:hover {
+            border-color: var(--color-primary);
+            color: var(--color-primary);
+            background: var(--color-primary-light);
+        }
+
+        .menu-toggle {
+            width: 38px;
+            height: 38px;
+            border: 1px solid var(--color-border);
+            background: transparent;
+            border-radius: 8px;
+            font-size: 1.05rem;
+            color: var(--color-text);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: .2s;
+        }
+
+        .menu-toggle:hover {
+            border-color: var(--color-primary);
+            color: var(--color-primary);
+            background: var(--color-primary-light);
+        }
+
+        .sidebar-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(20,17,14,.4);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity .25s ease;
+            z-index: 90;
+        }
+
+        .sidebar-overlay.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            width: 264px;
+            max-width: 78vw;
+            background: var(--color-white);
+            box-shadow: 4px 0 24px rgba(37,34,30,.18);
+            transform: translateX(-100%);
+            transition: transform .3s ease;
+            z-index: 95;
+            overflow-y: auto;
+            padding-bottom: 2rem;
+        }
+
+        .sidebar.open { transform: translateX(0); }
+
+        .sidebar-toggle-inner {
+            display: block;
+            width: 100%;
+            padding: .9rem 0;
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid var(--color-border);
+            font-size: 1.15rem;
+            color: var(--color-text-secondary);
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .sidebar-toggle-inner:hover { color: var(--color-primary); }
+
+        .sidebar-brand {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: .1rem;
+            padding: 1.1rem 0;
+            font-weight: 700;
+            color: var(--color-text);
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .sidebar-brand .zh { font-size: 1.05rem; }
+        .sidebar-brand .en { font-size: 1.05rem; letter-spacing: .04em; }
+
+        .sidebar-nav {
+            display: flex;
+            flex-direction: column;
+            padding: .3rem 0;
+        }
+
+        .sidebar-link {
+            padding: .85rem 1.4rem;
+            color: var(--color-text);
+            text-decoration: none;
+            font-size: .95rem;
+            transition: .2s;
+        }
+
+        .sidebar-link:hover { background: var(--color-primary-light); color: var(--color-primary); }
+        .sidebar-link.active { background: var(--color-primary-light); color: var(--color-primary); font-weight: 600; }
+
+        .sidebar-group-title {
+            padding: .85rem 1.4rem .3rem;
+            color: var(--color-text);
+            font-size: .95rem;
+            font-weight: 600;
+        }
+
+        .sidebar-sub {
+            display: block;
+            padding: .55rem 1.4rem .55rem 2.2rem;
+            color: var(--color-text-secondary);
+            text-decoration: none;
+            font-size: .88rem;
+            transition: .2s;
+        }
+
+        .sidebar-sub:hover { color: var(--color-primary); background: var(--color-primary-light); }
+
+        .container {
+            max-width: 820px;
+            margin: 0 auto;
+            padding: 3.2rem 5% 4rem;
+            background: transparent;
+            min-height: 80vh;
+        }
+
+        section {
+            margin-bottom: 4rem;
+            scroll-margin-top: 90px;
+        }
+
+        h2 {
+            color: var(--color-text);
+            margin-bottom: 1.35rem;
+            font-size: 1.55rem;
+            font-weight: 700;
+            letter-spacing: -.02em;
+        }
+
+        /* ---------- Hero ---------- */
+        .hero-clean {
+            text-align: center;
+            max-width: 640px;
+            margin: 0 auto 1rem;
+            padding: 1.4rem 0 .5rem;
+        }
+
+        .hero-eyebrow {
+            font-family: Georgia, "Songti SC", "STSong", serif;
+            font-style: italic;
+            font-size: .92rem;
+            color: var(--color-bronze-muted);
+            letter-spacing: .01em;
+            margin-bottom: .9rem;
+        }
+
+        .hero-title-main {
+            font-family: Georgia, "Songti SC", "STSong", serif;
+            font-size: clamp(1.7rem, 4.2vw, 2.5rem);
+            font-weight: 600;
+            color: var(--color-text);
+            line-height: 1.35;
+            margin-bottom: 1rem;
+        }
+
+        .hero-desc {
+            font-size: .95rem;
+            color: var(--color-text-secondary);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .hero-btn {
+            display: inline-block;
+            background: var(--color-primary);
+            color: #fff;
+            padding: .68rem 1.7rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: .88rem;
+            transition: .2s;
+        }
+
+        .hero-btn:hover { background: var(--color-primary-dark); }
+
+        /* ---------- Intro paragraphs ---------- */
+        .intro-block {
+            max-width: 640px;
+            margin: 0 auto;
+            font-size: .98rem;
+            color: var(--color-text-secondary);
+            line-height: 1.75;
+        }
+
+        .intro-block p { margin-bottom: .9rem; }
+        .intro-block p:last-child { margin-bottom: 0; }
+
+        /* ---------- Value cards ---------- */
+        .value-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+
+        .value-card {
+            background: var(--color-white);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            padding: 1.3rem 1.2rem;
+            transition: .2s;
+        }
+
+        .value-card:hover {
+            border-color: var(--color-primary);
+            box-shadow: 0 4px 14px rgba(138,90,59,.08);
+        }
+
+        .value-card .icon {
+            font-size: 1.3rem;
+            margin-bottom: .55rem;
+        }
+
+        .value-card h4 {
+            font-size: 1rem;
+            color: var(--color-text);
+            margin-bottom: .4rem;
+        }
+
+        .value-card p {
+            font-size: .82rem;
+            color: var(--color-text-secondary);
+            line-height: 1.6;
+        }
+
+        /* ---------- What we don't do ---------- */
+        .dont-panel {
+            background: var(--color-white);
+            border: 1px solid var(--color-border);
+            border-left: 3px solid var(--color-danger);
+            border-radius: 8px;
+            padding: 1.3rem 1.4rem;
+            margin-top: 1rem;
+        }
+
+        .dont-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: .55rem;
+        }
+
+        .dont-list li {
+            font-size: .88rem;
+            color: var(--color-text-secondary);
+            line-height: 1.55;
+            padding-left: 1.3rem;
+            position: relative;
+        }
+
+        .dont-list li::before {
+            content: "—";
+            position: absolute;
+            left: 0;
+            color: var(--color-danger);
+            font-weight: 600;
+        }
+
+        /* ---------- Location / contact strip ---------- */
+        .contact-strip {
+            background: var(--color-primary-light);
+            border-radius: 10px;
+            padding: 1.6rem 1.8rem;
+            text-align: center;
+        }
+
+        .contact-strip h3 {
+            font-size: 1.05rem;
+            color: var(--color-text);
+            margin-bottom: .35rem;
+        }
+
+        .contact-strip p {
+            font-size: .85rem;
+            color: var(--color-text-secondary);
+            margin-bottom: .8rem;
+        }
+
+        .contact-strip a {
+            color: var(--color-primary);
+            font-weight: 600;
+            text-decoration: none;
+            font-size: .92rem;
+        }
+
+        .contact-strip a:hover { text-decoration: underline; }
+
+        footer {
+            text-align: center;
+            padding: 2.2rem 5% 1.8rem;
+            background: var(--color-white);
+            color: var(--color-text-secondary);
+            margin-top: 1rem;
+            font-size: .78rem;
+            border-top: 1px solid var(--color-border);
+        }
+
+        .footer-nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.3rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .footer-nav a { color: var(--color-text-secondary); text-decoration: none; font-size: .82rem; }
+        .footer-nav a:hover { color: var(--color-primary); }
+
+        .footer-disclaimer {
+            max-width: 620px;
+            margin: 0 auto 1.1rem;
+            font-size: .74rem;
+            line-height: 1.65;
+            color: var(--color-text-muted);
+        }
+
+        [data-lang="en"] .zh { display: none; }
+        [data-lang="zh"] .en { display: none; }
+
+        @media (max-width: 820px) {
+            header { height: 62px; gap: .6rem; }
+            .btn-publish { padding: .45rem .85rem; font-size: .8rem; }
+            .container { padding-top: 2.4rem; }
+            .value-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 560px) {
+            .brand h1 { font-size: 1.15rem; }
+            .container { padding: 2rem 4.5% 3rem; }
+            section { margin-bottom: 3.4rem; }
+            .dont-panel { padding: 1.1rem 1.15rem; }
+            .contact-strip { padding: 1.3rem 1.2rem; }
+        }
+    </style>
+    <link rel="apple-touch-icon" href="/assets/icons/icon-192.png">
+</head>
+<body data-lang="zh">
+    <div class="announce-bar" id="announceBar">
+        <span class="zh">Beta 期间，前 2 件藏品信息免费发布</span>
+        <span class="en">Beta: List your first 2 items free</span>
+        <button class="announce-close" onclick="document.getElementById('announceBar').style.display='none'" aria-label="close">×</button>
+    </div>
+
+    <header>
+        <div style="display:flex; align-items:center; gap:.9rem;">
+            <button class="menu-toggle" onclick="openSidebar()" aria-label="menu">☰</button>
+            <a href="index.html" class="brand" style="text-decoration:none;color:inherit;">
+                <h1 class="zh">古董集</h1>
+                <h1 class="en">GUDONG</h1>
+                <p class="zh">GUDONG</p>
+            </a>
+        </div>
+
+        <div class="header-right">
+            <a href="pricing.html#seller-services" class="btn-publish">
+                <span class="zh">发布藏品信息</span><span class="en">List an Item</span>
+            </a>
+            <button class="lang-btn" onclick="toggleLang()">EN</button>
+        </div>
+    </header>
+
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+    <aside class="sidebar" id="sidebar">
+        <button class="sidebar-toggle-inner" onclick="closeSidebar()" aria-label="close menu">☰</button>
+        <div class="sidebar-brand">
+            <span class="zh">古董集</span><span class="en">GUDONG</span>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="index.html" class="sidebar-link"><span class="zh">首页</span><span class="en">Home</span></a>
+
+            <div class="sidebar-group-title zh">藏品库</div><div class="sidebar-group-title en">Collection</div>
+            <a href="categories/porcelain.html" class="sidebar-sub"><span class="zh">· 瓷器</span><span class="en">· Porcelain</span></a>
+            <a href="categories/jade.html" class="sidebar-sub"><span class="zh">· 玉器</span><span class="en">· Jade</span></a>
+            <a href="categories/coins.html" class="sidebar-sub"><span class="zh">· 钱币</span><span class="en">· Coins</span></a>
+            <a href="categories/paintings.html" class="sidebar-sub"><span class="zh">· 书画</span><span class="en">· Paintings &amp; Calligraphy</span></a>
+            <a href="categories/misc.html" class="sidebar-sub"><span class="zh">· 杂项</span><span class="en">· Miscellaneous</span></a>
+
+            <a href="expert-picks.html" class="sidebar-link"><span class="zh">编辑精选</span><span class="en">Editor's Picks</span></a>
+            <a href="sellers/index.html" class="sidebar-link"><span class="zh">卖家展馆</span><span class="en">Dealer Galleries</span></a>
+            <a href="pricing.html#seller-services" class="sidebar-link"><span class="zh">卖家服务</span><span class="en">Sell with Gudong</span></a>
+            <a href="pricing.html#buyer-services" class="sidebar-link"><span class="zh">买家指南</span><span class="en">Buyer Guide</span></a>
+            <a href="pricing.html" class="sidebar-link"><span class="zh">服务价格</span><span class="en">Pricing</span></a>
+            <a href="about.html" class="sidebar-link active"><span class="zh">关于 Gudong</span><span class="en">About</span></a>
+        </nav>
+    </aside>
+
+    <main class="container">
+        <section id="hero" style="padding-top: 0;">
+            <div class="hero-clean">
+                <div class="hero-eyebrow">About Gudong</div>
+                <div class="hero-title-main">
+                    <span class="zh">一个发现中国古董的地方</span>
+                    <span class="en">A Place to Discover Chinese Antiques</span>
+                </div>
+                <div class="hero-desc">
+                    <span class="zh">古董集是新加坡本地的古董与收藏品信息发现平台，帮助收藏者发现值得了解的中国古董。</span>
+                    <span class="en">Gudong is a Singapore-based discovery platform for Chinese antiques and collectibles.</span>
+                </div>
+                <a href="index.html#new-listings" class="hero-btn"><span class="zh">浏览藏品</span><span class="en">Browse Listings</span></a>
+            </div>
+        </section>
+
+        <section id="story">
+            <h2 class="zh">我们的出发点</h2>
+            <h2 class="en">Why We Started</h2>
+            <div class="intro-block">
+                <p class="zh">中国古董的买卖一直分散在画廊、拍卖行与私人间。信息零散、门槛不低，许多收藏者想了解一件器物，却不知道从何看起。</p>
+                <p class="en">Trading Chinese antiques has long been scattered across galleries, auction houses and private hands. Information is fragmented, and the barrier to entry is high — many collectors want to understand a piece but don't know where to look.</p>
+                <p class="zh">Gudong 想做一件简单的事：把藏品信息整理清楚，让更多人能看见、能了解，并能直接联系卖家。</p>
+                <p class="en">Gudong does one simple thing: organize listing information clearly, so more people can see it, understand it, and reach the seller directly.</p>
+            </div>
+        </section>
+
+        <section id="what-we-do">
+            <h2 class="zh">我们做什么</h2>
+            <h2 class="en">What We Do</h2>
+            <div class="value-grid">
+                <div class="value-card">
+                    <div class="icon">📋</div>
+                    <h4 class="zh">信息展示</h4>
+                    <h4 class="en">Listing Display</h4>
+                    <p class="zh">整理藏品信息与图片，按类别归档，便于浏览与搜索。</p>
+                    <p class="en">Organize listings and photos by category for easy browsing and search.</p>
+                </div>
+                <div class="value-card">
+                    <div class="icon">🔍</div>
+                    <h4 class="zh">发现与精选</h4>
+                    <h4 class="en">Discovery &amp; Picks</h4>
+                    <p class="zh">每日更新发现，编辑精选值得多看一眼的器物。</p>
+                    <p class="en">Daily discoveries and editor's picks worth a second look.</p>
+                </div>
+                <div class="value-card">
+                    <div class="icon">🤝</div>
+                    <h4 class="zh">联系卖家</h4>
+                    <h4 class="en">Connect with Sellers</h4>
+                    <p class="zh">提供公开的卖家联系方式，买卖双方直接沟通。</p>
+                    <p class="en">Provide public seller contact info; buyers and sellers connect directly.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="what-we-dont">
+            <h2 class="zh">我们不做什么</h2>
+            <h2 class="en">What We Don't Do</h2>
+            <div class="intro-block">
+                <p class="zh">为了让边界清晰，有些事 Gudong 不做：</p>
+                <p class="en">To keep the boundary clear, here's what Gudong does not do:</p>
+            </div>
+            <div class="dont-panel">
+                <ul class="dont-list">
+                    <li><span class="zh">不鉴定真伪，不提供权威鉴定报告</span><span class="en">No authentication or authoritative appraisal reports</span></li>
+                    <li><span class="zh">不估价、不参与定价</span><span class="en">No valuation or pricing involvement</span></li>
+                    <li><span class="zh">不代收款、不代付款、不托管资金</span><span class="en">No payment processing or fund escrow</span></li>
+                    <li><span class="zh">不参与买卖交易，不抽取成交佣金</span><span class="en">No transaction participation or commission</span></li>
+                    <li><span class="zh">不担保货品真伪与成交结果</span><span class="en">No guarantee of authenticity or completion</span></li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="location">
+            <h2 class="zh">立足新加坡</h2>
+            <h2 class="en">Based in Singapore</h2>
+            <div class="intro-block">
+                <p class="zh">Gudong 在新加坡本地运营，币种为新加坡元（SGD）。我们专注于服务本地与东南亚的收藏者，同时欢迎全球卖家与买家浏览与联系。</p>
+                <p class="en">Gudong operates locally in Singapore, with prices in Singapore Dollars (SGD). We focus on serving collectors in Singapore and Southeast Asia, while welcoming sellers and buyers worldwide to browse and connect.</p>
+            </div>
+
+            <div class="contact-strip">
+                <h3 class="zh">联系 Gudong</h3>
+                <h3 class="en">Contact Gudong</h3>
+                <p class="zh">合作、反馈或发布咨询，欢迎来信。</p>
+                <p class="en">For partnerships, feedback or listing inquiries, email us.</p>
+                <a href="mailto:contact@gudong.app">contact@gudong.app</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-nav">
+            <a href="about.html" class="zh">关于我们</a><a href="about.html" class="en">About</a>
+            <a href="pricing.html#buyer-services" class="zh">买家指南</a><a href="pricing.html#buyer-services" class="en">Buyer Guide</a>
+            <a href="pricing.html" class="zh">服务价格</a><a href="pricing.html" class="en">Pricing</a>
+            <a href="pricing.html#seller-services" class="zh">卖家服务</a><a href="pricing.html#seller-services" class="en">Sell with Gudong</a>
+            <a href="about.html#location" class="zh">联系我们</a><a href="about.html#location" class="en">Contact</a>
+        </div>
+        <p class="footer-disclaimer zh">古董集是古董与收藏品信息发现平台。平台不提供鉴定、估价、买卖、代收款或交易服务。买卖双方应自行核实相关信息，并直接协商及完成交易。</p>
+        <p class="footer-disclaimer en">Gudong is an information and discovery platform for antiques and collectibles. We do not authenticate, appraise, sell, purchase, process payments, or participate in transactions. Buyers and sellers are responsible for conducting their own due diligence and arranging transactions directly.</p>
+        <p class="zh">© 2026 古董集 · gudong.app</p>
+        <p class="en">© 2026 Gudong · gudong.app</p>
+    </footer>
+
+    <script>
+        let currentLang = 'zh';
+
+        function openSidebar() {
+            document.getElementById('sidebar').classList.add('open');
+            document.getElementById('sidebarOverlay').classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeSidebar() {
+            document.getElementById('sidebar').classList.remove('open');
+            document.getElementById('sidebarOverlay').classList.remove('show');
+            document.body.style.overflow = '';
+        }
+
+        function toggleLang() {
+            currentLang = currentLang === 'zh' ? 'en' : 'zh';
+            document.body.dataset.lang = currentLang;
+            document.querySelector('.lang-btn').textContent = currentLang === 'zh' ? 'EN' : '中';
+        }
+
+        if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js');
+    </script>
 </body>
 </html>

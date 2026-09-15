@@ -449,8 +449,8 @@
         .listing-card:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(37,34,30,.14); }
         .listing-card img { width: 100%; height: auto; max-height: 220px; object-fit: cover; display: block; }
         .listing-card h3 { padding: .45rem .55rem 0; font-size: .9rem; font-weight: 600; color: var(--color-text); line-height: 1.3; }
-        .listing-card .text-en { padding: 0 .55rem; font-size: .78rem; color: var(--color-text-secondary); margin-top: .12rem; }
-        .listing-card .price-cn { padding: .3rem .55rem 0; font-size: .82rem; color: var(--color-primary); font-weight: 600; }
+        .listing-card .text-en { padding: .45rem .55rem 0; font-size: .78rem; color: var(--color-text-secondary); margin-top: .12rem; }
+        .listing-card .price-cn { padding: .3rem .55rem .55rem; font-size: .82rem; color: var(--color-primary); font-weight: 600; }
         .listing-card .price-en { padding: 0 .55rem .55rem; font-size: .78rem; color: var(--color-text-muted); }
 
         /* ---------- New Listings / item grid ---------- */
@@ -646,13 +646,38 @@
             .expert-mini-grid { grid-template-columns: 1fr; }
             .item-card .price-tag { font-size: .68rem; padding: .22rem .45rem; }
         }
+    
+        /* ---------- Sidebar 语言切换按钮（2026-09-15 新增） ---------- */
+        .sidebar-lang-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: .4rem;
+            width: calc(100% - 2.8rem);
+            margin: 1rem 1.4rem .8rem;
+            padding: .62rem .9rem;
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            background: var(--color-white);
+            color: var(--color-text-secondary);
+            font-family: inherit;
+            font-size: .9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: .2s;
+        }
+        .sidebar-lang-btn:hover {
+            border-color: var(--color-primary);
+            color: var(--color-primary);
+            background: var(--color-primary-light);
+        }
     </style>
     <link rel="apple-touch-icon" href="/assets/icons/icon-192.png">
 </head>
 <body data-lang="zh">
     <div class="announce-bar" id="announceBar">
-        <span class="zh">✨创始会员福利：早期入驻卖家，可享前2条藏品信息免费发布</span>
-        <span class="en">✨Founder Member Offer: Early sellers get first-two listings complimentary</span>
+        <span class="zh">创始卖家福利｜限量 88 席免费入驻，前 2 件藏品信息免费刊登，平台不抽取交易佣金，仅提供藏品信息与曝光增值服务。</span>
+        <span class="en">Founder-Dealer Benefit | Limited 88 seats · Free to join · First 2 listings free · No transaction commission — we provide listing &amp; exposure services only.</span>
         <button class="announce-close" onclick="document.getElementById('announceBar').style.display='none';localStorage.setItem('announceClosed','yes')" aria-label="close">×</button>
     </div>
     <header>
@@ -665,7 +690,7 @@
         </div>
         <div class="header-right">
             <a href="pricing.html#seller-services" class="btn-publish">
-                <span class="zh">发布藏品信息</span><span class="en">List an Item</span>
+                <span class="zh">刊登藏品信息</span><span class="en">List an Item</span>
             </a>
             <button class="lang-btn" onclick="toggleLang()">EN</button>
         </div>
@@ -696,6 +721,7 @@
             <a href="pricing.html#price-table" class="sidebar-link" onclick="closeSidebar()"><span class="zh">服务价格</span><span class="en">Pricing</span></a>
 
             <a href="about.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">关于Gudong</span><span class="en">About</span></a>
+            <button type="button" class="sidebar-lang-btn" onclick="toggleLang()" aria-label="Switch language"><span class="zh">🌐 English</span><span class="en">🌐 中文</span></button>
         </nav>
     </aside>
     <main class="container">
@@ -839,7 +865,7 @@
             <div id="noResultEn" class="no-result en" style="display:none;">No items found</div>
             <div style="text-align:center; margin-top:2rem;">
                 <a href="pricing.html#seller-services" class="btn-publish">
-                    <span class="zh">发布藏品信息</span><span class="en">List an Item</span>
+                    <span class="zh">刊登藏品信息</span><span class="en">List an Item</span>
                 </a>
                 <p class="section-note zh" style="margin-top:1rem;">了解发布规则与收费，前往服务价格页。</p>
                 <p class="section-note en" style="margin-top:1rem;">See listing rules and pricing on the Pricing page.</p>
@@ -1134,10 +1160,10 @@
             const card = `
               <a href="${detailUrl}" class="item-card listing-card" data-cat="${catKey(f.category)}" data-keywords="${esc([f.title_zh, f.title_en, f.era_zh, f.era_en, f.category].filter(Boolean).join(' '))}">
                 <img src="${imgSrc}" alt="${esc(f.title_zh)}" loading="lazy" onerror="this.onerror=null;this.src='/assets/images/placeholder.jpg'">
-                <h3>${esc(f.title_zh)}</h3>
-                <p class="text-en">${esc(f.title_en)}</p>
-                <p class="price-cn">${esc(f.price_display_zh)}</p>
-                <p class="price-en">${esc(f.price_display_en)}</p>
+                <h3 class="zh">${esc(f.title_zh)}</h3>
+                <p class="text-en en">${esc(f.title_en)}</p>
+                <p class="price-cn zh">${esc(f.price_display_zh)}</p>
+                <p class="price-en en">${esc(f.price_display_en)}</p>
               </a>`;
             container.innerHTML += card;
           });

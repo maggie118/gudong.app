@@ -233,24 +233,10 @@
             object-fit: cover;
             display: block;
         }
-        .ep-badge {
-            position: absolute;
-            top: .4rem;
-            left: .4rem;
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #E08A3C, #C9601F);
-            color: #fff;
-            font-size: .58rem;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            line-height: 1.1;
-            box-shadow: 0 2px 6px rgba(0,0,0,.25);
-        }
+        /* ---------- .ep-badge ----------
+           2026-09-14：卡片图片左上角的橙色圆形「行家推荐」徽章已按要求移除，
+           对应的 .ep-badge 规则一并删除。如需恢复：徽章是 32×32 圆形，
+           background: linear-gradient(135deg, #E08A3C, #C9601F)。 */
         .ep-body { padding: .6rem .7rem .75rem; }
         .ep-title {
             font-size: .82rem;
@@ -377,7 +363,33 @@
             .ep-grid { grid-template-columns: repeat(2, 1fr); gap: .6rem; }
             .ep-header .ep-desc { display: block; margin-left: 0; margin-top: .3rem; }
         }
+    
+        /* ---------- Sidebar 语言切换按钮（2026-09-15 新增） ---------- */
+        .sidebar-lang-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: .4rem;
+            width: calc(100% - 2.8rem);
+            margin: 1rem 1.4rem .8rem;
+            padding: .62rem .9rem;
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            background: var(--color-white);
+            color: var(--color-text-secondary);
+            font-family: inherit;
+            font-size: .9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: .2s;
+        }
+        .sidebar-lang-btn:hover {
+            border-color: var(--color-primary);
+            color: var(--color-primary);
+            background: var(--color-primary-light);
+        }
     </style>
+    <link rel="apple-touch-icon" href="/assets/icons/icon-192.png">
 </head>
 <body data-lang="zh">
     <header>
@@ -416,6 +428,7 @@
             <a href="pricing.html#buyer-services" class="sidebar-link"><span class="zh">买家指南</span><span class="en">Buyer Guide</span></a>
             <a href="pricing.html" class="sidebar-link"><span class="zh">收费标准</span><span class="en">Pricing</span></a>
             <a href="about.html#location" class="sidebar-link"><span class="zh">关于我们</span><span class="en">About Us</span></a>
+            <button type="button" class="sidebar-lang-btn" onclick="toggleLang()" aria-label="Switch language"><span class="zh">🌐 English</span><span class="en">🌐 中文</span></button>
         </nav>
     </aside>
     <main class="container">
@@ -567,8 +580,7 @@
                 const cardHtml = `
 <a class="ep-card" href="${detailHref}" data-cat="${catKey}">
     <div class="ep-image">
-        <div class="ep-badge zh">行家<br>推荐</div>
-        <div class="ep-badge en">Expert</div>
+        <!-- 2026-09-14：图片上的「行家推荐 / Expert」圆形徽章已按需求移除 -->
         <img src="${imgSrc}" alt="${f.title_zh}" loading="lazy" onerror="this.onerror=null;this.src='/assets/images/placeholder.jpg'">
     </div>
     <div class="ep-body">

@@ -410,7 +410,33 @@
             .page-title { font-size: 1.4rem; }
             .cta-banner { align-items: flex-start; text-align: left; }
         }
+    
+        /* ---------- Sidebar 语言切换按钮（2026-09-15 新增） ---------- */
+        .sidebar-lang-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: .4rem;
+            width: calc(100% - 2.8rem);
+            margin: 1rem 1.4rem .8rem;
+            padding: .62rem .9rem;
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            background: var(--color-white);
+            color: var(--color-text-secondary);
+            font-family: inherit;
+            font-size: .9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: .2s;
+        }
+        .sidebar-lang-btn:hover {
+            border-color: var(--color-primary);
+            color: var(--color-primary);
+            background: var(--color-primary-light);
+        }
     </style>
+    <link rel="apple-touch-icon" href="/assets/icons/icon-192.png">
 </head>
 <body data-lang="zh">
     <header>
@@ -425,7 +451,7 @@
 
         <div class="header-right">
             <a href="mailto:contact@gudong.app?subject=%E5%8F%A4%E8%91%A3%E9%9B%86-%E7%94%B3%E8%AF%B7%E5%8F%91%E5%B8%83%E8%97%8F%E5%93%81" class="btn-publish">
-                <span class="zh">发布藏品信息</span><span class="en">List an Item</span>
+                <span class="zh">刊登藏品信息</span><span class="en">List an Item</span>
             </a>
             <button class="lang-btn" onclick="toggleLang()">EN</button>
         </div>
@@ -454,7 +480,7 @@
             <a href="../pricing.html#seller-services" class="sidebar-link"><span class="zh">卖家服务</span><span class="en">Sell with Gudong</span></a>
             <a href="../pricing.html#buyer-services" class="sidebar-link"><span class="zh">买家指南</span><span class="en">Buyer Guide</span></a>
             <a href="../pricing.html#price-table" class="sidebar-link"><span class="zh">服务价格</span><span class="en">Pricing</span></a>
-            <a href="../about.html" class="sidebar-link"><span class="zh">关于 Gudong</span><span class="en">About</span></a>
+            <a href="../about.html" class="sidebar-link"><span class="zh">关于 Gudong</span><span class="en">About</span></a>            <button type="button" class="sidebar-lang-btn" onclick="toggleLang()" aria-label="Switch language"><span class="zh">🌐 English</span><span class="en">🌐 中文</span></button>
         </nav>
     </aside>
 

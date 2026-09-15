@@ -6,6 +6,7 @@
 <title>{{SELLER_NAME}} 的展馆 | 古董集</title>
 <meta name="description" content="浏览卖家 {{SELLER_NAME}} 的古董藏品展馆，瓷器、玉器、杂项等古董艺术品在线展示。">
 <link rel="stylesheet" href="../css/styles.css">
+    <link rel="apple-touch-icon" href="/assets/icons/icon-192.png">
 </head>
 <body>
 <header class="site-header">
@@ -62,18 +63,14 @@ async function loadBoothData(){
       return;
     }
 
-    // 渲染藏品卡片，复用首页徽章样式
+    // 渲染藏品卡片（图片上不再叠加「今日发现置顶 / 编辑精选」文字标签）
     itemsContainer.innerHTML = "";
     sellerItems.forEach(f => {
       const imgSrc = `/assets/images/${f.img_file}`;
       const detailUrl = `/items/${f.item_id}.html`;
-      let badgeHtml = "";
-      if(f.is_today_finds) badgeHtml += `<span class="badge badge-top">今日发现置顶</span>`;
-      if(f.is_editor_picks) badgeHtml += `<span class="badge badge-editor">编辑精选</span>`;
 
       const card = `
         <div class="item-card" onclick="location.href='${detailUrl}'">
-          ${badgeHtml}
           <img src="${imgSrc}" alt="${f.title_zh}" loading="lazy">
           <h3>${f.title_zh}</h3>
           <p class="text-en">${f.title_en}</p>

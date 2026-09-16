@@ -1022,7 +1022,7 @@
             if (document.getElementById('searchInput').value.trim()) filterAll();
         }
 
-        /* ===== 搜索：覆盖首页三个区块（今日发现 / 编辑精选 / 最新上架） ===== */
+        /* ===== 搜索：覆盖首页三个区块（今日发现 / 精选展示 / 最新藏品） ===== */
         // 首页三处卡片列表的选择器
         const SEARCH_GROUPS = [
             '#todayFindsGrid .finds-card',
@@ -1060,7 +1060,7 @@
             showSearchTip(kw, visible);
             checkNoResult(kw);
 
-            // 今日发现 / 编辑精选 区块整块为空时收起区块标题，避免出现"空标题"
+            // 今日发现 / 精选展示 区块整块为空时收起区块标题，避免出现"空标题"
             ['todayFindsGrid', 'editorPicksGrid'].forEach(id => {
                 const grid = document.getElementById(id);
                 if (!grid) return;
@@ -1195,14 +1195,19 @@
           if (f.img_url && /^https?:\/\//i.test(f.img_url)) return f.img_url;
           return f.img_file ? ('/assets/images/' + f.img_file) : '/assets/images/placeholder.jpg';
         }
+        function attrKeywords(f) {
+          return esc([f.title_zh, f.title_en, f.era_zh, f.era_en, f.category].filter(Boolean).join(' '));
+        }
 
-        // 渲染一张「今日发现」卡片（is_today_finds=true 为「优先」）
+        /* 渲染「今日发现」卡片
+           2026-09-17：与静态 HTML 结构对齐，补齐 .finds-caption 一行
+           （此前接口返回数据后整块 innerHTML 被替换，caption 会消失）。 */
         function renderFindsCard(f) {
           const promoted = f.is_today_finds;
           const badgeZh = promoted ? '优先' : '系统推荐';
           const badgeEn = promoted ? 'Priority' : 'System Recommended';
           const cls = promoted ? 'finds-card--promoted' : 'finds-card--organic';
-          const kw = esc([f.title_zh, f.title_en, f.era_zh, f.era_en, f.category].filter(Boolean).join(' '));
+          const kw = attrKeywords(f);
           return `
             <a href="items/${esc(f.item_id)}.html" class="finds-card ${cls}" data-cat="${catKey(f.category)}" data-keywords="${kw}">
               <div class="finds-image"><img src="${imgPath(f)}" alt="${esc(f.title_zh)}" loading="lazy" onerror="this.onerror=null;this.src='/assets/images/placeholder.jpg'"></div>
@@ -1210,21 +1215,30 @@
               <div class="finds-meta zh">${esc(f.era_zh)} · ${esc(f.category)}</div><div class="finds-meta en">${esc(f.era_en)} · ${esc(f.category)}</div>
               <div class="finds-price">${esc(f.price_display_zh || f.price_display_en)}</div>
               <div class="finds-badge zh">${badgeZh}</div><div class="finds-badge en">${badgeEn}</div>
+              <div class="finds-caption zh">卖家提供资料</div><div class="finds-caption en">Seller-provided information</div>
             </a>`;
         }
 
-        // 渲染一张「编辑精选」卡片
+        /* 渲染「精选展示」卡片
+           2026-09-17：徽章文案与静态 HTML 对齐（此前是「编辑精选 / Editor's Pick」，
+           接口加载后与静态展示不一致）。副标题优先取 f.subtitle_zh/subtitle_en，
+           缺失时回退到「年代 · 品类」。 */
         function renderPickCard(f) {
-          const kw = esc([f.title_zh, f.title_en, f.era_zh, f.era_en, f.category].filter(Boolean).join(' '));
+          const kw = attrKeywords(f);
+          const subZh = f.subtitle_zh || [f.era_zh, f.category].filter(Boolean).join(' · ');
+          const subEn = f.subtitle_en || [f.era_en, f.category].filter(Boolean).join(' · ');
           return `
             <a href="items/${esc(f.item_id)}.html" class="expert-mini-card" data-cat="${catKey(f.category)}" data-keywords="${kw}">
-              <div class="expert-mini-badge zh">编辑精选</div><div class="expert-mini-badge en">Editor's Pick</div>
+              <div class="expert-mini-badge zh">精选展示</div><div class="expert-mini-badge en">Featured Listings</div>
               <div class="expert-mini-title zh">${esc(f.title_zh)}</div><div class="expert-mini-title en">${esc(f.title_en)}</div>
-              <div class="expert-mini-sub zh">${esc(f.era_zh)} · ${esc(f.category)}</div><div class="expert-mini-sub en">${esc(f.era_en)} · ${esc(f.category)}</div>
+              <div class="expert-mini-sub zh">${esc(subZh)}</div><div class="expert-mini-sub en">${esc(subEn)}</div>
             </a>`;
         }
 
-        // 渲染卡片（统一徽章样式，兼容今日发现 & 最新上架）
+        /* 渲染「最新藏品」卡片
+           2026-09-17：与静态 HTML 对齐——只输出图片 + 左下角价格标签，
+           不再使用 .listing-card / <h3> / .price-cn 等（静态卡片里没有这些元素，
+           接口加载后会导致卡片外观突变）。 */
         function renderCards(containerId, items) {
           const container = document.getElementById(containerId);
           if (!container) return;
@@ -1232,14 +1246,14 @@
           items.forEach(f => {
             const imgSrc = imgPath(f);
             const detailUrl = `/items/${esc(f.item_id)}.html`;
-            // 卡片图片上不再叠加「今日发现置顶 / 编辑精选」文字标签（2026-09-14 按需求移除）
+            const kw = attrKeywords(f);
+            const pz = f.price_display_zh || f.price_display_en || '';
+            const pe = f.price_display_en || f.price_display_zh || '';
             const card = `
-              <a href="${detailUrl}" class="item-card listing-card" data-cat="${catKey(f.category)}" data-keywords="${esc([f.title_zh, f.title_en, f.era_zh, f.era_en, f.category].filter(Boolean).join(' '))}">
+              <a href="${detailUrl}" class="item-card" data-cat="${catKey(f.category)}" data-keywords="${kw}">
                 <img src="${imgSrc}" alt="${esc(f.title_zh)}" loading="lazy" onerror="this.onerror=null;this.src='/assets/images/placeholder.jpg'">
-                <h3 class="zh">${esc(f.title_zh)}</h3>
-                <p class="text-en en">${esc(f.title_en)}</p>
-                <p class="price-cn zh">${esc(f.price_display_zh)}</p>
-                <p class="price-en en">${esc(f.price_display_en)}</p>
+                <div class="price-tag zh">${esc(pz)}</div>
+                <div class="price-tag en">${esc(pe)}</div>
               </a>`;
             container.innerHTML += card;
           });

@@ -4,10 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>服务价格 | Pricing | Gudong</title>
-    <link rel="manifest" href="manifest.json">
+    <link rel="manifest" href="../../Downloads/manifest.json">
     <meta name="theme-color" content="#8A5A3B">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <!-- 字体：英文全部用 Inter 系（Geist、Inter Display 作为补充候选）；中文全部用微软雅黑 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Geist:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         /* ========== 颜色：还原最初原版pricing.html的色值，不做色调微调 ========== */
         :root {
@@ -27,14 +31,19 @@
             --color-success: #526657;
             --color-danger: #9A554B;
             --card-radius: 22px;
-            /* 框架式排版新增：衬线展示字族（标题 / 价格），不改变任何颜色 */
-            --font-display: "Songti SC", "STSong", "SimSun", "Noto Serif SC", "Times New Roman", Georgia, serif;
+            /* 全站展示字体（标题/价格等）统一为：英文 Inter 系 + 中文微软雅黑系，与 LOGO 保持一致 */
+            --font-display: "Inter", "Geist", "Inter Display", "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            /* ===== 字体微调（2026-09-16）：英文全部用 Inter 系，中文全部用微软雅黑系 ===== */
+            --font-latin: "Inter", "Geist", "Inter Display", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            --font-zh-sans: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            /* ===== LOGO 专用色：主标题同正文炭黑 / 副标题浅金棕 ===== */
+            --color-qianjinzong: #948268;
         }
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-family: var(--font-latin), var(--font-zh-sans);
         }
         html { scroll-behavior: smooth; }
         body {
@@ -57,8 +66,30 @@
             top: 0;
             z-index: 50;
         }
-        .brand { display: flex; flex-direction: column; justify-content: center; line-height: 1; flex-shrink: 0; }
-        .brand h1 { font-size: 1.55rem; font-weight: 700; letter-spacing: .04em; line-height: 1.15; }
+        /* ===== 品牌 LOGO（2026-09-16 重构）=====
+           行间距规则：副标题 margin-top = 主标题字高 × 0.35（中英文LOGO统一）
+           副标题字号：主标题字号的 50%（此前 34% 偏小，按反馈调大）
+           中文副标题「古董藏品信息平台」的总宽度由脚本动态微调 letter-spacing，
+           使其稳定落在「古董集」总宽度的 105%～115% 区间（见文末 <script>）。 */
+        .brand {
+            display: flex; flex-direction: column; justify-content: center; line-height: 1; flex-shrink: 0;
+            --logo-main-size: 1.45rem;
+            --logo-sub-size: calc(var(--logo-main-size) * 0.5);
+            --logo-line-gap: calc(var(--logo-main-size) * 0.35);
+        }
+        .brand-line { display: flex; flex-direction: column; }
+        .brand-main { display: block; line-height: 1; white-space: nowrap; font-size: var(--logo-main-size); }
+        .brand-sub { display: block; line-height: 1; white-space: nowrap; font-size: var(--logo-sub-size); margin-top: var(--logo-line-gap); }
+        /* 中文 LOGO：古董集 / 古董藏品信息平台 —— 统一微软雅黑，靠字重制造厚重/纤细对比 */
+        .brand-line.zh .brand-main { font-family: var(--font-zh-sans); font-weight: 700; letter-spacing: .1em; color: var(--color-text); }
+        .brand-line.zh .brand-sub { font-family: var(--font-zh-sans); font-weight: 400; color: var(--color-qianjinzong); letter-spacing: 0; }
+        /* 英文 LOGO：GUDONG / Chinese Antiques Platform —— 统一 Inter 系 */
+        .brand-line.en .brand-main { font-family: var(--font-latin); font-weight: 800; letter-spacing: .05em; color: var(--color-text); }
+        .brand-line.en .brand-sub { font-family: var(--font-latin); font-weight: 400; color: var(--color-qianjinzong); letter-spacing: .01em; }
+        /* 导航栏窄屏：副标题自动隐藏，只保留主标题，避免拥挤 */
+        @media (max-width: 700px) {
+            .brand .brand-sub { display: none; }
+        }
         .header-right { display: flex; align-items: center; gap: .8rem; flex-shrink: 0; }
         .btn-publish {
             display: inline-flex;
@@ -327,13 +358,19 @@
     <header>
         <div style="display:flex; align-items:center; gap:.9rem;">
             <button class="menu-toggle" onclick="openSidebar()" aria-label="menu">☰</button>
-            <a href="index.html" class="brand" style="text-decoration:none;color:inherit;">
-                <h1 class="zh">古董集</h1>
-                <h1 class="en">GUDONG</h1>
+            <a href="../../Downloads/index.html" class="brand" style="text-decoration:none;color:inherit;" aria-label="古董集 GUDONG · 古董藏品信息平台 Chinese Antiques Platform">
+                <span class="brand-line zh">
+                    <span class="brand-main" id="brandZhMain">古董集</span>
+                    <span class="brand-sub" id="brandZhSub">古董藏品信息平台</span>
+                </span>
+                <span class="brand-line en">
+                    <span class="brand-main">GUDONG</span>
+                    <span class="brand-sub">Chinese Antiques Platform</span>
+                </span>
             </a>
         </div>
         <div class="header-right">
-            <a href="pricing.html#seller-services" class="btn-publish">
+            <a href="../../Downloads/pricing.html#seller-services" class="btn-publish">
                 <span class="zh">刊登藏品信息</span><span class="en">List an Item</span>
             </a>
             <button class="lang-btn" onclick="toggleLang()">EN</button>
@@ -346,25 +383,25 @@
             <span class="zh">古董集</span><span class="en">GUDONG</span>
         </div>
         <nav class="sidebar-nav">
-            <a href="index.html" class="sidebar-link"><span class="zh">首页</span><span class="en">Home</span></a>
+            <a href="../../Downloads/index.html" class="sidebar-link"><span class="zh">首页</span><span class="en">Home</span></a>
             <div class="sidebar-group-title zh">藏品库</div><div class="sidebar-group-title en">Collection</div>
-            <a href="categories/porcelain.html" class="sidebar-sub"><span class="zh">· 瓷器</span><span class="en">· Porcelain</span></a>
-            <a href="categories/jade.html" class="sidebar-sub"><span class="zh">· 玉器</span><span class="en">· Jade</span></a>
-            <a href="categories/coins.html" class="sidebar-sub"><span class="zh">· 钱币</span><span class="en">· Coins</span></a>
-            <a href="categories/paintings.html" class="sidebar-sub"><span class="zh">· 书画</span><span class="en">· Paintings &amp; Calligraphy</span></a>
-            <a href="categories/misc.html" class="sidebar-sub"><span class="zh">· 杂项</span><span class="en">· Miscellaneous</span></a>
-            <a href="expert-picks.html" class="sidebar-link"><span class="zh">编辑精选</span><span class="en">Editor's Picks</span></a>
-            <a href="sellers/index.html" class="sidebar-link"><span class="zh">卖家展馆</span><span class="en">Dealer Galleries</span></a>
+            <a href="../../Downloads/categories/porcelain.html" class="sidebar-sub"><span class="zh">· 瓷器</span><span class="en">· Porcelain</span></a>
+            <a href="../../Downloads/categories/jade.html" class="sidebar-sub"><span class="zh">· 玉器</span><span class="en">· Jade</span></a>
+            <a href="../../Downloads/categories/coins.html" class="sidebar-sub"><span class="zh">· 钱币</span><span class="en">· Coins</span></a>
+            <a href="../../Downloads/categories/paintings.html" class="sidebar-sub"><span class="zh">· 书画</span><span class="en">· Paintings &amp; Calligraphy</span></a>
+            <a href="../../Downloads/categories/misc.html" class="sidebar-sub"><span class="zh">· 杂项</span><span class="en">· Miscellaneous</span></a>
+            <a href="../../Downloads/expert-picks.html" class="sidebar-link"><span class="zh">编辑精选</span><span class="en">Editor's Picks</span></a>
+            <a href="../../Downloads/sellers/index.html" class="sidebar-link"><span class="zh">卖家展馆</span><span class="en">Dealer Galleries</span></a>
             <a href="#seller-services" class="sidebar-link"><span class="zh">卖家服务</span><span class="en">Sell with Gudong</span></a>
             <a href="#buyer-services" class="sidebar-link"><span class="zh">买家指南</span><span class="en">Buyer Guide</span></a>
             <a href="#price-table" class="sidebar-link active"><span class="zh">服务价格</span><span class="en">Pricing</span></a>
-            <a href="about.html" class="sidebar-link"><span class="zh">关于 Gudong</span><span class="en">About</span></a>
+            <a href="../../Downloads/about.html" class="sidebar-link"><span class="zh">关于 Gudong</span><span class="en">About</span></a>
             <button type="button" class="sidebar-lang-btn" onclick="toggleLang()" aria-label="Switch language"><span class="zh">🌐 English</span><span class="en">🌐 中文</span></button>
         </nav>
     </aside>
     <main class="container">
         <div class="breadcrumb">
-            <a href="index.html" class="zh">首页</a><a href="index.html" class="en">Home</a>
+            <a href="../../Downloads/index.html" class="zh">首页</a><a href="../../Downloads/index.html" class="en">Home</a>
             <span class="zh"> / 服务价格</span><span class="en"> / Pricing</span>
         </div>
 
@@ -474,7 +511,7 @@
                 <p class="inline-note zh">提示：未完成入驻审核的账号，无法提交藏品刊登。提交藏品表单时务必填写正确 Seller ID。</p>
                 <p class="inline-note en">Note: Un-approved applicants cannot submit listings. Please provide correct Seller ID inside the listing form.</p>
             </div>
-            <p class="inline-note"><a href="index.html#services" class="zh" style="color:var(--color-primary);text-decoration:none;">返回首页服务区 →</a><a href="index.html#services" class="en" style="color:var(--color-primary);text-decoration:none;">Back to homepage services →</a></p>
+            <p class="inline-note"><a href="../../Downloads/index.html#services" class="zh" style="color:var(--color-primary);text-decoration:none;">返回首页服务区 →</a><a href="../../Downloads/index.html#services" class="en" style="color:var(--color-primary);text-decoration:none;">Back to homepage services →</a></p>
         </section>
 
         <!-- ===== 二、曝光置顶服务 ===== -->
@@ -515,8 +552,8 @@
                         <div class="row-info">
                             <div class="row-title zh">卖家展馆（标准）</div>
                             <div class="row-title en">Dealer Gallery (Standard)</div>
-                            <div class="row-desc zh">付费开通后，获得<strong>独立专属展馆静态页面（独立分享URL，支持搜索引擎收录）</strong>，集中展示该卖家全部在售藏品，同时出现在卖家展馆公开列表。<strong>展馆服务有效期1年，到期展馆页面自动提示到期，藏品不再对外展示。</strong><br>可叠加增值：优先展馆 +SGD 220/年（展馆列表置顶、金边卡片）；馆内置顶藏品每件 SGD 60/年。<br><a href="sellers/index.html" style="color:var(--color-primary);text-decoration:none;">→ 浏览卖家展馆列表</a></div>
-                            <div class="row-desc en">Upon purchase you receive <strong>dedicated static gallery-page with shareable URL for search-engine indexing</strong> to showcase all your active inventory, visible in public dealer-gallery directory. <strong>Gallery licence valid 1-year; gallery page shows expiry notice and hides inventory after expiration.</strong><br>Optional add-ons: Priority Gallery +SGD 220/yr (directory pin, gold-border card); In-gallery pinned-item SGD 60/item/yr.<br><a href="sellers/index.html" style="color:var(--color-primary);text-decoration:none;">→ Browse dealer-galleries directory</a></div>
+                            <div class="row-desc zh">付费开通后，获得<strong>独立专属展馆静态页面（独立分享URL，支持搜索引擎收录）</strong>，集中展示该卖家全部在售藏品，同时出现在卖家展馆公开列表。<strong>展馆服务有效期1年，到期展馆页面自动提示到期，藏品不再对外展示。</strong><br>可叠加增值：优先展馆 +SGD 220/年（展馆列表置顶、金边卡片）；馆内置顶藏品每件 SGD 60/年。<br><a href="../../Downloads/sellers/index.html" style="color:var(--color-primary);text-decoration:none;">→ 浏览卖家展馆列表</a></div>
+                            <div class="row-desc en">Upon purchase you receive <strong>dedicated static gallery-page with shareable URL for search-engine indexing</strong> to showcase all your active inventory, visible in public dealer-gallery directory. <strong>Gallery licence valid 1-year; gallery page shows expiry notice and hides inventory after expiration.</strong><br>Optional add-ons: Priority Gallery +SGD 220/yr (directory pin, gold-border card); In-gallery pinned-item SGD 60/item/yr.<br><a href="../../Downloads/sellers/index.html" style="color:var(--color-primary);text-decoration:none;">→ Browse dealer-galleries directory</a></div>
                         </div>
                         <div class="row-price">
                             <span class="amount">SGD 380</span>
@@ -681,7 +718,7 @@
                 <div class="zh"><b>重要提示：</b>平台仅展示信息、提供联系方式；不介入交易、不抽交易佣金、不担保货品真伪与成交；转账、议价、付款、运输均由买卖双方自行解决。</div>
                 <div class="en"><b>Important:</b> The platform only displays information and facilitates contact. It does not take part in transactions, collect transaction-based commission, or guarantee authenticity or completion. Payment, negotiation and shipping are handled directly between buyer and seller.</div>
             </div>
-            <p class="inline-note"><a href="index.html#services" class="zh" style="color:var(--color-primary);text-decoration:none;">返回首页服务区 →</a><a href="index.html#services" class="en" style="color:var(--color-primary);text-decoration:none;">Back to homepage services →</a></p>
+            <p class="inline-note"><a href="../../Downloads/index.html#services" class="zh" style="color:var(--color-primary);text-decoration:none;">返回首页服务区 →</a><a href="../../Downloads/index.html#services" class="en" style="color:var(--color-primary);text-decoration:none;">Back to homepage services →</a></p>
         </section>
 
         <!-- ===== 五、价格明细 ===== -->
@@ -790,11 +827,11 @@
     </main>
     <footer>
         <div class="footer-nav">
-            <a href="about.html" class="zh">关于我们</a><a href="about.html" class="en">About</a>
+            <a href="../../Downloads/about.html" class="zh">关于我们</a><a href="../../Downloads/about.html" class="en">About</a>
             <a href="#buyer-services" class="zh">买家指南</a><a href="#buyer-services" class="en">Buyer Guide</a>
             <a href="#price-table" class="zh">服务价格</a><a href="#price-table" class="en">Pricing</a>
             <a href="#seller-services" class="zh">卖家服务</a><a href="#seller-services" class="en">Sell with Gudong</a>
-            <a href="about.html#location" class="zh">联系我们</a><a href="about.html#location" class="en">Contact</a>
+            <a href="../../Downloads/about.html#location" class="zh">联系我们</a><a href="../../Downloads/about.html#location" class="en">Contact</a>
         </div>
         <p class="footer-disclaimer zh">古董集是古董与收藏品信息发现平台。平台不提供鉴定、估价、买卖、代收款或交易服务。买卖双方应自行核实相关信息，并直接协商及完成交易。</p>
         <p class="footer-disclaimer en">Gudong is an information and discovery platform for antiques and collectibles. We do not authenticate, appraise, sell, purchase, process payments, or participate in transactions. Buyers and sellers are responsible for conducting their own due diligence and arranging transactions directly.</p>
@@ -802,6 +839,61 @@
         <p class="en">© 2026 Gudong · gudong.app</p>
     </footer>
     <script>
+        /* ===== LOGO 副标题宽度动态校准 =====
+           需求：中文副标题「古董藏品信息平台」总宽度须落在主标题「古董集」总宽度的 105%～115%。
+           字号比例（32%~36%）已由 CSS 固定，但因字符数不同（3字 vs 8字），
+           单纯按字号比例无法保证宽度比例，因此在运行时实测两者宽度，
+           反推所需 letter-spacing 精确收敛到目标区间（取 110% 中值），
+           不依赖具体字号/字体度量，换字体、换字号也依然成立。 */
+        function tuneChineseBrandSubtitle() {
+            const lineEl = document.querySelector('.brand-line.zh');
+            const mainEl = document.getElementById('brandZhMain');
+            const subEl = document.getElementById('brandZhSub');
+            if (!lineEl || !mainEl || !subEl) return;
+
+            const originalLineCss = lineEl.style.cssText;
+            const originalMainCss = mainEl.style.cssText;
+            const originalSubCss = subEl.style.cssText;
+
+            // 临时强制可测量：visibility:hidden + position:absolute 不影响任何视觉呈现，
+            // !important 确保即便当前处于英文模式（[data-lang="en"] .zh{display:none}）也能测量到真实宽度
+            [lineEl, mainEl, subEl].forEach(el => {
+                el.style.setProperty('display', 'inline-flex', 'important');
+                el.style.setProperty('visibility', 'hidden', 'important');
+                el.style.setProperty('position', 'absolute', 'important');
+            });
+            subEl.style.setProperty('letter-spacing', '0px', 'important');
+
+            const mainWidth = mainEl.getBoundingClientRect().width;
+            const naturalSubWidth = subEl.getBoundingClientRect().width;
+
+            let finalLetterSpacing = null;
+            if (mainWidth > 0) {
+                const targetWidth = mainWidth * 1.10; // 105%~115% 区间取中值 110%
+                const charCount = Array.from(subEl.textContent.trim()).length;
+                const gaps = Math.max(charCount - 1, 1);
+                const extraPerGap = Math.max((targetWidth - naturalSubWidth) / gaps, 0);
+                finalLetterSpacing = extraPerGap.toFixed(2) + 'px';
+            }
+
+            // 还原原始内联样式（不影响窄屏 .brand-sub{display:none} 等既有规则）
+            lineEl.style.cssText = originalLineCss;
+            mainEl.style.cssText = originalMainCss;
+            subEl.style.cssText = originalSubCss;
+            if (finalLetterSpacing) {
+                subEl.style.letterSpacing = finalLetterSpacing;
+            }
+        }
+        if (document.fonts && document.fonts.ready) {
+            document.fonts.ready.then(tuneChineseBrandSubtitle);
+        }
+        window.addEventListener('load', tuneChineseBrandSubtitle); // 字体延迟加载时的兜底二次校准
+        let resizeTuneTimer;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTuneTimer);
+            resizeTuneTimer = setTimeout(tuneChineseBrandSubtitle, 150);
+        });
+
         let currentLang = 'zh';
         function toggleLang() {
             currentLang = currentLang === 'zh' ? 'en' : 'zh';

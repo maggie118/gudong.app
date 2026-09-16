@@ -592,6 +592,52 @@
         .buyer-simple p { font-size: .92rem; color: var(--color-text-secondary); margin-bottom: .7rem; }
         .buyer-simple a { color: var(--color-primary); font-weight: 600; text-decoration: none; font-size: .88rem; }
         .buyer-simple a:hover { text-decoration: underline; }
+        /* ---------- How Gudong Works 平台运作方式（2026-09-16 改为三张横向卡片） ---------- */
+        .how-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin: 1.6rem 0 1.4rem;
+            text-align: left;
+        }
+        .how-card {
+            background: var(--color-white);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            padding: 1.2rem 1.1rem 1.3rem;
+            transition: .2s;
+        }
+        .how-card:hover {
+            border-color: var(--color-gold);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(176,138,69,.12);
+        }
+        .how-num {
+            font-family: "Inter Display", "Inter", "Geist",
+                         -apple-system, BlinkMacSystemFont, "Segoe UI",
+                         "Helvetica Neue", Arial, sans-serif;
+            font-size: .78rem;
+            font-weight: 700;
+            color: var(--color-bronze-muted);
+            letter-spacing: .08em;
+            margin-bottom: .35rem;
+        }
+        .how-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--color-text);
+            margin-bottom: .35rem;
+        }
+        .how-desc {
+            font-size: .82rem;
+            color: var(--color-text-secondary);
+            line-height: 1.55;
+        }
+        .how-foot {
+            font-size: .85rem;
+            color: var(--color-text-secondary);
+            margin-top: .6rem;
+        }
         footer {
             text-align: center;
             padding: 2.2rem 5% 1.8rem;
@@ -655,6 +701,7 @@
             .finds-grid { grid-template-columns: repeat(2, 1fr); gap: .8rem; }
             .expert-mini-grid { grid-template-columns: 1fr; }
             .item-card .price-tag { font-size: .68rem; padding: .22rem .45rem; }
+            .how-grid { grid-template-columns: 1fr; }   /* 2026-09-16：平台运作方式卡片手机端单列 */
         }
     
         /* ---------- Sidebar 语言切换按钮（2026-09-15 新增） ---------- */
@@ -776,7 +823,7 @@
                     <div class="finds-meta zh">清代 · 瓷器</div><div class="finds-meta en">Qing Dynasty · Porcelain</div>
                     <div class="finds-price">S$45,000</div>
                     <div class="finds-badge zh">优先</div><div class="finds-badge en">Priority</div>
-                    <div class="finds-caption zh">图片清晰 · 信息完整</div><div class="finds-caption en">Clear photos · Detailed listing</div>
+                    <div class="finds-caption zh">卖家提供资料</div><div class="finds-caption en">Seller-provided information</div>
                 </a>
                 <a href="categories/jade.html" class="finds-card finds-card--organic">
                     <div class="finds-image"><img src="assets/images/placeholder.jpg" alt="白玉童子摆件"></div>
@@ -784,7 +831,7 @@
                     <div class="finds-meta zh">清代 · 玉器</div><div class="finds-meta en">Qing Dynasty · Jade</div>
                     <div class="finds-price">S$10,000</div>
                     <div class="finds-badge zh">系统推荐</div><div class="finds-badge en">System Recommended</div>
-                    <div class="finds-caption zh">图片清晰 · 信息完整</div><div class="finds-caption en">Clear photos · Detailed listing</div>
+                    <div class="finds-caption zh">卖家提供资料</div><div class="finds-caption en">Seller-provided information</div>
                 </a>
                 <a href="categories/misc.html" class="finds-card finds-card--organic">
                     <div class="finds-image"><img src="assets/images/placeholder.jpg" alt="宣德炉"></div>
@@ -792,7 +839,7 @@
                     <div class="finds-meta zh">明宣德 · 铜器</div><div class="finds-meta en">Ming Xuande · Bronze</div>
                     <div class="finds-price zh">价格面议</div><div class="finds-price en">Price on Request</div>
                     <div class="finds-badge zh">系统推荐</div><div class="finds-badge en">System Recommended</div>
-                    <div class="finds-caption zh">图片清晰 · 信息完整</div><div class="finds-caption en">Clear photos · Detailed listing</div>
+                    <div class="finds-caption zh">卖家提供资料</div><div class="finds-caption en">Seller-provided information</div>
                 </a>
                 <a href="items/qing-huaping.html" class="finds-card finds-card--promoted">
                     <div class="finds-image"><img src="assets/images/placeholder.jpg" alt="霁蓝釉赏瓶"></div>
@@ -800,7 +847,7 @@
                     <div class="finds-meta zh">清代 · 官窑</div><div class="finds-meta en">Qing · Imperial Kiln</div>
                     <div class="finds-price zh">价格面议</div><div class="finds-price en">Price on Request</div>
                     <div class="finds-badge zh">优先</div><div class="finds-badge en">Priority</div>
-                    <div class="finds-caption zh">图片清晰 · 信息完整</div><div class="finds-caption en">Clear photos · Detailed listing</div>
+                    <div class="finds-caption zh">卖家提供资料</div><div class="finds-caption en">Seller-provided information</div>
                 </a>
             </div>
         </section>
@@ -872,13 +919,6 @@
             </div>
             <div id="noResult" class="no-result zh" style="display:none;">暂无匹配藏品</div>
             <div id="noResultEn" class="no-result en" style="display:none;">No items found</div>
-            <div style="text-align:center; margin-top:2rem;">
-                <a href="pricing.html#seller-services" class="btn-publish">
-                    <span class="zh">刊登藏品信息</span><span class="en">List an Item</span>
-                </a>
-                <p class="section-note zh" style="margin-top:1rem;">了解发布规则与收费，前往服务价格页。</p>
-                <p class="section-note en" style="margin-top:1rem;">See listing rules and pricing on the Pricing page.</p>
-            </div>
         </section>
         <section id="browse">
             <div class="section-head2">
@@ -897,12 +937,44 @@
             </div>
         </section>
         <section id="services">
-            <div style="text-align:center;max-width:680px;margin:0 auto;">
-                <h2 class="zh">发现藏品 . 查看信息 . 联系卖家</h2>
-                <h2 class="en">Discover. Learn. Connect.</h2>
-                <p class="zh" style="color:var(--color-text-secondary);margin:1rem 0;">古董集是古董与收藏品信息发现平台</p>
-                <p class="en" style="color:var(--color-text-secondary);margin:1rem 0;">Gudong is an information and discovery platform for antiques and collectibles.</p>
-               </div>
+            <div style="text-align:center;max-width:860px;margin:0 auto;">
+                <h2 class="zh">平台运作方式</h2>
+                <h2 class="en">How Gudong Works</h2>
+                <div class="how-grid">
+                    <div class="how-card">
+                        <div class="how-num">01</div>
+                        <div class="how-title zh">发现古董与收藏品</div>
+                        <div class="how-title en">Discover</div>
+                        <div class="how-desc zh">浏览感兴趣的古董与藏品。</div>
+                        <div class="how-desc en">Browse interesting antiques and collectibles.</div>
+                    </div>
+                    <div class="how-card">
+                        <div class="how-num">02</div>
+                        <div class="how-title zh">了解公开信息</div>
+                        <div class="how-title en">Explore</div>
+                        <div class="how-desc zh">查看图片、描述与可用的参考信息。</div>
+                        <div class="how-desc en">Explore photos, descriptions and available reference information.</div>
+                    </div>
+                    <div class="how-card">
+                        <div class="how-num">03</div>
+                        <div class="how-title zh">直接联系</div>
+                        <div class="how-title en">Contact</div>
+                        <div class="how-desc zh">对藏品感兴趣，直接联系信息提供者。</div>
+                        <div class="how-desc en">Contact the seller directly if a piece interests you.</div>
+                    </div>
+                </div>
+                <p class="how-foot zh"><strong>古董集是信息发现平台，而非交易平台。</strong></p>
+                <p class="how-foot en">Gudong is a An information and discovery platform for antiques and collectibles.</p>
+
+                <!-- 2026-09-16：从「最新藏品」区块移至此处 -->
+                <div style="text-align:center; margin-top:2rem;">
+                    <a href="pricing.html#seller-services" class="btn-publish">
+                        <span class="zh">刊登藏品信息</span><span class="en">List an Item</span>
+                    </a>
+                    <p class="section-note zh" style="margin-top:1rem;">了解发布规则与收费，前往服务价格页。</p>
+                    <p class="section-note en" style="margin-top:1rem;">See listing rules and pricing on the Pricing page.</p>
+                </div>
+            </div>
         </section>
     </main>
     <footer>

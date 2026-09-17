@@ -16,9 +16,7 @@
     <!-- 🟢 首页 JSON-LD（2026-09-17 新增）
          只声明平台身份与站点信息，不涉及任何商品级 Schema（Product / Offer）。
          商品级 Schema 属于详情页，首页出现会被 Google 视为误判信号。
-         @graph 结构用 @id 关联 Organization 与 WebSite，便于搜索引擎理解从属关系。
-         暂不声明 potentialAction:SearchAction —— 因为当前无真实 /search 页面，
-         声明后会引导 Google 爬取 404 URL，反而扣分；待建立搜索页后另行追加。 -->
+         暂不声明 potentialAction:SearchAction —— 因为当前无真实 /search 页面。 -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -551,7 +549,6 @@
             transition: .2s;
         }
         .expert-mini-card:hover {
-
             transform: translateY(-2px);
             box-shadow: 0 6px 16px rgba(176,138,69,.14);
         }
@@ -1390,18 +1387,16 @@
             .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
         }
         function imgPath(f) {
+          // 2026-09-17：支持 img_file 带子路径，如 "lim-kw/item-lim-04.jpg"
           if (f.img_url && /^https?:\/\//i.test(f.img_url)) return f.img_url;
-          return f.img_file ? ('/assets/images/' + f.img_file) : '/assets/images/placeholder.jpg';
+          if (f.img_file) return '/assets/images/' + f.img_file;
+          return '/assets/images/placeholder.jpg';
         }
         function attrKeywords(f) {
           return esc([f.title_zh, f.title_en, f.era_zh, f.era_en, f.category].filter(Boolean).join(' '));
         }
 
-        /* ===== 价格渲染（多货币支持） ===== */
-        const currencySymbol = {
-          SGD: 'S$', CNY: '¥', HKD: 'HK$', USD: 'US$', TWD: 'NT$'
-        };
-
+        // 取字段：兼容带空格 / 下划线两种命名
         function getF(f, ...names) {
           for (const n of names) {
             const v = f[n];
@@ -1410,43 +1405,40 @@
           return null;
         }
 
-        function fmtMoney(n, cur) {
-          const num = Number(n);
-          if (!Number.isFinite(num)) return '';
-          const sym = currencySymbol[cur] || 'S$';
-          return sym + ' ' + num.toLocaleString('en-SG');
-        }
-
-        function fmtRange(min, max, cur) {
-          if (min != null && max != null) {
-            return fmtMoney(min, cur) + '–' + Number(max).toLocaleString('en-SG');
-          }
-          if (min != null) return fmtMoney(min, cur) + ' 起';
-          if (max != null) return fmtMoney(max, cur) + ' 以内';
-          return null;
-        }
-
+        /* ===== 价格渲染（2026-09-17 v5，对齐 Airtable 真实字段） =====
+           实际字段：
+             price_type         单选：一口价 / 价格区间（可议价）/ 私聊【可能为空】
+             price_display_zh   已格式化价格，如 "S$49,000"【主要读这个】
+             price_display_en   同上英文
+             price_zh / price_en  备用（一般不填）
+           规则：
+             1. price_type 明确是"私聊" → 显示"私聊询价"
+             2. 否则只要 price_display 有值 → 显示它
+             3. 都没有 → 兜底"私聊询价"
+           设计原则：不依赖 price_type 是否填对，只要价格字符串存在就显示。 */
         function priceHtml(f, wrapperClass) {
-          const type = f.price_type;
-          const cur = f.price_currency || 'SGD';
+          const type = String(getF(f, 'price_type', 'price type') || '').trim();
+          const displayZh = getF(f, 'price_display_zh');
+          const displayEn = getF(f, 'price_display_en');
+          const rawZh = getF(f, 'price_zh');
+          const rawEn = getF(f, 'price_en');
+
           const enqHtml = `<div class="${wrapperClass}"><span class="price-main price-main--enquiry"><span class="zh">私聊询价</span><span class="en">Enquire</span></span></div>`;
-          const negoTag = '<span class="price-tag"><span class="zh">可议</span><span class="en">Nego.</span></span>';
 
-          if (type === '一口价') {
-            const fixed = getF(f, 'fixed price', 'fixed_price');
-            if (fixed == null) return enqHtml;
-            const tag = getF(f, 'price nego', 'price_nego') ? negoTag : '';
-            return `<div class="${wrapperClass}"><span class="price-main">${esc(fmtMoney(fixed, cur))}</span>${tag}</div>`;
+          // 1. 明确私聊 → 询价
+          if (type.indexOf('私聊') !== -1) return enqHtml;
+
+          // 2. 有价格字符串 → 显示
+          const zh = displayZh || rawZh || displayEn || rawEn;
+          const en = displayEn || rawEn || displayZh || rawZh;
+          if (zh || en) {
+            return `<div class="${wrapperClass}">
+              <span class="price-main zh">${esc(zh || en)}</span>
+              <span class="price-main en">${esc(en || zh)}</span>
+            </div>`;
           }
 
-          if (type && type.indexOf('价格区间') === 0) {
-            const min = getF(f, 'price_min', 'price min');
-            const max = getF(f, 'price_max', 'price max');
-            const range = fmtRange(min, max, cur);
-            if (!range) return enqHtml;
-            return `<div class="${wrapperClass}"><span class="price-main">${esc(range)}</span>${negoTag}</div>`;
-          }
-
+          // 3. 都没 → 兜底
           return enqHtml;
         }
 
@@ -1485,7 +1477,7 @@
           if (!container) return;
           container.innerHTML = items.map(f => {
             const imgSrc = imgPath(f);
-            const detailUrl = `/items/${esc(f.item_id)}.html`;
+            const detailUrl = `items/${esc(f.item_id)}.html`;
             const kw = attrKeywords(f);
             const nz = f.title_zh || f.title_en || '';
             const ne = f.title_en || f.title_zh || '';

@@ -10,50 +10,99 @@
     <!-- 标题保持专业度 -->
     <title>Gudong.app | Chinese Antiques & Collectibles Discovery Platform</title>
 
+    <!-- 🟢 canonical 归一（2026-09-17） -->
+    <link rel="canonical" href="https://gudong.app/" />
+
+    <!-- 🟢 首页 JSON-LD（2026-09-17 新增）
+         只声明平台身份与站点信息，不涉及任何商品级 Schema（Product / Offer）。
+         商品级 Schema 属于详情页，首页出现会被 Google 视为误判信号。
+         @graph 结构用 @id 关联 Organization 与 WebSite，便于搜索引擎理解从属关系。
+         暂不声明 potentialAction:SearchAction —— 因为当前无真实 /search 页面，
+         声明后会引导 Google 爬取 404 URL，反而扣分；待建立搜索页后另行追加。 -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://gudong.app/#organization",
+          "name": "古董集 Gudong",
+          "alternateName": "Gudong.app",
+          "url": "https://gudong.app/",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://gudong.app/assets/icons/apple-touch-icon-180x180.png",
+            "width": 180,
+            "height": 180
+          },
+          "description": "新加坡中国古董及藏品信息发现平台。汇集瓷器、玉器、钱币、书画及杂项，买卖双方直接联系。平台不参与鉴定、估价与交易。",
+          "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "SG"
+          },
+          "areaServed": {
+            "@type": "Country",
+            "name": "Singapore"
+          },
+          "knowsLanguage": ["zh-SG", "en-SG"]
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://gudong.app/#website",
+          "url": "https://gudong.app/",
+          "name": "古董集 Gudong",
+          "inLanguage": ["zh-SG", "en-SG"],
+          "publisher": { "@id": "https://gudong.app/#organization" }
+        }
+      ]
+    }
+    </script>
+
     <!-- 🟢 优化点 3：SEO 描述精简且地域化（加入 Singapore / 新加坡 核心词，提升本地搜索权重） -->
     <meta name="description" content="古董集 gudong.app —— 新加坡专业的中国古董及藏品信息发现平台。汇集瓷器、玉器、钱币、书画及杂项，买家直接联系藏家卖家。平台不参与鉴定与交易。">
     <meta name="keywords" content="Singapore antiques, Chinese porcelain, Jade collection, 古董集, 新加坡古董, 瓷器收藏, 玉器钱币">
 
-    <!-- 🟢 优化点 4：多语言国际化（I18n）SEO 指引（极为重要！） -->
-    <!-- 假设你的英文版地址是 gudong.app/en，中文版是 gudong.app 或 gudong.app/zh -->
-    <link rel="alternate" hreflang="en-SG" href="https://gudong.app" />
-    <link rel="alternate" hreflang="zh-SG" href="https://gudong.app" />
-    <!-- 默认语系兜底 -->
-    <link rel="alternate" hreflang="x-default" href="https://gudong.app" />
+    <!-- 🟢 优化点 4：多语言国际化（I18n）hreflang
+         2026-09-17：暂时移除无效 hreflang。原三行全部指向 https://gudong.app 会被 Google
+         判定为重复并整组忽略（比不写更糟）。当前用 body[data-lang] 做纯前端切换，没有
+         独立的 /zh/ 与 /en/ 页面，因此暂不声明 hreflang。
+         待建立真实 URL 分层后，把下方注释恢复：
+         <link rel="alternate" hreflang="zh-SG" href="https://gudong.app/zh/" />
+         <link rel="alternate" hreflang="en-SG" href="https://gudong.app/en/" />
+         <link rel="alternate" hreflang="x-default" href="https://gudong.app/" />
+    -->
 
-    <!-- 🟢 优化点 5：完整且健壮的 Open Graph 社交分享矩阵（支持 WhatsApp、微信、Telegram、Discord、Notion） -->
+    <!-- 🟢 优化点 5：完整且健壮的 Open Graph 社交分享矩阵 -->
     <meta property="og:site_name" content="古董集 Gudong.app">
     <meta property="og:title" content="古董集 Gudong.app | Chinese Antiques Platform Singapore">
     <meta property="og:description" content="Singapore-based discovery platform for Chinese antiques and collectibles. Browse porcelain, jade, coins, paintings and connect directly with sellers.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://gudong.app">
-    <!-- 💥 必须加上分享缩略图！尺寸推荐 1200x630px WebP 格式，确保在 WhatsApp 等软件能拉出漂亮的卡片 -->
-    <meta property="og:image" content="https://gudong.app/og-cover.webp">
+    <!-- 💥 分享缩略图：1200x630 PNG 主版本（微信/WhatsApp 兼容），WebP 作 secure_url 备选 -->
+    <meta property="og:image" content="https://gudong.app/og-cover.png">
+    <meta property="og:image:secure_url" content="https://gudong.app/og-cover.webp">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-    <meta property="og:image:type" content="image/webp">
+    <meta property="og:image:type" content="image/png">
 
     <!-- 🟢 优化点 6：Twitter / X 专属卡片渲染 -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="古董集 Gudong.app | Chinese Antiques Platform">
     <meta name="twitter:description" content="Singapore-based discovery platform for Chinese antiques and collectibles.">
-    <meta name="twitter:image" content="https://gudong.app/og-cover.webp">
+    <meta name="twitter:image" content="https://gudong.app/og-cover.png">
 
-    <!-- 🟢 优化点 7：PWA & 移动端 Web App（添加全套苹果 iOS 本地图标支持，防止添加到桌面时显示系统截屏） -->
+    <!-- 🟢 优化点 7：PWA & 移动端 Web App -->
     <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#8A5A3B"> <!-- 古董集经典的古朴棕色主题色 -->
+    <meta name="theme-color" content="#8A5A3B">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="古董集">
-    <link rel="apple-touch-icon" href="icons/apple-touch-icon-152x152.png" sizes="152x152">
-    <link rel="apple-touch-icon" href="icons/apple-touch-icon-180x180.png" sizes="180x180">
+    <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon-152x152.png" sizes="152x152">
+    <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon-180x180.png" sizes="180x180">
 
     <!-- 🟢 优化点 8：传统的浏览器 Favicon 基础设施保底 -->
     <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32x32.png">
-
-    <!-- 🟢 性能优化：如果你的资源部署在 CDN 上，提前连接以加快加载速度（无则删掉这行） -->
-    <!-- <link rel="preconnect" href="https://cdn.gudong.app" crossorigin> -->
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32x32.png">
 
     <!-- CSS 样式表引入 -->
     <link rel="stylesheet" href="css/styles.css">
@@ -146,7 +195,6 @@
             font-size: .62rem;
             letter-spacing: .2em;
         }
-        /* Logo 英文字体：Inter / Geist 体系（2026-09-16） */
         .brand h1 .en,
         .brand p .zh,
         .brand p .en,
@@ -397,7 +445,6 @@
             text-align: center;
             margin-bottom: 1.6rem;
         }
-        /* 搜索结果反馈（搜索时显示「找到 N 件藏品」/「未找到匹配藏品」） */
         .search-result-tip {
             font-size: .82rem;
             color: var(--color-primary);
@@ -405,7 +452,6 @@
             margin: -.8rem 0 1.6rem;
             font-weight: 600;
         }
-        /* ---------- Section headers ---------- */
         .section-head2 { margin-bottom: 1.4rem; display: flex; align-items: flex-end; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
         .section-head2 .title { font-size: 1.3rem; font-weight: 700; color: var(--color-text); }
         .section-head2 .sub-line { font-size: .85rem; color: var(--color-text-secondary); margin-top: .25rem; display: block; }
@@ -418,7 +464,6 @@
             margin-top: -.8rem;
             margin-bottom: 2rem;
         }
-        /* ---------- Today's Finds 今日发现 ---------- */
         .finds-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -436,17 +481,14 @@
         .finds-card:hover .finds-image img { transform: scale(1.04); }
         .finds-title { font-size: .98rem; font-weight: 700; color: var(--color-text); margin-bottom: .15rem; }
         .finds-meta { font-size: .8rem; color: var(--color-text-secondary); margin-bottom: .4rem; }
-        .finds-price { font-size: .95rem; font-weight: 700; color: var(--color-primary); margin-bottom: .45rem; }
         .finds-badge {
             display: inline-block;
-            font-size: .6rem;      /* 2026-09-16：由 .68rem 调小 */
+            font-size: .6rem;
             font-weight: 600;
             padding: .16rem .5rem;
             border-radius: 4px;
             margin-bottom: .4rem;
         }
-        /* 2026-09-16：「付费置顶」改为「优先」，去掉底色，
-           与「系统推荐」共用同一套描边样式（透明底 + 墨绿描边文字）。 */
         .finds-card--organic .finds-badge,
         .finds-card--promoted .finds-badge{
             background: transparent;
@@ -454,7 +496,45 @@
             border: 1px solid var(--color-success);
         }
         .finds-caption { font-size: .72rem; color: var(--color-text-muted); }
-        /* ---------- Editor's Picks ---------- */
+
+        /* ---------- 价格显示 ---------- */
+        .finds-price,
+        .expert-mini-price,
+        .item-price {
+            display: flex;
+            align-items: baseline;
+            gap: .35rem;
+            flex-wrap: wrap;
+        }
+        .finds-price { margin: 0 0 .5rem; font-size: .88rem; }
+        .expert-mini-price { margin-top: .4rem; font-size: .88rem; }
+
+        .price-main {
+            color: var(--color-primary);
+            font-weight: 700;
+            letter-spacing: .01em;
+        }
+        .price-main--enquiry {
+            color: var(--color-text-secondary);
+            font-weight: 600;
+            letter-spacing: .02em;
+        }
+        .price-tag {
+            display: inline-block;
+            font-size: .62rem;
+            font-weight: 500;
+            color: var(--color-text-muted);
+            border: 1px solid var(--color-border);
+            padding: 0 .3rem;
+            border-radius: 3px;
+            line-height: 1.5;
+            letter-spacing: .02em;
+        }
+        .price-tag--enquiry {
+            color: var(--color-bronze-muted);
+            border-color: var(--color-bronze-muted);
+        }
+
         .expert-mini-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -471,12 +551,13 @@
             transition: .2s;
         }
         .expert-mini-card:hover {
+
             transform: translateY(-2px);
             box-shadow: 0 6px 16px rgba(176,138,69,.14);
         }
         .expert-mini-badge {
             display: inline-block;
-            background: var(--color-far-mountain); /* 远山黛 #2E4A52 */
+            background: var(--color-far-mountain);
             color: #fff;
             font-size: .68rem;
             font-weight: 700;
@@ -494,9 +575,6 @@
             font-size: .82rem;
             color: var(--color-text-secondary);
         }
-        /* ---------- Badge ----------
-           2026-09-14：卡片图片上的「今日发现置顶 / 编辑精选」文字标签已按要求移除，
-           对应的 .badge-top / .badge-editor 规则一并删除。.badge 基础样式保留备用。 */
         .badge { position: absolute; top: 8px; left: 8px; padding: 3px 8px; font-size: 12px; border-radius: 4px; color: #fff; z-index: 2; }
         .listing-card { position: relative; cursor: pointer; overflow: hidden; border-radius: 8px; background: var(--color-primary-light); text-decoration: none; transition: .25s; min-height: 300px; display: flex; flex-direction: column; }
         .listing-card:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(37,34,30,.14); }
@@ -506,13 +584,6 @@
         .listing-card .price-cn { padding: .3rem .55rem .55rem; font-size: .82rem; color: var(--color-primary); font-weight: 600; }
         .listing-card .price-en { padding: 0 .55rem .55rem; font-size: .78rem; color: var(--color-text-muted); }
 
-        /* ---------- New Listings / item grid ---------- */
-        /* 2026-09-14 调整：最新上架改为「桌面每行 6 个 / 平板 4 个 / 手机 3 个」。
-           注意：卡片同时带 .item-card 与 .listing-card 两套样式，其中 .item-card 的
-           aspect-ratio:1/1 与 .listing-card 的 min-height:300px 会互相作用，反推出
-           min-width:300px（min-width 默认 auto），使卡片撑出网格列——实测列宽 258px、
-           卡片却被撑到 300px，末列直接溢出行外。下面显式解除这些约束，改为
-           「图片按列宽等比缩放 + 文字在下方自然铺开」的高度自适应卡片。 */
         .goods-list {
             display: grid;
             grid-template-columns: repeat(6, 1fr);
@@ -552,30 +623,54 @@
             object-fit: cover;
             display: block;
         }
-        .item-card .price-tag {
+        .item-card .item-info {
             position: absolute;
             left: .55rem;
+            right: .55rem;
             bottom: .55rem;
             background: rgba(20,17,14,.62);
             color: #fff;
             padding: .32rem .6rem;
             border-radius: 4px;
+            display: flex;
+            flex-direction: column;
+            gap: .1rem;
+        }
+        .item-card .item-name {
             font-size: .8rem;
             font-weight: 700;
             letter-spacing: .01em;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
-        .item-card .price-tag .neg {
-            font-weight: 400;
-            opacity: .85;
+        .item-card .item-price {
             font-size: .72rem;
-            margin-left: .2rem;
+            gap: .3rem;
+        }
+        .item-card .price-main {
+            color: #F1E8DF;
+            font-weight: 600;
+        }
+        .item-card .price-main--enquiry {
+            color: rgba(241,232,223,.9);
+            font-weight: 500;
+        }
+        .item-card .price-tag {
+            font-size: .58rem;
+            padding: 0 .25rem;
+            color: rgba(241,232,223,.75);
+            border-color: rgba(241,232,223,.35);
+        }
+        .item-card .price-tag--enquiry {
+            color: rgba(241,232,223,.85);
+            border-color: rgba(241,232,223,.55);
         }
         .no-result {
             text-align: center;
             padding: 3rem 1rem;
             color: var(--color-text-muted);
         }
-        /* ---------- Browse by Category ---------- */
         .browse-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -600,7 +695,6 @@
             color: var(--color-primary);
             background: var(--color-primary-light);
         }
-        /* ---------- Seller (simple) ---------- */
         .seller-intro { font-size: .92rem; color: var(--color-text-secondary); margin-bottom: 1.6rem; max-width: 640px; }
         .seller-simple-grid {
             display: grid;
@@ -632,11 +726,9 @@
             max-width: 640px;
         }
         .info-service-note strong { color: var(--color-text); }
-        /* ---------- Buyer (simple) ---------- */
         .buyer-simple p { font-size: .92rem; color: var(--color-text-secondary); margin-bottom: .7rem; }
         .buyer-simple a { color: var(--color-primary); font-weight: 600; text-decoration: none; font-size: .88rem; }
         .buyer-simple a:hover { text-decoration: underline; }
-        /* ---------- How Gudong Works 平台运作方式（2026-09-16 改为三张横向卡片） ---------- */
         .how-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -739,16 +831,18 @@
             .brand h1 { font-size: 1.15rem; }
             .container { padding: 2rem 4.5% 3rem; }
             section { margin-bottom: 3.8rem; }
-            /* 2026-09-16：删除 .btn-publish span.en { display: inline; }，
-               使中文态下按钮仅显示「刊登藏品」，不被移动端媒体查询覆盖。 */
             .goods-list { grid-template-columns: repeat(3, 1fr); gap: .6rem; }
             .finds-grid { grid-template-columns: repeat(2, 1fr); gap: .8rem; }
             .expert-mini-grid { grid-template-columns: 1fr; }
-            .item-card .price-tag { font-size: .68rem; padding: .22rem .45rem; }
-            .how-grid { grid-template-columns: 1fr; }   /* 2026-09-16：平台运作方式卡片手机端单列 */
+            .item-card .item-info { padding: .22rem .45rem; gap: .05rem; }
+            .item-card .item-name { font-size: .68rem; }
+            .item-card .item-price { font-size: .62rem; gap: .25rem; }
+            .item-card .price-tag { font-size: .52rem; padding: 0 .2rem; }
+            .finds-price { font-size: .82rem; }
+            .expert-mini-price { font-size: .82rem; }
+            .how-grid { grid-template-columns: 1fr; }
         }
-    
-        /* ---------- Sidebar 语言切换按钮（2026-09-15 新增） ---------- */
+
         .sidebar-lang-btn {
             display: flex;
             align-items: center;
@@ -847,10 +941,7 @@
                 <div class="search-tip en">Porcelain · Jade · Coins · Paintings · Miscellaneous</div>
             </div>
         </section>
-		<div id="today-finds-container" class="card-grid"></div>
-<div id="editor-picks-container" class="card-grid"></div>
-<div id="new-listing-container" class="card-grid"></div>
-        <section id="today-finds">
+		<section id="today-finds">
             <div class="section-head2">
                 <div>
                     <span class="title zh">今日发现</span><span class="title en">Today's Finds</span>
@@ -860,36 +951,47 @@
             <p class="section-note zh">今日发现为本平台人工精选藏品展示，部分位置为付费置顶；不代表平台鉴定或保真。</p>
             <p class="section-note en">Today's Finds are hand-selected highlights. A small number of slots are paid promoted placements. No authentication is provided.</p>
             <div class="finds-grid" id="todayFindsGrid">
-                <a href="items/guangxu-shuanglong-dapan.html" class="finds-card finds-card--promoted">
+                <a href="items/guangxu-shuanglong-dapan.html" class="finds-card finds-card--promoted" data-cat="porcelain" data-keywords="清代 青花 龙纹 盘 瓷器 Qing porcelain dragon plate">
                     <div class="finds-image"><img src="assets/images/placeholder.jpg" alt="清代青花龙纹盘"></div>
                     <div class="finds-title zh">清代青花龙纹盘</div><div class="finds-title en">Qing Blue &amp; White Dragon Plate</div>
                     <div class="finds-meta zh">清代 · 瓷器</div><div class="finds-meta en">Qing Dynasty · Porcelain</div>
-                    <div class="finds-price">S$45,000</div>
-                    <div class="finds-badge zh">优先</div><div class="finds-badge en">Priority</div>
+                    <div class="finds-price">
+                        <span class="price-main">S$ 8,000</span>
+                        <span class="price-tag"><span class="zh">可议</span><span class="en">Nego.</span></span>
+                    </div>
+                    <div class="finds-badge zh">推广展示</div><div class="finds-badge en">Sponsored</div>
                     <div class="finds-caption zh">卖家提供资料</div><div class="finds-caption en">Seller-provided information</div>
                 </a>
-                <a href="categories/jade.html" class="finds-card finds-card--organic">
+                <a href="categories/jade.html" class="finds-card finds-card--organic" data-cat="jade" data-keywords="白玉 童子 摆件 玉器 jade figure">
                     <div class="finds-image"><img src="assets/images/placeholder.jpg" alt="白玉童子摆件"></div>
                     <div class="finds-title zh">白玉童子摆件</div><div class="finds-title en">White Jade Boy Figure</div>
                     <div class="finds-meta zh">清代 · 玉器</div><div class="finds-meta en">Qing Dynasty · Jade</div>
-                    <div class="finds-price">S$10,000</div>
+                    <div class="finds-price">
+                        <span class="price-main">S$ 12,000–18,000</span>
+                        <span class="price-tag"><span class="zh">可议</span><span class="en">Nego.</span></span>
+                    </div>
                     <div class="finds-badge zh">系统推荐</div><div class="finds-badge en">System Recommended</div>
                     <div class="finds-caption zh">卖家提供资料</div><div class="finds-caption en">Seller-provided information</div>
                 </a>
-                <a href="categories/misc.html" class="finds-card finds-card--organic">
+                <a href="categories/misc.html" class="finds-card finds-card--organic" data-cat="misc" data-keywords="宣德 炉 铜器 Xuande censer bronze">
                     <div class="finds-image"><img src="assets/images/placeholder.jpg" alt="宣德炉"></div>
                     <div class="finds-title zh">宣德炉</div><div class="finds-title en">Xuande Censer</div>
                     <div class="finds-meta zh">明宣德 · 铜器</div><div class="finds-meta en">Ming Xuande · Bronze</div>
-                    <div class="finds-price zh">价格面议</div><div class="finds-price en">Price on Request</div>
+                    <div class="finds-price">
+                        <span class="price-main price-main--enquiry"><span class="zh">私聊询价</span><span class="en">Enquire</span></span>
+                    </div>
                     <div class="finds-badge zh">系统推荐</div><div class="finds-badge en">System Recommended</div>
                     <div class="finds-caption zh">卖家提供资料</div><div class="finds-caption en">Seller-provided information</div>
                 </a>
-                <a href="items/qing-huaping.html" class="finds-card finds-card--promoted">
+                <a href="items/qing-huaping.html" class="finds-card finds-card--promoted" data-cat="porcelain" data-keywords="霁蓝 釉 赏瓶 官窑 blue glaze vase imperial">
                     <div class="finds-image"><img src="assets/images/placeholder.jpg" alt="霁蓝釉赏瓶"></div>
                     <div class="finds-title zh">霁蓝釉赏瓶</div><div class="finds-title en">Sacrificial Blue Glaze Vase</div>
                     <div class="finds-meta zh">清代 · 官窑</div><div class="finds-meta en">Qing · Imperial Kiln</div>
-                    <div class="finds-price zh">价格面议</div><div class="finds-price en">Price on Request</div>
-                    <div class="finds-badge zh">优先</div><div class="finds-badge en">Priority</div>
+                    <div class="finds-price">
+                        <span class="price-main">S$ 45,000</span>
+                        <span class="price-tag"><span class="zh">可议</span><span class="en">Nego.</span></span>
+                    </div>
+                    <div class="finds-badge zh">推广展示</div><div class="finds-badge en">Sponsored</div>
                     <div class="finds-caption zh">卖家提供资料</div><div class="finds-caption en">Seller-provided information</div>
                 </a>
             </div>
@@ -901,15 +1003,22 @@
                 <a href="expert-picks.html" class="more en">More →</a>
             </div>
             <div class="expert-mini-grid" id="editorPicksGrid">
-                <a href="items/song-yingqing-wan.html" class="expert-mini-card">
+                <a href="items/song-yingqing-wan.html" class="expert-mini-card" data-cat="porcelain" data-keywords="宋 影青 暗刻 花碗 瓷器 Song Yingqing bowl">
                     <div class="expert-mini-badge zh">精选展示</div><div class="expert-mini-badge en">Featured Listings</div>
                     <div class="expert-mini-title zh">宋影青暗刻花碗</div><div class="expert-mini-title en">Song Yingqing Carved Bowl</div>
                     <div class="expert-mini-sub zh">釉色通透、刻纹精细</div><div class="expert-mini-sub en">Translucent glaze, finely incised</div>
+                    <div class="expert-mini-price">
+                        <span class="price-main">S$ 28,000</span>
+                        <span class="price-tag"><span class="zh">可议</span><span class="en">Nego.</span></span>
+                    </div>
                 </a>
-                <a href="categories/misc.html" class="expert-mini-card">
+                <a href="categories/misc.html" class="expert-mini-card" data-cat="misc" data-keywords="铜 鎏金 造像 佛像 gilt bronze buddhist figure">
                     <div class="expert-mini-badge zh">精选展示</div><div class="expert-mini-badge en">Featured Listings</div>
                     <div class="expert-mini-title zh">铜鎏金造像</div><div class="expert-mini-title en">Gilt Bronze Buddhist Figure</div>
                     <div class="expert-mini-sub zh">开相端庄、包浆温润</div><div class="expert-mini-sub en">Dignified, warm patina</div>
+                    <div class="expert-mini-price">
+                        <span class="price-main price-main--enquiry"><span class="zh">私聊询价</span><span class="en">Enquire</span></span>
+                    </div>
                 </a>
             </div>
             <p class="section-note zh">精选展示为付费曝光服务。平台仅审核图片格式，不做器物真伪、年代、价值鉴定，不担保藏品真实可靠，请买家自行审慎甄别。</p>
@@ -924,40 +1033,86 @@
             <div class="goods-list" id="itemList">
                 <a href="items/guangxu-shuanglong-dapan.html" class="item-card" data-cat="porcelain" data-keywords="清代 青花 龙纹 盘 瓷器 Qing porcelain dragon plate">
                     <img src="assets/images/placeholder.jpg" alt="清代青花龙纹盘">
-                    <div class="price-tag zh">S$40,000–48,000 <span class="neg">可议价</span></div>
-                    <div class="price-tag en">S$40,000–48,000 <span class="neg">Negotiable</span></div>
+                    <div class="item-info">
+                        <div class="item-name zh">清代青花龙纹盘</div>
+                        <div class="item-name en">Qing Blue &amp; White Dragon Plate</div>
+                        <div class="item-price">
+                            <span class="price-main">S$ 8,000</span>
+                            <span class="price-tag"><span class="zh">可议</span><span class="en">Nego.</span></span>
+                        </div>
+                    </div>
                 </a>
                 <a href="categories/porcelain.html" class="item-card" data-cat="porcelain" data-keywords="青花 山水 碗 瓷器 landscape bowl porcelain">
                     <img src="assets/images/placeholder.jpg" alt="青花山水纹碗">
-                    <div class="price-tag zh">私聊议价</div>
-                    <div class="price-tag en">Price on Request</div>
+                    <div class="item-info">
+                        <div class="item-name zh">青花山水纹碗</div>
+                        <div class="item-name en">Blue &amp; White Landscape Bowl</div>
+                        <div class="item-price">
+                            <span class="price-main">S$ 3,200</span>
+                        </div>
+                    </div>
                 </a>
                 <a href="categories/misc.html" class="item-card" data-cat="misc" data-keywords="绿釉 执壶 杂项 green glaze ewer">
                     <img src="assets/images/placeholder.jpg" alt="绿釉执壶">
-                    <div class="price-tag">S$8,600</div>
+                    <div class="item-info">
+                        <div class="item-name zh">绿釉执壶</div>
+                        <div class="item-name en">Green Glaze Ewer</div>
+                        <div class="item-price">
+                            <span class="price-main price-main--enquiry"><span class="zh">私聊询价</span><span class="en">Enquire</span></span>
+                        </div>
+                    </div>
                 </a>
                 <a href="categories/jade.html" class="item-card" data-cat="jade" data-keywords="白玉 童子 摆件 玉器 jade figure">
                     <img src="assets/images/placeholder.jpg" alt="白玉童子摆件">
-                    <div class="price-tag zh">S$9,000–11,000 <span class="neg">可议价</span></div>
-                    <div class="price-tag en">S$9,000–11,000 <span class="neg">Negotiable</span></div>
+                    <div class="item-info">
+                        <div class="item-name zh">白玉童子摆件</div>
+                        <div class="item-name en">White Jade Boy Figure</div>
+                        <div class="item-price">
+                            <span class="price-main">S$ 15,000</span>
+                            <span class="price-tag"><span class="zh">可议</span><span class="en">Nego.</span></span>
+                        </div>
+                    </div>
                 </a>
-                <a href="items/minguo-fencai-xiaoshangping.html" class="item-card" data-cat="porcelain" data-keywords="明代 宣德 瓷器 青花 粉彩 双耳瓶 Ming Xuande porcelain vase">
+                <a href="items/minguo-fencai-xiaoshangping.html" class="item-card" data-cat="porcelain" data-keywords="民国 粉彩 双耳瓶 瓷器 famille rose vase">
                     <img src="assets/images/placeholder.jpg" alt="粉彩双耳瓶">
-                    <div class="price-tag">S$16,000</div>
+                    <div class="item-info">
+                        <div class="item-name zh">粉彩双耳瓶</div>
+                        <div class="item-name en">Famille Rose Twin-handle Vase</div>
+                        <div class="item-price">
+                            <span class="price-main">S$ 6,800</span>
+                        </div>
+                    </div>
                 </a>
-                <a href="categories/paintings.html" class="item-card" data-cat="painting" data-keywords="五彩 人物纹 盘 书画 famille verte plate figures">
+                <a href="categories/paintings.html" class="item-card" data-cat="paintings" data-keywords="五彩 人物纹 盘 书画 famille verte plate figures">
                     <img src="assets/images/placeholder.jpg" alt="五彩人物纹盘">
-                    <div class="price-tag zh">私聊议价</div>
-                    <div class="price-tag en">Price on Request</div>
+                    <div class="item-info">
+                        <div class="item-name zh">五彩人物纹盘</div>
+                        <div class="item-name en">Famille Verte Figure Plate</div>
+                        <div class="item-price">
+                            <span class="price-main price-main--enquiry"><span class="zh">私聊询价</span><span class="en">Enquire</span></span>
+                        </div>
+                    </div>
                 </a>
                 <a href="items/qing-huaping.html" class="item-card" data-cat="porcelain" data-keywords="青花 三节瓶 组 瓷器 blue white vase set">
                     <img src="assets/images/placeholder.jpg" alt="青花三节瓶组">
-                    <div class="price-tag">S$10,000</div>
+                    <div class="item-info">
+                        <div class="item-name zh">青花三节瓶组</div>
+                        <div class="item-name en">Blue &amp; White Three-section Vase Set</div>
+                        <div class="item-price">
+                            <span class="price-main">S$ 22,000</span>
+                            <span class="price-tag"><span class="zh">可议</span><span class="en">Nego.</span></span>
+                        </div>
+                    </div>
                 </a>
                 <a href="categories/jade.html" class="item-card" data-cat="jade" data-keywords="翡翠 平安扣 珠宝 jadeite pendant">
                     <img src="assets/images/placeholder.jpg" alt="翡翠平安扣">
-                    <div class="price-tag zh">S$11,000–13,000 <span class="neg">可议价</span></div>
-                    <div class="price-tag en">S$11,000–13,000 <span class="neg">Negotiable</span></div>
+                    <div class="item-info">
+                        <div class="item-name zh">翡翠平安扣</div>
+                        <div class="item-name en">Jadeite Peace Pendant</div>
+                        <div class="item-price">
+                            <span class="price-main">S$ 2,800</span>
+                        </div>
+                    </div>
                 </a>
             </div>
             <div id="noResult" class="no-result zh" style="display:none;">暂无匹配藏品</div>
@@ -1009,7 +1164,6 @@
                 <p class="how-foot zh"><strong>古董集是信息发现平台，而非交易平台。</strong></p>
                 <p class="how-foot en">Gudong is a An information and discovery platform for antiques and collectibles.</p>
 
-                <!-- 2026-09-16：从「最新藏品」区块移至此处 -->
                 <div style="text-align:center; margin-top:2rem;">
                     <a href="pricing.html#seller-services" class="btn-publish">
                         <span class="zh">刊登藏品信息</span><span class="en">List an Item</span>
@@ -1029,12 +1183,26 @@
         </div>
         <p class="footer-disclaimer zh">免责声明：平台不提供鉴定、估价、买卖、代收款或交易服务。买卖双方应自行核实相关信息，并直接协商及完成交易。平台仅存储用户提交的公开信息，不承担藏品描述、图片的版权责任。</p>
         <p class="footer-disclaimer en">Disclaimer：We do not authenticate, appraise, sell, purchase, process payments, or participate in transactions. Buyers and sellers are responsible for conducting their own due diligence and arranging transactions directly. Platform stores user-submitted public content and assumes no copyright liability for listings text or images.</p>
-        <p class="zh" style="margin-bottom:0;">© 2026 古董集 · gudong.app <a href="javascript:void(0)" id="pwaInstallBtn" class="app-install-btn" onclick="event.preventDefault();"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20h14v-2H5v2zM19 9h-4V3H9v6H5l7 7 7-7z"/></svg>安装古董.app</a></p>
+        <p class="zh" style="margin-bottom:0;">© 2026 古董集 · gudong.app <a href="javascript:void(0)" class="app-install-btn" onclick="event.preventDefault();"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20h14v-2H5v2zM19 9h-4V3H9v6H5l7 7 7-7z"/></svg>安装古董.app</a></p>
         <p class="en" style="margin-bottom:0;">© 2026 Gudong · gudong.app <a href="javascript:void(0)" class="app-install-btn" onclick="event.preventDefault();"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20h14v-2H5v2zM19 9h-4V3H9v6H5l7 7 7-7z"/></svg>Install gudong.app</a></p>
     </footer>
     <script>
-        let currentLang = 'zh';
+        // 2026-09-17：从 localStorage 恢复用户上次选择的语言；首次访问默认中文
+        let currentLang = (function () {
+            try { return localStorage.getItem('gudong_lang') || 'zh'; }
+            catch (e) { return 'zh'; }
+        })();
         let currentCat = 'all';
+
+        // 初始化时同步 <html lang> 和 body.dataset.lang
+        (function applyLang(lang) {
+            const map = { zh: 'zh-SG', en: 'en-SG' };
+            document.documentElement.lang = map[lang] || 'zh-SG';
+            document.body.dataset.lang = lang;
+            const btn = document.querySelector('.lang-btn');
+            if (btn) btn.textContent = lang === 'zh' ? 'EN' : '中';
+            updateSearchPlaceholder();
+        })(currentLang);
 
         function updateSearchPlaceholder(){
           const inp = document.getElementById('searchInput');
@@ -1058,24 +1226,21 @@
         function toggleLang() {
             currentLang = currentLang === 'zh' ? 'en' : 'zh';
             document.body.dataset.lang = currentLang;
+            document.documentElement.lang = currentLang === 'zh' ? 'zh-SG' : 'en-SG';
+            try { localStorage.setItem('gudong_lang', currentLang); } catch (e) {}
             document.querySelector('.lang-btn').textContent = currentLang === 'zh' ? 'EN' : '中';
             updateSearchPlaceholder();
-            // 切换语言后同步刷新搜索结果文案
             if (document.getElementById('searchInput').value.trim()) filterAll();
         }
 
-        /* ===== 搜索：覆盖首页三个区块（今日发现 / 精选展示 / 最新藏品） ===== */
-        // 首页三处卡片列表的选择器
+        /* ===== 搜索：覆盖首页三个区块 ===== */
         const SEARCH_GROUPS = [
             '#todayFindsGrid .finds-card',
             '#editorPicksGrid .expert-mini-card',
             '#itemList .item-card',
         ];
-        // 记录第一个命中的卡片，供点击搜索/回车后滚动定位
         let firstMatchEl = null;
 
-        // 取卡片的可搜索文本。用 textContent 而不是 innerText：
-        // innerText 在被 display:none 隐藏后返回空串，会导致二次搜索失效。
         function searchHaystack(card) {
             const alt = card.querySelector('img')?.alt || '';
             return ((card.dataset.keywords || '') + ' ' + alt + ' ' + card.textContent).toLowerCase();
@@ -1102,7 +1267,6 @@
             showSearchTip(kw, visible);
             checkNoResult(kw);
 
-            // 今日发现 / 精选展示 区块整块为空时收起区块标题，避免出现"空标题"
             ['todayFindsGrid', 'editorPicksGrid'].forEach(id => {
                 const grid = document.getElementById(id);
                 if (!grid) return;
@@ -1115,7 +1279,6 @@
             return visible;
         }
 
-        // 搜索反馈：有结果报数量，无结果给出可操作提示
         function showSearchTip(kw, visible) {
             const tip = document.getElementById('searchResultTip');
             if (!tip) return;
@@ -1138,7 +1301,6 @@
             noneEl.style.display = (!visNormal && kw) ? 'block' : 'none';
         }
 
-        // 点击放大镜 / 按回车：过滤 + 滚动到第一个命中结果
         function doSearch() {
             const visible = filterAll();
             const kw = document.getElementById('searchInput').value.trim();
@@ -1159,7 +1321,6 @@
             document.getElementById('announceBar').style.display = 'none';
         }
 
-        // 搜索框事件绑定：回车触发搜索、输入即时过滤（此前只绑定了放大镜按钮，回车无效）
         (function bindSearch(){
             const el = document.getElementById('searchInput');
             if (!el) return;
@@ -1167,11 +1328,11 @@
                 if (e.key === 'Enter') { e.preventDefault(); doSearch(); }
                 if (e.key === 'Escape') { el.value = ''; filterAll(); }
             });
-            el.addEventListener('input', () => filterAll());   // 边输入边过滤，立即有反馈
-            el.addEventListener('search', () => filterAll());  // 兼容 <input type="search">
+            el.addEventListener('input', () => filterAll());
+            el.addEventListener('search', () => filterAll());
         })();
 
-        // PWA: 注册 service worker，使站点可被安装
+        // PWA: 注册 service worker
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('sw.js').then(reg => {
@@ -1182,23 +1343,21 @@
             });
         }
 
-        // PWA 安装：捕获 beforeinstallprompt，点击触发系统安装弹窗
+        // PWA 安装
         let deferredPrompt = null;
-        const pwaBtn = document.getElementById('pwaInstallBtn');
+        const pwaBtns = document.querySelectorAll('.app-install-btn');
         window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault();
             deferredPrompt = e;
         });
-        if (pwaBtn) {
+        pwaBtns.forEach((pwaBtn) => {
             pwaBtn.addEventListener('click', async (e) => {
                 e.preventDefault();
                 if (deferredPrompt) {
-                    // Chrome/Edge/Android: 触发系统安装弹窗
                     deferredPrompt.prompt();
                     const { outcome } = await deferredPrompt.userChoice;
                     deferredPrompt = null;
                 } else {
-                    // iOS Safari 或未触发 beforeinstallprompt 的环境：显示手动安装指引
                     const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
                     const zh = (document.body.dataset.lang === 'zh');
                     if (isIOS) {
@@ -1212,13 +1371,12 @@
                     }
                 }
             });
-        }
+        });
         window.addEventListener('appinstalled', () => {
-            if (pwaBtn) pwaBtn.style.display = 'none';
+            pwaBtns.forEach(btn => btn.style.display = 'none');
         });
 
-        /* ===== 从 Airtable 动态加载藏品（经 Vercel 代理接口，失败时保留静态后备） ===== */
-        // 中文品类 -> 浏览分类 key
+        /* ===== 从 Airtable 动态加载藏品 ===== */
         function catKey(c) {
           const map = {
             '瓷器': 'porcelain', '玉器': 'jade', '钱币': 'coins',
@@ -1232,8 +1390,6 @@
             .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
         }
         function imgPath(f) {
-          // 优先使用 Airtable 附件字段返回的真实图片URL（img_url），
-          // 没有的话再退回本地 /assets/images/ 里手动放的文件名（img_file）
           if (f.img_url && /^https?:\/\//i.test(f.img_url)) return f.img_url;
           return f.img_file ? ('/assets/images/' + f.img_file) : '/assets/images/placeholder.jpg';
         }
@@ -1241,13 +1397,63 @@
           return esc([f.title_zh, f.title_en, f.era_zh, f.era_en, f.category].filter(Boolean).join(' '));
         }
 
-        /* 渲染「今日发现」卡片
-           2026-09-17：与静态 HTML 结构对齐，补齐 .finds-caption 一行
-           （此前接口返回数据后整块 innerHTML 被替换，caption 会消失）。 */
+        /* ===== 价格渲染（多货币支持） ===== */
+        const currencySymbol = {
+          SGD: 'S$', CNY: '¥', HKD: 'HK$', USD: 'US$', TWD: 'NT$'
+        };
+
+        function getF(f, ...names) {
+          for (const n of names) {
+            const v = f[n];
+            if (v !== undefined && v !== null && v !== '') return v;
+          }
+          return null;
+        }
+
+        function fmtMoney(n, cur) {
+          const num = Number(n);
+          if (!Number.isFinite(num)) return '';
+          const sym = currencySymbol[cur] || 'S$';
+          return sym + ' ' + num.toLocaleString('en-SG');
+        }
+
+        function fmtRange(min, max, cur) {
+          if (min != null && max != null) {
+            return fmtMoney(min, cur) + '–' + Number(max).toLocaleString('en-SG');
+          }
+          if (min != null) return fmtMoney(min, cur) + ' 起';
+          if (max != null) return fmtMoney(max, cur) + ' 以内';
+          return null;
+        }
+
+        function priceHtml(f, wrapperClass) {
+          const type = f.price_type;
+          const cur = f.price_currency || 'SGD';
+          const enqHtml = `<div class="${wrapperClass}"><span class="price-main price-main--enquiry"><span class="zh">私聊询价</span><span class="en">Enquire</span></span></div>`;
+          const negoTag = '<span class="price-tag"><span class="zh">可议</span><span class="en">Nego.</span></span>';
+
+          if (type === '一口价') {
+            const fixed = getF(f, 'fixed price', 'fixed_price');
+            if (fixed == null) return enqHtml;
+            const tag = getF(f, 'price nego', 'price_nego') ? negoTag : '';
+            return `<div class="${wrapperClass}"><span class="price-main">${esc(fmtMoney(fixed, cur))}</span>${tag}</div>`;
+          }
+
+          if (type && type.indexOf('价格区间') === 0) {
+            const min = getF(f, 'price_min', 'price min');
+            const max = getF(f, 'price_max', 'price max');
+            const range = fmtRange(min, max, cur);
+            if (!range) return enqHtml;
+            return `<div class="${wrapperClass}"><span class="price-main">${esc(range)}</span>${negoTag}</div>`;
+          }
+
+          return enqHtml;
+        }
+
         function renderFindsCard(f) {
           const promoted = f.is_today_finds;
-          const badgeZh = promoted ? '优先' : '系统推荐';
-          const badgeEn = promoted ? 'Priority' : 'System Recommended';
+          const badgeZh = promoted ? '推广展示' : '系统推荐';
+          const badgeEn = promoted ? 'Sponsored' : 'System Recommended';
           const cls = promoted ? 'finds-card--promoted' : 'finds-card--organic';
           const kw = attrKeywords(f);
           return `
@@ -1255,16 +1461,12 @@
               <div class="finds-image"><img src="${imgPath(f)}" alt="${esc(f.title_zh)}" loading="lazy" onerror="this.onerror=null;this.src='/assets/images/placeholder.jpg'"></div>
               <div class="finds-title zh">${esc(f.title_zh)}</div><div class="finds-title en">${esc(f.title_en)}</div>
               <div class="finds-meta zh">${esc(f.era_zh)} · ${esc(f.category)}</div><div class="finds-meta en">${esc(f.era_en)} · ${esc(f.category)}</div>
-              <div class="finds-price">${esc(f.price_display_zh || f.price_display_en)}</div>
+              ${priceHtml(f, 'finds-price')}
               <div class="finds-badge zh">${badgeZh}</div><div class="finds-badge en">${badgeEn}</div>
               <div class="finds-caption zh">卖家提供资料</div><div class="finds-caption en">Seller-provided information</div>
             </a>`;
         }
 
-        /* 渲染「精选展示」卡片
-           2026-09-17：徽章文案与静态 HTML 对齐（此前是「编辑精选 / Editor's Pick」，
-           接口加载后与静态展示不一致）。副标题优先取 f.subtitle_zh/subtitle_en，
-           缺失时回退到「年代 · 品类」。 */
         function renderPickCard(f) {
           const kw = attrKeywords(f);
           const subZh = f.subtitle_zh || [f.era_zh, f.category].filter(Boolean).join(' · ');
@@ -1274,31 +1476,29 @@
               <div class="expert-mini-badge zh">精选展示</div><div class="expert-mini-badge en">Featured Listings</div>
               <div class="expert-mini-title zh">${esc(f.title_zh)}</div><div class="expert-mini-title en">${esc(f.title_en)}</div>
               <div class="expert-mini-sub zh">${esc(subZh)}</div><div class="expert-mini-sub en">${esc(subEn)}</div>
+              ${priceHtml(f, 'expert-mini-price')}
             </a>`;
         }
 
-        /* 渲染「最新藏品」卡片
-           2026-09-17：与静态 HTML 对齐——只输出图片 + 左下角价格标签，
-           不再使用 .listing-card / <h3> / .price-cn 等（静态卡片里没有这些元素，
-           接口加载后会导致卡片外观突变）。 */
         function renderCards(containerId, items) {
           const container = document.getElementById(containerId);
           if (!container) return;
-          container.innerHTML = "";
-          items.forEach(f => {
+          container.innerHTML = items.map(f => {
             const imgSrc = imgPath(f);
             const detailUrl = `/items/${esc(f.item_id)}.html`;
             const kw = attrKeywords(f);
-            const pz = f.price_display_zh || f.price_display_en || '';
-            const pe = f.price_display_en || f.price_display_zh || '';
-            const card = `
+            const nz = f.title_zh || f.title_en || '';
+            const ne = f.title_en || f.title_zh || '';
+            return `
               <a href="${detailUrl}" class="item-card" data-cat="${catKey(f.category)}" data-keywords="${kw}">
                 <img src="${imgSrc}" alt="${esc(f.title_zh)}" loading="lazy" onerror="this.onerror=null;this.src='/assets/images/placeholder.jpg'">
-                <div class="price-tag zh">${esc(pz)}</div>
-                <div class="price-tag en">${esc(pe)}</div>
+                <div class="item-info">
+                  <div class="item-name zh">${esc(nz)}</div>
+                  <div class="item-name en">${esc(ne)}</div>
+                  ${priceHtml(f, 'item-price')}
+                </div>
               </a>`;
-            container.innerHTML += card;
-          });
+          }).join('');
         }
 
         async function loadAirtableData() {
@@ -1321,7 +1521,6 @@
               checkNoResult();
             }
           } catch (e) {
-            // 接口不可用时保留页面现有静态内容作为后备，不报错
             console.warn('Airtable 数据加载失败，使用静态后备内容：', e);
           }
         }

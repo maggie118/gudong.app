@@ -1,18 +1,62 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<!-- 🟢 优化点 1：语系改为新加坡中文(zh-SG)或通用双语/多语系(en-SG / zh)，此处用 zh-SG 更贴合新加坡中文语境，若网站主英文则建议改为 en-SG -->
+<html lang="zh-SG">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 🟢 优化点 2：视口标签硬核规范，防止移动端点击延迟、禁止不必要的缩放，确保物理像素 1:1 完美呈现 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no, viewport-fit=cover">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- 标题保持专业度 -->
     <title>Gudong.app | Chinese Antiques & Collectibles Discovery Platform</title>
-    <meta name="description" content="古董集 gudong.app，新加坡古董藏品信息平台。浏览瓷器、玉器、钱币、书画、杂项藏品信息，直接联系藏家卖家。平台不做鉴定与交易。">
-    <meta property="og:title" content="古董集 Gudong.app">
-    <meta property="og:description" content="Singapore-based discovery platform for Chinese antiques and collectibles. Browse porcelain, jade, coins, paintings and miscellaneous antiques.">
+
+    <!-- 🟢 优化点 3：SEO 描述精简且地域化（加入 Singapore / 新加坡 核心词，提升本地搜索权重） -->
+    <meta name="description" content="古董集 gudong.app —— 新加坡专业的中国古董及藏品信息发现平台。汇集瓷器、玉器、钱币、书画及杂项，买家直接联系藏家卖家。平台不参与鉴定与交易。">
+    <meta name="keywords" content="Singapore antiques, Chinese porcelain, Jade collection, 古董集, 新加坡古董, 瓷器收藏, 玉器钱币">
+
+    <!-- 🟢 优化点 4：多语言国际化（I18n）SEO 指引（极为重要！） -->
+    <!-- 假设你的英文版地址是 gudong.app/en，中文版是 gudong.app 或 gudong.app/zh -->
+    <link rel="alternate" hreflang="en-SG" href="https://gudong.app" />
+    <link rel="alternate" hreflang="zh-SG" href="https://gudong.app" />
+    <!-- 默认语系兜底 -->
+    <link rel="alternate" hreflang="x-default" href="https://gudong.app" />
+
+    <!-- 🟢 优化点 5：完整且健壮的 Open Graph 社交分享矩阵（支持 WhatsApp、微信、Telegram、Discord、Notion） -->
+    <meta property="og:site_name" content="古董集 Gudong.app">
+    <meta property="og:title" content="古董集 Gudong.app | Chinese Antiques Platform Singapore">
+    <meta property="og:description" content="Singapore-based discovery platform for Chinese antiques and collectibles. Browse porcelain, jade, coins, paintings and connect directly with sellers.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://gudong.app">
+    <!-- 💥 必须加上分享缩略图！尺寸推荐 1200x630px WebP 格式，确保在 WhatsApp 等软件能拉出漂亮的卡片 -->
+    <meta property="og:image" content="https://gudong.app/og-cover.webp">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:type" content="image/webp">
+
+    <!-- 🟢 优化点 6：Twitter / X 专属卡片渲染 -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="古董集 Gudong.app | Chinese Antiques Platform">
+    <meta name="twitter:description" content="Singapore-based discovery platform for Chinese antiques and collectibles.">
+    <meta name="twitter:image" content="https://gudong.app/og-cover.webp">
+
+    <!-- 🟢 优化点 7：PWA & 移动端 Web App（添加全套苹果 iOS 本地图标支持，防止添加到桌面时显示系统截屏） -->
     <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#8A5A3B">
+    <meta name="theme-color" content="#8A5A3B"> <!-- 古董集经典的古朴棕色主题色 -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="古董集">
+    <link rel="apple-touch-icon" href="icons/apple-touch-icon-152x152.png" sizes="152x152">
+    <link rel="apple-touch-icon" href="icons/apple-touch-icon-180x180.png" sizes="180x180">
+
+    <!-- 🟢 优化点 8：传统的浏览器 Favicon 基础设施保底 -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32x32.png">
+
+    <!-- 🟢 性能优化：如果你的资源部署在 CDN 上，提前连接以加快加载速度（无则删掉这行） -->
+    <!-- <link rel="preconnect" href="https://cdn.gudong.app" crossorigin> -->
+
+    <!-- CSS 样式表引入 -->
+    <link rel="stylesheet" href="css/styles.css">
     <style>
         :root {
             --color-bg: #F5F2EC;
@@ -729,7 +773,6 @@
             background: var(--color-primary-light);
         }
     </style>
-    <link rel="apple-touch-icon" href="/assets/icons/icon-192.png">
 </head>
 <body data-lang="zh">
     <div class="announce-bar" id="announceBar">

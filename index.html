@@ -668,6 +668,17 @@
             padding: 3rem 1rem;
             color: var(--color-text-muted);
         }
+        /* 2026-09-17：加载失败提示（Airtable 挂了时显示） */
+        .load-error-tip {
+            text-align: center;
+            padding: 2rem 1rem;
+            color: var(--color-text-muted);
+            font-size: .85rem;
+            line-height: 1.7;
+            border: 1px dashed var(--color-border);
+            border-radius: 8px;
+        }
+        .load-error-tip strong { color: var(--color-danger); }
         .browse-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -828,6 +839,8 @@
             .brand h1 { font-size: 1.15rem; }
             .container { padding: 2rem 4.5% 3rem; }
             section { margin-bottom: 3.8rem; }
+            /* 2026-09-17：已确认此区块不含 .btn-publish span.en { display: inline; }，
+               中文态下按钮只显示「刊登藏品」，不再出现双份文案。 */
             .goods-list { grid-template-columns: repeat(3, 1fr); gap: .6rem; }
             .finds-grid { grid-template-columns: repeat(2, 1fr); gap: .8rem; }
             .expert-mini-grid { grid-template-columns: 1fr; }
@@ -928,7 +941,10 @@
                 </div>
                 <a href="#new-listings" class="hero-btn"><span class="zh">浏览藏品</span><span class="en">Browse Listings</span></a>
                 <div class="search-box">
-                    <input type="text" id="searchInput" placeholder="" />
+                    <input type="text"
+                           id="searchInput"
+                           placeholder="搜索藏品、类别或关键词"
+                           aria-label="搜索藏品" />
                     <button type="button" onclick="doSearch()" aria-label="search">🔍</button>
                 </div>
                 <div id="searchResultTip" class="search-result-tip" role="status" aria-live="polite" style="display:none;">
@@ -947,51 +963,10 @@
             </div>
             <p class="section-note zh">今日发现为本平台人工精选藏品展示，部分位置为付费置顶；不代表平台鉴定或保真。</p>
             <p class="section-note en">Today's Finds are hand-selected highlights. A small number of slots are paid promoted placements. No authentication is provided.</p>
-            <div class="finds-grid" id="todayFindsGrid">
-                <a href="items/guangxu-shuanglong-dapan.html" class="finds-card finds-card--promoted" data-cat="porcelain" data-keywords="清代 青花 龙纹 盘 瓷器 Qing porcelain dragon plate">
-                    <div class="finds-image"><img src="assets/images/placeholder.jpg" alt="清代青花龙纹盘"></div>
-                    <div class="finds-title zh">清代青花龙纹盘</div><div class="finds-title en">Qing Blue &amp; White Dragon Plate</div>
-                    <div class="finds-meta zh">清代 · 瓷器</div><div class="finds-meta en">Qing Dynasty · Porcelain</div>
-                    <div class="finds-price">
-                        <span class="price-main">S$ 8,000</span>
-                        <span class="price-tag"><span class="zh">可议</span><span class="en">Nego.</span></span>
-                    </div>
-                    <div class="finds-badge zh">推广展示</div><div class="finds-badge en">Sponsored</div>
-                    <div class="finds-caption zh">卖家提供资料</div><div class="finds-caption en">Seller-provided information</div>
-                </a>
-                <a href="categories/jade.html" class="finds-card finds-card--organic" data-cat="jade" data-keywords="白玉 童子 摆件 玉器 jade figure">
-                    <div class="finds-image"><img src="assets/images/placeholder.jpg" alt="白玉童子摆件"></div>
-                    <div class="finds-title zh">白玉童子摆件</div><div class="finds-title en">White Jade Boy Figure</div>
-                    <div class="finds-meta zh">清代 · 玉器</div><div class="finds-meta en">Qing Dynasty · Jade</div>
-                    <div class="finds-price">
-                        <span class="price-main">S$ 12,000–18,000</span>
-                        <span class="price-tag"><span class="zh">可议</span><span class="en">Nego.</span></span>
-                    </div>
-                    <div class="finds-badge zh">系统推荐</div><div class="finds-badge en">System Recommended</div>
-                    <div class="finds-caption zh">卖家提供资料</div><div class="finds-caption en">Seller-provided information</div>
-                </a>
-                <a href="categories/misc.html" class="finds-card finds-card--organic" data-cat="misc" data-keywords="宣德 炉 铜器 Xuande censer bronze">
-                    <div class="finds-image"><img src="assets/images/placeholder.jpg" alt="宣德炉"></div>
-                    <div class="finds-title zh">宣德炉</div><div class="finds-title en">Xuande Censer</div>
-                    <div class="finds-meta zh">明宣德 · 铜器</div><div class="finds-meta en">Ming Xuande · Bronze</div>
-                    <div class="finds-price">
-                        <span class="price-main price-main--enquiry"><span class="zh">私聊询价</span><span class="en">Enquire</span></span>
-                    </div>
-                    <div class="finds-badge zh">系统推荐</div><div class="finds-badge en">System Recommended</div>
-                    <div class="finds-caption zh">卖家提供资料</div><div class="finds-caption en">Seller-provided information</div>
-                </a>
-                <a href="items/qing-huaping.html" class="finds-card finds-card--promoted" data-cat="porcelain" data-keywords="霁蓝 釉 赏瓶 官窑 blue glaze vase imperial">
-                    <div class="finds-image"><img src="assets/images/placeholder.jpg" alt="霁蓝釉赏瓶"></div>
-                    <div class="finds-title zh">霁蓝釉赏瓶</div><div class="finds-title en">Sacrificial Blue Glaze Vase</div>
-                    <div class="finds-meta zh">清代 · 官窑</div><div class="finds-meta en">Qing · Imperial Kiln</div>
-                    <div class="finds-price">
-                        <span class="price-main">S$ 45,000</span>
-                        <span class="price-tag"><span class="zh">可议</span><span class="en">Nego.</span></span>
-                    </div>
-                    <div class="finds-badge zh">推广展示</div><div class="finds-badge en">Sponsored</div>
-                    <div class="finds-caption zh">卖家提供资料</div><div class="finds-caption en">Seller-provided information</div>
-                </a>
-            </div>
+            <!-- 2026-09-17：移除静态卡片，改为空容器由 JS 从 Airtable 加载。
+                 静态内容会与实际数据漂移，且会写出指向不存在详情的 404 链接，
+                 对 SEO 与用户信任都有害。 -->
+            <div class="finds-grid" id="todayFindsGrid"></div>
         </section>
         <section id="editor-picks">
             <div class="section-head2">
@@ -999,25 +974,8 @@
                 <a href="expert-picks.html" class="more zh">更多 →</a>
                 <a href="expert-picks.html" class="more en">More →</a>
             </div>
-            <div class="expert-mini-grid" id="editorPicksGrid">
-                <a href="items/song-yingqing-wan.html" class="expert-mini-card" data-cat="porcelain" data-keywords="宋 影青 暗刻 花碗 瓷器 Song Yingqing bowl">
-                    <div class="expert-mini-badge zh">精选展示</div><div class="expert-mini-badge en">Featured Listings</div>
-                    <div class="expert-mini-title zh">宋影青暗刻花碗</div><div class="expert-mini-title en">Song Yingqing Carved Bowl</div>
-                    <div class="expert-mini-sub zh">釉色通透、刻纹精细</div><div class="expert-mini-sub en">Translucent glaze, finely incised</div>
-                    <div class="expert-mini-price">
-                        <span class="price-main">S$ 28,000</span>
-                        <span class="price-tag"><span class="zh">可议</span><span class="en">Nego.</span></span>
-                    </div>
-                </a>
-                <a href="categories/misc.html" class="expert-mini-card" data-cat="misc" data-keywords="铜 鎏金 造像 佛像 gilt bronze buddhist figure">
-                    <div class="expert-mini-badge zh">精选展示</div><div class="expert-mini-badge en">Featured Listings</div>
-                    <div class="expert-mini-title zh">铜鎏金造像</div><div class="expert-mini-title en">Gilt Bronze Buddhist Figure</div>
-                    <div class="expert-mini-sub zh">开相端庄、包浆温润</div><div class="expert-mini-sub en">Dignified, warm patina</div>
-                    <div class="expert-mini-price">
-                        <span class="price-main price-main--enquiry"><span class="zh">私聊询价</span><span class="en">Enquire</span></span>
-                    </div>
-                </a>
-            </div>
+            <!-- 2026-09-17：同 todayFindsGrid，改为空容器由 JS 渲染 -->
+            <div class="expert-mini-grid" id="editorPicksGrid"></div>
             <p class="section-note zh">精选展示为付费曝光服务。平台仅审核图片格式，不做器物真伪、年代、价值鉴定，不担保藏品真实可靠，请买家自行审慎甄别。</p>
             <p class="section-note en">Featured Listings is a paid-exposure service. We only review image formatting. Gudong does NOT authenticate, date or appraise objects. Buyers must perform independent due-diligence.</p>
         </section>
@@ -1027,91 +985,8 @@
                 <a href="#browse" class="more zh">查看全部 →</a>
                 <a href="#browse" class="more en">View All →</a>
             </div>
-            <div class="goods-list" id="itemList">
-                <a href="items/guangxu-shuanglong-dapan.html" class="item-card" data-cat="porcelain" data-keywords="清代 青花 龙纹 盘 瓷器 Qing porcelain dragon plate">
-                    <img src="assets/images/placeholder.jpg" alt="清代青花龙纹盘">
-                    <div class="item-info">
-                        <div class="item-name zh">清代青花龙纹盘</div>
-                        <div class="item-name en">Qing Blue &amp; White Dragon Plate</div>
-                        <div class="item-price">
-                            <span class="price-main">S$ 8,000</span>
-                            <span class="price-tag"><span class="zh">可议</span><span class="en">Nego.</span></span>
-                        </div>
-                    </div>
-                </a>
-                <a href="categories/porcelain.html" class="item-card" data-cat="porcelain" data-keywords="青花 山水 碗 瓷器 landscape bowl porcelain">
-                    <img src="assets/images/placeholder.jpg" alt="青花山水纹碗">
-                    <div class="item-info">
-                        <div class="item-name zh">青花山水纹碗</div>
-                        <div class="item-name en">Blue &amp; White Landscape Bowl</div>
-                        <div class="item-price">
-                            <span class="price-main">S$ 3,200</span>
-                        </div>
-                    </div>
-                </a>
-                <a href="categories/misc.html" class="item-card" data-cat="misc" data-keywords="绿釉 执壶 杂项 green glaze ewer">
-                    <img src="assets/images/placeholder.jpg" alt="绿釉执壶">
-                    <div class="item-info">
-                        <div class="item-name zh">绿釉执壶</div>
-                        <div class="item-name en">Green Glaze Ewer</div>
-                        <div class="item-price">
-                            <span class="price-main price-main--enquiry"><span class="zh">私聊询价</span><span class="en">Enquire</span></span>
-                        </div>
-                    </div>
-                </a>
-                <a href="categories/jade.html" class="item-card" data-cat="jade" data-keywords="白玉 童子 摆件 玉器 jade figure">
-                    <img src="assets/images/placeholder.jpg" alt="白玉童子摆件">
-                    <div class="item-info">
-                        <div class="item-name zh">白玉童子摆件</div>
-                        <div class="item-name en">White Jade Boy Figure</div>
-                        <div class="item-price">
-                            <span class="price-main">S$ 15,000</span>
-                            <span class="price-tag"><span class="zh">可议</span><span class="en">Nego.</span></span>
-                        </div>
-                    </div>
-                </a>
-                <a href="items/minguo-fencai-xiaoshangping.html" class="item-card" data-cat="porcelain" data-keywords="民国 粉彩 双耳瓶 瓷器 famille rose vase">
-                    <img src="assets/images/placeholder.jpg" alt="粉彩双耳瓶">
-                    <div class="item-info">
-                        <div class="item-name zh">粉彩双耳瓶</div>
-                        <div class="item-name en">Famille Rose Twin-handle Vase</div>
-                        <div class="item-price">
-                            <span class="price-main">S$ 6,800</span>
-                        </div>
-                    </div>
-                </a>
-                <a href="categories/paintings.html" class="item-card" data-cat="paintings" data-keywords="五彩 人物纹 盘 书画 famille verte plate figures">
-                    <img src="assets/images/placeholder.jpg" alt="五彩人物纹盘">
-                    <div class="item-info">
-                        <div class="item-name zh">五彩人物纹盘</div>
-                        <div class="item-name en">Famille Verte Figure Plate</div>
-                        <div class="item-price">
-                            <span class="price-main price-main--enquiry"><span class="zh">私聊询价</span><span class="en">Enquire</span></span>
-                        </div>
-                    </div>
-                </a>
-                <a href="items/qing-huaping.html" class="item-card" data-cat="porcelain" data-keywords="青花 三节瓶 组 瓷器 blue white vase set">
-                    <img src="assets/images/placeholder.jpg" alt="青花三节瓶组">
-                    <div class="item-info">
-                        <div class="item-name zh">青花三节瓶组</div>
-                        <div class="item-name en">Blue &amp; White Three-section Vase Set</div>
-                        <div class="item-price">
-                            <span class="price-main">S$ 22,000</span>
-                            <span class="price-tag"><span class="zh">可议</span><span class="en">Nego.</span></span>
-                        </div>
-                    </div>
-                </a>
-                <a href="categories/jade.html" class="item-card" data-cat="jade" data-keywords="翡翠 平安扣 珠宝 jadeite pendant">
-                    <img src="assets/images/placeholder.jpg" alt="翡翠平安扣">
-                    <div class="item-info">
-                        <div class="item-name zh">翡翠平安扣</div>
-                        <div class="item-name en">Jadeite Peace Pendant</div>
-                        <div class="item-price">
-                            <span class="price-main">S$ 2,800</span>
-                        </div>
-                    </div>
-                </a>
-            </div>
+            <!-- 2026-09-17：同 todayFindsGrid，改为空容器由 JS 渲染 -->
+            <div class="goods-list" id="itemList"></div>
             <div id="noResult" class="no-result zh" style="display:none;">暂无匹配藏品</div>
             <div id="noResultEn" class="no-result en" style="display:none;">No items found</div>
         </section>
@@ -1175,8 +1050,11 @@
         <div class="footer-nav">
             <a href="about.html" class="zh">关于我们</a><a href="about.html" class="en">About</a>
             <a href="pricing.html#buyer-services" class="zh">买家指南</a><a href="pricing.html#buyer-services" class="en">Buyer Guide</a>
-            <a href="pricing.html#price-table" class="zh">服务价格</a><a href="pricing.html#price-table" class="en">Pricing</a>
             <a href="about.html#location" class="zh">联系我们</a><a href="about.html#location" class="en">Contact</a>
+            <!-- 2026-09-17：PDPA 合规链接。新加坡《个人资料保护法》要求明确告知收集联系方式的目的，
+                 用户投诉到 PDPC 时需要能提供隐私政策。两个页面可简单（200 字左右即可合规）。 -->
+            <a href="privacy.html" class="zh">隐私政策</a><a href="privacy.html" class="en">Privacy</a>
+            <a href="terms.html" class="zh">用户条款</a><a href="terms.html" class="en">Terms</a>
         </div>
         <p class="footer-disclaimer zh">免责声明：平台不提供鉴定、估价、买卖、代收款或交易服务。买卖双方应自行核实相关信息，并直接协商及完成交易。平台仅存储用户提交的公开信息，不承担藏品描述、图片的版权责任。</p>
         <p class="footer-disclaimer en">Disclaimer：We do not authenticate, appraise, sell, purchase, process payments, or participate in transactions. Buyers and sellers are responsible for conducting their own due diligence and arranging transactions directly. Platform stores user-submitted public content and assumes no copyright liability for listings text or images.</p>
@@ -1205,8 +1083,10 @@
           const inp = document.getElementById('searchInput');
           if(currentLang === 'zh'){
             inp.placeholder = "搜索藏品、类别或关键词";
+            inp.setAttribute('aria-label', '搜索藏品');
           }else{
             inp.placeholder = "Search antiques, categories or keywords";
+            inp.setAttribute('aria-label', 'Search antiques');
           }
         }
 
@@ -1493,6 +1373,19 @@
           }).join('');
         }
 
+        /* 2026-09-17：加载失败时在三个区块内显示错误提示，
+           而不是静默失败让页面一片空白。
+           用 load-error-tip 类，样式与 no-result 类似但更显眼。 */
+        function showLoadError() {
+          const msgZh = '<strong>藏品加载失败</strong><br>请刷新页面重试。如持续出现，请稍后再访问。';
+          const msgEn = '<strong>Failed to load listings</strong><br>Please refresh the page. If the issue persists, try again later.';
+          const html = `<div class="load-error-tip"><span class="zh">${msgZh}</span><span class="en">${msgEn}</span></div>`;
+          ['todayFindsGrid', 'editorPicksGrid', 'itemList'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.innerHTML = html;
+          });
+        }
+
         async function loadAirtableData() {
           try {
             const res = await fetch('api/airtable-proxy');
@@ -1513,7 +1406,9 @@
               checkNoResult();
             }
           } catch (e) {
-            console.warn('Airtable 数据加载失败，使用静态后备内容：', e);
+            // 2026-09-17：加载失败时给用户明确反馈，不再静默失败
+            console.warn('Airtable 数据加载失败：', e);
+            showLoadError();
           }
         }
         loadAirtableData();

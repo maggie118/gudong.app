@@ -224,12 +224,38 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
 .seller-item-card { position: relative; display: block; }
 .seller-item-name { margin-top: .5rem; font-size: .85rem; color: var(--color-text); }
 
+    
+        /* ---------- Sidebar 语言切换按钮（2026-09-15 新增） ---------- */
+        .sidebar-lang-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: .4rem;
+            width: calc(100% - 2.8rem);
+            margin: 1rem 1.4rem .8rem;
+            padding: .62rem .9rem;
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            background: var(--color-white);
+            color: var(--color-text-secondary);
+            font-family: inherit;
+            font-size: .9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: .2s;
+        }
+        .sidebar-lang-btn:hover {
+            border-color: var(--color-primary);
+            color: var(--color-primary);
+            background: var(--color-primary-light);
+        }
     </style>
+    <link rel="apple-touch-icon" href="/assets/icons/icon-192.png">
 </head>
 <body data-lang="zh">
     <div class="announce-bar" id="announceBar">
-        <span class="zh">创始会员福利：早期入驻卖家，可享前2条藏品信息免费发布</span>
-        <span class="en">Founder Member Offer: Early sellers get first-two listings complimentary</span>
+        <span class="zh">创始卖家福利｜限量 88 席免费入驻，前 2 件藏品信息免费刊登，平台不抽取交易佣金，仅提供藏品信息与曝光增值服务。</span>
+        <span class="en">Founder-Dealer Benefit | Limited 88 seats · Free to join · First 2 listings free · No transaction commission — we provide listing &amp; exposure services only.</span>
         <button class="announce-close" onclick="document.getElementById('announceBar').style.display='none'" aria-label="close">×</button>
     </div>
 
@@ -245,7 +271,7 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
 
         <div class="header-right">
             <a href="mailto:contact@gudong.app?subject=%E5%8F%A4%E8%91%A3%E9%9B%86-%E7%94%B3%E8%AF%B7%E5%8F%91%E5%B8%83%E8%97%8F%E5%93%81" class="btn-publish">
-                <span class="zh">发布藏品信息</span><span class="en">List an Item</span>
+                <span class="zh">刊登藏品信息</span><span class="en">List an Item</span>
             </a>
             <button class="lang-btn" onclick="toggleLang()">EN</button>
         </div>
@@ -257,24 +283,22 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
         <div class="sidebar-brand">
             <span class="zh">古董集</span><span class="en">GUDONG</span>
         </div>
-        <nav class="sidebar-nav">
-            <a href="../index.html#hero" class="sidebar-link"><span class="zh">首页</span><span class="en">Home</span></a>
-            <a href="../index.html#today-finds" class="sidebar-link"><span class="zh">今日发现</span><span class="en">Today's Finds</span></a>
-            <a href="../index.html#new-listings" class="sidebar-link"><span class="zh">最新上架</span><span class="en">New Listings</span></a>
+                <nav class="sidebar-nav">
+            <a href="../index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">首页</span><span class="en">Home</span></a>
+            <a href="../index.html#today-finds" class="sidebar-link" onclick="closeSidebar()"><span class="zh">今日发现</span><span class="en">Today's Finds</span></a>
+            <a href="../index.html#new-listings" class="sidebar-link" onclick="closeSidebar()"><span class="zh">最新藏品</span><span class="en">New Listings</span></a>
 
             <div class="sidebar-group-title zh">藏品库</div><div class="sidebar-group-title en">Collection</div>
-            <a href="../categories/porcelain.html" class="sidebar-sub"><span class="zh">· 瓷器</span><span class="en">· Porcelain</span></a>
-            <a href="../categories/jade.html" class="sidebar-sub"><span class="zh">· 玉器</span><span class="en">· Jade</span></a>
-            <a href="../categories/coins.html" class="sidebar-sub"><span class="zh">· 钱币</span><span class="en">· Coins</span></a>
-            <a href="../categories/paintings.html" class="sidebar-sub"><span class="zh">· 书画</span><span class="en">· Paintings &amp; Calligraphy</span></a>
-            <a href="../categories/misc.html" class="sidebar-sub"><span class="zh">· 杂项</span><span class="en">· Miscellaneous</span></a>
+            <a href="../categories/porcelain.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 瓷器</span><span class="en">· Porcelain</span></a>
+            <a href="../categories/jade.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 玉器</span><span class="en">· Jade</span></a>
+            <a href="../categories/coins.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 钱币</span><span class="en">· Coins</span></a>
+            <a href="../categories/paintings.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 书画</span><span class="en">· Paintings &amp; Calligraphy</span></a>
+            <a href="../categories/misc.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 杂项</span><span class="en">· Miscellaneous</span></a>
 
-            <a href="../expert-picks.html" class="sidebar-link"><span class="zh">编辑精选</span><span class="en">Editor's Picks</span></a>
-            <a href="../sellers/index.html" class="sidebar-link"><span class="zh">卖家展馆</span><span class="en">Dealer Galleries</span></a>
-            <a href="../pricing.html#seller-services" class="sidebar-link"><span class="zh">卖家服务</span><span class="en">Sell with Gudong</span></a>
-            <a href="../pricing.html#buyer-services" class="sidebar-link"><span class="zh">买家指南</span><span class="en">Buyer Guide</span></a>
-            <a href="../pricing.html#price-table" class="sidebar-link"><span class="zh">服务价格</span><span class="en">Pricing</span></a>
-            <a href="../about.html" class="sidebar-link"><span class="zh">关于Gudong</span><span class="en">About</span></a>
+            <a href="../sellers/index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">卖家展馆</span><span class="en">Dealer Galleries</span></a>
+            <a href="../pricing.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">服务价格</span><span class="en">Pricing</span></a>
+            <a href="../about.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">关于Gudong</span><span class="en">About</span></a>
+            <button type="button" class="sidebar-lang-btn" onclick="toggleLang()" aria-label="Switch language"><span class="zh">🌐 English</span><span class="en">🌐 中文</span></button>
         </nav>
     </aside>
 
@@ -308,14 +332,13 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
 
     <footer>
         <div class="footer-nav">
-            <a href="../about.html" class="zh">关于我们</a><a href="../about.html" class="en">About</a>
             <a href="../pricing.html#buyer-services" class="zh">买家指南</a><a href="../pricing.html#buyer-services" class="en">Buyer Guide</a>
-            <a href="../pricing.html#price-table" class="zh">服务价格</a><a href="../pricing.html#price-table" class="en">Pricing</a>
-            <a href="../pricing.html#seller-services" class="zh">卖家服务</a><a href="../pricing.html#seller-services" class="en">Sell with Gudong</a>
             <a href="../about.html#location" class="zh">联系我们</a><a href="../about.html#location" class="en">Contact</a>
+            <a href="../privacy.html" class="zh">隐私政策</a><a href="../privacy.html" class="en">Privacy</a>
+            <a href="../terms.html" class="zh">用户条款</a><a href="../terms.html" class="en">Terms</a>
         </div>
-        <p class="footer-disclaimer zh">古董集是古董与收藏品信息发现平台。平台不提供鉴定、估价、买卖、代收款或交易服务。买卖双方应自行核实相关信息，并直接协商及完成交易。</p>
-        <p class="footer-disclaimer en">Gudong is an information and discovery platform for antiques and collectibles. We do not authenticate, appraise, sell, purchase, process payments, or participate in transactions. Buyers and sellers are responsible for conducting their own due diligence and arranging transactions directly.</p>
+        <p class="footer-disclaimer zh">gudong.app 是信息发现平台，而非交易平台。</p>
+        <p class="footer-disclaimer en">gudong.app is an information and discovery platform for antiques and collectibles.</p>
         <p class="zh">© 2026 古董集 · gudong.app</p>
         <p class="en">© 2026 Gudong · gudong.app</p>
     </footer>

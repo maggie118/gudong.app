@@ -90,17 +90,17 @@
     <meta name="twitter:image" content="https://gudong.app/og-cover.png">
 
     <!-- 🟢 优化点 7：PWA & 移动端 Web App -->
-    <link rel="manifest" href="manifest.json">
+    <link rel="manifest" href="../../Downloads/manifest.json">
     <meta name="theme-color" content="#8A5A3B">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="古董集">
-    <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon-152x152.png" sizes="152x152">
-    <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon-180x180.png" sizes="180x180">
+    <link rel="apple-touch-icon" href="../../Downloads/assets/icons/apple-touch-icon-152x152.png" sizes="152x152">
+    <link rel="apple-touch-icon" href="../../Downloads/assets/icons/apple-touch-icon-180x180.png" sizes="180x180">
 
     <!-- 🟢 优化点 8：传统的浏览器 Favicon 基础设施保底 -->
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32x32.png">
+    <link rel="icon" type="image/x-icon" href="../../Downloads/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../Downloads/assets/icons/favicon-32x32.png">
 
     <!-- CSS 样式表引入 -->
     <style>
@@ -671,6 +671,31 @@
             border-radius: 8px;
         }
         .load-error-tip strong { color: var(--color-danger); }
+        .load-error-tip { grid-column: 1 / -1; }
+        /* 2026-09-19：加载骨架屏（数据到达前占位，避免空白闪烁） */
+        @keyframes gd-shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+        .skeleton-card {
+            border-radius: 8px;
+            background: linear-gradient(90deg, var(--color-primary-light) 25%, #FAF6F0 50%, var(--color-primary-light) 75%);
+            background-size: 200% 100%;
+            animation: gd-shimmer 1.4s linear infinite;
+        }
+        .skeleton-card--square { aspect-ratio: 1 / 1; }
+        .skeleton-card--wide { height: 96px; }
+        @media (prefers-reduced-motion: reduce) { .skeleton-card { animation: none; } }
+        [hidden] { display: none !important; }
+        /* 2026-09-19：数据连接诊断面板（仅 ?debug=1 时出现） */
+        .gd-debug {
+            position: fixed; left: 8px; bottom: 8px; z-index: 9999;
+            max-width: min(94vw, 440px); max-height: 60vh; overflow: auto;
+            background: rgba(20,17,14,.94); color: #E8E2D8;
+            font: 12px/1.6 ui-monospace, Menlo, Consolas, monospace;
+            padding: 10px 12px; border-radius: 8px;
+            white-space: pre-wrap; word-break: break-all;
+        }
+        .gd-debug .ok { color: #9FD08A; }
+        .gd-debug .warn { color: #E6C46B; }
+        .gd-debug .bad { color: #F0A090; }
         .browse-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -884,7 +909,7 @@
             </a>
         </div>
         <div class="header-right">
-            <a href="pricing.html#seller-services" class="btn-publish">
+            <a href="../../Downloads/pricing.html#seller-services" class="btn-publish">
                 <span class="zh">刊登藏品</span><span class="en">List an Item</span>
             </a>
             <button class="lang-btn" onclick="toggleLang()">EN</button>
@@ -902,17 +927,17 @@
             <a href="#new-listings" class="sidebar-link" onclick="closeSidebar()"><span class="zh">最新藏品</span><span class="en">New Listings</span></a>
 
             <div class="sidebar-group-title zh">藏品库</div><div class="sidebar-group-title en">Collection</div>
-            <a href="categories/porcelain.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 瓷器</span><span class="en">· Porcelain</span></a>
-            <a href="categories/jade.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 玉器</span><span class="en">· Jade</span></a>
-            <a href="categories/coins.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 钱币</span><span class="en">· Coins</span></a>
-            <a href="categories/paintings.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 书画</span><span class="en">· Paintings &amp; Calligraphy</span></a>
-            <a href="categories/misc.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 杂项</span><span class="en">· Miscellaneous</span></a>
+            <a href="../../Downloads/categories/porcelain.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 瓷器</span><span class="en">· Porcelain</span></a>
+            <a href="../../Downloads/categories/jade.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 玉器</span><span class="en">· Jade</span></a>
+            <a href="../../Downloads/categories/coins.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 钱币</span><span class="en">· Coins</span></a>
+            <a href="../../Downloads/categories/paintings.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 书画</span><span class="en">· Paintings &amp; Calligraphy</span></a>
+            <a href="../../Downloads/categories/misc.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 杂项</span><span class="en">· Miscellaneous</span></a>
 
-            <a href="sellers/index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">卖家展馆</span><span class="en">Dealer Galleries</span></a>
+            <a href="../../Downloads/sellers/index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">卖家展馆</span><span class="en">Dealer Galleries</span></a>
       
-            <a href="pricing.html#price-table" class="sidebar-link" onclick="closeSidebar()"><span class="zh">服务价格</span><span class="en">Pricing</span></a>
+            <a href="../../Downloads/pricing.html#price-table" class="sidebar-link" onclick="closeSidebar()"><span class="zh">服务价格</span><span class="en">Pricing</span></a>
 
-            <a href="about.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">关于Gudong</span><span class="en">About</span></a>
+            <a href="../../Downloads/about.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">关于Gudong</span><span class="en">About</span></a>
             <button type="button" class="sidebar-lang-btn" onclick="toggleLang()" aria-label="Switch language"><span class="zh">🌐 English</span><span class="en">🌐 中文</span></button>
         </nav>
     </aside>
@@ -958,8 +983,8 @@
         <section id="editor-picks">
             <div class="section-head2">
                 <div><span class="title zh">精选展示</span><span class="title en">Featured Listings</span></div>
-                <a href="expert-picks.html" class="more zh">更多 →</a>
-                <a href="expert-picks.html" class="more en">More →</a>
+                <a href="../../Downloads/expert-picks.html" class="more zh">更多 →</a>
+                <a href="../../Downloads/expert-picks.html" class="more en">More →</a>
             </div>
             <div class="expert-mini-grid" id="editorPicksGrid"></div>
             <p class="section-note zh">精选展示为付费曝光服务。平台仅审核图片格式，不做器物真伪、年代、价值鉴定，不担保藏品真实可靠，请买家自行审慎甄别。</p>
@@ -968,8 +993,8 @@
         <section id="new-listings">
             <div class="section-head2">
                 <div><span class="title zh">最新藏品</span><span class="title en">Recently added</span></div>
-                <a href="collection.html" class="more zh">查看全部 →</a>
-                <a href="collection.html" class="more en">View All →</a>
+                <a href="../../Downloads/collection.html" class="more zh">查看全部 →</a>
+                <a href="../../Downloads/collection.html" class="more en">View All →</a>
             </div>
             <div class="goods-list" id="itemList"></div>
             <div id="noResult" class="no-result zh" style="display:none;">暂无匹配藏品</div>
@@ -980,15 +1005,15 @@
                 <div><span class="title zh">按类别浏览</span><span class="title en">Explore by Category</span></div>
             </div>
             <div class="browse-grid">
-                <a href="categories/porcelain.html" class="browse-card"><span class="zh">瓷器</span><span class="en">Porcelain</span></a>
-                <a href="categories/jade.html" class="browse-card"><span class="zh">玉器</span><span class="en">Jade</span></a>
-                <a href="categories/coins.html" class="browse-card"><span class="zh">钱币</span><span class="en">Coins</span></a>
-                <a href="categories/paintings.html" class="browse-card"><span class="zh">书画</span><span class="en">Paintings &amp; Calligraphy</span></a>
-                <a href="categories/misc.html" class="browse-card"><span class="zh">杂项</span><span class="en">Miscellaneous</span></a>
+                <a href="../../Downloads/categories/porcelain.html" class="browse-card"><span class="zh">瓷器</span><span class="en">Porcelain</span></a>
+                <a href="../../Downloads/categories/jade.html" class="browse-card"><span class="zh">玉器</span><span class="en">Jade</span></a>
+                <a href="../../Downloads/categories/coins.html" class="browse-card"><span class="zh">钱币</span><span class="en">Coins</span></a>
+                <a href="../../Downloads/categories/paintings.html" class="browse-card"><span class="zh">书画</span><span class="en">Paintings &amp; Calligraphy</span></a>
+                <a href="../../Downloads/categories/misc.html" class="browse-card"><span class="zh">杂项</span><span class="en">Miscellaneous</span></a>
             </div>
             <div style="margin-top:1.1rem;">
-                <a href="sellers/index.html" class="more zh">卖家展馆 →</a>
-                <a href="sellers/index.html" class="more en">Dealer Galleries →</a>
+                <a href="../../Downloads/sellers/index.html" class="more zh">卖家展馆 →</a>
+                <a href="../../Downloads/sellers/index.html" class="more en">Dealer Galleries →</a>
             </div>
         </section>
         <section id="services">
@@ -1019,7 +1044,7 @@
                     </div>
                 </div>
                     <div style="text-align:center; margin-top:2rem;">
-                    <a href="pricing.html#seller-services" class="btn-publish">
+                    <a href="../../Downloads/pricing.html#seller-services" class="btn-publish">
                         <span class="zh">刊登藏品信息</span><span class="en">List an Item</span>
                     </a>
                     <p class="section-note zh" style="margin-top:1rem;">了解发布规则与收费，前往服务价格页。</p>
@@ -1030,10 +1055,10 @@
     </main>
     <footer>
         <div class="footer-nav">
-            <a href="pricing.html#buyer-services" class="zh">买家指南</a><a href="pricing.html#buyer-services" class="en">Buyer Guide</a>
-            <a href="about.html#location" class="zh">联系我们</a><a href="about.html#location" class="en">Contact</a>
-            <a href="privacy.html" class="zh">隐私政策</a><a href="privacy.html" class="en">Privacy</a>
-            <a href="terms.html" class="zh">用户条款</a><a href="terms.html" class="en">Terms</a>
+            <a href="../../Downloads/pricing.html#buyer-services" class="zh">买家指南</a><a href="../../Downloads/pricing.html#buyer-services" class="en">Buyer Guide</a>
+            <a href="../../Downloads/about.html#location" class="zh">联系我们</a><a href="../../Downloads/about.html#location" class="en">Contact</a>
+            <a href="../../Downloads/privacy.html" class="zh">隐私政策</a><a href="../../Downloads/privacy.html" class="en">Privacy</a>
+            <a href="../../Downloads/terms.html" class="zh">用户条款</a><a href="../../Downloads/terms.html" class="en">Terms</a>
         </div>
         <!-- 2026-09-18：详细免责声明见 terms.html「用户条款」，页脚仅保留一句话平台定位。 -->
         <p class="footer-disclaimer zh">gudong.app 是信息发现平台，而非交易平台。</p>
@@ -1246,17 +1271,42 @@
         });
 
         /* ===== 从 Airtable 动态加载藏品 ===== */
+
+        /* ============================================================
+           🟢 2026-09-19 数据连接层重构
+           1) 诊断：?debug=1 时右下角显示数据到底来自 Airtable 还是本地快照
+           2) 容错：兼容 {todayFinds,editorPicks,newListing} / Airtable 原始 records / 纯数组
+           3) 清洗：字段名归一（空格/大小写）、附件数组、勾选框、空行过滤、中英文兜底
+           4) 体验：骨架屏、空状态、超时+重试、防旧缓存、加载完成后重新应用搜索
+           ============================================================ */
+        const DEBUG = new URLSearchParams(location.search).get('debug') === '1';
+        const diag = { source: 'pending', endpoint: '', proxy: null, snapshot: null,
+                       payloadKeys: [], counts: {}, skipped: 0, sampleKeys: [], errors: [] };
+
         function catKey(c) {
           const map = {
             '瓷器': 'porcelain', '玉器': 'jade', '钱币': 'coins',
-            '书画': 'paintings', '杂项': 'misc'
+            '书画': 'paintings', '杂项': 'misc',
+            'porcelain': 'porcelain', 'jade': 'jade', 'coins': 'coins',
+            'paintings': 'paintings', 'painting': 'paintings', 'calligraphy': 'paintings',
+            'misc': 'misc', 'miscellaneous': 'misc'
           };
-          return map[c] || 'misc';
+          return map[String(c == null ? '' : c).trim().toLowerCase()] || map[c] || 'misc';
         }
         function esc(s) {
           return String(s == null ? '' : s)
             .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
             .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+        }
+
+        /* Airtable 附件字段是对象数组：[{url, thumbnails:{large:{url}}}]；也兼容普通字符串 */
+        function attachmentUrl(v) {
+          if (!v) return '';
+          if (Array.isArray(v)) v = v[0];
+          if (v && typeof v === 'object') {
+            return (v.thumbnails && v.thumbnails.large && v.thumbnails.large.url) || v.url || '';
+          }
+          return typeof v === 'string' ? v.trim() : '';
         }
 
         /* ============================================================
@@ -1266,14 +1316,17 @@
            🟢 改动 4（2026-09-18）：本地回退模式
            当走本地数据快照（__LOCAL_DATA__）或 file:// 打开时，
            图片用相对路径（file:// 下 /assets 绝对路径会失效）。
+           🟢 2026-09-19：img_url 支持 Airtable 附件对象数组
            ============================================================ */
         function imgPath(f) {
-          if (f.img_url && /^https?:\/\//i.test(f.img_url)) return f.img_url;
+          const u = attachmentUrl(f.img_url);
+          if (/^https?:\/\//i.test(u)) return u;
+          const file = normId(f.img_file || '');
           if (window.__LOCAL_DATA__ || location.protocol === 'file:') {
-            return 'assets/images/' + (f.img_file || 'placeholder.jpg');
+            return 'assets/images/' + (file || 'placeholder.jpg');
           }
           const base = (typeof API_BASE === 'string' && API_BASE) ? API_BASE : '';
-          if (f.img_file) return base + '/assets/images/' + f.img_file;
+          if (file) return base + '/assets/images/' + file;
           return base + '/assets/images/placeholder.jpg';
         }
         function attrKeywords(f) {
@@ -1289,6 +1342,106 @@
           return null;
         }
 
+        /* 🟢 2026-09-19：ID 防御性归一化
+           Airtable 录入时可能混入 Unicode 连字符（U+2011 等），
+           会导致 items/xxx.html 链接 404。统一转成 ASCII '-'。 */
+        function normId(v) {
+          return String(v == null ? '' : v).replace(/[\u2010\u2011\u2012\u2013\u2014\u2015\u2212\uFE58\uFF0D]/g, '-').trim();
+        }
+
+        /* ===== 记录清洗 ===== */
+        function normKey(k) { return String(k).trim().toLowerCase().replace(/[\s\-]+/g, '_'); }
+        function asBool(v) {
+          if (typeof v === 'string') return /^(true|yes|y|1|是|✓|✔)$/i.test(v.trim());
+          return !!v;
+        }
+        function normalizeRecord(rec) {
+          if (!rec || typeof rec !== 'object') return null;
+          // 兼容 Airtable 原始结构 {id, fields:{...}} 与代理已展平的结构
+          const src = (rec.fields && typeof rec.fields === 'object') ? rec.fields : rec;
+          const out = {};
+          Object.keys(src).forEach(k => {
+            let v = src[k];
+            // Lookup 字段会返回数组：基础类型数组取首个；附件（对象数组）保持原样
+            if (Array.isArray(v)) {
+              if (!v.length) v = null;
+              else if (v.every(x => x === null || typeof x !== 'object')) v = v[0];
+            }
+            const key = normKey(k);
+            out[key] = /^is_/.test(key) ? asBool(v) : v;
+          });
+          // 中英文互相兜底：英文缺失时不至于整块空白
+          [['title_zh', 'title_en'], ['era_zh', 'era_en']].forEach(([zh, en]) => {
+            if (!out[zh] && out[en]) out[zh] = out[en];
+            if (!out[en] && out[zh]) out[en] = out[zh];
+          });
+          return out;
+        }
+
+        /* ===== 响应清洗：统一成 {todayFinds, editorPicks, newListing} ===== */
+        function pickList(json, ...keys) {
+          for (const k of keys) if (Array.isArray(json[k])) return json[k];
+          return null;
+        }
+        function normalizePayload(json) {
+          if (!json || typeof json !== 'object') throw new Error('响应不是 JSON 对象');
+          if (json.error) {
+            const m = typeof json.error === 'string' ? json.error : (json.error.message || JSON.stringify(json.error));
+            throw new Error('接口返回错误：' + String(m).slice(0, 120));
+          }
+          diag.payloadKeys = Array.isArray(json) ? ['(array)'] : Object.keys(json);
+
+          const tf = pickList(json, 'todayFinds', 'today_finds');
+          const ep = pickList(json, 'editorPicks', 'editor_picks');
+          const nl = pickList(json, 'newListing', 'newListings', 'new_listing', 'new_listings');
+          const flat = Array.isArray(json) ? json : (Array.isArray(json.records) ? json.records : null);
+
+          let groups;
+          if (tf || ep || nl) {
+            groups = { todayFinds: tf || [], editorPicks: ep || [], newListing: nl || [] };
+          } else if (flat) {
+            // 后备：代理只返回一个扁平列表时，按勾选框字段自行分组
+            const all = flat.map(normalizeRecord).filter(Boolean);
+            groups = {
+              todayFinds: all.filter(f => f.is_today_finds),
+              editorPicks: all.filter(f => f.is_editor_pick || f.is_editor_picks || f.is_featured),
+              newListing: all
+            };
+          } else {
+            throw new Error('响应中找不到 todayFinds / editorPicks / newListing（实际字段：' + diag.payloadKeys.join(', ') + '）');
+          }
+
+          let total = 0, kept = 0;
+          const clean = list => list.map(normalizeRecord).filter(f => {
+            total++;
+            /* 代理在 item_id 为空时会回退成 Airtable 记录 ID（recXXXX），
+               所以空行也带着 item_id；必须再要求有标题，才能挡住空白卡片和 404 链接 */
+            if (f && normId(f.item_id) && (f.title_zh || f.title_en)) { kept++; return true; }
+            diag.skipped++;              // Airtable 空行 / 缺 item_id 或标题：直接丢弃
+            return false;
+          });
+          const out = {
+            todayFinds: clean(groups.todayFinds),
+            editorPicks: clean(groups.editorPicks),
+            newListing: clean(groups.newListing)
+          };
+          if (total > 0 && kept === 0) throw new Error('所有记录都缺少 item_id 或 title_zh/title_en，请检查 Airtable 字段名');
+
+          const first = out.todayFinds[0] || out.editorPicks[0] || out.newListing[0];
+          diag.sampleKeys = first ? Object.keys(first) : [];
+          diag.counts = { todayFinds: out.todayFinds.length, editorPicks: out.editorPicks.length, newListing: out.newListing.length };
+          return out;
+        }
+
+        /* 🟢 2026-09-19：价格「标签 + 金额」组合
+           Airtable 中 price_display_zh 可能只有标签（如「一口价：」），
+           金额在 price_zh（如「S$5000」）。两者拼接显示；标签已含金额则不重复。 */
+        function joinPrice(label, amount) {
+          if (!label) return amount || '';
+          if (!amount || label.indexOf(amount) !== -1) return label;
+          return /[:：]\s*$/.test(label) ? label + amount : label + ' ' + amount;
+        }
+
         /* ===== 价格渲染（2026-09-17 v5，对齐 Airtable 真实字段） ===== */
         function priceHtml(f, wrapperClass) {
           const type = String(getF(f, 'price_type', 'price type') || '').trim();
@@ -1302,9 +1455,9 @@
           // 1. 明确私聊 → 询价
           if (type.indexOf('私聊') !== -1) return enqHtml;
 
-          // 2. 有价格字符串 → 显示
-          const zh = displayZh || rawZh || displayEn || rawEn;
-          const en = displayEn || rawEn || displayZh || rawZh;
+          // 2. 组合标签 + 金额（2026-09-19：兼容 price_display_* 只有标签、price_* 是金额的情况）
+          const zh = joinPrice(displayZh, rawZh) || joinPrice(displayEn, rawEn);
+          const en = joinPrice(displayEn, rawEn) || joinPrice(displayZh, rawZh);
           if (zh || en) {
             return `<div class="${wrapperClass}">
               <span class="price-main zh">${esc(zh || en)}</span>
@@ -1322,11 +1475,13 @@
           const badgeEn = promoted ? 'Sponsored' : 'System Recommended';
           const cls = promoted ? 'finds-card--promoted' : 'finds-card--organic';
           const kw = attrKeywords(f);
+          const metaZh = [f.era_zh, f.category].filter(Boolean).join(' · ');
+          const metaEn = [f.era_en, f.category].filter(Boolean).join(' · ');
           return `
-            <a href="items/${esc(f.item_id)}.html" class="finds-card ${cls}" data-cat="${catKey(f.category)}" data-keywords="${kw}">
+            <a href="items/${esc(normId(f.item_id))}.html" class="finds-card ${cls}" data-cat="${catKey(f.category)}" data-keywords="${kw}">
               <div class="finds-image"><img src="${imgPath(f)}" alt="${esc(f.title_zh)}" loading="lazy" onerror="this.onerror=null;this.src='assets/images/placeholder.jpg'"></div>
               <div class="finds-title zh">${esc(f.title_zh)}</div><div class="finds-title en">${esc(f.title_en)}</div>
-              <div class="finds-meta zh">${esc(f.era_zh)} · ${esc(f.category)}</div><div class="finds-meta en">${esc(f.era_en)} · ${esc(f.category)}</div>
+              <div class="finds-meta zh">${esc(metaZh)}</div><div class="finds-meta en">${esc(metaEn)}</div>
               ${priceHtml(f, 'finds-price')}
               <div class="finds-badge zh">${badgeZh}</div><div class="finds-badge en">${badgeEn}</div>
               <div class="finds-caption zh">卖家提供资料</div><div class="finds-caption en">Seller-provided information</div>
@@ -1338,7 +1493,7 @@
           const subZh = f.subtitle_zh || [f.era_zh, f.category].filter(Boolean).join(' · ');
           const subEn = f.subtitle_en || [f.era_en, f.category].filter(Boolean).join(' · ');
           return `
-            <a href="items/${esc(f.item_id)}.html" class="expert-mini-card" data-cat="${catKey(f.category)}" data-keywords="${kw}">
+            <a href="items/${esc(normId(f.item_id))}.html" class="expert-mini-card" data-cat="${catKey(f.category)}" data-keywords="${kw}">
               <div class="expert-mini-badge zh">精选展示</div><div class="expert-mini-badge en">Featured Listings</div>
               <div class="expert-mini-title zh">${esc(f.title_zh)}</div><div class="expert-mini-title en">${esc(f.title_en)}</div>
               <div class="expert-mini-sub zh">${esc(subZh)}</div><div class="expert-mini-sub en">${esc(subEn)}</div>
@@ -1351,7 +1506,7 @@
           if (!container) return;
           container.innerHTML = items.map(f => {
             const imgSrc = imgPath(f);
-            const detailUrl = `items/${esc(f.item_id)}.html`;
+            const detailUrl = `items/${esc(normId(f.item_id))}.html`;
             const kw = attrKeywords(f);
             const nz = f.title_zh || f.title_en || '';
             /* 2026-09-18：最新藏品卡片只保留图片 + 价格，名称移除（保留 alt/aria 供 SEO 与无障碍） */
@@ -1365,6 +1520,19 @@
           }).join('');
         }
 
+        /* 2026-09-19：加载中骨架屏 */
+        function showSkeleton() {
+          const fill = (id, n, cls) => {
+            const el = document.getElementById(id);
+            if (!el) return;
+            el.setAttribute('aria-busy', 'true');
+            el.innerHTML = Array(n).fill('<div class="skeleton-card ' + cls + '"></div>').join('');
+          };
+          fill('todayFindsGrid', 4, 'skeleton-card--square');
+          fill('editorPicksGrid', 2, 'skeleton-card--wide');
+          fill('itemList', 6, 'skeleton-card--square');
+        }
+
         /* 2026-09-17：加载失败时在三个区块内显示错误提示。 */
         function showLoadError() {
           const msgZh = '<strong>藏品加载失败</strong><br>请刷新页面重试。如持续出现，请稍后再访问。';
@@ -1372,48 +1540,134 @@
           const html = `<div class="load-error-tip"><span class="zh">${msgZh}</span><span class="en">${msgEn}</span></div>`;
           ['todayFindsGrid', 'editorPicksGrid', 'itemList'].forEach(id => {
             const el = document.getElementById(id);
-            if (el) el.innerHTML = html;
+            if (el) { el.removeAttribute('aria-busy'); el.innerHTML = html; }
           });
         }
 
-        /* 渲染三个区块（2026-09-18：抽出公用，供线上 API 与本地快照两条路径复用） */
+        /* 渲染三个区块（2026-09-18：抽出公用，供线上 API 与本地快照两条路径复用）
+           2026-09-19：数据为空时清掉骨架屏——今日发现/精选展示无内容则整块隐藏，最新藏品显示空状态 */
         function applyListingData(data) {
-          const grid = document.getElementById('todayFindsGrid');
-          if (grid && data.todayFinds && data.todayFinds.length) {
-            grid.innerHTML = data.todayFinds.map(renderFindsCard).join('');
-          }
-          const picks = document.getElementById('editorPicksGrid');
-          if (picks && data.editorPicks && data.editorPicks.length) {
-            picks.innerHTML = data.editorPicks.map(renderPickCard).join('');
-          }
+          const fillSection = (id, items, renderFn) => {
+            const el = document.getElementById(id);
+            if (!el) return;
+            const sec = el.closest('section');
+            el.removeAttribute('aria-busy');
+            if (items.length) {
+              el.innerHTML = items.map(renderFn).join('');
+              if (sec) sec.hidden = false;
+            } else {
+              el.innerHTML = '';
+              if (sec) sec.hidden = true;
+            }
+          };
+          fillSection('todayFindsGrid', data.todayFinds, renderFindsCard);
+          fillSection('editorPicksGrid', data.editorPicks, renderPickCard);
+
           const list = document.getElementById('itemList');
-          if (list && data.newListing && data.newListing.length) {
-            renderCards('itemList', data.newListing);
-            checkNoResult();
+          if (list) {
+            list.removeAttribute('aria-busy');
+            if (data.newListing.length) {
+              renderCards('itemList', data.newListing);
+            } else {
+              list.innerHTML = '<div class="no-result" style="grid-column:1/-1;padding:2rem 1rem;"><span class="zh">暂无藏品，敬请期待</span><span class="en">No listings yet — please check back soon</span></div>';
+            }
+          }
+          // 用户在数据到达前已输入搜索词时，重新应用筛选
+          const kw = document.getElementById('searchInput').value.trim();
+          if (kw || currentCat !== 'all') filterAll(); else checkNoResult();
+        }
+
+        /* 带超时的 JSON 请求；no-store 防止浏览器/Service Worker 拿到旧数据 */
+        async function fetchJson(url, ms, tag) {
+          const ctl = new AbortController();
+          const timer = setTimeout(() => ctl.abort(), ms);
+          const t0 = performance.now();
+          try {
+            const res = await fetch(url, { cache: 'no-store', signal: ctl.signal, headers: { 'Accept': 'application/json' } });
+            diag[tag] = { status: res.status, ms: Math.round(performance.now() - t0) };
+            if (!res.ok) throw new Error('HTTP ' + res.status);
+            return await res.json();
+          } catch (e) {
+            if (!diag[tag]) diag[tag] = { status: 'no response', ms: Math.round(performance.now() - t0) };
+            if (e.name === 'AbortError') throw new Error('请求超时（' + ms + 'ms）');
+            throw e;
+          } finally {
+            clearTimeout(timer);
           }
         }
 
-        async function loadAirtableData() {
+        /* 仅对超时 / 5xx 重试一次（Vercel 冷启动、Airtable 偶发抖动）；4xx 与 CORS 错误不重试 */
+        async function fetchProxy(url) {
           try {
-            /* 🟢 改动 2（2026-09-17）：fetch 使用 API_BASE 前缀 */
-            const res = await fetch(API_BASE + '/api/airtable-proxy');
-            if (!res.ok) throw new Error('proxy ' + res.status);
-            applyListingData(await res.json());
+            return await fetchJson(url, 8000, 'proxy');
+          } catch (e) {
+            if (!/超时|HTTP 5\d\d/.test(e.message)) throw e;
+            diag.errors.push('proxy 第 1 次失败：' + e.message + '，重试中');
+            await new Promise(r => setTimeout(r, 800));
+            return await fetchJson(url, 8000, 'proxy');
+          }
+        }
+
+        /* 诊断面板：访问 https://gudong.app/?debug=1 即可看到数据链路是否真正打通 */
+        function renderDebug() {
+          console.info('[Gudong] 数据来源:', diag.source, diag.counts);
+          if (!DEBUG) return;
+          let el = document.getElementById('gdDebug');
+          if (!el) {
+            el = document.createElement('div');
+            el.id = 'gdDebug';
+            el.className = 'gd-debug';
+            document.body.appendChild(el);
+          }
+          const live = diag.source === 'airtable-proxy';
+          const srcLabel = live ? '<span class="ok">✔ Airtable 实时数据（经 /api/airtable-proxy）</span>'
+            : diag.source === 'local-snapshot' ? '<span class="warn">⚠ 本地快照 data/listings.json —— 不是 Airtable 实时数据</span>'
+            : '<span class="bad">✖ 没有任何数据来源</span>';
+          const st = o => o ? esc(o.status) + ' · ' + o.ms + 'ms' : '—';
+          const c = diag.counts || {};
+          el.innerHTML =
+            '<b>GUDONG 数据诊断</b>\n' +
+            '数据来源：' + srcLabel + '\n' +
+            '接口：' + esc(diag.endpoint) + '\n' +
+            '接口响应：' + st(diag.proxy) + '　快照响应：' + st(diag.snapshot) + '\n' +
+            '响应字段：' + esc(diag.payloadKeys.join(', ') || '—') + '\n' +
+            '今日发现 ' + (c.todayFinds ?? '—') + ' · 精选展示 ' + (c.editorPicks ?? '—') + ' · 最新藏品 ' + (c.newListing ?? '—') +
+            (diag.skipped ? ' · <span class="warn">已跳过空行/缺标题的行 ' + diag.skipped + '</span>' : '') + '\n' +
+            '首条记录字段：' + esc(diag.sampleKeys.join(', ') || '—') +
+            (diag.errors.length ? '\n<span class="bad">错误：\n' + diag.errors.map(esc).join('\n') + '</span>' : '');
+        }
+
+        async function loadAirtableData() {
+          showSkeleton();
+          /* 🟢 改动 2（2026-09-17）：fetch 使用 API_BASE 前缀
+             2026-09-19：不加缓存参数——sw.js 是网络优先，接口自带 s-maxage=60，
+             请求端只需 cache:'no-store' 绕开浏览器 HTTP 缓存即可。 */
+          diag.endpoint = API_BASE + '/api/airtable-proxy';
+          try {
+            const data = normalizePayload(await fetchProxy(diag.endpoint));
+            diag.source = 'airtable-proxy';
+            applyListingData(data);
           } catch (e) {
             /* 🟢 改动 4（2026-09-18）：本地预览回退
                线上 API 未返回 CORS 头（或网络不通）时，
-               自动改读本地快照 data/listings.json，图片走本地 assets。 */
+               自动改读本地快照 data/listings.json，图片走本地 assets。
+               2026-09-19：回退不再「静默」——写入 diag 并在控制台告警，避免误以为已连上 Airtable。 */
             console.warn('线上 API 加载失败，回退到本地快照：', e);
+            diag.errors.push('proxy：' + e.message);
+            diag.skipped = 0;
             try {
-              const res2 = await fetch('data/listings.json');
-              if (!res2.ok) throw new Error('local snapshot ' + res2.status);
+              const data = normalizePayload(await fetchJson('data/listings.json', 5000, 'snapshot'));
               window.__LOCAL_DATA__ = true;
-              applyListingData(await res2.json());
+              diag.source = 'local-snapshot';
+              applyListingData(data);
             } catch (e2) {
               console.warn('本地快照也加载失败：', e2);
+              diag.errors.push('snapshot：' + e2.message);
+              diag.source = 'none';
               showLoadError();
             }
           }
+          renderDebug();
         }
         loadAirtableData();
     </script>

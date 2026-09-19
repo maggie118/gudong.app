@@ -1,4 +1,4 @@
-const CACHE_NAME = 'antique-collection-v1';
+const CACHE_NAME = 'antique-collection-v2';   // 2026-09-19：v1 → v2，激活时清掉旧缓存（旧缓存里可能存过错误响应）
 // 需要预缓存的静态资源
 const PRECACHE_ASSETS = [
   '/',
@@ -38,19 +38,22 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
+  // 2026-09-19：只处理 GET（cache.put 不支持 POST 等，会抛未捕获异常）
+  if (req.method !== 'GET') return;
+
   event.respondWith(
     fetch(req)
       .then((networkRes) => {
-        // 更新缓存
-        const resClone = networkRes.clone();
-        caches.open(CACHE_NAME).then(cache => {
-          cache.put(req, resClone);
-        });
+        // 2026-09-19：只缓存成功响应。否则一次 403/502 会被存下来，断网时被当成"缓存数据"返回
+        if (networkRes.ok) {
+          const resClone = networkRes.clone();
+          caches.open(CACHE_NAME).then(cache => cache.put(req, resClone));
+        }
         return networkRes;
       })
       .catch(() => {
-        // 网络出错，读取缓存
-        return caches.match(req);
+        // 网络出错，读取缓存；缓存也没有时返回 503，而不是 respondWith(undefined) 抛异常
+        return caches.match(req).then(hit => hit || new Response('', { status: 503, statusText: 'Offline' }));
       })
   );
 });

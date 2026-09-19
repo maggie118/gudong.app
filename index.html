@@ -1442,31 +1442,47 @@
           return /[:：]\s*$/.test(label) ? label + amount : label + ' ' + amount;
         }
 
-        /* ===== 价格渲染（2026-09-17 v5，对齐 Airtable 真实字段） ===== */
-        function priceHtml(f, wrapperClass) {
-          const type = String(getF(f, 'price_type', 'price type') || '').trim();
-          const displayZh = getF(f, 'price_display_zh');
-          const displayEn = getF(f, 'price_display_en');
-          const rawZh = getF(f, 'price_zh');
-          const rawEn = getF(f, 'price_en');
-
-          const enqHtml = `<div class="${wrapperClass}"><span class="price-main price-main--enquiry"><span class="zh">私聊询价</span><span class="en">Enquire</span></span></div>`;
-
-          // 1. 明确私聊 → 询价
-          if (type.indexOf('私聊') !== -1) return enqHtml;
-
-          // 2. 组合标签 + 金额（2026-09-19：兼容 price_display_* 只有标签、price_* 是金额的情况）
-          const zh = joinPrice(displayZh, rawZh) || joinPrice(displayEn, rawEn);
-          const en = joinPrice(displayEn, rawEn) || joinPrice(displayZh, rawZh);
-          if (zh || en) {
-            return `<div class="${wrapperClass}">
-              <span class="price-main zh">${esc(zh || en)}</span>
-              <span class="price-main en">${esc(en || zh)}</span>
-            </div>`;
+        /* ===== 价格渲染 =====
+           2026-09-19 v6：三种叫价方式（Airtable 的 price_type + fixed_price）
+             一口价   → 显示 fixed_price（数字或文本，如 500 → S$500）；fixed_price 为空时退回 price_display_* / price_*
+             价格区间 → 显示 price_display_* / price_*（如 S$100 - S$500，兼容「标签 + 金额」两段式）
+             私聊询价 → 显示「私聊询价 / Enquire」
+           price_type 为空的旧数据：有 fixed_price 按一口价，否则按 price_display_* / price_*。 */
+        function fmtMoney(v) {
+          v = Array.isArray(v) ? v[0] : v;
+          if (v == null || v === '') return '';
+          const str = String(v).trim();
+          if (/^(S?\$)?\s*[\d,]+(\.\d+)?$/i.test(str)) {        // 纯数字 / S$500 / $1,200.50
+            const n = Number(str.replace(/[S$\s,]/gi, ''));
+            if (!isFinite(n) || n <= 0) return '';
+            return 'S$' + new Intl.NumberFormat('en-SG', { maximumFractionDigits: 2 }).format(n);
           }
+          return str;                                           // 其它文本原样显示
+        }
+        function resolvePrice(f) {
+          const type = String(getF(f, 'price_type', 'price type') || '').trim();
+          const enquiry = { zh: '私聊询价', en: 'Enquire', enquiry: true };
 
-          // 3. 都没 → 兜底
-          return enqHtml;
+          if (/私聊|询价|enquir|inquir|message/i.test(type)) return enquiry;
+
+          const fixed = fmtMoney(getF(f, 'fixed_price'));
+          if (fixed && (!type || /一口价|fixed/i.test(type))) return { zh: fixed, en: fixed };
+
+          // 价格区间 / 旧数据：标签 + 金额组合（price_display_* 可能只有标签，金额在 price_*）
+          const zh = joinPrice(getF(f, 'price_display_zh'), getF(f, 'price_zh')) || joinPrice(getF(f, 'price_display_en'), getF(f, 'price_en'));
+          const en = joinPrice(getF(f, 'price_display_en'), getF(f, 'price_en')) || joinPrice(getF(f, 'price_display_zh'), getF(f, 'price_zh'));
+          if (zh || en) return { zh: zh || en, en: en || zh };
+          return enquiry;
+        }
+        function priceHtml(f, wrapperClass) {
+          const p = resolvePrice(f);
+          if (p.enquiry) {
+            return `<div class="${wrapperClass}"><span class="price-main price-main--enquiry"><span class="zh">${p.zh}</span><span class="en">${p.en}</span></span></div>`;
+          }
+          return `<div class="${wrapperClass}">
+              <span class="price-main zh">${esc(p.zh)}</span>
+              <span class="price-main en">${esc(p.en)}</span>
+            </div>`;
         }
 
         function renderFindsCard(f) {

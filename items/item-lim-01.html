@@ -417,10 +417,24 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
             if (!amount || label.indexOf(amount) !== -1) return label;
             return /[:：]\s*$/.test(label) ? label + amount : label + ' ' + amount;
         }
+        /* 三种叫价方式（与首页 resolvePrice 保持一致）：一口价读 fixed_price；价格区间读 price_display_* / price_*；私聊询价 */
+        function fmtMoney(v) {
+            v = first(v);
+            if (v == null || v === '') return '';
+            var str = String(v).trim();
+            if (/^(S?\$)?\s*[\d,]+(\.\d+)?$/i.test(str)) {
+                var n = Number(str.replace(/[S$\s,]/gi, ''));
+                if (!isFinite(n) || n <= 0) return '';
+                return 'S$' + new Intl.NumberFormat('en-SG', { maximumFractionDigits: 2 }).format(n);
+            }
+            return str;
+        }
         function setPrice(f) {
             var el = $('.item-detail-price'); if (!el) return;
-            var zh, en;
-            if (String(first(f.price_type) || '').indexOf('私聊') !== -1) { zh = '私聊询价'; en = 'Enquire'; }
+            var type = String(first(f.price_type) || '').trim(), zh, en;
+            var fixed = fmtMoney(f.fixed_price);
+            if (/私聊|询价|enquir|inquir|message/i.test(type)) { zh = '私聊询价'; en = 'Enquire'; }
+            else if (fixed && (!type || /一口价|fixed/i.test(type))) { zh = en = fixed; }
             else {
                 zh = joinPrice(f.price_display_zh, f.price_zh) || joinPrice(f.price_display_en, f.price_en);
                 en = joinPrice(f.price_display_en, f.price_en) || zh;

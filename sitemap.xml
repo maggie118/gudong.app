@@ -1,138 +1,121 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- 2026-09-19：域名统一为 https://gudong.app（与各页面 canonical 一致）；lastmod 请以实际部署日期为准；
+       Google 不使用 priority，已删除。contact.html 是未完成的片段页，已移出。 -->
   <url>
-    <loc>https://www.gudong.app/</loc>
-    <lastmod>2026-09-13</lastmod>
-    <priority>1.0</priority>
+    <loc>https://gudong.app/</loc>
+    <lastmod>2026-09-19</lastmod>
   </url>
   <url>
-    <loc>https://www.gudong.app/about.html</loc>
-    <lastmod>2026-09-13</lastmod>
-    <priority>0.8</priority>
+    <loc>https://gudong.app/about.html</loc>
+    <lastmod>2026-09-19</lastmod>
   </url>
   <url>
-    <loc>https://www.gudong.app/collection.html</loc>
-    <lastmod>2026-09-13</lastmod>
-    <priority>0.8</priority>
+    <loc>https://gudong.app/collection.html</loc>
+    <lastmod>2026-09-19</lastmod>
   </url>
   <url>
-    <loc>https://www.gudong.app/contact.html</loc>
-    <lastmod>2026-09-13</lastmod>
-    <priority>0.8</priority>
+    <loc>https://gudong.app/expert-picks.html</loc>
+    <lastmod>2026-09-19</lastmod>
   </url>
   <url>
-    <loc>https://www.gudong.app/pricing.html</loc>
-    <lastmod>2026-09-13</lastmod>
-    <priority>0.8</priority>
+    <loc>https://gudong.app/pricing.html</loc>
+    <lastmod>2026-09-19</lastmod>
   </url>
   <url>
-    <loc>https://www.gudong.app/expert-picks.html</loc>
-    <lastmod>2026-09-13</lastmod>
-    <priority>0.8</priority>
+    <loc>https://gudong.app/categories/porcelain.html</loc>
+    <lastmod>2026-09-19</lastmod>
   </url>
   <url>
-    <loc>https://www.gudong.app/items/guangxu-shuanglong-dapan.html</loc>
-    <lastmod>2026-09-13</lastmod>
-    <priority>0.8</priority>
+    <loc>https://gudong.app/categories/jade.html</loc>
+    <lastmod>2026-09-19</lastmod>
   </url>
   <url>
-    <loc>https://www.gudong.app/items/item-lim-01.html</loc>
-    <lastmod>2026-09-13</lastmod>
-    <priority>0.8</priority>
+    <loc>https://gudong.app/categories/coins.html</loc>
+    <lastmod>2026-09-19</lastmod>
   </url>
   <url>
-    <loc>https://www.gudong.app/items/item-lim-02.html</loc>
-    <lastmod>2026-09-13</lastmod>
-    <priority>0.8</priority>
+    <loc>https://gudong.app/categories/paintings.html</loc>
+    <lastmod>2026-09-19</lastmod>
   </url>
   <url>
-    <loc>https://www.gudong.app/items/item-lim-03.html</loc>
-    <lastmod>2026-09-13</lastmod>
-    <priority>0.8</priority>
+    <loc>https://gudong.app/categories/misc.html</loc>
+    <lastmod>2026-09-19</lastmod>
   </url>
   <url>
-    <loc>https://www.gudong.app/items/item-lim-04.html</loc>
-    <lastmod>2026-09-13</lastmod>
-    <priority>0.8</priority>
+    <loc>https://gudong.app/sellers/index.html</loc>
+    <lastmod>2026-09-19</lastmod>
   </url>
   <url>
-    <loc>https://www.gudong.app/items/minguo-fencai-xiaoshangping.html</loc>
-    <lastmod>2026-09-13</lastmod>
-    <priority>0.8</priority>
+    <loc>https://gudong.app/sellers/seller-lim-kw-antiques.html</loc>
+    <lastmod>2026-09-19</lastmod>
   </url>
   <url>
-    <loc>https://www.gudong.app/items/qing-huaping.html</loc>
-    <lastmod>2026-09-13</lastmod>
-    <priority>0.8</priority>
+    <loc>https://gudong.app/items/item-lim-01.html</loc>
+    <lastmod>2026-09-19</lastmod>
   </url>
   <url>
-    <loc>https://www.gudong.app/items/song-yingqing-wan.html</loc>
-    <lastmod>2026-09-13</lastmod>
-    <priority>0.8</priority>
+    <loc>https://gudong.app/items/item-lim-02.html</loc>
+    <lastmod>2026-09-19</lastmod>
   </url>
   <url>
-    <loc>https://www.gudong.app/sellers/index.html</loc>
-    <lastmod>2026-09-13</lastmod>
-    <priority>0.7</priority>
+    <loc>https://gudong.app/items/item-lim-03.html</loc>
+    <lastmod>2026-09-19</lastmod>
   </url>
   <url>
-    <loc>https://www.gudong.app/sellers/seller-cui-yuan.html</loc>
-    <lastmod>2026-09-13</lastmod>
-    <priority>0.8</priority>
+    <loc>https://gudong.app/items/item-lim-04.html</loc>
+    <lastmod>2026-09-19</lastmod>
   </url>
   <url>
-    <loc>https://www.gudong.app/sellers/seller-han-bi-ge.html</loc>
-    <lastmod>2026-09-13</lastmod>
-    <priority>0.8</priority>
+    <loc>https://gudong.app/privacy.html</loc>
+    <lastmod>2026-09-19</lastmod>
   </url>
   <url>
-    <loc>https://www.gudong.app/sellers/seller-he-zhentao.html</loc>
+    <loc>https://gudong.app/terms.html</loc>
+    <lastmod>2026-09-19</lastmod>
+  </url>
+
+  <!-- 以下页面我没有拿到文件，无法确认是否真实存在、内容是否为演示数据。
+       确认它们是真实页面后，再把整段取消注释；新增藏品页 / 卖家页也要记得加进来。
+  <url>
+    <loc>https://gudong.app/sellers/seller-cui-yuan.html</loc>
     <lastmod>2026-09-13</lastmod>
-    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.gudong.app/sellers/seller-jingxuan-tang.html</loc>
+    <loc>https://gudong.app/sellers/seller-han-bi-ge.html</loc>
     <lastmod>2026-09-13</lastmod>
-    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.gudong.app/sellers/seller-lim-kw-antiques.html</loc>
+    <loc>https://gudong.app/sellers/seller-he-zhentao.html</loc>
     <lastmod>2026-09-13</lastmod>
-    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.gudong.app/sellers/seller-mo-yun-tang.html</loc>
+    <loc>https://gudong.app/sellers/seller-jingxuan-tang.html</loc>
     <lastmod>2026-09-13</lastmod>
-    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.gudong.app/sellers/seller-yu-zhen-ge.html</loc>
+    <loc>https://gudong.app/sellers/seller-mo-yun-tang.html</loc>
     <lastmod>2026-09-13</lastmod>
-    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.gudong.app/categories/coins.html</loc>
+    <loc>https://gudong.app/sellers/seller-yu-zhen-ge.html</loc>
     <lastmod>2026-09-13</lastmod>
-    <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.gudong.app/categories/jade.html</loc>
+    <loc>https://gudong.app/items/guangxu-shuanglong-dapan.html</loc>
     <lastmod>2026-09-13</lastmod>
-    <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.gudong.app/categories/misc.html</loc>
+    <loc>https://gudong.app/items/minguo-fencai-xiaoshangping.html</loc>
     <lastmod>2026-09-13</lastmod>
-    <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.gudong.app/categories/paintings.html</loc>
+    <loc>https://gudong.app/items/qing-huaping.html</loc>
     <lastmod>2026-09-13</lastmod>
-    <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.gudong.app/categories/porcelain.html</loc>
+    <loc>https://gudong.app/items/song-yingqing-wan.html</loc>
     <lastmod>2026-09-13</lastmod>
-    <priority>0.7</priority>
   </url>
+  -->
 </urlset>

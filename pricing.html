@@ -1,932 +1,707 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
- <meta charset="UTF-8">
- <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>服务价格 | Pricing | Gudong</title>
- <link rel="manifest" href="./manifest.json">
- <meta name="theme-color" content="#8A5A3B">
- <meta name="apple-mobile-web-app-capable" content="yes">
- <meta name="apple-mobile-web-app-status-bar-style" content="default">
- <!-- 字体：英文全部用 Inter 系（Geist、Inter Display 作为补充候选）；中文全部用微软雅黑 -->
- <link rel="preconnect" href="https://fonts.googleapis.com">
- <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
- <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Geist:wght@400;500;600;700;800&display=swap" rel="stylesheet">
- <style>
- /* ========== 颜色：还原最初原版pricing.html的色值，不做色调微调 ========== */
- :root {
- --color-bg: #F5F2EC;
- --color-surface: #FFFFFF;
- --color-white: #FFFFFF;
- --color-border: #E2DDD4;
- --color-primary: #8A5A3B;
- --color-primary-dark: #68432D;
- --color-primary-light: #F1E8DF;
- --color-text: #25221E;
- --color-text-secondary: #716B63;
- --color-text-muted: #A49D94;
- --color-gold: #B08A45;
- --color-gold-soft: rgba(176,138,69,.10);
- --color-bronze-muted: #9C8558;
- --color-success: #526657;
- --color-danger: #9A554B;
- --card-radius: 22px;
- /* 全站展示字体（标题/价格等）统一为：英文 Inter 系 + 中文微软雅黑系，与 LOGO 保持一致 */
- --font-display: "Inter", "Geist", "Inter Display", "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Helvetica, Arial, sans-serif;
- /* ===== 字体微调（2026-09-16）：英文全部用 Inter 系，中文全部用微软雅黑系 ===== */
- --font-latin: "Inter", "Geist", "Inter Display", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
- --font-zh-sans: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Helvetica, Arial, sans-serif;
- /* ===== LOGO 专用色：主标题同正文炭黑 / 副标题浅金棕 ===== */
- --color-qianjinzong: #948268;
- }
- * {
- margin: 0;
- padding: 0;
- box-sizing: border-box;
- font-family: var(--font-latin), var(--font-zh-sans);
- }
- html { scroll-behavior: smooth; }
- body {
- background: var(--color-bg);
- color: var(--color-text);
- line-height: 1.65;
- }
- header {
- background: rgba(255,255,255,.96);
- backdrop-filter: blur(6px);
- color: var(--color-text);
- padding: 0 5%;
- height: 68px;
- display: flex;
- align-items: center;
- justify-content: space-between;
- gap: 1.5rem;
- border-bottom: 1px solid var(--color-border);
- position: sticky;
- top: 0;
- z-index: 50;
- }
- /* ===== 品牌 LOGO（2026-09-16 重构）=====
- 行间距规则：副标题 margin-top = 主标题字高 × 0.35（中英文LOGO统一）
- 副标题字号：主标题字号的 50%（此前 34% 偏小，按反馈调大）
- 中文副标题「古董藏品信息平台」的总宽度由脚本动态微调 letter-spacing，
- 使其稳定落在「古董集」总宽度的 105%～115% 区间（见文末 <script>）。 */
- .brand {
- display: flex; flex-direction: column; justify-content: center; line-height: 1; flex-shrink: 0;
- --logo-main-size: 1.45rem;
- --logo-sub-size: calc(var(--logo-main-size) * 0.5);
- --logo-line-gap: calc(var(--logo-main-size) * 0.35);
- }
- .brand-line { display: flex; flex-direction: column; }
- .brand-main { display: block; line-height: 1; white-space: nowrap; font-size: var(--logo-main-size); }
- .brand-sub { display: block; line-height: 1; white-space: nowrap; font-size: var(--logo-sub-size); margin-top: var(--logo-line-gap); }
- /* 中文 LOGO：古董集 / 古董藏品信息平台 —— 统一微软雅黑，靠字重制造厚重/纤细对比 */
- .brand-line.zh .brand-main { font-family: var(--font-zh-sans); font-weight: 700; letter-spacing: .1em; color: var(--color-text); }
- .brand-line.zh .brand-sub { font-family: var(--font-zh-sans); font-weight: 400; color: var(--color-qianjinzong); letter-spacing: 0; }
- /* 英文 LOGO：GUDONG / Chinese Antiques Platform —— 统一 Inter 系 */
- .brand-line.en .brand-main { font-family: var(--font-latin); font-weight: 800; letter-spacing: .05em; color: var(--color-text); }
- .brand-line.en .brand-sub { font-family: var(--font-latin); font-weight: 400; color: var(--color-qianjinzong); letter-spacing: .01em; }
- /* 导航栏窄屏：副标题自动隐藏，只保留主标题，避免拥挤 */
- @media (max-width: 700px) {
- .brand .brand-sub { display: none; }
- }
- .header-right { display: flex; align-items: center; gap: .8rem; flex-shrink: 0; }
- .btn-publish {
- display: inline-flex;
- align-items: center;
- gap: .35rem;
- background: var(--color-primary);
- color: #fff;
- padding: .5rem 1.1rem;
- border-radius: 8px;
- font-size: .85rem;
- font-weight: 600;
- text-decoration: none;
- white-space: nowrap;
- transition: .2s;
- }
- .btn-publish:hover { background: var(--color-primary-dark); }
- .btn-group-gap { display:flex; gap:0.8rem; flex-wrap:wrap; margin:0.8rem 0 1.2rem; }
- .lang-btn {
- border: 1px solid var(--color-border);
- background: transparent;
- color: var(--color-text-secondary);
- padding: .3rem .68rem;
- border-radius: 6px;
- cursor: pointer;
- font-size: .75rem;
- letter-spacing: .04em;
- transition: .2s;
- }
- .lang-btn:hover { border-color: var(--color-primary); color: var(--color-primary); background: var(--color-primary-light); }
- .menu-toggle {
- width: 38px; height: 38px; border: 1px solid var(--color-border); background: transparent;
- border-radius: 8px; font-size: 1.05rem; color: var(--color-text); cursor: pointer;
- display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: .2s;
- }
- .menu-toggle:hover { border-color: var(--color-primary); color: var(--color-primary); background: var(--color-primary-light); }
- .sidebar-overlay { position: fixed; inset: 0; background: rgba(20,17,14,.4); opacity: 0; pointer-events: none; transition: opacity .25s ease; z-index: 90; }
- .sidebar-overlay.show { opacity: 1; pointer-events: auto; }
- .sidebar {
- position: fixed; top: 0; left: 0; height: 100vh; width: 264px; max-width: 78vw;
- background: var(--color-white); box-shadow: 4px 0 24px rgba(37,34,30,.18);
- transform: translateX(-100%); transition: transform .3s ease; z-index: 95;
- overflow-y: auto; padding-bottom: 2rem;
- }
- .sidebar.open { transform: translateX(0); }
- .sidebar-toggle-inner {
- display: block; width: 100%; padding: .9rem 0; background: transparent; border: none;
- border-bottom: 1px solid var(--color-border); font-size: 1.15rem; color: var(--color-text-secondary);
- cursor: pointer; text-align: center;
- }
- .sidebar-toggle-inner:hover { color: var(--color-primary); }
- .sidebar-brand {
- display: flex; flex-direction: column; align-items: center; justify-content: center;
- gap: .1rem; padding: 1.1rem 0; font-weight: 700; color: var(--color-text);
- border-bottom: 1px solid var(--color-border);
- }
- .sidebar-brand .zh { font-size: 1.05rem; }
- .sidebar-brand .en { font-size: 1.05rem; letter-spacing: .04em; }
- .sidebar-nav { display: flex; flex-direction: column; padding: .3rem 0; }
- .sidebar-link { padding: .85rem 1.4rem; color: var(--color-text); text-decoration: none; font-size: .95rem; transition: .2s; }
- .sidebar-link:hover { background: var(--color-primary-light); color: var(--color-primary); }
- .sidebar-link.active { background: var(--color-primary-light); color: var(--color-primary); font-weight: 600; }
- .sidebar-group-title { padding: .85rem 1.4rem .3rem; color: var(--color-text); font-size: .95rem; font-weight: 600; }
- .sidebar-sub { display: block; padding: .55rem 1.4rem .55rem 2.2rem; color: var(--color-text-secondary); text-decoration: none; font-size: .88rem; transition: .2s; }
- .sidebar-sub:hover { color: var(--color-primary); background: var(--color-primary-light); }
- .container { max-width: 880px; margin: 0 auto; padding: 2.2rem 5% 4rem; min-height: 80vh; }
- .breadcrumb { font-size: .8rem; color: var(--color-text-muted); margin-bottom: 1.2rem; }
- .breadcrumb a { color: var(--color-text-secondary); text-decoration: none; }
- .breadcrumb a:hover { color: var(--color-primary); }
- .tab-bar {
- display: flex;
- background: var(--color-white);
- border: 1px solid var(--color-border);
- border-radius: var(--card-radius);
- padding: .3rem;
- gap: .3rem;
- margin-bottom: .4rem;
- }
- .tab-btn {
- flex: 1;
- text-align: center;
- padding: .65rem .8rem;
- border-radius: calc(var(--card-radius) - 6px);
- text-decoration: none;
- color: var(--color-text-secondary);
- font-size: .9rem;
- font-weight: 600;
- transition: .2s;
- }
- .tab-btn:hover { background: var(--color-primary-light); color: var(--color-primary); }
- .tab-btn.active { background: var(--color-primary-light); color: var(--color-primary); }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>服务价格 | Pricing | Gudong</title>
+<link rel="manifest" href="./manifest.json">
+<meta name="theme-color" content="#8A5A3B">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Geist:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --color-bg: #F5F2EC;
+  --color-surface: #FFFFFF;
+  --color-white: #FFFFFF;
+  --color-border: #E2DDD4;
+  --color-primary: #8A5A3B;
+  --color-primary-dark: #68432D;
+  --color-primary-light: #F1E8DF;
+  --color-text: #25221E;
+  --color-text-secondary: #716B63;
+  --color-text-muted: #A49D94;
+  --color-gold: #B08A45;
+  --color-gold-soft: rgba(176,138,69,.10);
+  --color-danger: #9A554B;
+  --card-radius: 22px;
+  --font-display: "Inter", "Geist", "Inter Display", "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-latin: "Inter", "Geist", "Inter Display", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-zh-sans: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --color-qianjinzong: #948268;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: var(--font-latin), var(--font-zh-sans); }
+html { scroll-behavior: smooth; }
+body { background: var(--color-bg); color: var(--color-text); line-height: 1.65; }
 
- /* ========== 框架式排版（2026-09-16）：只重构结构与字级，色值全部沿用上方变量 ========== */
- main section[id] { scroll-margin-top: 92px; }
- .sec-head { text-align: center; max-width: 620px; margin: 3rem auto 1.6rem; }
- .sec-head.tight { margin-bottom: .9rem; }
- .sec-head.tight .sec-title { font-size: 1.35rem; }
- .eyebrow { font-size: .7rem; font-weight: 600; letter-spacing: .34em; text-transform: uppercase; color: var(--color-gold); }
- .sec-title { font-family: var(--font-display); font-size: 1.9rem; font-weight: 700; letter-spacing: .08em; color: var(--color-text); margin: .6rem 0 .55rem; }
- .sec-sub { font-size: .82rem; color: var(--color-text-secondary); }
- .sec-divider { display: flex; align-items: center; justify-content: center; gap: .55rem; max-width: 200px; margin: 1.15rem auto 0; }
- .sec-divider::before, .sec-divider::after { content: ""; flex: 1; height: 1px; }
- .sec-divider::before { background: linear-gradient(90deg, transparent, var(--color-gold)); }
- .sec-divider::after { background: linear-gradient(90deg, var(--color-gold), transparent); }
- .sec-divider span { width: 6px; height: 6px; background: var(--color-gold); transform: rotate(45deg); flex-shrink: 0; }
- .center-actions { display: flex; justify-content: center; flex-wrap: wrap; gap: .8rem; margin: 1.4rem 0 1.6rem; }
- .btn-outline {
- display: inline-flex; align-items: center; gap: .35rem;
- background: transparent; border: 1px solid var(--color-primary); color: var(--color-primary);
- padding: .5rem 1.1rem; border-radius: 8px; font-size: .85rem; font-weight: 600;
- text-decoration: none; white-space: nowrap; transition: .2s;
- }
- .btn-outline:hover { background: var(--color-primary-light); }
- /* 双层细线外框：全页统一的「框架」语言 */
- .frame {
- position: relative; background: var(--color-surface);
- border: 1px solid var(--color-border); border-radius: 16px;
- padding: 1.9rem 2rem; box-shadow: 0 1px 3px rgba(0,0,0,.04);
- }
- .frame::after {
- content: ""; position: absolute; inset: 6px;
- border: 1px solid var(--color-border); border-radius: 11px;
- pointer-events: none; opacity: .7;
- }
- .frame > * { position: relative; z-index: 1; }
- .frame-title { font-family: var(--font-display); font-size: 1.05rem; font-weight: 700; letter-spacing: .05em; text-align: center; color: var(--color-text); }
- .frame-title-sub { text-align: center; font-size: .72rem; color: var(--color-gold); letter-spacing: .18em; margin-top: .35rem; text-transform: uppercase; }
- /* 明细行：左信息 / 右价格 */
- .rows { display: flex; flex-direction: column; }
- .row { display: flex; align-items: flex-start; justify-content: space-between; gap: 1.5rem; padding: 1.2rem .2rem; border-bottom: 1px solid var(--color-border); }
- .row:last-child { border-bottom: none; }
- .row-info { flex: 1 1 auto; min-width: 0; }
- .row-title { font-family: var(--font-display); font-size: .98rem; font-weight: 700; color: var(--color-text); margin-bottom: .35rem; letter-spacing: .03em; }
- .row-desc { font-size: .79rem; color: var(--color-text-secondary); line-height: 1.75; }
- .row-desc b, .row-desc strong { color: var(--color-text); }
- .row-price { flex: 0 0 auto; text-align: right; padding-top: .1rem; }
- .row-price .amount { font-family: var(--font-display); font-size: 1.3rem; font-weight: 700; color: var(--color-text); white-space: nowrap; letter-spacing: .02em; }
- .row-price .unit { display: block; font-size: .72rem; color: var(--color-gold); letter-spacing: .04em; margin-top: .15rem; white-space: nowrap; }
- /* 定价卡 */
- .plan-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 1.4rem; }
- .plan {
- position: relative; background: var(--color-surface);
- border: 1px solid var(--color-border); border-radius: 16px;
- padding: 2.1rem 1.6rem 1.6rem; text-align: center;
- box-shadow: 0 1px 3px rgba(0,0,0,.04);
- }
- .plan.featured { border-color: var(--color-gold); }
- .plan.featured::after { content: ""; position: absolute; inset: 6px; border: 1px solid var(--color-gold); border-radius: 11px; pointer-events: none; opacity: .45; }
- .plan > * { position: relative; z-index: 1; }
- .plan-badge {
- position: absolute; top: -13px; left: 50%; transform: translateX(-50%); z-index: 2;
- background: var(--color-gold); color: var(--color-primary-dark);
- font-size: .7rem; font-weight: 700; letter-spacing: .14em;
- padding: .32rem .9rem; border-radius: 6px; white-space: nowrap;
- }
- .plan-title { font-family: var(--font-display); font-size: 1.2rem; font-weight: 700; letter-spacing: .06em; color: var(--color-text); }
- .plan-note { font-size: .74rem; color: var(--color-text-muted); margin-top: .35rem; }
- .plan-divider { width: 46px; height: 1px; background: var(--color-border); margin: 1.05rem auto 1.15rem; }
- .plan-price { font-family: var(--font-display); font-size: 2.1rem; font-weight: 700; line-height: 1.15; color: var(--color-text); letter-spacing: .02em; }
- .plan-unit { font-size: .73rem; color: var(--color-gold); margin-top: .3rem; letter-spacing: .04em; }
- .plan-list { list-style: none; margin-top: 1.3rem; text-align: left; }
- .plan-list li { position: relative; padding: .5rem 0 .5rem 1.15rem; font-size: .82rem; color: var(--color-text-secondary); line-height: 1.6; }
- .plan-list li + li { border-top: 1px dashed var(--color-border); }
- .plan-list li::before { content: ""; position: absolute; left: 2px; top: .98rem; width: 5px; height: 5px; background: var(--color-gold); transform: rotate(45deg); }
- /* 图标卡 */
- .icon-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 1.2rem; }
- .icon-card { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 14px; padding: 1.6rem 1.4rem; text-align: center; box-shadow: 0 1px 3px rgba(0,0,0,.04); }
- .icon-box { width: 46px; height: 46px; margin: 0 auto 1rem; border: 1px solid var(--color-border); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.15rem; color: var(--color-gold); }
- .icon-card h3 { font-family: var(--font-display); font-size: 1rem; font-weight: 700; color: var(--color-text); margin-bottom: .55rem; letter-spacing: .03em; }
- .icon-card p { font-size: .78rem; color: var(--color-text-secondary); line-height: 1.75; }
- /* 流程时间轴 */
- .flow-list { counter-reset: flow; list-style: none; margin-top: 1.2rem; }
- .flow-step { position: relative; padding: 0 0 1rem 2.2rem; font-size: .8rem; color: var(--color-text-secondary); line-height: 1.75; }
- .flow-step:last-child { padding-bottom: 0; }
- .flow-step::before {
- counter-increment: flow; content: counter(flow);
- position: absolute; left: 0; top: .05rem; width: 1.55rem; height: 1.55rem;
- border: 1px solid var(--color-gold); border-radius: 50%;
- display: flex; align-items: center; justify-content: center;
- font-family: var(--font-display); font-size: .74rem; font-weight: 700;
- color: var(--color-primary-dark); background: var(--color-gold-soft);
- }
- .flow-step:not(:last-child)::after { content: ""; position: absolute; left: .77rem; top: 1.8rem; bottom: .1rem; width: 1px; background: var(--color-border); }
- .flow-list b, .flow-list strong { color: var(--color-text); }
- /* 提示条 */
- .note-bar { display: flex; gap: .7rem; background: var(--color-primary-light); border-left: 3px solid var(--color-gold); border-radius: 8px; padding: .9rem 1.05rem; font-size: .78rem; color: var(--color-text-secondary); line-height: 1.75; margin-top: 1.3rem; }
- .note-bar b { color: var(--color-text); }
- .note-bar.warn { color: var(--color-danger); }
- .note-bar.warn b { color: var(--color-danger); }
- .note-bar .marker { flex-shrink: 0; }
- .inline-note { text-align: center; font-size: .76rem; color: var(--color-text-muted); margin-top: 1.3rem; }
- /* PayNow 付款框 */
- .pay-frame { position: relative; background: var(--color-surface); border: 1px solid var(--color-gold); border-radius: 14px; padding: 2.1rem 2.2rem; margin-top: 3rem; }
- .pay-frame::after { content: ""; position: absolute; inset: 8px; border: 1px solid var(--color-border); border-radius: 9px; pointer-events: none; }
- .pay-frame > * { position: relative; z-index: 1; }
- .pay-grid { display: grid; grid-template-columns: 210px 1fr; gap: 1.8rem; align-items: center; margin-top: 1.5rem; }
- .qr-box { border: 1px dashed var(--color-border); border-radius: 10px; min-height: 172px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .6rem; color: var(--color-text-muted); font-size: .76rem; text-align: center; }
- .qr-box .qr-icon { font-size: 2rem; line-height: 1; opacity: .4; }
- .info-title { font-size: .84rem; font-weight: 700; color: var(--color-gold); border-left: 3px solid var(--color-gold); padding-left: .6rem; margin-bottom: .8rem; letter-spacing: .06em; }
- .info-line { font-size: .82rem; color: var(--color-text-secondary); padding: .28rem 0; line-height: 1.75; }
- .info-line b { color: var(--color-text); }
- footer {
- text-align: center;
- padding: 2.2rem 5% 1.8rem;
- background: var(--color-white);
- color: var(--color-text-secondary);
- margin-top: 2.4rem;
- font-size: .78rem;
- border-top: 1px solid var(--color-border);
- border-radius: var(--card-radius) var(--card-radius) 0 0;
- }
- .footer-nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 1.3rem; margin-bottom: 1.2rem; }
- .footer-nav a { color: var(--color-text-secondary); text-decoration: none; font-size: .82rem; }
- .footer-nav a:hover { color: var(--color-primary); }
- .footer-disclaimer { max-width: 620px; margin: 0 auto 1.1rem; font-size: .74rem; line-height: 1.65; color: var(--color-text-muted); }
- [data-lang="en"] .zh { display: none; }
- [data-lang="zh"] .en { display: none; }
- @media (max-width: 700px) {
- header { height: 62px; }
- .btn-publish { padding: .45rem .85rem; font-size: .8rem; }
- .btn-group-gap { gap:0.6rem; }
- .container { padding: 1.6rem 5% 3rem; }
- .tab-bar { flex-direction: column; }
- .sec-head { margin: 2.2rem auto 1.3rem; }
- .sec-title { font-size: 1.55rem; }
- .sec-head.tight .sec-title { font-size: 1.2rem; }
- .frame { padding: 1.4rem 1.15rem 1.5rem; }
- .frame::after { inset: 5px; }
- .plan-grid, .icon-grid { grid-template-columns: 1fr; }
- .plan { padding: 1.9rem 1.2rem 1.4rem; }
- .plan-price { font-size: 1.85rem; }
- .row { gap: 1rem; padding: 1rem .1rem; }
- .row-price .amount { font-size: 1.1rem; }
- .pay-frame { padding: 1.6rem 1.2rem; }
- .pay-grid { grid-template-columns: 1fr; gap: 1.3rem; }
- .qr-box { min-height: 140px; }
- }
+header {
+  background: rgba(255,255,255,.96); backdrop-filter: blur(6px);
+  color: var(--color-text); padding: 0 5%; height: 68px;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 1.5rem; border-bottom: 1px solid var(--color-border);
+  position: sticky; top: 0; z-index: 50;
+}
+.brand {
+  display: flex; flex-direction: column; justify-content: center; line-height: 1; flex-shrink: 0;
+  --logo-main-size: 1.45rem;
+  --logo-sub-size: calc(var(--logo-main-size) * 0.5);
+  --logo-line-gap: calc(var(--logo-main-size) * 0.35);
+}
+.brand-line { display: flex; flex-direction: column; }
+.brand-main { display: block; line-height: 1; white-space: nowrap; font-size: var(--logo-main-size); }
+.brand-sub { display: block; line-height: 1; white-space: nowrap; font-size: var(--logo-sub-size); margin-top: var(--logo-line-gap); }
+.brand-line.zh .brand-main { font-family: var(--font-zh-sans); font-weight: 700; letter-spacing: .1em; color: var(--color-text); }
+.brand-line.zh .brand-sub { font-family: var(--font-zh-sans); font-weight: 400; color: var(--color-qianjinzong); letter-spacing: 0; }
+.brand-line.en .brand-main { font-family: var(--font-latin); font-weight: 800; letter-spacing: .05em; color: var(--color-text); }
+.brand-line.en .brand-sub { font-family: var(--font-latin); font-weight: 400; color: var(--color-qianjinzong); letter-spacing: .01em; }
+@media (max-width: 700px) { .brand .brand-sub { display: none; } }
+.header-right { display: flex; align-items: center; gap: .8rem; flex-shrink: 0; }
+.btn-publish {
+  display: inline-flex; align-items: center; gap: .35rem;
+  background: var(--color-primary); color: #fff;
+  padding: .5rem 1.1rem; border-radius: 8px;
+  font-size: .85rem; font-weight: 600; text-decoration: none;
+  white-space: nowrap; transition: .2s;
+}
+.btn-publish:hover { background: var(--color-primary-dark); }
+.lang-btn {
+  border: 1px solid var(--color-border); background: transparent;
+  color: var(--color-text-secondary); padding: .3rem .68rem;
+  border-radius: 6px; cursor: pointer; font-size: .75rem;
+  letter-spacing: .04em; transition: .2s;
+}
+.lang-btn:hover { border-color: var(--color-primary); color: var(--color-primary); background: var(--color-primary-light); }
+.menu-toggle {
+  width: 38px; height: 38px; border: 1px solid var(--color-border); background: transparent;
+  border-radius: 8px; font-size: 1.05rem; color: var(--color-text); cursor: pointer;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: .2s;
+}
+.menu-toggle:hover { border-color: var(--color-primary); color: var(--color-primary); background: var(--color-primary-light); }
 
- /* ---------- Sidebar 语言切换按钮 ---------- */
- .sidebar-lang-btn {
- display: flex;
- align-items: center;
- justify-content: center;
- gap: .4rem;
- width: calc(100% - 2.8rem);
- margin: 1rem 1.4rem .8rem;
- padding: .62rem .9rem;
- border: 1px solid var(--color-border);
- border-radius: 12px;
- background: var(--color-white);
- color: var(--color-text-secondary);
- font-family: inherit;
- font-size: .9rem;
- font-weight: 600;
- cursor: pointer;
- transition: .2s;
- }
- .sidebar-lang-btn:hover {
- border-color: var(--color-primary);
- color: var(--color-primary);
- background: var(--color-primary-light);
- }
- </style>
- <link rel="apple-touch-icon" href="/assets/icons/icon-192.png">
+.sidebar-overlay { position: fixed; inset: 0; background: rgba(20,17,14,.4); opacity: 0; pointer-events: none; transition: opacity .25s ease; z-index: 90; }
+.sidebar-overlay.show { opacity: 1; pointer-events: auto; }
+.sidebar {
+  position: fixed; top: 0; left: 0; height: 100vh; width: 264px; max-width: 78vw;
+  background: var(--color-white); box-shadow: 4px 0 24px rgba(37,34,30,.18);
+  transform: translateX(-100%); transition: transform .3s ease; z-index: 95;
+  overflow-y: auto; padding-bottom: 2rem;
+}
+.sidebar.open { transform: translateX(0); }
+.sidebar-toggle-inner {
+  display: block; width: 100%; padding: .9rem 0; background: transparent; border: none;
+  border-bottom: 1px solid var(--color-border); font-size: 1.15rem;
+  color: var(--color-text-secondary); cursor: pointer; text-align: center;
+}
+.sidebar-toggle-inner:hover { color: var(--color-primary); }
+.sidebar-brand {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: .1rem; padding: 1.1rem 0; font-weight: 700; color: var(--color-text);
+  border-bottom: 1px solid var(--color-border);
+}
+.sidebar-brand .zh { font-size: 1.05rem; }
+.sidebar-brand .en { font-size: 1.05rem; letter-spacing: .04em; }
+.sidebar-nav { display: flex; flex-direction: column; padding: .3rem 0; }
+.sidebar-link { padding: .85rem 1.4rem; color: var(--color-text); text-decoration: none; font-size: .95rem; transition: .2s; }
+.sidebar-link:hover { background: var(--color-primary-light); color: var(--color-primary); }
+.sidebar-link.active { background: var(--color-primary-light); color: var(--color-primary); font-weight: 600; }
+.sidebar-group-title { padding: .85rem 1.4rem .3rem; color: var(--color-text); font-size: .95rem; font-weight: 600; }
+.sidebar-sub { display: block; padding: .55rem 1.4rem .55rem 2.2rem; color: var(--color-text-secondary); text-decoration: none; font-size: .88rem; transition: .2s; }
+.sidebar-sub:hover { color: var(--color-primary); background: var(--color-primary-light); }
+.sidebar-lang-btn {
+  display: flex; align-items: center; justify-content: center; gap: .4rem;
+  width: calc(100% - 2.8rem); margin: 1rem 1.4rem .8rem;
+  padding: .62rem .9rem; border: 1px solid var(--color-border);
+  border-radius: 12px; background: var(--color-white);
+  color: var(--color-text-secondary); font-family: inherit;
+  font-size: .9rem; font-weight: 600; cursor: pointer; transition: .2s;
+}
+.sidebar-lang-btn:hover { border-color: var(--color-primary); color: var(--color-primary); background: var(--color-primary-light); }
+
+.container { max-width: 880px; margin: 0 auto; padding: 2.2rem 5% 4rem; min-height: 80vh; }
+.breadcrumb { font-size: .8rem; color: var(--color-text-muted); margin-bottom: 1.2rem; }
+.breadcrumb a { color: var(--color-text-secondary); text-decoration: none; }
+.breadcrumb a:hover { color: var(--color-primary); }
+
+main section[id] { scroll-margin-top: 92px; }
+.sec-head { text-align: center; max-width: 620px; margin: 3rem auto 1.6rem; }
+.sec-head.tight { margin-bottom: .9rem; }
+.sec-head.tight .sec-title { font-size: 1.35rem; }
+.eyebrow { font-size: .7rem; font-weight: 600; letter-spacing: .34em; text-transform: uppercase; color: var(--color-gold); }
+.sec-title { font-family: var(--font-display); font-size: 1.9rem; font-weight: 700; letter-spacing: .08em; color: var(--color-text); margin: .6rem 0 .55rem; }
+.sec-sub { font-size: .82rem; color: var(--color-text-secondary); }
+.sec-divider { display: flex; align-items: center; justify-content: center; gap: .55rem; max-width: 200px; margin: 1.15rem auto 0; }
+.sec-divider::before, .sec-divider::after { content: ""; flex: 1; height: 1px; }
+.sec-divider::before { background: linear-gradient(90deg, transparent, var(--color-gold)); }
+.sec-divider::after { background: linear-gradient(90deg, var(--color-gold), transparent); }
+.sec-divider span { width: 6px; height: 6px; background: var(--color-gold); transform: rotate(45deg); flex-shrink: 0; }
+.center-actions { display: flex; justify-content: center; flex-wrap: wrap; gap: .8rem; margin: 1.4rem 0 1.6rem; }
+.btn-outline {
+  display: inline-flex; align-items: center; gap: .35rem;
+  background: transparent; border: 1px solid var(--color-primary); color: var(--color-primary);
+  padding: .5rem 1.1rem; border-radius: 8px; font-size: .85rem; font-weight: 600;
+  text-decoration: none; white-space: nowrap; transition: .2s;
+}
+.btn-outline:hover { background: var(--color-primary-light); }
+
+.frame {
+  position: relative; background: var(--color-surface);
+  border: 1px solid var(--color-border); border-radius: 16px;
+  padding: 1.9rem 2rem; box-shadow: 0 1px 3px rgba(0,0,0,.04);
+}
+.frame::after {
+  content: ""; position: absolute; inset: 6px;
+  border: 1px solid var(--color-border); border-radius: 11px;
+  pointer-events: none; opacity: .7;
+}
+.frame > * { position: relative; z-index: 1; }
+.frame-title { font-family: var(--font-display); font-size: 1.05rem; font-weight: 700; letter-spacing: .05em; text-align: center; color: var(--color-text); }
+.frame-title-sub { text-align: center; font-size: .72rem; color: var(--color-gold); letter-spacing: .18em; margin-top: .35rem; text-transform: uppercase; }
+
+.rows { display: flex; flex-direction: column; }
+.row { display: flex; align-items: flex-start; justify-content: space-between; gap: 1.5rem; padding: 1.3rem .2rem; border-bottom: 1px solid var(--color-border); }
+.row:last-child { border-bottom: none; }
+.row-info { flex: 1 1 auto; min-width: 0; }
+.row-title { font-family: var(--font-display); font-size: 1rem; font-weight: 700; color: var(--color-text); margin-bottom: .35rem; letter-spacing: .03em; }
+.row-desc { font-size: .79rem; color: var(--color-text-secondary); line-height: 1.75; }
+.row-desc b, .row-desc strong { color: var(--color-text); }
+.row-price { flex: 0 0 auto; text-align: right; padding-top: .1rem; }
+.row-price .amount { font-family: var(--font-display); font-size: 1.3rem; font-weight: 700; color: var(--color-text); white-space: nowrap; letter-spacing: .02em; }
+.row-price .amount-sub { display: block; font-family: var(--font-display); font-size: .95rem; font-weight: 600; color: var(--color-gold); margin-top: .25rem; white-space: nowrap; }
+.row-price .unit { display: block; font-size: .72rem; color: var(--color-gold); letter-spacing: .04em; margin-top: .15rem; white-space: nowrap; }
+
+.plan-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 1.4rem; }
+.plan {
+  position: relative; background: var(--color-surface);
+  border: 1px solid var(--color-border); border-radius: 16px;
+  padding: 2.2rem 1.7rem 1.8rem; text-align: center;
+  box-shadow: 0 1px 3px rgba(0,0,0,.04);
+  display: flex; flex-direction: column;
+}
+.plan.featured { border-color: var(--color-gold); }
+.plan.featured::after { content: ""; position: absolute; inset: 6px; border: 1px solid var(--color-gold); border-radius: 11px; pointer-events: none; opacity: .45; }
+.plan > * { position: relative; z-index: 1; }
+.plan-badge {
+  position: absolute; top: -13px; left: 50%; transform: translateX(-50%); z-index: 2;
+  background: var(--color-gold); color: var(--color-primary-dark);
+  font-size: .7rem; font-weight: 700; letter-spacing: .14em;
+  padding: .32rem .9rem; border-radius: 6px; white-space: nowrap;
+}
+.plan-title { font-family: var(--font-display); font-size: 1.25rem; font-weight: 700; letter-spacing: .06em; color: var(--color-text); }
+.plan-note { font-size: .75rem; color: var(--color-text-muted); margin-top: .4rem; display: inline-flex; align-items: center; justify-content: center; gap: .35rem; flex-wrap: wrap; }
+.plan-divider { width: 46px; height: 1px; background: var(--color-border); margin: 1.1rem auto 1.2rem; }
+.plan-price { font-family: var(--font-display); font-size: 2.2rem; font-weight: 700; line-height: 1.15; color: var(--color-text); letter-spacing: .02em; }
+.plan-price .cur { font-size: 1rem; font-weight: 600; margin-right: .15rem; }
+.plan-price-sub { font-family: var(--font-display); font-size: .95rem; font-weight: 600; color: var(--color-gold); margin-top: .5rem; letter-spacing: .02em; }
+.plan-unit { font-size: .74rem; color: var(--color-gold); margin-top: .35rem; letter-spacing: .04em; }
+.plan-list { list-style: none; margin-top: 1.4rem; text-align: left; }
+.plan-list li { position: relative; padding: .55rem 0 .55rem 1.15rem; font-size: .82rem; color: var(--color-text-secondary); line-height: 1.6; }
+.plan-list li + li { border-top: 1px dashed var(--color-border); }
+.plan-list li::before { content: ""; position: absolute; left: 2px; top: 1.02rem; width: 5px; height: 5px; background: var(--color-gold); transform: rotate(45deg); }
+
+/* ===== 创始卖家 ICON 徽章（皇冠 + 88） ===== */
+.founder-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: .28rem;
+  background: linear-gradient(135deg, #B08A45 0%, #D4AF6A 50%, #B08A45 100%);
+  color: #FFFFFF;
+  font-family: var(--font-display);
+  font-size: .62rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  padding: .22rem .5rem .22rem .38rem;
+  border-radius: 20px;
+  white-space: nowrap;
+  vertical-align: middle;
+  box-shadow: 0 1px 3px rgba(176,138,69,.35), inset 0 1px 0 rgba(255,255,255,.25);
+  position: relative;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.founder-badge:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 6px rgba(176,138,69,.45), inset 0 1px 0 rgba(255,255,255,.25);
+}
+.founder-badge svg {
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
+  display: block;
+}
+.founder-badge .badge-num {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: .72rem;
+  letter-spacing: 0;
+}
+.founder-badge.lg {
+  font-size: .68rem;
+  padding: .3rem .7rem .3rem .55rem;
+  gap: .35rem;
+}
+.founder-badge.lg svg { width: 14px; height: 14px; }
+.founder-badge.lg .badge-num { font-size: .82rem; }
+
+/* plan-list 内的徽章：跟随文字不换行 */
+.plan-list li .founder-badge {
+  margin-left: .3rem;
+  vertical-align: middle;
+  transform: translateY(-1px);
+}
+
+.note-bar { display: flex; gap: .7rem; background: var(--color-primary-light); border-left: 3px solid var(--color-gold); border-radius: 8px; padding: .9rem 1.05rem; font-size: .78rem; color: var(--color-text-secondary); line-height: 1.75; margin-top: 1.3rem; }
+.note-bar b { color: var(--color-text); }
+.note-bar.warn { color: var(--color-danger); }
+.note-bar.warn b { color: var(--color-danger); }
+.note-bar .marker { flex-shrink: 0; }
+.inline-note { text-align: center; font-size: .76rem; color: var(--color-text-muted); margin-top: 1.3rem; }
+
+.pay-frame { position: relative; background: var(--color-surface); border: 1px solid var(--color-gold); border-radius: 14px; padding: 2.1rem 2.2rem; margin-top: 3rem; }
+.pay-frame::after { content: ""; position: absolute; inset: 8px; border: 1px solid var(--color-border); border-radius: 9px; pointer-events: none; }
+.pay-frame > * { position: relative; z-index: 1; }
+.pay-grid { display: grid; grid-template-columns: 210px 1fr; gap: 1.8rem; align-items: center; margin-top: 1.5rem; }
+.qr-box { border: 1px dashed var(--color-border); border-radius: 10px; min-height: 172px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .6rem; color: var(--color-text-muted); font-size: .76rem; text-align: center; }
+.qr-box .qr-icon { font-size: 2rem; line-height: 1; opacity: .4; }
+.info-title { font-size: .84rem; font-weight: 700; color: var(--color-gold); border-left: 3px solid var(--color-gold); padding-left: .6rem; margin-bottom: .8rem; letter-spacing: .06em; }
+.info-line { font-size: .82rem; color: var(--color-text-secondary); padding: .28rem 0; line-height: 1.75; }
+.info-line b { color: var(--color-text); }
+
+footer {
+  text-align: center; padding: 2.2rem 5% 1.8rem;
+  background: var(--color-white); color: var(--color-text-secondary);
+  margin-top: 2.4rem; font-size: .78rem;
+  border-top: 1px solid var(--color-border);
+  border-radius: var(--card-radius) var(--card-radius) 0 0;
+}
+.footer-nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 1.3rem; margin-bottom: 1.2rem; }
+.footer-nav a { color: var(--color-text-secondary); text-decoration: none; font-size: .82rem; }
+.footer-nav a:hover { color: var(--color-primary); }
+.footer-disclaimer { max-width: 620px; margin: 0 auto 1.1rem; font-size: .74rem; line-height: 1.65; color: var(--color-text-muted); }
+
+[data-lang="en"] .zh { display: none; }
+[data-lang="zh"] .en { display: none; }
+
+@media (max-width: 700px) {
+  header { height: 62px; }
+  .btn-publish { padding: .45rem .85rem; font-size: .8rem; }
+  .container { padding: 1.6rem 5% 3rem; }
+  .sec-head { margin: 2.2rem auto 1.3rem; }
+  .sec-title { font-size: 1.55rem; }
+  .sec-head.tight .sec-title { font-size: 1.2rem; }
+  .frame { padding: 1.4rem 1.15rem 1.5rem; }
+  .frame::after { inset: 5px; }
+  .plan-grid { grid-template-columns: 1fr; }
+  .plan { padding: 1.9rem 1.2rem 1.4rem; }
+  .plan-price { font-size: 1.85rem; }
+  .row { gap: 1rem; padding: 1.1rem .1rem; }
+  .row-price .amount { font-size: 1.1rem; }
+  .pay-frame { padding: 1.6rem 1.2rem; }
+  .pay-grid { grid-template-columns: 1fr; gap: 1.3rem; }
+  .qr-box { min-height: 140px; }
+}
+</style>
+<link rel="apple-touch-icon" href="/assets/icons/icon-192.png">
 </head>
 <body data-lang="zh">
- <header>
- <div style="display:flex; align-items:center; gap:.9rem;">
- <button class="menu-toggle" onclick="openSidebar()" aria-label="menu">☰</button>
- <a href="./index.html" class="brand" style="text-decoration:none;color:inherit;" aria-label="古董集 GUDONG · 古董藏品信息平台 Chinese Antiques Platform">
- <span class="brand-line zh">
- <span class="brand-main" id="brandZhMain">古董集</span>
- <span class="brand-sub" id="brandZhSub">古董藏品信息平台</span>
- </span>
- <span class="brand-line en">
- <span class="brand-main">GUDONG</span>
- <span class="brand-sub">Chinese Antiques Platform</span>
- </span>
- </a>
- </div>
- <div class="header-right">
- <a href="./pricing.html#seller-services" class="btn-publish">
- <span class="zh">刊登藏品信息</span><span class="en">List an Item</span>
- </a>
- <button class="lang-btn" onclick="toggleLang()">EN</button>
- </div>
- </header>
- <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
- <aside class="sidebar" id="sidebar">
- <button class="sidebar-toggle-inner" onclick="closeSidebar()" aria-label="close menu">☰</button>
- <a href="./index.html" class="sidebar-brand" style="text-decoration:none;">
- <span class="zh">古董集</span><span class="en">GUDONG</span>
- </a>
-         <nav class="sidebar-nav">
-            <a href="index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">首页</span><span class="en">Home</span></a>
-            <a href="index.html#today-finds" class="sidebar-link" onclick="closeSidebar()"><span class="zh">今日发现</span><span class="en">Today's Finds</span></a>
-            <a href="index.html#new-listings" class="sidebar-link" onclick="closeSidebar()"><span class="zh">最新藏品</span><span class="en">New Listings</span></a>
 
-            <div class="sidebar-group-title zh">藏品库</div><div class="sidebar-group-title en">Collection</div>
-            <a href="categories/porcelain.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 瓷器</span><span class="en">· Porcelain</span></a>
-            <a href="categories/jade.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 玉器</span><span class="en">· Jade</span></a>
-            <a href="categories/coins.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 钱币</span><span class="en">· Coins</span></a>
-            <a href="categories/paintings.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 书画</span><span class="en">· Paintings &amp; Calligraphy</span></a>
-            <a href="categories/misc.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 杂项</span><span class="en">· Miscellaneous</span></a>
+<header>
+  <div style="display:flex; align-items:center; gap:.9rem;">
+    <button class="menu-toggle" onclick="openSidebar()" aria-label="menu">☰</button>
+    <a href="./index.html" class="brand" style="text-decoration:none;color:inherit;" aria-label="古董集 GUDONG · 古董藏品信息平台 Chinese Antiques Platform">
+      <span class="brand-line zh">
+        <span class="brand-main" id="brandZhMain">古董集</span>
+        <span class="brand-sub" id="brandZhSub">古董藏品信息平台</span>
+      </span>
+      <span class="brand-line en">
+        <span class="brand-main">GUDONG</span>
+        <span class="brand-sub">Chinese Antiques Platform</span>
+      </span>
+    </a>
+  </div>
+  <div class="header-right">
+    <a href="./pricing.html#seller-services" class="btn-publish">
+      <span class="zh">刊登藏品</span><span class="en">List an Item</span>
+    </a>
+    <button class="lang-btn" onclick="toggleLang()">EN</button>
+  </div>
+</header>
 
-            <a href="sellers/index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">卖家展馆</span><span class="en">Dealer Galleries</span></a>
-            <a href="pricing.html" class="sidebar-link active" onclick="closeSidebar()"><span class="zh">服务价格</span><span class="en">Pricing</span></a>
-            <a href="about.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">关于Gudong</span><span class="en">About</span></a>
-            <button type="button" class="sidebar-lang-btn" onclick="toggleLang()" aria-label="Switch language"><span class="zh">🌐 English</span><span class="en">🌐 中文</span></button>
-        </nav>
- </aside>
- <main class="container">
- <div class="breadcrumb">
- <a href="./index.html" class="zh">首页</a><a href="./index.html" class="en">Home</a>
- <span class="zh"> / 服务价格</span><span class="en"> / Pricing</span>
- </div>
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+<aside class="sidebar" id="sidebar">
+  <button class="sidebar-toggle-inner" onclick="closeSidebar()" aria-label="close menu">☰</button>
+  <a href="./index.html" class="sidebar-brand" style="text-decoration:none;">
+    <span class="zh">古董集</span><span class="en">GUDONG</span>
+  </a>
+  <nav class="sidebar-nav">
+    <a href="index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">首页</span><span class="en">Home</span></a>
+    <a href="index.html#today-finds" class="sidebar-link" onclick="closeSidebar()"><span class="zh">今日发现</span><span class="en">Today's Finds</span></a>
+    <a href="index.html#new-listings" class="sidebar-link" onclick="closeSidebar()"><span class="zh">最新藏品</span><span class="en">New Listings</span></a>
 
- <!-- ===== 页首：居中标题 + 金色分隔 ===== -->
- <div class="sec-head tight">
- <div class="eyebrow zh">古 董 集</div><div class="eyebrow en">Gudong</div>
- <h1 class="sec-title zh">收费标准</h1><h1 class="sec-title en">Pricing</h1>
- <p class="sec-sub zh">新加坡本地运营 · 币种：新加坡元 SGD · 价格不含消费税</p>
- <p class="sec-sub en">Operated in Singapore · Currency: SGD · Prices exclude GST</p>
- <div class="sec-divider" aria-hidden="true"><span></span></div>
- </div>
+    <div class="sidebar-group-title zh">藏品库</div><div class="sidebar-group-title en">Collection</div>
+    <a href="categories/porcelain.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 瓷器</span><span class="en">· Porcelain</span></a>
+    <a href="categories/jade.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 玉器</span><span class="en">· Jade</span></a>
+    <a href="categories/coins.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 钱币</span><span class="en">· Coins</span></a>
+    <a href="categories/paintings.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 书画</span><span class="en">· Paintings &amp; Calligraphy</span></a>
+    <a href="categories/misc.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 杂项</span><span class="en">· Miscellaneous</span></a>
 
- <div class="tab-bar">
- <a href="#seller-services" class="tab-btn active" data-tab="seller">
- <span class="zh">🛡️ 卖家服务</span>
- <span class="en">🛡️ Seller Services</span>
- </a>
- <a href="#buyer-services" class="tab-btn" data-tab="buyer">
- <span class="zh">🏅 买家指南</span>
- <span class="en">🏅 Buyer Guide</span>
- </a>
- <a href="#price-table" class="tab-btn" data-tab="table">
- <span class="zh">💰 价格明细</span>
- <span class="en">💰 Price Table</span>
- </a>
- </div>
+    <a href="sellers/index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">卖家展馆</span><span class="en">Dealer Galleries</span></a>
+    <a href="pricing.html" class="sidebar-link active" onclick="closeSidebar()"><span class="zh">服务价格</span><span class="en">Pricing</span></a>
+    <a href="about.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">关于Gudong</span><span class="en">About</span></a>
+    <button type="button" class="sidebar-lang-btn" onclick="toggleLang()" aria-label="Switch language"><span class="zh">🌐 English</span><span class="en">🌐 中文</span></button>
+  </nav>
+</aside>
 
- <!-- ===== 一、卖家入驻与藏品发布 ===== -->
- <section id="seller-services">
- <div class="sec-head">
- <div class="eyebrow zh">卖家入驻</div><div class="eyebrow en">Seller Onboarding</div>
- <h2 class="sec-title zh">卖家入驻与刊登藏品</h2><h2 class="sec-title en">Seller Onboarding &amp; Item Listing</h2>
- <p class="sec-sub zh">加入新加坡古董藏品信息平台，向藏家展示您的珍藏</p>
- <p class="sec-sub en">Join a Singapore-based antiques information platform to showcase your collection</p>
- </div>
- <div class="center-actions">
- <a href="https://airtable.com/apprn6XDQnAm8bkaT/shrlQLTRfG5RlYjD4" target="_blank" class="btn-publish">
- <span class="zh">卖家入驻申请</span>
- <span class="en">Apply as Seller</span>
- </a>
- <a href="https://airtable.com/apprn6XDQnAm8bkaT/pagLlGrrcpRWrcaWM/form" target="_blank" class="btn-outline">
- <span class="zh">刊登藏品（已审核卖家）</span>
- <span class="en">Submit Listing (Approved Sellers)</span>
- </a>
- </div>
- <div class="plan-grid">
- <div class="plan featured">
- <span class="plan-badge zh">限量 88 席</span><span class="plan-badge en">Limited to 88</span>
- <h3 class="plan-title zh">创始卖家 · 2026</h3><h3 class="plan-title en">Founder-Dealer 2026</h3>
- <div class="plan-note zh">免费申请入驻</div><div class="plan-note en">Free application</div>
- <div class="plan-divider"></div>
- <div class="plan-price zh">免费入驻</div><div class="plan-price en">Free</div>
- <div class="plan-unit zh">前 2 件藏品发布免费</div><div class="plan-unit en">First 2 listings complimentary</div>
- <ul class="plan-list">
- <li class="zh">前 2 件藏品信息免费刊登</li><li class="en">First 2 item listings free of charge</li>
- <li class="zh">第 3 件起：SGD 20 / 件 / 年</li><li class="en">From 3rd item: SGD 20 / item / year</li>
- <li class="zh">平台不抽取任何交易佣金</li><li class="en">No transaction commission of any kind</li>
- <li class="zh">专属卖家编号（Seller ID）</li><li class="en">Dedicated Seller ID</li>
- </ul>
- </div>
- <div class="plan">
- <h3 class="plan-title zh">普通卖家</h3><h3 class="plan-title en">Standard Seller</h3>
- <div class="plan-note zh">88 名额满后开放</div><div class="plan-note en">Opens once 88 seats are filled</div>
- <div class="plan-divider"></div>
- <div class="plan-price">SGD 20</div>
- <div class="plan-unit zh">/ 件 / 半年</div><div class="plan-unit en">/ item / 6 months</div>
- <ul class="plan-list">
- <li class="zh">藏品发布：SGD 20 / 件 / 半年</li><li class="en">Listing: SGD 20 / item / 6 months</li>
- <li class="zh">平台不抽取任何交易佣金</li><li class="en">No transaction commission of any kind</li>
- <li class="zh">专属卖家编号（Seller ID）</li><li class="en">Dedicated Seller ID</li>
- </ul>
- </div>
- </div>
- <div class="note-bar">
- <span class="marker" aria-hidden="true">※</span>
- <div class="zh">
- 「创始卖家·2026」为平台早期优质卖家身份，<strong>免费申请，无需付费购买，总名额88席，招满关闭申请通道；已有资格不受名额已满影响。</strong>
- <br>创始卖家·2026：享有前2件藏品免费发布额度（有效期1年）；第3件起，每件 SGD 20 /件 /年。
- <br>普通卖家（88席名额已满之后入驻）：无免费发布额度，每件 SGD 20 /件 /半年。
- <br>藏品进入「最新上架」免费流量池。不开通展馆也可以正常发布藏品。
- </div>
- <div class="en">
- Founder-Dealer 2026 is an early-adopter seller status, <strong>application is free of charge, total 88 seats. Application closes once fully allocated; existing qualified sellers retain their status.</strong>
- <br>Founder-Dealer 2026: 2 complimentary listing credits (valid for 1-year). From the 3rd item onwards: SGD 20 / item / year.
- <br>Standard Sellers (apply after 88 seats filled): No free credits. SGD 20 / item / 6-months.
- <br>Listings enter the free "New Listings" pool. You may list items without purchasing a dealer-gallery.
- </div>
- </div>
+<main class="container">
+  <div class="breadcrumb">
+    <a href="./index.html" class="zh">首页</a><a href="./index.html" class="en">Home</a>
+    <span class="zh"> / 服务价格</span><span class="en"> / Pricing</span>
+  </div>
 
- <div class="sec-head tight">
- <div class="eyebrow zh">平台流程</div><div class="eyebrow en">Platform Flow</div>
- <h3 class="sec-title zh">卖家完整业务流程</h3><h3 class="sec-title en">Full Seller Workflow</h3>
- </div>
- <div class="frame">
- <ol class="flow-list">
- <li class="flow-step zh">填写【卖家入驻申请】表单提交基础资料，等待平台人工审核；</li>
- <li class="flow-step en">Complete the seller-onboarding application form and wait for manual review;</li>
- <li class="flow-step zh">审核通过，平台分配唯一 <b>Seller ID（卖家编号）</b>；审核不通过将邮件告知原因；</li>
- <li class="flow-step en">Once approved, you receive your unique <b>Seller ID</b>. Rejection reasons will be sent via email;</li>
- <li class="flow-step zh">拿到 Seller ID 之后，使用【发布藏品】表单提交藏品资料；<strong>表单提交只是刊登申请，藏品不会立刻对外上线；</strong></li>
- <li class="flow-step en">With valid Seller ID, submit item details via listing form. <strong>Submission is only an application; listings are NOT published automatically.</strong></li>
- <li class="flow-step zh">平台后台审核藏品内容，核对刊登服务费用：创始卖家消耗免费额度 / 普通卖家确认收款；</li>
- <li class="flow-step en">Platform reviews item content and verifies listing-service payment / complimentary credits for Founder-Dealers;</li>
- <li class="flow-step zh">审核与费用确认全部完成后，藏品才对外公开展示；到期藏品会被手动下架。</li>
- <li class="flow-step en">Item goes public only after review and payment-verification. Expired listings will be taken offline manually.</li>
- </ol>
- <p class="inline-note zh">提示：未完成入驻审核的账号，无法提交藏品刊登。提交藏品表单时务必填写正确 Seller ID。</p>
- <p class="inline-note en">Note: Un-approved applicants cannot submit listings. Please provide correct Seller ID inside the listing form.</p>
- </div>
- <p class="inline-note"><a href="./index.html#services" class="zh" style="color:var(--color-primary);text-decoration:none;">返回首页服务区 →</a><a href="./index.html#services" class="en" style="color:var(--color-primary);text-decoration:none;">Back to homepage services →</a></p>
- </section>
+  <!-- ===== 页首 ===== -->
+  <div class="sec-head tight">
+    <div class="eyebrow zh">古 董 集</div><div class="eyebrow en">Gudong</div>
+    <h1 class="sec-title zh">收费标准</h1><h1 class="sec-title en">Pricing</h1>
+    <p class="sec-sub zh">新加坡本地运营 · 币种：新加坡元 SGD · 价格不含消费税（GST）</p>
+    <p class="sec-sub en">Operated in Singapore · Currency: SGD · Prices exclude GST</p>
+    <div class="sec-divider" aria-hidden="true"><span></span></div>
+  </div>
 
- <!-- ===== 二、曝光置顶服务 ===== -->
- <section>
- <div class="sec-head">
- <div class="eyebrow zh">曝光增值</div><div class="eyebrow en">Exposure &amp; Boost</div>
- <h2 class="sec-title zh">曝光置顶服务</h2><h2 class="sec-title en">Exposure &amp; Placement Services</h2>
- <p class="sec-sub zh">让您的藏品获得更多关注，精准触达目标藏家</p>
- <p class="sec-sub en">Get your items in front of targeted collectors</p>
- </div>
- <div class="frame">
- <div class="rows">
- <div class="row">
- <div class="row-info">
- <div class="row-title zh">付费置顶（今日发现插槽）</div>
- <div class="row-title en">Paid Pin Slot (Today's Finds)</div>
- <div class="row-desc zh">将合格藏品放置首页「今日发现」栏目置顶插槽；平台同时仅开放1-2个位置，先到先得。图片、年代、品类信息必须完整，不合格藏品不可购买。<strong>服务有效期7天，到期系统自动取消置顶，恢复普通藏品展示。</strong>仅提升曝光，不代表平台鉴定保真。</div>
- <div class="row-desc en">Place eligible listing inside homepage "Today's Finds" pinned slot. Only 1-2 concurrent slots available, first-come-first-served. Complete photos, era and category data required. <strong>Term lasts 7-days; pin status auto-revokes upon expiry.</strong> Exposure boost does not constitute platform authentication.</div>
- </div>
- <div class="row-price">
- <span class="amount">SGD 180</span>
- <span class="unit zh">/ 7 天</span><span class="unit en">/ 7 days</span>
- </div>
- </div>
- <div class="row">
- <div class="row-info">
- <div class="row-title zh">精选展示（编辑精选）</div>
- <div class="row-title en">Featured Listing (Editor's Picks)</div>
- <div class="row-desc zh">登上首页独立「编辑精选」付费栏目，带编辑精选徽章，优先排序。与今日发现置顶属于相互独立服务。<strong>有效期1年，到期自动退出精选栏目。</strong></div>
- <div class="row-desc en">Appear in dedicated homepage "Editor's Picks" section with badge and priority ordering. Separate service from Today's Finds pin. <strong>Valid for one-year; auto-removed after expiry.</strong></div>
- </div>
- <div class="row-price">
- <span class="amount">SGD 80</span>
- <span class="unit zh">/ 件 / 年</span><span class="unit en">/ item / yr</span>
- </div>
- </div>
- <div class="row">
- <div class="row-info">
- <div class="row-title zh">卖家展馆（标准）</div>
- <div class="row-title en">Dealer Gallery (Standard)</div>
- <div class="row-desc zh">付费开通后，获得<strong>独立专属展馆静态页面（独立分享URL，支持搜索引擎收录）</strong>，集中展示该卖家全部在售藏品，同时出现在卖家展馆公开列表。<strong>展馆服务有效期1年，到期展馆页面自动提示到期，藏品不再对外展示。</strong><br>可叠加增值：优先展馆 +SGD 220/年（展馆列表置顶、金边卡片）；馆内置顶藏品每件 SGD 60/年。<br><a href="./sellers/index.html" style="color:var(--color-primary);text-decoration:none;">→ 浏览卖家展馆列表</a></div>
- <div class="row-desc en">Upon purchase you receive <strong>dedicated static gallery-page with shareable URL for search-engine indexing</strong> to showcase all your active inventory, visible in public dealer-gallery directory. <strong>Gallery licence valid 1-year; gallery page shows expiry notice and hides inventory after expiration.</strong><br>Optional add-ons: Priority Gallery +SGD 220/yr (directory pin, gold-border card); In-gallery pinned-item SGD 60/item/yr.<br><a href="./sellers/index.html" style="color:var(--color-primary);text-decoration:none;">→ Browse dealer-galleries directory</a></div>
- </div>
- <div class="row-price">
- <span class="amount">SGD 380</span>
- <span class="unit zh">/ 年</span><span class="unit en">/ yr</span>
- </div>
- </div>
- <div class="row">
- <div class="row-info">
- <div class="row-title zh">优先展馆（叠加增值）</div>
- <div class="row-title en">Priority Gallery (add-on)</div>
- <div class="row-desc zh">展馆列表置顶、金边卡片，叠加于标准展馆之上。</div>
- <div class="row-desc en">Directory pin and gold-border card, layered on top of the Standard Gallery.</div>
- </div>
- <div class="row-price">
- <span class="amount">+SGD 220</span>
- <span class="unit zh">/ 年</span><span class="unit en">/ yr</span>
- </div>
- </div>
- <div class="row">
- <div class="row-info">
- <div class="row-title zh">馆内置顶藏品</div>
- <div class="row-title en">In-gallery Pinned Item</div>
- <div class="row-desc zh">在您的展馆内置顶展示指定藏品。</div>
- <div class="row-desc en">Pin a designated item at the top of your gallery.</div>
- </div>
- <div class="row-price">
- <span class="amount">SGD 60</span>
- <span class="unit zh">/ 件 / 年</span><span class="unit en">/ item / yr</span>
- </div>
- </div>
- </div>
- </div>
- </section>
-
- <!-- ===== 三、可选增值信息服务 ===== -->
- <section>
- <div class="sec-head">
- <div class="eyebrow zh">增值服务</div><div class="eyebrow en">Add-on Services</div>
- <h2 class="sec-title zh">成交后可选增值信息服务</h2><h2 class="sec-title en">Optional Add-on Information Services</h2>
- <p class="sec-sub zh">自愿选购，与交易脱钩 — 提升卖家行业影响力</p>
- <p class="sec-sub en">Optional purchase, decoupled from transactions</p>
- <div class="sec-divider" aria-hidden="true"><span></span></div>
- </div>
- <p class="inline-note zh">※ 以下服务均为自愿选购的信息服务，与藏品交易完全脱钩</p>
- <p class="inline-note en">※ All services below are optional information services, fully decoupled from item transactions</p>
- <div class="icon-grid" style="margin-top:1.4rem;">
- <div class="icon-card">
- <div class="icon-box" aria-hidden="true">📋</div>
- <h3 class="zh">藏品成交档案刊登</h3><h3 class="en">Sales Archive Publication</h3>
- <p class="zh">卖家申报藏品成交记录（隐去买家隐私、不披露成交价），刊登至平台成交档案栏目，用于行业参考、提升卖家背书；平台不对申报内容真实性做核验。</p>
- <p class="en">Seller-submitted sales record (buyer privacy &amp; sale price redacted) published in platform sales-archive section for industry reference and seller credibility. Platform does not verify submitted facts.</p>
- </div>
- <div class="icon-card">
- <div class="icon-box" aria-hidden="true">✉️</div>
- <h3 class="zh">卖家专题推送包</h3><h3 class="en">Seller Feature Broadcast Package</h3>
- <p class="zh">一次性邮件+社群专题曝光，最多展示6件藏品，用于推广卖家在售藏品，不限是否刚成交。</p>
- <p class="en">One-off email-newsletter &amp; community feature showcasing up to six items, available regardless of recent sales activity.</p>
- </div>
- <div class="icon-card">
- <div class="icon-box" aria-hidden="true">🖼️</div>
- <h3 class="zh">卖家展厅增强包</h3><h3 class="en">Enhanced Gallery Package</h3>
- <p class="zh">需已购买标准展馆，提供横幅、自定义模板、标签分类等页面美化能力。</p>
- <p class="en">Requires active Standard-Gallery subscription; provides banner, custom templates and tagging features for gallery-page styling.</p>
- </div>
- <div class="icon-card">
- <div class="icon-box" aria-hidden="true">🔖</div>
- <h3 class="zh">藏品溯源卡片刊登</h3><h3 class="en">Provenance Card Publication</h3>
- <p class="zh">刊登藏品递藏来源资料，生成公开溯源信息卡片，平台不对溯源资料真伪做核验。</p>
- <p class="en">Publish provenance-chain materials for an item as public reference card. Platform does not verify provenance authenticity.</p>
- </div>
- </div>
- <div class="note-bar warn">
- <span class="marker" aria-hidden="true">⚠️</span>
- <div class="zh"><b>重要：</b>以上为可选增值信息展示服务。购买无需以藏品成交为前提，未成交卖家同样可以选购。平台不对卖家申报的成交事实、溯源资料做真实性核验；所有内容由卖家自行提供，仅供行业参考，不构成平台背书。购买本服务不会带来账号特权、不会改变创始卖家资格。服务仅提供线上信息刊登，不保证询盘与成交。</div>
- <div class="en"><b>Important:</b> These are optional value-add information-display services. Purchase is not conditional upon a completed sale; non-selling sellers may also purchase. Platform does not verify the truthfulness of sales-declarations or provenance documents submitted by sellers. All content is provided by sellers for reference only and does not constitute platform endorsement. Purchasing these services grants no account privileges and does not modify Founder-Dealer status. Services are for online information publication only; inquiries or sales are not guaranteed.</div>
- </div>
- </section>
-
- <!-- ===== 重要业务说明与免责（沿用原版全文） ===== -->
- <section>
- <div class="frame" style="margin-top:3rem;">
- <div class="frame-title zh">重要业务说明与免责</div>
- <div class="frame-title en">Important Terms &amp; Disclaimer</div>
- <div class="frame-title-sub">Terms</div>
- <div class="note-bar" style="margin-top:1.3rem;">
- <span class="marker" aria-hidden="true">※</span>
- <div class="zh">
- <b>重要业务说明：</b>基础发布、付费置顶（今日发现插槽）、精选展示（编辑精选）、卖家展馆、优先展馆、馆内置顶藏品以及各项可选增值服务均为独立服务，购买其中一项不会自动包含其余服务。一件藏品可同时购买多项推广。到期前需要主动续费；不续费则服务自动降级失效。付款支持 PayNow / 银行转账，平台提供收款收据。
- <br><br>
- <b>免责：</b>1.所有付费信息刊登 / 置顶 / 展馆 /增值服务，<strong>仅为线上信息曝光，不保证询盘、不保证联系、不保证成交</strong>。
- 2.平台仅提供线上信息曝光服务，不介入买卖双方实际交易，不做真伪担保，不参与资金收付。
- 3.所有藏品来源合法性责任全部归属卖家；平台只做信息展示，不做古物合规核验。
- 4.创始卖家·2026为免费审核准入身份，名额88席，招满关闭申请；已有资格卖家如发生账号冻结，席位予以释放不再保留该身份。
- </div>
- <div class="en">
- <b>Important terms:</b> 1. All paid services provide only online information publication and exposure. No inquiries or sales are guaranteed.
- 2. Basic Listing, Today's Finds pin, Editor's Picks, Dealer-Gallery, gallery add-ons and optional value-add services are independent services; purchasing one does not include others. Renew before expiry; services auto-downgrade without renewal. Payments via PayNow / bank transfer; receipts will be issued.
- 3. Sellers warrant all listed items comply with Singapore antiquities-related regulations and have lawful provenance.
- 4. Founder-Dealer 2026 status is free-application &amp; review-only, limited to 88 seats. Seats will be released and status revoked if account is suspended.
- <br><br>
- <b>Disclaimer:</b> Platform provides digital exposure service only. We do not mediate physical transactions, authenticate objects or handle funds.
- </div>
- </div>
- </div>
- </section>
-
- <!-- ===== 四、买家指南 ===== -->
- <section id="buyer-services">
- <div class="sec-head">
- <div class="eyebrow zh">买家指南</div><div class="eyebrow en">Buyer Guide</div>
- <h2 class="sec-title zh">买家使用指南</h2><h2 class="sec-title en">Buyer Usage Guide</h2>
- <p class="sec-sub zh">平台仅展示信息、提供联系方式，不介入交易、不抽交易佣金</p>
- <p class="sec-sub en">We display information and facilitate contact only</p>
- </div>
- <div class="sec-head tight">
- <div class="eyebrow zh">平台流程</div><div class="eyebrow en">Platform Flow</div>
- <h3 class="sec-title zh">买家完整业务流程</h3><h3 class="sec-title en">Full Buyer Workflow</h3>
- </div>
- <div class="frame">
- <ol class="flow-list">
- <li class="flow-step zh">浏览平台藏品库、卖家展馆，筛选感兴趣藏品；查看报价方式（价格区间 / 一口价 / 私聊）；</li>
- <li class="flow-step en">Browse public listings and dealer-galleries, filter antiques of interest, check pricing mode (range / fixed / private-inquiry);</li>
- <li class="flow-step zh">直接联系卖家，自行议价、确认货品细节、来源、交付、付款与运输安排；平台不介入交易；</li>
- <li class="flow-step en">Contact sellers directly to negotiate price, item details, provenance, payment and shipping. Platform will not get involved in transactions;</li>
- <li class="flow-step zh">需要第三方参考意见：可购买【专家咨询】服务获取顾问书面参考意见（不构成法律鉴定）；</li>
- <li class="flow-step en">For third-party reference: purchase Expert Consultation for consultant remarks (not formal legal appraisal);</li>
- <li class="flow-step zh">找不到目标藏品：可提交需求购买【委托找货】服务，平台帮你匹配卖家藏品资源；</li>
- <li class="flow-step en">If you cannot locate target antiques: use Sourcing Service and we match potential inventory for you;</li>
- <li class="flow-step zh">全部交易、转账、物流、风险核验，均由买卖双方自行负责。</li>
- <li class="flow-step en">All payments, shipping and risk-verification are handled solely between buyer and seller.</li>
- </ol>
- </div>
- <div class="frame" style="margin-top:1.4rem;">
- <div class="rows">
- <div class="row">
- <div class="row-info">
- <div class="row-title zh">专家咨询</div>
- <div class="row-title en">Expert Consultation</div>
- <div class="row-desc zh">资深顾问提供意见，仅作参考，不构成权威鉴定</div>
- <div class="row-desc en">Opinions provided by senior consultants are for reference only and do not constitute authoritative antique appraisal.</div>
- </div>
- <div class="row-price">
- <span class="amount">SGD 10</span>
- <span class="unit zh">/ 件</span><span class="unit en">/ item</span>
- </div>
- </div>
- <div class="row">
- <div class="row-info">
- <div class="row-title zh">委托找货 · 基础服务费</div>
- <div class="row-title en">Sourcing Service · Base fee</div>
- <div class="row-desc zh">按客户指定找货、匹配、约谈，为信息匹配固定服务费，不按成交金额抽佣。</div>
- <div class="row-desc en">Custom sourcing, matching and introductions; flat-rate information-service fee, no percentage commission on deal value.</div>
- </div>
- <div class="row-price">
- <span class="amount">SGD 120</span>
- </div>
- </div>
- </div>
- </div>
- <div class="note-bar">
- <span class="marker" aria-hidden="true">※</span>
- <div class="zh"><b>重要提示：</b>平台仅展示信息、提供联系方式；不介入交易、不抽交易佣金、不担保货品真伪与成交；转账、议价、付款、运输均由买卖双方自行解决。</div>
- <div class="en"><b>Important:</b> The platform only displays information and facilitates contact. It does not take part in transactions, collect transaction-based commission, or guarantee authenticity or completion. Payment, negotiation and shipping are handled directly between buyer and seller.</div>
- </div>
- <p class="inline-note"><a href="./index.html#services" class="zh" style="color:var(--color-primary);text-decoration:none;">返回首页服务区 →</a><a href="./index.html#services" class="en" style="color:var(--color-primary);text-decoration:none;">Back to homepage services →</a></p>
- </section>
-
- <!-- ===== 五、价格明细 ===== -->
- <section id="price-table">
- <div class="sec-head">
- <div class="eyebrow zh">价格明细</div><div class="eyebrow en">Price Table</div>
- <h2 class="sec-title zh">服务费用一览</h2><h2 class="sec-title en">Fee Overview</h2>
- <p class="sec-sub zh">新加坡元（SGD）计价 · 不含消费税</p>
- <p class="sec-sub en">Denominated in SGD · Excluding GST</p>
- <div class="sec-divider" aria-hidden="true"><span></span></div>
- </div>
- <div class="frame">
- <div class="rows">
- <div class="row">
- <div class="row-info"><div class="row-title zh">基础发布-创始卖家·2026（超出免费2件后）</div><div class="row-title en">Basic Listing-Founder-Dealer 2026 (after 2 complimentary credits)</div></div>
- <div class="row-price"><span class="amount">SGD 20</span><span class="unit zh">/ 件 / 年</span><span class="unit en">/ item / yr</span></div>
- </div>
- <div class="row">
- <div class="row-info"><div class="row-title zh">基础发布-普通卖家</div><div class="row-title en">Basic Listing-Standard Seller</div></div>
- <div class="row-price"><span class="amount">SGD 20</span><span class="unit zh">/ 件 / 半年</span><span class="unit en">/ item / 6-months</span></div>
- </div>
- <div class="row">
- <div class="row-info"><div class="row-title zh">付费置顶（今日发现插槽，7天）</div><div class="row-title en">Paid Pin Slot (Today's Finds, 7-day)</div></div>
- <div class="row-price"><span class="amount">SGD 180</span><span class="unit zh">/ 7 天</span><span class="unit en">/ 7 days</span></div>
- </div>
- <div class="row">
- <div class="row-info"><div class="row-title zh">精选展示（编辑精选）</div><div class="row-title en">Featured Listing (Editor's Picks)</div></div>
- <div class="row-price"><span class="amount">SGD 80</span><span class="unit zh">/ 件 / 年</span><span class="unit en">/ item / yr</span></div>
- </div>
- <div class="row">
- <div class="row-info"><div class="row-title zh">卖家展馆（标准）</div><div class="row-title en">Dealer Gallery (Standard)</div></div>
- <div class="row-price"><span class="amount">SGD 380</span><span class="unit zh">/ 年</span><span class="unit en">/ yr</span></div>
- </div>
- <div class="row">
- <div class="row-info"><div class="row-title zh">优先展馆（叠加增值）</div><div class="row-title en">Priority Gallery (add-on)</div></div>
- <div class="row-price"><span class="amount">+SGD 220</span><span class="unit zh">/ 年</span><span class="unit en">/ yr</span></div>
- </div>
- <div class="row">
- <div class="row-info"><div class="row-title zh">馆内置顶藏品</div><div class="row-title en">In-gallery Pinned Item</div></div>
- <div class="row-price"><span class="amount">SGD 60</span><span class="unit zh">/ 件 / 年</span><span class="unit en">/ item / yr</span></div>
- </div>
- <div class="row">
- <div class="row-info"><div class="row-title zh">增值：藏品成交档案刊登</div><div class="row-title en">Add-on: Sales Archive Publication</div></div>
- <div class="row-price"><span class="amount">SGD 80</span><span class="unit zh">/ 件</span><span class="unit en">/ item</span></div>
- </div>
- <div class="row">
- <div class="row-info"><div class="row-title zh">增值：卖家专题推送包</div><div class="row-title en">Add-on: Seller Feature Broadcast Package</div></div>
- <div class="row-price"><span class="amount">SGD 160</span><span class="unit zh">/ 次</span><span class="unit en">/ time</span></div>
- </div>
- <div class="row">
- <div class="row-info"><div class="row-title zh">增值：卖家展厅增强包（需已有标准展馆）</div><div class="row-title en">Add-on: Enhanced Gallery Package (requires Standard Gallery)</div></div>
- <div class="row-price"><span class="amount">SGD 220</span><span class="unit zh">/ 年</span><span class="unit en">/ yr</span></div>
- </div>
- <div class="row">
- <div class="row-info"><div class="row-title zh">增值：藏品溯源卡片刊登</div><div class="row-title en">Add-on: Provenance Card Publication</div></div>
- <div class="row-price"><span class="amount">SGD 60</span><span class="unit zh">/ 件</span><span class="unit en">/ item</span></div>
- </div>
- <div class="row">
- <div class="row-info"><div class="row-title zh">专家咨询</div><div class="row-title en">Expert Consultation</div></div>
- <div class="row-price"><span class="amount">SGD 10</span><span class="unit zh">/ 件</span><span class="unit en">/ item</span></div>
- </div>
- <div class="row">
- <div class="row-info"><div class="row-title zh">委托找货</div><div class="row-title en">Sourcing Service</div></div>
- <div class="row-price"><span class="amount">SGD 120</span></div>
- </div>
- </div>
- </div>
- <div class="note-bar">
- <span class="marker" aria-hidden="true">※</span>
- <div class="zh"><b>说明：</b>以上价格均为新加坡元（SGD），不含消费税。所有卖家服务互相独立，购买其一不包含其他服务。付款支持 PayNow / 银行转账，提供收据。</div>
- <div class="en"><b>Note:</b> All prices are in SGD, excluding GST. Seller services are independent — purchasing one does not include any other. Payment via PayNow or bank transfer; receipts provided.</div>
- </div>
- </section>
-
- <!-- ===== 六、付款方式 PayNow（双线框） ===== -->
- <div class="pay-frame">
- <div class="frame-title zh">平台服务费 · 付款方式</div>
- <div class="frame-title en">Platform Service Fee · Payment</div>
- <div class="frame-title-sub">PayNow</div>
- <div class="pay-grid">
- <div class="qr-box">
- <span class="qr-icon" aria-hidden="true">▦</span>
- <span class="zh">PayNow 二维码</span><span class="en">PayNow QR</span>
- </div>
- <div>
- <div class="info-title zh">收款信息</div>
- <div class="info-title en">Payment Details</div>
- <div class="info-line zh">平台服务费支持企业 PayNow 转账，请在备注填写：<b>卖家编号 + 购买的服务名称</b></div>
- <div class="info-line en">For platform service-fee payments only. Please include in reference: <b>Seller ID + service name</b></div>
- <div class="info-line zh">收款名称：<b>【填写你的公司名称】</b></div>
- <div class="info-line en">Payee Name: <b>【Fill your entity name】</b></div>
- <div class="info-line zh">UEN：<b>【填写UEN号】</b></div>
- <div class="info-line en">UEN: <b>【Fill UEN number】</b></div>
- <div class="info-line zh">示例：S0001 卖家展馆年费</div>
- <div class="info-line en">Example: S0001 Standard Gallery Annual</div>
- <div class="info-line zh">转账完成后，请保存截图发送至平台联系渠道，核验后开通对应服务，平台将提供收款收据。</div>
- <div class="info-line en">After transfer, please send payment screenshot for verification. Service will be activated upon confirmation, official receipt will be issued.</div>
- </div>
- </div>
- <div class="note-bar warn">
- <span class="marker" aria-hidden="true">⚠️</span>
- <div class="zh"><b>重要：</b>此收款仅用于支付平台信息刊登服务费。藏品交易货款请买卖双方自行结算，平台不代收藏品交易款项。</div>
- <div class="en"><b>Important:</b> This PayNow is for platform information-service fees only. All antique transaction payments are handled directly between buyer and seller. Platform does not receive object-sale funds.</div>
- </div>
- </div>
- </main>
- <footer>
- <div class="footer-nav">
-            <a href="pricing.html#buyer-services" class="zh">买家指南</a><a href="pricing.html#buyer-services" class="en">Buyer Guide</a>
-            <a href="about.html#location" class="zh">联系我们</a><a href="about.html#location" class="en">Contact</a>
-            <a href="privacy.html" class="zh">隐私政策</a><a href="privacy.html" class="en">Privacy</a>
-            <a href="terms.html" class="zh">用户条款</a><a href="terms.html" class="en">Terms</a>
+  <!-- ===== 一、卖家服务（2 项） ===== -->
+  <section id="seller-services">
+    <div class="sec-head">
+      <div class="eyebrow zh">卖家服务</div><div class="eyebrow en">Seller Services</div>
+      <h2 class="sec-title zh">刊登 · 推荐</h2><h2 class="sec-title en">Listing · Featured</h2>
+      <p class="sec-sub zh">平台不抽取任何交易佣金</p>
+      <p class="sec-sub en">No transaction commission of any kind</p>
+    </div>
+    <div class="center-actions">
+      <a href="https://airtable.com/apprn6XDQnAm8bkaT/shrlQLTRfG5RlYjD4" target="_blank" class="btn-publish">
+        <span class="zh">卖家入驻申请</span>
+        <span class="en">Apply as Seller</span>
+      </a>
+      <a href="https://airtable.com/apprn6XDQnAm8bkaT/pagLlGrrcpRWrcaWM/form" target="_blank" class="btn-outline">
+        <span class="zh">刊登藏品（已审核卖家）</span>
+        <span class="en">Submit Listing (Approved Sellers)</span>
+      </a>
+    </div>
+    <div class="plan-grid">
+      <div class="plan">
+        <h3 class="plan-title zh">刊登藏品</h3><h3 class="plan-title en">Item Listing</h3>
+        <div class="plan-note zh">
+          前 88 位卖家前 2 件免费
+          <span class="founder-badge" title="创始卖家 · 2026（限量 88 席）" aria-label="Founder-Dealer 2026, limited to 88">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M3 8L6 14L9 7L12 13L15 7L18 14L21 8V17C21 17.55 20.55 18 20 18H4C3.45 18 3 17.55 3 17V8Z"
+                    fill="currentColor" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/>
+              <circle cx="3" cy="8" r="1.4" fill="currentColor"/>
+              <circle cx="12" cy="6" r="1.4" fill="currentColor"/>
+              <circle cx="21" cy="8" r="1.4" fill="currentColor"/>
+            </svg>
+            <span class="badge-num">88</span>
+          </span>
         </div>
- <!-- 2026-09-18：免责声明已移入 terms.html「用户条款」。 -->
-        <p class="footer-disclaimer zh">gudong.app 是信息发现平台，而非交易平台。</p>
-        <p class="footer-disclaimer en">gudong.app is an information and discovery platform for antiques and collectibles.</p>
- <p class="zh">© 2026 古董集 · gudong.app</p>
- <p class="en">© 2026 Gudong · gudong.app</p>
- </footer>
- <script>
- /* ===== LOGO 副标题宽度动态校准 =====
- 需求：中文副标题「古董藏品信息平台」总宽度须落在主标题「古董集」总宽度的 105%～115%。
- 字号比例（32%~36%）已由 CSS 固定，但因字符数不同（3字 vs 8字），
- 单纯按字号比例无法保证宽度比例，因此在运行时实测两者宽度，
- 反推所需 letter-spacing 精确收敛到目标区间（取 110% 中值），
- 不依赖具体字号/字体度量，换字体、换字号也依然成立。 */
- function tuneChineseBrandSubtitle() {
- const lineEl = document.querySelector('.brand-line.zh');
- const mainEl = document.getElementById('brandZhMain');
- const subEl = document.getElementById('brandZhSub');
- if (!lineEl || !mainEl || !subEl) return;
+        <div class="plan-note en">
+          First 88 sellers: first 2 free
+          <span class="founder-badge" title="Founder-Dealer 2026, limited to 88" aria-label="Founder-Dealer 2026, limited to 88">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M3 8L6 14L9 7L12 13L15 7L18 14L21 8V17C21 17.55 20.55 18 20 18H4C3.45 18 3 17.55 3 17V8Z"
+                    fill="currentColor" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/>
+              <circle cx="3" cy="8" r="1.4" fill="currentColor"/>
+              <circle cx="12" cy="6" r="1.4" fill="currentColor"/>
+              <circle cx="21" cy="8" r="1.4" fill="currentColor"/>
+            </svg>
+            <span class="badge-num">88</span>
+          </span>
+        </div>
+        <div class="plan-divider"></div>
+        <div class="plan-price"><span class="cur">SGD</span>20</div>
+        <div class="plan-unit zh">/ 件 / 年</div><div class="plan-unit en">/ item / year</div>
+        <ul class="plan-list">
+          <li class="zh">藏品上架展示，进入最新上架池</li><li class="en">Listed and shown in "New Listings" pool</li>
+          <li class="zh">平台不抽取任何交易佣金</li><li class="en">No transaction commission</li>
+          <li class="zh">
+            专属创始卖家·2026 身份
+            <span class="founder-badge" title="创始卖家 · 2026（限量 88 席）" aria-label="Founder-Dealer 2026, limited to 88">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M3 8L6 14L9 7L12 13L15 7L18 14L21 8V17C21 17.55 20.55 18 20 18H4C3.45 18 3 17.55 3 17V8Z"
+                      fill="currentColor" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/>
+                <circle cx="3" cy="8" r="1.4" fill="currentColor"/>
+                <circle cx="12" cy="6" r="1.4" fill="currentColor"/>
+                <circle cx="21" cy="8" r="1.4" fill="currentColor"/>
+              </svg>
+              <span class="badge-num">88</span>
+            </span>
+          </li>
+          <li class="en">
+            Dedicated Founder-Dealer 2026 status
+            <span class="founder-badge" title="Founder-Dealer 2026, limited to 88" aria-label="Founder-Dealer 2026, limited to 88">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M3 8L6 14L9 7L12 13L15 7L18 14L21 8V17C21 17.55 20.55 18 20 18H4C3.45 18 3 17.55 3 17V8Z"
+                      fill="currentColor" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/>
+                <circle cx="3" cy="8" r="1.4" fill="currentColor"/>
+                <circle cx="12" cy="6" r="1.4" fill="currentColor"/>
+                <circle cx="21" cy="8" r="1.4" fill="currentColor"/>
+              </svg>
+              <span class="badge-num">88</span>
+            </span>
+          </li>
+        </ul>
+      </div>
+      <div class="plan featured">
+        <span class="plan-badge zh">推荐</span><span class="plan-badge en">Featured</span>
+        <h3 class="plan-title zh">首页推荐</h3><h3 class="plan-title en">Homepage Feature</h3>
+        <div class="plan-note zh">每月仅 1-2 个位置，先到先得</div><div class="plan-note en">Only 1-2 slots per month</div>
+        <div class="plan-divider"></div>
+        <div class="plan-price"><span class="cur">SGD</span>120</div>
+        <div class="plan-unit zh">/ 月</div><div class="plan-unit en">/ month</div>
+        <div class="plan-price-sub zh">年付 SGD 1200 / 年</div>
+        <div class="plan-price-sub en">Annual: SGD 1200 / year</div>
+        <ul class="plan-list">
+          <li class="zh">首页「今日发现」置顶插槽</li><li class="en">Pinned slot in "Today's Finds"</li>
+          <li class="zh">「编辑精选」徽章 + 优先排序</li><li class="en">"Editor's Picks" badge + priority ordering</li>
+          <li class="zh">年付省 2 个月</li><li class="en">Annual plan: 2 months free</li>
+        </ul>
+      </div>
+    </div>
+    <div class="note-bar">
+      <span class="marker" aria-hidden="true">※</span>
+      <div class="zh">
+        前 88 位入驻卖家自动获得「创始卖家·2026」身份
+        <span class="founder-badge lg" title="创始卖家 · 2026（限量 88 席）" aria-label="Founder-Dealer 2026, limited to 88">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M3 8L6 14L9 7L12 13L15 7L18 14L21 8V17C21 17.55 20.55 18 20 18H4C3.45 18 3 17.55 3 17V8Z"
+                  fill="currentColor" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/>
+            <circle cx="3" cy="8" r="1.4" fill="currentColor"/>
+            <circle cx="12" cy="6" r="1.4" fill="currentColor"/>
+            <circle cx="21" cy="8" r="1.4" fill="currentColor"/>
+          </svg>
+          <span class="badge-num">88</span>
+        </span>
+        ，前 2 件藏品免费刊登。名额招满后，新卖家按 SGD 20 / 件 / 年收费。平台不抽取任何交易佣金。
+      </div>
+      <div class="en">
+        First 88 approved sellers automatically receive "Founder-Dealer 2026" status
+        <span class="founder-badge lg" title="Founder-Dealer 2026, limited to 88" aria-label="Founder-Dealer 2026, limited to 88">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M3 8L6 14L9 7L12 13L15 7L18 14L21 8V17C21 17.55 20.55 18 20 18H4C3.45 18 3 17.55 3 17V8Z"
+                  fill="currentColor" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/>
+            <circle cx="3" cy="8" r="1.4" fill="currentColor"/>
+            <circle cx="12" cy="6" r="1.4" fill="currentColor"/>
+            <circle cx="21" cy="8" r="1.4" fill="currentColor"/>
+          </svg>
+          <span class="badge-num">88</span>
+        </span>
+        with 2 complimentary listings. Once seats are filled, new sellers pay SGD 20 / item / year. No transaction commission of any kind.
+      </div>
+    </div>
+  </section>
 
- const originalLineCss = lineEl.style.cssText;
- const originalMainCss = mainEl.style.cssText;
- const originalSubCss = subEl.style.cssText;
+  <!-- ===== 二、买家服务（1 项） ===== -->
+  <section id="buyer-services">
+    <div class="sec-head">
+      <div class="eyebrow zh">买家服务</div><div class="eyebrow en">Buyer Services</div>
+      <h2 class="sec-title zh">委托找货</h2><h2 class="sec-title en">Sourcing Service</h2>
+      <p class="sec-sub zh">浏览、联系卖家全免费，仅对深度找货服务收费</p>
+      <p class="sec-sub en">Browsing and contacting sellers are free</p>
+    </div>
+    <div class="frame">
+      <div class="rows">
+        <div class="row">
+          <div class="row-info">
+            <div class="row-title zh">委托找货</div>
+            <div class="row-title en">Sourcing Service</div>
+            <div class="row-desc zh">
+              <strong>预付：SGD 120 基础服务费 + 成交价 2% 保证金（最低 SGD 100）</strong><br>
+              · 委托时预付，用于人工找货、匹配、约谈<br>
+              · <b>成交：保证金转为服务费，不予退还</b><br>
+              · <b>未成交：退还全额保证金，SGD 120 不退</b>（已投入人工）<br>
+              · 平台不代收货款，成交款由买卖双方自行结算<br>
+              · 平台不保证一定找到、不保证成交<br>
+              <br>
+              <b>示例：</b>委托找一件预算 SGD 10,000 的藏品，预付 SGD 120 + SGD 200 = <b>SGD 320</b>。
+              成交后 SGD 200 转为服务费；未成交退 SGD 200，保留 SGD 120。
+            </div>
+            <div class="row-desc en">
+              <strong>Prepaid: SGD 120 base fee + 2% deposit on sale price (min. SGD 100)</strong><br>
+              · Prepaid upon engagement, covering manual sourcing, matching and introductions<br>
+              · <b>If sale completes: deposit converts to service fee, non-refundable</b><br>
+              · <b>If no sale: full deposit refunded, SGD 120 non-refundable</b><br>
+              · Platform does not collect sale proceeds; payment settled directly between buyer and seller<br>
+              · Platform does not guarantee finding an item or completing a sale<br>
+              <br>
+              <b>Example:</b> sourcing an item with estimated price SGD 10,000 — prepay SGD 120 + SGD 200 = <b>SGD 320</b>.
+              On completion, SGD 200 becomes the service fee; if no sale, SGD 200 refunded, SGD 120 retained.
+            </div>
+          </div>
+          <div class="row-price">
+            <span class="amount">SGD 120</span>
+            <span class="amount-sub zh">+ 2% 保证金</span>
+            <span class="amount-sub en">+ 2% deposit</span>
+            <span class="unit zh">/ 次（最低 SGD 100）</span>
+            <span class="unit en">/ time (min. SGD 100)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
- // 临时强制可测量：visibility:hidden + position:absolute 不影响任何视觉呈现，
- // !important 确保即便当前处于英文模式（[data-lang="en"] .zh{display:none}）也能测量到真实宽度
- [lineEl, mainEl, subEl].forEach(el => {
- el.style.setProperty('display', 'inline-flex', 'important');
- el.style.setProperty('visibility', 'hidden', 'important');
- el.style.setProperty('position', 'absolute', 'important');
- });
- subEl.style.setProperty('letter-spacing', '0px', 'important');
+  <!-- ===== 三、价格明细（3 行） ===== -->
+  <section id="price-table">
+    <div class="sec-head">
+      <div class="eyebrow zh">价格明细</div><div class="eyebrow en">Fee Overview</div>
+      <h2 class="sec-title zh">服务费用一览</h2><h2 class="sec-title en">Fee Overview</h2>
+      <p class="sec-sub zh">新加坡元（SGD）计价 · 不含消费税</p>
+      <p class="sec-sub en">Denominated in SGD · Excluding GST</p>
+      <div class="sec-divider" aria-hidden="true"><span></span></div>
+    </div>
+    <div class="frame">
+      <div class="rows">
+        <div class="row">
+          <div class="row-info">
+            <div class="row-title zh">刊登藏品</div>
+            <div class="row-title en">Item Listing</div>
+          </div>
+          <div class="row-price"><span class="amount">SGD 20</span><span class="unit zh">/ 件 / 年</span><span class="unit en">/ item / yr</span></div>
+        </div>
+        <div class="row">
+          <div class="row-info">
+            <div class="row-title zh">首页推荐（月付 / 年付）</div>
+            <div class="row-title en">Homepage Feature (monthly / annual)</div>
+          </div>
+          <div class="row-price">
+            <span class="amount">SGD 120</span>
+            <span class="amount-sub zh">年付 SGD 1200</span>
+            <span class="amount-sub en">Annual SGD 1200</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="row-info">
+            <div class="row-title zh">委托找货（含 2% 保证金，最低 SGD 100）</div>
+            <div class="row-title en">Sourcing Service (incl. 2% deposit, min. SGD 100)</div>
+          </div>
+          <div class="row-price">
+            <span class="amount">SGD 120</span>
+            <span class="amount-sub zh">+ 成交价 2%</span>
+            <span class="amount-sub en">+ 2% of sale price</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="note-bar">
+      <span class="marker" aria-hidden="true">※</span>
+      <div class="zh"><b>说明：</b>以上价格均为新加坡元（SGD），不含消费税。所有服务互相独立，购买其一不包含其他服务。付款支持 PayNow / 银行转账，提供收据。委托找货保证金在未成交时全额退还。平台不代收货款。</div>
+      <div class="en"><b>Note:</b> All prices are in SGD, excluding GST. Services are independent — purchasing one does not include any other. Payment via PayNow or bank transfer; receipts provided. Sourcing Service deposit is fully refunded if no sale occurs. Platform does not collect sale proceeds.</div>
+    </div>
+  </section>
 
- const mainWidth = mainEl.getBoundingClientRect().width;
- const naturalSubWidth = subEl.getBoundingClientRect().width;
+  <!-- ===== 四、PayNow 付款 ===== -->
+  <div class="pay-frame">
+    <div class="frame-title zh">平台服务费 · 付款方式</div>
+    <div class="frame-title en">Platform Service Fee · Payment</div>
+    <div class="frame-title-sub">PayNow</div>
+    <div class="pay-grid">
+      <div class="qr-box">
+        <span class="qr-icon" aria-hidden="true">▦</span>
+        <span class="zh">PayNow 二维码</span><span class="en">PayNow QR</span>
+      </div>
+      <div>
+        <div class="info-title zh">收款信息</div>
+        <div class="info-title en">Payment Details</div>
+        <div class="info-line zh">请在备注填写：<b>卖家编号 / 买家姓名 + 服务名称</b></div>
+        <div class="info-line en">Reference: <b>Seller ID / Buyer name + service name</b></div>
+        <div class="info-line zh">收款名称：<b>【填写你的公司名称】</b></div>
+        <div class="info-line en">Payee Name: <b>【Fill your entity name】</b></div>
+        <div class="info-line zh">UEN：<b>【填写UEN号】</b></div>
+        <div class="info-line en">UEN: <b>【Fill UEN number】</b></div>
+        <div class="info-line zh">GST 注册号：<b>【如已注册请填写，未注册写 N/A】</b></div>
+        <div class="info-line en">GST Reg. No.: <b>【Fill if registered, otherwise N/A】</b></div>
+        <div class="info-line zh">示例：S0001 刊登费 / 首页推荐 / 委托找货保证金</div>
+        <div class="info-line en">Example: S0001 Listing / Homepage Feature / Sourcing deposit</div>
+        <div class="info-line zh">转账完成后，请保存截图发送至平台联系渠道，核验后开通对应服务，平台将提供收款收据。</div>
+        <div class="info-line en">After transfer, please send payment screenshot for verification. Service will be activated upon confirmation, official receipt will be issued.</div>
+      </div>
+    </div>
+    <div class="note-bar warn">
+      <span class="marker" aria-hidden="true">⚠️</span>
+      <div class="zh"><b>重要：</b>此收款仅用于支付平台服务费。藏品交易货款请买卖双方自行结算，平台不代收藏品交易款项。委托找货保证金在未成交时全额退还。</div>
+      <div class="en"><b>Important:</b> This PayNow is for platform service fees only. All antique transaction payments are handled directly between buyer and seller. Platform does not receive object-sale funds. Sourcing Service deposit is fully refunded if no sale occurs.</div>
+    </div>
+  </div>
+</main>
 
- let finalLetterSpacing = null;
- if (mainWidth > 0) {
- const targetWidth = mainWidth * 1.10; // 105%~115% 区间取中值 110%
- const charCount = Array.from(subEl.textContent.trim()).length;
- const gaps = Math.max(charCount - 1, 1);
- const extraPerGap = Math.max((targetWidth - naturalSubWidth) / gaps, 0);
- finalLetterSpacing = extraPerGap.toFixed(2) + 'px';
- }
+<footer>
+  <div class="footer-nav">
+    <a href="pricing.html#buyer-services" class="zh">委托找货</a><a href="pricing.html#buyer-services" class="en">Sourcing</a>
+    <a href="about.html#location" class="zh">联系我们</a><a href="about.html#location" class="en">Contact</a>
+    <a href="privacy.html" class="zh">隐私政策</a><a href="privacy.html" class="en">Privacy</a>
+    <a href="terms.html" class="zh">用户条款</a><a href="terms.html" class="en">Terms</a>
+  </div>
+  <p class="footer-disclaimer zh">gudong.app 是信息发现平台，而非交易平台。</p>
+  <p class="footer-disclaimer en">gudong.app is an information and discovery platform for antiques and collectibles.</p>
+  <p class="zh">© 2026 古董集 · gudong.app</p>
+  <p class="en">© 2026 Gudong · gudong.app</p>
+</footer>
 
- // 还原原始内联样式（不影响窄屏 .brand-sub{display:none} 等既有规则）
- lineEl.style.cssText = originalLineCss;
- mainEl.style.cssText = originalMainCss;
- subEl.style.cssText = originalSubCss;
- if (finalLetterSpacing) {
- subEl.style.letterSpacing = finalLetterSpacing;
- }
- }
- if (document.fonts && document.fonts.ready) {
- document.fonts.ready.then(tuneChineseBrandSubtitle);
- }
- window.addEventListener('load', tuneChineseBrandSubtitle); // 字体延迟加载时的兜底二次校准
- let resizeTuneTimer;
- window.addEventListener('resize', () => {
- clearTimeout(resizeTuneTimer);
- resizeTuneTimer = setTimeout(tuneChineseBrandSubtitle, 150);
- });
+<script>
+function tuneChineseBrandSubtitle() {
+  const lineEl = document.querySelector('.brand-line.zh');
+  const mainEl = document.getElementById('brandZhMain');
+  const subEl = document.getElementById('brandZhSub');
+  if (!lineEl || !mainEl || !subEl) return;
+  const originalLineCss = lineEl.style.cssText;
+  const originalMainCss = mainEl.style.cssText;
+  const originalSubCss = subEl.style.cssText;
+  [lineEl, mainEl, subEl].forEach(el => {
+    el.style.setProperty('display', 'inline-flex', 'important');
+    el.style.setProperty('visibility', 'hidden', 'important');
+    el.style.setProperty('position', 'absolute', 'important');
+  });
+  subEl.style.setProperty('letter-spacing', '0px', 'important');
+  const mainWidth = mainEl.getBoundingClientRect().width;
+  const naturalSubWidth = subEl.getBoundingClientRect().width;
+  let finalLetterSpacing = null;
+  if (mainWidth > 0) {
+    const targetWidth = mainWidth * 1.10;
+    const charCount = Array.from(subEl.textContent.trim()).length;
+    const gaps = Math.max(charCount - 1, 1);
+    const extraPerGap = Math.max((targetWidth - naturalSubWidth) / gaps, 0);
+    finalLetterSpacing = extraPerGap.toFixed(2) + 'px';
+  }
+  lineEl.style.cssText = originalLineCss;
+  mainEl.style.cssText = originalMainCss;
+  subEl.style.cssText = originalSubCss;
+  if (finalLetterSpacing) { subEl.style.letterSpacing = finalLetterSpacing; }
+}
+if (document.fonts && document.fonts.ready) {
+  document.fonts.ready.then(tuneChineseBrandSubtitle);
+}
+window.addEventListener('load', tuneChineseBrandSubtitle);
+let resizeTuneTimer;
+window.addEventListener('resize', () => {
+  clearTimeout(resizeTuneTimer);
+  resizeTuneTimer = setTimeout(tuneChineseBrandSubtitle, 150);
+});
 
- let currentLang = 'zh';
- function toggleLang() {
- currentLang = currentLang === 'zh' ? 'en' : 'zh';
- document.body.dataset.lang = currentLang;
- document.querySelector('.lang-btn').textContent = currentLang === 'zh' ? 'EN' : '中';
- }
- function openSidebar() {
- document.getElementById('sidebar').classList.add('open');
- document.getElementById('sidebarOverlay').classList.add('show');
- document.body.style.overflow = 'hidden';
- }
- function closeSidebar() {
- document.getElementById('sidebar').classList.remove('open');
- document.getElementById('sidebarOverlay').classList.remove('show');
- document.body.style.overflow = '';
- }
- // Tab点击：激活+平滑滚动锚点
- const tabLinks = document.querySelectorAll('.tab-btn[data-tab]');
- tabLinks.forEach(tab => {
- tab.addEventListener('click', function(e){
- e.preventDefault();
- tabLinks.forEach(t=>t.classList.remove('active'));
- this.classList.add('active');
- const targetId = this.getAttribute('href');
- const el = document.querySelector(targetId);
- if(el) el.scrollIntoView({behavior:'smooth'});
- })
- });
- // 仅在线https环境注册serviceWorker，本地打开不会报错
- if ('serviceWorker' in navigator && window.location.protocol === 'https:') {
- navigator.serviceWorker.register('/sw.js');
- }
- </script>
+let currentLang = 'zh';
+function toggleLang() {
+  currentLang = currentLang === 'zh' ? 'en' : 'zh';
+  document.body.dataset.lang = currentLang;
+  document.querySelector('.lang-btn').textContent = currentLang === 'zh' ? 'EN' : '中';
+}
+function openSidebar() {
+  document.getElementById('sidebar').classList.add('open');
+  document.getElementById('sidebarOverlay').classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+function closeSidebar() {
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('sidebarOverlay').classList.remove('show');
+  document.body.style.overflow = '';
+}
+if ('serviceWorker' in navigator && window.location.protocol === 'https:') {
+  navigator.serviceWorker.register('/sw.js');
+}
+</script>
 </body>
 </html>

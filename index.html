@@ -468,6 +468,7 @@
         }
         .finds-card { text-decoration: none; color: inherit; display: block; }
         .finds-image {
+            position: relative;
             aspect-ratio: 1 / 1;
             border-radius: 8px;
             overflow: hidden;
@@ -479,12 +480,14 @@
         .finds-title { font-size: .98rem; font-weight: 700; color: var(--color-text); margin-bottom: .15rem; }
         .finds-meta { font-size: .8rem; color: var(--color-text-secondary); margin-bottom: .4rem; }
         .finds-badge {
+            position: absolute;
+            top: .5rem;
+            right: .5rem;
             display: inline-block;
             font-size: .6rem;
             font-weight: 600;
             padding: .16rem .5rem;
             border-radius: 4px;
-            margin-bottom: .4rem;
         }
         .finds-card--organic .finds-badge,
         .finds-card--promoted .finds-badge{
@@ -1001,7 +1004,7 @@
     </main>
     <footer>
         <div class="footer-nav">
-            <a href="pricing.html#buyer-services" class="zh">买家指南</a><a href="pricing.html#buyer-services" class="en">Buyer Guide</a>
+            <a href="pricing.html#buyer-services" class="zh">委托找货</a><a href="pricing.html#buyer-services" class="en">Sourcing</a>
             <a href="about.html#location" class="zh">联系我们</a><a href="about.html#location" class="en">Contact</a>
             <a href="privacy.html" class="zh">隐私政策</a><a href="privacy.html" class="en">Privacy</a>
             <a href="terms.html" class="zh">用户条款</a><a href="terms.html" class="en">Terms</a>
@@ -1429,7 +1432,7 @@
 
         function renderFindsCard(f) {
           const promoted = f.is_today_finds;
-          const badgeZh = promoted ? '推广展示' : '系统推荐';
+          const badgeZh = promoted ? '推广' : '系统推荐';
           const badgeEn = promoted ? 'Sponsored' : 'System Recommended';
           const cls = promoted ? 'finds-card--promoted' : 'finds-card--organic';
           const kw = attrKeywords(f);
@@ -1437,11 +1440,13 @@
           const metaEn = [f.era_en, f.category].filter(Boolean).join(' · ');
           return `
             <a href="items/${esc(normId(f.item_id))}.html" class="finds-card ${cls}" data-cat="${catKey(f.category)}" data-keywords="${kw}">
-              <div class="finds-image"><img src="${imgPath(f)}" alt="${esc(f.title_zh)}" loading="lazy" onerror="this.onerror=null;this.src='assets/images/placeholder.jpg'"></div>
+              <div class="finds-image">
+                <img src="${imgPath(f)}" alt="${esc(f.title_zh)}" loading="lazy" onerror="this.onerror=null;this.src='assets/images/placeholder.jpg'">
+                <span class="finds-badge zh">${badgeZh}</span><span class="finds-badge en">${badgeEn}</span>
+              </div>
               <div class="finds-title zh">${esc(f.title_zh)}</div><div class="finds-title en">${esc(f.title_en)}</div>
               <div class="finds-meta zh">${esc(metaZh)}</div><div class="finds-meta en">${esc(metaEn)}</div>
               ${priceHtml(f, 'finds-price')}
-              <div class="finds-badge zh">${badgeZh}</div><div class="finds-badge en">${badgeEn}</div>
               <div class="finds-caption zh">卖家提供资料</div><div class="finds-caption en">Seller-provided information</div>
             </a>`;
         }

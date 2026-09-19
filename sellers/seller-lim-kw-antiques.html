@@ -1,10 +1,19 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-SG">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lim Kee Whee | Gudong 卖家展馆</title>
-    <link rel="manifest" href="../manifest.json">
+    <meta name="description" content="林记古玩（Lim Kee Whee）展馆：高古青铜与明清瓷器。 Lim Kee Whee gallery: archaic bronzes and Ming-Qing porcelain.">
+    <link rel="canonical" href="https://gudong.app/sellers/seller-lim-kw-antiques.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="古董集 Gudong">
+    <meta property="og:title" content="Lim Kee Whee | Gudong 卖家展馆">
+    <meta property="og:description" content="林记古玩（Lim Kee Whee）展馆：高古青铜与明清瓷器。 Lim Kee Whee gallery: archaic bronzes and Ming-Qing porcelain.">
+    <meta property="og:url" content="https://gudong.app/sellers/seller-lim-kw-antiques.html">
+    <meta property="og:image" content="https://gudong.app/assets/icons/icon-512.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+    <link rel="manifest" href="../../../manifest.json">
     <meta name="theme-color" content="#8A5A3B">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -261,13 +270,13 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
     <div class="announce-bar" id="announceBar">
         <span class="zh">创始卖家福利｜限量 88 席免费入驻，前 2 件藏品信息免费刊登。</span>
         <span class="en">Founder-Dealer Benefit | Limited 88 seats · Free to join · First 2 listings free.</span>
-        <button class="announce-close" onclick="document.getElementById('announceBar').style.display='none'" aria-label="close">×</button>
+        <button class="announce-close" onclick="closeAnnounce()" aria-label="close">×</button>
     </div>
 
     <header>
         <div style="display:flex; align-items:center; gap:.9rem;">
             <button class="menu-toggle" onclick="openSidebar()" aria-label="menu">☰</button>
-            <a href="../index.html" class="brand" style="text-decoration:none;color:inherit;">
+            <a href="../../../index.html" class="brand" style="text-decoration:none;color:inherit;">
                 <h1 class="zh">古董集</h1>
                 <h1 class="en">GUDONG</h1>
                 <p class="zh">GUDONG</p>
@@ -289,28 +298,28 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
             <span class="zh">古董集</span><span class="en">GUDONG</span>
         </div>
                 <nav class="sidebar-nav">
-            <a href="../index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">首页</span><span class="en">Home</span></a>
-            <a href="../index.html#today-finds" class="sidebar-link" onclick="closeSidebar()"><span class="zh">今日发现</span><span class="en">Today's Finds</span></a>
-            <a href="../index.html#new-listings" class="sidebar-link" onclick="closeSidebar()"><span class="zh">最新藏品</span><span class="en">New Listings</span></a>
+            <a href="../../../index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">首页</span><span class="en">Home</span></a>
+            <a href="../../../index.html#today-finds" class="sidebar-link" onclick="closeSidebar()"><span class="zh">今日发现</span><span class="en">Today's Finds</span></a>
+            <a href="../../../index.html#new-listings" class="sidebar-link" onclick="closeSidebar()"><span class="zh">最新藏品</span><span class="en">New Listings</span></a>
 
             <div class="sidebar-group-title zh">藏品库</div><div class="sidebar-group-title en">Collection</div>
-            <a href="../categories/porcelain.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 瓷器</span><span class="en">· Porcelain</span></a>
-            <a href="../categories/jade.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 玉器</span><span class="en">· Jade</span></a>
-            <a href="../categories/coins.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 钱币</span><span class="en">· Coins</span></a>
-            <a href="../categories/paintings.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 书画</span><span class="en">· Paintings &amp; Calligraphy</span></a>
-            <a href="../categories/misc.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 杂项</span><span class="en">· Miscellaneous</span></a>
+            <a href="../../../categories/porcelain.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 瓷器</span><span class="en">· Porcelain</span></a>
+            <a href="../../../categories/jade.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 玉器</span><span class="en">· Jade</span></a>
+            <a href="../../../categories/coins.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 钱币</span><span class="en">· Coins</span></a>
+            <a href="../../../categories/paintings.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 书画</span><span class="en">· Paintings &amp; Calligraphy</span></a>
+            <a href="../../../categories/misc.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 杂项</span><span class="en">· Miscellaneous</span></a>
 
-            <a href="../sellers/index.html" class="sidebar-link active" onclick="closeSidebar()"><span class="zh">卖家展馆</span><span class="en">Dealer Galleries</span></a>
-            <a href="../pricing.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">服务价格</span><span class="en">Pricing</span></a>
-            <a href="../about.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">关于Gudong</span><span class="en">About</span></a>
+            <a href="../../../sellers/index.html" class="sidebar-link active" onclick="closeSidebar()"><span class="zh">卖家展馆</span><span class="en">Dealer Galleries</span></a>
+            <a href="../../../pricing.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">服务价格</span><span class="en">Pricing</span></a>
+            <a href="../../../about.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">关于Gudong</span><span class="en">About</span></a>
             <button type="button" class="sidebar-lang-btn" onclick="toggleLang()" aria-label="Switch language"><span class="zh">🌐 English</span><span class="en">🌐 中文</span></button>
         </nav>
     </aside>
 
     <main class="container">
         <section>
-            <a href="../sellers/index.html" class="back-link zh">← 返回卖家展馆</a>
-            <a href="../sellers/index.html" class="back-link en">← Back to Dealer Galleries</a>
+            <a href="../../../sellers/index.html" class="back-link zh">← 返回卖家展馆</a>
+            <a href="../../../sellers/index.html" class="back-link en">← Back to Seller Galleries</a>
 
             <!--
               使用说明 / How to use this template
@@ -347,10 +356,10 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
 
     <footer>
         <div class="footer-nav">
-            <a href="../pricing.html#buyer-services" class="zh">买家指南</a><a href="../pricing.html#buyer-services" class="en">Buyer Guide</a>
-            <a href="../about.html#location" class="zh">联系我们</a><a href="../about.html#location" class="en">Contact</a>
-            <a href="../privacy.html" class="zh">隐私政策</a><a href="../privacy.html" class="en">Privacy</a>
-            <a href="../terms.html" class="zh">用户条款</a><a href="../terms.html" class="en">Terms</a>
+            <a href="../../../pricing.html#buyer-services" class="zh">买家指南</a><a href="../../../pricing.html#buyer-services" class="en">Buyer Guide</a>
+            <a href="../../../about.html#location" class="zh">联系我们</a><a href="../../../about.html#location" class="en">Contact</a>
+            <a href="../../../privacy.html" class="zh">隐私政策</a><a href="../../../privacy.html" class="en">Privacy</a>
+            <a href="../../../terms.html" class="zh">用户条款</a><a href="../../../terms.html" class="en">Terms</a>
         </div>
         <p class="footer-disclaimer zh">gudong.app 是信息发现平台，而非交易平台。</p>
         <p class="footer-disclaimer en">gudong.app is an information and discovery platform for antiques and collectibles.</p>
@@ -358,6 +367,7 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
         <p class="en">© 2026 Gudong · gudong.app</p>
     </footer>
 
+    <script src="../../../assets/js/gudong-data.js" data-root="../"></script>
     <script>
         function openSidebar() {
             document.getElementById('sidebar').classList.add('open');
@@ -369,97 +379,79 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
             document.getElementById('sidebarOverlay').classList.remove('show');
             document.body.style.overflow = '';
         }
-        function toggleLang() {
-            const body = document.body;
-            const next = body.dataset.lang === 'zh' ? 'en' : 'zh';
-            body.dataset.lang = next;
-            document.querySelector('.lang-btn').textContent = next === 'zh' ? 'EN' : '中';
+        /* 2026-09-19：全站统一的语言偏好与公告条（localStorage：gudong_lang / announceClosed），子页面之间保持一致 */
+        let currentLang = (function () { try { return localStorage.getItem('gudong_lang') === 'en' ? 'en' : 'zh'; } catch (e) { return 'zh'; } })();
+        function applyLang() {
+            document.body.dataset.lang = currentLang;
+            document.documentElement.lang = currentLang === 'en' ? 'en-SG' : 'zh-SG';
+            var b = document.querySelector('.lang-btn');
+            if (b) b.textContent = currentLang === 'zh' ? 'EN' : '中';
         }
+        function toggleLang() {
+            currentLang = currentLang === 'zh' ? 'en' : 'zh';
+            applyLang();
+            try { localStorage.setItem('gudong_lang', currentLang); } catch (e) {}
+            if (window.filterItems) filterItems();
+        }
+        function closeAnnounce() {
+            var b = document.getElementById('announceBar');
+            if (b) b.style.display = 'none';
+            try { localStorage.setItem('announceClosed', 'yes'); } catch (e) {}
+        }
+        applyLang();
+        try { if (localStorage.getItem('announceClosed') === 'yes') { var __ab = document.getElementById('announceBar'); if (__ab) __ab.style.display = 'none'; } } catch (e) {}
         if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js');
 
-        // ── 动态加载该卖家的藏品（从 API 拉取）─────────────────────────
-        function esc(s) {
-          return String(s == null ? '' : s)
-            .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
-            .replace(/"/g,'&quot;').replace(/'/g,'&#39;');
-        }
-        function imgSrc(f) {
-          const file = f.img_file || '';
-          // Airtable 里若只存文件名，自动补上该卖家的图片子目录
-          const rel = file && !file.includes('/') ? 'lim-kw/' + file : file;
-          return file ? ('../assets/images/' + rel) : '../assets/images/placeholder.jpg';
-        }
-
-        // 静态兜底数据：API 不可用时展示（与 items/item-lim-01~04.html 一致）
-        const FALLBACK_ITEMS = [
-          { item_id: 'item-lim-01', title_zh: '大明宣德青花描金云龙纹扁瓶', title_en: 'Ming Xuande Blue-and-White Gilt Dragon Vase', price_display_zh: 'S$58,000', price_display_en: 'S$58,000', img_file: 'lim-kw/item-lim-01.jpg' },
-          { item_id: 'item-lim-02', title_zh: '战国青铜错金乳钉双耳四足方鼎', title_en: 'Warring States Bronze Gold-Inlaid Square Ding', price_display_zh: 'S$42,000', price_display_en: 'S$42,000', img_file: 'lim-kw/item-lim-02.jpg' },
-          { item_id: 'item-lim-03', title_zh: '战国错金银青铜瑞兽摆件', title_en: 'Warring States Gold-and-Silver-Inlaid Bronze Beast', price_display_zh: 'S$45,000', price_display_en: 'S$45,000', img_file: 'lim-kw/item-lim-03.jpg' },
-          { item_id: 'item-lim-04', title_zh: '大清雍正年制款窑变釉贯耳瓶', title_en: 'Yongzheng Flambé Glaze Vase', price_display_zh: 'S$38,000', price_display_en: 'S$38,000', img_file: 'lim-kw/item-lim-04.jpg' },
-        ];
+        // ── 动态加载该卖家的藏品（公共数据层 assets/js/gudong-data.js）─────────
+        /* 复制本模板做新卖家页时，只需改下面三个常量 */
+        const SELLER_ID = 'lim-kee-whee';     // 对应 Airtable 的 seller_id
+        const SELLER_SINCE = '2026';          // 入驻年份（与 sellers/index.html 卡片一致）
+        const SELLER_IMG_DIR = 'lim-kw';      // Airtable 的 img_file 若只有文件名，自动补该卖家的图片子目录
+        const GD = window.GudongData;
 
         function renderSellerItem(f) {
-          // 卡片图片上不再叠加「今日发现置顶 / 编辑精选」文字标签（2026-09-14 按需求移除）
+          const file = GD.normId(f.img_file || '');
+          const g = (file && file.indexOf('/') === -1) ? Object.assign({}, f, { img_file: SELLER_IMG_DIR + '/' + file }) : f;
+          const p = GD.resolvePrice(f);
           return `
-            <a href="../items/${esc(f.item_id)}.html" class="item-card">
-              <img src="${imgSrc(f)}" alt="${esc(f.title_zh)}" loading="lazy" onerror="this.onerror=null;this.src='../assets/images/placeholder.jpg'">
-              <h3 class="zh">${esc(f.title_zh)}</h3>
-              <p class="text-en en">${esc(f.title_en)}</p>
-              <p class="price-cn zh">${esc(f.price_display_zh)}</p>
-              <p class="price-en en">${esc(f.price_display_en)}</p>
+            <a href="${GD.itemHref(f)}" class="item-card">
+              <img src="${GD.esc(GD.imgUrl(g))}" alt="${GD.esc(f.title_zh)}" loading="lazy" onerror="${GD.imgOnError}">
+              <h3 class="zh">${GD.esc(f.title_zh)}</h3>
+              <p class="text-en en">${GD.esc(f.title_en)}</p>
+              <p class="price-cn zh">${GD.esc(p.zh)}</p>
+              <p class="price-en en">${GD.esc(p.en)}</p>
             </a>`;
         }
-
-        // 去重：同一件藏品可能同时出现在「今日发现 / 编辑精选 / 最新上架」多个列表中，
-        // 直接 concat 会让同一件藏品重复渲染（2026-09-14 修复：按 item_id 去重，保留首次出现顺序）
-        function uniqById(items) {
-          const seen = new Set();
-          return items.filter(f => {
-            const key = f.item_id || f.title_zh || JSON.stringify(f);
-            if (seen.has(key)) return false;
-            seen.add(key);
-            return true;
-          });
-        }
-
-        async function loadSellerItems() {
-          const list = document.getElementById('sellerGoodsList');
+        function setStats(n) {
           const stats = document.getElementById('sellerStats');
-          if (!list) return;
-          try {
-            const res = await fetch('/api/airtable-proxy');
-            if (!res.ok) throw new Error(res.status);
-            const data = await res.json();
-            const SELLER_ID = 'lim-kee-whee';
-            // newListing 是全集，todayFinds／editorPicks 是它的子集：合并后再去重，避免同款重复出现
-            const items = uniqById(
-              [].concat(data.newListing || [], data.todayFinds || [], data.editorPicks || [])
-                .filter(f => f.seller_id === SELLER_ID)
-            );
-            if (items.length) {
-              list.innerHTML = items.map(renderSellerItem).join('');
-              const count = items.length;
-              stats.innerHTML = `
-                <span class="zh">藏品数：${count} · 入驻年份：-</span>
-                <span class="en">Items: ${count} · Member since: -</span>`;
-            } else {
-              renderFallback();
-            }
-          } catch (e) {
-            // API 不可用（如本地静态预览）：展示静态兜底藏品
-            renderFallback();
-          }
-        }
-
-        function renderFallback() {
-          const list = document.getElementById('sellerGoodsList');
-          const stats = document.getElementById('sellerStats');
-          list.innerHTML = FALLBACK_ITEMS.map(renderSellerItem).join('');
+          if (!stats || n == null) return;
           stats.innerHTML = `
-            <span class="zh">藏品数：${FALLBACK_ITEMS.length} · 入驻年份：-</span>
-            <span class="en">Items: ${FALLBACK_ITEMS.length} · Member since: -</span>`;
+            <span class="zh">藏品数：${n} · 入驻：${SELLER_SINCE}年</span>
+            <span class="en">Items: ${n} · Member since: ${SELLER_SINCE}</span>`;
         }
-        loadSellerItems();
+        (function () {
+          const list = document.getElementById('sellerGoodsList');
+          if (!list) return;
+          if (!GD) { console.error('[Gudong] assets/js/gudong-data.js 未加载'); return; }
+          GD.injectCss();
+          GD.skeleton(list, 4, 'aspect-ratio:1/1');
+          GD.load().then(r => {
+            GD.diag.page = 'sellers/' + SELLER_ID;
+            // newListing 是全集，todayFinds／editorPicks 是它的子集：合并去重
+            const items = GD.dedupe([].concat(r.data.newListing, r.data.todayFinds, r.data.editorPicks))
+              .filter(f => GD.normId(f.seller_id) === SELLER_ID);
+            list.removeAttribute('aria-busy');
+            list.innerHTML = items.length ? items.map(renderSellerItem).join('')
+              : GD.emptyHtml('该展馆暂无在售藏品', 'No items on sale in this gallery yet');
+            setStats(items.length);
+            GD.renderDebug('本展馆（' + SELLER_ID + '）藏品：' + items.length);
+          }).catch(() => {
+            list.removeAttribute('aria-busy');
+            list.innerHTML = GD.errorHtml();
+            const stats = document.getElementById('sellerStats');
+            if (stats) stats.innerHTML = '<span class="zh">藏品数：—</span><span class="en">Items: —</span>';
+          });
+        })();
     </script>
 
 </body>

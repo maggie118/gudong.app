@@ -1,10 +1,19 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-SG">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>编辑精选 | Expert Picks | Gudong.app</title>
-    <link rel="manifest" href="manifest.json">
+    <meta name="description" content="古董集编辑精选的中国古董与收藏品。 Editor-picked Chinese antiques and collectibles on Gudong.">
+    <link rel="canonical" href="https://gudong.app/expert-picks.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="古董集 Gudong">
+    <meta property="og:title" content="编辑精选 | Expert Picks | Gudong.app">
+    <meta property="og:description" content="古董集编辑精选的中国古董与收藏品。 Editor-picked Chinese antiques and collectibles on Gudong.">
+    <meta property="og:url" content="https://gudong.app/expert-picks.html">
+    <meta property="og:image" content="https://gudong.app/assets/icons/icon-512.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+    <link rel="manifest" href="../../Downloads/manifest.json">
     <meta name="theme-color" content="#8A5A3B">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -347,6 +356,22 @@
             font-size: .78rem;
             border-top: 1px solid var(--color-border);
         }
+        .footer-nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.3rem;
+            margin-bottom: 1rem;
+        }
+        .footer-nav a { color: var(--color-text-secondary); text-decoration: none; font-size: .82rem; }
+        .footer-nav a:hover { color: var(--color-primary); }
+        .footer-disclaimer {
+            max-width: 620px;
+            margin: 0 auto .9rem;
+            font-size: .74rem;
+            line-height: 1.65;
+            color: var(--color-text-muted);
+        }
         [data-lang="en"] .zh { display: none; }
         [data-lang="zh"] .en { display: none; }
         @media (max-width: 1024px) {
@@ -395,13 +420,13 @@
     <header>
         <div style="display:flex; align-items:center; gap:.9rem;">
             <button class="menu-toggle" onclick="openSidebar()" aria-label="menu">☰</button>
-            <a href="index.html" class="brand" style="text-decoration:none;color:inherit;">
+            <a href="../../Downloads/index.html" class="brand" style="text-decoration:none;color:inherit;">
                 <h1 class="zh">古董.app</h1>
                 <h1 class="en">Gudong.app</h1>
             </a>
         </div>
         <div class="header-right">
-            <a href="pricing.html#seller-services" class="btn-publish">
+            <a href="../../Downloads/pricing.html#seller-services" class="btn-publish">
                 <span class="zh">我要发布藏品</span><span class="en">List an Item</span>
             </a>
             <button class="lang-btn" onclick="toggleLang()">EN</button>
@@ -414,26 +439,27 @@
             <span class="sidebar-icon">🏺</span>
             <span class="zh">古董.app</span><span class="en">Gudong.app</span>
         </div>
-        <nav class="sidebar-nav">
-            <a href="index.html#new-listings" class="sidebar-link"><span class="zh">首页</span><span class="en">Home</span></a>
+                <nav class="sidebar-nav">
+            <a href="../../Downloads/index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">首页</span><span class="en">Home</span></a>
+            <a href="../../Downloads/index.html#today-finds" class="sidebar-link" onclick="closeSidebar()"><span class="zh">今日发现</span><span class="en">Today's Finds</span></a>
+            <a href="../../Downloads/index.html#new-listings" class="sidebar-link" onclick="closeSidebar()"><span class="zh">最新藏品</span><span class="en">New Listings</span></a>
+
             <div class="sidebar-group-title zh">藏品库</div><div class="sidebar-group-title en">Collection</div>
-            <a href="index.html#new-listings" class="sidebar-sub"><span class="zh">· 瓷器</span><span class="en">· Porcelain</span></a>
-            <a href="index.html#new-listings" class="sidebar-sub"><span class="zh">· 玉器</span><span class="en">· Jade</span></a>
-            <a href="index.html#new-listings" class="sidebar-sub"><span class="zh">· 书画</span><span class="en">· Painting</span></a>
-            <a href="index.html#new-listings" class="sidebar-sub"><span class="zh">· 钱币</span><span class="en">· Coins</span></a>
-            <a href="index.html#new-listings" class="sidebar-sub"><span class="zh">· 杂项</span><span class="en">· Other</span></a>
-            <a href="expert-picks.html" class="sidebar-link active"><span class="zh">编辑精选</span><span class="en">Expert Picks</span></a>
-            <a href="sellers/index.html" class="sidebar-link"><span class="zh">卖家展馆</span><span class="en">Seller Gallery</span></a>
-            <a href="pricing.html#seller-services" class="sidebar-link"><span class="zh">卖家入驻</span><span class="en">Seller Onboarding</span></a>
-            <a href="pricing.html#buyer-services" class="sidebar-link"><span class="zh">买家指南</span><span class="en">Buyer Guide</span></a>
-            <a href="pricing.html" class="sidebar-link"><span class="zh">收费标准</span><span class="en">Pricing</span></a>
-            <a href="about.html#location" class="sidebar-link"><span class="zh">关于我们</span><span class="en">About Us</span></a>
+            <a href="../../Downloads/categories/porcelain.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 瓷器</span><span class="en">· Porcelain</span></a>
+            <a href="../../Downloads/categories/jade.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 玉器</span><span class="en">· Jade</span></a>
+            <a href="../../Downloads/categories/coins.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 钱币</span><span class="en">· Coins</span></a>
+            <a href="../../Downloads/categories/paintings.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 书画</span><span class="en">· Paintings &amp; Calligraphy</span></a>
+            <a href="../../Downloads/categories/misc.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 杂项</span><span class="en">· Miscellaneous</span></a>
+
+            <a href="../../Downloads/sellers/index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">卖家展馆</span><span class="en">Dealer Galleries</span></a>
+            <a href="../../Downloads/pricing.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">服务价格</span><span class="en">Pricing</span></a>
+            <a href="../../Downloads/about.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">关于Gudong</span><span class="en">About</span></a>
             <button type="button" class="sidebar-lang-btn" onclick="toggleLang()" aria-label="Switch language"><span class="zh">🌐 English</span><span class="en">🌐 中文</span></button>
         </nav>
     </aside>
     <main class="container">
         <div class="breadcrumb">
-            <a href="index.html" class="zh">首页</a><a href="index.html" class="en">Home</a>
+            <a href="../../Downloads/index.html" class="zh">首页</a><a href="../../Downloads/index.html" class="en">Home</a>
             <span class="zh"> / 编辑精选</span><span class="en"> / Expert Picks</span>
         </div>
         <div class="ep-header">
@@ -466,178 +492,35 @@
         </div>
     </main>
     <footer>
+        <div class="footer-nav">
+            <a href="../../Downloads/pricing.html#buyer-services" class="zh">买家指南</a><a href="../../Downloads/pricing.html#buyer-services" class="en">Buyer Guide</a>
+            <a href="../../Downloads/about.html#location" class="zh">联系我们</a><a href="../../Downloads/about.html#location" class="en">Contact</a>
+            <a href="../../Downloads/privacy.html" class="zh">隐私政策</a><a href="../../Downloads/privacy.html" class="en">Privacy</a>
+            <a href="../../Downloads/terms.html" class="zh">用户条款</a><a href="../../Downloads/terms.html" class="en">Terms</a>
+        </div>
+        <p class="footer-disclaimer zh">gudong.app 是信息发现平台，而非交易平台。</p>
+        <p class="footer-disclaimer en">gudong.app is an information and discovery platform for antiques and collectibles.</p>
         <p class="zh">© 2026 古董集 | gudong.app &amp; 古董.app | 仅展示引荐 · 当面核验 · 交易自担风险</p>
         <p class="en">© 2026 Gudong.app | Display only — always inspect &amp; deal at your own risk</p>
     </footer>
+    <script src="../../Downloads/assets/js/gudong-data.js"></script>
     <script>
-        let currentLang = 'zh';
-        let rawEditorList = [];
-        // 分页配置：每页显示条数
-        const PAGE_SIZE = 10;
-        let currentPage = 1;
-
-        // Airtable中文category →页面data-cat分类key映射
-        function mapCatKey(catZh) {
-            const map = {
-                "瓷器":"porcelain",
-                "玉器":"jade",
-                "钱币":"coin",
-                "铜器":"bronze",
-                "木器":"wood",
-                "书画":"painting",
-                "杂项":"other"
-            };
-            return map[catZh] || "other";
+        /* 2026-09-19：全站统一的语言偏好（localStorage：gudong_lang） */
+        let currentLang = (function () { try { return localStorage.getItem('gudong_lang') === 'en' ? 'en' : 'zh'; } catch (e) { return 'zh'; } })();
+        function applyLang() {
+            document.body.dataset.lang = currentLang;
+            document.documentElement.lang = currentLang === 'en' ? 'en-SG' : 'zh-SG';
+            var b = document.querySelector('.lang-btn');
+            if (b) b.textContent = currentLang === 'zh' ? 'EN' : '中';
         }
-
-        // 本地兜底demo数据，接口挂掉就显示这个
-        const demoEditorItems = [
-            {
-                item_id:"item-lim-01",
-                title_zh:"大明宣德青花描金云龙纹扁瓶",
-                title_en:"Ming Xuande Blue-and-Gold Dragon Flat Vase",
-                img_file:"lim-kw/item-lim-01.jpg",
-                category:"瓷器",
-                price_zh:"S$58000",
-                price_en:"S$58,000"
-            },
-            {
-                item_id:"item-lim-02",
-                title_zh:"战国青铜错金乳钉双耳四足方鼎",
-                title_en:"Warring-States Bronze Ding With Gold-Inlaid Studs",
-                img_file:"lim-kw/item-lim-02.jpg",
-                category:"杂项",
-                price_zh:"S$42000",
-                price_en:"S$42,000"
-            },
-            {
-                item_id:"item-lim-03",
-                title_zh:"战国错金银青铜瑞兽摆件",
-                title_en:"Warring-States Gold-Silver Inlaid Bronze Beast Ornament",
-                img_file:"lim-kw/item-lim-03.jpg",
-                category:"杂项",
-                price_zh:"S$45000",
-                price_en:"S$45,000"
-            },
-            {
-                item_id:"item-lim-04",
-                title_zh:"大清雍正年制款窑变釉贯耳瓶",
-                title_en:"Yongzheng-Mark Flambe-Glazed Vase",
-                img_file:"lim-kw/item-lim-04.jpg",
-                category:"瓷器",
-                price_zh:"S$38000",
-                price_en:"S$38,000"
-            }
-        ];
-
-        async function loadEditorPicks(){
-            const grid = document.getElementById('epGrid');
-            try{
-                const res = await fetch("/api/airtable-proxy");
-                const json = await res.json();
-                rawEditorList = json.editorPicks || [];
-                console.log("✅从接口获取editorPicks", rawEditorList.length,"条");
-            }catch(err){
-                console.warn("⚠️接口读取失败，启用demo兜底数据",err);
-                rawEditorList = demoEditorItems;
-            }
-            currentPage = 1;
-            renderPage();
-        }
-
-        // 根据当前页，切片数据，渲染卡片+重绘分页控件
-        function renderPage(){
-            const grid = document.getElementById('epGrid');
-            const total = rawEditorList.length;
-            const totalPages = Math.ceil(total / PAGE_SIZE);
-
-            // 边界保护，防止页码越界
-            if(currentPage < 1) currentPage = 1;
-            if(currentPage > totalPages && totalPages>0) currentPage = totalPages;
-
-            // 切片拿当前页数据
-            const startIdx = (currentPage -1) * PAGE_SIZE;
-            const pageData = rawEditorList.slice(startIdx, startIdx + PAGE_SIZE);
-
-            // 空状态
-            if(total === 0){
-                grid.innerHTML = `<div class="empty-tip"><p class="zh">暂无编辑精选藏品</p><p class="en">No featured items yet</p></div>`;
-                renderPagination(totalPages);
-                return;
-            }
-
-            // 渲染卡片
-            grid.innerHTML = '';
-            pageData.forEach(f=>{
-                const catKey = mapCatKey(f.category||"");
-                // 优先用 Airtable 附件字段的真实图片URL，没有再退回本地文件名；统一用根路径 "/assets/..." 避免子路径下相对路径出错
-                const imgSrc = (f.img_url && /^https?:\/\//i.test(f.img_url)) ? f.img_url
-                    : (f.img_file ? `/assets/images/${f.img_file}` : "/assets/images/placeholder.jpg");
-                const detailHref = `items/${f.item_id}.html`;
-                const priceZh = f.price_zh||"";
-                const priceEn = f.price_en||"";
-
-                const cardHtml = `
-<a class="ep-card" href="${detailHref}" data-cat="${catKey}">
-    <div class="ep-image">
-        <!-- 2026-09-14：图片上的「行家推荐 / Expert」圆形徽章已按需求移除 -->
-        <img src="${imgSrc}" alt="${f.title_zh}" loading="lazy" onerror="this.onerror=null;this.src='/assets/images/placeholder.jpg'">
-    </div>
-    <div class="ep-body">
-        <div class="ep-title zh">${f.title_zh}</div>
-        <div class="ep-title en">${f.title_en}</div>
-        <div class="ep-tags"></div>
-        <div class="ep-price-row">
-            <div class="ep-price"><span class="zh">${priceZh}</span><span class="en">${priceEn}</span></div>
-            <div class="ep-views">--</div>
-        </div>
-    </div>
-</a>`;
-                grid.innerHTML += cardHtml;
-            });
-
-            renderPagination(totalPages);
-            window.scrollTo({ top:0, behavior:'smooth' });
-        }
-
-        // 动态渲染分页按钮（上一页、页码、下一页）
-        function renderPagination(totalPages){
-            const pagePrevBtn = document.getElementById('pagePrev');
-            const pageNextBtn = document.getElementById('pageNext');
-            const paginationWrap = pagePrevBtn.parentElement;
-
-            // 先清空旧的数字页码按钮，保留prev/next和跳页组件
-            const children = Array.from(paginationWrap.children);
-            children.forEach(el=>{
-                if(el.id !== "pagePrev" && el.id !== "pageNext" && !el.classList.contains("page-jump")){
-                    el.remove();
-                }
-            });
-
-            // 上下页disabled状态
-            pagePrevBtn.disabled = currentPage <=1;
-            pageNextBtn.disabled = currentPage >= totalPages;
-
-            // 生成数字页码按钮
-            for(let p=1; p<= totalPages; p++){
-                const btn = document.createElement('button');
-                btn.className = "page-btn";
-                if(p === currentPage) btn.classList.add('active');
-                btn.textContent = String(p);
-                btn.addEventListener('click', ()=>{
-                    currentPage = p;
-                    renderPage();
-                });
-                // 插入到next按钮前面
-                paginationWrap.insertBefore(btn, pageNextBtn);
-            }
-        }
-
         function toggleLang() {
             currentLang = currentLang === 'zh' ? 'en' : 'zh';
-            document.body.dataset.lang = currentLang;
-            document.querySelector('.lang-btn').textContent = currentLang === 'zh' ? 'EN' : '中';
+            applyLang();
+            try { localStorage.setItem('gudong_lang', currentLang); } catch (e) {}
         }
+        applyLang();
+        if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js');
+
         function openSidebar() {
             document.getElementById('sidebar').classList.add('open');
             document.getElementById('sidebarOverlay').classList.add('show');
@@ -649,50 +532,139 @@
             document.body.style.overflow = '';
         }
 
-        // 分类筛选：切换分类重置回第1页
+        /* ===== 编辑精选：数据来自公共数据层 assets/js/gudong-data.js（Airtable 的 editorPicks） =====
+           2026-09-19 修复：
+           · 标题/alt 原先未转义就写入 innerHTML（Airtable 内容含引号或 < 时会破坏页面）→ 统一转义
+           · 接口失败时不再展示写死的 demo 数据（其中两件价格与 Airtable 不一致）→ 改读快照，仍失败则显示错误提示
+           · 未检查 HTTP 状态：接口返回 403 时被当成「暂无精选」→ 由数据层区分错误
+           · 分类标签原先只隐藏当前页卡片，与分页总数脱节 → 先按分类过滤再分页
+           · 初次渲染时页面被强制滚动到顶部 → 仅在用户翻页时滚动
+           · 移除写死的「--」浏览量占位；价格支持 一口价 / 价格区间 / 私聊询价 */
+        const GD = window.GudongData;
+        const PAGE_SIZE = 10;
+        let currentPage = 1;
+        let currentCat = 'all';
+        let rawEditorList = [];
+
+        // Airtable 中文 category → 页面分类标签的 data-cat
+        function mapCatKey(catZh) {
+            const map = { "瓷器": "porcelain", "玉器": "jade", "钱币": "coin", "铜器": "bronze", "木器": "wood", "书画": "painting", "杂项": "other" };
+            return map[catZh] || "other";
+        }
+        function filteredList() {
+            return currentCat === 'all' ? rawEditorList : rawEditorList.filter(f => mapCatKey(f.category || "") === currentCat);
+        }
+        function totalPagesOf(list) { return Math.ceil(list.length / PAGE_SIZE); }
+
+        function cardHtml(f) {
+            const p = GD.resolvePrice(f);
+            return `
+<a class="ep-card" href="${GD.itemHref(f)}" data-cat="${mapCatKey(f.category || "")}">
+    <div class="ep-image">
+        <img src="${GD.esc(GD.imgUrl(f))}" alt="${GD.esc(f.title_zh)}" loading="lazy" onerror="${GD.imgOnError}">
+    </div>
+    <div class="ep-body">
+        <div class="ep-title zh">${GD.esc(f.title_zh)}</div>
+        <div class="ep-title en">${GD.esc(f.title_en)}</div>
+        <div class="ep-tags"></div>
+        <div class="ep-price-row">
+            <div class="ep-price"><span class="zh">${GD.esc(p.zh)}</span><span class="en">${GD.esc(p.en)}</span></div>
+        </div>
+    </div>
+</a>`;
+        }
+
+        // 根据当前页切片渲染卡片并重绘分页；scroll=true 仅用于用户主动翻页
+        function renderPage(scroll) {
+            const grid = document.getElementById('epGrid');
+            const list = filteredList();
+            const totalPages = totalPagesOf(list);
+            if (currentPage < 1) currentPage = 1;
+            if (currentPage > totalPages && totalPages > 0) currentPage = totalPages;
+            grid.removeAttribute('aria-busy');
+
+            if (!list.length) {
+                grid.innerHTML = `<div class="empty-tip"><p class="zh">暂无编辑精选藏品</p><p class="en">No featured items yet</p></div>`;
+                renderPagination(0);
+                return;
+            }
+            const startIdx = (currentPage - 1) * PAGE_SIZE;
+            grid.innerHTML = list.slice(startIdx, startIdx + PAGE_SIZE).map(cardHtml).join('');   // 一次性写入，避免循环内 innerHTML +=
+            renderPagination(totalPages);
+            if (scroll) window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // 动态渲染分页按钮（上一页、页码、下一页）；只有一页时隐藏整个分页条
+        function renderPagination(totalPages) {
+            const pagePrevBtn = document.getElementById('pagePrev');
+            const pageNextBtn = document.getElementById('pageNext');
+            const paginationWrap = pagePrevBtn.parentElement;
+
+            Array.from(paginationWrap.children).forEach(el => {
+                if (el.id !== "pagePrev" && el.id !== "pageNext" && !el.classList.contains("page-jump")) el.remove();
+            });
+            paginationWrap.style.display = totalPages > 1 ? '' : 'none';
+            pagePrevBtn.disabled = currentPage <= 1;
+            pageNextBtn.disabled = currentPage >= totalPages;
+
+            for (let p = 1; p <= totalPages; p++) {
+                const btn = document.createElement('button');
+                btn.className = "page-btn";
+                if (p === currentPage) btn.classList.add('active');
+                btn.textContent = String(p);
+                btn.addEventListener('click', () => { currentPage = p; renderPage(true); });
+                paginationWrap.insertBefore(btn, pageNextBtn);
+            }
+        }
+
+        function loadEditorPicks() {
+            const grid = document.getElementById('epGrid');
+            if (!GD) { console.error('[Gudong] assets/js/gudong-data.js 未加载'); grid.innerHTML = '<div class="empty-tip"><p class="zh">藏品加载失败，请刷新重试</p><p class="en">Failed to load listings — please refresh</p></div>'; return; }
+            GD.injectCss();
+            GD.skeleton(grid, 6, 'height:280px');
+            GD.load().then(r => {
+                GD.diag.page = 'expert-picks';
+                rawEditorList = GD.dedupe(r.data.editorPicks);
+                currentPage = 1;
+                renderPage(false);
+                GD.renderDebug('编辑精选：' + rawEditorList.length + ' 件');
+            }).catch(() => {
+                grid.removeAttribute('aria-busy');
+                grid.innerHTML = GD.errorHtml();
+                renderPagination(0);
+            });
+        }
+
+        // 分类筛选：先过滤再分页，切换分类回到第 1 页
         document.querySelectorAll('.category-tabs .cat-btn').forEach(btn => {
             btn.addEventListener('click', () => {
                 document.querySelectorAll('.category-tabs .cat-btn').forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
-                // 卡片显示隐藏逻辑不变（前端css过滤）
-                const cat = btn.dataset.cat;
-                document.querySelectorAll('#epGrid .ep-card').forEach(card => {
-                    card.style.display = (cat === 'all' || card.dataset.cat === cat) ? '' : 'none';
-                });
+                currentCat = btn.dataset.cat || 'all';
+                currentPage = 1;
+                renderPage(false);
             });
         });
 
-        // 上一页
-        document.getElementById('pagePrev').addEventListener('click',()=>{
-            if(currentPage>1){
-                currentPage -=1;
-                renderPage();
-            }
+        document.getElementById('pagePrev').addEventListener('click', () => {
+            if (currentPage > 1) { currentPage -= 1; renderPage(true); }
         });
-        // 下一页
-        document.getElementById('pageNext').addEventListener('click',()=>{
-            const totalPages = Math.ceil(rawEditorList.length / PAGE_SIZE);
-            if(currentPage < totalPages){
-                currentPage +=1;
-                renderPage();
-            }
+        document.getElementById('pageNext').addEventListener('click', () => {
+            if (currentPage < totalPagesOf(filteredList())) { currentPage += 1; renderPage(true); }
         });
 
         // 跳页
         function jumpPage() {
             const val = currentLang === 'zh' ? document.getElementById('jumpInput').value : document.getElementById('jumpInputEn').value;
             const n = parseInt(val, 10);
-            const totalPages = Math.ceil(rawEditorList.length / PAGE_SIZE);
-            if(Number.isInteger(n) && n>=1 && n <= totalPages){
+            if (Number.isInteger(n) && n >= 1 && n <= totalPagesOf(filteredList())) {
                 currentPage = n;
-                renderPage();
+                renderPage(true);
             }
         }
 
-        //页面加载完毕拉取数据
-        document.addEventListener('DOMContentLoaded', ()=>{
-            loadEditorPicks();
-        });
+        // 页面加载完毕拉取数据
+        loadEditorPicks();
 </script>
 
 </body>

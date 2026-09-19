@@ -1,10 +1,19 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-SG">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>瓷器 | Porcelain | Gudong</title>
-    <link rel="manifest" href="../manifest.json">
+    <meta name="description" content="浏览中国古瓷藏品，查看叫价并直接联系卖家。 Browse Chinese antique porcelain listings and contact sellers directly.">
+    <link rel="canonical" href="https://gudong.app/categories/porcelain.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="古董集 Gudong">
+    <meta property="og:title" content="瓷器 | Porcelain | Gudong">
+    <meta property="og:description" content="浏览中国古瓷藏品，查看叫价并直接联系卖家。 Browse Chinese antique porcelain listings and contact sellers directly.">
+    <meta property="og:url" content="https://gudong.app/categories/porcelain.html">
+    <meta property="og:image" content="https://gudong.app/assets/icons/icon-512.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+    <link rel="manifest" href="../../../manifest.json">
     <meta name="theme-color" content="#8A5A3B">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -721,13 +730,13 @@
     <div class="announce-bar" id="announceBar">
         <span class="zh">创始卖家福利｜限量 88 席免费入驻，前 2 件藏品信息免费刊登。</span>
         <span class="en">Founder-Dealer Benefit | Limited 88 seats · Free to join · First 2 listings free.</span>
-        <button class="announce-close" onclick="document.getElementById('announceBar').style.display='none'" aria-label="close">×</button>
+        <button class="announce-close" onclick="closeAnnounce()" aria-label="close">×</button>
     </div>
 
     <header>
         <div style="display:flex; align-items:center; gap:.9rem;">
             <button class="menu-toggle" onclick="openSidebar()" aria-label="menu">☰</button>
-            <a href="../index.html" class="brand" style="text-decoration:none;color:inherit;">
+            <a href="../../../index.html" class="brand" style="text-decoration:none;color:inherit;">
                 <h1 class="zh">古董集</h1>
                 <h1 class="en">GUDONG</h1>
                 <p class="zh">GUDONG</p>
@@ -735,7 +744,7 @@
         </div>
 
         <div class="header-right">
-            <a href="../pricing.html#seller-services" class="btn-publish">
+            <a href="../../../pricing.html#seller-services" class="btn-publish">
                 <span class="zh">刊登藏品</span><span class="en">List an Item</span>
             </a>
             <button class="lang-btn" onclick="toggleLang()">EN</button>
@@ -749,20 +758,20 @@
             <span class="zh">古董集</span><span class="en">GUDONG</span>
         </div>
                 <nav class="sidebar-nav">
-            <a href="../index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">首页</span><span class="en">Home</span></a>
-            <a href="../index.html#today-finds" class="sidebar-link" onclick="closeSidebar()"><span class="zh">今日发现</span><span class="en">Today's Finds</span></a>
-            <a href="../index.html#new-listings" class="sidebar-link" onclick="closeSidebar()"><span class="zh">最新藏品</span><span class="en">New Listings</span></a>
+            <a href="../../../index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">首页</span><span class="en">Home</span></a>
+            <a href="../../../index.html#today-finds" class="sidebar-link" onclick="closeSidebar()"><span class="zh">今日发现</span><span class="en">Today's Finds</span></a>
+            <a href="../../../index.html#new-listings" class="sidebar-link" onclick="closeSidebar()"><span class="zh">最新藏品</span><span class="en">New Listings</span></a>
 
             <div class="sidebar-group-title zh">藏品库</div><div class="sidebar-group-title en">Collection</div>
-            <a href="../categories/porcelain.html" class="sidebar-sub active" onclick="closeSidebar()"><span class="zh">· 瓷器</span><span class="en">· Porcelain</span></a>
-            <a href="../categories/jade.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 玉器</span><span class="en">· Jade</span></a>
-            <a href="../categories/coins.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 钱币</span><span class="en">· Coins</span></a>
-            <a href="../categories/paintings.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 书画</span><span class="en">· Paintings &amp; Calligraphy</span></a>
-            <a href="../categories/misc.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 杂项</span><span class="en">· Miscellaneous</span></a>
+            <a href="../../../categories/porcelain.html" class="sidebar-sub active" onclick="closeSidebar()"><span class="zh">· 瓷器</span><span class="en">· Porcelain</span></a>
+            <a href="../../../categories/jade.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 玉器</span><span class="en">· Jade</span></a>
+            <a href="../../../categories/coins.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 钱币</span><span class="en">· Coins</span></a>
+            <a href="../../../categories/paintings.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 书画</span><span class="en">· Paintings &amp; Calligraphy</span></a>
+            <a href="../../../categories/misc.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 杂项</span><span class="en">· Miscellaneous</span></a>
 
-            <a href="../sellers/index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">卖家展馆</span><span class="en">Dealer Galleries</span></a>
-            <a href="../pricing.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">服务价格</span><span class="en">Pricing</span></a>
-            <a href="../about.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">关于Gudong</span><span class="en">About</span></a>
+            <a href="../../../sellers/index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">卖家展馆</span><span class="en">Dealer Galleries</span></a>
+            <a href="../../../pricing.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">服务价格</span><span class="en">Pricing</span></a>
+            <a href="../../../about.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">关于Gudong</span><span class="en">About</span></a>
             <button type="button" class="sidebar-lang-btn" onclick="toggleLang()" aria-label="Switch language"><span class="zh">🌐 English</span><span class="en">🌐 中文</span></button>
         </nav>
     </aside>
@@ -834,8 +843,6 @@
                         <a href="#list" class="chip"><span class="zh">摆件</span><span class="en">Figure</span></a>
                     </div>
                 </div>
-                <p class="filter-note zh">静态页：点击标签跳转到藏品列表。后续将升级为动态筛选。</p>
-                <p class="filter-note en">Static page: chips anchor to the listing list. Dynamic filtering will come later.</p>
             </div>
         </section>
 
@@ -846,13 +853,13 @@
                     <span class="title zh">编辑精选</span><span class="title en">Editor's Picks</span>
                     <span class="sub-line zh">付费擦亮 · 大图优先展示</span><span class="sub-line en">Paid featured · prominent display</span>
                 </div>
-                <a href="../pricing.html" class="more zh">了解擦亮服务 →</a>
-                <a href="../pricing.html" class="more en">View featured pricing →</a>
+                <a href="../../../pricing.html" class="more zh">了解擦亮服务 →</a>
+                <a href="../../../pricing.html" class="more en">View featured pricing →</a>
             </div>
             <div class="picks-grid">
                 <a href="../items/song-yingqing-wan.html" class="pick-card">
                     <div class="pick-image">
-                        <img src="../assets/images/placeholder.jpg" alt="宋影青暗刻花碗">
+                        <img src="../../../assets/images/placeholder.jpg" alt="宋影青暗刻花碗">
                         <span class="pick-badge zh">编辑精选</span>
                         <span class="pick-badge en">Editor's Pick</span>
                     </div>
@@ -867,14 +874,14 @@
                             <span class="zh">口径 15cm</span><span class="en">⌀ 15cm</span>
                         </div>
                         <div class="pick-seller zh">展馆：<a href="../sellers/index.html#he-zhentao">和珍陶</a></div>
-                        <div class="pick-seller en">Gallery: <a href="../sellers/index.html#he-zhentao">Hezhentao</a></div>
+                        <div class="pick-seller en">Gallery: <a href="../../../sellers/index.html#he-zhentao">Hezhentao</a></div>
                         <span class="pick-cta zh">查看详情 →</span>
                         <span class="pick-cta en">View Details →</span>
                     </div>
                 </a>
                 <a href="../items/minguo-fencai-xiaoshangping.html" class="pick-card">
                     <div class="pick-image">
-                        <img src="../assets/images/placeholder.jpg" alt="民国粉彩小赏瓶">
+                        <img src="../../../assets/images/placeholder.jpg" alt="民国粉彩小赏瓶">
                         <span class="pick-badge zh">编辑精选</span>
                         <span class="pick-badge en">Editor's Pick</span>
                     </div>
@@ -889,7 +896,7 @@
                             <span class="zh">高 22cm</span><span class="en">H 22cm</span>
                         </div>
                         <div class="pick-seller zh">展馆：<a href="../sellers/index.html#jingxuan-tang">静选堂</a></div>
-                        <div class="pick-seller en">Gallery: <a href="../sellers/index.html#jingxuan-tang">Jingxuan Tang</a></div>
+                        <div class="pick-seller en">Gallery: <a href="../../../sellers/index.html#jingxuan-tang">Jingxuan Tang</a></div>
                         <span class="pick-cta zh">查看详情 →</span>
                         <span class="pick-cta en">View Details →</span>
                     </div>
@@ -904,58 +911,58 @@
                     <span class="title zh">全部瓷器</span><span class="title en">All Porcelain</span>
                     <span class="sub-line zh">免费/基础入驻展示</span><span class="sub-line en">Free / basic listings</span>
                 </div>
-                <a href="../pricing.html" class="more zh">发布我的瓷器 →</a>
-                <a href="../pricing.html" class="more en">List your porcelain →</a>
+                <a href="../../../pricing.html" class="more zh">发布我的瓷器 →</a>
+                <a href="../../../pricing.html" class="more en">List your porcelain →</a>
             </div>
             <div class="list-grid" id="itemList">
                 <a href="../items/guangxu-shuanglong-dapan.html" class="item-card" data-keywords="清代 青花 龙纹 盘 景德镇 Qing blue white dragon plate Jingdezhen">
-                    <div class="item-image"><img src="../assets/images/placeholder.jpg" alt="清代青花龙纹盘"></div>
+                    <div class="item-image"><img src="../../../assets/images/placeholder.jpg" alt="清代青花龙纹盘"></div>
                     <div class="item-body">
                         <div class="item-title zh">清代青花龙纹盘</div>
                         <div class="item-title en">Qing Blue &amp; White Dragon Plate</div>
                         <div class="item-meta zh">清代 · 景德镇窑 · ⌀ 28cm</div>
                         <div class="item-meta en">Qing · Jingdezhen · ⌀ 28cm</div>
                         <div class="item-seller zh">展馆：<a href="../sellers/index.html#he-zhentao">和珍陶</a></div>
-                        <div class="item-seller en">Gallery: <a href="../sellers/index.html#he-zhentao">Hezhentao</a></div>
+                        <div class="item-seller en">Gallery: <a href="../../../sellers/index.html#he-zhentao">Hezhentao</a></div>
                         <div class="item-cta zh">查看详情 →</div>
                         <div class="item-cta en">View Details →</div>
                     </div>
                 </a>
                 <a href="../items/qing-huaping.html" class="item-card" data-keywords="清代 花瓶 瓶 景德镇 Qing vase Jingdezhen">
-                    <div class="item-image"><img src="../assets/images/placeholder.jpg" alt="清代花瓶"></div>
+                    <div class="item-image"><img src="../../../assets/images/placeholder.jpg" alt="清代花瓶"></div>
                     <div class="item-body">
                         <div class="item-title zh">清代花瓶</div>
                         <div class="item-title en">Qing Vase</div>
                         <div class="item-meta zh">清代 · 景德镇窑 · 高 32cm</div>
                         <div class="item-meta en">Qing · Jingdezhen · H 32cm</div>
                         <div class="item-seller zh">展馆：<a href="../sellers/index.html#jingxuan-tang">静选堂</a></div>
-                        <div class="item-seller en">Gallery: <a href="../sellers/index.html#jingxuan-tang">Jingxuan Tang</a></div>
+                        <div class="item-seller en">Gallery: <a href="../../../sellers/index.html#jingxuan-tang">Jingxuan Tang</a></div>
                         <div class="item-cta zh">查看详情 →</div>
                         <div class="item-cta en">View Details →</div>
                     </div>
                 </a>
                 <a href="../items/guangxu-shuanglong-dapan.html" class="item-card" data-keywords="清光绪 青花 双龙 大盘 盘 景德镇 Guangxu blue white dragon plate Jingdezhen">
-                    <div class="item-image"><img src="../assets/images/placeholder.jpg" alt="光绪青花双龙大瓷盘"></div>
+                    <div class="item-image"><img src="../../../assets/images/placeholder.jpg" alt="光绪青花双龙大瓷盘"></div>
                     <div class="item-body">
                         <div class="item-title zh">光绪青花双龙大瓷盘</div>
                         <div class="item-title en">Guangxu Blue &amp; White Twin-Dragon Plate</div>
                         <div class="item-meta zh">清光绪 · 景德镇窑 · ⌀ 38cm</div>
                         <div class="item-meta en">Guangxu · Jingdezhen · ⌀ 38cm</div>
                         <div class="item-seller zh">展馆：<a href="../sellers/index.html#he-zhentao">和珍陶</a></div>
-                        <div class="item-seller en">Gallery: <a href="../sellers/index.html#he-zhentao">Hezhentao</a></div>
+                        <div class="item-seller en">Gallery: <a href="../../../sellers/index.html#he-zhentao">Hezhentao</a></div>
                         <div class="item-cta zh">查看详情 →</div>
                         <div class="item-cta en">View Details →</div>
                     </div>
                 </a>
                 <a href="#" class="item-card" data-keywords="明 嘉靖 青花 罐 罐 景德镇 Ming Jiajing blue white jar Jingdezhen">
-                    <div class="item-image"><img src="../assets/images/placeholder.jpg" alt="明嘉靖青花人物罐"></div>
+                    <div class="item-image"><img src="../../../assets/images/placeholder.jpg" alt="明嘉靖青花人物罐"></div>
                     <div class="item-body">
                         <div class="item-title zh">明嘉靖青花人物罐</div>
                         <div class="item-title en">Ming Jiajing Blue &amp; White Figure Jar</div>
                         <div class="item-meta zh">明嘉靖 · 景德镇窑 · 高 18cm</div>
                         <div class="item-meta en">Jiajing · Jingdezhen · H 18cm</div>
                         <div class="item-seller zh">展馆：<a href="../sellers/index.html#jingxuan-tang">静选堂</a></div>
-                        <div class="item-seller en">Gallery: <a href="../sellers/index.html#jingxuan-tang">Jingxuan Tang</a></div>
+                        <div class="item-seller en">Gallery: <a href="../../../sellers/index.html#jingxuan-tang">Jingxuan Tang</a></div>
                         <div class="item-cta zh">查看详情 →</div>
                         <div class="item-cta en">View Details →</div>
                     </div>
@@ -968,10 +975,10 @@
 
     <footer>
         <div class="footer-nav">
-            <a href="../pricing.html#buyer-services" class="zh">买家指南</a><a href="../pricing.html#buyer-services" class="en">Buyer Guide</a>
-            <a href="../about.html#location" class="zh">联系我们</a><a href="../about.html#location" class="en">Contact</a>
-            <a href="../privacy.html" class="zh">隐私政策</a><a href="../privacy.html" class="en">Privacy</a>
-            <a href="../terms.html" class="zh">用户条款</a><a href="../terms.html" class="en">Terms</a>
+            <a href="../../../pricing.html#buyer-services" class="zh">买家指南</a><a href="../../../pricing.html#buyer-services" class="en">Buyer Guide</a>
+            <a href="../../../about.html#location" class="zh">联系我们</a><a href="../../../about.html#location" class="en">Contact</a>
+            <a href="../../../privacy.html" class="zh">隐私政策</a><a href="../../../privacy.html" class="en">Privacy</a>
+            <a href="../../../terms.html" class="zh">用户条款</a><a href="../../../terms.html" class="en">Terms</a>
         </div>
         <p class="footer-disclaimer zh">gudong.app 是信息发现平台，而非交易平台。</p>
         <p class="footer-disclaimer en">gudong.app is an information and discovery platform for antiques and collectibles.</p>
@@ -980,7 +987,6 @@
     </footer>
 
     <script>
-        let currentLang = 'zh';
 
         function openSidebar() {
             document.getElementById('sidebar').classList.add('open');
@@ -994,150 +1000,38 @@
             document.body.style.overflow = '';
         }
 
+        /* 2026-09-19：全站统一的语言偏好与公告条（localStorage：gudong_lang / announceClosed），子页面之间保持一致 */
+        let currentLang = (function () { try { return localStorage.getItem('gudong_lang') === 'en' ? 'en' : 'zh'; } catch (e) { return 'zh'; } })();
+        function applyLang() {
+            document.body.dataset.lang = currentLang;
+            document.documentElement.lang = currentLang === 'en' ? 'en-SG' : 'zh-SG';
+            var b = document.querySelector('.lang-btn');
+            if (b) b.textContent = currentLang === 'zh' ? 'EN' : '中';
+        }
         function toggleLang() {
             currentLang = currentLang === 'zh' ? 'en' : 'zh';
-            document.body.dataset.lang = currentLang;
-            document.querySelector('.lang-btn').textContent = currentLang === 'zh' ? 'EN' : '中';
-            // 切换语言后同步刷新搜索结果文案
+            applyLang();
+            try { localStorage.setItem('gudong_lang', currentLang); } catch (e) {}
             if (window.filterItems) filterItems();
         }
+        function closeAnnounce() {
+            var b = document.getElementById('announceBar');
+            if (b) b.style.display = 'none';
+            try { localStorage.setItem('announceClosed', 'yes'); } catch (e) {}
+        }
+        applyLang();
+        try { if (localStorage.getItem('announceClosed') === 'yes') { var __ab = document.getElementById('announceBar'); if (__ab) __ab.style.display = 'none'; } } catch (e) {}
 
         // 搜索逻辑统一由 ../assets/js/item-search.js 提供（关键词过滤 + 回车触发 + 结果反馈）
         if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js');
-    
-    /* ===== 品类动态加载：从 Airtable 接口按品类筛选 ===== */
-    (function(){
-      var TARGET_CAT = "瓷器";
-      function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');}
-      function imgPath(f){return f.img_file?('/assets/images/'+f.img_file):'/assets/images/placeholder.jpg';}
-
-      // 定位容器：优先 #itemList，其次 #items
-      var container = document.getElementById('itemList') || document.getElementById('items');
-
-      function renderCards(list){
-        if(!container) return;
-        if(!list.length){
-          // 保留原有空态提示：若页面有 noResult 元素则显示
-          var nr = document.getElementById('noResult') || document.getElementById('noResultEn');
-          if(nr) nr.style.display = 'block';
-          return;
-        }
-        // 清空静态演示内容，替换为接口数据卡片
-        container.innerHTML = list.map(function(f){
-          var kw = [f.title_zh,f.title_en,f.era_zh,f.era_en,f.category].filter(Boolean).join(' ');
-          return '<a href="../items/'+esc(f.item_id)+'.html" class="item-card" data-cat="'+esc(f.category)+'" data-keywords="'+esc(kw)+'">'+
-            '<div class="item-image"><img src="'+imgPath(f)+'" alt="'+esc(f.title_zh)+'" loading="lazy"></div>'+
-            '<div class="item-body">'+
-              '<div class="item-title zh">'+esc(f.title_zh)+'</div>'+
-              '<div class="item-title en">'+esc(f.title_en)+'</div>'+
-              '<div class="item-meta zh">'+esc(f.era_zh)+' · '+esc(f.category)+'</div>'+
-              '<div class="item-meta en">'+esc(f.era_en)+' · '+esc(f.category)+'</div>'+
-              '<div class="price-cn">'+esc(f.price_display_zh||'')+'</div>'+
-              '<div class="price-en">'+esc(f.price_display_en||'')+'</div>'+
-            '</div></a>';
-        }).join('');
-      }
-
-      async function load(){
-        var list = [];
-        try{
-          var res = await fetch('../api/airtable-proxy');
-          if(!res.ok) throw new Error('proxy '+res.status);
-          var data = await res.json();
-          var all = [].concat(data.todayFinds||[], data.editorPicks||[], data.newListing||[]);
-          // 去重：newListing 是全集，todayFinds／editorPicks 是它的子集，直接 concat 会把同一件藏品渲染多次（2026-09-14 修复）
-          var seen = {}, uniq = [];
-          all.forEach(function(it){ var k = it.item_id || it.title_zh || JSON.stringify(it); if(!seen[k]){ seen[k] = 1; uniq.push(it); } });
-          list = uniq.filter(function(it){ return it.category === TARGET_CAT; });
-        }catch(e){
-          console.warn('接口不可用，保留页面静态内容：', e);
-          return; // 失败保留静态演示内容作后备
-        }
-        if(list.length) renderCards(list);
-      }
-      load();
-    })();
-
-
-    /* ===== 品类动态加载 v2：从 Airtable 接口按品类筛选 ===== */
-    (function(){
-      var TARGET_CAT = "瓷器";
-      function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');}
-      function imgPath(f){return f.img_file?('/assets/images/'+f.img_file):'/assets/images/placeholder.jpg';}
-
-      // 定位容器与结构类型：新结构 #itemList(图文卡片) / 旧结构 #items(.goods-list 全图卡片)
-      var container = document.getElementById('itemList');
-      var isNew = !!container;
-      if(!container) container = document.getElementById('items');
-
-      // 旧结构下，把注入卡片塞进 .goods-list
-      function wrapOld(){ 
-        var gl = container && container.querySelector && container.querySelector('.goods-list');
-        if(gl) return gl;
-        return container;
-      }
-
-      function renderCards(list){
-        if(!container) return;
-        if(!list.length){
-          var nr = document.getElementById('noResult') || document.getElementById('noResultEn');
-          if(nr) nr.style.display = 'block';
-          return;
-        }
-        var target = isNew ? container : (wrapOld() || container);
-
-        if(isNew){
-          // 新结构：item-image / item-body 图文卡片
-          target.innerHTML = list.map(function(f){
-            var kw = [f.title_zh,f.title_en,f.era_zh,f.era_en,f.category].filter(Boolean).join(' ');
-            return '<a href="../items/'+esc(f.item_id)+'.html" class="item-card" data-cat="'+esc(f.category)+'" data-keywords="'+esc(kw)+'">'+
-              '<div class="item-image"><img src="'+imgPath(f)+'" alt="'+esc(f.title_zh)+'" loading="lazy"></div>'+
-              '<div class="item-body">'+
-                '<div class="item-title zh">'+esc(f.title_zh)+'</div>'+
-                '<div class="item-title en">'+esc(f.title_en)+'</div>'+
-                '<div class="item-meta zh">'+esc(f.era_zh)+' · '+esc(f.category)+'</div>'+
-                '<div class="item-meta en">'+esc(f.era_en)+' · '+esc(f.category)+'</div>'+
-                '<div class="item-cta zh">查看详情 →</div>'+
-                '<div class="item-cta en">View Details →</div>'+
-              '</div></a>';
-          }).join('');
-        } else {
-          // 旧结构：全图方形卡片 + 底部价格标签
-          target.innerHTML = list.map(function(f){
-            var kw = [f.title_zh,f.title_en,f.era_zh,f.era_en,f.category].filter(Boolean).join(' ');
-            var price = f.price_display_zh||f.price_display_en||'';
-            var priceEn = f.price_display_en||f.price_display_zh||'';
-            return '<a href="../items/'+esc(f.item_id)+'.html" class="item-card" data-cat="'+esc(f.category)+'" data-keywords="'+esc(kw)+'">'+
-              '<img src="'+imgPath(f)+'" alt="'+esc(f.title_zh)+'" loading="lazy">'+
-              '<div class="price-tag zh">'+esc(price)+'</div>'+
-              '<div class="price-tag en">'+esc(priceEn)+'</div>'+
-            '</a>';
-          }).join('');
-        }
-      }
-
-      async function load(){
-        var list = [];
-        try{
-          var res = await fetch('../api/airtable-proxy');
-          if(!res.ok) throw new Error('proxy '+res.status);
-          var data = await res.json();
-          var all = [].concat(data.todayFinds||[], data.editorPicks||[], data.newListing||[]);
-          // 去重：newListing 是全集，todayFinds／editorPicks 是它的子集，直接 concat 会把同一件藏品渲染多次（2026-09-14 修复）
-          var seen = {}, uniq = [];
-          all.forEach(function(it){ var k = it.item_id || it.title_zh || JSON.stringify(it); if(!seen[k]){ seen[k] = 1; uniq.push(it); } });
-          list = uniq.filter(function(it){ return it.category === TARGET_CAT; });
-        }catch(e){
-          console.warn('接口不可用，保留页面静态内容：', e);
-          return; // 失败保留静态演示内容作后备
-        }
-        if(list.length) renderCards(list);
-      }
-      load();
-    })();
-
-</script>
+    </script>
     <!-- 分类页通用搜索：关键词过滤 + 回车/点击触发 + 结果反馈 -->
-    <script src="../assets/js/item-search.js"></script>
+    <script src="../../../assets/js/item-search.js"></script>
+    <script src="../../../assets/js/gudong-data.js" data-root="../"></script>
+    <script>
+        /* 2026-09-19：品类页统一由公共数据层渲染（Airtable 实时数据 → 快照回退 → 保留静态内容） */
+        if (window.GudongData) GudongData.mountCategory({ cat: '瓷器', list: '#itemList', style: 'card', picks: '#picks' });
+        else console.error('[Gudong] assets/js/gudong-data.js 未加载');
+    </script>
 </body>
 </html>

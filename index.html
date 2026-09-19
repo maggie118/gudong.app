@@ -496,7 +496,6 @@
 
         /* ---------- 价格显示 ---------- */
         .finds-price,
-        .expert-mini-price,
         .item-price {
             display: flex;
             align-items: baseline;
@@ -504,7 +503,6 @@
             flex-wrap: wrap;
         }
         .finds-price { margin: 0 0 .5rem; font-size: .88rem; }
-        .expert-mini-price { margin-top: .4rem; font-size: .88rem; }
 
         .price-main {
             color: var(--color-primary);
@@ -532,45 +530,6 @@
             border-color: var(--color-bronze-muted);
         }
 
-        .expert-mini-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
-            margin-bottom: 1rem;
-        }
-        .expert-mini-card {
-            background: var(--color-white);
-            border: 1px solid var(--color-gold);
-            border-radius: 8px;
-            padding: 1.1rem 1.3rem 1.3rem;
-            text-decoration: none;
-            color: inherit;
-            transition: .2s;
-        }
-        .expert-mini-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(176,138,69,.14);
-        }
-        .expert-mini-badge {
-            display: inline-block;
-            background: var(--color-far-mountain);
-            color: #fff;
-            font-size: .68rem;
-            font-weight: 700;
-            padding: .2rem .55rem;
-            border-radius: 4px;
-            margin-bottom: .6rem;
-        }
-        .expert-mini-title {
-            font-size: 1rem;
-            font-weight: 700;
-            color: var(--color-text);
-            margin-bottom: .3rem;
-        }
-        .expert-mini-sub {
-            font-size: .82rem;
-            color: var(--color-text-secondary);
-        }
         .badge { position: absolute; top: 8px; left: 8px; padding: 3px 8px; font-size: 12px; border-radius: 4px; color: #fff; z-index: 2; }
         .listing-card { position: relative; cursor: pointer; overflow: hidden; border-radius: 8px; background: var(--color-primary-light); text-decoration: none; transition: .25s; min-height: 300px; display: flex; flex-direction: column; }
         .listing-card:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(37,34,30,.14); }
@@ -681,7 +640,6 @@
             animation: gd-shimmer 1.4s linear infinite;
         }
         .skeleton-card--square { aspect-ratio: 1 / 1; }
-        .skeleton-card--wide { height: 96px; }
         @media (prefers-reduced-motion: reduce) { .skeleton-card { animation: none; } }
         [hidden] { display: none !important; }
         /* 2026-09-19：数据连接诊断面板（仅 ?debug=1 时出现） */
@@ -860,12 +818,10 @@
                中文态下按钮只显示「刊登藏品」，不再出现双份文案。 */
             .goods-list { grid-template-columns: repeat(3, 1fr); gap: .6rem; }
             .finds-grid { grid-template-columns: repeat(2, 1fr); gap: .8rem; }
-            .expert-mini-grid { grid-template-columns: 1fr; }
             .item-card .item-info { padding: .22rem .45rem; gap: .05rem; }
             .item-card .item-price { font-size: .62rem; gap: .25rem; }
             .item-card .price-tag { font-size: .52rem; padding: 0 .2rem; }
             .finds-price { font-size: .82rem; }
-            .expert-mini-price { font-size: .82rem; }
             .how-grid { grid-template-columns: 1fr; }
         }
 
@@ -979,16 +935,6 @@
             <p class="section-note en">Today's Finds are hand-selected highlights. A small number of slots are paid promoted placements. No authentication is provided.</p>
             <!-- 2026-09-17：移除静态卡片，改为空容器由 JS 从 Airtable 加载。 -->
             <div class="finds-grid" id="todayFindsGrid"></div>
-        </section>
-        <section id="editor-picks">
-            <div class="section-head2">
-                <div><span class="title zh">精选展示</span><span class="title en">Featured Listings</span></div>
-                <a href="../../Downloads/expert-picks.html" class="more zh">更多 →</a>
-                <a href="../../Downloads/expert-picks.html" class="more en">More →</a>
-            </div>
-            <div class="expert-mini-grid" id="editorPicksGrid"></div>
-            <p class="section-note zh">精选展示为付费曝光服务。平台仅审核图片格式，不做器物真伪、年代、价值鉴定，不担保藏品真实可靠，请买家自行审慎甄别。</p>
-            <p class="section-note en">Featured Listings is a paid-exposure service. We only review image formatting. Gudong does NOT authenticate, date or appraise objects. Buyers must perform independent due-diligence.</p>
         </section>
         <section id="new-listings">
             <div class="section-head2">
@@ -1127,10 +1073,9 @@
             if (document.getElementById('searchInput').value.trim()) filterAll();
         }
 
-        /* ===== 搜索：覆盖首页三个区块 ===== */
+        /* ===== 搜索：覆盖首页两个区块（今日发现 / 最新藏品） ===== */
         const SEARCH_GROUPS = [
             '#todayFindsGrid .finds-card',
-            '#editorPicksGrid .expert-mini-card',
             '#itemList .item-card',
         ];
         let firstMatchEl = null;
@@ -1161,7 +1106,7 @@
             showSearchTip(kw, visible);
             checkNoResult(kw);
 
-            ['todayFindsGrid', 'editorPicksGrid'].forEach(id => {
+            ['todayFindsGrid'].forEach(id => {
                 const grid = document.getElementById(id);
                 if (!grid) return;
                 const sec = grid.closest('section');
@@ -1504,19 +1449,6 @@
             </a>`;
         }
 
-        function renderPickCard(f) {
-          const kw = attrKeywords(f);
-          const subZh = f.subtitle_zh || [f.era_zh, f.category].filter(Boolean).join(' · ');
-          const subEn = f.subtitle_en || [f.era_en, f.category].filter(Boolean).join(' · ');
-          return `
-            <a href="items/${esc(normId(f.item_id))}.html" class="expert-mini-card" data-cat="${catKey(f.category)}" data-keywords="${kw}">
-              <div class="expert-mini-badge zh">精选展示</div><div class="expert-mini-badge en">Featured Listings</div>
-              <div class="expert-mini-title zh">${esc(f.title_zh)}</div><div class="expert-mini-title en">${esc(f.title_en)}</div>
-              <div class="expert-mini-sub zh">${esc(subZh)}</div><div class="expert-mini-sub en">${esc(subEn)}</div>
-              ${priceHtml(f, 'expert-mini-price')}
-            </a>`;
-        }
-
         function renderCards(containerId, items) {
           const container = document.getElementById(containerId);
           if (!container) return;
@@ -1545,7 +1477,6 @@
             el.innerHTML = Array(n).fill('<div class="skeleton-card ' + cls + '"></div>').join('');
           };
           fill('todayFindsGrid', 4, 'skeleton-card--square');
-          fill('editorPicksGrid', 2, 'skeleton-card--wide');
           fill('itemList', 6, 'skeleton-card--square');
         }
 
@@ -1554,7 +1485,7 @@
           const msgZh = '<strong>藏品加载失败</strong><br>请刷新页面重试。如持续出现，请稍后再访问。';
           const msgEn = '<strong>Failed to load listings</strong><br>Please refresh the page. If the issue persists, try again later.';
           const html = `<div class="load-error-tip"><span class="zh">${msgZh}</span><span class="en">${msgEn}</span></div>`;
-          ['todayFindsGrid', 'editorPicksGrid', 'itemList'].forEach(id => {
+          ['todayFindsGrid', 'itemList'].forEach(id => {
             const el = document.getElementById(id);
             if (el) { el.removeAttribute('aria-busy'); el.innerHTML = html; }
           });
@@ -1577,7 +1508,6 @@
             }
           };
           fillSection('todayFindsGrid', data.todayFinds, renderFindsCard);
-          fillSection('editorPicksGrid', data.editorPicks, renderPickCard);
 
           const list = document.getElementById('itemList');
           if (list) {
@@ -1647,7 +1577,7 @@
             '接口：' + esc(diag.endpoint) + '\n' +
             '接口响应：' + st(diag.proxy) + '　快照响应：' + st(diag.snapshot) + '\n' +
             '响应字段：' + esc(diag.payloadKeys.join(', ') || '—') + '\n' +
-            '今日发现 ' + (c.todayFinds ?? '—') + ' · 精选展示 ' + (c.editorPicks ?? '—') + ' · 最新藏品 ' + (c.newListing ?? '—') +
+            '今日发现 ' + (c.todayFinds ?? '—') + ' · 最新藏品 ' + (c.newListing ?? '—') +
             (diag.skipped ? ' · <span class="warn">已跳过空行/缺标题的行 ' + diag.skipped + '</span>' : '') + '\n' +
             '首条记录字段：' + esc(diag.sampleKeys.join(', ') || '—') +
             (diag.errors.length ? '\n<span class="bad">错误：\n' + diag.errors.map(esc).join('\n') + '</span>' : '');

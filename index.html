@@ -1220,7 +1220,7 @@
         /* ============================================================
            🟢 2026-09-19 数据连接层重构
            1) 诊断：?debug=1 时右下角显示数据到底来自 Airtable 还是本地快照
-           2) 容错：兼容 {todayFinds,editorPicks,newListing} / Airtable 原始 records / 纯数组
+           2) 容错：兼容 {todayFinds,newListing} / Airtable 原始 records / 纯数组
            3) 清洗：字段名归一（空格/大小写）、附件数组、勾选框、空行过滤、中英文兜底
            4) 体验：骨架屏、空状态、超时+重试、防旧缓存、加载完成后重新应用搜索
            ============================================================ */
@@ -1323,7 +1323,7 @@
           return out;
         }
 
-        /* ===== 响应清洗：统一成 {todayFinds, editorPicks, newListing} ===== */
+        /* ===== 响应清洗：统一成 {todayFinds, newListing} ===== */
         function pickList(json, ...keys) {
           for (const k of keys) if (Array.isArray(json[k])) return json[k];
           return null;
@@ -1337,23 +1337,21 @@
           diag.payloadKeys = Array.isArray(json) ? ['(array)'] : Object.keys(json);
 
           const tf = pickList(json, 'todayFinds', 'today_finds');
-          const ep = pickList(json, 'editorPicks', 'editor_picks');
           const nl = pickList(json, 'newListing', 'newListings', 'new_listing', 'new_listings');
           const flat = Array.isArray(json) ? json : (Array.isArray(json.records) ? json.records : null);
 
           let groups;
-          if (tf || ep || nl) {
-            groups = { todayFinds: tf || [], editorPicks: ep || [], newListing: nl || [] };
+          if (tf || nl) {
+            groups = { todayFinds: tf || [], newListing: nl || [] };
           } else if (flat) {
             // 后备：代理只返回一个扁平列表时，按勾选框字段自行分组
             const all = flat.map(normalizeRecord).filter(Boolean);
             groups = {
               todayFinds: all.filter(f => f.is_today_finds),
-              editorPicks: all.filter(f => f.is_editor_pick || f.is_editor_picks || f.is_featured),
               newListing: all
             };
           } else {
-            throw new Error('响应中找不到 todayFinds / editorPicks / newListing（实际字段：' + diag.payloadKeys.join(', ') + '）');
+            throw new Error('响应中找不到 todayFinds / newListing（实际字段：' + diag.payloadKeys.join(', ') + '）');
           }
 
           let total = 0, kept = 0;
@@ -1367,14 +1365,13 @@
           });
           const out = {
             todayFinds: clean(groups.todayFinds),
-            editorPicks: clean(groups.editorPicks),
             newListing: clean(groups.newListing)
           };
           if (total > 0 && kept === 0) throw new Error('所有记录都缺少 item_id 或 title_zh/title_en，请检查 Airtable 字段名');
 
-          const first = out.todayFinds[0] || out.editorPicks[0] || out.newListing[0];
+          const first = out.todayFinds[0] || out.newListing[0];
           diag.sampleKeys = first ? Object.keys(first) : [];
-          diag.counts = { todayFinds: out.todayFinds.length, editorPicks: out.editorPicks.length, newListing: out.newListing.length };
+          diag.counts = { todayFinds: out.todayFinds.length, newListing: out.newListing.length };
           return out;
         }
 

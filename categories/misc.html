@@ -13,7 +13,7 @@
     <meta property="og:url" content="https://gudong.app/categories/misc.html">
     <meta property="og:image" content="https://gudong.app/assets/icons/icon-512.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
-    <link rel="manifest" href="../../../manifest.json">
+    <link rel="manifest" href="../manifest.json">
     <meta name="theme-color" content="#8A5A3B">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -83,23 +83,6 @@
         .section-head2 .sub-line { font-size: .82rem; color: var(--color-text-secondary); margin-top: .2rem; display: block; }
         .section-head2 .more { font-size: .85rem; color: var(--color-text-secondary); text-decoration: none; white-space: nowrap; }
         .section-head2 .more:hover { color: var(--color-primary); }
-        .picks-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.2rem; }
-        .pick-card { display: flex; flex-direction: column; background: var(--color-white); border: 1px solid var(--color-gold); border-radius: 10px; overflow: hidden; text-decoration: none; color: inherit; transition: .25s; position: relative; }
-        .pick-card:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(176,138,69,.16); }
-        .pick-image { aspect-ratio: 4 / 3; background: var(--color-primary-light); overflow: hidden; position: relative; }
-        .pick-image img { width: 100%; height: 100%; object-fit: cover; display: block; transition: .3s; }
-        .pick-card:hover .pick-image img { transform: scale(1.03); }
-        .pick-badge { position: absolute; top: .6rem; left: .6rem; background: var(--color-gold); color: #fff; font-size: .68rem; font-weight: 700; padding: .25rem .55rem; border-radius: 4px; letter-spacing: .02em; }
-        .pick-body { padding: 1rem 1.1rem 1.1rem; }
-        .pick-title { font-size: 1.02rem; font-weight: 700; color: var(--color-text); margin-bottom: .35rem; }
-        .pick-meta { display: flex; flex-wrap: wrap; gap: .15rem .8rem; font-size: .8rem; color: var(--color-text-secondary); margin-bottom: .5rem; }
-        .pick-meta span { white-space: nowrap; }
-        .pick-meta .sep { color: var(--color-text-muted); }
-        .pick-seller { font-size: .82rem; color: var(--color-primary); margin-bottom: .6rem; }
-        .pick-seller a { color: var(--color-primary); text-decoration: none; font-weight: 600; }
-        .pick-seller a:hover { text-decoration: underline; }
-        .pick-cta { display: inline-block; font-size: .85rem; color: var(--color-primary); font-weight: 600; text-decoration: none; }
-        .pick-cta:hover { text-decoration: underline; }
         .list-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.1rem; }
         .item-card { display: flex; flex-direction: column; background: var(--color-white); border: 1px solid var(--color-border); border-radius: 8px; overflow: hidden; text-decoration: none; color: inherit; transition: .2s; }
         .item-card:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(37,34,30,.10); border-color: var(--color-primary); }
@@ -123,7 +106,7 @@
         .footer-disclaimer { max-width: 620px; margin: 0 auto 1.1rem; font-size: .74rem; line-height: 1.65; color: var(--color-text-muted); }
         [data-lang="en"] .zh { display: none; }
         [data-lang="zh"] .en { display: none; }
-        @media (max-width: 820px) { header { height: 62px; gap: .6rem; } .btn-publish { padding: .45rem .85rem; font-size: .8rem; } .container { padding-top: 2rem; } .picks-grid { grid-template-columns: 1fr; } .list-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 820px) { header { height: 62px; gap: .6rem; } .btn-publish { padding: .45rem .85rem; font-size: .8rem; } .container { padding-top: 2rem; } .list-grid { grid-template-columns: repeat(2, 1fr); } }
         @media (max-width: 560px) { .brand h1 { font-size: 1.15rem; } .container { padding: 1.8rem 4.5% 3rem; } section { margin-bottom: 2.8rem; } .list-grid { grid-template-columns: 1fr; gap: .8rem; } .filter-row { flex-direction: column; align-items: flex-start; gap: .4rem; } }
 
         /* ---------- Sidebar 语言切换按钮（2026-09-15 新增） ---------- */
@@ -163,14 +146,14 @@
     <header>
         <div style="display:flex; align-items:center; gap:.9rem;">
             <button class="menu-toggle" onclick="openSidebar()" aria-label="menu">☰</button>
-            <a href="../../../index.html" class="brand" style="text-decoration:none;color:inherit;">
+            <a href="../index.html" class="brand" style="text-decoration:none;color:inherit;">
                 <h1 class="zh">古董集</h1>
                 <h1 class="en">GUDONG</h1>
                 <p class="zh">GUDONG</p>
             </a>
         </div>
         <div class="header-right">
-            <a href="../../../pricing.html#seller-services" class="btn-publish">
+            <a href="../pricing.html#seller-services" class="btn-publish">
                 <span class="zh">刊登藏品</span><span class="en">List an Item</span>
             </a>
             <button class="lang-btn" onclick="toggleLang()">EN</button>
@@ -184,20 +167,20 @@
             <span class="zh">古董集</span><span class="en">GUDONG</span>
         </div>
                 <nav class="sidebar-nav">
-            <a href="../../../index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">首页</span><span class="en">Home</span></a>
-            <a href="../../../index.html#today-finds" class="sidebar-link" onclick="closeSidebar()"><span class="zh">今日发现</span><span class="en">Today's Finds</span></a>
-            <a href="../../../index.html#new-listings" class="sidebar-link" onclick="closeSidebar()"><span class="zh">最新藏品</span><span class="en">New Listings</span></a>
+            <a href="../index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">首页</span><span class="en">Home</span></a>
+            <a href="../index.html#today-finds" class="sidebar-link" onclick="closeSidebar()"><span class="zh">今日发现</span><span class="en">Today's Finds</span></a>
+            <a href="../index.html#new-listings" class="sidebar-link" onclick="closeSidebar()"><span class="zh">最新藏品</span><span class="en">New Listings</span></a>
 
             <div class="sidebar-group-title zh">藏品库</div><div class="sidebar-group-title en">Collection</div>
-            <a href="../../../categories/porcelain.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 瓷器</span><span class="en">· Porcelain</span></a>
-            <a href="../../../categories/jade.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 玉器</span><span class="en">· Jade</span></a>
-            <a href="../../../categories/coins.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 钱币</span><span class="en">· Coins</span></a>
-            <a href="../../../categories/paintings.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 书画</span><span class="en">· Paintings &amp; Calligraphy</span></a>
-            <a href="../../../categories/misc.html" class="sidebar-sub active" onclick="closeSidebar()"><span class="zh">· 杂项</span><span class="en">· Miscellaneous</span></a>
+            <a href="../categories/porcelain.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 瓷器</span><span class="en">· Porcelain</span></a>
+            <a href="../categories/jade.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 玉器</span><span class="en">· Jade</span></a>
+            <a href="../categories/coins.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 钱币</span><span class="en">· Coins</span></a>
+            <a href="../categories/paintings.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 书画</span><span class="en">· Paintings &amp; Calligraphy</span></a>
+            <a href="../categories/misc.html" class="sidebar-sub active" onclick="closeSidebar()"><span class="zh">· 杂项</span><span class="en">· Miscellaneous</span></a>
 
-            <a href="../../../sellers/index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">卖家展馆</span><span class="en">Dealer Galleries</span></a>
-            <a href="../../../pricing.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">服务价格</span><span class="en">Pricing</span></a>
-            <a href="../../../about.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">关于Gudong</span><span class="en">About</span></a>
+            <a href="../sellers/index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">卖家展馆</span><span class="en">Dealer Galleries</span></a>
+            <a href="../pricing.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">服务价格</span><span class="en">Pricing</span></a>
+            <a href="../about.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">关于Gudong</span><span class="en">About</span></a>
             <button type="button" class="sidebar-lang-btn" onclick="toggleLang()" aria-label="Switch language"><span class="zh">🌐 English</span><span class="en">🌐 中文</span></button>
         </nav>
     </aside>
@@ -267,108 +250,25 @@
             </div>
         </section>
 
-        <section id="picks">
-            <div class="section-head2">
-                <div>
-                    <span class="title zh">编辑精选</span><span class="title en">Editor's Picks</span>
-                    <span class="sub-line zh">付费擦亮 · 大图优先展示</span><span class="sub-line en">Paid featured · prominent display</span>
-                </div>
-                <a href="../../../pricing.html" class="more zh">了解擦亮服务 →</a>
-                <a href="../../../pricing.html" class="more en">View featured pricing →</a>
-            </div>
-            <div class="picks-grid">
-                <a href="../sellers/seller-cui-yuan.html" class="pick-card">
-                    <div class="pick-image">
-                        <img src="../../../assets/images/placeholder.jpg" alt="宣德炉">
-                        <span class="pick-badge zh">编辑精选</span>
-                        <span class="pick-badge en">Editor's Pick</span>
-                    </div>
-                    <div class="pick-body">
-                        <div class="pick-title zh">宣德炉</div>
-                        <div class="pick-title en">Xuande Bronze Censer</div>
-                        <div class="pick-meta">
-                            <span class="zh">明</span><span class="en">Ming</span>
-                            <span class="sep">·</span>
-                            <span class="zh">铜炉</span><span class="en">Censer</span>
-                            <span class="sep">·</span>
-                            <span class="zh">价格面议</span><span class="en">Price on Request</span>
-                        </div>
-                        <div class="pick-seller zh">展馆：<a href="../sellers/seller-cui-yuan.html">翠缘古玩</a></div>
-                        <div class="pick-seller en">Gallery: <a href="../../../sellers/seller-cui-yuan.html">Cui Yuan</a></div>
-                        <span class="pick-cta zh">查看详情 →</span>
-                        <span class="pick-cta en">View Details →</span>
-                    </div>
-                </a>
-                <a href="../sellers/seller-lim-kw-antiques.html" class="pick-card">
-                    <div class="pick-image">
-                        <img src="../../../assets/images/placeholder.jpg" alt="铜鎏金造像">
-                        <span class="pick-badge zh">编辑精选</span>
-                        <span class="pick-badge en">Editor's Pick</span>
-                    </div>
-                    <div class="pick-body">
-                        <div class="pick-title zh">铜鎏金造像</div>
-                        <div class="pick-title en">Gilt-Bronze Figure</div>
-                        <div class="pick-meta">
-                            <span class="zh">清</span><span class="en">Qing</span>
-                            <span class="sep">·</span>
-                            <span class="zh">佛像</span><span class="en">Buddhist Figure</span>
-                            <span class="sep">·</span>
-                            <span class="zh">价格面议</span><span class="en">Price on Request</span>
-                        </div>
-                        <div class="pick-seller zh">展馆：<a href="../sellers/seller-lim-kw-antiques.html">林记古玩</a></div>
-                        <div class="pick-seller en">Gallery: <a href="../../../sellers/seller-lim-kw-antiques.html">Lim Kee Whee</a></div>
-                        <span class="pick-cta zh">查看详情 →</span>
-                        <span class="pick-cta en">View Details →</span>
-                    </div>
-                </a>
-            </div>
-        </section>
-
         <section id="list">
             <div class="section-head2">
                 <div>
                     <span class="title zh">全部杂项</span><span class="title en">All Miscellaneous</span>
                     <span class="sub-line zh">免费/基础入驻展示</span><span class="sub-line en">Free / basic listings</span>
                 </div>
-                <a href="../../../pricing.html" class="more zh">发布我的藏品 →</a>
-                <a href="../../../pricing.html" class="more en">List your items →</a>
+                <a href="../pricing.html" class="more zh">发布我的藏品 →</a>
+                <a href="../pricing.html" class="more en">List your items →</a>
             </div>
             <div class="list-grid" id="itemList">
-                <a href="../sellers/seller-cui-yuan.html" class="item-card" data-keywords="绿釉 执壶 壶 瓷杂 green glazed ewer">
-                    <div class="item-image"><img src="../../../assets/images/placeholder.jpg" alt="绿釉执壶"></div>
-                    <div class="item-body">
-                        <div class="item-title zh">绿釉执壶</div>
-                        <div class="item-title en">Green-Glazed Ewer</div>
-                        <div class="item-meta zh">执壶 · ¥8600</div>
-                        <div class="item-meta en">Ewer · $8,600</div>
-                        <div class="item-seller zh">展馆：<a href="../sellers/seller-cui-yuan.html">翠缘古玩</a></div>
-                        <div class="item-seller en">Gallery: <a href="../../../sellers/seller-cui-yuan.html">Cui Yuan</a></div>
-                        <div class="item-cta zh">查看详情 →</div>
-                        <div class="item-cta en">View Details →</div>
-                    </div>
-                </a>
-                <a href="../sellers/seller-cui-yuan.html" class="item-card" data-keywords="宣德 炉 铜器 面议 Xuande censer bronze">
-                    <div class="item-image"><img src="../../../assets/images/placeholder.jpg" alt="宣德炉"></div>
-                    <div class="item-body">
-                        <div class="item-title zh">宣德炉</div>
-                        <div class="item-title en">Xuande Bronze Censer</div>
-                        <div class="item-meta zh">铜炉 · 价格面议</div>
-                        <div class="item-meta en">Censer · Price on Request</div>
-                        <div class="item-seller zh">展馆：<a href="../sellers/seller-cui-yuan.html">翠缘古玩</a></div>
-                        <div class="item-seller en">Gallery: <a href="../../../sellers/seller-cui-yuan.html">Cui Yuan</a></div>
-                        <div class="item-cta zh">查看详情 →</div>
-                        <div class="item-cta en">View Details →</div>
-                    </div>
-                </a>
                 <a href="../sellers/seller-lim-kw-antiques.html" class="item-card" data-keywords="铜鎏金 造像 佛像 面议 gilt bronze figure buddha">
-                    <div class="item-image"><img src="../../../assets/images/placeholder.jpg" alt="铜鎏金造像"></div>
+                    <div class="item-image"><img src="../assets/images/placeholder.jpg" alt="铜鎏金造像"></div>
                     <div class="item-body">
                         <div class="item-title zh">铜鎏金造像</div>
                         <div class="item-title en">Gilt-Bronze Figure</div>
                         <div class="item-meta zh">佛像 · 价格面议</div>
                         <div class="item-meta en">Buddhist Figure · Price on Request</div>
                         <div class="item-seller zh">展馆：<a href="../sellers/seller-lim-kw-antiques.html">林记古玩</a></div>
-                        <div class="item-seller en">Gallery: <a href="../../../sellers/seller-lim-kw-antiques.html">Lim Kee Whee</a></div>
+                        <div class="item-seller en">Gallery: <a href="../sellers/seller-lim-kw-antiques.html">Lim Kee Whee</a></div>
                         <div class="item-cta zh">查看详情 →</div>
                         <div class="item-cta en">View Details →</div>
                     </div>
@@ -381,10 +281,10 @@
 
     <footer>
         <div class="footer-nav">
-            <a href="../../../pricing.html#buyer-services" class="zh">买家指南</a><a href="../../../pricing.html#buyer-services" class="en">Buyer Guide</a>
-            <a href="../../../about.html#location" class="zh">联系我们</a><a href="../../../about.html#location" class="en">Contact</a>
-            <a href="../../../privacy.html" class="zh">隐私政策</a><a href="../../../privacy.html" class="en">Privacy</a>
-            <a href="../../../terms.html" class="zh">用户条款</a><a href="../../../terms.html" class="en">Terms</a>
+            <a href="../pricing.html#buyer-services" class="zh">买家指南</a><a href="../pricing.html#buyer-services" class="en">Buyer Guide</a>
+            <a href="../about.html#location" class="zh">联系我们</a><a href="../about.html#location" class="en">Contact</a>
+            <a href="../privacy.html" class="zh">隐私政策</a><a href="../privacy.html" class="en">Privacy</a>
+            <a href="../terms.html" class="zh">用户条款</a><a href="../terms.html" class="en">Terms</a>
         </div>
         <p class="footer-disclaimer zh">gudong.app 是信息发现平台，而非交易平台。</p>
         <p class="footer-disclaimer en">gudong.app is an information and discovery platform for antiques and collectibles.</p>
@@ -420,11 +320,11 @@
         if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js');
     </script>
     <!-- 分类页通用搜索：关键词过滤 + 回车/点击触发 + 结果反馈 -->
-    <script src="../../../assets/js/item-search.js"></script>
-    <script src="../../../assets/js/gudong-data.js" data-root="../"></script>
+    <script src="../assets/js/item-search.js"></script>
+    <script src="../assets/js/gudong-data.js" data-root="../"></script>
     <script>
         /* 2026-09-19：品类页统一由公共数据层渲染（Airtable 实时数据 → 快照回退 → 保留静态内容） */
-        if (window.GudongData) GudongData.mountCategory({ cat: '杂项', list: '#itemList', style: 'card', picks: '#picks' });
+        if (window.GudongData) GudongData.mountCategory({ cat: '杂项', list: '#itemList', style: 'card' });
         else console.error('[Gudong] assets/js/gudong-data.js 未加载');
     </script>
 </body>

@@ -10,6 +10,16 @@ const TOKEN = process.env.AIRTABLE_TOKEN;
 const STRIP_PREFIX = ['校验_'];
 const STRIP_EXACT  = [];
 
+/* 🟢 2026-09-19：Unicode 连字符归一化
+   Airtable 数据在录入/复制粘贴时混入了 U+2011（‑ 非断行连字符）等变体，
+   导致 item_id 对不上静态页文件名（ASCII '-'）、图片路径 404。
+   统一归一化为 ASCII '-'。 */
+const HYPHEN_VARIANTS = /[\u2010\u2011\u2012\u2013\u2014\u2015\u2212\uFE58\uFF0D]/g;
+function normHyphen(v) {
+  if (typeof v !== 'string') return v;
+  return v.replace(HYPHEN_VARIANTS, '-').trim();
+}
+
 function shouldStrip(key) {
   if (STRIP_EXACT.includes(key)) return true;
   return STRIP_PREFIX.some(p => key.startsWith(p));
@@ -40,14 +50,22 @@ async function fetchAllRecords() {
 
 export default async function handler(req, res) {
   // ---------- CORS ----------
+  /* 🟢 2026-09-19 修复：同源 GET 请求浏览器不发送 Origin 头，
+     原逻辑会把 origin='' 判为 Forbidden 返回 403，
+     导致生产站点（www.gudong.app）自己永远拉不到数据、回退静态快照。
+     新逻辑：无 Origin（同源请求/直接访问）→ 直接放行；
+     有 Origin 且在白名单（含本地开发）→ 放行并回 CORS 头；
+     有 Origin 但不在白名单 → 403。 */
   const origin = req.headers.origin || '';
   const allowed = ['https://gudong.app', 'https://www.gudong.app'];
   const isLocal = /^https?:\/\/(127\.0\.0\.1|localhost)(:\d+)?$/.test(origin);
 
-  if (allowed.includes(origin) || isLocal) {
-    res.setHeader('Access-Control-Allow-Origin', origin);
-  } else if (req.method !== 'OPTIONS') {
+  if (origin && !allowed.includes(origin) && !isLocal) {
     return res.status(403).json({ error: 'Forbidden' });
+  }
+  if (origin) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+    res.setHeader('Vary', 'Origin');
   }
   res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
@@ -83,13 +101,16 @@ export default async function handler(req, res) {
       })
       .map(rec => {
         const out = {
-          item_id: rec.fields.item_id || rec.id,   // 优先用字段里的 item_id
+          item_id: normHyphen(rec.fields.item_id || rec.id),   // 优先用字段里的 item_id（归一化连字符）
           _createdTime: rec.createdTime,
         };
         for (const [k, v] of Object.entries(rec.fields)) {
           if (shouldStrip(k)) continue;
           out[k] = v;
         }
+        // 🟢 2026-09-19：关键 ID / 图片路径字段做连字符归一化，保证链接可用
+        if (out.seller_id) out.seller_id = normHyphen(out.seller_id);
+        if (out.img_file)  out.img_file  = normHyphen(out.img_file);
         return out;
       });
 

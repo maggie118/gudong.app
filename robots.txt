@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.gudong.app/sitemap.xml
+# 注意：不要屏蔽 /api/ 与 /data/ —— 藏品列表由 JS 从 /api/airtable-proxy 读取，
+# 屏蔽后 Google 渲染出来的品类页、藏品库会是空的。
+Sitemap: https://gudong.app/sitemap.xml

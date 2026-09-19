@@ -90,17 +90,17 @@
     <meta name="twitter:image" content="https://gudong.app/og-cover.png">
 
     <!-- 🟢 优化点 7：PWA & 移动端 Web App -->
-    <link rel="manifest" href="../../Downloads/manifest.json">
+    <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#8A5A3B">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="古董集">
-    <link rel="apple-touch-icon" href="../../Downloads/assets/icons/apple-touch-icon-152x152.png" sizes="152x152">
-    <link rel="apple-touch-icon" href="../../Downloads/assets/icons/apple-touch-icon-180x180.png" sizes="180x180">
+    <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon-152x152.png" sizes="152x152">
+    <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon-180x180.png" sizes="180x180">
 
     <!-- 🟢 优化点 8：传统的浏览器 Favicon 基础设施保底 -->
-    <link rel="icon" type="image/x-icon" href="../../Downloads/favicon.ico">
-    <link rel="icon" type="image/png" sizes="32x32" href="../../Downloads/assets/icons/favicon-32x32.png">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32x32.png">
 
     <!-- CSS 样式表引入 -->
     <style>
@@ -865,7 +865,7 @@
             </a>
         </div>
         <div class="header-right">
-            <a href="../../Downloads/pricing.html#seller-services" class="btn-publish">
+            <a href="pricing.html#seller-services" class="btn-publish">
                 <span class="zh">刊登藏品</span><span class="en">List an Item</span>
             </a>
             <button class="lang-btn" onclick="toggleLang()">EN</button>
@@ -883,17 +883,17 @@
             <a href="#new-listings" class="sidebar-link" onclick="closeSidebar()"><span class="zh">最新藏品</span><span class="en">New Listings</span></a>
 
             <div class="sidebar-group-title zh">藏品库</div><div class="sidebar-group-title en">Collection</div>
-            <a href="../../Downloads/categories/porcelain.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 瓷器</span><span class="en">· Porcelain</span></a>
-            <a href="../../Downloads/categories/jade.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 玉器</span><span class="en">· Jade</span></a>
-            <a href="../../Downloads/categories/coins.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 钱币</span><span class="en">· Coins</span></a>
-            <a href="../../Downloads/categories/paintings.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 书画</span><span class="en">· Paintings &amp; Calligraphy</span></a>
-            <a href="../../Downloads/categories/misc.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 杂项</span><span class="en">· Miscellaneous</span></a>
+            <a href="categories/porcelain.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 瓷器</span><span class="en">· Porcelain</span></a>
+            <a href="categories/jade.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 玉器</span><span class="en">· Jade</span></a>
+            <a href="categories/coins.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 钱币</span><span class="en">· Coins</span></a>
+            <a href="categories/paintings.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 书画</span><span class="en">· Paintings &amp; Calligraphy</span></a>
+            <a href="categories/misc.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 杂项</span><span class="en">· Miscellaneous</span></a>
 
-            <a href="../../Downloads/sellers/index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">卖家展馆</span><span class="en">Dealer Galleries</span></a>
+            <a href="sellers/index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">卖家展馆</span><span class="en">Dealer Galleries</span></a>
       
-            <a href="../../Downloads/pricing.html#price-table" class="sidebar-link" onclick="closeSidebar()"><span class="zh">服务价格</span><span class="en">Pricing</span></a>
+            <a href="pricing.html#price-table" class="sidebar-link" onclick="closeSidebar()"><span class="zh">服务价格</span><span class="en">Pricing</span></a>
 
-            <a href="../../Downloads/about.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">关于Gudong</span><span class="en">About</span></a>
+            <a href="about.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">关于Gudong</span><span class="en">About</span></a>
             <button type="button" class="sidebar-lang-btn" onclick="toggleLang()" aria-label="Switch language"><span class="zh">🌐 English</span><span class="en">🌐 中文</span></button>
         </nav>
     </aside>
@@ -939,8 +939,8 @@
         <section id="new-listings">
             <div class="section-head2">
                 <div><span class="title zh">最新藏品</span><span class="title en">Recently added</span></div>
-                <a href="../../Downloads/collection.html" class="more zh">查看全部 →</a>
-                <a href="../../Downloads/collection.html" class="more en">View All →</a>
+                <a href="collection.html" class="more zh">查看全部 →</a>
+                <a href="collection.html" class="more en">View All →</a>
             </div>
             <div class="goods-list" id="itemList"></div>
             <div id="noResult" class="no-result zh" style="display:none;">暂无匹配藏品</div>
@@ -951,15 +951,15 @@
                 <div><span class="title zh">按类别浏览</span><span class="title en">Explore by Category</span></div>
             </div>
             <div class="browse-grid">
-                <a href="../../Downloads/categories/porcelain.html" class="browse-card"><span class="zh">瓷器</span><span class="en">Porcelain</span></a>
-                <a href="../../Downloads/categories/jade.html" class="browse-card"><span class="zh">玉器</span><span class="en">Jade</span></a>
-                <a href="../../Downloads/categories/coins.html" class="browse-card"><span class="zh">钱币</span><span class="en">Coins</span></a>
-                <a href="../../Downloads/categories/paintings.html" class="browse-card"><span class="zh">书画</span><span class="en">Paintings &amp; Calligraphy</span></a>
-                <a href="../../Downloads/categories/misc.html" class="browse-card"><span class="zh">杂项</span><span class="en">Miscellaneous</span></a>
+                <a href="categories/porcelain.html" class="browse-card"><span class="zh">瓷器</span><span class="en">Porcelain</span></a>
+                <a href="categories/jade.html" class="browse-card"><span class="zh">玉器</span><span class="en">Jade</span></a>
+                <a href="categories/coins.html" class="browse-card"><span class="zh">钱币</span><span class="en">Coins</span></a>
+                <a href="categories/paintings.html" class="browse-card"><span class="zh">书画</span><span class="en">Paintings &amp; Calligraphy</span></a>
+                <a href="categories/misc.html" class="browse-card"><span class="zh">杂项</span><span class="en">Miscellaneous</span></a>
             </div>
             <div style="margin-top:1.1rem;">
-                <a href="../../Downloads/sellers/index.html" class="more zh">卖家展馆 →</a>
-                <a href="../../Downloads/sellers/index.html" class="more en">Dealer Galleries →</a>
+                <a href="sellers/index.html" class="more zh">卖家展馆 →</a>
+                <a href="sellers/index.html" class="more en">Dealer Galleries →</a>
             </div>
         </section>
         <section id="services">
@@ -990,7 +990,7 @@
                     </div>
                 </div>
                     <div style="text-align:center; margin-top:2rem;">
-                    <a href="../../Downloads/pricing.html#seller-services" class="btn-publish">
+                    <a href="pricing.html#seller-services" class="btn-publish">
                         <span class="zh">刊登藏品信息</span><span class="en">List an Item</span>
                     </a>
                     <p class="section-note zh" style="margin-top:1rem;">了解发布规则与收费，前往服务价格页。</p>
@@ -1001,10 +1001,10 @@
     </main>
     <footer>
         <div class="footer-nav">
-            <a href="../../Downloads/pricing.html#buyer-services" class="zh">买家指南</a><a href="../../Downloads/pricing.html#buyer-services" class="en">Buyer Guide</a>
-            <a href="../../Downloads/about.html#location" class="zh">联系我们</a><a href="../../Downloads/about.html#location" class="en">Contact</a>
-            <a href="../../Downloads/privacy.html" class="zh">隐私政策</a><a href="../../Downloads/privacy.html" class="en">Privacy</a>
-            <a href="../../Downloads/terms.html" class="zh">用户条款</a><a href="../../Downloads/terms.html" class="en">Terms</a>
+            <a href="pricing.html#buyer-services" class="zh">买家指南</a><a href="pricing.html#buyer-services" class="en">Buyer Guide</a>
+            <a href="about.html#location" class="zh">联系我们</a><a href="about.html#location" class="en">Contact</a>
+            <a href="privacy.html" class="zh">隐私政策</a><a href="privacy.html" class="en">Privacy</a>
+            <a href="terms.html" class="zh">用户条款</a><a href="terms.html" class="en">Terms</a>
         </div>
         <!-- 2026-09-18：详细免责声明见 terms.html「用户条款」，页脚仅保留一句话平台定位。 -->
         <p class="footer-disclaimer zh">gudong.app 是信息发现平台，而非交易平台。</p>

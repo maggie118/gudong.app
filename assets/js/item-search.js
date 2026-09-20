@@ -103,20 +103,31 @@
         ['catSearch', 'catSearchEn'].forEach(function (id) {
             var el = byId(id);
             if (!el) return;
-            el.addEventListener('input', filterItems);          // 边输入边过滤
+            el.addEventListener('input', function () {          // 边输入边过滤
+                // 2026-09-19：中英文两个搜索框同步关键词，切换语言后不会丢失已输入的内容
+                var other = byId(id === 'catSearch' ? 'catSearchEn' : 'catSearch');
+                if (other && other.value !== el.value) other.value = el.value;
+                filterItems();
+            });
             el.addEventListener('keydown', function (e) {
                 if (e.key === 'Enter') { e.preventDefault(); doSearch(); }
-                if (e.key === 'Escape') { el.value = ''; filterItems(); }
+                if (e.key === 'Escape') {
+                    ['catSearch', 'catSearchEn'].forEach(function (i) { var x = byId(i); if (x) x.value = ''; });
+                    filterItems();
+                }
             });
         });
 
         // 藏品列表由 Airtable 异步渲染（会把 innerHTML 整个替换掉），
         // 内容变化后若搜索框有关键词，自动重新应用过滤。
+        // 2026-09-19：加 subtree —— jade / paintings 的卡片渲染在 #items 内层的 .goods-list 里，
+        // 只监听 #items 的直接子节点时，「先输入关键词、数据后到」的场景不会重新过滤。
+        // （filterItems 只改 style / 提示文字，不增删列表内节点，不会触发死循环。）
         var list = container();
         if (list && window.MutationObserver) {
             new MutationObserver(function () {
                 if (keyword()) filterItems();
-            }).observe(list, { childList: true });
+            }).observe(list, { childList: true, subtree: true });
         }
     });
 })();

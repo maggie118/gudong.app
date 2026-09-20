@@ -14,6 +14,10 @@
 //  6. 卖家真实姓名（seller_name_zh / seller_name_en）不再对外输出，也不参与搜索；
 //     网页上的卖家名一律来自「卖家展馆名」——见下方 sellers 表（可选）。
 //
+// 排查「某条记录为什么没出现在网站上」：设置环境变量 AIRTABLE_DEBUG_KEY（自己定一个长随机串），
+// 然后访问  /api/airtable-proxy?debug=<你的密钥>  ，会逐条列出每条记录是否公开、被排除的原因、
+// 会出现在哪个品类页、以及缺图 / 缺价格 / 缺 seller 等问题。不设置该变量则此功能关闭。
+//
 // 可选环境变量：AIRTABLE_SELLERS_TABLE —— 卖家表的表名（如 sellers）。未设置时 sellers 返回 []，
 // 页面回退到写在 HTML 里的展馆名。sellers 表字段：seller_id / display_zh / display_en /
 // since_year / intro_zh / intro_en / status；真实姓名请放在 real_name 之类的字段，不在白名单里，永不输出。
@@ -22,6 +26,7 @@ const BASE  = process.env.AIRTABLE_BASE_ID;
 const TABLE = process.env.AIRTABLE_TABLE;
 const TOKEN = process.env.AIRTABLE_TOKEN;
 const SELLERS_TABLE = process.env.AIRTABLE_SELLERS_TABLE;   // 可选
+const DEBUG_KEY = process.env.AIRTABLE_DEBUG_KEY;           // 可选：排查用密钥
 
 /* 只公开 status 为下列值的记录 */
 const PUBLIC_STATUSES = ['active'];
@@ -117,6 +122,69 @@ function toPublicSellers(rawRecords) {
     .filter(s => s.seller_id && (s.display_zh || s.display_en));    // 没有展馆名的行不输出
 }
 
+// ---------- 排查报告（需要 AIRTABLE_DEBUG_KEY）----------
+function pageOfCategory(c) {                      // 与前端 gudong-data.js 的 catKey 保持一致
+  const v = String(c == null ? '' : c).trim().toLowerCase();
+  const exact = { '瓷器': '瓷器', '玉器': '玉器', '钱币': '钱币', '书画': '书画', '杂项': '杂项',
+    porcelain: '瓷器', jade: '玉器', coins: '钱币', coin: '钱币', paintings: '书画', painting: '书画', calligraphy: '书画', misc: '杂项', miscellaneous: '杂项', other: '杂项' };
+  if (exact[v]) return { page: exact[v], standard: true };
+  if (/瓷|porcelain|ceramic/.test(v)) return { page: '瓷器', standard: false };
+  if (/玉|jade/.test(v)) return { page: '玉器', standard: false };
+  if (/币|钱|coin|numismat/.test(v)) return { page: '钱币', standard: false };
+  if (/画|书法|painting|calligraph/.test(v)) return { page: '书画', standard: false };
+  return { page: '杂项', standard: false };
+}
+
+async function debugReport() {
+  const raw = await fetchAllRecords(TABLE);
+  const byPage = {};
+  const records = raw.map(rec => {
+    const f = rec.fields || {};
+    const status = String(f.status || '').trim().toLowerCase();
+    const isPublic = PUBLIC_STATUSES.includes(status);
+    const problems = [];      // 导致「不公开」或「前端不显示」的原因
+    const notes = [];         // 会显示，但值得注意
+    if (!isPublic) problems.push(status ? `status=「${f.status}」→ 不公开（只有 active 才公开）` : 'status 为空 → 不公开（必须填 active）');
+    if (!f.title_zh && !f.title_en) problems.push('title_zh 与 title_en 都为空 → 前端会丢弃这条记录');
+    if (!f.item_id) notes.push('item_id 为空 → 用记录 ID 代替，详情页链接会 404');
+    const cat = pageOfCategory(f.category);
+    if (f.category && !cat.standard) notes.push(`分类「${f.category}」不是标准分类 → 按关键词归入【${cat.page}】页`);
+    if (!f.category) notes.push('category 为空 → 归入【杂项】页');
+    if (!f.img_file) notes.push('img_file 为空 → 显示占位图');
+    const type = String(f.price_type || '').trim();
+    if (/一口价|fixed/i.test(type) && !(Number(f.fixed_price) > 0)) notes.push('价格类型是一口价，但 fixed_price 为空 → 退回显示 price_display_* / price_*');
+    if (!type && !f.fixed_price && !f.price_display_zh && !f.price_zh) notes.push('没有任何价格字段 → 显示「私聊询价」');
+    if (!f.seller_id) notes.push('seller_id 为空 → 不会出现在任何卖家展馆页');
+    const shown = isPublic && (f.title_zh || f.title_en);
+    if (shown) byPage[cat.page] = (byPage[cat.page] || 0) + 1;
+    return {
+      record_id: rec.id, item_id: normHyphen(f.item_id || ''), title: f.title_zh || f.title_en || '(无标题)',
+      status: f.status || '', category: f.category || '', shows_on_page: shown ? cat.page : null,
+      public: !!shown, problems, notes,
+    };
+  });
+
+  let sellers = null;
+  if (SELLERS_TABLE) {
+    const rawS = await fetchAllRecords(SELLERS_TABLE);
+    const ok = toPublicSellers(rawS);
+    const okIds = new Set(ok.map(s => s.seller_id));
+    const itemSellerIds = [...new Set(raw.filter(rec => PUBLIC_STATUSES.includes(String((rec.fields || {}).status || '').trim().toLowerCase()) && rec.fields.seller_id).map(rec => normHyphen(rec.fields.seller_id)))];
+    sellers = {
+      rows: rawS.length, public_rows: ok.length,
+      rows_not_public: rawS.filter(r => { const f = r.fields || {}; return !(PUBLIC_STATUSES.includes(String(f.status || '').trim().toLowerCase()) && f.seller_id && (f.display_zh || f.display_en)); })
+        .map(r => ({ record_id: r.id, seller_id: (r.fields || {}).seller_id || '', why: '需要 status=active，并且 seller_id 与 display_zh / display_en 至少一个不为空' })),
+      item_seller_ids_without_public_seller_row: itemSellerIds.filter(id => !okIds.has(normHyphen(id))),
+    };
+  }
+  return {
+    generated_at: new Date().toISOString(),
+    summary: { total_records: records.length, public_records: records.filter(r => r.public).length, by_category_page: byPage },
+    hint: '每条记录的 problems = 为什么没出现；notes = 会出现但有需要注意的地方。修改 Airtable 后，网站最多约 2 分钟内更新。',
+    records, sellers,
+  };
+}
+
 // ---------- 内存缓存（同一个函数实例内有效） ----------
 const FRESH_MS = 30 * 1000;          // 30 秒内直接用缓存，不打 Airtable
 const STALE_MS = 60 * 60 * 1000;     // 上游故障时，最长回退 1 小时内的旧数据
@@ -175,6 +243,20 @@ export default async function handler(req, res) {
     return res.status(500).json({ error: 'Server misconfigured' });
   }
 
+  // ---------- 排查模式（key 不对就当作普通请求，不暴露该功能是否开启） ----------
+  if (DEBUG_KEY && req.query.debug && String(req.query.debug) === DEBUG_KEY) {
+    try {
+      const report = await debugReport();
+      res.setHeader('Cache-Control', 'no-store');
+      res.setHeader('X-Robots-Tag', 'noindex');
+      return res.status(200).json(report);
+    } catch (e) {
+      console.error('[airtable-proxy][debug]', e.message);
+      res.setHeader('Cache-Control', 'no-store');
+      return res.status(502).json({ error: 'Upstream failed', detail: e.message });
+    }
+  }
+
   // ---------- 查询参数（前端目前未使用，保留；做长度与取值限制） ----------
   const q   = String(req.query.q || '').trim().toLowerCase().slice(0, 60);
   const cat = String(req.query.cat || 'all').trim();
@@ -197,7 +279,7 @@ export default async function handler(req, res) {
 
     // ---------- 输出 ----------
     // 回退到旧数据时缩短缓存，让 CDN 尽快重新向我们要新数据
-    res.setHeader('Cache-Control', stale ? 'public, s-maxage=10' : 's-maxage=60, stale-while-revalidate=300');
+    res.setHeader('Cache-Control', stale ? 'public, s-maxage=10' : 's-maxage=30, stale-while-revalidate=60');
     if (stale) res.setHeader('X-Data-Stale', '1');
     return res.status(200).json({
       todayFinds:  items.filter(f => f.is_today_finds),

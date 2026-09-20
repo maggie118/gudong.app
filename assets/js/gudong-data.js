@@ -121,10 +121,24 @@
     }
     var out = { todayFinds: clean(groups.todayFinds), editorPicks: clean(groups.editorPicks), newListing: clean(groups.newListing) };
     if (total > 0 && kept === 0) throw new Error('所有记录都缺少 item_id 或标题，请检查 Airtable 字段名');
+    // 卖家展馆名（来自 Airtable 的 sellers 表；未配置时为空数组，页面回退到 HTML 里写的展馆名）
+    out.sellers = (Array.isArray(json.sellers) ? json.sellers : []).map(normalizeRecord).filter(function (sl) {
+      return sl && normId(sl.seller_id) && (sl.display_zh || sl.display_en);
+    }).map(function (sl) {
+      sl.seller_id = normId(sl.seller_id);
+      if (!sl.display_zh) sl.display_zh = sl.display_en;
+      if (!sl.display_en) sl.display_en = sl.display_zh;
+      return sl;
+    });
     var f0 = out.todayFinds[0] || out.editorPicks[0] || out.newListing[0];
     diag.sampleKeys = f0 ? Object.keys(f0) : [];
     diag.counts = { todayFinds: out.todayFinds.length, editorPicks: out.editorPicks.length, newListing: out.newListing.length };
     return out;
+  }
+  function sellerMap(data) {                    // { seller_id: {display_zh, display_en, since_year, ...} }
+    var m = {};
+    ((data && data.sellers) || []).forEach(function (sl) { m[sl.seller_id] = sl; });
+    return m;
   }
   function dedupe(list) {                       // 按 item_id 去重，保留首次出现顺序
     var seen = {};
@@ -309,7 +323,6 @@
       var metaZh = [f.era_zh, f.category].filter(Boolean).join(' · '), metaEn = [f.era_en, f.category].filter(Boolean).join(' · ');
       return '<a href="' + itemHref(f) + '" class="item-card"' + attrs + '>' +
         '<div class="item-image">' + img + '</div><div class="item-body">' +
-
         '<div class="item-title zh">' + esc(f.title_zh) + '</div><div class="item-title en">' + esc(f.title_en) + '</div>' +
         '<div class="item-meta zh">' + esc(metaZh) + '</div><div class="item-meta en">' + esc(metaEn) + '</div>' +
         priceBlock(f) +
@@ -348,7 +361,7 @@
 
   global.GudongData = {
     ROOT: ROOT, API_BASE: API_BASE, DEBUG: DEBUG, diag: diag,
-    load: load, dedupe: dedupe, catKey: catKey, esc: esc, normId: normId,
+    load: load, dedupe: dedupe, sellerMap: sellerMap, catKey: catKey, esc: esc, normId: normId,
     resolvePrice: resolvePrice, priceSpans: priceSpans, priceBlock: priceBlock,
     imgUrl: imgUrl, imgOnError: IMG_FALLBACK, itemHref: itemHref,
     skeleton: skeleton, emptyHtml: emptyHtml, errorHtml: errorHtml, injectCss: injectCss, renderDebug: renderDebug,

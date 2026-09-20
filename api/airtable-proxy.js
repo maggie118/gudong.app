@@ -1,42 +1,78 @@
 // /api/airtable-proxy.js
-// Vercel Serverless Function â€” è¯»å– Airtable çœŸå®æ•°æ®
-// ç¯å¢ƒå˜é‡ï¼šAIRTABLE_BASE_ID / AIRTABLE_TABLE / AIRTABLE_TOKEN
+// Vercel Serverless Function ¡ª ¶ÁÈ¡ Airtable ÕæÊµÊı¾İ£¨¹«¿ªÖ»¶Á½Ó¿Ú£©
+// »·¾³±äÁ¿£ºAIRTABLE_BASE_ID / AIRTABLE_TABLE / AIRTABLE_TOKEN
+//
+// 2026-09-19 ¼Ó¹Ì£¨Ïà¶ÔÉÏÒ»°æ£©£º
+//  1. Ö»¹«¿ª status === 'active' µÄ¼ÇÂ¼¡£Ô­Âß¼­¡¸È±Ê¡ÊÓÎª active¡¢Ö»ÅÅ³ı archived/deleted¡¹£¬
+//     »áÈÃ draft / pending / Î´ÉóºËµÄ±íµ¥Ìá½»Ö±½ÓÉÏÏß¡££¨Óë generate.js µÄ¿Ú¾¶Ò»ÖÂ£©
+//  2. ×Ö¶Î°×Ãûµ¥¡£Ô­Âß¼­ÊÇ¡¸³ı Ğ£Ñé_ Ç°×ºÍâÈ«²¿Êä³ö¡¹£¬ÒÔºóÔÚ Airtable ĞÂÔöµÄÄÚ²¿×Ö¶Î
+//     £¨µ×¼Û¡¢±¸×¢¡¢³É±¾¡­¡­£©»á±»×Ô¶¯¹«¿ª¡£ĞÂÔö¹«¿ª×Ö¶ÎÊ±£¬ÔÚ PUBLIC_FIELDS Àï¼ÓÒ»ĞĞ¼´¿É¡£
+//  3. ²»ÔÙ°Ñ Airtable µÄ´íÎóÔ­ÎÄ / È±Ê§µÄ»·¾³±äÁ¿Ãû·µ»Ø¸ø·Ã¿Í£¬Ö»Ğ´·şÎñ¶ËÈÕÖ¾¡£
+//  4. ÄÚ´æ»º´æ + ÉÏÓÎ¹ÊÕÏÊ±»ØÍËµ½×î½üÒ»´Î³É¹¦µÄÊı¾İ£¨stale-if-error£©£¬
+//     ²¢ÈÃ ?v=Ëæ»úÊı Ö®ÀàµÄ»º´æ´©Í¸ÇëÇó²»»á·´¸´´òµ½ Airtable£¨ÏŞÁ÷ 5 ´Î/Ãë/base£©¡£
+//  5. ÉÏÓÎÇëÇó 8 Ãë³¬Ê±£»Ö»ÔÊĞí GET / HEAD / OPTIONS£»q / cat ²ÎÊı×ö³¤¶ÈÓëÈ¡ÖµÏŞÖÆ¡£
+//  6. Âô¼ÒÕæÊµĞÕÃû£¨seller_name_zh / seller_name_en£©²»ÔÙ¶ÔÍâÊä³ö£¬Ò²²»²ÎÓëËÑË÷£»
+//     ÍøÒ³ÉÏµÄÂô¼ÒÃûÒ»ÂÉÀ´×Ô¡¸Âô¼ÒÕ¹¹İÃû¡¹¡ª¡ª¼ûÏÂ·½ sellers ±í£¨¿ÉÑ¡£©¡£
+//
+// ¿ÉÑ¡»·¾³±äÁ¿£ºAIRTABLE_SELLERS_TABLE ¡ª¡ª Âô¼Ò±íµÄ±íÃû£¨Èç sellers£©¡£Î´ÉèÖÃÊ± sellers ·µ»Ø []£¬
+// Ò³Ãæ»ØÍËµ½Ğ´ÔÚ HTML ÀïµÄÕ¹¹İÃû¡£sellers ±í×Ö¶Î£ºseller_id / display_zh / display_en /
+// since_year / intro_zh / intro_en / status£»ÕæÊµĞÕÃûÇë·ÅÔÚ real_name Ö®ÀàµÄ×Ö¶Î£¬²»ÔÚ°×Ãûµ¥Àï£¬ÓÀ²»Êä³ö¡£
 
-const BASE  = process.env.AIRTABLE_BASE_ID;   // â† æ³¨æ„æ˜¯ _ID åç¼€ï¼Œå¯¹é½ Vercel å˜é‡å
+const BASE  = process.env.AIRTABLE_BASE_ID;
 const TABLE = process.env.AIRTABLE_TABLE;
 const TOKEN = process.env.AIRTABLE_TOKEN;
+const SELLERS_TABLE = process.env.AIRTABLE_SELLERS_TABLE;   // ¿ÉÑ¡
 
-// å†…éƒ¨å­—æ®µï¼šä¸å¯¹å¤–è¾“å‡ºï¼ˆä¸åˆ  price_display_*ï¼Œæš‚æ—¶ä¿æŒå‰ç«¯å…¼å®¹ï¼‰
-const STRIP_PREFIX = ['æ ¡éªŒ_'];
-const STRIP_EXACT  = [];
+/* Ö»¹«¿ª status ÎªÏÂÁĞÖµµÄ¼ÇÂ¼ */
+const PUBLIC_STATUSES = ['active'];
 
-/* ğŸŸ¢ 2026-09-19ï¼šUnicode è¿å­—ç¬¦å½’ä¸€åŒ–
-   Airtable æ•°æ®åœ¨å½•å…¥/å¤åˆ¶ç²˜è´´æ—¶æ··å…¥äº† U+2011ï¼ˆâ€‘ éæ–­è¡Œè¿å­—ç¬¦ï¼‰ç­‰å˜ä½“ï¼Œ
-   å¯¼è‡´ item_id å¯¹ä¸ä¸Šé™æ€é¡µæ–‡ä»¶åï¼ˆASCII '-'ï¼‰ã€å›¾ç‰‡è·¯å¾„ 404ã€‚
-   ç»Ÿä¸€å½’ä¸€åŒ–ä¸º ASCII '-'ã€‚ */
+/* ¶ÔÍâ¹«¿ªµÄ×Ö¶Î°×Ãûµ¥£¨item_id / _createdTime Ê¼ÖÕÊä³ö£©¡£
+   img_url£¨Airtable ¸½¼ş£©¿ÌÒâ²»ÔÚÁĞ±íÀï£º¸½¼şÁ´½ÓÔ¼ 2 Ğ¡Ê±ºóÊ§Ğ§£¬Í¼Æ¬Çë·Å assets/images/ ²¢Ìî img_file¡£ */
+const PUBLIC_FIELDS = [
+  // ±êÌâ / ÃèÊö / ·ÖÀà
+  'title_zh', 'title_en', 'desc_zh', 'desc_en', 'era_zh', 'era_en', 'category',
+  'material_zh', 'material_en', 'kiln_zh', 'kiln_en', 'mark_zh', 'mark_en', 'certificate_no', 'tags',
+  // ¼Û¸ñ£¨Ò»¿Ú¼Û / ¼Û¸ñÇø¼ä / Ë½ÁÄÑ¯¼Û£©
+  'price_type', 'fixed_price', 'price_zh', 'price_en', 'price_display_zh', 'price_display_en',
+  // Í¼Æ¬
+  'img_file',
+  // Âô¼Ò£¨seller_id ÊÇÕ¾ÄÚ±ğÃû£¬²»ÒªÓÃÕæÊµĞÕÃû£»ÕæÊµĞÕÃû×Ö¶Î seller_name_* ¿ÌÒâ²»¹«¿ª£©
+  'seller_id', 'seller_whatsapp',
+  // Õ¹Ê¾Î» / ×´Ì¬
+  'is_today_finds', 'is_editor_picks', 'is_new_listing', 'status',
+];
+
+/* ?? 2026-09-19£ºUnicode Á¬×Ö·û¹éÒ»»¯
+   Airtable Êı¾İÔÚÂ¼Èë/¸´ÖÆÕ³ÌùÊ±»ìÈëÁË U+2011£¨? ·Ç¶ÏĞĞÁ¬×Ö·û£©µÈ±äÌå£¬
+   µ¼ÖÂ item_id ¶Ô²»ÉÏ¾²Ì¬Ò³ÎÄ¼şÃû£¨ASCII '-'£©¡¢Í¼Æ¬Â·¾¶ 404¡£Í³Ò»¹éÒ»»¯Îª ASCII '-'¡£ */
 const HYPHEN_VARIANTS = /[\u2010\u2011\u2012\u2013\u2014\u2015\u2212\uFE58\uFF0D]/g;
 function normHyphen(v) {
   if (typeof v !== 'string') return v;
   return v.replace(HYPHEN_VARIANTS, '-').trim();
 }
 
-function shouldStrip(key) {
-  if (STRIP_EXACT.includes(key)) return true;
-  return STRIP_PREFIX.some(p => key.startsWith(p));
-}
+/* sellers ±í¶ÔÍâ¹«¿ªµÄ×Ö¶Î°×Ãûµ¥ */
+const SELLER_PUBLIC_FIELDS = ['seller_id', 'display_zh', 'display_en', 'since_year', 'intro_zh', 'intro_en'];
 
-// æ‹‰å…¨é‡ï¼ˆè‡ªåŠ¨ç¿»é¡µï¼Œçªç ´ 100 æ¡ä¸Šé™ï¼‰
-async function fetchAllRecords() {
+const CATEGORY_MAP = { porcelain: '´ÉÆ÷', jade: 'ÓñÆ÷', coins: 'Ç®±Ò', paintings: 'Êé»­', misc: 'ÔÓÏî' };
+
+// ---------- ÉÏÓÎÇëÇó ----------
+async function fetchAllRecords(table) {
   const records = [];
   let offset = null;
   do {
-    const url = new URL(`https://api.airtable.com/v0/${BASE}/${encodeURIComponent(TABLE)}`);
+    const url = new URL(`https://api.airtable.com/v0/${BASE}/${encodeURIComponent(table)}`);
     url.searchParams.set('pageSize', '100');
     if (offset) url.searchParams.set('offset', offset);
 
-    const r = await fetch(url.toString(), {
-      headers: { Authorization: `Bearer ${TOKEN}` },
-    });
+    const ctl = new AbortController();
+    const timer = setTimeout(() => ctl.abort(), 8000);
+    let r;
+    try {
+      r = await fetch(url.toString(), { headers: { Authorization: `Bearer ${TOKEN}` }, signal: ctl.signal });
+    } finally {
+      clearTimeout(timer);
+    }
     if (!r.ok) {
       const txt = await r.text();
       throw new Error(`airtable ${r.status}: ${txt.slice(0, 200)}`);
@@ -48,14 +84,72 @@ async function fetchAllRecords() {
   return records;
 }
 
+// ---------- ÇåÏ´£º×´Ì¬¹ıÂË + ×Ö¶Î°×Ãûµ¥ ----------
+function toPublicItems(rawRecords) {
+  return rawRecords
+    .filter(rec => PUBLIC_STATUSES.includes(String((rec.fields && rec.fields.status) || '').trim().toLowerCase()))
+    .map(rec => {
+      const out = {
+        item_id: normHyphen((rec.fields && rec.fields.item_id) || rec.id),   // ÓÅÏÈÓÃ×Ö¶ÎÀïµÄ item_id
+        _createdTime: rec.createdTime,
+      };
+      for (const k of PUBLIC_FIELDS) {
+        if (rec.fields[k] !== undefined && rec.fields[k] !== null && rec.fields[k] !== '') out[k] = rec.fields[k];
+      }
+      if (out.seller_id) out.seller_id = normHyphen(out.seller_id);
+      if (out.img_file)  out.img_file  = normHyphen(out.img_file);
+      return out;
+    })
+    .sort((a, b) => String(b._createdTime || '').localeCompare(String(a._createdTime || '')));   // ĞÂµÄÔÚÇ°
+}
+
+function toPublicSellers(rawRecords) {
+  return rawRecords
+    .filter(rec => PUBLIC_STATUSES.includes(String((rec.fields && rec.fields.status) || '').trim().toLowerCase()))
+    .map(rec => {
+      const out = {};
+      for (const k of SELLER_PUBLIC_FIELDS) {
+        if (rec.fields[k] !== undefined && rec.fields[k] !== null && rec.fields[k] !== '') out[k] = rec.fields[k];
+      }
+      if (out.seller_id) out.seller_id = normHyphen(out.seller_id);
+      return out;
+    })
+    .filter(s => s.seller_id && (s.display_zh || s.display_en));    // Ã»ÓĞÕ¹¹İÃûµÄĞĞ²»Êä³ö
+}
+
+// ---------- ÄÚ´æ»º´æ£¨Í¬Ò»¸öº¯ÊıÊµÀıÄÚÓĞĞ§£© ----------
+const FRESH_MS = 30 * 1000;          // 30 ÃëÄÚÖ±½ÓÓÃ»º´æ£¬²»´ò Airtable
+const STALE_MS = 60 * 60 * 1000;     // ÉÏÓÎ¹ÊÕÏÊ±£¬×î³¤»ØÍË 1 Ğ¡Ê±ÄÚµÄ¾ÉÊı¾İ
+let cache = { items: null, sellers: [], at: 0 };
+
+async function getData() {
+  const now = Date.now();
+  if (cache.items && now - cache.at < FRESH_MS) return { items: cache.items, sellers: cache.sellers, stale: false };
+  try {
+    const items = toPublicItems(await fetchAllRecords(TABLE));
+    // Âô¼Ò±íÊÇ¿ÉÑ¡µÄ£¬¶ÁÈ¡Ê§°Ü²»Ó°Ïì²ØÆ·£ºÑØÓÃÉÏÒ»´ÎµÄÂô¼ÒÊı¾İ
+    let sellers = cache.sellers;
+    if (SELLERS_TABLE) {
+      try { sellers = toPublicSellers(await fetchAllRecords(SELLERS_TABLE)); }
+      catch (e) { console.warn('[airtable-proxy] ¶ÁÈ¡ sellers ±íÊ§°Ü£¬ÑØÓÃÉÏ´ÎÊı¾İ£º', e.message); }
+    } else {
+      sellers = [];
+    }
+    cache = { items, sellers, at: Date.now() };
+    return { items, sellers, stale: false };
+  } catch (e) {
+    if (cache.items && now - cache.at < STALE_MS) {
+      console.warn('[airtable-proxy] ÉÏÓÎÊ§°Ü£¬»ØÍËµ½»º´æ£º', e.message);
+      return { items: cache.items, sellers: cache.sellers, stale: true };
+    }
+    throw e;
+  }
+}
+
 export default async function handler(req, res) {
   // ---------- CORS ----------
-  /* ğŸŸ¢ 2026-09-19 ä¿®å¤ï¼šåŒæº GET è¯·æ±‚æµè§ˆå™¨ä¸å‘é€ Origin å¤´ï¼Œ
-     åŸé€»è¾‘ä¼šæŠŠ origin='' åˆ¤ä¸º Forbidden è¿”å› 403ï¼Œ
-     å¯¼è‡´ç”Ÿäº§ç«™ç‚¹ï¼ˆwww.gudong.appï¼‰è‡ªå·±æ°¸è¿œæ‹‰ä¸åˆ°æ•°æ®ã€å›é€€é™æ€å¿«ç…§ã€‚
-     æ–°é€»è¾‘ï¼šæ—  Originï¼ˆåŒæºè¯·æ±‚/ç›´æ¥è®¿é—®ï¼‰â†’ ç›´æ¥æ”¾è¡Œï¼›
-     æœ‰ Origin ä¸”åœ¨ç™½åå•ï¼ˆå«æœ¬åœ°å¼€å‘ï¼‰â†’ æ”¾è¡Œå¹¶å› CORS å¤´ï¼›
-     æœ‰ Origin ä½†ä¸åœ¨ç™½åå• â†’ 403ã€‚ */
+  /* Í¬Ô´ GET ÇëÇóä¯ÀÀÆ÷²»·¢ËÍ Origin Í·£ºÎŞ Origin ¡ú ·ÅĞĞ£»
+     ÓĞ Origin ÇÒÔÚ°×Ãûµ¥£¨º¬±¾µØ¿ª·¢£©¡ú ·ÅĞĞ²¢»Ø CORS Í·£»ÓĞ Origin µ«²»ÔÚ°×Ãûµ¥ ¡ú 403¡£ */
   const origin = req.headers.origin || '';
   const allowed = ['https://gudong.app', 'https://www.gudong.app'];
   const isLocal = /^https?:\/\/(127\.0\.0\.1|localhost)(:\d+)?$/.test(origin);
@@ -67,102 +161,55 @@ export default async function handler(req, res) {
     res.setHeader('Access-Control-Allow-Origin', origin);
     res.setHeader('Vary', 'Origin');
   }
-  res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, HEAD, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
   if (req.method === 'OPTIONS') return res.status(200).end();
-
-  // ---------- ç¯å¢ƒå˜é‡æ£€æŸ¥ ----------
-  if (!BASE || !TABLE || !TOKEN) {
-    console.error('[proxy] env missing', {
-      BASE: !!BASE, TABLE: !!TABLE, TOKEN: !!TOKEN,
-    });
-    return res.status(500).json({
-      error: 'Airtable env vars missing',
-      missing: {
-        AIRTABLE_BASE_ID: !BASE,
-        AIRTABLE_TABLE:   !TABLE,
-        AIRTABLE_TOKEN:   !TOKEN,
-      },
-    });
+  if (req.method !== 'GET' && req.method !== 'HEAD') {
+    res.setHeader('Allow', 'GET, HEAD, OPTIONS');
+    return res.status(405).json({ error: 'Method Not Allowed' });
   }
 
-  // ---------- æŸ¥è¯¢å‚æ•° ----------
-  const q   = String(req.query.q   || '').trim().toLowerCase();
+  // ---------- »·¾³±äÁ¿¼ì²é£¨Ï¸½ÚÖ»Ğ´ÈÕÖ¾£¬²»¶ÔÍâĞ¹Â¶£© ----------
+  if (!BASE || !TABLE || !TOKEN) {
+    console.error('[proxy] env missing', { AIRTABLE_BASE_ID: !!BASE, AIRTABLE_TABLE: !!TABLE, AIRTABLE_TOKEN: !!TOKEN });
+    return res.status(500).json({ error: 'Server misconfigured' });
+  }
+
+  // ---------- ²éÑ¯²ÎÊı£¨Ç°¶ËÄ¿Ç°Î´Ê¹ÓÃ£¬±£Áô£»×ö³¤¶ÈÓëÈ¡ÖµÏŞÖÆ£© ----------
+  const q   = String(req.query.q || '').trim().toLowerCase().slice(0, 60);
   const cat = String(req.query.cat || 'all').trim();
 
   try {
-    const rawRecords = await fetchAllRecords();
+    const { items: all, sellers, stale } = await getData();
+    let items = all;
 
-    // æ¸…æ´—ï¼šå­—æ®µå‰¥ç¦» + è¡¥ item_id / _createdTime
-    let items = rawRecords
-      .filter(rec => {
-        const st = String(rec.fields.status || 'active').toLowerCase();
-        return st !== 'archived' && st !== 'deleted';
-      })
-      .map(rec => {
-        const out = {
-          item_id: normHyphen(rec.fields.item_id || rec.id),   // ä¼˜å…ˆç”¨å­—æ®µé‡Œçš„ item_idï¼ˆå½’ä¸€åŒ–è¿å­—ç¬¦ï¼‰
-          _createdTime: rec.createdTime,
-        };
-        for (const [k, v] of Object.entries(rec.fields)) {
-          if (shouldStrip(k)) continue;
-          out[k] = v;
-        }
-        // ğŸŸ¢ 2026-09-19ï¼šå…³é”® ID / å›¾ç‰‡è·¯å¾„å­—æ®µåšè¿å­—ç¬¦å½’ä¸€åŒ–ï¼Œä¿è¯é“¾æ¥å¯ç”¨
-        if (out.seller_id) out.seller_id = normHyphen(out.seller_id);
-        if (out.img_file)  out.img_file  = normHyphen(out.img_file);
-        return out;
-      });
-
-    // ---------- å…³é”®è¯æœç´¢ï¼ˆè¦†ç›–å…¨å­—æ®µï¼‰ ----------
+    // ---------- ¹Ø¼ü´ÊËÑË÷£¨¸²¸ÇÈ«²¿¹«¿ª×Ö¶ÎÀïµÄÎÄ±¾£© ----------
     if (q) {
-      items = items.filter(f => {
-        const hay = [
-          f.title_zh, f.title_en,
-          f.desc_zh,  f.desc_en,
-          f.era_zh,   f.era_en,
-          f.category,
-          f.material_zh, f.material_en,
-          f.kiln_zh,     f.kiln_en,
-          f.mark_zh,     f.mark_en,
-          f.certificate_no,
-          f.seller_name_zh, f.seller_name_en,
-          f.tags,
-        ].filter(Boolean).join(' ').toLowerCase();
-        return hay.includes(q);
-      });
+      items = items.filter(f => [
+        f.title_zh, f.title_en, f.desc_zh, f.desc_en, f.era_zh, f.era_en, f.category,
+        f.material_zh, f.material_en, f.kiln_zh, f.kiln_en, f.mark_zh, f.mark_en,
+        f.certificate_no, f.tags,
+      ].filter(Boolean).join(' ').toLowerCase().includes(q));
     }
 
-    // ---------- åˆ†ç±»è¿‡æ»¤ ----------
-    if (cat && cat !== 'all') {
-      const map = {
-        porcelain: 'ç“·å™¨', jade: 'ç‰å™¨', coins: 'é’±å¸',
-        paintings: 'ä¹¦ç”»', misc: 'æ‚é¡¹',
-      };
-      const cn = map[cat];
-      if (cn) items = items.filter(f => f.category === cn);
-    }
+    // ---------- ·ÖÀà¹ıÂË ----------
+    if (CATEGORY_MAP[cat]) items = items.filter(f => f.category === CATEGORY_MAP[cat]);
 
-    // ---------- æ’åºï¼šæ–°çš„åœ¨å‰ ----------
-    items.sort((a, b) =>
-      String(b._createdTime || '').localeCompare(String(a._createdTime || ''))
-    );
-
-    // ---------- è¾“å‡º ----------
-    res.setHeader('Cache-Control', 's-maxage=60, stale-while-revalidate=300');
+    // ---------- Êä³ö ----------
+    // »ØÍËµ½¾ÉÊı¾İÊ±Ëõ¶Ì»º´æ£¬ÈÃ CDN ¾¡¿ìÖØĞÂÏòÎÒÃÇÒªĞÂÊı¾İ
+    res.setHeader('Cache-Control', stale ? 'public, s-maxage=10' : 's-maxage=60, stale-while-revalidate=300');
+    if (stale) res.setHeader('X-Data-Stale', '1');
     return res.status(200).json({
       todayFinds:  items.filter(f => f.is_today_finds),
       editorPicks: items.filter(f => f.is_editor_picks),
-      newListing:  items,
-      sellers:     [],            // æš‚æ—¶è¿”å›ç©ºï¼Œå‰ç«¯å·²æœ‰å…œåº•ï¼›åç»­å†å•ç‹¬æ¥ seller è¡¨
+      newListing:  items,          // È«¼¯£¨º¬½ñÈÕ·¢ÏÖ / ±à¼­¾«Ñ¡£©
+      sellers,                     // Âô¼ÒÕ¹¹İÃûµÈ£¨À´×Ô sellers ±í£»Î´ÅäÖÃÊ±Îª []£¬Ò³Ãæ»ØÍËµ½ HTML ÀïµÄÕ¹¹İÃû£©
       total:       items.length,
     });
 
   } catch (e) {
     console.error('[airtable-proxy]', e.message);
-    return res.status(502).json({
-      error: 'Upstream failed',
-      detail: e.message,
-    });
+    res.setHeader('Cache-Control', 'no-store');
+    return res.status(502).json({ error: 'Upstream failed' });
   }
 }

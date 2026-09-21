@@ -117,8 +117,6 @@ header {
 .container { max-width: 1100px; margin: 0 auto; padding: 2.4rem 5% 4rem; min-height: 70vh; }
 .back-link { display: inline-block; margin-bottom: 1.4rem; font-size: .85rem; color: var(--color-text-secondary); text-decoration: none; }
 .back-link:hover { color: var(--color-primary); }
-
-/* ===== 详情页主布局 ===== */
 .item-detail { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
 .item-detail-image { aspect-ratio: 1 / 1; border-radius: 10px; overflow: hidden; background: var(--color-primary-light); position: relative; }
 .item-detail-image::after {
@@ -129,10 +127,11 @@ header {
 .item-detail-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .item-detail-meta { font-size: .88rem; color: var(--color-text-secondary); margin-bottom: .5rem; }
 .item-detail-title { font-family: Georgia, "Songti SC", "STSong", serif; font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 600; margin-bottom: .7rem; }
-.item-detail-price { font-size: 1.4rem; font-weight: 700; color: var(--color-primary); margin-bottom: 1.2rem; }
+.item-detail-price {
+    font-size: 1.4rem; font-weight: 700; color: var(--color-primary);
+    margin-bottom: 1.2rem; display: flex; flex-direction: column; gap: .15rem;
+}
 .item-detail-desc { font-size: .92rem; color: var(--color-text); line-height: 1.8; margin-bottom: 1.6rem; }
-
-/* ===== 规格表 ===== */
 .specs-block {
     position: relative;
     background: var(--color-surface);
@@ -151,7 +150,6 @@ header {
     font-size: .78rem; font-weight: 700; letter-spacing: .18em;
     text-transform: uppercase; color: var(--color-gold);
     margin-bottom: .8rem;
-
 }
 .spec-row {
     display: flex; justify-content: space-between; align-items: baseline;
@@ -161,8 +159,6 @@ header {
 .spec-row:last-child { border-bottom: none; }
 .spec-label { font-size: .8rem; color: var(--color-text-muted); letter-spacing: .04em; flex-shrink: 0; }
 .spec-value { font-size: .88rem; color: var(--color-text); text-align: right; font-weight: 500; }
-
-/* ===== 卖家信息卡 ===== */
 .seller-card {
     position: relative;
     background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
@@ -203,8 +199,6 @@ header {
     backdrop-filter: blur(4px);
 }
 .seller-card-link:hover { background: rgba(255,255,255,.25); }
-
-/* 皇冠徽章 */
 .founder-badge {
     display: inline-flex; align-items: center; gap: .28rem;
     background: linear-gradient(135deg, #B08A45 0%, #D4AF6A 50%, #B08A45 100%);
@@ -216,7 +210,6 @@ header {
 }
 .founder-badge svg { width: 11px; height: 11px; flex-shrink: 0; display: block; }
 .founder-badge .badge-num { font-weight: 800; font-size: .7rem; letter-spacing: 0; }
-
 .contact-btn {
     display: inline-flex; align-items: center; gap: .5rem;
     background: #25D366; color: #fff;
@@ -232,7 +225,6 @@ header {
     font-size: .78rem; color: var(--color-text-secondary); line-height: 1.6;
 }
 .disclaimer-box strong { color: var(--color-text); }
-
 footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-white); color: var(--color-text-secondary); margin-top: 1rem; font-size: .78rem; border-top: 1px solid var(--color-border); }
 .footer-nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 1.3rem; margin-bottom: 1.2rem; }
 .footer-nav a { color: var(--color-text-secondary); text-decoration: none; font-size: .82rem; }
@@ -260,7 +252,6 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
         <span class="en">Founder-Dealer Benefit | Limited 88 seats · Free to join · First 2 listings free · No transaction commission.</span>
         <button class="announce-close" onclick="document.getElementById('announceBar').style.display='none'" aria-label="close">×</button>
     </div>
-
     <header>
         <div style="display:flex; align-items:center; gap:.9rem;">
             <button class="menu-toggle" onclick="openSidebar()" aria-label="menu">☰</button>
@@ -277,7 +268,6 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
             <button class="lang-btn" onclick="toggleLang()">EN</button>
         </div>
     </header>
-
     <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
     <aside class="sidebar" id="sidebar">
         <button class="sidebar-toggle-inner" onclick="closeSidebar()" aria-label="close menu">☰</button>
@@ -288,25 +278,21 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
             <a href="../index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">首页</span><span class="en">Home</span></a>
             <a href="../index.html#today-finds" class="sidebar-link" onclick="closeSidebar()"><span class="zh">今日发现</span><span class="en">Today's Finds</span></a>
             <a href="../index.html#new-listings" class="sidebar-link" onclick="closeSidebar()"><span class="zh">最新藏品</span><span class="en">New Listings</span></a>
-
             <div class="sidebar-group-title zh">藏品库</div><div class="sidebar-group-title en">Collection</div>
             <a href="../categories/porcelain.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 瓷器</span><span class="en">· Porcelain</span></a>
             <a href="../categories/jade.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 玉器</span><span class="en">· Jade</span></a>
             <a href="../categories/coins.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 钱币</span><span class="en">· Coins</span></a>
             <a href="../categories/paintings.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 书画</span><span class="en">· Paintings &amp; Calligraphy</span></a>
             <a href="../categories/misc.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 杂项</span><span class="en">· Miscellaneous</span></a>
-
             <a href="../sellers/index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">私家博物馆</span><span class="en">Private Museums</span></a>
             <a href="../pricing.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">服务价格</span><span class="en">Pricing</span></a>
             <a href="../about.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">关于Gudong</span><span class="en">About</span></a>
             <button type="button" class="sidebar-lang-btn" onclick="toggleLang()" aria-label="Switch language"><span class="zh">🌐 English</span><span class="en">🌐 中文</span></button>
         </nav>
     </aside>
-
     <main class="container">
         <a href="../sellers/seller-lim-kw-antiques.html" class="back-link zh">← 返回 林记古玩 私家博物馆</a>
         <a href="../sellers/seller-lim-kw-antiques.html" class="back-link en">← Back to Lim KW Antiques</a>
-
         <div class="item-detail">
             <div class="item-detail-image">
                 <img src="../assets/images/lim-kw/item-lim-01.jpg" alt="大明宣德青花描金云龙纹扁瓶" onerror="this.onerror=null;this.src='../assets/images/placeholder.jpg'">
@@ -316,11 +302,13 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
                 <p class="item-detail-meta en">Ming Dynasty, Xuande period · Porcelain · Seller: Lim KW Antiques</p>
                 <h1 class="item-detail-title zh">大明宣德青花描金云龙纹扁瓶</h1>
                 <h1 class="item-detail-title en">Ming Xuande Blue-and-Gold Dragon Flat Vase</h1>
-                <div class="item-detail-price">S$58,000</div>
+                <div class="item-detail-price">
+                    <span class="zh">S$5,000</span>
+                    <span class="en">S$5,000</span>
+                </div>
                 <p class="item-detail-desc zh">扁瓶造型规整，青花发色浓艳，云龙纹饰描金勾边，为宣德朝官窑典型器形之一。</p>
                 <p class="item-detail-desc en">A well-potted flat vase with vivid underglaze blue and gilt-outlined dragon-and-cloud motifs, characteristic of Xuande-period imperial ware.</p>
 
-                <!-- 规格表 -->
                 <div class="specs-block">
                     <div class="specs-title zh">藏品规格</div>
                     <div class="specs-title en">Specifications</div>
@@ -350,7 +338,6 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
                     </div>
                 </div>
 
-                <!-- 卖家信息卡 -->
                 <div class="seller-card">
                     <div class="seller-card-label"><span class="zh">卖家</span><span class="en">Seller</span></div>
                     <div class="seller-card-name">
@@ -427,9 +414,6 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
     </script>
 
     <script>
-    /* ============================================================
-       详情页与 Airtable 联动（含规格表 + 卖家卡）
-       ============================================================ */
     (function () {
         var API_BASE = (location.hostname === '127.0.0.1' || location.hostname === 'localhost' || location.protocol === 'file:') ? 'https://gudong.app' : '';
         var HY = /[\u2010-\u2015\u2212\uFE58\uFF0D]/g;
@@ -438,11 +422,9 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
         var DEBUG = /[?&]debug=1\b/.test(location.search);
         var ID = clean(document.body.dataset.itemId || decodeURIComponent(location.pathname.split('/').pop() || '').replace(/\.html?$/i, ''));
         if (!ID) return;
-
         var CAT_EN = { '瓷器': 'Porcelain', '玉器': 'Jade', '钱币': 'Coins', '书画': 'Paintings & Calligraphy', '杂项': 'Miscellaneous' };
         var changes = [];
         function $(s) { return document.querySelector(s); }
-
         function setText(sel, v, label) {
             var el = $(sel); v = clean(first(v));
             if (!el || !v) return;
@@ -500,13 +482,12 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
         function setWhatsApp(f) {
             var wa = String(first(f.seller_whatsapp) || '').replace(/\D/g, '');
             if (!wa) return;
-            if (!/^65[3689]\d{7}$/.test(wa)) { console.warn('[Gudong] seller_whatsapp 不是有效的新加坡号码：', wa); changes.push('whatsapp 号码无效(' + wa + ')'); return; }
+            if (!/^65[3689]\d{7}$/.test(wa)) { changes.push('whatsapp 号码无效(' + wa + ')'); return; }
             document.querySelectorAll('a.contact-btn').forEach(function (a) {
                 var h = a.getAttribute('href') || '', n = h.replace(/^.*wa\.me\//, '').replace(/[?].*$/, '');
                 if (n !== wa) { changes.push('whatsapp: ' + n + ' → ' + wa); a.setAttribute('href', h.replace(/wa\.me\/\d+/, 'wa.me/' + wa)); }
             });
         }
-        /* 规格表：Airtable 有值就覆盖，无值保留 HTML 里的静态内容 */
         function setSpec(f) {
             var cat = clean(first(f.category));
             var map = {
@@ -522,7 +503,6 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
                 if (el && el.textContent.trim() !== v) { el.textContent = v; changes.push('spec.' + key + ' → ' + v.slice(0, 20)); }
             });
         }
-        /* 卖家信息卡 */
         function setSellerCard(f, data) {
             var sid = clean(first(f.seller_id));
             if (!sid) return;
@@ -534,7 +514,6 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
                 var en = clean(first(sl.display_en) || first(sl.display_zh));
                 if (zh) setText('#sellerNameZh', zh, 'seller.zh');
                 if (en) setText('#sellerNameEn', en, 'seller.en');
-                /* 更新卖家链接到对应博物馆页 */
                 var link = document.getElementById('sellerLink');
                 if (link && sl.page_url) link.href = sl.page_url;
             }
@@ -553,7 +532,6 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
             d.style.cssText = 'position:fixed;left:8px;bottom:8px;z-index:9999;max-width:min(94vw,440px);max-height:50vh;overflow:auto;background:rgba(20,17,14,.94);color:' + (ok ? '#E8E2D8' : '#F0A090') + ';font:12px/1.6 ui-monospace,Menlo,Consolas,monospace;padding:10px 12px;border-radius:8px;white-space:pre-wrap;word-break:break-all';
             d.textContent = text; document.body.appendChild(d);
         }
-
         var ctl = new AbortController(), timer = setTimeout(function () { ctl.abort(); }, 8000);
         fetch(API_BASE + '/api/airtable-proxy', { cache: 'no-store', signal: ctl.signal, headers: { 'Accept': 'application/json' } })
             .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
@@ -563,7 +541,6 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
                 var f = null;
                 for (var i = 0; i < list.length; i++) { if (clean(first(list[i].item_id)) === ID) { f = list[i]; break; } }
                 if (!f) { document.documentElement.dataset.source = 'not-in-airtable'; showNotFound(); badge('item_id ' + ID + ' 不在接口返回列表中', false); return; }
-
                 setText('.item-detail-title.zh', f.title_zh, 'title_zh');
                 setText('.item-detail-title.en', f.title_en, 'title_en');
                 var sl = null, sid = clean(first(f.seller_id));
@@ -581,14 +558,11 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
                 setSellerCard(f, data);
                 setWhatsApp(f);
                 if (f.title_zh) { var t = document.title.split(' | '); t[0] = clean(first(f.title_zh)); if (sen && t.length > 1) t[1] = sen; document.title = t.join(' | '); }
-
                 document.documentElement.dataset.source = 'airtable';
-                console.info('[Gudong] ' + ID + ' 已渲染；变动：', changes);
                 badge('✔ Airtable · ' + ID + '\n' + (changes.length ? changes.join('\n') : '与静态页一致'), true);
             })
             .catch(function (e) {
                 document.documentElement.dataset.source = 'static';
-                console.warn('[Gudong] 未连上 Airtable，显示静态内容：', e);
                 badge('⚠ 未连上 Airtable，显示静态页\n' + e.message, false);
             })
             .then(function () { clearTimeout(timer); });

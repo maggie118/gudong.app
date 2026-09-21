@@ -127,7 +127,10 @@ header {
 .item-detail-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .item-detail-meta { font-size: .88rem; color: var(--color-text-secondary); margin-bottom: .5rem; }
 .item-detail-title { font-family: Georgia, "Songti SC", "STSong", serif; font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 600; margin-bottom: .7rem; }
-.item-detail-price { font-size: 1.4rem; font-weight: 700; color: var(--color-primary); margin-bottom: 1.2rem; }
+.item-detail-price {
+    font-size: 1.4rem; font-weight: 700; color: var(--color-primary);
+    margin-bottom: 1.2rem; display: flex; flex-direction: column; gap: .15rem;
+}
 .item-detail-desc { font-size: .92rem; color: var(--color-text); line-height: 1.8; margin-bottom: 1.6rem; }
 .specs-block {
     position: relative;
@@ -299,7 +302,10 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
                 <p class="item-detail-meta en">Qing Dynasty, Yongzheng period · Porcelain · Seller: Lim KW Antiques</p>
                 <h1 class="item-detail-title zh">大清雍正年制款窑变釉贯耳瓶</h1>
                 <h1 class="item-detail-title en">Yongzheng-Mark Flambé-Glazed Vase</h1>
-                <div class="item-detail-price">S$38,000</div>
+                <div class="item-detail-price">
+                    <span class="zh">S$5,000</span>
+                    <span class="en">S$5,000</span>
+                </div>
                 <p class="item-detail-desc zh">贯耳瓶形制端庄，通体窑变釉色流淌自然，底书大清雍正年制款。</p>
                 <p class="item-detail-desc en">A dignified twin-handled vase with naturally flowing flambé glaze and a Yongzheng-mark reign inscription on the base.</p>
 

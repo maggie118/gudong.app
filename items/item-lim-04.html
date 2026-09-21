@@ -263,7 +263,7 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
         </div>
         <div class="header-right">
             <a href="../pricing.html#seller-services" class="btn-publish">
-                <span class="zh">刊登藏品</span><span class="en">List an Item</span>
+                <span class="zh">刊登藏品信息</span><span class="en">List an Item</span>
             </a>
             <button class="lang-btn" onclick="toggleLang()">EN</button>
         </div>
@@ -327,14 +327,9 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
                         <span class="spec-value" data-spec="dimensions">H 30cm × D 13cm</span>
                     </div>
                     <div class="spec-row">
-                        <span class="spec-label zh">材质</span><span class="spec-label en">Material</span>
-                        <span class="spec-value zh" data-spec="material_zh">瓷胎 · 窑变釉</span>
-                        <span class="spec-value en" data-spec="material_en">Porcelain · Flambé glaze</span>
-                    </div>
-                    <div class="spec-row">
                         <span class="spec-label zh">品相</span><span class="spec-label en">Condition</span>
-                        <span class="spec-value zh" data-spec="condition_zh">完整 · 釉面匀净</span>
-                        <span class="spec-value en" data-spec="condition_en">Intact · even glaze</span>
+                        <span class="spec-value zh" data-spec="condition_zh">完整 · 表面有轻微磨损</span>
+                        <span class="spec-value en" data-spec="condition_en">Intact · minor surface wear</span>
                     </div>
                 </div>
 
@@ -488,14 +483,22 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
                 if (n !== wa) { changes.push('whatsapp: ' + n + ' → ' + wa); a.setAttribute('href', h.replace(/wa\.me\/\d+/, 'wa.me/' + wa)); }
             });
         }
+        function computeCondition(f) {
+            var wear = f.has_surface_wear === true;
+            var damage = f.has_surface_damage === true;
+            if (wear && damage) return { zh: '表面有磨损及破损', en: 'Surface wear and damage' };
+            if (wear)           return { zh: '完整 · 表面有轻微磨损', en: 'Intact · minor surface wear' };
+            if (damage)         return { zh: '表面有破损', en: 'Surface damage' };
+            return { zh: '完整', en: 'Intact' };
+        }
         function setSpec(f) {
             var cat = clean(first(f.category));
+            var cond = computeCondition(f);
             var map = {
                 'era_zh': f.era_zh, 'era_en': f.era_en,
                 'category': cat, 'category_en': CAT_EN[cat] || cat,
                 'dimensions': f.dimensions,
-                'material_zh': f.material_zh, 'material_en': f.material_en,
-                'condition_zh': f.condition_zh, 'condition_en': f.condition_en
+                'condition_zh': cond.zh, 'condition_en': cond.en
             };
             Object.keys(map).forEach(function (key) {
                 var v = clean(first(map[key])); if (!v) return;

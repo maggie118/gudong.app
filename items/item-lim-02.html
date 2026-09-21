@@ -1,100 +1,56 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-SG">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>战国青铜错金乳钉双耳四足方鼎 | Lim KW Antiques | Gudong</title>
-    <link rel="manifest" href="../../../manifest.json">
+    <link rel="manifest" href="../manifest.json">
     <meta name="theme-color" content="#8A5A3B">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <style>
-
 :root {
     --color-bg: #F5F2EC;
     --color-surface: #FFFFFF;
     --color-white: #FFFFFF;
     --color-border: #E4DED5;
-
     --color-primary: #8A5A3B;
     --color-primary-dark: #68432D;
     --color-primary-light: #F1E8DF;
-
     --color-text: #25221E;
     --color-text-secondary: #716B63;
     --color-text-muted: #A49D94;
-
     --color-gold: #B08A45;
     --color-gold-soft: rgba(176,138,69,.10);
     --color-bronze-muted: #9C8558;
-
     --color-success: #526657;
     --color-danger: #9A554B;
 }
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
-}
-
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif; }
 html { scroll-behavior: smooth; }
-
-body {
-    background: var(--color-bg);
-    color: var(--color-text);
-    line-height: 1.65;
-}
-
+body { background: var(--color-bg); color: var(--color-text); line-height: 1.65; }
 .announce-bar {
-    background: var(--color-primary-light);
-    color: var(--color-primary-dark);
-    font-size: .8rem;
-    text-align: center;
-    padding: .55rem 2.6rem;
-    position: relative;
-    line-height: 1.4;
+    background: var(--color-primary-light); color: var(--color-primary-dark);
+    font-size: .8rem; text-align: center; padding: .55rem 2.6rem;
+    position: relative; line-height: 1.4;
 }
-
 .announce-close {
-    position: absolute;
-    right: .9rem;
-    top: 50%;
-    transform: translateY(-50%);
-    background: none;
-    border: none;
-    font-size: 1.05rem;
-    line-height: 1;
-    color: var(--color-text-secondary);
-    cursor: pointer;
-    padding: .2rem;
+    position: absolute; right: .9rem; top: 50%; transform: translateY(-50%);
+    background: none; border: none; font-size: 1.05rem; line-height: 1;
+    color: var(--color-text-secondary); cursor: pointer; padding: .2rem;
 }
-
 .announce-close:hover { color: var(--color-primary); }
-
 header {
-    background: rgba(255,255,255,.96);
-    backdrop-filter: blur(6px);
-    color: var(--color-text);
-    padding: 0 5%;
-    height: 68px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1.5rem;
-    border-bottom: 1px solid var(--color-border);
-    position: sticky;
-    top: 0;
-    z-index: 50;
+    background: rgba(255,255,255,.96); backdrop-filter: blur(6px);
+    color: var(--color-text); padding: 0 5%; height: 68px;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 1.5rem; border-bottom: 1px solid var(--color-border);
+    position: sticky; top: 0; z-index: 50;
 }
-
 .brand { display: flex; flex-direction: column; justify-content: center; line-height: 1; flex-shrink: 0; }
 .brand h1 { font-size: 1.4rem; font-weight: 700; letter-spacing: .02em; line-height: 1.15; }
 .brand p { color: var(--color-bronze-muted); margin-top: .2rem; font-size: .62rem; letter-spacing: .2em; text-transform: uppercase; }
-
 .header-right { display: flex; align-items: center; gap: .8rem; flex-shrink: 0; }
-
 .btn-publish {
     display: inline-flex; align-items: center; gap: .35rem;
     background: var(--color-primary); color: #fff;
@@ -103,7 +59,6 @@ header {
     white-space: nowrap; transition: .2s;
 }
 .btn-publish:hover { background: var(--color-primary-dark); }
-
 .lang-btn {
     border: 1px solid var(--color-border); background: transparent;
     color: var(--color-text-secondary); padding: .3rem .68rem;
@@ -111,7 +66,6 @@ header {
     letter-spacing: .04em; transition: .2s;
 }
 .lang-btn:hover { border-color: var(--color-primary); color: var(--color-primary); background: var(--color-primary-light); }
-
 .menu-toggle {
     width: 38px; height: 38px; border: 1px solid var(--color-border);
     background: transparent; border-radius: 8px; font-size: 1.05rem;
@@ -119,13 +73,11 @@ header {
     align-items: center; justify-content: center; flex-shrink: 0; transition: .2s;
 }
 .menu-toggle:hover { border-color: var(--color-primary); color: var(--color-primary); background: var(--color-primary-light); }
-
 .sidebar-overlay {
     position: fixed; inset: 0; background: rgba(20,17,14,.4);
     opacity: 0; pointer-events: none; transition: opacity .25s ease; z-index: 90;
 }
 .sidebar-overlay.show { opacity: 1; pointer-events: auto; }
-
 .sidebar {
     position: fixed; top: 0; left: 0; height: 100vh; width: 264px; max-width: 78vw;
     background: var(--color-white); box-shadow: 4px 0 24px rgba(37,34,30,.18);
@@ -133,14 +85,12 @@ header {
     overflow-y: auto; padding-bottom: 2rem;
 }
 .sidebar.open { transform: translateX(0); }
-
 .sidebar-toggle-inner {
     display: block; width: 100%; padding: .9rem 0; background: transparent;
     border: none; border-bottom: 1px solid var(--color-border); font-size: 1.15rem;
     color: var(--color-text-secondary); cursor: pointer; text-align: center;
 }
 .sidebar-toggle-inner:hover { color: var(--color-primary); }
-
 .sidebar-brand {
     display: flex; flex-direction: column; align-items: center; justify-content: center;
     gap: .1rem; padding: 1.1rem 0; font-weight: 700; color: var(--color-text);
@@ -148,7 +98,6 @@ header {
 }
 .sidebar-brand .zh { font-size: 1.05rem; }
 .sidebar-brand .en { font-size: 1.05rem; letter-spacing: .04em; }
-
 .sidebar-nav { display: flex; flex-direction: column; padding: .3rem 0; }
 .sidebar-link { padding: .85rem 1.4rem; color: var(--color-text); text-decoration: none; font-size: .95rem; transition: .2s; }
 .sidebar-link:hover { background: var(--color-primary-light); color: var(--color-primary); }
@@ -156,186 +105,269 @@ header {
 .sidebar-group-title { padding: .85rem 1.4rem .3rem; color: var(--color-text); font-size: .95rem; font-weight: 600; }
 .sidebar-sub { display: block; padding: .55rem 1.4rem .55rem 2.2rem; color: var(--color-text-secondary); text-decoration: none; font-size: .88rem; transition: .2s; }
 .sidebar-sub:hover { color: var(--color-primary); background: var(--color-primary-light); }
-.sidebar-sub.active { color: var(--color-primary); background: var(--color-primary-light); font-weight: 600; }
-
-.container { max-width: 1200px; margin: 0 auto; padding: 3.2rem 5% 4rem; background: transparent; min-height: 70vh; }
-
-section { margin-bottom: 3.4rem; scroll-margin-top: 90px; }
-
-h2 { color: var(--color-text); margin-bottom: .6rem; font-size: 1.75rem; font-weight: 700; letter-spacing: -.02em; }
-
-.page-desc { font-size: .92rem; color: var(--color-text-secondary); margin-bottom: 2rem; max-width: 640px; }
-
+.sidebar-lang-btn {
+    display: flex; align-items: center; justify-content: center; gap: .4rem;
+    width: calc(100% - 2.8rem); margin: 1rem 1.4rem .8rem;
+    padding: .62rem .9rem; border: 1px solid var(--color-border);
+    border-radius: 8px; background: var(--color-white);
+    color: var(--color-text-secondary); font-family: inherit;
+    font-size: .9rem; font-weight: 600; cursor: pointer; transition: .2s;
+}
+.sidebar-lang-btn:hover { border-color: var(--color-primary); color: var(--color-primary); background: var(--color-primary-light); }
+.container { max-width: 1100px; margin: 0 auto; padding: 2.4rem 5% 4rem; min-height: 70vh; }
 .back-link { display: inline-block; margin-bottom: 1.4rem; font-size: .85rem; color: var(--color-text-secondary); text-decoration: none; }
 .back-link:hover { color: var(--color-primary); }
-
-.goods-list { display: grid; grid-template-columns: repeat(4, 1fr); gap: .9rem; margin-top: .5rem; }
-.item-card { position: relative; display: block; aspect-ratio: 1 / 1; border-radius: 8px; overflow: hidden; background: var(--color-primary-light); text-decoration: none; transition: .25s; }
-.item-card:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(37,34,30,.14); }
-.item-card img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.item-card .price-tag { position: absolute; left: .55rem; bottom: .55rem; background: rgba(20,17,14,.62); color: #fff; padding: .32rem .6rem; border-radius: 4px; font-size: .8rem; font-weight: 700; letter-spacing: .01em; }
-.item-card .price-tag .neg { font-weight: 400; opacity: .85; font-size: .72rem; margin-left: .2rem; }
-
-.empty-state { text-align: center; padding: 3.4rem 1rem; color: var(--color-text-muted); border: 1px dashed var(--color-border); border-radius: 8px; }
-
-/* ---------- item detail page ---------- */
 .item-detail { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
-.item-detail-image { aspect-ratio: 1 / 1; border-radius: 10px; overflow: hidden; background: var(--color-primary-light); }
+.item-detail-image { aspect-ratio: 1 / 1; border-radius: 10px; overflow: hidden; background: var(--color-primary-light); position: relative; }
+.item-detail-image::after {
+    content: ""; position: absolute; inset: 8px;
+    border: 1px solid rgba(255,255,255,.25); border-radius: 6px;
+    pointer-events: none;
+}
 .item-detail-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .item-detail-meta { font-size: .88rem; color: var(--color-text-secondary); margin-bottom: .5rem; }
 .item-detail-title { font-family: Georgia, "Songti SC", "STSong", serif; font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 600; margin-bottom: .7rem; }
 .item-detail-price { font-size: 1.4rem; font-weight: 700; color: var(--color-primary); margin-bottom: 1.2rem; }
 .item-detail-desc { font-size: .92rem; color: var(--color-text); line-height: 1.8; margin-bottom: 1.6rem; }
-.contact-btn { display: inline-flex; align-items: center; gap: .5rem; background: #25D366; color: #fff; padding: .8rem 1.5rem; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: .92rem; transition: .2s; }
-.contact-btn:hover { filter: brightness(.95); }
-.disclaimer-box { margin-top: 1.6rem; padding: .9rem 1.1rem; background: var(--color-primary-light); border-radius: 8px; font-size: .78rem; color: var(--color-text-secondary); line-height: 1.6; }
+.specs-block {
+    position: relative;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    padding: 1.3rem 1.5rem;
+    margin-bottom: 1.5rem;
+}
+.specs-block::after {
+    content: ""; position: absolute; inset: 6px;
+    border: 1px solid var(--color-border); border-radius: 8px;
+    pointer-events: none; opacity: .55;
+}
+.specs-block > * { position: relative; z-index: 1; }
+.specs-title {
+    font-size: .78rem; font-weight: 700; letter-spacing: .18em;
+    text-transform: uppercase; color: var(--color-gold);
+    margin-bottom: .8rem;
+}
+.spec-row {
+    display: flex; justify-content: space-between; align-items: baseline;
+    padding: .6rem 0; border-bottom: 1px dashed var(--color-border);
+    gap: 1rem;
+}
+.spec-row:last-child { border-bottom: none; }
+.spec-label { font-size: .8rem; color: var(--color-text-muted); letter-spacing: .04em; flex-shrink: 0; }
+.spec-value { font-size: .88rem; color: var(--color-text); text-align: right; font-weight: 500; }
+.seller-card {
+    position: relative;
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+    border-radius: 12px;
+    padding: 1.3rem 1.5rem;
+    color: #fff;
+    margin-bottom: 1.5rem;
+    overflow: hidden;
+}
+.seller-card::before {
+    content: ""; position: absolute; inset: 8px;
+    border: 1px solid rgba(255,255,255,.2); border-radius: 7px;
+    pointer-events: none;
+}
+.seller-card > * { position: relative; z-index: 1; }
+.seller-card-label {
+    font-size: .68rem; letter-spacing: .22em; text-transform: uppercase;
+    color: rgba(255,255,255,.65); margin-bottom: .4rem;
+}
+.seller-card-name {
+    font-size: 1.1rem; font-weight: 700; letter-spacing: .03em;
+    margin-bottom: .3rem;
+    display: flex; align-items: center; gap: .5rem; flex-wrap: wrap;
+}
+.seller-card-id {
+    font-size: .74rem; color: rgba(255,255,255,.7);
+    font-family: "Inter", monospace; letter-spacing: .04em;
+    margin-bottom: .9rem;
+}
+.seller-card-link {
+    display: inline-flex; align-items: center; gap: .35rem;
+    background: rgba(255,255,255,.15);
+    border: 1px solid rgba(255,255,255,.3);
+    color: #fff; text-decoration: none;
+    padding: .5rem 1rem; border-radius: 6px;
+    font-size: .8rem; font-weight: 600;
+    transition: .2s;
+    backdrop-filter: blur(4px);
+}
+.seller-card-link:hover { background: rgba(255,255,255,.25); }
+.founder-badge {
+    display: inline-flex; align-items: center; gap: .28rem;
+    background: linear-gradient(135deg, #B08A45 0%, #D4AF6A 50%, #B08A45 100%);
+    color: #FFFFFF; font-size: .6rem; font-weight: 700;
+    letter-spacing: .08em;
+    padding: .2rem .48rem .2rem .36rem; border-radius: 20px;
+    white-space: nowrap; vertical-align: middle;
+    box-shadow: 0 1px 3px rgba(0,0,0,.25), inset 0 1px 0 rgba(255,255,255,.3);
+}
+.founder-badge svg { width: 11px; height: 11px; flex-shrink: 0; display: block; }
+.founder-badge .badge-num { font-weight: 800; font-size: .7rem; letter-spacing: 0; }
+.contact-btn {
+    display: inline-flex; align-items: center; gap: .5rem;
+    background: #25D366; color: #fff;
+    padding: .8rem 1.5rem; border-radius: 8px;
+    text-decoration: none; font-weight: 600; font-size: .92rem;
+    transition: .2s;
+    margin-bottom: 1rem;
+}
+.contact-btn:hover { filter: brightness(.95); transform: translateY(-1px); }
+.disclaimer-box {
+    margin-top: 1.2rem; padding: .9rem 1.1rem;
+    background: var(--color-primary-light); border-radius: 8px;
+    font-size: .78rem; color: var(--color-text-secondary); line-height: 1.6;
+}
 .disclaimer-box strong { color: var(--color-text); }
-
-/* ---------- seller gallery page ---------- */
-.seller-header { margin-bottom: 2.2rem; }
-.seller-stats { font-size: .82rem; color: var(--color-text-secondary); margin-top: .5rem; }
-
 footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-white); color: var(--color-text-secondary); margin-top: 1rem; font-size: .78rem; border-top: 1px solid var(--color-border); }
 .footer-nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 1.3rem; margin-bottom: 1.2rem; }
 .footer-nav a { color: var(--color-text-secondary); text-decoration: none; font-size: .82rem; }
 .footer-nav a:hover { color: var(--color-primary); }
 .footer-disclaimer { max-width: 620px; margin: 0 auto 1.1rem; font-size: .74rem; line-height: 1.65; color: var(--color-text-muted); }
-
 [data-lang="en"] .zh { display: none; }
 [data-lang="zh"] .en { display: none; }
-
 @media (max-width: 820px) {
     header { height: 62px; gap: .6rem; }
     .btn-publish { padding: .45rem .85rem; font-size: .8rem; }
-    .container { padding-top: 2.4rem; }
+    .container { padding-top: 2rem; }
     .item-detail { grid-template-columns: 1fr; gap: 1.6rem; }
 }
-
 @media (max-width: 560px) {
     .brand h1 { font-size: 1.15rem; }
-    .container { padding: 2rem 4.5% 3rem; }
-    section { margin-bottom: 2.6rem; }
-    .btn-publish span.en { display: inline; }
-    .goods-list { grid-template-columns: repeat(2, 1fr); gap: .6rem; }
-    .item-card .price-tag { font-size: .68rem; padding: .22rem .45rem; }
+    .container { padding: 1.6rem 4.5% 3rem; }
+    .specs-block, .seller-card { padding: 1.1rem 1.2rem; }
 }
-
-
-.seller-item-card { position: relative; display: block; }
-.seller-item-name { margin-top: .5rem; font-size: .85rem; color: var(--color-text); }
-
-    
-        /* ---------- Sidebar 语言切换按钮（2026-09-15 新增） ---------- */
-        .sidebar-lang-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: .4rem;
-            width: calc(100% - 2.8rem);
-            margin: 1rem 1.4rem .8rem;
-            padding: .62rem .9rem;
-            border: 1px solid var(--color-border);
-            border-radius: 8px;
-            background: var(--color-white);
-            color: var(--color-text-secondary);
-            font-family: inherit;
-            font-size: .9rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: .2s;
-        }
-        .sidebar-lang-btn:hover {
-            border-color: var(--color-primary);
-            color: var(--color-primary);
-            background: var(--color-primary-light);
-        }
     </style>
-    <link rel="apple-touch-icon" href="/assets/icons/icon-192.png">
+    <link rel="apple-touch-icon" href="../assets/icons/icon-192.png">
 </head>
 <body data-lang="zh">
     <div class="announce-bar" id="announceBar">
-        <span class="zh">创始卖家福利｜限量 88 席免费入驻，前 2 件藏品信息免费刊登，对卖家不抽取交易佣金；平台仅提供信息展示与增值服务，不参与交易。</span>
-        <span class="en">Founder-Dealer Benefit | Limited 88 seats · Free to join · First 2 listings free · No transaction commission charged to sellers — listing &amp; add-on services only; we do not take part in transactions.</span>
+        <span class="zh">创始卖家福利｜限量 88 席免费入驻，前 2 件藏品信息免费刊登，对卖家不抽取交易佣金。</span>
+        <span class="en">Founder-Dealer Benefit | Limited 88 seats · Free to join · First 2 listings free · No transaction commission.</span>
         <button class="announce-close" onclick="document.getElementById('announceBar').style.display='none'" aria-label="close">×</button>
     </div>
-
     <header>
         <div style="display:flex; align-items:center; gap:.9rem;">
             <button class="menu-toggle" onclick="openSidebar()" aria-label="menu">☰</button>
-            <a href="../../../index.html" class="brand" style="text-decoration:none;color:inherit;">
+            <a href="../index.html" class="brand" style="text-decoration:none;color:inherit;">
                 <h1 class="zh">古董集</h1>
                 <h1 class="en">GUDONG</h1>
                 <p class="zh">GUDONG</p>
             </a>
         </div>
-
         <div class="header-right">
-            <a href="mailto:contact@gudong.app?subject=%E5%8F%A4%E8%91%A3%E9%9B%86-%E7%94%B3%E8%AF%B7%E5%8F%91%E5%B8%83%E8%97%8F%E5%93%81" class="btn-publish">
+            <a href="../pricing.html#seller-services" class="btn-publish">
                 <span class="zh">刊登藏品信息</span><span class="en">List an Item</span>
             </a>
             <button class="lang-btn" onclick="toggleLang()">EN</button>
         </div>
     </header>
-
     <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
     <aside class="sidebar" id="sidebar">
         <button class="sidebar-toggle-inner" onclick="closeSidebar()" aria-label="close menu">☰</button>
         <div class="sidebar-brand">
             <span class="zh">古董集</span><span class="en">GUDONG</span>
         </div>
-                <nav class="sidebar-nav">
-            <a href="../../../index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">首页</span><span class="en">Home</span></a>
-            <a href="../../../index.html#today-finds" class="sidebar-link" onclick="closeSidebar()"><span class="zh">今日发现</span><span class="en">Today's Finds</span></a>
-            <a href="../../../index.html#new-listings" class="sidebar-link" onclick="closeSidebar()"><span class="zh">最新藏品</span><span class="en">New Listings</span></a>
-
+        <nav class="sidebar-nav">
+            <a href="../index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">首页</span><span class="en">Home</span></a>
+            <a href="../index.html#today-finds" class="sidebar-link" onclick="closeSidebar()"><span class="zh">今日发现</span><span class="en">Today's Finds</span></a>
+            <a href="../index.html#new-listings" class="sidebar-link" onclick="closeSidebar()"><span class="zh">最新藏品</span><span class="en">New Listings</span></a>
             <div class="sidebar-group-title zh">藏品库</div><div class="sidebar-group-title en">Collection</div>
-            <a href="../../../categories/porcelain.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 瓷器</span><span class="en">· Porcelain</span></a>
-            <a href="../../../categories/jade.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 玉器</span><span class="en">· Jade</span></a>
-            <a href="../../../categories/coins.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 钱币</span><span class="en">· Coins</span></a>
-            <a href="../../../categories/paintings.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 书画</span><span class="en">· Paintings &amp; Calligraphy</span></a>
-            <a href="../../../categories/misc.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 杂项</span><span class="en">· Miscellaneous</span></a>
-
-            <a href="../../../sellers/index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">卖家展馆</span><span class="en">Dealer Galleries</span></a>
-            <a href="../../../pricing.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">服务价格</span><span class="en">Pricing</span></a>
-            <a href="../../../about.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">关于Gudong</span><span class="en">About</span></a>
+            <a href="../categories/porcelain.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 瓷器</span><span class="en">· Porcelain</span></a>
+            <a href="../categories/jade.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 玉器</span><span class="en">· Jade</span></a>
+            <a href="../categories/coins.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 钱币</span><span class="en">· Coins</span></a>
+            <a href="../categories/paintings.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 书画</span><span class="en">· Paintings &amp; Calligraphy</span></a>
+            <a href="../categories/misc.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 杂项</span><span class="en">· Miscellaneous</span></a>
+            <a href="../sellers/index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">私家博物馆</span><span class="en">Private Museums</span></a>
+            <a href="../pricing.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">服务价格</span><span class="en">Pricing</span></a>
+            <a href="../about.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">关于Gudong</span><span class="en">About</span></a>
             <button type="button" class="sidebar-lang-btn" onclick="toggleLang()" aria-label="Switch language"><span class="zh">🌐 English</span><span class="en">🌐 中文</span></button>
         </nav>
     </aside>
-
     <main class="container">
-        <section>
-            <a href="../../../sellers/seller-lim-kw-antiques.html" class="back-link zh">← 返回 林记古玩 展馆</a>
-            <a href="../../../sellers/seller-lim-kw-antiques.html" class="back-link en">← Back to Lim KW Antiques</a>
-
-            <div class="item-detail">
-                <div class="item-detail-image">
-                    <img src="../../../assets/images/lim-kw/item-lim-02.jpg" alt="战国青铜错金乳钉双耳四足方鼎" onerror="this.onerror=null;this.src='/assets/images/placeholder.jpg'">
-                </div>
-                <div>
-                    <p class="item-detail-meta zh">战国 · 杂项 · 卖家：林记古玩 </p>
-                    <p class="item-detail-meta en">Warring States period · 杂项 · Seller: Lim KW Antiques</p>
-                    <h1 class="item-detail-title zh">战国青铜错金乳钉双耳四足方鼎</h1>
-                    <h1 class="item-detail-title en">Warring-States Bronze Ding with Gold-Inlaid Studs</h1>
-                    <div class="item-detail-price">S$42,000</div>
-                    <p class="item-detail-desc zh">方鼎四足双耳，鼎身满饰乳钉纹并错金，铜质包浆自然，具典型战国青铜礼器风格。</p>
-                    <p class="item-detail-desc en">A four-legged, two-handled bronze ding with gold-inlaid stud decoration and a naturally formed patina, in the classic style of Warring States ritual bronzes.</p>
-
-                    <a href="https://wa.me/6591234567?text=%E4%BD%A0%E5%A5%BD%EF%BC%8C%E6%88%91%E5%9C%A8Gudong%E4%B8%8A%E7%9C%8B%E5%88%B0%E4%BD%A0%E7%9A%84%E8%97%8F%E5%93%81%EF%BC%9Aitem-lim-02" class="contact-btn zh">💬 联系卖家 (WhatsApp)</a>
-                    <a href="https://wa.me/6591234567?text=Hi%2C%20I%27m%20interested%20in%20this%20item%20on%20Gudong%3A%20item-lim-02" class="contact-btn en">💬 Contact Seller (WhatsApp)</a>
-
-                    <div class="disclaimer-box zh"><strong>请注意：</strong>Gudong 仅提供藏品信息展示与联系引荐，不鉴定真伪、不担保成交、不代收款项。请务必当面核验实物后再行交易。</div>
-                    <div class="disclaimer-box en"><strong>Please note:</strong> Gudong only displays item information and facilitates contact — we do not authenticate items, guarantee sales, or process payments. Always inspect items in person before dealing.</div>
-                </div>
+        <a href="../sellers/seller-lim-kw-antiques.html" class="back-link zh">← 返回 林记古玩 私家博物馆</a>
+        <a href="../sellers/seller-lim-kw-antiques.html" class="back-link en">← Back to Lim KW Antiques</a>
+        <div class="item-detail">
+            <div class="item-detail-image">
+                <img src="../assets/images/lim-kw/item-lim-02.jpg" alt="战国青铜错金乳钉双耳四足方鼎" onerror="this.onerror=null;this.src='../assets/images/placeholder.jpg'">
             </div>
-        </section>
+            <div>
+                <p class="item-detail-meta zh">战国 · 杂项 · 卖家：林记古玩</p>
+                <p class="item-detail-meta en">Warring States period · Miscellaneous · Seller: Lim KW Antiques</p>
+                <h1 class="item-detail-title zh">战国青铜错金乳钉双耳四足方鼎</h1>
+                <h1 class="item-detail-title en">Warring-States Bronze Ding with Gold-Inlaid Studs</h1>
+                <div class="item-detail-price">S$42,000</div>
+                <p class="item-detail-desc zh">方鼎四足双耳，鼎身满饰乳钉纹并错金，铜质包浆自然，具典型战国青铜礼器风格。</p>
+                <p class="item-detail-desc en">A four-legged, two-handled bronze ding with gold-inlaid stud decoration and a naturally formed patina, in the classic style of Warring States ritual bronzes.</p>
+
+                <div class="specs-block">
+                    <div class="specs-title zh">藏品规格</div>
+                    <div class="specs-title en">Specifications</div>
+                    <div class="spec-row">
+                        <span class="spec-label zh">年代</span><span class="spec-label en">Era</span>
+                        <span class="spec-value zh" data-spec="era_zh">战国</span>
+                        <span class="spec-value en" data-spec="era_en">Warring States period</span>
+                    </div>
+                    <div class="spec-row">
+                        <span class="spec-label zh">品类</span><span class="spec-label en">Category</span>
+                        <span class="spec-value zh" data-spec="category">杂项</span>
+                        <span class="spec-value en" data-spec="category_en">Miscellaneous</span>
+                    </div>
+                    <div class="spec-row">
+                        <span class="spec-label zh">尺寸</span><span class="spec-label en">Dimensions</span>
+                        <span class="spec-value" data-spec="dimensions">H 28cm × W 22cm</span>
+                    </div>
+                    <div class="spec-row">
+                        <span class="spec-label zh">材质</span><span class="spec-label en">Material</span>
+                        <span class="spec-value zh" data-spec="material_zh">青铜 · 错金</span>
+                        <span class="spec-value en" data-spec="material_en">Bronze · Gold inlay</span>
+                    </div>
+                    <div class="spec-row">
+                        <span class="spec-label zh">品相</span><span class="spec-label en">Condition</span>
+                        <span class="spec-value zh" data-spec="condition_zh">完整 · 铜锈自然</span>
+                        <span class="spec-value en" data-spec="condition_en">Intact · natural patina</span>
+                    </div>
+                </div>
+
+                <div class="seller-card">
+                    <div class="seller-card-label"><span class="zh">卖家</span><span class="en">Seller</span></div>
+                    <div class="seller-card-name">
+                        <span class="zh" id="sellerNameZh">林记古玩</span>
+                        <span class="en" id="sellerNameEn">Lim KW Antiques</span>
+                        <span class="founder-badge" title="创始卖家 · 2026（限量 88 席）">
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <path d="M3 8L6 14L9 7L12 13L15 7L18 14L21 8V17C21 17.55 20.55 18 20 18H4C3.45 18 3 17.55 3 17V8Z" fill="currentColor" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/>
+                                <circle cx="3" cy="8" r="1.4" fill="currentColor"/>
+                                <circle cx="12" cy="6" r="1.4" fill="currentColor"/>
+                                <circle cx="21" cy="8" r="1.4" fill="currentColor"/>
+                            </svg>
+                            <span class="badge-num">88</span>
+                        </span>
+                    </div>
+                    <div class="seller-card-id">Seller ID: <span id="sellerId">Lim-KW</span></div>
+                    <a href="../sellers/seller-lim-kw-antiques.html" class="seller-card-link" id="sellerLink">
+                        <span class="zh">查看全部藏品 →</span><span class="en">View all items →</span>
+                    </a>
+                </div>
+
+                <a href="https://wa.me/6591234567?text=%E4%BD%A0%E5%A5%BD%EF%BC%8C%E6%88%91%E5%9C%A8Gudong%E4%B8%8A%E7%9C%8B%E5%88%B0%E4%BD%A0%E7%9A%84%E8%97%8F%E5%93%81%EF%BC%9Aitem-lim-02" class="contact-btn zh">💬 联系卖家 (WhatsApp)</a>
+                <a href="https://wa.me/6591234567?text=Hi%2C%20I%27m%20interested%20in%20this%20item%20on%20Gudong%3A%20item-lim-02" class="contact-btn en">💬 Contact Seller (WhatsApp)</a>
+
+                <div class="disclaimer-box zh"><strong>请注意：</strong>Gudong 仅提供藏品信息展示与联系引荐，不鉴定真伪、不担保成交、不代收款项。请务必当面核验实物后再行交易。</div>
+                <div class="disclaimer-box en"><strong>Please note:</strong> Gudong only displays item information and facilitates contact — we do not authenticate items, guarantee sales, or process payments. Always inspect items in person before dealing.</div>
+            </div>
+        </div>
     </main>
 
     <footer>
         <div class="footer-nav">
-            <a href="../../../pricing.html#buyer-services" class="zh">买家指南</a><a href="../../../pricing.html#buyer-services" class="en">Buyer Guide</a>
-            <a href="../../../about.html#location" class="zh">联系我们</a><a href="../../../about.html#location" class="en">Contact</a>
-            <a href="../../../privacy.html" class="zh">隐私政策</a><a href="../../../privacy.html" class="en">Privacy</a>
-            <a href="../../../terms.html" class="zh">用户条款</a><a href="../../../terms.html" class="en">Terms</a>
+            <a href="../pricing.html" class="zh">服务价格</a><a href="../pricing.html" class="en">Pricing</a>
+            <a href="../about.html#location" class="zh">联系我们</a><a href="../about.html#location" class="en">Contact</a>
+            <a href="../privacy.html" class="zh">隐私政策</a><a href="../privacy.html" class="en">Privacy</a>
+            <a href="../terms.html" class="zh">用户条款</a><a href="../terms.html" class="en">Terms</a>
         </div>
         <p class="footer-disclaimer zh">gudong.app 是信息发现平台，而非交易平台。</p>
         <p class="footer-disclaimer en">gudong.app is an information and discovery platform for antiques and collectibles.</p>
@@ -362,7 +394,6 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
             try { localStorage.setItem('gudong_lang', next); } catch (e) {}
             document.querySelector('.lang-btn').textContent = next === 'zh' ? 'EN' : '中';
         }
-        /* 2026-09-19：与首页共用语言偏好（gudong_lang），避免首页选了 EN、详情页又变回中文 */
         (function () {
             try {
                 var l = localStorage.getItem('gudong_lang');
@@ -377,14 +408,6 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
     </script>
 
     <script>
-    /* ============================================================
-       2026-09-19：详情页与 Airtable 联动
-       页面里的静态内容保留，作为无 JS / 接口失败时的兜底（也利于 SEO）；
-       页面加载后从 /api/airtable-proxy 取同一 item_id 的记录，覆盖标题、年代、价格、
-       描述、图片与 WhatsApp。Airtable 是唯一数据源：改 Airtable，首页与详情页同步变化。
-       item_id 取自文件名（items/xxx.html → xxx），也可用 <body data-item-id="xxx"> 覆盖。
-       用 ?debug=1 打开页面，可看到哪些字段被 Airtable 覆盖。
-       ============================================================ */
     (function () {
         var API_BASE = (location.hostname === '127.0.0.1' || location.hostname === 'localhost' || location.protocol === 'file:') ? 'https://gudong.app' : '';
         var HY = /[\u2010-\u2015\u2212\uFE58\uFF0D]/g;
@@ -393,17 +416,14 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
         var DEBUG = /[?&]debug=1\b/.test(location.search);
         var ID = clean(document.body.dataset.itemId || decodeURIComponent(location.pathname.split('/').pop() || '').replace(/\.html?$/i, ''));
         if (!ID) return;
-
         var CAT_EN = { '瓷器': 'Porcelain', '玉器': 'Jade', '钱币': 'Coins', '书画': 'Paintings & Calligraphy', '杂项': 'Miscellaneous' };
         var changes = [];
         function $(s) { return document.querySelector(s); }
-
         function setText(sel, v, label) {
             var el = $(sel); v = clean(first(v));
             if (!el || !v) return;
             if (el.textContent.trim() !== v) { changes.push(label + ': ' + el.textContent.trim().slice(0, 28) + ' → ' + v.slice(0, 28)); el.textContent = v; }
         }
-        /* 元信息「年代 · 类别 · 卖家」：只换前两段，保留页面里的卖家段（Airtable 没有卖家中文名） */
         function setMeta(sel, era, cat, label, sellerTail) {
             var el = $(sel); if (!el || !(era || cat)) return;
             var parts = el.textContent.split(' · ');
@@ -417,7 +437,6 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
             if (!amount || label.indexOf(amount) !== -1) return label;
             return /[:：]\s*$/.test(label) ? label + amount : label + ' ' + amount;
         }
-        /* 三种叫价方式（与首页 resolvePrice 保持一致）：一口价读 fixed_price；价格区间读 price_display_* / price_*；私聊询价 */
         function fmtMoney(v) {
             v = first(v);
             if (v == null || v === '') return '';
@@ -454,15 +473,44 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
             if (src && img.getAttribute('src') !== src) { changes.push('img → ' + src.slice(-40)); img.setAttribute('src', src); }
             if (f.title_zh) img.alt = clean(first(f.title_zh));
         }
-        /* 只接受形如新加坡的号码（65 + 3/6/8/9 开头共 8 位）；不合格就保留页面原有号码，避免 WhatsApp 按钮失效 */
         function setWhatsApp(f) {
             var wa = String(first(f.seller_whatsapp) || '').replace(/\D/g, '');
             if (!wa) return;
-            if (!/^65[3689]\d{7}$/.test(wa)) { console.warn('[Gudong] seller_whatsapp 不是有效的新加坡号码，已保留页面原有号码：', wa); changes.push('whatsapp 号码无效(' + wa + ')，未采用'); return; }
+            if (!/^65[3689]\d{7}$/.test(wa)) { changes.push('whatsapp 号码无效(' + wa + ')'); return; }
             document.querySelectorAll('a.contact-btn').forEach(function (a) {
                 var h = a.getAttribute('href') || '', n = h.replace(/^.*wa\.me\//, '').replace(/[?].*$/, '');
                 if (n !== wa) { changes.push('whatsapp: ' + n + ' → ' + wa); a.setAttribute('href', h.replace(/wa\.me\/\d+/, 'wa.me/' + wa)); }
             });
+        }
+        function setSpec(f) {
+            var cat = clean(first(f.category));
+            var map = {
+                'era_zh': f.era_zh, 'era_en': f.era_en,
+                'category': cat, 'category_en': CAT_EN[cat] || cat,
+                'dimensions': f.dimensions,
+                'material_zh': f.material_zh, 'material_en': f.material_en,
+                'condition_zh': f.condition_zh, 'condition_en': f.condition_en
+            };
+            Object.keys(map).forEach(function (key) {
+                var v = clean(first(map[key])); if (!v) return;
+                var el = document.querySelector('[data-spec="' + key + '"]');
+                if (el && el.textContent.trim() !== v) { el.textContent = v; changes.push('spec.' + key + ' → ' + v.slice(0, 20)); }
+            });
+        }
+        function setSellerCard(f, data) {
+            var sid = clean(first(f.seller_id));
+            if (!sid) return;
+            document.getElementById('sellerId').textContent = sid;
+            var sl = null;
+            (data.sellers || []).forEach(function (x) { if (clean(first(x.seller_id)) === sid) sl = x; });
+            if (sl) {
+                var zh = clean(first(sl.display_zh) || first(sl.display_en));
+                var en = clean(first(sl.display_en) || first(sl.display_zh));
+                if (zh) setText('#sellerNameZh', zh, 'seller.zh');
+                if (en) setText('#sellerNameEn', en, 'seller.en');
+                var link = document.getElementById('sellerLink');
+                if (link && sl.page_url) link.href = sl.page_url;
+            }
         }
         function showNotFound() {
             var box = $('.item-detail'); if (!box) return;
@@ -478,7 +526,6 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
             d.style.cssText = 'position:fixed;left:8px;bottom:8px;z-index:9999;max-width:min(94vw,440px);max-height:50vh;overflow:auto;background:rgba(20,17,14,.94);color:' + (ok ? '#E8E2D8' : '#F0A090') + ';font:12px/1.6 ui-monospace,Menlo,Consolas,monospace;padding:10px 12px;border-radius:8px;white-space:pre-wrap;word-break:break-all';
             d.textContent = text; document.body.appendChild(d);
         }
-
         var ctl = new AbortController(), timer = setTimeout(function () { ctl.abort(); }, 8000);
         fetch(API_BASE + '/api/airtable-proxy', { cache: 'no-store', signal: ctl.signal, headers: { 'Accept': 'application/json' } })
             .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
@@ -487,37 +534,33 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
                 if (!Array.isArray(list)) throw new Error('响应缺少 newListing');
                 var f = null;
                 for (var i = 0; i < list.length; i++) { if (clean(first(list[i].item_id)) === ID) { f = list[i]; break; } }
-                if (!f) { document.documentElement.dataset.source = 'not-in-airtable'; showNotFound(); badge('item_id ' + ID + ' 不在接口返回的在售列表中（已归档/删除，或 item_id 不一致）', false); return; }
-
+                if (!f) { document.documentElement.dataset.source = 'not-in-airtable'; showNotFound(); badge('item_id ' + ID + ' 不在接口返回列表中', false); return; }
                 setText('.item-detail-title.zh', f.title_zh, 'title_zh');
                 setText('.item-detail-title.en', f.title_en, 'title_en');
-                /* 卖家展馆名：取 Airtable sellers 表的 display_zh / display_en（没配置时保留页面原有文字）；不使用卖家真实姓名 */
                 var sl = null, sid = clean(first(f.seller_id));
                 (data.sellers || []).forEach(function (x) { if (clean(first(x.seller_id)) === sid) sl = x; });
                 var szh = sl ? clean(first(sl.display_zh) || first(sl.display_en)) : '', sen = sl ? clean(first(sl.display_en) || first(sl.display_zh)) : '';
                 setMeta('.item-detail-meta.zh', clean(first(f.era_zh)), clean(first(f.category)), 'meta_zh', szh ? '卖家：' + szh : '');
                 setMeta('.item-detail-meta.en', clean(first(f.era_en)), CAT_EN[clean(first(f.category))] || clean(first(f.category)), 'meta_en', sen ? 'Seller: ' + sen : '');
-                if (szh) setText('.back-link.zh', '← 返回 ' + szh + ' 展馆', 'back_zh');
+                if (szh) setText('.back-link.zh', '← 返回 ' + szh + ' 私家博物馆', 'back_zh');
                 if (sen) setText('.back-link.en', '← Back to ' + sen, 'back_en');
                 setPrice(f);
                 setText('.item-detail-desc.zh', f.desc_zh, 'desc_zh');
                 setText('.item-detail-desc.en', f.desc_en, 'desc_en');
                 setImage(f);
+                setSpec(f);
+                setSellerCard(f, data);
                 setWhatsApp(f);
                 if (f.title_zh) { var t = document.title.split(' | '); t[0] = clean(first(f.title_zh)); if (sen && t.length > 1) t[1] = sen; document.title = t.join(' | '); }
-
                 document.documentElement.dataset.source = 'airtable';
-                console.info('[Gudong] ' + ID + ' 已用 Airtable 数据渲染；与静态页不同的字段：', changes);
-                badge('✔ 数据来自 Airtable · ' + ID + '\n' + (changes.length ? '与静态页不同的字段：\n' + changes.join('\n') : '与静态页完全一致'), true);
+                badge('✔ Airtable · ' + ID + '\n' + (changes.length ? changes.join('\n') : '与静态页一致'), true);
             })
             .catch(function (e) {
                 document.documentElement.dataset.source = 'static';
-                console.warn('[Gudong] 详情页未能连接 Airtable，显示静态内容：', e);
-                badge('⚠ 未连上 Airtable，当前显示的是静态页内容\n' + e.message, false);
+                badge('⚠ 未连上 Airtable，显示静态页\n' + e.message, false);
             })
             .then(function () { clearTimeout(timer); });
     })();
     </script>
-
 </body>
 </html>

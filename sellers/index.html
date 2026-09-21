@@ -1,7 +1,13 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-SG">
 <head>
     <meta charset="UTF-8">
+    <script>
+        /* 2026-09-19：目录页被直接访问成「/sellers」（不带结尾斜杠）时，页面里的相对链接
+           （如 seller-lim-kw-antiques.html）会被错误解析到网站根目录而 404。
+           这里把地址栏补成「/sellers/」，相对链接即恢复正确；已带斜杠或 .html 的地址不受影响。 */
+        if (!/\/$|\.html?$/.test(location.pathname)) history.replaceState(null, '', location.pathname + '/' + location.search + location.hash);
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>卖家展馆 | Seller Galleries | Gudong</title>
     <meta name="description" content="浏览古董集卖家展馆，查看各商号与藏家的全部藏品。 Browse seller galleries on Gudong and see each dealer's full collection.">
@@ -278,18 +284,6 @@
             margin-bottom: 2.4rem;
         }
 
-        .tier-title {
-            display: flex;
-            align-items: center;
-            gap: .5rem;
-            font-size: 1.15rem;
-            font-weight: 700;
-            color: var(--color-text);
-            padding-bottom: .8rem;
-            margin-bottom: 1.4rem;
-            border-bottom: 1px solid var(--color-border);
-        }
-
         .tier-section { margin-bottom: 3rem; }
 
         .gallery-grid {
@@ -313,19 +307,6 @@
         .gallery-card:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 20px rgba(37,34,30,.08);
-        }
-
-        /* 金边框 = 「优先展馆」标志，仅限付费购买该增值服务的卖家。
-           落位规则：完全由卡片所属分区自动决定 ——
-           卡片放进 .tier-priority 即自动带金边，移出即自动恢复普通样式。
-           不再手工加 class，从根上杜绝「档次与边框不一致」。 */
-        .tier-priority .gallery-card {
-            border: 2px solid var(--color-gold);
-            box-shadow: 0 0 0 3px var(--color-gold-soft);
-        }
-
-        .tier-priority .gallery-card:hover {
-            box-shadow: 0 0 0 3px var(--color-gold-soft), 0 10px 24px rgba(176,138,69,.22);
         }
 
         .gallery-badge {
@@ -459,7 +440,7 @@
         </div>
 
         <div class="header-right">
-            <a href="mailto:contact@gudong.app?subject=%E5%8F%A4%E8%91%A3%E9%9B%86-%E7%94%B3%E8%AF%B7%E5%8F%91%E5%B8%83%E8%97%8F%E5%93%81" class="btn-publish">
+            <a href="../../../pricing.html#seller-services" class="btn-publish">
                 <span class="zh">刊登藏品</span><span class="en">List an Item</span>
             </a>
             <button class="lang-btn" onclick="toggleLang()">EN</button>
@@ -502,79 +483,16 @@
         <p class="page-sub zh">独立展馆 · 专属主页 · 集中展示全部藏品</p>
         <p class="page-sub en">A standalone gallery page for each seller — all their items in one place</p>
 
-        <!-- 优先展馆（付费增值）：分区内卡片自动带金边框，无需逐张加 class -->
-        <div class="tier-section tier-priority">
-            <div class="tier-title">
-                <span>🏅</span><span class="zh">优先展馆</span><span class="en">Priority Galleries</span>
-            </div>
+        <!-- 展馆列表：新增展馆时，在下面继续加 gallery-card 即可 -->
+        <div class="tier-section">
             <div class="gallery-grid">
-                <a id="he-zhentao" href="../../../Downloads/seller-he-zhentao.html" class="gallery-card">
-                    <div class="gallery-badge zh">优先展馆</div><div class="gallery-badge en">Priority</div>
-                    <div class="gallery-name zh">和珍陶</div><div class="gallery-name en">Hezhentao</div>
-                    <div class="gallery-desc zh">主营明清官窑瓷器，青花、粉彩与单色釉</div>
-                    <div class="gallery-desc en">Ming &amp; Qing imperial porcelain — blue &amp; white, fencai and monochrome glazes</div>
-                    <div class="gallery-stats zh">藏品数：3 · 入驻：2024年6月</div>
-                    <div class="gallery-stats en">3 items · Joined Jun 2024</div>
-                    <div class="gallery-link zh">进入展馆 →</div><div class="gallery-link en">Visit Gallery →</div>
-                </a>
-                <a href="../../../Downloads/seller-yu-zhen-ge.html" class="gallery-card">
-                    <div class="gallery-badge zh">优先展馆</div><div class="gallery-badge en">Priority</div>
-                    <div class="gallery-name zh">玉珍阁</div><div class="gallery-name en">Yuzhen Ge</div>
-                    <div class="gallery-desc zh">专注和田白玉与明清玉雕件</div>
-                    <div class="gallery-desc en">Hetian white jade and Ming-Qing carvings</div>
-                    <div class="gallery-stats zh">藏品数：2 · 入驻：2024年3月</div>
-                    <div class="gallery-stats en">2 items · Joined Mar 2024</div>
-                    <div class="gallery-link zh">进入展馆 →</div><div class="gallery-link en">Visit Gallery →</div>
-                </a>
-                <a href="../../../Downloads/seller-mo-yun-tang.html" class="gallery-card">
-                    <div class="gallery-badge zh">优先展馆</div><div class="gallery-badge en">Priority</div>
-                    <div class="gallery-name zh">墨韵堂</div><div class="gallery-name en">Moyun Tang</div>
-                    <div class="gallery-desc zh">主收清代山水立轴与书法对联</div>
-                    <div class="gallery-desc en">Qing landscape scrolls and calligraphy couplets</div>
-                    <div class="gallery-stats zh">藏品数：1 · 入驻：2024年5月</div>
-                    <div class="gallery-stats en">1 item · Joined May 2024</div>
-                    <div class="gallery-link zh">进入展馆 →</div><div class="gallery-link en">Visit Gallery →</div>
-                </a>
-            </div>
-        </div>
-
-        <!-- 标准展馆：即使卡片带「新入驻」等徽章，也无金边框 -->
-        <div class="tier-section tier-standard">
-            <div class="tier-title">
-                <span>📦</span><span class="zh">标准展馆</span><span class="en">Standard Galleries</span>
-            </div>
-            <div class="gallery-grid">
-                <a id="jingxuan-tang" href="../../../Downloads/seller-jingxuan-tang.html" class="gallery-card">
-                    <div class="gallery-name zh">静选堂</div><div class="gallery-name en">Jingxuan Tang</div>
-                    <div class="gallery-desc zh">民国粉彩与明清官窑瓷器</div>
-                    <div class="gallery-desc en">Republic fencai and Ming-Qing imperial porcelain</div>
-                    <div class="gallery-stats zh">藏品数：2 · 入驻：2024年9月</div>
-                    <div class="gallery-stats en">2 items · Joined Sep 2024</div>
-                    <div class="gallery-link zh">进入展馆 →</div><div class="gallery-link en">Visit Gallery →</div>
-                </a>
-                <a href="../../../Downloads/seller-lim-kw-antiques.html" class="gallery-card" data-seller-id="lim-kee-whee">
+                <a href="seller-lim-kw-antiques.html" class="gallery-card" data-seller-id="Lim-KW">
                     <div class="gallery-badge zh">新入驻</div><div class="gallery-badge en">New</div>
                     <div class="gallery-name zh">林记古玩</div><div class="gallery-name en">Lim KW Antiques</div>
                     <div class="gallery-desc zh">专注高古青铜与明清瓷器</div>
                     <div class="gallery-desc en">Archaic bronzes and Ming-Qing porcelain</div>
-                    <div class="gallery-stats zh">藏品数：5 · 入驻：2026年</div>
-                    <div class="gallery-stats en">5 items · Joined 2026</div>
-                    <div class="gallery-link zh">进入展馆 →</div><div class="gallery-link en">Visit Gallery →</div>
-                </a>
-                <a href="../../../Downloads/seller-cui-yuan.html" class="gallery-card">
-                    <div class="gallery-name zh">翠缘古玩</div><div class="gallery-name en">Cui Yuan</div>
-                    <div class="gallery-desc zh">翡翠与近现代玉饰，佩戴类为主</div>
-                    <div class="gallery-desc en">Jadeite and modern jade jewelry — wearable pieces</div>
-                    <div class="gallery-stats zh">藏品数：1 · 入驻：2025年1月</div>
-                    <div class="gallery-stats en">1 item · Joined Jan 2025</div>
-                    <div class="gallery-link zh">进入展馆 →</div><div class="gallery-link en">Visit Gallery →</div>
-                </a>
-                <a href="../../../Downloads/seller-han-bi-ge.html" class="gallery-card">
-                    <div class="gallery-name zh">翰碧阁</div><div class="gallery-name en">Han Bi Ge</div>
-                    <div class="gallery-desc zh">书画、文房藏品专营</div>
-                    <div class="gallery-desc en">Calligraphy, paintings and scholarly items</div>
-                    <div class="gallery-stats zh">藏品数：1 · 入驻：2024年11月</div>
-                    <div class="gallery-stats en">1 item · Joined Nov 2024</div>
+                    <div class="gallery-stats zh">藏品数：4 · 入驻：2026年</div>
+                    <div class="gallery-stats en">4 items · Joined 2026</div>
                     <div class="gallery-link zh">进入展馆 →</div><div class="gallery-link en">Visit Gallery →</div>
                 </a>
             </div>
@@ -583,8 +501,8 @@
         <div class="cta-banner">
             <div class="cta-line zh">🏛 想拥有自己的独立展馆？</div>
             <div class="cta-line en">🏛 Want your own independent gallery?</div>
-            <a href="../../../pricing.html#seller-services" class="cta-link zh">查看展馆套餐与入驻说明 →</a>
-            <a href="../../../pricing.html#seller-services" class="cta-link en">View gallery plans &amp; onboarding →</a>
+            <a href="../../../pricing.html#seller-services" class="cta-link zh">查看刊登价格与入驻说明 →</a>
+            <a href="../../../pricing.html#seller-services" class="cta-link en">View listing prices &amp; onboarding →</a>
         </div>
     </main>
 
@@ -652,6 +570,37 @@
                     }
                 });
             }).catch(function () { /* 保持静态文案 */ });
+        }
+    </script>
+    <script>
+        /* 2026-09-19：链接自检（仅 ?debug=1 时启用）。
+           左下角是数据诊断，右下角是本面板：列出页面上 3 个关键链接「实际指向的完整地址」以及该地址能否打开，
+           用来判断「点了没反应 / 404 / 跳错页面」到底出在哪一环（文件没部署、地址被改写、用 file:// 打开等）。 */
+        if (/[?&]debug=1\b/.test(location.search)) {
+            var __checks = [
+                ['进入展馆（卡片）', document.querySelector('.gallery-card')],
+                ['右上角「刊登藏品」', document.querySelector('.btn-publish')],
+                ['「查看刊登价格与入驻说明」', document.querySelector('.cta-link')]
+            ];
+            var __box = document.createElement('div');
+            __box.style.cssText = 'position:fixed;right:8px;bottom:8px;z-index:9999;max-width:min(94vw,460px);max-height:60vh;overflow:auto;background:rgba(20,17,14,.94);color:#E8E2D8;font:12px/1.6 ui-monospace,Menlo,Consolas,monospace;padding:10px 12px;border-radius:8px;white-space:pre-wrap;word-break:break-all';
+            document.body.appendChild(__box);
+            var __lines = ['GUDONG 链接检查', '当前页面：' + location.href + (location.protocol === 'file:' ? '\n⚠ 正在用 file:// 打开：相对链接依赖文件夹结构，且接口读不到数据，请改用本地服务器预览' : '')];
+            var __render = function () { __box.textContent = __lines.join('\n'); };
+            __render();
+            __checks.forEach(function (c, i) {
+                var a = c[1], idx = __lines.push((i + 1) + ') ' + c[0] + '\n   ' + (a ? '→ ' + a.href + '  …检测中' : '✖ 页面上找不到这个链接')) - 1;
+                if (!a) { __render(); return; }
+                var url = a.href.split('#')[0];
+                fetch(url, { method: 'HEAD', cache: 'no-store' }).then(function (r) {
+                    __lines[idx] = (i + 1) + ') ' + c[0] + '\n   → ' + a.href + '\n   ' + (r.ok ? '✔ 可以打开（HTTP ' + r.status + '）' : '✖ 打不开（HTTP ' + r.status + '）→ 该文件没有部署在这个路径上，或地址被改写');
+                    __render();
+                }).catch(function () {
+                    __lines[idx] = (i + 1) + ') ' + c[0] + '\n   → ' + a.href + '\n   ? 无法检测（file:// 或网络限制）';
+                    __render();
+                });
+                __render();
+            });
         }
     </script>
 </body>

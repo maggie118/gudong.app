@@ -14,13 +14,18 @@
 //  6. 卖家真实姓名（seller_name_zh / seller_name_en）不再对外输出，也不参与搜索；
 //     网页上的卖家名一律来自「卖家展馆名」——见下方 sellers 表（可选）。
 //
+// 2026-09-21 更新：
+//  7. PUBLIC_FIELDS 增加规格字段（dimensions / weight / condition_zh / condition_en /
+//     has_surface_wear / has_surface_damage），用于详情页「藏品规格」表格。
+//  8. SELLER_PUBLIC_FIELDS 增加 page_url，用于详情页卖家卡的「查看全部藏品」链接。
+//
 // 排查「某条记录为什么没出现在网站上」：设置环境变量 AIRTABLE_DEBUG_KEY（自己定一个长随机串），
 // 然后访问  /api/airtable-proxy?debug=<你的密钥>  ，会逐条列出每条记录是否公开、被排除的原因、
 // 会出现在哪个品类页、以及缺图 / 缺价格 / 缺 seller 等问题。不设置该变量则此功能关闭。
 //
 // 可选环境变量：AIRTABLE_SELLERS_TABLE —— 卖家表的表名（如 sellers）。未设置时 sellers 返回 []，
 // 页面回退到写在 HTML 里的展馆名。sellers 表字段：seller_id / display_zh / display_en /
-// since_year / intro_zh / intro_en / status；真实姓名请放在 real_name 之类的字段，不在白名单里，永不输出。
+// since_year / intro_zh / intro_en / page_url / status；真实姓名请放在 real_name 之类的字段，不在白名单里，永不输出。
 
 const BASE  = process.env.AIRTABLE_BASE_ID;
 const TABLE = process.env.AIRTABLE_TABLE;
@@ -37,6 +42,8 @@ const PUBLIC_FIELDS = [
   // 标题 / 描述 / 分类
   'title_zh', 'title_en', 'desc_zh', 'desc_en', 'era_zh', 'era_en', 'category',
   'material_zh', 'material_en', 'kiln_zh', 'kiln_en', 'mark_zh', 'mark_en', 'certificate_no', 'tags',
+  // 规格（2026-09-21 新增）
+  'dimensions', 'weight', 'condition_zh', 'condition_en', 'has_surface_wear', 'has_surface_damage',
   // 价格（一口价 / 价格区间 / 私聊询价）
   'price_type', 'fixed_price', 'price_zh', 'price_en', 'price_display_zh', 'price_display_en',
   // 图片
@@ -48,7 +55,7 @@ const PUBLIC_FIELDS = [
 ];
 
 /* ?? 2026-09-19：Unicode 连字符归一化
-   Airtable 数据在录入/复制粘贴时混入了 U+2011（? 非断行连字符）等变体，
+   Airtable 数据在录入/复制粘贴时混入了 U+2011（非断行连字符）等变体，
    导致 item_id 对不上静态页文件名（ASCII '-'）、图片路径 404。统一归一化为 ASCII '-'。 */
 const HYPHEN_VARIANTS = /[\u2010\u2011\u2012\u2013\u2014\u2015\u2212\uFE58\uFF0D]/g;
 function normHyphen(v) {
@@ -56,8 +63,8 @@ function normHyphen(v) {
   return v.replace(HYPHEN_VARIANTS, '-').trim();
 }
 
-/* sellers 表对外公开的字段白名单 */
-const SELLER_PUBLIC_FIELDS = ['seller_id', 'display_zh', 'display_en', 'since_year', 'intro_zh', 'intro_en'];
+/* sellers 表对外公开的字段白名单（2026-09-21 增加 page_url） */
+const SELLER_PUBLIC_FIELDS = ['seller_id', 'display_zh', 'display_en', 'since_year', 'intro_zh', 'intro_en', 'page_url'];
 
 const CATEGORY_MAP = { porcelain: '瓷器', jade: '玉器', coins: '钱币', paintings: '书画', misc: '杂项' };
 
@@ -255,6 +262,7 @@ export default async function handler(req, res) {
       res.setHeader('Cache-Control', 'no-store');
       return res.status(502).json({ error: 'Upstream failed', detail: e.message });
     }
+
   }
 
   // ---------- 查询参数（前端目前未使用，保留；做长度与取值限制） ----------

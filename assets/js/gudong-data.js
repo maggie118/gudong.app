@@ -37,7 +37,17 @@
     '书画': 'paintings', 'paintings': 'paintings', 'painting': 'paintings', 'calligraphy': 'paintings',
     '杂项': 'misc', 'misc': 'misc', 'miscellaneous': 'misc', 'other': 'misc'
   };
-  function catKey(c) { return CAT_ALIASES[String(c == null ? '' : c).trim().toLowerCase()] || 'misc'; }
+  /* 分类识别：先精确匹配标准值，再按关键词匹配（「陶瓷」「青花瓷」「玉石」「铜钱」等也能落到正确的品类页），
+     都不认识才归入杂项。这样 Airtable 的分类选项写法稍有出入，藏品也不会跑到别的品类页。 */
+  function catKey(c) {
+    var v = String(c == null ? '' : c).trim().toLowerCase();
+    if (CAT_ALIASES[v]) return CAT_ALIASES[v];
+    if (/瓷|porcelain|ceramic/.test(v)) return 'porcelain';
+    if (/玉|jade/.test(v)) return 'jade';
+    if (/币|钱|coin|numismat/.test(v)) return 'coins';
+    if (/画|书法|painting|calligraph/.test(v)) return 'paintings';
+    return 'misc';
+  }
 
   /* ---------- 公共样式（骨架屏 / 空状态 / 诊断面板），只注入一次 ---------- */
   function injectCss() {
@@ -295,8 +305,8 @@
        list  ：列表容器选择器（card 风格 = #itemList；tag 风格 = '#items .goods-list'）
        style ：'card' 图文卡片（标题/年代/价格/查看详情）；'tag' 全图卡片 + 右下价格标签
        picks ：可选，「编辑精选」区块选择器（区块内需有 .picks-grid）
-     行为：接口成功 → 用 Airtable 数据替换静态演示内容（该品类没有藏品时显示空状态，精选区隐藏）；
-           全部失败 → 恢复页面原有静态内容。 */
+     行为：接口成功 → 用 Airtable 数据渲染（该品类没有藏品时显示空状态，精选区隐藏）；
+           接口与快照都失败 → 显示「藏品加载失败」提示，精选区隐藏。页面 HTML 里不再放静态演示卡片。 */
   function mountCategory(o) {
     injectCss();
     var listEl = document.querySelector(o.list);
@@ -304,7 +314,6 @@
     diag.page = 'categories/' + catKey(o.cat);
     var picksSec = o.picks ? document.querySelector(o.picks) : null;
     var picksGrid = picksSec ? picksSec.querySelector('.picks-grid') : null;
-    var origList = listEl.innerHTML, origPicks = picksGrid ? picksGrid.innerHTML : '';
     var keep = [].slice.call(listEl.querySelectorAll('#noResult,#noResultEn'));   // 搜索「无结果」提示节点，渲染后放回去
     var tag = o.style === 'tag';
 
@@ -352,10 +361,20 @@
         picksGrid.innerHTML = picks.map(pickHtml).join('');
         picksSec.hidden = !picks.length;
       }
-      renderDebug('本页品类「' + o.cat + '」：藏品 ' + items.length + ' · 编辑精选 ' + picks.length);
-    }).catch(function () {                      // 接口与快照都不可用：恢复原静态内容
-      listEl.removeAttribute('aria-busy'); listEl.innerHTML = origList;
-      if (picksGrid) { picksGrid.removeAttribute('aria-busy'); picksGrid.innerHTML = origPicks; }
+      // 调试面板：本页数量 + 全站分类分布 + 未被标准分类精确匹配的分类值（帮助判断「为什么某件藏品没出现在这个品类页」）
+      var LABEL = { porcelain: '瓷器', jade: '玉器', coins: '钱币', paintings: '书画', misc: '杂项' }, dist = {}, odd = {};
+      dedupe([].concat(r.data.newListing, r.data.todayFinds, r.data.editorPicks)).forEach(function (f) {
+        var k = catKey(f.category); dist[LABEL[k]] = (dist[LABEL[k]] || 0) + 1;
+        if (!CAT_ALIASES[String(f.category == null ? '' : f.category).trim().toLowerCase()]) odd['「' + (f.category || '空') + '」→' + LABEL[k]] = 1;
+      });
+      renderDebug('本页品类「' + o.cat + '」：藏品 ' + items.length + ' · 编辑精选 ' + picks.length + '\n' +
+        '全站分类分布：' + (Object.keys(dist).map(function (k) { return k + ' ' + dist[k]; }).join(' · ') || '无') +
+        (Object.keys(odd).length ? '\n非标准分类值（已按关键词归类）：' + Object.keys(odd).join('、') : ''));
+    }).catch(function () {                      // 接口与快照都不可用：显示加载失败提示
+      listEl.removeAttribute('aria-busy'); listEl.innerHTML = errorHtml();
+      keep.forEach(function (n) { listEl.appendChild(n); });
+      if (picksGrid) { picksGrid.removeAttribute('aria-busy'); picksGrid.innerHTML = ''; }
+      if (picksSec) picksSec.hidden = true;
     });
   }
 

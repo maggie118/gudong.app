@@ -758,20 +758,18 @@
             <span class="zh">古董集</span><span class="en">GUDONG</span>
         </div>
                 <nav class="sidebar-nav">
-            <a href="../../../index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">首页</span><span class="en">Home</span></a>
-            <a href="../../../index.html#today-finds" class="sidebar-link" onclick="closeSidebar()"><span class="zh">今日发现</span><span class="en">Today's Finds</span></a>
-            <a href="../../../index.html#new-listings" class="sidebar-link" onclick="closeSidebar()"><span class="zh">最新藏品</span><span class="en">New Listings</span></a>
-
-            <div class="sidebar-group-title zh">藏品库</div><div class="sidebar-group-title en">Collection</div>
-            <a href="../../../categories/porcelain.html" class="sidebar-sub active" onclick="closeSidebar()"><span class="zh">· 瓷器</span><span class="en">· Porcelain</span></a>
-            <a href="../../../categories/jade.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 玉器</span><span class="en">· Jade</span></a>
-            <a href="../../../categories/coins.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 钱币</span><span class="en">· Coins</span></a>
-            <a href="../../../categories/paintings.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 书画</span><span class="en">· Paintings &amp; Calligraphy</span></a>
-            <a href="../../../categories/misc.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 杂项</span><span class="en">· Miscellaneous</span></a>
-
-            <a href="../../../sellers/index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">藏馆</span><span class="en">Collection</span></a>
-            <a href="../../../pricing.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">服务价格</span><span class="en">Pricing</span></a>
-            <a href="../../../about.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">关于Gudong</span><span class="en">About</span></a>
+            <a href="../index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">首页</span><span class="en">Home</span></a>
+            <a href="../index.html#today-finds" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 今日发现</span><span class="en">· Today's Finds</span></a>
+            <a href="../index.html#new-listings" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 最新藏品</span><span class="en">· New Listings</span></a>
+            <a href="../collection.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">藏品库</span><span class="en">Collection</span></a>
+            <a href="../categories/porcelain.html" class="sidebar-sub active" onclick="closeSidebar()"><span class="zh">· 瓷器</span><span class="en">· Porcelain</span></a>
+            <a href="../categories/jade.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 玉器</span><span class="en">· Jade</span></a>
+            <a href="../categories/coins.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 钱币</span><span class="en">· Coins</span></a>
+            <a href="../categories/paintings.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 书画</span><span class="en">· Paintings &amp; Calligraphy</span></a>
+            <a href="../categories/misc.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 杂项</span><span class="en">· Miscellaneous</span></a>
+            <a href="../sellers/index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">藏家主页</span><span class="en">Sellers</span></a>
+            <a href="../pricing.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">刊登藏品</span><span class="en">List an Item</span></a>
+            <a href="../about.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">联系我们</span><span class="en">Contact</span></a>
             <button type="button" class="sidebar-lang-btn" onclick="toggleLang()" aria-label="Switch language"><span class="zh">🌐 English</span><span class="en">🌐 中文</span></button>
         </nav>
     </aside>
@@ -798,50 +796,6 @@
                 </div>
                 <div id="searchResultTip" class="search-result-tip" role="status" aria-live="polite" style="display:none;">
                     <span class="zh"></span><span class="en"></span>
-                </div>
-            </div>
-        </section>
-
-        <!-- Filter bar -->
-        <section id="filter">
-            <div class="filter-bar">
-                <div class="filter-row">
-                    <div class="filter-label zh">年代</div>
-                    <div class="filter-label en">Era</div>
-                    <div class="filter-chips">
-                        <a href="#list" class="chip"><span class="zh">唐</span><span class="en">Tang</span></a>
-                        <a href="#list" class="chip"><span class="zh">宋</span><span class="en">Song</span></a>
-                        <a href="#list" class="chip"><span class="zh">元</span><span class="en">Yuan</span></a>
-                        <a href="#list" class="chip"><span class="zh">明</span><span class="en">Ming</span></a>
-                        <a href="#list" class="chip"><span class="zh">清</span><span class="en">Qing</span></a>
-                        <a href="#list" class="chip"><span class="zh">近现代</span><span class="en">Modern</span></a>
-                    </div>
-                </div>
-                <div class="filter-row">
-                    <div class="filter-label zh">窑口</div>
-                    <div class="filter-label en">Kiln</div>
-                    <div class="filter-chips">
-                        <a href="#list" class="chip"><span class="zh">汝窑</span><span class="en">Ru</span></a>
-                        <a href="#list" class="chip"><span class="zh">官窑</span><span class="en">Guan</span></a>
-                        <a href="#list" class="chip"><span class="zh">哥窑</span><span class="en">Ge</span></a>
-                        <a href="#list" class="chip"><span class="zh">定窑</span><span class="en">Ding</span></a>
-                        <a href="#list" class="chip"><span class="zh">钧窑</span><span class="en">Jun</span></a>
-                        <a href="#list" class="chip"><span class="zh">景德镇</span><span class="en">Jingdezhen</span></a>
-                        <a href="#list" class="chip"><span class="zh">其他</span><span class="en">Other</span></a>
-                    </div>
-                </div>
-                <div class="filter-row">
-                    <div class="filter-label zh">器型</div>
-                    <div class="filter-label en">Form</div>
-                    <div class="filter-chips">
-                        <a href="#list" class="chip"><span class="zh">瓶</span><span class="en">Vase</span></a>
-                        <a href="#list" class="chip"><span class="zh">碗</span><span class="en">Bowl</span></a>
-                        <a href="#list" class="chip"><span class="zh">盘</span><span class="en">Plate</span></a>
-                        <a href="#list" class="chip"><span class="zh">壶</span><span class="en">Ewer</span></a>
-                        <a href="#list" class="chip"><span class="zh">罐</span><span class="en">Jar</span></a>
-                        <a href="#list" class="chip"><span class="zh">文房</span><span class="en">Scholar</span></a>
-                        <a href="#list" class="chip"><span class="zh">摆件</span><span class="en">Figure</span></a>
-                    </div>
                 </div>
             </div>
         </section>
@@ -879,15 +833,14 @@
 
     <footer>
         <div class="footer-nav">
-            <a href="../../../pricing.html#buyer-services" class="zh">买家指南</a><a href="../../../pricing.html#buyer-services" class="en">Buyer Guide</a>
-            <a href="../../../about.html#location" class="zh">联系我们</a><a href="../../../about.html#location" class="en">Contact</a>
-            <a href="../../../privacy.html" class="zh">隐私政策</a><a href="../../../privacy.html" class="en">Privacy</a>
-            <a href="../../../terms.html" class="zh">用户条款</a><a href="../../../terms.html" class="en">Terms</a>
+            <a href="../pricing.html#buyer-services" class="zh">委托找货</a><a href="../pricing.html#buyer-services" class="en">Sourcing</a>
+            <a href="../privacy.html" class="zh">隐私政策</a><a href="../privacy.html" class="en">Privacy</a>
+            <a href="../terms.html" class="zh">用户条款</a><a href="../terms.html" class="en">Terms</a>
         </div>
         <p class="footer-disclaimer zh">gudong.app 是信息发现平台，而非交易平台。</p>
         <p class="footer-disclaimer en">gudong.app is an information and discovery platform for antiques and collectibles.</p>
-        <p class="zh">© 2026 古董集 · gudong.app</p>
-        <p class="en">© 2026 Gudong · gudong.app</p>
+        <p class="zh" style="margin-bottom:0;">© 2026 古董集 · gudong.app <a href="javascript:void(0)" class="app-install-btn" onclick="event.preventDefault();"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20h14v-2H5v2zM19 9h-4V3H9v6H5l7 7 7-7z"/></svg>安装古董.app</a></p>
+        <p class="en" style="margin-bottom:0;">© 2026 Gudong · gudong.app <a href="javascript:void(0)" class="app-install-btn" onclick="event.preventDefault();"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20h14v-2H5v2zM19 9h-4V3H9v6H5l7 7 7-7z"/></svg>Install gudong.app</a></p>
     </footer>
 
     <script>
@@ -940,5 +893,73 @@
             var __l = document.querySelector('#itemList'); if (__l) __l.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:2.4rem 1rem;color:#716B63;line-height:1.8"><span class="zh">藏品加载失败，请刷新页面重试</span><span class="en">Failed to load listings — please refresh</span></div>';
         }
     </script>
+<!-- 2026-09-23：PWA 安装引导弹层（iOS 图文步骤 / 桌面提示），全站统一 -->
+<style>
+.gd-install-modal { position: fixed; inset: 0; z-index: 9999; display: none; align-items: center; justify-content: center; background: rgba(0,0,0,.45); padding: 1.2rem; }
+.gd-install-modal.open { display: flex; }
+.gd-install-card { background: #fff; border-radius: 14px; max-width: 350px; width: 100%; padding: 1.6rem 1.4rem 1.2rem; text-align: center; box-shadow: 0 18px 50px rgba(0,0,0,.25); position: relative; }
+.gd-install-close { position: absolute; top: .5rem; right: .7rem; border: 0; background: none; font-size: 1.4rem; color: #999; cursor: pointer; padding: .3rem; line-height: 1; }
+.gd-install-title { font-size: 1.08rem; font-weight: 700; color: #3d2b1f; margin: .2rem 0 1rem; }
+.gd-install-steps { text-align: left; margin: 0 auto 1rem; max-width: 290px; }
+.gd-install-step { display: flex; align-items: flex-start; gap: .6rem; padding: .5rem 0; color: #5a4636; font-size: .9rem; line-height: 1.5; }
+.gd-install-step .n { flex-shrink: 0; width: 22px; height: 22px; border-radius: 50%; background: #f0e4d8; color: #8A5A3B; font-weight: 700; font-size: .78rem; display: flex; align-items: center; justify-content: center; margin-top: .1rem; }
+.gd-install-step svg { flex-shrink: 0; width: 22px; height: 22px; fill: #007AFF; margin-top: .1rem; }
+.gd-install-note { font-size: .78rem; color: #9a8d80; margin-top: .5rem; line-height: 1.5; }
+.gd-install-modal [data-lang="en"] .zh, body[data-lang="en"] .gd-install-modal .zh { display: none; }
+.gd-install-modal [data-lang="zh"] .en, body[data-lang="zh"] .gd-install-modal .en { display: none; }
+.app-install-btn { display: inline-flex; align-items: center; gap: .3rem; margin-left: .6rem; padding: .3rem .7rem; border: 1px solid #e3d9cf; border-radius: 999px; color: #7a6a5c; font-size: .78rem; text-decoration: none; vertical-align: middle; transition: .2s; }
+.app-install-btn:hover { border-color: #8A5A3B; color: #8A5A3B; background: #f0e4d8; }
+.app-install-btn svg { width: 12px; height: 12px; flex-shrink: 0; fill: currentColor; }
+</style>
+<div class="gd-install-modal" id="gdInstallModal" role="dialog" aria-modal="true" aria-label="Install guide">
+    <div class="gd-install-card">
+        <button type="button" class="gd-install-close" onclick="gdCloseInstall()" aria-label="close">×</button>
+        <div class="gd-install-title zh">安装 古董.app 到主屏幕</div>
+        <div class="gd-install-title en">Add Gudong.app to Home Screen</div>
+        <div class="gd-install-steps" id="gdStepsIos">
+            <div class="gd-install-step"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18.2c-4.5 0-8.2-3.7-8.2-8.2S7.5 3.8 12 3.8s8.2 3.7 8.2 8.2-3.7 8.2-8.2 8.2zM11 7l-4 4h3v6h2v-6h3l-4-4z"/></svg><span class="zh">点击 Safari 底部工具栏的「分享」按钮</span><span class="en">Tap the Share button in Safari's bottom toolbar</span></div>
+            <div class="gd-install-step"><span class="n">2</span><span class="zh">在分享菜单中选择「添加到主屏幕」</span><span class="en">Choose "Add to Home Screen" in the share menu</span></div>
+            <div class="gd-install-step"><span class="n">3</span><span class="zh">点击右上角「添加」，桌面即出现古董.app 图标</span><span class="en">Tap "Add" — the Gudong.app icon appears on your Home Screen</span></div>
+        </div>
+        <div class="gd-install-steps" id="gdStepsOther" style="display:none;">
+            <div class="gd-install-step"><span class="n">1</span><span class="zh">点击浏览器地址栏右侧的「安装」图标</span><span class="en">Click the install icon at the right of the address bar</span></div>
+            <div class="gd-install-step"><span class="n">2</span><span class="zh">或通过浏览器菜单 →「安装古董集」</span><span class="en">Or open the browser menu → "Install Gudong"</span></div>
+        </div>
+        <div class="gd-install-note zh">安装后可像原生 App 一样全屏使用，无需应用商店。</div>
+        <div class="gd-install-note en">Runs full-screen like a native app. No app store needed.</div>
+    </div>
+</div>
+<script>
+(function () {
+    var modal = document.getElementById('gdInstallModal');
+    if (!modal) return;
+    window.gdCloseInstall = function () { modal.classList.remove('open'); };
+    modal.addEventListener('click', function (e) { if (e.target === modal) gdCloseInstall(); });
+
+    var deferredPrompt = null;
+    window.addEventListener('beforeinstallprompt', function (e) { e.preventDefault(); deferredPrompt = e; });
+    window.addEventListener('appinstalled', function () {
+        document.querySelectorAll('.app-install-btn').forEach(function (b) { b.style.display = 'none'; });
+    });
+
+    document.addEventListener('click', function (e) {
+        var btn = e.target && e.target.closest ? e.target.closest('.app-install-btn') : null;
+        if (!btn) return;
+        e.preventDefault();
+        if (deferredPrompt) {
+            deferredPrompt.prompt();
+            deferredPrompt.userChoice.then(function () { deferredPrompt = null; }).catch(function () {});
+            return;
+        }
+        // 无原生安装提示（iOS Safari / 未触发的浏览器）→ 显示图文引导
+        var ua = navigator.userAgent;
+        var isIOS = /iPad|iPhone|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+        document.getElementById('gdStepsIos').style.display = isIOS ? '' : 'none';
+        document.getElementById('gdStepsOther').style.display = isIOS ? 'none' : '';
+        modal.classList.add('open');
+    });
+})();
+</script>
+
 </body>
 </html>

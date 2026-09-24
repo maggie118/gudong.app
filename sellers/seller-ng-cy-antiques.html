@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="zh-SG">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>博古斋 | Ng CY Antiques | Gudong 私家藏馆</title>
+    <meta name="description" content="博古斋私家藏馆。 Ng CY Antiques Private Museum.">
+    <link rel="canonical" href="https://gudong.app/sellers/seller-ng-cy-antiques.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="古董集 Gudong">
+    <meta property="og:title" content="博古斋 | Ng CY Antiques | Gudong 私家藏馆">
+    <meta property="og:description" content="Yak BC 私家藏馆。">
+    <meta property="og:url" content="https://gudong.app/sellers/seller-ng-cy-antiques.html">
+    <meta property="og:image" content="https://gudong.app/assets/icons/icon-512.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+    <link rel="manifest" href="../manifest.json">
+    <meta name="theme-color" content="#8A5A3B">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <style>
+:root {
+    --color-bg: #F5F2EC;
+    --color-surface: #FFFFFF;
+    --color-white: #FFFFFF;
+    --color-border: #E4DED5;
+    --color-primary: #8A5A3B;
+    --color-primary-dark: #68432D;
+    --color-primary-light: #F1E8DF;
+    --color-text: #25221E;
+    --color-text-secondary: #716B63;
+    --color-text-muted: #A49D94;
+    --color-gold: #B08A45;
+    --color-gold-soft: rgba(176,138,69,.10);
+    --color-bronze-muted: #9C8558;
+    --color-success: #526657;
+    --color-danger: #9A554B;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif; }
+html { scroll-behavior: smooth; }
+body { background: var(--color-bg); color: var(--color-text); line-height: 1.65; }
+
+header {
+    background: rgba(255,255,255,.96); backdrop-filter: blur(6px);
+    color: var(--color-text); padding: 0 5%; height: 68px;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 1.5rem; border-bottom: 1px solid var(--color-border);
+    position: sticky; top: 0; z-index: 50;
+}
+.brand { display: flex; flex-direction: column; justify-content: center; line-height: 1; flex-shrink: 0; }
+.brand h1 { font-size: 1.4rem; font-weight: 700; letter-spacing: .02em; line-height: 1.15; }
+.brand p { color: var(--color-bronze-muted); margin-top: .2rem; font-size: .62rem; letter-spacing: .2em; text-transform: uppercase; }
+.header-right { display: flex; align-items: center; gap: .8rem; flex-shrink: 0; }
+.btn-publish {
+    display: inline-flex; align-items: center; gap: .35rem;
+    background: var(--color-primary); color: #fff;
+    padding: .5rem 1.1rem; border-radius: 8px;
+    font-size: .85rem; font-weight: 600; text-decoration: none;
+    white-space: nowrap; transition: .2s;
+}
+.btn-publish:hover { background: var(--color-primary-dark); }
+.lang-btn {
+    border: 1px solid var(--color-border); background: transparent;
+    color: var(--color-text-secondary); padding: .3rem .68rem;
+    border-radius: 6px; cursor: pointer; font-size: .75rem;
+    letter-spacing: .04em; transition: .2s;
+}
+.lang-btn:hover { border-color: var(--color-primary); color: var(--color-primary); background: var(--color-primary-light); }
+.menu-toggle {
+    width: 38px; height: 38px; border: 1px solid var(--color-border);
+    background: transparent; border-radius: 8px; font-size: 1.05rem;
+    color: var(--color-text); cursor: pointer; display: flex;
+    align-items: center; justify-content: center; flex-shrink: 0; transition: .2s;
+}
+.menu-toggle:hover { border-color: var(--color-primary); color: var(--color-primary); background: var(--color-primary-light); }
+
+.sidebar-overlay { position: fixed; inset: 0; background: rgba(20,17,14,.4); opacity: 0; pointer-events: none; transition: opacity .25s ease; z-index: 90; }
+.sidebar-overlay.show { opacity: 1; pointer-events: auto; }
+.sidebar {
+    position: fixed; top: 0; left: 0; height: 100vh; width: 264px; max-width: 78vw;
+    background: var(--color-white); box-shadow: 4px 0 24px rgba(37,34,30,.18);
+    transform: translateX(-100%); transition: transform .3s ease; z-index: 95;
+    overflow-y: auto; padding-bottom: 2rem;
+}
+.sidebar.open { transform: translateX(0); }
+.sidebar-toggle-inner {
+    display: block; width: 100%; padding: .9rem 0; background: transparent;
+    border: none; border-bottom: 1px solid var(--color-border); font-size: 1.15rem;
+    color: var(--color-text-secondary); cursor: pointer; text-align: center;
+}
+.sidebar-toggle-inner:hover { color: var(--color-primary); }
+.sidebar-brand {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: .1rem; padding: 1.1rem 0; font-weight: 700; color: var(--color-text);
+    border-bottom: 1px solid var(--color-border);
+}
+.sidebar-brand .zh { font-size: 1.05rem; }
+.sidebar-brand .en { font-size: 1.05rem; letter-spacing: .04em; }
+.sidebar-nav { display: flex; flex-direction: column; padding: .3rem 0; }
+.sidebar-link { padding: .85rem 1.4rem; color: var(--color-text); text-decoration: none; font-size: .95rem; transition: .2s; }
+.sidebar-link:hover { background: var(--color-primary-light); color: var(--color-primary); }
+.sidebar-link.active { background: var(--color-primary-light); color: var(--color-primary); font-weight: 600; }
+.sidebar-group-title { padding: .85rem 1.4rem .3rem; color: var(--color-text); font-size: .95rem; font-weight: 600; }
+.sidebar-sub { display: block; padding: .55rem 1.4rem .55rem 2.2rem; color: var(--color-text-secondary); text-decoration: none; font-size: .88rem; transition: .2s; }
+.sidebar-sub:hover { color: var(--color-primary); background: var(--color-primary-light); }
+.sidebar-lang-btn {
+    display: flex; align-items: center; justify-content: center; gap: .4rem;
+    width: calc(100% - 2.8rem); margin: 1rem 1.4rem .8rem;
+    padding: .62rem .9rem; border: 1px solid var(--color-border);
+    border-radius: 8px; background: var(--color-white);
+    color: var(--color-text-secondary); font-family: inherit;
+    font-size: .9rem; font-weight: 600; cursor: pointer; transition: .2s;
+}
+.sidebar-lang-btn:hover { border-color: var(--color-primary); color: var(--color-primary); background: var(--color-primary-light); }
+
+.container { max-width: 1200px; margin: 0 auto; padding: 2.4rem 5% 4rem; min-height: 70vh; }
+.breadcrumb { font-size: .8rem; color: var(--color-text-muted); margin-bottom: 1.2rem; }
+.breadcrumb a { color: var(--color-text-secondary); text-decoration: none; }
+.breadcrumb a:hover { color: var(--color-primary); }
+
+/* 博物馆头部 */
+.museum-head {
+    position: relative;
+    background: linear-gradient(135deg, #8A5A3B 0%, #68432D 100%);
+    border-radius: 16px;
+    padding: 2.4rem 2rem 2rem;
+    color: #fff;
+    margin-bottom: 1.5rem;
+    overflow: hidden;
+}
+.museum-head::before {
+    content: ""; position: absolute; inset: 10px;
+    border: 1px solid rgba(255,255,255,.18); border-radius: 10px;
+    pointer-events: none;
+}
+.museum-head > * { position: relative; z-index: 1; }
+.museum-label {
+    display: inline-block; font-size: .62rem; font-weight: 700;
+    letter-spacing: .28em; text-transform: uppercase;
+    color: rgba(255,255,255,.75); margin-bottom: .6rem;
+}
+.museum-name {
+    font-size: 1.75rem; font-weight: 800; letter-spacing: .04em;
+    margin-bottom: .5rem;
+    display: flex; align-items: center; gap: .6rem; flex-wrap: wrap;
+}
+.museum-meta {
+    font-size: .82rem; color: rgba(255,255,255,.75);
+    display: flex; gap: 1.2rem; flex-wrap: wrap;
+}
+.museum-meta b { color: #fff; font-weight: 600; }
+
+/* 创始卖家徽章 */
+.founder-badge {
+    display: inline-flex; align-items: center; gap: .28rem;
+    background: linear-gradient(135deg, #B08A45 0%, #D4AF6A 50%, #B08A45 100%);
+    color: #FFFFFF; font-size: .62rem; font-weight: 700;
+    letter-spacing: .08em;
+    padding: .22rem .5rem .22rem .38rem; border-radius: 20px;
+    white-space: nowrap; vertical-align: middle;
+    box-shadow: 0 1px 3px rgba(0,0,0,.25), inset 0 1px 0 rgba(255,255,255,.3);
+}
+.founder-badge svg { width: 11px; height: 11px; flex-shrink: 0; display: block; }
+.founder-badge .badge-num { font-weight: 800; font-size: .7rem; letter-spacing: 0; }
+
+/* 简介 + 联系方式 */
+.museum-info {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 14px;
+    padding: 1.5rem 1.6rem;
+    margin-bottom: 1.5rem;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 1.5rem;
+    align-items: start;
+}
+.museum-bio { font-size: .88rem; color: var(--color-text-secondary); line-height: 1.75; }
+.museum-bio h3 { font-size: .92rem; color: var(--color-text); margin-bottom: .5rem; letter-spacing: .04em; }
+.museum-contact { display: flex; flex-direction: column; gap: .5rem; min-width: 160px; }
+.contact-btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: .4rem;
+    padding: .6rem 1.1rem; border-radius: 8px;
+    font-size: .82rem; font-weight: 600; text-decoration: none;
+    transition: .2s; white-space: nowrap;
+    cursor: pointer;
+}
+.contact-btn.primary { background: var(--color-primary); color: #fff; border: none; }
+.contact-btn.primary:hover { background: var(--color-primary-dark); }
+.contact-btn.outline { background: transparent; color: var(--color-primary); border: 1px solid var(--color-primary); }
+.contact-btn.outline:hover { background: var(--color-primary-light); }
+
+/* 筛选栏 */
+.filter-bar {
+    display: flex; flex-wrap: wrap; gap: .5rem;
+    margin-bottom: 1.5rem;
+    align-items: center;
+}
+.filter-bar .label { font-size: .78rem; color: var(--color-text-muted); letter-spacing: .06em; margin-right: .3rem; }
+.filter-chip {
+    padding: .38rem .9rem; border-radius: 20px;
+    font-size: .78rem; font-weight: 600;
+    border: 1px solid var(--color-border);
+    background: var(--color-surface);
+    color: var(--color-text-secondary);
+    cursor: pointer; transition: .2s;
+    text-decoration: none;
+}
+.filter-chip:hover { border-color: var(--color-primary); color: var(--color-primary); }
+.filter-chip.active { background: var(--color-primary); color: #fff; border-color: var(--color-primary); }
+
+.search-bar {
+    flex: 1; min-width: 200px; max-width: 320px;
+    margin-left: auto;
+    position: relative;
+}
+.search-bar input {
+    width: 100%; height: 38px;
+    padding: 0 2.4rem 0 .9rem;
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    font-size: .82rem;
+    background: var(--color-surface);
+    transition: .2s;
+}
+.search-bar input:focus {
+    outline: none;
+    border-color: var(--color-gold);
+    box-shadow: 0 0 0 3px var(--color-gold-soft);
+}
+.search-bar svg {
+    position: absolute; right: .8rem; top: 50%; transform: translateY(-50%);
+    width: 14px; height: 14px; color: var(--color-text-muted);
+    pointer-events: none;
+}
+
+/* 藏品网格 */
+.goods-list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: .9rem;
+    margin-top: .5rem;
+}
+.item-card {
+    position: relative; display: block;
+    border-radius: 8px; overflow: hidden;
+    background: var(--color-primary-light);
+    text-decoration: none; transition: .25s;
+    min-height: 260px;
+}
+.item-card:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(37,34,30,.14); }
+.item-card img { width: 100%; height: 100%; object-fit: cover; display: block; max-height: 220px; }
+.item-card h3 { padding: .45rem .55rem 0; font-size: .9rem; font-weight: 600; color: var(--color-text); line-height: 1.3; }
+.item-card .text-en { padding: .45rem .55rem 0; font-size: .78rem; color: var(--color-text-secondary); margin-top: .12rem; }
+.item-card .price-cn { padding: .3rem .55rem .55rem; font-size: .82rem; color: var(--color-primary); font-weight: 600; }
+.item-card .price-en { padding: 0 .55rem .55rem; font-size: .78rem; color: var(--color-text-muted); }
+.item-card .price-tag { position: absolute; left: .55rem; bottom: .55rem; background: rgba(20,17,14,.62); color: #fff; padding: .32rem .6rem; border-radius: 4px; font-size: .8rem; font-weight: 700; letter-spacing: .01em; }
+.item-card .price-tag .neg { font-weight: 400; opacity: .85; font-size: .72rem; margin-left: .2rem; }
+
+.empty-state { text-align: center; padding: 3.4rem 1rem; color: var(--color-text-muted); border: 1px dashed var(--color-border); border-radius: 8px; grid-column: 1 / -1; }
+
+.disclaimer-box {
+    margin-top: 1.6rem; padding: .9rem 1.1rem;
+    background: var(--color-primary-light); border-radius: 8px;
+    font-size: .78rem; color: var(--color-text-secondary); line-height: 1.6;
+}
+.disclaimer-box strong { color: var(--color-text); }
+
+footer {
+    text-align: center; padding: 2.2rem 5% 1.8rem;
+    background: var(--color-white); color: var(--color-text-secondary);
+    margin-top: 1rem; font-size: .78rem;
+    border-top: 1px solid var(--color-border);
+}
+.footer-nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 1.3rem; margin-bottom: 1.2rem; }
+.footer-nav a { color: var(--color-text-secondary); text-decoration: none; font-size: .82rem; }
+.footer-nav a:hover { color: var(--color-primary); }
+.footer-disclaimer { max-width: 620px; margin: 0 auto 1.1rem; font-size: .74rem; line-height: 1.65; color: var(--color-text-muted); }
+
+[data-lang="en"] .zh { display: none; }
+[data-lang="zh"] .en { display: none; }
+
+@media (max-width: 900px) {
+    .goods-list { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 820px) {
+    header { height: 62px; gap: .6rem; }
+    .btn-publish { padding: .45rem .85rem; font-size: .8rem; }
+    .container { padding-top: 2rem; }
+}
+@media (max-width: 700px) {
+    .museum-head { padding: 1.8rem 1.4rem 1.5rem; }
+    .museum-name { font-size: 1.35rem; }
+    .museum-info { grid-template-columns: 1fr; gap: 1rem; }
+    .museum-contact { flex-direction: row; flex-wrap: wrap; }
+    .search-bar { max-width: 100%; margin-left: 0; width: 100%; }
+}
+@media (max-width: 560px) {
+    .brand h1 { font-size: 1.15rem; }
+    .container { padding: 1.5rem 4.5% 3rem; }
+    .goods-list { grid-template-columns: repeat(2, 1fr); gap: .6rem; }
+    .item-card .price-tag { font-size: .68rem; padding: .22rem .45rem; }
+}
+    </style>
+    <link rel="apple-touch-icon" href="/assets/icons/icon-192.png">
+</head>
+<body data-lang="zh">
+    <header>
+        <div style="display:flex; align-items:center; gap:.9rem;">
+            <button class="menu-toggle" onclick="openSidebar()" aria-label="menu">☰</button>
+            <a href="../index.html" class="brand" style="text-decoration:none;color:inherit;">
+                <h1 class="zh">古董集</h1>
+                <h1 class="en">GUDONG</h1>
+                <p class="zh">GUDONG</p>
+            </a>
+        </div>
+        <div class="header-right">
+            <a href="../pricing.html#seller-services" class="btn-publish">
+                <span class="zh">刊登藏品</span><span class="en">List an Item</span>
+            </a>
+            <button class="lang-btn" onclick="toggleLang()">EN</button>
+        </div>
+    </header>
+
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+    <aside class="sidebar" id="sidebar">
+        <button class="sidebar-toggle-inner" onclick="closeSidebar()" aria-label="close menu">☰</button>
+        <div class="sidebar-brand">
+            <span class="zh">古董集</span><span class="en">GUDONG</span>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="../index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">首页</span><span class="en">Home</span></a>
+            <a href="../index.html#today-finds" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 今日发现</span><span class="en">· Today's Finds</span></a>
+            <a href="../index.html#new-listings" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 最新藏品</span><span class="en">· New Listings</span></a>
+            <a href="../collection.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">藏品库</span><span class="en">Collection</span></a>
+            <a href="../categories/porcelain.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 瓷器</span><span class="en">· Porcelain</span></a>
+            <a href="../categories/jade.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 玉器</span><span class="en">· Jade</span></a>
+            <a href="../categories/coins.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 钱币</span><span class="en">· Coins</span></a>
+            <a href="../categories/paintings.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 书画</span><span class="en">· Paintings &amp; Calligraphy</span></a>
+            <a href="../categories/misc.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 杂项</span><span class="en">· Miscellaneous</span></a>
+            <a href="../sellers/index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">藏家主页</span><span class="en">Collector Gallery</span></a>
+            <a href="../pricing.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">刊登藏品</span><span class="en">List an Item</span></a>
+            <a href="../about.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">联系我们</span><span class="en">Contact</span></a>
+            <button type="button" class="sidebar-lang-btn" onclick="toggleLang()" aria-label="Switch language"><span class="zh">🌐 English</span><span class="en">🌐 中文</span></button>
+        </nav>
+    </aside>
+
+    <main class="container">
+        <div class="breadcrumb">
+            <a href="../index.html" class="zh">首页</a><a href="../index.html" class="en">Home</a>
+            <span class="zh"> / </span><span class="en"> / </span>
+            <a href="index.html" class="zh">私家藏馆</a><a href="index.html" class="en">Private Gallery</a>
+            <span class="zh"> / 博古斋</span><span class="en"> / 博古斋</span>
+        </div>
+
+        <!-- 藏馆头部 -->
+        <section class="museum-head">
+            <div class="museum-label"><span class="zh">私家藏馆</span><span class="en">Private Museum</span></div>
+            <div class="museum-name">
+                <span class="zh" id="sellerNameZh">博古斋</span>
+                <span class="en" id="sellerNameEn">Ng CY Antiques</span>
+                <span class="founder-badge" id="founderBadge" title="创始卖家 · 2026（限量 88 席）" aria-label="Founder-Dealer 2026">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path d="M3 8L6 14L9 7L12 13L15 7L18 14L21 8V17C21 17.55 20.55 18 20 18H4C3.45 18 3 17.55 3 17V8Z" fill="currentColor" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/>
+                        <circle cx="3" cy="8" r="1.4" fill="currentColor"/>
+                        <circle cx="12" cy="6" r="1.4" fill="currentColor"/>
+                        <circle cx="21" cy="8" r="1.4" fill="currentColor"/>
+                    </svg>
+                    <span class="badge-num">88</span>
+                </span>
+            </div>
+            <div class="museum-meta">
+                <span><span class="zh">馆主编号</span><span class="en">Seller ID</span>：<b id="sellerId">Ng-CY</b></span>
+                <span><span class="zh">在售</span><span class="en">Active</span>：<b id="itemCount">—</b> <span class="zh">件</span><span class="en">items</span></span>
+                <span><span class="zh">入驻</span><span class="en">Joined</span>：<b id="joinedYear">2026</b></span>
+            </div>
+        </section>
+
+        <!-- 简介 + 联系方式 -->
+        <section class="museum-info">
+            <div class="museum-bio">
+                <h3 class="zh">馆主简介</h3><h3 class="en">About the Collector</h3>
+                <p class="zh" id="bioZh">古董收藏爱好者，欢迎交流。</p>
+                <p class="en" id="bioEn">Antique collector. Welcome to connect.</p>
+            </div>
+            <div class="museum-contact">
+                <a href="#" class="contact-btn primary" id="contactWhatsapp" hidden>
+                    <span class="zh">WhatsApp</span><span class="en">WhatsApp</span>
+                </a>
+                <a href="#" class="contact-btn outline" id="contactEmail" hidden>
+                    <span class="zh">邮件联系</span><span class="en">Email</span>
+                </a>
+                <button type="button" class="contact-btn outline" onclick="shareMuseum()">
+                    <span class="zh">分享主页</span><span class="en">Share</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- 筛选栏 -->
+        <div class="filter-bar">
+            <span class="label zh">类别</span><span class="label en">Category</span>
+            <a href="#" class="filter-chip active" data-cat="all" onclick="setCat(event,'all')"><span class="zh">全部</span><span class="en">All</span></a>
+            <a href="#" class="filter-chip" data-cat="porcelain" onclick="setCat(event,'porcelain')"><span class="zh">瓷器</span><span class="en">Porcelain</span></a>
+            <a href="#" class="filter-chip" data-cat="jade" onclick="setCat(event,'jade')"><span class="zh">玉器</span><span class="en">Jade</span></a>
+            <a href="#" class="filter-chip" data-cat="coins" onclick="setCat(event,'coins')"><span class="zh">钱币</span><span class="en">Coins</span></a>
+            <a href="#" class="filter-chip" data-cat="paintings" onclick="setCat(event,'paintings')"><span class="zh">书画</span><span class="en">Paintings</span></a>
+            <a href="#" class="filter-chip" data-cat="misc" onclick="setCat(event,'misc')"><span class="zh">杂项</span><span class="en">Misc.</span></a>
+
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="搜索本馆藏品" aria-label="Search museum items" oninput="applyFilters()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                    <circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/>
+                </svg>
+            </div>
+        </div>
+
+        <!-- 藏品网格 -->
+        <div class="goods-list" id="sellerGoodsList" aria-busy="true"></div>
+
+        <div class="disclaimer-box zh">
+            <strong>请注意：</strong>本页为信息展示，藏品资料由卖家提供。Gudong 不鉴定真伪、不担保成交、不代收款项。请务必当面核验实物后再行交易。
+        </div>
+        <div class="disclaimer-box en">
+            <strong>Please note:</strong> This page is for information display only. Listing details are provided by the seller. Gudong does not authenticate items, guarantee sales, or process payments. Always inspect items in person before dealing.
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-nav">
+            <a href="../pricing.html#buyer-services" class="zh">委托找货</a><a href="../pricing.html#buyer-services" class="en">Sourcing</a>
+            <a href="../privacy.html" class="zh">隐私政策</a><a href="../privacy.html" class="en">Privacy</a>
+            <a href="../terms.html" class="zh">用户条款</a><a href="../terms.html" class="en">Terms</a>
+        </div>
+        <p class="footer-disclaimer zh">gudong.app 是信息发现平台，而非交易平台。</p>
+        <p class="footer-disclaimer en">gudong.app is an information and discovery platform for antiques and collectibles.</p>
+        <p class="zh" style="margin-bottom:0;">© 2026 古董集 · gudong.app <a href="javascript:void(0)" class="app-install-btn" onclick="event.preventDefault();"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20h14v-2H5v2zM19 9h-4V3H9v6H5l7 7 7-7z"/></svg>安装古董.app</a></p>
+        <p class="en" style="margin-bottom:0;">© 2026 Gudong · gudong.app <a href="javascript:void(0)" class="app-install-btn" onclick="event.preventDefault();"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20h14v-2H5v2zM19 9h-4V3H9v6H5l7 7 7-7z"/></svg>Install gudong.app</a></p>
+    </footer>
+
+    <script src="../assets/js/gudong-data.js" data-root="../"></script>
+    <script>
+        /* ============================================================
+           私家博物馆页 — 数据加载、渲染、筛选
+           复制本模板做新卖家页时，只需改下面三个常量
+           ============================================================ */
+        const SELLER_ID = 'Ng-CY';        // Airtable 的 seller_id
+        let SELLER_SINCE = '2026';         // 入驻年份
+        const SELLER_IMG_DIR = 'ng-cy';   // 图片子目录
+
+        const GD = window.GudongData;
+
+        let allItems = [];
+        let filteredItems = [];
+        let currentCat = 'all';
+
+        let currentLang = (function () { try { return localStorage.getItem('gudong_lang') === 'en' ? 'en' : 'zh'; } catch (e) { return 'zh'; } })();
+        function applyLang() {
+            document.body.dataset.lang = currentLang;
+            document.documentElement.lang = currentLang === 'en' ? 'en-SG' : 'zh-SG';
+            var b = document.querySelector('.lang-btn');
+            if (b) b.textContent = currentLang === 'zh' ? 'EN' : '中';
+        }
+        function toggleLang() {
+            currentLang = currentLang === 'zh' ? 'en' : 'zh';
+            applyLang();
+            try { localStorage.setItem('gudong_lang', currentLang); } catch (e) {}
+        }
+        applyLang();
+
+        function openSidebar() { document.getElementById('sidebar').classList.add('open'); document.getElementById('sidebarOverlay').classList.add('show'); document.body.style.overflow = 'hidden'; }
+        function closeSidebar() { document.getElementById('sidebar').classList.remove('open'); document.getElementById('sidebarOverlay').classList.remove('show'); document.body.style.overflow = ''; }
+        if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js');
+
+        function catKey(c) {
+            const map = {
+                '瓷器': 'porcelain', '玉器': 'jade', '钱币': 'coins',
+                '书画': 'paintings', '杂项': 'misc',
+                'porcelain': 'porcelain', 'jade': 'jade', 'coins': 'coins',
+                'paintings': 'paintings', 'painting': 'paintings', 'calligraphy': 'paintings',
+                'misc': 'misc', 'miscellaneous': 'misc'
+            };
+            return map[String(c == null ? '' : c).trim().toLowerCase()] || map[c] || 'misc';
+        }
+
+        function renderSellerItem(f) {
+            const file = GD.normId(f.img_file || '');
+            const g = (file && file.indexOf('/') === -1) ? Object.assign({}, f, { img_file: SELLER_IMG_DIR + '/' + file }) : f;
+            const p = GD.resolvePrice(f);
+            return `
+                <a href="${GD.itemHref(f)}" class="item-card" data-cat="${catKey(f.category)}" data-kw="${GD.esc([f.title_zh, f.title_en, f.era_zh, f.era_en, f.category].filter(Boolean).join(' ').toLowerCase())}">
+                    <img src="${GD.esc(GD.imgUrl(g))}" alt="${GD.esc(f.title_zh || f.title_en)}" loading="lazy" onerror="${GD.imgOnError}">
+                    <h3 class="zh">${GD.esc(f.title_zh)}</h3>
+                    <p class="text-en en">${GD.esc(f.title_en)}</p>
+                    <p class="price-cn zh">${GD.esc(p.zh)}</p>
+                    <p class="price-en en">${GD.esc(p.en)}</p>
+                </a>`;
+        }
+
+        function renderVisible() {
+            const list = document.getElementById('sellerGoodsList');
+            list.removeAttribute('aria-busy');
+            if (!filteredItems.length) {
+                list.innerHTML = `<div class="empty-state">
+                    <span class="zh">该馆暂无匹配藏品</span><span class="en">No matching items in this museum</span>
+                </div>`;
+                return;
+            }
+            list.innerHTML = filteredItems.map(renderSellerItem).join('');
+        }
+
+        function applyFilters() {
+            const kw = document.getElementById('searchInput').value.trim().toLowerCase();
+            filteredItems = allItems.filter(f => {
+                const okCat = currentCat === 'all' || catKey(f.category) === currentCat;
+                if (!okCat) return false;
+                if (!kw) return true;
+                const hay = [f.title_zh, f.title_en, f.era_zh, f.era_en, f.category].filter(Boolean).join(' ').toLowerCase();
+                return hay.includes(kw);
+            });
+            renderVisible();
+        }
+
+        function setCat(e, cat) {
+            e.preventDefault();
+            currentCat = cat;
+            document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+            document.querySelector(`.filter-chip[data-cat="${cat}"]`).classList.add('active');
+            applyFilters();
+        }
+
+        function shareMuseum() {
+            const url = window.location.href;
+            const title = (document.getElementById('sellerNameZh').textContent || 'Gudong') + ' · 私家博物馆';
+            if (navigator.share) {
+                navigator.share({ title, url }).catch(() => {});
+            } else {
+                navigator.clipboard.writeText(url).then(() => {
+                    alert(currentLang === 'zh' ? '链接已复制' : 'Link copied');
+                }).catch(() => alert(url));
+            }
+        }
+
+        function applySeller(sl) {
+            if (!sl) return;
+            const zh = sl.display_zh, en = sl.display_en;
+            if (zh) document.getElementById('sellerNameZh').textContent = zh;
+            if (en) document.getElementById('sellerNameEn').textContent = en;
+            if (zh && en) document.title = zh + ' | ' + en + ' | Gudong 私家博物馆';
+            if (sl.since_year) SELLER_SINCE = String(sl.since_year);
+            document.getElementById('joinedYear').textContent = SELLER_SINCE;
+            if (sl.intro_zh) document.getElementById('bioZh').textContent = sl.intro_zh;
+            if (sl.intro_en) document.getElementById('bioEn').textContent = sl.intro_en;
+            if (sl.whatsapp) {
+                const el = document.getElementById('contactWhatsapp');
+                el.href = 'https://wa.me/' + String(sl.whatsapp).replace(/[^\d]/g, '');
+                el.hidden = false;
+            }
+            if (sl.email) {
+                const el = document.getElementById('contactEmail');
+                el.href = 'mailto:' + sl.email;
+                el.hidden = false;
+            }
+        }
+
+        (function init() {
+            const list = document.getElementById('sellerGoodsList');
+            if (!list) return;
+            if (!GD) {
+                list.innerHTML = '<div class="empty-state">数据加载模块未找到</div>';
+                return;
+            }
+            GD.injectCss();
+            GD.skeleton(list, 8, 'min-height:260px');
+            GD.load().then(r => {
+                GD.diag.page = 'sellers/' + SELLER_ID;
+                applySeller(GD.sellerMap(r.data)[SELLER_ID]);
+                allItems = GD.dedupe([].concat(r.data.newListing, r.data.todayFinds, r.data.editorPicks))
+                    .filter(f => GD.normId(f.seller_id) === SELLER_ID);
+                document.getElementById('itemCount').textContent = allItems.length;
+                filteredItems = allItems.slice();
+                renderVisible();
+                GD.renderDebug('本馆（' + SELLER_ID + '）藏品：' + allItems.length);
+            }).catch(() => {
+                list.removeAttribute('aria-busy');
+                list.innerHTML = GD.errorHtml();
+                document.getElementById('itemCount').textContent = '—';
+            });
+        })();
+    </script>
+<!-- 2026-09-23：PWA 安装引导弹层（iOS 图文步骤 / 桌面提示），全站统一 -->
+<style>
+.gd-install-modal { position: fixed; inset: 0; z-index: 9999; display: none; align-items: center; justify-content: center; background: rgba(0,0,0,.45); padding: 1.2rem; }
+.gd-install-modal.open { display: flex; }
+.gd-install-card { background: #fff; border-radius: 14px; max-width: 350px; width: 100%; padding: 1.6rem 1.4rem 1.2rem; text-align: center; box-shadow: 0 18px 50px rgba(0,0,0,.25); position: relative; }
+.gd-install-close { position: absolute; top: .5rem; right: .7rem; border: 0; background: none; font-size: 1.4rem; color: #999; cursor: pointer; padding: .3rem; line-height: 1; }
+.gd-install-title { font-size: 1.08rem; font-weight: 700; color: #3d2b1f; margin: .2rem 0 1rem; }
+.gd-install-steps { text-align: left; margin: 0 auto 1rem; max-width: 290px; }
+.gd-install-step { display: flex; align-items: flex-start; gap: .6rem; padding: .5rem 0; color: #5a4636; font-size: .9rem; line-height: 1.5; }
+.gd-install-step .n { flex-shrink: 0; width: 22px; height: 22px; border-radius: 50%; background: #f0e4d8; color: #8A5A3B; font-weight: 700; font-size: .78rem; display: flex; align-items: center; justify-content: center; margin-top: .1rem; }
+.gd-install-step svg { flex-shrink: 0; width: 22px; height: 22px; fill: #007AFF; margin-top: .1rem; }
+.gd-install-note { font-size: .78rem; color: #9a8d80; margin-top: .5rem; line-height: 1.5; }
+.gd-install-modal [data-lang="en"] .zh, body[data-lang="en"] .gd-install-modal .zh { display: none; }
+.gd-install-modal [data-lang="zh"] .en, body[data-lang="zh"] .gd-install-modal .en { display: none; }
+.app-install-btn { display: inline-flex; align-items: center; gap: .3rem; margin-left: .6rem; padding: .3rem .7rem; border: 1px solid #e3d9cf; border-radius: 999px; color: #7a6a5c; font-size: .78rem; text-decoration: none; vertical-align: middle; transition: .2s; }
+.app-install-btn:hover { border-color: #8A5A3B; color: #8A5A3B; background: #f0e4d8; }
+.app-install-btn svg { width: 12px; height: 12px; flex-shrink: 0; fill: currentColor; }
+</style>
+<div class="gd-install-modal" id="gdInstallModal" role="dialog" aria-modal="true" aria-label="Install guide">
+    <div class="gd-install-card">
+        <button type="button" class="gd-install-close" onclick="gdCloseInstall()" aria-label="close">×</button>
+        <div class="gd-install-title zh">安装 古董.app 到主屏幕</div>
+        <div class="gd-install-title en">Add Gudong.app to Home Screen</div>
+        <div class="gd-install-steps" id="gdStepsIos">
+            <div class="gd-install-step"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18.2c-4.5 0-8.2-3.7-8.2-8.2S7.5 3.8 12 3.8s8.2 3.7 8.2 8.2-3.7 8.2-8.2 8.2zM11 7l-4 4h3v6h2v-6h3l-4-4z"/></svg><span class="zh">点击 Safari 底部工具栏的「分享」按钮</span><span class="en">Tap the Share button in Safari's bottom toolbar</span></div>
+            <div class="gd-install-step"><span class="n">2</span><span class="zh">在分享菜单中选择「添加到主屏幕」</span><span class="en">Choose "Add to Home Screen" in the share menu</span></div>
+            <div class="gd-install-step"><span class="n">3</span><span class="zh">点击右上角「添加」，桌面即出现古董.app 图标</span><span class="en">Tap "Add" — the Gudong.app icon appears on your Home Screen</span></div>
+        </div>
+        <div class="gd-install-steps" id="gdStepsOther" style="display:none;">
+            <div class="gd-install-step"><span class="n">1</span><span class="zh">点击浏览器地址栏右侧的「安装」图标</span><span class="en">Click the install icon at the right of the address bar</span></div>
+            <div class="gd-install-step"><span class="n">2</span><span class="zh">或通过浏览器菜单 →「安装古董集」</span><span class="en">Or open the browser menu → "Install Gudong"</span></div>
+        </div>
+        <div class="gd-install-note zh">安装后可像原生 App 一样全屏使用，无需应用商店。</div>
+        <div class="gd-install-note en">Runs full-screen like a native app. No app store needed.</div>
+    </div>
+</div>
+<script>
+(function () {
+    var modal = document.getElementById('gdInstallModal');
+    if (!modal) return;
+    window.gdCloseInstall = function () { modal.classList.remove('open'); };
+    modal.addEventListener('click', function (e) { if (e.target === modal) gdCloseInstall(); });
+
+    var deferredPrompt = null;
+    window.addEventListener('beforeinstallprompt', function (e) { e.preventDefault(); deferredPrompt = e; });
+    window.addEventListener('appinstalled', function () {
+        document.querySelectorAll('.app-install-btn').forEach(function (b) { b.style.display = 'none'; });
+    });
+
+    document.addEventListener('click', function (e) {
+        var btn = e.target && e.target.closest ? e.target.closest('.app-install-btn') : null;
+        if (!btn) return;
+        e.preventDefault();
+        if (deferredPrompt) {
+            deferredPrompt.prompt();
+            deferredPrompt.userChoice.then(function () { deferredPrompt = null; }).catch(function () {});
+            return;
+        }
+        // 无原生安装提示（iOS Safari / 未触发的浏览器）→ 显示图文引导
+        var ua = navigator.userAgent;
+        var isIOS = /iPad|iPhone|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+        document.getElementById('gdStepsIos').style.display = isIOS ? '' : 'none';
+        document.getElementById('gdStepsOther').style.display = isIOS ? 'none' : '';
+        modal.classList.add('open');
+    });
+})();
+</script>
+
+</body>
+</html>

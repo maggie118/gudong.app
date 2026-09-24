@@ -66,8 +66,6 @@ function normHyphen(v) {
 /* sellers 表对外公开的字段白名单（2026-09-21 增加 page_url） */
 const SELLER_PUBLIC_FIELDS = ['seller_id', 'display_zh', 'display_en', 'since_year', 'intro_zh', 'intro_en', 'page_url'];
 
-const CATEGORY_MAP = { porcelain: '瓷器', jade: '玉器', coins: '钱币', paintings: '书画', misc: '杂项' };
-
 // ---------- 上游请求 ----------
 async function fetchAllRecords(table) {
   const records = [];
@@ -282,8 +280,12 @@ export default async function handler(req, res) {
       ].filter(Boolean).join(' ').toLowerCase().includes(q));
     }
 
-    // ---------- 分类过滤 ----------
-    if (CATEGORY_MAP[cat]) items = items.filter(f => f.category === CATEGORY_MAP[cat]);
+    // ---------- 分类过滤（与 pageOfCategory 一致：标准 alias 才生效，未知值放行全集）----------
+    const resolvedCat = cat !== 'all' ? pageOfCategory(cat) : null;
+    if (resolvedCat && resolvedCat.standard) {
+      const target = resolvedCat.page;
+      items = items.filter(f => pageOfCategory(f.category).page === target);
+    }
 
     // ---------- 输出 ----------
     // 回退到旧数据时缩短缓存，让 CDN 尽快重新向我们要新数据

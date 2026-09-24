@@ -324,7 +324,7 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
     padding: 0;
     margin: 0;
     color: var(--color-gold);
-    font-size: 1.4rem; /* 星星保留原尺寸 */
+    font-size: 1.4rem;
     line-height: 1;
     cursor: pointer;
     transition: transform .18s ease, color .18s ease;
@@ -339,6 +339,11 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
     box-shadow: none;
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
+    /* 新增：白色光晕 + 轻微深色投影，让星星在深色背景也清晰可见 */
+    text-shadow:
+        0 0 5px rgba(255,255,255,.95),
+        0 0 10px rgba(255,255,255,.6),
+        0 1px 2px rgba(0,0,0,.25);
 }
 .fav-btn:hover { transform: scale(1.12); color: var(--color-primary); }
 .fav-btn:active { transform: scale(.94); }
@@ -365,7 +370,7 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
     .fav-btn {
         right: 10px;
         bottom: 10px;
-        /* 尺寸和字号不变，仅调整位置 */
+        /* 尺寸和字号不变 */
     }
 }
     </style>

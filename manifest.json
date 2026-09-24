@@ -1,7 +1,7 @@
 {
     "id": "/",
-    "name": "古董集 GuDong",
-    "short_name": "GuDong",
+    "name": "古董集 Gudong",
+    "short_name": "Gudong",
     "description": "新加坡中国古董与收藏品信息发现平台",
     "start_url": "/",
     "scope": "/",
@@ -9,8 +9,11 @@
     "background_color": "#F5F2EC",
     "theme_color": "#8A5A3B",
     "orientation": "portrait-primary",
-    "lang": "zh-CN",
-    "categories": ["shopping", "lifestyle"],
+    "lang": "zh-SG",
+    "categories": [
+        "shopping",
+        "lifestyle"
+    ],
     "icons": [
         {
             "src": "/assets/icons/icon-192.png",
@@ -23,18 +26,6 @@
             "sizes": "512x512",
             "type": "image/png",
             "purpose": "any"
-        },
-        {
-            "src": "/assets/icons/icon-192.png",
-            "sizes": "192x192",
-            "type": "image/png",
-            "purpose": "maskable"
-        },
-        {
-            "src": "/assets/icons/icon-512.png",
-            "sizes": "512x512",
-            "type": "image/png",
-            "purpose": "maskable"
         },
         {
             "src": "/assets/icons/icon.svg",

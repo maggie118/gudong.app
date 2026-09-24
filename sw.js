@@ -1,4 +1,4 @@
-const CACHE_NAME = 'antique-collection-v3';   // 2026-09-19：v2 → v4，激活时清掉旧缓存（旧缓存里存过的接口响应含卖家真实姓名，需要从访客浏览器里清除）
+const CACHE_NAME = 'antique-collection-v3';   // 2026-09-19：v2 → v3，激活时清掉旧缓存（旧缓存里存过的接口响应含卖家真实姓名，需要从访客浏览器里清除）
 // 需要预缓存的静态资源
 const PRECACHE_ASSETS = [
   '/',

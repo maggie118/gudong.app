@@ -12,9 +12,10 @@
 <meta property="og:url" content="https://gudong.app/privacy.html">
 <meta property="og:image" content="https://gudong.app/assets/icons/icon-512.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
-<link rel="manifest" href="manifest.json">
+<link rel="manifest" href="../../Downloads/manifest.json">
     <link rel="canonical" href="https://gudong.app/privacy.html" />
     <meta name="theme-color" content="#8A5A3B">
+    <link rel="apple-touch-icon" href="/assets/icons/icon-192.png">
     <style>
         :root {
             --color-bg: #F5F2EC;
@@ -72,7 +73,7 @@
 </head>
 <body data-lang="zh">
     <header>
-        <a href="index.html" class="brand">
+        <a href="../../Downloads/index.html" class="brand">
             <h1 class="zh">古董集</h1><h1 class="en">GUDONG</h1>
             <p>GUDONG</p>
         </a>
@@ -139,6 +140,9 @@
             <li class="en">To protect the rights, property or safety of the platform, our users or the public.</li>
         </ul>
 
+        <p class="zh"><strong>使用的第三方服务：</strong>（a）<strong>Airtable</strong>（airtable.com）作为卖家藏品信息的存储与展示服务，卖家提交的藏品数据（包括图片、描述、价格、联系方式）经该服务对外提供；（b）<strong>WhatsApp</strong>（whatsapp.com，由 Meta Platforms Ireland Limited 提供）作为买家与卖家直接沟通的工具，专家视频咨询的预约亦通过 WhatsApp 发送 PayNow 付款二维码与视频通话链接。这些第三方服务会按其各自的服务条款与隐私政策处理相关数据。</p>
+        <p class="en"><strong>Third-party services we use:</strong> (a) <strong>Airtable</strong> (airtable.com) as the storage and presentation service for seller-submitted listing data (including images, descriptions, prices and contact details); and (b) <strong>WhatsApp</strong> (whatsapp.com, operated by Meta Platforms Ireland Limited) as the direct communication channel between buyers and sellers, and for sending PayNow payment QR codes and video-call links for expert consultations. These third-party services process relevant data under their own terms of service and privacy policies.</p>
+
         <h2><span class="zh">五、跨境数据传输</span><span class="en">5. Cross-border Data Transfer</span></h2>
         <p class="zh">我们的服务器或服务提供商可能位于新加坡以外。若发生跨境传输，我们确保接收方所在司法辖区具备与 PDPA 相当的数据保护水平，或在传输前取得您的同意。</p>
         <p class="en">Our servers or service providers may be located outside Singapore. Where cross-border transfer occurs, we ensure the receiving jurisdiction has a level of data protection comparable to the PDPA, or we obtain your consent prior to transfer.</p>
@@ -190,9 +194,9 @@
 
     <footer>
         <div class="footer-nav">
-            <a href="pricing.html#buyer-services" class="zh">委托找货</a><a href="pricing.html#buyer-services" class="en">Sourcing</a>
-            <a href="privacy.html" class="zh">隐私政策</a><a href="privacy.html" class="en">Privacy</a>
-            <a href="terms.html" class="zh">用户条款</a><a href="terms.html" class="en">Terms</a>
+            <a href="../../Downloads/pricing.html#buyer-services" class="zh">委托找货</a><a href="../../Downloads/pricing.html#buyer-services" class="en">Sourcing</a>
+            <a href="../../Downloads/privacy.html" class="zh">隐私政策</a><a href="../../Downloads/privacy.html" class="en">Privacy</a>
+            <a href="../../Downloads/terms.html" class="zh">用户条款</a><a href="../../Downloads/terms.html" class="en">Terms</a>
         </div>
         <p class="footer-disclaimer zh">gudong.app 是信息发现平台，而非交易平台。</p>
         <p class="footer-disclaimer en">gudong.app is an information and discovery platform for antiques and collectibles.</p>
@@ -201,15 +205,19 @@
     </footer>
 
     <script>
-        let currentLang = (function () { try { return localStorage.getItem('gudong_lang') || 'zh'; } catch (e) { return 'zh'; } })();
-        document.body.dataset.lang = currentLang;
+        let currentLang = (function () { try { return localStorage.getItem('gudong_lang') === 'en' ? 'en' : 'zh'; } catch (e) { return 'zh'; } })();
+        function applyLang() {
+            document.body.dataset.lang = currentLang;
+            document.documentElement.lang = currentLang === 'en' ? 'en-SG' : 'zh-SG';
+            var b = document.querySelector('.lang-btn');
+            if (b) b.textContent = currentLang === 'zh' ? 'EN' : '中';
+        }
         function toggleLang() {
             currentLang = currentLang === 'zh' ? 'en' : 'zh';
-            document.body.dataset.lang = currentLang;
-            document.querySelector('.lang-btn').textContent = currentLang === 'zh' ? 'EN' : '中';
+            applyLang();
             try { localStorage.setItem('gudong_lang', currentLang); } catch (e) {}
         }
-        document.querySelector('.lang-btn').textContent = currentLang === 'zh' ? 'EN' : '中';
+        applyLang();
     </script>
 <!-- 2026-09-23：PWA 安装引导弹层（iOS 图文步骤 / 桌面提示），全站统一 -->
 <style>

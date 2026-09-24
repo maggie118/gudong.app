@@ -312,6 +312,65 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
 .footer-disclaimer { max-width: 620px; margin: 0 auto 1.1rem; font-size: .74rem; line-height: 1.65; color: var(--color-text-muted); }
 [data-lang="en"] .zh { display: none; }
 [data-lang="zh"] .en { display: none; }
+
+/* ===== 本地收藏按钮（localStorage，无后端） ===== */
+.fav-btn {
+    position: absolute;
+    right: 12px;
+    bottom: 12px;
+    z-index: 3;
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
+    color: var(--color-gold);
+    width: 26px;
+    height: 26px;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform .18s ease, color .18s ease;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-user-select: none;
+    user-select: none;
+    /* 白色光晕 + 轻微深色投影：让心形在深色图片背景上也能清晰可见 */
+    filter:
+        drop-shadow(0 0 2px rgba(255,255,255,.95))
+        drop-shadow(0 0 5px rgba(255,255,255,.7))
+        drop-shadow(0 1px 2px rgba(0,0,0,.35));
+}
+.fav-btn svg {
+    width: 26px;
+    height: 26px;
+    display: block;
+    overflow: visible;
+    /* 未收藏：空心轮廓，线条加粗 */
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.4;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: fill .18s ease, stroke-width .18s ease;
+}
+.fav-btn.active svg {
+    /* 已收藏：实心心形 */
+    fill: currentColor;
+    stroke: currentColor;
+    stroke-width: 2;
+}
+.fav-btn:hover { transform: scale(1.12); color: var(--color-primary); }
+.fav-btn:active { transform: scale(.94); }
+.fav-btn:focus-visible { outline: 2px solid var(--color-gold); outline-offset: 3px; border-radius: 4px; }
+.fav-btn .fav-icon { display: block; pointer-events: none; }
+@keyframes favPop {
+    0% { transform: scale(1); }
+    45% { transform: scale(1.28); }
+    100% { transform: scale(1); }
+}
+.fav-btn.pop .fav-icon { animation: favPop .32s ease; }
+
 @media (max-width: 820px) {
     header { height: 62px; gap: .6rem; }
     .btn-publish { padding: .45rem .85rem; font-size: .8rem; }
@@ -322,6 +381,10 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
     .brand h1 { font-size: 1.15rem; }
     .container { padding: 1.6rem 4.5% 3rem; }
     .specs-block, .seller-card { padding: 1.1rem 1.2rem; }
+    .fav-btn {
+        right: 10px;
+        bottom: 10px;
+    }
 }
     </style>
     <link rel="apple-touch-icon" href="../../../assets/icons/icon-192.png">
@@ -376,6 +439,11 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
         <div class="item-detail">
             <div class="item-detail-image">
                 <img src="../../../assets/images/ng-cy/item-ngcy-03.jpg" alt="清代哥釉天球瓶" onerror="this.onerror=null;this.src='../assets/images/placeholder.jpg'">
+                <button type="button" class="fav-btn" id="favBtn" aria-pressed="false" aria-label="收藏此藏品" title="收藏 / Add to favourites">
+                    <svg class="fav-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                    </svg>
+                </button>
             </div>
             <div>
                 <p class="item-detail-meta zh">清 · 瓷器 · 卖家：博古斋</p>
@@ -852,6 +920,96 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
         document.getElementById('gdStepsOther').style.display = isIOS ? 'none' : '';
         modal.classList.add('open');
     });
+})();
+</script>
+
+<!-- ===== 本地收藏（localStorage，无后端 / 无会员） ===== -->
+<script>
+(function () {
+    'use strict';
+
+    var FAV_KEY = 'gudong_fav';
+    var btn = document.getElementById('favBtn');
+    if (!btn) return;
+
+    // ---- 取当前藏品 ID（与 Airtable 脚本同一逻辑，兜底用文件名）----
+    function resolveItemId() {
+        var raw = document.body.dataset.itemId;
+        if (raw) return String(raw).trim();
+        try {
+            var name = decodeURIComponent(location.pathname.split('/').pop() || '');
+            return name.replace(/\.html?$/i, '');
+        } catch (e) {
+            return '';
+        }
+    }
+    var ITEM_ID = resolveItemId();
+
+    // ---- 读写 localStorage ----
+    function readFav() {
+        try {
+            var raw = localStorage.getItem(FAV_KEY);
+            if (!raw) return [];
+            var arr = JSON.parse(raw);
+            if (!Array.isArray(arr)) return [];
+            return arr.filter(function (x) { return typeof x === 'string' && x; });
+        } catch (e) {
+            return [];
+        }
+    }
+    function writeFav(arr) {
+        try {
+            localStorage.setItem(FAV_KEY, JSON.stringify(arr));
+            return true;
+        } catch (e) {
+            return false; // 隐私模式 / 配额满
+        }
+    }
+    function isFav() {
+        return readFav().indexOf(ITEM_ID) !== -1;
+    }
+
+    // ---- 同步按钮外观：切换 .active 即可，心形由 CSS 控制空心/实心 ----
+    function sync() {
+        var on = ITEM_ID ? isFav() : false;
+        btn.classList.toggle('active', on);
+        btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+        var zh = document.body.dataset.lang !== 'en';
+        btn.setAttribute('aria-label', on
+            ? (zh ? '取消收藏此藏品' : 'Remove from favourites')
+            : (zh ? '收藏此藏品' : 'Add to favourites'));
+    }
+
+    // ---- 点击切换 ----
+    btn.addEventListener('click', function () {
+        if (!ITEM_ID) return;
+        var favs = readFav();
+        var i = favs.indexOf(ITEM_ID);
+        if (i === -1) {
+            favs.push(ITEM_ID);
+        } else {
+            favs.splice(i, 1);
+        }
+        if (!writeFav(favs)) {
+            // 写入失败（无痕模式等）——仅做视觉反馈，不阻断页面
+        }
+        sync();
+        btn.classList.remove('pop');
+        void btn.offsetWidth; // 重置动画
+        btn.classList.add('pop');
+    });
+
+    // ---- 多标签页同步 ----
+    window.addEventListener('storage', function (e) {
+        if (!e || e.key === FAV_KEY) sync();
+    });
+
+    // ---- 语言切换后刷新 aria-label ----
+    var langBtn = document.querySelector('.lang-btn');
+    if (langBtn) langBtn.addEventListener('click', function () { setTimeout(sync, 0); });
+
+    // ---- 初始化：刷新页面状态保留 ----
+    sync();
 })();
 </script>
 

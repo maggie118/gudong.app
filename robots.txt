@@ -1,6 +1,14 @@
 User-agent: *
 Allow: /
 
+# 构建源文件与内部原型，不供线上访问，禁止抓取（配合 .vercelignore 一并排除部署）
+Disallow: /templates/
+Disallow: /content/
+Disallow: /prototypes/
+Disallow: /_backup
+Disallow: /docs/
+Disallow: /scripts/
+
 # 注意：不要屏蔽 /api/ 与 /data/ —— 藏品列表由 JS 从 /api/airtable-proxy 读取，
 # 屏蔽后 Google 渲染出来的品类页、藏品库会是空的。
 Sitemap: https://gudong.app/sitemap.xml

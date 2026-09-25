@@ -1,22 +1,13 @@
 <!DOCTYPE html>
-<!-- 🟢 优化点 1：语系改为新加坡中文(zh-SG)或通用双语/多语系(en-SG / zh)，此处用 zh-SG 更贴合新加坡中文语境，若网站主英文则建议改为 en-SG -->
 <html lang="zh-SG">
 <head>
     <meta charset="UTF-8">
-    <!-- 🟢 优化点 2：视口标签硬核规范，防止移动端点击延迟、禁止不必要的缩放，确保物理像素 1:1 完美呈现 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no, viewport-fit=cover">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <!-- 标题保持专业度 -->
-    <title>Gudong.app | Chinese Antiques & Collectibles Discovery Platform</title>
-
-    <!-- 🟢 canonical 归一（2026-09-17） -->
+    <title>古董集 Gudong.app | 新加坡古董捡漏 · 寻宝情报站</title>
     <link rel="canonical" href="https://gudong.app/" />
 
-    <!-- 🟢 首页 JSON-LD（2026-09-17 新增）
-         只声明平台身份与站点信息，不涉及任何商品级 Schema（Product / Offer）。
-         商品级 Schema 属于详情页，首页出现会被 Google 视为误判信号。
-         暂不声明 potentialAction:SearchAction —— 因为当前无真实 /search 页面。 -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -27,21 +18,10 @@
           "name": "古董集 Gudong",
           "alternateName": "Gudong.app",
           "url": "https://gudong.app/",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "https://gudong.app/assets/icons/apple-touch-icon-180x180.png",
-            "width": 180,
-            "height": 180
-          },
+          "logo": { "@type": "ImageObject", "url": "https://gudong.app/assets/icons/apple-touch-icon-180x180.png", "width": 180, "height": 180 },
           "description": "新加坡中国古董及藏品信息发现平台。汇集瓷器、玉器、钱币、书画及杂项，买卖双方直接联系。平台不参与鉴定、估价与交易。",
-          "address": {
-            "@type": "PostalAddress",
-            "addressCountry": "SG"
-          },
-          "areaServed": {
-            "@type": "Country",
-            "name": "Singapore"
-          },
+          "address": { "@type": "PostalAddress", "addressCountry": "SG" },
+          "areaServed": { "@type": "Country", "name": "Singapore" },
           "knowsLanguage": ["zh-SG", "en-SG"]
         },
         {
@@ -51,45 +31,46 @@
           "name": "古董集 Gudong",
           "inLanguage": ["zh-SG", "en-SG"],
           "publisher": { "@id": "https://gudong.app/#organization" }
+        },
+        {
+          "@type": "FAQPage",
+          "@id": "https://gudong.app/#faq",
+          "mainEntity": [
+            { "@type": "Question", "name": "平台会帮忙鉴定藏品吗？",
+              "acceptedAnswer": { "@type": "Answer", "text": "不会。古董集是信息发现平台，不提供鉴定、估价或保真服务。所有藏品描述与图片均由卖家提供，请自行核验或咨询独立专家。" } },
+            { "@type": "Question", "name": "可以请平台推荐专家给参考意见吗？",
+              "acceptedAnswer": { "@type": "Answer", "text": "可以。平台可应要求引荐专家提供个人意见，仅供参考，但不构成真伪鉴定。是否采纳由你决定，平台不介入、不担保；费用与结论由你与专家直接沟通。" } },
+            { "@type": "Question", "name": "怎么联系卖家？",
+              "acceptedAnswer": { "@type": "Answer", "text": "在藏品详情页可直接看到卖家提供的联系方式，买卖双方直接沟通，平台不经手交易。" } },
+            { "@type": "Question", "name": "藏品价格是平台定的吗？",
+              "acceptedAnswer": { "@type": "Answer", "text": "不是。所有价格由卖家自行设定，平台仅提供展示。部分藏品为「私聊询价」，需直接联系卖家获取报价。" } },
+            { "@type": "Question", "name": "刊登藏品收费吗？",
+              "acceptedAnswer": { "@type": "Answer", "text": "创始藏家限量 88 席免费入驻，前 2 件藏品免费刊登。后续刊登规则与费用请见服务价格页。" } }
+          ]
         }
       ]
     }
     </script>
 
-    <!-- 🟢 优化点 3：SEO 描述精简且地域化（加入 Singapore / 新加坡 核心词，提升本地搜索权重） -->
-    <meta name="description" content="古董集 gudong.app —— 新加坡专业的中国古董及藏品信息发现平台。汇集瓷器、玉器、钱币、书画及杂项，买家直接联系藏家卖家。平台不参与鉴定与交易。">
-    <meta name="keywords" content="Singapore antiques, Chinese porcelain, Jade collection, 古董集, 新加坡古董, 瓷器收藏, 玉器钱币">
+    <meta name="description" content="古董集 gudong.app —— 新加坡古董捡漏与寻宝情报站。每日情报、同类价格对比、藏家直供瓷器、玉器、钱币、书画。买家直接联系卖家，平台不参与鉴定与交易。">
+    <meta name="keywords" content="Singapore antiques, Chinese porcelain, Jade collection, 古董集, 新加坡古董, 古董捡漏, 瓷器收藏, 玉器钱币">
 
-    <!-- 🟢 优化点 4：多语言国际化（I18n）hreflang
-         2026-09-17：暂时移除无效 hreflang。原三行全部指向 https://gudong.app 会被 Google
-         判定为重复并整组忽略（比不写更糟）。当前用 body[data-lang] 做纯前端切换，没有
-         独立的 /zh/ 与 /en/ 页面，因此暂不声明 hreflang。
-         待建立真实 URL 分层后，把下方注释恢复：
-         <link rel="alternate" hreflang="zh-SG" href="https://gudong.app/zh/" />
-         <link rel="alternate" hreflang="en-SG" href="https://gudong.app/en/" />
-         <link rel="alternate" hreflang="x-default" href="https://gudong.app/" />
-    -->
-
-    <!-- 🟢 优化点 5：完整且健壮的 Open Graph 社交分享矩阵 -->
     <meta property="og:site_name" content="古董集 Gudong.app">
-    <meta property="og:title" content="古董集 Gudong.app | Chinese Antiques Platform Singapore">
-    <meta property="og:description" content="Singapore-based discovery platform for Chinese antiques and collectibles. Browse porcelain, jade, coins, paintings and connect directly with sellers.">
+    <meta property="og:title" content="古董集 Gudong.app | 新加坡古董捡漏 · 寻宝情报站">
+    <meta property="og:description" content="Singapore-based discovery platform for Chinese antiques. Daily intel, price comparison, direct seller contact.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://gudong.app">
-    <!-- 💥 分享缩略图：1200x630 PNG 主版本（微信/WhatsApp 兼容），WebP 作 secure_url 备选 -->
     <meta property="og:image" content="https://gudong.app/og-cover.png">
     <meta property="og:image:secure_url" content="https://gudong.app/og-cover.webp">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="og:image:type" content="image/png">
 
-    <!-- 🟢 优化点 6：Twitter / X 专属卡片渲染 -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="古董集 Gudong.app | Chinese Antiques Platform">
+    <meta name="twitter:title" content="古董集 Gudong.app | 古董捡漏 · 寻宝情报站">
     <meta name="twitter:description" content="Singapore-based discovery platform for Chinese antiques and collectibles.">
     <meta name="twitter:image" content="https://gudong.app/og-cover.png">
 
-    <!-- 🟢 优化点 7：PWA & 移动端 Web App -->
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#8A5A3B">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -97,12 +78,9 @@
     <meta name="apple-mobile-web-app-title" content="古董集">
     <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon-152x152.png" sizes="152x152">
     <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon-180x180.png" sizes="180x180">
-
-    <!-- 🟢 优化点 8：传统的浏览器 Favicon 基础设施保底 -->
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32x32.png">
 
-    <!-- CSS 样式表引入 -->
     <style>
         :root {
             --color-bg: #F5F2EC;
@@ -120,705 +98,474 @@
             --color-bronze-muted: #9C8558;
             --color-success: #526657;
             --color-danger: #9A554B;
-            --color-far-mountain: #2E4A52; /* 远山黛 */
+            --color-far-mountain: #2E4A52;
         }
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box;
+            font-family: "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif; }
         html { scroll-behavior: smooth; }
-        body {
-            background: var(--color-bg);
-            color: var(--color-text);
-            line-height: 1.65;
-        }
+        body { background: var(--color-bg); color: var(--color-text); line-height: 1.65; }
+
+        /* ---------- 公告栏 ---------- */
         .announce-bar {
-            background: var(--color-primary-light);
-            color: var(--color-primary-dark);
-            font-size: .8rem;
-            text-align: center;
-            padding: .55rem 2.6rem;
-            position: relative;
-            line-height: 1.4;
-            word-break: break-all;
+            background: var(--color-primary-light); color: var(--color-primary-dark);
+            font-size: .8rem; text-align: center; padding: .55rem 2.6rem;
+            position: relative; line-height: 1.4; word-break: break-all;
         }
         .announce-close {
-            position: absolute;
-            right: .9rem;
-            top: 50%;
-            transform: translateY(-50%);
-            background: none;
-            border: none;
-            font-size: 1.05rem;
-            line-height: 1;
-            color: var(--color-text-secondary);
-            cursor: pointer;
-            padding: .2rem;
+            position: absolute; right: .9rem; top: 50%; transform: translateY(-50%);
+            background: none; border: none; font-size: 1.05rem; line-height: 1;
+            color: var(--color-text-secondary); cursor: pointer; padding: .2rem;
         }
         .announce-close:hover { color: var(--color-primary); }
+
+        /* ---------- Header ---------- */
         header {
-            background: rgba(255,255,255,.96);
-            backdrop-filter: blur(6px);
-            color: var(--color-text);
-            padding: 0 5%;
-            height: 68px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 1.5rem;
-            border-bottom: 1px solid var(--color-border);
-            position: sticky;
-            top: 0;
-            z-index: 50;
+            background: rgba(255,255,255,.96); backdrop-filter: blur(6px);
+            color: var(--color-text); padding: 0 5%; height: 68px;
+            display: flex; align-items: center; justify-content: space-between;
+            gap: 1.5rem; border-bottom: 1px solid var(--color-border);
+            position: sticky; top: 0; z-index: 50;
         }
-        .brand {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            line-height: 1;
-            flex-shrink: 0;
-        }
-        .brand h1 {
-            font-size: 1.4rem;
-            font-weight: 700;
-            letter-spacing: .02em;
-            line-height: 1.15;
-        }
-        .brand p {
-            color: var(--color-bronze-muted);
-            margin-top: .2rem;
-            font-size: .62rem;
-            letter-spacing: .2em;
-        }
-        .brand h1 .en,
-        .brand p .zh,
-        .brand p .en,
-        .sidebar-brand .en {
-            font-family: "Inter Display", "Inter", "Geist",
-                         -apple-system, BlinkMacSystemFont, "Segoe UI",
-                         "Helvetica Neue", Arial, sans-serif;
+        .brand { display: flex; flex-direction: column; justify-content: center; line-height: 1; flex-shrink: 0; }
+        .brand h1 { font-size: 1.4rem; font-weight: 700; letter-spacing: .02em; line-height: 1.15; }
+        .brand p { color: var(--color-bronze-muted); margin-top: .2rem; font-size: .62rem; letter-spacing: .2em; }
+        .brand h1 .en, .brand p .zh, .brand p .en, .sidebar-brand .en {
+            font-family: "Inter Display", "Inter", "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
             letter-spacing: normal;
         }
-        .header-right {
-            display: flex;
-            align-items: center;
-            gap: .8rem;
-            flex-shrink: 0;
-        }
+        .header-right { display: flex; align-items: center; gap: .8rem; flex-shrink: 0; }
         .btn-publish {
-            display: inline-flex;
-            align-items: center;
-            gap: .35rem;
-            background: var(--color-primary);
-            color: #fff;
-            padding: .5rem 1.1rem;
-            border-radius: 8px;
-            font-size: .85rem;
-            font-weight: 600;
-            text-decoration: none;
-            white-space: nowrap;
-            transition: .2s;
+            display: inline-flex; align-items: center; gap: .35rem;
+            background: var(--color-primary); color: #fff; padding: .5rem 1.1rem;
+            border-radius: 8px; font-size: .85rem; font-weight: 600;
+            text-decoration: none; white-space: nowrap; transition: .2s;
         }
         .btn-publish:hover { background: var(--color-primary-dark); }
         .lang-btn {
-            border: 1px solid var(--color-border);
-            background: transparent;
-            color: var(--color-text-secondary);
-            padding: .3rem .68rem;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: .75rem;
-            letter-spacing: .04em;
-            transition: .2s;
+            border: 1px solid var(--color-border); background: transparent;
+            color: var(--color-text-secondary); padding: .3rem .68rem;
+            border-radius: 6px; cursor: pointer; font-size: .75rem;
+            letter-spacing: .04em; transition: .2s;
         }
-        .lang-btn:hover {
-            border-color: var(--color-primary);
-            color: var(--color-primary);
-            background: var(--color-primary-light);
-        }
+        .lang-btn:hover { border-color: var(--color-primary); color: var(--color-primary); background: var(--color-primary-light); }
         .menu-toggle {
-            width: 38px;
-            height: 38px;
-            border: 1px solid var(--color-border);
-            background: transparent;
-            border-radius: 8px;
-            font-size: 1.05rem;
-            color: var(--color-text);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            transition: .2s;
+            width: 38px; height: 38px; border: 1px solid var(--color-border);
+            background: transparent; border-radius: 8px; font-size: 1.05rem;
+            color: var(--color-text); cursor: pointer; display: flex;
+            align-items: center; justify-content: center; flex-shrink: 0; transition: .2s;
         }
-        .menu-toggle:hover {
-            border-color: var(--color-primary);
-            color: var(--color-primary);
-            background: var(--color-primary-light);
-        }
+        .menu-toggle:hover { border-color: var(--color-primary); color: var(--color-primary); background: var(--color-primary-light); }
+
+        /* ---------- Sidebar ---------- */
         .sidebar-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(20,17,14,.4);
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity .25s ease;
-            z-index: 90;
+            position: fixed; inset: 0; background: rgba(20,17,14,.4);
+            opacity: 0; pointer-events: none; transition: opacity .25s ease; z-index: 90;
         }
-        .sidebar-overlay.show {
-            opacity: 1;
-            pointer-events: auto;
-        }
+        .sidebar-overlay.show { opacity: 1; pointer-events: auto; }
         .sidebar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            height: 100vh;
-            width: 264px;
-            max-width: 78vw;
-            background: var(--color-white);
+            position: fixed; top: 0; left: 0; height: 100vh; width: 264px;
+            max-width: 78vw; background: var(--color-white);
             box-shadow: 4px 0 24px rgba(37,34,30,.18);
-            transform: translateX(-100%);
-            transition: transform .3s ease;
-            z-index: 95;
-            overflow-y: auto;
-            padding-bottom: 2rem;
+            transform: translateX(-100%); transition: transform .3s ease;
+            z-index: 95; overflow-y: auto; padding-bottom: 2rem;
         }
         .sidebar.open { transform: translateX(0); }
         .sidebar-toggle-inner {
-            display: block;
-            width: 100%;
-            padding: .9rem 0;
-            background: transparent;
-            border: none;
-            border-bottom: 1px solid var(--color-border);
-            font-size: 1.15rem;
-            color: var(--color-text-secondary);
-            cursor: pointer;
-            text-align: center;
+            display: block; width: 100%; padding: .9rem 0; background: transparent;
+            border: none; border-bottom: 1px solid var(--color-border);
+            font-size: 1.15rem; color: var(--color-text-secondary); cursor: pointer; text-align: center;
         }
         .sidebar-toggle-inner:hover { color: var(--color-primary); }
         .sidebar-brand {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: .1rem;
-            padding: 1.1rem 0;
-            font-weight: 700;
-            color: var(--color-text);
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            gap: .1rem; padding: 1.1rem 0; font-weight: 700; color: var(--color-text);
             border-bottom: 1px solid var(--color-border);
         }
         .sidebar-brand .zh { font-size: 1.05rem; }
         .sidebar-brand .en { font-size: 1.05rem; letter-spacing: .04em; }
-        .sidebar-nav {
-            display: flex;
-            flex-direction: column;
-            padding: .3rem 0;
-        }
+        .sidebar-nav { display: flex; flex-direction: column; padding: .3rem 0; }
         .sidebar-link {
-            padding: .85rem 1.4rem;
-            color: var(--color-text);
-            text-decoration: none;
-            font-size: .95rem;
-            transition: .2s;
+            padding: .85rem 1.4rem; color: var(--color-text); text-decoration: none;
+            font-size: .95rem; transition: .2s;
         }
         .sidebar-link:hover { background: var(--color-primary-light); color: var(--color-primary); }
         .sidebar-link.active { background: var(--color-primary-light); color: var(--color-primary); font-weight: 600; }
-        .sidebar-group-title {
-            padding: .85rem 1.4rem .3rem;
-            color: var(--color-text);
-            font-size: .95rem;
-            font-weight: 600;
-        }
         .sidebar-sub {
-            display: block;
-            padding: .55rem 1.4rem .55rem 2.2rem;
-            color: var(--color-text-secondary);
-            text-decoration: none;
-            font-size: .88rem;
-            transition: .2s;
+            display: block; padding: .55rem 1.4rem .55rem 2.2rem;
+            color: var(--color-text-secondary); text-decoration: none; font-size: .88rem; transition: .2s;
         }
         .sidebar-sub:hover { color: var(--color-primary); background: var(--color-primary-light); }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 3.2rem 5% 4rem;
-            background: transparent;
-            min-height: 80vh;
+        .sidebar-lang-btn {
+            display: flex; align-items: center; justify-content: center; gap: .4rem;
+            width: calc(100% - 2.8rem); margin: 1rem 1.4rem .8rem;
+            padding: .62rem .9rem; border: 1px solid var(--color-border);
+            border-radius: 8px; background: var(--color-white);
+            color: var(--color-text-secondary); font-family: inherit;
+            font-size: .9rem; font-weight: 600; cursor: pointer; transition: .2s;
         }
-        section {
-            margin-bottom: 5rem;
-            scroll-margin-top: 90px;
-        }
-        h2 {
-            color: var(--color-text);
-            margin-bottom: 1.35rem;
-            border-left: none;
-            padding-left: 0;
-            font-size: 1.75rem;
-            font-weight: 700;
-            letter-spacing: -.02em;
-        }
-        .text-secondary { color: var(--color-text-secondary); }
+        .sidebar-lang-btn:hover { border-color: var(--color-primary); color: var(--color-primary); background: var(--color-primary-light); }
+
+        /* ---------- Layout ---------- */
+        .container { max-width: 1200px; margin: 0 auto; padding: 3.2rem 5% 4rem; min-height: 80vh; }
+        section { margin-bottom: 5rem; scroll-margin-top: 90px; }
+        h2 { color: var(--color-text); margin-bottom: 1.35rem; font-size: 1.75rem; font-weight: 700; letter-spacing: -.02em; }
+
         /* ---------- Hero ---------- */
-        .hero-clean {
-            text-align: center;
-            max-width: 640px;
-            margin: 0 auto 1rem;
-            padding: 1.4rem 0 .5rem;
-        }
+        .hero-clean { text-align: center; max-width: 680px; margin: 0 auto 1rem; padding: 1.4rem 0 .5rem; }
         .hero-eyebrow {
-            font-family: Georgia, "Songti SC", "STSong", serif;
-            font-style: italic;
-            font-size: .92rem;
-            color: var(--color-bronze-muted);
-            letter-spacing: .01em;
-            margin-bottom: .9rem;
+            font-family: Georgia, "Songti SC", "STSong", serif; font-style: italic;
+            font-size: .92rem; color: var(--color-bronze-muted); letter-spacing: .01em; margin-bottom: .9rem;
         }
         .hero-title-main {
             font-family: Georgia, "Songti SC", "STSong", serif;
-            font-size: clamp(1.7rem, 4.2vw, 2.5rem);
-            font-weight: 600;
-            color: var(--color-text);
-            line-height: 1.35;
-            margin-bottom: 1rem;
+            font-size: clamp(1.7rem, 4.2vw, 2.5rem); font-weight: 600;
+            color: var(--color-text); line-height: 1.35; margin-bottom: 1rem;
         }
-        .hero-desc {
-            font-size: .95rem;
-            color: var(--color-text-secondary);
-            margin-bottom: 1.5rem;
-            line-height: 1.6;
-        }
+        .hero-desc { font-size: .95rem; color: var(--color-text-secondary); margin-bottom: 1.5rem; line-height: 1.6; }
         .hero-btn {
-            display: inline-block;
-            background: var(--color-primary);
-            color: #fff;
-            padding: .68rem 1.7rem;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: .88rem;
-            transition: .2s;
+            display: inline-block; background: var(--color-primary); color: #fff;
+            padding: .68rem 1.7rem; border-radius: 6px; text-decoration: none;
+            font-weight: 600; font-size: .88rem; transition: .2s;
         }
         .hero-btn:hover { background: var(--color-primary-dark); }
-        .search-box {
-            max-width: 560px;
-            margin: 2.2rem auto .65rem;
-            position: relative;
-        }
+
+        .search-box { max-width: 560px; margin: 2.2rem auto .65rem; position: relative; }
         .search-box input {
-            width: 100%;
-            height: 50px;
-            padding: 0 3rem 0 1.2rem;
-            border: 1px solid #DED7CE;
-            border-radius: 12px;
-            font-size: .95rem;
-            background: #FFFFFF;
-            color: var(--color-text);
+            width: 100%; height: 50px; padding: 0 3rem 0 1.2rem;
+            border: 1px solid #DED7CE; border-radius: 12px; font-size: .95rem;
+            background: #FFFFFF; color: var(--color-text); transition: .2s;
+        }
+        .search-box input:focus { outline: none; border-color: var(--color-gold); box-shadow: 0 0 0 4px var(--color-gold-soft); }
+        .search-box button {
+            position: absolute; right: 1rem; top: 50%; transform: translateY(-50%);
+            background: transparent; border: none; color: var(--color-primary); font-size: 1rem; cursor: pointer;
+        }
+        .search-tip { font-size: .78rem; color: var(--color-text-muted); text-align: center; margin-bottom: 1.6rem; }
+        .search-result-tip {
+            font-size: .82rem; color: var(--color-primary); text-align: center;
+            margin: -.8rem 0 1.6rem; font-weight: 600;
+        }
+        .hot-tags {
+            display: flex; flex-wrap: wrap; justify-content: center; gap: .5rem;
+            max-width: 600px; margin: 0 auto 1.4rem;
+        }
+        .hot-tag {
+            border: 1px solid var(--color-border); background: var(--color-white);
+            color: var(--color-text-secondary); font-size: .78rem; padding: .28rem .72rem;
+            border-radius: 999px; cursor: pointer; transition: .2s;
+        }
+        .hot-tag:hover { border-color: var(--color-primary); color: var(--color-primary); background: var(--color-primary-light); }
+
+        /* ---------- 🟢 今日情报 · 捡漏雷达（深棕底 · 对齐策略图配色） ---------- */
+        .intel-section {
+            background: linear-gradient(135deg, #2B2620 0%, #352E27 100%);
+            border: 1px solid rgba(217,182,121,.30);
+            border-radius: 14px;
+            padding: 2rem 1.6rem 1.5rem;
+            color: #F1E8DF;
+            margin: -1rem 0 4.5rem;
+            box-shadow: 0 8px 28px rgba(20,17,14,.16);
+        }
+        .intel-head {
+            display: flex; align-items: flex-end; justify-content: space-between;
+            gap: 1rem; flex-wrap: wrap; margin-bottom: 1.2rem;
+        }
+        .intel-head .title {
+            font-size: 1.25rem; font-weight: 700; color: #E8C87E;
+            letter-spacing: .01em;
+        }
+        .intel-head .sub {
+            font-size: .82rem; color: rgba(201,182,138,.75);
+            margin-top: .3rem; display: block;
+        }
+        .intel-live {
+            display: inline-flex; align-items: center; gap: .35rem;
+            font-size: .72rem; color: rgba(201,182,138,.8);
+        }
+        .intel-live::before {
+            content: ''; width: 7px; height: 7px; border-radius: 50%;
+            background: #E8C87E;
+            box-shadow: 0 0 0 0 rgba(232,200,126,.55);
+            animation: intelPulse 2s infinite;
+        }
+        @keyframes intelPulse {
+            0% { box-shadow: 0 0 0 0 rgba(232,200,126,.55); }
+            70% { box-shadow: 0 0 0 8px rgba(232,200,126,0); }
+            100% { box-shadow: 0 0 0 0 rgba(232,200,126,0); }
+        }
+        .intel-scroll {
+            display: flex; gap: .9rem; overflow-x: auto; padding-bottom: .6rem;
+            scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;
+        }
+        .intel-scroll::-webkit-scrollbar { height: 6px; }
+        .intel-scroll::-webkit-scrollbar-thumb { background: rgba(217,182,121,.35); border-radius: 3px; }
+        .intel-card {
+            flex: 0 0 268px; scroll-snap-align: start;
+            background: #3A322B;
+            border: 1px solid rgba(217,182,121,.22);
+            border-radius: 10px; padding: 1rem 1.05rem;
+            color: #F1E8DF;
+            display: flex; flex-direction: column; gap: .55rem;
             transition: .2s;
         }
-        .search-box input:focus {
-            outline: none;
-            border-color: var(--color-gold);
-            box-shadow: 0 0 0 4px var(--color-gold-soft);
+        .intel-card:hover {
+            background: #423A32;
+            border-color: rgba(217,182,121,.55);
+            transform: translateY(-2px);
         }
-        .search-box button {
-            position: absolute;
-            right: 1rem;
-            top: 50%;
-            transform: translateY(-50%);
-            background: transparent;
-            border: none;
-            color: var(--color-primary);
-            font-size: 1rem;
-            cursor: pointer;
+        .intel-card:first-child {
+            background: #423A32;
+            border-color: #D9B679;
+            border-width: 1.5px;
         }
-        .search-tip {
-            font-size: .78rem;
-            color: var(--color-text-muted);
-            text-align: center;
-            margin-bottom: 1.6rem;
+        .intel-type {
+            display: inline-block; font-size: .62rem; font-weight: 700; letter-spacing: .06em;
+            padding: .2rem .55rem; border-radius: 4px; align-self: flex-start;
+            background: rgba(232,200,126,.14); color: #E8C87E;
+            border: 1px solid rgba(232,200,126,.5);
         }
-        .search-result-tip {
-            font-size: .82rem;
-            color: var(--color-primary);
-            text-align: center;
-            margin: -.8rem 0 1.6rem;
-            font-weight: 600;
+        .intel-type--drop {
+            background: rgba(201,107,90,.18); color: #E8A79B;
+            border-color: rgba(232,167,155,.5);
         }
+        .intel-type--new {
+            background: rgba(159,208,138,.14); color: #A8CE9A;
+            border-color: rgba(168,206,154,.45);
+        }
+        .intel-type--compare {
+            background: rgba(143,195,207,.14); color: #9BC5D0;
+            border-color: rgba(155,197,208,.45);
+        }
+        .intel-type--collector {
+            background: rgba(201,169,220,.14); color: #C9A9DC;
+            border-color: rgba(201,169,220,.45);
+        }
+        .intel-type--platform {
+            background: rgba(232,200,126,.14); color: #E8C87E;
+            border-color: rgba(232,200,126,.5);
+        }
+        .intel-text { font-size: .88rem; line-height: 1.65; color: rgba(241,232,223,.92); }
+        .intel-meta { font-size: .7rem; color: rgba(201,182,138,.55); margin-top: auto; }
+        .intel-note {
+            font-size: .72rem; color: rgba(201,182,138,.5);
+            margin-top: 1rem; line-height: 1.6;
+        }
+
+        /* ---------- 区块标题 ---------- */
         .section-head2 { margin-bottom: 1.4rem; display: flex; align-items: flex-end; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
         .section-head2 .title { font-size: 1.3rem; font-weight: 700; color: var(--color-text); }
         .section-head2 .sub-line { font-size: .85rem; color: var(--color-text-secondary); margin-top: .25rem; display: block; }
         .section-head2 .more { font-size: .85rem; color: var(--color-text-secondary); text-decoration: none; white-space: nowrap; }
         .section-head2 .more:hover { color: var(--color-primary); }
-        .section-note {
-            font-size: .78rem;
-            color: var(--color-text-muted);
-            line-height: 1.6;
-            margin-top: -.8rem;
-            margin-bottom: 2rem;
-        }
-        .finds-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 1.3rem;
-        }
+        .section-note { font-size: .78rem; color: var(--color-text-muted); line-height: 1.6; margin-top: -.8rem; margin-bottom: 2rem; }
+
+        /* ---------- 今日好货 ---------- */
+        .finds-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.3rem; }
         .finds-card { text-decoration: none; color: inherit; display: block; }
         .finds-image {
-            position: relative;
-            aspect-ratio: 1 / 1;
-            border-radius: 8px;
-            overflow: hidden;
-            background: var(--color-primary-light);
-            margin-bottom: .8rem;
+            position: relative; aspect-ratio: 1 / 1; border-radius: 8px;
+            overflow: hidden; background: var(--color-primary-light); margin-bottom: .8rem;
         }
         .finds-image img { width: 100%; height: 100%; object-fit: cover; display: block; transition: .3s; }
         .finds-card:hover .finds-image img { transform: scale(1.04); }
         .finds-title { font-size: .98rem; font-weight: 700; color: var(--color-text); margin-bottom: .15rem; }
         .finds-meta { font-size: .8rem; color: var(--color-text-secondary); margin-bottom: .4rem; }
         .finds-badge {
-            position: absolute;
-            top: .5rem;
-            right: .5rem;
-            display: inline-block;
-            font-size: .6rem;
-            font-weight: 600;
-            padding: .16rem .5rem;
-            border-radius: 4px;
+            position: absolute; top: .5rem; right: .5rem; display: inline-block;
+            font-size: .6rem; font-weight: 600; padding: .16rem .5rem; border-radius: 4px;
         }
-        .finds-card--organic .finds-badge,
-        .finds-card--promoted .finds-badge{
-            background: transparent;
-            color: var(--color-success);
-            border: 1px solid var(--color-success);
+        .finds-card--organic .finds-badge, .finds-card--promoted .finds-badge {
+            background: transparent; color: var(--color-success); border: 1px solid var(--color-success);
         }
+        .finds-reason {
+            font-size: .74rem; color: var(--color-primary);
+            background: var(--color-gold-soft); border-left: 2px solid var(--color-gold);
+            padding: .28rem .5rem; border-radius: 3px; margin: .35rem 0 .4rem;
+            line-height: 1.5;
+        }
+        .finds-timestamp { font-size: .68rem; color: var(--color-text-muted); }
         .finds-caption { font-size: .72rem; color: var(--color-text-muted); }
 
-        /* ---------- 价格显示 ---------- */
-        .finds-price,
-        .item-price {
-            display: flex;
-            align-items: baseline;
-            gap: .35rem;
-            flex-wrap: wrap;
-        }
+        /* ---------- 价格 ---------- */
+        .finds-price, .item-price { display: flex; align-items: baseline; gap: .35rem; flex-wrap: wrap; }
         .finds-price { margin: 0 0 .5rem; font-size: .88rem; }
-
-        .price-main {
-            color: var(--color-primary);
-            font-weight: 700;
-            letter-spacing: .01em;
-        }
-        .price-main--enquiry {
-            color: var(--color-text-secondary);
-            font-weight: 600;
-            letter-spacing: .02em;
-        }
+        .price-main { color: var(--color-primary); font-weight: 700; letter-spacing: .01em; }
+        .price-main--enquiry { color: var(--color-text-secondary); font-weight: 600; letter-spacing: .02em; }
         .price-tag {
-            display: inline-block;
-            font-size: .62rem;
-            font-weight: 500;
-            color: var(--color-text-muted);
-            border: 1px solid var(--color-border);
-            padding: 0 .3rem;
-            border-radius: 3px;
-            line-height: 1.5;
-            letter-spacing: .02em;
+            display: inline-block; font-size: .62rem; font-weight: 500;
+            color: var(--color-text-muted); border: 1px solid var(--color-border);
+            padding: 0 .3rem; border-radius: 3px; line-height: 1.5; letter-spacing: .02em;
         }
-        .price-tag--enquiry {
-            color: var(--color-bronze-muted);
-            border-color: var(--color-bronze-muted);
-        }
+        .price-tag--enquiry { color: var(--color-bronze-muted); border-color: var(--color-bronze-muted); }
 
-        .badge { position: absolute; top: 8px; left: 8px; padding: 3px 8px; font-size: 12px; border-radius: 4px; color: #fff; z-index: 2; }
-        .listing-card { position: relative; cursor: pointer; overflow: hidden; border-radius: 8px; background: var(--color-primary-light); text-decoration: none; transition: .25s; min-height: 300px; display: flex; flex-direction: column; }
-        .listing-card:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(37,34,30,.14); }
-        .listing-card img { width: 100%; height: auto; max-height: 220px; object-fit: cover; display: block; }
-        .listing-card h3 { padding: .45rem .55rem 0; font-size: .9rem; font-weight: 600; color: var(--color-text); line-height: 1.3; }
-        .listing-card .text-en { padding: .45rem .55rem 0; font-size: .78rem; color: var(--color-text-secondary); margin-top: .12rem; }
-        .listing-card .price-cn { padding: .3rem .55rem .55rem; font-size: .82rem; color: var(--color-primary); font-weight: 600; }
-        .listing-card .price-en { padding: 0 .55rem .55rem; font-size: .78rem; color: var(--color-text-muted); }
-
-        .goods-list {
-            display: grid;
-            grid-template-columns: repeat(6, 1fr);
-            gap: .8rem;
-            margin-top: .5rem;
-        }
-        .goods-list .item-card {
-            aspect-ratio: auto;
-            min-width: 0;
-            min-height: 0;
-            height: auto;
-        }
-        .goods-list .item-card img {
-            width: 100%;
-            height: auto;
-            aspect-ratio: 1 / 1;
-            max-height: none;
-            object-fit: cover;
-        }
+        /* ---------- 新上架好货 ---------- */
+        .goods-list { display: grid; grid-template-columns: repeat(6, 1fr); gap: .8rem; margin-top: .5rem; }
+        .goods-list .item-card { aspect-ratio: auto; min-width: 0; min-height: 0; height: auto; }
+        .goods-list .item-card img { width: 100%; height: auto; aspect-ratio: 1 / 1; max-height: none; object-fit: cover; }
         .item-card {
-            position: relative;
-            display: block;
-            aspect-ratio: 1 / 1;
-            border-radius: 8px;
-            overflow: hidden;
-            background: var(--color-primary-light);
-            text-decoration: none;
-            transition: .25s;
+            position: relative; display: block; aspect-ratio: 1 / 1; border-radius: 8px;
+            overflow: hidden; background: var(--color-primary-light); text-decoration: none; transition: .25s;
         }
-        .item-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 22px rgba(37,34,30,.14);
-        }
-        .item-card img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
+        .item-card:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(37,34,30,.14); }
+        .item-card img { width: 100%; height: 100%; object-fit: cover; display: block; }
         .item-card .item-info {
-            position: absolute;
-            left: .55rem;
-            right: .55rem;
-            bottom: .55rem;
-            background: rgba(20,17,14,.62);
-            color: #fff;
-            padding: .32rem .6rem;
-            border-radius: 4px;
-            display: flex;
-            flex-direction: column;
-            gap: .1rem;
+            position: absolute; left: .55rem; right: .55rem; bottom: .55rem;
+            background: rgba(20,17,14,.62); color: #fff; padding: .32rem .6rem;
+            border-radius: 4px; display: flex; flex-direction: column; gap: .1rem;
         }
-        /* 2026-09-18：最新藏品卡片移除名称，仅保留图片 + 价格。 */
-        .item-card .item-price {
-            font-size: .72rem;
-            gap: .3rem;
-        }
-        .item-card .price-main {
-            color: #F1E8DF;
-            font-weight: 600;
-        }
-        .item-card .price-main--enquiry {
-            color: rgba(241,232,223,.9);
-            font-weight: 500;
-        }
-        .item-card .price-tag {
-            font-size: .58rem;
-            padding: 0 .25rem;
-            color: rgba(241,232,223,.75);
-            border-color: rgba(241,232,223,.35);
-        }
-        .item-card .price-tag--enquiry {
-            color: rgba(241,232,223,.85);
-            border-color: rgba(241,232,223,.55);
-        }
-        .no-result {
-            text-align: center;
-            padding: 3rem 1rem;
-            color: var(--color-text-muted);
-        }
-        /* 2026-09-17：加载失败提示（Airtable 挂了时显示） */
+        .item-card .item-price { font-size: .72rem; gap: .3rem; }
+        .item-card .price-main { color: #F1E8DF; font-weight: 600; }
+        .item-card .price-main--enquiry { color: rgba(241,232,223,.9); font-weight: 500; }
+        .item-card .price-tag { font-size: .58rem; padding: 0 .25rem; color: rgba(241,232,223,.75); border-color: rgba(241,232,223,.35); }
+        .item-card .price-tag--enquiry { color: rgba(241,232,223,.85); border-color: rgba(241,232,223,.55); }
+
+        /* ---------- 状态 ---------- */
+        .no-result { text-align: center; padding: 3rem 1rem; color: var(--color-text-muted); }
         .load-error-tip {
-            text-align: center;
-            padding: 2rem 1rem;
-            color: var(--color-text-muted);
-            font-size: .85rem;
-            line-height: 1.7;
-            border: 1px dashed var(--color-border);
-            border-radius: 8px;
+            text-align: center; padding: 2rem 1rem; color: var(--color-text-muted);
+            font-size: .85rem; line-height: 1.7; border: 1px dashed var(--color-border);
+            border-radius: 8px; grid-column: 1 / -1;
         }
         .load-error-tip strong { color: var(--color-danger); }
-        .load-error-tip { grid-column: 1 / -1; }
-        /* 2026-09-19：加载骨架屏（数据到达前占位，避免空白闪烁） */
         @keyframes gd-shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
         .skeleton-card {
             border-radius: 8px;
             background: linear-gradient(90deg, var(--color-primary-light) 25%, #FAF6F0 50%, var(--color-primary-light) 75%);
-            background-size: 200% 100%;
-            animation: gd-shimmer 1.4s linear infinite;
+            background-size: 200% 100%; animation: gd-shimmer 1.4s linear infinite;
         }
         .skeleton-card--square { aspect-ratio: 1 / 1; }
         @media (prefers-reduced-motion: reduce) { .skeleton-card { animation: none; } }
         [hidden] { display: none !important; }
-        /* 2026-09-19：数据连接诊断面板（仅 ?debug=1 时出现） */
+
+        /* ---------- Debug ---------- */
         .gd-debug {
             position: fixed; left: 8px; bottom: 8px; z-index: 9999;
             max-width: min(94vw, 440px); max-height: 60vh; overflow: auto;
             background: rgba(20,17,14,.94); color: #E8E2D8;
             font: 12px/1.6 ui-monospace, Menlo, Consolas, monospace;
-            padding: 10px 12px; border-radius: 8px;
-            white-space: pre-wrap; word-break: break-all;
+            padding: 10px 12px; border-radius: 8px; white-space: pre-wrap; word-break: break-all;
         }
         .gd-debug .ok { color: #9FD08A; }
         .gd-debug .warn { color: #E6C46B; }
         .gd-debug .bad { color: #F0A090; }
-        .browse-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: .9rem;
-        }
+
+        /* ---------- 寻宝地图 ---------- */
+        .browse-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: .9rem; }
         .browse-card {
-            display: block;
-            text-align: center;
-            padding: 1.5rem 1rem;
-            background: var(--color-white);
-            border: 1px solid var(--color-border);
-            border-radius: 8px;
-            text-decoration: none;
-            color: var(--color-text);
-            font-weight: 600;
-            font-size: .95rem;
-            cursor: pointer;
-            transition: .2s;
+            position: relative; display: flex; flex-direction: column; gap: .35rem;
+            padding: 1.3rem 1.1rem; background: var(--color-white);
+            border: 1px solid var(--color-border); border-radius: 10px;
+            text-decoration: none; color: var(--color-text); cursor: pointer; transition: .2s;
+            overflow: hidden;
         }
-        .browse-card:hover {
-            border-color: var(--color-primary);
-            color: var(--color-primary);
-            background: var(--color-primary-light);
+        .browse-card:hover { border-color: var(--color-primary); color: var(--color-primary); background: var(--color-primary-light); }
+        .browse-card .cat-name { font-weight: 700; font-size: 1rem; }
+        .browse-card .cat-en { font-size: .74rem; color: var(--color-text-muted); letter-spacing: .04em; }
+        .browse-card .cat-stats { font-size: .78rem; color: var(--color-text-secondary); margin-top: .3rem; }
+        .browse-card .cat-range { font-size: .74rem; color: var(--color-bronze-muted); }
+
+        .price-hunt { margin-top: 1.4rem; }
+        .price-hunt-title { font-size: .85rem; font-weight: 700; color: var(--color-text-secondary); margin-bottom: .6rem; }
+        .price-hunt-list { display: flex; flex-wrap: wrap; gap: .5rem; }
+        .price-hunt-btn {
+            border: 1px solid var(--color-border); background: var(--color-white);
+            color: var(--color-text-secondary); font-size: .8rem; padding: .42rem .95rem;
+            border-radius: 999px; text-decoration: none; transition: .2s;
         }
-        .seller-intro { font-size: .92rem; color: var(--color-text-secondary); margin-bottom: 1.6rem; max-width: 640px; }
-        .seller-simple-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 1rem;
-            margin-bottom: 1.3rem;
+        .price-hunt-btn:hover { border-color: var(--color-gold); color: var(--color-gold); background: var(--color-gold-soft); }
+
+        /* ---------- 情报/知识 ---------- */
+        .insight-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; }
+        .insight-card {
+            background: var(--color-white); border: 1px solid var(--color-border);
+            border-radius: 10px; padding: 1.2rem 1.15rem 1.3rem;
+            text-decoration: none; color: var(--color-text); transition: .2s; display: block;
         }
-        .seller-simple-card {
-            background: var(--color-white);
-            border: 1px solid var(--color-border);
-            border-radius: 8px;
-            padding: 1.3rem 1.2rem;
-        }
-        .seller-simple-card h4 { font-size: 1rem; color: var(--color-text); margin-bottom: .45rem; }
-        .seller-simple-card p { font-size: .82rem; color: var(--color-text-secondary); }
-        .view-pricing-link {
-            display: inline-block;
-            font-size: .88rem;
-            color: var(--color-primary);
-            font-weight: 600;
-            text-decoration: none;
-        }
-        .view-pricing-link:hover { text-decoration: underline; }
-        .info-service-note {
-            font-size: .8rem;
-            color: var(--color-text-secondary);
-            margin-top: 1.6rem;
-            line-height: 1.7;
-            max-width: 640px;
-        }
-        .info-service-note strong { color: var(--color-text); }
-        .buyer-simple p { font-size: .92rem; color: var(--color-text-secondary); margin-bottom: .7rem; }
-        .buyer-simple a { color: var(--color-primary); font-weight: 600; text-decoration: none; font-size: .88rem; }
-        .buyer-simple a:hover { text-decoration: underline; }
-        .how-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1rem;
-            margin: 1.6rem 0 1.4rem;
-            text-align: left;
-        }
+        .insight-card:hover { border-color: var(--color-gold); transform: translateY(-2px); box-shadow: 0 6px 16px rgba(176,138,69,.12); }
+        .insight-kicker { font-size: .68rem; font-weight: 700; letter-spacing: .08em; color: var(--color-bronze-muted); margin-bottom: .4rem; }
+        .insight-title { font-size: 1rem; font-weight: 700; margin-bottom: .4rem; line-height: 1.4; }
+        .insight-desc { font-size: .82rem; color: var(--color-text-secondary); line-height: 1.55; }
+
+        /* ---------- 平台如何帮你避坑（5 条，同款卡片） ---------- */
+        .how-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1rem; margin: 1.6rem 0 1.4rem; text-align: left; }
         .how-card {
-            background: var(--color-white);
-            border: 1px solid var(--color-border);
-            border-radius: 8px;
-            padding: 1.2rem 1.1rem 1.3rem;
-            transition: .2s;
+            background: var(--color-white); border: 1px solid var(--color-border);
+            border-radius: 10px; padding: 1.2rem 1.1rem 1.3rem; transition: .2s;
         }
-        .how-card:hover {
-            border-color: var(--color-gold);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(176,138,69,.12);
-        }
+        .how-card:hover { border-color: var(--color-gold); transform: translateY(-2px); box-shadow: 0 6px 16px rgba(176,138,69,.12); }
         .how-num {
-            font-family: "Inter Display", "Inter", "Geist",
-                         -apple-system, BlinkMacSystemFont, "Segoe UI",
-                         "Helvetica Neue", Arial, sans-serif;
-            font-size: .78rem;
-            font-weight: 700;
-            color: var(--color-bronze-muted);
-            letter-spacing: .08em;
-            margin-bottom: .35rem;
+            font-family: "Inter Display", "Inter", "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+            font-size: .78rem; font-weight: 700; color: var(--color-bronze-muted);
+            letter-spacing: .08em; margin-bottom: .35rem;
         }
-        .how-title {
-            font-size: 1rem;
-            font-weight: 700;
-            color: var(--color-text);
-            margin-bottom: .35rem;
+        .how-title { font-size: 1rem; font-weight: 700; color: var(--color-text); margin-bottom: .35rem; line-height: 1.35; }
+        .how-desc { font-size: .82rem; color: var(--color-text-secondary); line-height: 1.55; }
+
+        /* ---------- 卖家招募 ---------- */
+        .seller-cta {
+            background: linear-gradient(135deg, var(--color-primary-light) 0%, #FAF3EA 100%);
+            border: 1px solid var(--color-border); border-radius: 14px;
+            padding: 2rem 1.6rem; text-align: center;
         }
-        .how-desc {
-            font-size: .82rem;
-            color: var(--color-text-secondary);
-            line-height: 1.55;
+        .seller-cta .title { font-size: 1.35rem; font-weight: 700; color: var(--color-text); margin-bottom: .5rem; }
+        .seller-cta .desc { font-size: .9rem; color: var(--color-text-secondary); margin-bottom: 1.2rem; line-height: 1.6; }
+        .seller-cta .btn-publish { font-size: .92rem; padding: .68rem 1.7rem; }
+        .seller-cta .cta-note { font-size: .78rem; color: var(--color-text-muted); margin-top: .9rem; }
+
+        /* ---------- FAQ ---------- */
+        .faq-list { max-width: 760px; margin: 0 auto; }
+        .faq-item { border-bottom: 1px solid var(--color-border); padding: .2rem 0; }
+        .faq-item summary {
+            cursor: pointer; padding: .95rem .2rem; font-size: .95rem; font-weight: 600;
+            color: var(--color-text); list-style: none; position: relative; padding-right: 2rem;
         }
-        .how-foot {
-            font-size: .85rem;
-            color: var(--color-text-secondary);
-            margin-top: .6rem;
+        .faq-item summary::-webkit-details-marker { display: none; }
+        .faq-item summary::after {
+            content: '+'; position: absolute; right: .2rem; top: 50%; transform: translateY(-50%);
+            font-size: 1.15rem; color: var(--color-primary); font-weight: 400; transition: .2s;
         }
+        .faq-item[open] summary::after { content: '−'; }
+        .faq-item .faq-answer { font-size: .86rem; color: var(--color-text-secondary); line-height: 1.7; padding: 0 .2rem 1rem; }
+
+        /* ---------- Footer ---------- */
         footer {
-            text-align: center;
-            padding: 2.2rem 5% 1.8rem;
-            background: var(--color-white);
-            color: var(--color-text-secondary);
-            margin-top: 1rem;
-            font-size: .78rem;
+            text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-white);
+            color: var(--color-text-secondary); margin-top: 1rem; font-size: .78rem;
             border-top: 1px solid var(--color-border);
         }
-        .footer-nav {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 1.3rem;
-            margin-bottom: 1.2rem;
-        }
+        .footer-nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 1.3rem; margin-bottom: 1.2rem; }
         .footer-nav a { color: var(--color-text-secondary); text-decoration: none; font-size: .82rem; }
         .footer-nav a:hover { color: var(--color-primary); }
-        .footer-disclaimer {
-            max-width: 620px;
-            margin: 0 auto 1.1rem;
-            font-size: .74rem;
-            line-height: 1.65;
-            color: var(--color-text-muted);
-        }
+        .footer-disclaimer { max-width: 620px; margin: 0 auto 1.1rem; font-size: .74rem; line-height: 1.65; color: var(--color-text-muted); }
+
         .app-install-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: .25rem;
-            padding: .15rem .5rem;
-            border: 1px solid var(--color-border);
-            border-radius: 5px;
-            background: var(--color-bg);
-            color: var(--color-text-secondary);
-            text-decoration: none;
-            font-size: .68rem;
-            font-weight: 500;
-            transition: .2s;
-            cursor: pointer;
-            vertical-align: middle;
-            margin-left: .5rem;
+            display: inline-flex; align-items: center; gap: .3rem; margin-left: .6rem;
+            padding: .3rem .7rem; border: 1px solid #e3d9cf; border-radius: 999px;
+            color: #7a6a5c; font-size: .78rem; text-decoration: none; vertical-align: middle; transition: .2s;
         }
-        .app-install-btn:hover { border-color: var(--color-primary); color: var(--color-primary); background: var(--color-primary-light); }
+        .app-install-btn:hover { border-color: #8A5A3B; color: #8A5A3B; background: #f0e4d8; }
         .app-install-btn svg { width: 12px; height: 12px; flex-shrink: 0; fill: currentColor; }
+
         [data-lang="en"] .zh { display: none; }
         [data-lang="zh"] .en { display: none; }
+
+        /* ---------- 响应式 ---------- */
+        @media (max-width: 1100px) {
+            .how-grid { grid-template-columns: repeat(3, 1fr); }
+        }
         @media (max-width: 820px) {
             header { height: 62px; gap: .6rem; }
             .btn-publish { padding: .45rem .85rem; font-size: .8rem; }
             .container { padding-top: 2.4rem; }
             .finds-grid { grid-template-columns: repeat(2, 1fr); }
             .goods-list { grid-template-columns: repeat(4, 1fr); }
+            .intel-card { flex: 0 0 230px; }
+            .how-grid { grid-template-columns: repeat(2, 1fr); }
         }
         @media (max-width: 560px) {
             .brand h1 { font-size: 1.15rem; }
             .container { padding: 2rem 4.5% 3rem; }
             section { margin-bottom: 3.8rem; }
-            /* 2026-09-17：已确认此区块不含 .btn-publish span.en { display: inline; }，
-               中文态下按钮只显示「刊登藏品」，不再出现双份文案。 */
             .goods-list { grid-template-columns: repeat(3, 1fr); gap: .6rem; }
             .finds-grid { grid-template-columns: repeat(2, 1fr); gap: .8rem; }
             .item-card .item-info { padding: .22rem .45rem; gap: .05rem; }
@@ -826,30 +573,9 @@
             .item-card .price-tag { font-size: .52rem; padding: 0 .2rem; }
             .finds-price { font-size: .82rem; }
             .how-grid { grid-template-columns: 1fr; }
-        }
-
-        .sidebar-lang-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: .4rem;
-            width: calc(100% - 2.8rem);
-            margin: 1rem 1.4rem .8rem;
-            padding: .62rem .9rem;
-            border: 1px solid var(--color-border);
-            border-radius: 8px;
-            background: var(--color-white);
-            color: var(--color-text-secondary);
-            font-family: inherit;
-            font-size: .9rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: .2s;
-        }
-        .sidebar-lang-btn:hover {
-            border-color: var(--color-primary);
-            color: var(--color-primary);
-            background: var(--color-primary-light);
+            .intel-section { padding: 1.4rem 1.1rem 1.1rem; border-radius: 12px; }
+            .intel-card { flex: 0 0 210px; }
+            .intel-text { font-size: .84rem; }
         }
     </style>
 </head>
@@ -859,6 +585,7 @@
         <span class="en">Founder-Dealer Benefit | Limited 88 seats · Free to join · First 2 listings free.</span>
         <button class="announce-close" onclick="document.getElementById('announceBar').style.display='none';localStorage.setItem('announceClosed','yes')" aria-label="close">×</button>
     </div>
+
     <header>
         <div style="display:flex; align-items:center; gap:.9rem;">
             <button class="menu-toggle" onclick="openSidebar()" aria-label="menu">☰</button>
@@ -874,6 +601,7 @@
             <button class="lang-btn" onclick="toggleLang()">EN</button>
         </div>
     </header>
+
     <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
     <aside class="sidebar" id="sidebar">
         <button class="sidebar-toggle-inner" onclick="closeSidebar()" aria-label="close menu">☰</button>
@@ -882,40 +610,54 @@
         </div>
         <nav class="sidebar-nav">
             <a href="#hero" class="sidebar-link active" onclick="closeSidebar()"><span class="zh">首页</span><span class="en">Home</span></a>
-            <a href="#today-finds" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 今日发现</span><span class="en">· Today's Finds</span></a>
-            <a href="#new-listings" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 最新藏品</span><span class="en">· New Listings</span></a>
+            <a href="#daily-intel" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 今日情报</span><span class="en">· Daily Intel</span></a>
+            <a href="#today-finds" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 今日好货</span><span class="en">· Today's Picks</span></a>
+            <a href="#new-listings" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 新上架好货</span><span class="en">· New Arrivals</span></a>
             <a href="collection.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">藏品库</span><span class="en">Collection</span></a>
             <a href="categories/porcelain.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 瓷器</span><span class="en">· Porcelain</span></a>
             <a href="categories/jade.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 玉器</span><span class="en">· Jade</span></a>
             <a href="categories/coins.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 钱币</span><span class="en">· Coins</span></a>
             <a href="categories/paintings.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 书画</span><span class="en">· Paintings &amp; Calligraphy</span></a>
             <a href="categories/misc.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 杂项</span><span class="en">· Miscellaneous</span></a>
+            <a href="insights/index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">情报 / 知识</span><span class="en">Insights</span></a>
             <a href="sellers/index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">藏家主页</span><span class="en">Collector Gallery</span></a>
             <a href="pricing.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">刊登藏品</span><span class="en">List an Item</span></a>
             <a href="about.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">联系我们</span><span class="en">Contact</span></a>
             <button type="button" class="sidebar-lang-btn" onclick="toggleLang()" aria-label="Switch language"><span class="zh">🌐 English</span><span class="en">🌐 中文</span></button>
         </nav>
     </aside>
+
     <main class="container">
+        <!-- ============ HERO ============ -->
         <section id="hero" style="padding-top: 0;">
             <div class="hero-clean">
                 <div class="hero-eyebrow">Chinese Antiques &amp; Collectibles</div>
                 <div class="hero-title-main">
-                    <span class="zh">发现值得收藏的古董与藏品</span>
-                    <span class="en">Discover Chinese Antiques & Collectibles</span>
+                    <span class="zh">每天 5 分钟，看看今天有什么漏可捡</span>
+                    <span class="en">5 minutes a day. See what's undervalued today.</span>
                 </div>
                 <div class="hero-desc">
-                    <span class="zh">浏览藏品信息，了解器物，并直接联系卖家。</span>
-                    <span class="en">Explore listings, learn about each piece, and connect directly with sellers.</span>
+                    <span class="zh">新加坡本地藏家直供 · 瓷器 / 玉器 / 钱币 / 书画 · 平台不经手交易</span>
+                    <span class="en">Direct from Singapore collectors · No middleman, no platform transaction</span>
                 </div>
-                <a href="#new-listings" class="hero-btn"><span class="zh">浏览藏品</span><span class="en">Browse Listings</span></a>
+                <a href="#new-listings" class="hero-btn"><span class="zh">开始寻宝</span><span class="en">Start Hunting</span></a>
+
                 <div class="search-box">
-                    <input type="text"
-                           id="searchInput"
-                           placeholder="搜索藏品、类别或关键词"
+                    <input type="text" id="searchInput"
+                           placeholder="试试搜「青花」「康熙通宝」「和田玉」…"
                            aria-label="搜索藏品" />
                     <button type="button" onclick="doSearch()" aria-label="search">🔍</button>
                 </div>
+
+                <div class="hot-tags" id="hotTags">
+                    <button type="button" class="hot-tag" data-kw="青花"><span class="zh">青花瓷</span><span class="en">Blue &amp; White</span></button>
+                    <button type="button" class="hot-tag" data-kw="康熙通宝"><span class="zh">康熙通宝</span><span class="en">Kangxi Coin</span></button>
+                    <button type="button" class="hot-tag" data-kw="和田玉"><span class="zh">和田玉</span><span class="en">Hetian Jade</span></button>
+                    <button type="button" class="hot-tag" data-kw="书画"><span class="zh">清代书画</span><span class="en">Qing Painting</span></button>
+                    <button type="button" class="hot-tag" data-kw="蜜蜡"><span class="zh">老蜜蜡</span><span class="en">Amber</span></button>
+                    <button type="button" class="hot-tag" data-kw="香炉"><span class="zh">铜香炉</span><span class="en">Bronze Censer</span></button>
+                </div>
+
                 <div id="searchResultTip" class="search-result-tip" role="status" aria-live="polite" style="display:none;">
                     <span class="zh"></span><span class="en"></span>
                 </div>
@@ -923,21 +665,47 @@
                 <div class="search-tip en">Porcelain · Jade · Coins · Paintings · Miscellaneous</div>
             </div>
         </section>
-		<section id="today-finds">
+
+        <!-- ============ 🟢 今日情报 · 捡漏雷达（深棕底 · 金棕描边） ============ -->
+        <section id="daily-intel" class="intel-section" aria-labelledby="intelTitle">
+            <div class="intel-head">
+                <div>
+                    <span class="title" id="intelTitle">
+                        <span class="zh">📡 今日情报 · 古董捡漏寻宝</span>
+                        <span class="en">📡 Today's Intel · Antique Treasure Hunt</span>
+                    </span>
+                    <span class="sub zh">编辑整理，不是商品广告。看看今天市场在发生什么。</span>
+                    <span class="sub en">Editorially curated. Not ads. What's moving in the market today.</span>
+                </div>
+                <span class="intel-live"><span class="zh">实时更新</span><span class="en">Live</span></span>
+            </div>
+            <div class="intel-scroll" id="intelScroll" aria-busy="true"></div>
+            <p class="intel-note zh">情报由平台编辑整理，部分内容可能引用卖家提供的信息；不构成鉴定、估价或投资建议。</p>
+            <p class="intel-note en">Compiled by editors; some items reference seller-provided info. Not authentication, valuation, or investment advice.</p>
+        </section>
+
+        <!-- ============ 今日好货 ============ -->
+        <section id="today-finds">
             <div class="section-head2">
                 <div>
-                    <span class="title zh">今日发现</span><span class="title en">Today's Finds</span>
-                    <span class="sub-line zh">今天值得看看</span><span class="sub-line en">Worth a look today</span>
+                    <span class="title zh">今日好货</span>
+                    <span class="title en">Today's Picks</span>
+                    <span class="sub-line zh">今日有宝 · 人工精选</span>
+                    <span class="sub-line en">Handpicked today · Editor selected</span>
                 </div>
             </div>
-            <p class="section-note zh">今日发现为本平台人工精选藏品展示，部分位置为付费置顶；不代表平台鉴定或保真。</p>
-            <p class="section-note en">Today's Finds are hand-selected highlights. A small number of slots are paid promoted placements. No authentication is provided.</p>
-            <!-- 2026-09-17：移除静态卡片，改为空容器由 JS 从 Airtable 加载。 -->
+            <p class="section-note zh">为本平台编辑精选或藏家自荐，仅供信息参考，不代表平台鉴定或保真。</p>
+            <p class="section-note en">Editorially selected or collector-submitted. For reference only; no authentication or authenticity guarantee is provided.</p>
             <div class="finds-grid" id="todayFindsGrid"></div>
         </section>
+
+        <!-- ============ 新上架好货 ============ -->
         <section id="new-listings">
             <div class="section-head2">
-                <div><span class="title zh">最新藏品</span><span class="title en">Recently added</span></div>
+                <div>
+                    <span class="title zh">新上架好货</span>
+                    <span class="title en">New Arrivals</span>
+                </div>
                 <a href="collection.html" class="more zh">查看全部 →</a>
                 <a href="collection.html" class="more en">View All →</a>
             </div>
@@ -945,50 +713,157 @@
             <div id="noResult" class="no-result zh" style="display:none;">暂无匹配藏品</div>
             <div id="noResultEn" class="no-result en" style="display:none;">No items found</div>
         </section>
+
+        <!-- ============ 寻宝地图 ============ -->
         <section id="browse">
             <div class="section-head2">
-                <div><span class="title zh">按类别浏览</span><span class="title en">Explore by Category</span></div>
+                <div>
+                    <span class="title zh">🗺️ 寻宝地图</span><span class="title en">🗺️ Treasure Map</span>
+                    <span class="sub-line zh">按类别或价位，找到属于你的那件</span>
+                    <span class="sub-line en">Browse by category or budget</span>
+                </div>
             </div>
             <div class="browse-grid">
-                <a href="categories/porcelain.html" class="browse-card"><span class="zh">瓷器</span><span class="en">Porcelain</span></a>
-                <a href="categories/jade.html" class="browse-card"><span class="zh">玉器</span><span class="en">Jade</span></a>
-                <a href="categories/coins.html" class="browse-card"><span class="zh">钱币</span><span class="en">Coins</span></a>
-                <a href="categories/paintings.html" class="browse-card"><span class="zh">书画</span><span class="en">Paintings &amp; Calligraphy</span></a>
-                <a href="categories/misc.html" class="browse-card"><span class="zh">杂项</span><span class="en">Miscellaneous</span></a>
+                <a href="categories/porcelain.html" class="browse-card">
+                    <span class="cat-name zh">瓷器</span><span class="cat-name en">Porcelain</span>
+                    <span class="cat-en zh">Porcelain</span><span class="cat-en en">瓷器</span>
+                    <span class="cat-stats zh" data-cat-count="porcelain">— 件在售</span>
+                    <span class="cat-stats en" data-cat-count="porcelain">— items</span>
+                    <span class="cat-range">S$80 – S$12,000</span>
+                </a>
+                <a href="categories/jade.html" class="browse-card">
+                    <span class="cat-name zh">玉器</span><span class="cat-name en">Jade</span>
+                    <span class="cat-en zh">Jade</span><span class="cat-en en">玉器</span>
+                    <span class="cat-stats zh" data-cat-count="jade">— 件在售</span>
+                    <span class="cat-stats en" data-cat-count="jade">— items</span>
+                    <span class="cat-range">S$150 – S$8,000</span>
+                </a>
+                <a href="categories/coins.html" class="browse-card">
+                    <span class="cat-name zh">钱币</span><span class="cat-name en">Coins</span>
+                    <span class="cat-en zh">Coins</span><span class="cat-en en">钱币</span>
+                    <span class="cat-stats zh" data-cat-count="coins">— 件在售</span>
+                    <span class="cat-stats en" data-cat-count="coins">— items</span>
+                    <span class="cat-range">S$20 – S$3,500</span>
+                </a>
+                <a href="categories/paintings.html" class="browse-card">
+                    <span class="cat-name zh">书画</span><span class="cat-name en">Paintings</span>
+                    <span class="cat-en zh">Paintings &amp; Calligraphy</span><span class="cat-en en">书画</span>
+                    <span class="cat-stats zh" data-cat-count="paintings">— 件在售</span>
+                    <span class="cat-stats en" data-cat-count="paintings">— items</span>
+                    <span class="cat-range">S$200 – S$15,000</span>
+                </a>
+                <a href="categories/misc.html" class="browse-card">
+                    <span class="cat-name zh">杂项</span><span class="cat-name en">Miscellaneous</span>
+                    <span class="cat-en zh">Miscellaneous</span><span class="cat-en en">杂项</span>
+                    <span class="cat-stats zh" data-cat-count="misc">— 件在售</span>
+                    <span class="cat-stats en" data-cat-count="misc">— items</span>
+                    <span class="cat-range">S$30 – S$6,000</span>
+                </a>
             </div>
-            <div style="margin-top:1.1rem;">
+
+            <div class="price-hunt">
+                <div class="price-hunt-title zh">按价位寻宝</div>
+                <div class="price-hunt-title en">Hunt by Budget</div>
+                <div class="price-hunt-list">
+                    <a href="collection.html?max=100" class="price-hunt-btn">S$100 以下</a>
+                    <a href="collection.html?min=100&max=500" class="price-hunt-btn">S$100 – 500</a>
+                    <a href="collection.html?min=500&max=2000" class="price-hunt-btn">S$500 – 2,000</a>
+                    <a href="collection.html?min=2000" class="price-hunt-btn">S$2,000 以上</a>
+                </div>
+            </div>
+
+            <div style="margin-top:1.4rem;">
                 <a href="sellers/index.html" class="more zh">藏家主页 →</a>
                 <a href="sellers/index.html" class="more en">Collector Gallery →</a>
             </div>
         </section>
+
+        <!-- ============ 情报 / 知识 ============ -->
+        <section id="insights">
+            <div class="section-head2">
+                <div>
+                    <span class="title zh">📖 情报 / 知识</span><span class="title en">📖 Insights &amp; Guides</span>
+                    <span class="sub-line zh">看懂器物，比买到器物更重要</span>
+                    <span class="sub-line en">Knowing the piece matters more than owning it</span>
+                </div>
+                <a href="insights/index.html" class="more zh">全部情报 →</a>
+                <a href="insights/index.html" class="more en">All insights →</a>
+            </div>
+            <div class="insight-grid">
+                <a href="insights/qing-porcelain-dating.html" class="insight-card">
+                    <div class="insight-kicker zh">入门指南</div><div class="insight-kicker en">BEGINNER</div>
+                    <div class="insight-title zh">清代民窑青花怎么分辨年代？3 个上手要点</div>
+                    <div class="insight-title en">Dating Qing folk kiln blue-and-white: 3 hands-on signals</div>
+                    <div class="insight-desc zh">釉面、胎质、发色，三个最容易上手的判断维度。</div>
+                    <div class="insight-desc en">Glaze, body, and pigment tone — three of the easiest entry points.</div>
+                </a>
+                <a href="insights/singapore-coin-market.html" class="insight-card">
+                    <div class="insight-kicker zh">行情观察</div><div class="insight-kicker en">MARKET</div>
+                    <div class="insight-title zh">新加坡本地钱币市场近半年行情简析</div>
+                    <div class="insight-title en">Singapore coin market: a half-year snapshot</div>
+                    <div class="insight-desc zh">清钱、民国币、东南亚流通币的成交趋势与价格区间。</div>
+                    <div class="insight-desc en">Qing, Republican, and SE-Asian circulating coins trends.</div>
+                </a>
+                <a href="insights/jade-buyer-pitfalls.html" class="insight-card">
+                    <div class="insight-kicker zh">避坑手册</div><div class="insight-kicker en">PITFALLS</div>
+                    <div class="insight-title zh">新手买玉器，最容易踩的 5 个坑</div>
+                    <div class="insight-title en">5 pitfalls new jade buyers fall into</div>
+                    <div class="insight-desc zh">从「和田」二字说起，谈谈如何不被话术带走。</div>
+                    <div class="insight-desc en">Starting from the word "Hetian" — how not to be talked into it.</div>
+                </a>
+                <a href="insights/what-is-jianlou.html" class="insight-card">
+                    <div class="insight-kicker zh">捡漏逻辑</div><div class="insight-kicker en">STRATEGY</div>
+                    <div class="insight-title zh">什么是"捡漏"？古董捡漏的 3 个真实逻辑</div>
+                    <div class="insight-title en">What is "jianlou"? 3 real logics behind bargain hunting</div>
+                    <div class="insight-desc zh">信息差、时间差、认知差——捡漏不是运气。</div>
+                    <div class="insight-desc en">Information, timing, and knowledge gaps — not luck.</div>
+                </a>
+            </div>
+        </section>
+
+        <!-- ============ 平台如何帮你避坑（5 条，同款卡片） ============ -->
         <section id="services">
-            <div style="text-align:center;max-width:860px;margin:0 auto;">
-                <h2 class="zh">平台运作方式</h2>
-                <h2 class="en">How Gudong Works</h2>
+            <div style="text-align:center;max-width:1080px;margin:0 auto;">
+                <h2 class="zh">平台如何帮你避坑</h2>
+                <h2 class="en">How Gudong Helps You Avoid Pitfalls</h2>
                 <div class="how-grid">
                     <div class="how-card">
                         <div class="how-num">01</div>
-                        <div class="how-title zh">发现古董与收藏品</div>
-                        <div class="how-title en">Discover</div>
-                        <div class="how-desc zh">浏览感兴趣的古董与藏品。</div>
-                        <div class="how-desc en">Browse interesting antiques and collectibles.</div>
+                        <div class="how-title zh">信息透明</div>
+                        <div class="how-title en">Transparency</div>
+                        <div class="how-desc zh">每件藏品公开来源说明与卖家自述，不做美化包装。</div>
+                        <div class="how-desc en">Each listing exposes source notes and seller statements as-is.</div>
                     </div>
                     <div class="how-card">
                         <div class="how-num">02</div>
-                        <div class="how-title zh">了解公开信息</div>
-                        <div class="how-title en">Explore</div>
-                        <div class="how-desc zh">查看图片、描述与可用的参考信息。</div>
-                        <div class="how-desc en">Explore photos, descriptions and available reference information.</div>
+                        <div class="how-title zh">不经手交易</div>
+                        <div class="how-title en">No Middleman</div>
+                        <div class="how-desc zh">平台不收款、不鉴定、不担保，买卖双方直接联系。</div>
+                        <div class="how-desc en">No payment, no authentication, no guarantee — buyers and sellers deal directly.</div>
                     </div>
                     <div class="how-card">
                         <div class="how-num">03</div>
-                        <div class="how-title zh">直接联系</div>
-                        <div class="how-title en">Contact</div>
-                        <div class="how-desc zh">对藏品感兴趣，直接联系信息提供者。</div>
-                        <div class="how-desc en">Contact the seller directly if a piece interests you.</div>
+                        <div class="how-title zh">情报辅助</div>
+                        <div class="how-title en">Market Intel</div>
+                        <div class="how-desc zh">提供同类对比与行情观察，帮你判断价格是否合理。</div>
+                        <div class="how-desc en">Comparable items and market notes to help you judge pricing.</div>
+                    </div>
+                    <div class="how-card">
+                        <div class="how-num">04</div>
+                        <div class="how-title zh">风险提示</div>
+                        <div class="how-title en">Risk Notice</div>
+                        <div class="how-desc zh">所有藏品信息由卖家提供，请自行核验后再决策。</div>
+                        <div class="how-desc en">All information is seller-provided. Verify independently before deciding.</div>
+                    </div>
+                    <div class="how-card">
+                        <div class="how-num">05</div>
+                        <div class="how-title zh">专家连线</div>
+                        <div class="how-title en">Expert Line</div>
+                        <div class="how-desc zh">平台可应要求引荐专家提供个人意见，仅供参考，但不构成真伪鉴定。是否采纳由你决定，平台不介入、不担保。</div>
+                        <div class="how-desc en">On request, the platform can refer you to a specialist for a personal opinion, for reference only. This does not constitute authentication. Whether to accept it is your call; the platform does not intervene or guarantee.</div>
                     </div>
                 </div>
-                    <div style="text-align:center; margin-top:2rem;">
+                <div style="text-align:center; margin-top:1.4rem;">
                     <a href="pricing.html#seller-services" class="btn-publish">
                         <span class="zh">刊登藏品信息</span><span class="en">List an Item</span>
                     </a>
@@ -997,40 +872,86 @@
                 </div>
             </div>
         </section>
+
+        <!-- ============ 卖家招募 ============ -->
+        <section id="seller-cta">
+            <div class="seller-cta">
+                <div class="title zh">📣 创始藏家招募 · 限量 88 席</div>
+                <div class="title en">📣 Founding Collectors · Limited to 88</div>
+                <div class="desc zh">前 2 件藏品免费刊登 · 永久保留藏家主页 · 直接对接本地买家</div>
+                <div class="desc en">First 2 listings free · Permanent collector page · Direct access to local buyers</div>
+                <a href="pricing.html#seller-services" class="btn-publish">
+                    <span class="zh">立即入驻 →</span><span class="en">Join Now →</span>
+                </a>
+                <div class="cta-note zh">名额有限，按申请顺序审核。</div>
+                <div class="cta-note en">Limited seats, reviewed in application order.</div>
+            </div>
+        </section>
+
+        <!-- ============ FAQ ============ -->
+        <section id="faq">
+            <div class="section-head2" style="justify-content:center;text-align:center;">
+                <div>
+                    <span class="title zh">常见问题</span><span class="title en">Frequently Asked</span>
+                </div>
+            </div>
+            <div class="faq-list">
+                <details class="faq-item">
+                    <summary><span class="zh">平台会帮忙鉴定藏品吗？</span><span class="en">Does Gudong authenticate items?</span></summary>
+                    <div class="faq-answer zh">不会。古董集是信息发现平台，不提供鉴定、估价或保真服务。所有藏品描述与图片均由卖家提供，请自行核验或咨询独立专家。</div>
+                    <div class="faq-answer en">No. Gudong is a discovery platform and does not provide authentication, valuation, or guarantees. All descriptions and images are seller-provided — verify independently or consult a specialist.</div>
+                </details>
+                <details class="faq-item">
+                    <summary><span class="zh">可以请平台推荐专家给参考意见吗？</span><span class="en">Can Gudong refer me to an expert for a reference opinion?</span></summary>
+                    <div class="faq-answer zh">可以。平台可应要求引荐专家提供个人意见，仅供参考，但不构成真伪鉴定。是否采纳由你决定，平台不介入、不担保；费用与结论由你与专家直接沟通。</div>
+                    <div class="faq-answer en">Yes. On request, the platform can refer you to a specialist for a personal opinion, for reference only. This does not constitute authentication. Whether to accept it is your call; the platform does not intervene or guarantee. Fees and conclusions are handled directly between you and the expert.</div>
+                </details>
+                <details class="faq-item">
+                    <summary><span class="zh">怎么联系卖家？</span><span class="en">How do I contact a seller?</span></summary>
+                    <div class="faq-answer zh">在藏品详情页可直接看到卖家提供的联系方式，买卖双方直接沟通，平台不经手交易。</div>
+                    <div class="faq-answer en">Contact details are shown on the item detail page. Buyers and sellers communicate directly; the platform does not handle transactions.</div>
+                </details>
+                <details class="faq-item">
+                    <summary><span class="zh">藏品价格是平台定的吗？</span><span class="en">Does Gudong set the prices?</span></summary>
+                    <div class="faq-answer zh">不是。所有价格由卖家自行设定，平台仅提供展示。部分藏品为「私聊询价」，需直接联系卖家获取报价。</div>
+                    <div class="faq-answer en">No. All prices are set by sellers. Some items are "Enquire" only — contact the seller directly for pricing.</div>
+                </details>
+                <details class="faq-item">
+                    <summary><span class="zh">刊登藏品收费吗？</span><span class="en">Is listing free?</span></summary>
+                    <div class="faq-answer zh">创始藏家限量 88 席免费入驻，前 2 件藏品免费刊登。后续刊登规则与费用请见服务价格页。</div>
+                    <div class="faq-answer en">Founding collectors (limited to 88) join free, with the first 2 listings free. See the pricing page for subsequent listing rules and fees.</div>
+                </details>
+            </div>
+        </section>
     </main>
+
     <footer>
         <div class="footer-nav">
             <a href="pricing.html#buyer-services" class="zh">委托找货</a><a href="pricing.html#buyer-services" class="en">Sourcing</a>
+            <a href="insights/index.html" class="zh">情报 / 知识</a><a href="insights/index.html" class="en">Insights</a>
             <a href="privacy.html" class="zh">隐私政策</a><a href="privacy.html" class="en">Privacy</a>
             <a href="terms.html" class="zh">用户条款</a><a href="terms.html" class="en">Terms</a>
         </div>
-        <!-- 2026-09-18：详细免责声明见 terms.html「用户条款」，页脚仅保留一句话平台定位。 -->
         <p class="footer-disclaimer zh">gudong.app 是信息发现平台，而非交易平台。</p>
         <p class="footer-disclaimer en">gudong.app is an information and discovery platform for antiques and collectibles.</p>
         <p class="zh" style="margin-bottom:0;">© 2026 古董集 · gudong.app <a href="javascript:void(0)" class="app-install-btn" onclick="event.preventDefault();"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20h14v-2H5v2zM19 9h-4V3H9v6H5l7 7 7-7z"/></svg>安装古董.app</a></p>
         <p class="en" style="margin-bottom:0;">© 2026 Gudong · gudong.app <a href="javascript:void(0)" class="app-install-btn" onclick="event.preventDefault();"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20h14v-2H5v2zM19 9h-4V3H9v6H5l7 7 7-7z"/></svg>Install gudong.app</a></p>
     </footer>
+
     <script>
-        // 2026-09-17：从 localStorage 恢复用户上次选择的语言；首次访问默认中文
+        /* ============ 语言 & 侧栏 ============ */
         let currentLang = (function () {
             try { return localStorage.getItem('gudong_lang') || 'zh'; }
             catch (e) { return 'zh'; }
         })();
         let currentCat = 'all';
 
-        /* ============================================================
-           🟢 改动 1（2026-09-17）：API_BASE 智能判断
-           本地预览（127.0.0.1 / localhost / file://）没有 /api/ 后端，
-           自动指向生产域名；线上部署时 API_BASE 为空串，走相对路径。
-           这样本地和线上都能正常工作，无需手动改来改去。
-           ============================================================ */
         const API_BASE = (
             location.hostname === '127.0.0.1' ||
             location.hostname === 'localhost' ||
             location.protocol === 'file:'
         ) ? 'https://gudong.app' : '';
 
-        // 初始化时同步 <html lang> 和 body.dataset.lang
         (function applyLang(lang) {
             const map = { zh: 'zh-SG', en: 'en-SG' };
             document.documentElement.lang = map[lang] || 'zh-SG';
@@ -1042,11 +963,12 @@
 
         function updateSearchPlaceholder(){
           const inp = document.getElementById('searchInput');
+          if(!inp) return;
           if(currentLang === 'zh'){
-            inp.placeholder = "搜索藏品、类别或关键词";
+            inp.placeholder = "试试搜「青花」「康熙通宝」「和田玉」…";
             inp.setAttribute('aria-label', '搜索藏品');
           }else{
-            inp.placeholder = "Search antiques, categories or keywords";
+            inp.placeholder = "Try \"blue and white\", \"Kangxi coin\", \"Hetian jade\"…";
             inp.setAttribute('aria-label', 'Search antiques');
           }
         }
@@ -1068,10 +990,11 @@
             try { localStorage.setItem('gudong_lang', currentLang); } catch (e) {}
             document.querySelector('.lang-btn').textContent = currentLang === 'zh' ? 'EN' : '中';
             updateSearchPlaceholder();
+            renderIntel();
             if (document.getElementById('searchInput').value.trim()) filterAll();
         }
 
-        /* ===== 搜索：覆盖首页两个区块（今日发现 / 最新藏品） ===== */
+        /* ============ 搜索 ============ */
         const SEARCH_GROUPS = [
             '#todayFindsGrid .finds-card',
             '#itemList .item-card',
@@ -1087,6 +1010,7 @@
             const kw = document.getElementById('searchInput').value.trim().toLowerCase();
             let visible = 0;
             firstMatchEl = null;
+
 
             SEARCH_GROUPS.forEach(sel => {
                 document.querySelectorAll(sel).forEach(card => {
@@ -1152,7 +1076,20 @@
             }
         }
 
-        //页面初始化
+        (function bindHotTags(){
+            const wrap = document.getElementById('hotTags');
+            if (!wrap) return;
+            wrap.addEventListener('click', e => {
+                const btn = e.target.closest('.hot-tag');
+                if (!btn) return;
+                const kw = btn.dataset.kw || btn.textContent.trim();
+                const inp = document.getElementById('searchInput');
+                inp.value = kw;
+                filterAll();
+                inp.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            });
+        })();
+
         updateSearchPlaceholder();
         if(localStorage.getItem('announceClosed') === 'yes'){
             document.getElementById('announceBar').style.display = 'none';
@@ -1169,46 +1106,28 @@
             el.addEventListener('search', () => filterAll());
         })();
 
-        // PWA: 注册 service worker（2026-09-23 增强更新机制，解决"网上更新了手机不更新"）
+        /* ============ PWA ============ */
         if ('serviceWorker' in navigator) {
-            let updateReady = false; // 仅在"有新版本接管"时刷新，避免首次安装误刷
+            let updateReady = false;
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('sw.js').then(reg => {
-                    console.log('[PWA] Service Worker registered:', reg.scope);
-
-                    // 1. 检测到新版本安装完成（浏览器会重新拉取 sw.js 做字节比对）
                     reg.addEventListener('updatefound', () => {
                         const newWorker = reg.installing;
                         if (!newWorker) return;
                         newWorker.addEventListener('statechange', () => {
                             if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                                console.log('[PWA] 检测到新版本，等待接管后刷新页面');
                                 updateReady = true;
                             }
                         });
                     });
-
-                    // 2. 每小时主动检查一次更新
                     setInterval(() => reg.update().catch(() => {}), 60 * 60 * 1000);
-
-                    // 3. 关键：PWA 从后台恢复/回到前台时立即检查更新
-                    //    （手机上点图标常是"唤醒"旧页面而非重新加载，必须主动触发）
                     const checkUpdate = () => {
-                        if (document.visibilityState === 'visible') {
-                            reg.update().catch(() => {});
-                        }
+                        if (document.visibilityState === 'visible') reg.update().catch(() => {});
                     };
                     document.addEventListener('visibilitychange', checkUpdate);
-                    // iOS Safari 从 bfcache 恢复时走 pageshow
                     window.addEventListener('pageshow', e => { if (e.persisted) checkUpdate(); });
-
-                }).catch(err => {
-                    console.warn('[PWA] Service Worker registration failed:', err);
-                });
+                }).catch(err => console.warn('[PWA] SW registration failed:', err));
             });
-
-            // 4. 新 SW 接管（sw.js 内 skipWaiting + clients.claim）后刷新一次，
-            //    让已打开的旧页面立即加载新内容
             let refreshing = false;
             navigator.serviceWorker.addEventListener('controllerchange', () => {
                 if (updateReady && !refreshing) {
@@ -1217,41 +1136,100 @@
                 }
             });
         }
-
-        // 5. 内容更新兜底：SW 只在 sw.js 字节变化时才触发刷新，
-        //    若只更新了商品/文案（sw.js 未变），唤醒的旧页面不会重新拉数据。
-        //    因此：后台挂起超过 10 分钟再回到前台 → 自动整页刷新，保证内容最新。
         let lastHiddenAt = Date.now();
         document.addEventListener('visibilitychange', () => {
             if (document.visibilityState === 'hidden') {
                 lastHiddenAt = Date.now();
             } else if (Date.now() - lastHiddenAt > 10 * 60 * 1000) {
-                console.log('[PWA] 页面在后台超过 10 分钟，刷新以获取最新内容');
                 window.location.reload();
             }
         });
-        // iOS Safari bfcache 恢复同样处理
         window.addEventListener('pageshow', e => {
             if (e.persisted && Date.now() - lastHiddenAt > 10 * 60 * 1000) {
                 window.location.reload();
             }
         });
 
-        // 2026-09-23：PWA 安装逻辑已迁移至页面底部统一的安装引导弹层（gdInstallModal），
-        // iOS 显示图文步骤引导，其他浏览器优先走原生 beforeinstallprompt。
-
-        /* ===== 从 Airtable 动态加载藏品 ===== */
-
         /* ============================================================
-           🟢 2026-09-19 数据连接层重构
-           1) 诊断：?debug=1 时右下角显示数据到底来自 Airtable 还是本地快照
-           2) 容错：兼容 {todayFinds,newListing} / Airtable 原始 records / 纯数组
-           3) 清洗：字段名归一（空格/大小写）、附件数组、勾选框、空行过滤、中英文兜底
-           4) 体验：骨架屏、空状态、超时+重试、防旧缓存、加载完成后重新应用搜索
+           今日情报 · 捡漏雷达
+           - 5 类互不重复：新上架 / 降价 / 同类对比 / 藏家动态 / 平台快讯
+           - 若接口返回 intel 数组，则用接口数据（Airtable 自动更新）
+           - 否则用下面的 INTEL_FEED 兜底（人工）
            ============================================================ */
+        const INTEL_FEED = [
+            {
+                type: 'new',
+                zh: '📌 新上架：今日已有 12 件新藏品进入，钱币类占 5 件，其中 3 件为「私聊询价」。',
+                en: '📌 New arrivals: 12 items today, 5 in coins — 3 of them "Enquire only".',
+                meta: '平台数据 · 今日',
+                metaEn: 'Platform data · today'
+            },
+            {
+                type: 'drop',
+                zh: '📌 降价信号：民国玉镯类目近 3 天有 4 件下调价格，平均降幅约 12%，可留意议价空间。',
+                en: '📌 Price drop: 4 Republican-era jade bangles reduced in the last 3 days, avg. cut ~12% — room to negotiate.',
+                meta: '市场快照 · 3 天',
+                metaEn: 'Market snapshot · 3 days'
+            },
+            {
+                type: 'compare',
+                zh: '📌 同类对比：一只明末青花碗（同类器型）本周成交价 S$680，平台内现有一件同类标价 S$420。',
+                en: '📌 Comparable: a late-Ming blue-and-white bowl sold at S$680 this week; a similar piece is listed here at S$420.',
+                meta: '同类参照 · 仅供参考',
+                metaEn: 'Comparable reference · for reference only'
+            },
+            {
+                type: 'collector',
+                zh: '📌 藏家动态：本地一位藏家本周集中上架 8 件钱币，均为单件，可私聊打包。',
+                en: '📌 Collector activity: a local collector listed 8 coins this week, all singles, bundle negotiable.',
+                meta: '藏家动态',
+                metaEn: 'Collector activity'
+            },
+            {
+                type: 'platform',
+                zh: '📌 平台快讯：创始藏家招募进行中，限量 88 席免费入驻，前 2 件藏品免费刊登。',
+                en: '📌 Platform note: Founding Collector seats are open — limited to 88, join free, first 2 listings free.',
+                meta: '平台公告',
+                metaEn: 'Platform notice'
+            }
+        ];
+
+        const INTEL_TYPE_LABEL = {
+            new:       { zh: '新上架',   en: 'NEW',        cls: 'intel-type--new' },
+            drop:      { zh: '降价',     en: 'PRICE DROP', cls: 'intel-type--drop' },
+            compare:   { zh: '同类对比', en: 'COMPARE',    cls: 'intel-type--compare' },
+            collector: { zh: '藏家动态', en: 'COLLECTOR',  cls: 'intel-type--collector' },
+            platform:  { zh: '平台快讯', en: 'PLATFORM',   cls: 'intel-type--platform' }
+        };
+
+        function renderIntel(items) {
+            const box = document.getElementById('intelScroll');
+            if (!box) return;
+            const list = (items && items.length) ? items : INTEL_FEED;
+            box.removeAttribute('aria-busy');
+            box.innerHTML = list.map(it => {
+                const t = INTEL_TYPE_LABEL[it.type] || INTEL_TYPE_LABEL.new;
+                const zh = esc(it.zh || it.text_zh || '');
+                const en = esc(it.en || it.text_en || zh);
+                const metaZh = esc(it.meta || it.meta_zh || '编辑整理');
+                const metaEn = esc(it.metaEn || it.meta_en || 'Editorial');
+                return `
+                    <div class="intel-card">
+                        <span class="intel-type ${t.cls}"><span class="zh">${t.zh}</span><span class="en">${t.en}</span></span>
+                        <div class="intel-text zh">${zh}</div>
+                        <div class="intel-text en">${en}</div>
+                        <div class="intel-meta"><span class="zh">${metaZh}</span><span class="en">${metaEn}</span></div>
+                    </div>`;
+            }).join('');
+        }
+        renderIntel();
+
+        /* ============ Airtable 数据层 ============ */
         const DEBUG = new URLSearchParams(location.search).get('debug') === '1';
+        /* 🟢 改动：diag 新增 intelCount 字段，用于 debug 面板显示情报条数 */
         const diag = { source: 'pending', endpoint: '', proxy: null, snapshot: null,
-                       payloadKeys: [], counts: {}, skipped: 0, sampleKeys: [], errors: [] };
+                       payloadKeys: [], counts: {}, skipped: 0, sampleKeys: [], errors: [],
+                       intelCount: null };
 
         function catKey(c) {
           const map = {
@@ -1268,8 +1246,6 @@
             .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
             .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
         }
-
-        /* Airtable 附件字段是对象数组：[{url, thumbnails:{large:{url}}}]；也兼容普通字符串 */
         function attachmentUrl(v) {
           if (!v) return '';
           if (Array.isArray(v)) v = v[0];
@@ -1278,16 +1254,6 @@
           }
           return typeof v === 'string' ? v.trim() : '';
         }
-
-        /* ============================================================
-           🟢 改动 3（2026-09-17）：imgPath 使用 API_BASE
-           本地预览时数据来自生产 API，图片也必须指向生产域名；
-           线上时 API_BASE 为空串，走相对根路径。
-           🟢 改动 4（2026-09-18）：本地回退模式
-           当走本地数据快照（__LOCAL_DATA__）或 file:// 打开时，
-           图片用相对路径（file:// 下 /assets 绝对路径会失效）。
-           🟢 2026-09-19：img_url 支持 Airtable 附件对象数组
-           ============================================================ */
         function imgPath(f) {
           const u = attachmentUrl(f.img_url);
           if (/^https?:\/\//i.test(u)) return u;
@@ -1302,8 +1268,6 @@
         function attrKeywords(f) {
           return esc([f.title_zh, f.title_en, f.era_zh, f.era_en, f.category].filter(Boolean).join(' '));
         }
-
-        // 取字段：兼容带空格 / 下划线两种命名
         function getF(f, ...names) {
           for (const n of names) {
             const v = f[n];
@@ -1311,15 +1275,9 @@
           }
           return null;
         }
-
-        /* 🟢 2026-09-19：ID 防御性归一化
-           Airtable 录入时可能混入 Unicode 连字符（U+2011 等），
-           会导致 items/xxx.html 链接 404。统一转成 ASCII '-'。 */
         function normId(v) {
           return String(v == null ? '' : v).replace(/[\u2010\u2011\u2012\u2013\u2014\u2015\u2212\uFE58\uFF0D]/g, '-').trim();
         }
-
-        /* ===== 记录清洗 ===== */
         function normKey(k) { return String(k).trim().toLowerCase().replace(/[\s\-]+/g, '_'); }
         function asBool(v) {
           if (typeof v === 'string') return /^(true|yes|y|1|是|✓|✔)$/i.test(v.trim());
@@ -1327,12 +1285,10 @@
         }
         function normalizeRecord(rec) {
           if (!rec || typeof rec !== 'object') return null;
-          // 兼容 Airtable 原始结构 {id, fields:{...}} 与代理已展平的结构
           const src = (rec.fields && typeof rec.fields === 'object') ? rec.fields : rec;
           const out = {};
           Object.keys(src).forEach(k => {
             let v = src[k];
-            // Lookup 字段会返回数组：基础类型数组取首个；附件（对象数组）保持原样
             if (Array.isArray(v)) {
               if (!v.length) v = null;
               else if (v.every(x => x === null || typeof x !== 'object')) v = v[0];
@@ -1340,15 +1296,12 @@
             const key = normKey(k);
             out[key] = /^is_/.test(key) ? asBool(v) : v;
           });
-          // 中英文互相兜底：英文缺失时不至于整块空白
           [['title_zh', 'title_en'], ['era_zh', 'era_en']].forEach(([zh, en]) => {
             if (!out[zh] && out[en]) out[zh] = out[en];
             if (!out[en] && out[zh]) out[en] = out[zh];
           });
           return out;
         }
-
-        /* ===== 响应清洗：统一成 {todayFinds, newListing} ===== */
         function pickList(json, ...keys) {
           for (const k of keys) if (Array.isArray(json[k])) return json[k];
           return null;
@@ -1369,12 +1322,8 @@
           if (tf || nl) {
             groups = { todayFinds: tf || [], newListing: nl || [] };
           } else if (flat) {
-            // 后备：代理只返回一个扁平列表时，按勾选框字段自行分组
             const all = flat.map(normalizeRecord).filter(Boolean);
-            groups = {
-              todayFinds: all.filter(f => f.is_today_finds),
-              newListing: all
-            };
+            groups = { todayFinds: all.filter(f => f.is_today_finds), newListing: all };
           } else {
             throw new Error('响应中找不到 todayFinds / newListing（实际字段：' + diag.payloadKeys.join(', ') + '）');
           }
@@ -1382,10 +1331,8 @@
           let total = 0, kept = 0;
           const clean = list => list.map(normalizeRecord).filter(f => {
             total++;
-            /* 代理在 item_id 为空时会回退成 Airtable 记录 ID（recXXXX），
-               所以空行也带着 item_id；必须再要求有标题，才能挡住空白卡片和 404 链接 */
             if (f && normId(f.item_id) && (f.title_zh || f.title_en)) { kept++; return true; }
-            diag.skipped++;              // Airtable 空行 / 缺 item_id 或标题：直接丢弃
+            diag.skipped++;
             return false;
           });
           const out = {
@@ -1400,42 +1347,28 @@
           return out;
         }
 
-        /* 🟢 2026-09-19：价格「标签 + 金额」组合
-           Airtable 中 price_display_zh 可能只有标签（如「一口价：」），
-           金额在 price_zh（如「S$5000」）。两者拼接显示；标签已含金额则不重复。 */
         function joinPrice(label, amount) {
           if (!label) return amount || '';
           if (!amount || label.indexOf(amount) !== -1) return label;
           return /[:：]\s*$/.test(label) ? label + amount : label + ' ' + amount;
         }
-
-        /* ===== 价格渲染 =====
-           2026-09-19 v6：三种叫价方式（Airtable 的 price_type + fixed_price）
-             一口价   → 显示 fixed_price（数字或文本，如 500 → S$500）；fixed_price 为空时退回 price_display_* / price_*
-             价格区间 → 显示 price_display_* / price_*（如 S$100 - S$500，兼容「标签 + 金额」两段式）
-             私聊询价 → 显示「私聊询价 / Enquire」
-           price_type 为空的旧数据：有 fixed_price 按一口价，否则按 price_display_* / price_*。 */
         function fmtMoney(v) {
           v = Array.isArray(v) ? v[0] : v;
           if (v == null || v === '') return '';
           const str = String(v).trim();
-          if (/^(S?\$)?\s*[\d,]+(\.\d+)?$/i.test(str)) {        // 纯数字 / S$500 / $1,200.50
+          if (/^(S?\$)?\s*[\d,]+(\.\d+)?$/i.test(str)) {
             const n = Number(str.replace(/[S$\s,]/gi, ''));
             if (!isFinite(n) || n <= 0) return '';
             return 'S$' + new Intl.NumberFormat('en-SG', { maximumFractionDigits: 2 }).format(n);
           }
-          return str;                                           // 其它文本原样显示
+          return str;
         }
         function resolvePrice(f) {
           const type = String(getF(f, 'price_type', 'price type') || '').trim();
           const enquiry = { zh: '私聊询价', en: 'Enquire', enquiry: true };
-
           if (/私聊|询价|enquir|inquir|message/i.test(type)) return enquiry;
-
           const fixed = fmtMoney(getF(f, 'fixed_price'));
           if (fixed && (!type || /一口价|fixed/i.test(type))) return { zh: fixed, en: fixed };
-
-          // 价格区间 / 旧数据：标签 + 金额组合（price_display_* 可能只有标签，金额在 price_*）
           const zh = joinPrice(getF(f, 'price_display_zh'), getF(f, 'price_zh')) || joinPrice(getF(f, 'price_display_en'), getF(f, 'price_en'));
           const en = joinPrice(getF(f, 'price_display_en'), getF(f, 'price_en')) || joinPrice(getF(f, 'price_display_zh'), getF(f, 'price_zh'));
           if (zh || en) return { zh: zh || en, en: en || zh };
@@ -1452,23 +1385,53 @@
             </div>`;
         }
 
+        function reasonFor(f) {
+          const rz = getF(f, 'reason_zh', 'reason');
+          const re = getF(f, 'reason_en', 'reason_en_us') || rz;
+          if (rz || re) return { zh: rz || re, en: re || rz };
+          return null;
+        }
+        function timeAgo(f) {
+          const raw = getF(f, 'listed_at', 'listed_time', 'created_at', 'updated_at');
+          if (!raw) return null;
+          const t = new Date(raw);
+          if (isNaN(t.getTime())) return null;
+          const diff = Date.now() - t.getTime();
+          const h = Math.floor(diff / 3600000);
+          if (h < 1) return { zh: '刚刚上架', en: 'Just listed' };
+          if (h < 24) return { zh: `${h} 小时前上架`, en: `Listed ${h}h ago` };
+          const d = Math.floor(h / 24);
+          if (d < 30) return { zh: `${d} 天前上架`, en: `Listed ${d}d ago` };
+          return null;
+        }
+
         function renderFindsCard(f) {
           const promoted = f.is_today_finds;
-          const badgeZh = promoted ? '推广' : '系统推荐';
-          const badgeEn = promoted ? 'Sponsored' : 'System Recommended';
+          const badgeZh = promoted ? '藏家自荐' : '人工精选';
+          const badgeEn = promoted ? 'Collector Pick' : 'Editor Pick';
           const cls = promoted ? 'finds-card--promoted' : 'finds-card--organic';
           const kw = attrKeywords(f);
           const metaZh = [f.era_zh, f.category].filter(Boolean).join(' · ');
           const metaEn = [f.era_en, f.category].filter(Boolean).join(' · ');
+          const reason = reasonFor(f);
+          const reasonHtml = reason ? `
+              <div class="finds-reason zh">💡 ${esc(reason.zh)}</div>
+              <div class="finds-reason en">💡 ${esc(reason.en)}</div>` : '';
+          const ta = timeAgo(f);
+          const taHtml = ta ? `
+              <div class="finds-timestamp zh">${esc(ta.zh)}</div>
+              <div class="finds-timestamp en">${esc(ta.en)}</div>` : '';
           return `
             <a href="items/${esc(normId(f.item_id))}.html" class="finds-card ${cls}" data-cat="${catKey(f.category)}" data-keywords="${kw}">
               <div class="finds-image">
-                <img src="${imgPath(f)}" alt="${esc(f.title_zh)}" loading="lazy" onerror="this.onerror=null;this.src='assets/images/placeholder.jpg'">
+                <img src="${imgPath(f)}" alt="${esc(f.title_zh)} ${esc(f.title_en)} - Chinese antiques Singapore" loading="lazy" onerror="this.onerror=null;this.src='assets/images/placeholder.jpg'">
                 <span class="finds-badge zh">${badgeZh}</span><span class="finds-badge en">${badgeEn}</span>
               </div>
               <div class="finds-title zh">${esc(f.title_zh)}</div><div class="finds-title en">${esc(f.title_en)}</div>
               <div class="finds-meta zh">${esc(metaZh)}</div><div class="finds-meta en">${esc(metaEn)}</div>
               ${priceHtml(f, 'finds-price')}
+              ${reasonHtml}
+              ${taHtml}
               <div class="finds-caption zh">卖家提供资料</div><div class="finds-caption en">Seller-provided information</div>
             </a>`;
         }
@@ -1481,18 +1444,14 @@
             const detailUrl = `items/${esc(normId(f.item_id))}.html`;
             const kw = attrKeywords(f);
             const nz = f.title_zh || f.title_en || '';
-            /* 2026-09-18：最新藏品卡片只保留图片 + 价格，名称移除（保留 alt/aria 供 SEO 与无障碍） */
             return `
               <a href="${detailUrl}" class="item-card" data-cat="${catKey(f.category)}" data-keywords="${kw}" aria-label="${esc(nz)}">
-                <img src="${imgSrc}" alt="${esc(f.title_zh)}" loading="lazy" onerror="this.onerror=null;this.src='assets/images/placeholder.jpg'">
-                <div class="item-info">
-                  ${priceHtml(f, 'item-price')}
-                </div>
+                <img src="${imgSrc}" alt="${esc(f.title_zh)} ${esc(f.title_en)} - Chinese antiques Singapore" loading="lazy" onerror="this.onerror=null;this.src='assets/images/placeholder.jpg'">
+                <div class="item-info">${priceHtml(f, 'item-price')}</div>
               </a>`;
           }).join('');
         }
 
-        /* 2026-09-19：加载中骨架屏 */
         function showSkeleton() {
           const fill = (id, n, cls) => {
             const el = document.getElementById(id);
@@ -1504,7 +1463,6 @@
           fill('itemList', 6, 'skeleton-card--square');
         }
 
-        /* 2026-09-17：加载失败时在三个区块内显示错误提示。 */
         function showLoadError() {
           const msgZh = '<strong>藏品加载失败</strong><br>请刷新页面重试。如持续出现，请稍后再访问。';
           const msgEn = '<strong>Failed to load listings</strong><br>Please refresh the page. If the issue persists, try again later.';
@@ -1515,8 +1473,19 @@
           });
         }
 
-        /* 渲染三个区块（2026-09-18：抽出公用，供线上 API 与本地快照两条路径复用）
-           2026-09-19：数据为空时清掉骨架屏——今日发现/精选展示无内容则整块隐藏，最新藏品显示空状态 */
+        function updateCategoryCounts(newListing) {
+          const counts = { porcelain: 0, jade: 0, coins: 0, paintings: 0, misc: 0 };
+          (newListing || []).forEach(f => {
+            const k = catKey(f.category);
+            if (counts[k] !== undefined) counts[k]++;
+          });
+          document.querySelectorAll('[data-cat-count]').forEach(el => {
+            const k = el.getAttribute('data-cat-count');
+            const n = counts[k] || 0;
+            el.textContent = n > 0 ? (el.classList.contains('zh') ? `${n} 件在售` : `${n} items`) : (el.classList.contains('zh') ? '待上架' : 'Coming soon');
+          });
+        }
+
         function applyListingData(data) {
           const fillSection = (id, items, renderFn) => {
             const el = document.getElementById(id);
@@ -1542,12 +1511,11 @@
               list.innerHTML = '<div class="no-result" style="grid-column:1/-1;padding:2rem 1rem;"><span class="zh">暂无藏品，敬请期待</span><span class="en">No listings yet — please check back soon</span></div>';
             }
           }
-          // 用户在数据到达前已输入搜索词时，重新应用筛选
+          updateCategoryCounts(data.newListing);
           const kw = document.getElementById('searchInput').value.trim();
           if (kw || currentCat !== 'all') filterAll(); else checkNoResult();
         }
 
-        /* 带超时的 JSON 请求；no-store 防止浏览器/Service Worker 拿到旧数据 */
         async function fetchJson(url, ms, tag) {
           const ctl = new AbortController();
           const timer = setTimeout(() => ctl.abort(), ms);
@@ -1566,7 +1534,6 @@
           }
         }
 
-        /* 仅对超时 / 5xx 重试一次（Vercel 冷启动、Airtable 偶发抖动）；4xx 与 CORS 错误不重试 */
         async function fetchProxy(url) {
           try {
             return await fetchJson(url, 8000, 'proxy');
@@ -1578,7 +1545,6 @@
           }
         }
 
-        /* 诊断面板：访问 https://gudong.app/?debug=1 即可看到数据链路是否真正打通 */
         function renderDebug() {
           console.info('[Gudong] 数据来源:', diag.source, diag.counts);
           if (!DEBUG) return;
@@ -1601,7 +1567,8 @@
             '接口：' + esc(diag.endpoint) + '\n' +
             '接口响应：' + st(diag.proxy) + '　快照响应：' + st(diag.snapshot) + '\n' +
             '响应字段：' + esc(diag.payloadKeys.join(', ') || '—') + '\n' +
-            '今日发现 ' + (c.todayFinds ?? '—') + ' · 最新藏品 ' + (c.newListing ?? '—') +
+            '今日好货 ' + (c.todayFinds ?? '—') + ' · 新上架好货 ' + (c.newListing ?? '—') +
+            ' · 情报 ' + (diag.intelCount ?? '—') +
             (diag.skipped ? ' · <span class="warn">已跳过空行/缺标题的行 ' + diag.skipped + '</span>' : '') + '\n' +
             '首条记录字段：' + esc(diag.sampleKeys.join(', ') || '—') +
             (diag.errors.length ? '\n<span class="bad">错误：\n' + diag.errors.map(esc).join('\n') + '</span>' : '');
@@ -1609,24 +1576,29 @@
 
         async function loadAirtableData() {
           showSkeleton();
-          /* 🟢 改动 2（2026-09-17）：fetch 使用 API_BASE 前缀
-             2026-09-19：不加缓存参数——sw.js 是网络优先，接口自带 s-maxage=60，
-             请求端只需 cache:'no-store' 绕开浏览器 HTTP 缓存即可。 */
           diag.endpoint = API_BASE + '/api/airtable-proxy';
           try {
-            const data = normalizePayload(await fetchProxy(diag.endpoint));
+            const raw = await fetchProxy(diag.endpoint);
+            /* 🟢 关键：如果接口返回 intel 数组，前端自动切换为 Airtable 数据；
+                  同时记录条数到 diag.intelCount，供 debug 面板显示。 */
+            if (raw && Array.isArray(raw.intel)) {
+              diag.intelCount = raw.intel.length;
+              if (raw.intel.length) renderIntel(raw.intel);
+            }
+            const data = normalizePayload(raw);
             diag.source = 'airtable-proxy';
             applyListingData(data);
           } catch (e) {
-            /* 🟢 改动 4（2026-09-18）：本地预览回退
-               线上 API 未返回 CORS 头（或网络不通）时，
-               自动改读本地快照 data/listings.json，图片走本地 assets。
-               2026-09-19：回退不再「静默」——写入 diag 并在控制台告警，避免误以为已连上 Airtable。 */
             console.warn('线上 API 加载失败，回退到本地快照：', e);
             diag.errors.push('proxy：' + e.message);
             diag.skipped = 0;
             try {
-              const data = normalizePayload(await fetchJson('data/listings.json', 5000, 'snapshot'));
+              const raw = await fetchJson('data/listings.json', 5000, 'snapshot');
+              if (raw && Array.isArray(raw.intel)) {
+                diag.intelCount = raw.intel.length;
+                if (raw.intel.length) renderIntel(raw.intel);
+              }
+              const data = normalizePayload(raw);
               window.__LOCAL_DATA__ = true;
               diag.source = 'local-snapshot';
               applyListingData(data);
@@ -1641,73 +1613,69 @@
         }
         loadAirtableData();
     </script>
-<!-- 2026-09-23：PWA 安装引导弹层（iOS 图文步骤 / 桌面提示），全站统一 -->
-<style>
-.gd-install-modal { position: fixed; inset: 0; z-index: 9999; display: none; align-items: center; justify-content: center; background: rgba(0,0,0,.45); padding: 1.2rem; }
-.gd-install-modal.open { display: flex; }
-.gd-install-card { background: #fff; border-radius: 14px; max-width: 350px; width: 100%; padding: 1.6rem 1.4rem 1.2rem; text-align: center; box-shadow: 0 18px 50px rgba(0,0,0,.25); position: relative; }
-.gd-install-close { position: absolute; top: .5rem; right: .7rem; border: 0; background: none; font-size: 1.4rem; color: #999; cursor: pointer; padding: .3rem; line-height: 1; }
-.gd-install-title { font-size: 1.08rem; font-weight: 700; color: #3d2b1f; margin: .2rem 0 1rem; }
-.gd-install-steps { text-align: left; margin: 0 auto 1rem; max-width: 290px; }
-.gd-install-step { display: flex; align-items: flex-start; gap: .6rem; padding: .5rem 0; color: #5a4636; font-size: .9rem; line-height: 1.5; }
-.gd-install-step .n { flex-shrink: 0; width: 22px; height: 22px; border-radius: 50%; background: #f0e4d8; color: #8A5A3B; font-weight: 700; font-size: .78rem; display: flex; align-items: center; justify-content: center; margin-top: .1rem; }
-.gd-install-step svg { flex-shrink: 0; width: 22px; height: 22px; fill: #007AFF; margin-top: .1rem; }
-.gd-install-note { font-size: .78rem; color: #9a8d80; margin-top: .5rem; line-height: 1.5; }
-.gd-install-modal [data-lang="en"] .zh, body[data-lang="en"] .gd-install-modal .zh { display: none; }
-.gd-install-modal [data-lang="zh"] .en, body[data-lang="zh"] .gd-install-modal .en { display: none; }
-.app-install-btn { display: inline-flex; align-items: center; gap: .3rem; margin-left: .6rem; padding: .3rem .7rem; border: 1px solid #e3d9cf; border-radius: 999px; color: #7a6a5c; font-size: .78rem; text-decoration: none; vertical-align: middle; transition: .2s; }
-.app-install-btn:hover { border-color: #8A5A3B; color: #8A5A3B; background: #f0e4d8; }
-.app-install-btn svg { width: 12px; height: 12px; flex-shrink: 0; fill: currentColor; }
-</style>
-<div class="gd-install-modal" id="gdInstallModal" role="dialog" aria-modal="true" aria-label="Install guide">
-    <div class="gd-install-card">
-        <button type="button" class="gd-install-close" onclick="gdCloseInstall()" aria-label="close">×</button>
-        <div class="gd-install-title zh">安装 古董.app 到主屏幕</div>
-        <div class="gd-install-title en">Add Gudong.app to Home Screen</div>
-        <div class="gd-install-steps" id="gdStepsIos">
-            <div class="gd-install-step"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18.2c-4.5 0-8.2-3.7-8.2-8.2S7.5 3.8 12 3.8s8.2 3.7 8.2 8.2-3.7 8.2-8.2 8.2zM11 7l-4 4h3v6h2v-6h3l-4-4z"/></svg><span class="zh">点击 Safari 底部工具栏的「分享」按钮</span><span class="en">Tap the Share button in Safari's bottom toolbar</span></div>
-            <div class="gd-install-step"><span class="n">2</span><span class="zh">在分享菜单中选择「添加到主屏幕」</span><span class="en">Choose "Add to Home Screen" in the share menu</span></div>
-            <div class="gd-install-step"><span class="n">3</span><span class="zh">点击右上角「添加」，桌面即出现古董.app 图标</span><span class="en">Tap "Add" — the Gudong.app icon appears on your Home Screen</span></div>
+
+    <!-- PWA 安装引导弹层 -->
+    <style>
+    .gd-install-modal { position: fixed; inset: 0; z-index: 9999; display: none; align-items: center; justify-content: center; background: rgba(0,0,0,.45); padding: 1.2rem; }
+    .gd-install-modal.open { display: flex; }
+    .gd-install-card { background: #fff; border-radius: 14px; max-width: 350px; width: 100%; padding: 1.6rem 1.4rem 1.2rem; text-align: center; box-shadow: 0 18px 50px rgba(0,0,0,.25); position: relative; }
+    .gd-install-close { position: absolute; top: .5rem; right: .7rem; border: 0; background: none; font-size: 1.4rem; color: #999; cursor: pointer; padding: .3rem; line-height: 1; }
+    .gd-install-title { font-size: 1.08rem; font-weight: 700; color: #3d2b1f; margin: .2rem 0 1rem; }
+    .gd-install-steps { text-align: left; margin: 0 auto 1rem; max-width: 290px; }
+    .gd-install-step { display: flex; align-items: flex-start; gap: .6rem; padding: .5rem 0; color: #5a4636; font-size: .9rem; line-height: 1.5; }
+    .gd-install-step .n { flex-shrink: 0; width: 22px; height: 22px; border-radius: 50%; background: #f0e4d8; color: #8A5A3B; font-weight: 700; font-size: .78rem; display: flex; align-items: center; justify-content: center; margin-top: .1rem; }
+    .gd-install-step svg { flex-shrink: 0; width: 22px; height: 22px; fill: #007AFF; margin-top: .1rem; }
+    .gd-install-note { font-size: .78rem; color: #9a8d80; margin-top: .5rem; line-height: 1.5; }
+    .gd-install-modal [data-lang="en"] .zh, body[data-lang="en"] .gd-install-modal .zh { display: none; }
+    .gd-install-modal [data-lang="zh"] .en, body[data-lang="zh"] .gd-install-modal .en { display: none; }
+    </style>
+    <div class="gd-install-modal" id="gdInstallModal" role="dialog" aria-modal="true" aria-label="Install guide">
+        <div class="gd-install-card">
+            <button type="button" class="gd-install-close" onclick="gdCloseInstall()" aria-label="close">×</button>
+            <div class="gd-install-title zh">安装 古董.app 到主屏幕</div>
+            <div class="gd-install-title en">Add Gudong.app to Home Screen</div>
+            <div class="gd-install-steps" id="gdStepsIos">
+                <div class="gd-install-step"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18.2c-4.5 0-8.2-3.7-8.2-8.2S7.5 3.8 12 3.8s8.2 3.7 8.2 8.2-3.7 8.2-8.2 8.2zM11 7l-4 4h3v6h2v-6h3l-4-4z"/></svg><span class="zh">点击 Safari 底部工具栏的「分享」按钮</span><span class="en">Tap the Share button in Safari's bottom toolbar</span></div>
+                <div class="gd-install-step"><span class="n">2</span><span class="zh">在分享菜单中选择「添加到主屏幕」</span><span class="en">Choose "Add to Home Screen" in the share menu</span></div>
+                <div class="gd-install-step"><span class="n">3</span><span class="zh">点击右上角「添加」，桌面即出现古董.app 图标</span><span class="en">Tap "Add" — the Gudong.app icon appears on your Home Screen</span></div>
+            </div>
+            <div class="gd-install-steps" id="gdStepsOther" style="display:none;">
+                <div class="gd-install-step"><span class="n">1</span><span class="zh">点击浏览器地址栏右侧的「安装」图标</span><span class="en">Click the install icon at the right of the address bar</span></div>
+                <div class="gd-install-step"><span class="n">2</span><span class="zh">或通过浏览器菜单 →「安装古董集」</span><span class="en">Or open the browser menu → "Install Gudong"</span></div>
+            </div>
+            <div class="gd-install-note zh">安装后可像原生 App 一样全屏使用，无需应用商店。</div>
+            <div class="gd-install-note en">Runs full-screen like a native app. No app store needed.</div>
         </div>
-        <div class="gd-install-steps" id="gdStepsOther" style="display:none;">
-            <div class="gd-install-step"><span class="n">1</span><span class="zh">点击浏览器地址栏右侧的「安装」图标</span><span class="en">Click the install icon at the right of the address bar</span></div>
-            <div class="gd-install-step"><span class="n">2</span><span class="zh">或通过浏览器菜单 →「安装古董集」</span><span class="en">Or open the browser menu → "Install Gudong"</span></div>
-        </div>
-        <div class="gd-install-note zh">安装后可像原生 App 一样全屏使用，无需应用商店。</div>
-        <div class="gd-install-note en">Runs full-screen like a native app. No app store needed.</div>
     </div>
-</div>
-<script>
-(function () {
-    var modal = document.getElementById('gdInstallModal');
-    if (!modal) return;
-    window.gdCloseInstall = function () { modal.classList.remove('open'); };
-    modal.addEventListener('click', function (e) { if (e.target === modal) gdCloseInstall(); });
+    <script>
+    (function () {
+        var modal = document.getElementById('gdInstallModal');
+        if (!modal) return;
+        window.gdCloseInstall = function () { modal.classList.remove('open'); };
+        modal.addEventListener('click', function (e) { if (e.target === modal) gdCloseInstall(); });
 
-    var deferredPrompt = null;
-    window.addEventListener('beforeinstallprompt', function (e) { e.preventDefault(); deferredPrompt = e; });
-    window.addEventListener('appinstalled', function () {
-        document.querySelectorAll('.app-install-btn').forEach(function (b) { b.style.display = 'none'; });
-    });
+        var deferredPrompt = null;
+        window.addEventListener('beforeinstallprompt', function (e) { e.preventDefault(); deferredPrompt = e; });
+        window.addEventListener('appinstalled', function () {
+            document.querySelectorAll('.app-install-btn').forEach(function (b) { b.style.display = 'none'; });
+        });
 
-    document.addEventListener('click', function (e) {
-        var btn = e.target && e.target.closest ? e.target.closest('.app-install-btn') : null;
-        if (!btn) return;
-        e.preventDefault();
-        if (deferredPrompt) {
-            deferredPrompt.prompt();
-            deferredPrompt.userChoice.then(function () { deferredPrompt = null; }).catch(function () {});
-            return;
-        }
-        // 无原生安装提示（iOS Safari / 未触发的浏览器）→ 显示图文引导
-        var ua = navigator.userAgent;
-        var isIOS = /iPad|iPhone|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-        document.getElementById('gdStepsIos').style.display = isIOS ? '' : 'none';
-        document.getElementById('gdStepsOther').style.display = isIOS ? 'none' : '';
-        modal.classList.add('open');
-    });
-})();
-</script>
-
+        document.addEventListener('click', function (e) {
+            var btn = e.target && e.target.closest ? e.target.closest('.app-install-btn') : null;
+            if (!btn) return;
+            e.preventDefault();
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then(function () { deferredPrompt = null; }).catch(function () {});
+                return;
+            }
+            var ua = navigator.userAgent;
+            var isIOS = /iPad|iPhone|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+            document.getElementById('gdStepsIos').style.display = isIOS ? '' : 'none';
+            document.getElementById('gdStepsOther').style.display = isIOS ? 'none' : '';
+            modal.classList.add('open');
+        });
+    })();
+    </script>
 </body>
 </html>

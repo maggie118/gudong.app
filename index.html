@@ -1253,10 +1253,23 @@
           }
           return typeof v === 'string' ? v.trim() : '';
         }
+        // 根据 item_id 推导默认实拍图路径（与详情页 defaultImages 同源），
+        // 作为主页 Airtable 没给 img_file/img_url 时的兜底，避免卡片显示 placeholder。
+        function defaultImgPath(f) {
+          const id = normId(f.item_id || '');
+          if (!id) return '';
+          let seller = '';
+          if (id.startsWith('item-lim-'))  seller = 'lim-kw';
+          else if (id.startsWith('item-ng-'))   seller = 'ng-lk';
+          else if (id.startsWith('item-ngcy-')) seller = 'ng-cy';
+          else if (id.startsWith('item-yak-'))  seller = 'yak-bc';
+          if (!seller) return '';
+          return seller + '/' + id + '.jpg';
+        }
         function imgPath(f) {
           const u = attachmentUrl(f.img_url);
           if (/^https?:\/\//i.test(u)) return u;
-          const file = normId(f.img_file || '');
+          const file = normId(f.img_file || '') || defaultImgPath(f);
           if (window.__LOCAL_DATA__ || location.protocol === 'file:') {
             return 'assets/images/' + (file || 'placeholder.jpg');
           }

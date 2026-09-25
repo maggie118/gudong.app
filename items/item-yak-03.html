@@ -845,9 +845,19 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
         });
 
         // 暴露给 Airtable 接口使用
+        var GD_ZH = ['正面', '背面', '底部', '细节', '局部', '铭款', '侧视', '包装'];
+        var GD_EN = ['Front', 'Back', 'Base', 'Detail', 'Close-up', 'Mark', 'Side', 'Packaging'];
         window.__gdSetGalleryImages = function (list) {
             if (!Array.isArray(list) || !list.length) return;
-            images = list;
+            // 始终补齐到至少 4 个槽位：Airtable 只给 1 张图时，缺的槽用占位图填充，
+            // 避免 gallery 塌成 .single（缩略图/箭头/计数器被隐藏、无法轮换）。
+            var n = Math.max(4, list.length);
+            var padded = [];
+            for (var i = 0; i < n; i++) {
+                if (list[i] && list[i].src) padded.push(list[i]);
+                else padded.push({ src: PLACEHOLDER, label: { zh: GD_ZH[i] || ('图 ' + (i + 1)), en: GD_EN[i] || ('View ' + (i + 1)) } });
+            }
+            images = padded;
             current = 0;
             main.src = images[0].src;
             main.alt = getLabel(images[0]) || '';

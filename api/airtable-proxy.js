@@ -6,10 +6,12 @@
 //             AIRTABLE_INTEL_TABLE   (e.g. Intel; manual override only)
 //             AIRTABLE_DEBUG_KEY     (debug key)
 //
-// 2026-09-25 v3
+// 2026-09-25 v4
 //  - Auto intel generation from antiques data (new / drop / collector / compare)
 //  - Manual override via Intel table (platform / any type)
 //  - All Chinese strings encoded as \uXXXX escapes to avoid encoding issues.
+//  - FIXED: English prefix bug — auto intel "en" fields now use English prefixes
+//           instead of Chinese ones (PIN_EN + PREFIX_EN_* added).
 
 const BASE           = process.env.AIRTABLE_BASE_ID;
 const TABLE          = process.env.AIRTABLE_TABLE;
@@ -60,12 +62,22 @@ const CAT_EN = {
 };
 
 // ---------- Reusable prefixes ----------
-const PIN = '\uD83D\uDCCC ';                    // ?? (space)
+const PIN    = '\uD83D\uDCCC ';   // ?? (space) for Chinese
+const PIN_EN = '\uD83D\uDCCC ';   // ?? (space) for English
+
+// Chinese prefixes
 const PREFIX_NEW       = PIN + '\u65b0\u4e0a\u67b6\uff1a';             // ?? 新上架：
 const PREFIX_DROP      = PIN + '\u964d\u4ef7\u4fe1\u53f7\uff1a';       // ?? 降价信号：
 const PREFIX_COLLECTOR = PIN + '\u85cf\u5bb6\u52a8\u6001\uff1a';       // ?? 藏家动态：
 const PREFIX_COMPARE   = PIN + '\u540c\u7c7b\u5bf9\u6bd4\uff1a';       // ?? 同类对比：
 const PREFIX_PLATFORM  = PIN + '\u5e73\u53f0\u5feb\u8baf\uff1a';       // ?? 平台快讯：
+
+// English prefixes
+const PREFIX_EN_NEW       = PIN_EN + 'New arrivals: ';
+const PREFIX_EN_DROP      = PIN_EN + 'Price drop: ';
+const PREFIX_EN_COLLECTOR = PIN_EN + 'Collector activity: ';
+const PREFIX_EN_COMPARE   = PIN_EN + 'Comparable: ';
+const PREFIX_EN_PLATFORM  = PIN_EN + 'Platform note: ';
 
 // Meta labels
 const META_TODAY       = '\u5e73\u53f0\u6570\u636e \u00b7 \u4eca\u65e5';      // 平台数据 · 今日
@@ -196,7 +208,7 @@ function buildAutoIntel(items) {
       type: 'new',
       zh: PREFIX_NEW + '\u4eca\u65e5\u5df2\u6709 ' + newToday.length + ' \u4ef6\u65b0\u85cf\u54c1\u8fdb\u5165' +
           (topCat ? '\uff0c' + topCat[0] + '\u5360 ' + topCat[1] + ' \u4ef6\u3002' : '\u3002'),
-      en: PREFIX_NEW + newToday.length + ' new items today' +
+      en: PREFIX_EN_NEW + newToday.length + ' new items today' +
           (topCat ? ', ' + topCat[1] + ' in ' + topCatEn : '') + '.',
       meta: META_TODAY,
       metaEn: META_EN_TODAY,
@@ -219,7 +231,7 @@ function buildAutoIntel(items) {
     auto.push({
       type: 'drop',
       zh: PREFIX_DROP + '\u8fd1 7 \u5929\u6709 ' + dropped.length + ' \u4ef6\u4e0b\u8c03\u4ef7\u683c\uff0c\u5e73\u5747\u964d\u5e45\u7ea6 ' + avgPct + '%\uff0c\u53ef\u7559\u610f\u8bae\u4ef7\u7a7a\u95f4\u3002',
-      en: PREFIX_DROP + dropped.length + ' item' + (dropped.length > 1 ? 's' : '') +
+      en: PREFIX_EN_DROP + dropped.length + ' item' + (dropped.length > 1 ? 's' : '') +
           ' reduced in the last 7 days, avg. cut ~' + avgPct + '% \u2014 room to negotiate.',
       meta: META_7D,
       metaEn: META_EN_7D,
@@ -252,7 +264,7 @@ function buildAutoIntel(items) {
     auto.push({
       type: 'collector',
       zh: PREFIX_COLLECTOR + '\u672c\u5468 ' + sellerId + ' \u96c6\u4e2d\u4e0a\u67b6 ' + list.length + ' \u4ef6' + catZh + '\uff0c\u53ef\u7559\u610f\u3002',
-      en: PREFIX_COLLECTOR + sellerId + ' listed ' + list.length + ' ' + catEn + ' this week \u2014 worth a look.',
+      en: PREFIX_EN_COLLECTOR + sellerId + ' listed ' + list.length + ' ' + catEn + ' this week \u2014 worth a look.',
       meta: META_WEEK,
       metaEn: META_EN_WEEK,
     });
@@ -286,7 +298,7 @@ function buildAutoIntel(items) {
       type: 'compare',
       zh: PREFIX_COMPARE + '\u540c\u4e3a' + bestPair.cat + '\uff0c\u4e00\u4ef6\u6807\u4ef7 S$' + lowPrice +
           '\uff0c\u53e6\u4e00\u4ef6 S$' + highPrice + '\uff0c\u4ef7\u5dee\u7ea6 ' + pct + '%\u3002',
-      en: PREFIX_COMPARE + 'within ' + bestPair.cat + ', one listed at S$' + lowPrice +
+      en: PREFIX_EN_COMPARE + 'within ' + bestPair.cat + ', one listed at S$' + lowPrice +
           ' vs S$' + highPrice + ' \u2014 spread ~' + pct + '%.',
       meta: META_COMPARE,
       metaEn: META_EN_COMPARE,
@@ -316,7 +328,7 @@ function mergeIntel(autoIntel, manualIntel) {
     result.push({
       type: 'platform',
       zh: PREFIX_PLATFORM + '\u521b\u59cb\u85cf\u5bb6\u62db\u52df\u8fdb\u884c\u4e2d\uff0c\u9650\u91cf 88 \u5e2d\u514d\u8d39\u5165\u9a7b\uff0c\u524d 2 \u4ef6\u85cf\u54c1\u514d\u8d39\u520a\u767b\u3002',
-      en: PREFIX_PLATFORM + 'Founding Collector seats are open \u2014 limited to 88, join free, first 2 listings free.',
+      en: PREFIX_EN_PLATFORM + 'Founding Collector seats are open \u2014 limited to 88, join free, first 2 listings free.',
       meta: META_PLATFORM,
       metaEn: META_EN_PLATFORM,
     });

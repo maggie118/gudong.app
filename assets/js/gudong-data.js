@@ -1,13 +1,20 @@
-/*! gudong-data.js â€” ç«™ç‚¹å…¬å…±æ•°æ®å±‚ï¼ˆ2026-09-19ï¼‰
+/*! gudong-data.js ¡ª Õ¾µã¹«¹²Êı¾İ²ã£¨2026-09-25 ¸üĞÂ£©
  *
- * ä½œç”¨ï¼šæ‰€æœ‰å­é¡µé¢å…±ç”¨ä¸€å¥—ã€Œè¯»å– Airtable â†’ æ¸…æ´— â†’ æ¸²æŸ“ã€é€»è¾‘ï¼Œé¿å…æ¯é¡µå„æŠ„ä¸€ä»½ã€‚
- * å¼•ç”¨æ–¹å¼ï¼ˆæ”¾åœ¨é¡µé¢å†…è”è„šæœ¬ä¹‹å‰ï¼‰ï¼š
- *     <script src="../assets/js/gudong-data.js" data-root="../"></script>   â† ä½äºå­ç›®å½•
- *     <script src="assets/js/gudong-data.js"></script>                       â† ä½äºæ ¹ç›®å½•
- * data-root = ä»å½“å‰é¡µé¢å›åˆ°ç«™ç‚¹æ ¹ç›®å½•çš„ç›¸å¯¹è·¯å¾„ï¼ˆæ ¹ç›®å½•é¡µé¢ç•™ç©ºï¼‰ã€‚
+ * ×÷ÓÃ£ºËùÓĞ×ÓÒ³Ãæ¹²ÓÃÒ»Ì×¡¸¶ÁÈ¡ Airtable ¡ú ÇåÏ´ ¡ú äÖÈ¾¡¹Âß¼­£¬±ÜÃâÃ¿Ò³¸÷³­Ò»·İ¡£
+ * ÒıÓÃ·½Ê½£¨·ÅÔÚÒ³ÃæÄÚÁª½Å±¾Ö®Ç°£©£º
+ *     <script src="../assets/js/gudong-data.js" data-root="../"></script>   ¡û Î»ÓÚ×ÓÄ¿Â¼
+ *     <script src="assets/js/gudong-data.js"></script>                       ¡û Î»ÓÚ¸ùÄ¿Â¼
+ * data-root = ´Óµ±Ç°Ò³Ãæ»Øµ½Õ¾µã¸ùÄ¿Â¼µÄÏà¶ÔÂ·¾¶£¨¸ùÄ¿Â¼Ò³ÃæÁô¿Õ£©¡£
  *
- * æ•°æ®é“¾è·¯ï¼š/api/airtable-proxyï¼ˆAirtable å®æ—¶æ•°æ®ï¼‰â†’ å¤±è´¥åˆ™è¯» data/listings.json å¿«ç…§ â†’ å†å¤±è´¥åˆ™é¡µé¢ä¿ç•™åŸé™æ€å†…å®¹ã€‚
- * è¯Šæ–­ï¼šä»»ä½•é¡µé¢åŠ  ?debug=1ï¼Œå·¦ä¸‹è§’æ˜¾ç¤ºæ•°æ®æ¥è‡ª Airtable è¿˜æ˜¯å¿«ç…§ã€‚
+ * Êı¾İÁ´Â·£º/api/airtable-proxy£¨Airtable ÊµÊ±Êı¾İ£©¡ú Ê§°ÜÔò¶Á data/listings.json ¿ìÕÕ ¡ú ÔÙÊ§°ÜÔòÒ³Ãæ±£ÁôÔ­¾²Ì¬ÄÚÈİ¡£
+ * Õï¶Ï£ºÈÎºÎÒ³Ãæ¼Ó ?debug=1£¬×óÏÂ½ÇÏÔÊ¾Êı¾İÀ´×Ô Airtable »¹ÊÇ¿ìÕÕ¡£
+ *
+ * ?? 2026-09-25 ¸üĞÂ£º
+ *   1. normalizePayload Ôö¼Ó intel ×Ö¶Î£¬ËùÓĞÒ³Ãæ¶¼ÄÜÄÃµ½Çé±¨Êı¾İ¡£
+ *   2. catKey Ôö¼Ó 'all' ÌØÅĞ£¬ĞŞ¸´ mountCategory({cat:'all'}) ±»´íÎó¹éÈë misc µÄ bug¡£
+ *   3. mountCategory Àï key ÅĞ¶Ï¸ÄÎª o.cat === 'all' ? 'all' : catKey(o.cat)¡£
+ *   4. ĞÂÔö renderIntel(container, list) Í¨ÓÃÇé±¨äÖÈ¾º¯Êı£¬ÈÎºÎÒ³Ãæ¶¼ÄÜÓÃ¡£
+ *   5. mountCategory äÖÈ¾Íê³Éºó¹ã²¥ gd:rendered ÊÂ¼ş¡£
  */
 (function (global) {
   'use strict';
@@ -16,13 +23,13 @@
   var ROOT = (cs && cs.getAttribute('data-root')) || '';
   var HOST = location.hostname;
   var LOCAL = HOST === '127.0.0.1' || HOST === 'localhost' || location.protocol === 'file:';
-  var API_BASE = LOCAL ? 'https://gudong.app' : '';      // æœ¬åœ°é¢„è§ˆæ—¶ç›´è¿çº¿ä¸Šæ¥å£
+  var API_BASE = LOCAL ? 'https://gudong.app' : '';      // ±¾µØÔ¤ÀÀÊ±Ö±Á¬ÏßÉÏ½Ó¿Ú
   var DEBUG = /[?&]debug=1\b/.test(location.search);
   var diag = { source: 'pending', endpoint: '', proxy: null, snapshot: null, payloadKeys: [],
                counts: {}, skipped: 0, sampleKeys: [], errors: [], page: '' };
 
-  /* ---------- åŸºç¡€å·¥å…· ---------- */
-  var HY = /[\u2010-\u2015\u2212\uFE58\uFF0D]/g;           // Unicode è¿å­—ç¬¦ â†’ ASCII '-'
+  /* ---------- »ù´¡¹¤¾ß ---------- */
+  var HY = /[\u2010-\u2015\u2212\uFE58\uFF0D]/g;           // Unicode Á¬×Ö·û ¡ú ASCII '-'
   function esc(s) {
     return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
       .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
@@ -31,25 +38,25 @@
   function first(v) { return Array.isArray(v) ? v[0] : v; }
 
   var CAT_ALIASES = {
-    'ç“·å™¨': 'porcelain', 'porcelain': 'porcelain',
-    'ç‰å™¨': 'jade', 'jade': 'jade',
-    'é’±å¸': 'coins', 'coins': 'coins', 'coin': 'coins',
-    'ä¹¦ç”»': 'paintings', 'paintings': 'paintings', 'painting': 'paintings', 'calligraphy': 'paintings',
-    'æ‚é¡¹': 'misc', 'misc': 'misc', 'miscellaneous': 'misc', 'other': 'misc'
+    '´ÉÆ÷': 'porcelain', 'porcelain': 'porcelain',
+    'ÓñÆ÷': 'jade', 'jade': 'jade',
+    'Ç®±Ò': 'coins', 'coins': 'coins', 'coin': 'coins',
+    'Êé»­': 'paintings', 'paintings': 'paintings', 'painting': 'paintings', 'calligraphy': 'paintings',
+    'ÔÓÏî': 'misc', 'misc': 'misc', 'miscellaneous': 'misc', 'other': 'misc'
   };
-  /* åˆ†ç±»è¯†åˆ«ï¼šå…ˆç²¾ç¡®åŒ¹é…æ ‡å‡†å€¼ï¼Œå†æŒ‰å…³é”®è¯åŒ¹é…ï¼ˆã€Œé™¶ç“·ã€ã€Œé’èŠ±ç“·ã€ã€Œç‰çŸ³ã€ã€Œé“œé’±ã€ç­‰ä¹Ÿèƒ½è½åˆ°æ­£ç¡®çš„å“ç±»é¡µï¼‰ï¼Œ
-     éƒ½ä¸è®¤è¯†æ‰å½’å…¥æ‚é¡¹ã€‚è¿™æ · Airtable çš„åˆ†ç±»é€‰é¡¹å†™æ³•ç¨æœ‰å‡ºå…¥ï¼Œè—å“ä¹Ÿä¸ä¼šè·‘åˆ°åˆ«çš„å“ç±»é¡µã€‚ */
+  /* ?? 2026-09-25£ºÔö¼Ó 'all' ÌØÅĞ£¬±ÜÃâ 'all' ±»¹éÈë misc */
   function catKey(c) {
     var v = String(c == null ? '' : c).trim().toLowerCase();
+    if (v === 'all' || v === '') return 'all';
     if (CAT_ALIASES[v]) return CAT_ALIASES[v];
-    if (/ç“·|porcelain|ceramic/.test(v)) return 'porcelain';
-    if (/ç‰|jade/.test(v)) return 'jade';
-    if (/å¸|é’±|coin|numismat/.test(v)) return 'coins';
-    if (/ç”»|ä¹¦æ³•|painting|calligraph/.test(v)) return 'paintings';
+    if (/´É|porcelain|ceramic/.test(v)) return 'porcelain';
+    if (/Óñ|jade/.test(v)) return 'jade';
+    if (/±Ò|Ç®|coin|numismat/.test(v)) return 'coins';
+    if (/»­|Êé·¨|painting|calligraph/.test(v)) return 'paintings';
     return 'misc';
   }
 
-  /* ---------- å…¬å…±æ ·å¼ï¼ˆéª¨æ¶å± / ç©ºçŠ¶æ€ / è¯Šæ–­é¢æ¿ï¼‰ï¼Œåªæ³¨å…¥ä¸€æ¬¡ ---------- */
+  /* ---------- ¹«¹²ÑùÊ½ ---------- */
   function injectCss() {
     if (document.getElementById('gd-shared-css')) return;
     var st = document.createElement('style');
@@ -68,26 +75,26 @@
     (document.head || document.documentElement).appendChild(st);
   }
 
-  /* ---------- è®°å½•æ¸…æ´— ---------- */
+  /* ---------- ¼ÇÂ¼ÇåÏ´ ---------- */
   function normKey(k) { return String(k).trim().toLowerCase().replace(/[\s\-]+/g, '_'); }
   function asBool(v) {
-    if (typeof v === 'string') return /^(true|yes|y|1|æ˜¯|âœ“|âœ”)$/i.test(v.trim());
+    if (typeof v === 'string') return /^(true|yes|y|1|ÊÇ|?|?)$/i.test(v.trim());
     return !!v;
   }
   function normalizeRecord(rec) {
     if (!rec || typeof rec !== 'object') return null;
-    var src = (rec.fields && typeof rec.fields === 'object') ? rec.fields : rec;   // å…¼å®¹ Airtable åŸå§‹ç»“æ„
+    var src = (rec.fields && typeof rec.fields === 'object') ? rec.fields : rec;
     var out = {};
     Object.keys(src).forEach(function (k) {
       var v = src[k];
-      if (Array.isArray(v)) {                                                     // Lookup å­—æ®µè¿”å›æ•°ç»„
+      if (Array.isArray(v)) {
         if (!v.length) v = null;
         else if (v.every(function (x) { return x === null || typeof x !== 'object'; })) v = v[0];
       }
       var key = normKey(k);
       out[key] = /^is_/.test(key) ? asBool(v) : v;
     });
-    [['title_zh', 'title_en'], ['era_zh', 'era_en']].forEach(function (p) {       // ä¸­è‹±æ–‡äº’ç›¸å…œåº•
+    [['title_zh', 'title_en'], ['era_zh', 'era_en']].forEach(function (p) {
       if (!out[p[0]] && out[p[1]]) out[p[0]] = out[p[1]];
       if (!out[p[1]] && out[p[0]]) out[p[1]] = out[p[0]];
     });
@@ -98,10 +105,10 @@
     return null;
   }
   function normalizePayload(json) {
-    if (!json || typeof json !== 'object') throw new Error('å“åº”ä¸æ˜¯ JSON å¯¹è±¡');
+    if (!json || typeof json !== 'object') throw new Error('ÏìÓ¦²»ÊÇ JSON ¶ÔÏó');
     if (json.error) {
       var m = typeof json.error === 'string' ? json.error : (json.error.message || JSON.stringify(json.error));
-      throw new Error('æ¥å£è¿”å›é”™è¯¯ï¼š' + String(m).slice(0, 120));
+      throw new Error('½Ó¿Ú·µ»Ø´íÎó£º' + String(m).slice(0, 120));
     }
     diag.payloadKeys = Array.isArray(json) ? ['(array)'] : Object.keys(json);
     var tf = pickList(json, 'todayFinds', 'today_finds'),
@@ -117,21 +124,34 @@
         editorPicks: all.filter(function (f) { return f.is_editor_picks || f.is_editor_pick || f.is_featured; }),
         newListing: all
       };
-    } else throw new Error('å“åº”ä¸­æ‰¾ä¸åˆ° todayFinds / editorPicks / newListingï¼ˆå®é™…å­—æ®µï¼š' + diag.payloadKeys.join(', ') + 'ï¼‰');
+    } else throw new Error('ÏìÓ¦ÖĞÕÒ²»µ½ todayFinds / editorPicks / newListing£¨Êµ¼Ê×Ö¶Î£º' + diag.payloadKeys.join(', ') + '£©');
 
     var total = 0, kept = 0;
     function clean(list) {
       return list.map(normalizeRecord).filter(function (f) {
         total++;
-        /* ä»£ç†åœ¨ item_id ä¸ºç©ºæ—¶ä¼šå›é€€æˆ Airtable è®°å½• IDï¼Œæ‰€ä»¥ç©ºè¡Œä¹Ÿå¸¦ item_idï¼›å¿…é¡»å†è¦æ±‚æœ‰æ ‡é¢˜ */
         if (f && normId(f.item_id) && (f.title_zh || f.title_en)) { kept++; return true; }
         diag.skipped++;
         return false;
       });
     }
     var out = { todayFinds: clean(groups.todayFinds), editorPicks: clean(groups.editorPicks), newListing: clean(groups.newListing) };
-    if (total > 0 && kept === 0) throw new Error('æ‰€æœ‰è®°å½•éƒ½ç¼ºå°‘ item_id æˆ–æ ‡é¢˜ï¼Œè¯·æ£€æŸ¥ Airtable å­—æ®µå');
-    // å–å®¶å±•é¦†åï¼ˆæ¥è‡ª Airtable çš„ sellers è¡¨ï¼›æœªé…ç½®æ—¶ä¸ºç©ºæ•°ç»„ï¼Œé¡µé¢å›é€€åˆ° HTML é‡Œå†™çš„å±•é¦†åï¼‰
+    if (total > 0 && kept === 0) throw new Error('ËùÓĞ¼ÇÂ¼¶¼È±ÉÙ item_id »ò±êÌâ£¬Çë¼ì²é Airtable ×Ö¶ÎÃû');
+
+    /* ?? 2026-09-25£ºÇé±¨Êı¾İ£¨À´×Ô´úÀíµÄ intel Êı×é£©£¬ËùÓĞÒ³ÃæÍ¨ÓÃ */
+    out.intel = Array.isArray(json.intel) ? json.intel.filter(function (it) {
+      return it && it.type && (it.zh || it.en || it.text_zh || it.text_en);
+    }).map(function (it) {
+      return {
+        type: it.type,
+        zh: it.zh || it.text_zh || '',
+        en: it.en || it.text_en || it.zh || it.text_zh || '',
+        meta: it.meta || it.meta_zh || '±à¼­ÕûÀí',
+        metaEn: it.metaEn || it.meta_en || 'Editorial'
+      };
+    }) : [];
+
+    /* Âô¼ÒÕ¹¹İÃû */
     out.sellers = (Array.isArray(json.sellers) ? json.sellers : []).map(normalizeRecord).filter(function (sl) {
       return sl && normId(sl.seller_id) && (sl.display_zh || sl.display_en);
     }).map(function (sl) {
@@ -140,17 +160,23 @@
       if (!sl.display_en) sl.display_en = sl.display_zh;
       return sl;
     });
+
     var f0 = out.todayFinds[0] || out.editorPicks[0] || out.newListing[0];
     diag.sampleKeys = f0 ? Object.keys(f0) : [];
-    diag.counts = { todayFinds: out.todayFinds.length, editorPicks: out.editorPicks.length, newListing: out.newListing.length };
+    diag.counts = {
+      todayFinds: out.todayFinds.length,
+      editorPicks: out.editorPicks.length,
+      newListing: out.newListing.length,
+      intel: out.intel.length
+    };
     return out;
   }
-  function sellerMap(data) {                    // { seller_id: {display_zh, display_en, since_year, ...} }
+  function sellerMap(data) {
     var m = {};
     ((data && data.sellers) || []).forEach(function (sl) { m[sl.seller_id] = sl; });
     return m;
   }
-  function dedupe(list) {                       // æŒ‰ item_id å»é‡ï¼Œä¿ç•™é¦–æ¬¡å‡ºç°é¡ºåº
+  function dedupe(list) {
     var seen = {};
     return list.filter(function (f) {
       var k = normId(f.item_id);
@@ -159,7 +185,7 @@
     });
   }
 
-  /* ---------- ä»·æ ¼ï¼šä¸€å£ä»· / ä»·æ ¼åŒºé—´ / ç§èŠè¯¢ä»· ---------- */
+  /* ---------- ¼Û¸ñ ---------- */
   function fmtMoney(v) {
     v = first(v);
     if (v == null || v === '') return '';
@@ -177,14 +203,14 @@
     amount = amount == null ? '' : String(amount).trim();
     if (!label) return amount;
     if (!amount || label.indexOf(amount) !== -1) return label;
-    return /[:ï¼š]\s*$/.test(label) ? label + amount : label + ' ' + amount;
+    return /[:£º]\s*$/.test(label) ? label + amount : label + ' ' + amount;
   }
   function resolvePrice(f) {
     var type = String(first(f.price_type) || first(f['price type']) || '').trim();
-    var enquiry = { zh: 'ç§èŠè¯¢ä»·', en: 'Enquire', enquiry: true };
-    if (/ç§èŠ|è¯¢ä»·|enquir|inquir|message/i.test(type)) return enquiry;
+    var enquiry = { zh: 'Ë½ÁÄÑ¯¼Û', en: 'Enquire', enquiry: true };
+    if (/Ë½ÁÄ|Ñ¯¼Û|enquir|inquir|message/i.test(type)) return enquiry;
     var fixed = fmtMoney(f.fixed_price);
-    if (fixed && (!type || /ä¸€å£ä»·|fixed/i.test(type))) return { zh: fixed, en: fixed, enquiry: false };
+    if (fixed && (!type || /Ò»¿Ú¼Û|fixed/i.test(type))) return { zh: fixed, en: fixed, enquiry: false };
     var zh = joinPrice(f.price_display_zh, f.price_zh) || joinPrice(f.price_display_en, f.price_en);
     var en = joinPrice(f.price_display_en, f.price_en) || joinPrice(f.price_display_zh, f.price_zh);
     if (zh || en) return { zh: zh || en, en: en || zh, enquiry: false };
@@ -195,7 +221,7 @@
     return '<div class="gd-price' + (p.enquiry ? ' gd-price--enquiry' : '') + '"><span class="zh">' + esc(p.zh) + '</span><span class="en">' + esc(p.en) + '</span></div>';
   }
 
-  /* ---------- å›¾ç‰‡ / é“¾æ¥ ---------- */
+  /* ---------- Í¼Æ¬ / Á´½Ó ---------- */
   function attachmentUrl(v) {
     if (!v) return '';
     if (Array.isArray(v)) v = v[0];
@@ -212,7 +238,7 @@
   var IMG_FALLBACK = "this.onerror=null;this.src='" + ROOT + "assets/images/placeholder.jpg'";
   function itemHref(f) { return ROOT + 'items/' + esc(normId(f.item_id)) + '.html'; }
 
-  /* ---------- ç½‘ç»œè¯·æ±‚ ---------- */
+  /* ---------- ÍøÂçÇëÇó ---------- */
   function fetchJson(url, ms, tag) {
     var ctl = new AbortController(), t0 = performance.now();
     var timer = setTimeout(function () { ctl.abort(); }, ms);
@@ -224,20 +250,20 @@
       })
       .catch(function (e) {
         if (!diag[tag]) diag[tag] = { status: 'no response', ms: Math.round(performance.now() - t0) };
-        throw e && e.name === 'AbortError' ? new Error('è¯·æ±‚è¶…æ—¶ï¼ˆ' + ms + 'msï¼‰') : e;
+        throw e && e.name === 'AbortError' ? new Error('ÇëÇó³¬Ê±£¨' + ms + 'ms£©') : e;
       })
       .then(function (v) { clearTimeout(timer); return v; }, function (e) { clearTimeout(timer); throw e; });
   }
-  function fetchProxy(url) {                    // ä»…è¶…æ—¶ / 5xx é‡è¯•ä¸€æ¬¡ï¼›4xx ä¸ CORS é”™è¯¯ä¸é‡è¯•
+  function fetchProxy(url) {
     return fetchJson(url, 8000, 'proxy').catch(function (e) {
-      if (!/è¶…æ—¶|HTTP 5\d\d/.test(e.message)) throw e;
-      diag.errors.push('proxy ç¬¬ 1 æ¬¡å¤±è´¥ï¼š' + e.message + 'ï¼Œé‡è¯•ä¸­');
+      if (!/³¬Ê±|HTTP 5\d\d/.test(e.message)) throw e;
+      diag.errors.push('proxy µÚ 1 ´ÎÊ§°Ü£º' + e.message + '£¬ÖØÊÔÖĞ');
       return new Promise(function (r) { setTimeout(r, 800); }).then(function () { return fetchJson(url, 8000, 'proxy'); });
     });
   }
 
   var _p = null;
-  function load() {                             // åŒä¸€é¡µé¢åªè¯·æ±‚ä¸€æ¬¡ï¼Œå¤šä¸ªä½¿ç”¨æ–¹å…±äº«
+  function load() {
     if (_p) return _p;
     diag.endpoint = API_BASE + '/api/airtable-proxy';
     _p = fetchProxy(diag.endpoint).then(function (json) {
@@ -245,46 +271,49 @@
       diag.source = 'airtable-proxy';
       return { source: diag.source, data: data };
     }).catch(function (e) {
-      console.warn('[Gudong] çº¿ä¸Š API åŠ è½½å¤±è´¥ï¼Œå›é€€åˆ°æœ¬åœ°å¿«ç…§ï¼š', e);
-      diag.errors.push('proxyï¼š' + e.message);
+      console.warn('[Gudong] ÏßÉÏ API ¼ÓÔØÊ§°Ü£¬»ØÍËµ½±¾µØ¿ìÕÕ£º', e);
+      diag.errors.push('proxy£º' + e.message);
       diag.skipped = 0;
       return fetchJson(ROOT + 'data/listings.json', 5000, 'snapshot').then(function (json) {
         var data = normalizePayload(json);
         diag.source = 'local-snapshot';
         return { source: diag.source, data: data };
       }).catch(function (e2) {
-        diag.errors.push('snapshotï¼š' + e2.message);
+        diag.errors.push('snapshot£º' + e2.message);
         diag.source = 'none';
         throw e2;
       });
-    }).then(function (r) { console.info('[Gudong] æ•°æ®æ¥æº:', r.source, diag.counts); renderDebug(); return r; },
-            function (e) { console.warn('[Gudong] æ²¡æœ‰å¯ç”¨çš„æ•°æ®æ¥æºï¼š', e); renderDebug(); throw e; });
+    }).then(function (r) { console.info('[Gudong] Êı¾İÀ´Ô´:', r.source, diag.counts); renderDebug(); return r; },
+            function (e) { console.warn('[Gudong] Ã»ÓĞ¿ÉÓÃµÄÊı¾İÀ´Ô´£º', e); renderDebug(); throw e; });
     return _p;
   }
 
-  /* ---------- è¯Šæ–­é¢æ¿ ---------- */
+  /* ---------- Õï¶ÏÃæ°å ---------- */
   function renderDebug(extra) {
     if (!DEBUG) return;
     var el = document.getElementById('gdDebug');
     if (!el) { el = document.createElement('div'); el.id = 'gdDebug'; el.className = 'gd-debug'; document.body.appendChild(el); }
     var live = diag.source === 'airtable-proxy';
-    var src = live ? '<span class="ok">âœ” Airtable å®æ—¶æ•°æ®ï¼ˆç» /api/airtable-proxyï¼‰</span>'
-      : diag.source === 'local-snapshot' ? '<span class="warn">âš  æœ¬åœ°å¿«ç…§ data/listings.json â€”â€” ä¸æ˜¯ Airtable å®æ—¶æ•°æ®</span>'
-      : '<span class="bad">âœ– æ²¡æœ‰ä»»ä½•æ•°æ®æ¥æº</span>';
-    function st(o) { return o ? esc(o.status) + ' Â· ' + o.ms + 'ms' : 'â€”'; }
+    var src = live ? '<span class="ok">? Airtable ÊµÊ±Êı¾İ£¨¾­ /api/airtable-proxy£©</span>'
+      : diag.source === 'local-snapshot' ? '<span class="warn">? ±¾µØ¿ìÕÕ data/listings.json ¡ª¡ª ²»ÊÇ Airtable ÊµÊ±Êı¾İ</span>'
+      : '<span class="bad">? Ã»ÓĞÈÎºÎÊı¾İÀ´Ô´</span>';
+    function st(o) { return o ? esc(o.status) + ' ¡¤ ' + o.ms + 'ms' : '¡ª'; }
     var c = diag.counts || {};
-    el.innerHTML = '<b>GUDONG æ•°æ®è¯Šæ–­ Â· ' + esc(diag.page || location.pathname) + '</b>\n' +
-      'æ•°æ®æ¥æºï¼š' + src + '\næ¥å£ï¼š' + esc(diag.endpoint) + '\n' +
-      'æ¥å£å“åº”ï¼š' + st(diag.proxy) + 'ã€€å¿«ç…§å“åº”ï¼š' + st(diag.snapshot) + '\n' +
-      'å“åº”å­—æ®µï¼š' + esc(diag.payloadKeys.join(', ') || 'â€”') + '\n' +
-      'ä»Šæ—¥å‘ç° ' + (c.todayFinds != null ? c.todayFinds : 'â€”') + ' Â· ç²¾é€‰å±•ç¤º ' + (c.editorPicks != null ? c.editorPicks : 'â€”') + ' Â· æœ€æ–°è—å“ ' + (c.newListing != null ? c.newListing : 'â€”') +
-      (diag.skipped ? ' Â· <span class="warn">å·²è·³è¿‡ç©ºè¡Œ/ç¼ºæ ‡é¢˜çš„è¡Œ ' + diag.skipped + '</span>' : '') + '\n' +
+    el.innerHTML = '<b>GUDONG Êı¾İÕï¶Ï ¡¤ ' + esc(diag.page || location.pathname) + '</b>\n' +
+      'Êı¾İÀ´Ô´£º' + src + '\n½Ó¿Ú£º' + esc(diag.endpoint) + '\n' +
+      '½Ó¿ÚÏìÓ¦£º' + st(diag.proxy) + '¡¡¿ìÕÕÏìÓ¦£º' + st(diag.snapshot) + '\n' +
+      'ÏìÓ¦×Ö¶Î£º' + esc(diag.payloadKeys.join(', ') || '¡ª') + '\n' +
+      '½ñÈÕ·¢ÏÖ ' + (c.todayFinds != null ? c.todayFinds : '¡ª') +
+      ' ¡¤ ¾«Ñ¡Õ¹Ê¾ ' + (c.editorPicks != null ? c.editorPicks : '¡ª') +
+      ' ¡¤ ×îĞÂ²ØÆ· ' + (c.newListing != null ? c.newListing : '¡ª') +
+      ' ¡¤ Çé±¨ ' + (c.intel != null ? c.intel : '¡ª') +
+      (diag.skipped ? ' ¡¤ <span class="warn">ÒÑÌø¹ı¿ÕĞĞ/È±±êÌâµÄĞĞ ' + diag.skipped + '</span>' : '') + '\n' +
       (extra ? esc(extra) + '\n' : '') +
-      'é¦–æ¡è®°å½•å­—æ®µï¼š' + esc(diag.sampleKeys.join(', ') || 'â€”') +
-      (diag.errors.length ? '\n<span class="bad">é”™è¯¯ï¼š\n' + diag.errors.map(esc).join('\n') + '</span>' : '');
+      'Ê×Ìõ¼ÇÂ¼×Ö¶Î£º' + esc(diag.sampleKeys.join(', ') || '¡ª') +
+      (diag.errors.length ? '\n<span class="bad">´íÎó£º\n' + diag.errors.map(esc).join('\n') + '</span>' : '');
   }
 
-  /* ---------- é€šç”¨å ä½ / æç¤º ---------- */
+  /* ---------- Í¨ÓÃÕ¼Î» / ÌáÊ¾ ---------- */
   function skeleton(el, n, style) {
     if (!el) return;
     el.setAttribute('aria-busy', 'true');
@@ -292,23 +321,19 @@
   }
   function emptyHtml(zh, en) { return '<div class="gd-empty"><span class="zh">' + zh + '</span><span class="en">' + en + '</span></div>'; }
   function errorHtml() {
-    return '<div class="gd-error"><span class="zh"><strong>è—å“åŠ è½½å¤±è´¥</strong><br>è¯·åˆ·æ–°é¡µé¢é‡è¯•ã€‚å¦‚æŒç»­å‡ºç°ï¼Œè¯·ç¨åå†è®¿é—®ã€‚</span>' +
+    return '<div class="gd-error"><span class="zh"><strong>²ØÆ·¼ÓÔØÊ§°Ü</strong><br>ÇëË¢ĞÂÒ³ÃæÖØÊÔ¡£Èç³ÖĞø³öÏÖ£¬ÇëÉÔºóÔÙ·ÃÎÊ¡£</span>' +
            '<span class="en"><strong>Failed to load listings</strong><br>Please refresh the page. If the issue persists, try again later.</span></div>';
   }
 
-  /* ---------- å“ç±»é¡µï¼šporcelain / jade / coins / misc / paintings ----------
-     mountCategory({ cat:'ç“·å™¨', list:'#itemList', style:'card' })
-       list  ï¼šåˆ—è¡¨å®¹å™¨é€‰æ‹©å™¨ï¼ˆcard é£æ ¼ = #itemListï¼›tag é£æ ¼ = '#items .goods-list'ï¼‰
-       style ï¼š'card' å›¾æ–‡å¡ç‰‡ï¼ˆæ ‡é¢˜/å¹´ä»£/ä»·æ ¼/æŸ¥çœ‹è¯¦æƒ…ï¼‰ï¼›'tag' å…¨å›¾å¡ç‰‡ + å³ä¸‹ä»·æ ¼æ ‡ç­¾
-     è¡Œä¸ºï¼šæ¥å£æˆåŠŸ â†’ ç”¨ Airtable æ•°æ®æ¸²æŸ“ï¼ˆè¯¥å“ç±»æ²¡æœ‰è—å“æ—¶æ˜¾ç¤ºç©ºçŠ¶æ€ï¼‰ï¼›
-           æ¥å£ä¸å¿«ç…§éƒ½å¤±è´¥ â†’ æ˜¾ç¤ºã€Œè—å“åŠ è½½å¤±è´¥ã€æç¤ºã€‚é¡µé¢ HTML é‡Œä¸å†æ”¾é™æ€æ¼”ç¤ºå¡ç‰‡ã€‚ */
+  /* ---------- Æ·ÀàÒ³ / ²ØÆ·¿âÒ³£ºÍ¨ÓÃäÖÈ¾ ---------- */
   function mountCategory(o) {
     injectCss();
     var listEl = document.querySelector(o.list);
     if (!listEl) return;
-    var key = catKey(o.cat);
-    diag.page = 'categories/' + key;
-    var keep = [].slice.call(listEl.querySelectorAll('#noResult,#noResultEn'));   // æœç´¢ã€Œæ— ç»“æœã€æç¤ºèŠ‚ç‚¹ï¼Œæ¸²æŸ“åæ”¾å›å»
+    /* ?? 2026-09-25£ºÖ±½ÓÅĞ¶Ï o.cat£¬±ÜÃâ catKey('all') ±»¹éÈë misc */
+    var key = (o.cat === 'all') ? 'all' : catKey(o.cat);
+    diag.page = o.page || ('categories/' + key);
+    var keep = [].slice.call(listEl.querySelectorAll('#noResult,#noResultEn'));
     var tag = o.style === 'tag';
 
     skeleton(listEl, 4, tag ? 'aspect-ratio:1/1' : 'height:260px');
@@ -322,34 +347,51 @@
         return '<a href="' + itemHref(f) + '" class="item-card"' + attrs + '>' + img +
           '<div class="price-tag zh">' + esc(p.zh) + '</div><div class="price-tag en">' + esc(p.en) + '</div></a>';
       }
-      var metaZh = [f.era_zh, f.category].filter(Boolean).join(' Â· '), metaEn = [f.era_en, f.category].filter(Boolean).join(' Â· ');
+      var metaZh = [f.era_zh, f.category].filter(Boolean).join(' ¡¤ '), metaEn = [f.era_en, f.category].filter(Boolean).join(' ¡¤ ');
       return '<a href="' + itemHref(f) + '" class="item-card"' + attrs + '>' +
         '<div class="item-image">' + img + '</div><div class="item-body">' +
         '<div class="item-title zh">' + esc(f.title_zh) + '</div><div class="item-title en">' + esc(f.title_en) + '</div>' +
         '<div class="item-meta zh">' + esc(metaZh) + '</div><div class="item-meta en">' + esc(metaEn) + '</div>' +
         priceBlock(f) +
-        '<div class="item-cta zh">æŸ¥çœ‹è¯¦æƒ… â†’</div><div class="item-cta en">View Details â†’</div></div></a>';
+        '<div class="item-cta zh">²é¿´ÏêÇé ¡ú</div><div class="item-cta en">View Details ¡ú</div></div></a>';
     }
 
     load().then(function (r) {
-      var items = dedupe([].concat(r.data.newListing, r.data.todayFinds, r.data.editorPicks)).filter(function (f) { return catKey(f.category) === key; });
+      var all = dedupe([].concat(r.data.newListing, r.data.todayFinds, r.data.editorPicks));
+      var items = key === 'all' ? all : all.filter(function (f) { return catKey(f.category) === key; });
       listEl.removeAttribute('aria-busy');
       listEl.innerHTML = items.length ? items.map(cardHtml).join('')
-        : emptyHtml('è¯¥å“ç±»æš‚æ— è—å“ï¼Œæ¬¢è¿å–å®¶å…¥é©»å‘å¸ƒ', 'No listings in this category yet â€” sellers are welcome to list');
+        : emptyHtml('¸ÃÆ·ÀàÔİÎŞ²ØÆ·£¬»¶Ó­Âô¼ÒÈë×¤·¢²¼', 'No listings in this category yet ¡ª sellers are welcome to list');
       keep.forEach(function (n) { listEl.appendChild(n); });
-      // è°ƒè¯•é¢æ¿ï¼šæœ¬é¡µæ•°é‡ + å…¨ç«™åˆ†ç±»åˆ†å¸ƒ + æœªè¢«æ ‡å‡†åˆ†ç±»ç²¾ç¡®åŒ¹é…çš„åˆ†ç±»å€¼ï¼ˆå¸®åŠ©åˆ¤æ–­ã€Œä¸ºä»€ä¹ˆæŸä»¶è—å“æ²¡å‡ºç°åœ¨è¿™ä¸ªå“ç±»é¡µã€ï¼‰
-      var LABEL = { porcelain: 'ç“·å™¨', jade: 'ç‰å™¨', coins: 'é’±å¸', paintings: 'ä¹¦ç”»', misc: 'æ‚é¡¹' }, dist = {}, odd = {};
-      dedupe([].concat(r.data.newListing, r.data.todayFinds, r.data.editorPicks)).forEach(function (f) {
-        var k = catKey(f.category); dist[LABEL[k]] = (dist[LABEL[k]] || 0) + 1;
-        if (!CAT_ALIASES[String(f.category == null ? '' : f.category).trim().toLowerCase()]) odd['ã€Œ' + (f.category || 'ç©º') + 'ã€â†’' + LABEL[k]] = 1;
-      });
-      renderDebug('æœ¬é¡µå“ç±»ã€Œ' + o.cat + 'ã€ï¼šè—å“ ' + items.length + '\n' +
-        'å…¨ç«™åˆ†ç±»åˆ†å¸ƒï¼š' + (Object.keys(dist).map(function (k) { return k + ' ' + dist[k]; }).join(' Â· ') || 'æ— ') +
-        (Object.keys(odd).length ? '\néæ ‡å‡†åˆ†ç±»å€¼ï¼ˆå·²æŒ‰å…³é”®è¯å½’ç±»ï¼‰ï¼š' + Object.keys(odd).join('ã€') : ''));
-    }).catch(function () {                      // æ¥å£ä¸å¿«ç…§éƒ½ä¸å¯ç”¨ï¼šæ˜¾ç¤ºåŠ è½½å¤±è´¥æç¤º
+      renderDebug('±¾Ò³Æ·Àà¡¸' + o.cat + '¡¹£º²ØÆ· ' + items.length + ' ¡¤ È«Õ¾²ØÆ· ' + all.length);
+      try { document.dispatchEvent(new CustomEvent('gd:rendered', { detail: { count: items.length } })); } catch (e) {}
+    }).catch(function () {
       listEl.removeAttribute('aria-busy'); listEl.innerHTML = errorHtml();
       keep.forEach(function (n) { listEl.appendChild(n); });
     });
+  }
+
+  /* ---------- Çé±¨Í¨ÓÃäÖÈ¾ ---------- */
+  function renderIntel(container, list) {
+    if (!container) return;
+    var items = list && list.length ? list : [];
+    if (!items.length) { container.innerHTML = ''; return; }
+    var TYPE = {
+      new:       { zh: 'ĞÂÉÏ¼Ü',   en: 'NEW',        cls: 'intel-type--new' },
+      drop:      { zh: '½µ¼Û',     en: 'PRICE DROP', cls: 'intel-type--drop' },
+      compare:   { zh: 'Í¬Àà¶Ô±È', en: 'COMPARE',    cls: 'intel-type--compare' },
+      collector: { zh: '²Ø¼Ò¶¯Ì¬', en: 'COLLECTOR',  cls: 'intel-type--collector' },
+      platform:  { zh: 'Æ½Ì¨¿ìÑ¶', en: 'PLATFORM',   cls: 'intel-type--platform' }
+    };
+    container.innerHTML = items.map(function (it) {
+      var t = TYPE[it.type] || TYPE.platform;
+      return '<div class="intel-card">' +
+        '<span class="intel-type ' + t.cls + '"><span class="zh">' + t.zh + '</span><span class="en">' + t.en + '</span></span>' +
+        '<div class="intel-text zh">' + esc(it.zh) + '</div>' +
+        '<div class="intel-text en">' + esc(it.en) + '</div>' +
+        '<div class="intel-meta"><span class="zh">' + esc(it.meta) + '</span><span class="en">' + esc(it.metaEn) + '</span></div>' +
+        '</div>';
+    }).join('');
   }
 
   global.GudongData = {
@@ -358,6 +400,6 @@
     resolvePrice: resolvePrice, priceBlock: priceBlock,
     imgUrl: imgUrl, imgOnError: IMG_FALLBACK, itemHref: itemHref,
     skeleton: skeleton, emptyHtml: emptyHtml, errorHtml: errorHtml, injectCss: injectCss, renderDebug: renderDebug,
-    mountCategory: mountCategory
+    mountCategory: mountCategory, renderIntel: renderIntel
   };
 })(window);

@@ -229,8 +229,8 @@
                 <div>
                     <span class="title zh">全部钱币</span><span class="title en">All Coins</span>
                     </div>
-                <a href="../../../pricing.html" class="more zh">想要同款图片效果？ →</a>
-                <a href="../../../pricing.html" class="more en">Want the Same Photo Finish? →</a>
+                <a href="javascript:void(0)" class="more zh" onclick="openPhotoRetouchModal()">想要同款图片效果？ →</a>
+                <a href="javascript:void(0)" class="more en" onclick="openPhotoRetouchModal()">Want the Same Photo Finish? →</a>
             </div>
             <div class="list-grid" id="itemList">
                 <div id="noResult" class="no-result zh" style="display:none;">暂无匹配钱币</div>
@@ -289,6 +289,145 @@
             var __l = document.querySelector('#itemList'); if (__l) __l.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:2.4rem 1rem;color:#716B63;line-height:1.8"><span class="zh">藏品加载失败，请刷新页面重试</span><span class="en">Failed to load listings — please refresh</span></div>';
         }
     </script>
+<!-- 2026-09-25：图片精修服务弹窗（创始卖家专属福利） -->
+<style>
+.pr-modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:120;display:none;align-items:center;justify-content:center;padding:1rem;}
+.pr-modal-overlay.show{display:flex;}
+.pr-modal-box{background:#fff;border-radius:12px;max-width:560px;width:100%;padding:1.7rem 1.5rem;position:relative;max-height:90vh;overflow-y:auto;box-shadow:0 18px 50px rgba(0,0,0,.22);animation:pr-in .2s ease;}
+@keyframes pr-in{from{opacity:0;transform:translateY(8px) scale(.98);}to{opacity:1;transform:none;}}
+.pr-modal-close{position:absolute;top:.7rem;right:.9rem;border:none;background:none;font-size:1.5rem;cursor:pointer;color:var(--color-text-secondary);line-height:1;}
+.pr-modal-close:hover{color:var(--color-text);}
+.pr-badge{display:inline-block;padding:.28rem .72rem;background:var(--color-gold-soft);color:var(--color-gold);border-radius:6px;font-size:.78rem;font-weight:700;margin-bottom:.75rem;}
+.pr-title{font-size:1.22rem;font-weight:700;color:var(--color-text);margin-bottom:.9rem;line-height:1.4;}
+.pr-price-block{background:var(--color-primary-light);border-radius:10px;padding:1rem 1.1rem;margin-bottom:1rem;}
+.pr-price-main{font-size:1.1rem;font-weight:800;color:var(--color-primary);margin-bottom:.4rem;}
+.pr-price-main .amt{font-size:1.5rem;}
+.pr-example{font-size:.82rem;color:var(--color-text-secondary);line-height:1.6;margin-bottom:.5rem;}
+.pr-checklist{list-style:none;padding:0;margin:.4rem 0;}
+.pr-checklist li{display:flex;align-items:flex-start;gap:.5rem;font-size:.85rem;color:var(--color-text);padding:.2rem 0;}
+.pr-checklist li svg{flex-shrink:0;width:16px;height:16px;color:var(--color-success);margin-top:.12rem;}
+.pr-note{font-size:.78rem;color:var(--color-text-secondary);line-height:1.6;margin-top:.5rem;}
+.pr-price-sub{font-size:.88rem;font-weight:700;color:var(--color-primary);margin-top:.6rem;line-height:1.5;}
+.pr-warning{background:#FDF6EC;border:1px solid #F0E0C0;border-radius:8px;padding:.8rem 1rem;font-size:.78rem;color:#8A6D3B;line-height:1.6;margin-bottom:1rem;}
+.pr-section-title{font-size:.95rem;font-weight:700;color:var(--color-text);margin:1rem 0 .5rem;}
+.pr-workflow{font-size:.83rem;color:var(--color-text-secondary);line-height:1.7;background:#FAFAF7;border-radius:8px;padding:.8rem 1rem;margin-bottom:.3rem;}
+.pr-workflow p{margin:.3rem 0;}
+.pr-form-row{margin-top:.9rem;}
+.pr-form-row label{display:block;font-size:.82rem;margin-bottom:.35rem;color:var(--color-text-secondary);font-weight:600;}
+.pr-input,.pr-textarea{width:100%;padding:.65rem .8rem;border:1px solid var(--color-border);border-radius:8px;font-size:.88rem;font-family:inherit;color:var(--color-text);background:#fff;transition:.2s;}
+.pr-input:focus,.pr-textarea:focus{outline:none;border-color:var(--color-gold);box-shadow:0 0 0 4px var(--color-gold-soft);}
+.pr-textarea{min-height:80px;resize:vertical;}
+.pr-file-wrap{border:1.5px dashed var(--color-border);border-radius:8px;padding:1rem;text-align:center;cursor:pointer;transition:.2s;background:#FAFAF7;display:block;}
+.pr-file-wrap:hover{border-color:var(--color-primary);background:var(--color-primary-light);}
+.pr-file-wrap input{display:none;}
+.pr-file-plus{font-size:1.3rem;color:var(--color-primary);font-weight:700;line-height:1;}
+.pr-file-text{font-size:.8rem;color:var(--color-text-secondary);margin-top:.25rem;}
+.pr-file-count{font-size:.75rem;color:var(--color-success);margin-top:.2rem;display:none;}
+.pr-file-wrap.has .pr-file-count{display:block;}
+.pr-paynow-block{background:var(--color-primary-light);border-radius:10px;padding:1rem 1.1rem;margin-top:.9rem;}
+.pr-paynow-amount{font-size:1.05rem;font-weight:800;color:var(--color-primary);margin-bottom:.5rem;}
+.pr-qr-placeholder{width:150px;height:150px;margin:.5rem auto;background:#fff;border:1px solid var(--color-border);border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--color-text-muted);}
+.pr-qr-placeholder svg{width:80px;height:80px;opacity:.25;}
+.pr-submit-btn{width:100%;padding:.9rem;background:var(--color-primary);color:#fff;border:none;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer;margin-top:1.2rem;transition:.2s;}
+.pr-submit-btn:hover{background:var(--color-primary-dark);}
+.pr-submit-btn:active{transform:translateY(1px);}
+</style>
+<div class="pr-modal-overlay" id="photoRetouchModal" role="dialog" aria-modal="true" aria-label="图片精修申请">
+  <div class="pr-modal-box">
+    <button type="button" class="pr-modal-close" onclick="closePhotoRetouchModal()" aria-label="关闭">×</button>
+    <div class="pr-badge">⭐ 创始卖家专属福利</div>
+    <h3 class="pr-title">想让你的图片也有这样的效果？</h3>
+    <div class="pr-price-block">
+      <div class="pr-price-main">图片精修 <span class="amt">S$10</span> / 件</div>
+      <div class="pr-example">例如：一只瓷瓶有正面、背面、底部、细节图，共 4 张 → S$10。</div>
+      <ul class="pr-checklist">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>光线与亮度</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>色彩与白平衡</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>裁剪与构图</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>背景清理</li>
+      </ul>
+      <div class="pr-note">不会改变器物真实颜色、形状或实际品相。</div>
+      <div class="pr-price-sub">S$10 / 件（1 件藏品，可上传最多 4 张图片）<br>一次精修最多 4 张 = S$10</div>
+    </div>
+    <div class="pr-warning">⚠️ 温馨提示：本套餐为基础图片精修服务，仅处理光影、调色、裁剪、背景清理；不含重度修图、创意美化、器物修补、绘图重构等高阶效果，将按客户提交的基础需求完成处理。</div>
+    <div class="pr-section-title">我们怎么工作：</div>
+    <div class="pr-workflow">
+      <p>表单资料 + 原图 + PayNow 截图 → 一次性提交</p>
+      <p>后台人工核验 5 项：1. 付款 2. 客户身份 3. 对应藏品 4. 提交原图 5. 客户基础需求</p>
+      <p>处理完成后通过 WhatsApp 发送成品给客户确认, 客户认可后，上传部署到藏品页面。</p>
+    </div>
+    <div class="pr-section-title">图片精修申请表</div>
+    <div class="pr-form-row">
+      <label>Seller ID（藏家古董网站 ID）</label>
+      <input class="pr-input" id="pr_seller_id" placeholder="例如：seller-lim-kw-antiques">
+    </div>
+    <div class="pr-form-row">
+      <label>WhatsApp</label>
+      <input class="pr-input" id="pr_whatsapp" placeholder="+65 xxxxxxxx">
+    </div>
+    <div class="pr-form-row">
+      <label>上传图片（可多选，最多 4 张）</label>
+      <label class="pr-file-wrap" id="pr_images_wrap">
+        <input type="file" id="pr_images" multiple accept="image/*">
+        <div class="pr-file-plus">＋</div>
+        <div class="pr-file-text">上传图片</div>
+        <div class="pr-file-count" id="pr_images_count"></div>
+      </label>
+    </div>
+    <div class="pr-paynow-block">
+      <div class="pr-paynow-amount">PayNow S$10</div>
+      <div class="pr-qr-placeholder" aria-label="PayNow QR Code">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><line x1="14" y1="14" x2="14" y2="21"/><line x1="18" y1="14" x2="18" y2="21"/><line x1="21" y1="18" x2="14" y2="18"/></svg>
+      </div>
+      <div class="pr-note" style="margin-top:.6rem;">完成付款后，请上传付款截图</div>
+      <label class="pr-file-wrap" style="margin-top:.6rem;" id="pr_paynow_wrap">
+        <input type="file" id="pr_paynow" accept="image/*">
+        <div class="pr-file-plus">＋</div>
+        <div class="pr-file-text">上传 PayNow 付款截图</div>
+        <div class="pr-file-count" id="pr_paynow_count"></div>
+      </label>
+    </div>
+    <div class="pr-form-row">
+      <label>备注（可选 · 填写你的基础需求：仅限光影、调色、构图、背景清理）</label>
+      <textarea class="pr-textarea" id="pr_remark" placeholder="希望重点优化哪里？"></textarea>
+    </div>
+    <button type="button" class="pr-submit-btn" onclick="submitPhotoRetouch()">提交精修申请 →</button>
+  </div>
+</div>
+<script>
+function openPhotoRetouchModal(){var m=document.getElementById('photoRetouchModal');if(m){m.classList.add('show');document.body.style.overflow='hidden';}}
+function closePhotoRetouchModal(){var m=document.getElementById('photoRetouchModal');if(m){m.classList.remove('show');document.body.style.overflow='';}}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closePhotoRetouchModal();});
+(function(){var m=document.getElementById('photoRetouchModal');if(m)m.addEventListener('click',function(e){if(e.target===m)closePhotoRetouchModal();});})();
+(function(){
+  function bindDrop(fileId,wrapId,countId){
+    var input=document.getElementById(fileId);var wrap=document.getElementById(wrapId);var count=document.getElementById(countId);
+    if(!input||!wrap||!count)return;
+    input.addEventListener('change',function(){
+      var n=input.files?input.files.length:0;
+      if(n>0){wrap.classList.add('has');count.textContent='已选择 '+n+' 个文件';}
+      else{wrap.classList.remove('has');count.textContent='';}
+    });
+  }
+  bindDrop('pr_images','pr_images_wrap','pr_images_count');
+  bindDrop('pr_paynow','pr_paynow_wrap','pr_paynow_count');
+})();
+function submitPhotoRetouch(){
+  var sid=document.getElementById('pr_seller_id').value.trim();
+  var wa=document.getElementById('pr_whatsapp').value.trim();
+  var rk=document.getElementById('pr_remark').value.trim();
+  var imgs=document.getElementById('pr_images').files;
+  var pay=document.getElementById('pr_paynow').files;
+  if(!sid){alert('请填写 Seller ID');return;}
+  if(!wa){alert('请填写 WhatsApp 联系方式');return;}
+  if(!imgs||imgs.length===0){alert('请上传需要精修的图片');return;}
+  if(imgs.length>4){alert('一次精修最多上传 4 张图片');return;}
+  if(!pay||pay.length===0){alert('请上传 PayNow 付款截图');return;}
+  var msg='【图片精修申请】\nSeller ID：'+sid+'\nWhatsApp：'+wa+'\n图片数量：'+imgs.length+' 张\n备注：'+(rk||'无')+'\n服务费 S$10，已附 PayNow 付款截图，请核验后安排精修。';
+  window.open('https://wa.me/6591234567?text='+encodeURIComponent(msg),'_blank');
+  closePhotoRetouchModal();
+}
+</script>
 <!-- 2026-09-23：PWA 安装引导弹层（iOS 图文步骤 / 桌面提示），全站统一 -->
 <style>
 .gd-install-modal { position: fixed; inset: 0; z-index: 9999; display: none; align-items: center; justify-content: center; background: rgba(0,0,0,.45); padding: 1.2rem; }

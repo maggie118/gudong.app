@@ -61,7 +61,7 @@
 
   /* ---------- record normalisation ---------- */
   function normKey(k) { return String(k).trim().toLowerCase().replace(/[\s\-]+/g, '_'); }
-  /* ?? FIXED: was /^(true|yes|y|1|頁|?|?)$/i - non-ASCII broke under some encodings */
+  /* asBool: accept true/yes/y/1/\u662f/\u2713/\u2714 (all ASCII-escaped) */
   function asBool(v) {
     if (typeof v === 'string') return /^(true|yes|y|1|\u662f|\u2713|\u2714)$/i.test(v.trim());
     return !!v;
@@ -90,10 +90,10 @@
     return null;
   }
   function normalizePayload(json) {
-    if (!json || typeof json !== 'object') throw new Error('\u54cd\u5e94\u4e0d\u662f JSON \u5bf9\u8c61');
+    if (!json || typeof json !== 'object') throw new Error('response is not a JSON object');
     if (json.error) {
       var m = typeof json.error === 'string' ? json.error : (json.error.message || JSON.stringify(json.error));
-      throw new Error('\u63a5\u53e3\u8fd4\u56de\u9519\u8bef\uff1a' + String(m).slice(0, 120));
+      throw new Error('api error: ' + String(m).slice(0, 120));
     }
     diag.payloadKeys = Array.isArray(json) ? ['(array)'] : Object.keys(json);
     var tf = pickList(json, 'todayFinds', 'today_finds'),
@@ -109,7 +109,7 @@
         editorPicks: all.filter(function (f) { return f.is_editor_picks || f.is_editor_pick || f.is_featured; }),
         newListing: all
       };
-    } else throw new Error('\u54cd\u5e94\u4e2d\u627e\u4e0d\u5230 todayFinds / editorPicks / newListing');
+    } else throw new Error('no todayFinds / editorPicks / newListing in payload');
 
     var total = 0, kept = 0;
     function clean(list) {
@@ -121,7 +121,7 @@
       });
     }
     var out = { todayFinds: clean(groups.todayFinds), editorPicks: clean(groups.editorPicks), newListing: clean(groups.newListing) };
-    if (total > 0 && kept === 0) throw new Error('\u6240\u6709\u8bb0\u5f55\u90fd\u7f3a\u5c11 item_id \u6216\u6807\u9898');
+    if (total > 0 && kept === 0) throw new Error('all records missing item_id or title');
 
     out.intel = Array.isArray(json.intel) ? json.intel.filter(function (it) {
       return it && it.type && (it.zh || it.en || it.text_zh || it.text_en);
@@ -233,13 +233,13 @@
       })
       .catch(function (e) {
         if (!diag[tag]) diag[tag] = { status: 'no response', ms: Math.round(performance.now() - t0) };
-        throw e && e.name === 'AbortError' ? new Error('\u8bf7\u6c42\u8d85\u65f6\uff08' + ms + 'ms\uff09') : e;
+        throw e && e.name === 'AbortError' ? new Error('timeout (' + ms + 'ms)') : e;
       })
       .then(function (v) { clearTimeout(timer); return v; }, function (e) { clearTimeout(timer); throw e; });
   }
   function fetchProxy(url) {
     return fetchJson(url, 8000, 'proxy').catch(function (e) {
-      if (!/\u8d85\u65f6|HTTP 5\d\d/.test(e.message)) throw e;
+      if (!/timeout|HTTP 5\d\d/.test(e.message)) throw e;
       diag.errors.push('proxy 1st failed: ' + e.message + ' - retrying');
       return new Promise(function (r) { setTimeout(r, 800); }).then(function () { return fetchJson(url, 8000, 'proxy'); });
     });
@@ -272,6 +272,7 @@
   }
 
   /* ---------- debug panel ---------- */
+  var DOT = ' \u00b7 ';
   function renderDebug(extra) {
     if (!DEBUG) return;
     var el = document.getElementById('gdDebug');
@@ -280,17 +281,17 @@
     var src = live ? '<span class="ok">Airtable live data (/api/airtable-proxy)</span>'
       : diag.source === 'local-snapshot' ? '<span class="warn">Local snapshot data/listings.json</span>'
       : '<span class="bad">No data source</span>';
-    function st(o) { return o ? esc(o.status) + ' ， ' + o.ms + 'ms' : '-'; }
+    function st(o) { return o ? esc(o.status) + DOT + o.ms + 'ms' : '-'; }
     var c = diag.counts || {};
-    el.innerHTML = '<b>GUDONG data diag ， ' + esc(diag.page || location.pathname) + '</b>\n' +
+    el.innerHTML = '<b>GUDONG data diag' + DOT + esc(diag.page || location.pathname) + '</b>\n' +
       'source: ' + src + '\nendpoint: ' + esc(diag.endpoint) + '\n' +
       'api: ' + st(diag.proxy) + '  snapshot: ' + st(diag.snapshot) + '\n' +
       'payload: ' + esc(diag.payloadKeys.join(', ') || '-') + '\n' +
       'todayFinds ' + (c.todayFinds != null ? c.todayFinds : '-') +
-      ' ， editorPicks ' + (c.editorPicks != null ? c.editorPicks : '-') +
-      ' ， newListing ' + (c.newListing != null ? c.newListing : '-') +
-      ' ， intel ' + (c.intel != null ? c.intel : '-') +
-      (diag.skipped ? ' ， <span class="warn">skipped ' + diag.skipped + '</span>' : '') + '\n' +
+      DOT + 'editorPicks ' + (c.editorPicks != null ? c.editorPicks : '-') +
+      DOT + 'newListing ' + (c.newListing != null ? c.newListing : '-') +
+      DOT + 'intel ' + (c.intel != null ? c.intel : '-') +
+      (diag.skipped ? DOT + '<span class="warn">skipped ' + diag.skipped + '</span>' : '') + '\n' +
       (extra ? esc(extra) + '\n' : '') +
       'first record keys: ' + esc(diag.sampleKeys.join(', ') || '-') +
       (diag.errors.length ? '\n<span class="bad">errors:\n' + diag.errors.map(esc).join('\n') + '</span>' : '');
@@ -360,8 +361,8 @@
     var items = list && list.length ? list : [];
     if (!items.length) { container.innerHTML = ''; return; }
     var TYPE = {
-      new:       { zh: '\u65b0\u4e0a\u67b6',   en: 'NEW',        cls: 'intel-type--new' },
-      drop:      { zh: '\u964d\u4ef7',        en: 'PRICE DROP', cls: 'intel-type--drop' },
+      new:       { zh: '\u65b0\u4e0a\u67b6',     en: 'NEW',        cls: 'intel-type--new' },
+      drop:      { zh: '\u964d\u4ef7',           en: 'PRICE DROP', cls: 'intel-type--drop' },
       compare:   { zh: '\u540c\u7c7b\u5bf9\u6bd4', en: 'COMPARE',    cls: 'intel-type--compare' },
       collector: { zh: '\u85cf\u5bb6\u52a8\u6001', en: 'COLLECTOR',  cls: 'intel-type--collector' },
       platform:  { zh: '\u5e73\u53f0\u5feb\u8baf', en: 'PLATFORM',   cls: 'intel-type--platform' }
@@ -385,4 +386,4 @@
     skeleton: skeleton, emptyHtml: emptyHtml, errorHtml: errorHtml, injectCss: injectCss, renderDebug: renderDebug,
     mountCategory: mountCategory, renderIntel: renderIntel
   };
-})(window);
+})(window);s

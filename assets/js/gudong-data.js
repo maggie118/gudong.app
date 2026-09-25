@@ -214,7 +214,8 @@
   function imgUrl(f) {
     var u = attachmentUrl(f.img_url);
     if (/^https?:\/\//i.test(u)) return u;
-    var file = normId(first(f.img_file) || '');
+    // img_file 可能包含多个空格/逗号分隔的路径，只取第一个
+    var file = normId(first(f.img_file) || '').split(/\s+/)[0] || '';
     var base = diag.source === 'local-snapshot' ? ROOT + 'assets/images/' : API_BASE + '/assets/images/';
     return base + (file || 'placeholder.jpg');
   }

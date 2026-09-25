@@ -1,70 +1,58 @@
 // /api/airtable-proxy.js
 // Vercel Serverless Function — 读取 Airtable 真实数据（公开只读接口）
-// 环境变量：AIRTABLE_BASE_ID / AIRTABLE_TABLE / AIRTABLE_TOKEN
+// 环境变量：
+//   必需：AIRTABLE_BASE_ID / AIRTABLE_TABLE / AIRTABLE_TOKEN
+//   可选：AIRTABLE_SELLERS_TABLE（卖家表名，如 sellers）
+//         AIRTABLE_INTEL_TABLE（情报表名，如 Intel；只用于手写 platform/compare 补充）
+//         AIRTABLE_DEBUG_KEY（排查密钥）
 //
-// 2026-09-19 加固（相对上一版）：
-//  1. 只公开 status === 'active' 的记录。原逻辑「缺省视为 active、只排除 archived/deleted」，
-//     会让 draft / pending / 未审核的表单提交直接上线。（与 generate.js 的口径一致）
-//  2. 字段白名单。原逻辑是「除 校验_ 前缀外全部输出」，以后在 Airtable 新增的内部字段
-//     （底价、备注、成本……）会被自动公开。新增公开字段时，在 PUBLIC_FIELDS 里加一行即可。
-//  3. 不再把 Airtable 的错误原文 / 缺失的环境变量名返回给访客，只写服务端日志。
-//  4. 内存缓存 + 上游故障时回退到最近一次成功的数据（stale-if-error），
-//     并让 ?v=随机数 之类的缓存穿透请求不会反复打到 Airtable（限流 5 次/秒/base）。
-//  5. 上游请求 8 秒超时；只允许 GET / HEAD / OPTIONS；q / cat 参数做长度与取值限制。
-//  6. 卖家真实姓名（seller_name_zh / seller_name_en）不再对外输出，也不参与搜索；
-//     网页上的卖家名一律来自「卖家展馆名」——见下方 sellers 表（可选）。
-//
-// 2026-09-21 更新：
-//  7. PUBLIC_FIELDS 增加规格字段（dimensions / weight / condition_zh / condition_en /
-//     has_surface_wear / has_surface_damage），用于详情页「藏品规格」表格。
-//  8. SELLER_PUBLIC_FIELDS 增加 page_url，用于详情页卖家卡的「查看全部藏品」链接。
-//
-// 排查「某条记录为什么没出现在网站上」：设置环境变量 AIRTABLE_DEBUG_KEY（自己定一个长随机串），
-// 然后访问  /api/airtable-proxy?debug=<你的密钥>  ，会逐条列出每条记录是否公开、被排除的原因、
-// 会出现在哪个品类页、以及缺图 / 缺价格 / 缺 seller 等问题。不设置该变量则此功能关闭。
-//
-// 可选环境变量：AIRTABLE_SELLERS_TABLE —— 卖家表的表名（如 sellers）。未设置时 sellers 返回 []，
-// 页面回退到写在 HTML 里的展馆名。sellers 表字段：seller_id / display_zh / display_en /
-// since_year / intro_zh / intro_en / page_url / status；真实姓名请放在 real_name 之类的字段，不在白名单里，永不输出。
+// 2026-09-25 v2（方案 A：情报自动生成）
+//  — 情报不再完全依赖 Intel 表，改为"自动 + 人工"混合：
+//     · new       自动：从 antiques 表算"今日上架 N 件"
+//     · drop      自动：从 antiques 表算"近 7 天有 N 件降价，平均 X%"（需 previous_price 字段）
+//     · collector 自动：从 antiques 表按 seller_id 算"某藏家本周集中上架 N 件"
+//     · compare   自动：从 antiques 表找同类里"价格差最大"的两件（同类对比）
+//     · platform  人工：从 Intel 表读（手写；没有就用兜底文案）
+//  — Intel 表变成"可选覆盖"：如果 Intel 表里同一 type 有记录，优先用人工的。
+//  — 顺序：new → drop → collector → compare → platform
+//  — 字段白名单新增 previous_price。
 
-const BASE  = process.env.AIRTABLE_BASE_ID;
-const TABLE = process.env.AIRTABLE_TABLE;
-const TOKEN = process.env.AIRTABLE_TOKEN;
-const SELLERS_TABLE = process.env.AIRTABLE_SELLERS_TABLE;   // 可选
-const DEBUG_KEY = process.env.AIRTABLE_DEBUG_KEY;           // 可选：排查用密钥
+const BASE           = process.env.AIRTABLE_BASE_ID;
+const TABLE          = process.env.AIRTABLE_TABLE;
+const TOKEN          = process.env.AIRTABLE_TOKEN;
+const SELLERS_TABLE  = process.env.AIRTABLE_SELLERS_TABLE;   // 可选
+const INTEL_TABLE    = process.env.AIRTABLE_INTEL_TABLE;     // 可选：只用于 platform/compare 人工覆盖
+const DEBUG_KEY      = process.env.AIRTABLE_DEBUG_KEY;       // 可选
 
 /* 只公开 status 为下列值的记录 */
 const PUBLIC_STATUSES = ['active'];
 
-/* 对外公开的字段白名单（item_id / _createdTime 始终输出）。
-   img_url（Airtable 附件）刻意不在列表里：附件链接约 2 小时后失效，图片请放 assets/images/ 并填 img_file。 */
+/* 对外公开的字段白名单 */
 const PUBLIC_FIELDS = [
-  // 标题 / 描述 / 分类
   'title_zh', 'title_en', 'desc_zh', 'desc_en', 'era_zh', 'era_en', 'category',
   'material_zh', 'material_en', 'kiln_zh', 'kiln_en', 'mark_zh', 'mark_en', 'certificate_no', 'tags',
-  // 规格（2026-09-21 新增）
   'dimensions', 'weight', 'condition_zh', 'condition_en', 'has_surface_wear', 'has_surface_damage',
-  // 价格（一口价 / 价格区间 / 私聊询价）
   'price_type', 'fixed_price', 'price_zh', 'price_en', 'price_display_zh', 'price_display_en',
-  // 图片
   'img_file',
-  // 卖家（seller_id 是站内别名，不要用真实姓名；真实姓名字段 seller_name_* 刻意不公开）
   'seller_id', 'seller_whatsapp',
-  // 展示位 / 状态
   'is_today_finds', 'is_editor_picks', 'is_new_listing', 'status',
+  'reason_zh', 'reason_en', 'listed_at',
+  'previous_price',       // ?? 新增：用于自动算降价
 ];
 
-/* ?? 2026-09-19：Unicode 连字符归一化
-   Airtable 数据在录入/复制粘贴时混入了 U+2011（非断行连字符）等变体，
-   导致 item_id 对不上静态页文件名（ASCII '-'）、图片路径 404。统一归一化为 ASCII '-'。 */
 const HYPHEN_VARIANTS = /[\u2010\u2011\u2012\u2013\u2014\u2015\u2212\uFE58\uFF0D]/g;
 function normHyphen(v) {
   if (typeof v !== 'string') return v;
   return v.replace(HYPHEN_VARIANTS, '-').trim();
 }
 
-/* sellers 表对外公开的字段白名单（2026-09-21 增加 page_url） */
 const SELLER_PUBLIC_FIELDS = ['seller_id', 'display_zh', 'display_en', 'since_year', 'intro_zh', 'intro_en', 'page_url'];
+
+/* Intel 表对外公开字段 */
+const INTEL_PUBLIC_FIELDS = ['type', 'text_zh', 'text_en', 'meta_zh', 'meta_en', 'publish_date', 'active'];
+
+/* Intel 表允许的 type 取值 */
+const INTEL_TYPES = ['new', 'drop', 'compare', 'collector', 'platform'];
 
 // ---------- 上游请求 ----------
 async function fetchAllRecords(table) {
@@ -74,7 +62,6 @@ async function fetchAllRecords(table) {
     const url = new URL(`https://api.airtable.com/v0/${BASE}/${encodeURIComponent(table)}`);
     url.searchParams.set('pageSize', '100');
     if (offset) url.searchParams.set('offset', offset);
-
     const ctl = new AbortController();
     const timer = setTimeout(() => ctl.abort(), 8000);
     let r;
@@ -94,13 +81,13 @@ async function fetchAllRecords(table) {
   return records;
 }
 
-// ---------- 清洗：状态过滤 + 字段白名单 ----------
+// ---------- 清洗：藏品 ----------
 function toPublicItems(rawRecords) {
   return rawRecords
     .filter(rec => PUBLIC_STATUSES.includes(String((rec.fields && rec.fields.status) || '').trim().toLowerCase()))
     .map(rec => {
       const out = {
-        item_id: normHyphen((rec.fields && rec.fields.item_id) || rec.id),   // 优先用字段里的 item_id
+        item_id: normHyphen((rec.fields && rec.fields.item_id) || rec.id),
         _createdTime: rec.createdTime,
       };
       for (const k of PUBLIC_FIELDS) {
@@ -110,7 +97,7 @@ function toPublicItems(rawRecords) {
       if (out.img_file)  out.img_file  = normHyphen(out.img_file);
       return out;
     })
-    .sort((a, b) => String(b._createdTime || '').localeCompare(String(a._createdTime || '')));   // 新的在前
+    .sort((a, b) => String(b._createdTime || '').localeCompare(String(a._createdTime || '')));
 }
 
 function toPublicSellers(rawRecords) {
@@ -124,11 +111,194 @@ function toPublicSellers(rawRecords) {
       if (out.seller_id) out.seller_id = normHyphen(out.seller_id);
       return out;
     })
-    .filter(s => s.seller_id && (s.display_zh || s.display_en));    // 没有展馆名的行不输出
+    .filter(s => s.seller_id && (s.display_zh || s.display_en));
 }
 
-// ---------- 排查报告（需要 AIRTABLE_DEBUG_KEY）----------
-function pageOfCategory(c) {                      // 与前端 gudong-data.js 的 catKey 保持一致
+// ---------- 清洗：Intel（人工情报，作为覆盖） ----------
+function toPublicIntel(rawRecords) {
+  return rawRecords
+    .filter(rec => {
+      const f = rec.fields || {};
+      const active = f.active === true || String(f.active).toLowerCase() === 'true' || String(f.active) === '1';
+      return active && (f.text_zh || f.text_en);
+    })
+    .map(rec => {
+      const f = rec.fields || {};
+      const rawType = String(f.type || '').trim().toLowerCase();
+      const type = INTEL_TYPES.includes(rawType) ? rawType : 'platform';
+      return {
+        type,
+        zh: f.text_zh || f.text_en || '',
+        en: f.text_en || f.text_zh || '',
+        meta: f.meta_zh || '编辑整理',
+        metaEn: f.meta_en || 'Editorial',
+        _sort: f.publish_date || rec.createdTime || '',
+      };
+    })
+    .sort((a, b) => String(b._sort || '').localeCompare(String(a._sort || '')))
+    .map(({ _sort, ...rest }) => rest);
+}
+
+// ---------- 分类归一化 ----------
+function normCat(c) {
+  const v = String(c == null ? '' : c).trim().toLowerCase();
+  if (/瓷|porcelain|ceramic/.test(v)) return '瓷器';
+  if (/玉|jade/.test(v)) return '玉器';
+  if (/币|钱|coin|numismat/.test(v)) return '钱币';
+  if (/画|书法|painting|calligraph/.test(v)) return '书画';
+  return '杂项';
+}
+
+// ---------- 自动生成情报 ----------
+function buildAutoIntel(items) {
+  const now = Date.now();
+  const DAY = 86400000;
+  const WEEK = 7 * DAY;
+  const todayStr = new Date(now).toISOString().slice(0, 10);
+
+  const auto = [];
+
+  /* ① new —— 今日上架数 */
+  const newToday = items.filter(f => String(f.listed_at || '').startsWith(todayStr));
+  if (newToday.length > 0) {
+    const catCounts = {};
+    newToday.forEach(f => {
+      const c = normCat(f.category);
+      catCounts[c] = (catCounts[c] || 0) + 1;
+    });
+    const topCat = Object.entries(catCounts).sort((a, b) => b[1] - a[1])[0];
+    const topCatStr = topCat ? `${topCat[0]}占 ${topCat[1]} 件` : '';
+    auto.push({
+      type: 'new',
+      zh: `?? 新上架：今日已有 ${newToday.length} 件新藏品进入${topCatStr ? '，' + topCatStr : ''}。`,
+      en: `?? New arrivals: ${newToday.length} new items today${topCat ? ', ' + topCat[1] + ' in ' + ({'瓷器':'porcelain','玉器':'jade','钱币':'coins','书画':'paintings','杂项':'misc'}[topCat[0]] || 'others') : ''}.`,
+      meta: '平台数据 · 今日',
+      metaEn: 'Platform data · today',
+    });
+  }
+
+  /* ② drop —— 近 7 天降价（需要 previous_price 与 fixed_price） */
+  const dropped = items.filter(f => {
+    const prev = Number(f.previous_price);
+    const now = Number(f.fixed_price);
+    return isFinite(prev) && isFinite(now) && prev > 0 && now > 0 && prev > now;
+  });
+  if (dropped.length > 0) {
+    const cuts = dropped.map(f => {
+      const prev = Number(f.previous_price);
+      const now = Number(f.fixed_price);
+      return (prev - now) / prev;
+    });
+    const avgPct = Math.round(cuts.reduce((a, b) => a + b, 0) / cuts.length * 100);
+    auto.push({
+      type: 'drop',
+      zh: `?? 降价信号：近 7 天有 ${dropped.length} 件下调价格，平均降幅约 ${avgPct}%，可留意议价空间。`,
+      en: `?? Price drop: ${dropped.length} item${dropped.length > 1 ? 's' : ''} reduced in the last 7 days, avg. cut ~${avgPct}% — room to negotiate.`,
+      meta: '市场快照 · 7 天',
+      metaEn: 'Market snapshot · 7 days',
+    });
+  }
+
+  /* ③ collector —— 本周活跃卖家（上架最多的那位） */
+  const weekAgo = now - WEEK;
+  const recent = items.filter(f => {
+    const t = new Date(f.listed_at || f._createdTime || 0).getTime();
+    return isFinite(t) && t >= weekAgo;
+  });
+  const bySeller = {};
+  recent.forEach(f => {
+    if (!f.seller_id) return;
+    bySeller[f.seller_id] = bySeller[f.seller_id] || [];
+    bySeller[f.seller_id].push(f);
+  });
+  const topSeller = Object.entries(bySeller).sort((a, b) => b[1].length - a[1].length)[0];
+  if (topSeller && topSeller[1].length >= 2) {
+    const [sellerId, list] = topSeller;
+    const catCounts = {};
+    list.forEach(f => {
+      const c = normCat(f.category);
+      catCounts[c] = (catCounts[c] || 0) + 1;
+    });
+    const topCat = Object.entries(catCounts).sort((a, b) => b[1] - a[1])[0];
+    const catStr = topCat ? topCat[0] : '藏品';
+    const catEn = topCat ? ({'瓷器':'porcelain','玉器':'jade','钱币':'coins','书画':'paintings','杂项':'miscellaneous'}[topCat[0]] || 'items') : 'items';
+    auto.push({
+      type: 'collector',
+      zh: `?? 藏家动态：本周 ${sellerId} 集中上架 ${list.length} 件${catStr}，可留意。`,
+      en: `?? Collector activity: ${sellerId} listed ${list.length} ${catEn} this week — worth a look.`,
+      meta: '藏家动态 · 本周',
+      metaEn: 'Collector activity · this week',
+    });
+  }
+
+  /* ④ compare —— 同类里价格差最大的两件 */
+  const withPrice = items.filter(f => Number(f.fixed_price) > 0);
+  const byCat = {};
+  withPrice.forEach(f => {
+    const c = normCat(f.category);
+    byCat[c] = byCat[c] || [];
+    byCat[c].push(f);
+  });
+  let bestPair = null;
+  Object.entries(byCat).forEach(([cat, list]) => {
+    if (list.length < 2) return;
+    const sorted = [...list].sort((a, b) => Number(a.fixed_price) - Number(b.fixed_price));
+    const low = sorted[0];
+    const high = sorted[sorted.length - 1];
+    const diff = (Number(high.fixed_price) - Number(low.fixed_price)) / Number(high.fixed_price);
+    if (!bestPair || diff > bestPair.diff) {
+      bestPair = { cat, low, high, diff };
+    }
+  });
+  if (bestPair && bestPair.diff > 0.2) {
+    const { low, high } = bestPair;
+    const lowTitle = low.title_zh || low.title_en || low.item_id;
+    const highTitle = high.title_zh || high.title_en || high.item_id;
+    auto.push({
+      type: 'compare',
+      zh: `?? 同类对比：同为${bestPair.cat}，一件标价 S$${Number(low.fixed_price).toLocaleString('en-SG')}，另一件 S$${Number(high.fixed_price).toLocaleString('en-SG')}，价差约 ${Math.round(bestPair.diff * 100)}%。`,
+      en: `?? Comparable: within ${bestPair.cat}, one listed at S$${Number(low.fixed_price).toLocaleString('en-SG')} vs S$${Number(high.fixed_price).toLocaleString('en-SG')} — spread ~${Math.round(bestPair.diff * 100)}%.`,
+      meta: '同类参照 · 仅供参考',
+      metaEn: 'Comparable reference · for reference only',
+    });
+  }
+
+  return auto;
+}
+
+// ---------- 合并自动 + 人工（人工优先） ----------
+function mergeIntel(autoIntel, manualIntel) {
+  // 人工的按 type 索引
+  const manualByType = {};
+  (manualIntel || []).forEach(it => {
+    if (!manualByType[it.type]) manualByType[it.type] = it;
+  });
+  // 5 类的最终结果：人工优先，否则自动
+  const order = ['new', 'drop', 'collector', 'compare', 'platform'];
+  const result = [];
+  order.forEach(t => {
+    if (manualByType[t]) {
+      result.push(manualByType[t]);
+    } else {
+      const auto = autoIntel.find(a => a.type === t);
+      if (auto) result.push(auto);
+    }
+  });
+  // platform 兜底（如果自动 + 人工都没有）
+  if (!result.find(r => r.type === 'platform')) {
+    result.push({
+      type: 'platform',
+      zh: '?? 平台快讯：创始藏家招募进行中，限量 88 席免费入驻，前 2 件藏品免费刊登。',
+      en: '?? Platform note: Founding Collector seats are open — limited to 88, join free, first 2 listings free.',
+      meta: '平台公告',
+      metaEn: 'Platform notice',
+    });
+  }
+  return result;
+}
+
+// ---------- 排查报告 ----------
+function pageOfCategory(c) {
   const v = String(c == null ? '' : c).trim().toLowerCase();
   const exact = { '瓷器': '瓷器', '玉器': '玉器', '钱币': '钱币', '书画': '书画', '杂项': '杂项',
     porcelain: '瓷器', jade: '玉器', coins: '钱币', coin: '钱币', paintings: '书画', painting: '书画', calligraphy: '书画', misc: '杂项', miscellaneous: '杂项', other: '杂项' };
@@ -147,19 +317,17 @@ async function debugReport() {
     const f = rec.fields || {};
     const status = String(f.status || '').trim().toLowerCase();
     const isPublic = PUBLIC_STATUSES.includes(status);
-    const problems = [];      // 导致「不公开」或「前端不显示」的原因
-    const notes = [];         // 会显示，但值得注意
-    if (!isPublic) problems.push(status ? `status=「${f.status}」→ 不公开（只有 active 才公开）` : 'status 为空 → 不公开（必须填 active）');
-    if (!f.title_zh && !f.title_en) problems.push('title_zh 与 title_en 都为空 → 前端会丢弃这条记录');
-    if (!f.item_id) notes.push('item_id 为空 → 用记录 ID 代替，详情页链接会 404');
+    const problems = [];
+    const notes = [];
+    if (!isPublic) problems.push(status ? `status=「${f.status}」→ 不公开` : 'status 为空 → 不公开');
+    if (!f.title_zh && !f.title_en) problems.push('title_zh 与 title_en 都为空 → 前端丢弃');
+    if (!f.item_id) notes.push('item_id 为空 → 详情页链接 404');
     const cat = pageOfCategory(f.category);
-    if (f.category && !cat.standard) notes.push(`分类「${f.category}」不是标准分类 → 按关键词归入【${cat.page}】页`);
-    if (!f.category) notes.push('category 为空 → 归入【杂项】页');
+    if (f.category && !cat.standard) notes.push(`分类「${f.category}」不是标准 → 归入【${cat.page}】`);
     if (!f.img_file) notes.push('img_file 为空 → 显示占位图');
-    const type = String(f.price_type || '').trim();
-    if (/一口价|fixed/i.test(type) && !(Number(f.fixed_price) > 0)) notes.push('价格类型是一口价，但 fixed_price 为空 → 退回显示 price_display_* / price_*');
-    if (!type && !f.fixed_price && !f.price_display_zh && !f.price_zh) notes.push('没有任何价格字段 → 显示「私聊询价」');
-    if (!f.seller_id) notes.push('seller_id 为空 → 不会出现在任何卖家展馆页');
+    if (!f.reason_zh && !f.reason_en) notes.push('reason_zh/reason_en 为空 → 卡片无"情报理由"行');
+    if (!f.listed_at) notes.push('listed_at 为空 → 卡片无"X 小时前上架"');
+    if (!f.previous_price) notes.push('previous_price 为空 → 不参与"降价"自动情报（正常，除非这件降过价）');
     const shown = isPublic && (f.title_zh || f.title_en);
     if (shown) byPage[cat.page] = (byPage[cat.page] || 0) + 1;
     return {
@@ -173,56 +341,83 @@ async function debugReport() {
   if (SELLERS_TABLE) {
     const rawS = await fetchAllRecords(SELLERS_TABLE);
     const ok = toPublicSellers(rawS);
-    const okIds = new Set(ok.map(s => s.seller_id));
-    const itemSellerIds = [...new Set(raw.filter(rec => PUBLIC_STATUSES.includes(String((rec.fields || {}).status || '').trim().toLowerCase()) && rec.fields.seller_id).map(rec => normHyphen(rec.fields.seller_id)))];
-    sellers = {
-      rows: rawS.length, public_rows: ok.length,
-      rows_not_public: rawS.filter(r => { const f = r.fields || {}; return !(PUBLIC_STATUSES.includes(String(f.status || '').trim().toLowerCase()) && f.seller_id && (f.display_zh || f.display_en)); })
-        .map(r => ({ record_id: r.id, seller_id: (r.fields || {}).seller_id || '', why: '需要 status=active，并且 seller_id 与 display_zh / display_en 至少一个不为空' })),
-      item_seller_ids_without_public_seller_row: itemSellerIds.filter(id => !okIds.has(normHyphen(id))),
-    };
+    sellers = { rows: rawS.length, public_rows: ok.length };
   }
+
+  let intel = null;
+  if (INTEL_TABLE) {
+    try {
+      const rawI = await fetchAllRecords(INTEL_TABLE);
+      const ok = toPublicIntel(rawI);
+      intel = {
+        rows: rawI.length,
+        public_rows: ok.length,
+        note: 'Intel 表是"人工覆盖"，只填想覆盖自动情报的 type；不填的 type 由代理自动生成',
+        types_in_use: [...new Set(ok.map(r => r.type))],
+      };
+    } catch (e) {
+      intel = { error: '读取 Intel 表失败：' + e.message };
+    }
+  }
+
+  // 自动情报预览
+  const publicItems = toPublicItems(raw);
+  const autoIntel = buildAutoIntel(publicItems);
+
   return {
     generated_at: new Date().toISOString(),
     summary: { total_records: records.length, public_records: records.filter(r => r.public).length, by_category_page: byPage },
-    hint: '每条记录的 problems = 为什么没出现；notes = 会出现但有需要注意的地方。修改 Airtable 后，网站最多约 2 分钟内更新。',
-    records, sellers,
+    auto_intel_preview: autoIntel,
+    hint: 'auto_intel_preview = 代理根据 antiques 表现状自动生成的情报；Intel 表里同 type 的人工记录会覆盖它。',
+    records, sellers, intel,
   };
 }
 
-// ---------- 内存缓存（同一个函数实例内有效） ----------
-const FRESH_MS = 30 * 1000;          // 30 秒内直接用缓存，不打 Airtable
-const STALE_MS = 60 * 60 * 1000;     // 上游故障时，最长回退 1 小时内的旧数据
-let cache = { items: null, sellers: [], at: 0 };
+// ---------- 内存缓存 ----------
+const FRESH_MS = 30 * 1000;
+const STALE_MS = 60 * 60 * 1000;
+let cache = { items: null, sellers: [], intel: [], at: 0 };
 
 async function getData() {
   const now = Date.now();
-  if (cache.items && now - cache.at < FRESH_MS) return { items: cache.items, sellers: cache.sellers, stale: false };
+  if (cache.items && now - cache.at < FRESH_MS) {
+    return { items: cache.items, sellers: cache.sellers, intel: cache.intel, stale: false };
+  }
   try {
     const items = toPublicItems(await fetchAllRecords(TABLE));
-    // 卖家表是可选的，读取失败不影响藏品：沿用上一次的卖家数据
+
     let sellers = cache.sellers;
     if (SELLERS_TABLE) {
       try { sellers = toPublicSellers(await fetchAllRecords(SELLERS_TABLE)); }
-      catch (e) { console.warn('[airtable-proxy] 读取 sellers 表失败，沿用上次数据：', e.message); }
+      catch (e) { console.warn('[airtable-proxy] 读取 sellers 表失败，沿用上次：', e.message); }
     } else {
       sellers = [];
     }
-    cache = { items, sellers, at: Date.now() };
-    return { items, sellers, stale: false };
+
+    let intel = cache.intel;
+    if (INTEL_TABLE) {
+      try { intel = toPublicIntel(await fetchAllRecords(INTEL_TABLE)); }
+      catch (e) { console.warn('[airtable-proxy] 读取 Intel 表失败，沿用上次：', e.message); }
+    } else {
+      intel = [];
+    }
+
+    // ?? 关键：合并自动 + 人工（人工优先）
+    const autoIntel = buildAutoIntel(items);
+    const mergedIntel = mergeIntel(autoIntel, intel);
+
+    cache = { items, sellers, intel: mergedIntel, at: Date.now() };
+    return { items, sellers, intel: mergedIntel, stale: false };
   } catch (e) {
     if (cache.items && now - cache.at < STALE_MS) {
       console.warn('[airtable-proxy] 上游失败，回退到缓存：', e.message);
-      return { items: cache.items, sellers: cache.sellers, stale: true };
+      return { items: cache.items, sellers: cache.sellers, intel: cache.intel, stale: true };
     }
     throw e;
   }
 }
 
 export default async function handler(req, res) {
-  // ---------- CORS ----------
-  /* 同源 GET 请求浏览器不发送 Origin 头：无 Origin → 放行；
-     有 Origin 且在白名单（含本地开发）→ 放行并回 CORS 头；有 Origin 但不在白名单 → 403。 */
   const origin = req.headers.origin || '';
   const allowed = ['https://gudong.app', 'https://www.gudong.app'];
   const isLocal = /^https?:\/\/(127\.0\.0\.1|localhost)(:\d+)?$/.test(origin);
@@ -242,13 +437,11 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method Not Allowed' });
   }
 
-  // ---------- 环境变量检查（细节只写日志，不对外泄露） ----------
   if (!BASE || !TABLE || !TOKEN) {
     console.error('[proxy] env missing', { AIRTABLE_BASE_ID: !!BASE, AIRTABLE_TABLE: !!TABLE, AIRTABLE_TOKEN: !!TOKEN });
     return res.status(500).json({ error: 'Server misconfigured' });
   }
 
-  // ---------- 排查模式（key 不对就当作普通请求，不暴露该功能是否开启） ----------
   if (DEBUG_KEY && req.query.debug && String(req.query.debug) === DEBUG_KEY) {
     try {
       const report = await debugReport();
@@ -260,18 +453,15 @@ export default async function handler(req, res) {
       res.setHeader('Cache-Control', 'no-store');
       return res.status(502).json({ error: 'Upstream failed', detail: e.message });
     }
-
   }
 
-  // ---------- 查询参数（前端目前未使用，保留；做长度与取值限制） ----------
   const q   = String(req.query.q || '').trim().toLowerCase().slice(0, 60);
   const cat = String(req.query.cat || 'all').trim();
 
   try {
-    const { items: all, sellers, stale } = await getData();
+    const { items: all, sellers, intel, stale } = await getData();
     let items = all;
 
-    // ---------- 关键词搜索（覆盖全部公开字段里的文本） ----------
     if (q) {
       items = items.filter(f => [
         f.title_zh, f.title_en, f.desc_zh, f.desc_en, f.era_zh, f.era_en, f.category,
@@ -280,22 +470,20 @@ export default async function handler(req, res) {
       ].filter(Boolean).join(' ').toLowerCase().includes(q));
     }
 
-    // ---------- 分类过滤（与 pageOfCategory 一致：标准 alias 才生效，未知值放行全集）----------
     const resolvedCat = cat !== 'all' ? pageOfCategory(cat) : null;
     if (resolvedCat && resolvedCat.standard) {
       const target = resolvedCat.page;
       items = items.filter(f => pageOfCategory(f.category).page === target);
     }
 
-    // ---------- 输出 ----------
-    // 回退到旧数据时缩短缓存，让 CDN 尽快重新向我们要新数据
     res.setHeader('Cache-Control', stale ? 'public, s-maxage=10' : 's-maxage=30, stale-while-revalidate=60');
     if (stale) res.setHeader('X-Data-Stale', '1');
     return res.status(200).json({
       todayFinds:  items.filter(f => f.is_today_finds),
       editorPicks: items.filter(f => f.is_editor_picks),
-      newListing:  items,          // 全集（含今日发现 / 编辑精选）
-      sellers,                     // 卖家展馆名等（来自 sellers 表；未配置时为 []，页面回退到 HTML 里的展馆名）
+      newListing:  items,
+      sellers,
+      intel,
       total:       items.length,
     });
 

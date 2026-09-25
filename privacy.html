@@ -287,5 +287,11 @@
 })();
 </script>
 
+    <script>
+    /* PWA: 注册 Service Worker */
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function () { navigator.serviceWorker.register('sw.js').catch(function () {}); });
+    }
+    </script>
 </body>
 </html>

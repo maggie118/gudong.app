@@ -13,7 +13,7 @@
     <meta property="og:url" content="https://gudong.app/items/item-ng-01.html">
     <meta property="og:image" content="https://gudong.app/assets/images/ng-lk/item-ng-01.jpg">
     <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
-    <link rel="manifest" href="../../../manifest.json">
+    <link rel="manifest" href="../manifest.json">
     <meta name="theme-color" content="#8A5A3B">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -126,13 +126,84 @@ header {
 .back-link { display: inline-block; margin-bottom: 1.4rem; font-size: .85rem; color: var(--color-text-secondary); text-decoration: none; }
 .back-link:hover { color: var(--color-primary); }
 .item-detail { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
-.item-detail-image { aspect-ratio: 1 / 1; border-radius: 10px; overflow: hidden; background: var(--color-primary-light); position: relative; }
-.item-detail-image::after {
-    content: ""; position: absolute; inset: 8px;
+/* ===== 图片区（多图） ===== */
+.item-detail-image { position: relative; }
+.image-main {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    border-radius: 10px;
+    overflow: hidden;
+    background: var(--color-primary-light);
+}
+.image-main::after {
+    content: "";
+    position: absolute; inset: 8px;
     border: 1px solid rgba(255,255,255,.25); border-radius: 6px;
     pointer-events: none;
+    z-index: 2;
 }
-.item-detail-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.image-main > img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+    transition: opacity .22s ease;
+}
+.image-main > img.fading { opacity: 0; }
+
+.image-nav {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    width: 38px; height: 38px; border-radius: 50%;
+    background: rgba(20,17,14,.42); color: #fff;
+    border: none; font-size: 1.25rem; line-height: 1;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    z-index: 3; transition: .2s;
+    backdrop-filter: blur(3px);
+    -webkit-tap-highlight-color: transparent;
+}
+.image-nav:hover { background: rgba(20,17,14,.72); }
+.image-nav.prev { left: 10px; }
+.image-nav.next { right: 10px; }
+
+.image-counter {
+    position: absolute; right: 12px; top: 12px;
+    background: rgba(20,17,14,.55); color: #fff;
+    padding: .22rem .6rem; border-radius: 999px;
+    font-size: .68rem; letter-spacing: .05em;
+    z-index: 3; backdrop-filter: blur(3px);
+    font-variant-numeric: tabular-nums;
+}
+
+.image-thumbs {
+    display: flex; gap: .5rem; margin-top: .7rem;
+    overflow-x: auto; padding-bottom: .3rem;
+    scrollbar-width: thin;
+}
+.image-thumbs::-webkit-scrollbar { height: 5px; }
+.image-thumbs::-webkit-scrollbar-thumb { background: var(--color-border); border-radius: 3px; }
+.image-thumb {
+    flex: 0 0 62px; width: 62px; height: 62px;
+    border-radius: 6px; overflow: hidden;
+    border: 1.5px solid var(--color-border);
+    background: var(--color-primary-light);
+    cursor: pointer; padding: 0;
+    transition: .2s; position: relative;
+    -webkit-tap-highlight-color: transparent;
+}
+.image-thumb:hover { border-color: var(--color-gold); }
+.image-thumb.active {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 2px var(--color-gold-soft);
+}
+.image-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.image-thumb-label {
+    position: absolute; left: 0; right: 0; bottom: 0;
+    background: rgba(20,17,14,.65); color: #fff;
+    font-size: .55rem; text-align: center; padding: .1rem .2rem;
+    letter-spacing: .04em; white-space: nowrap;
+    overflow: hidden; text-overflow: ellipsis;
+}
+.item-detail-image.single .image-thumbs,
+.item-detail-image.single .image-nav,
+.item-detail-image.single .image-counter { display: none; }
 .item-detail-meta { font-size: .88rem; color: var(--color-text-secondary); margin-bottom: .5rem; }
 .item-detail-title { font-family: Georgia, "Songti SC", "STSong", serif; font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 600; margin-bottom: .7rem; }
 .item-detail-price {
@@ -369,6 +440,8 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
     .btn-publish { padding: .45rem .85rem; font-size: .8rem; }
     .container { padding-top: 2rem; }
     .item-detail { grid-template-columns: 1fr; gap: 1.6rem; }
+    .image-thumb { flex: 0 0 54px; width: 54px; height: 54px; }
+    .image-nav { width: 34px; height: 34px; font-size: 1.1rem; }
 }
 @media (max-width: 560px) {
     .brand h1 { font-size: 1.15rem; }
@@ -378,11 +451,12 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
         right: 10px;
         bottom: 10px;
     }
+    .image-thumb { flex: 0 0 50px; width: 50px; height: 50px; }
 }
     </style>
-    <link rel="apple-touch-icon" href="../../../assets/icons/icon-192.png">
+    <link rel="apple-touch-icon" href="../assets/icons/icon-192.png">
 </head>
-<body data-lang="zh">
+<body data-lang="zh" data-item-id="item-ng-01">
     <div class="announce-bar" id="announceBar">
         <span class="zh">创始卖家福利｜限量 88 席免费入驻，前 2 件藏品信息免费刊登。</span>
         <span class="en">Founder-Dealer Benefit | Limited 88 seats · Free to join · First 2 listings free.</span>
@@ -391,14 +465,14 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
     <header>
         <div style="display:flex; align-items:center; gap:.9rem;">
             <button class="menu-toggle" onclick="openSidebar()" aria-label="menu">☰</button>
-            <a href="../../../index.html" class="brand" style="text-decoration:none;color:inherit;">
+            <a href="../index.html" class="brand" style="text-decoration:none;color:inherit;">
                 <h1 class="zh">古董集</h1>
                 <h1 class="en">GUDONG</h1>
                 <p class="zh">GUDONG</p>
             </a>
         </div>
         <div class="header-right">
-            <a href="../../../pricing.html#seller-services" class="btn-publish">
+            <a href="../pricing.html#seller-services" class="btn-publish">
                 <span class="zh">刊登藏品</span><span class="en">List an Item</span>
             </a>
             <button class="lang-btn" onclick="toggleLang()">EN</button>
@@ -411,34 +485,40 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
             <span class="zh">古董集</span><span class="en">GUDONG</span>
         </div>
         <nav class="sidebar-nav">
-            <a href="../../../index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">首页</span><span class="en">Home</span></a>
-            <a href="../../../index.html#daily-intel" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 今日情报</span><span class="en">· Daily Intel</span></a>
-            <a href="../../../index.html#today-finds" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 今日好货</span><span class="en">· Today's Picks</span></a>
-            <a href="../../../index.html#new-listings" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 新上架好货</span><span class="en">· New Arrivals</span></a>
-            <a href="../../../collection.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">藏品库</span><span class="en">Collection</span></a>
-            <a href="../../../categories/porcelain.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 瓷器</span><span class="en">· Porcelain</span></a>
-            <a href="../../../categories/jade.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 玉器</span><span class="en">· Jade</span></a>
-            <a href="../../../categories/coins.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 钱币</span><span class="en">· Coins</span></a>
-            <a href="../../../categories/paintings.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 书画</span><span class="en">· Paintings &amp; Calligraphy</span></a>
-            <a href="../../../categories/misc.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 杂项</span><span class="en">· Miscellaneous</span></a>
-            <a href="../../../insights/index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">情报 / 知识</span><span class="en">Insights</span></a>
-            <a href="../../../sellers/index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">藏家主页</span><span class="en">Collector Gallery</span></a>
-            <a href="../../../pricing.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">刊登藏品</span><span class="en">List an Item</span></a>
-            <a href="../../../about.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">联系我们</span><span class="en">Contact</span></a>
+            <a href="../index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">首页</span><span class="en">Home</span></a>
+            <a href="../index.html#daily-intel" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 今日情报</span><span class="en">· Daily Intel</span></a>
+            <a href="../index.html#today-finds" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 今日好货</span><span class="en">· Today's Picks</span></a>
+            <a href="../index.html#new-listings" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 新上架好货</span><span class="en">· New Arrivals</span></a>
+            <a href="../collection.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">藏品库</span><span class="en">Collection</span></a>
+            <a href="../categories/porcelain.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 瓷器</span><span class="en">· Porcelain</span></a>
+            <a href="../categories/jade.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 玉器</span><span class="en">· Jade</span></a>
+            <a href="../categories/coins.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 钱币</span><span class="en">· Coins</span></a>
+            <a href="../categories/paintings.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 书画</span><span class="en">· Paintings &amp; Calligraphy</span></a>
+            <a href="../categories/misc.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 杂项</span><span class="en">· Miscellaneous</span></a>
+            <a href="../insights.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">情报 / 知识</span><span class="en">Insights</span></a>
+            <a href="../sellers/index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">藏家主页</span><span class="en">Collector Gallery</span></a>
+            <a href="../pricing.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">刊登藏品</span><span class="en">List an Item</span></a>
+            <a href="../about.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">联系我们</span><span class="en">Contact</span></a>
             <button type="button" class="sidebar-lang-btn" onclick="toggleLang()" aria-label="Switch language"><span class="zh">🌐 English</span><span class="en">🌐 中文</span></button>
         </nav>
     </aside>
     <main class="container">
-        <a href="../../../sellers/seller-ng-lk-antiques.html" class="back-link zh">← 返回 聚珍阁 私家藏馆</a>
-        <a href="../../../sellers/seller-ng-lk-antiques.html" class="back-link en">← Back to Ng LK Antiques</a>
+        <a href="../sellers/seller-ng-lk-antiques.html" class="back-link zh">← 返回 聚珍阁 私家藏馆</a>
+        <a href="../sellers/seller-ng-lk-antiques.html" class="back-link en">← Back to Ng LK Antiques</a>
         <div class="item-detail">
-            <div class="item-detail-image">
-                <img src="../../../assets/images/ng-lk/item-ng-01.jpg" alt="商周青铜饕餮纹方罍" onerror="this.onerror=null;this.src='../assets/images/placeholder.jpg'">
-                <button type="button" class="fav-btn" id="favBtn" aria-pressed="false" aria-label="收藏此藏品" title="收藏 / Add to favourites">
-                    <svg class="fav-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                    </svg>
-                </button>
+            <div class="item-detail-image" id="imageGallery">
+                <div class="image-main">
+                    <img id="mainImage" src="../assets/images/ng-lk/item-ng-01.jpg" alt="商周青铜饕餮纹方罍">
+                    <span class="image-counter" id="imageCounter">1 / 4</span>
+                    <button class="image-nav prev" id="imgPrev" type="button" aria-label="上一张">‹</button>
+                    <button class="image-nav next" id="imgNext" type="button" aria-label="下一张">›</button>
+                    <button type="button" class="fav-btn" id="favBtn" aria-pressed="false" aria-label="收藏此藏品" title="收藏 / Add to favourites">
+                        <svg class="fav-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="image-thumbs" id="imageThumbs" aria-label="图片切换"></div>
             </div>
             <div>
                 <p class="item-detail-meta zh">商周 · 杂项 · 铜器 · 卖家：聚珍阁</p>
@@ -491,7 +571,7 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
                         </span>
                     </div>
                     <div class="seller-card-id">Seller ID: <span id="sellerId">Ng-LK</span></div>
-                    <a href="../../../sellers/seller-ng-lk-antiques.html" class="seller-card-link" id="sellerLink">
+                    <a href="../sellers/seller-ng-lk-antiques.html" class="seller-card-link" id="sellerLink">
                         <span class="zh">查看全部藏品 →</span><span class="en">View all items →</span>
                     </a>
                 </div>
@@ -569,9 +649,9 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
     </main>
     <footer>
         <div class="footer-nav">
-            <a href="../../../pricing.html#buyer-services" class="zh">委托找货</a><a href="../../../pricing.html#buyer-services" class="en">Sourcing</a>
-            <a href="../../../privacy.html" class="zh">隐私政策</a><a href="../../../privacy.html" class="en">Privacy</a>
-            <a href="../../../terms.html" class="zh">用户条款</a><a href="../../../terms.html" class="en">Terms</a>
+            <a href="../pricing.html#buyer-services" class="zh">委托找货</a><a href="../pricing.html#buyer-services" class="en">Sourcing</a>
+            <a href="../privacy.html" class="zh">隐私政策</a><a href="../privacy.html" class="en">Privacy</a>
+            <a href="../terms.html" class="zh">用户条款</a><a href="../terms.html" class="en">Terms</a>
         </div>
         <p class="footer-disclaimer zh">gudong.app 是信息发现平台，而非交易平台。</p>
         <p class="footer-disclaimer en">gudong.app is an information and discovery platform for antiques and collectibles.</p>
@@ -669,6 +749,112 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
             closeExpertCallModal();
         }
     </script>
+    <!-- ===== 多图切换（正面 / 背面 / 底部 / 细节） ===== -->
+    <script>
+    (function () {
+        'use strict';
+        var gallery = document.getElementById('imageGallery');
+        var main = document.getElementById('mainImage');
+        var thumbsWrap = document.getElementById('imageThumbs');
+        var counter = document.getElementById('imageCounter');
+        var prevBtn = document.getElementById('imgPrev');
+        var nextBtn = document.getElementById('imgNext');
+        if (!gallery || !main || !thumbsWrap) return;
+
+        // 静态页默认 4 张图（放入 assets 后即可显示）
+        var defaultImages = [
+            { src: '../assets/images/ng-lk/item-ng-01.jpg',   label: { zh: '正面', en: 'Front'  } },
+            { src: '../assets/images/ng-lk/item-ng-01-b.jpg', label: { zh: '背面', en: 'Back'   } },
+            { src: '../assets/images/ng-lk/item-ng-01-c.jpg', label: { zh: '底部', en: 'Base'   } },
+            { src: '../assets/images/ng-lk/item-ng-01-d.jpg', label: { zh: '细节', en: 'Detail' } }
+        ];
+        var images = defaultImages.slice();
+        var current = 0;
+        var PLACEHOLDER = '../assets/images/placeholder.jpg';
+
+        function getLabel(img) {
+            var lang = document.body.dataset.lang === 'en' ? 'en' : 'zh';
+            return img && img.label ? (img.label[lang] || img.label.zh) : '';
+        }
+
+        function renderThumbs() {
+            thumbsWrap.innerHTML = '';
+            if (images.length <= 1) {
+                gallery.classList.add('single');
+                return;
+            }
+            gallery.classList.remove('single');
+            images.forEach(function (img, i) {
+                var b = document.createElement('button');
+                b.type = 'button';
+                b.className = 'image-thumb' + (i === current ? ' active' : '');
+                b.setAttribute('aria-label', getLabel(img) || ('图片 ' + (i + 1)));
+
+                var im = document.createElement('img');
+                im.src = img.src;
+                im.alt = getLabel(img) || '';
+                im.loading = 'lazy';
+                im.onerror = function () { this.onerror = null; this.src = PLACEHOLDER; };
+                b.appendChild(im);
+
+                var label = getLabel(img);
+                if (label) {
+                    var sp = document.createElement('span');
+                    sp.className = 'image-thumb-label';
+                    sp.textContent = label;
+                    b.appendChild(sp);
+                }
+                b.addEventListener('click', function () { goTo(i); });
+                thumbsWrap.appendChild(b);
+            });
+            if (counter) counter.textContent = (current + 1) + ' / ' + images.length;
+        }
+
+        function goTo(i) {
+            if (!images.length) return;
+            i = (i + images.length) % images.length;
+            if (i === current) return;
+            current = i;
+            var next = images[i];
+            main.classList.add('fading');
+            setTimeout(function () {
+                main.src = next.src;
+                main.alt = getLabel(next) || '';
+                main.classList.remove('fading');
+            }, 140);
+            Array.prototype.forEach.call(thumbsWrap.children, function (el, idx) {
+                el.classList.toggle('active', idx === i);
+            });
+            if (counter) counter.textContent = (i + 1) + ' / ' + images.length;
+        }
+
+        if (prevBtn) prevBtn.addEventListener('click', function (e) { e.preventDefault(); goTo(current - 1); });
+        if (nextBtn) nextBtn.addEventListener('click', function (e) { e.preventDefault(); goTo(current + 1); });
+
+        document.addEventListener('keydown', function (e) {
+            if (e.target && /INPUT|TEXTAREA|SELECT/.test(e.target.tagName)) return;
+            if (e.key === 'ArrowLeft')  goTo(current - 1);
+            if (e.key === 'ArrowRight') goTo(current + 1);
+        });
+
+        // 暴露给 Airtable 接口使用
+        window.__gdSetGalleryImages = function (list) {
+            if (!Array.isArray(list) || !list.length) return;
+            images = list;
+            current = 0;
+            main.src = images[0].src;
+            main.alt = getLabel(images[0]) || '';
+            main.onerror = function () { this.onerror = null; this.src = PLACEHOLDER; };
+            renderThumbs();
+        };
+
+        var langBtn = document.querySelector('.lang-btn');
+        if (langBtn) langBtn.addEventListener('click', function () { setTimeout(renderThumbs, 0); });
+
+        main.onerror = function () { this.onerror = null; this.src = PLACEHOLDER; };
+        renderThumbs();
+    })();
+    </script>
     <script>
     (function () {
         var API_BASE = (location.hostname === '127.0.0.1' || location.hostname === 'localhost' || location.protocol === 'file:') ? 'https://gudong.app' : '';
@@ -742,12 +928,37 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
                 var s = document.createElement('span'); s.className = p[0]; s.textContent = p[1]; el.appendChild(s);
             });
         }
-        function setImage(f) {
-            var img = $('.item-detail-image img'); if (!img) return;
-            var u = first(f.img_url); if (u && typeof u === 'object') u = (u.thumbnails && u.thumbnails.large && u.thumbnails.large.url) || u.url;
-            var src = (typeof u === 'string' && /^https?:\/\//i.test(u)) ? u : (f.img_file ? '../assets/images/' + clean(first(f.img_file)) : '');
-            if (src && img.getAttribute('src') !== src) { changes.push('img → ' + src.slice(-40)); img.setAttribute('src', src); }
-            if (f.title_zh) img.alt = clean(first(f.title_zh));
+        // ---- 图片：只读 img_file，多个文件名用逗号/空格/顿号分隔 ----
+        function parseImgFiles(f) {
+            var raw = clean(first(f.img_file));
+            if (!raw) return [];
+            var seen = {}, out = [];
+            raw.split(/[,\s，、]+/).forEach(function (name) {
+                name = name.trim();
+                if (!name || !/\.(jpe?g|png|webp|gif)$/i.test(name)) return;
+                if (seen[name]) return;
+                seen[name] = 1;
+                out.push('../assets/images/' + name);
+            });
+            return out;
+        }
+        function setGallery(f) {
+            if (typeof window.__gdSetGalleryImages !== 'function') return;
+            var urls = parseImgFiles(f);
+            if (!urls.length) return;
+            var zhLabels = ['正面', '背面', '底部', '细节', '局部', '铭款', '侧视', '包装'];
+            var enLabels = ['Front', 'Back', 'Base', 'Detail', 'Close-up', 'Mark', 'Side', 'Packaging'];
+            var imgs = urls.map(function (src, i) {
+                return {
+                    src: src,
+                    label: {
+                        zh: zhLabels[i] || ('图 ' + (i + 1)),
+                        en: enLabels[i] || ('View ' + (i + 1))
+                    }
+                };
+            });
+            changes.push('gallery → ' + imgs.length + ' 张');
+            window.__gdSetGalleryImages(imgs);
         }
         function setWhatsApp(f) {
             var wa = String(first(f.seller_whatsapp) || '').replace(/\D/g, '');
@@ -850,7 +1061,7 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
                 setPrice(f);
                 setText('.item-detail-desc.zh', f.desc_zh, 'desc_zh');
                 setText('.item-detail-desc.en', f.desc_en, 'desc_en');
-                setImage(f);
+                setGallery(f);
                 setSpec(f);
                 setSellerCard(f, data);
                 setWhatsApp(f);

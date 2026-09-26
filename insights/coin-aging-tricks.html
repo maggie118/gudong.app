@@ -5,11 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no, viewport-fit=cover">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <!-- ============ 占位符 1：页面标题 ============ -->
     <title>钱币做旧手法图解：这几种包浆要小心 | 古董集 Gudong.app</title>
     <link rel="canonical" href="https://gudong.app/insights/coin-aging-tricks.html" />
 
-    <!-- ============ 占位符 2：SEO 描述 ============ -->
     <meta name="description" content="化学做旧、土埋、火烧——常见手法与肉眼识别要点。">
     <meta name="keywords" content="钱币 做旧 包浆 辨伪 coins patina fake">
 
@@ -24,7 +22,6 @@
     <meta name="twitter:description" content="化学做旧、土埋、火烧——常见手法与肉眼识别要点。">
     <meta name="twitter:image" content="https://gudong.app/og-cover.png">
 
-    <!-- ============ 占位符 3：JSON-LD 结构化数据 ============ -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -56,272 +53,177 @@
 
     <style>
         :root {
-            --color-bg: #F5F2EC;
-            --color-white: #FFFFFF;
-            --color-border: #E4DED5;
-            --color-primary: #8A5A3B;
-            --color-primary-dark: #68432D;
-            --color-primary-light: #F1E8DF;
-            --color-text: #25221E;
-            --color-text-secondary: #716B63;
-            --color-text-muted: #A49D94;
-            --color-gold: #B08A45;
-            --color-gold-soft: rgba(176,138,69,.10);
-            --color-bronze-muted: #9C8558;
-            --color-danger: #9A554B;
+            --color-bg: #F5F2EC; --color-white: #FFFFFF; --color-border: #E4DED5;
+            --color-primary: #8A5A3B; --color-primary-dark: #68432D; --color-primary-light: #F1E8DF;
+            --color-text: #25221E; --color-text-secondary: #716B63; --color-text-muted: #A49D94;
+            --color-gold: #B08A45; --color-bronze-muted: #9C8558;
+            --radius-card: 14px; --radius-sm: 10px;
+            --shadow-soft: 0 6px 20px rgba(37, 34, 30, 0.05);
+            --shadow-hover: 0 12px 28px rgba(138, 90, 59, 0.10);
         }
         * { margin: 0; padding: 0; box-sizing: border-box;
             font-family: "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif; }
         html { scroll-behavior: smooth; }
         body { background: var(--color-bg); color: var(--color-text); line-height: 1.75; }
 
-        /* ---------- 公告栏 ---------- */
-        .announce-bar {
-            background: var(--color-primary-light); color: var(--color-primary-dark);
-            font-size: .8rem; text-align: center; padding: .55rem 2.6rem;
-            position: relative; line-height: 1.4; word-break: break-all;
-        }
-        .announce-close {
-            position: absolute; right: .9rem; top: 50%; transform: translateY(-50%);
-            background: none; border: none; font-size: 1.05rem; line-height: 1;
-            color: var(--color-text-secondary); cursor: pointer; padding: .2rem;
-        }
+        .announce-bar { background: var(--color-primary-light); color: var(--color-primary-dark);
+            font-size: .8rem; text-align: center; padding: .55rem 2.6rem; position: relative; line-height: 1.4; word-break: break-all; }
+        .announce-close { position: absolute; right: .9rem; top: 50%; transform: translateY(-50%);
+            background: none; border: none; font-size: 1.05rem; line-height: 1; color: var(--color-text-secondary); cursor: pointer; padding: .2rem; }
         .announce-close:hover { color: var(--color-primary); }
 
-        /* ---------- Header ---------- */
-        header {
-            background: rgba(255,255,255,.96); backdrop-filter: blur(6px);
-            color: var(--color-text); padding: 0 5%; height: 68px;
-            display: flex; align-items: center; justify-content: space-between;
-            gap: 1.5rem; border-bottom: 1px solid var(--color-border);
-            position: sticky; top: 0; z-index: 50;
-        }
+        header { background: rgba(255,255,255,.96); backdrop-filter: blur(6px); color: var(--color-text);
+            padding: 0 5%; height: 68px; display: flex; align-items: center; justify-content: space-between;
+            gap: 1.5rem; border-bottom: 1px solid var(--color-border); position: sticky; top: 0; z-index: 50; }
         .brand { display: flex; flex-direction: column; justify-content: center; line-height: 1; flex-shrink: 0; }
         .brand h1 { font-size: 1.4rem; font-weight: 700; letter-spacing: .02em; line-height: 1.15; }
         .brand p { color: var(--color-bronze-muted); margin-top: .2rem; font-size: .62rem; letter-spacing: .2em; }
         .brand h1 .en, .brand p .en, .sidebar-brand .en {
-            font-family: "Inter Display", "Inter", "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
-            letter-spacing: normal;
-        }
+            font-family: "Inter Display", "Inter", "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif; letter-spacing: normal; }
         .header-right { display: flex; align-items: center; gap: .8rem; flex-shrink: 0; }
-        .btn-publish {
-            display: inline-flex; align-items: center; gap: .35rem;
-            background: var(--color-primary); color: #fff; padding: .5rem 1.1rem;
-            border-radius: 8px; font-size: .85rem; font-weight: 600;
-            text-decoration: none; white-space: nowrap; transition: .2s;
-        }
+        .btn-publish { display: inline-flex; align-items: center; gap: .35rem; background: var(--color-primary);
+            color: #fff; padding: .5rem 1.1rem; border-radius: 8px; font-size: .85rem; font-weight: 600;
+            text-decoration: none; white-space: nowrap; transition: .2s; }
         .btn-publish:hover { background: var(--color-primary-dark); }
-        .lang-btn {
-            border: 1px solid var(--color-border); background: transparent;
-            color: var(--color-text-secondary); padding: .3rem .68rem;
-            border-radius: 6px; cursor: pointer; font-size: .75rem;
-            letter-spacing: .04em; transition: .2s;
-        }
+        .lang-btn { border: 1px solid var(--color-border); background: transparent; color: var(--color-text-secondary);
+            padding: .3rem .68rem; border-radius: 6px; cursor: pointer; font-size: .75rem; letter-spacing: .04em; transition: .2s; }
         .lang-btn:hover { border-color: var(--color-primary); color: var(--color-primary); background: var(--color-primary-light); }
-        .menu-toggle {
-            width: 38px; height: 38px; border: 1px solid var(--color-border);
-            background: transparent; border-radius: 8px; font-size: 1.05rem;
-            color: var(--color-text); cursor: pointer; display: flex;
-            align-items: center; justify-content: center; flex-shrink: 0; transition: .2s;
-        }
+        .menu-toggle { width: 38px; height: 38px; border: 1px solid var(--color-border); background: transparent;
+            border-radius: 8px; font-size: 1.05rem; color: var(--color-text); cursor: pointer; display: flex;
+            align-items: center; justify-content: center; flex-shrink: 0; transition: .2s; }
         .menu-toggle:hover { border-color: var(--color-primary); color: var(--color-primary); background: var(--color-primary-light); }
 
-        /* ---------- Sidebar ---------- */
-        .sidebar-overlay {
-            position: fixed; inset: 0; background: rgba(20,17,14,.4);
-            opacity: 0; pointer-events: none; transition: opacity .25s ease; z-index: 90;
-        }
+        .sidebar-overlay { position: fixed; inset: 0; background: rgba(20,17,14,.4); opacity: 0; pointer-events: none; transition: opacity .25s ease; z-index: 90; }
         .sidebar-overlay.show { opacity: 1; pointer-events: auto; }
-        .sidebar {
-            position: fixed; top: 0; left: 0; height: 100vh; width: 264px;
-            max-width: 78vw; background: var(--color-white);
-            box-shadow: 4px 0 24px rgba(37,34,30,.18);
-            transform: translateX(-100%); transition: transform .3s ease;
-            z-index: 95; overflow-y: auto; padding-bottom: 2rem;
-        }
+        .sidebar { position: fixed; top: 0; left: 0; height: 100vh; width: 264px; max-width: 78vw; background: var(--color-white);
+            box-shadow: 4px 0 24px rgba(37,34,30,.18); transform: translateX(-100%); transition: transform .3s ease;
+            z-index: 95; overflow-y: auto; padding-bottom: 2rem; }
         .sidebar.open { transform: translateX(0); }
-        .sidebar-toggle-inner {
-            display: block; width: 100%; padding: .9rem 0; background: transparent;
-            border: none; border-bottom: 1px solid var(--color-border);
-            font-size: 1.15rem; color: var(--color-text-secondary); cursor: pointer; text-align: center;
-        }
+        .sidebar-toggle-inner { display: block; width: 100%; padding: .9rem 0; background: transparent;
+            border: none; border-bottom: 1px solid var(--color-border); font-size: 1.15rem; color: var(--color-text-secondary); cursor: pointer; text-align: center; }
         .sidebar-toggle-inner:hover { color: var(--color-primary); }
-        .sidebar-brand {
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            gap: .1rem; padding: 1.1rem 0; font-weight: 700; color: var(--color-text);
-            border-bottom: 1px solid var(--color-border);
-        }
-        .sidebar-brand .zh { font-size: 1.05rem; }
-        .sidebar-brand .en { font-size: 1.05rem; letter-spacing: .04em; }
+        .sidebar-brand { display: flex; flex-direction: column; align-items: center; justify-content: center;
+            gap: .1rem; padding: 1.1rem 0; font-weight: 700; color: var(--color-text); border-bottom: 1px solid var(--color-border); }
+        .sidebar-brand .zh { font-size: 1.05rem; } .sidebar-brand .en { font-size: 1.05rem; letter-spacing: .04em; }
         .sidebar-nav { display: flex; flex-direction: column; padding: .3rem 0; }
-        .sidebar-link {
-            padding: .85rem 1.4rem; color: var(--color-text); text-decoration: none;
-            font-size: .95rem; transition: .2s;
-        }
+        .sidebar-link { padding: .85rem 1.4rem; color: var(--color-text); text-decoration: none; font-size: .95rem; transition: .2s; }
         .sidebar-link:hover { background: var(--color-primary-light); color: var(--color-primary); }
         .sidebar-link.active { background: var(--color-primary-light); color: var(--color-primary); font-weight: 600; }
-        .sidebar-sub {
-            display: block; padding: .55rem 1.4rem .55rem 2.2rem;
-            color: var(--color-text-secondary); text-decoration: none; font-size: .88rem; transition: .2s;
-        }
+        .sidebar-sub { display: block; padding: .55rem 1.4rem .55rem 2.2rem; color: var(--color-text-secondary); text-decoration: none; font-size: .88rem; transition: .2s; }
         .sidebar-sub:hover { color: var(--color-primary); background: var(--color-primary-light); }
-        .sidebar-lang-btn {
-            display: flex; align-items: center; justify-content: center; gap: .4rem;
-            width: calc(100% - 2.8rem); margin: 1rem 1.4rem .8rem;
-            padding: .62rem .9rem; border: 1px solid var(--color-border);
-            border-radius: 8px; background: var(--color-white);
-            color: var(--color-text-secondary); font-family: inherit;
-            font-size: .9rem; font-weight: 600; cursor: pointer; transition: .2s;
-        }
+        .sidebar-lang-btn { display: flex; align-items: center; justify-content: center; gap: .4rem;
+            width: calc(100% - 2.8rem); margin: 1rem 1.4rem .8rem; padding: .62rem .9rem; border: 1px solid var(--color-border);
+            border-radius: 8px; background: var(--color-white); color: var(--color-text-secondary); font-family: inherit;
+            font-size: .9rem; font-weight: 600; cursor: pointer; transition: .2s; }
         .sidebar-lang-btn:hover { border-color: var(--color-primary); color: var(--color-primary); background: var(--color-primary-light); }
 
-        /* ---------- 文章容器 ---------- */
-        .article-wrap { max-width: 760px; margin: 0 auto; padding: 2.6rem 5% 4rem; }
-        .breadcrumb {
-            font-size: .78rem; color: var(--color-text-muted);
-            margin-bottom: 1.4rem; display: flex; flex-wrap: wrap; gap: .35rem; align-items: center;
-        }
-        .breadcrumb a { color: var(--color-text-secondary); text-decoration: none; }
-        .breadcrumb a:hover { color: var(--color-primary); }
+        .article-wrap { max-width: 820px; margin: 0 auto; padding: 2.8rem 5% 4.5rem; }
+        .breadcrumb { font-size: .78rem; color: var(--color-text-muted); margin-bottom: 1.8rem; display: flex; flex-wrap: wrap; gap: .35rem; align-items: center; }
+        .breadcrumb a { color: var(--color-text-secondary); text-decoration: none; } .breadcrumb a:hover { color: var(--color-primary); }
         .breadcrumb .sep { color: var(--color-border); }
-
-        .article-kicker {
-            font-size: .72rem; font-weight: 700; letter-spacing: .1em;
-            color: var(--color-bronze-muted); margin-bottom: .7rem;
-        }
-        .article-title {
-            font-family: Georgia, "Songti SC", "STSong", serif;
-            font-size: clamp(1.6rem, 4vw, 2.15rem); font-weight: 600;
-            line-height: 1.35; color: var(--color-text); margin-bottom: .8rem;
-        }
-        .article-meta {
-            display: flex; flex-wrap: wrap; gap: .8rem; align-items: center;
-            font-size: .78rem; color: var(--color-text-muted);
-            padding-bottom: 1.4rem; border-bottom: 1px solid var(--color-border);
-            margin-bottom: 1.8rem;
-        }
+        .article-kicker { font-size: .72rem; font-weight: 700; letter-spacing: .1em; color: var(--color-bronze-muted); margin-bottom: .7rem; }
+        .article-title { font-family: Georgia, "Songti SC", "STSong", serif; font-size: clamp(1.8rem, 4.5vw, 2.4rem);
+            font-weight: 600; line-height: 1.3; color: var(--color-text); margin-bottom: 1rem; letter-spacing: -.01em; }
+        .article-meta { display: flex; flex-wrap: wrap; gap: .8rem; align-items: center; font-size: .78rem;
+            color: var(--color-text-muted); padding-bottom: 1.6rem; border-bottom: 1px solid var(--color-border); margin-bottom: 2.2rem; }
         .article-meta .dot { color: var(--color-border); }
 
-        /* ---------- 封面 ---------- */
-        .article-cover {
-            position: relative; aspect-ratio: 21 / 9; border-radius: 12px;
-            overflow: hidden; margin-bottom: 2rem;
-            background: linear-gradient(135deg, #3A322B 0%, #4C4137 100%);
-            display: flex; align-items: center; justify-content: center;
-        }
-        .article-cover::after {
-            content: ''; position: absolute; left: 0; right: 0; top: 0; height: 3px;
-            background: linear-gradient(90deg, #D9B679 0%, rgba(217,182,121,.05) 70%);
-        }
-        .article-cover .cover-mark {
-            font-family: Georgia, "Songti SC", "STSong", serif;
-            font-size: clamp(3rem, 8vw, 5rem); color: rgba(217,182,121,.55);
-            line-height: 1; letter-spacing: .06em; text-shadow: 0 2px 14px rgba(0,0,0,.3);
-        }
-        /* 封面配色，按分类选用 */
-        .tone-guide    { background: linear-gradient(135deg, #3A322B 0%, #4C4137 100%); }
-        .tone-market   { background: linear-gradient(135deg, #253A40 0%, #33505A 100%); }
-        .tone-pitfall  { background: linear-gradient(135deg, #3C2B27 0%, #5A3E36 100%); }
-        .tone-strategy { background: linear-gradient(135deg, #3A3220 0%, #5C4C2A 100%); }
+        /* ===== 封面：方案一 · 避坑手册系列（暗红调） ===== */
+        .article-cover { position: relative; aspect-ratio: 21 / 9; border-radius: 20px; overflow: hidden;
+            margin-bottom: 2.2rem; display: flex; align-items: center;
+            box-shadow: 0 14px 30px -8px rgba(37, 34, 30, 0.18); border: 1px solid rgba(255, 255, 255, 0.3); padding: 0 6%;
+            background: linear-gradient(145deg, #352420 0%, #5A3E36 100%); }
+        .article-cover::before { content: ''; position: absolute; inset: 0;
+            background: radial-gradient(circle at 25% 50%, rgba(230, 180, 155, 0.20) 0%, transparent 60%); z-index: 1; }
+        .article-cover::after { content: ''; position: absolute; left: 0; right: 0; top: 0; height: 4px;
+            background: linear-gradient(90deg, #D9B679 0%, rgba(217,182,121,.05) 80%); z-index: 2; }
+        .cover-text { position: relative; z-index: 3; display: flex; flex-direction: column; gap: .5rem; max-width: 62%; }
+        .cover-text .cover-tag { display: inline-block; font-size: .68rem; font-weight: 700; letter-spacing: .18em; color: #D9B679; text-transform: uppercase; }
+        .cover-text .cover-title { font-family: Georgia, "Songti SC", "STSong", serif; font-size: clamp(1.05rem, 2.2vw, 1.45rem);
+            color: #F5EBD9; line-height: 1.45; font-weight: 600; text-shadow: 0 2px 8px rgba(0,0,0,.3); }
+        .cover-text .cover-sub { font-size: .76rem; color: rgba(230, 205, 160, .65); letter-spacing: .04em; }
+        .cover-mark { position: absolute; right: 4%; top: 50%; transform: translateY(-50%);
+            font-family: Georgia, "Songti SC", "STSong", serif; font-size: clamp(5rem, 14vw, 9rem);
+            color: rgba(230, 205, 160, 0.10); line-height: 1; letter-spacing: .08em; z-index: 1; pointer-events: none; }
 
-        /* ---------- 正文排版 ---------- */
-        .article-body { font-size: .96rem; color: var(--color-text); }
-        .article-body p { margin-bottom: 1.15rem; }
-        .article-body h2 {
-            font-family: Georgia, "Songti SC", "STSong", serif;
-            font-size: 1.28rem; font-weight: 600; color: var(--color-text);
-            margin: 2.2rem 0 .9rem; padding-left: .75rem;
-            border-left: 3px solid var(--color-gold); line-height: 1.45;
-        }
-        .article-body h3 {
-            font-size: 1.05rem; font-weight: 700; color: var(--color-text);
-            margin: 1.6rem 0 .6rem;
-        }
-        .article-body ul, .article-body ol { margin: 0 0 1.15rem 1.3rem; }
-        .article-body li { margin-bottom: .5rem; }
+        .article-body { font-size: 1.02rem; color: var(--color-text); letter-spacing: .01em; }
+        .article-body p { margin-bottom: 1.3rem; }
+        .article-body h2 { font-family: Georgia, "Songti SC", "STSong", serif; font-size: 1.45rem; font-weight: 600;
+            color: var(--color-text); margin: 2.8rem 0 1.2rem; padding-left: 1rem;
+            border-left: 4px solid var(--color-gold); line-height: 1.4; letter-spacing: -.01em; }
+        .article-body h3 { font-size: 1.15rem; font-weight: 700; color: var(--color-text); margin: 2rem 0 .8rem; }
+        .article-body ul, .article-body ol { margin: 0 0 1.4rem 1.4rem; }
+        .article-body li { margin-bottom: .7rem; padding-left: .2rem; }
         .article-body strong { color: var(--color-primary-dark); font-weight: 700; }
         .article-body em { font-style: italic; color: var(--color-text-secondary); }
 
-        .callout {
-            background: var(--color-gold-soft); border-left: 3px solid var(--color-gold);
-            padding: .9rem 1.1rem; border-radius: 6px; margin: 1.4rem 0;
-            font-size: .88rem; color: var(--color-text-secondary); line-height: 1.7;
-        }
+        .callout { background: var(--color-white); border-left: 5px solid var(--color-gold); padding: 1.2rem 1.5rem;
+            border-radius: var(--radius-sm); margin: 2rem 0; font-size: .94rem; color: var(--color-text-secondary);
+            line-height: 1.75; box-shadow: var(--shadow-soft); border: 1px solid var(--color-border); border-left-width: 5px; border-left-color: var(--color-gold); }
         .callout strong { color: var(--color-primary-dark); }
 
-        .article-figure {
-            margin: 1.6rem 0; border-radius: 10px; overflow: hidden;
-            border: 1px solid var(--color-border); background: var(--color-white);
-        }
-        .article-figure img { width: 100%; display: block; }
-        .article-figure figcaption {
-            font-size: .74rem; color: var(--color-text-muted);
-            padding: .55rem .85rem; border-top: 1px solid var(--color-border);
-            line-height: 1.55;
-        }
+        /* ===== 表格：补齐原版缺失的样式 ===== */
+        .price-table { width: 100%; border-collapse: separate; border-spacing: 0; margin: 1.8rem 0 2rem;
+            border-radius: var(--radius-card); overflow: hidden; border: 1px solid var(--color-border);
+            background: var(--color-white); box-shadow: var(--shadow-soft); font-size: .94rem; }
+        .price-table th { background: #F1EDE7; color: var(--color-primary-dark); font-weight: 700;
+            padding: .9rem 1.2rem; text-align: left; border-bottom: 1px solid var(--color-border); font-size: .85rem; }
+        .price-table td { padding: .9rem 1.2rem; border-bottom: 1px solid rgba(228, 222, 213, 0.5); }
+        .price-table tbody tr:last-child td { border-bottom: none; }
+        .price-table tbody tr:hover { background-color: #FCFAF7; }
 
-        /* ---------- 免责声明 ---------- */
-        .article-disclaimer {
-            margin-top: 2.6rem; padding: 1rem 1.15rem;
-            border: 1px dashed var(--color-border); border-radius: 8px;
-            font-size: .78rem; color: var(--color-text-muted); line-height: 1.7;
-        }
+        .article-disclaimer { margin-top: 3rem; padding: 1.2rem 1.5rem; border: 1px dashed var(--color-border);
+            border-radius: var(--radius-sm); font-size: .78rem; color: var(--color-text-muted); line-height: 1.75; background: rgba(255, 255, 255, 0.6); }
 
-        /* ---------- 相关阅读 ---------- */
-        .related { margin-top: 3rem; }
-        .related-title {
-            font-size: 1.05rem; font-weight: 700; color: var(--color-text);
-            margin-bottom: 1rem; padding-bottom: .6rem;
-            border-bottom: 1px solid var(--color-border);
-        }
-        .related-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
-        .related-card {
-            display: block; text-decoration: none; color: var(--color-text);
-            background: var(--color-white); border: 1px solid var(--color-border);
-            border-radius: 10px; padding: 1rem 1.05rem; transition: .2s;
-        }
-        .related-card:hover { border-color: var(--color-gold); transform: translateY(-2px); box-shadow: 0 6px 16px rgba(176,138,69,.12); }
-        .related-card .rc-kicker {
-            font-size: .66rem; font-weight: 700; letter-spacing: .08em;
-            color: var(--color-bronze-muted); margin-bottom: .35rem;
-        }
-        .related-card .rc-title { font-size: .92rem; font-weight: 700; line-height: 1.45; }
+        .related { margin-top: 3.5rem; }
+        .related-title { font-size: 1.15rem; font-weight: 700; color: var(--color-text); margin-bottom: 1.2rem;
+            padding-bottom: .7rem; border-bottom: 1px solid var(--color-border); }
+        .related-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.2rem; }
+        .related-card { display: block; text-decoration: none; color: var(--color-text); background: var(--color-white);
+            border: 1px solid var(--color-border); border-radius: var(--radius-card); padding: 1.2rem 1.3rem; transition: .25s; box-shadow: var(--shadow-soft); }
+        .related-card:hover { border-color: var(--color-gold); transform: translateY(-3px); box-shadow: var(--shadow-hover); }
+        .related-card .rc-kicker { font-size: .68rem; font-weight: 700; letter-spacing: .1em; color: var(--color-bronze-muted); margin-bottom: .5rem; }
+        .related-card .rc-title { font-size: .98rem; font-weight: 700; line-height: 1.5; }
 
-        /* ---------- 底部 CTA ---------- */
-        .article-cta {
-            margin-top: 3rem; padding: 1.8rem 1.5rem; text-align: center;
-            background: linear-gradient(135deg, var(--color-primary-light) 0%, #FAF3EA 100%);
-            border: 1px solid var(--color-border); border-radius: 12px;
-        }
-        .article-cta .title { font-size: 1.15rem; font-weight: 700; margin-bottom: .45rem; }
-        .article-cta .desc { font-size: .86rem; color: var(--color-text-secondary); margin-bottom: 1.1rem; line-height: 1.6; }
-        .article-cta .cta-note { font-size: .76rem; color: var(--color-text-muted); margin-top: .8rem; }
+        .article-cta { margin-top: 3.5rem; padding: 2.2rem 1.8rem; text-align: center;
+            background: linear-gradient(145deg, #FDFBF9 0%, #F9F4EE 100%); border: 1px solid var(--color-border);
+            border-radius: 24px; box-shadow: var(--shadow-soft); }
+        .article-cta .title { font-size: 1.3rem; font-weight: 700; margin-bottom: .5rem; }
+        .article-cta .desc { font-size: .9rem; color: var(--color-text-secondary); margin-bottom: 1.4rem; line-height: 1.65; }
+        .article-cta .cta-note { font-size: .76rem; color: var(--color-text-muted); margin-top: 1rem; }
+        .article-cta .btn-publish { background: var(--color-primary); padding: .7rem 1.8rem; font-size: .9rem; border-radius: 40px; }
+        .article-cta .btn-publish:hover { background: var(--color-primary-dark); }
 
-        /* ---------- Footer ---------- */
-        footer {
-            text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-white);
-            color: var(--color-text-secondary); margin-top: 1rem; font-size: .78rem;
-            border-top: 1px solid var(--color-border);
-        }
-        .footer-nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 1.3rem; margin-bottom: 1.2rem; }
-        .footer-nav a { color: var(--color-text-secondary); text-decoration: none; font-size: .82rem; }
+        footer { text-align: center; padding: 2.5rem 5% 2rem; background: var(--color-white);
+            color: var(--color-text-secondary); margin-top: 1.5rem; font-size: .78rem; border-top: 1px solid var(--color-border); }
+        .footer-nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 1.8rem; margin-bottom: 1.4rem; }
+        .footer-nav a { color: var(--color-text-secondary); text-decoration: none; font-size: .84rem; }
         .footer-nav a:hover { color: var(--color-primary); }
-        .footer-disclaimer { max-width: 620px; margin: 0 auto 1.1rem; font-size: .74rem; line-height: 1.65; color: var(--color-text-muted); }
+        .footer-disclaimer { max-width: 640px; margin: 0 auto 1.3rem; font-size: .74rem; line-height: 1.7; color: var(--color-text-muted); }
 
-        [data-lang="en"] .zh { display: none; }
-        [data-lang="zh"] .en { display: none; }
+        [data-lang="en"] .zh { display: none; } [data-lang="zh"] .en { display: none; }
 
         @media (max-width: 820px) {
             header { height: 62px; gap: .6rem; }
             .btn-publish { padding: .45rem .85rem; font-size: .8rem; }
-            .article-wrap { padding-top: 1.9rem; }
+            .article-wrap { padding-top: 2rem; }
             .related-grid { grid-template-columns: 1fr; }
+            .article-body { font-size: .98rem; }
+            .price-table { font-size: .88rem; }
+            .price-table th, .price-table td { padding: .7rem .9rem; }
         }
         @media (max-width: 560px) {
             .brand h1 { font-size: 1.15rem; }
-            .article-wrap { padding: 1.6rem 4.5% 3rem; }
-            .article-cover { aspect-ratio: 16 / 10; }
-            .article-body { font-size: .93rem; }
+            .article-wrap { padding: 1.8rem 4.5% 3rem; }
+            .article-cover { aspect-ratio: 16 / 10; border-radius: 16px; padding: 0 5%; }
+            .cover-text { max-width: 72%; }
+            .cover-mark { font-size: clamp(4rem, 22vw, 6rem); right: 2%; }
+            .article-body { font-size: .95rem; }
+            .article-body h2 { font-size: 1.3rem; }
+            .callout { padding: 1rem 1.2rem; font-size: .9rem; }
+            .price-table th, .price-table td { padding: .6rem .7rem; }
+            .related-card { padding: 1rem 1.1rem; }
+            .article-cta { padding: 1.6rem 1.2rem; }
         }
     </style>
 </head>
@@ -341,9 +243,7 @@
             </a>
         </div>
         <div class="header-right">
-            <a href="../pricing.html#seller-services" class="btn-publish">
-                <span class="zh">刊登藏品</span><span class="en">List an Item</span>
-            </a>
+            <a href="../pricing.html#seller-services" class="btn-publish"><span class="zh">刊登藏品</span><span class="en">List an Item</span></a>
             <button class="lang-btn" onclick="toggleLang()">EN</button>
         </div>
     </header>
@@ -351,9 +251,7 @@
     <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
     <aside class="sidebar" id="sidebar">
         <button class="sidebar-toggle-inner" onclick="closeSidebar()" aria-label="close menu">☰</button>
-        <div class="sidebar-brand">
-            <span class="zh">古董集</span><span class="en">GUDONG</span>
-        </div>
+        <div class="sidebar-brand"><span class="zh">古董集</span><span class="en">GUDONG</span></div>
         <nav class="sidebar-nav">
             <a href="../index.html#hero" class="sidebar-link" onclick="closeSidebar()"><span class="zh">首页</span><span class="en">Home</span></a>
             <a href="../index.html#daily-intel" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 今日情报</span><span class="en">· Daily Intel</span></a>
@@ -374,27 +272,21 @@
     </aside>
 
     <main class="article-wrap">
-        <!-- 面包屑 -->
         <nav class="breadcrumb" aria-label="breadcrumb">
             <a href="../index.html"><span class="zh">首页</span><span class="en">Home</span></a>
             <span class="sep">/</span>
             <a href="../insights.html"><span class="zh">情报 / 知识</span><span class="en">Insights</span></a>
             <span class="sep">/</span>
-            <!-- 占位符 4：分类名 -->
             <span class="zh">避坑手册</span><span class="en">PITFALLS</span>
         </nav>
 
-        <!-- 文章头 -->
-        <!-- 占位符 5：分类标签 -->
         <div class="article-kicker zh">避坑手册</div>
         <div class="article-kicker en">PITFALLS</div>
 
-        <!-- 占位符 6：标题 -->
         <h1 class="article-title zh">钱币做旧手法图解：这几种包浆要小心</h1>
         <h1 class="article-title en">Coin ageing tricks illustrated: patinas to be careful with</h1>
 
         <div class="article-meta">
-            <!-- 占位符 7：发布日期与阅读时长 -->
             <span>2026-01-26</span>
             <span class="dot">·</span>
             <span class="zh">6 分钟阅读</span><span class="en">6 min read</span>
@@ -402,171 +294,175 @@
             <span class="zh">古董集编辑整理</span><span class="en">Gudong editorial</span>
         </div>
 
-        <!-- 占位符 8：封面色调 tone-guide / tone-market / tone-pitfall / tone-strategy 与封面字 -->
-        <div class="article-cover tone-pitfall" role="img" aria-label="钱币做旧手法图解：这几种包浆要小心">
+        <div class="article-cover" role="img" aria-label="钱币做旧手法图解">
+            <div class="cover-text">
+                <span class="cover-tag zh">PITFALLS / 避坑手册</span>
+                <span class="cover-tag en">PITFALLS / Guide</span>
+                <span class="cover-title zh">钱币做旧手法图解</span>
+                <span class="cover-title en">Coin ageing tricks illustrated</span>
+                <span class="cover-sub zh">这几种包浆要小心</span>
+                <span class="cover-sub en">Patinas to be careful with</span>
+            </div>
             <span class="cover-mark">伪</span>
         </div>
 
-        <!-- ============ 占位符 9：正文 ============ -->
-       <article class="article-body">
-    <div class="zh">
- <p>钱币做旧，是本地市场的常见问题。尤其在高价清钱和民国银元上，做旧手法层出不穷。今天讲的几种，是新手最容易遇到的。</p>
+        <article class="article-body">
+            <div class="zh">
+                <p>钱币做旧，是本地市场的常见问题。尤其在高价清钱和民国银元上，做旧手法层出不穷。今天讲的几种，是新手最容易遇到的。</p>
 
- <div class="callout">
- <strong>先说明：</strong>本文讲的是识别手法，不是鉴定结论。任何单枚钱币，仍需结合实物、称重、听声、看边齿综合判断。
- </div>
+                <div class="callout">
+                    <strong>先说明：</strong>本文讲的是识别手法，不是鉴定结论。任何单枚钱币，仍需结合实物、称重、听声、看边齿综合判断。
+                </div>
 
- <h2>一、化学做旧</h2>
- <p>用硫化物或酸液，快速在铜表面生成黑褐色的“包浆”。这是最常见也最容易识别的手法。</p>
- <p>特征：</p>
- <ul>
- <li>颜色均匀死板，整枚币通体一致</li>
- <li>缺乏层次，从字口到地章颜色一样</li>
- <li>表面常有轻微的化学气味</li>
- <li>用湿纸巾轻擦，可能掉色</li>
- </ul>
+                <h2>一、化学做旧</h2>
+                <p>用硫化物或酸液，快速在铜表面生成黑褐色的“包浆”。这是最常见也最容易识别的手法。</p>
+                <p>特征：</p>
+                <ul>
+                    <li>颜色均匀死板，整枚币通体一致</li>
+                    <li>缺乏层次，从字口到地章颜色一样</li>
+                    <li>表面常有轻微的化学气味</li>
+                    <li>用湿纸巾轻擦，可能掉色</li>
+                </ul>
 
- <h2>二、土埋做旧</h2>
- <p>把新币埋进潮湿土壤数月，让它生锈。这种手法做出来的锈，看似自然，但与真品有差别。</p>
- <p>特征：</p>
- <ul>
- <li>土锈浮于表面，不入骨</li>
- <li>锈色偏红、偏土黄，缺乏层次</li>
- <li>字口内的锈常被清掉，与地章锈色不一致</li>
- <li>背面与正面锈色相近，缺乏自然使用痕迹</li>
- </ul>
+                <h2>二、土埋做旧</h2>
+                <p>把新币埋进潮湿土壤数月，让它生锈。这种手法做出来的锈，看似自然，但与真品有差别。</p>
+                <p>特征：</p>
+                <ul>
+                    <li>土锈浮于表面，不入骨</li>
+                    <li>锈色偏红、偏土黄，缺乏层次</li>
+                    <li>字口内的锈常被清掉，与地章锈色不一致</li>
+                    <li>背面与正面锈色相近，缺乏自然使用痕迹</li>
+                </ul>
 
- <h2>三、火烧做旧</h2>
- <p>用高温让铜快速氧化变色。做旧币往往通体发红、发黑，字口模糊。</p>
- <p>特征：</p>
- <ul>
- <li>通体发红或发黑，颜色不均匀但整体偏暗</li>
- <li>字口因高温膨胀而模糊，缺乏利落感</li>
- <li>手感偏涩，缺乏自然磨损的润滑感</li>
- </ul>
+                <h2>三、火烧做旧</h2>
+                <p>用高温让铜快速氧化变色。做旧币往往通体发红、发黑，字口模糊。</p>
+                <p>特征：</p>
+                <ul>
+                    <li>通体发红或发黑，颜色不均匀但整体偏暗</li>
+                    <li>字口因高温膨胀而模糊，缺乏利落感</li>
+                    <li>手感偏涩，缺乏自然磨损的润滑感</li>
+                </ul>
 
- <h2>四、拼配做旧</h2>
- <p>用真币的边道 + 新做的字面，或真币的字面 + 新做的边道，拼成一枚“完美”的币。这属于高级造假，肉眼不易识别。</p>
- <p>识别要点：</p>
- <ul>
- <li>边齿与字面风格是否一致</li>
- <li>锈色在字面与边道之间是否过渡自然</li>
- <li>称重，与真品重量对比</li>
- </ul>
+                <h2>四、拼配做旧</h2>
+                <p>用真币的边道 + 新做的字面，或真币的字面 + 新做的边道，拼成一枚“完美”的币。这属于高级造假，肉眼不易识别。</p>
+                <p>识别要点：</p>
+                <ul>
+                    <li>边齿与字面风格是否一致</li>
+                    <li>锈色在字面与边道之间是否过渡自然</li>
+                    <li>称重，与真品重量对比</li>
+                </ul>
 
- <h2>五、肉眼识别要点汇总</h2>
- <table class="price-table">
- <thead>
- <tr>
- <th>观察点</th>
- <th>真品</th>
- <th>做旧品</th>
- </tr>
- </thead>
- <tbody>
- <tr><td>颜色</td><td>深浅不一，有过渡</td><td>均匀、死板</td></tr>
- <tr><td>字口</td><td>清晰、利落</td><td>模糊、被腐蚀</td></tr>
- <tr><td>边道</td><td>磨损有方向</td><td>磨损均匀、假</td></tr>
- <tr><td>锈色入骨</td><td>入骨，与铜结合</td><td>浮于表面</td></tr>
- <tr><td>手感</td><td>润滑、自然</td><td>干涩、有化学感</td></tr>
- </tbody>
- </table>
+                <h2>五、肉眼识别要点汇总</h2>
+                <table class="price-table">
+                    <thead>
+                        <tr>
+                            <th>观察点</th>
+                            <th>真品</th>
+                            <th>做旧品</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>颜色</td><td>深浅不一，有过渡</td><td>均匀、死板</td></tr>
+                        <tr><td>字口</td><td>清晰、利落</td><td>模糊、被腐蚀</td></tr>
+                        <tr><td>边道</td><td>磨损有方向</td><td>磨损均匀、假</td></tr>
+                        <tr><td>锈色入骨</td><td>入骨，与铜结合</td><td>浮于表面</td></tr>
+                        <tr><td>手感</td><td>润滑、自然</td><td>干涩、有化学感</td></tr>
+                    </tbody>
+                </table>
 
- <div class="callout">
- <strong>实战提醒：</strong>看到“通体黑褐、字口模糊、颜色均匀”的币，先怀疑做旧；看到“颜色深浅有过渡、字口利落、边道磨损有方向”的币，再往真品方向想。
- </div>
+                <div class="callout">
+                    <strong>实战提醒：</strong>看到“通体黑褐、字口模糊、颜色均匀”的币，先怀疑做旧；看到“颜色深浅有过渡、字口利落、边道磨损有方向”的币，再往真品方向想。
+                </div>
 
- <h2>六、几件必备工具</h2>
- <ul>
- <li><strong>电子秤：</strong>精确到 0.01 克，和真品重量对照</li>
- <li><strong>10 倍放大镜：</strong>看边齿、字口、锈色过渡</li>
- <li><strong>强光手电：</strong>斜光看表面，正光看字口</li>
- <li><strong>软橡皮或湿纸巾：</strong>轻轻擦拭，看是否掉色</li>
- </ul>
+                <h2>六、几件必备工具</h2>
+                <ul>
+                    <li><strong>电子秤：</strong>精确到 0.01 克，和真品重量对照</li>
+                    <li><strong>10 倍放大镜：</strong>看边齿、字口、锈色过渡</li>
+                    <li><strong>强光手电：</strong>斜光看表面，正光看字口</li>
+                    <li><strong>软橡皮或湿纸巾：</strong>轻轻擦拭，看是否掉色</li>
+                </ul>
 
- <h2>下一步可以做什么？</h2>
- <ul>
- <li>先从便宜的钱币练手，建立对“真品手感”的记忆</li>
- <li>建立自己的对比库，把见过的真品和仿品都拍下来</li>
- <li>遇到高价币，务必多方核验，宁可错过</li>
- </ul>
-</div>
+                <h2>下一步可以做什么？</h2>
+                <ul>
+                    <li>先从便宜的钱币练手，建立对“真品手感”的记忆</li>
+                    <li>建立自己的对比库，把见过的真品和仿品都拍下来</li>
+                    <li>遇到高价币，务必多方核验，宁可错过</li>
+                </ul>
+            </div>
 
-<div class="en">
- <p>Coin ageing is a common issue locally, especially on expensive Qing coins and Republican silver. Here are the tricks you are most likely to meet.</p>
+            <div class="en">
+                <p>Coin ageing is a common issue locally, especially on expensive Qing coins and Republican silver. Here are the tricks you are most likely to meet.</p>
 
- <div class="callout">
- <strong>Note:</strong> This is about spotting methods, not authentication. Always weigh, sound, and inspect edges on any single coin.
- </div>
+                <div class="callout">
+                    <strong>Note:</strong> This is about spotting methods, not authentication. Always weigh, sound, and inspect edges on any single coin.
+                </div>
 
- <h2>1. Chemical ageing</h2>
- <p>Sulphides or acids create a dark "patina" fast. The most common and easiest to spot.</p>
- <ul>
- <li>Even, flat, uniform colour</li>
- <li>No depth — characters and fields the same tone</li>
- <li>Faint chemical smell</li>
- <li>May bleed when wiped with a wet tissue</li>
- </ul>
+                <h2>1. Chemical ageing</h2>
+                <p>Sulphides or acids create a dark "patina" fast. The most common and easiest to spot.</p>
+                <ul>
+                    <li>Even, flat, uniform colour</li>
+                    <li>No depth — characters and fields the same tone</li>
+                    <li>Faint chemical smell</li>
+                    <li>May bleed when wiped with a wet tissue</li>
+                </ul>
 
- <h2>2. Burial ageing</h2>
- <p>Months in damp soil produce rust that looks natural but differs from genuine.</p>
- <ul>
- <li>Rust sits on the surface, not in the metal</li>
- <li>Reddish or earthy yellow, no depth</li>
- <li>Characters cleaned, mismatched with fields</li>
- <li>Obverse and reverse rust too similar — no natural use wear</li>
- </ul>
+                <h2>2. Burial ageing</h2>
+                <p>Months in damp soil produce rust that looks natural but differs from genuine.</p>
+                <ul>
+                    <li>Rust sits on the surface, not in the metal</li>
+                    <li>Reddish or earthy yellow, no depth</li>
+                    <li>Characters cleaned, mismatched with fields</li>
+                    <li>Obverse and reverse rust too similar — no natural use wear</li>
+                </ul>
 
- <h2>3. Torching</h2>
- <p>Heat rapidly oxidises the copper. Torched coins look red or black overall, with blurred characters.</p>
- <ul>
- <li>Overall dark red or black, uneven but dim</li>
- <li>Characters expanded by heat, blurred</li>
- <li>Surface dry, no natural smoothness</li>
- </ul>
+                <h2>3. Torching</h2>
+                <p>Heat rapidly oxidises the copper. Torched coins look red or black overall, with blurred characters.</p>
+                <ul>
+                    <li>Overall dark red or black, uneven but dim</li>
+                    <li>Characters expanded by heat, blurred</li>
+                    <li>Surface dry, no natural smoothness</li>
+                </ul>
 
- <h2>4. Composite ageing</h2>
- <p>Genuine edge on a new face, or genuine face with a new edge. High-level fakery, hard to spot by eye.</p>
- <ul>
- <li>Edge style consistent with the face?</li>
- <li>Rust transition between face and edge natural?</li>
- <li>Weight compared to genuine reference</li>
- </ul>
+                <h2>4. Composite ageing</h2>
+                <p>Genuine edge on a new face, or genuine face with a new edge. High-level fakery, hard to spot by eye.</p>
+                <ul>
+                    <li>Edge style consistent with the face?</li>
+                    <li>Rust transition between face and edge natural?</li>
+                    <li>Weight compared to genuine reference</li>
+                </ul>
 
- <h2>5. Visual checks</h2>
- <table class="price-table">
- <thead>
- <tr>
- <th>Point</th>
- <th>Genuine</th>
- <th>Faked</th>
- </tr>
- </thead>
- <tbody>
- <tr><td>Colour</td><td>Varied, gradual</td><td>Even, flat</td></tr>
- <tr><td>Characters</td><td>Crisp</td><td>Blurred, corroded</td></tr>
- <tr><td>Edges</td><td>Directional wear</td><td>Uniform, fake</td></tr>
- <tr><td>Rust</td><td>In the metal</td><td>On the surface</td></tr>
- <tr><td>Feel</td><td>Smooth, natural</td><td>Dry, chemical</td></tr>
- </tbody>
- </table>
+                <h2>5. Visual checks</h2>
+                <table class="price-table">
+                    <thead>
+                        <tr>
+                            <th>Point</th>
+                            <th>Genuine</th>
+                            <th>Faked</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Colour</td><td>Varied, gradual</td><td>Even, flat</td></tr>
+                        <tr><td>Characters</td><td>Crisp</td><td>Blurred, corroded</td></tr>
+                        <tr><td>Edges</td><td>Directional wear</td><td>Uniform, fake</td></tr>
+                        <tr><td>Rust</td><td>In the metal</td><td>On the surface</td></tr>
+                        <tr><td>Feel</td><td>Smooth, natural</td><td>Dry, chemical</td></tr>
+                    </tbody>
+                </table>
 
- <div class="callout">
- <strong>Tip:</strong> Even black-brown, blurred, uniform — suspect ageing. Gradual colour, crisp characters, directional edge wear — lean genuine.
- </div>
+                <div class="callout">
+                    <strong>Tip:</strong> Even black-brown, blurred, uniform — suspect ageing. Gradual colour, crisp characters, directional edge wear — lean genuine.
+                </div>
 
- <h2>6. Tools</h2>
- <ul>
- <li><strong>Digital scale</strong> to 0.01g</li>
- <li><strong>10× loupe</strong> for edges, characters, transitions</li>
- <li><strong>Strong torch</strong> for raking and direct light</li>
- <li><strong>Soft eraser or wet tissue</strong> to test for bleeding colour</li>
- </ul>
-</div>
+                <h2>6. Tools</h2>
+                <ul>
+                    <li><strong>Digital scale</strong> to 0.01g</li>
+                    <li><strong>10× loupe</strong> for edges, characters, transitions</li>
+                    <li><strong>Strong torch</strong> for raking and direct light</li>
+                    <li><strong>Soft eraser or wet tissue</strong> to test for bleeding colour</li>
+                </ul>
+            </div>
+        </article>
 
-</article>
-
-        <!-- 免责声明 -->
         <div class="article-disclaimer zh">
             本文由古董集编辑整理，部分内容引用公开资料与卖家经验，仅供信息参考，不构成鉴定、估价或投资建议。藏品真伪请自行核验或咨询独立专家。
         </div>
@@ -574,33 +470,29 @@
             Compiled by Gudong editorial; some content draws on public references and seller experience. For reference only — not authentication, valuation, or investment advice. Verify independently or consult a specialist.
         </div>
 
-        <!-- ============ 占位符 10：相关阅读（建议 2 篇） ============ -->
         <section class="related">
             <div class="related-title zh">相关阅读</div>
             <div class="related-title en">Related reading</div>
             <div class="related-grid">
-                <a class="related-card" href="singapore-coin-market.html">
-                    <div class="rc-kicker zh">行情观察</div><div class="rc-kicker en">MARKET</div>
-                    <div class="rc-title zh">新加坡本地钱币市场近半年行情简析</div>
-                    <div class="rc-title en">Singapore coin market: a half-year snapshot</div>
-                </a>
-                <a class="related-card" href="amber-baked-vs-natural.html">
+                <a class="related-card" href="coin-patina-types.html">
                     <div class="rc-kicker zh">避坑手册</div><div class="rc-kicker en">PITFALLS</div>
-                    <div class="rc-title zh">老蜜蜡的“烤色”与天然氧化，怎么区分</div>
-                    <div class="rc-title en">Baked amber vs. natural oxidation — how to tell</div>
+                    <div class="rc-title zh">古钱“生坑”和“熟坑”哪个更值钱</div>
+                    <div class="rc-title en">Buried vs. handed-down coins — which is worth more?</div>
+                </a>
+                <a class="related-card" href="silver-dollar-edges.html">
+                    <div class="rc-kicker zh">避坑手册</div><div class="rc-kicker en">PITFALLS</div>
+                    <div class="rc-title zh">银元边齿怎么看？一眼假的特征都在这</div>
+                    <div class="rc-title en">Silver dollar edge reeding — how to spot a fake</div>
                 </a>
             </div>
         </section>
 
-        <!-- 底部 CTA -->
         <section class="article-cta">
             <div class="title zh">📖 回到情报 / 知识</div>
             <div class="title en">📖 Back to Insights</div>
             <div class="desc zh">断代方法、行情观察、避坑手册、捡漏逻辑——写给新加坡本地藏家的实战笔记。</div>
             <div class="desc en">Dating, market notes, pitfalls, and bargain-hunting logic — for collectors in Singapore.</div>
-            <a href="../insights.html" class="btn-publish">
-                <span class="zh">查看全部情报 →</span><span class="en">All insights →</span>
-            </a>
+            <a href="../insights.html" class="btn-publish"><span class="zh">查看全部情报 →</span><span class="en">All insights →</span></a>
             <div class="cta-note zh">情报内容不构成鉴定、估价或投资建议。</div>
             <div class="cta-note en">Insights do not constitute authentication, valuation, or investment advice.</div>
         </section>
@@ -619,44 +511,20 @@
     </footer>
 
     <script>
-        let currentLang = (function () {
-            try { return localStorage.getItem('gudong_lang') || 'zh'; }
-            catch (e) { return 'zh'; }
-        })();
+        let currentLang = (function () { try { return localStorage.getItem('gudong_lang') || 'zh'; } catch (e) { return 'zh'; } })();
         (function applyLang(lang) {
             document.documentElement.lang = lang === 'zh' ? 'zh-SG' : 'en-SG';
             document.body.dataset.lang = lang;
-            const btn = document.querySelector('.lang-btn');
-            if (btn) btn.textContent = lang === 'zh' ? 'EN' : '中';
+            const btn = document.querySelector('.lang-btn'); if (btn) btn.textContent = lang === 'zh' ? 'EN' : '中';
         })(currentLang);
-
-        function openSidebar() {
-            document.getElementById('sidebar').classList.add('open');
-            document.getElementById('sidebarOverlay').classList.add('show');
-            document.body.style.overflow = 'hidden';
-        }
-        function closeSidebar() {
-            document.getElementById('sidebar').classList.remove('open');
-            document.getElementById('sidebarOverlay').classList.remove('show');
-            document.body.style.overflow = '';
-        }
-        function toggleLang() {
-            currentLang = currentLang === 'zh' ? 'en' : 'zh';
-            document.body.dataset.lang = currentLang;
+        function openSidebar() { document.getElementById('sidebar').classList.add('open'); document.getElementById('sidebarOverlay').classList.add('show'); document.body.style.overflow = 'hidden'; }
+        function closeSidebar() { document.getElementById('sidebar').classList.remove('open'); document.getElementById('sidebarOverlay').classList.remove('show'); document.body.style.overflow = ''; }
+        function toggleLang() { currentLang = currentLang === 'zh' ? 'en' : 'zh'; document.body.dataset.lang = currentLang;
             document.documentElement.lang = currentLang === 'zh' ? 'zh-SG' : 'en-SG';
             try { localStorage.setItem('gudong_lang', currentLang); } catch (e) {}
-            document.querySelector('.lang-btn').textContent = currentLang === 'zh' ? 'EN' : '中';
-        }
-
-        if (localStorage.getItem('announceClosed') === 'yes') {
-            document.getElementById('announceBar').style.display = 'none';
-        }
-
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('../sw.js').catch(err => console.warn('[PWA] SW registration failed:', err));
-            });
-        }
+            document.querySelector('.lang-btn').textContent = currentLang === 'zh' ? 'EN' : '中'; }
+        if (localStorage.getItem('announceClosed') === 'yes') { document.getElementById('announceBar').style.display = 'none'; }
+        if ('serviceWorker' in navigator) { window.addEventListener('load', () => { navigator.serviceWorker.register('../sw.js').catch(err => console.warn('[PWA] SW registration failed:', err)); }); }
     </script>
 </body>
 </html>

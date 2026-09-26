@@ -1,14 +1,162 @@
+# ============================================================
+# 古董集 Gudong.app — robots.txt
+# 更新日期：2026-09-26
+# 配套站点地图：https://gudong.app/sitemap.xml
+# ============================================================
+
+# ---------- 默认规则：允许所有爬虫 ----------
 User-agent: *
 Allow: /
 
-# 构建源文件与内部原型，不供线上访问，禁止抓取（配合 .vercelignore 一并排除部署）
+# ---------- 构建源文件与内部原型，不供线上访问 ----------
+# （配合 .vercelignore / .gitignore 一并排除部署）
 Disallow: /templates/
 Disallow: /content/
 Disallow: /prototypes/
-Disallow: /_backup
+Disallow: /_backup/
+Disallow: /_drafts/
 Disallow: /docs/
 Disallow: /scripts/
+Disallow: /node_modules/
+Disallow: /.git/
 
-# 注意：不要屏蔽 /api/ 与 /data/ —— 藏品列表由 JS 从 /api/airtable-proxy 读取，
+# ---------- 开发与配置文件 ----------
+Disallow: /*.env
+Disallow: /*.env.*
+Disallow: /package.json
+Disallow: /package-lock.json
+Disallow: /yarn.lock
+Disallow: /pnpm-lock.yaml
+Disallow: /tsconfig.json
+Disallow: /next.config.*
+Disallow: /vercel.json
+Disallow: /.vercel/
+
+# ---------- 避免重复内容 ----------
+# 带查询参数的内部搜索、筛选、排序页，避免与主页面重复
+Disallow: /*?q=
+Disallow: /*?s=
+Disallow: /*?search=
+Disallow: /*?sort=
+Disallow: /*?filter=
+Disallow: /*?page=
+Disallow: /*?utm_
+Disallow: /*?ref=
+
+# ---------- 重要说明 ----------
+# 不要屏蔽 /api/ 与 /data/ —— 藏品列表由 JS 从 /api/airtable-proxy 读取，
 # 屏蔽后 Google 渲染出来的品类页、藏品库会是空的。
+# 同理，不要屏蔽 /assets/ —— 图标、OG 图片、favicon 都在此处。
+#
+# 也不要屏蔽 /insights/ —— 38 篇情报文章是 SEO 的核心资产。
+# 如果未来某个文章页需要临时下线，请用 <meta name="robots" content="noindex">
+# 单页处理，而不是在这里全局屏蔽目录。
+
+# ---------- 站点地图 ----------
 Sitemap: https://gudong.app/sitemap.xml
+
+# ============================================================
+# 主流爬虫的额外规则（可选）
+# ============================================================
+
+# ---------- Google ----------
+User-agent: Googlebot
+Allow: /
+Disallow: /templates/
+Disallow: /content/
+Disallow: /prototypes/
+Disallow: /_backup/
+Disallow: /docs/
+Disallow: /scripts/
+Disallow: /*?q=
+Disallow: /*?s=
+Disallow: /*?search=
+Disallow: /*?sort=
+Disallow: /*?filter=
+
+User-agent: Googlebot-Image
+Allow: /
+Allow: /assets/
+Allow: /insights/
+Allow: /items/
+Allow: /categories/
+Disallow: /templates/
+Disallow: /content/
+Disallow: /scripts/
+
+# ---------- Bing ----------
+User-agent: Bingbot
+Allow: /
+Disallow: /templates/
+Disallow: /content/
+Disallow: /prototypes/
+Disallow: /_backup/
+Disallow: /docs/
+Disallow: /scripts/
+Disallow: /*?q=
+Disallow: /*?s=
+Disallow: /*?search=
+Disallow: /*?sort=
+Disallow: /*?filter=
+
+# ---------- 百度 ----------
+User-agent: Baiduspider
+Allow: /
+Disallow: /templates/
+Disallow: /content/
+Disallow: /prototypes/
+Disallow: /_backup/
+Disallow: /docs/
+Disallow: /scripts/
+Disallow: /*?q=
+Disallow: /*?s=
+Disallow: /*?search=
+
+# ---------- Yandex ----------
+User-agent: Yandex
+Allow: /
+Disallow: /templates/
+Disallow: /content/
+Disallow: /prototypes/
+Disallow: /_backup/
+Disallow: /docs/
+Disallow: /scripts/
+Disallow: /*?q=
+Disallow: /*?s=
+Disallow: /*?search=
+
+# ---------- AI 爬虫（可选策略） ----------
+# 保留以下注释，供你按需开启：
+#
+# 如果希望允许 AI 抓取（推荐，利于被引用）：
+# User-agent: GPTBot
+# Allow: /
+#
+# 如果希望禁止 AI 训练抓取：
+# User-agent: GPTBot
+# Disallow: /
+# User-agent: ChatGPT-User
+# Disallow: /
+# User-agent: CCBot
+# Disallow: /
+# User-agent: anthropic-ai
+# Disallow: /
+# User-agent: Claude-Web
+# Disallow: /
+# User-agent: PerplexityBot
+# Disallow: /
+# User-agent: Bytespider
+# Disallow: /
+
+# ---------- 无意义的爬虫，直接拒绝 ----------
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /

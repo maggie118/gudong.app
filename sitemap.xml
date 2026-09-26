@@ -1,183 +1,198 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <!-- 2026-09-26：上线前全面更新。域名 https://gudong.app；lastmod 以实际部署日期为准。
-       本次补齐：insights.html、12 篇情报文章、10 个藏品页（ng / ngcy / yak-02、03）、
-       2 个卖家页（ng-cy / ng-lk）。contact.html 为未完成片段页，不列入。
-       构建源文件（templates/、content/）非线上页面，不列入。 -->
+
+  <!-- ============================================================
+       古董集 Gudong.app — 站点地图
+       生成日期：2026-09-26
+       总 URL 数：70
+       结构：7 顶层页 + 5 分类页 + 5 卖家页 + 15 藏品页 + 38 情报文章
+       说明：contact.html 为未完成片段页，不列入；
+             templates/ 与 content/ 为构建源文件，不列入。
+       ============================================================ -->
+
+  <!-- ==================== 顶层页面（7） ==================== -->
   <url>
     <loc>https://gudong.app/</loc>
     <lastmod>2026-09-26</lastmod>
-  </url>
-  <url>
-    <loc>https://gudong.app/about.html</loc>
-    <lastmod>2026-09-26</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
   </url>
   <url>
     <loc>https://gudong.app/collection.html</loc>
     <lastmod>2026-09-26</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://gudong.app/insights.html</loc>
     <lastmod>2026-09-26</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://gudong.app/pricing.html</loc>
     <lastmod>2026-09-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://gudong.app/about.html</loc>
+    <lastmod>2026-09-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
   <url>
     <loc>https://gudong.app/privacy.html</loc>
     <lastmod>2026-09-26</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
   </url>
   <url>
     <loc>https://gudong.app/terms.html</loc>
     <lastmod>2026-09-26</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
   </url>
+
+  <!-- ==================== 分类页（5） ==================== -->
   <url>
     <loc>https://gudong.app/categories/porcelain.html</loc>
     <lastmod>2026-09-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://gudong.app/categories/jade.html</loc>
     <lastmod>2026-09-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://gudong.app/categories/coins.html</loc>
     <lastmod>2026-09-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://gudong.app/categories/paintings.html</loc>
     <lastmod>2026-09-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://gudong.app/categories/misc.html</loc>
     <lastmod>2026-09-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
   </url>
+
+  <!-- ==================== 卖家主页与单页（5） ==================== -->
   <url>
     <loc>https://gudong.app/sellers/index.html</loc>
     <lastmod>2026-09-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://gudong.app/sellers/seller-lim-kw-antiques.html</loc>
     <lastmod>2026-09-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://gudong.app/sellers/seller-ng-cy-antiques.html</loc>
     <lastmod>2026-09-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://gudong.app/sellers/seller-ng-lk-antiques.html</loc>
     <lastmod>2026-09-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://gudong.app/sellers/seller-yak-bc-antiques.html</loc>
     <lastmod>2026-09-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
   </url>
-  <url>
-    <loc>https://gudong.app/items/item-lim-01.html</loc>
-    <lastmod>2026-09-26</lastmod>
-  </url>
-  <url>
-    <loc>https://gudong.app/items/item-lim-02.html</loc>
-    <lastmod>2026-09-26</lastmod>
-  </url>
-  <url>
-    <loc>https://gudong.app/items/item-lim-03.html</loc>
-    <lastmod>2026-09-26</lastmod>
-  </url>
-  <url>
-    <loc>https://gudong.app/items/item-lim-04.html</loc>
-    <lastmod>2026-09-26</lastmod>
-  </url>
-  <url>
-    <loc>https://gudong.app/items/item-ng-01.html</loc>
-    <lastmod>2026-09-26</lastmod>
-  </url>
-  <url>
-    <loc>https://gudong.app/items/item-ng-02.html</loc>
-    <lastmod>2026-09-26</lastmod>
-  </url>
-  <url>
-    <loc>https://gudong.app/items/item-ng-03.html</loc>
-    <lastmod>2026-09-26</lastmod>
-  </url>
-  <url>
-    <loc>https://gudong.app/items/item-ngcy-01.html</loc>
-    <lastmod>2026-09-26</lastmod>
-  </url>
-  <url>
-    <loc>https://gudong.app/items/item-ngcy-02.html</loc>
-    <lastmod>2026-09-26</lastmod>
-  </url>
-  <url>
-    <loc>https://gudong.app/items/item-ngcy-03.html</loc>
-    <lastmod>2026-09-26</lastmod>
-  </url>
-  <url>
-    <loc>https://gudong.app/items/item-ngcy-04.html</loc>
-    <lastmod>2026-09-26</lastmod>
-  </url>
-  <url>
-    <loc>https://gudong.app/items/item-ngcy-05.html</loc>
-    <lastmod>2026-09-26</lastmod>
-  </url>
-  <url>
-    <loc>https://gudong.app/items/item-yak-01.html</loc>
-    <lastmod>2026-09-26</lastmod>
-  </url>
-  <url>
-    <loc>https://gudong.app/items/item-yak-02.html</loc>
-    <lastmod>2026-09-26</lastmod>
-  </url>
-  <url>
-    <loc>https://gudong.app/items/item-yak-03.html</loc>
-    <lastmod>2026-09-26</lastmod>
-  </url>
-  <url>
-    <loc>https://gudong.app/insights/what-is-jianlou.html</loc>
-    <lastmod>2026-09-26</lastmod>
-  </url>
-  <url>
-    <loc>https://gudong.app/insights/qing-porcelain-dating.html</loc>
-    <lastmod>2026-09-26</lastmod>
-  </url>
-  <url>
-    <loc>https://gudong.app/insights/jade-buyer-pitfalls.html</loc>
-    <lastmod>2026-09-26</lastmod>
-  </url>
-  <url>
-    <loc>https://gudong.app/insights/singapore-coin-market.html</loc>
-    <lastmod>2026-09-26</lastmod>
-  </url>
-  <url>
-    <loc>https://gudong.app/insights/coin-aging-tricks.html</loc>
-    <lastmod>2026-09-26</lastmod>
-  </url>
-  <url>
-    <loc>https://gudong.app/insights/bronze-censer-patina.html</loc>
-    <lastmod>2026-09-26</lastmod>
-  </url>
-  <url>
-    <loc>https://gudong.app/insights/glaze-crackle-basics.html</loc>
-    <lastmod>2026-09-26</lastmod>
-  </url>
-  <url>
-    <loc>https://gudong.app/insights/painting-seals-signatures.html</loc>
-    <lastmod>2026-09-26</lastmod>
-  </url>
-  <url>
-    <loc>https://gudong.app/insights/amber-baked-vs-natural.html</loc>
-    <lastmod>2026-09-26</lastmod>
-  </url>
-  <url>
-    <loc>https://gudong.app/insights/auction-house-watch.html</loc>
-    <lastmod>2026-09-26</lastmod>
-  </url>
-  <url>
-    <loc>https://gudong.app/insights/singapore-flea-market-map.html</loc>
-    <lastmod>2026-09-26</lastmod>
-  </url>
-  <url>
-    <loc>https://gudong.app/insights/how-to-brief-a-sourcing.html</loc>
-    <lastmod>2026-09-26</lastmod>
-  </url>
+
+  <!-- ==================== 藏品单页（15） ==================== -->
+  <url><loc>https://gudong.app/items/item-lim-01.html</loc><lastmod>2026-09-26</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://gudong.app/items/item-lim-02.html</loc><lastmod>2026-09-26</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://gudong.app/items/item-lim-03.html</loc><lastmod>2026-09-26</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://gudong.app/items/item-lim-04.html</loc><lastmod>2026-09-26</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://gudong.app/items/item-ng-01.html</loc><lastmod>2026-09-26</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://gudong.app/items/item-ng-02.html</loc><lastmod>2026-09-26</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://gudong.app/items/item-ng-03.html</loc><lastmod>2026-09-26</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://gudong.app/items/item-ngcy-01.html</loc><lastmod>2026-09-26</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://gudong.app/items/item-ngcy-02.html</loc><lastmod>2026-09-26</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://gudong.app/items/item-ngcy-03.html</loc><lastmod>2026-09-26</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://gudong.app/items/item-ngcy-04.html</loc><lastmod>2026-09-26</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://gudong.app/items/item-ngcy-05.html</loc><lastmod>2026-09-26</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://gudong.app/items/item-yak-01.html</loc><lastmod>2026-09-26</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://gudong.app/items/item-yak-02.html</loc><lastmod>2026-09-26</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://gudong.app/items/item-yak-03.html</loc><lastmod>2026-09-26</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
+
+  <!-- ============================================================
+       情报 / 知识（38 篇）
+       lastmod 使用各文章实际发布日期，便于搜索引擎识别内容时间分布。
+       priority 统一 0.7（长尾内容，与分类页同级）。
+       ============================================================ -->
+
+  <!-- ---------- 瓷器系列（7） ---------- -->
+  <url><loc>https://gudong.app/insights/qing-porcelain-dating.html</loc><lastmod>2026-02-18</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://gudong.app/insights/ming-porcelain-dating.html</loc><lastmod>2026-01-28</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://gudong.app/insights/republic-porcelain-dating.html</loc><lastmod>2026-01-30</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://gudong.app/insights/qinghua-cobalt.html</loc><lastmod>2026-01-26</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://gudong.app/insights/porcelain-marks.html</loc><lastmod>2026-01-24</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://gudong.app/insights/glaze-crackle-basics.html</loc><lastmod>2026-02-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://gudong.app/insights/porcelain-aging-tricks.html</loc><lastmod>2026-01-20</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+
+  <!-- ---------- 玉器系列（5） ---------- -->
+  <url><loc>https://gudong.app/insights/jade-tool-marks.html</loc><lastmod>2026-02-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://gudong.app/insights/jadeite-abc.html</loc><lastmod>2026-01-22</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://gudong.app/insights/jade-buyer-pitfalls.html</loc><lastmod>2026-01-16</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://gudong.app/insights/ancient-jade-stains.html</loc><lastmod>2026-02-02</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://gudong.app/insights/hetian-seeds-vs-mountain.html</loc><lastmod>2026-01-26</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+
+  <!-- ---------- 钱币系列（6） ---------- -->
+  <url><loc>https://gudong.app/insights/coin-casting-dating.html</loc><lastmod>2026-02-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://gudong.app/insights/coin-patina-types.html</loc><lastmod>2026-01-24</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://gudong.app/insights/silver-patina.html</loc><lastmod>2026-01-26</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://gudong.app/insights/coin-aging-tricks.html</loc><lastmod>2026-01-26</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://gudong.app/insights/coin-cleaning.html</loc><lastmod>2026-02-08</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://gudong.app/insights/silver-dollar-edges.html</loc><lastmod>2026-01-22</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+
+  <!-- ---------- 书画系列（3） ---------- -->
+  <url><loc>https://gudong.app/insights/painting-seals-signatures.html</loc><lastmod>2026-01-22</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://gudong.app/insights/painting-mounting.html</loc><lastmod>2026-02-06</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://gudong.app/insights/painting-prints-vs-hand.html</loc><lastmod>2026-02-02</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+
+  <!-- ---------- 器物与杂项（5） ---------- -->
+  <url><loc>https://gudong.app/insights/furniture-joinery-dating.html</loc><lastmod>2026-02-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://gudong.app/insights/furniture-patina.html</loc><lastmod>2026-02-06</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://gudong.app/insights/bronze-censer-patina.html</loc><lastmod>2026-01-14</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://gudong.app/insights/bamboo-ivory-cracks.html</loc><lastmod>2026-02-06</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://gudong.app/insights/amber-baked-vs-natural.html</loc><lastmod>2026-01-18</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+
+  <!-- ---------- 新加坡本地（6） ---------- -->
+  <url><loc>https://gudong.app/insights/singapore-coin-market.html</loc><lastmod>2026-01-28</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://gudong.app/insights/singapore-flea-market-map.html</loc><lastmod>2026-01-28</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://gudong.app/insights/auction-house-watch.html</loc><lastmod>2026-01-09</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://gudong.app/insights/singapore-porcelain-market.html</loc><lastmod>2026-01-28</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://gudong.app/insights/singapore-jade-market.html</loc><lastmod>2026-01-30</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://gudong.app/insights/singapore-painting-market.html</loc><lastmod>2026-02-02</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+
+  <!-- ---------- 收藏与保存（2） ---------- -->
+  <url><loc>https://gudong.app/insights/how-to-store-collection.html</loc><lastmod>2026-02-08</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://gudong.app/insights/first-collection.html</loc><lastmod>2026-01-28</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+
+  <!-- ---------- 捡漏与策略（4） ---------- -->
+  <url><loc>https://gudong.app/insights/what-is-jianlou.html</loc><lastmod>2026-02-08</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://gudong.app/insights/how-to-brief-a-sourcing.html</loc><lastmod>2026-01-05</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://gudong.app/insights/how-to-negotiate.html</loc><lastmod>2026-01-30</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://gudong.app/insights/provenance-basics.html</loc><lastmod>2026-02-08</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+
 </urlset>

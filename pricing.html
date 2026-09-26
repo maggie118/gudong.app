@@ -13,7 +13,7 @@
 <meta property="og:url" content="https://gudong.app/pricing.html">
 <meta property="og:image" content="https://gudong.app/assets/icons/icon-512.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
-<link rel="manifest" href="manifest.json">
+<link rel="manifest" href="../../Downloads/manifest.json">
 <meta name="theme-color" content="#8A5A3B">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -175,6 +175,19 @@ main section[id] { scroll-margin-top: 92px; }
 .row-price .unit { display: block; font-size: .72rem; color: var(--color-gold); letter-spacing: .04em; margin-top: .15rem; white-space: nowrap; }
 
 .plan-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 1.2rem; }
+.plan-grid.addon-grid { grid-template-columns: repeat(2, minmax(0,1fr)); max-width: 640px; margin: 0 auto; }
+.plan-price-strike { font-size: .82rem; color: var(--color-text-muted); text-decoration: line-through; margin-bottom: .15rem; }
+.bundle-wrap { max-width: 440px; margin: 0 auto; }
+.bundle-rows { text-align: left; margin-top: 1.3rem; }
+.bundle-row { display: flex; align-items: center; justify-content: space-between; gap: .8rem; font-size: .8rem; color: var(--color-text-secondary); padding: .55rem 0; border-bottom: 1px dashed var(--color-border); }
+.bundle-row:last-child { border-bottom: none; }
+.bundle-val { color: var(--color-gold); font-weight: 700; white-space: nowrap; }
+.save-banner { background: var(--color-primary-light); border-radius: 8px; padding: .7rem .9rem; text-align: center; font-size: .8rem; color: var(--color-gold); font-weight: 700; margin-top: 1.1rem; }
+.faq-item { padding: 1.1rem .2rem; border-bottom: 1px dashed var(--color-border); }
+.faq-item:last-child { border-bottom: none; }
+.faq-q { font-family: var(--font-display); font-size: .92rem; font-weight: 700; color: var(--color-text); margin-bottom: .4rem; }
+.faq-a { font-size: .8rem; color: var(--color-text-secondary); line-height: 1.75; }
+.faq-a b { color: var(--color-text); }
 .plan {
   position: relative; background: var(--color-surface);
   border: 1px solid var(--color-border); border-radius: 16px;
@@ -301,13 +314,13 @@ footer {
 <header>
   <div style="display:flex; align-items:center; gap:.9rem;">
     <button class="menu-toggle" onclick="openSidebar()" aria-label="menu">☰</button>
-    <a href="index.html" class="brand" style="text-decoration:none;color:inherit;">
+    <a href="../../index.html" class="brand" style="text-decoration:none;color:inherit;">
       <h1><span class="zh">古董集</span><span class="en">GUDONG</span></h1>
       <p><span class="zh">GUDONG.APP</span><span class="en">Chinese Antiques Platform</span></p>
     </a>
   </div>
   <div class="header-right">
-    <a href="pricing.html#seller-services" class="btn-publish">
+    <a href="../../pricing.html#seller-services" class="btn-publish">
       <span class="zh">刊登藏品</span><span class="en">List an Item</span>
     </a>
     <button class="lang-btn" onclick="toggleLang()">EN</button>
@@ -317,31 +330,31 @@ footer {
 <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
 <aside class="sidebar" id="sidebar">
   <button class="sidebar-toggle-inner" onclick="closeSidebar()" aria-label="close menu">☰</button>
-  <a href="index.html" class="sidebar-brand" style="text-decoration:none;">
+  <a href="../../index.html" class="sidebar-brand" style="text-decoration:none;">
     <span class="zh">古董集</span><span class="en">GUDONG</span>
   </a>
   <nav class="sidebar-nav">
-            <a href="index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">首页</span><span class="en">Home</span></a>
-            <a href="index.html#daily-intel" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 今日情报</span><span class="en">· Daily Intel</span></a>
-            <a href="index.html#today-finds" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 今日好货</span><span class="en">· Today's Picks</span></a>
-            <a href="index.html#new-listings" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 新上架好货</span><span class="en">· New Arrivals</span></a>
-            <a href="collection.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">藏品库</span><span class="en">Collection</span></a>
-            <a href="categories/porcelain.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 瓷器</span><span class="en">· Porcelain</span></a>
-            <a href="categories/jade.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 玉器</span><span class="en">· Jade</span></a>
-            <a href="categories/coins.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 钱币</span><span class="en">· Coins</span></a>
-            <a href="categories/paintings.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 书画</span><span class="en">· Paintings &amp; Calligraphy</span></a>
-            <a href="categories/misc.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 杂项</span><span class="en">· Miscellaneous</span></a>
-            <a href="insights.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">情报 / 知识</span><span class="en">Insights</span></a>
-            <a href="sellers/index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">藏家主页</span><span class="en">Collector Gallery</span></a>
-            <a href="pricing.html" class="sidebar-link active" onclick="closeSidebar()"><span class="zh">刊登藏品</span><span class="en">List an Item</span></a>
-            <a href="about.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">联系我们</span><span class="en">Contact</span></a>
+            <a href="../../index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">首页</span><span class="en">Home</span></a>
+            <a href="../../index.html#daily-intel" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 今日情报</span><span class="en">· Daily Intel</span></a>
+            <a href="../../index.html#today-finds" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 今日好货</span><span class="en">· Today's Picks</span></a>
+            <a href="../../index.html#new-listings" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 新上架好货</span><span class="en">· New Arrivals</span></a>
+            <a href="../../collection.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">藏品库</span><span class="en">Collection</span></a>
+            <a href="../../categories/porcelain.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 瓷器</span><span class="en">· Porcelain</span></a>
+            <a href="../../categories/jade.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 玉器</span><span class="en">· Jade</span></a>
+            <a href="../../categories/coins.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 钱币</span><span class="en">· Coins</span></a>
+            <a href="../../categories/paintings.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 书画</span><span class="en">· Paintings &amp; Calligraphy</span></a>
+            <a href="../../categories/misc.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 杂项</span><span class="en">· Miscellaneous</span></a>
+            <a href="../../insights.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">情报 / 知识</span><span class="en">Insights</span></a>
+            <a href="../../sellers/index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">藏家主页</span><span class="en">Collector Gallery</span></a>
+            <a href="../../pricing.html" class="sidebar-link active" onclick="closeSidebar()"><span class="zh">刊登藏品</span><span class="en">List an Item</span></a>
+            <a href="../../about.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">联系我们</span><span class="en">Contact</span></a>
             <button type="button" class="sidebar-lang-btn" onclick="toggleLang()" aria-label="Switch language"><span class="zh">🌐 English</span><span class="en">🌐 中文</span></button>
         </nav>
 </aside>
 
 <main class="container">
   <div class="breadcrumb">
-    <a href="index.html" class="zh">首页</a><a href="index.html" class="en">Home</a>
+    <a href="../../index.html" class="zh">首页</a><a href="../../index.html" class="en">Home</a>
     <span class="zh"> / 服务价格</span><span class="en"> / Pricing</span>
   </div>
 
@@ -354,6 +367,35 @@ footer {
     <div class="sec-divider" aria-hidden="true"><span></span></div>
   </div>
 
+  <!-- ===== 主推：商家启动套装（私家藏馆 + 10件刊登额度，加赠1个月首页推荐 + 2套图片精修） ===== -->
+  <section id="bundle">
+    <div class="sec-head tight">
+      <div class="eyebrow zh">主推套装</div><div class="eyebrow en">Recommended</div>
+      <h2 class="sec-title zh">商家启动套装</h2><h2 class="sec-title en">Business Starter Bundle</h2>
+      <p class="sec-sub zh">新卖家最省心的入门方式：私家藏馆 + 10 件刊登额度，加赠首页推荐与图片精修</p>
+      <p class="sec-sub en">The easiest way to start: Private Gallery + 10 listing credits, plus free Homepage Feature and photo retouching</p>
+    </div>
+    <div class="bundle-wrap">
+      <div class="plan featured">
+        <span class="plan-badge zh">推荐</span><span class="plan-badge en">Featured</span>
+        <h3 class="plan-title zh">商家启动套装</h3><h3 class="plan-title en">Business Starter Bundle</h3>
+        <div class="plan-divider"></div>
+        <div class="plan-price"><span class="cur">SGD</span>680</div>
+        <div class="plan-unit zh">/ 首年</div><div class="plan-unit en">/ first year</div>
+        <div class="bundle-rows">
+          <div class="bundle-row"><span class="zh">私家藏馆（年付）</span><span class="en">Private Gallery (annual)</span><span class="bundle-val">SGD 480</span></div>
+          <div class="bundle-row"><span class="zh">刊登额度 × 10 件</span><span class="en">10 listing credits</span><span class="bundle-val">SGD 200</span></div>
+          <div class="bundle-row"><span class="zh">首页推荐 1 个月（赠送）</span><span class="en">Homepage Feature, 1 month (free)</span><span class="bundle-val">SGD 120</span></div>
+          <div class="bundle-row"><span class="zh">图片精修 × 2 套（赠送）</span><span class="en">Photo Retouching × 2 sets (free)</span><span class="bundle-val">SGD 50</span></div>
+        </div>
+        <div class="save-banner zh">单独购买合计 SGD 850 · 套装立省 SGD 170</div>
+        <div class="save-banner en">SGD 850 if bought separately · Save SGD 170 with the bundle</div>
+        <div class="plan-note zh" style="margin-top:.9rem;">仍在前 88 位创始卖家名额内？联系客服可将私家藏馆部分换算为创始价 SGD 384，套装价相应下调至 SGD 584（赠送项不变）</div>
+        <div class="plan-note en" style="margin-top:.9rem;">Still within the first 88 Founder-Dealer seats? Contact us to apply the SGD 384 founder gallery price — the bundle drops to SGD 584 (free items unchanged)</div>
+      </div>
+    </div>
+  </section>
+
   <!-- ===== 一、卖家服务（3 项） ===== -->
   <section id="seller-services">
     <div class="sec-head">
@@ -361,6 +403,11 @@ footer {
       <h2 class="sec-title zh">刊登 · 私家藏馆 · 推荐</h2><h2 class="sec-title en">Listing · Private Gallery · Feature</h2>
       <p class="sec-sub zh">不抽取交易佣金</p>
       <p class="sec-sub en">No transaction commission</p>
+    </div>
+    <div class="note-bar" style="max-width:820px;margin-left:auto;margin-right:auto;margin-bottom:1.6rem;">
+      <span class="marker" aria-hidden="true">💡</span>
+      <div class="zh"><b>怎么选：</b>新卖家不确定怎么组合 → 直接选「商家启动套装」最省心；偶尔出手 1-2 件 → 「刊登藏品」即可；已确定长期在线经营 → 单独买「私家藏馆」也划算；想让单品短期内获得更多曝光 → 叠加「首页推荐」。</div>
+      <div class="en"><b>Which to choose:</b> not sure where to start → the Business Starter Bundle is the easiest path; selling occasionally (1-2 items) → Item Listing alone is enough; committed to an ongoing collection → Private Gallery alone still pays off; want a short burst of visibility for one piece → add the Homepage Feature on top.</div>
     </div>
     <div class="center-actions">
       <a href="https://airtable.com/apprn6XDQnAm8bkaT/shrlQLTRfG5RlYjD4" target="_blank" rel="noopener noreferrer" class="btn-publish">
@@ -436,13 +483,39 @@ footer {
       </div>
 
       <!-- 卡 2：私家藏馆（主推） -->
-      <div class="plan featured">
-        <span class="plan-badge zh">推荐</span><span class="plan-badge en">Featured</span>
+      <div class="plan">
         <h3 class="plan-title zh">私家藏馆</h3><h3 class="plan-title en">Private Gallery</h3>
         <div class="plan-note zh">你的藏品主页</div><div class="plan-note en">Your collection page</div>
         <div class="plan-divider"></div>
-        <div class="plan-price"><span class="cur">SGD</span>480</div>
-        <div class="plan-unit zh">/ 年</div><div class="plan-unit en">/ year</div>
+        <div class="plan-price-strike zh">原价 SGD 480 / 年</div>
+        <div class="plan-price-strike en">Regular SGD 480 / year</div>
+        <div class="plan-price"><span class="cur">SGD</span>384</div>
+        <div class="plan-unit zh">
+          / 年 · 创始卖家价
+          <span class="founder-badge" title="创始卖家 · 2026（限量 88 席）" aria-label="Founder-Dealer 2026, limited to 88">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M3 8L6 14L9 7L12 13L15 7L18 14L21 8V17C21 17.55 20.55 18 20 18H4C3.45 18 3 17.55 3 17V8Z" fill="currentColor" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/>
+              <circle cx="3" cy="8" r="1.4" fill="currentColor"/>
+              <circle cx="12" cy="6" r="1.4" fill="currentColor"/>
+              <circle cx="21" cy="8" r="1.4" fill="currentColor"/>
+            </svg>
+            <span class="badge-num">88</span>
+          </span>
+        </div>
+        <div class="plan-unit en">
+          / year · Founder-Dealer price
+          <span class="founder-badge" title="Founder-Dealer 2026, limited to 88" aria-label="Founder-Dealer 2026, limited to 88">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M3 8L6 14L9 7L12 13L15 7L18 14L21 8V17C21 17.55 20.55 18 20 18H4C3.45 18 3 17.55 3 17V8Z" fill="currentColor" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/>
+              <circle cx="3" cy="8" r="1.4" fill="currentColor"/>
+              <circle cx="12" cy="6" r="1.4" fill="currentColor"/>
+              <circle cx="21" cy="8" r="1.4" fill="currentColor"/>
+            </svg>
+            <span class="badge-num">88</span>
+          </span>
+        </div>
+        <div class="plan-price-sub zh">相当于 SGD 32 / 月 · 名额招满后恢复原价 480</div>
+        <div class="plan-price-sub en">Equivalent to SGD 32 / month · reverts to SGD 480 once seats are filled</div>
         <ul class="plan-list">
           <li class="zh">独立专属主页（独立分享 URL）</li><li class="en">Dedicated page with shareable URL</li>
           <li class="zh"><strong>全部在售藏品自动聚合（不限数量）</strong></li><li class="en"><strong>All active listings auto-aggregated (no limit)</strong></li>
@@ -485,7 +558,7 @@ footer {
           </svg>
           <span class="badge-num">88</span>
         </span>
-        ，前 2 件藏品免费刊登。名额招满后，新卖家按 SGD 20 / 件 / 年收费。不抽取交易佣金。
+        ，前 2 件藏品免费刊登，私家藏馆首年 8 折（SGD 384，原价 480）。名额招满后，新卖家按 SGD 20 / 件 / 年、私家藏馆 SGD 480 / 年原价收费。不抽取交易佣金。
         <br>三项服务互相独立：刊登费按件计；私家馆按年计，聚合卖家全部在售藏品；首页推荐按月或年计，为单品提供首页置顶曝光。
       </div>
       <div class="en">
@@ -499,8 +572,42 @@ footer {
           </svg>
           <span class="badge-num">88</span>
         </span>
-        with 2 complimentary listings. Once seats are filled, new sellers pay SGD 20 / item / year. No transaction commission.
+        with 2 complimentary listings and 20% off the first year of the Private Gallery (SGD 384, regular SGD 480). Once seats are filled, new sellers pay SGD 20 / item / year and SGD 480 / year for the Private Gallery at regular price. No transaction commission.
         <br>Three independent services: Listing is per item; the Private Gallery is per year and aggregates all active listings; the Homepage Feature (monthly or annual) provides pinned exposure for a single item.
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 一、五、增值服务 ===== -->
+  <section id="addon-services">
+    <div class="sec-head tight">
+      <div class="eyebrow zh">增值服务</div><div class="eyebrow en">Add-on Services</div>
+      <h2 class="sec-title zh">让藏品呈现更专业</h2><h2 class="sec-title en">Present Your Pieces Better</h2>
+      <p class="sec-sub zh">与刊登 / 私家藏馆 / 首页推荐相互独立，随时按需购买</p>
+      <p class="sec-sub en">Independent of Listing / Gallery / Feature — purchase either whenever you need it</p>
+    </div>
+    <div class="plan-grid addon-grid">
+      <div class="plan">
+        <h3 class="plan-title zh">图片精修</h3><h3 class="plan-title en">Photo Retouching</h3>
+        <div class="plan-note zh">让老照片、随手拍也能上镜</div><div class="plan-note en">Makes casual or old photos presentable</div>
+        <div class="plan-divider"></div>
+        <div class="plan-price"><span class="cur">SGD</span>25</div>
+        <div class="plan-unit zh">/ 套（4 张）</div><div class="plan-unit en">/ set (4 photos)</div>
+        <ul class="plan-list">
+          <li class="zh">亮度 / 裁剪 / 背景整理</li><li class="en">Brightness / cropping / background tidy-up</li>
+          <li class="zh">一套 4 张藏品图</li><li class="en">One set of 4 photos</li>
+        </ul>
+      </div>
+      <div class="plan">
+        <h3 class="plan-title zh">专家视频咨询</h3><h3 class="plan-title en">Expert Video Consultation</h3>
+        <div class="plan-note zh">下单前多一层参考意见</div><div class="plan-note en">A second opinion before you commit</div>
+        <div class="plan-divider"></div>
+        <div class="plan-price"><span class="cur">SGD</span>50</div>
+        <div class="plan-unit zh">/ 次</div><div class="plan-unit en">/ session</div>
+        <ul class="plan-list">
+          <li class="zh">藏品页内直接预约</li><li class="en">Book directly from a listing page</li>
+          <li class="zh no">仅参考意见，不提供纸质鉴定证书</li><li class="en no">Advisory opinion only, no formal certificate</li>
+        </ul>
       </div>
     </div>
   </section>
@@ -520,34 +627,18 @@ footer {
             <div class="row-title zh">委托找货</div>
             <div class="row-title en">Sourcing Service</div>
             <div class="row-desc zh">
-              <strong>预付：SGD 120 基础服务费 + 成交价 2% 保证金（最低 SGD 100）</strong><br>
-              · 委托时预付，用于人工找货、匹配、约谈<br>
-              · <b>成交：保证金转为服务费，不予退还</b><br>
-              · <b>未成交：退还全额保证金，SGD 120 不退</b>（已投入人工）<br>
-              · 平台不代收货款，成交款由买卖双方自行结算<br>
-              · 平台不保证一定找到、不保证成交<br>
-              <br>
-              <b>示例：</b>委托找一件预算 SGD 10,000 的藏品，预付 SGD 120 + SGD 200 = <b>SGD 320</b>。
-              成交后 SGD 200 转为服务费；未成交退 SGD 200，保留 SGD 120。
+              <strong>预付 SGD 120 基础服务费 + SGD 200 信息对接费</strong>（成交后收取；未成交全额退还 SGD 200，SGD 120 不退）。用于人工找货、匹配、约谈；平台不代收货款，不保证成交。预算 SGD 20,000 以上的委托，信息对接费另议。
             </div>
             <div class="row-desc en">
-              <strong>Prepaid: SGD 120 base fee + 2% deposit on sale price (min. SGD 100)</strong><br>
-              · Prepaid upon engagement, covering manual sourcing, matching and introductions<br>
-              · <b>If sale completes: deposit converts to service fee, non-refundable</b><br>
-              · <b>If no sale: full deposit refunded, SGD 120 non-refundable</b><br>
-              · Platform does not collect sale proceeds; payment settled directly between buyer and seller<br>
-              · Platform does not guarantee finding an item or completing a sale<br>
-              <br>
-              <b>Example:</b> sourcing an item with estimated price SGD 10,000 — prepay SGD 120 + SGD 200 = <b>SGD 320</b>.
-              On completion, SGD 200 becomes the service fee; if no sale, SGD 200 refunded, SGD 120 retained.
+              <strong>Prepaid: SGD 120 base fee + SGD 200 information-matching fee</strong> (charged only on completion; SGD 200 fully refunded if no sale, SGD 120 non-refundable). Covers manual sourcing, matching and introductions. Platform does not collect sale proceeds or guarantee a sale. For budgets above SGD 20,000, the matching fee is quoted separately.
             </div>
           </div>
           <div class="row-price">
             <span class="amount">SGD 120</span>
-            <span class="amount-sub zh">+ 2% 保证金</span>
-            <span class="amount-sub en">+ 2% deposit</span>
-            <span class="unit zh">/ 次（最低 SGD 100）</span>
-            <span class="unit en">/ time (min. SGD 100)</span>
+            <span class="amount-sub zh">+ SGD 200 信息对接费</span>
+            <span class="amount-sub en">+ SGD 200 matching fee</span>
+            <span class="unit zh">/ 次</span>
+            <span class="unit en">/ time</span>
           </div>
         </div>
       </div>
@@ -581,7 +672,22 @@ footer {
           </div>
           <div class="row-price">
             <span class="amount">SGD 480</span>
+            <span class="amount-sub zh">创始卖家价 SGD 384</span>
+            <span class="amount-sub en">Founder price SGD 384</span>
             <span class="unit zh">/ 年</span><span class="unit en">/ yr</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="row-info">
+            <div class="row-title zh">商家启动套装</div>
+            <div class="row-title en">Business Starter Bundle</div>
+            <div class="row-desc zh">私家藏馆 + 10 件刊登额度，加赠 1 个月首页推荐 + 2 套图片精修 · 单独购买合计 SGD 850</div>
+            <div class="row-desc en">Private Gallery + 10 listing credits, plus free Homepage Feature (1 month) and Photo Retouching (2 sets) · SGD 850 if bought separately</div>
+          </div>
+          <div class="row-price">
+            <span class="amount">SGD 680</span>
+            <span class="amount-sub zh">立省 SGD 170</span>
+            <span class="amount-sub en">Save SGD 170</span>
           </div>
         </div>
         <div class="row">
@@ -597,13 +703,13 @@ footer {
         </div>
         <div class="row">
           <div class="row-info">
-            <div class="row-title zh">委托找货（含 2% 保证金，最低 SGD 100）</div>
-            <div class="row-title en">Sourcing Service (incl. 2% deposit, min. SGD 100)</div>
+            <div class="row-title zh">委托找货（含信息对接费）</div>
+            <div class="row-title en">Sourcing Service (incl. matching fee)</div>
           </div>
           <div class="row-price">
             <span class="amount">SGD 120</span>
-            <span class="amount-sub zh">+ 成交价 2%</span>
-            <span class="amount-sub en">+ 2% of sale price</span>
+            <span class="amount-sub zh">+ SGD 200 信息对接费</span>
+            <span class="amount-sub en">+ SGD 200 matching fee</span>
           </div>
         </div>
         <div class="row">
@@ -627,7 +733,7 @@ footer {
             <div class="row-desc en">Set of 4 photos · basic retouching (brightness / cropping / background tidy-up)</div>
           </div>
           <div class="row-price">
-            <span class="amount">SGD 10</span>
+            <span class="amount">SGD 25</span>
             <span class="unit zh">/ 套（4 张）</span>
             <span class="unit en">/ set (4 photos)</span>
           </div>
@@ -636,8 +742,49 @@ footer {
     </div>
     <div class="note-bar">
       <span class="marker" aria-hidden="true">※</span>
-      <div class="zh"><b>说明：</b>以上价格均为新加坡元（SGD），不含消费税。所有服务互相独立，购买其一不包含其他服务。付款支持 PayNow / 银行转账。委托找货保证金在未成交时全额退还。专家视频咨询费用在平台完成专家匹配并发送视频通话链接后不予退款。平台不代收货款。</div>
-      <div class="en"><b>Note:</b> All prices are in SGD, excluding GST. Services are independent — purchasing one does not include any other. Payment via PayNow or bank transfer. Sourcing Service deposit is fully refunded if no sale occurs. Expert Video Consultation is non-refundable once the platform has assigned an expert and sent the video-call link. Platform does not collect sale proceeds.</div>
+      <div class="zh"><b>说明：</b>以上价格均为新加坡元（SGD），不含消费税。所有服务互相独立，购买其一不包含其他服务。付款支持 PayNow / 银行转账。委托找货的信息对接费在未成交时全额退还。专家视频咨询费用在平台完成专家匹配并发送视频通话链接后不予退款。平台不代收货款。</div>
+      <div class="en"><b>Note:</b> All prices are in SGD, excluding GST. Services are independent — purchasing one does not include any other. Payment via PayNow or bank transfer. The Sourcing Service's matching fee is fully refunded if no sale occurs. Expert Video Consultation is non-refundable once the platform has assigned an expert and sent the video-call link. Platform does not collect sale proceeds.</div>
+    </div>
+  </section>
+
+  <!-- ===== 三点五、常见问题 ===== -->
+  <section id="faq">
+    <div class="sec-head">
+      <div class="eyebrow zh">常见问题</div><div class="eyebrow en">FAQ</div>
+      <h2 class="sec-title zh">关于收费，你可能想问</h2><h2 class="sec-title en">Pricing, Answered</h2>
+      <div class="sec-divider" aria-hidden="true"><span></span></div>
+    </div>
+    <div class="frame">
+      <div class="faq-item">
+        <div class="faq-q zh">平台为什么不收取交易佣金？</div>
+        <div class="faq-q en">Why doesn't the platform charge a transaction commission?</div>
+        <div class="faq-a zh">古董集是信息展示与匹配平台，不代收藏品交易货款、不参与买卖流程，因此不针对成交本身抽成。平台收入完全来自刊登、私家藏馆、首页推荐等<b>展示与曝光类服务费</b>，买卖双方私下议价、成交的金额与平台无关。</div>
+        <div class="faq-a en">Gudong is a discovery and matching platform — it does not collect sale proceeds or take part in the transaction, so it does not take a cut of what an item actually sells for. Revenue comes entirely from <b>display and exposure services</b> (listing, gallery, homepage feature); the price buyer and seller privately agree on is not the platform's business.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q zh">「委托找货」的信息对接费算佣金吗？</div>
+        <div class="faq-q en">Is the information-matching fee on the Sourcing Service a commission?</div>
+        <div class="faq-a zh">不算。委托找货是买家<b>自愿购买</b>的独立增值服务，用于人工找货、匹配与约谈，不购买它完全不影响正常浏览、联系卖家和自行成交。信息对接费是固定金额，对应的是人工服务本身，不随成交价浮动。</div>
+        <div class="faq-a en">No. The Sourcing Service is an <b>optional</b> add-on for manual sourcing, matching and introductions — skipping it has no effect on free browsing, contacting sellers, or completing a deal on your own. The matching fee is a fixed amount for that manual work, not a percentage of the sale price.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q zh">已支付的服务费，可以退款吗？</div>
+        <div class="faq-q en">Can I get a refund on a service fee I've already paid?</div>
+        <div class="faq-a zh">【请确认并替换本段：建议明确刊登费 / 私家藏馆 / 首页推荐一经开通是否可退，例如"服务费一经开通即视为服务已提供，原则上不予退还；如因平台原因导致无法正常展示，可联系客服协商处理"。委托找货与专家视频咨询的退款政策已在对应小节说明，无需重复。】</div>
+        <div class="faq-a en">【Placeholder — confirm and replace: state whether Listing / Private Gallery / Homepage Feature fees are refundable once activated. Sourcing Service and Expert Video Consultation already have their refund terms stated in their own sections above.】</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q zh">付款后多久生效？</div>
+        <div class="faq-q en">How soon after payment does the service start?</div>
+        <div class="faq-a zh">【请填写实际开通时效，例如："PayNow / 银行转账核实后 1 个工作日内开通"，并注明是否有节假日延迟。】</div>
+        <div class="faq-a en">【Placeholder — fill in the real activation turnaround, e.g. "Activated within 1 business day of payment verification."】</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q zh">「创始卖家·2026」的 88 个名额还剩多少？</div>
+        <div class="faq-q en">How many of the 88 Founder-Dealer 2026 seats are left?</div>
+        <div class="faq-a zh">【建议接入实际剩余席位数并定期更新（例如"截至[日期]已有 X 位卖家入驻"），避免"限量 88 席"长期原样展示造成不实稀缺感。】</div>
+        <div class="faq-a en">【Placeholder — show the real, periodically-updated seat count (e.g. "X of 88 seats filled as of [date]") rather than leaving the limited-seats claim static indefinitely.】</div>
+      </div>
     </div>
   </section>
 
@@ -671,17 +818,17 @@ footer {
     </div>
     <div class="note-bar warn">
       <span class="marker" aria-hidden="true">⚠️</span>
-      <div class="zh"><b>重要：</b>此收款仅用于支付平台服务费。藏品交易货款请买卖双方自行结算，平台不代收藏品交易款项。委托找货保证金在未成交时全额退还。</div>
-      <div class="en"><b>Important:</b> This PayNow is for platform service fees only. All antique transaction payments are handled directly between buyer and seller. Platform does not receive object-sale funds. Sourcing Service deposit is fully refunded if no sale occurs.</div>
+      <div class="zh"><b>重要：</b>此收款仅用于支付平台服务费。藏品交易货款请买卖双方自行结算，平台不代收藏品交易款项。委托找货的信息对接费在未成交时全额退还。</div>
+      <div class="en"><b>Important:</b> This PayNow is for platform service fees only. All antique transaction payments are handled directly between buyer and seller. Platform does not receive object-sale funds. The Sourcing Service's matching fee is fully refunded if no sale occurs.</div>
     </div>
   </div>
 </main>
 
 <footer>
   <div class="footer-nav">
-            <a href="pricing.html#buyer-services" class="zh">委托找货</a><a href="pricing.html#buyer-services" class="en">Sourcing</a>
-            <a href="privacy.html" class="zh">隐私政策</a><a href="privacy.html" class="en">Privacy</a>
-            <a href="terms.html" class="zh">用户条款</a><a href="terms.html" class="en">Terms</a>
+            <a href="../../Downloads/pricing.html#buyer-services" class="zh">委托找货</a><a href="../../Downloads/pricing.html#buyer-services" class="en">Sourcing</a>
+            <a href="../../Downloads/privacy.html" class="zh">隐私政策</a><a href="../../Downloads/privacy.html" class="en">Privacy</a>
+            <a href="../../Downloads/terms.html" class="zh">用户条款</a><a href="../../Downloads/terms.html" class="en">Terms</a>
         </div>
   <p class="footer-disclaimer zh">gudong.app 是信息发现平台，而非交易平台。</p>
   <p class="footer-disclaimer en">gudong.app is an information and discovery platform for antiques and collectibles.</p>

@@ -8,7 +8,7 @@
     <title>情报 / 知识 | 古董集 Gudong.app</title>
     <link rel="canonical" href="https://gudong.app/insights.html" />
 
-    <meta name="description" content="古董集情报 / 知识 —— 清代民窑青花断代、新加坡钱币行情、玉器避坑、捡漏逻辑。看懂器物，比买到器物更重要。">
+    <meta name="description" content="古董集情报 / 知识 —— 瓷器断代、玉器辨识、钱币鉴定、书画钤印、家具榫卯、新加坡本地行情、收藏保存、捡漏策略，八大系列一次看完。">
     <meta name="keywords" content="新加坡古董, 古董集, 青花断代, 钱币行情, 玉器避坑, 捡漏, Gudong insights">
 
     <meta property="og:site_name" content="古董集 Gudong.app">
@@ -32,10 +32,14 @@
       "inLanguage": ["zh-SG", "en-SG"],
       "publisher": { "@type": "Organization", "name": "古董集 Gudong", "url": "https://gudong.app/" },
       "blogPost": [
+        { "@type": "BlogPosting", "headline": "怎么看藏品“来源”？证据链比故事重要", "url": "https://gudong.app/insights/provenance-basics.html" },
+        { "@type": "BlogPosting", "headline": "怎么保存藏品？六个环境要素决定藏品寿命", "url": "https://gudong.app/insights/how-to-store-collection.html" },
         { "@type": "BlogPosting", "headline": "清代民窑青花怎么分辨年代？3 个上手要点", "url": "https://gudong.app/insights/qing-porcelain-dating.html" },
-        { "@type": "BlogPosting", "headline": "新加坡本地钱币市场近半年行情简析", "url": "https://gudong.app/insights/singapore-coin-market.html" },
+        { "@type": "BlogPosting", "headline": "瓷器釉面开片怎么看？自然开片与人工开片的区别", "url": "https://gudong.app/insights/glaze-crackle-basics.html" },
+        { "@type": "BlogPosting", "headline": "钱币做旧手法图解：这几种包浆要小心", "url": "https://gudong.app/insights/coin-aging-tricks.html" },
         { "@type": "BlogPosting", "headline": "新手买玉器，最容易踩的 5 个坑", "url": "https://gudong.app/insights/jade-buyer-pitfalls.html" },
-        { "@type": "BlogPosting", "headline": "什么是“捡漏”？古董捡漏的 3 个真实逻辑", "url": "https://gudong.app/insights/what-is-jianlou.html" }
+        { "@type": "BlogPosting", "headline": "新加坡拍卖行观察：本地成交价参考逻辑", "url": "https://gudong.app/insights/auction-house-watch.html" },
+        { "@type": "BlogPosting", "headline": "委托找货：如何准确描述你想要的那件藏品", "url": "https://gudong.app/insights/how-to-brief-a-sourcing.html" }
       ]
     }
     </script>
@@ -64,16 +68,15 @@
             --color-gold: #B08A45;
             --color-gold-soft: rgba(176,138,69,.10);
             --color-bronze-muted: #9C8558;
-            --color-success: #526657;
-            --color-danger: #9A554B;
-            --color-far-mountain: #2E4A52;
+            --radius-card: 14px; --radius-sm: 10px;
+            --shadow-soft: 0 6px 20px rgba(37, 34, 30, 0.05);
+            --shadow-hover: 0 12px 28px rgba(138, 90, 59, 0.10);
         }
         * { margin: 0; padding: 0; box-sizing: border-box;
             font-family: "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif; }
-        html { scroll-behavior: smooth; }
+        html { scroll-behavior: smooth; scroll-padding-top: 88px; }
         body { background: var(--color-bg); color: var(--color-text); line-height: 1.65; }
 
-        /* ---------- 公告栏 ---------- */
         .announce-bar {
             background: var(--color-primary-light); color: var(--color-primary-dark);
             font-size: .8rem; text-align: center; padding: .55rem 2.6rem;
@@ -86,7 +89,6 @@
         }
         .announce-close:hover { color: var(--color-primary); }
 
-        /* ---------- Header ---------- */
         header {
             background: rgba(255,255,255,.96); backdrop-filter: blur(6px);
             color: var(--color-text); padding: 0 5%; height: 68px;
@@ -97,7 +99,7 @@
         .brand { display: flex; flex-direction: column; justify-content: center; line-height: 1; flex-shrink: 0; }
         .brand h1 { font-size: 1.4rem; font-weight: 700; letter-spacing: .02em; line-height: 1.15; }
         .brand p { color: var(--color-bronze-muted); margin-top: .2rem; font-size: .62rem; letter-spacing: .2em; }
-        .brand h1 .en, .brand p .zh, .brand p .en, .sidebar-brand .en {
+        .brand h1 .en, .brand p .en, .sidebar-brand .en {
             font-family: "Inter Display", "Inter", "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
             letter-spacing: normal;
         }
@@ -124,7 +126,6 @@
         }
         .menu-toggle:hover { border-color: var(--color-primary); color: var(--color-primary); background: var(--color-primary-light); }
 
-        /* ---------- Sidebar ---------- */
         .sidebar-overlay {
             position: fixed; inset: 0; background: rgba(20,17,14,.4);
             opacity: 0; pointer-events: none; transition: opacity .25s ease; z-index: 90;
@@ -173,12 +174,10 @@
         }
         .sidebar-lang-btn:hover { border-color: var(--color-primary); color: var(--color-primary); background: var(--color-primary-light); }
 
-        /* ---------- Layout ---------- */
         .container { max-width: 1200px; margin: 0 auto; padding: 3.2rem 5% 4rem; min-height: 80vh; }
         section { margin-bottom: 4rem; }
 
-        /* ---------- 页面 Hero ---------- */
-        .page-hero { text-align: center; max-width: 700px; margin: 0 auto 2rem; padding: .4rem 0 0; }
+        .page-hero { text-align: center; max-width: 720px; margin: 0 auto 1.6rem; padding: .4rem 0 0; }
         .page-eyebrow {
             font-family: Georgia, "Songti SC", "STSong", serif; font-style: italic;
             font-size: .92rem; color: var(--color-bronze-muted); letter-spacing: .01em; margin-bottom: .85rem;
@@ -190,8 +189,7 @@
         }
         .page-desc { font-size: .95rem; color: var(--color-text-secondary); line-height: 1.7; }
 
-        /* ---------- 搜索 ---------- */
-        .search-box { max-width: 520px; margin: 1.8rem auto 1rem; position: relative; }
+        .search-box { max-width: 520px; margin: 1.8rem auto .8rem; position: relative; }
         .search-box input {
             width: 100%; height: 48px; padding: 0 3rem 0 1.15rem;
             border: 1px solid #DED7CE; border-radius: 12px; font-size: .93rem;
@@ -203,27 +201,34 @@
             background: transparent; border: none; color: var(--color-primary); font-size: 1rem; cursor: pointer;
         }
 
-        /* ---------- 分类筛选 ---------- */
-        .filter-bar { display: flex; flex-wrap: wrap; justify-content: center; gap: .5rem; margin: 1.2rem 0 .9rem; }
-        .filter-chip {
-            border: 1px solid var(--color-border); background: var(--color-white);
-            color: var(--color-text-secondary); font-family: inherit;
-            font-size: .82rem; padding: .4rem .98rem; border-radius: 999px;
-            cursor: pointer; transition: .2s;
+        .series-nav {
+            display: flex; flex-wrap: wrap; justify-content: center; gap: .5rem;
+            margin: 1.4rem 0 .6rem;
         }
-        .filter-chip:hover { border-color: var(--color-primary); color: var(--color-primary); background: var(--color-primary-light); }
-        .filter-chip.active { background: var(--color-primary); border-color: var(--color-primary); color: #fff; font-weight: 600; }
+        .series-chip {
+            display: inline-flex; align-items: center; gap: .4rem;
+            border: 1px solid var(--color-border); background: var(--color-white);
+            color: var(--color-text-secondary); font-size: .82rem;
+            padding: .4rem .9rem; border-radius: 999px; text-decoration: none;
+            transition: .2s;
+        }
+        .series-chip:hover { border-color: var(--color-primary); color: var(--color-primary); background: var(--color-primary-light); }
+        .series-chip .chip-count {
+            font-size: .68rem; font-weight: 700; color: var(--color-bronze-muted);
+            background: var(--color-gold-soft); padding: .1rem .4rem; border-radius: 999px;
+        }
+        .series-chip:hover .chip-count { color: var(--color-primary-dark); background: #EADFCE; }
 
-        .result-count { text-align: center; font-size: .78rem; color: var(--color-text-muted); margin-bottom: 2.4rem; }
+        .result-count { text-align: center; font-size: .78rem; color: var(--color-text-muted); margin-bottom: 2rem; }
 
-        /* ---------- 编辑推荐 ---------- */
         .feature-card {
             display: grid; grid-template-columns: 288px 1fr; gap: 1.5rem;
             background: var(--color-white); border: 1px solid var(--color-border);
-            border-radius: 14px; overflow: hidden; text-decoration: none;
-            color: var(--color-text); transition: .25s; margin-bottom: 2.2rem;
+            border-radius: var(--radius-card); overflow: hidden; text-decoration: none;
+            color: var(--color-text); transition: .25s; margin-bottom: 2.6rem;
+            box-shadow: var(--shadow-soft);
         }
-        .feature-card:hover { border-color: var(--color-gold); box-shadow: 0 12px 32px rgba(176,138,69,.15); transform: translateY(-2px); }
+        .feature-card:hover { border-color: var(--color-gold); box-shadow: var(--shadow-hover); transform: translateY(-2px); }
         .feature-cover {
             position: relative; display: flex; align-items: center; justify-content: center;
             min-height: 200px; overflow: hidden;
@@ -236,39 +241,144 @@
         .feature-desc { font-size: .86rem; color: var(--color-text-secondary); line-height: 1.62; }
         .feature-more { font-size: .82rem; font-weight: 600; color: var(--color-primary); margin-top: auto; }
 
-        /* ---------- 封面色带 ---------- */
-        .post-cover, .feature-cover {
-            position: relative; overflow: hidden;
+        /* ============ 卡片封面：杂志感排版 ============ */
+        .post-cover, .feature-cover { position: relative; overflow: hidden; }
+
+        .post-cover {
+            aspect-ratio: 16 / 9;
+            display: block;
+            padding: 0;
         }
-        .post-cover { aspect-ratio: 16 / 9; display: flex; align-items: center; justify-content: center; }
-        .post-cover::before, .feature-cover::before {
-            content: ''; position: absolute; inset: 0;
+
+        /* 对角光晕：左上亮、右下暗，制造立体感 */
+        .post-cover::before {
+            content: '';
+            position: absolute; inset: 0;
+            background:
+                radial-gradient(circle at 18% 18%, rgba(255,255,255,.16), transparent 55%),
+                radial-gradient(circle at 88% 92%, rgba(0,0,0,.24), transparent 62%);
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* 顶部金色装饰线 */
+        .post-cover::after {
+            content: '';
+            position: absolute; left: 0; right: 0; top: 0; height: 3px;
+            background: linear-gradient(90deg, #D9B679 0%, rgba(217,182,121,.05) 70%);
+            z-index: 3;
+        }
+
+        /* 左上角杂志标签（由 JS 注入 .cover-label） */
+        .post-cover .cover-label {
+            position: absolute;
+            left: 1.1rem;
+            top: 1rem;
+            z-index: 3;
+            font-family: Georgia, "Inter", serif;
+            font-size: .68rem;
+            letter-spacing: .28em;
+            color: rgba(217,182,121,.62);
+            text-transform: uppercase;
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+            pointer-events: none;
+        }
+        .post-cover .cover-label::before {
+            content: '';
+            width: 18px;
+            height: 1px;
+            background: rgba(217,182,121,.5);
+        }
+
+        /* 大号字：右下角，溢出裁切，低对比水印感 */
+        .post-cover .cover-mark {
+            position: absolute;
+            right: -0.12em;
+            bottom: -0.34em;
+            font-family: Georgia, "Songti SC", "STSong", serif;
+            font-size: 6.8rem;
+            line-height: 1;
+            letter-spacing: -.03em;
+            color: rgba(217,182,121,.14);
+            font-weight: 600;
+            z-index: 2;
+            pointer-events: none;
+            user-select: none;
+            text-shadow: none;
+        }
+
+        /* ============ 编辑推荐卡（feature-cover） ============ */
+        .feature-cover {
+            position: relative; overflow: hidden;
+            display: flex; align-items: center; justify-content: center;
+            min-height: 200px;
+        }
+        .feature-cover::before {
+            content: '';
+            position: absolute; inset: 0;
             background-image: radial-gradient(circle at 28% 18%, rgba(255,255,255,.08), transparent 62%);
         }
-        .post-cover::after, .feature-cover::after {
-            content: ''; position: absolute; left: 0; right: 0; top: 0; height: 3px;
+        .feature-cover::after {
+            content: '';
+            position: absolute; left: 0; right: 0; top: 0; height: 3px;
             background: linear-gradient(90deg, #D9B679 0%, rgba(217,182,121,.05) 70%);
         }
-        .cover-mark {
-            position: relative; z-index: 2;
-            font-family: Georgia, "Songti SC", "STSong", serif;
-            font-size: 2.7rem; color: rgba(217,182,121,.58); line-height: 1;
-            letter-spacing: .06em; text-shadow: 0 2px 14px rgba(0,0,0,.28);
+        .feature-cover .cover-mark {
+            position: relative;
+            z-index: 2;
+            font-size: 4.2rem;
+            color: rgba(217,182,121,.55);
+            letter-spacing: .06em;
+            text-shadow: 0 2px 14px rgba(0,0,0,.28);
         }
-        .feature-cover .cover-mark { font-size: 4.2rem; }
-        .tone-guide    { background: linear-gradient(135deg, #3A322B 0%, #4C4137 100%); }
-        .tone-market   { background: linear-gradient(135deg, #253A40 0%, #33505A 100%); }
-        .tone-pitfall  { background: linear-gradient(135deg, #3C2B27 0%, #5A3E36 100%); }
-        .tone-strategy { background: linear-gradient(135deg, #3A3220 0%, #5C4C2A 100%); }
 
-        /* ---------- 情报卡片网格 ---------- */
+        /* ============ 4 个 tone 色板：鲜明四色 ============ */
+        .tone-guide    { background: linear-gradient(145deg, #2C3E35 0%, #4A6B58 100%); }   /* 墨绿 */
+        .tone-market   { background: linear-gradient(145deg, #1F3548 0%, #3A5A78 100%); }   /* 藏青 */
+        .tone-pitfall  { background: linear-gradient(145deg, #3C1F22 0%, #6B3438 100%); }   /* 酒红 */
+        .tone-strategy { background: linear-gradient(145deg, #3A2E1A 0%, #6B5528 100%); }   /* 赭黄 */
+
+        .series-block { margin-bottom: 3.6rem; scroll-margin-top: 90px; }
+        .series-block:last-child { margin-bottom: 0; }
+        .series-head {
+            display: flex; align-items: baseline; justify-content: space-between; gap: 1rem;
+            padding-bottom: .85rem; margin-bottom: 1.4rem;
+            border-bottom: 1px solid var(--color-border);
+        }
+        .series-head-left { display: flex; flex-direction: column; gap: .25rem; }
+        .series-title {
+            font-family: Georgia, "Songti SC", "STSong", serif;
+            font-size: 1.45rem; font-weight: 600; color: var(--color-text);
+            line-height: 1.3; letter-spacing: -.01em;
+            display: flex; align-items: baseline; gap: .6rem;
+        }
+        .series-title .series-count {
+            font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+            font-size: .74rem; font-weight: 700; letter-spacing: .04em;
+            color: var(--color-bronze-muted); background: var(--color-gold-soft);
+            padding: .18rem .55rem; border-radius: 999px; white-space: nowrap;
+        }
+        .series-desc {
+            font-size: .86rem; color: var(--color-text-secondary); line-height: 1.6;
+            max-width: 640px;
+        }
+        .series-anchor {
+            font-size: .72rem; color: var(--color-text-muted); text-decoration: none;
+            white-space: nowrap; padding: .25rem .6rem; border-radius: 999px;
+            border: 1px solid var(--color-border); transition: .2s;
+        }
+        .series-anchor:hover { color: var(--color-primary); border-color: var(--color-primary); }
+
         .insight-list-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; }
         .insight-post {
             display: flex; flex-direction: column; background: var(--color-white);
             border: 1px solid var(--color-border); border-radius: 12px;
             overflow: hidden; text-decoration: none; color: var(--color-text); transition: .25s;
+            box-shadow: var(--shadow-soft);
         }
-        .insight-post:hover { border-color: var(--color-gold); transform: translateY(-3px); box-shadow: 0 10px 26px rgba(176,138,69,.14); }
+        .insight-post:hover { border-color: var(--color-gold); transform: translateY(-3px); box-shadow: var(--shadow-hover); }
         .post-body { padding: 1.05rem 1.15rem 1.15rem; display: flex; flex-direction: column; gap: .45rem; flex: 1; }
         .post-kicker {
             font-size: .68rem; font-weight: 700; letter-spacing: .09em;
@@ -282,28 +392,17 @@
             padding-top: .6rem; border-top: 1px dashed var(--color-border); margin-top: .2rem;
         }
 
-        /* ---------- 状态 ---------- */
-        .no-result { text-align: center; padding: 3rem 1rem; color: var(--color-text-muted); grid-column: 1 / -1; }
-        .load-more-wrap { text-align: center; margin-top: 2.2rem; }
-        .load-more-btn {
-            border: 1px solid var(--color-border); background: var(--color-white);
-            color: var(--color-text); font-family: inherit; font-size: .88rem;
-            font-weight: 600; padding: .62rem 1.9rem; border-radius: 999px;
-            cursor: pointer; transition: .2s;
-        }
-        .load-more-btn:hover { border-color: var(--color-primary); color: var(--color-primary); background: var(--color-primary-light); }
+        .no-result { text-align: center; padding: 3rem 1rem; color: var(--color-text-muted); }
 
-        /* ---------- 底部 CTA ---------- */
         .insight-cta {
             background: linear-gradient(135deg, var(--color-primary-light) 0%, #FAF3EA 100%);
-            border: 1px solid var(--color-border); border-radius: 14px;
+            border: 1px solid var(--color-border); border-radius: var(--radius-card);
             padding: 2rem 1.6rem; text-align: center;
         }
         .insight-cta .title { font-size: 1.32rem; font-weight: 700; margin-bottom: .5rem; }
         .insight-cta .desc { font-size: .9rem; color: var(--color-text-secondary); margin-bottom: 1.2rem; line-height: 1.65; }
         .insight-cta .cta-note { font-size: .78rem; color: var(--color-text-muted); margin-top: .9rem; }
 
-        /* ---------- Footer ---------- */
         footer {
             text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-white);
             color: var(--color-text-secondary); margin-top: 1rem; font-size: .78rem;
@@ -317,7 +416,6 @@
         [data-lang="en"] .zh { display: none; }
         [data-lang="zh"] .en { display: none; }
 
-        /* ---------- 响应式 ---------- */
         @media (max-width: 980px) {
             .insight-list-grid { grid-template-columns: repeat(2, 1fr); }
             .feature-card { grid-template-columns: 220px 1fr; gap: 1.2rem; }
@@ -330,14 +428,19 @@
             .feature-cover { min-height: 150px; }
             .feature-body { padding: 1.2rem 1.25rem 1.35rem; }
             .feature-title { font-size: 1.15rem; }
+            .series-head { flex-direction: column; align-items: flex-start; gap: .4rem; }
+            .series-anchor { display: none; }
         }
         @media (max-width: 560px) {
             .brand h1 { font-size: 1.15rem; }
             .container { padding: 2rem 4.5% 3rem; }
-            section { margin-bottom: 3.2rem; }
+            section { margin-bottom: 3rem; }
+            .series-block { margin-bottom: 2.6rem; }
             .insight-list-grid { grid-template-columns: 1fr; gap: 1rem; }
             .post-title { font-size: .98rem; }
-            .page-hero { margin-bottom: 1.4rem; }
+            .post-cover .cover-mark { font-size: 5.4rem; }
+            .page-hero { margin-bottom: 1.2rem; }
+            .series-title { font-size: 1.25rem; }
         }
     </style>
 </head>
@@ -390,7 +493,6 @@
     </aside>
 
     <main class="container">
-        <!-- ============ 页面标题 ============ -->
         <section style="margin-bottom:0;">
             <div class="page-hero">
                 <div class="page-eyebrow">Insights &amp; Guides</div>
@@ -399,8 +501,8 @@
                     <span class="en">📖 Insights &amp; Guides</span>
                 </div>
                 <div class="page-desc">
-                    <span class="zh">看懂器物，比买到器物更重要。断代方法、行情观察、避坑手册、捡漏逻辑——写给新加坡本地藏家的实战笔记。</span>
-                    <span class="en">Knowing the piece matters more than owning it. Dating methods, market notes, pitfalls and bargain-hunting logic — written for collectors in Singapore.</span>
+                    <span class="zh">看懂器物，比买到器物更重要。八大系列，从断代辨伪到本地行情，写给新加坡本地藏家的实战笔记。</span>
+                    <span class="en">Knowing the piece matters more than owning it. Eight series — from dating and authentication to local market notes, written for collectors in Singapore.</span>
                 </div>
 
                 <div class="search-box">
@@ -408,13 +510,7 @@
                     <button type="button" onclick="document.getElementById('insightSearch').focus()" aria-label="search">🔍</button>
                 </div>
 
-                <div class="filter-bar" id="filterBar">
-                    <button type="button" class="filter-chip active" data-cat="all"><span class="zh">全部</span><span class="en">All</span></button>
-                    <button type="button" class="filter-chip" data-cat="guide"><span class="zh">入门指南</span><span class="en">Beginner</span></button>
-                    <button type="button" class="filter-chip" data-cat="market"><span class="zh">行情观察</span><span class="en">Market</span></button>
-                    <button type="button" class="filter-chip" data-cat="pitfall"><span class="zh">避坑手册</span><span class="en">Pitfalls</span></button>
-                    <button type="button" class="filter-chip" data-cat="strategy"><span class="zh">捡漏逻辑</span><span class="en">Strategy</span></button>
-                </div>
+                <nav class="series-nav" id="seriesNav" aria-label="series navigation"></nav>
 
                 <div class="result-count">
                     <span class="zh" id="countZh"></span>
@@ -423,41 +519,32 @@
             </div>
         </section>
 
-        <!-- ============ 编辑推荐 ============ -->
-        <section id="featured" style="margin-bottom:2.2rem;">
-            <a class="feature-card" href="insights/what-is-jianlou.html">
-                <div class="feature-cover tone-strategy">
-                    <span class="cover-mark">鉴</span>
+        <section id="featured" style="margin-bottom:2.6rem;">
+            <a class="feature-card" href="insights/how-to-store-collection.html">
+                <div class="feature-cover" style="background: linear-gradient(145deg, #1F2E2A 0%, #3A544A 100%);">
+                    <span class="cover-mark">藏</span>
                 </div>
                 <div class="feature-body">
-                    <span class="post-kicker zh">编辑推荐 · 捡漏逻辑</span>
-                    <span class="post-kicker en">EDITOR'S PICK · STRATEGY</span>
-                    <div class="feature-title zh">什么是“捡漏”？古董捡漏的 3 个真实逻辑</div>
-                    <div class="feature-title en">What is "jianlou"? 3 real logics behind bargain hunting</div>
-                    <div class="feature-desc zh">信息差、时间差、认知差——捡漏不是运气，是可以练出来的判断力。这篇写给刚入门的你。</div>
-                    <div class="feature-desc en">Information, timing, and knowledge gaps — bargain hunting is a trainable judgement, not luck. A starting point for newcomers.</div>
+                    <span class="post-kicker zh">编辑推荐 · 收藏保存</span>
+                    <span class="post-kicker en">EDITOR'S PICK · COLLECTION CARE</span>
+                    <div class="feature-title zh">怎么保存藏品？六个环境要素决定藏品寿命</div>
+                    <div class="feature-title en">How to store a collection: 6 environmental factors</div>
+                    <div class="feature-desc zh">温度、湿度、光照、灰尘、虫害、接触——六个要素，每一个都能毁掉一件藏品。看完再决定你的展示柜放哪里。</div>
+                    <div class="feature-desc en">Temperature, humidity, light, dust, pests, contact — any one can ruin a piece. Read this before deciding where your display case goes.</div>
                     <span class="feature-more zh">阅读全文 →</span>
                     <span class="feature-more en">Read the guide →</span>
                 </div>
             </a>
         </section>
 
-        <!-- ============ 情报列表 ============ -->
-        <section id="insight-list" style="margin-bottom:2.4rem;">
-            <div class="insight-list-grid" id="insightGrid"></div>
-            <div class="no-result" id="insightEmpty" style="display:none;">
-                <span class="zh">暂无匹配的情报，换个关键词试试</span>
-                <span class="en">No matching articles — try another keyword</span>
-            </div>
-            <div class="load-more-wrap" id="loadMoreWrap" style="display:none;">
-                <button type="button" class="load-more-btn" onclick="loadMore()">
-                    <span class="zh">加载更多情报</span><span class="en">Load more</span>
-                </button>
-            </div>
-        </section>
+        <div id="seriesContainer"></div>
 
-        <!-- ============ 投稿 CTA ============ -->
-        <section id="contribute" style="margin-bottom:0;">
+        <div class="no-result" id="insightEmpty" style="display:none;">
+            <span class="zh">暂无匹配的情报，换个关键词试试</span>
+            <span class="en">No matching articles — try another keyword</span>
+        </div>
+
+        <section id="contribute" style="margin-top:3.6rem;margin-bottom:0;">
             <div class="insight-cta">
                 <div class="title zh">📮 有情报想分享？</div>
                 <div class="title en">📮 Got market intel to share?</div>
@@ -485,7 +572,6 @@
     </footer>
 
     <script>
-        /* ============ 语言 & 侧栏 ============ */
         let currentLang = (function () {
             try { return localStorage.getItem('gudong_lang') || 'zh'; }
             catch (e) { return 'zh'; }
@@ -523,113 +609,226 @@
             document.getElementById('announceBar').style.display = 'none';
         }
 
-        /* ============ 情报数据 ============ */
-        const ARTICLES = [
+        /* ============ 数据：8 大系列，共 38 篇 ============ */
+        const SERIES = [
             {
-                slug: 'qing-porcelain-dating', cat: 'guide', tone: 'guide', mark: '青',
-                kicker: { zh: '入门指南', en: 'BEGINNER' },
-                title: { zh: '清代民窑青花怎么分辨年代？3 个上手要点', en: 'Dating Qing folk kiln blue-and-white: 3 hands-on signals' },
-                desc: { zh: '釉面、胎质、发色，三个最容易上手的判断维度。', en: 'Glaze, body, and pigment tone — three of the easiest entry points.' },
-                tags: '青花 瓷器 断代 清代 民窑 porcelain blue and white',
-                date: '2026-02-18', read: { zh: '6 分钟', en: '6 min' }
+                id: 'porcelain',
+                name: { zh: '瓷器系列', en: 'Porcelain' },
+                desc: { zh: '青花、彩瓷、釉面、款识——从断代到辨伪', en: 'Blue-and-white, enamels, glazes, marks — from dating to authentication' },
+                articles: [
+                    { slug: 'qing-porcelain-dating', tone: 'guide', mark: '青', kicker: { zh: '断代方法', en: 'DATING' },
+                      title: { zh: '清代民窑青花怎么分辨年代？3 个上手要点', en: 'Dating Qing folk kiln blue-and-white: 3 hands-on signals' },
+                      desc: { zh: '釉面、胎质、发色，三个最容易上手的判断维度。', en: 'Glaze, body, and pigment tone — three of the easiest entry points.' },
+                      tags: '青花 瓷器 断代 清代 民窑 porcelain blue and white', date: '2026-02-18', read: { zh: '6 分钟', en: '6 min' } },
+                    { slug: 'ming-porcelain-dating', tone: 'guide', mark: '明', kicker: { zh: '断代方法', en: 'DATING' },
+                      title: { zh: '明代瓷器断代：从哪几个特征入手', en: 'Dating Ming porcelain: which features to look at' },
+                      desc: { zh: '早明、中明、晚明——三个阶段的瓷器特征完全不同。', en: 'Early, Middle, Late Ming — three phases, three distinct sets of features.' },
+                      tags: '明代 瓷器 断代 ming porcelain dating', date: '2026-01-28', read: { zh: '9 分钟', en: '9 min' } },
+                    { slug: 'republic-porcelain-dating', tone: 'guide', mark: '民', kicker: { zh: '断代方法', en: 'DATING' },
+                      title: { zh: '民国瓷器断代：从哪几个特征入手', en: 'Dating Republic-era porcelain' },
+                      desc: { zh: '民国瓷器夹在清晚和现代之间，风格混杂，最容易看走眼。', en: 'Between late Qing and the modern era — a mixed style that\'s easy to misread.' },
+                      tags: '民国 瓷器 断代 republic porcelain', date: '2026-01-30', read: { zh: '6 分钟', en: '6 min' } },
+                    { slug: 'qinghua-cobalt', tone: 'guide', mark: '料', kicker: { zh: '避坑手册', en: 'PITFALLS' },
+                      title: { zh: '青花发色怎么看？苏料、平等青、浙料一张表讲清', en: 'Reading blue-and-white: Su, Pingdeng, and Zhe cobalt' },
+                      desc: { zh: '三种钴料，三种发色。看懂青花，先看懂它用的是什么料。', en: 'Three cobalt sources, three tones. Read the pigment before the painting.' },
+                      tags: '青花 青料 发色 苏麻离青 cobalt pigment', date: '2026-01-26', read: { zh: '6 分钟', en: '6 min' } },
+                    { slug: 'porcelain-marks', tone: 'guide', mark: '款', kicker: { zh: '避坑手册', en: 'PITFALLS' },
+                      title: { zh: '瓷器底款怎么看？底款对不上是不是一定假', en: 'Reading porcelain marks — does a wrong mark mean a fake?' },
+                      desc: { zh: '官窑、民窑、后朝仿前朝、后加款——底款里的信息比你想的多。', en: 'Imperial, folk, later copies, added marks — there\'s more in a mark than you think.' },
+                      tags: '瓷器 底款 款识 porcelain marks', date: '2026-01-24', read: { zh: '6 分钟', en: '6 min' } },
+                    { slug: 'glaze-crackle-basics', tone: 'pitfall', mark: '釉', kicker: { zh: '避坑手册', en: 'PITFALLS' },
+                      title: { zh: '瓷器釉面开片怎么看？自然开片与人工开片的区别', en: 'Reading glaze crackle: natural vs. forced' },
+                      desc: { zh: '开片不是瑕疵代名词，它同时是断代与辨伪的重要线索。', en: 'Crackle is not just a flaw — it is a key clue for dating and authentication.' },
+                      tags: '瓷器 釉面 开片 辨伪 porcelain glaze crackle', date: '2026-02-04', read: { zh: '6 分钟', en: '6 min' } },
+                    { slug: 'porcelain-aging-tricks', tone: 'pitfall', mark: '旧', kicker: { zh: '避坑手册', en: 'PITFALLS' },
+                      title: { zh: '瓷器“做旧”的 5 种常见手法，看完少交学费', en: '5 common ways porcelain is artificially aged' },
+                      desc: { zh: '酸洗、土沁、磨底、接底、后加彩——老瓷和新瓷差在哪，一次讲清。', en: 'Acid, soil, ground feet, joined feet, repaint — how old and new porcelains differ.' },
+                      tags: '瓷器 做旧 酸洗 接底 porcelain ageing', date: '2026-01-20', read: { zh: '6 分钟', en: '6 min' } }
+                ]
             },
             {
-                slug: 'singapore-coin-market', cat: 'market', tone: 'market', mark: '泉',
-                kicker: { zh: '行情观察', en: 'MARKET' },
-                title: { zh: '新加坡本地钱币市场近半年行情简析', en: 'Singapore coin market: a half-year snapshot' },
-                desc: { zh: '清钱、民国币、东南亚流通币的成交趋势与价格区间。', en: 'Qing, Republican, and SE-Asian circulating coins — trends and price ranges.' },
-                tags: '钱币 行情 新加坡 康熙通宝 coins market kangxi',
-                date: '2026-02-15', read: { zh: '8 分钟', en: '8 min' }
+                id: 'jade',
+                name: { zh: '玉器系列', en: 'Jade' },
+                desc: { zh: '翡翠与和田玉的辨识、工艺痕迹与常见坑', en: 'Jadeite and Hetian jade — identification, toolmarks, common pitfalls' },
+                articles: [
+                    { slug: 'jade-tool-marks', tone: 'guide', mark: '砣', kicker: { zh: '断代方法', en: 'DATING' },
+                      title: { zh: '玉器断代：从“砣痕”看年代', en: 'Dating jade by tool marks' },
+                      desc: { zh: '砣痕是玉器加工留下的痕迹，不同时代工具不同，痕迹也不同。', en: 'Wheel marks record how a piece was made — and when.' },
+                      tags: '玉器 工艺 砣痕 断代 jade tool marks', date: '2026-02-04', read: { zh: '6 分钟', en: '6 min' } },
+                    { slug: 'jadeite-abc', tone: 'guide', mark: '翠', kicker: { zh: '避坑手册', en: 'PITFALLS' },
+                      title: { zh: '翡翠 A / B / C 货到底差在哪？一张表讲清', en: 'Jadeite A / B / C — what the letters really mean' },
+                      desc: { zh: 'A 货天然，B 货酸洗注胶，C 货染色。看懂这三个字母，少花冤枉钱。', en: 'Natural, acid-treated, dyed — understand the letters, save your money.' },
+                      tags: '翡翠 玉器 jadeite A货 B货 C货 jade', date: '2026-01-22', read: { zh: '6 分钟', en: '6 min' } },
+                    { slug: 'jade-buyer-pitfalls', tone: 'pitfall', mark: '玉', kicker: { zh: '避坑手册', en: 'PITFALLS' },
+                      title: { zh: '新手买玉器，最容易踩的 5 个坑', en: '5 pitfalls new jade buyers fall into' },
+                      desc: { zh: '从「和田」二字说起，谈谈如何不被话术带走。', en: 'Starting from the word "Hetian" — how not to be talked into it.' },
+                      tags: '玉器 和田玉 避坑 jade hetian pitfalls', date: '2026-01-16', read: { zh: '5 分钟', en: '5 min' } },
+                    { slug: 'ancient-jade-stains', tone: 'pitfall', mark: '沁', kicker: { zh: '避坑手册', en: 'PITFALLS' },
+                      title: { zh: '古玉“沁色”是天然还是人工？看这 4 点', en: 'Ancient jade stains — natural or artificial?' },
+                      desc: { zh: '土沁、血沁、水银沁——天然沁和人工沁差在哪，一次讲清。', en: 'Soil, blood, mercury — how natural and artificial stains differ.' },
+                      tags: '古玉 沁色 辨伪 避坑 jade staining', date: '2026-02-02', read: { zh: '6 分钟', en: '6 min' } },
+                    { slug: 'hetian-seeds-vs-mountain', tone: 'pitfall', mark: '籽', kicker: { zh: '避坑手册', en: 'PITFALLS' },
+                      title: { zh: '和田玉“籽料”和“山料”，上手怎么分', en: 'Hetian jade: seed vs. mountain material' },
+                      desc: { zh: '皮色、毛孔、结构、手感——四点讲清籽料和山料的区别。', en: 'Skin, pores, structure, feel — four checks to tell them apart.' },
+                      tags: '和田玉 籽料 山料 hetian seed jade', date: '2026-01-26', read: { zh: '6 分钟', en: '6 min' } }
+                ]
             },
             {
-                slug: 'jade-buyer-pitfalls', cat: 'pitfall', tone: 'pitfall', mark: '玉',
-                kicker: { zh: '避坑手册', en: 'PITFALLS' },
-                title: { zh: '新手买玉器，最容易踩的 5 个坑', en: '5 pitfalls new jade buyers fall into' },
-                desc: { zh: '从「和田」二字说起，谈谈如何不被话术带走。', en: 'Starting from the word "Hetian" — how not to be talked into it.' },
-                tags: '玉器 和田玉 避坑 jade hetian pitfalls',
-                date: '2026-02-11', read: { zh: '7 分钟', en: '7 min' }
+                id: 'coins',
+                name: { zh: '钱币系列', en: 'Coins' },
+                desc: { zh: '铸造、包浆、清洗、辨伪——古钱与银元的完整脉络', en: 'Casting, patina, cleaning, authentication — the full arc from cash to silver dollars' },
+                articles: [
+                    { slug: 'coin-casting-dating', tone: 'guide', mark: '铸', kicker: { zh: '断代方法', en: 'DATING' },
+                      title: { zh: '钱币断代：从“铸法”看年代', en: 'Dating coins by casting method' },
+                      desc: { zh: '范铸、翻砂、机制——三种铸法对应三个时代，看懂铸法就能缩小范围。', en: 'Mould, sand, machine — three methods, three eras.' },
+                      tags: '钱币 铸造 版别 coins casting', date: '2026-02-04', read: { zh: '6 分钟', en: '6 min' } },
+                    { slug: 'coin-patina-types', tone: 'guide', mark: '锈', kicker: { zh: '避坑手册', en: 'PITFALLS' },
+                      title: { zh: '古钱“生坑”和“熟坑”哪个更值钱', en: 'Buried vs. handed-down coins — which is worth more?' },
+                      desc: { zh: '出土 vs 传世，包浆不一样，价格也不一样。一张表讲清。', en: 'Excavated vs. inherited — different patinas, different prices.' },
+                      tags: '钱币 包浆 生坑 熟坑 coins patina', date: '2026-01-24', read: { zh: '5 分钟', en: '5 min' } },
+                    { slug: 'silver-patina', tone: 'guide', mark: '银', kicker: { zh: '避坑手册', en: 'PITFALLS' },
+                      title: { zh: '老银器“黑包浆”是脏还是值钱', en: 'Silver patina — dirt, or value?' },
+                      desc: { zh: '天然黑包浆 vs 硫化银，看起来像，价值差很多。', en: 'Natural patina vs. sulfide — similar look, very different value.' },
+                      tags: '银器 包浆 氧化 silver patina', date: '2026-01-26', read: { zh: '5 分钟', en: '5 min' } },
+                    { slug: 'coin-aging-tricks', tone: 'pitfall', mark: '伪', kicker: { zh: '避坑手册', en: 'PITFALLS' },
+                      title: { zh: '钱币做旧手法图解：这几种包浆要小心', en: 'Coin ageing tricks illustrated: patinas to be careful with' },
+                      desc: { zh: '化学做旧、土埋、火烧——常见手法与肉眼识别要点。', en: 'Chemical ageing, burying, torching — common methods and how to spot them.' },
+                      tags: '钱币 做旧 包浆 辨伪 coins patina fake', date: '2026-01-26', read: { zh: '6 分钟', en: '6 min' } },
+                    { slug: 'coin-cleaning', tone: 'pitfall', mark: '洗', kicker: { zh: '避坑手册', en: 'PITFALLS' },
+                      title: { zh: '钱币“洗过”和“没洗过”，差多少价', en: 'Cleaned vs. uncleaned coins — how much value is lost?' },
+                      desc: { zh: '一次错误清洗，可能让一枚好钱币跌价一半以上。', en: 'One bad cleaning can halve a coin\'s value.' },
+                      tags: '钱币 清洗 避坑 价格 coins cleaning', date: '2026-02-08', read: { zh: '5 分钟', en: '5 min' } },
+                    { slug: 'silver-dollar-edges', tone: 'pitfall', mark: '齿', kicker: { zh: '避坑手册', en: 'PITFALLS' },
+                      title: { zh: '银元边齿怎么看？一眼假的特征都在这', en: 'Silver dollar edge reeding — how to spot a fake' },
+                      desc: { zh: '边齿是银元最容易露出破绽的地方。', en: 'The edge is where counterfeit silver dollars most often give themselves away.' },
+                      tags: '银元 边齿 辨伪 silver dollar edges', date: '2026-01-22', read: { zh: '5 分钟', en: '5 min' } }
+                ]
             },
             {
-                slug: 'what-is-jianlou', cat: 'strategy', tone: 'strategy', mark: '鉴',
-                kicker: { zh: '捡漏逻辑', en: 'STRATEGY' },
-                title: { zh: '什么是“捡漏”？古董捡漏的 3 个真实逻辑', en: 'What is "jianlou"? 3 real logics behind bargain hunting' },
-                desc: { zh: '信息差、时间差、认知差——捡漏不是运气。', en: 'Information, timing, and knowledge gaps — not luck.' },
-                tags: '捡漏 策略 判断 jianlou strategy',
-                date: '2026-02-08', read: { zh: '5 分钟', en: '5 min' }
+                id: 'paintings',
+                name: { zh: '书画系列', en: 'Paintings' },
+                desc: { zh: '钤印、装裱、印刷与手绘——看书画的几把钥匙', en: 'Seals, mounting, prints vs. hand — keys to reading paintings' },
+                articles: [
+                    { slug: 'painting-seals-signatures', tone: 'guide', mark: '印', kicker: { zh: '避坑手册', en: 'PITFALLS' },
+                      title: { zh: '书画落款与印章怎么看', en: 'Reading seals and signatures on paintings' },
+                      desc: { zh: '上款、下款、闲章、鉴藏印，落款是最容易被忽略的线索区。', en: 'Dedications, signatures, leisure seals, collector seals — an overlooked clue zone.' },
+                      tags: '书画 题跋 钤印 落款 painting calligraphy seals', date: '2026-01-22', read: { zh: '6 分钟', en: '6 min' } },
+                    { slug: 'painting-mounting', tone: 'pitfall', mark: '裱', kicker: { zh: '避坑手册', en: 'PITFALLS' },
+                      title: { zh: '书画“揭裱”和“原裱”差在哪', en: 'Re-mounted vs. original mounting' },
+                      desc: { zh: '原裱保真、揭裱伤画。裱工对价格的影响，比你想的大。', en: 'Original mounting preserves value; re-mounting damages it — and the price.' },
+                      tags: '书画 装裱 揭裱 原裱 painting mounting', date: '2026-02-06', read: { zh: '5 分钟', en: '5 min' } },
+                    { slug: 'painting-prints-vs-hand', tone: 'pitfall', mark: '版', kicker: { zh: '避坑手册', en: 'PITFALLS' },
+                      title: { zh: '书画“印刷品”和“手绘”怎么分？放大镜看这 3 处', en: 'Prints vs. hand-painted — 3 checks with a loupe' },
+                      desc: { zh: '网点、墨色、笔触——三处放大看，印刷品和手绘立刻分。', en: 'Halftone, ink, brushwork — three checks that separate prints from hand-painted.' },
+                      tags: '书画 印刷 手绘 辨伪 painting print fake', date: '2026-02-02', read: { zh: '5 分钟', en: '5 min' } }
+                ]
             },
             {
-                slug: 'glaze-crackle-basics', cat: 'guide', tone: 'guide', mark: '釉',
-                kicker: { zh: '入门指南', en: 'BEGINNER' },
-                title: { zh: '瓷器釉面开片怎么看？自然开片与人工开片的区别', en: 'Reading glaze crackle: natural vs. forced' },
-                desc: { zh: '开片不是瑕疵代名词，它同时是断代与辨伪的重要线索。', en: 'Crackle is not just a flaw — it is a key clue for dating and authentication.' },
-                tags: '瓷器 釉面 开片 辨伪 porcelain glaze crackle',
-                date: '2026-02-04', read: { zh: '6 分钟', en: '6 min' }
+                id: 'objects',
+                name: { zh: '器物与杂项', en: 'Objects & Misc' },
+                desc: { zh: '家具、竹木牙角、铜器、蜜蜡——非主流品类的判断方法', en: 'Furniture, bamboo, bronze, amber — approaches to the less-trodden categories' },
+                articles: [
+                    { slug: 'furniture-joinery-dating', tone: 'guide', mark: '榫', kicker: { zh: '断代方法', en: 'DATING' },
+                      title: { zh: '家具断代：从“榫卯”看年代', en: 'Dating furniture by joinery' },
+                      desc: { zh: '榫卯结构的变化，藏着家具断代的关键信息。', en: 'Changes in joinery encode a piece\'s place in time.' },
+                      tags: '家具 榫卯 断代 furniture joinery', date: '2026-02-04', read: { zh: '6 分钟', en: '6 min' } },
+                    { slug: 'furniture-patina', tone: 'pitfall', mark: '木', kicker: { zh: '避坑手册', en: 'PITFALLS' },
+                      title: { zh: '老家具“包浆”是天然还是做旧', en: 'Furniture patina — natural or faked?' },
+                      desc: { zh: '天然包浆温润内敛，做旧包浆浮于表面。看这四点就分得清。', en: 'Natural is warm and inward; faked sits on the surface. Four checks.' },
+                      tags: '家具 包浆 皮壳 furniture patina', date: '2026-02-06', read: { zh: '5 分钟', en: '5 min' } },
+                    { slug: 'bronze-censer-patina', tone: 'guide', mark: '炉', kicker: { zh: '入门指南', en: 'BEGINNER' },
+                      title: { zh: '铜香炉的皮壳与包浆：从手感说起', en: 'Bronze censers: patina and surface feel' },
+                      desc: { zh: '铜质、铸痕、皮色、重量——四步建立基本判断。', en: 'Alloy, casting marks, surface colour, weight — four steps to a basic read.' },
+                      tags: '香炉 铜器 皮壳 包浆 bronze censer patina', date: '2026-01-14', read: { zh: '6 分钟', en: '6 min' } },
+                    { slug: 'bamboo-ivory-cracks', tone: 'pitfall', mark: '裂', kicker: { zh: '避坑手册', en: 'PITFALLS' },
+                      title: { zh: '竹木牙角“笑纹”是天然还是裂', en: 'Bamboo, wood, ivory cracks — natural or forced?' },
+                      desc: { zh: '笑纹是天然老化，还是人工做裂？看这四点就分得清。', en: 'Natural age or forced crack — four checks that tell them apart.' },
+                      tags: '竹木牙角 开裂 断代 辨伪 bamboo ivory cracks', date: '2026-02-06', read: { zh: '5 分钟', en: '5 min' } },
+                    { slug: 'amber-baked-vs-natural', tone: 'pitfall', mark: '蜡', kicker: { zh: '避坑手册', en: 'PITFALLS' },
+                      title: { zh: '老蜜蜡的“烤色”与天然氧化，怎么区分', en: 'Baked amber vs. natural oxidation — how to tell' },
+                      desc: { zh: '颜色深浅不等于年份长短，先看纹路再看光泽。', en: 'Darker does not mean older — check the flow lines before the shine.' },
+                      tags: '蜜蜡 琥珀 烤色 避坑 amber beeswax pitfalls', date: '2026-01-18', read: { zh: '5 分钟', en: '5 min' } }
+                ]
             },
             {
-                slug: 'singapore-flea-market-map', cat: 'market', tone: 'market', mark: '市',
-                kicker: { zh: '本地指南', en: 'LOCAL GUIDE' },
-                title: { zh: '新加坡古董市集地图：周末去哪里淘', en: 'Singapore flea & antique market map: where to hunt on weekends' },
-                desc: { zh: '从牛车水到加东，几个本地藏家常去的市集与摊位类型。', en: 'From Chinatown to Katong — markets local collectors actually visit.' },
-                tags: '新加坡 市集 周末 淘货 singapore flea market weekend',
-                date: '2026-01-30', read: { zh: '7 分钟', en: '7 min' }
+                id: 'local',
+                name: { zh: '新加坡本地', en: 'Local Singapore' },
+                desc: { zh: '本地市场行情、市集地图、拍卖行观察——写给本地藏家', en: 'Local market notes, flea maps, auction watch — written for Singapore collectors' },
+                articles: [
+                    { slug: 'singapore-coin-market', tone: 'market', mark: '泉', kicker: { zh: '行情观察', en: 'MARKET' },
+                      title: { zh: '新加坡钱币市场：去哪看、怎么看', en: 'Singapore coin market: where and how to look' },
+                      desc: { zh: '清钱、民国币、东南亚流通币的成交趋势与价格区间。', en: 'Qing, Republican, and SE-Asian circulating coins — trends and price ranges.' },
+                      tags: '钱币 行情 新加坡 coins market', date: '2026-01-28', read: { zh: '7 分钟', en: '7 min' } },
+
+                    { slug: 'singapore-flea-market-map', tone: 'market', mark: '市', kicker: { zh: '行情观察', en: 'MARKET' },
+                      title: { zh: '新加坡跳蚤市场地图', en: 'Singapore flea market map' },
+                      desc: { zh: '从牛车水到加东，几个本地藏家常去的市集与摊位类型。', en: 'From Chinatown to Katong — markets local collectors actually visit.' },
+                      tags: '新加坡 市集 周末 淘货 singapore flea market', date: '2026-01-28', read: { zh: '6 分钟', en: '6 min' } },
+                    { slug: 'auction-house-watch', tone: 'market', mark: '拍', kicker: { zh: '行情观察', en: 'MARKET' },
+                      title: { zh: '新加坡拍卖行观察：本地成交价参考逻辑', en: 'Singapore auction watch: how to read local hammer prices' },
+                      desc: { zh: '成交价 ≠ 市场价，先弄懂佣金、品相与来源的加成。', en: 'Hammer price is not market price — premiums, condition and provenance all count.' },
+                      tags: '拍卖 行情 新加坡 成交价 auction market price', date: '2026-01-09', read: { zh: '7 分钟', en: '7 min' } },
+                    { slug: 'singapore-porcelain-market', tone: 'market', mark: '瓷', kicker: { zh: '行情观察', en: 'MARKET' },
+                      title: { zh: '新加坡瓷器市场：去哪看、怎么看', en: 'Singapore porcelain market: where and how to look' },
+                      desc: { zh: '从实体店到拍卖行，新加坡瓷器买家的实用地图。', en: 'From shops to auctions — a practical map for Singapore porcelain buyers.' },
+                      tags: '瓷器 行情 新加坡 porcelain market', date: '2026-01-28', read: { zh: '6 分钟', en: '6 min' } },
+                    { slug: 'singapore-jade-market', tone: 'market', mark: '翠', kicker: { zh: '行情观察', en: 'MARKET' },
+                      title: { zh: '新加坡玉器市场：去哪看、怎么看', en: 'Singapore jade market: where and how to look' },
+                      desc: { zh: '玉器水深，渠道比瓷器更关键。这份本地地图帮你少踩坑。', en: 'Jade is deep — channel matters more than with porcelain. A local map.' },
+                      tags: '玉器 行情 新加坡 jade market', date: '2026-01-30', read: { zh: '6 分钟', en: '6 min' } },
+                    { slug: 'singapore-painting-market', tone: 'market', mark: '画', kicker: { zh: '行情观察', en: 'MARKET' },
+                      title: { zh: '新加坡书画市场：去哪看、怎么看', en: 'Singapore painting market: where and how to look' },
+                      desc: { zh: '从几百块到几十万，书画市场分层明显。这份本地地图帮你找对入口。', en: 'From hundreds to hundreds of thousands — clearly tiered. Find the right entry.' },
+                      tags: '书画 行情 新加坡 painting market', date: '2026-02-02', read: { zh: '6 分钟', en: '6 min' } }
+                ]
             },
             {
-                slug: 'coin-aging-tricks', cat: 'pitfall', tone: 'pitfall', mark: '伪',
-                kicker: { zh: '避坑手册', en: 'PITFALLS' },
-                title: { zh: '钱币做旧手法图解：这几种包浆要小心', en: 'Coin ageing tricks illustrated: patinas to be careful with' },
-                desc: { zh: '化学做旧、土埋、火烧——常见手法与肉眼识别要点。', en: 'Chemical ageing, burying, torching — common methods and how to spot them.' },
-                tags: '钱币 做旧 包浆 辨伪 coins patina fake',
-                date: '2026-01-26', read: { zh: '6 分钟', en: '6 min' }
+                id: 'care',
+                name: { zh: '收藏与保存', en: 'Collection Care' },
+                desc: { zh: '买回来之后怎么办——保存、养护与第一次收藏', en: 'After you buy — storage, care, and how to start collecting' },
+                articles: [
+                    { slug: 'how-to-store-collection', tone: 'guide', mark: '藏', kicker: { zh: '入门指南', en: 'BEGINNER' },
+                      title: { zh: '怎么保存藏品？六个环境要素决定藏品寿命', en: 'How to store a collection: 6 environmental factors' },
+                      desc: { zh: '温度、湿度、光照、灰尘、虫害、接触——六个要素，决定藏品能保存多久。', en: 'Temperature, humidity, light, dust, pests, contact — six factors that decide how long a piece lasts.' },
+                      tags: '藏品 保存 养护 湿度 光照 收藏 storage collection', date: '2026-02-08', read: { zh: '6 分钟', en: '6 min' } },
+                    { slug: 'first-collection', tone: 'guide', mark: '初', kicker: { zh: '入门指南', en: 'BEGINNER' },
+                      title: { zh: '新手第一件藏品买什么？先想清楚这 5 件事', en: 'Your first antique: 5 questions before you buy' },
+                      desc: { zh: '别急着买，先回答五个问题。第一件藏品决定了你之后的收藏路径。', en: 'Don\'t rush. Answer five questions — your first piece sets your path.' },
+                      tags: '新手 入门 收藏 first collection beginner', date: '2026-01-28', read: { zh: '6 分钟', en: '6 min' } }
+                ]
             },
             {
-                slug: 'painting-seals-signatures', cat: 'guide', tone: 'guide', mark: '印',
-                kicker: { zh: '入门指南', en: 'BEGINNER' },
-                title: { zh: '书画题跋与钤印：读懂落款里的信息', en: 'Inscriptions and seals: reading what the signature tells you' },
-                desc: { zh: '上款、下款、闲章、鉴藏印，落款是最容易被忽略的线索区。', en: 'Dedications, signatures, leisure seals, collector seals — an overlooked clue zone.' },
-                tags: '书画 题跋 钤印 落款 painting calligraphy seals',
-                date: '2026-01-22', read: { zh: '8 分钟', en: '8 min' }
-            },
-            {
-                slug: 'amber-baked-vs-natural', cat: 'pitfall', tone: 'pitfall', mark: '蜡',
-                kicker: { zh: '避坑手册', en: 'PITFALLS' },
-                title: { zh: '老蜜蜡的“烤色”与天然氧化，怎么区分', en: 'Baked amber vs. natural oxidation — how to tell' },
-                desc: { zh: '颜色深浅不等于年份长短，先看纹路再看光泽。', en: 'Darker does not mean older — check the flow lines before the shine.' },
-                tags: '蜜蜡 琥珀 烤色 避坑 amber beeswax pitfalls',
-                date: '2026-01-18', read: { zh: '5 分钟', en: '5 min' }
-            },
-            {
-                slug: 'bronze-censer-patina', cat: 'guide', tone: 'guide', mark: '炉',
-                kicker: { zh: '入门指南', en: 'BEGINNER' },
-                title: { zh: '铜香炉的皮壳与包浆：从手感说起', en: 'Bronze censers: patina and surface feel' },
-                desc: { zh: '铜质、铸痕、皮色、重量——四步建立基本判断。', en: 'Alloy, casting marks, surface colour, weight — four steps to a basic read.' },
-                tags: '香炉 铜器 皮壳 包浆 bronze censer patina',
-                date: '2026-01-14', read: { zh: '6 分钟', en: '6 min' }
-            },
-            {
-                slug: 'auction-house-watch', cat: 'market', tone: 'market', mark: '拍',
-                kicker: { zh: '行情观察', en: 'MARKET' },
-                title: { zh: '新加坡拍卖行观察：本地成交价参考逻辑', en: 'Singapore auction watch: how to read local hammer prices' },
-                desc: { zh: '成交价 ≠ 市场价，先弄懂佣金、品相与来源的加成。', en: 'Hammer price is not market price — premiums, condition and provenance all count.' },
-                tags: '拍卖 行情 新加坡 成交价 auction market price',
-                date: '2026-01-09', read: { zh: '7 分钟', en: '7 min' }
-            },
-            {
-                slug: 'how-to-brief-a-sourcing', cat: 'strategy', tone: 'strategy', mark: '委',
-                kicker: { zh: '捡漏逻辑', en: 'STRATEGY' },
-                title: { zh: '委托找货：如何准确描述你想要的那件藏品', en: 'Sourcing briefs: describing the piece you actually want' },
-                desc: { zh: '器型、尺寸、年代、预算、可接受瑕疵——写清楚，成交率翻倍。', en: 'Form, size, period, budget, acceptable flaws — clarity doubles your hit rate.' },
-                tags: '委托 找货 沟通 sourcing brief',
-                date: '2026-01-05', read: { zh: '5 分钟', en: '5 min' }
+                id: 'strategy',
+                name: { zh: '捡漏与策略', en: 'Strategy' },
+                desc: { zh: '信息差、时间差、认知差——成交背后的博弈', en: 'Information, timing, and knowledge gaps — the game behind the deal' },
+                articles: [
+                    { slug: 'what-is-jianlou', tone: 'strategy', mark: '鉴', kicker: { zh: '入门指南', en: 'BEGINNER' },
+                      title: { zh: '什么是“捡漏”？古董捡漏的 3 个真实逻辑', en: 'What is "jianlou"? 3 real logics behind bargain hunting' },
+                      desc: { zh: '信息差、时间差、认知差——捡漏不是运气。', en: 'Information, timing, and knowledge gaps — not luck.' },
+                      tags: '捡漏 策略 判断 jianlou strategy', date: '2026-02-08', read: { zh: '5 分钟', en: '5 min' } },
+                    { slug: 'how-to-brief-a-sourcing', tone: 'strategy', mark: '委', kicker: { zh: '入门指南', en: 'BEGINNER' },
+                      title: { zh: '委托找货：如何准确描述你想要的那件藏品', en: 'Sourcing briefs: describing the piece you actually want' },
+                      desc: { zh: '器型、尺寸、年代、预算、可接受瑕疵——写清楚，成交率翻倍。', en: 'Form, size, period, budget, acceptable flaws — clarity doubles your hit rate.' },
+                      tags: '委托 找货 沟通 sourcing brief', date: '2026-01-05', read: { zh: '5 分钟', en: '5 min' } },
+                    { slug: 'how-to-negotiate', tone: 'strategy', mark: '谈', kicker: { zh: '入门指南', en: 'BEGINNER' },
+                      title: { zh: '怎么和卖家谈价？老手不会明说的 6 条规则', en: 'How to negotiate with a seller: 6 rules' },
+                      desc: { zh: '谈价不是砍价。什么时候开口、怎么开口、什么时候走人，这篇讲透。', en: 'Negotiating isn\'t haggling — when to speak, how, and when to walk away.' },
+                      tags: '议价 谈判 策略 古董 negotiate antiques', date: '2026-01-30', read: { zh: '6 分钟', en: '6 min' } },
+                    { slug: 'provenance-basics', tone: 'strategy', mark: '源', kicker: { zh: '入门指南', en: 'BEGINNER' },
+                      title: { zh: '怎么看藏品“来源”？证据链比故事重要', en: 'Reading provenance — evidence matters more than stories' },
+                      desc: { zh: '来源不是一句话，而是一条证据链。看这四类证据就够了。', en: 'Provenance is a chain of evidence, not a sentence. Four types to check.' },
+                      tags: '藏品 来源 传承 证据 出处 provenance antiques', date: '2026-02-08', read: { zh: '6 分钟', en: '6 min' } }
+                ]
             }
         ];
 
-        const PAGE_SIZE = 6;
-        let activeCat = 'all';
-        let shown = PAGE_SIZE;
-
-        const grid = document.getElementById('insightGrid');
-        const emptyEl = document.getElementById('insightEmpty');
-        const moreWrap = document.getElementById('loadMoreWrap');
+        /* ============ tone → 杂志标签映射 ============ */
+        const TONE_LABEL = {
+            guide:    'GUIDE',
+            pitfall:  'PITFALL',
+            market:   'MARKET',
+            strategy: 'STRATEGY'
+        };
 
         function esc(s) {
             return String(s == null ? '' : s)
@@ -640,11 +839,27 @@
             return [a.title.zh, a.title.en, a.desc.zh, a.desc.en,
                     a.kicker.zh, a.kicker.en, a.tags].filter(Boolean).join(' ').toLowerCase();
         }
+        function totalArticles() {
+            return SERIES.reduce((n, s) => n + s.articles.length, 0);
+        }
+
+        function renderSeriesNav() {
+            const nav = document.getElementById('seriesNav');
+            nav.innerHTML = SERIES.map(s => `
+                <a class="series-chip" href="#series-${esc(s.id)}">
+                    <span class="zh">${esc(s.name.zh)}</span>
+                    <span class="en">${esc(s.name.en)}</span>
+                    <span class="chip-count">${s.articles.length}</span>
+                </a>
+            `).join('');
+        }
 
         function postHtml(a) {
+            const toneLabel = TONE_LABEL[a.tone] || '';
             return `
               <a class="insight-post" href="insights/${esc(a.slug)}.html">
                 <div class="post-cover tone-${esc(a.tone)}">
+                  <span class="cover-label">${esc(toneLabel)}</span>
                   <span class="cover-mark">${esc(a.mark)}</span>
                 </div>
                 <div class="post-body">
@@ -663,31 +878,70 @@
               </a>`;
         }
 
+        function buildSeriesBlocks() {
+            const container = document.getElementById('seriesContainer');
+            container.innerHTML = SERIES.map(s => `
+                <section class="series-block" id="series-${esc(s.id)}" data-series-id="${esc(s.id)}">
+                    <div class="series-head">
+                        <div class="series-head-left">
+                            <h2 class="series-title">
+                                <span class="zh">${esc(s.name.zh)}</span>
+                                <span class="en">${esc(s.name.en)}</span>
+                                <span class="series-count">${s.articles.length} 篇</span>
+                            </h2>
+                            <p class="series-desc zh">${esc(s.desc.zh)}</p>
+                            <p class="series-desc en">${esc(s.desc.en)}</p>
+                        </div>
+                        <a class="series-anchor" href="#seriesNav">↑ 系列导航</a>
+                    </div>
+                    <div class="insight-list-grid"></div>
+                </section>
+            `).join('');
+        }
+
         function renderList() {
             const kw = (document.getElementById('insightSearch').value || '').trim().toLowerCase();
-            const list = ARTICLES.filter(a =>
-                (activeCat === 'all' || a.cat === activeCat) &&
-                (!kw || hay(a).includes(kw))
-            );
+            const emptyEl = document.getElementById('insightEmpty');
 
-            grid.innerHTML = list.slice(0, shown).map(postHtml).join('');
-            emptyEl.style.display = list.length ? 'none' : 'block';
-            moreWrap.style.display = list.length > shown ? 'block' : 'none';
+            let totalMatched = 0;
+            let visibleSeries = 0;
+
+            SERIES.forEach(s => {
+                const block = document.querySelector(`[data-series-id="${s.id}"]`);
+                if (!block) return;
+
+                const matched = s.articles.filter(a => !kw || hay(a).includes(kw));
+                const countEl = block.querySelector('.series-count');
+
+                if (matched.length === 0) {
+                    block.style.display = 'none';
+                    return;
+                }
+
+                block.style.display = '';
+                visibleSeries++;
+                totalMatched += matched.length;
+
+                countEl.textContent = kw
+                    ? (currentLang === 'zh' ? `匹配 ${matched.length}` : `${matched.length} match`)
+                    : (currentLang === 'zh' ? `${matched.length} 篇` : `${matched.length}`);
+
+                block.querySelector('.insight-list-grid').innerHTML = matched.map(postHtml).join('');
+            });
 
             const cz = document.getElementById('countZh');
             const ce = document.getElementById('countEn');
-            if (list.length) {
-                cz.textContent = `共 ${list.length} 篇情报 · 每周更新`;
-                ce.textContent = `${list.length} article${list.length > 1 ? 's' : ''} · updated weekly`;
-            } else {
-                cz.textContent = '';
-                ce.textContent = '';
-            }
-        }
+            const total = totalArticles();
 
-        function loadMore() {
-            shown += PAGE_SIZE;
-            renderList();
+            if (kw) {
+                cz.textContent = `找到 ${totalMatched} 篇 · 来自 ${visibleSeries} 个系列`;
+                ce.textContent = `${totalMatched} result${totalMatched !== 1 ? 's' : ''} from ${visibleSeries} series`;
+            } else {
+                cz.textContent = `共 ${total} 篇情报 · 分 ${SERIES.length} 个系列 · 每周更新`;
+                ce.textContent = `${total} articles in ${SERIES.length} series · updated weekly`;
+            }
+
+            emptyEl.style.display = totalMatched ? 'none' : 'block';
         }
 
         function updatePlaceholder() {
@@ -702,30 +956,20 @@
             }
         }
 
-        /* ---------- 事件绑定 ---------- */
-        document.getElementById('filterBar').addEventListener('click', e => {
-            const chip = e.target.closest('.filter-chip');
-            if (!chip) return;
-            document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
-            chip.classList.add('active');
-            activeCat = chip.dataset.cat || 'all';
-            shown = PAGE_SIZE;
-            renderList();
-        });
-
         (function bindSearch() {
             const el = document.getElementById('insightSearch');
-            el.addEventListener('input', () => { shown = PAGE_SIZE; renderList(); });
-            el.addEventListener('search', () => { shown = PAGE_SIZE; renderList(); });
+            el.addEventListener('input', renderList);
+            el.addEventListener('search', renderList);
             el.addEventListener('keydown', e => {
-                if (e.key === 'Escape') { el.value = ''; shown = PAGE_SIZE; renderList(); }
+                if (e.key === 'Escape') { el.value = ''; renderList(); }
             });
         })();
 
+        buildSeriesBlocks();
+        renderSeriesNav();
         updatePlaceholder();
         renderList();
 
-        /* ============ PWA ============ */
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('sw.js').catch(err => console.warn('[PWA] SW registration failed:', err));

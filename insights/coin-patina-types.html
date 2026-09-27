@@ -399,6 +399,47 @@
             .related-card { padding: 1rem 1.1rem; }
             .article-cta { padding: 1.6rem 1.2rem; }
         }
+    
+        /* ===== 相关藏品 CTA ===== */
+        .related-items { margin-top: 3.5rem; }
+        .ri-head { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; margin-bottom: 1.1rem; border-bottom: 1px solid var(--color-border); padding-bottom: .7rem; }
+        .ri-title { font-size: 1.15rem; font-weight: 700; color: var(--color-text); }
+        .ri-more { font-size: .82rem; font-weight: 600; color: var(--color-primary); text-decoration: none; white-space: nowrap; }
+        .ri-more:hover { color: var(--color-primary-dark); text-decoration: underline; }
+        .ri-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(148px, 1fr)); gap: 1.1rem; }
+        .ri-card { display: flex; flex-direction: column; text-decoration: none; color: var(--color-text); background: var(--color-white); border: 1px solid var(--color-border); border-radius: var(--radius-card, 12px); overflow: hidden; transition: .25s; box-shadow: var(--shadow-soft, 0 6px 20px rgba(37,34,30,.05)); }
+        .ri-card:hover { border-color: var(--color-gold); transform: translateY(-3px); box-shadow: var(--shadow-hover, 0 12px 28px rgba(138,90,59,.10)); }
+        .ri-img { aspect-ratio: 1 / 1; background: #EFEAE2; overflow: hidden; }
+        .ri-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .4s ease; }
+        .ri-card:hover .ri-img img { transform: scale(1.05); }
+        .ri-body { padding: .8rem .9rem .95rem; display: flex; flex-direction: column; gap: .28rem; }
+        .ri-name { font-size: .88rem; font-weight: 700; line-height: 1.45; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        .ri-meta { font-size: .72rem; color: var(--color-bronze-muted); letter-spacing: .03em; }
+        .ri-price { font-size: .8rem; font-weight: 700; color: var(--color-primary-dark); }
+        .ri-foot { margin-top: 1.1rem; font-size: .84rem; color: var(--color-text-secondary); line-height: 1.7; }
+        .ri-foot a { color: var(--color-primary); font-weight: 700; text-decoration: none; }
+        .ri-foot a:hover { text-decoration: underline; }
+        .ri-foot .ri-cat-note { display: block; margin-bottom: .15rem; color: var(--color-bronze-muted); }
+
+        /* ===== 月度简报徽章 ===== */
+        .monthly-badge { display: inline-flex; align-items: center; gap: .5rem; margin: -1.2rem 0 1.8rem; padding: .42rem .95rem; border-radius: 999px; background: rgba(176,138,69,.12); border: 1px solid rgba(176,138,69,.38); font-size: .76rem; font-weight: 700; color: var(--color-primary-dark); letter-spacing: .02em; }
+        .monthly-badge .mb-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--color-gold); flex-shrink: 0; }
+
+        /* ===== 月度回访提示 ===== */
+        .monthly-return { margin-top: 3rem; padding: 1.4rem 1.6rem; border-radius: var(--radius-card, 12px); background: linear-gradient(145deg, #FDF9F2 0%, #F8F1E6 100%); border: 1px solid rgba(176,138,69,.38); box-shadow: var(--shadow-soft, 0 6px 20px rgba(37,34,30,.05)); }
+        .monthly-return .mr-title { font-size: 1.02rem; font-weight: 700; color: var(--color-primary-dark); margin-bottom: .5rem; }
+        .monthly-return .mr-text { font-size: .86rem; color: var(--color-text-secondary); line-height: 1.7; margin-bottom: .8rem; }
+        .monthly-return .mr-links a { font-size: .85rem; font-weight: 700; color: var(--color-primary); text-decoration: none; }
+        .monthly-return .mr-links a:hover { text-decoration: underline; }
+
+        @media (max-width: 560px) {
+            .ri-grid { grid-template-columns: repeat(2, 1fr); gap: .8rem; }
+            .ri-body { padding: .6rem .7rem .75rem; }
+            .ri-name { font-size: .8rem; }
+            .ri-foot { font-size: .8rem; }
+            .monthly-return { padding: 1.1rem 1.2rem; }
+        }
+
     </style>
 </head>
 <body data-lang="zh">
@@ -660,6 +701,69 @@
                     <div class="rc-title zh">银元边齿怎么看？一眼假的特征都在这</div>
                     <div class="rc-title en">Silver dollar edge reeding — how to spot a fake</div>
                 </a>
+            </div>
+        </section>
+
+        
+        <!-- 相关藏品：内容 → 成交最短路径 -->
+        <section class="related-items" id="relatedItems">
+            <div class="ri-head">
+                <div class="ri-title zh">看看相关藏品</div>
+                <div class="ri-title en">Related pieces on offer</div>
+                <a class="ri-more" href="../collection.html"><span class="zh">全部藏品 →</span><span class="en">All listings →</span></a>
+            </div>
+            <div class="ri-grid">
+                <a class="ri-card" href="../items/item-yak-01.html">
+                    <div class="ri-img"><img src="../assets/images/yak-bc/item-yak-01.jpg" alt="唐三彩伎乐舞俑" loading="lazy"></div>
+                    <div class="ri-body">
+                        <div class="ri-name zh">唐三彩伎乐舞俑</div>
+                        <div class="ri-name en">Tang Sancai Musician Figurines</div>
+                        <div class="ri-meta"><span class="zh">唐 · 瓷器</span><span class="en">Tang · Porcelain</span></div>
+                        <div class="ri-price"><span class="zh">价格面议</span><span class="en">Price on inquiry</span></div>
+                    </div>
+                </a>
+                <a class="ri-card" href="../items/item-lim-04.html">
+                    <div class="ri-img"><img src="../assets/images/lim-kw/item-lim-04.jpg" alt="大清雍正年制款窑变釉贯耳瓶" loading="lazy"></div>
+                    <div class="ri-body">
+                        <div class="ri-name zh">大清雍正年制款窑变釉贯耳瓶</div>
+                        <div class="ri-name en">Yongzheng Flambe-Glaze Vase</div>
+                        <div class="ri-meta"><span class="zh">清雍正 · 瓷器</span><span class="en">Qing Yongzheng · Porcelain</span></div>
+                        <div class="ri-price"><span class="zh">价格面议</span><span class="en">Price on inquiry</span></div>
+                    </div>
+                </a>
+                <a class="ri-card" href="../items/item-lim-02.html">
+                    <div class="ri-img"><img src="../assets/images/lim-kw/item-lim-02.jpg" alt="战国青铜错金乳钉双耳四足方鼎" loading="lazy"></div>
+                    <div class="ri-body">
+                        <div class="ri-name zh">战国青铜错金乳钉双耳四足方鼎</div>
+                        <div class="ri-name en">Warring-States Gold-Inlaid Bronze Ding</div>
+                        <div class="ri-meta"><span class="zh">战国 · 铜器</span><span class="en">Warring States · Bronze</span></div>
+                        <div class="ri-price"><span class="zh">价格面议</span><span class="en">Price on inquiry</span></div>
+                    </div>
+                </a>
+                <a class="ri-card" href="../items/item-lim-03.html">
+                    <div class="ri-img"><img src="../assets/images/lim-kw/item-lim-03.jpg" alt="战国错金银青铜瑞兽摆件" loading="lazy"></div>
+                    <div class="ri-body">
+                        <div class="ri-name zh">战国错金银青铜瑞兽摆件</div>
+                        <div class="ri-name en">Warring-States Gold-Silver Inlaid Bronze Beast</div>
+                        <div class="ri-meta"><span class="zh">战国 · 铜器</span><span class="en">Warring States · Bronze</span></div>
+                        <div class="ri-price"><span class="zh">价格面议</span><span class="en">Price on inquiry</span></div>
+                    </div>
+                </a>
+                <a class="ri-card" href="../items/item-ng-01.html">
+                    <div class="ri-img"><img src="../assets/images/ng-lk/item-ng-01.jpg" alt="商周青铜饕餮纹方罍" loading="lazy"></div>
+                    <div class="ri-body">
+                        <div class="ri-name zh">商周青铜饕餮纹方罍</div>
+                        <div class="ri-name en">Shang-Zhou Bronze Square Lei</div>
+                        <div class="ri-meta"><span class="zh">商周 · 铜器</span><span class="en">Shang-Zhou · Bronze</span></div>
+                        <div class="ri-price"><span class="zh">价格面议</span><span class="en">Price on inquiry</span></div>
+                    </div>
+                </a>
+            </div>
+            <div class="ri-foot">
+            <span class="ri-cat-note zh">钱币类藏品正在陆续上架。想找特定钱币？</span>
+            <span class="ri-cat-note en">Coins are being listed gradually. Looking for a specific one?</span>
+            <span class="zh">没找到心仪的？<a href="../collection.html">浏览全部藏品</a>，或<a href="../pricing.html#buyer-services">委托找货 →</a></span>
+                <span class="en">Can't find the one? <a href="../collection.html">Browse all listings</a> or <a href="../pricing.html#buyer-services">request sourcing →</a></span>
             </div>
         </section>
 

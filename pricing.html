@@ -175,7 +175,8 @@ main section[id] { scroll-margin-top: 92px; }
 .row-price .unit { display: block; font-size: .72rem; color: var(--color-gold); letter-spacing: .04em; margin-top: .15rem; white-space: nowrap; }
 
 .plan-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 1.2rem; }
-.plan-grid.addon-grid { grid-template-columns: repeat(2, minmax(0,1fr)); max-width: 640px; margin: 0 auto; }
+.plan-grid.addon-grid { grid-template-columns: repeat(3, minmax(0,1fr)); max-width: 880px; margin: 0 auto; }
+@media (max-width:820px){ .plan-grid.addon-grid { grid-template-columns: 1fr; } }
 .plan-price-strike { font-size: .82rem; color: var(--color-text-muted); text-decoration: line-through; margin-bottom: .15rem; }
 .bundle-wrap { max-width: 440px; margin: 0 auto; }
 .bundle-rows { text-align: left; margin-top: 1.3rem; }
@@ -307,17 +308,120 @@ footer {
   .qr-box { min-height: 140px; }
 }
 
-/* ===== Pricing V2: simpler hierarchy ===== */
+/* ===== Pricing V3: Founding Seller + 2 tiers ===== */
 .legacy-fee-overview { display:none !important; }
-#bundle { margin-top: .4rem; }
-#bundle .sec-head { margin-top: 1.8rem; }
-#bundle .bundle-wrap { max-width: 620px; }
-#bundle .plan.featured { padding: 2.4rem 2rem 2rem; }
-.bundle-value-note { margin-top: 1rem; text-align:center; font-size:.78rem; color:var(--color-text-secondary); }
-.seller-choice-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1.2rem; margin-top:1.4rem; }
+.seller-choice-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1.2rem; margin-top:1.4rem; max-width:760px; margin-left:auto; margin-right:auto; }
 .choice-label { font-size:.72rem; color:var(--color-gold); font-weight:700; letter-spacing:.08em; text-transform:uppercase; margin-top:.85rem; }
-.plan-cta { display:inline-flex; justify-content:center; align-items:center; margin-top:auto; padding:.65rem 1rem; border-radius:8px; background:var(--color-primary); color:#fff; text-decoration:none; font-size:.8rem; font-weight:700; transition:.2s; }
+.plan-cta { display:inline-flex; justify-content:center; align-items:center; gap:.35rem; margin-top:auto; padding:.7rem 1.1rem; border-radius:8px; background:var(--color-primary); color:#fff; text-decoration:none; font-size:.82rem; font-weight:700; transition:.2s; }
 .plan-cta:hover { background:var(--color-primary-dark); }
+.plan-cta.gold { background:linear-gradient(135deg, var(--color-gold) 0%, #C99A55 100%); }
+.plan-cta.gold:hover { box-shadow:0 3px 10px rgba(176,138,69,.4); }
+
+/* ===== Founding Seller Hero Module ===== */
+.founder-hero {
+  position: relative;
+  background: linear-gradient(135deg, #FBF6EE 0%, #F5EBDB 55%, #F1E2C8 100%);
+  border: 1px solid var(--color-gold);
+  border-radius: 22px;
+  padding: 2.6rem 2.2rem 2.2rem;
+  text-align: center;
+  overflow: hidden;
+  margin-top: .4rem;
+}
+.founder-hero::before {
+  content: ""; position: absolute; inset: 8px;
+  border: 1px solid rgba(176,138,69,.32);
+  border-radius: 16px;
+  pointer-events: none;
+}
+.founder-hero > * { position: relative; z-index: 1; }
+.founder-hero-badge { display: flex; justify-content: center; margin-bottom: 1.1rem; }
+.founder-badge.xl {
+  font-size: .78rem; padding: .5rem 1.1rem .5rem .9rem; gap: .45rem;
+  box-shadow: 0 2px 10px rgba(176,138,69,.4), inset 0 1px 0 rgba(255,255,255,.3);
+}
+.founder-badge.xl svg { width: 17px; height: 17px; }
+.founder-badge.xl .badge-num { font-size: 1rem; }
+.founder-principle {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--color-primary-dark);
+  letter-spacing: .03em;
+  line-height: 1.5;
+  max-width: 580px;
+  margin: 0 auto .7rem;
+}
+.founder-principle-sub {
+  font-size: .8rem;
+  color: var(--color-text-secondary);
+  letter-spacing: .02em;
+  margin-bottom: 1.4rem;
+}
+.founder-seats-bar {
+  display: inline-flex; align-items: center; gap: .5rem;
+  background: rgba(255,255,255,.65);
+  border: 1px dashed var(--color-gold);
+  border-radius: 20px;
+  padding: .42rem 1.05rem;
+  font-size: .74rem;
+  color: var(--color-gold);
+  font-weight: 700;
+  letter-spacing: .05em;
+  margin-bottom: 1.7rem;
+}
+.founder-seats-bar .seats-num { font-family: var(--font-display); font-size: .88rem; }
+.founder-benefits {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: .6rem;
+  max-width: 680px;
+  margin: 0 auto 1.7rem;
+  text-align: left;
+}
+.founder-benefit {
+  display: flex; align-items: flex-start; gap: .55rem;
+  padding: .7rem .9rem;
+  background: rgba(255,255,255,.6);
+  border: 1px solid rgba(176,138,69,.2);
+  border-radius: 10px;
+  font-size: .8rem;
+  color: var(--color-text);
+  line-height: 1.5;
+}
+.founder-benefit .b-icon {
+  flex-shrink: 0;
+  color: var(--color-gold);
+  font-size: .72rem;
+  margin-top: .22rem;
+}
+.founder-benefit b { color: var(--color-primary-dark); }
+.founder-cta-wrap { display: flex; justify-content: center; gap: .8rem; flex-wrap: wrap; }
+.founder-cta {
+  display: inline-flex; align-items: center; gap: .4rem;
+  background: linear-gradient(135deg, var(--color-gold) 0%, #C99A55 100%);
+  color: #fff;
+  padding: .72rem 1.7rem;
+  border-radius: 10px;
+  font-size: .88rem;
+  font-weight: 700;
+  text-decoration: none;
+  letter-spacing: .04em;
+  box-shadow: 0 2px 8px rgba(176,138,69,.35);
+  transition: .2s;
+}
+.founder-cta:hover { transform: translateY(-1px); box-shadow: 0 4px 14px rgba(176,138,69,.45); }
+.founder-foot-note {
+  font-size: .74rem;
+  color: var(--color-text-muted);
+  margin-top: 1.1rem;
+  line-height: 1.6;
+}
+@media (max-width: 600px) {
+  .founder-benefits { grid-template-columns: 1fr; }
+  .founder-hero { padding: 2rem 1.4rem 1.8rem; }
+  .founder-principle { font-size: 1.05rem; }
+}
 @media (max-width:820px){ .seller-choice-grid{grid-template-columns:1fr;} }
 </style>
 <link rel="apple-touch-icon" href="/assets/icons/icon-192.png">
@@ -380,219 +484,148 @@ footer {
     <div class="sec-divider" aria-hidden="true"><span></span></div>
   </div>
 
-  <!-- ===== 主推：商家启动套装（私家藏馆 + 10件刊登额度，加赠1个月首页推荐 + 2套图片精修） ===== -->
-  <section id="bundle">
-    <div class="sec-head tight">
-      <div class="eyebrow zh">主推套装</div><div class="eyebrow en">Recommended</div>
-      <h2 class="sec-title zh">卖家启动套餐</h2><h2 class="sec-title en">Seller Start‑up Package</h2>
-      <p class="sec-sub zh">新卖家最省心的入门方式：私家藏馆 + 10 件刊登额度，加赠首页推荐与图片精修</p>
-      <p class="sec-sub en">The easiest way to start: Private Gallery + 10 listing credits, plus free Homepage Feature and photo retouching</p>
-    </div>
-    <div class="bundle-wrap">
-      <div class="plan featured">
-        <span class="plan-badge zh">推荐</span><span class="plan-badge en">Featured</span>
-        <h3 class="plan-title zh">卖家启动套餐</h3><h3 class="plan-title en">Seller Start‑up Package</h3>
-        <div class="plan-divider"></div>
-        <div class="plan-price"><span class="cur">SGD</span>699</div>
-        <div class="plan-unit zh">/ 首年</div><div class="plan-unit en">/ first year</div>
-        <div class="bundle-rows">
-          <div class="bundle-row"><span class="zh">私家藏馆（年付）</span><span class="en">Private Gallery (annual)</span><span class="bundle-val">SGD 499</span></div>
-          <div class="bundle-row"><span class="zh">刊登额度 × 10 件</span><span class="en">10 listing credits</span><span class="bundle-val">SGD 290</span></div>
-          <div class="bundle-row"><span class="zh">首页推荐 1 个月（赠送）</span><span class="en">Homepage Feature, 1 month (free)</span><span class="bundle-val">SGD 129</span></div>
-          <div class="bundle-row"><span class="zh">图片精修 × 2 套（赠送）</span><span class="en">Photo Retouching × 2 sets (free)</span><span class="bundle-val">SGD 50</span></div>
-        </div>
-        <div class="save-banner zh">单独购买价值 SGD 968 · 套餐节省 SGD 269</div>
-        <div class="save-banner en">SGD 968 if bought separately · Save SGD 269 with the bundle</div>
-        <div class="plan-note zh" style="margin-top:.9rem;">仍在前 88 位创始卖家名额内？创始卖家可按 SGD 384 的首年藏馆价计算，套餐价相应为 SGD 584（其余项目不变）</div>
-        <div class="plan-note en" style="margin-top:.9rem;">Founder-Dealers can apply the SGD 384 first-year Gallery price — the bundle becomes SGD 584 (other items unchanged)</div>
+  <!-- ===== Founding Seller · 2026 模块（前 88 席创始权益） ===== -->
+  <section id="founding-seller">
+    <div class="founder-hero">
+      <div class="founder-hero-badge">
+        <span class="founder-badge xl" title="创始卖家 · 2026（限量 88 席）" aria-label="Founding Seller 2026, limited to 88">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M3 8L6 14L9 7L12 13L15 7L18 14L21 8V17C21 17.55 20.55 18 20 18H4C3.45 18 3 17.55 3 17V8Z" fill="currentColor" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/>
+            <circle cx="3" cy="8" r="1.4" fill="currentColor"/>
+            <circle cx="12" cy="6" r="1.4" fill="currentColor"/>
+            <circle cx="21" cy="8" r="1.4" fill="currentColor"/>
+          </svg>
+          <span class="zh">创始卖家 · 2026</span><span class="en">Founding Seller · 2026</span>
+          <span class="badge-num">88</span>
+        </span>
       </div>
+
+      <div class="founder-principle zh">创始权益，随 Gudong 一路成长</div>
+      <div class="founder-principle en">Founder benefits stay with you as Gudong grows.</div>
+      <div class="founder-principle-sub zh">前 88 位入驻卖家自动获得「创始卖家 · 2026」身份，享有一系列永久与长期权益</div>
+      <div class="founder-principle-sub en">The first 88 approved sellers automatically receive "Founding Seller · 2026" status with a suite of permanent and long-term benefits</div>
+
+      <div class="founder-seats-bar">
+        <span class="zh">限量</span><span class="en">Limited to</span>
+        <span class="seats-num">88</span>
+        <span class="zh">席 · 招满即止</span><span class="en">seats · until filled</span>
+      </div>
+
+      <div class="founder-benefits">
+        <div class="founder-benefit">
+          <span class="b-icon">✦</span>
+          <div><span class="zh"><b>前 2 件免费</b>，1 年有效</span><span class="en"><b>First 2 items free</b>, 1-year validity</span></div>
+        </div>
+        <div class="founder-benefit">
+          <span class="b-icon">✦</span>
+          <div><span class="zh"><b>永久保留</b> Founding Seller · 2026 身份</span><span class="en"><b>Permanent</b> Founding Seller · 2026 status</span></div>
+        </div>
+        <div class="founder-benefit">
+          <span class="b-icon">✦</span>
+          <div><span class="zh"><b>创始续费价格</b>（永享特殊价）</span><span class="en"><b>Founding renewal pricing</b> (special rate forever)</span></div>
+        </div>
+        <div class="founder-benefit">
+          <span class="b-icon">✦</span>
+          <div><span class="zh"><b>新功能优先体验</b></span><span class="en"><b>Priority access</b> to new features</span></div>
+        </div>
+        <div class="founder-benefit">
+          <span class="b-icon">✦</span>
+          <div><span class="zh"><b>优先审核与支持</b></span><span class="en"><b>Priority review &amp; support</b></span></div>
+        </div>
+        <div class="founder-benefit">
+          <span class="b-icon">✦</span>
+          <div><span class="zh"><b>创始卖家专属曝光机会</b></span><span class="en"><b>Exclusive exposure opportunities</b></span></div>
+        </div>
+        <div class="founder-benefit" style="grid-column: 1 / -1;">
+          <span class="b-icon">✦</span>
+          <div><span class="zh">未来平台新增重要卖家权益时，<b>创始卖家优先享有</b></span><span class="en">When new seller benefits are added in future, <b>Founding Sellers receive them first</b></span></div>
+        </div>
+      </div>
+
+      <div class="founder-cta-wrap">
+        <a href="https://airtable.com/apprn6XDQnAm8bkaT/shrlQLTRfG5RlYjD4" target="_blank" rel="noopener noreferrer" class="founder-cta">
+          <span class="zh">成为创始卖家</span><span class="en">Become a Founding Seller</span>
+        </a>
+      </div>
+      <div class="founder-foot-note zh">前 2 件免费刊登额度 1 年内有效；创始续费价适用于 Annual Seller 与 Seller Pro 两档年度续费。名额招满后，新卖家按常规价收费。</div>
+      <div class="founder-foot-note en">The 2 free listings are valid for 1 year; the founding renewal rate applies to both Annual Seller and Seller Pro annual renewals. Once seats are filled, new sellers pay regular pricing.</div>
     </div>
   </section>
 
-  <!-- ===== 一、卖家服务（3 项） ===== -->
+  <!-- ===== 卖家服务：两档年度方案 ===== -->
   <section id="seller-services">
     <div class="sec-head">
       <div class="eyebrow zh">卖家服务</div><div class="eyebrow en">Seller Services</div>
-      <h2 class="sec-title zh">刊登 · 私家藏馆 · 推荐</h2><h2 class="sec-title en">Listing · Private Gallery · Feature</h2>
-      <p class="sec-sub zh">不抽取交易佣金</p>
-      <p class="sec-sub en">No transaction commission</p>
+      <h2 class="sec-title zh">两档年度方案</h2><h2 class="sec-title en">Two Annual Plans</h2>
+      <p class="sec-sub zh">自助刊登或全包代运营 · 不抽取交易佣金</p>
+      <p class="sec-sub en">Self-service or full-service managed · No transaction commission</p>
     </div>
     <div class="note-bar" style="max-width:820px;margin-left:auto;margin-right:auto;margin-bottom:1.6rem;">
       <span class="marker" aria-hidden="true">💡</span>
-      <div class="zh"><b>怎么选：</b>偶尔卖几件 →「刊登藏品」；长期经营自己的展示页 →「私家藏馆」；第一次入驻 →「卖家启动套餐」；想让单品获得更多首页曝光 → 加购「首页推荐」。</div>
-      <div class="en"><b>Which to choose:</b> selling a few items → Item Listing; building an ongoing presence → Private Gallery; new to Gudong → Seller Start-up Package; need extra visibility for one item → add Homepage Feature.</div>
+      <div class="zh"><b>怎么选：</b>自己上架、自己运营 →「Annual Seller」；让平台帮你上架、精修图片、做首页曝光 →「Seller Pro」。<b>创始卖家</b>两档均享创始续费价。</div>
+      <div class="en"><b>Which to choose:</b> list and run it yourself → Annual Seller; have the platform list, retouch photos and feature you → Seller Pro. <b>Founding Sellers</b> get a founding renewal rate on both plans.</div>
     </div>
     <div class="center-actions">
       <a href="https://airtable.com/apprn6XDQnAm8bkaT/shrlQLTRfG5RlYjD4" target="_blank" rel="noopener noreferrer" class="btn-publish">
         <span class="zh">卖家入驻申请</span>
         <span class="en">Apply as Seller</span>
       </a>
-      <a href="https://airtable.com/apprn6XDQnAm8bkaT/pagLlGrrcpRWrcaWM/form" target="_blank" rel="noopener noreferrer" class="btn-outline">
-        <span class="zh">刊登藏品（已审核卖家）</span>
-        <span class="en">Submit Listing (Approved Sellers)</span>
-      </a>
     </div>
-    <div class="plan-grid">
+    <div class="plan-grid seller-choice-grid">
 
-      <!-- 卡 1：刊登藏品 -->
+      <!-- 卡 1：Annual Seller · S$288 / 年 -->
       <div class="plan">
-        <h3 class="plan-title zh">刊登藏品</h3><h3 class="plan-title en">Item Listing</h3>
-        <div class="plan-note zh">
-          前 88 位卖家前 2 件免费
-          <span class="founder-badge" title="创始卖家 · 2026（限量 88 席）" aria-label="Founder-Dealer 2026, limited to 88">
-            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <path d="M3 8L6 14L9 7L12 13L15 7L18 14L21 8V17C21 17.55 20.55 18 20 18H4C3.45 18 3 17.55 3 17V8Z" fill="currentColor" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/>
-              <circle cx="3" cy="8" r="1.4" fill="currentColor"/>
-              <circle cx="12" cy="6" r="1.4" fill="currentColor"/>
-              <circle cx="21" cy="8" r="1.4" fill="currentColor"/>
-            </svg>
-            <span class="badge-num">88</span>
-          </span>
-        </div>
-        <div class="plan-note en">
-          First 88 sellers: first 2 free
-          <span class="founder-badge" title="Founder-Dealer 2026, limited to 88" aria-label="Founder-Dealer 2026, limited to 88">
-            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <path d="M3 8L6 14L9 7L12 13L15 7L18 14L21 8V17C21 17.55 20.55 18 20 18H4C3.45 18 3 17.55 3 17V8Z" fill="currentColor" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/>
-              <circle cx="3" cy="8" r="1.4" fill="currentColor"/>
-              <circle cx="12" cy="6" r="1.4" fill="currentColor"/>
-              <circle cx="21" cy="8" r="1.4" fill="currentColor"/>
-            </svg>
-            <span class="badge-num">88</span>
-          </span>
-        </div>
+        <h3 class="plan-title zh">Annual Seller</h3><h3 class="plan-title en">Annual Seller</h3>
+        <div class="plan-note zh">自助型卖家 · 自己上架自己运营</div><div class="plan-note en">Self-service seller · list and run it yourself</div>
         <div class="plan-divider"></div>
-        <div class="plan-price"><span class="cur">SGD</span>29</div>
-        <div class="plan-unit zh">/ 件 / 年</div><div class="plan-unit en">/ item / year</div>
+        <div class="plan-price"><span class="cur">SGD</span>288</div>
+        <div class="plan-unit zh">/ 年</div><div class="plan-unit en">/ year</div>
+        <div class="plan-price-sub zh">相当于 SGD 24 / 月</div>
+        <div class="plan-price-sub en">Equivalent to SGD 24 / month</div>
         <ul class="plan-list">
-          <li class="zh">藏品上架展示</li><li class="en">Listed for display</li>
-          <li class="zh">进入「最新上架」流量池</li><li class="en">Shown in the "New Listings" pool</li>
-          <li class="zh">不抽取交易佣金</li><li class="en">No transaction commission charge</li>
-          <li class="zh">
-            专属创始卖家·2026 身份
-            <span class="founder-badge" title="创始卖家 · 2026（限量 88 席）" aria-label="Founder-Dealer 2026, limited to 88">
-              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <path d="M3 8L6 14L9 7L12 13L15 7L18 14L21 8V17C21 17.55 20.55 18 20 18H4C3.45 18 3 17.55 3 17V8Z" fill="currentColor" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/>
-                <circle cx="3" cy="8" r="1.4" fill="currentColor"/>
-                <circle cx="12" cy="6" r="1.4" fill="currentColor"/>
-                <circle cx="21" cy="8" r="1.4" fill="currentColor"/>
-              </svg>
-              <span class="badge-num">88</span>
-            </span>
-          </li>
-          <li class="en">
-            Dedicated Founder-Dealer 2026 status
-            <span class="founder-badge" title="Founder-Dealer 2026, limited to 88" aria-label="Founder-Dealer 2026, limited to 88">
-              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <path d="M3 8L6 14L9 7L12 13L15 7L18 14L21 8V17C21 17.55 20.55 18 20 18H4C3.45 18 3 17.55 3 17V8Z" fill="currentColor" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/>
-                <circle cx="3" cy="8" r="1.4" fill="currentColor"/>
-                <circle cx="12" cy="6" r="1.4" fill="currentColor"/>
-                <circle cx="21" cy="8" r="1.4" fill="currentColor"/>
-              </svg>
-              <span class="badge-num">88</span>
-            </span>
-          </li>
-        </ul>
-        <div class="choice-label zh">偶尔卖几件</div><div class="choice-label en">Sell a few items</div>
-        <a class="plan-cta" href="https://airtable.com/apprn6XDQnAm8bkaT/pagLlGrrcpRWrcaWM/form" target="_blank" rel="noopener noreferrer"><span class="zh">刊登藏品</span><span class="en">List an Item</span></a>
-      </div>
-
-      <!-- 卡 2：私家藏馆（主推） -->
-      <div class="plan">
-        <h3 class="plan-title zh">私家藏馆</h3><h3 class="plan-title en">Private Gallery</h3>
-        <div class="plan-note zh">你的专属收藏主页</div><div class="plan-note en">Your dedicated collection page</div>
-        <div class="plan-divider"></div>
-        <div class="plan-price-strike zh">原价 SGD 499 / 年</div>
-        <div class="plan-price-strike en">Regular SGD 499 / year</div>
-        <div class="plan-price"><span class="cur">SGD</span>384</div>
-        <div class="plan-unit zh">
-          / 年 · 创始卖家价
-          <span class="founder-badge" title="创始卖家 · 2026（限量 88 席）" aria-label="Founder-Dealer 2026, limited to 88">
-            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <path d="M3 8L6 14L9 7L12 13L15 7L18 14L21 8V17C21 17.55 20.55 18 20 18H4C3.45 18 3 17.55 3 17V8Z" fill="currentColor" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/>
-              <circle cx="3" cy="8" r="1.4" fill="currentColor"/>
-              <circle cx="12" cy="6" r="1.4" fill="currentColor"/>
-              <circle cx="21" cy="8" r="1.4" fill="currentColor"/>
-            </svg>
-            <span class="badge-num">88</span>
-          </span>
-        </div>
-        <div class="plan-unit en">
-          / year · Founder-Dealer price
-          <span class="founder-badge" title="Founder-Dealer 2026, limited to 88" aria-label="Founder-Dealer 2026, limited to 88">
-            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <path d="M3 8L6 14L9 7L12 13L15 7L18 14L21 8V17C21 17.55 20.55 18 20 18H4C3.45 18 3 17.55 3 17V8Z" fill="currentColor" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/>
-              <circle cx="3" cy="8" r="1.4" fill="currentColor"/>
-              <circle cx="12" cy="6" r="1.4" fill="currentColor"/>
-              <circle cx="21" cy="8" r="1.4" fill="currentColor"/>
-            </svg>
-            <span class="badge-num">88</span>
-          </span>
-        </div>
-        <div class="plan-price-sub zh">相当于 SGD 32 / 月 · 名额招满后恢复原价 499</div>
-        <div class="plan-price-sub en">Equivalent to SGD 32 / month · reverts to SGD 499 once seats are filled</div>
-        <ul class="plan-list">
-          <li class="zh">独立专属主页（独立分享 URL）</li><li class="en">Dedicated page with shareable URL</li>
-          <li class="zh"><strong>全部在售藏品自动聚合（不限数量）</strong></li><li class="en"><strong>All active listings auto-aggregated (no limit)</strong></li>
+          <li class="zh"><strong>私家藏馆</strong>（独立分享 URL，聚合全部在售藏品）</li><li class="en"><strong>Private Gallery</strong> (shareable URL, aggregates all active listings)</li>
+          <li class="zh">10 件刊登额度（年度）</li><li class="en">10 listing credits (annual)</li>
           <li class="zh">分类筛选 + 价格筛选 + 搜索</li><li class="en">Category / price filters + search</li>
-          <li class="zh">出现在「私家藏馆」公开列表</li><li class="en">Listed in the public "Private Gallery" directory</li>
-          <li class="zh">可发微信 / WhatsApp 分享</li><li class="en">Shareable via WhatsApp / WeChat</li>
-          <li class="zh no">不含刊登额度（刊登费另计）</li><li class="en no">Listing credits NOT included (fee separate)</li>
+          <li class="zh">标准审核队列</li><li class="en">Standard review queue</li>
+          <li class="zh">标准客服支持</li><li class="en">Standard customer support</li>
+          <li class="zh">不抽取交易佣金</li><li class="en">No transaction commission</li>
+          <li class="zh no">不含图片精修与首页推荐（按需加购）</li><li class="en no">Photo retouching &amp; Homepage Feature not included (add-on)</li>
         </ul>
-        <div class="choice-label zh">长期经营</div><div class="choice-label en">Build an ongoing presence</div>
-        <a class="plan-cta" href="https://airtable.com/apprn6XDQnAm8bkaT/shrlQLTRfG5RlYjD4" target="_blank" rel="noopener noreferrer"><span class="zh">申请入驻</span><span class="en">Apply as Seller</span></a>
+        <div class="choice-label zh">自己动手经营</div><div class="choice-label en">Run it yourself</div>
+        <a class="plan-cta" href="https://airtable.com/apprn6XDQnAm8bkaT/shrlQLTRfG5RlYjD4" target="_blank" rel="noopener noreferrer"><span class="zh">选择此方案</span><span class="en">Choose this plan</span></a>
       </div>
 
-      <!-- 卡 3：首页推荐 -->
-      <div class="plan">
-        <h3 class="plan-title zh">首页推荐</h3><h3 class="plan-title en">Homepage Feature</h3>
-        <div class="plan-note zh">每月仅 1-2 个位置</div><div class="plan-note en">Only 1-2 slots per month</div>
+      <!-- 卡 2：Seller Pro · S$699 / 年（Best Value） -->
+      <div class="plan featured">
+        <span class="plan-badge zh">Best Value</span><span class="plan-badge en">Best Value</span>
+        <h3 class="plan-title zh">Seller Pro</h3><h3 class="plan-title en">Seller Pro</h3>
+        <div class="plan-note zh">全包代运营型 · 平台帮你上架与推广</div><div class="plan-note en">Full-service managed · the platform lists &amp; promotes for you</div>
         <div class="plan-divider"></div>
-        <div class="plan-price"><span class="cur">SGD</span>129</div>
-        <div class="plan-unit zh">/ 月</div><div class="plan-unit en">/ month</div>
-        <div class="plan-price-sub zh">年付 SGD 1,290 / 年</div>
-        <div class="plan-price-sub en">Annual: SGD 1,290 / year</div>
+        <div class="plan-price"><span class="cur">SGD</span>699</div>
+        <div class="plan-unit zh">/ 年</div><div class="plan-unit en">/ year</div>
+        <div class="plan-price-sub zh">相当于 SGD 58 / 月 · 含 Annual Seller 全部权益</div>
+        <div class="plan-price-sub en">Equivalent to SGD 58 / month · includes everything in Annual Seller</div>
         <ul class="plan-list">
-          <li class="zh">首页「今日发现」置顶插槽</li><li class="en">Pinned slot in "Today's Finds"</li>
-          <li class="zh">带「推广」标识</li><li class="en">Marked with a "Promoted" label</li>
-          <li class="zh">年付省 2 个月</li><li class="en">Annual plan: 2 months free</li>
-          <li class="zh no">不含刊登额度</li><li class="en no">Listing credits NOT included</li>
-          <li class="zh no">不含私家藏馆</li><li class="en no">Private Gallery NOT included</li>
+          <li class="zh"><strong>私家藏馆</strong> + 不限刊登额度（平台代运营）</li><li class="en"><strong>Private Gallery</strong> + unlimited listings (platform-managed)</li>
+          <li class="zh">平台代为上架、整理藏品信息</li><li class="en">Platform lists and organises item info on your behalf</li>
+          <li class="zh">图片精修 × 4 套（年度）</li><li class="en">Photo Retouching × 4 sets (annual)</li>
+          <li class="zh">首页推荐 1 个月（赠送）</li><li class="en">Homepage Feature 1 month (included)</li>
+          <li class="zh"><strong>优先审核与支持</strong></li><li class="en"><strong>Priority review &amp; support</strong></li>
+          <li class="zh"><strong>专属曝光机会</strong></li><li class="en"><strong>Exclusive exposure opportunities</strong></li>
+          <li class="zh">不抽取交易佣金</li><li class="en">No transaction commission</li>
         </ul>
-        <div class="choice-label zh">短期增加曝光</div><div class="choice-label en">Boost visibility</div>
-        <a class="plan-cta" href="#addon-services"><span class="zh">了解服务</span><span class="en">View Services</span></a>
+        <div class="choice-label zh">全托管 · 省心经营</div><div class="choice-label en">Fully managed · hassle-free</div>
+        <a class="plan-cta gold" href="https://airtable.com/apprn6XDQnAm8bkaT/shrlQLTRfG5RlYjD4" target="_blank" rel="noopener noreferrer"><span class="zh">选择此方案</span><span class="en">Choose this plan</span></a>
       </div>
 
     </div>
     <div class="note-bar">
       <span class="marker" aria-hidden="true">※</span>
       <div class="zh">
-        前 88 位入驻卖家自动获得「创始卖家·2026」身份
-        <span class="founder-badge lg" title="创始卖家 · 2026（限量 88 席）" aria-label="Founder-Dealer 2026, limited to 88">
-          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <path d="M3 8L6 14L9 7L12 13L15 7L18 14L21 8V17C21 17.55 20.55 18 20 18H4C3.45 18 3 17.55 3 17V8Z" fill="currentColor" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/>
-            <circle cx="3" cy="8" r="1.4" fill="currentColor"/>
-            <circle cx="12" cy="6" r="1.4" fill="currentColor"/>
-            <circle cx="21" cy="8" r="1.4" fill="currentColor"/>
-          </svg>
-          <span class="badge-num">88</span>
-        </span>
-        ，前 2 件藏品免费刊登，私家藏馆首年创始价 SGD 384（常规价 SGD 499）。名额招满后，新卖家按 SGD 29 / 件 / 年、私家藏馆 SGD 499 / 年原价收费。不抽取交易佣金。
-        <br>三项服务互相独立：刊登费按件计；私家馆按年计，聚合卖家全部在售藏品；首页推荐按月或年计，为单品提供首页置顶曝光。
+        两档方案均为年付，均含私家藏馆，均不抽取交易佣金。<b>前 88 位创始卖家</b>在两档方案续费时均享创始续费价；前 2 件免费刊登额度（1 年有效）可与方案叠加使用。名额招满后，新卖家按常规价收费，不再享有创始权益。图片精修、专家视频咨询、首页推荐加购请见下方「增值服务」。
       </div>
       <div class="en">
-        First 88 approved sellers automatically receive "Founder-Dealer 2026" status
-        <span class="founder-badge lg" title="Founder-Dealer 2026, limited to 88" aria-label="Founder-Dealer 2026, limited to 88">
-          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <path d="M3 8L6 14L9 7L12 13L15 7L18 14L21 8V17C21 17.55 20.55 18 20 18H4C3.45 18 3 17.55 3 17V8Z" fill="currentColor" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/>
-            <circle cx="3" cy="8" r="1.4" fill="currentColor"/>
-            <circle cx="12" cy="6" r="1.4" fill="currentColor"/>
-            <circle cx="21" cy="8" r="1.4" fill="currentColor"/>
-          </svg>
-          <span class="badge-num">88</span>
-        </span>
-        with 2 complimentary listings and Founder first-year price of SGD 384 (regular SGD 499). Once seats are filled, new sellers pay SGD 29 / item / year and SGD 499 / year for the Private Gallery at regular price. No transaction commission.
-        <br>Three independent services: Listing is per item; the Private Gallery is per year and aggregates all active listings; the Homepage Feature (monthly or annual) provides pinned exposure for a single item.
+        Both plans are billed annually, both include the Private Gallery, and neither charges a transaction commission. <b>The first 88 Founding Sellers</b> receive a founding renewal rate on both plans; the 2 free listings (1-year validity) stack on top of either plan. Once seats are filled, new sellers pay regular pricing and do not receive founding benefits. Photo Retouching, Expert Video Consultation and Homepage Feature add-ons are listed under "Add-on Services" below.
       </div>
     </div>
   </section>
@@ -602,10 +635,23 @@ footer {
     <div class="sec-head tight">
       <div class="eyebrow zh">增值服务</div><div class="eyebrow en">Add-on Services</div>
       <h2 class="sec-title zh">让藏品呈现更专业</h2><h2 class="sec-title en">Present Your Pieces Better</h2>
-      <p class="sec-sub zh">与刊登 / 私家藏馆 / 首页推荐相互独立，随时按需购买</p>
-      <p class="sec-sub en">Independent of Listing / Gallery / Feature — purchase either whenever you need it</p>
+      <p class="sec-sub zh">独立于两档年度方案之外，随时按需购买</p>
+      <p class="sec-sub en">Independent of the two annual plans — purchase whenever you need it</p>
     </div>
     <div class="plan-grid addon-grid">
+      <div class="plan">
+        <h3 class="plan-title zh">首页推荐</h3><h3 class="plan-title en">Homepage Feature</h3>
+        <div class="plan-note zh">每月仅 1-2 个位置</div><div class="plan-note en">Only 1-2 slots per month</div>
+        <div class="plan-divider"></div>
+        <div class="plan-price"><span class="cur">SGD</span>129</div>
+        <div class="plan-unit zh">/ 月</div><div class="plan-unit en">/ month</div>
+        <div class="plan-price-sub zh">年付 SGD 1,290 / 年（省 2 个月）</div>
+        <div class="plan-price-sub en">Annual SGD 1,290 / year (2 months free)</div>
+        <ul class="plan-list">
+          <li class="zh">首页「今日发现」置顶插槽</li><li class="en">Pinned slot in "Today's Finds"</li>
+          <li class="zh">带「推广」标识</li><li class="en">Marked with a "Promoted" label</li>
+        </ul>
+      </div>
       <div class="plan">
         <h3 class="plan-title zh">图片精修</h3><h3 class="plan-title en">Photo Retouching</h3>
         <div class="plan-note zh">让老照片、随手拍也能上镜</div><div class="plan-note en">Makes casual or old photos presentable</div>
@@ -664,7 +710,7 @@ footer {
     </div>
   </section>
 
-  <!-- ===== 三、价格明细（6 行） ===== -->
+  <!-- ===== 三、价格明细 ===== -->
   <section id="price-table" class="legacy-fee-overview">
     <div class="sec-head">
       <div class="eyebrow zh">价格明细</div><div class="eyebrow en">Fee Overview</div>
@@ -677,36 +723,30 @@ footer {
       <div class="rows">
         <div class="row">
           <div class="row-info">
-            <div class="row-title zh">刊登藏品</div>
-            <div class="row-title en">Item Listing</div>
-          </div>
-          <div class="row-price"><span class="amount">SGD 29</span><span class="unit zh">/ 件 / 年</span><span class="unit en">/ item / yr</span></div>
-        </div>
-        <div class="row">
-          <div class="row-info">
-            <div class="row-title zh">私家藏馆（卖家主页）</div>
-            <div class="row-title en">Private Gallery (Seller Page)</div>
-            <div class="row-desc zh">独立主页 + 全部在售藏品聚合 · 不含刊登额度</div>
-            <div class="row-desc en">Dedicated page + full inventory aggregation · listing credits NOT included</div>
+            <div class="row-title zh">Annual Seller（自助型）</div>
+            <div class="row-title en">Annual Seller (Self-service)</div>
+            <div class="row-desc zh">私家藏馆 + 10 件刊登额度 · 标准审核与支持</div>
+            <div class="row-desc en">Private Gallery + 10 listing credits · standard review &amp; support</div>
           </div>
           <div class="row-price">
-            <span class="amount">SGD 499</span>
-            <span class="amount-sub zh">创始卖家价 SGD 384</span>
-            <span class="amount-sub en">Founder price SGD 384</span>
+            <span class="amount">SGD 288</span>
+            <span class="amount-sub zh">创始续费价（前 88 席）</span>
+            <span class="amount-sub en">Founding renewal rate (first 88)</span>
             <span class="unit zh">/ 年</span><span class="unit en">/ yr</span>
           </div>
         </div>
         <div class="row">
           <div class="row-info">
-            <div class="row-title zh">商家启动套装</div>
-            <div class="row-title en">Business Starter Bundle</div>
-            <div class="row-desc zh">私家藏馆 + 10 件刊登额度，加赠 1 个月首页推荐 + 2 套图片精修 · 单独购买价值 SGD 968</div>
-            <div class="row-desc en">Private Gallery + 10 listing credits, plus free Homepage Feature (1 month) and Photo Retouching (2 sets) · SGD 968 if bought separately</div>
+            <div class="row-title zh">Seller Pro（全包代运营）</div>
+            <div class="row-title en">Seller Pro (Full-service)</div>
+            <div class="row-desc zh">私家藏馆 + 不限刊登 + 图片精修 × 4 + 首页推荐 1 个月 + 优先支持</div>
+            <div class="row-desc en">Private Gallery + unlimited listings + Retouching × 4 + Homepage Feature 1 mo + priority support</div>
           </div>
           <div class="row-price">
             <span class="amount">SGD 699</span>
-            <span class="amount-sub zh">节省 SGD 269</span>
-            <span class="amount-sub en">Save SGD 269</span>
+            <span class="amount-sub zh">创始续费价（前 88 席）</span>
+            <span class="amount-sub en">Founding renewal rate (first 88)</span>
+            <span class="unit zh">/ 年</span><span class="unit en">/ yr</span>
           </div>
         </div>
         <div class="row">
@@ -761,8 +801,8 @@ footer {
     </div>
     <div class="note-bar">
       <span class="marker" aria-hidden="true">※</span>
-      <div class="zh"><b>说明：</b>以上价格均为新加坡元（SGD），不含消费税。所有服务互相独立，购买其一不包含其他服务。付款支持 PayNow / 银行转账。委托找货的信息对接费在未成交时全额退还。专家视频咨询费用在平台完成专家匹配并发送视频通话链接后不予退款。平台不代收货款。</div>
-      <div class="en"><b>Note:</b> All prices are in SGD, excluding GST. Services are independent — purchasing one does not include any other. Payment via PayNow or bank transfer. The Sourcing Service's matching fee is fully refunded if no sale occurs. Expert Video Consultation is non-refundable once the platform has assigned an expert and sent the video-call link. Platform does not collect sale proceeds.</div>
+      <div class="zh"><b>说明：</b>以上价格均为新加坡元（SGD），不含消费税。Annual Seller 与 Seller Pro 均为年付方案，均含私家藏馆，均不抽取交易佣金。前 88 位创始卖家续费时享创始续费价；前 2 件免费刊登额度（1 年有效）可与方案叠加。增值服务与年度方案相互独立，按需购买。付款支持 PayNow / 银行转账。委托找货的信息对接费在未成交时全额退还。专家视频咨询费用在平台完成专家匹配并发送视频通话链接后不予退款。平台不代收货款。</div>
+      <div class="en"><b>Note:</b> All prices are in SGD, excluding GST. Annual Seller and Seller Pro are both annual plans, both include the Private Gallery, and neither charges a transaction commission. The first 88 Founding Sellers receive a founding renewal rate; the 2 free listings (1-year validity) stack on top of either plan. Add-on services are independent of the annual plans and may be purchased as needed. Payment via PayNow or bank transfer. The Sourcing Service's matching fee is fully refunded if no sale occurs. Expert Video Consultation is non-refundable once the platform has assigned an expert and sent the video-call link. Platform does not collect sale proceeds.</div>
     </div>
   </section>
 

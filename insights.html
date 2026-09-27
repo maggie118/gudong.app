@@ -34,10 +34,10 @@
       "blogPost": [
         { "@type": "BlogPosting", "headline": "苏麻离青：郑和船队带回的那一抹蓝", "url": "https://gudong.app/insights/sumali-cobalt-zhenghe.html" },
         { "@type": "BlogPosting", "headline": "景德镇为什么成为瓷都？", "url": "https://gudong.app/insights/jingdezhen-geography.html" },
+        { "@type": "BlogPosting", "headline": "南洋最贵的那只碗", "url": "https://gudong.app/insights/nyonya-ware.html" },
         { "@type": "BlogPosting", "headline": "怎么看藏品“来源”？证据链比故事重要", "url": "https://gudong.app/insights/provenance-basics.html" },
         { "@type": "BlogPosting", "headline": "怎么保存藏品？六个环境要素决定藏品寿命", "url": "https://gudong.app/insights/how-to-store-collection.html" },
         { "@type": "BlogPosting", "headline": "清代民窑青花怎么分辨年代？3 个上手要点", "url": "https://gudong.app/insights/qing-porcelain-dating.html" },
-        { "@type": "BlogPosting", "headline": "瓷器釉面开片怎么看？自然开片与人工开片的区别", "url": "https://gudong.app/insights/glaze-crackle-basics.html" },
         { "@type": "BlogPosting", "headline": "钱币做旧手法图解：这几种包浆要小心", "url": "https://gudong.app/insights/coin-aging-tricks.html" },
         { "@type": "BlogPosting", "headline": "新加坡拍卖行观察：本地成交价参考逻辑", "url": "https://gudong.app/insights/auction-house-watch.html" }
       ]
@@ -386,6 +386,12 @@
             font-size: .72rem; color: var(--color-text-muted);
             padding-top: .6rem; border-top: 1px dashed var(--color-border); margin-top: .2rem;
         }
+        .post-badge-monthly {
+            display: inline-block; align-self: flex-start; margin-top: .55rem;
+            padding: .16rem .55rem; border-radius: 999px;
+            background: rgba(176,138,69,.13); border: 1px solid rgba(176,138,69,.4);
+            color: #8A6A2F; font-size: .66rem; font-weight: 700; letter-spacing: .05em;
+        }
 
         .no-result { text-align: center; padding: 3rem 1rem; color: var(--color-text-muted); }
 
@@ -515,17 +521,17 @@
         </section>
 
         <section id="featured" style="margin-bottom:2.6rem;">
-            <a class="feature-card" href="insights/sumali-cobalt-zhenghe.html">
+            <a class="feature-card" href="insights/nyonya-ware.html">
                 <div class="feature-cover" style="background: linear-gradient(145deg, #1F2E24 0%, #3A4E3C 100%);">
-                    <span class="cover-mark">青</span>
+                    <span class="cover-mark">娘</span>
                 </div>
                 <div class="feature-body">
                     <span class="post-kicker zh">新系列首发 · 透过历史看古董</span>
                     <span class="post-kicker en">NEW SERIES · HISTORY</span>
-                    <div class="feature-title zh">苏麻离青：郑和船队带回的那一抹蓝</div>
-                    <div class="feature-title en">Sumali Cobalt: the blue that came back with Zheng He's fleet</div>
-                    <div class="feature-desc zh">永乐三年，郑和第一次下西洋。他带回的不只是香料与珍宝，还有改变中国青花三百年的苏麻离青。</div>
-                    <div class="feature-desc en">In 1405, Zheng He set sail. He came back with more than spices — he came back with the cobalt that would change Chinese blue-and-white for three centuries.</div>
+                    <div class="feature-title zh">南洋最贵的那只碗</div>
+                    <div class="feature-title en">The most expensive bowl in Nanyang</div>
+                    <div class="feature-desc zh">它不在景德镇烧，也不全是中国画的。娘惹瓷是南洋华人自己"造"出来的一种瓷器。</div>
+                    <div class="feature-desc en">Not fired in Jingdezhen — and not entirely painted in China. Nyonya ware was invented in Nanyang.</div>
                     <span class="feature-more zh">阅读全文 →</span>
                     <span class="feature-more en">Read the essay →</span>
                 </div>
@@ -748,7 +754,7 @@
             {
                 id: 'local',
                 name: { zh: '新加坡本地', en: 'Local Singapore' },
-                desc: { zh: '本地市场行情、市集地图、拍卖行观察——写给本地藏家', en: 'Local market notes, flea maps, auction watch — written for Singapore collectors' },
+                desc: { zh: '本地行情月报、市集地图、拍卖行观察——每月更新，写给本地藏家', en: 'Local market briefs, flea maps, auction watch — updated monthly, for Singapore collectors' },
                 articles: [
                     { slug: 'singapore-coin-market', tone: 'market', mark: '泉', kicker: { zh: '行情观察', en: 'MARKET' },
                       title: { zh: '新加坡钱币市场：去哪看、怎么看', en: 'Singapore coin market: where and how to look' },
@@ -825,48 +831,48 @@
                       tags: '苏麻离青 郑和下西洋 永宣青花 青花钴料 sumali cobalt zheng he', date: '2026-03-01', read: { zh: '4 分钟', en: '4 min' } },
                     { slug: 'tang-ceramics-trade', tone: 'history', mark: '唐', kicker: { zh: '透过历史看古董', en: 'HISTORY' },
                       title: { zh: '唐代瓷器为什么突然变多？', en: 'Why did Tang ceramics suddenly multiply?' },
-                      desc: { zh: '安史之乱之后，中国的经济重心南移，瓷器第一次成为大宗商品。', en: 'After the An Lushan Rebellion, China\'s economic centre shifted south — and ceramics became mass-market for the first time.' },
-                      tags: '唐代 瓷器 安史之乱 长沙窑 越窑 tang ceramics', date: '2026-03-01', read: { zh: '4 分钟', en: '4 min' } },
+                      desc: { zh: '安史之乱之后，中国的经济重心南移，瓷器第一次成为大众商品。', en: 'After the An Lushan Rebellion, China\'s economic centre shifted south — and ceramics became mass-market for the first time.' },
+                      tags: '唐代 瓷器 安史之乱 长沙窑 越窑 tang ceramics', date: '2026-03-03', read: { zh: '4 分钟', en: '4 min' } },
                     { slug: 'song-five-kilns', tone: 'history', mark: '宋', kicker: { zh: '透过历史看古董', en: 'HISTORY' },
                       title: { zh: '宋代五大名窑为什么都在河南河北？', en: 'Why were the Song\'s five great kilns all in the north?' },
                       desc: { zh: '汝、官、哥、钧、定——五个名字背后，是北宋定都开封的地理密码。', en: 'Ru, Guan, Ge, Jun, Ding — five names, and the geographic logic of the Northern Song capital at Kaifeng.' },
-                      tags: '宋代 五大名窑 汝窑 官窑 哥窑 钧窑 定窑 song five kilns', date: '2026-03-01', read: { zh: '4 分钟', en: '4 min' } },
+                      tags: '宋代 五大名窑 汝窑 官窑 哥窑 钧窑 定窑 song five kilns', date: '2026-03-05', read: { zh: '4 分钟', en: '4 min' } },
                     { slug: 'qing-three-reigns-porcelain', tone: 'history', mark: '清', kicker: { zh: '透过历史看古董', en: 'HISTORY' },
                       title: { zh: '康雍乾三朝为什么是瓷器巅峰？', en: 'Why were the Kangxi-Yongzheng-Qianlong reigns the peak of porcelain?' },
                       desc: { zh: '一个半世纪的经济繁荣、皇帝本人的审美、督陶官制度——三者缺一不可。', en: 'A century and a half of prosperity, imperial taste, and the supervisor-of-kilns system — all three were needed.' },
-                      tags: '康雍乾 清代 官窑 瓷器 qing porcelain', date: '2026-03-01', read: { zh: '4 分钟', en: '4 min' } },
+                      tags: '康雍乾 清代 官窑 瓷器 qing porcelain', date: '2026-03-11', read: { zh: '4 分钟', en: '4 min' } },
                     { slug: 'ming-furniture-minimalism', tone: 'history', mark: '明', kicker: { zh: '透过历史看古董', en: 'HISTORY' },
                       title: { zh: '明代家具为什么简到极致？', en: 'Why is Ming furniture so radically minimal?' },
                       desc: { zh: '文人审美、硬木进口、海禁政策——三个看似无关的因素，共同塑造了明式家具。', en: 'Literati taste, imported hardwoods, and maritime prohibition — three seemingly unrelated factors shaped Ming furniture.' },
-                      tags: '明代 家具 明式家具 文人 ming furniture', date: '2026-03-01', read: { zh: '4 分钟', en: '4 min' } },
+                      tags: '明代 家具 明式家具 文人 ming furniture', date: '2026-03-12', read: { zh: '4 分钟', en: '4 min' } },
                     { slug: 'xuande-censer-legacy', tone: 'history', mark: '炉', kicker: { zh: '透过历史看古董', en: 'HISTORY' },
                       title: { zh: '宣德炉为什么被仿了五百年？', en: 'Why has the Xuande censer been copied for 500 years?' },
                       desc: { zh: '一批风磨铜、一份铸炉档案、一场大火——宣德炉的传说从诞生起就带着神秘。', en: 'A batch of wind-milled copper, a casting record, a fire — the Xuande censer was mysterious from birth.' },
-                      tags: '宣德炉 铜香炉 风磨铜 xuande censer', date: '2026-03-01', read: { zh: '4 分钟', en: '4 min' } },
+                      tags: '宣德炉 铜香炉 风磨铜 xuande censer', date: '2026-03-13', read: { zh: '4 分钟', en: '4 min' } },
                     { slug: 'late-qing-outflow', tone: 'history', mark: '流', kicker: { zh: '透过历史看古董', en: 'HISTORY' },
                       title: { zh: '晚清文物为什么大量外流？', en: 'Why did so many Chinese antiques leave the country in the late Qing?' },
                       desc: { zh: '鸦片战争、庚子赔款、外国博物馆的采购团——三重力量，把中国文物推向世界。', en: 'The Opium Wars, the Boxer indemnity, and foreign museum buying trips — three forces pushed Chinese antiques out into the world.' },
-                      tags: '晚清 文物外流 鸦片战争 庚子赔款 late qing outflow', date: '2026-03-01', read: { zh: '4 分钟', en: '4 min' } },
+                      tags: '晚清 文物外流 鸦片战争 庚子赔款 late qing outflow', date: '2026-03-07', read: { zh: '4 分钟', en: '4 min' } },
                     { slug: 'republic-antique-fakes', tone: 'history', mark: '仿', kicker: { zh: '透过历史看古董', en: 'HISTORY' },
                       title: { zh: '民国仿古为什么这么厉害？', en: 'Why was Republic-era antiquarianism so skilled?' },
                       desc: { zh: '上海开埠、古董商网络、宫廷匠人流入民间——民国仿品至今仍能骗过很多人。', en: 'Shanghai\'s opening, dealer networks, imperial craftsmen entering the private market — Republic fakes still fool many people today.' },
-                      tags: '民国 仿古 上海 古董商 republic fakes', date: '2026-03-01', read: { zh: '4 分钟', en: '4 min' } },
+                      tags: '民国 仿古 上海 古董商 republic fakes', date: '2026-03-14', read: { zh: '4 分钟', en: '4 min' } },
                     { slug: 'zhushan-eight-friends', tone: 'history', mark: '珠', kicker: { zh: '透过历史看古董', en: 'HISTORY' },
                       title: { zh: '“珠山八友”是怎么回事？', en: 'Who were the Zhushan Eight Friends?' },
                       desc: { zh: '民国景德镇的一群文人瓷画家，把中国画搬上了瓷板，开创了浅绛彩之后的又一高峰。', en: 'A group of literati porcelain painters in Republican Jingdezhen who put Chinese painting onto porcelain plaques.' },
-                      tags: '珠山八友 浅绛彩 新粉彩 民国 景德镇 zhushan eight friends', date: '2026-03-01', read: { zh: '4 分钟', en: '4 min' } },
+                      tags: '珠山八友 浅绛彩 新粉彩 民国 景德镇 zhushan eight friends', date: '2026-03-15', read: { zh: '4 分钟', en: '4 min' } },
                     { slug: 'singapore-chinese-antiques', tone: 'history', mark: '侨', kicker: { zh: '透过历史看古董', en: 'HISTORY' },
                       title: { zh: '新加坡为什么有这么多中国古董？', en: 'Why does Singapore have so many Chinese antiques?' },
                       desc: { zh: '南洋华人移民、侨批、宗乡会馆——这些历史纽带，把中国古董带到了新加坡。', en: 'Nanyang migration, remittance letters, clan associations — these historical links brought Chinese antiques to Singapore.' },
-                      tags: '新加坡 南洋华人 侨批 中国古董 singapore nanyang chinese', date: '2026-03-01', read: { zh: '4 分钟', en: '4 min' } },
+                      tags: '新加坡 南洋华人 侨批 中国古董 singapore nanyang chinese', date: '2026-03-16', read: { zh: '4 分钟', en: '4 min' } },
                     { slug: 'nyonya-ware', tone: 'history', mark: '娘', kicker: { zh: '透过历史看古董', en: 'HISTORY' },
-                      title: { zh: '娘惹瓷是怎么来的？', en: 'Where did Nyonya ware come from?' },
-                      desc: { zh: '峇峇娘惹文化与景德镇订烧——一段横跨南海的瓷器贸易史。', en: 'Peranakan culture and Jingdezhen custom orders — a porcelain trade history spanning the South China Sea.' },
-                      tags: '娘惹瓷 峇峇娘惹 南洋 景德镇 nyonya peranakan', date: '2026-03-01', read: { zh: '4 分钟', en: '4 min' } },
+                      title: { zh: '南洋最贵的那只碗', en: 'The most expensive bowl in Nanyang' },
+                      desc: { zh: '它不在景德镇烧，也不全是中国画的。', en: 'Not fired in Jingdezhen — and not entirely painted in China.' },
+                      tags: '娘惹瓷 峇峇娘惹 南洋 景德镇 nyonya peranakan', date: '2026-03-09', read: { zh: '4 分钟', en: '4 min' } },
                     { slug: 'singapore-dealers-history', tone: 'history', mark: '商', kicker: { zh: '透过历史看古董', en: 'HISTORY' },
                       title: { zh: '二战前后的新加坡古董商', en: 'Singapore antique dealers before and after WWII' },
                       desc: { zh: '从战前的贸易繁荣到战后的重建，新加坡古董商见证了这座城市的一段特殊历史。', en: 'From pre-war trade prosperity to post-war rebuilding, Singapore dealers witnessed a particular slice of the city\'s history.' },
-                      tags: '新加坡 古董商 二战 老店 singapore dealers history', date: '2026-03-01', read: { zh: '4 分钟', en: '4 min' } }
+                      tags: '新加坡 古董商 二战 老店 singapore dealers history', date: '2026-03-17', read: { zh: '4 分钟', en: '4 min' } }
                 ]
             },
             {
@@ -881,47 +887,47 @@
                     { slug: 'jade-road-hetian', tone: 'geography', mark: '玉', kicker: { zh: '透过地理看古董', en: 'GEOGRAPHY' },
                       title: { zh: '和田玉是怎么运到中原的？', en: 'How did Hetian jade reach the Central Plains?' },
                       desc: { zh: '从于阗到长安，一条比丝绸之路更古老的玉石之路。', en: 'From Khotan to Chang\'an — a jade road older than the Silk Road itself.' },
-                      tags: '和田玉 玉石之路 于阗 河西走廊 jade road hetian', date: '2026-03-02', read: { zh: '4 分钟', en: '4 min' } },
+                      tags: '和田玉 玉石之路 于阗 河西走廊 jade road hetian', date: '2026-03-04', read: { zh: '4 分钟', en: '4 min' } },
                     { slug: 'sumali-cobalt-origin', tone: 'geography', mark: '矿', kicker: { zh: '透过地理看古董', en: 'GEOGRAPHY' },
                       title: { zh: '苏麻离青的产地在哪里？', en: 'Where did Sumali cobalt actually come from?' },
                       desc: { zh: '波斯卡尚、伊斯法罕、霍尔木兹——沿着航线，追踪那一抹蓝的源头。', en: 'Kashan, Isfahan, Hormuz — following the sea routes back to the source of that blue.' },
-                      tags: '苏麻离青 波斯卡尚 钴矿 霍尔木兹 sumali cobalt origin', date: '2026-03-02', read: { zh: '4 分钟', en: '4 min' } },
+                      tags: '苏麻离青 波斯卡尚 钴矿 霍尔木兹 sumali cobalt origin', date: '2026-03-06', read: { zh: '4 分钟', en: '4 min' } },
                     { slug: 'bronze-age-copper', tone: 'geography', mark: '铜', kicker: { zh: '透过地理看古董', en: 'GEOGRAPHY' },
                       title: { zh: '铜矿与青铜时代', en: 'Copper mines and the Bronze Age' },
                       desc: { zh: '长江中下游的铜矿带，决定了中国青铜文明的地理版图。', en: 'The copper belt of the middle and lower Yangtze shaped the geographic map of Chinese bronze civilisation.' },
-                      tags: '青铜 铜矿 长江 青铜时代 bronze copper', date: '2026-03-02', read: { zh: '4 分钟', en: '4 min' } },
+                      tags: '青铜 铜矿 长江 青铜时代 bronze copper', date: '2026-03-18', read: { zh: '4 分钟', en: '4 min' } },
                     { slug: 'grand-canal-porcelain', tone: 'geography', mark: '运', kicker: { zh: '透过地理看古董', en: 'GEOGRAPHY' },
                       title: { zh: '大运河如何改变了瓷器流通？', en: 'How did the Grand Canal change porcelain distribution?' },
                       desc: { zh: '一条人工河道，把南方的瓷器运到北方，也把北方的订单带回南方。', en: 'A man-made waterway carried southern porcelain north — and northern orders back south.' },
-                      tags: '大运河 京杭 瓷器 流通 grand canal porcelain', date: '2026-03-02', read: { zh: '4 分钟', en: '4 min' } },
+                      tags: '大运河 京杭 瓷器 流通 grand canal porcelain', date: '2026-03-19', read: { zh: '4 分钟', en: '4 min' } },
                     { slug: 'yangtze-kilns', tone: 'geography', mark: '江', kicker: { zh: '透过地理看古董', en: 'GEOGRAPHY' },
                       title: { zh: '长江水系与窑口分布', en: 'The Yangtze river system and the distribution of kilns' },
                       desc: { zh: '越窑、龙泉、景德镇——为什么中国最著名的窑口都沿着长江？', en: 'Yue, Longquan, Jingdezhen — why were China\'s most famous kilns all along the Yangtze?' },
-                      tags: '长江 窑口 越窑 龙泉 景德镇 yangtze kilns', date: '2026-03-02', read: { zh: '4 分钟', en: '4 min' } },
+                      tags: '长江 窑口 越窑 龙泉 景德镇 yangtze kilns', date: '2026-03-20', read: { zh: '4 分钟', en: '4 min' } },
                     { slug: 'maritime-silk-road-ports', tone: 'geography', mark: '港', kicker: { zh: '透过地理看古董', en: 'GEOGRAPHY' },
                       title: { zh: '海上丝绸之路的三大港口', en: 'The three great ports of the Maritime Silk Road' },
                       desc: { zh: '泉州、广州、宁波——三座城市，三种贸易模式，三种瓷器风格。', en: 'Quanzhou, Guangzhou, Ningbo — three cities, three trade patterns, three styles of porcelain.' },
-                      tags: '海上丝绸之路 泉州 广州 宁波 maritime silk road', date: '2026-03-02', read: { zh: '4 分钟', en: '4 min' } },
+                      tags: '海上丝绸之路 泉州 广州 宁波 maritime silk road', date: '2026-03-21', read: { zh: '4 分钟', en: '4 min' } },
                     { slug: 'canton-thirteen-hongs', tone: 'geography', mark: '粤', kicker: { zh: '透过地理看古董', en: 'GEOGRAPHY' },
                       title: { zh: '广州十三行与外销瓷', en: 'The Canton Thirteen Hongs and export porcelain' },
                       desc: { zh: '一口通商政策下，广州成为中西瓷器贸易的唯一出口。', en: 'Under the single-port policy, Guangzhou became the only exit for Chinese-Western porcelain trade.' },
-                      tags: '广州 十三行 外销瓷 广彩 canton thirteen hongs', date: '2026-03-02', read: { zh: '4 分钟', en: '4 min' } },
+                      tags: '广州 十三行 外销瓷 广彩 canton thirteen hongs', date: '2026-03-08', read: { zh: '4 分钟', en: '4 min' } },
                     { slug: 'quanzhou-yuan-blue', tone: 'geography', mark: '泉', kicker: { zh: '透过地理看古董', en: 'GEOGRAPHY' },
                       title: { zh: '泉州与元代青花', en: 'Quanzhou and Yuan blue-and-white' },
                       desc: { zh: '色目商人、伊斯兰贸易、波斯钴料——泉州港是元青花诞生的地理支点。', en: 'Semu merchants, Islamic trade, Persian cobalt — Quanzhou was the geographic pivot for Yuan blue-and-white.' },
-                      tags: '泉州 元代 青花 色目人 quanzhou yuan blue and white', date: '2026-03-02', read: { zh: '4 分钟', en: '4 min' } },
+                      tags: '泉州 元代 青花 色目人 quanzhou yuan blue and white', date: '2026-03-22', read: { zh: '4 分钟', en: '4 min' } },
                     { slug: 'burial-climate-north-south', tone: 'geography', mark: '埋', kicker: { zh: '透过地理看古董', en: 'GEOGRAPHY' },
                       title: { zh: '南方潮湿 vs 北方干燥', en: 'Humid south vs. dry north' },
                       desc: { zh: '同样的器物，埋在不同的气候里，出土后的样子完全不同。', en: 'The same object, buried in different climates, comes out looking entirely different.' },
-                      tags: '埋藏 南方 北方 气候 出土 burial climate', date: '2026-03-02', read: { zh: '4 分钟', en: '4 min' } },
+                      tags: '埋藏 南方 北方 气候 出土 burial climate', date: '2026-03-23', read: { zh: '4 分钟', en: '4 min' } },
                     { slug: 'bronze-patina-soil', tone: 'geography', mark: '锈', kicker: { zh: '透过地理看古董', en: 'GEOGRAPHY' },
                       title: { zh: '不同土壤的青铜锈色', en: 'Bronze patina by soil type' },
                       desc: { zh: '红壤、黄壤、沙土、水坑——土壤化学决定了青铜器的锈色。', en: 'Red soil, yellow soil, sand, water pits — soil chemistry decides the colour of bronze patina.' },
-                      tags: '青铜 锈色 土壤 红壤 水坑 bronze patina soil', date: '2026-03-02', read: { zh: '4 分钟', en: '4 min' } },
+                      tags: '青铜 锈色 土壤 红壤 水坑 bronze patina soil', date: '2026-03-24', read: { zh: '4 分钟', en: '4 min' } },
                     { slug: 'malacca-strait-antiques', tone: 'geography', mark: '峡', kicker: { zh: '透过地理看古董', en: 'GEOGRAPHY' },
-                      title: { zh: '马六甲海峡与南洋古董', en: 'The Malacca Strait and Nanyang antiques' },
-                      desc: { zh: '六百年的转口贸易，让新加坡与马六甲成为南洋古董的天然交汇点。', en: 'Six centuries of entrepôt trade made Singapore and Malacca a natural meeting point for Nanyang antiques.' },
-                      tags: '马六甲海峡 南洋 新加坡 贸易 malacca strait', date: '2026-03-02', read: { zh: '4 分钟', en: '4 min' } }
+                      title: { zh: '一条海峡，装下了半个亚洲的古董', en: 'One strait, half of Asia\'s antiques' },
+                      desc: { zh: '为什么新加坡的旧货铺里，什么都有？答案在六百年的转口贸易。', en: 'Why can you find almost anything in a Singapore junk shop? Six hundred years of entrepôt trade.' },
+                      tags: '马六甲海峡 南洋 新加坡 贸易 malacca strait', date: '2026-03-10', read: { zh: '4 分钟', en: '4 min' } }
                 ]
             }
         ];
@@ -980,6 +986,7 @@
                     <span class="zh">${esc(a.read.zh)}阅读</span>
                     <span class="en">${esc(a.read.en)} read</span>
                   </div>
+                  ${a.tone === 'market' ? '<span class="post-badge-monthly"><span class="zh">📅 每月更新</span><span class="en">📅 Monthly</span></span>' : ''}
                 </div>
               </a>`;
         }

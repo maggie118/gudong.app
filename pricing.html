@@ -4,12 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>服务价格 | Pricing | Gudong</title>
-<meta name="description" content="古董集服务价格：卖家刊登、私家藏馆与首页推荐，以及买家委托找货的收费标准（新加坡元）。 Gudong pricing for listings, Private Gallery, homepage features and the Sourcing Service (SGD).">
+<meta name="description" content="古董集服务价格：前 88 位创始卖家专属权益、Annual Seller（S$288/年）与 Seller Pro（S$699/年）两档年度方案，以及买家委托找货的收费标准（新加坡元）。 Gudong pricing: Founding Seller · 2026 benefits, Annual Seller (S$288/yr) and Seller Pro (S$699/yr) plans, and the Sourcing Service (SGD).">
 <link rel="canonical" href="https://gudong.app/pricing.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="古董集 Gudong">
 <meta property="og:title" content="服务价格 | Pricing | Gudong">
-<meta property="og:description" content="古董集服务价格：卖家刊登、私家藏馆与首页推荐，以及买家委托找货的收费标准（新加坡元）。">
+<meta property="og:description" content="古董集服务价格：前 88 位创始卖家专属权益、Annual Seller（S$288/年）与 Seller Pro（S$699/年）两档年度方案，以及买家委托找货的收费标准（新加坡元）。">
 <meta property="og:url" content="https://gudong.app/pricing.html">
 <meta property="og:image" content="https://gudong.app/assets/icons/icon-512.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
@@ -445,29 +445,30 @@ footer {
 </header>
 
 <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
-<aside class="sidebar" id="sidebar">
-  <button class="sidebar-toggle-inner" onclick="closeSidebar()" aria-label="close menu">☰</button>
-  <a href="index.html" class="sidebar-brand" style="text-decoration:none;">
-    <span class="zh">古董集</span><span class="en">GUDONG</span>
-  </a>
-  <nav class="sidebar-nav">
+    <aside class="sidebar" id="sidebar">
+        <button class="sidebar-toggle-inner" onclick="closeSidebar()" aria-label="close menu">☰</button>
+        <div class="sidebar-brand">
+            <span class="zh">古董集</span><span class="en">GUDONG</span>
+        </div>
+        <nav class="sidebar-nav">
             <a href="index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">首页</span><span class="en">Home</span></a>
-            <a href="index.html#daily-intel" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 今日情报</span><span class="en">· Daily Intel</span></a>
-            <a href=".index.html#today-finds" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 今日好货</span><span class="en">· Today's Picks</span></a>
+            <a href="index.html#daily-intel" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 今日捡漏</span><span class="en">· Daily Radar</span></a>
+            <a href="index.html#today-finds" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 今日好货</span><span class="en">· Today's Picks</span></a>
             <a href="index.html#new-listings" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 新上架好货</span><span class="en">· New Arrivals</span></a>
             <a href="collection.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">藏品库</span><span class="en">Collection</span></a>
             <a href="categories/porcelain.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 瓷器</span><span class="en">· Porcelain</span></a>
             <a href="categories/jade.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 玉器</span><span class="en">· Jade</span></a>
+            <a href="categories/bronze.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 铜器</span><span class="en">· Bronzes</span></a>
             <a href="categories/coins.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 钱币</span><span class="en">· Coins</span></a>
             <a href="categories/paintings.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 书画</span><span class="en">· Paintings &amp; Calligraphy</span></a>
             <a href="categories/misc.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 杂项</span><span class="en">· Miscellaneous</span></a>
+            <a href="sellers/index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">卖家展馆</span><span class="en">Seller Gallery</span></a>
+            <a href="pricing.html#seller-services" class="sidebar-link active" onclick="closeSidebar()"><span class="zh">刊登藏品</span><span class="en">List an Item</span></a>
             <a href="insights.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">情报 / 知识</span><span class="en">Insights</span></a>
-            <a href="sellers/index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">藏家主页</span><span class="en">Collector Gallery</span></a>
-            <a href="pricing.html" class="sidebar-link active" onclick="closeSidebar()"><span class="zh">刊登藏品</span><span class="en">List an Item</span></a>
-            <a href="about.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">联系我们</span><span class="en">Contact</span></a>
+            <a href="about.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">关于我们</span><span class="en">About</span></a>
             <button type="button" class="sidebar-lang-btn" onclick="toggleLang()" aria-label="Switch language"><span class="zh">🌐 English</span><span class="en">🌐 中文</span></button>
         </nav>
-</aside>
+    </aside>
 
 <main class="container">
   <div class="breadcrumb">
@@ -817,8 +818,8 @@ footer {
       <div class="faq-item">
         <div class="faq-q zh">平台为什么不收取交易佣金？</div>
         <div class="faq-q en">Why doesn't the platform charge a transaction commission?</div>
-        <div class="faq-a zh">古董集是信息展示与匹配平台，不代收藏品交易货款、不参与买卖流程，因此不针对成交本身抽成。平台收入完全来自刊登、私家藏馆、首页推荐等<b>展示与曝光类服务费</b>，买卖双方私下议价、成交的金额与平台无关。</div>
-        <div class="faq-a en">Gudong is a discovery and matching platform — it does not collect sale proceeds or take part in the transaction, so it does not take a cut of what an item actually sells for. Revenue comes entirely from <b>display and exposure services</b> (listing, gallery, homepage feature); the price buyer and seller privately agree on is not the platform's business.</div>
+        <div class="faq-a zh">古董集是信息展示与匹配平台，不代收藏品交易货款、不参与买卖流程，因此不针对成交本身抽成。平台收入完全来自年度方案、首页推荐、图片精修等<b>展示与曝光类服务费</b>，买卖双方私下议价、成交的金额与平台无关。</div>
+        <div class="faq-a en">Gudong is a discovery and matching platform — it does not collect sale proceeds or take part in the transaction, so it does not take a cut of what an item actually sells for. Revenue comes entirely from <b>display and exposure services</b> (annual plans, homepage feature, photo retouching); the price buyer and seller privately agree on is not the platform's business.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q zh">「委托找货」的信息对接费算佣金吗？</div>
@@ -829,8 +830,8 @@ footer {
       <div class="faq-item">
         <div class="faq-q zh">已支付的服务费，可以退款吗？</div>
         <div class="faq-q en">Can I get a refund on a service fee I've already paid?</div>
-        <div class="faq-a zh">【请确认并替换本段：建议明确刊登费 / 私家藏馆 / 首页推荐一经开通是否可退，例如"服务费一经开通即视为服务已提供，原则上不予退还；如因平台原因导致无法正常展示，可联系客服协商处理"。委托找货与专家视频咨询的退款政策已在对应小节说明，无需重复。】</div>
-        <div class="faq-a en">【Placeholder — confirm and replace: state whether Listing / Private Gallery / Homepage Feature fees are refundable once activated. Sourcing Service and Expert Video Consultation already have their refund terms stated in their own sections above.】</div>
+        <div class="faq-a zh">【请确认并替换本段：建议明确 Annual Seller / Seller Pro / 首页推荐一经开通是否可退，例如"年度方案一经开通即视为服务已提供，原则上不予退还；如因平台原因导致无法正常展示，可联系客服协商处理"。委托找货与专家视频咨询的退款政策已在对应小节说明，无需重复。】</div>
+        <div class="faq-a en">【Placeholder — confirm and replace: state whether Annual Seller / Seller Pro / Homepage Feature fees are refundable once activated. Sourcing Service and Expert Video Consultation already have their refund terms stated in their own sections above.】</div>
       </div>
       <div class="faq-item">
         <div class="faq-q zh">付款后多久生效？</div>
@@ -839,10 +840,10 @@ footer {
         <div class="faq-a en">【Placeholder — fill in the real activation turnaround, e.g. "Activated within 1 business day of payment verification."】</div>
       </div>
       <div class="faq-item">
-        <div class="faq-q zh">「创始卖家·2026」的 88 个名额还剩多少？</div>
-        <div class="faq-q en">How many of the 88 Founder-Dealer 2026 seats are left?</div>
-        <div class="faq-a zh">【建议接入实际剩余席位数并定期更新（例如"截至[日期]已有 X 位卖家入驻"），避免"限量 88 席"长期原样展示造成不实稀缺感。】</div>
-        <div class="faq-a en">【Placeholder — show the real, periodically-updated seat count (e.g. "X of 88 seats filled as of [date]") rather than leaving the limited-seats claim static indefinitely.】</div>
+        <div class="faq-q zh">「Founding Seller · 2026」的 88 个名额还剩多少？创始卖家具体有哪些权益？</div>
+        <div class="faq-q en">How many of the 88 Founding Seller · 2026 seats are left? What benefits do Founding Sellers get?</div>
+        <div class="faq-a zh">【建议接入实际剩余席位数并定期更新（例如"截至[日期]已有 X 位卖家入驻"），避免"限量 88 席"长期原样展示造成不实稀缺感。】创始卖家权益包括：前 2 件免费刊登（1 年有效）、永久保留 Founding Seller · 2026 身份、创始续费价格（适用于 Annual Seller / Seller Pro）、新功能优先体验、优先审核与支持、创始卖家专属曝光机会，以及未来平台新增重要卖家权益时优先享有。</div>
+        <div class="faq-a en">【Placeholder — show the real, periodically-updated seat count (e.g. "X of 88 seats filled as of [date]") rather than leaving the limited-seats claim static indefinitely.】Founding Seller benefits include: first 2 listings free (1-year validity), permanent Founding Seller · 2026 status, founding renewal rate (for both Annual Seller and Seller Pro), priority access to new features, priority review &amp; support, exclusive exposure opportunities, and priority access to any future seller benefits added by the platform.</div>
       </div>
     </div>
   </section>
@@ -884,16 +885,19 @@ footer {
 </main>
 
 <footer>
-  <div class="footer-nav">
-            <a href="pricing.html#buyer-services" class="zh">委托找货</a><a href="pricing.html#buyer-services" class="en">Sourcing</a>
+        <div class="footer-nav">
+            <a href="about.html" class="zh">联系我们</a><a href="about.html" class="en">Contact</a>
+            <a href="pricing.html#seller-services" class="zh">卖家服务</a><a href="pricing.html#seller-services" class="en">Seller Services</a>
+            <a href="pricing.html#buyer-services" class="zh">买家指南</a><a href="pricing.html#buyer-services" class="en">Buyer Guide</a>
+            <a href="pricing.html#price-table" class="zh">服务收费</a><a href="pricing.html#price-table" class="en">Price List</a>
             <a href="privacy.html" class="zh">隐私政策</a><a href="privacy.html" class="en">Privacy</a>
             <a href="terms.html" class="zh">用户条款</a><a href="terms.html" class="en">Terms</a>
         </div>
-  <p class="footer-disclaimer zh">gudong.app 是信息发现平台，而非交易平台。</p>
-  <p class="footer-disclaimer en">gudong.app is an information and discovery platform for antiques and collectibles.</p>
-  <p class="zh" style="margin-bottom:0;">© 2026 古董集 · gudong.app <a href="javascript:void(0)" class="app-install-btn" onclick="event.preventDefault();"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20h14v-2H5v2zM19 9h-4V3H9v6H5l7 7 7-7z"/></svg>安装古董.app</a></p>
-  <p class="en" style="margin-bottom:0;">© 2026 Gudong · gudong.app <a href="javascript:void(0)" class="app-install-btn" onclick="event.preventDefault();"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20h14v-2H5v2zM19 9h-4V3H9v6H5l7 7 7-7z"/></svg>Install gudong.app</a></p>
-</footer>
+        <p class="footer-disclaimer zh">gudong.app 是信息发现平台，而非交易平台。</p>
+        <p class="footer-disclaimer en">gudong.app is an information and discovery platform for antiques and collectibles.</p>
+        <p class="zh" style="margin-bottom:0;">© 2026 古董集 · gudong.app <a href="javascript:void(0)" class="app-install-btn" onclick="event.preventDefault();"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20h14v-2H5v2zM19 9h-4V3H9v6H5l7 7 7-7z"/></svg>安装古董.app</a></p>
+        <p class="en" style="margin-bottom:0;">© 2026 Gudong · gudong.app <a href="javascript:void(0)" class="app-install-btn" onclick="event.preventDefault();"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20h14v-2H5v2zM19 9h-4V3H9v6H5l7 7 7-7z"/></svg>Install gudong.app</a></p>
+    </footer>
 
 <script>
 let currentLang = (function () { try { return localStorage.getItem('gudong_lang') === 'en' ? 'en' : 'zh'; } catch (e) { return 'zh'; } })();

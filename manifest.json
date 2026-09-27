@@ -1,10 +1,10 @@
 {
-    "id": "/",
+    "id": "https://gudong.app/",
     "name": "古董集 Gudong",
     "short_name": "Gudong",
     "description": "新加坡中国古董与收藏品信息发现平台",
-    "start_url": "/",
-    "scope": "/",
+    "start_url": "https://gudong.app/",
+    "scope": "https://gudong.app/",
     "display": "standalone",
     "background_color": "#F5F2EC",
     "theme_color": "#8A5A3B",
@@ -16,19 +16,19 @@
     ],
     "icons": [
         {
-            "src": "/assets/icons/icon-192.png",
+            "src": "https://gudong.app/assets/icons/icon-192.png",
             "sizes": "192x192",
             "type": "image/png",
             "purpose": "any"
         },
         {
-            "src": "/assets/icons/icon-512.png",
+            "src": "https://gudong.app/assets/icons/icon-512.png",
             "sizes": "512x512",
             "type": "image/png",
             "purpose": "any"
         },
         {
-            "src": "/assets/icons/icon.svg",
+            "src": "https://gudong.app/assets/icons/icon.svg",
             "sizes": "any",
             "type": "image/svg+xml",
             "purpose": "any"

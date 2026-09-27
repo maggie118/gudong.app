@@ -27,7 +27,9 @@
     '\u7389\u5668': 'jade', 'jade': 'jade',
     '\u94b1\u5e01': 'coins', 'coins': 'coins', 'coin': 'coins',
     '\u4e66\u753b': 'paintings', 'paintings': 'paintings', 'painting': 'paintings', 'calligraphy': 'paintings',
-    '\u6742\u9879': 'misc', 'misc': 'misc', 'miscellaneous': 'misc', 'other': 'misc'
+    '\u6742\u9879': 'misc', 'misc': 'misc', 'miscellaneous': 'misc', 'other': 'misc',
+    // 2026-09-27：新增 \u94dc\u5668 (bronze) 一级分类；同时兼容已有的\u300c\u6742\u9879 \u94dc\u5668\u300d复合写法
+    '\u94dc\u5668': 'bronze', 'bronze': 'bronze', 'bronzeware': 'bronze'
   };
   function catKey(c) {
     var v = String(c == null ? '' : c).trim().toLowerCase();
@@ -37,6 +39,8 @@
     if (/\u7389|jade/.test(v)) return 'jade';
     if (/\u5e01|\u94b1|coin|numismat/.test(v)) return 'coins';
     if (/\u753b|\u4e66\u6cd5|painting|calligraph/.test(v)) return 'paintings';
+    // \u94dc = U+94DC (\u201c\u94dc\u201d\u5b57\u9996) \u2014 \u8986\u76d6 \u300c\u6742\u9879 \u94dc\u5668\u300d\u3001\u300cbronze\u300d\u3001\u300cbronzeware\u300d\u7b49\u5199\u6cd5
+    if (/\u94dc|bronze/.test(v)) return 'bronze';
     return 'misc';
   }
 

@@ -39,12 +39,44 @@
             --color-qianjinzong: #948268;
             --color-success: #526657;
             --color-danger: #9A554B;
+
+        --card-radius: 22px;
+        --font-display: "Inter", "Geist", "Inter Display", "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        --font-latin: "Inter", "Geist", "Inter Display", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        --font-zh-sans: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Helvetica, Arial, sans-serif;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif; }
         html { scroll-behavior: smooth; }
         body { background: var(--color-bg); color: var(--color-text); line-height: 1.65; }
 
         /* ---------- Header (synced with pricing.html) ---------- */
+        /* ---------- Announcement bar ---------- */
+        .announce-bar {
+            background: var(--color-primary-light);
+            color: var(--color-primary-dark);
+            font-size: .8rem;
+            text-align: center;
+            padding: .55rem 2.6rem;
+            position: relative;
+            line-height: 1.4;
+        }
+
+        .announce-close {
+            position: absolute;
+            right: .9rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            font-size: 1.05rem;
+            line-height: 1;
+            color: var(--color-text-secondary);
+            cursor: pointer;
+            padding: .2rem;
+        }
+
+        .announce-close:hover { color: var(--color-primary); }
+
         header {
             background: rgba(255,255,255,.96); backdrop-filter: blur(6px);
             color: var(--color-text); padding: 0 5%; height: 68px;
@@ -223,11 +255,15 @@
     </style>
 </head>
 <body data-lang="zh">
+    <div class="announce-bar" id="announceBar">
+        <span class="zh">创始卖家福利｜限量 88 席免费入驻，前 2 件藏品信息免费刊登，对卖家不抽取交易佣金。</span>
+        <span class="en">Founder-Dealer Benefit | Limited 88 seats · Free to join · First 2 listings free · No transaction commission.</span>
+        <button class="announce-close" onclick="closeAnnounce()" aria-label="close">×</button>
+    </div>
     <header>
         <div style="display:flex; align-items:center; gap:.9rem;">
             <button class="menu-toggle" onclick="openSidebar()" aria-label="menu" aria-expanded="false" id="menuToggle">☰</button>
-
-            <a href="https://gudong.app/index.html" class="brand" style="text-decoration:none;color:inherit;">
+            <a href="https://gudong.app/index.html" class="brand">
                 <h1><span class="zh">古董集</span><span class="en">GUDONG</span></h1>
                 <p><span class="zh">GUDONG.APP</span><span class="en">Chinese Antiques Platform</span></p>
             </a>
@@ -241,7 +277,7 @@
     </header>
 
     <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
-    <aside class="sidebar" id="sidebar" aria-hidden="true">
+    <aside class="sidebar" id="sidebar">
         <button class="sidebar-toggle-inner" onclick="closeSidebar()" aria-label="close menu">☰</button>
         <div class="sidebar-brand">
             <span class="zh">古董集</span><span class="en">GUDONG</span>
@@ -386,6 +422,23 @@
     </footer>
 
     <script>
+        function openSidebar() {
+            document.getElementById('sidebar').classList.add('open');
+            document.getElementById('sidebarOverlay').classList.add('show');
+            document.body.style.overflow = 'hidden';
+            var t = document.getElementById('menuToggle');
+            if (t) t.setAttribute('aria-expanded', 'true');
+        }
+
+        function closeSidebar() {
+            document.getElementById('sidebar').classList.remove('open');
+            document.getElementById('sidebarOverlay').classList.remove('show');
+            document.body.style.overflow = '';
+            var t = document.getElementById('menuToggle');
+            if (t) t.setAttribute('aria-expanded', 'false');
+        }
+
+        /* 全站统一的语言偏好与公告条（localStorage：gudong_lang / announceClosed） */
         let currentLang = (function () { try { return localStorage.getItem('gudong_lang') === 'en' ? 'en' : 'zh'; } catch (e) { return 'zh'; } })();
         function applyLang() {
             document.body.dataset.lang = currentLang;
@@ -398,29 +451,29 @@
             applyLang();
             try { localStorage.setItem('gudong_lang', currentLang); } catch (e) {}
         }
-        applyLang();
-        function openSidebar() {
-            document.getElementById('sidebar').classList.add('open');
-            document.getElementById('sidebarOverlay').classList.add('show');
-            document.body.style.overflow = 'hidden';
-            var t = document.getElementById('menuToggle');
-            if (t) t.setAttribute('aria-expanded', 'true');
+        function closeAnnounce() {
+            var b = document.getElementById('announceBar');
+            if (b) b.style.display = 'none';
+            try { localStorage.setItem('announceClosed', 'yes'); } catch (e) {}
         }
-        function closeSidebar() {
-            document.getElementById('sidebar').classList.remove('open');
-            document.getElementById('sidebarOverlay').classList.remove('show');
-            document.body.style.overflow = '';
-            var t = document.getElementById('menuToggle');
-            if (t) t.setAttribute('aria-expanded', 'false');
-        }
-        /* ESC 关闭侧栏 */
-        document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeSidebar(); });
-        /* 宽屏自动收起，避免遮罩残留 */
-        window.addEventListener('resize', function () { if (window.innerWidth > 900) closeSidebar(); });
 
+        /* ESC 关闭侧栏 */
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') closeSidebar();
+        });
+
+        /* 桌面宽度时自动收起，避免遮罩残留 */
+        window.addEventListener('resize', function () {
+            if (window.innerWidth > 900) closeSidebar();
+        });
+
+        applyLang();
+        try { if (localStorage.getItem('announceClosed') === 'yes') { var __ab = document.getElementById('announceBar'); if (__ab) __ab.style.display = 'none'; } } catch (e) {}
+
+        /* Service Worker：同域根相对路径（items/ 下写 'sw.js' 会解析成 /items/sw.js） */
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', function () {
-                navigator.serviceWorker.register('sw.js').catch(function () {});
+                navigator.serviceWorker.register('/sw.js').catch(function () {});
             });
         }
     </script>

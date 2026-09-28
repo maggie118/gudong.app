@@ -3,8 +3,8 @@
 
   <!-- ============================================================
        古董集 Gudong.app — 站点地图
-       生成日期：2026-09-27
-       总 URL 数：96
+       生成日期：2026-09-28
+       总 URL 数：94
        ============================================================ -->
 
   <!-- ==================== 顶层页面（7） ==================== -->
@@ -25,10 +25,10 @@
 
   <!-- ==================== 卖家页（5） ==================== -->
   <url><loc>https://gudong.app/sellers/index.html</loc><lastmod>2026-09-27</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://gudong.app/sellers/seller-lim-kw-antiques.html</loc><lastmod>2026-09-27</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://gudong.app/sellers/seller-ng-cy-antiques.html</loc><lastmod>2026-09-27</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://gudong.app/sellers/seller-ng-lk-antiques.html</loc><lastmod>2026-09-27</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://gudong.app/sellers/seller-yak-bc-antiques.html</loc><lastmod>2026-09-27</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://gudong.app/sellers/seller-lim-kw-antiques.html</loc><lastmod>2026-09-28</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://gudong.app/sellers/seller-ng-cy-antiques.html</loc><lastmod>2026-09-28</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://gudong.app/sellers/seller-ng-lk-antiques.html</loc><lastmod>2026-09-28</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://gudong.app/sellers/seller-yak-bc-antiques.html</loc><lastmod>2026-09-28</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
 
   <!-- ==================== 藏品页（15） ==================== -->
   <url><loc>https://gudong.app/items/item-lim-01.html</loc><lastmod>2026-09-27</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
@@ -42,10 +42,10 @@
   <url><loc>https://gudong.app/items/item-ngcy-02.html</loc><lastmod>2026-09-27</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
   <url><loc>https://gudong.app/items/item-ngcy-03.html</loc><lastmod>2026-09-27</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
   <url><loc>https://gudong.app/items/item-ngcy-04.html</loc><lastmod>2026-09-27</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://gudong.app/items/item-ngcy-05.html</loc><lastmod>2026-09-27</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://gudong.app/items/item-yak-01.html</loc><lastmod>2026-09-27</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://gudong.app/items/item-yak-02.html</loc><lastmod>2026-09-27</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://gudong.app/items/item-yak-03.html</loc><lastmod>2026-09-27</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://gudong.app/items/item-ngcy-05.html</loc><lastmod>2026-09-28</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://gudong.app/items/item-yak-01.html</loc><lastmod>2026-09-28</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://gudong.app/items/item-yak-02.html</loc><lastmod>2026-09-28</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://gudong.app/items/item-yak-03.html</loc><lastmod>2026-09-28</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
 
   <!-- ==================== 情报：原有 38 篇 ==================== -->
 
@@ -131,4 +131,4 @@
   <url><loc>https://gudong.app/insights/bronze-patina-soil.html</loc><lastmod>2026-03-24</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://gudong.app/insights/malacca-strait-antiques.html</loc><lastmod>2026-03-10</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
 
-</urlset>
+</urlset>

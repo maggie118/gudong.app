@@ -5,18 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>钱币 | Coins | Gudong</title>
     <meta name="description" content="浏览中国古钱币与钱币藏品，查看叫价并直接联系卖家。 Browse Chinese antique coins and numismatic listings and contact sellers directly.">
-    <link rel="canonical" href="https://gudong.app/categories/coins.html">
+    <link rel="canonical" href="coins.html">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="古董集 Gudong">
     <meta property="og:title" content="钱币 | Coins | Gudong">
     <meta property="og:description" content="浏览中国古钱币与钱币藏品，查看叫价并直接联系卖家。 Browse Chinese antique coins and numismatic listings and contact sellers directly.">
-    <meta property="og:url" content="https://gudong.app/categories/coins.html">
-    <meta property="og:image" content="https://gudong.app/assets/icons/icon-512.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+    <meta property="og:url" content="coins.html">
+    <meta property="og:image" content="../assets/icons/icon-512.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/icons/favicon-32x32.png">
     <link rel="manifest" href="../manifest.json">
     <meta name="theme-color" content="#8A5A3B">
+    <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <link rel="apple-touch-icon" href="../assets/icons/icon-192.png">
     <style>
         :root {
             --color-bg: #F5F2EC; --color-surface: #FFFFFF; --color-white: #FFFFFF; --color-border: #E4DED5;
@@ -32,9 +34,13 @@
         .announce-close { position: absolute; right: .9rem; top: 50%; transform: translateY(-50%); background: none; border: none; font-size: 1.05rem; line-height: 1; color: var(--color-text-secondary); cursor: pointer; padding: .2rem; }
         .announce-close:hover { color: var(--color-primary); }
         header { background: rgba(255,255,255,.96); backdrop-filter: blur(6px); color: var(--color-text); padding: 0 5%; height: 68px; display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; border-bottom: 1px solid var(--color-border); position: sticky; top: 0; z-index: 50; }
-        .brand { display: flex; flex-direction: column; justify-content: center; line-height: 1; flex-shrink: 0; }
-        .brand h1 { font-size: 1.4rem; font-weight: 700; letter-spacing: .02em; line-height: 1.15; }
+        .brand { display: flex; flex-direction: column; justify-content: center; line-height: 1; flex-shrink: 0; text-decoration: none; color: inherit; }
+        .brand h1 { font-size: 1.4rem; font-weight: 700; letter-spacing: .02em; line-height: 1.15; color: var(--color-primary-dark); }
         .brand p { color: var(--color-bronze-muted); margin-top: .2rem; font-size: .62rem; letter-spacing: .2em; text-transform: uppercase; }
+        .brand h1 .en, .brand p .en, .sidebar-brand .en {
+            font-family: "Inter Display", "Inter", "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+            letter-spacing: normal;
+        }
         .header-right { display: flex; align-items: center; gap: .8rem; flex-shrink: 0; }
         .btn-publish { display: inline-flex; align-items: center; gap: .35rem; background: var(--color-primary); color: #fff; padding: .5rem 1.1rem; border-radius: 8px; font-size: .85rem; font-weight: 600; text-decoration: none; white-space: nowrap; transition: .2s; }
         .btn-publish:hover { background: var(--color-primary-dark); }
@@ -44,7 +50,7 @@
         .menu-toggle:hover { border-color: var(--color-primary); color: var(--color-primary); background: var(--color-primary-light); }
         .sidebar-overlay { position: fixed; inset: 0; background: rgba(20,17,14,.4); opacity: 0; pointer-events: none; transition: opacity .25s ease; z-index: 90; }
         .sidebar-overlay.show { opacity: 1; pointer-events: auto; }
-        .sidebar { position: fixed; top: 0; left: 0; height: 100vh; width: 264px; max-width: 78vw; background: var(--color-white); box-shadow: 4px 0 24px rgba(37,34,30,.18); transform: translateX(-100%); transition: transform .3s ease; z-index: 95; overflow-y: auto; padding-bottom: 2rem; }
+        .sidebar { position: fixed; top: 0; left: 0; height: 100vh; height: 100dvh; width: 264px; max-width: 78vw; background: var(--color-white); box-shadow: 4px 0 24px rgba(37,34,30,.18); transform: translateX(-100%); transition: transform .3s ease; z-index: 95; overflow-y: auto; -webkit-overflow-scrolling: touch; padding-bottom: 2rem; }
         .sidebar.open { transform: translateX(0); }
         .sidebar-toggle-inner { display: block; width: 100%; padding: .9rem 0; background: transparent; border: none; border-bottom: 1px solid var(--color-border); font-size: 1.15rem; color: var(--color-text-secondary); cursor: pointer; text-align: center; }
         .sidebar-toggle-inner:hover { color: var(--color-primary); }
@@ -59,6 +65,15 @@
         .sidebar-sub { display: block; padding: .55rem 1.4rem .55rem 2.2rem; color: var(--color-text-secondary); text-decoration: none; font-size: .88rem; transition: .2s; }
         .sidebar-sub:hover { color: var(--color-primary); background: var(--color-primary-light); }
         .sidebar-sub.active { color: var(--color-primary); font-weight: 600; }
+        .sidebar-lang-btn {
+            display: flex; align-items: center; justify-content: center; gap: .4rem;
+            width: calc(100% - 2.8rem); margin: 1rem 1.4rem .8rem;
+            padding: .62rem .9rem; border: 1px solid var(--color-border);
+            border-radius: 12px; background: var(--color-white);
+            color: var(--color-text-secondary); font-family: inherit;
+            font-size: .9rem; font-weight: 600; cursor: pointer; transition: .2s;
+        }
+        .sidebar-lang-btn:hover { border-color: var(--color-primary); color: var(--color-primary); background: var(--color-primary-light); }
         .container { max-width: 1200px; margin: 0 auto; padding: 2.6rem 5% 4rem; background: transparent; min-height: 80vh; }
         section { margin-bottom: 3.6rem; scroll-margin-top: 90px; }
         h2 { color: var(--color-text); margin-bottom: 1.2rem; font-size: 1.5rem; font-weight: 700; letter-spacing: -.02em; }
@@ -124,50 +139,24 @@
         [data-lang="zh"] .en { display: none; }
         @media (max-width: 820px) { header { height: 62px; gap: .6rem; } .btn-publish { padding: .45rem .85rem; font-size: .8rem; } .container { padding-top: 2rem; } .list-grid { grid-template-columns: repeat(2, 1fr); } }
         @media (max-width: 560px) { .brand h1 { font-size: 1.15rem; } .container { padding: 1.8rem 4.5% 3rem; } section { margin-bottom: 2.8rem; } .list-grid { grid-template-columns: 1fr; gap: .8rem; } .filter-row { flex-direction: column; align-items: flex-start; gap: .4rem; } }
-    
-        /* ---------- Sidebar 语言切换按钮（2026-09-15 新增） ---------- */
-        .sidebar-lang-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: .4rem;
-            width: calc(100% - 2.8rem);
-            margin: 1rem 1.4rem .8rem;
-            padding: .62rem .9rem;
-            border: 1px solid var(--color-border);
-            border-radius: 8px;
-            background: var(--color-white);
-            color: var(--color-text-secondary);
-            font-family: inherit;
-            font-size: .9rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: .2s;
-        }
-        .sidebar-lang-btn:hover {
-            border-color: var(--color-primary);
-            color: var(--color-primary);
-            background: var(--color-primary-light);
-        }
     </style>
-    <link rel="apple-touch-icon" href="/assets/icons/icon-192.png">
 </head>
 <body data-lang="zh">
     <div class="announce-bar" id="announceBar">
-        <span class="zh">创始卖家福利｜限量 88 席免费入驻，前 2 件藏品信息免费刊登。</span>
-        <span class="en">Founder-Dealer Benefit | Limited 88 seats · Free to join · First 2 listings free.</span>
+        <span class="zh">创始卖家福利｜限量 88 席免费入驻，前 2 件藏品信息免费刊登，对卖家不抽取交易佣金。</span>
+        <span class="en">Founder-Dealer Benefit | Limited 88 seats · Free to join · First 2 listings free · No transaction commission.</span>
         <button class="announce-close" onclick="closeAnnounce()" aria-label="close">×</button>
     </div>
 
     <header>
         <div style="display:flex; align-items:center; gap:.9rem;">
-            <button class="menu-toggle" onclick="openSidebar()" aria-label="menu">☰</button>
-            <a href="../index.html" class="brand" style="text-decoration:none;color:inherit;">
-                <h1 class="zh">古董集</h1>
-                <h1 class="en">GUDONG</h1>
-                <p class="zh">GUDONG</p>
+            <button class="menu-toggle" onclick="openSidebar()" aria-label="menu" aria-expanded="false" id="menuToggle">☰</button>
+            <a href="../index.html" class="brand">
+                <h1><span class="zh">古董集</span><span class="en">GUDONG</span></h1>
+                <p><span class="zh">GUDONG.APP</span><span class="en">Chinese Antiques Platform</span></p>
             </a>
         </div>
+
         <div class="header-right">
             <a href="../pricing.html#seller-services" class="btn-publish">
                 <span class="zh">刊登藏品</span><span class="en">List an Item</span>
@@ -177,26 +166,27 @@
     </header>
 
     <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
-    <aside class="sidebar" id="sidebar">
+    <aside class="sidebar" id="sidebar" aria-hidden="true">
         <button class="sidebar-toggle-inner" onclick="closeSidebar()" aria-label="close menu">☰</button>
         <div class="sidebar-brand">
             <span class="zh">古董集</span><span class="en">GUDONG</span>
         </div>
-                <nav class="sidebar-nav">
+        <nav class="sidebar-nav">
             <a href="../index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">首页</span><span class="en">Home</span></a>
-            <a href="../index.html#daily-intel" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 今日情报</span><span class="en">· Daily Intel</span></a>
+            <a href="../index.html#daily-intel" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 今日捡漏</span><span class="en">· Daily Radar</span></a>
             <a href="../index.html#today-finds" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 今日好货</span><span class="en">· Today's Picks</span></a>
             <a href="../index.html#new-listings" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 新上架好货</span><span class="en">· New Arrivals</span></a>
-            <a href="../collection.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">藏品库</span><span class="en">Collection</span></a>
-            <a href="../categories/porcelain.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 瓷器</span><span class="en">· Porcelain</span></a>
-            <a href="../categories/jade.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 玉器</span><span class="en">· Jade</span></a>
-            <a href="../categories/coins.html" class="sidebar-sub active" onclick="closeSidebar()"><span class="zh">· 钱币</span><span class="en">· Coins</span></a>
-            <a href="../categories/paintings.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 书画</span><span class="en">· Paintings &amp; Calligraphy</span></a>
-            <a href="../categories/misc.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 杂项</span><span class="en">· Miscellaneous</span></a>
+            <a href="../collection.html" class="sidebar-link active" onclick="closeSidebar()"><span class="zh">藏品库</span><span class="en">Collection</span></a>
+            <a href="porcelain.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 瓷器</span><span class="en">· Porcelain</span></a>
+            <a href="jade.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 玉器</span><span class="en">· Jade</span></a>
+            <a href="bronze.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 铜器</span><span class="en">· Bronzes</span></a>
+            <a href="coins.html" class="sidebar-sub active" onclick="closeSidebar()"><span class="zh">· 钱币</span><span class="en">· Coins</span></a>
+            <a href="paintings.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 书画</span><span class="en">· Paintings &amp; Calligraphy</span></a>
+            <a href="misc.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 杂项</span><span class="en">· Miscellaneous</span></a>
+            <a href="../sellers/index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">卖家展馆</span><span class="en">Seller Gallery</span></a>
+            <a href="../pricing.html#seller-services" class="sidebar-link" onclick="closeSidebar()"><span class="zh">刊登藏品</span><span class="en">List an Item</span></a>
             <a href="../insights.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">情报 / 知识</span><span class="en">Insights</span></a>
-            <a href="../sellers/index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">藏家主页</span><span class="en">Collector Gallery</span></a>
-            <a href="../pricing.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">刊登藏品</span><span class="en">List an Item</span></a>
-            <a href="../about.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">联系我们</span><span class="en">Contact</span></a>
+            <a href="../about.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">关于我们</span><span class="en">About</span></a>
             <button type="button" class="sidebar-lang-btn" onclick="toggleLang()" aria-label="Switch language"><span class="zh">🌐 English</span><span class="en">🌐 中文</span></button>
         </nav>
     </aside>
@@ -226,11 +216,11 @@
             </div>
         </section>
 
-             <section id="list">
+        <section id="list">
             <div class="section-head2">
                 <div>
                     <span class="title zh">全部钱币</span><span class="title en">All Coins</span>
-                    </div>
+                </div>
                 <a href="javascript:void(0)" class="more zh" onclick="openPhotoRetouchModal()">想要同款图片效果？ →</a>
                 <a href="javascript:void(0)" class="more en" onclick="openPhotoRetouchModal()">Want the Same Photo Finish? →</a>
             </div>
@@ -243,7 +233,10 @@
 
     <footer>
         <div class="footer-nav">
-            <a href="../pricing.html#buyer-services" class="zh">委托找货</a><a href="../pricing.html#buyer-services" class="en">Sourcing</a>
+            <a href="../about.html" class="zh">联系我们</a><a href="../about.html" class="en">Contact</a>
+            <a href="../pricing.html#seller-services" class="zh">卖家服务</a><a href="../pricing.html#seller-services" class="en">Seller Services</a>
+            <a href="../pricing.html#buyer-services" class="zh">买家指南</a><a href="../pricing.html#buyer-services" class="en">Buyer Guide</a>
+            <a href="../pricing.html#price-table" class="zh">服务收费</a><a href="../pricing.html#price-table" class="en">Price List</a>
             <a href="../privacy.html" class="zh">隐私政策</a><a href="../privacy.html" class="en">Privacy</a>
             <a href="../terms.html" class="zh">用户条款</a><a href="../terms.html" class="en">Terms</a>
         </div>
@@ -254,9 +247,27 @@
     </footer>
 
     <script>
-        function openSidebar() { document.getElementById('sidebar').classList.add('open'); document.getElementById('sidebarOverlay').classList.add('show'); document.body.style.overflow = 'hidden'; }
-        function closeSidebar() { document.getElementById('sidebar').classList.remove('open'); document.getElementById('sidebarOverlay').classList.remove('show'); document.body.style.overflow = ''; }
-        /* 2026-09-19：全站统一的语言偏好与公告条（localStorage：gudong_lang / announceClosed），子页面之间保持一致 */
+        function openSidebar() {
+            document.getElementById('sidebar').classList.add('open');
+            document.getElementById('sidebarOverlay').classList.add('show');
+            document.body.style.overflow = 'hidden';
+            var t = document.getElementById('menuToggle');
+            if (t) t.setAttribute('aria-expanded', 'true');
+            var sb = document.getElementById('sidebar');
+            if (sb) sb.setAttribute('aria-hidden', 'false');
+        }
+
+        function closeSidebar() {
+            document.getElementById('sidebar').classList.remove('open');
+            document.getElementById('sidebarOverlay').classList.remove('show');
+            document.body.style.overflow = '';
+            var t = document.getElementById('menuToggle');
+            if (t) t.setAttribute('aria-expanded', 'false');
+            var sb = document.getElementById('sidebar');
+            if (sb) sb.setAttribute('aria-hidden', 'true');
+        }
+
+        /* 全站统一的语言偏好与公告条（localStorage：gudong_lang / announceClosed） */
         let currentLang = (function () { try { return localStorage.getItem('gudong_lang') === 'en' ? 'en' : 'zh'; } catch (e) { return 'zh'; } })();
         function applyLang() {
             document.body.dataset.lang = currentLang;
@@ -275,228 +286,242 @@
             if (b) b.style.display = 'none';
             try { localStorage.setItem('announceClosed', 'yes'); } catch (e) {}
         }
+
+        /* ESC 关闭侧栏 */
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') closeSidebar();
+        });
+
+        /* 桌面宽度时自动收起，避免遮罩残留 */
+        window.addEventListener('resize', function () {
+            if (window.innerWidth > 900) closeSidebar();
+        });
+
         applyLang();
         try { if (localStorage.getItem('announceClosed') === 'yes') { var __ab = document.getElementById('announceBar'); if (__ab) __ab.style.display = 'none'; } } catch (e) {}
-        // 搜索逻辑统一由 ../assets/js/item-search.js 提供（关键词过滤 + 回车触发 + 结果反馈）
-        if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js');
+
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function () {
+                navigator.serviceWorker.register('../sw.js').catch(function () {});
+            });
+        }
     </script>
     <!-- 分类页通用搜索：关键词过滤 + 回车/点击触发 + 结果反馈 -->
     <script src="../assets/js/item-search.js"></script>
     <script src="../assets/js/gudong-data.js" data-root="../"></script>
     <script>
-        /* 2026-09-19：品类页统一由公共数据层渲染（Airtable 实时数据 → 快照回退 → 保留静态内容） */
         if (window.GudongData) GudongData.mountCategory({ cat: '钱币', list: '#itemList', style: 'card' });
-        else {   // 公共数据层没加载到（文件没部署 / 路径不对）：给出可见提示，避免页面一片空白
+        else {
             console.error('[Gudong] assets/js/gudong-data.js 未加载');
             var __l = document.querySelector('#itemList'); if (__l) __l.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:2.4rem 1rem;color:#716B63;line-height:1.8"><span class="zh">藏品加载失败，请刷新页面重试</span><span class="en">Failed to load listings — please refresh</span></div>';
         }
     </script>
-<!-- 2026-09-25：图片精修服务弹窗（创始卖家专属福利） -->
-<style>
-.pr-modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:120;display:none;align-items:center;justify-content:center;padding:1rem;}
-.pr-modal-overlay.show{display:flex;}
-.pr-modal-box{background:#fff;border-radius:12px;max-width:560px;width:100%;padding:1.7rem 1.5rem;position:relative;max-height:90vh;overflow-y:auto;box-shadow:0 18px 50px rgba(0,0,0,.22);animation:pr-in .2s ease;}
-@keyframes pr-in{from{opacity:0;transform:translateY(8px) scale(.98);}to{opacity:1;transform:none;}}
-.pr-modal-close{position:absolute;top:.7rem;right:.9rem;border:none;background:none;font-size:1.5rem;cursor:pointer;color:var(--color-text-secondary);line-height:1;}
-.pr-modal-close:hover{color:var(--color-text);}
-.pr-badge{display:inline-block;padding:.28rem .72rem;background:var(--color-gold-soft);color:var(--color-gold);border-radius:6px;font-size:.78rem;font-weight:700;margin-bottom:.75rem;}
-.pr-title{font-size:1.22rem;font-weight:700;color:var(--color-text);margin-bottom:.9rem;line-height:1.4;}
-.pr-price-block{background:var(--color-primary-light);border-radius:10px;padding:1rem 1.1rem;margin-bottom:1rem;}
-.pr-price-main{font-size:1.1rem;font-weight:800;color:var(--color-primary);margin-bottom:.4rem;}
-.pr-price-main .amt{font-size:1.5rem;}
-.pr-example{font-size:.82rem;color:var(--color-text-secondary);line-height:1.6;margin-bottom:.5rem;}
-.pr-checklist{list-style:none;padding:0;margin:.4rem 0;}
-.pr-checklist li{display:flex;align-items:flex-start;gap:.5rem;font-size:.85rem;color:var(--color-text);padding:.2rem 0;}
-.pr-checklist li svg{flex-shrink:0;width:16px;height:16px;color:var(--color-success);margin-top:.12rem;}
-.pr-note{font-size:.78rem;color:var(--color-text-secondary);line-height:1.6;margin-top:.5rem;}
-.pr-price-sub{font-size:.88rem;font-weight:700;color:var(--color-primary);margin-top:.6rem;line-height:1.5;}
-.pr-warning{background:#FDF6EC;border:1px solid #F0E0C0;border-radius:8px;padding:.8rem 1rem;font-size:.78rem;color:#8A6D3B;line-height:1.6;margin-bottom:1rem;}
-.pr-section-title{font-size:.95rem;font-weight:700;color:var(--color-text);margin:1rem 0 .5rem;}
-.pr-workflow{font-size:.83rem;color:var(--color-text-secondary);line-height:1.7;background:#FAFAF7;border-radius:8px;padding:.8rem 1rem;margin-bottom:.3rem;}
-.pr-workflow p{margin:.3rem 0;}
-.pr-form-row{margin-top:.9rem;}
-.pr-form-row label{display:block;font-size:.82rem;margin-bottom:.35rem;color:var(--color-text-secondary);font-weight:600;}
-.pr-input,.pr-textarea{width:100%;padding:.65rem .8rem;border:1px solid var(--color-border);border-radius:8px;font-size:.88rem;font-family:inherit;color:var(--color-text);background:#fff;transition:.2s;}
-.pr-input:focus,.pr-textarea:focus{outline:none;border-color:var(--color-gold);box-shadow:0 0 0 4px var(--color-gold-soft);}
-.pr-textarea{min-height:80px;resize:vertical;}
-.pr-file-wrap{border:1.5px dashed var(--color-border);border-radius:8px;padding:1rem;text-align:center;cursor:pointer;transition:.2s;background:#FAFAF7;display:block;}
-.pr-file-wrap:hover{border-color:var(--color-primary);background:var(--color-primary-light);}
-.pr-file-wrap input{display:none;}
-.pr-file-plus{font-size:1.3rem;color:var(--color-primary);font-weight:700;line-height:1;}
-.pr-file-text{font-size:.8rem;color:var(--color-text-secondary);margin-top:.25rem;}
-.pr-file-count{font-size:.75rem;color:var(--color-success);margin-top:.2rem;display:none;}
-.pr-file-wrap.has .pr-file-count{display:block;}
-.pr-paynow-block{background:var(--color-primary-light);border-radius:10px;padding:1rem 1.1rem;margin-top:.9rem;}
-.pr-paynow-amount{font-size:1.05rem;font-weight:800;color:var(--color-primary);margin-bottom:.5rem;}
-.pr-qr-placeholder{width:150px;height:150px;margin:.5rem auto;background:#fff;border:1px solid var(--color-border);border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--color-text-muted);}
-.pr-qr-placeholder svg{width:80px;height:80px;opacity:.25;}
-.pr-submit-btn{width:100%;padding:.9rem;background:var(--color-primary);color:#fff;border:none;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer;margin-top:1.2rem;transition:.2s;}
-.pr-submit-btn:hover{background:var(--color-primary-dark);}
-.pr-submit-btn:active{transform:translateY(1px);}
-</style>
-<div class="pr-modal-overlay" id="photoRetouchModal" role="dialog" aria-modal="true" aria-label="图片精修申请">
-  <div class="pr-modal-box">
-    <button type="button" class="pr-modal-close" onclick="closePhotoRetouchModal()" aria-label="关闭">×</button>
-    <div class="pr-badge">⭐ 创始卖家专属福利</div>
-    <h3 class="pr-title">想让你的图片也有这样的效果？</h3>
-    <div class="pr-price-block">
-      <div class="pr-price-main">图片精修 <span class="amt">S$25</span> / 套</div>
-      <div class="pr-example">例如：一只瓷瓶有正面、背面、底部、细节图，共 4 张 → S$25。</div>
-      <ul class="pr-checklist">
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>光线与亮度</li>
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>色彩与白平衡</li>
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>裁剪与构图</li>
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>背景清理</li>
-      </ul>
-      <div class="pr-note">不会改变器物真实颜色、形状或实际品相。</div>
-      <div class="pr-price-sub">S$25 / 套（1 件藏品，可上传最多 4 张图片）<br>一次精修最多 4 张 = S$25</div>
-    </div>
-    <div class="pr-warning">⚠️ 温馨提示：本套餐为基础图片精修服务，仅处理光影、调色、裁剪、背景清理；不含重度修图、创意美化、器物修补、绘图重构等高阶效果，将按客户提交的基础需求完成处理。</div>
-    <div class="pr-section-title">我们怎么工作：</div>
-    <div class="pr-workflow">
-      <p>表单资料 + 原图 + PayNow 截图 → 一次性提交</p>
-      <p>后台人工核验 5 项：1. 付款 2. 客户身份 3. 对应藏品 4. 提交原图 5. 客户基础需求</p>
-      <p>处理完成后通过 WhatsApp 发送成品给客户确认, 客户认可后，上传部署到藏品页面。</p>
-    </div>
-    <div class="pr-section-title">图片精修申请表</div>
-    <div class="pr-form-row">
-      <label>Seller ID（藏家古董网站 ID）</label>
-      <input class="pr-input" id="pr_seller_id" placeholder="例如：seller-lim-kw-antiques">
-    </div>
-    <div class="pr-form-row">
-      <label>WhatsApp</label>
-      <input class="pr-input" id="pr_whatsapp" placeholder="+65 xxxxxxxx">
-    </div>
-    <div class="pr-form-row">
-      <label>上传图片（可多选，最多 4 张）</label>
-      <label class="pr-file-wrap" id="pr_images_wrap">
-        <input type="file" id="pr_images" multiple accept="image/*">
-        <div class="pr-file-plus">＋</div>
-        <div class="pr-file-text">上传图片</div>
-        <div class="pr-file-count" id="pr_images_count"></div>
-      </label>
-    </div>
-    <div class="pr-paynow-block">
-      <div class="pr-paynow-amount">PayNow S$25</div>
-      <div class="pr-qr-placeholder" aria-label="PayNow QR Code">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><line x1="14" y1="14" x2="14" y2="21"/><line x1="18" y1="14" x2="18" y2="21"/><line x1="21" y1="18" x2="14" y2="18"/></svg>
+
+    <!-- 图片精修服务弹窗（创始卖家专属福利） -->
+    <style>
+    .pr-modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:120;display:none;align-items:center;justify-content:center;padding:1rem;}
+    .pr-modal-overlay.show{display:flex;}
+    .pr-modal-box{background:#fff;border-radius:12px;max-width:560px;width:100%;padding:1.7rem 1.5rem;position:relative;max-height:90vh;overflow-y:auto;box-shadow:0 18px 50px rgba(0,0,0,.22);animation:pr-in .2s ease;}
+    @keyframes pr-in{from{opacity:0;transform:translateY(8px) scale(.98);}to{opacity:1;transform:none;}}
+    .pr-modal-close{position:absolute;top:.7rem;right:.9rem;border:none;background:none;font-size:1.5rem;cursor:pointer;color:var(--color-text-secondary);line-height:1;}
+    .pr-modal-close:hover{color:var(--color-text);}
+    .pr-badge{display:inline-block;padding:.28rem .72rem;background:var(--color-gold-soft);color:var(--color-gold);border-radius:6px;font-size:.78rem;font-weight:700;margin-bottom:.75rem;}
+    .pr-title{font-size:1.22rem;font-weight:700;color:var(--color-text);margin-bottom:.9rem;line-height:1.4;}
+    .pr-price-block{background:var(--color-primary-light);border-radius:10px;padding:1rem 1.1rem;margin-bottom:1rem;}
+    .pr-price-main{font-size:1.1rem;font-weight:800;color:var(--color-primary);margin-bottom:.4rem;}
+    .pr-price-main .amt{font-size:1.5rem;}
+    .pr-example{font-size:.82rem;color:var(--color-text-secondary);line-height:1.6;margin-bottom:.5rem;}
+    .pr-checklist{list-style:none;padding:0;margin:.4rem 0;}
+    .pr-checklist li{display:flex;align-items:flex-start;gap:.5rem;font-size:.85rem;color:var(--color-text);padding:.2rem 0;}
+    .pr-checklist li svg{flex-shrink:0;width:16px;height:16px;color:var(--color-success);margin-top:.12rem;}
+    .pr-note{font-size:.78rem;color:var(--color-text-secondary);line-height:1.6;margin-top:.5rem;}
+    .pr-price-sub{font-size:.88rem;font-weight:700;color:var(--color-primary);margin-top:.6rem;line-height:1.5;}
+    .pr-warning{background:#FDF6EC;border:1px solid #F0E0C0;border-radius:8px;padding:.8rem 1rem;font-size:.78rem;color:#8A6D3B;line-height:1.6;margin-bottom:1rem;}
+    .pr-section-title{font-size:.95rem;font-weight:700;color:var(--color-text);margin:1rem 0 .5rem;}
+    .pr-workflow{font-size:.83rem;color:var(--color-text-secondary);line-height:1.7;background:#FAFAF7;border-radius:8px;padding:.8rem 1rem;margin-bottom:.3rem;}
+    .pr-workflow p{margin:.3rem 0;}
+    .pr-form-row{margin-top:.9rem;}
+    .pr-form-row label{display:block;font-size:.82rem;margin-bottom:.35rem;color:var(--color-text-secondary);font-weight:600;}
+    .pr-input,.pr-textarea{width:100%;padding:.65rem .8rem;border:1px solid var(--color-border);border-radius:8px;font-size:.88rem;font-family:inherit;color:var(--color-text);background:#fff;transition:.2s;}
+    .pr-input:focus,.pr-textarea:focus{outline:none;border-color:var(--color-gold);box-shadow:0 0 0 4px var(--color-gold-soft);}
+    .pr-textarea{min-height:80px;resize:vertical;}
+    .pr-file-wrap{border:1.5px dashed var(--color-border);border-radius:8px;padding:1rem;text-align:center;cursor:pointer;transition:.2s;background:#FAFAF7;display:block;}
+    .pr-file-wrap:hover{border-color:var(--color-primary);background:var(--color-primary-light);}
+    .pr-file-wrap input{display:none;}
+    .pr-file-plus{font-size:1.3rem;color:var(--color-primary);font-weight:700;line-height:1;}
+    .pr-file-text{font-size:.8rem;color:var(--color-text-secondary);margin-top:.25rem;}
+    .pr-file-count{font-size:.75rem;color:var(--color-success);margin-top:.2rem;display:none;}
+    .pr-file-wrap.has .pr-file-count{display:block;}
+    .pr-paynow-block{background:var(--color-primary-light);border-radius:10px;padding:1rem 1.1rem;margin-top:.9rem;}
+    .pr-paynow-amount{font-size:1.05rem;font-weight:800;color:var(--color-primary);margin-bottom:.5rem;}
+    .pr-qr-placeholder{width:150px;height:150px;margin:.5rem auto;background:#fff;border:1px solid var(--color-border);border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--color-text-muted);}
+    .pr-qr-placeholder svg{width:80px;height:80px;opacity:.25;}
+    .pr-submit-btn{width:100%;padding:.9rem;background:var(--color-primary);color:#fff;border:none;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer;margin-top:1.2rem;transition:.2s;}
+    .pr-submit-btn:hover{background:var(--color-primary-dark);}
+    .pr-submit-btn:active{transform:translateY(1px);}
+    </style>
+    <div class="pr-modal-overlay" id="photoRetouchModal" role="dialog" aria-modal="true" aria-label="图片精修申请">
+      <div class="pr-modal-box">
+        <button type="button" class="pr-modal-close" onclick="closePhotoRetouchModal()" aria-label="关闭">×</button>
+        <div class="pr-badge">⭐ 创始卖家专属福利</div>
+        <h3 class="pr-title">想让你的图片也有这样的效果？</h3>
+        <div class="pr-price-block">
+          <div class="pr-price-main">图片精修 <span class="amt">S$25</span> / 套</div>
+          <div class="pr-example">例如：一只瓷瓶有正面、背面、底部、细节图，共 4 张 → S$25。</div>
+          <ul class="pr-checklist">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>光线与亮度</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>色彩与白平衡</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>裁剪与构图</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>背景清理</li>
+          </ul>
+          <div class="pr-note">不会改变器物真实颜色、形状或实际品相。</div>
+          <div class="pr-price-sub">S$25 / 套（1 件藏品，可上传最多 4 张图片）<br>一次精修最多 4 张 = S$25</div>
+        </div>
+        <div class="pr-warning">⚠️ 温馨提示：本套餐为基础图片精修服务，仅处理光影、调色、裁剪、背景清理；不含重度修图、创意美化、器物修补、绘图重构等高阶效果，将按客户提交的基础需求完成处理。</div>
+        <div class="pr-section-title">我们怎么工作：</div>
+        <div class="pr-workflow">
+          <p>表单资料 + 原图 + PayNow 截图 → 一次性提交</p>
+          <p>后台人工核验 5 项：1. 付款 2. 客户身份 3. 对应藏品 4. 提交原图 5. 客户基础需求</p>
+          <p>处理完成后通过 WhatsApp 发送成品给客户确认, 客户认可后，上传部署到藏品页面。</p>
+        </div>
+        <div class="pr-section-title">图片精修申请表</div>
+        <div class="pr-form-row">
+          <label>Seller ID（藏家古董网站 ID）</label>
+          <input class="pr-input" id="pr_seller_id" placeholder="例如：seller-lim-kw-antiques">
+        </div>
+        <div class="pr-form-row">
+          <label>WhatsApp</label>
+          <input class="pr-input" id="pr_whatsapp" placeholder="+65 xxxxxxxx">
+        </div>
+        <div class="pr-form-row">
+          <label>上传图片（可多选，最多 4 张）</label>
+          <label class="pr-file-wrap" id="pr_images_wrap">
+            <input type="file" id="pr_images" multiple accept="image/*">
+            <div class="pr-file-plus">＋</div>
+            <div class="pr-file-text">上传图片</div>
+            <div class="pr-file-count" id="pr_images_count"></div>
+          </label>
+        </div>
+        <div class="pr-paynow-block">
+          <div class="pr-paynow-amount">PayNow S$25</div>
+          <div class="pr-qr-placeholder" aria-label="PayNow QR Code">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><line x1="14" y1="14" x2="14" y2="21"/><line x1="18" y1="14" x2="18" y2="21"/><line x1="21" y1="18" x2="14" y2="18"/></svg>
+          </div>
+          <div class="pr-note" style="margin-top:.6rem;">完成付款后，请上传付款截图</div>
+          <label class="pr-file-wrap" style="margin-top:.6rem;" id="pr_paynow_wrap">
+            <input type="file" id="pr_paynow" accept="image/*">
+            <div class="pr-file-plus">＋</div>
+            <div class="pr-file-text">上传 PayNow 付款截图</div>
+            <div class="pr-file-count" id="pr_paynow_count"></div>
+          </label>
+        </div>
+        <div class="pr-form-row">
+          <label>备注（可选 · 填写你的基础需求：仅限光影、调色、构图、背景清理）</label>
+          <textarea class="pr-textarea" id="pr_remark" placeholder="希望重点优化哪里？"></textarea>
+        </div>
+        <button type="button" class="pr-submit-btn" onclick="submitPhotoRetouch()">提交精修申请 →</button>
       </div>
-      <div class="pr-note" style="margin-top:.6rem;">完成付款后，请上传付款截图</div>
-      <label class="pr-file-wrap" style="margin-top:.6rem;" id="pr_paynow_wrap">
-        <input type="file" id="pr_paynow" accept="image/*">
-        <div class="pr-file-plus">＋</div>
-        <div class="pr-file-text">上传 PayNow 付款截图</div>
-        <div class="pr-file-count" id="pr_paynow_count"></div>
-      </label>
     </div>
-    <div class="pr-form-row">
-      <label>备注（可选 · 填写你的基础需求：仅限光影、调色、构图、背景清理）</label>
-      <textarea class="pr-textarea" id="pr_remark" placeholder="希望重点优化哪里？"></textarea>
-    </div>
-    <button type="button" class="pr-submit-btn" onclick="submitPhotoRetouch()">提交精修申请 →</button>
-  </div>
-</div>
-<script>
-function openPhotoRetouchModal(){var m=document.getElementById('photoRetouchModal');if(m){m.classList.add('show');document.body.style.overflow='hidden';}}
-function closePhotoRetouchModal(){var m=document.getElementById('photoRetouchModal');if(m){m.classList.remove('show');document.body.style.overflow='';}}
-document.addEventListener('keydown',function(e){if(e.key==='Escape')closePhotoRetouchModal();});
-(function(){var m=document.getElementById('photoRetouchModal');if(m)m.addEventListener('click',function(e){if(e.target===m)closePhotoRetouchModal();});})();
-(function(){
-  function bindDrop(fileId,wrapId,countId){
-    var input=document.getElementById(fileId);var wrap=document.getElementById(wrapId);var count=document.getElementById(countId);
-    if(!input||!wrap||!count)return;
-    input.addEventListener('change',function(){
-      var n=input.files?input.files.length:0;
-      if(n>0){wrap.classList.add('has');count.textContent='已选择 '+n+' 个文件';}
-      else{wrap.classList.remove('has');count.textContent='';}
-    });
-  }
-  bindDrop('pr_images','pr_images_wrap','pr_images_count');
-  bindDrop('pr_paynow','pr_paynow_wrap','pr_paynow_count');
-})();
-function submitPhotoRetouch(){
-  var sid=document.getElementById('pr_seller_id').value.trim();
-  var wa=document.getElementById('pr_whatsapp').value.trim();
-  var rk=document.getElementById('pr_remark').value.trim();
-  var imgs=document.getElementById('pr_images').files;
-  var pay=document.getElementById('pr_paynow').files;
-  if(!sid){alert('请填写 Seller ID');return;}
-  if(!wa){alert('请填写 WhatsApp 联系方式');return;}
-  if(!imgs||imgs.length===0){alert('请上传需要精修的图片');return;}
-  if(imgs.length>4){alert('一次精修最多上传 4 张图片');return;}
-  if(!pay||pay.length===0){alert('请上传 PayNow 付款截图');return;}
-  var msg='【图片精修申请】\nSeller ID：'+sid+'\nWhatsApp：'+wa+'\n图片数量：'+imgs.length+' 张\n备注：'+(rk||'无')+'\n服务费 S$10，已附 PayNow 付款截图，请核验后安排精修。';
-  window.open('https://wa.me/6591234567?text='+encodeURIComponent(msg),'_blank');
-  closePhotoRetouchModal();
-}
-</script>
-<!-- 2026-09-23：PWA 安装引导弹层（iOS 图文步骤 / 桌面提示），全站统一 -->
-<style>
-.gd-install-modal { position: fixed; inset: 0; z-index: 9999; display: none; align-items: center; justify-content: center; background: rgba(0,0,0,.45); padding: 1.2rem; }
-.gd-install-modal.open { display: flex; }
-.gd-install-card { background: #fff; border-radius: 14px; max-width: 350px; width: 100%; padding: 1.6rem 1.4rem 1.2rem; text-align: center; box-shadow: 0 18px 50px rgba(0,0,0,.25); position: relative; }
-.gd-install-close { position: absolute; top: .5rem; right: .7rem; border: 0; background: none; font-size: 1.4rem; color: #999; cursor: pointer; padding: .3rem; line-height: 1; }
-.gd-install-title { font-size: 1.08rem; font-weight: 700; color: #3d2b1f; margin: .2rem 0 1rem; }
-.gd-install-steps { text-align: left; margin: 0 auto 1rem; max-width: 290px; }
-.gd-install-step { display: flex; align-items: flex-start; gap: .6rem; padding: .5rem 0; color: #5a4636; font-size: .9rem; line-height: 1.5; }
-.gd-install-step .n { flex-shrink: 0; width: 22px; height: 22px; border-radius: 50%; background: #f0e4d8; color: #8A5A3B; font-weight: 700; font-size: .78rem; display: flex; align-items: center; justify-content: center; margin-top: .1rem; }
-.gd-install-step svg { flex-shrink: 0; width: 22px; height: 22px; fill: #007AFF; margin-top: .1rem; }
-.gd-install-note { font-size: .78rem; color: #9a8d80; margin-top: .5rem; line-height: 1.5; }
-.gd-install-modal [data-lang="en"] .zh, body[data-lang="en"] .gd-install-modal .zh { display: none; }
-.gd-install-modal [data-lang="zh"] .en, body[data-lang="zh"] .gd-install-modal .en { display: none; }
-.app-install-btn { display: inline-flex; align-items: center; gap: .3rem; margin-left: .6rem; padding: .3rem .7rem; border: 1px solid #e3d9cf; border-radius: 999px; color: #7a6a5c; font-size: .78rem; text-decoration: none; vertical-align: middle; transition: .2s; }
-.app-install-btn:hover { border-color: #8A5A3B; color: #8A5A3B; background: #f0e4d8; }
-.app-install-btn svg { width: 12px; height: 12px; flex-shrink: 0; fill: currentColor; }
-</style>
-<div class="gd-install-modal" id="gdInstallModal" role="dialog" aria-modal="true" aria-label="Install guide">
-    <div class="gd-install-card">
-        <button type="button" class="gd-install-close" onclick="gdCloseInstall()" aria-label="close">×</button>
-        <div class="gd-install-title zh">安装 古董.app 到主屏幕</div>
-        <div class="gd-install-title en">Add Gudong.app to Home Screen</div>
-        <div class="gd-install-steps" id="gdStepsIos">
-            <div class="gd-install-step"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18.2c-4.5 0-8.2-3.7-8.2-8.2S7.5 3.8 12 3.8s8.2 3.7 8.2 8.2-3.7 8.2-8.2 8.2zM11 7l-4 4h3v6h2v-6h3l-4-4z"/></svg><span class="zh">点击 Safari 底部工具栏的「分享」按钮</span><span class="en">Tap the Share button in Safari's bottom toolbar</span></div>
-            <div class="gd-install-step"><span class="n">2</span><span class="zh">在分享菜单中选择「添加到主屏幕」</span><span class="en">Choose "Add to Home Screen" in the share menu</span></div>
-            <div class="gd-install-step"><span class="n">3</span><span class="zh">点击右上角「添加」，桌面即出现古董.app 图标</span><span class="en">Tap "Add" — the Gudong.app icon appears on your Home Screen</span></div>
+    <script>
+    function openPhotoRetouchModal(){var m=document.getElementById('photoRetouchModal');if(m){m.classList.add('show');document.body.style.overflow='hidden';}}
+    function closePhotoRetouchModal(){var m=document.getElementById('photoRetouchModal');if(m){m.classList.remove('show');document.body.style.overflow='';}}
+    document.addEventListener('keydown',function(e){if(e.key==='Escape')closePhotoRetouchModal();});
+    (function(){var m=document.getElementById('photoRetouchModal');if(m)m.addEventListener('click',function(e){if(e.target===m)closePhotoRetouchModal();});})();
+    (function(){
+      function bindDrop(fileId,wrapId,countId){
+        var input=document.getElementById(fileId);var wrap=document.getElementById(wrapId);var count=document.getElementById(countId);
+        if(!input||!wrap||!count)return;
+        input.addEventListener('change',function(){
+          var n=input.files?input.files.length:0;
+          if(n>0){wrap.classList.add('has');count.textContent='已选择 '+n+' 个文件';}
+          else{wrap.classList.remove('has');count.textContent='';}
+        });
+      }
+      bindDrop('pr_images','pr_images_wrap','pr_images_count');
+      bindDrop('pr_paynow','pr_paynow_wrap','pr_paynow_count');
+    })();
+    function submitPhotoRetouch(){
+      var sid=document.getElementById('pr_seller_id').value.trim();
+      var wa=document.getElementById('pr_whatsapp').value.trim();
+      var rk=document.getElementById('pr_remark').value.trim();
+      var imgs=document.getElementById('pr_images').files;
+      var pay=document.getElementById('pr_paynow').files;
+      if(!sid){alert('请填写 Seller ID');return;}
+      if(!wa){alert('请填写 WhatsApp 联系方式');return;}
+      if(!imgs||imgs.length===0){alert('请上传需要精修的图片');return;}
+      if(imgs.length>4){alert('一次精修最多上传 4 张图片');return;}
+      if(!pay||pay.length===0){alert('请上传 PayNow 付款截图');return;}
+      var msg='【图片精修申请】\nSeller ID：'+sid+'\nWhatsApp：'+wa+'\n图片数量：'+imgs.length+' 张\n备注：'+(rk||'无')+'\n服务费 S$25，已附 PayNow 付款截图，请核验后安排精修。';
+      window.open('https://wa.me/6591234567?text='+encodeURIComponent(msg),'_blank');
+      closePhotoRetouchModal();
+    }
+    </script>
+
+    <!-- PWA 安装引导弹层（iOS 图文步骤 / 桌面提示），全站统一 -->
+    <style>
+    .gd-install-modal { position: fixed; inset: 0; z-index: 9999; display: none; align-items: center; justify-content: center; background: rgba(0,0,0,.45); padding: 1.2rem; }
+    .gd-install-modal.open { display: flex; }
+    .gd-install-card { background: #fff; border-radius: 14px; max-width: 350px; width: 100%; padding: 1.6rem 1.4rem 1.2rem; text-align: center; box-shadow: 0 18px 50px rgba(0,0,0,.25); position: relative; }
+    .gd-install-close { position: absolute; top: .5rem; right: .7rem; border: 0; background: none; font-size: 1.4rem; color: #999; cursor: pointer; padding: .3rem; line-height: 1; }
+    .gd-install-title { font-size: 1.08rem; font-weight: 700; color: #3d2b1f; margin: .2rem 0 1rem; }
+    .gd-install-steps { text-align: left; margin: 0 auto 1rem; max-width: 290px; }
+    .gd-install-step { display: flex; align-items: flex-start; gap: .6rem; padding: .5rem 0; color: #5a4636; font-size: .9rem; line-height: 1.5; }
+    .gd-install-step .n { flex-shrink: 0; width: 22px; height: 22px; border-radius: 50%; background: #f0e4d8; color: #8A5A3B; font-weight: 700; font-size: .78rem; display: flex; align-items: center; justify-content: center; margin-top: .1rem; }
+    .gd-install-step svg { flex-shrink: 0; width: 22px; height: 22px; fill: #007AFF; margin-top: .1rem; }
+    .gd-install-note { font-size: .78rem; color: #9a8d80; margin-top: .5rem; line-height: 1.5; }
+    .gd-install-modal [data-lang="en"] .zh, body[data-lang="en"] .gd-install-modal .zh { display: none; }
+    .gd-install-modal [data-lang="zh"] .en, body[data-lang="zh"] .gd-install-modal .en { display: none; }
+    .app-install-btn { display: inline-flex; align-items: center; gap: .3rem; margin-left: .6rem; padding: .3rem .7rem; border: 1px solid #e3d9cf; border-radius: 999px; color: #7a6a5c; font-size: .78rem; text-decoration: none; vertical-align: middle; transition: .2s; }
+    .app-install-btn:hover { border-color: #8A5A3B; color: #8A5A3B; background: #f0e4d8; }
+    .app-install-btn svg { width: 12px; height: 12px; flex-shrink: 0; fill: currentColor; }
+    </style>
+    <div class="gd-install-modal" id="gdInstallModal" role="dialog" aria-modal="true" aria-label="Install guide">
+        <div class="gd-install-card">
+            <button type="button" class="gd-install-close" onclick="gdCloseInstall()" aria-label="close">×</button>
+            <div class="gd-install-title zh">安装 古董.app 到主屏幕</div>
+            <div class="gd-install-title en">Add Gudong.app to Home Screen</div>
+            <div class="gd-install-steps" id="gdStepsIos">
+                <div class="gd-install-step"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18.2c-4.5 0-8.2-3.7-8.2-8.2S7.5 3.8 12 3.8s8.2 3.7 8.2 8.2-3.7 8.2-8.2 8.2zM11 7l-4 4h3v6h2v-6h3l-4-4z"/></svg><span class="zh">点击 Safari 底部工具栏的「分享」按钮</span><span class="en">Tap the Share button in Safari's bottom toolbar</span></div>
+                <div class="gd-install-step"><span class="n">2</span><span class="zh">在分享菜单中选择「添加到主屏幕」</span><span class="en">Choose "Add to Home Screen" in the share menu</span></div>
+                <div class="gd-install-step"><span class="n">3</span><span class="zh">点击右上角「添加」，桌面即出现古董.app 图标</span><span class="en">Tap "Add" — the Gudong.app icon appears on your Home Screen</span></div>
+            </div>
+            <div class="gd-install-steps" id="gdStepsOther" style="display:none;">
+                <div class="gd-install-step"><span class="n">1</span><span class="zh">点击浏览器地址栏右侧的「安装」图标</span><span class="en">Click the install icon at the right of the address bar</span></div>
+                <div class="gd-install-step"><span class="n">2</span><span class="zh">或通过浏览器菜单 →「安装古董集」</span><span class="en">Or open the browser menu → "Install Gudong"</span></div>
+            </div>
+            <div class="gd-install-note zh">安装后可像原生 App 一样全屏使用，无需应用商店。</div>
+            <div class="gd-install-note en">Runs full-screen like a native app. No app store needed.</div>
         </div>
-        <div class="gd-install-steps" id="gdStepsOther" style="display:none;">
-            <div class="gd-install-step"><span class="n">1</span><span class="zh">点击浏览器地址栏右侧的「安装」图标</span><span class="en">Click the install icon at the right of the address bar</span></div>
-            <div class="gd-install-step"><span class="n">2</span><span class="zh">或通过浏览器菜单 →「安装古董集」</span><span class="en">Or open the browser menu → "Install Gudong"</span></div>
-        </div>
-        <div class="gd-install-note zh">安装后可像原生 App 一样全屏使用，无需应用商店。</div>
-        <div class="gd-install-note en">Runs full-screen like a native app. No app store needed.</div>
     </div>
-</div>
-<script>
-(function () {
-    var modal = document.getElementById('gdInstallModal');
-    if (!modal) return;
-    window.gdCloseInstall = function () { modal.classList.remove('open'); };
-    modal.addEventListener('click', function (e) { if (e.target === modal) gdCloseInstall(); });
+    <script>
+    (function () {
+        var modal = document.getElementById('gdInstallModal');
+        if (!modal) return;
+        window.gdCloseInstall = function () { modal.classList.remove('open'); };
+        modal.addEventListener('click', function (e) { if (e.target === modal) gdCloseInstall(); });
 
-    var deferredPrompt = null;
-    window.addEventListener('beforeinstallprompt', function (e) { e.preventDefault(); deferredPrompt = e; });
-    window.addEventListener('appinstalled', function () {
-        document.querySelectorAll('.app-install-btn').forEach(function (b) { b.style.display = 'none'; });
-    });
+        var deferredPrompt = null;
+        window.addEventListener('beforeinstallprompt', function (e) { e.preventDefault(); deferredPrompt = e; });
+        window.addEventListener('appinstalled', function () {
+            document.querySelectorAll('.app-install-btn').forEach(function (b) { b.style.display = 'none'; });
+        });
 
-    document.addEventListener('click', function (e) {
-        var btn = e.target && e.target.closest ? e.target.closest('.app-install-btn') : null;
-        if (!btn) return;
-        e.preventDefault();
-        if (deferredPrompt) {
-            deferredPrompt.prompt();
-            deferredPrompt.userChoice.then(function () { deferredPrompt = null; }).catch(function () {});
-            return;
-        }
-        // 无原生安装提示（iOS Safari / 未触发的浏览器）→ 显示图文引导
-        var ua = navigator.userAgent;
-        var isIOS = /iPad|iPhone|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-        document.getElementById('gdStepsIos').style.display = isIOS ? '' : 'none';
-        document.getElementById('gdStepsOther').style.display = isIOS ? 'none' : '';
-        modal.classList.add('open');
-    });
-})();
-</script>
-
+        document.addEventListener('click', function (e) {
+            var btn = e.target && e.target.closest ? e.target.closest('.app-install-btn') : null;
+            if (!btn) return;
+            e.preventDefault();
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then(function () { deferredPrompt = null; }).catch(function () {});
+                return;
+            }
+            var ua = navigator.userAgent;
+            var isIOS = /iPad|iPhone|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+            document.getElementById('gdStepsIos').style.display = isIOS ? '' : 'none';
+            document.getElementById('gdStepsOther').style.display = isIOS ? 'none' : '';
+            modal.classList.add('open');
+        });
+    })();
+    </script>
 </body>
 </html>

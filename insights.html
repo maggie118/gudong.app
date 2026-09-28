@@ -44,15 +44,15 @@
     }
     </script>
 
-    <link rel="manifest" href="https://gudong.app/manifest.json">
+    <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#8A5A3B">
 	<meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="古董集">
-    <link rel="apple-touch-icon" href="https://gudong.app/assets/icons/apple-touch-icon-180x180.png" sizes="180x180">
-    <link rel="icon" type="image/x-icon" href="https://gudong.app/favicon.ico">
-    <link rel="icon" type="image/png" sizes="32x32" href="https://gudong.app/assets/icons/favicon-32x32.png">
+    <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon-180x180.png" sizes="180x180">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32x32.png">
 
     <style>
         :root {
@@ -76,6 +76,9 @@
             --font-display: "Inter", "Geist", "Inter Display", "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Helvetica, Arial, sans-serif;
             --font-latin: "Inter", "Geist", "Inter Display", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
             --font-zh-sans: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            --color-success: #526657;
+            --color-danger: #9A554B;
+            --card-radius: 22px;
         }
         * { margin: 0; padding: 0; box-sizing: border-box;
             font-family: "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif; }
@@ -83,14 +86,26 @@
         body { background: var(--color-bg); color: var(--color-text); line-height: 1.65; }
 
         .announce-bar {
-            background: var(--color-primary-light); color: var(--color-primary-dark);
-            font-size: .8rem; text-align: center; padding: .55rem 2.6rem;
-            position: relative; line-height: 1.4; word-break: break-all;
+        background: var(--color-primary-light);
+        color: var(--color-primary-dark);
+        font-size: .8rem;
+        text-align: center;
+        padding: .55rem 2.6rem;
+        position: relative;
+        line-height: 1.4;
         }
         .announce-close {
-            position: absolute; right: .9rem; top: 50%; transform: translateY(-50%);
-            background: none; border: none; font-size: 1.05rem; line-height: 1;
-            color: var(--color-text-secondary); cursor: pointer; padding: .2rem;
+        position: absolute;
+        right: .9rem;
+        top: 50%;
+        transform: translateY(-50%);
+        background: none;
+        border: none;
+        font-size: 1.05rem;
+        line-height: 1;
+        color: var(--color-text-secondary);
+        cursor: pointer;
+        padding: .2rem;
         }
         .announce-close:hover { color: var(--color-primary); }
 
@@ -102,12 +117,34 @@
             gap: 1.5rem; border-bottom: 1px solid var(--color-border);
             position: sticky; top: 0; z-index: 50;
         }
-        .brand { display: flex; flex-direction: column; justify-content: center; line-height: 1; flex-shrink: 0; text-decoration: none; color: inherit; }
-        .brand h1 { font-size: 1.4rem; font-weight: 700; letter-spacing: .02em; line-height: 1.15; color: var(--color-primary-dark); }
-        .brand p { color: var(--color-qianjinzong); margin-top: .2rem; font-size: .62rem; letter-spacing: .2em; }
+        .brand {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        line-height: 1;
+        flex-shrink: 0;
+        text-decoration: none;
+        color: inherit;
+        }
+        .brand h1 {
+        font-size: 1.4rem;
+        font-weight: 700;
+        letter-spacing: .02em;
+        line-height: 1.15;
+        color: var(--color-primary-dark);
+        }
+        .brand p {
+        color: var(--color-qianjinzong);
+        margin-top: .2rem;
+        font-size: .62rem;
+        letter-spacing: .2em;
+        text-transform: uppercase;
+        }
         .brand h1 .en, .brand p .en, .sidebar-brand .en {
-            font-family: "Inter Display", "Inter", "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
-            letter-spacing: normal;
+        font-family: "Inter Display", "Inter", "Geist",
+        -apple-system, BlinkMacSystemFont, "Segoe UI",
+        "Helvetica Neue", Arial, sans-serif;
+        letter-spacing: normal;
         }
         .header-right { display: flex; align-items: center; gap: .8rem; flex-shrink: 0; }
         .btn-publish {
@@ -139,11 +176,21 @@
         }
         .sidebar-overlay.show { opacity: 1; pointer-events: auto; }
         .sidebar {
-            position: fixed; top: 0; left: 0; height: 100vh; height: 100dvh; width: 264px;
-            max-width: 78vw; background: var(--color-white);
-            box-shadow: 4px 0 24px rgba(37,34,30,.18);
-            transform: translateX(-100%); transition: transform .3s ease;
-            z-index: 95; overflow-y: auto; -webkit-overflow-scrolling: touch; padding-bottom: 2rem;
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        height: 100dvh;
+        width: 264px;
+        max-width: 78vw;
+        background: var(--color-white);
+        box-shadow: 4px 0 24px rgba(37,34,30,.18);
+        transform: translateX(-100%);
+        transition: transform .3s ease;
+        z-index: 95;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 2rem;
         }
         .sidebar.open { transform: translateX(0); }
         .sidebar-toggle-inner {
@@ -166,19 +213,38 @@
         }
         .sidebar-link:hover { background: var(--color-primary-light); color: var(--color-primary); }
         .sidebar-link.active { background: var(--color-primary-light); color: var(--color-primary); font-weight: 600; }
-        .sidebar-group-title { padding: .85rem 1.4rem .3rem; color: var(--color-text); font-size: .95rem; font-weight: 600; }
+        .sidebar-group-title {
+        padding: .85rem 1.4rem .3rem;
+        color: var(--color-text);
+        font-size: .95rem;
+        font-weight: 600;
+        }
         .sidebar-sub {
-            display: block; padding: .55rem 1.4rem .55rem 2.2rem;
-            color: var(--color-text-secondary); text-decoration: none; font-size: .88rem; transition: .2s;
+        display: block;
+        padding: .55rem 1.4rem .55rem 2.2rem;
+        color: var(--color-text-secondary);
+        text-decoration: none;
+        font-size: .88rem;
+        transition: .2s;
         }
         .sidebar-sub:hover { color: var(--color-primary); background: var(--color-primary-light); }
         .sidebar-lang-btn {
-            display: flex; align-items: center; justify-content: center; gap: .4rem;
-            width: calc(100% - 2.8rem); margin: 1rem 1.4rem .8rem;
-            padding: .62rem .9rem; border: 1px solid var(--color-border);
-            border-radius: 12px; background: var(--color-white);
-            color: var(--color-text-secondary); font-family: inherit;
-            font-size: .9rem; font-weight: 600; cursor: pointer; transition: .2s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: .4rem;
+        width: calc(100% - 2.8rem);
+        margin: 1rem 1.4rem .8rem;
+        padding: .62rem .9rem;
+        border: 1px solid var(--color-border);
+        border-radius: 12px;
+        background: var(--color-white);
+        color: var(--color-text-secondary);
+        font-family: inherit;
+        font-size: .9rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: .2s;
         }
         .sidebar-lang-btn:hover { border-color: var(--color-primary); color: var(--color-primary); background: var(--color-primary-light); }
 
@@ -413,14 +479,30 @@
         .insight-cta .cta-note { font-size: .78rem; color: var(--color-text-muted); margin-top: .9rem; }
 
         footer {
-            text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-white);
-            color: var(--color-text-secondary); margin-top: 1rem; font-size: .78rem;
-            border-top: 1px solid var(--color-border);
+        text-align: center;
+        padding: 2.2rem 5% 1.8rem;
+        background: var(--color-white);
+        color: var(--color-text-secondary);
+        margin-top: 1rem;
+        font-size: .78rem;
+        border-top: 1px solid var(--color-border);
         }
-        .footer-nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 1.3rem; margin-bottom: 1.2rem; }
+        .footer-nav {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1.3rem;
+        margin-bottom: 1.2rem;
+        }
         .footer-nav a { color: var(--color-text-secondary); text-decoration: none; font-size: .82rem; }
         .footer-nav a:hover { color: var(--color-primary); }
-        .footer-disclaimer { max-width: 620px; margin: 0 auto 1.1rem; font-size: .74rem; line-height: 1.65; color: var(--color-text-muted); }
+        .footer-disclaimer {
+        max-width: 620px;
+        margin: 0 auto 1.1rem;
+        font-size: .74rem;
+        line-height: 1.65;
+        color: var(--color-text-muted);
+        }
 
         [data-lang="en"] .zh { display: none; }
         [data-lang="zh"] .en { display: none; }
@@ -455,21 +537,22 @@
 </head>
 <body data-lang="zh">
     <div class="announce-bar" id="announceBar">
-        <span class="zh">创始卖家福利｜限量 88 席免费入驻，前 2 件藏品免费刊登。</span>
-        <span class="en">Founder-Dealer Benefit | Limited 88 seats · Free to join · First 2 listings free.</span>
+        <span class="zh">创始卖家福利｜限量 88 席免费入驻，前 2 件藏品信息免费刊登，对卖家不抽取交易佣金。</span>
+        <span class="en">Founder-Dealer Benefit | Limited 88 seats · Free to join · First 2 listings free · No transaction commission.</span>
         <button class="announce-close" onclick="closeAnnounce()" aria-label="close">×</button>
     </div>
 
     <header>
         <div style="display:flex; align-items:center; gap:.9rem;">
             <button class="menu-toggle" onclick="openSidebar()" aria-label="menu" aria-expanded="false" id="menuToggle">☰</button>
-            <a href="https://gudong.app/index.html" class="brand">
+            <a href="index.html" class="brand">
                 <h1><span class="zh">古董集</span><span class="en">GUDONG</span></h1>
                 <p><span class="zh">GUDONG.APP</span><span class="en">Chinese Antiques Platform</span></p>
             </a>
         </div>
+
         <div class="header-right">
-            <a href="https://gudong.app/pricing.html#seller-services" class="btn-publish">
+            <a href="pricing.html#seller-services" class="btn-publish">
                 <span class="zh">刊登藏品</span><span class="en">List an Item</span>
             </a>
             <button class="lang-btn" onclick="toggleLang()">EN</button>
@@ -477,27 +560,27 @@
     </header>
 
     <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
-    <aside class="sidebar" id="sidebar" aria-hidden="true">
+    <aside class="sidebar" id="sidebar">
         <button class="sidebar-toggle-inner" onclick="closeSidebar()" aria-label="close menu">☰</button>
         <div class="sidebar-brand">
             <span class="zh">古董集</span><span class="en">GUDONG</span>
         </div>
         <nav class="sidebar-nav">
-            <a href="https://gudong.app/index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">首页</span><span class="en">Home</span></a>
-            <a href="https://gudong.app/index.html#daily-intel" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 今日捡漏</span><span class="en">· Daily Radar</span></a>
-            <a href="https://gudong.app/index.html#today-finds" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 今日好货</span><span class="en">· Today's Picks</span></a>
-            <a href="https://gudong.app/index.html#new-listings" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 新上架好货</span><span class="en">· New Arrivals</span></a>
-            <a href="https://gudong.app/collection.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">藏品库</span><span class="en">Collection</span></a>
-            <a href="https://gudong.app/categories/porcelain.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 瓷器</span><span class="en">· Porcelain</span></a>
-            <a href="https://gudong.app/categories/jade.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 玉器</span><span class="en">· Jade</span></a>
-            <a href="https://gudong.app/categories/bronze.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 铜器</span><span class="en">· Bronzes</span></a>
-            <a href="https://gudong.app/categories/coins.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 钱币</span><span class="en">· Coins</span></a>
-            <a href="https://gudong.app/categories/paintings.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 书画</span><span class="en">· Paintings &amp; Calligraphy</span></a>
-            <a href="https://gudong.app/categories/misc.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 杂项</span><span class="en">· Miscellaneous</span></a>
-            <a href="https://gudong.app/sellers/index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">卖家展馆</span><span class="en">Seller Gallery</span></a>
-            <a href="https://gudong.app/pricing.html#seller-services" class="sidebar-link" onclick="closeSidebar()"><span class="zh">刊登藏品</span><span class="en">List an Item</span></a>
-            <a href="https://gudong.app/insights.html" class="sidebar-link active" onclick="closeSidebar()"><span class="zh">情报 / 知识</span><span class="en">Insights</span></a>
-            <a href="https://gudong.app/about.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">关于我们</span><span class="en">About</span></a>
+            <a href="index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">首页</span><span class="en">Home</span></a>
+            <a href="index.html#daily-intel" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 今日捡漏</span><span class="en">· Daily Radar</span></a>
+            <a href="index.html#today-finds" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 今日好货</span><span class="en">· Today's Picks</span></a>
+            <a href="index.html#new-listings" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 新上架好货</span><span class="en">· New Arrivals</span></a>
+            <a href="collection.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">藏品库</span><span class="en">Collection</span></a>
+            <a href="categories/porcelain.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 瓷器</span><span class="en">· Porcelain</span></a>
+            <a href="categories/jade.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 玉器</span><span class="en">· Jade</span></a>
+            <a href="categories/bronze.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 铜器</span><span class="en">· Bronzes</span></a>
+            <a href="categories/coins.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 钱币</span><span class="en">· Coins</span></a>
+            <a href="categories/paintings.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 书画</span><span class="en">· Paintings &amp; Calligraphy</span></a>
+            <a href="categories/misc.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 杂项</span><span class="en">· Miscellaneous</span></a>
+            <a href="sellers/index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">卖家展馆</span><span class="en">Seller Gallery</span></a>
+            <a href="pricing.html#seller-services" class="sidebar-link" onclick="closeSidebar()"><span class="zh">刊登藏品</span><span class="en">List an Item</span></a>
+            <a href="insights.html" class="sidebar-link active" onclick="closeSidebar()"><span class="zh">情报 / 知识</span><span class="en">Insights</span></a>
+            <a href="about.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">关于我们</span><span class="en">About</span></a>
             <button type="button" class="sidebar-lang-btn" onclick="toggleLang()" aria-label="Switch language"><span class="zh">🌐 English</span><span class="en">🌐 中文</span></button>
         </nav>
     </aside>
@@ -530,7 +613,7 @@
         </section>
 
         <section id="featured" style="margin-bottom:2.6rem;">
-            <a class="feature-card" href="https://gudong.app/insights/nyonya-ware.html">
+            <a class="feature-card" href="insights/nyonya-ware.html">
                 <div class="feature-cover" style="background: linear-gradient(145deg, #1F2E24 0%, #3A4E3C 100%);">
                     <span class="cover-mark">娘</span>
                 </div>
@@ -560,7 +643,7 @@
                 <div class="title en">📮 Got market intel to share?</div>
                 <div class="desc zh">本地市集情报、行情变化、踩坑经历，都欢迎投稿。经编辑整理后署名发布，让更多藏家少走弯路。</div>
                 <div class="desc en">Local market intel, price movements, or lessons learned — submit it. Reviewed and published with credit, so other collectors can learn faster.</div>
-                <a href="https://gudong.app/about.html" class="btn-publish">
+                <a href="about.html" class="btn-publish">
                     <span class="zh">联系我们 →</span><span class="en">Contact Us →</span>
                 </a>
                 <div class="cta-note zh">情报内容不构成鉴定、估价或投资建议。</div>
@@ -571,12 +654,12 @@
 
     <footer>
         <div class="footer-nav">
-            <a href="https://gudong.app/about.html" class="zh">联系我们</a><a href="https://gudong.app/about.html" class="en">Contact</a>
-            <a href="https://gudong.app/pricing.html#seller-services" class="zh">卖家服务</a><a href="https://gudong.app/pricing.html#seller-services" class="en">Seller Services</a>
-            <a href="https://gudong.app/pricing.html#buyer-services" class="zh">买家指南</a><a href="https://gudong.app/pricing.html#buyer-services" class="en">Buyer Guide</a>
-            <a href="https://gudong.app/pricing.html#price-table" class="zh">服务收费</a><a href="https://gudong.app/pricing.html#price-table" class="en">Price List</a>
-            <a href="https://gudong.app/privacy.html" class="zh">隐私政策</a><a href="https://gudong.app/privacy.html" class="en">Privacy</a>
-            <a href="https://gudong.app/terms.html" class="zh">用户条款</a><a href="https://gudong.app/terms.html" class="en">Terms</a>
+            <a href="about.html" class="zh">联系我们</a><a href="about.html" class="en">Contact</a>
+            <a href="pricing.html#seller-services" class="zh">卖家服务</a><a href="pricing.html#seller-services" class="en">Seller Services</a>
+            <a href="pricing.html#buyer-services" class="zh">买家指南</a><a href="pricing.html#buyer-services" class="en">Buyer Guide</a>
+            <a href="pricing.html#price-table" class="zh">服务收费</a><a href="pricing.html#price-table" class="en">Price List</a>
+            <a href="privacy.html" class="zh">隐私政策</a><a href="privacy.html" class="en">Privacy</a>
+            <a href="terms.html" class="zh">用户条款</a><a href="terms.html" class="en">Terms</a>
         </div>
         <p class="footer-disclaimer zh">gudong.app 是信息发现平台，而非交易平台。</p>
         <p class="footer-disclaimer en">gudong.app is an information and discovery platform for antiques and collectibles.</p>
@@ -998,7 +1081,7 @@
         function postHtml(a) {
             const toneLabel = TONE_LABEL[a.tone] || '';
             return `
-              <a class="insight-post" href="https://gudong.app/insights/${esc(a.slug)}.html">
+              <a class="insight-post" href="insights/${esc(a.slug)}.html">
                 <div class="post-cover tone-${esc(a.tone)}">
                   <span class="cover-label">${esc(toneLabel)}</span>
                   <span class="cover-mark">${esc(a.mark)}</span>

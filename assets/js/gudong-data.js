@@ -1,19 +1,19 @@
 /*! gudong-data.js - Site-wide shared data layer (2026-09-28)
  * 2026-09-28：修复末尾多余字符 's'（曾导致整个文件 SyntaxError，GudongData 未挂载）
- *             全站链接统一为绝对路径 https://gudong.app/...
+ *             全站链接统一为相对路径，避免跨域（CORS）导致数据源加载失败
  * All non-ASCII characters are \u-escaped to survive any editor / encoding.
  */
 (function (global) {
   'use strict';
 
   var cs = document.currentScript;
-  // 2026-09-28：ROOT 默认改为绝对路径，避免在 categories/*.html 等子目录页面
+  // 2026-09-28：ROOT 默认改为相对路径，避免在 categories/*.html 等子目录页面
   // 生成 items/xxx.html 时被解析为 /categories/items/xxx.html 而 404。
-  var ROOT = (cs && cs.getAttribute('data-root')) || 'https://gudong.app/';
+  var ROOT = (cs && cs.getAttribute('data-root')) || '/';
   var HOST = location.hostname;
   var LOCAL = HOST === '127.0.0.1' || HOST === 'localhost' || location.protocol === 'file:';
-  // 本地/线上统一走绝对域名，不再依赖同域相对路径
-  var API_BASE = 'https://gudong.app';
+  // 本地/线上统一走同源相对路径，不再依赖绝对域名
+  var API_BASE = '';
   var DEBUG = /[?&]debug=1\b/.test(location.search);
   var diag = { source: 'pending', endpoint: '', proxy: null, snapshot: null, payloadKeys: [],
                counts: {}, skipped: 0, sampleKeys: [], errors: [], page: '' };
@@ -210,7 +210,7 @@
     return '<div class="gd-price' + (p.enquiry ? ' gd-price--enquiry' : '') + '"><span class="zh">' + esc(p.zh) + '</span><span class="en">' + esc(p.en) + '</span></div>';
   }
 
-  /* ---------- image / link（2026-09-28：全部绝对路径） ---------- */
+  /* ---------- image / link（2026-09-28：全部相对路径） ---------- */
   function attachmentUrl(v) {
     if (!v) return '';
     if (Array.isArray(v)) v = v[0];
@@ -221,10 +221,10 @@
     var u = attachmentUrl(f.img_url);
     if (/^https?:\/\//i.test(u)) return u;
     var file = normId(first(f.img_file) || '').split(/\s+/)[0] || '';
-    return 'https://gudong.app/assets/images/' + (file || 'placeholder.jpg');
+    return '/assets/images/' + (file || 'placeholder.jpg');
   }
-  var IMG_FALLBACK = "this.onerror=null;this.src='https://gudong.app/assets/images/placeholder.jpg'";
-  function itemHref(f) { return 'https://gudong.app/items/' + esc(normId(f.item_id)) + '.html'; }
+  var IMG_FALLBACK = "this.onerror=null;this.src='/assets/images/placeholder.jpg'";
+  function itemHref(f) { return '/items/' + esc(normId(f.item_id)) + '.html'; }
 
   /* ---------- network ---------- */
   function fetchJson(url, ms, tag) {
@@ -262,8 +262,8 @@
       console.warn('[Gudong] api failed, falling back to snapshot:', e);
       diag.errors.push('proxy: ' + e.message);
       diag.skipped = 0;
-      // 2026-09-28：快照也使用绝对路径
-      return fetchJson('https://gudong.app/data/listings.json', 5000, 'snapshot').then(function (json) {
+      // 2026-09-28：快照也使用相对路径
+      return fetchJson('/data/listings.json', 5000, 'snapshot').then(function (json) {
         var data = normalizePayload(json);
         diag.source = 'local-snapshot';
         return { source: diag.source, data: data };

@@ -15,11 +15,12 @@
     <meta property="og:description" content="浏览古董集私家藏馆，查看各商号与藏家的全部藏品。">
     <meta property="og:url" content="https://gudong.app/sellers/index.html">
     <meta property="og:image" content="https://gudong.app/assets/icons/icon-512.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
-    <link rel="manifest" href="../manifest.json">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://gudong.app/assets/icons/favicon-32x32.png">
+    <link rel="manifest" href="https://gudong.app/manifest.json">
     <meta name="theme-color" content="#8A5A3B">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <link rel="apple-touch-icon" href="https://gudong.app/assets/icons/icon-192.png">
     <style>
         :root {
             --color-bg: #F5F2EC;
@@ -35,6 +36,7 @@
             --color-gold: #B08A45;
             --color-gold-soft: rgba(176,138,69,.10);
             --color-bronze-muted: #9C8558;
+            --color-qianjinzong: #948268;
             --color-success: #526657;
             --color-danger: #9A554B;
         }
@@ -42,6 +44,7 @@
         html { scroll-behavior: smooth; }
         body { background: var(--color-bg); color: var(--color-text); line-height: 1.65; }
 
+        /* ---------- Header (synced with pricing.html) ---------- */
         header {
             background: rgba(255,255,255,.96); backdrop-filter: blur(6px);
             color: var(--color-text); padding: 0 5%; height: 68px;
@@ -49,9 +52,13 @@
             gap: 1.5rem; border-bottom: 1px solid var(--color-border);
             position: sticky; top: 0; z-index: 50;
         }
-        .brand { display: flex; flex-direction: column; justify-content: center; line-height: 1; flex-shrink: 0; }
-        .brand h1 { font-size: 1.55rem; font-weight: 700; letter-spacing: .04em; line-height: 1.15; }
-        .brand p { color: var(--color-bronze-muted); margin-top: .2rem; font-size: .62rem; letter-spacing: .2em; text-transform: uppercase; }
+        .brand { display: flex; flex-direction: column; justify-content: center; line-height: 1; flex-shrink: 0; text-decoration: none; color: inherit; }
+        .brand h1 { font-size: 1.4rem; font-weight: 700; letter-spacing: .02em; line-height: 1.15; color: var(--color-primary-dark); }
+        .brand p { color: var(--color-qianjinzong); margin-top: .2rem; font-size: .62rem; letter-spacing: .2em; text-transform: uppercase; }
+        .brand h1 .en, .brand p .en, .sidebar-brand .en {
+            font-family: "Inter Display", "Inter", "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+            letter-spacing: normal;
+        }
         .header-right { display: flex; align-items: center; gap: .8rem; flex-shrink: 0; }
         .btn-publish {
             display: inline-flex; align-items: center; gap: .35rem;
@@ -76,13 +83,14 @@
         }
         .menu-toggle:hover { border-color: var(--color-primary); color: var(--color-primary); background: var(--color-primary-light); }
 
+        /* ---------- Sidebar (synced with pricing.html) ---------- */
         .sidebar-overlay { position: fixed; inset: 0; background: rgba(20,17,14,.4); opacity: 0; pointer-events: none; transition: opacity .25s ease; z-index: 90; }
         .sidebar-overlay.show { opacity: 1; pointer-events: auto; }
         .sidebar {
-            position: fixed; top: 0; left: 0; height: 100vh; width: 264px; max-width: 78vw;
+            position: fixed; top: 0; left: 0; height: 100vh; height: 100dvh; width: 264px; max-width: 78vw;
             background: var(--color-white); box-shadow: 4px 0 24px rgba(37,34,30,.18);
             transform: translateX(-100%); transition: transform .3s ease; z-index: 95;
-            overflow-y: auto; padding-bottom: 2rem;
+            overflow-y: auto; -webkit-overflow-scrolling: touch; padding-bottom: 2rem;
         }
         .sidebar.open { transform: translateX(0); }
         .sidebar-toggle-inner {
@@ -109,12 +117,13 @@
             display: flex; align-items: center; justify-content: center; gap: .4rem;
             width: calc(100% - 2.8rem); margin: 1rem 1.4rem .8rem;
             padding: .62rem .9rem; border: 1px solid var(--color-border);
-            border-radius: 8px; background: var(--color-white);
+            border-radius: 12px; background: var(--color-white);
             color: var(--color-text-secondary); font-family: inherit;
             font-size: .9rem; font-weight: 600; cursor: pointer; transition: .2s;
         }
         .sidebar-lang-btn:hover { border-color: var(--color-primary); color: var(--color-primary); background: var(--color-primary-light); }
 
+        /* ---------- Content ---------- */
         .container { max-width: 1000px; margin: 0 auto; padding: 2.4rem 5% 4rem; min-height: 80vh; }
         .breadcrumb { font-size: .8rem; color: var(--color-text-muted); margin-bottom: 1.2rem; }
         .breadcrumb a { color: var(--color-text-secondary); text-decoration: none; }
@@ -212,21 +221,19 @@
             .cta-banner { align-items: flex-start; text-align: left; }
         }
     </style>
-    <link rel="apple-touch-icon" href="/assets/icons/icon-192.png">
 </head>
 <body data-lang="zh">
     <header>
         <div style="display:flex; align-items:center; gap:.9rem;">
-            <button class="menu-toggle" onclick="openSidebar()" aria-label="menu">☰</button>
+            <button class="menu-toggle" onclick="openSidebar()" aria-label="menu" aria-expanded="false" id="menuToggle">☰</button>
 
-            <a href="../index.html" class="brand" style="text-decoration:none;color:inherit;">
-                <h1 class="zh">古董集</h1>
-                <h1 class="en">GUDONG</h1>
-                <p class="zh">GUDONG</p>
+            <a href="https://gudong.app/index.html" class="brand" style="text-decoration:none;color:inherit;">
+                <h1><span class="zh">古董集</span><span class="en">GUDONG</span></h1>
+                <p><span class="zh">GUDONG.APP</span><span class="en">Chinese Antiques Platform</span></p>
             </a>
         </div>
         <div class="header-right">
-            <a href="../pricing.html#seller-services" class="btn-publish">
+            <a href="https://gudong.app/pricing.html#seller-services" class="btn-publish">
                 <span class="zh">刊登藏品</span><span class="en">List an Item</span>
             </a>
             <button class="lang-btn" onclick="toggleLang()">EN</button>
@@ -234,40 +241,42 @@
     </header>
 
     <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
-    <aside class="sidebar" id="sidebar">
+    <aside class="sidebar" id="sidebar" aria-hidden="true">
         <button class="sidebar-toggle-inner" onclick="closeSidebar()" aria-label="close menu">☰</button>
         <div class="sidebar-brand">
             <span class="zh">古董集</span><span class="en">GUDONG</span>
         </div>
         <nav class="sidebar-nav">
-            <a href="../index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">首页</span><span class="en">Home</span></a>
-            <a href="../index.html#today-finds" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 今日发现</span><span class="en">· Today's Finds</span></a>
-            <a href="../index.html#new-listings" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 最新藏品</span><span class="en">· New Listings</span></a>
-            <a href="../collection.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">藏品库</span><span class="en">Collection</span></a>
-            <a href="../categories/porcelain.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 瓷器</span><span class="en">· Porcelain</span></a>
-            <a href="../categories/jade.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 玉器</span><span class="en">· Jade</span></a>
-            <a href="../categories/coins.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 钱币</span><span class="en">· Coins</span></a>
-            <a href="../categories/paintings.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 书画</span><span class="en">· Paintings &amp; Calligraphy</span></a>
-            <a href="../categories/misc.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 杂项</span><span class="en">· Miscellaneous</span></a>
-            <a href="../sellers/index.html" class="sidebar-link active" onclick="closeSidebar()"><span class="zh">藏家主页</span><span class="en">Collector Gallery</span></a>
-            <a href="../pricing.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">刊登藏品</span><span class="en">List an Item</span></a>
-            <a href="../about.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">联系我们</span><span class="en">Contact</span></a>
+            <a href="https://gudong.app/index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">首页</span><span class="en">Home</span></a>
+            <a href="https://gudong.app/index.html#daily-intel" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 今日捡漏</span><span class="en">· Daily Radar</span></a>
+            <a href="https://gudong.app/index.html#today-finds" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 今日好货</span><span class="en">· Today's Picks</span></a>
+            <a href="https://gudong.app/index.html#new-listings" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 新上架好货</span><span class="en">· New Arrivals</span></a>
+            <a href="https://gudong.app/collection.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">藏品库</span><span class="en">Collection</span></a>
+            <a href="https://gudong.app/categories/porcelain.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 瓷器</span><span class="en">· Porcelain</span></a>
+            <a href="https://gudong.app/categories/jade.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 玉器</span><span class="en">· Jade</span></a>
+            <a href="https://gudong.app/categories/bronze.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 铜器</span><span class="en">· Bronzes</span></a>
+            <a href="https://gudong.app/categories/coins.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 钱币</span><span class="en">· Coins</span></a>
+            <a href="https://gudong.app/categories/paintings.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 书画</span><span class="en">· Paintings &amp; Calligraphy</span></a>
+            <a href="https://gudong.app/categories/misc.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 杂项</span><span class="en">· Miscellaneous</span></a>
+            <a href="https://gudong.app/sellers/index.html" class="sidebar-link active" onclick="closeSidebar()"><span class="zh">卖家展馆</span><span class="en">Seller Gallery</span></a>
+            <a href="https://gudong.app/pricing.html#seller-services" class="sidebar-link" onclick="closeSidebar()"><span class="zh">刊登藏品</span><span class="en">List an Item</span></a>
+            <a href="https://gudong.app/insights.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">情报 / 知识</span><span class="en">Insights</span></a>
+            <a href="https://gudong.app/about.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">关于我们</span><span class="en">About</span></a>
             <button type="button" class="sidebar-lang-btn" onclick="toggleLang()" aria-label="Switch language"><span class="zh">🌐 English</span><span class="en">🌐 中文</span></button>
         </nav>
     </aside>
 
     <main class="container">
         <div class="breadcrumb">
-            <a href="../index.html" class="zh">首页</a><a href="../index.html" class="en">Home</a>
+            <a href="https://gudong.app/index.html" class="zh">首页</a><a href="https://gudong.app/index.html" class="en">Home</a>
             <span class="zh"> / 私家主页</span><span class="en"> / Collector Gallery</span>
         </div>
 
         <h1 class="page-title zh">私家藏馆 · 藏家与商号</h1>
         <h1 class="page-title en">Private Collection Gallery</h1>
-       
 
         <div class="gallery-grid">
-            <a href="seller-lim-kw-antiques.html" class="gallery-card" data-seller-id="Lim-KW">
+            <a href="https://gudong.app/sellers/seller-lim-kw-antiques.html" class="gallery-card" data-seller-id="Lim-KW">
                 <div class="gallery-badge zh">新入驻</div><div class="gallery-badge en">New</div>
                 <div class="gallery-name">
                     <span class="zh">林记古玩</span><span class="en">Lim KW Antiques</span>
@@ -288,7 +297,7 @@
                 <div class="gallery-stats en">4 items · Joined 2026</div>
                 <div class="gallery-link zh">进入藏馆 →</div><div class="gallery-link en">Enter Gallery →</div>
             </a>
-            <a href="seller-yak-bc-antiques.html" class="gallery-card" data-seller-id="Yak-BC">
+            <a href="https://gudong.app/sellers/seller-yak-bc-antiques.html" class="gallery-card" data-seller-id="Yak-BC">
                 <div class="gallery-badge zh">新入驻</div><div class="gallery-badge en">New</div>
                 <div class="gallery-name">
                     <span class="zh">Yak BC</span><span class="en">Yak BC</span>
@@ -309,7 +318,7 @@
                 <div class="gallery-stats en">1 item · Joined 2026</div>
                 <div class="gallery-link zh">进入藏馆 →</div><div class="gallery-link en">Enter Gallery →</div>
             </a>
-            <a href="seller-ng-lk-antiques.html" class="gallery-card" data-seller-id="Ng-LK">
+            <a href="https://gudong.app/sellers/seller-ng-lk-antiques.html" class="gallery-card" data-seller-id="Ng-LK">
                 <div class="gallery-badge zh">新入驻</div><div class="gallery-badge en">New</div>
                 <div class="gallery-name">
                     <span class="zh">聚珍阁</span><span class="en">Ng LK Antiques</span>
@@ -330,7 +339,7 @@
                 <div class="gallery-stats en">3 items · Joined 2026</div>
                 <div class="gallery-link zh">进入藏馆 →</div><div class="gallery-link en">Enter Gallery →</div>
             </a>
-            <a href="seller-ng-cy-antiques.html" class="gallery-card" data-seller-id="Ng-CY">
+            <a href="https://gudong.app/sellers/seller-ng-cy-antiques.html" class="gallery-card" data-seller-id="Ng-CY">
                 <div class="gallery-badge zh">新入驻</div><div class="gallery-badge en">New</div>
                 <div class="gallery-name">
                     <span class="zh">博古斋</span><span class="en">Ng CY Antiques</span>
@@ -356,16 +365,19 @@
         <div class="cta-banner">
             <div class="cta-line zh">🏛 想拥有自己的私家藏馆？</div>
             <div class="cta-line en">🏛 Want your own Private Museum?</div>
-            <a href="../pricing.html#seller-services" class="cta-link zh">查看藏馆价格 →</a>
-            <a href="../pricing.html#seller-services" class="cta-link en">View Private Collection Gallery pricing →</a>
+            <a href="https://gudong.app/pricing.html#seller-services" class="cta-link zh">查看藏馆价格 →</a>
+            <a href="https://gudong.app/pricing.html#seller-services" class="cta-link en">View Private Collection Gallery pricing →</a>
         </div>
     </main>
 
     <footer>
         <div class="footer-nav">
-            <a href="../pricing.html#buyer-services" class="zh">委托找货</a><a href="../pricing.html#buyer-services" class="en">Sourcing</a>
-            <a href="../privacy.html" class="zh">隐私政策</a><a href="../privacy.html" class="en">Privacy</a>
-            <a href="../terms.html" class="zh">用户条款</a><a href="../terms.html" class="en">Terms</a>
+            <a href="https://gudong.app/about.html" class="zh">联系我们</a><a href="https://gudong.app/about.html" class="en">Contact</a>
+            <a href="https://gudong.app/pricing.html#seller-services" class="zh">卖家服务</a><a href="https://gudong.app/pricing.html#seller-services" class="en">Seller Services</a>
+            <a href="https://gudong.app/pricing.html#buyer-services" class="zh">买家指南</a><a href="https://gudong.app/pricing.html#buyer-services" class="en">Buyer Guide</a>
+            <a href="https://gudong.app/pricing.html#price-table" class="zh">服务收费</a><a href="https://gudong.app/pricing.html#price-table" class="en">Price List</a>
+            <a href="https://gudong.app/privacy.html" class="zh">隐私政策</a><a href="https://gudong.app/privacy.html" class="en">Privacy</a>
+            <a href="https://gudong.app/terms.html" class="zh">用户条款</a><a href="https://gudong.app/terms.html" class="en">Terms</a>
         </div>
         <p class="footer-disclaimer zh">gudong.app 是信息发现平台，而非交易平台。</p>
         <p class="footer-disclaimer en">gudong.app is an information and discovery platform for antiques and collectibles.</p>
@@ -387,11 +399,32 @@
             try { localStorage.setItem('gudong_lang', currentLang); } catch (e) {}
         }
         applyLang();
-        function openSidebar() { document.getElementById('sidebar').classList.add('open'); document.getElementById('sidebarOverlay').classList.add('show'); document.body.style.overflow = 'hidden'; }
-        function closeSidebar() { document.getElementById('sidebar').classList.remove('open'); document.getElementById('sidebarOverlay').classList.remove('show'); document.body.style.overflow = ''; }
-        if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js');
+        function openSidebar() {
+            document.getElementById('sidebar').classList.add('open');
+            document.getElementById('sidebarOverlay').classList.add('show');
+            document.body.style.overflow = 'hidden';
+            var t = document.getElementById('menuToggle');
+            if (t) t.setAttribute('aria-expanded', 'true');
+        }
+        function closeSidebar() {
+            document.getElementById('sidebar').classList.remove('open');
+            document.getElementById('sidebarOverlay').classList.remove('show');
+            document.body.style.overflow = '';
+            var t = document.getElementById('menuToggle');
+            if (t) t.setAttribute('aria-expanded', 'false');
+        }
+        /* ESC 关闭侧栏 */
+        document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeSidebar(); });
+        /* 宽屏自动收起，避免遮罩残留 */
+        window.addEventListener('resize', function () { if (window.innerWidth > 900) closeSidebar(); });
+
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function () {
+                navigator.serviceWorker.register('sw.js').catch(function () {});
+            });
+        }
     </script>
-    <script src="../assets/js/gudong-data.js" data-root="../"></script>
+    <script src="https://gudong.app/assets/js/gudong-data.js"></script>
     <script>
         if (window.GudongData) {
             GudongData.load().then(function (r) {

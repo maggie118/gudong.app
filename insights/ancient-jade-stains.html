@@ -279,7 +279,22 @@
             .ri-name { font-size: .8rem; }
             .ri-foot { font-size: .8rem; }
         }
-    </style>
+.app-install-btn { display: inline-flex; align-items: center; gap: .3rem; margin-left: .6rem; padding: .3rem .7rem; border: 1px solid #e3d9cf; border-radius: 999px; color: #7a6a5c; font-size: .78rem; text-decoration: none; vertical-align: middle; transition: .2s; }
+.app-install-btn:hover { border-color: #8A5A3B; color: #8A5A3B; background: #f0e4d8; }
+.app-install-btn svg { width: 12px; height: 12px; flex-shrink: 0; fill: currentColor; }
+.gd-install-modal { position: fixed; inset: 0; z-index: 9999; display: none; align-items: center; justify-content: center; background: rgba(0,0,0,.45); padding: 1.2rem; }
+.gd-install-modal.open { display: flex; }
+.gd-install-card { background: #fff; border-radius: 14px; max-width: 350px; width: 100%; padding: 1.6rem 1.4rem 1.2rem; text-align: center; box-shadow: 0 18px 50px rgba(0,0,0,.25); position: relative; }
+.gd-install-close { position: absolute; top: .5rem; right: .7rem; border: 0; background: none; font-size: 1.4rem; color: #999; cursor: pointer; padding: .3rem; line-height: 1; }
+.gd-install-title { font-size: 1.08rem; font-weight: 700; color: #3d2b1f; margin: .2rem 0 1rem; }
+.gd-install-steps { text-align: left; margin: 0 auto 1rem; max-width: 290px; }
+.gd-install-step { display: flex; align-items: flex-start; gap: .6rem; padding: .5rem 0; color: #5a4636; font-size: .9rem; line-height: 1.5; }
+.gd-install-step .n { flex-shrink: 0; width: 22px; height: 22px; border-radius: 50%; background: #f0e4d8; color: #8A5A3B; font-weight: 700; font-size: .78rem; display: flex; align-items: center; justify-content: center; margin-top: .1rem; }
+.gd-install-step svg { flex-shrink: 0; width: 22px; height: 22px; fill: #007AFF; margin-top: .1rem; }
+.gd-install-note { font-size: .78rem; color: #9a8d80; margin-top: .5rem; line-height: 1.5; }
+.gd-install-modal [data-lang="en"] .zh, body[data-lang="en"] .gd-install-modal .zh { display: none; }
+.gd-install-modal [data-lang="zh"] .en, body[data-lang="zh"] .gd-install-modal .en { display: none; }
+</style>
 </head>
 <body data-lang="zh">
     <div class="announce-bar" id="announceBar">
@@ -348,7 +363,7 @@
             <span class="dot">·</span>
             <span class="zh">6 分钟阅读</span><span class="en">6 min read</span>
             <span class="dot">·</span>
-            <span class="zh">古董圈编辑整理</span><span class="en">Gudong editorial</span>
+            <span class="zh">古董圈编辑整理 · 未经授权禁止转载</span><span class="en">Gudong editorial · No reposting without permission</span>
         </div>
 
         <div class="article-cover" role="img" aria-label="古玉沁色">
@@ -679,8 +694,8 @@
         </div>
         <p class="footer-disclaimer zh">gudong.app 是信息发现平台，而非交易平台。</p>
         <p class="footer-disclaimer en">gudong.app is an information and discovery platform for antiques and collectibles.</p>
-        <p class="zh" style="margin-bottom:0;">© 2026 古董圈 · gudong.app <a href="javascript:void(0)" class="app-install-btn" onclick="event.preventDefault();"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20h14v-2H5v2zM19 9h-4V3H9v6H5l7 7 7-7z"/></svg>安装古董.app</a></p>
-        <p class="en" style="margin-bottom:0;">© 2026 Gudong · gudong.app <a href="javascript:void(0)" class="app-install-btn" onclick="event.preventDefault();"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20h14v-2H5v2zM19 9h-4V3H9v6H5l7 7 7-7z"/></svg>Install gudong.app</a></p>
+        <p class="zh" style="margin-bottom:0;">© 2026 古董圈 · gudong.app <a href="javascript:void(0)" class="app-install-btn" onclick="event.preventDefault();"><svg viewBox="0 0 24 24" aria-hidden="true" width="12" height="12"><path d="M5 20h14v-2H5v2zM19 9h-4V3H9v6H5l7 7 7-7z"/></svg>安装古董.app</a></p>
+        <p class="en" style="margin-bottom:0;">© 2026 Gudong · gudong.app <a href="javascript:void(0)" class="app-install-btn" onclick="event.preventDefault();"><svg viewBox="0 0 24 24" aria-hidden="true" width="12" height="12"><path d="M5 20h14v-2H5v2zM19 9h-4V3H9v6H5l7 7 7-7z"/></svg>Install gudong.app</a></p>
     </footer>
 
     <script>
@@ -743,5 +758,77 @@
             });
         }
     </script>
+
+<!-- 复制时自动追加版权信息 -->
+<script>
+(function () {
+    var MIN_LEN = 30; // 复制文字超过该长度才追加，避免干扰短词复制
+    document.addEventListener('copy', function (e) {
+        var sel = window.getSelection();
+        var text = sel ? sel.toString() : '';
+        if (!text || text.length < MIN_LEN) return;
+        if (text.indexOf('gudong.app原创内容') !== -1) return; // 避免重复追加
+        var url = location.href.split('#')[0].split('?')[0];
+        var lang = document.documentElement.lang || '';
+        var notice = lang.indexOf('zh') === 0
+            ? '\n\n本文为gudong.app原创内容，转载请注明出处\n原文链接：' + url
+            : '\n\nOriginal content by gudong.app. Please cite the source when reposting.\nSource: ' + url;
+        if (e.clipboardData && typeof e.clipboardData.setData === 'function') {
+            e.clipboardData.setData('text/plain', text + notice);
+            e.preventDefault();
+        }
+    });
+})();
+</script>
+
+<!-- 安装引导弹窗 -->
+<div class="gd-install-modal" id="gdInstallModal" role="dialog" aria-modal="true" aria-label="Install guide">
+    <div class="gd-install-card">
+        <button type="button" class="gd-install-close" onclick="gdCloseInstall()" aria-label="close">×</button>
+        <div class="gd-install-title zh">安装 古董.app 到主屏幕</div>
+        <div class="gd-install-title en">Add Gudong.app to Home Screen</div>
+        <div class="gd-install-steps" id="gdStepsIos">
+            <div class="gd-install-step"><svg viewBox="0 0 24 24" aria-hidden="true" width="22" height="22"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18.2c-4.5 0-8.2-3.7-8.2-8.2S7.5 3.8 12 3.8s8.2 3.7 8.2 8.2-3.7 8.2-8.2 8.2zM11 7l-4 4h3v6h2v-6h3l-4-4z"/></svg><span class="zh">点击 Safari 底部工具栏的「分享」按钮</span><span class="en">Tap the Share button in Safari's bottom toolbar</span></div>
+            <div class="gd-install-step"><span class="n">2</span><span class="zh">在分享菜单中选择「添加到主屏幕」</span><span class="en">Choose "Add to Home Screen" in the share menu</span></div>
+            <div class="gd-install-step"><span class="n">3</span><span class="zh">点击右上角「添加」，桌面即出现古董.app 图标</span><span class="en">Tap "Add" — the Gudong.app icon appears on your Home Screen</span></div>
+        </div>
+        <div class="gd-install-steps" id="gdStepsOther" style="display:none;">
+            <div class="gd-install-step"><span class="n">1</span><span class="zh">点击浏览器地址栏右侧的「安装」图标</span><span class="en">Click the install icon at the right of the address bar</span></div>
+            <div class="gd-install-step"><span class="n">2</span><span class="zh">或通过浏览器菜单 →「安装古董圈」</span><span class="en">Or open the browser menu → "Install Gudong"</span></div>
+        </div>
+        <div class="gd-install-note zh">安装后可像原生 App 一样全屏使用，无需应用商店。</div>
+        <div class="gd-install-note en">Runs full-screen like a native app. No app store needed.</div>
+    </div>
+</div>
+<script>
+(function () {
+    var modal = document.getElementById('gdInstallModal');
+    if (!modal) return;
+    window.gdCloseInstall = function () { modal.classList.remove('open'); };
+    modal.addEventListener('click', function (e) { if (e.target === modal) gdCloseInstall(); });
+
+    var deferredPrompt = null;
+    window.addEventListener('beforeinstallprompt', function (e) { e.preventDefault(); deferredPrompt = e; });
+    window.addEventListener('appinstalled', function () {
+        document.querySelectorAll('.app-install-btn').forEach(function (b) { b.style.display = 'none'; });
+    });
+
+    document.addEventListener('click', function (e) {
+        var btn = e.target && e.target.closest ? e.target.closest('.app-install-btn') : null;
+        if (!btn) return;
+        e.preventDefault();
+        if (deferredPrompt) {
+            deferredPrompt.prompt();
+            deferredPrompt.userChoice.then(function () { deferredPrompt = null; }).catch(function () {});
+            return;
+        }
+        var ua = navigator.userAgent;
+        var isIOS = /iPad|iPhone|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+        document.getElementById('gdStepsIos').style.display = isIOS ? '' : 'none';
+        document.getElementById('gdStepsOther').style.display = isIOS ? 'none' : '';
+        modal.classList.add('open');
+    });
+})();
+</script>
 </body>
 </html>

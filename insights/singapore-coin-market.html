@@ -414,7 +414,7 @@
 
             <span class="zh">8 分钟阅读</span><span class="en">8 min read</span>
             <span class="dot">·</span>
-            <span class="zh">古董圈编辑整理</span><span class="en">Gudong editorial</span>
+            <span class="zh">古董圈编辑整理 · 未经授权禁止转载</span><span class="en">Gudong editorial · No reposting without permission</span>
         </div>
 <!-- 月度简报徽章：固定回访锚点 -->
         <div class="monthly-badge">
@@ -648,8 +648,8 @@
         </div>
         <p class="footer-disclaimer zh">gudong.app 是信息发现平台，而非交易平台。</p>
         <p class="footer-disclaimer en">gudong.app is an information and discovery platform for antiques and collectibles.</p>
-        <p class="zh" style="margin-bottom:0;">© 2026 古董圈 · gudong.app <a href="javascript:void(0)" class="app-install-btn" onclick="event.preventDefault();"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20h14v-2H5v2zM19 9h-4V3H9v6H5l7 7 7-7z"/></svg>安装古董.app</a></p>
-        <p class="en" style="margin-bottom:0;">© 2026 Gudong · gudong.app <a href="javascript:void(0)" class="app-install-btn" onclick="event.preventDefault();"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20h14v-2H5v2zM19 9h-4V3H9v6H5l7 7 7-7z"/></svg>Install gudong.app</a></p>
+        <p class="zh" style="margin-bottom:0;">© 2026 古董圈 · gudong.app <a href="javascript:void(0)" class="app-install-btn" onclick="event.preventDefault();"><svg viewBox="0 0 24 24" aria-hidden="true" width="12" height="12"><path d="M5 20h14v-2H5v2zM19 9h-4V3H9v6H5l7 7 7-7z"/></svg>安装古董.app</a></p>
+        <p class="en" style="margin-bottom:0;">© 2026 Gudong · gudong.app <a href="javascript:void(0)" class="app-install-btn" onclick="event.preventDefault();"><svg viewBox="0 0 24 24" aria-hidden="true" width="12" height="12"><path d="M5 20h14v-2H5v2zM19 9h-4V3H9v6H5l7 7 7-7z"/></svg>Install gudong.app</a></p>
     </footer>
 
     <script>
@@ -776,5 +776,27 @@
 })();
 </script>
 
+
+<!-- 复制时自动追加版权信息 -->
+<script>
+(function () {
+    var MIN_LEN = 30; // 复制文字超过该长度才追加，避免干扰短词复制
+    document.addEventListener('copy', function (e) {
+        var sel = window.getSelection();
+        var text = sel ? sel.toString() : '';
+        if (!text || text.length < MIN_LEN) return;
+        if (text.indexOf('gudong.app原创内容') !== -1) return; // 避免重复追加
+        var url = location.href.split('#')[0].split('?')[0];
+        var lang = document.documentElement.lang || '';
+        var notice = lang.indexOf('zh') === 0
+            ? '\n\n本文为gudong.app原创内容，转载请注明出处\n原文链接：' + url
+            : '\n\nOriginal content by gudong.app. Please cite the source when reposting.\nSource: ' + url;
+        if (e.clipboardData && typeof e.clipboardData.setData === 'function') {
+            e.clipboardData.setData('text/plain', text + notice);
+            e.preventDefault();
+        }
+    });
+})();
+</script>
 </body>
 </html>

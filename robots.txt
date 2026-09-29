@@ -1,15 +1,14 @@
 # ============================================================
-# 古董集 Gudong.app — robots.txt
-# 更新日期：2026-09-26
+# 古董圈 Gudong.app — robots.txt
+# 更新日期：2026-09-29
 # 配套站点地图：https://gudong.app/sitemap.xml
 # ============================================================
-
 # ---------- 默认规则：允许所有爬虫 ----------
 User-agent: *
 Allow: /
 
 # ---------- 构建源文件与内部原型，不供线上访问 ----------
-# （配合 .vercelignore / .gitignore 一并排除部署）
+# ⚠️重要：确认线上URL**不存在 /content/**，如果线上可以访问该路径，请删除所有 Disallow: /content/
 Disallow: /templates/
 Disallow: /content/
 Disallow: /prototypes/
@@ -48,7 +47,7 @@ Disallow: /*?ref=
 # 屏蔽后 Google 渲染出来的品类页、藏品库会是空的。
 # 同理，不要屏蔽 /assets/ —— 图标、OG 图片、favicon 都在此处。
 #
-# 也不要屏蔽 /insights/ —— 38 篇情报文章是 SEO 的核心资产。
+# 也不要屏蔽 /insights/ —— 核心原创文章SEO资产。
 # 如果未来某个文章页需要临时下线，请用 <meta name="robots" content="noindex">
 # 单页处理，而不是在这里全局屏蔽目录。
 
@@ -56,10 +55,8 @@ Disallow: /*?ref=
 Sitemap: https://gudong.app/sitemap.xml
 
 # ============================================================
-# 主流爬虫的额外规则（可选）
+# 主流搜索引擎爬虫
 # ============================================================
-
-# ---------- Google ----------
 User-agent: Googlebot
 Allow: /
 Disallow: /templates/
@@ -76,15 +73,10 @@ Disallow: /*?filter=
 
 User-agent: Googlebot-Image
 Allow: /
-Allow: /assets/
-Allow: /insights/
-Allow: /items/
-Allow: /categories/
 Disallow: /templates/
 Disallow: /content/
 Disallow: /scripts/
 
-# ---------- Bing ----------
 User-agent: Bingbot
 Allow: /
 Disallow: /templates/
@@ -99,7 +91,6 @@ Disallow: /*?search=
 Disallow: /*?sort=
 Disallow: /*?filter=
 
-# ---------- 百度 ----------
 User-agent: Baiduspider
 Allow: /
 Disallow: /templates/
@@ -112,7 +103,6 @@ Disallow: /*?q=
 Disallow: /*?s=
 Disallow: /*?search=
 
-# ---------- Yandex ----------
 User-agent: Yandex
 Allow: /
 Disallow: /templates/
@@ -126,13 +116,11 @@ Disallow: /*?s=
 Disallow: /*?search=
 
 # ---------- AI 爬虫（可选策略） ----------
-# 保留以下注释，供你按需开启：
-#
 # 如果希望允许 AI 抓取（推荐，利于被引用）：
 # User-agent: GPTBot
 # Allow: /
 #
-# 如果希望禁止 AI 训练抓取：
+# 如果希望禁止 AI 训练抓取，取消下面注释：
 # User-agent: GPTBot
 # Disallow: /
 # User-agent: ChatGPT-User
@@ -148,15 +136,18 @@ Disallow: /*?search=
 # User-agent: Bytespider
 # Disallow: /
 
-# ---------- 无意义的爬虫，直接拒绝 ----------
+# ---------- SEO分析爬虫、采集爬虫（礼貌拒绝） ----------
 User-agent: AhrefsBot
 Disallow: /
-
 User-agent: SemrushBot
 Disallow: /
-
 User-agent: MJ12bot
 Disallow: /
-
 User-agent: DotBot
+Disallow: /
+User-agent: Scrapy
+Disallow: /
+User-agent: Go-http-client
+Disallow: /
+User-agent: Python-urllib
 Disallow: /

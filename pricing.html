@@ -3,17 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>服务价格 | Pricing | Gudong</title>
-<meta name="description" content="古董圈服务价格：前 88 位创始卖家专属权益、Annual Seller（S$288/年）与 Seller Pro（S$699/年）两档年度方案，以及买家委托找货的收费标准（新加坡元）。 Gudong pricing: Founding Seller · 2026 benefits, Annual Seller (S$288/yr) and Seller Pro (S$699/yr) plans, and the Sourcing Service (SGD).">
+<title>服务价格 | 古董圈 Gudong</title>
+<meta name="description" content="古董圈服务价格：前 88 位创始卖家专属权益、Annual Seller（S$288/年）与 Collector Launch Kit（S$699/年）两档年度方案，以及买家委托找货的收费标准（新加坡元）。 Gudong pricing: Founding Seller · 2026 benefits, Annual Seller (S$288/yr) and Collector Launch Kit (S$699/yr) plans, and the Sourcing Service (SGD).">
 <link rel="canonical" href="https://gudong.app/pricing.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="古董圈 Gudong">
 <meta property="og:title" content="服务价格 | Pricing | Gudong">
-<meta property="og:description" content="古董圈服务价格：前 88 位创始卖家专属权益、Annual Seller（S$288/年）与 Seller Pro（S$699/年）两档年度方案，以及买家委托找货的收费标准（新加坡元）。">
+<meta property="og:description" content="古董圈服务价格：前 88 位创始卖家专属权益、Annual Seller（S$288/年）与 Collector Launch Kit（S$699/年）两档年度方案，以及买家委托找货的收费标准（新加坡元）。">
 <meta property="og:url" content="https://gudong.app/pricing.html">
 <meta property="og:image" content="https://gudong.app/assets/icons/icon-512.png">
-<link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32x32.png">
-<link rel="manifest" href="manifest.json">
+<link rel="icon" type="image/png" sizes="32x32" href="../../Downloads/assets/icons/favicon-32x32.png">
+<link rel="manifest" href="../../Downloads/manifest.json">
 <meta name="theme-color" content="#8A5A3B">
 	<meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -401,6 +401,24 @@ footer {
 
 /* ===== Pricing V3: Founding Seller + 2 tiers ===== */
 .legacy-fee-overview { display:none !important; }
+
+/* ===== 主推方案视觉层级 ===== */
+.seller-choice-grid{display:grid;grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr);gap:1.5rem;max-width:900px;margin:1.6rem auto 0;align-items:stretch}
+.seller-choice-grid .plan{min-height:100%;padding:2rem 1.5rem 1.7rem}
+.seller-choice-grid .plan.featured{padding:2.55rem 1.75rem 1.9rem;box-shadow:0 14px 36px rgba(70,48,32,.12);transform:translateY(-8px);background:linear-gradient(180deg,#fffdf9 0%,#fff 55%)}
+.seller-choice-grid .plan.featured .plan-title{font-size:1.38rem}
+.seller-choice-grid .plan.featured .plan-price{font-size:2.65rem}
+.seller-choice-grid .plan.featured .plan-price-sub{font-size:.94rem}
+.seller-choice-grid .plan:not(.featured){opacity:.94}
+.seller-choice-grid .plan:not(.featured) .plan-price{font-size:1.8rem}
+.seller-choice-grid .plan-badge{top:-15px;padding:.38rem 1.15rem;border-radius:999px;box-shadow:0 4px 12px rgba(176,138,69,.22)}
+.gallery-url-demo{margin:1.15rem -0.1rem 1.25rem;padding:1.15rem 1rem;border:1px solid rgba(176,138,69,.6);background:linear-gradient(135deg,#fbf5e9,#fffdf9);border-radius:14px;text-align:center;box-shadow:inset 0 0 0 1px rgba(255,255,255,.7)}
+.gallery-url{font-size:1.15rem;letter-spacing:.01em}
+.gallery-url-note{font-size:.72rem}
+.plan.featured .plan-cta{font-size:.9rem;padding:.82rem 1.25rem;border-radius:10px;box-shadow:0 6px 16px rgba(176,138,69,.2)}
+.seller-choice-intro{max-width:700px;margin:-.4rem auto 1.1rem;text-align:center}
+.seller-choice-intro strong{color:var(--color-primary-dark)}
+@media (max-width:820px){.seller-choice-grid{grid-template-columns:1fr;max-width:560px}.seller-choice-grid .plan.featured{order:-1;transform:none}.seller-choice-grid .plan.featured .plan-title{font-size:1.25rem}.seller-choice-grid .plan.featured .plan-price{font-size:2.4rem}}
 .seller-choice-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1.2rem; margin-top:1.4rem; max-width:760px; margin-left:auto; margin-right:auto; }
 .choice-label { font-size:.72rem; color:var(--color-gold); font-weight:700; letter-spacing:.08em; text-transform:uppercase; margin-top:.85rem; }
 .plan-cta { display:inline-flex; justify-content:center; align-items:center; gap:.35rem; margin-top:auto; padding:.7rem 1.1rem; border-radius:8px; background:var(--color-primary); color:#fff; text-decoration:none; font-size:.82rem; font-weight:700; transition:.2s; }
@@ -515,7 +533,11 @@ footer {
 }
 @media (max-width:820px){ .seller-choice-grid{grid-template-columns:1fr;} }
 </style>
-<link rel="apple-touch-icon" href="assets/icons/icon-192.png">
+<link rel="apple-touch-icon" href="../../Downloads/assets/icons/icon-192.png">
+
+<style>
+.gallery-url-demo{margin:1rem 0 1.2rem;padding:1rem;border:1px solid var(--color-gold);background:rgba(255,255,255,.7);border-radius:12px;text-align:center}.gallery-url-label{font-size:.68rem;color:var(--color-text-muted);letter-spacing:.08em;text-transform:uppercase}.gallery-url{margin:.35rem 0;font-family:var(--font-display);font-size:1rem;font-weight:700;color:var(--color-primary-dark);word-break:break-word}.gallery-url span{color:var(--color-gold)}.gallery-url-note{font-size:.7rem;color:var(--color-text-secondary);line-height:1.5}
+</style>
 </head>
 <body data-lang="zh">
     <div class="announce-bar" id="announceBar">
@@ -527,14 +549,14 @@ footer {
     <header>
         <div style="display:flex; align-items:center; gap:.9rem;">
             <button class="menu-toggle" onclick="openSidebar()" aria-label="menu" aria-expanded="false" id="menuToggle">☰</button>
-            <a href="index.html" class="brand">
+            <a href="../../Downloads/index.html" class="brand">
                 <h1><span class="zh">古董圈</span><span class="en">GUDONG</span></h1>
                 <p><span class="zh">GUDONG.APP</span><span class="en">Chinese Antiques Platform</span></p>
             </a>
         </div>
 
         <div class="header-right">
-            <a href="pricing.html#seller-services" class="btn-publish">
+            <a href="../../Downloads/pricing.html#seller-services" class="btn-publish">
                 <span class="zh">刊登藏品</span><span class="en">List an Item</span>
             </a>
             <button class="lang-btn" onclick="toggleLang()">EN</button>
@@ -548,34 +570,34 @@ footer {
             <span class="zh">古董圈</span><span class="en">GUDONG</span>
         </div>
         <nav class="sidebar-nav">
-            <a href="index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">首页</span><span class="en">Home</span></a>
-            <a href="index.html#daily-intel" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 今日捡漏</span><span class="en">· Daily Radar</span></a>
-            <a href="index.html#today-finds" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 今日好货</span><span class="en">· Today's Picks</span></a>
-            <a href="index.html#new-listings" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 新上架好货</span><span class="en">· New Arrivals</span></a>
-            <a href="collection.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">藏品库</span><span class="en">Collection</span></a>
-            <a href="categories/porcelain.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 瓷器</span><span class="en">· Porcelain</span></a>
-            <a href="categories/jade.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 玉器</span><span class="en">· Jade</span></a>
-            <a href="categories/bronze.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 铜器</span><span class="en">· Bronzes</span></a>
-            <a href="categories/coins.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 钱币</span><span class="en">· Coins</span></a>
-            <a href="categories/paintings.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 书画</span><span class="en">· Paintings &amp; Calligraphy</span></a>
-            <a href="categories/misc.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 杂项</span><span class="en">· Miscellaneous</span></a>
-            <a href="sellers/index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">卖家展馆</span><span class="en">Seller Gallery</span></a>
-            <a href="pricing.html#seller-services" class="sidebar-link active" onclick="closeSidebar()"><span class="zh">刊登藏品</span><span class="en">List an Item</span></a>
-            <a href="insights.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">情报 / 知识</span><span class="en">Insights</span></a>
-            <a href="about.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">关于我们</span><span class="en">About</span></a>
+            <a href="../../Downloads/index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">首页</span><span class="en">Home</span></a>
+            <a href="../../Downloads/index.html#daily-intel" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 今日捡漏</span><span class="en">· Daily Radar</span></a>
+            <a href="../../Downloads/index.html#today-finds" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 今日好货</span><span class="en">· Today's Picks</span></a>
+            <a href="../../Downloads/index.html#new-listings" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 新上架好货</span><span class="en">· New Arrivals</span></a>
+            <a href="../../Downloads/collection.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">藏品库</span><span class="en">Collection</span></a>
+            <a href="../../Downloads/categories/porcelain.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 瓷器</span><span class="en">· Porcelain</span></a>
+            <a href="../../Downloads/categories/jade.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 玉器</span><span class="en">· Jade</span></a>
+            <a href="../../Downloads/categories/bronze.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 铜器</span><span class="en">· Bronzes</span></a>
+            <a href="../../Downloads/categories/coins.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 钱币</span><span class="en">· Coins</span></a>
+            <a href="../../Downloads/categories/paintings.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 书画</span><span class="en">· Paintings &amp; Calligraphy</span></a>
+            <a href="../../Downloads/categories/misc.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 杂项</span><span class="en">· Miscellaneous</span></a>
+            <a href="../../Downloads/sellers/index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">卖家展馆</span><span class="en">Seller Gallery</span></a>
+            <a href="../../Downloads/pricing.html#seller-services" class="sidebar-link active" onclick="closeSidebar()"><span class="zh">刊登藏品</span><span class="en">List an Item</span></a>
+            <a href="../../Downloads/insights.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">情报 / 知识</span><span class="en">Insights</span></a>
+            <a href="../../Downloads/about.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">关于我们</span><span class="en">About</span></a>
             <button type="button" class="sidebar-lang-btn" onclick="toggleLang()" aria-label="Switch language"><span class="zh">🌐 English</span><span class="en">🌐 中文</span></button>
         </nav>
     </aside>
 
 <main class="container">
   <div class="breadcrumb">
-    <a href="index.html" class="zh">首页</a><a href="index.html" class="en">Home</a>
+    <a href="../../Downloads/index.html" class="zh">首页</a><a href="../../Downloads/index.html" class="en">Home</a>
     <span class="zh"> / 服务价格</span><span class="en"> / Pricing</span>
   </div>
 
   <!-- ===== 页首 ===== -->
   <div class="sec-head tight">
-    <div class="eyebrow zh">古 董 集</div><div class="eyebrow en">Gudong</div>
+    <div class="eyebrow zh">古 董 圈</div><div class="eyebrow en">Gudong</div>
     <h1 class="sec-title zh">收费标准</h1><h1 class="sec-title en">Pricing</h1>
     <p class="sec-sub zh">新加坡本地运营 · 币种：新加坡元 SGD · 价格不含消费税（GST）</p>
     <p class="sec-sub en">Operated in Singapore · Currency: SGD · Prices exclude GST</p>
@@ -620,7 +642,7 @@ footer {
         </div>
         <div class="founder-benefit">
           <span class="b-icon">✦</span>
-          <div><span class="zh"><b>创始续费价格</b>（永享特殊价）</span><span class="en"><b>Founding renewal pricing</b> (special rate forever)</span></div>
+          <div><span class="zh"><b>创始卖家续费时享专属优惠价格</b></span><span class="en"><b>Founding Sellers receive preferred renewal pricing.</b></span></div>
         </div>
         <div class="founder-benefit">
           <span class="b-icon">✦</span>
@@ -645,8 +667,8 @@ footer {
           <span class="zh">成为创始卖家</span><span class="en">Become a Founding Seller</span>
         </a>
       </div>
-      <div class="founder-foot-note zh">前 2 件免费刊登额度 1 年内有效；创始续费价适用于 Annual Seller 与 Seller Pro 两档年度续费。名额招满后，新卖家按常规价收费。</div>
-      <div class="founder-foot-note en">The 2 free listings are valid for 1 year; the founding renewal rate applies to both Annual Seller and Seller Pro annual renewals. Once seats are filled, new sellers pay regular pricing.</div>
+      <div class="founder-foot-note zh">前 2 件免费刊登额度 1 年内有效；创始续费价适用于 Annual Seller 与 Collector Launch Kit 两档年度续费。名额招满后，新卖家按常规价收费。</div>
+      <div class="founder-foot-note en">The 2 free listings are valid for 1 year; the founding renewal rate applies to both Annual Seller and Collector Launch Kit annual renewals. Once seats are filled, new sellers pay regular pricing.</div>
     </div>
   </section>
 
@@ -655,13 +677,17 @@ footer {
     <div class="sec-head">
       <div class="eyebrow zh">卖家服务</div><div class="eyebrow en">Seller Services</div>
       <h2 class="sec-title zh">两档年度方案</h2><h2 class="sec-title en">Two Annual Plans</h2>
-      <p class="sec-sub zh">自助刊登或全包代运营 · 不抽取交易佣金</p>
-      <p class="sec-sub en">Self-service or full-service managed · No transaction commission</p>
+      <p class="sec-sub zh">从发布藏品，到拥有属于自己的线上藏馆 · 不抽取交易佣金</p>
+      <p class="sec-sub en">From listing pieces to owning your own online collection gallery · No transaction commission</p>
+      <div class="seller-choice-intro">
+        <div class="zh"><strong>主推：藏家启动包 S$699 / 年</strong> · 为你的收藏建立一个可长期分享的专属线上空间。</div>
+        <div class="en"><strong>Featured: Collector Launch Kit — S$699 / year</strong> · Create a dedicated online home for your collection.</div>
+      </div>
     </div>
     <div class="note-bar" style="max-width:820px;margin-left:auto;margin-right:auto;margin-bottom:1.6rem;">
       <span class="marker" aria-hidden="true">💡</span>
-      <div class="zh"><b>怎么选：</b>自己上架、自己运营 →「Annual Seller」；让平台帮你上架、精修图片、做首页曝光 →「Seller Pro」。<b>创始卖家</b>两档均享创始续费价。</div>
-      <div class="en"><b>Which to choose:</b> list and run it yourself → Annual Seller; have the platform list, retouch photos and feature you → Seller Pro. <b>Founding Sellers</b> get a founding renewal rate on both plans.</div>
+      <div class="zh"><b>怎么选：</b>自己上架、自己运营 →「Annual Seller」；建立自己的线上藏馆，让平台协助上架、精修图片、做首页曝光 →「Collector Launch Kit」。<b>创始卖家</b>两档均享创始续费价。</div>
+      <div class="en"><b>Which to choose:</b> list and run it yourself → Annual Seller; build your own online collection gallery with listing support, photo retouching and homepage exposure → Collector Launch Kit. <b>Founding Sellers</b> get a founding renewal rate on both plans.</div>
     </div>
     <div class="center-actions">
       <a href="https://airtable.com/apprn6XDQnAm8bkaT/shrlQLTRfG5RlYjD4" target="_blank" rel="noopener noreferrer" class="btn-publish">
@@ -682,48 +708,54 @@ footer {
         <div class="plan-price-sub en">Equivalent to SGD 24 / month</div>
         <ul class="plan-list">
           <li class="zh"><strong>私家藏馆</strong>（独立分享 URL，聚合全部在售藏品）</li><li class="en"><strong>Private Gallery</strong> (shareable URL, aggregates all active listings)</li>
-          <li class="zh">10 件刊登额度（年度）</li><li class="en">10 listing credits (annual)</li>
+          <li class="zh">10 件活跃藏品展示额度（年度）</li><li class="en">Up to 10 active listings (annual)</li>
           <li class="zh">分类筛选 + 价格筛选 + 搜索</li><li class="en">Category / price filters + search</li>
           <li class="zh">标准审核队列</li><li class="en">Standard review queue</li>
           <li class="zh">标准客服支持</li><li class="en">Standard customer support</li>
           <li class="zh">不抽取交易佣金</li><li class="en">No transaction commission</li>
           <li class="zh no">不含图片精修与首页推荐（按需加购）</li><li class="en no">Photo retouching &amp; Homepage Feature not included (add-on)</li>
         </ul>
-        <div class="choice-label zh">自己动手经营</div><div class="choice-label en">Run it yourself</div>
-        <a class="plan-cta" href="https://airtable.com/apprn6XDQnAm8bkaT/shrlQLTRfG5RlYjD4" target="_blank" rel="noopener noreferrer"><span class="zh">选择此方案</span><span class="en">Choose this plan</span></a>
+        <div class="choice-label zh">适合：偶尔发布、自己运营</div><div class="choice-label en">For occasional listings &amp; self-management</div>
+        <a class="plan-cta" href="https://airtable.com/apprn6XDQnAm8bkaT/shrlQLTRfG5RlYjD4" target="_blank" rel="noopener noreferrer"><span class="zh">建立我的藏馆</span><span class="en">Build My Gallery</span></a>
       </div>
 
-      <!-- 卡 2：Seller Pro · S$699 / 年（Best Value） -->
+      <!-- 卡 2：Collector Launch Kit · S$699 / 年（主推） -->
       <div class="plan featured">
-        <span class="plan-badge zh">Best Value</span><span class="plan-badge en">Best Value</span>
-        <h3 class="plan-title zh">Seller Pro</h3><h3 class="plan-title en">Seller Pro</h3>
-        <div class="plan-note zh">全包代运营型 · 平台帮你上架与推广</div><div class="plan-note en">Full-service managed · the platform lists &amp; promotes for you</div>
+        <span class="plan-badge zh">主推方案</span><span class="plan-badge en">Recommended</span>
+        <h3 class="plan-title zh">Collector Launch Kit</h3><h3 class="plan-title en">Collector Launch Kit</h3>
+        <div class="plan-note zh">藏家启动包 · 建立你的线上藏馆</div><div class="plan-note en">Collector launch kit · build your own online collection gallery</div>
         <div class="plan-divider"></div>
         <div class="plan-price"><span class="cur">SGD</span>699</div>
         <div class="plan-unit zh">/ 年</div><div class="plan-unit en">/ year</div>
-        <div class="plan-price-sub zh">相当于 SGD 58 / 月 · 含 Annual Seller 全部权益</div>
-        <div class="plan-price-sub en">Equivalent to SGD 58 / month · includes everything in Annual Seller</div>
+        <div class="plan-price-sub zh">相当于 SGD 58 / 月 · 建立你的专属线上藏馆</div>
+        <div class="plan-price-sub en">Equivalent to SGD 58 / month · your own online collection gallery</div>
+        <div class="gallery-url-demo">
+          <div class="gallery-url-label zh">你的专属藏家主页</div><div class="gallery-url-label en">Your collector page</div>
+          <div class="gallery-url">gudong.app/<span>your-name</span></div>
+          <div class="gallery-url-note zh">一个链接，展示你的收藏与在售藏品</div><div class="gallery-url-note en">One link for your collection and active pieces</div>
+        </div>
         <ul class="plan-list">
-          <li class="zh"><strong>私家藏馆</strong> + 不限刊登额度（平台代运营）</li><li class="en"><strong>Private Gallery</strong> + unlimited listings (platform-managed)</li>
-          <li class="zh">平台代为上架、整理藏品信息</li><li class="en">Platform lists and organises item info on your behalf</li>
+          <li class="zh"><strong>专属藏家主页 + 独立 URL</strong>（例如 gudong.app/your-name）</li><li class="en"><strong>Your own collector page + dedicated URL</strong> (e.g. gudong.app/your-name)</li>
+          <li class="zh"><strong>线上藏馆</strong>：最多 30 件活跃藏品展示</li><li class="en"><strong>Online collection gallery</strong>: up to 30 active listings</li>
+          <li class="zh">平台协助上架、整理藏品资料</li><li class="en">Platform-assisted listing setup and collection organisation</li>
           <li class="zh">图片精修 × 4 套（年度）</li><li class="en">Photo Retouching × 4 sets (annual)</li>
-          <li class="zh">首页推荐 1 个月（赠送）</li><li class="en">Homepage Feature 1 month (included)</li>
+          <li class="zh"><strong>首页推荐 1 个月</strong>（启动期赠送）</li><li class="en"><strong>Homepage Feature 1 month</strong> (included at launch)</li>
           <li class="zh"><strong>优先审核与支持</strong></li><li class="en"><strong>Priority review &amp; support</strong></li>
           <li class="zh"><strong>专属曝光机会</strong></li><li class="en"><strong>Exclusive exposure opportunities</strong></li>
           <li class="zh">不抽取交易佣金</li><li class="en">No transaction commission</li>
         </ul>
-        <div class="choice-label zh">全托管 · 省心经营</div><div class="choice-label en">Fully managed · hassle-free</div>
-        <a class="plan-cta gold" href="https://airtable.com/apprn6XDQnAm8bkaT/shrlQLTRfG5RlYjD4" target="_blank" rel="noopener noreferrer"><span class="zh">选择此方案</span><span class="en">Choose this plan</span></a>
+        <div class="choice-label zh">建立你的线上藏馆</div><div class="choice-label en">Build your online collection gallery</div>
+        <a class="plan-cta gold" href="https://airtable.com/apprn6XDQnAm8bkaT/shrlQLTRfG5RlYjD4" target="_blank" rel="noopener noreferrer"><span class="zh">建立我的藏馆</span><span class="en">Build My Gallery</span></a>
       </div>
 
     </div>
     <div class="note-bar">
       <span class="marker" aria-hidden="true">※</span>
       <div class="zh">
-        两档方案均为年付，均含私家藏馆，均不抽取交易佣金。<b>前 88 位创始卖家</b>在两档方案续费时均享创始续费价；前 2 件免费刊登额度（1 年有效）可与方案叠加使用。名额招满后，新卖家按常规价收费，不再享有创始权益。图片精修、专家视频咨询、首页推荐加购请见下方「增值服务」。
+        两档方案均为年付，均含私家藏馆，均不抽取交易佣金。<b>前 88 位创始卖家</b>在两档方案续费时均享创始续费价；前 2 件免费刊登额度（1 年有效）可与方案叠加使用。名额招满后，新卖家按常规价收费，不再享有创始权益。图片精修、专家视频咨询、首页推荐等加购服务请见下方「增值服务」。
       </div>
       <div class="en">
-        Both plans are billed annually, both include the Private Gallery, and neither charges a transaction commission. <b>The first 88 Founding Sellers</b> receive a founding renewal rate on both plans; the 2 free listings (1-year validity) stack on top of either plan. Once seats are filled, new sellers pay regular pricing and do not receive founding benefits. Photo Retouching, Expert Video Consultation and Homepage Feature add-ons are listed under "Add-on Services" below.
+        Both plans are billed annually, both include the Private Gallery, and neither charges a transaction commission. <b>The first 88 Founding Sellers</b> receive a founding renewal rate on both plans; the 2 free listings (1-year validity) stack on top of either plan. Once seats are filled, new sellers pay regular pricing and do not receive founding benefits. Photo Retouching, Specialist Opinion and Homepage Feature add-ons are listed under "Add-on Services" below.
       </div>
     </div>
   </section>
@@ -835,10 +867,10 @@ footer {
         </div>
         <div class="row">
           <div class="row-info">
-            <div class="row-title zh">Seller Pro（全包代运营）</div>
-            <div class="row-title en">Seller Pro (Full-service)</div>
-            <div class="row-desc zh">私家藏馆 + 不限刊登 + 图片精修 × 4 + 首页推荐 1 个月 + 优先支持</div>
-            <div class="row-desc en">Private Gallery + unlimited listings + Retouching × 4 + Homepage Feature 1 mo + priority support</div>
+            <div class="row-title zh">Collector Launch Kit（藏家启动包）</div>
+            <div class="row-title en">Collector Launch Kit (Collector Launch Kit)</div>
+            <div class="row-desc zh">专属藏家主页 URL + 线上藏馆 + 最多 30 件活跃藏品 + 图片精修 × 4 + 首页推荐 1 个月 + 优先支持</div>
+            <div class="row-desc en">Dedicated collector URL + online gallery + up to 30 active listings + Retouching × 4 + Homepage Feature 1 mo + priority support</div>
           </div>
           <div class="row-price">
             <span class="amount">SGD 699</span>
@@ -899,8 +931,8 @@ footer {
     </div>
     <div class="note-bar">
       <span class="marker" aria-hidden="true">※</span>
-      <div class="zh"><b>说明：</b>以上价格均为新加坡元（SGD），不含消费税。Annual Seller 与 Seller Pro 均为年付方案，均含私家藏馆，均不抽取交易佣金。前 88 位创始卖家续费时享创始续费价；前 2 件免费刊登额度（1 年有效）可与方案叠加。增值服务与年度方案相互独立，按需购买。付款支持 PayNow / 银行转账。委托找货的信息对接费在未成交时全额退还。专家视频咨询费用在平台完成专家匹配并发送视频通话链接后不予退款。平台不代收货款。</div>
-      <div class="en"><b>Note:</b> All prices are in SGD, excluding GST. Annual Seller and Seller Pro are both annual plans, both include the Private Gallery, and neither charges a transaction commission. The first 88 Founding Sellers receive a founding renewal rate; the 2 free listings (1-year validity) stack on top of either plan. Add-on services are independent of the annual plans and may be purchased as needed. Payment via PayNow or bank transfer. The Sourcing Service's matching fee is fully refunded if no sale occurs. Expert Video Consultation is non-refundable once the platform has assigned an expert and sent the video-call link. Platform does not collect sale proceeds.</div>
+      <div class="zh"><b>说明：</b>以上价格均为新加坡元（SGD），不含消费税。Annual Seller 与 Collector Launch Kit 均为年付方案，均含私家藏馆，均不抽取交易佣金。前 88 位创始卖家续费时享创始续费价；前 2 件免费刊登额度（1 年有效）可与方案叠加。增值服务与年度方案相互独立，按需购买。付款支持 PayNow / 银行转账。委托找货的信息对接费在未成交时全额退还。专家视频咨询费用在平台完成专家匹配并发送视频通话链接后不予退款。平台不代收货款。</div>
+      <div class="en"><b>Note:</b> All prices are in SGD, excluding GST. Annual Seller and Collector Launch Kit are both annual plans, both include the Private Gallery, and neither charges a transaction commission. The first 88 Founding Sellers receive a founding renewal rate; the 2 free listings (1-year validity) stack on top of either plan. Add-on services are independent of the annual plans and may be purchased as needed. Payment via PayNow or bank transfer. The Sourcing Service's matching fee is fully refunded if no sale occurs. Expert Video Consultation is non-refundable once the platform has assigned an expert and sent the video-call link. Platform does not collect sale proceeds.</div>
     </div>
   </section>
 
@@ -927,20 +959,20 @@ footer {
       <div class="faq-item">
         <div class="faq-q zh">已支付的服务费，可以退款吗？</div>
         <div class="faq-q en">Can I get a refund on a service fee I've already paid?</div>
-        <div class="faq-a zh">【请确认并替换本段：建议明确 Annual Seller / Seller Pro / 首页推荐一经开通是否可退，例如"年度方案一经开通即视为服务已提供，原则上不予退还；如因平台原因导致无法正常展示，可联系客服协商处理"。委托找货与专家视频咨询的退款政策已在对应小节说明，无需重复。】</div>
-        <div class="faq-a en">【Placeholder — confirm and replace: state whether Annual Seller / Seller Pro / Homepage Feature fees are refundable once activated. Sourcing Service and Expert Video Consultation already have their refund terms stated in their own sections above.】</div>
+        <div class="faq-a zh">Annual Seller、Collector Launch Kit 与首页推荐服务一经开通，原则上不予退款。如因平台原因导致服务无法正常展示或提供，可联系客服，我们会根据具体情况协助处理。委托找货与专家视频咨询的退款政策以各自服务说明为准。</div>
+        <div class="faq-a en">Annual Seller, Collector Launch Kit and Homepage Feature fees are generally non-refundable once activated. If the service cannot be provided or displayed as described due to a platform-side issue, please contact us and we will review the situation. Sourcing Service and Expert Video Consultation follow the refund terms stated in their respective sections above.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q zh">付款后多久生效？</div>
         <div class="faq-q en">How soon after payment does the service start?</div>
-        <div class="faq-a zh">【请填写实际开通时效，例如："PayNow / 银行转账核实后 1 个工作日内开通"，并注明是否有节假日延迟。】</div>
-        <div class="faq-a en">【Placeholder — fill in the real activation turnaround, e.g. "Activated within 1 business day of payment verification."】</div>
+        <div class="faq-a zh">PayNow / 银行转账完成并经核实后，服务通常在 1 个工作日内开通；如遇周末或公共假期，开通时间可能顺延至下一个工作日。</div>
+        <div class="faq-a en">After PayNow or bank transfer payment is verified, the service is normally activated within 1 business day. Weekend or public-holiday payments may be processed on the next business day.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q zh">「Founding Seller · 2026」的 88 个名额还剩多少？创始卖家具体有哪些权益？</div>
         <div class="faq-q en">How many of the 88 Founding Seller · 2026 seats are left? What benefits do Founding Sellers get?</div>
-        <div class="faq-a zh">【建议接入实际剩余席位数并定期更新（例如"截至[日期]已有 X 位卖家入驻"），避免"限量 88 席"长期原样展示造成不实稀缺感。】创始卖家权益包括：前 2 件免费刊登（1 年有效）、永久保留 Founding Seller · 2026 身份、创始续费价格（适用于 Annual Seller / Seller Pro）、新功能优先体验、优先审核与支持、创始卖家专属曝光机会，以及未来平台新增重要卖家权益时优先享有。</div>
-        <div class="faq-a en">【Placeholder — show the real, periodically-updated seat count (e.g. "X of 88 seats filled as of [date]") rather than leaving the limited-seats claim static indefinitely.】Founding Seller benefits include: first 2 listings free (1-year validity), permanent Founding Seller · 2026 status, founding renewal rate (for both Annual Seller and Seller Pro), priority access to new features, priority review &amp; support, exclusive exposure opportunities, and priority access to any future seller benefits added by the platform.</div>
+        <div class="faq-a zh">【建议接入实际剩余席位数并定期更新（例如"截至[日期]已有 X 位卖家入驻"），避免"限量 88 席"长期原样展示造成不实稀缺感。】创始卖家权益包括：前 2 件免费刊登（1 年有效）、永久保留 Founding Seller · 2026 身份、创始续费价格（适用于 Annual Seller / Collector Launch Kit）、新功能优先体验、优先审核与支持、创始卖家专属曝光机会，以及未来平台新增重要卖家权益时优先享有。</div>
+        <div class="faq-a en">【Placeholder — show the real, periodically-updated seat count (e.g. "X of 88 seats filled as of [date]") rather than leaving the limited-seats claim static indefinitely.】Founding Seller benefits include: first 2 listings free (1-year validity), permanent Founding Seller · 2026 status, founding renewal rate (for both Annual Seller and Collector Launch Kit), priority access to new features, priority review &amp; support, exclusive exposure opportunities, and priority access to any future seller benefits added by the platform.</div>
       </div>
     </div>
   </section>
@@ -983,17 +1015,17 @@ footer {
 
     <footer>
         <div class="footer-nav">
-            <a href="about.html" class="zh">联系我们</a><a href="about.html" class="en">Contact</a>
-            <a href="pricing.html#seller-services" class="zh">卖家服务</a><a href="pricing.html#seller-services" class="en">Seller Services</a>
-            <a href="pricing.html#buyer-services" class="zh">买家指南</a><a href="pricing.html#buyer-services" class="en">Buyer Guide</a>
-            <a href="pricing.html#price-table" class="zh">服务收费</a><a href="pricing.html#price-table" class="en">Price List</a>
-            <a href="privacy.html" class="zh">隐私政策</a><a href="privacy.html" class="en">Privacy</a>
-            <a href="terms.html" class="zh">用户条款</a><a href="terms.html" class="en">Terms</a>
+            <a href="../../Downloads/about.html" class="zh">联系我们</a><a href="../../Downloads/about.html" class="en">Contact</a>
+            <a href="../../Downloads/pricing.html#seller-services" class="zh">卖家服务</a><a href="../../Downloads/pricing.html#seller-services" class="en">Seller Services</a>
+            <a href="../../Downloads/pricing.html#buyer-services" class="zh">买家指南</a><a href="../../Downloads/pricing.html#buyer-services" class="en">Buyer Guide</a>
+            <a href="../../Downloads/pricing.html#price-table" class="zh">服务收费</a><a href="../../Downloads/pricing.html#price-table" class="en">Price List</a>
+            <a href="../../Downloads/privacy.html" class="zh">隐私政策</a><a href="../../Downloads/privacy.html" class="en">Privacy</a>
+            <a href="../../Downloads/terms.html" class="zh">用户条款</a><a href="../../Downloads/terms.html" class="en">Terms</a>
         </div>
         <p class="footer-disclaimer zh">gudong.app 是信息发现平台，而非交易平台。</p>
         <p class="footer-disclaimer en">gudong.app is an information and discovery platform for antiques and collectibles.</p>
-        <p class="zh" style="margin-bottom:0;">© 2026 古董圈 · gudong.app <a href="javascript:void(0)" class="app-install-btn" onclick="event.preventDefault();"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20h14v-2H5v2zM19 9h-4V3H9v6H5l7 7 7-7z"/></svg>安装古董.app</a></p>
-        <p class="en" style="margin-bottom:0;">© 2026 Gudong · gudong.app <a href="javascript:void(0)" class="app-install-btn" onclick="event.preventDefault();"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20h14v-2H5v2zM19 9h-4V3H9v6H5l7 7 7-7z"/></svg>Install gudong.app</a></p>
+        <p class="zh" style="margin-bottom:0;">© 2026 古董圈 · gudong.app <a href="javascript:void(0)" class="app-install-btn" onclick="event.preventDefault();"><svg viewBox="0 0 24 24" aria-hidden="true" width="12" height="12"><path d="M5 20h14v-2H5v2zM19 9h-4V3H9v6H5l7 7 7-7z"/></svg>安装古董.app</a></p>
+        <p class="en" style="margin-bottom:0;">© 2026 Gudong · gudong.app <a href="javascript:void(0)" class="app-install-btn" onclick="event.preventDefault();"><svg viewBox="0 0 24 24" aria-hidden="true" width="12" height="12"><path d="M5 20h14v-2H5v2zM19 9h-4V3H9v6H5l7 7 7-7z"/></svg>Install gudong.app</a></p>
     </footer>
 
     <script>

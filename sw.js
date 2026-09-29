@@ -1,4 +1,4 @@
-/* 古董集 Gudong · Service Worker
+/* 古董圈 Gudong · Service Worker
  * 2026-09-28：v4 → v5
  * - 全站导航链接统一为绝对路径（https://gudong.app/...）后提升版本号
  * - 预缓存改为逐个 add（某个图标 404 不再拖垮整个 install）

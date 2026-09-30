@@ -2,7 +2,7 @@
     "id": "/",
     "name": "古董圈 Gudong",
     "short_name": "Gudong",
-    "description": "新加坡中国古董与收藏品信息发现平台",
+    "description": "Gudong 古董圈是一个帮助收藏家经营线上藏馆和获得收藏家曝光的平台",
     "start_url": "/",
     "scope": "/",
     "display": "standalone",
@@ -28,6 +28,12 @@
             "purpose": "any"
         },
         {
+            "src": "/assets/icons/icon-512-maskable.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "maskable any"
+        },
+        {
             "src": "/assets/icons/icon.svg",
             "sizes": "any",
             "type": "image/svg+xml",
@@ -35,3 +41,4 @@
         }
     ]
 }
+ 

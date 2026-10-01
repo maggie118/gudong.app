@@ -90,6 +90,10 @@
         text-decoration: none;
         color: inherit;
         }
+        .brand { flex-direction: row; align-items: center; gap: .6rem; }
+        .brand-logo-img { height: 36px; width: auto; display: block; object-fit: contain; }
+        .brand-text { display: flex; flex-direction: column; justify-content: center; }
+        @media (max-width: 640px) { .brand-logo-img { height: 30px; } }
         .brand h1 {
         font-size: 1.4rem;
         font-weight: 700;
@@ -369,8 +373,11 @@
         <div style="display:flex; align-items:center; gap:.9rem;">
             <button class="menu-toggle" onclick="openSidebar()" aria-label="menu" aria-expanded="false" id="menuToggle">☰</button>
             <a href="../index.html" class="brand">
+                <img src="../assets/icons/logo-mark.png" alt="古董圈 Gudong" class="brand-logo-img">
+                <div class="brand-text">
                 <h1><span class="zh">古董圈</span><span class="en">GUDONG</span></h1>
                 <p><span class="zh">GUDONG.APP</span><span class="en">Chinese Antiques Platform</span></p>
+                </div>
             </a>
         </div>
 

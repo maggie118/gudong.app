@@ -1,5 +1,5 @@
 /* 古董圈 Gudong · Service Worker
- * 2026-09-28：v4 → v5
+ * 2026-10-3：v5 → v6
  * - 全站导航链接统一为绝对路径（https://gudong.app/...）后提升版本号
  * - 预缓存改为逐个 add（某个图标 404 不再拖垮整个 install）
  * - /api/* 动态接口网络优先、不缓存（避免 Airtable 数据陈旧）
@@ -7,7 +7,7 @@
  * - 导航请求离线时回退到缓存页面，再回退到 index.html
  */
 
-const CACHE_NAME = 'antique-collection-v5';
+const CACHE_NAME = 'antique-collection-v6';
 
 // 预缓存清单：核心页面 + 常用图标 + 占位图
 // 注意：改用逐个 cache.add，单个 404 不会导致整个 install 失败

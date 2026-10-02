@@ -309,6 +309,7 @@
             color: var(--color-text); line-height: 1.35; margin-bottom: 1rem;
         }
         .hero-desc { font-size: .95rem; color: var(--color-text-secondary); margin-bottom: 1.5rem; line-height: 1.6; }
+        .hero-guide { font-size: .85rem; color: var(--color-gold); margin-bottom: 1.3rem; font-weight: 600; letter-spacing: .01em; }
         .hero-btn {
             display: inline-block; background: var(--color-primary); color: #fff;
             padding: .68rem 1.7rem; border-radius: 6px; text-decoration: none;
@@ -327,7 +328,10 @@
             position: absolute; right: 1rem; top: 50%; transform: translateY(-50%);
             background: transparent; border: none; color: var(--color-primary); font-size: 1rem; cursor: pointer;
         }
-        .search-tip { font-size: .78rem; color: var(--color-text-muted); text-align: center; margin-bottom: 1.6rem; }
+        .search-tip { font-size: .78rem; color: var(--color-text-muted); text-align: center; margin-bottom: 1rem; }
+        .hero-stats { display: flex; align-items: center; justify-content: center; gap: .55rem; flex-wrap: wrap; font-size: .82rem; color: var(--color-text-secondary); margin-bottom: 1.6rem; }
+        .hero-stats .stat-item b { color: var(--color-primary-dark); font-size: 1.05rem; font-family: var(--font-display); }
+        .hero-stats .stat-sep { color: var(--color-text-muted); }
         .search-result-tip {
             font-size: .82rem; color: var(--color-primary); text-align: center;
             margin: -.8rem 0 1.6rem; font-weight: 600;
@@ -746,8 +750,12 @@
                     <span class="en">5 minutes a day. See what's undervalued today.</span>
                 </div>
                 <div class="hero-desc">
-                    <span class="zh">新加坡本地藏家直供 · 瓷器 / 玉器 / 钱币 / 书画 · 平台不经手交易</span>
-                    <span class="en">Direct from Singapore collectors · No middleman, no platform transaction</span>
+                    <span class="zh">新加坡本地藏家直供 · 瓷器 / 玉器 / 钱币 / 书画 / 杂项</span>
+                    <span class="en">Direct from Singapore collectors · Porcelain · Jade · Coins · Paintings · Misc</span>
+                </div>
+                <div class="hero-guide">
+                    <span class="zh">搜关键词找藏品，或往下逛「今日好货」与「新上架」</span>
+                    <span class="en">Search by keyword, or scroll for Today's Picks &amp; New Arrivals</span>
                 </div>
                 <a href="#new-listings" class="hero-btn"><span class="zh">开始寻宝</span><span class="en">Start Hunting</span></a>
 
@@ -772,25 +780,14 @@
                 </div>
                 <div class="search-tip zh">瓷器 · 玉器 · 钱币 · 书画 · 杂项</div>
                 <div class="search-tip en">Porcelain · Jade · Coins · Paintings · Miscellaneous</div>
-            </div>
-        </section>
-
-        <!-- ============ 今日情报 · 捡漏雷达 ============ -->
-        <section id="daily-intel" class="intel-section" aria-labelledby="intelTitle">
-            <div class="intel-head">
-                <div>
-                    <span class="title" id="intelTitle">
-                        <span class="zh">📡 今日情报 · 古董捡漏寻宝</span>
-                        <span class="en">📡 Today's Intel · Antique Treasure Hunt</span>
-                    </span>
-                    <span class="sub zh">编辑整理，不是商品广告。看看今天市场在发生什么。</span>
-                    <span class="sub en">Editorially curated. Not ads. What's moving in the market today.</span>
+                <div class="hero-stats">
+                    <span class="stat-item"><b>5</b><span class="zh"> 位藏家入驻</span><span class="en"> collectors</span></span>
+                    <span class="stat-sep">·</span>
+                    <span class="stat-item"><b>15</b><span class="zh"> 件藏品在线</span><span class="en"> items live</span></span>
+                    <span class="stat-sep">·</span>
+                    <span class="stat-item zh">新加坡本地直供</span><span class="stat-item en">Direct from SG</span>
                 </div>
-                <span class="intel-live"><span class="zh">实时更新</span><span class="en">Live</span></span>
             </div>
-            <div class="intel-scroll" id="intelScroll" aria-busy="true"></div>
-            <p class="intel-note zh">情报由平台编辑整理，部分内容可能引用卖家提供的信息；不构成鉴定、估价或投资建议。</p>
-            <p class="intel-note en">Compiled by editors; some items reference seller-provided info. Not authentication, valuation, or investment advice.</p>
         </section>
 
         <!-- ============ 今日好货 ============ -->
@@ -896,13 +893,31 @@
             </div>
         </section>
 
+        <!-- ============ 今日情报 · 捡漏雷达 ============ -->
+        <section id="daily-intel" class="intel-section" aria-labelledby="intelTitle">
+            <div class="intel-head">
+                <div>
+                    <span class="title" id="intelTitle">
+                        <span class="zh">📡 今日情报 · 古董捡漏寻宝</span>
+                        <span class="en">📡 Today's Intel · Antique Treasure Hunt</span>
+                    </span>
+                    <span class="sub zh">编辑整理，不是商品广告。看看今天市场在发生什么。</span>
+                    <span class="sub en">Editorially curated. Not ads. What's moving in the market today.</span>
+                </div>
+                <span class="intel-live"><span class="zh">实时更新</span><span class="en">Live</span></span>
+            </div>
+            <div class="intel-scroll" id="intelScroll" aria-busy="true"></div>
+            <p class="intel-note zh">情报由平台编辑整理，部分内容可能引用卖家提供的信息；不构成鉴定、估价或投资建议。</p>
+            <p class="intel-note en">Compiled by editors; some items reference seller-provided info. Not authentication, valuation, or investment advice.</p>
+        </section>
+
         <!-- ============ 情报 / 知识 ============ -->
         <section id="insights">
             <div class="section-head2">
                 <div>
                     <span class="title zh">📖 情报 / 知识</span><span class="title en">📖 Insights &amp; Guides</span>
-                    <span class="sub-line zh">看懂器物，比买到器物更重要</span>
-                    <span class="sub-line en">Knowing the piece matters more than owning it</span>
+                    <span class="sub-line zh">看懂器物，才敢放心入手</span>
+                    <span class="sub-line en">Know the piece, then buy with confidence</span>
                 </div>
                 <a href="insights.html" class="more zh">全部情报 →</a>
                 <a href="insights.html" class="more en">All insights →</a>
@@ -939,11 +954,11 @@
             </div>
         </section>
 
-        <!-- ============ 平台如何帮你避坑 ============ -->
+        <!-- ============ 在古董圈放心逛 ============ -->
         <section id="services">
             <div style="text-align:center;max-width:1080px;margin:0 auto;">
-                <h2 class="zh">平台如何帮你避坑</h2>
-                <h2 class="en">How Gudong Helps You Avoid Pitfalls</h2>
+                <h2 class="zh">在古董圈，你可以这样放心逛</h2>
+                <h2 class="en">Browse with confidence on Gudong</h2>
                 <div class="how-grid">
                     <div class="how-card">
                         <div class="how-num">01</div>
@@ -954,55 +969,19 @@
                     </div>
                     <div class="how-card">
                         <div class="how-num">02</div>
-                        <div class="how-title zh">不经手交易</div>
-                        <div class="how-title en">No Middleman</div>
-                        <div class="how-desc zh">平台不收款、不鉴定、不担保，买卖双方直接联系。</div>
-                        <div class="how-desc en">No payment, no authentication, no guarantee — buyers and sellers deal directly.</div>
+                        <div class="how-title zh">直接联系卖家</div>
+                        <div class="how-title en">Direct Seller Contact</div>
+                        <div class="how-desc zh">买卖双方直接沟通，价格透明，无中间商加价。</div>
+                        <div class="how-desc en">Buyers and sellers deal directly — transparent pricing, no middleman markup.</div>
                     </div>
                     <div class="how-card">
                         <div class="how-num">03</div>
-                        <div class="how-title zh">情报辅助</div>
+                        <div class="how-title zh">行情参考</div>
                         <div class="how-title en">Market Intel</div>
                         <div class="how-desc zh">提供同类对比与行情观察，帮你判断价格是否合理。</div>
                         <div class="how-desc en">Comparable items and market notes to help you judge pricing.</div>
                     </div>
-                    <div class="how-card">
-                        <div class="how-num">04</div>
-                        <div class="how-title zh">风险提示</div>
-                        <div class="how-title en">Risk Notice</div>
-                        <div class="how-desc zh">所有藏品信息由卖家提供，请自行核验后再决策。</div>
-                        <div class="how-desc en">All information is seller-provided. Verify independently before deciding.</div>
-                    </div>
-                    <div class="how-card">
-                        <div class="how-num">05</div>
-                        <div class="how-title zh">专家连线</div>
-                        <div class="how-title en">Expert Line</div>
-                        <div class="how-desc zh">平台可应要求引荐专家提供个人意见，仅供参考，但不构成真伪鉴定。是否采纳由你决定，平台不介入、不担保。</div>
-                        <div class="how-desc en">On request, the platform can refer you to a specialist for a personal opinion, for reference only. This does not constitute authentication. Whether to accept it is your call; the platform does not intervene or guarantee.</div>
-                    </div>
                 </div>
-                <div style="text-align:center; margin-top:1.4rem;">
-                    <a href="pricing.html#seller-services" class="btn-publish">
-                        <span class="zh">刊登藏品信息</span><span class="en">List an Item</span>
-                    </a>
-                    <p class="section-note zh" style="margin-top:1rem;">了解发布规则与收费，前往服务价格页。</p>
-                    <p class="section-note en" style="margin-top:1rem;">See listing rules and pricing on the Pricing page.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- ============ 卖家招募 ============ -->
-        <section id="seller-cta">
-            <div class="seller-cta">
-                <div class="title zh">📣 创始藏家招募 · 限量 88 席</div>
-                <div class="title en">📣 Founding Collectors · Limited to 88</div>
-                <div class="desc zh">前 2 件藏品免费刊登 · 永久保留藏家主页 · 直接对接本地买家</div>
-                <div class="desc en">First 2 listings free · Permanent collector page · Direct access to local buyers</div>
-                <a href="pricing.html#seller-services" class="btn-publish">
-                    <span class="zh">立即入驻 →</span><span class="en">Join Now →</span>
-                </a>
-                <div class="cta-note zh">名额有限，按申请顺序审核。</div>
-                <div class="cta-note en">Limited seats, reviewed in application order.</div>
             </div>
         </section>
 
@@ -1020,11 +999,6 @@
                     <div class="faq-answer en">No. Gudong is a discovery platform and does not provide authentication, valuation, or guarantees. All descriptions and images are seller-provided — verify independently or consult a specialist.</div>
                 </details>
                 <details class="faq-item">
-                    <summary><span class="zh">可以请平台推荐专家给参考意见吗？</span><span class="en">Can Gudong refer me to an expert for a reference opinion?</span></summary>
-                    <div class="faq-answer zh">可以。平台可应要求引荐专家提供个人意见，仅供参考，但不构成真伪鉴定。是否采纳由你决定，平台不介入、不担保；费用与结论由你与专家直接沟通。</div>
-                    <div class="faq-answer en">Yes. On request, the platform can refer you to a specialist for a personal opinion, for reference only. This does not constitute authentication. Whether to accept it is your call; the platform does not intervene or guarantee. Fees and conclusions are handled directly between you and the expert.</div>
-                </details>
-                <details class="faq-item">
                     <summary><span class="zh">怎么联系卖家？</span><span class="en">How do I contact a seller?</span></summary>
                     <div class="faq-answer zh">在藏品详情页可直接看到卖家提供的联系方式，买卖双方直接沟通，平台不经手交易。</div>
                     <div class="faq-answer en">Contact details are shown on the item detail page. Buyers and sellers communicate directly; the platform does not handle transactions.</div>
@@ -1035,10 +1009,30 @@
                     <div class="faq-answer en">No. All prices are set by sellers. Some items are "Enquire" only — contact the seller directly for pricing.</div>
                 </details>
                 <details class="faq-item">
+                    <summary><span class="zh">可以请平台推荐专家给参考意见吗？</span><span class="en">Can Gudong refer me to an expert for a reference opinion?</span></summary>
+                    <div class="faq-answer zh">可以。平台可应要求引荐专业人士提供个人意见，仅供参考，但不构成真伪鉴定。是否采纳由您决定，平台不介入、不担保；相关看法由您与专业人士直接沟通。</div>
+                    <div class="faq-answer en">Yes. The platform may, upon request, introduce a professional to provide personal opinions for reference only. These opinions do not constitute an authenticity appraisal. It is up to you to decide whether to accept them. The platform does not intervene or offer any guarantees. All views are discussed directly between you and the professional.</div>
+                </details>
+                <details class="faq-item">
                     <summary><span class="zh">刊登藏品收费吗？</span><span class="en">Is listing free?</span></summary>
                     <div class="faq-answer zh">创始藏家限量 88 席免费入驻，前 2 件藏品免费刊登。后续刊登规则与费用请见<a href="pricing.html">服务价格页</a>。</div>
                     <div class="faq-answer en">Founding collectors (limited to 88) join free, with the first 2 listings free. See the <a href="pricing.html">pricing page</a> for subsequent listing rules and fees.</div>
                 </details>
+            </div>
+        </section>
+
+        <!-- ============ 卖家招募 ============ -->
+        <section id="seller-cta">
+            <div class="seller-cta">
+                <div class="title zh">📣 创始藏家招募 · 限量 88 席</div>
+                <div class="title en">📣 Founding Collectors · Limited to 88</div>
+                <div class="desc zh">前 2 件藏品免费刊登 · 永久保留藏家主页 · 直接对接本地买家</div>
+                <div class="desc en">First 2 listings free · Permanent collector page · Direct access to local buyers</div>
+                <a href="pricing.html#seller-services" class="btn-publish">
+                    <span class="zh">立即入驻 →</span><span class="en">Join Now →</span>
+                </a>
+                <div class="cta-note zh">名额有限，按申请顺序审核。</div>
+                <div class="cta-note en">Limited seats, reviewed in application order.</div>
             </div>
         </section>
     </main>

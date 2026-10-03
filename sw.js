@@ -1,13 +1,14 @@
 /* 古董圈 Gudong · Service Worker
- * 2026-10-3：v5 → v6
- * - 全站导航链接统一为绝对路径（https://gudong.app/...）后提升版本号
- * - 预缓存改为逐个 add（某个图标 404 不再拖垮整个 install）
- * - /api/* 动态接口网络优先、不缓存（避免 Airtable 数据陈旧）
- * - 跨域请求直接放行（避免 opaque 响应污染缓存）
- * - 导航请求离线时回退到缓存页面，再回退到 index.html
+ * 2026-10-3：v7 → v8
+ * - 配合本轮改动（pricing.html 全页中英双语、FAQ 精简、
+ *   页脚与全站统一、锚点 id 对齐 seller-services/buyer-services/price-table）提升缓存版本号
+ * - 注意：fetch 策略是「网络优先」，本身不会卡住旧内容；
+ *         升版主要用于 activate 时清掉 v6 的历史缓存条目
+ * - v6 记录：导航链接统一为绝对路径；预缓存改为逐个 add（单个 404 不拖垮 install）；
+ *         /api/* 网络优先不缓存；跨域放行；导航离线回退缓存页再回退首页
  */
 
-const CACHE_NAME = 'antique-collection-v6';
+const CACHE_NAME = 'antique-collection-v8';
 
 // 预缓存清单：核心页面 + 常用图标 + 占位图
 // 注意：改用逐个 cache.add，单个 404 不会导致整个 install 失败

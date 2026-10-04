@@ -332,6 +332,84 @@ main section[id] { scroll-margin-top: 92px; }
   box-shadow: 0 2px 6px rgba(156,122,58,.3);
 }
 
+/* 卡片内部进度条 */
+.progress-block { width: 100%; margin: 1.2rem 0 1.2rem; }
+.progress-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: .5rem;
+  font-size: .72rem;
+  font-weight: 700;
+  color: var(--color-primary-dark);
+  margin-bottom: .4rem;
+  flex-wrap: wrap;
+  letter-spacing: .02em;
+}
+.progress-label .label-text { display: inline-flex; align-items: center; gap: .35rem; }
+.progress-label .label-text .dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--color-gold);
+  box-shadow: 0 0 0 3px rgba(156,122,58,.18);
+  animation: pulse 1.8s infinite;
+}
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 3px rgba(156,122,58,.18); }
+  50%      { box-shadow: 0 0 0 6px rgba(156,122,58,.05); }
+}
+.progress-count {
+  font-family: var(--font-display);
+  font-weight: 800;
+  color: var(--color-gold);
+  font-size: .9rem;
+  letter-spacing: .02em;
+}
+.progress-count .joined { font-size: 1.15em; }
+.progress-count .total { color: var(--color-text-secondary); font-weight: 600; font-size: .84em; }
+.progress-track {
+  position: relative;
+  height: 8px;
+  background: rgba(156,122,58,.15);
+  border-radius: 999px;
+  overflow: hidden;
+  box-shadow: inset 0 1px 2px rgba(156,122,58,.12);
+}
+.progress-fill {
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 5.68%;
+  min-width: 14px;
+  background: linear-gradient(90deg, #9C7A3A 0%, #D4AF6A 60%, #C99A55 100%);
+  border-radius: 999px;
+  box-shadow: 0 0 8px rgba(156,122,58,.45);
+  overflow: hidden;
+}
+.progress-fill::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,.6) 50%, transparent 100%);
+  animation: shimmer 2.4s infinite;
+}
+@keyframes shimmer {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(200%); }
+}
+.progress-foot {
+  margin-top: .5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: .5rem;
+  flex-wrap: wrap;
+  font-size: .68rem;
+  color: var(--color-text-secondary);
+  letter-spacing: .02em;
+}
+.progress-foot .left-note strong { color: var(--color-gold); font-weight: 700; }
+.progress-foot .countdown { font-family: var(--font-display); font-weight: 700; color: var(--color-primary-dark); }
+.progress-foot .countdown .num { color: var(--color-danger); font-size: 1.05em; }
+
 /* 委托找货 */
 .sourcing-section {
   margin: 3rem auto 0;
@@ -375,7 +453,8 @@ main section[id] { scroll-margin-top: 92px; }
 
 /* 其他服务 */
 .rows { display: flex; flex-direction: column; }
-.row { display: flex; align-items: flex-start; justify-content: space-between; gap: 1.5rem; padding: 1.25rem .2rem; border-bottom: 1px solid var(--color-border); }
+.row { display: flex; align-items: flex-start; justify-content: space-between; gap: 1.5rem; padding: 1.25rem .2rem; border-bottom: 1px solid var(--color-border); cursor: pointer; transition: .3s; }
+.row:hover { background: var(--color-primary-light); border-radius: 8px; padding-left: .5rem; padding-right: .5rem; }
 .row:last-child { border-bottom: none; }
 .row-info { flex: 1 1 auto; min-width: 0; }
 .row-title { font-family: var(--font-serif); font-size: 1rem; font-weight: 600; color: var(--color-text); margin-bottom: .3rem; letter-spacing: .01em; }
@@ -449,16 +528,70 @@ footer {
   .row { gap: 1rem; padding: 1.05rem .1rem; }
   .row-price .amount { font-size: 1.1rem; }
 }
+
+/* ====== 服务预约弹窗（通用表单弹窗，完全匹配截图设计） ====== */
+.publish-modal { position: fixed; inset: 0; z-index: 10000; display: none; align-items: center; justify-content: center; background: rgba(0,0,0,.5); padding: 1.2rem; }
+.publish-modal.open { display: flex; }
+.publish-card { background: #fff; border-radius: var(--card-radius); max-width: 480px; width: 100%; padding: 2rem 1.8rem 1.5rem; text-align: left; box-shadow: 0 18px 50px rgba(0,0,0,.3); position: relative; max-height: 90vh; overflow-y: auto; }
+.publish-close { position: absolute; top: .5rem; right: .7rem; border: 0; background: none; font-size: 1.5rem; color: #999; cursor: pointer; padding: .5rem; line-height: 1; }
+.publish-close:hover { color: #333; }
+
+/* 顶部金色徽章 */
+.modal-badge { display: inline-flex; align-items: center; gap: .3rem; background: #FDF9F0; color: #9C7A3A; font-size: .72rem; font-weight: 700; padding: .25rem .6rem; border-radius: 4px; margin-bottom: .8rem; border: 1px solid #E8DCC8; }
+
+.publish-card h3 { font-family: var(--font-serif); font-size: 1.25rem; color: var(--color-primary-dark); margin-bottom: .5rem; font-weight: 600; }
+.publish-card .publish-desc { font-size: .82rem; color: var(--color-text-secondary); margin-bottom: 1rem; line-height: 1.6; }
+
+/* 服务清单 */
+.service-list { list-style: none; padding: 0; margin: 0 0 1rem 0; }
+.service-list li { position: relative; padding-left: 1.2rem; margin-bottom: .6rem; font-size: .8rem; color: var(--color-text-secondary); }
+.service-list li::before { content: "•"; position: absolute; left: 0; color: #7A4E33; font-weight: bold; }
+.service-list li strong { display: block; color: var(--color-text); font-size: .85rem; font-weight: 600; margin-bottom: .1rem; }
+.service-list li span { font-size: .75rem; color: #8A8A8A; display: block; }
+
+/* 价格框 */
+.price-box { background: #FDF9F0; border: 1px solid #E8DCC8; border-radius: 8px; padding: 1rem; margin-bottom: 1rem; font-size: .8rem; color: var(--color-text-secondary); }
+.price-box .price-highlight { font-weight: 700; color: #7A4E33; font-size: 1rem; }
+.price-box ul { list-style: none; padding: 0; margin: .5rem 0 0 0; }
+.price-box li { padding: .15rem 0; }
+
+/* 警告框 */
+.warning-box { background: #FFF8E7; border: 1px solid #F0E6D2; padding: .8rem 1rem; border-radius: 6px; font-size: .75rem; color: #8A6D3B; line-height: 1.6; margin-bottom: 1.2rem; display: flex; gap: .5rem; align-items: flex-start; }
+.warning-box span { flex-shrink: 0; font-size: 1rem; }
+
+/* 工作流程 */
+.workflow { margin-bottom: 1.2rem; }
+.workflow p { font-size: .8rem; color: var(--color-text); margin-bottom: .3rem; font-weight: 600; }
+.workflow ol { padding-left: 1.2rem; font-size: .78rem; color: var(--color-text-secondary); line-height: 1.7; }
+.workflow ol li { margin-bottom: .2rem; }
+.workflow ol li strong { color: #7A4E33; }
+
+/* 表单 */
+.publish-form-group { margin-bottom: 1rem; }
+.publish-form-group label { display: block; font-size: .8rem; font-weight: 600; color: var(--color-text); margin-bottom: .35rem; }
+.publish-form-group label .required { color: #D9534F; margin-left: 2px; }
+.publish-input, .publish-textarea { width: 100%; padding: .65rem .8rem; border: 1px solid var(--color-border); border-radius: 6px; font-size: .85rem; font-family: inherit; color: var(--color-text); background: #fff; transition: border-color .2s; }
+.publish-input:focus, .publish-textarea:focus { outline: none; border-color: var(--color-gold); box-shadow: 0 0 0 2px rgba(156,122,58,.1); }
+.publish-textarea { min-height: 80px; resize: vertical; }
+.publish-input::placeholder, .publish-textarea::placeholder { color: #B0A89E; font-size: .8rem; }
+
+/* 上传区 */
+.upload-area { border: 2px dashed #D5CBBE; border-radius: 8px; padding: 1.5rem; text-align: center; cursor: pointer; transition: .3s; background: #FDFBF7; margin-bottom: 1rem; }
+.upload-area:hover { border-color: var(--color-gold); background: #FDF9F0; }
+.upload-area input[type="file"] { display: none; }
+.upload-area .upload-label { display: flex; flex-direction: column; align-items: center; gap: .3rem; color: #8A8A8A; font-size: .8rem; }
+.upload-area .upload-label .plus { font-size: 1.8rem; color: #9C7A3A; line-height: 1; }
+
+/* 底部按钮 */
+.submit-btn { display: flex; align-items: center; justify-content: center; gap: .5rem; padding: .85rem 1rem; border-radius: 6px; font-weight: 700; text-decoration: none; transition: .3s; font-size: .9rem; cursor: pointer; border: none; width: 100%; background: #7A4E33; color: #fff; margin-top: 1rem; font-family: inherit; }
+.submit-btn:hover { background: #5C3A26; transform: translateY(-1px); }
+
+.publish-modal [data-lang="en"] .zh, body[data-lang="en"] .publish-modal .zh { display: none; }
+.publish-modal [data-lang="zh"] .en, body[data-lang="zh"] .publish-modal .en { display: none; }
 </style>
 <link rel="apple-touch-icon" href="/assets/icons/icon-192.png">
 </head>
 <body data-lang="zh">
-  <div class="announce-bar" id="announceBar">
-    <span class="zh">88 席创始藏家首发｜前 2 件免费上架 · 专属创始勋章 · 参与平台功能共创。</span>
-    <span class="en">88 Founding Collector Seats | First 2 listings free · Exclusive medal · Co-create platform features.</span>
-    <button class="announce-close" onclick="closeAnnounce()" aria-label="关闭">×</button>
-  </div>
-
   <header>
     <div style="display:flex; align-items:center; gap:.9rem;">
       <button class="menu-toggle" onclick="openSidebar()" aria-label="菜单" aria-expanded="false" id="menuToggle">☰</button>
@@ -471,8 +604,7 @@ footer {
       </a>
     </div>
     <div class="header-right">
-      <a href="https://wa.me/6591888952" class="btn-publish" target="_blank" rel="noopener noreferrer"><span class="zh">申请创始藏家</span><span class="en">Apply Now</span></a>
-      <button class="lang-btn" onclick="toggleLang()">EN</button>
+       <button class="lang-btn" onclick="toggleLang()">EN</button>
     </div>
   </header>
 
@@ -521,16 +653,41 @@ footer {
       <div class="card">
         <span class="tier-tag free"><span class="zh">零门槛破冰</span><span class="en">Zero-barrier Entry</span></span>
         <div class="card-eyebrow"><span class="zh">① 免费体验</span><span class="en">① Free Trial</span></div>
-        <h3><span class="zh">创始藏家 · 前 2 件免费</span><span class="en">First 2 Listings Free</span></h3>
-        <p class="card-desc"><span class="zh">零成本搭建线上展厅，先试试看。</span><span class="en">Build your online gallery at no cost — try it first.</span></p>
+        <h3><span class="zh">创始藏家 · 仅88席</span><span class="en">Founding Collector · Only 88 Seats</span></h3>
         <div class="price"><span class="free-word"><span class="zh">免费</span><span class="en">FREE</span></span></div>
         <div class="price-unit"><span class="zh">/ 前 2 件 · 创始藏家专享</span><span class="en">/ first 2 items · founding collectors</span></div>
         <ul>
           <li><span class="zh">前 2 件藏品完全免费上架（1 年有效）</span><span class="en">First 2 listings free (valid 1 year)</span></li>
           <li><span class="zh">免费精修图片 + 代上架</span><span class="en">Free retouching + we list for you</span></li>
-          <li><span class="zh">专属创始藏家勋章</span><span class="en">Exclusive founding collector badge</span></li>
+          <!-- 添加了金色皇冠图标 -->
+          <li><span style="color:#9C7A3A; margin-right:4px; font-size:1.05em;">♛</span><span class="zh">专属创始藏家勋章</span><span class="en">Exclusive founding collector badge</span></li>
         </ul>
-        <a class="card-cta" href="https://wa.me/6591888952" target="_blank" rel="noopener noreferrer"><span class="zh">免费领 2 个展位 →</span><span class="en">Claim 2 Free Slots →</span></a>
+        
+        <!-- 入驻实时进度条 -->
+        <div class="progress-block" aria-label="创始藏家入驻进度">
+          <div class="progress-label">
+            <span class="label-text">
+              <span class="dot" aria-hidden="true"></span>
+              <span class="zh">创始藏家入驻倒计时</span>
+              <span class="en">Founding Collector Countdown</span>
+            </span>
+            <span class="progress-count">
+              <span class="zh">已入驻 <span class="joined">5</span> <span class="total">/ 88</span></span>
+              <span class="en"><span class="joined">5</span> <span class="total">/ 88 joined</span></span>
+            </span>
+          </div>
+          <div class="progress-track">
+            <div class="progress-fill" style="width:5.68%"></div>
+          </div>
+          <div class="progress-foot">
+            <span class="left-note">
+              <span class="zh">仅剩 <strong>83</strong> 席 · 越早入驻，创始勋章越显尊贵</span>
+              <span class="en">Only <strong>83</strong> seats left — earlier means more exclusive</span>
+            </span>
+          </div>
+        </div>
+
+         <a class="card-cta" href="https://airtable.com/apprn6XDQnAm8bkaT/shrlQLTRfG5RlYjD4" target="_blank" rel="noopener noreferrer"><span class="zh">申请成为创始藏家 →</span><span class="en">Claim 2 Free Slots →</span></a>
       </div>
 
       <!-- 单件发布 -->
@@ -546,7 +703,8 @@ footer {
           <li><span class="zh">基础修图 · 背景处理 · 代发布</span><span class="en">Basic retouch · background · publishing</span></li>
           <li><span class="zh">一年在线展示</span><span class="en">1 year online display</span></li>
         </ul>
-        <a class="card-cta" href="https://wa.me/6591888952" target="_blank" rel="noopener noreferrer"><span class="zh">帮我刊登 →</span><span class="en">List For Me →</span></a>
+        <!-- 触发弹窗，服务类型为 listing -->
+        <a class="card-cta" href="javascript:void(0)" onclick="openServiceModal('listing')"><span class="zh">帮我刊登 →</span><span class="en">List For Me →</span></a>
       </div>
 
       <!-- 私人藏馆 · 主推 -->
@@ -620,7 +778,8 @@ footer {
             <span class="unit"><span class="zh">/ 月 · 年付 S$1,290</span><span class="en">/ month · S$1,290 yearly</span></span>
           </div>
         </div>
-        <div class="row">
+        <!-- 点击整行触发咨询弹窗 -->
+        <div class="row" onclick="openServiceModal('advisory')" style="cursor:pointer;">
           <div class="row-info">
             <div class="row-title"><span class="zh">在线咨询顾问</span><span class="en">Online Advisory</span></div>
             <div class="row-desc"><span class="zh">藏品页面预约，PayNow 付款；仅提供参考意见</span><span class="en">Book from the listing, pay via PayNow; reference opinions only</span></div>
@@ -652,7 +811,7 @@ footer {
       </div>
       <div class="faq-item">
         <div class="faq-q"><span class="zh">创始藏家有什么特别？</span><span class="en">What is special about founding collectors?</span></div>
-        <div class="faq-a"><span class="zh">前 2 件免费上架（含精修与代上架）、私人藏馆特惠价 S$599（常规 S$799）、专属创始勋章、功能共创特权。点击右上角"申请创始藏家"或加 <b>9188 8952</b>，免注册，WhatsApp 一键完成。</span><span class="en">First 2 listings free (with retouching), Private Gallery at S$599 (regular S$799), exclusive founding badge, and co-create privileges. Tap "Apply Now" above or add <b>9188 8952</b> — no sign-up, one tap on WhatsApp.</span></div>
+        <div class="faq-a"><span class="zh">前 2 件免费上架（含精修与代上架）、私人藏馆特惠价 S$599（常规 S$799）、专属创始勋章。点击右上角"申请创始藏家"。</span><span class="en">First 2 listings free (with retouching), Private Gallery at S$599 (regular S$799), exclusive founding badge, and co-create privileges. Tap "Apply Now" above.</span></div>
       </div>
       <div class="faq-item">
         <div class="faq-q"><span class="zh">平台如何收费？</span><span class="en">How does the platform charge?</span></div>
@@ -677,6 +836,110 @@ footer {
   <p class="en" style="margin-bottom:0;">© 2026 Gudong · gudong.app <a href="javascript:void(0)" class="app-install-btn" onclick="event.preventDefault();"><svg viewBox="0 0 24 24" aria-hidden="true" width="12" height="12"><path d="M5 20h14v-2H5v2zM19 9h-4V3H9v6H5l7 7 7-7z"/></svg>Install gudong.app</a></p>
 </footer>
 
+<!-- ====== 图片精修服务弹窗（完全匹配截图设计） ====== -->
+<div class="publish-modal" id="serviceModal" role="dialog" aria-modal="true">
+  <div class="publish-card">
+    <button type="button" class="publish-close" onclick="closeServiceModal()" aria-label="关闭">×</button>
+    
+    <h3><span class="zh">帮我刊登</span><span class="en">List for me</span></h3>
+    
+    <div class="publish-desc"><span class="zh">古董圈为您完成：图片优化 · 标题 · 描述 · 标签 · 发布</span><span class="en">Gudong handles: Image Optimization · Title · Description · Tags · Publishing</span></div>
+
+    <!-- 服务清单 -->
+    <ul class="service-list">
+      <li>
+        <strong><span class="zh">图片优化</span><span class="en">Image Optimization</span></strong>
+        <span class="zh">光影与亮度 · 色彩与对比 · 背景与构图 · 画面清晰</span>
+        <span class="en">Light & shadow · Color & contrast · Background & composition · Clarity</span>
+      </li>
+      <li>
+        <strong><span class="zh">标题</span><span class="en">Title</span></strong>
+        <span class="zh">品类、年代、器型一目了然的</span>
+        <span class="en">Category, era, form at a glance</span>
+      </li>
+      <li>
+        <strong><span class="zh">描述</span><span class="en">Description</span></strong>
+        <span class="zh">来源与品质如实描述</span>
+        <span class="en">Source and condition described accurately</span>
+      </li>
+      <li>
+        <strong><span class="zh">标签</span><span class="en">Tags</span></strong>
+        <span class="zh">便于卖家买家沟通检索</span>
+        <span class="en">Easier for buyers and sellers to search</span>
+      </li>
+      <li>
+        <strong><span class="zh">发布</span><span class="en">Publishing</span></strong>
+        <span class="zh">确认后直接上架到藏品页面</span>
+        <span class="en">Publish directly to listing page after confirmation</span>
+      </li>
+    </ul>
+
+    <div class="price-box">
+      <span class="zh">不会改变实物颜色与细节，所有图片只做优化。</span>
+      <span class="en">No change to actual color or details — only optimization.</span><br>
+      <span class="price-highlight">S$59 / 件</span> <span class="zh">（1 件藏品，可上传最多 4 张图片）</span>
+      <span class="en">(1 item, up to 4 images)</span><br>
+      <span class="zh">一次精修最多 4 张 · S$59</span>
+      <span class="en">Max 4 images per item · S$59</span>
+    </div>
+
+    <!-- 警告框 -->
+    <div class="warning-box">
+      <span>⚠️</span>
+      <div>
+        <span class="zh">温馨提示：本套餐包含图片精修（光影、调色、背景、清晰度）与标题、描述、标签优化。您需要确认所有精修图片的原图。不包含实物鉴定、估值、交易撮合、卖家售假赔偿、标题与描述中您提供资料的真实性，平台不作负责。</span>
+        <span class="en">Note: This package includes image retouching (light, color, background, clarity) and title, description, tag optimization. You must confirm the original images. It does not include authentication, valuation, transaction matching, compensation for counterfeit items, or the accuracy of information you provide in titles and descriptions.</span>
+      </div>
+    </div>
+
+    <!-- 工作流程 -->
+    <div class="workflow">
+      <p><span class="zh">我们怎么工作：</span><span class="en">How We Work:</span></p>
+      <ol>
+        <li><span class="zh"><strong>1.</strong> 填写表单 → 提交后跳转 WhatsApp</span><span class="en"><strong>1.</strong> Fill form → Redirect to WhatsApp</span></li>
+        <li><span class="zh"><strong>2.</strong> 客服通过 WhatsApp 发送 PayNow 付款二维码（S$59 / 件）</span><span class="en"><strong>2.</strong> Customer service sends PayNow QR code via WhatsApp (S$59 / item)</span></li>
+        <li><span class="zh"><strong>3.</strong> 完成付款后，把 PayNow 付款截图发回 WhatsApp</span><span class="en"><strong>3.</strong> After payment, send the PayNow screenshot back to WhatsApp</span></li>
+        <li><span class="zh"><strong>4.</strong> 提交后 3 个工作日内完成人工服务并发布</span><span class="en"><strong>4.</strong> Manual service and publishing completed within 3 working days</span></li>
+      </ol>
+    </div>
+
+    <!-- 表单区域 -->
+    <h4 style="font-size:.9rem; font-weight:600; color:#7A4E33; margin-bottom:.8rem;"><span class="zh">图片精修申请表</span><span class="en">Image Retouching Application Form</span></h4>
+    
+    <div class="publish-form-group">
+      <label><span class="zh">Seller ID（古董圈网站 ID）</span><span class="en">Seller ID (Gudong Website ID)</span> <span class="required">*</span></label>
+      <input type="text" class="publish-input" id="serviceSellerId" placeholder="seller-lim-ku-antiques">
+    </div>
+
+    <div class="publish-form-group">
+      <label><span class="zh">WhatsApp</span><span class="en">WhatsApp</span> <span class="required">*</span></label>
+      <input type="text" class="publish-input" id="serviceWhatsapp" placeholder="+65 xxxxxxxx">
+    </div>
+
+    <div class="publish-form-group">
+      <label><span class="zh">上传图片（可选，最多 4 张）</span><span class="en">Upload Images (Optional, max 4)</span></label>
+      <div class="upload-area" onclick="document.getElementById('fileInput').click()">
+        <input type="file" id="fileInput" multiple accept="image/*">
+        <div class="upload-label">
+          <span class="plus">+</span>
+          <span><span class="zh">上传图片</span><span class="en">Upload Image</span></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="publish-form-group">
+      <label><span class="zh">备注（可选，写下你的基础需求：仅限光影、调色、构图、背景清理）</span><span class="en">Notes (Optional: light, color, composition, background cleanup)</span></label>
+      <textarea class="publish-textarea" id="serviceNotes" placeholder="希望重点优化哪些？"></textarea>
+    </div>
+
+    <!-- 底部提交按钮 -->
+    <button class="submit-btn" onclick="submitServiceForm()">
+      <span class="zh">提交精修申请，跳转WhatsApp获取PayNow →</span>
+      <span class="en">Submit & Go to WhatsApp for PayNow →</span>
+    </button>
+  </div>
+</div>
+
 <script>
   function openSidebar() {
     document.getElementById('sidebar').classList.add('open');
@@ -692,6 +955,45 @@ footer {
     var t = document.getElementById('menuToggle');
     if (t) t.setAttribute('aria-expanded', 'false');
   }
+  
+  // ====== 服务预约弹窗逻辑 ======
+  function openServiceModal(type) {
+    // 目前只展示精修弹窗，如果后续需要扩展其他类型，可在此处根据 type 切换内容
+    var modal = document.getElementById('serviceModal');
+    if (modal) modal.classList.add('open');
+  }
+
+  function closeServiceModal() {
+    var modal = document.getElementById('serviceModal');
+    if (modal) modal.classList.remove('open');
+  }
+
+  function submitServiceForm() {
+    var sellerId = document.getElementById('serviceSellerId').value.trim();
+    var wa = document.getElementById('serviceWhatsapp').value.trim();
+    var notes = document.getElementById('serviceNotes').value.trim();
+    
+    if (!sellerId || !wa) {
+      alert('请填写必填项（Seller ID 和 WhatsApp）\nPlease fill in all required fields (Seller ID and WhatsApp).');
+      return;
+    }
+    
+    var message = `【图片精修申请 - 古董圈】\nSeller ID：${sellerId}\nWhatsApp：${wa}\n备注：${notes || '无'}\n\n我想申请图片精修服务（S$59/件），请发送PayNow付款二维码。`;
+    var url = `https://wa.me/6591888952?text=${encodeURIComponent(message)}`;
+    
+    window.open(url, '_blank');
+    closeServiceModal();
+  }
+
+  // 点击弹窗背景关闭
+  var serviceModal = document.getElementById('serviceModal');
+  if (serviceModal) {
+    serviceModal.addEventListener('click', function(e) {
+      if (e.target === this) closeServiceModal();
+    });
+  }
+
+  // 语言切换
   let currentLang = (function () { try { return localStorage.getItem('gudong_lang') === 'en' ? 'en' : 'zh'; } catch (e) { return 'zh'; } })();
   function applyLang() {
     document.body.dataset.lang = currentLang;
@@ -710,7 +1012,10 @@ footer {
     try { localStorage.setItem('announceClosed', 'yes'); } catch (e) {}
   }
   document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape') closeSidebar();
+    if (e.key === 'Escape') {
+      closeSidebar();
+      closeServiceModal();
+    }
   });
   window.addEventListener('resize', function () {
     if (window.innerWidth > 900) closeSidebar();

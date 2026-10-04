@@ -97,7 +97,7 @@ header {
 .brand-text { display: flex; flex-direction: column; justify-content: center; }
 @media (max-width: 640px) { .brand-logo-img { height: 30px; } }
 .brand h1 { font-size: 1.4rem; font-weight: 700; letter-spacing: .02em; line-height: 1.15; color: var(--color-primary-dark); }
-.brand p { color: var(--color-qianjinzong); margin-top: .2rem; font-size: .62rem; letter-spacing: .2em; text-transform: uppercase; }
+.brand p { color: var(--color-qianjinzong); margin-top: .2rem; font-size: .75rem; letter-spacing: .18em; text-transform: uppercase; }
 .brand h1 .en, .brand p .en, .sidebar-brand .en {
   font-family: "Inter Display", "Inter", "Geist",
                -apple-system, BlinkMacSystemFont, "Segoe UI",
@@ -108,7 +108,7 @@ header {
 .btn-publish {
   display: inline-flex; align-items: center; gap: .35rem;
   background: var(--color-primary); color: #fff;
-  padding: .5rem 1.1rem; border-radius: 8px;
+  padding: .75rem 1.1rem; min-height: 44px; border-radius: 8px;
   font-size: .85rem; font-weight: 600; text-decoration: none;
   white-space: nowrap; transition: .4s cubic-bezier(.25,.1,.25,1);
 }
@@ -117,7 +117,7 @@ header {
   border: 1px solid var(--color-border);
   background: transparent;
   color: var(--color-text-secondary);
-  padding: .3rem .68rem;
+  padding: .55rem .85rem; min-height: 44px;
   border-radius: 6px;
   cursor: pointer;
   font-size: .75rem;
@@ -130,7 +130,7 @@ header {
   background: var(--color-primary-light);
 }
 .menu-toggle {
-  width: 38px; height: 38px; border: 1px solid var(--color-border); background: transparent;
+  width: 44px; height: 44px; border: 1px solid var(--color-border); background: transparent;
   border-radius: 8px; font-size: 1.05rem; color: var(--color-text); cursor: pointer;
   display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: .4s cubic-bezier(.25,.1,.25,1);
 }
@@ -192,284 +192,13 @@ main section[id] { scroll-margin-top: 92px; }
 .sec-head { text-align: center; max-width: 680px; margin: 3rem auto 1.6rem; }
 .sec-head.tight { margin-bottom: .9rem; }
 .eyebrow { font-size: .7rem; font-weight: 600; letter-spacing: .34em; text-transform: uppercase; color: var(--color-gold); }
-.sec-title { font-family: var(--font-display); font-size: 1.9rem; font-weight: 700; letter-spacing: .06em; color: var(--color-text); margin: .6rem 0 .55rem; }
+.sec-title { font-family: var(--font-serif); font-size: 1.9rem; font-weight: 600; letter-spacing: .02em; color: var(--color-text); margin: .6rem 0 .55rem; }
 .sec-sub { font-size: .84rem; color: var(--color-text-secondary); }
 .sec-divider { display: flex; align-items: center; justify-content: center; gap: .55rem; max-width: 200px; margin: 1.15rem auto 0; }
 .sec-divider::before, .sec-divider::after { content: ""; flex: 1; height: 1px; }
 .sec-divider::before { background: linear-gradient(90deg, transparent, var(--color-gold)); }
 .sec-divider::after { background: linear-gradient(90deg, var(--color-gold), transparent); }
 .sec-divider span { width: 6px; height: 6px; background: var(--color-gold); transform: rotate(45deg); flex-shrink: 0; }
-
-.action-rail {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1.1rem;
-  flex-wrap: wrap;
-  margin: 1.6rem auto 2.4rem;
-  padding: .85rem 1.2rem;
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: 60px;
-  max-width: 660px;
-}
-.action-rail .action {
-  font-family: var(--font-display);
-  font-size: .82rem;
-  font-weight: 700;
-  letter-spacing: .18em;
-  text-transform: uppercase;
-  color: var(--color-primary-dark);
-  text-decoration: none;
-  padding: .3rem .6rem;
-  border-radius: 30px;
-  transition: .4s cubic-bezier(.25,.1,.25,1);
-}
-.action-rail .action:hover { background: var(--color-primary-light); color: var(--color-primary); }
-.action-rail .arrow { color: var(--color-gold); font-size: .8rem; }
-
-/* 创始藏家横幅 */
-.founding-banner {
-  background: linear-gradient(135deg, #FBF6EE 0%, #F5EBDB 60%, #F1E2C8 100%);
-  border: 1px solid var(--color-gold);
-  border-radius: 20px;
-  padding: 1.6rem 1.9rem 1.5rem;
-  margin-bottom: 2.6rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1.15rem;
-  position: relative;
-}
-.founding-banner::before {
-  content: ""; position: absolute; inset: 6px;
-  border: 1px solid rgba(176,138,69,.28); border-radius: 15px;
-  pointer-events: none;
-}
-.founding-banner > * { position: relative; z-index: 1; }
-.founding-badge {
-  display: inline-flex; align-items: center; gap: .32rem;
-  background: linear-gradient(135deg, #9C7A3A 0%, #D4AF6A 50%, #9C7A3A 100%);
-  color: #FFFFFF;
-  font-family: var(--font-display);
-  font-size: .68rem;
-  font-weight: 700;
-  letter-spacing: .08em;
-  padding: .28rem .62rem .28rem .5rem;
-  border-radius: 20px;
-  white-space: nowrap;
-  box-shadow: 0 1px 3px rgba(176,138,69,.35), inset 0 1px 0 rgba(255,255,255,.25);
-  align-self: flex-start;
-}
-.founding-badge svg { width: 12px; height: 12px; flex-shrink: 0; display: block; }
-.banner-info { display: flex; flex-direction: column; gap: .5rem; }
-.founding-banner .headline {
-  font-family: var(--font-serif);
-  font-size: 1.35rem;
-  font-weight: 700;
-  color: var(--color-primary-dark);
-  letter-spacing: .02em;
-  line-height: 1.35;
-}
-.founding-banner .headline .gold-num { color: var(--color-gold); font-family: var(--font-display); font-size: 1.15em; }
-.founding-banner .line { display: flex; align-items: center; gap: .5rem; flex-wrap: wrap; font-size: .92rem; color: var(--color-primary-dark); }
-.founding-banner .line strong { font-weight: 700; }
-.founding-banner .founder-note { font-size: .84rem; color: var(--color-text-secondary); display: flex; align-items: flex-start; gap: .32rem; line-height: 1.7; }
-.founding-banner .founder-note .crown-icon {
-  color: var(--color-gold);
-  font-size: 1.1em;
-  line-height: 1.4;
-  display: inline-block;
-  filter: drop-shadow(0 1px 1px rgba(156,122,58,.3));
-  flex-shrink: 0;
-}
-.founding-banner .founder-note strong { color: var(--color-primary-dark); font-weight: 700; }
-
-/* 权益三宫格 */
-.perks-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: .8rem;
-  margin-top: .3rem;
-}
-.perk {
-  background: rgba(255,255,255,.65);
-  border: 1px solid rgba(176,138,69,.3);
-  border-radius: 10px;
-  padding: .75rem .8rem;
-  display: flex;
-  flex-direction: column;
-  gap: .28rem;
-}
-.perk .perk-icon { font-size: 1.05rem; color: var(--color-gold); line-height: 1; }
-.perk .perk-title {
-  font-family: var(--font-display);
-  font-size: .76rem;
-  font-weight: 700;
-  color: var(--color-primary-dark);
-  letter-spacing: .02em;
-}
-.perk .perk-desc { font-size: .7rem; color: var(--color-text-secondary); line-height: 1.55; }
-
-/* 创始藏家入驻进度条 */
-.progress-block { width: 100%; }
-.progress-label {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: .5rem;
-  font-size: .76rem;
-  font-weight: 700;
-  color: var(--color-primary-dark);
-  margin-bottom: .45rem;
-  flex-wrap: wrap;
-  letter-spacing: .02em;
-}
-.progress-label .label-text { display: inline-flex; align-items: center; gap: .35rem; }
-.progress-label .label-text .dot {
-  width: 6px; height: 6px; border-radius: 50%;
-  background: var(--color-gold);
-  box-shadow: 0 0 0 3px rgba(156,122,58,.18);
-  animation: pulse 1.8s infinite;
-}
-@keyframes pulse {
-  0%, 100% { box-shadow: 0 0 0 3px rgba(156,122,58,.18); }
-  50%      { box-shadow: 0 0 0 6px rgba(156,122,58,.05); }
-}
-.progress-count {
-  font-family: var(--font-display);
-  font-weight: 800;
-  color: var(--color-gold);
-  font-size: .96rem;
-  letter-spacing: .02em;
-}
-.progress-count .joined { font-size: 1.15em; }
-.progress-count .total { color: var(--color-text-secondary); font-weight: 600; font-size: .84em; }
-.progress-track {
-  position: relative;
-  height: 10px;
-  background: rgba(156,122,58,.15);
-  border-radius: 999px;
-  overflow: hidden;
-  box-shadow: inset 0 1px 2px rgba(156,122,58,.12);
-}
-.progress-fill {
-  position: absolute;
-  left: 0; top: 0; bottom: 0;
-  width: 5.68%;
-  min-width: 14px;
-  background: linear-gradient(90deg, #9C7A3A 0%, #D4AF6A 60%, #C99A55 100%);
-  border-radius: 999px;
-  box-shadow: 0 0 10px rgba(156,122,58,.45);
-  overflow: hidden;
-}
-.progress-fill::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,.6) 50%, transparent 100%);
-  animation: shimmer 2.4s infinite;
-}
-@keyframes shimmer {
-  0%   { transform: translateX(-100%); }
-  100% { transform: translateX(200%); }
-}
-.progress-foot {
-  margin-top: .55rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: .5rem;
-  flex-wrap: wrap;
-  font-size: .74rem;
-  color: var(--color-text-secondary);
-  letter-spacing: .02em;
-}
-.progress-foot .left-note strong { color: var(--color-gold); font-weight: 700; }
-.progress-foot .countdown { font-family: var(--font-display); font-weight: 700; color: var(--color-primary-dark); }
-.progress-foot .countdown .num { color: var(--color-danger); font-size: 1.05em; }
-
-/* 底部 CTA 破冰区 */
-.cta-icebreak {
-  margin: 0 auto 2.6rem;
-  max-width: 720px;
-  padding: 1.8rem 1.9rem 1.5rem;
-  background: linear-gradient(135deg, #FBF6EE 0%, #F5EBDB 60%, #F1E2C8 100%);
-  border: 1px solid var(--color-gold);
-  border-radius: 20px;
-  text-align: center;
-  position: relative;
-}
-.cta-icebreak::before {
-  content: ""; position: absolute; inset: 6px;
-  border: 1px solid rgba(176,138,69,.28); border-radius: 15px;
-  pointer-events: none;
-}
-.cta-icebreak > * { position: relative; z-index: 1; }
-.cta-eyebrow {
-  font-size: .68rem;
-  font-weight: 700;
-  letter-spacing: .28em;
-  text-transform: uppercase;
-  color: var(--color-gold);
-  margin-bottom: .5rem;
-}
-.cta-title {
-  font-family: var(--font-serif);
-  font-size: 1.35rem;
-  font-weight: 700;
-  color: var(--color-primary-dark);
-  letter-spacing: .02em;
-  line-height: 1.4;
-  margin-bottom: .35rem;
-}
-.cta-sub {
-  font-size: .82rem;
-  color: var(--color-text-secondary);
-  line-height: 1.7;
-  margin-bottom: 1.2rem;
-}
-.btn-whatsapp {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: .55rem;
-  background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
-  color: #FFFFFF;
-  font-family: var(--font-display);
-  font-size: 1rem;
-  font-weight: 700;
-  letter-spacing: .02em;
-  padding: .95rem 1.8rem;
-  border-radius: 12px;
-  text-decoration: none;
-  box-shadow: 0 8px 22px rgba(37,211,102,.32), 0 1px 0 rgba(255,255,255,.25) inset;
-  transition: .35s cubic-bezier(.25,.1,.25,1);
-  position: relative;
-  overflow: hidden;
-  max-width: 100%;
-}
-.btn-whatsapp:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 28px rgba(37,211,102,.42), 0 1px 0 rgba(255,255,255,.25) inset;
-}
-.btn-whatsapp:active { transform: translateY(0); }
-.btn-whatsapp svg {
-  width: 22px; height: 22px;
-  flex-shrink: 0;
-  fill: currentColor;
-}
-.btn-whatsapp .btn-label { display: inline-flex; flex-direction: column; align-items: flex-start; line-height: 1.15; text-align: left; }
-.btn-whatsapp .btn-label .primary { font-size: 1rem; font-weight: 800; }
-.btn-whatsapp .btn-label .secondary { font-size: .74rem; font-weight: 600; opacity: .92; letter-spacing: .04em; }
-.cta-hint {
-  margin-top: .9rem;
-  font-size: .74rem;
-  color: var(--color-text-secondary);
-  letter-spacing: .02em;
-  line-height: 1.6;
-}
-.cta-hint .zh, .cta-hint .en { display: inline; }
-.cta-hint .wa-num { color: var(--color-wa-dark); font-weight: 700; font-family: var(--font-display); }
 
 /* 核心三卡 */
 .core-grid {
@@ -488,62 +217,62 @@ main section[id] { scroll-margin-top: 92px; }
   flex-direction: column;
   box-shadow: 0 1px 3px rgba(0,0,0,.04);
   position: relative;
-  transition: box-shadow .2s ease, transform .15s ease;
+  transition: border-color .4s cubic-bezier(.25,.1,.25,1), box-shadow .4s cubic-bezier(.25,.1,.25,1);
 }
-.card:hover { box-shadow: 0 10px 26px rgba(0,0,0,.05); }
+.card:hover { border-color: var(--color-gold); box-shadow: 0 8px 24px rgba(37,34,30,.08); }
 .card .card-eyebrow {
-  font-size: .68rem;
-  font-weight: 700;
+  font-size: .75rem;
+  font-weight: 600;
   letter-spacing: .22em;
   text-transform: uppercase;
   color: var(--color-gold);
   margin-bottom: .55rem;
 }
 .card h3 {
-  font-family: var(--font-display);
+  font-family: var(--font-serif);
   font-size: 1.2rem;
-  font-weight: 700;
-  letter-spacing: .03em;
+  font-weight: 600;
+  letter-spacing: .01em;
   color: var(--color-text);
   margin-bottom: .35rem;
 }
-.card .card-desc { font-size: .82rem; color: var(--color-text-secondary); line-height: 1.7; min-height: 2.6rem; }
+.card .card-desc { font-size: .82rem; color: var(--color-text-secondary); line-height: 1.65; min-height: 2.6rem; }
 .card .price {
-  font-family: var(--font-display);
+  font-family: var(--font-serif);
   font-size: 2.2rem;
-  font-weight: 700;
+  font-weight: 600;
   color: var(--color-text);
-  letter-spacing: .02em;
+  letter-spacing: .01em;
   margin: 1.05rem 0 .15rem;
   line-height: 1.1;
 }
-.card .price .cur { font-size: .95rem; font-weight: 600; margin-right: .12rem; }
+.card .price .cur { font-size: .95rem; font-weight: 500; margin-right: .12rem; }
 .card .price .free-word { font-family: var(--font-serif); font-size: 2rem; color: var(--color-primary-dark); letter-spacing: .04em; }
-.card .price-unit { font-size: .74rem; color: var(--color-gold); letter-spacing: .04em; line-height: 1.5; }
+.card .price-unit { font-size: .78rem; color: var(--color-gold); letter-spacing: .04em; line-height: 1.5; }
 .card .price-unit s { color: var(--color-text-muted); font-weight: 500; }
-.card ul { list-style: none; margin: 1.3rem 0 1.6rem; }
+.card ul { list-style: none; margin: 1.2rem 0 1.5rem; }
 .card li {
   position: relative;
-  padding: .48rem 0 .48rem 1.15rem;
+  padding: .45rem 0 .45rem 1.15rem;
   font-size: .8rem;
   color: var(--color-text-secondary);
   line-height: 1.6;
 }
 .card li + li { border-top: 1px dashed var(--color-border); }
 .card li::before {
-  content: ""; position: absolute; left: 2px; top: .92rem;
+  content: ""; position: absolute; left: 2px; top: .9rem;
   width: 5px; height: 5px; background: var(--color-gold); transform: rotate(45deg);
 }
 .card .card-cta {
   display: inline-flex; justify-content: center; align-items: center; gap: .35rem;
   margin-top: auto;
   padding: .72rem 1.1rem;
-  border-radius: 8px;
+  border-radius: 6px;
   background: var(--color-primary);
   color: #fff;
   text-decoration: none;
   font-size: .84rem;
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: .02em;
   transition: .4s cubic-bezier(.25,.1,.25,1);
 }
@@ -551,21 +280,21 @@ main section[id] { scroll-margin-top: 92px; }
 .card.featured {
   border-color: var(--color-gold);
   background: linear-gradient(180deg, #FFFDF9 0%, #FFFAF2 100%);
-  box-shadow: 0 14px 34px rgba(70,48,32,.10);
+  box-shadow: 0 16px 40px rgba(70,48,32,.12);
   transform: translateY(-6px);
 }
 .card.featured::after {
   content: ""; position: absolute; inset: 6px;
-  border: 1px solid rgba(176,138,69,.45); border-radius: 16px;
+  border: 1px solid rgba(156,122,58,.4); border-radius: 16px;
   pointer-events: none;
 }
 .card.featured > * { position: relative; z-index: 1; }
-.card.featured .price { font-size: 2.5rem; }
+.card.featured .price { font-size: 2.5rem; color: var(--color-primary-dark); }
 .card.featured .card-cta {
   background: linear-gradient(135deg, var(--color-gold) 0%, #C99A55 100%);
-  box-shadow: 0 6px 16px rgba(176,138,69,.22);
+  box-shadow: 0 6px 16px rgba(156,122,58,.25);
 }
-.card.featured .card-cta:hover { box-shadow: 0 8px 20px rgba(176,138,69,.32); }
+.card.featured .card-cta:hover { box-shadow: 0 8px 20px rgba(156,122,58,.35); }
 .card-badge {
   position: absolute;
   top: -12px;
@@ -573,7 +302,7 @@ main section[id] { scroll-margin-top: 92px; }
   transform: translateX(-50%);
   background: var(--color-gold);
   color: #fff;
-  font-size: .66rem;
+  font-size: .75rem;
   font-weight: 700;
   letter-spacing: .14em;
   padding: .3rem .95rem;
@@ -586,7 +315,7 @@ main section[id] { scroll-margin-top: 92px; }
   display: inline-flex;
   align-items: center;
   gap: .3rem;
-  font-size: .62rem;
+  font-size: .75rem;
   font-weight: 700;
   letter-spacing: .12em;
   text-transform: uppercase;
@@ -603,19 +332,6 @@ main section[id] { scroll-margin-top: 92px; }
   box-shadow: 0 2px 6px rgba(156,122,58,.3);
 }
 
-.card-quote {
-  font-size: .82rem;
-  line-height: 1.75;
-  color: var(--color-primary-dark);
-  font-weight: 700;
-  border-left: 3px solid var(--color-gold);
-  padding-left: .85rem;
-  margin: -.4rem 0 1.2rem;
-  text-align: left;
-}
-.card-quote .zh { display: block; }
-.card-quote .en { display: block; font-family: var(--font-latin); font-weight: 700; }
-
 /* 委托找货 */
 .sourcing-section {
   margin: 3rem auto 0;
@@ -625,7 +341,7 @@ main section[id] { scroll-margin-top: 92px; }
   border-radius: 18px;
 }
 .sourcing-head { max-width: 640px; margin: 0 auto; text-align: center; }
-.sourcing-title { font-family: var(--font-display); font-size: 1.4rem; color: var(--color-text); margin: .5rem 0 .5rem; }
+.sourcing-title { font-family: var(--font-serif); font-size: 1.35rem; font-weight: 600; color: var(--color-text); margin: .5rem 0 .5rem; }
 .sourcing-desc { font-size: .84rem; color: var(--color-text-secondary); line-height: 1.85; }
 .sourcing-grid {
   display: grid;
@@ -640,7 +356,7 @@ main section[id] { scroll-margin-top: 92px; }
 }
 .sourcing-step { padding: 1.4rem 1.3rem; background: #fff; text-align: center; }
 .sourcing-step .step-label {
-  font-size: .68rem; font-weight: 700; letter-spacing: .18em;
+  font-size: .75rem; font-weight: 700; letter-spacing: .18em;
   text-transform: uppercase; color: var(--color-gold); margin-bottom: .5rem;
 }
 .sourcing-step .step-price {
@@ -649,33 +365,24 @@ main section[id] { scroll-margin-top: 92px; }
 }
 .sourcing-step .step-price .cur { font-size: .85rem; font-weight: 600; margin-right: .1rem; }
 .sourcing-step .step-desc { font-size: .78rem; color: var(--color-text-secondary); margin-top: .5rem; line-height: 1.7; }
-.sourcing-step .step-unit { font-size: .72rem; color: var(--color-gold); margin-top: .3rem; }
+.sourcing-step .step-unit { font-size: .75rem; color: var(--color-gold); margin-top: .3rem; }
 .sourcing-divider {
   display: flex; align-items: center; justify-content: center;
   background: var(--color-primary-light); color: var(--color-primary-dark);
   font-size: .7rem; font-weight: 700; letter-spacing: .1em;
   padding: 0 .55rem; writing-mode: vertical-rl; text-orientation: mixed;
 }
-.sourcing-note {
-  max-width: 720px;
-  margin: 1.4rem auto 0;
-  font-size: .78rem;
-  color: var(--color-text-secondary);
-  line-height: 1.8;
-  text-align: center;
-}
-.sourcing-note b { color: var(--color-text); }
 
 /* 其他服务 */
 .rows { display: flex; flex-direction: column; }
 .row { display: flex; align-items: flex-start; justify-content: space-between; gap: 1.5rem; padding: 1.25rem .2rem; border-bottom: 1px solid var(--color-border); }
 .row:last-child { border-bottom: none; }
 .row-info { flex: 1 1 auto; min-width: 0; }
-.row-title { font-family: var(--font-display); font-size: 1rem; font-weight: 700; color: var(--color-text); margin-bottom: .3rem; letter-spacing: .03em; }
+.row-title { font-family: var(--font-serif); font-size: 1rem; font-weight: 600; color: var(--color-text); margin-bottom: .3rem; letter-spacing: .01em; }
 .row-desc { font-size: .78rem; color: var(--color-text-secondary); line-height: 1.7; }
 .row-price { flex: 0 0 auto; text-align: right; padding-top: .1rem; }
 .row-price .amount { font-family: var(--font-display); font-size: 1.25rem; font-weight: 700; color: var(--color-text); white-space: nowrap; }
-.row-price .unit { display: block; font-size: .72rem; color: var(--color-gold); letter-spacing: .04em; margin-top: .15rem; white-space: nowrap; }
+.row-price .unit { display: block; font-size: .75rem; color: var(--color-gold); letter-spacing: .04em; margin-top: .15rem; white-space: nowrap; }
 
 .frame {
   position: relative; background: var(--color-surface);
@@ -692,7 +399,7 @@ main section[id] { scroll-margin-top: 92px; }
 /* 常见问题 */
 .faq-item { padding: 1.1rem .2rem; border-bottom: 1px dashed var(--color-border); }
 .faq-item:last-child { border-bottom: none; }
-.faq-q { font-family: var(--font-display); font-size: .92rem; font-weight: 700; color: var(--color-text); margin-bottom: .4rem; }
+.faq-q { font-family: var(--font-serif); font-size: .95rem; font-weight: 600; color: var(--color-text); margin-bottom: .4rem; }
 .faq-a { font-size: .8rem; color: var(--color-text-secondary); line-height: 1.75; }
 .faq-a b { color: var(--color-text); }
 
@@ -722,36 +429,25 @@ footer {
 .footer-nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 1.3rem; margin-bottom: 1.2rem; }
 .footer-nav a { color: var(--color-text-secondary); text-decoration: none; font-size: .82rem; }
 .footer-nav a:hover { color: var(--color-primary); }
-.footer-disclaimer { max-width: 620px; margin: 0 auto 1.1rem; font-size: .74rem; line-height: 1.65; color: var(--color-text-muted); }
+.footer-disclaimer { max-width: 620px; margin: 0 auto 1.1rem; font-size: .78rem; line-height: 1.65; color: var(--color-text-muted); }
 
 @media (max-width: 900px) {
   .core-grid { grid-template-columns: 1fr; max-width: 520px; margin-left: auto; margin-right: auto; }
   .card.featured { transform: none; order: -1; }
-  .perks-grid { grid-template-columns: 1fr; }
   .sourcing-grid { grid-template-columns: 1fr; }
   .sourcing-divider { writing-mode: horizontal-tb; padding: .5rem 0; }
 }
 @media (max-width: 700px) {
   header { height: 62px; }
-  .btn-publish { padding: .45rem .85rem; font-size: .8rem; }
+  .btn-publish { padding: .65rem .85rem; font-size: .8rem; min-height: 44px; }
   .container { padding: 1.6rem 5% 3rem; }
   .sec-head { margin: 2.2rem auto 1.3rem; }
   .sec-title { font-size: 1.55rem; }
   .frame { padding: 1.4rem 1.15rem 1.5rem; }
   .frame::after { inset: 5px; }
-  .founding-banner { padding: 1.25rem 1.3rem; }
-  .founding-banner .headline { font-size: 1.15rem; }
-  .cta-icebreak { padding: 1.5rem 1.15rem 1.3rem; }
-  .cta-title { font-size: 1.15rem; }
-  .btn-whatsapp { width: 100%; padding: .85rem 1rem; }
-  .btn-whatsapp .btn-label .primary { font-size: .92rem; }
   .sourcing-section { padding: 1.8rem 1.15rem; }
   .row { gap: 1rem; padding: 1.05rem .1rem; }
   .row-price .amount { font-size: 1.1rem; }
-}
-@media (max-width: 520px) {
-  .action-rail { gap: .5rem; padding: .75rem .9rem; }
-  .action-rail .action { font-size: .74rem; letter-spacing: .12em; }
 }
 </style>
 <link rel="apple-touch-icon" href="/assets/icons/icon-192.png">
@@ -797,7 +493,6 @@ footer {
       <a href="categories/paintings.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 书画</span><span class="en">· Paintings &amp; Calligraphy</span></a>
       <a href="categories/misc.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 杂项</span><span class="en">· Miscellaneous</span></a>
       <a href="sellers/index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">藏家展馆</span><span class="en">Collector Gallery</span></a>
-      <a href="pricing.html#seller-services" class="sidebar-link active" onclick="closeSidebar()"><span class="zh">发布我的藏品</span><span class="en">Publish My Item</span></a>
       <a href="insights.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">情报 / 知识</span><span class="en">Insights</span></a>
       <a href="about.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">关于我们</span><span class="en">About</span></a>
       <button type="button" class="sidebar-lang-btn" onclick="toggleLang()" aria-label="Switch language"><span class="zh">🌐 English</span><span class="en">🌐 中文</span></button>
@@ -813,164 +508,70 @@ footer {
   <!-- 页首 -->
   <div class="sec-head tight">
     <div class="eyebrow"><span class="zh">古 董 圈</span><span class="en">G U D O N G</span></div>
-    <h1 class="sec-title"><span class="zh">选择适合你的方式</span><span class="en">Choose the Way That Fits You</span></h1>
-    <p class="sec-sub"><span class="zh">免费体验 · 按需付费 · 私人藏馆。三层路径，对应你收藏的不同阶段。</span><span class="en">Free Trial · Pay as You Go · Private Gallery. Three tiers for every stage of collecting.</span></p>
+    <h1 class="sec-title"><span class="zh">为你的收藏，建一个线上藏馆</span><span class="en">A Home for Your Collection Online</span></h1>
+    <p class="sec-sub"><span class="zh">从免费体验到私人藏馆，选一种适合你的方式。</span><span class="en">From free trial to a private gallery — choose what fits you.</span></p>
     <div class="sec-divider" aria-hidden="true"><span></span></div>
   </div>
-
-  <!-- 核心动作条 -->
-  <nav class="action-rail" aria-label="核心动作">
-    <a href="#seller-services" class="action"><span class="zh">免费体验</span><span class="en">Free</span></a>
-    <span class="arrow">→</span>
-    <a href="#seller-services" class="action"><span class="zh">按需付费</span><span class="en">Pay as Go</span></a>
-    <span class="arrow">→</span>
-    <a href="#seller-services" class="action"><span class="zh">私人藏馆</span><span class="en">Private Gallery</span></a>
-  </nav>
-
-  <!-- 创始藏家横幅 + 权益 + 进度条 -->
-  <div class="founding-banner">
-    <div class="founding-badge">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M5 16 3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm14 3H5v2h14v-2z"/></svg>
-      <span class="zh">创始藏家 · 88席</span><span class="en">Founding Collector · 88 Seats</span>
-    </div>
-
-    <div class="banner-info">
-      <div class="headline">
-        <span class="zh">首发核心席位：<span class="gold-num">88</span> 席创始藏家</span>
-        <span class="en">First Release: <span class="gold-num">88</span> Founding Collector Seats</span>
-      </div>
-      <div class="line">
-        <strong><span class="zh">免费加入 · 前 2 件藏品完全免费上架</span><span class="en">Free to join · First 2 listings completely free</span></strong>
-      </div>
-    </div>
-
-    <!-- 三大权益 -->
-    <div class="perks-grid">
-      <div class="perk">
-        <span class="perk-icon">♛</span>
-        <span class="perk-title"><span class="zh">专属尊贵勋章</span><span class="en">Exclusive Medal</span></span>
-        <span class="perk-desc"><span class="zh">永久创始藏家标识，身份永不褪色</span><span class="en">Permanent badge — status that never fades</span></span>
-      </div>
-      <div class="perk">
-        <span class="perk-icon">⚙</span>
-        <span class="perk-title"><span class="zh">功能共创特权</span><span class="en">Co-create Privilege</span></span>
-        <span class="perk-desc"><span class="zh">参与平台功能共创，优先体验新功能</span><span class="en">Co-create features, early access to new tools</span></span>
-      </div>
-      <div class="perk">
-        <span class="perk-icon">✦</span>
-        <span class="perk-title"><span class="zh">零门槛破冰</span><span class="en">Zero-barrier Entry</span></span>
-        <span class="perk-desc"><span class="zh">前 2 件免费上架，零负担搭建官网展厅</span><span class="en">First 2 free — build your gallery at zero cost</span></span>
-      </div>
-    </div>
-
-    <!-- 创始藏家入驻进度条 -->
-    <div class="progress-block" aria-label="创始藏家入驻进度">
-      <div class="progress-label">
-        <span class="label-text">
-          <span class="dot" aria-hidden="true"></span>
-          <span class="zh">创始藏家入驻倒计时</span>
-          <span class="en">Founding Collector Countdown</span>
-        </span>
-        <span class="progress-count">
-          <span class="zh">已入驻 <span class="joined">5</span> <span class="total">/ 88</span></span>
-          <span class="en"><span class="joined">5</span> <span class="total">/ 88 joined</span></span>
-        </span>
-      </div>
-      <div class="progress-track">
-        <div class="progress-fill" style="width:5.68%"></div>
-      </div>
-      <div class="progress-foot">
-        <span class="left-note">
-          <span class="zh">仅剩 <strong>83</strong> 席 · 越早入驻，创始勋章越显尊贵</span>
-          <span class="en">Only <strong>83</strong> seats left — earlier means more exclusive</span>
-        </span>
-        <span class="countdown">
-          <span class="zh">席位倒计时 <span class="num">83</span> / 88</span>
-          <span class="en">Countdown <span class="num">83</span> / 88</span>
-        </span>
-      </div>
-    </div>
-  </div>
-
-  <!-- 底部 CTA 破冰区 -->
-  <div class="cta-icebreak">
-    <div class="cta-eyebrow"><span class="zh">快 · 轻 · 一键接入</span><span class="en">Fast · Lightweight · One Tap</span></div>
-    <h3 class="cta-title"><span class="zh">不用注册，不用填表，不用等待</span><span class="en">No sign-up, no forms, no waiting</span></h3>
-    <p class="cta-sub"><span class="zh">跳转 WhatsApp 一键授权。</span><span class="en">One tap to authorize via WhatsApp.</span></p>
-    <a class="btn-whatsapp" href="https://wa.me/6591888952?text=%E6%88%91%E6%83%B3%E7%94%B3%E8%AF%B7%E6%88%90%E4%B8%BA%E5%88%9B%E5%A7%8B%E8%97%8F%E5%AE%B6%EF%BC%8C%E9%A2%862%E4%B8%AA%E5%85%8D%E8%B4%B9%E5%B1%95%E4%BD%8D" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp 申请成为创始藏家">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.05 4.91A9.82 9.82 0 0 0 12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.87 9.87 0 0 0 4.75 1.21h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01zM12.01 20.13h-.01a8.2 8.2 0 0 1-4.18-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.18 8.18 0 0 1-1.26-4.36c0-4.54 3.7-8.23 8.24-8.23 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.83c0 4.54-3.7 8.2-8.23 8.2zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.12-.17.25-.64.81-.78.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.12-.14.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.35-.77-1.85-.2-.48-.41-.42-.56-.43-.14-.01-.31-.01-.48-.01-.17 0-.43.06-.66.31-.23.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.57.12.17 1.75 2.67 4.25 3.74.59.26 1.06.41 1.42.53.6.19 1.14.16 1.57.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.14-1.18-.06-.11-.23-.17-.48-.29z"/></svg>
-      <span class="btn-label">
-        <span class="primary"><span class="zh">申请成为创始藏家（领 2 个免费展位）</span><span class="en">Apply as Founding Collector (2 free slots)</span></span>
-      </span>
-    </a>
-    </div>
 
   <!-- 三层定价 -->
   <section id="seller-services">
     <div class="core-grid">
 
-      <!-- 基础层 · 零门槛破冰 -->
+      <!-- 免费体验 -->
       <div class="card">
         <span class="tier-tag free"><span class="zh">零门槛破冰</span><span class="en">Zero-barrier Entry</span></span>
         <div class="card-eyebrow"><span class="zh">① 免费体验</span><span class="en">① Free Trial</span></div>
-        <h3><span class="zh">创始藏家 前 2 件免费</span><span class="en">First 2 Listings Free</span></h3>
-        <p class="card-desc"><span class="zh">零负担搭建高品味官网展厅，迅速建立您的线上藏品库。</span><span class="en">Build a refined online gallery at zero cost and quickly establish your collection.</span></p>
+        <h3><span class="zh">创始藏家 · 前 2 件免费</span><span class="en">First 2 Listings Free</span></h3>
+        <p class="card-desc"><span class="zh">零成本搭建线上展厅，先试试看。</span><span class="en">Build your online gallery at no cost — try it first.</span></p>
         <div class="price"><span class="free-word"><span class="zh">免费</span><span class="en">FREE</span></span></div>
-        <div class="price-unit"><span class="zh">/ 前 2 件 · 创始藏家专享</span><span class="en">/ first 2 items · founding collectors only</span></div>
+        <div class="price-unit"><span class="zh">/ 前 2 件 · 创始藏家专享</span><span class="en">/ first 2 items · founding collectors</span></div>
         <ul>
-          <li><span class="zh">前 2 件藏品完全免费上架（1 年有效）</span><span class="en">First 2 listings completely free (1 year validity)</span></li>
-          <li><strong><span class="zh">免费修图（精修级别）</span><span class="en">Free retouching (premium level)</span></strong></li>
-          <li><strong><span class="zh">保姆式服务</span><span class="en">Concierge service</span></strong><span class="zh">：图片处理 · 文案整理 · 上架发布</span><span class="en">: image editing · copywriting · publishing</span></li>
-          <li><span class="zh">适合：初次尝试线上展示的藏家</span><span class="en">Best for: collectors trying online display for the first time</span></li>
+          <li><span class="zh">前 2 件藏品完全免费上架（1 年有效）</span><span class="en">First 2 listings free (valid 1 year)</span></li>
+          <li><span class="zh">免费精修图片 + 代上架</span><span class="en">Free retouching + we list for you</span></li>
+          <li><span class="zh">专属创始藏家勋章</span><span class="en">Exclusive founding collector badge</span></li>
         </ul>
         <a class="card-cta" href="https://wa.me/6591888952" target="_blank" rel="noopener noreferrer"><span class="zh">免费领 2 个展位 →</span><span class="en">Claim 2 Free Slots →</span></a>
       </div>
 
-      <!-- 成长层 · 精品扩容 -->
+      <!-- 单件发布 -->
       <div class="card">
-        <span class="tier-tag growth"><span class="zh">精品扩容</span><span class="en">Pay as You Go</span></span>
-        <div class="card-eyebrow"><span class="zh">② 按需付费</span><span class="en">② Pay as You Go</span></div>
-        <h3><span class="zh">单件发布</span><span class="en">Single Listing</span></h3>
-        <p class="card-desc"><span class="zh">适合手里有少量精品、灵活出货的中小行家。</span><span class="en">For small-to-mid dealers with a few fine pieces to move flexibly.</span></p>
+        <span class="tier-tag growth"><span class="zh">按需付费</span><span class="en">Pay as You Go</span></span>
+        <div class="card-eyebrow"><span class="zh">② 单件发布</span><span class="en">② Single Listing</span></div>
+        <h3><span class="zh">按需发布</span><span class="en">List as You Need</span></h3>
+        <p class="card-desc"><span class="zh">手里有几件精品，按件计费，灵活出货。</span><span class="en">A few fine pieces — pay per item, move flexibly.</span></p>
         <div class="price"><span class="cur">S$</span>59</div>
-        <div class="price-unit"><span class="zh">/ 件 / 年 · 第 3 件起</span><span class="en">/ item / year · from your 3rd item</span></div>
+        <div class="price-unit"><span class="zh">/ 件 / 年 · 第 3 件起</span><span class="en">/ item / year · from your 3rd</span></div>
         <ul>
-          <li><span class="zh">第 3 件藏品起，按件计费，用多少付多少</span><span class="en">Charged per item from your 3rd — pay only for what you use</span></li>
-          <li><span class="zh">基础修尺寸 · 背景处理 · 代发布</span><span class="en">Basic resizing · Background cleanup · Publishing</span></li>
-          <li><span class="zh">一年在线展示有效期</span><span class="en">1-year online display validity</span></li>
-          <li><span class="zh">适合：少量精品、灵活出货的中小行家</span><span class="en">Best for: small-to-mid dealers with select pieces</span></li>
+          <li><span class="zh">第 3 件起按件计费</span><span class="en">Per-item from your 3rd listing</span></li>
+          <li><span class="zh">基础修图 · 背景处理 · 代发布</span><span class="en">Basic retouch · background · publishing</span></li>
+          <li><span class="zh">一年在线展示</span><span class="en">1 year online display</span></li>
         </ul>
         <a class="card-cta" href="https://wa.me/6591888952" target="_blank" rel="noopener noreferrer"><span class="zh">帮我刊登 →</span><span class="en">List For Me →</span></a>
       </div>
 
-      <!-- 塔尖层 · 私人藏馆 -->
+      <!-- 私人藏馆 · 主推 -->
       <div class="card featured">
-        <span class="card-badge"><span class="zh">旗舰级 · 核心推荐</span><span class="en">Flagship · Recommended</span></span>
-        <span class="tier-tag flagship"><span class="zh">塔尖旗舰 · 私人藏馆</span><span class="en">Flagship · Private Gallery</span></span>
-        <div class="card-eyebrow"><span class="zh">③ 私人藏馆</span><span class="en">③ Private Gallery</span></div>
-        <h3><span class="zh">尊贵旗舰身份 · 极致排版</span><span class="en">Flagship Identity · Refined Layout</span></h3>
-        <p class="card-desc"><span class="zh">专为大藏家、实力实体店主或资深行家打造的旗舰级专属空间。</span><span class="en">A flagship personal space for major collectors, established dealers and seasoned connoisseurs.</span></p>
+        <span class="card-badge"><span class="zh">核心推荐</span><span class="en">Recommended</span></span>
+        <span class="tier-tag flagship"><span class="zh">私人藏馆</span><span class="en">Private Gallery</span></span>
+        <div class="card-eyebrow"><span class="zh">③ 年度旗舰</span><span class="en">③ Annual Flagship</span></div>
+        <h3><span class="zh">专属藏家主页</span><span class="en">Your Collector Homepage</span></h3>
+        <p class="card-desc"><span class="zh">把散落的藏品归于一馆，让访客一眼看见你的眼力与品位。</span><span class="en">All your pieces in one place — visitors see your eye and taste at a glance.</span></p>
         <div class="price">
-          <span class="cur">S$</span>599 
-          <s style="font-size:1.2rem; color:var(--color-text-muted); font-weight:500; margin-left:.25rem;">S$799</s>
+          <span class="cur">S$</span>599
+          <s style="font-size:1.15rem; color:var(--color-text-muted); font-weight:400; margin-left:.35rem;">S$799</s>
         </div>
         <div class="price-unit">
-          <span class="zh">/ 年 · <strong style="color:#9C7A3A;">创始藏家特惠</strong>（非创始藏家 S$799）</span>
-          <span class="en">/ year · <strong style="color:#9C7A3A;">Founding special</strong> (Regular S$799)</span>
+          <span class="zh">/ 年 · 创始藏家特惠（常规 S$799）</span>
+          <span class="en">/ year · founding special (regular S$799)</span>
         </div>
         <ul>
-          <li><strong><span class="zh">专属藏家身份</span><span class="en">Exclusive Collector Identity</span></strong><span class="zh">｜独立网址与藏家主页，建立个人收藏标识，区别普通卖家</span><span class="en"> · Dedicated URL &amp; collector homepage, a personal collection brand apart from ordinary sellers</span></li>
-          <li><strong><span class="zh">藏品归于一馆</span><span class="en">All Items in One Gallery</span></strong><span class="zh">｜全部藏品统一陈列，完整展现您的收藏脉络</span><span class="en"> · Every piece displayed together, a complete picture of your collection</span></li>
-          <li><strong><span class="zh">体面馆藏呈现</span><span class="en">Refined Gallery Presentation</span></strong><span class="zh">｜专业版式陈列，器物档案完整，行家访客直观看见您的眼力与审美</span><span class="en"> · Professional layout, complete object records — connoisseurs see your eye and taste at a glance</span></li>
-          <li><strong><span class="zh">开馆即享曝光</span><span class="en">Exposure from Day One</span></strong><span class="zh">｜附赠 1 个月首页推荐，上线直达平台资深藏家圈层</span><span class="en"> · Includes 1 month homepage feature, reaching seasoned collectors right away</span></li>
-          <li><strong><span class="zh">藏馆管家协助</span><span class="en">Gallery Concierge Service</span></strong><span class="zh">｜人工处理页面维护上架，繁琐工作交由平台，专心鉴赏收藏</span><span class="en"> · We handle page maintenance and listings — you focus on appreciating your collection</span></li>
-          <li><strong><span class="zh">零交易佣金</span><span class="en">Zero Sales Commission</span></strong><span class="zh">｜平台不抽取成交佣金，全部收益归您</span><span class="en"> · No commission on sales, 100% of proceeds stay with you</span></li>
+          <li><strong><span class="zh">独立藏家主页</span><span class="en">Dedicated homepage</span></strong><span class="zh">——你不再是一个卖家，而是一个有名字的藏家</span><span class="en"> — you are a named collector, not just a seller</span></li>
+          <li><strong><span class="zh">全部藏品同馆陈列</span><span class="en">All items in one gallery</span></strong><span class="zh">——完整呈现你的收藏脉络</span><span class="en"> — the full story of your collection</span></li>
+          <li><strong><span class="zh">开馆即享首页推荐</span><span class="en">Homepage feature on launch</span></strong><span class="zh">——1 个月，直达资深藏家圈层</span><span class="en"> — 1 month, straight to serious collectors</span></li>
+          <li><strong><span class="zh">人工管家代上架</span><span class="en">Concierge listing service</span></strong><span class="zh">——繁琐交给我们，你只管鉴赏</span><span class="en"> — we handle the work, you appreciate</span></li>
+          <li><strong><span class="zh">零交易佣金</span><span class="en">Zero sales commission</span></strong><span class="zh">——成交全归你</span><span class="en"> — you keep every cent</span></li>
         </ul>
-        <p class="card-quote">
-          <span class="zh">收藏不止收与卖，更要有处安放你的眼界与心血。</span>
-          <span class="en">Collecting is more than buying and selling — it is about giving your vision and dedication a place to live.</span>
-        </p>
-        <a class="card-cta" href="https://wa.me/6591888952" target="_blank" rel="noopener noreferrer"><span class="zh">抢占创始藏家席位（剩余 83 席） →</span><span class="en">Claim Founding Collector Seat (83 left) →</span></a>
+        <a class="card-cta" href="https://wa.me/6591888952" target="_blank" rel="noopener noreferrer"><span class="zh">开通私人藏馆 →</span><span class="en">Open My Gallery →</span></a>
       </div>
     </div>
   </section>
@@ -980,25 +581,24 @@ footer {
     <div class="sourcing-section">
       <div class="sourcing-head">
         <div class="eyebrow"><span class="zh">买家委托找货</span><span class="en">Buyer Sourcing</span></div>
-        <h3 class="sourcing-title"><span class="zh">S$120 启动检索，成功介绍后再付 S$200</span><span class="en">Start a Search at S$120 — Pay S$200 Only on a Successful Introduction</span></h3>
-        <p class="sourcing-desc"><span class="zh">人工检索 · 初步筛选 · 联系潜在卖家 · 提供匹配信息。如果确实需要更深度人工寻找，再进入成功介绍。</span><span class="en">Manual search · Initial screening · Contacting potential sellers · Providing matched information. If deeper manual searching is truly needed, it proceeds to a successful introduction.</span></p>
+        <h3 class="sourcing-title"><span class="zh">S$120 启动检索，成功对接再付 S$200</span><span class="en">S$120 to Start — S$200 Only on a Successful Match</span></h3>
+        <p class="sourcing-desc"><span class="zh">人工检索、初步筛选、联系潜在卖家。如需更深度寻找并成功对接，再付 S$200，未成交全额退还。</span><span class="en">Manual search, initial screening, contacting potential sellers. If deeper searching leads to a successful match, pay S$200 — fully refunded if no deal.</span></p>
       </div>
       <div class="sourcing-grid">
         <div class="sourcing-step">
           <div class="step-label"><span class="zh">启动检索</span><span class="en">Start Search</span></div>
           <div class="step-price"><span class="cur">S$</span>120</div>
-          <div class="step-unit"><span class="zh">包含人工检索与初步筛选</span><span class="en">Includes manual search &amp; initial screening</span></div>
-          <div class="step-desc"><span class="zh">联系潜在卖家 · 提供匹配信息</span><span class="en">Contact potential sellers · Provide matches</span></div>
+          <div class="step-unit"><span class="zh">人工检索与初步筛选</span><span class="en">Manual search &amp; screening</span></div>
+          <div class="step-desc"><span class="zh">联系潜在卖家 · 提供匹配信息</span><span class="en">Contact sellers · provide matches</span></div>
         </div>
         <div class="sourcing-divider">→</div>
         <div class="sourcing-step">
-          <div class="step-label"><span class="zh">成功介绍</span><span class="en">Successful Introduction</span></div>
+          <div class="step-label"><span class="zh">成功对接</span><span class="en">Successful Match</span></div>
           <div class="step-price"><span class="cur">S$</span>200</div>
-          <div class="step-unit"><span class="zh">仅在成功对接后支付</span><span class="en">Pay only after a successful match</span></div>
-          <div class="step-desc"><span class="zh">未成交可全额退还</span><span class="en">Fully refundable if no deal</span></div>
+          <div class="step-unit"><span class="zh">仅成功后支付</span><span class="en">Pay only on success</span></div>
+          <div class="step-desc"><span class="zh">未成交全额退还</span><span class="en">Fully refundable if no deal</span></div>
         </div>
       </div>
-      <p class="sourcing-note"><b><span class="zh">说明：</span><span class="en">Note:</span></b><span class="zh">S$120 是启动检索的服务费；只有确实需要更深度人工寻找并成功介绍时，才进入 S$200 的成功介绍费。未成交时 S$200 全额退还。</span><span class="en"> S$120 is the service fee to start the search; the S$200 introduction fee applies only when deeper manual searching leads to a successful introduction. S$200 is fully refunded if no deal is closed.</span></p>
     </div>
   </section>
 
@@ -1013,7 +613,7 @@ footer {
         <div class="row">
           <div class="row-info">
             <div class="row-title"><span class="zh">重点推荐</span><span class="en">Featured Placement</span></div>
-            <div class="row-desc"><span class="zh">首页精选展示 · 优先推荐给藏家 · 专属曝光位，让重点藏品获得更多曝光</span><span class="en">Homepage feature · Priority recommendation · Dedicated slot — more exposure for your key pieces</span></div>
+            <div class="row-desc"><span class="zh">首页精选展示，让重点藏品获得更多曝光</span><span class="en">Homepage feature for your key pieces</span></div>
           </div>
           <div class="row-price">
             <span class="amount">S$129</span>
@@ -1023,7 +623,7 @@ footer {
         <div class="row">
           <div class="row-info">
             <div class="row-title"><span class="zh">在线咨询顾问</span><span class="en">Online Advisory</span></div>
-            <div class="row-desc"><span class="zh">藏品页面预约，PayNow 付款；仅提供参考意见，不出具纸质鉴定证书</span><span class="en">Book from the listing page, pay via PayNow; reference opinions only — no printed authentication certificates</span></div>
+            <div class="row-desc"><span class="zh">藏品页面预约，PayNow 付款；仅提供参考意见</span><span class="en">Book from the listing, pay via PayNow; reference opinions only</span></div>
           </div>
           <div class="row-price">
             <span class="amount">S$88</span>
@@ -1034,7 +634,7 @@ footer {
     </div>
     <div class="note-bar">
       <span aria-hidden="true">※</span>
-      <div><b><span class="zh">说明：</span><span class="en">Note:</span></b><span class="zh">全部价格以新加坡元 SGD 计价，不含消费税。零门槛破冰层为创始藏家免费加入，前 2 件免费发布（1 年有效），含免费修图与保姆式服务。精品扩容层按件每年收费，S$59/件/年（第 3 件起）。塔尖旗舰层私人藏馆为年度订阅，创始藏家特惠价 S$599/年（非创始藏家 S$799/年），把已发布藏品集中展示，平台不收取交易佣金。增值服务全部可选，不强制绑定年度方案。支持 PayNow 或银行转账付款。委托找货的信息对接费未成交全额退还；在线咨询顾问完成顾问匹配并发送会议链接后不予退款。平台不处理买卖双方之间藏品交易货款。</span><span class="en"> All prices are in Singapore Dollars (SGD), GST excluded. The Zero-barrier tier is free to join for founding collectors, with the first 2 listings free (valid 1 year), including free retouching and concierge service. The Pay-as-you-go tier is charged per item per year at S$59/item/year (from your 3rd item). The Flagship Private Gallery is an annual subscription at the founding collector special price of S$599/year (regular S$799/year), bringing all listed items together; the platform charges no sales commission. All add-on services are optional and never bundled with the annual plan. Payment via PayNow or bank transfer. The sourcing introduction fee is fully refunded if no deal is closed; online advisory fees are non-refundable once the consultant is matched and the meeting link has been sent. The platform does not handle any item payment between buyers and sellers.</span></div>
+      <div><b><span class="zh">说明：</span><span class="en">Note:</span></b><span class="zh">价格以新加坡元 SGD 计价，不含消费税。支持 PayNow 或银行转账。平台不处理买卖双方货款，不抽取交易佣金。</span><span class="en"> Prices in SGD, GST excluded. PayNow or bank transfer. The platform handles no payments between buyers and sellers and charges no sales commission.</span></div>
     </div>
   </section>
 
@@ -1042,21 +642,21 @@ footer {
   <section id="faq">
     <div class="sec-head">
       <div class="eyebrow"><span class="zh">常见问题</span><span class="en">FAQ</span></div>
-      <h2 class="sec-title"><span class="zh">收费相关疑问解答</span><span class="en">Pricing Questions, Answered</span></h2>
+      <h2 class="sec-title"><span class="zh">你可能想知道</span><span class="en">Good to Know</span></h2>
       <div class="sec-divider" aria-hidden="true"><span></span></div>
     </div>
     <div class="frame">
       <div class="faq-item">
-        <div class="faq-q"><span class="zh">三层阶梯式变现模型是什么？</span><span class="en">What is the three-tier ladder model?</span></div>
-        <div class="faq-a"><span class="zh"><b>零门槛破冰</b>：创始藏家前 2 件藏品完全免费上架，零负担搭建高品味官网展厅。<b>精品扩容</b>：第 3 件藏品起，S$59/件/年，适合手里有少量精品、灵活出货的中小行家。<b>塔尖旗舰</b>：创始藏家特惠 S$599/年（非创始藏家 S$799/年），解锁尊贵大气的"私人藏馆"旗舰身份与极致排版。三层可独立选择，也可以叠加使用。</span><span class="en"><b>Zero-barrier Entry</b>: founding collectors list their first 2 items completely free, building a refined gallery at zero cost. <b>Pay as You Go</b>: from the 3rd item at S$59/item/year, suited to small-to-mid dealers with select pieces. <b>Flagship</b>: founding collector special S$599/year (regular S$799/year) unlocks the prestigious "Private Gallery" identity with refined layout. The three tiers can be chosen independently or combined.</span></div>
+        <div class="faq-q"><span class="zh">S$599 的私人藏馆，值不值？</span><span class="en">Is the S$599 Private Gallery worth it?</span></div>
+        <div class="faq-a"><span class="zh">这不只是存储图片——是你在收藏圈的身份名片。按年折算每天约 S$1.6，换来独立藏家主页、首页曝光、人工代上架和 0% 佣金。如果藏品较多、想建立个人收藏形象，它是最值的选择；偶尔发布单件，选 S$59 即可。</span><span class="en">It is more than image storage — it is your identity card in the collecting world. About S$1.6/day for a dedicated homepage, homepage exposure, concierge listing and 0% commission. Worth it if you have a real collection and want a personal brand. For occasional single listings, S$59 is fine.</span></div>
       </div>
       <div class="faq-item">
-        <div class="faq-q"><span class="zh">S$599 的私人藏馆年费，值得投入吗？</span><span class="en">Is the S$599 annual fee for the Private Gallery worth it?</span></div>
-        <div class="faq-a"><span class="zh">这不是简单的图片存储费用，是投资您在收藏圈的个人声誉与数字阵地。创始藏家享受特惠价 <b>S$599</b>（非创始藏家 S$799），按一年折算每天约 S$1.6，换来独立藏家主页、圈层曝光、人工管家协助以及 0% 佣金，适合有一定藏品、希望建立个人收藏形象的资深藏家。如果只是偶尔单件发布藏品，精品扩容层的 S$59 单件刊登会更适合。</span><span class="en">This is not simply an image storage fee — it is an investment in your personal reputation and digital presence in the collecting world. Founding collectors enjoy the special price of <b>S$599</b> (regular S$799), about S$1.6/day, for a dedicated collector homepage, community exposure, concierge assistance and 0% commission. It suits established collectors who wish to build a personal collection identity. If you only list items occasionally, the S$59 single listing is a better fit.</span></div>
+        <div class="faq-q"><span class="zh">创始藏家有什么特别？</span><span class="en">What is special about founding collectors?</span></div>
+        <div class="faq-a"><span class="zh">前 2 件免费上架（含精修与代上架）、私人藏馆特惠价 S$599（常规 S$799）、专属创始勋章、功能共创特权。点击右上角"申请创始藏家"或加 <b>9188 8952</b>，免注册，WhatsApp 一键完成。</span><span class="en">First 2 listings free (with retouching), Private Gallery at S$599 (regular S$799), exclusive founding badge, and co-create privileges. Tap "Apply Now" above or add <b>9188 8952</b> — no sign-up, one tap on WhatsApp.</span></div>
       </div>
       <div class="faq-item">
-        <div class="faq-q"><span class="zh">创始藏家权益有哪些？如何申请？</span><span class="en">What are the founding collector benefits and how to apply?</span></div>
-        <div class="faq-a"><span class="zh"><b>权益</b>：专属尊贵勋章、参与平台功能共创的特权、"创始"身份永不褪色、前 2 件藏品完全免费上架（1 年有效，含免费修图与保姆式服务）、私人藏馆续费特惠价、新功能优先体验、专属曝光机会。<b>如何申请</b>：点击页面顶部"申请创始藏家"按钮或底部绿色 WhatsApp 按钮，跳转 WhatsApp 一键授权（免注册），或直接添加 <b>9188 8952</b>。名额以申请审核通过时间排序，<b>截至 2026 年 10 月 1 日，已有五位藏家入驻，实时剩余席位：83。</b></span><span class="en"><b>Benefits</b>: exclusive medal, co-create privilege for platform features, a "founding" status that never fades, first 2 listings completely free (valid 1 year, with free retouching and concierge service), Private Gallery renewal discount, early access to new features, and dedicated exposure opportunities. <b>How to apply</b>: tap the "Apply Now" button at the top or the green WhatsApp button below to authorize via WhatsApp in one tap (no sign-up), or add <b>9188 8952</b> directly. Seats are counted in the order applications are approved. <b>As of 1 October 2026, five collectors have joined — seats remaining in real time: 83.</b></span></div>
+        <div class="faq-q"><span class="zh">平台如何收费？</span><span class="en">How does the platform charge?</span></div>
+        <div class="faq-a"><span class="zh">发布端：免费 / S$59 每件 / S$599 每年，三选一或叠加。增值服务（首页推荐、在线咨询、委托找货）全部可选，不强制绑定。平台不参与买卖双方货款结算。</span><span class="en">Selling side: Free / S$59 per item / S$599 yearly — pick one or combine. Add-ons (featured placement, advisory, sourcing) are all optional. The platform never handles buyer-seller payments.</span></div>
       </div>
     </div>
   </section>
@@ -1129,7 +729,7 @@ footer {
 .gd-install-modal { position: fixed; inset: 0; z-index: 9999; display: none; align-items: center; justify-content: center; background: rgba(0,0,0,.45); padding: 1.2rem; }
 .gd-install-modal.open { display: flex; }
 .gd-install-card { background: #fff; border-radius: var(--card-radius); max-width: 350px; width: 100%; padding: 1.6rem 1.4rem 1.2rem; text-align: center; box-shadow: 0 18px 50px rgba(0,0,0,.25); position: relative; }
-.gd-install-close { position: absolute; top: .5rem; right: .7rem; border: 0; background: none; font-size: 1.4rem; color: #999; cursor: pointer; padding: .3rem; line-height: 1; }
+.gd-install-close { position: absolute; top: .5rem; right: .7rem; border: 0; background: none; font-size: 1.4rem; color: #999; cursor: pointer; padding: .5rem; min-width: 44px; min-height: 44px; display: inline-flex; align-items: center; justify-content: center; line-height: 1; }
 .gd-install-title { font-size: 1.08rem; font-weight: 700; color: #3d2b1f; margin: .2rem 0 1rem; }
 .gd-install-steps { text-align: left; margin: 0 auto 1rem; max-width: 290px; }
 .gd-install-step { display: flex; align-items: flex-start; gap: .6rem; padding: .5rem 0; color: #5a4636; font-size: .9rem; line-height: 1.5; }

@@ -843,7 +843,7 @@ footer {
     
     <h3><span class="zh">帮我刊登</span><span class="en">List for me</span></h3>
     
-    <div class="publish-desc"><span class="zh">古董圈为您完成：图片优化 · 标题 · 描述 · 标签 · 发布</span><span class="en">Gudong handles: Image Optimization · Title · Description · Tags · Publishing</span></div>
+    <div class="publish-desc"><span class="zh">古董圈可为您完成：图片优化 · 标题 · 描述 · 标签 · 发布</span><span class="en">Gudong handles: Image Optimization · Title · Description · Tags · Publishing</span></div>
 
     <!-- 服务清单 -->
     <ul class="service-list">
@@ -887,8 +887,8 @@ footer {
     <div class="warning-box">
       <span>⚠️</span>
       <div>
-        <span class="zh">温馨提示：本套餐包含图片精修（光影、调色、背景、清晰度）与标题、描述、标签优化。您需要确认所有精修图片的原图。不包含实物鉴定、估值、交易撮合、卖家售假赔偿、标题与描述中您提供资料的真实性，平台不作负责。</span>
-        <span class="en">Note: This package includes image retouching (light, color, background, clarity) and title, description, tag optimization. You must confirm the original images. It does not include authentication, valuation, transaction matching, compensation for counterfeit items, or the accuracy of information you provide in titles and descriptions.</span>
+        <span class="zh">温馨提示：本套餐包含图片精修（尺寸、背景、清晰度）与标题、描述、标签优化。您需要确认所有精修图片的原图。不包含实物鉴定、估值、交易撮合、卖家售假赔偿、标题与描述中您提供资料的真实性，平台不作负责。</span>
+        <span class="en">Note: This package includes image retouching (size, background, clarity) and title, description, tag optimization. You must confirm the original images. It does not include authentication, valuation, transaction matching, compensation for counterfeit items, or the accuracy of information you provide in titles and descriptions.</span>
       </div>
     </div>
 
@@ -896,10 +896,10 @@ footer {
     <div class="workflow">
       <p><span class="zh">我们怎么工作：</span><span class="en">How We Work:</span></p>
       <ol>
-        <li><span class="zh"><strong>1.</strong> 填写表单 → 提交后跳转 WhatsApp</span><span class="en"><strong>1.</strong> Fill form → Redirect to WhatsApp</span></li>
-        <li><span class="zh"><strong>2.</strong> 客服通过 WhatsApp 发送 PayNow 付款二维码（S$59 / 件）</span><span class="en"><strong>2.</strong> Customer service sends PayNow QR code via WhatsApp (S$59 / item)</span></li>
-        <li><span class="zh"><strong>3.</strong> 完成付款后，把 PayNow 付款截图发回 WhatsApp</span><span class="en"><strong>3.</strong> After payment, send the PayNow screenshot back to WhatsApp</span></li>
-        <li><span class="zh"><strong>4.</strong> 提交后 3 个工作日内完成人工服务并发布</span><span class="en"><strong>4.</strong> Manual service and publishing completed within 3 working days</span></li>
+        <li><span class="zh"><strong></strong> 填写表单 → 提交后跳转 WhatsApp</span><span class="en"><strong></strong> Fill form → Redirect to WhatsApp</span></li>
+        <li><span class="zh"><strong></strong> 客服通过 WhatsApp 发送 PayNow 付款二维码（S$59 / 件）</span><span class="en"><strong></strong> Customer service sends PayNow QR code via WhatsApp (S$59 / item)</span></li>
+        <li><span class="zh"><strong></strong> 完成付款后，把 PayNow 付款截图发回 WhatsApp</span><span class="en"><strong></strong> After payment, send the PayNow screenshot back to WhatsApp</span></li>
+        <li><span class="zh"><strong></strong> 提交后 3 个工作日内完成人工服务并发布</span><span class="en"><strong></strong> Manual service and publishing completed within 3 working days</span></li>
       </ol>
     </div>
 
@@ -928,13 +928,13 @@ footer {
     </div>
 
     <div class="publish-form-group">
-      <label><span class="zh">备注（可选，写下你的基础需求：仅限光影、调色、构图、背景清理）</span><span class="en">Notes (Optional: light, color, composition, background cleanup)</span></label>
-      <textarea class="publish-textarea" id="serviceNotes" placeholder="希望重点优化哪些？"></textarea>
+      <label><span class="zh">备注（可选，写下您的藏品的基本信息及修图要求（仅限尺寸、背景，清晰度）</span><span class="en">Notes (Optional: Enter basic information about your artefact and photo‑editing requirements (size, background and clarity only)</span></label>
+      <textarea class="publish-textarea" id="serviceNotes" placeholder="希望平台为您完成哪些？"></textarea>
     </div>
 
     <!-- 底部提交按钮 -->
     <button class="submit-btn" onclick="submitServiceForm()">
-      <span class="zh">提交精修申请，跳转WhatsApp获取PayNow →</span>
+      <span class="zh">提交刊登申请，跳转WhatsApp获取PayNow →</span>
       <span class="en">Submit & Go to WhatsApp for PayNow →</span>
     </button>
   </div>
@@ -978,7 +978,7 @@ footer {
       return;
     }
     
-    var message = `【图片精修申请 - 古董圈】\nSeller ID：${sellerId}\nWhatsApp：${wa}\n备注：${notes || '无'}\n\n我想申请图片精修服务（S$59/件），请发送PayNow付款二维码。`;
+    var message = `【图片精修申请 - 古董圈】\nSeller ID：${sellerId}\nWhatsApp：${wa}\n备注：${notes || '无'}\n\n帮我刊登（S$59/件），请发送PayNow付款二维码。`;
     var url = `https://wa.me/6591888952?text=${encodeURIComponent(message)}`;
     
     window.open(url, '_blank');

@@ -1,14 +1,15 @@
 /* 古董圈 Gudong · Service Worker
- * 2026-10-3：v7 → v8
- * - 配合本轮改动（pricing.html 全页中英双语、FAQ 精简、
- *   页脚与全站统一、锚点 id 对齐 seller-services/buyer-services/price-table）提升缓存版本号
+ * 2026-10-4：v8 → v9
+ * - 配合首页改版（删除公告栏与 Hero 数据行、区块改名「今日发现/刚刚上新/
+ *   按类别逛藏品」、删除按价位寻宝、三卡改版、FAQ 删一条、卖家招募 CTA 改文案、
+ *   Header 改轻量文字按钮）提升缓存版本号
  * - 注意：fetch 策略是「网络优先」，本身不会卡住旧内容；
- *         升版主要用于 activate 时清掉 v6 的历史缓存条目
+ *         升版主要用于 activate 时清掉历史缓存条目
  * - v6 记录：导航链接统一为绝对路径；预缓存改为逐个 add（单个 404 不拖垮 install）；
  *         /api/* 网络优先不缓存；跨域放行；导航离线回退缓存页再回退首页
  */
 
-const CACHE_NAME = 'antique-collection-v8';
+const CACHE_NAME = 'antique-collection-v9';
 
 // 预缓存清单：核心页面 + 常用图标 + 占位图
 // 注意：改用逐个 cache.add，单个 404 不会导致整个 install 失败

@@ -43,9 +43,7 @@
             { "@type": "Question", "name": "怎么联系卖家？",
               "acceptedAnswer": { "@type": "Answer", "text": "在藏品详情页可直接看到卖家提供的联系方式，买卖双方直接沟通，平台不经手交易。" } },
             { "@type": "Question", "name": "藏品价格是平台定的吗？",
-              "acceptedAnswer": { "@type": "Answer", "text": "不是。所有价格由卖家自行设定，平台仅提供展示。部分藏品为「私聊询价」，需直接联系卖家获取报价。" } },
-            { "@type": "Question", "name": "发布我的藏品收费吗？",
-              "acceptedAnswer": { "@type": "Answer", "text": "创始藏家限量 88 席免费入驻，前 2 件藏品免费刊登。后续刊登规则与费用请见服务价格页。" } }
+              "acceptedAnswer": { "@type": "Answer", "text": "不是。所有价格由卖家自行设定，平台仅提供展示。部分藏品为「私聊询价」，需直接联系卖家获取报价。" } }
           ]
         }
       ]
@@ -127,31 +125,6 @@
         html { scroll-behavior: smooth; }
         body { background: var(--color-bg); color: var(--color-text); line-height: 1.65; }
 
-        /* ---------- 公告栏 ---------- */
-        .announce-bar {
-        background: var(--color-primary-light);
-        color: var(--color-primary-dark);
-        font-size: .8rem;
-        text-align: center;
-        padding: .55rem 2.6rem;
-        position: relative;
-        line-height: 1.4;
-        }
-        .announce-close {
-        position: absolute;
-        right: .9rem;
-        top: 50%;
-        transform: translateY(-50%);
-        background: none;
-        border: none;
-        font-size: 1.05rem;
-        line-height: 1;
-        color: var(--color-text-secondary);
-        cursor: pointer;
-        padding: .2rem;
-        }
-        .announce-close:hover { color: var(--color-primary); }
-
         /* ---------- Header ---------- */
         header {
             background: rgba(255,255,255,.96); backdrop-filter: blur(6px);
@@ -209,6 +182,14 @@
             text-decoration: none; white-space: nowrap; transition: .3s cubic-bezier(.25,.1,.25,1);
         }
         .btn-publish:hover { background: var(--color-primary-dark); }
+        .btn-publish-text {
+            display: inline-flex; align-items: center;
+            background: transparent; color: var(--color-text-secondary);
+            padding: .45rem .5rem; font-size: .88rem; font-weight: 500;
+            text-decoration: none; white-space: nowrap;
+            transition: .3s cubic-bezier(.25,.1,.25,1);
+        }
+        .btn-publish-text:hover { color: var(--color-primary); }
         .lang-btn {
             border: 1px solid var(--color-border); background: transparent;
             color: var(--color-text-secondary); padding: .3rem .68rem;
@@ -341,8 +322,6 @@
         }
         .search-tip { font-size: .78rem; color: var(--color-text-muted); text-align: center; margin-bottom: 1rem; }
         .hero-stats { display: flex; align-items: center; justify-content: center; gap: .55rem; flex-wrap: wrap; font-size: .82rem; color: var(--color-text-secondary); margin-bottom: 1.6rem; }
-        .hero-stats .stat-item b { color: var(--color-primary-dark); font-size: 1.1rem; font-family: var(--font-serif); font-weight: 600; }
-        .hero-stats .stat-sep { color: var(--color-text-muted); }
         .search-result-tip {
             font-size: .82rem; color: var(--color-primary); text-align: center;
             margin: -.8rem 0 1.6rem; font-weight: 600;
@@ -458,9 +437,17 @@
         .section-head2 .sub-line { font-size: .85rem; color: var(--color-text-secondary); margin-top: .25rem; display: block; }
         .section-head2 .more { font-size: .85rem; color: var(--color-text-secondary); text-decoration: none; white-space: nowrap; }
         .section-head2 .more:hover { color: var(--color-primary); }
+        .more-btn {
+            display: inline-flex; align-items: center;
+            border: 1px solid var(--color-border); background: var(--color-white);
+            color: var(--color-text-secondary); font-size: .85rem; font-weight: 500;
+            padding: .5rem 1.25rem; border-radius: 999px; text-decoration: none;
+            transition: .3s cubic-bezier(.25,.1,.25,1);
+        }
+        .more-btn:hover { border-color: var(--color-gold); color: var(--color-primary); background: var(--color-gold-soft); }
         .section-note { font-size: .78rem; color: var(--color-text-muted); line-height: 1.6; margin-top: -.8rem; margin-bottom: 2rem; }
 
-        /* ---------- 今日好货 ---------- */
+        /* ---------- 今日发现 ---------- */
         .finds-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.8rem; }
         .finds-card { text-decoration: none; color: inherit; display: block; }
         .finds-image {
@@ -499,7 +486,7 @@
         }
         .price-tag--enquiry { color: var(--color-bronze-muted); border-color: var(--color-bronze-muted); }
 
-        /* ---------- 新上架好货 ---------- */
+        /* ---------- 刚刚上新 ---------- */
         .goods-list { display: grid; grid-template-columns: repeat(6, 1fr); gap: 1.2rem; margin-top: .5rem; }
         .goods-list .item-card { aspect-ratio: auto; min-width: 0; min-height: 0; height: auto; }
         .goods-list .item-card img { width: 100%; height: auto; aspect-ratio: 1 / 1; max-height: none; object-fit: cover; }
@@ -550,7 +537,7 @@
         .gd-debug .warn { color: #E6C46B; }
         .gd-debug .bad { color: #F0A090; }
 
-        /* ---------- 寻宝地图 ---------- */
+        /* ---------- 按类别逛藏品 ---------- */
         .browse-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1.1rem; }
         .browse-card {
             position: relative; display: flex; flex-direction: column; gap: .35rem;
@@ -564,16 +551,6 @@
         .browse-card .cat-en { font-size: .74rem; color: var(--color-text-muted); letter-spacing: .04em; }
         .browse-card .cat-stats { font-size: .78rem; color: var(--color-text-secondary); margin-top: .3rem; }
         .browse-card .cat-range { font-size: .74rem; color: var(--color-bronze-muted); }
-
-        .price-hunt { margin-top: 1.4rem; }
-        .price-hunt-title { font-size: .85rem; font-weight: 700; color: var(--color-text-secondary); margin-bottom: .6rem; }
-        .price-hunt-list { display: flex; flex-wrap: wrap; gap: .5rem; }
-        .price-hunt-btn {
-            border: 1px solid var(--color-border); background: var(--color-white);
-            color: var(--color-text-secondary); font-size: .8rem; padding: .42rem .95rem;
-            border-radius: 999px; text-decoration: none; transition: .3s cubic-bezier(.25,.1,.25,1);
-        }
-        .price-hunt-btn:hover { border-color: var(--color-gold); color: var(--color-gold); background: var(--color-gold-soft); }
 
         /* ---------- 情报/知识 ---------- */
         .insight-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.3rem; }
@@ -601,6 +578,7 @@
         }
         .how-title { font-size: 1.05rem; font-weight: 600; color: var(--color-text); margin-bottom: .4rem; line-height: 1.35; font-family: var(--font-serif); }
         .how-desc { font-size: .82rem; color: var(--color-text-secondary); line-height: 1.55; }
+        .how-sub { font-size: .85rem; color: var(--color-text-secondary); margin: .35rem 0 0; letter-spacing: .02em; }
 
         /* ---------- 卖家招募 ---------- */
         .seller-cta {
@@ -611,7 +589,6 @@
         .seller-cta .title { font-size: 1.4rem; font-weight: 600; color: var(--color-text); margin-bottom: .55rem; font-family: var(--font-serif); }
         .seller-cta .desc { font-size: .9rem; color: var(--color-text-secondary); margin-bottom: 1.3rem; line-height: 1.65; }
         .seller-cta .btn-publish { font-size: .92rem; padding: .68rem 1.7rem; }
-        .seller-cta .cta-note { font-size: .78rem; color: var(--color-text-muted); margin-top: .9rem; }
         /* 实时剩余席位 */
         .seats-line {
             display: inline-flex; align-items: center; gap: .5rem;
@@ -715,12 +692,6 @@
     </style>
 </head>
 <body data-lang="zh">
-    <div class="announce-bar" id="announceBar">
-        <span class="zh">创始卖家福利｜限量 88 席免费入驻，前 2 件藏品信息免费刊登。</span>
-        <span class="en">Founder-Dealer Benefit | Limited 88 seats · Free to join · First 2 listings free.</span>
-        <button class="announce-close" onclick="closeAnnounce()" aria-label="close">×</button>
-    </div>
-
     <header>
         <div style="display:flex; align-items:center; gap:.9rem;">
             <button class="menu-toggle" onclick="openSidebar()" aria-label="menu" aria-expanded="false" id="menuToggle">☰</button>
@@ -734,8 +705,8 @@
         </div>
 
         <div class="header-right">
-            <a href="pricing.html#seller-services" class="btn-publish">
-                <span class="zh">发布我的藏品</span><span class="en">Publish My Item</span>
+            <a href="pricing.html#seller-services" class="btn-publish-text">
+                <span class="zh">发布藏品</span><span class="en">Publish</span>
             </a>
             <button class="lang-btn" onclick="toggleLang()">EN</button>
         </div>
@@ -750,8 +721,8 @@
         <nav class="sidebar-nav">
             <a href="#hero" class="sidebar-link active" onclick="closeSidebar()"><span class="zh">首页</span><span class="en">Home</span></a>
             <a href="#daily-intel" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 今日捡漏</span><span class="en">· Daily Radar</span></a>
-            <a href="#today-finds" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 今日好货</span><span class="en">· Today's Picks</span></a>
-            <a href="#new-listings" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 新上架好货</span><span class="en">· New Arrivals</span></a>
+            <a href="#today-finds" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 今日发现</span><span class="en">· Today's Finds</span></a>
+            <a href="#new-listings" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 刚刚上新</span><span class="en">· Just Listed</span></a>
             <a href="collection.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">藏品库</span><span class="en">Collection</span></a>
             <a href="categories/porcelain.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 瓷器</span><span class="en">· Porcelain</span></a>
             <a href="categories/jade.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 玉器</span><span class="en">· Jade</span></a>
@@ -781,8 +752,8 @@
                     <span class="en">Direct from Singapore collectors · Porcelain · Jade · Coins · Paintings · Misc</span>
                 </div>
                 <div class="hero-guide">
-                    <span class="zh">搜关键词找藏品，或往下逛「今日好货」与「新上架」</span>
-                    <span class="en">Search by keyword, or scroll for Today's Picks &amp; New Arrivals</span>
+                    <span class="zh">搜关键词找藏品，或往下逛「今日发现」与「刚刚上新」</span>
+                    <span class="en">Search by keyword, or scroll for Today's Finds &amp; Just Listed</span>
                 </div>
                 <a href="#new-listings" class="hero-btn"><span class="zh">开始寻宝</span><span class="en">Start Hunting</span></a>
 
@@ -808,23 +779,19 @@
                 <div class="search-tip zh">瓷器 · 玉器 · 钱币 · 书画 · 杂项</div>
                 <div class="search-tip en">Porcelain · Jade · Coins · Paintings · Miscellaneous</div>
                 <div class="hero-stats">
-                    <span class="stat-item"><b>5</b><span class="zh"> 位藏家入驻</span><span class="en"> collectors</span></span>
-                    <span class="stat-sep">·</span>
-                    <span class="stat-item"><b>15</b><span class="zh"> 件藏品在线</span><span class="en"> items live</span></span>
-                    <span class="stat-sep">·</span>
                     <span class="stat-item zh">新加坡本地直供</span><span class="stat-item en">Direct from SG</span>
                 </div>
             </div>
         </section>
 
-        <!-- ============ 今日好货 ============ -->
+        <!-- ============ 今日发现 ============ -->
         <section id="today-finds">
             <div class="section-head2">
                 <div>
-                    <span class="title zh">今日好货</span>
-                    <span class="title en">Today's Picks</span>
-                    <span class="sub-line zh">今日有宝 · 人工精选</span>
-                    <span class="sub-line en">Handpicked today · Editor selected</span>
+                    <span class="title zh">今日发现</span>
+                    <span class="title en">Today's Finds</span>
+                    <span class="sub-line zh">今天值得看看的一些藏品</span>
+                    <span class="sub-line en">A few pieces worth a look today</span>
                 </div>
             </div>
             <p class="section-note zh">为本平台编辑精选或藏家自荐，仅供信息参考，不代表平台鉴定或保真。</p>
@@ -832,12 +799,14 @@
             <div class="finds-grid" id="todayFindsGrid"></div>
         </section>
 
-        <!-- ============ 新上架好货 ============ -->
+        <!-- ============ 刚刚上新 ============ -->
         <section id="new-listings">
             <div class="section-head2">
                 <div>
-                    <span class="title zh">新上架好货</span>
-                    <span class="title en">New Arrivals</span>
+                    <span class="title zh">刚刚上新</span>
+                    <span class="title en">Just Listed</span>
+                    <span class="sub-line zh">最新发布的藏品</span>
+                    <span class="sub-line en">The latest listings</span>
                 </div>
                 <a href="collection.html" class="more zh">查看全部 →</a>
                 <a href="collection.html" class="more en">View All →</a>
@@ -847,13 +816,13 @@
             <div id="noResultEn" class="no-result en" style="display:none;">No items found</div>
         </section>
 
-        <!-- ============ 寻宝地图 ============ -->
+        <!-- ============ 按类别逛藏品 ============ -->
         <section id="browse">
             <div class="section-head2">
                 <div>
-                    <span class="title zh">🗺️ 寻宝地图</span><span class="title en">🗺️ Treasure Map</span>
-                    <span class="sub-line zh">藏品库导览：按类别或价位，找到属于你的那件</span>
-                    <span class="sub-line en">Your way into the Collection — browse by category or budget</span>
+                    <span class="title zh">按类别逛藏品</span><span class="title en">Browse by Category</span>
+                    <span class="sub-line zh">从你喜欢的类别开始继续逛</span>
+                    <span class="sub-line en">Start from the categories you love</span>
                 </div>
                 <a href="collection.html" class="more zh">查看完整藏品库 →</a>
                 <a href="collection.html" class="more en">View Full Collection →</a>
@@ -903,20 +872,9 @@
                 </a>
             </div>
 
-            <div class="price-hunt">
-                <div class="price-hunt-title zh">按价位寻宝</div>
-                <div class="price-hunt-title en">Hunt by Budget</div>
-                <div class="price-hunt-list">
-                    <a href="collection.html?max=100" class="price-hunt-btn">S$100 以下</a>
-                    <a href="collection.html?min=100&max=500" class="price-hunt-btn">S$100 – 500</a>
-                    <a href="collection.html?min=500&max=2000" class="price-hunt-btn">S$500 – 2,000</a>
-                    <a href="collection.html?min=2000" class="price-hunt-btn">S$2,000 以上</a>
-                </div>
-            </div>
-
             <div style="margin-top:1.4rem;">
-                <a href="sellers/index.html" class="more zh">藏家展馆 →</a>
-                <a href="sellers/index.html" class="more en">Collector Gallery →</a>
+                <a href="sellers/index.html" class="more-btn zh">藏家展馆 →</a>
+                <a href="sellers/index.html" class="more-btn en">Collector Gallery →</a>
             </div>
         </section>
 
@@ -981,32 +939,34 @@
             </div>
         </section>
 
-        <!-- ============ 在古董圈放心逛 ============ -->
+        <!-- ============ 为什么在古董圈找藏品 ============ -->
         <section id="services">
             <div style="text-align:center;max-width:1080px;margin:0 auto;">
-                <h2 class="zh">在古董圈，你可以这样放心逛</h2>
-                <h2 class="en">Browse with confidence on Gudong</h2>
+                <h2 class="zh">为什么在古董圈找藏品？</h2>
+                <h2 class="en">Why look for pieces on Gudong?</h2>
+                <p class="how-sub zh">信息展示 · 行情参考 · 直接联系卖家</p>
+                <p class="how-sub en">Information display · Market reference · Direct seller contact</p>
                 <div class="how-grid">
                     <div class="how-card">
                         <div class="how-num">01</div>
-                        <div class="how-title zh">信息透明</div>
-                        <div class="how-title en">Transparency</div>
-                        <div class="how-desc zh">每件藏品公开来源说明与卖家自述，不做美化包装。</div>
-                        <div class="how-desc en">Each listing exposes source notes and seller statements as-is.</div>
+                        <div class="how-title zh">看藏品</div>
+                        <div class="how-title en">Browse Items</div>
+                        <div class="how-desc zh">先浏览，再决定是否深入了解。</div>
+                        <div class="how-desc en">Browse first, then decide what interests you.</div>
                     </div>
                     <div class="how-card">
                         <div class="how-num">02</div>
-                        <div class="how-title zh">直接联系卖家</div>
-                        <div class="how-title en">Direct Seller Contact</div>
-                        <div class="how-desc zh">买卖双方直接沟通，价格透明，无中间商加价。</div>
-                        <div class="how-desc en">Buyers and sellers deal directly — transparent pricing, no middleman markup.</div>
+                        <div class="how-title zh">联系卖家</div>
+                        <div class="how-title en">Contact the Seller</div>
+                        <div class="how-desc zh">感兴趣的藏品，可直接联系卖家。</div>
+                        <div class="how-desc en">Contact the seller directly for items you like.</div>
                     </div>
                     <div class="how-card">
                         <div class="how-num">03</div>
-                        <div class="how-title zh">行情参考</div>
-                        <div class="how-title en">Market Intel</div>
-                        <div class="how-desc zh">提供同类对比与行情观察，帮你判断价格是否合理。</div>
-                        <div class="how-desc en">Comparable items and market notes to help you judge pricing.</div>
+                        <div class="how-title zh">自己判断</div>
+                        <div class="how-title en">Judge for Yourself</div>
+                        <div class="how-desc zh">平台不参与鉴定、估价或交易。</div>
+                        <div class="how-desc en">Gudong does not authenticate, value or handle transactions.</div>
                     </div>
                 </div>
             </div>
@@ -1040,26 +1000,19 @@
                     <div class="faq-answer zh">可以。平台可应要求引荐专业人士提供个人意见，仅供参考，但不构成真伪鉴定。是否采纳由您决定，平台不介入、不担保；相关看法由您与专业人士直接沟通。</div>
                     <div class="faq-answer en">Yes. The platform may, upon request, introduce a professional to provide personal opinions for reference only. These opinions do not constitute an authenticity appraisal. It is up to you to decide whether to accept them. The platform does not intervene or offer any guarantees. All views are discussed directly between you and the professional.</div>
                 </details>
-                <details class="faq-item">
-                    <summary><span class="zh">发布我的藏品收费吗？</span><span class="en">Is listing free?</span></summary>
-                    <div class="faq-answer zh">创始藏家限量 88 席免费入驻，前 2 件藏品免费刊登。后续刊登规则与费用请见<a href="pricing.html">服务价格页</a>。</div>
-                    <div class="faq-answer en">Founding collectors (limited to 88) join free, with the first 2 listings free. See the <a href="pricing.html">pricing page</a> for subsequent listing rules and fees.</div>
-                </details>
             </div>
         </section>
 
         <!-- ============ 卖家招募 ============ -->
         <section id="seller-cta">
             <div class="seller-cta">
-                <div class="title zh">📣 创始藏家招募 · 限量 88 席</div>
-                <div class="title en">📣 Founding Collectors · Limited to 88</div>
-                <div class="desc zh">前 2 件藏品免费刊登 · 永久保留藏家主页 · 直接对接本地买家</div>
-                <div class="desc en">First 2 listings free · Permanent collector page · Direct access to local buyers</div>
+                <div class="title zh">你也有藏品想展示？</div>
+                <div class="title en">Got pieces you'd like to show?</div>
+                <div class="desc zh">让更多收藏者看到你的藏品。创始藏家 · 2026 现开放限量席位。</div>
+                <div class="desc en">Show your pieces to more collectors. Founding Collectors · 2026 · limited seats now open.</div>
                 <a href="pricing.html#seller-services" class="btn-publish">
-                    <span class="zh">立即入驻 →</span><span class="en">Join Now →</span>
+                    <span class="zh">发布我的藏品 →</span><span class="en">Publish My Item →</span>
                 </a>
-                <div class="cta-note zh">名额有限，按申请顺序审核。</div>
-                <div class="cta-note en">Limited seats, reviewed in application order.</div>
                 <div class="seats-line" id="seatsLine" role="status" aria-live="polite">
                     <span class="seats-label zh"><span class="dot"></span>实时剩余席位：<span class="seats-num" id="seatsNum">—</span><span class="seats-total">/ 88 席</span></span>
                     <span class="seats-label en"><span class="dot"></span>Seats remaining: <span class="seats-num" id="seatsNumEn">—</span><span class="seats-total">/ 88</span></span>
@@ -1131,11 +1084,6 @@
             document.body.style.overflow = '';
             var t = document.getElementById('menuToggle');
             if (t) t.setAttribute('aria-expanded', 'false');
-        }
-        function closeAnnounce() {
-            var b = document.getElementById('announceBar');
-            if (b) b.style.display = 'none';
-            try { localStorage.setItem('announceClosed', 'yes'); } catch (e) {}
         }
         function toggleLang() {
             currentLang = currentLang === 'zh' ? 'en' : 'zh';
@@ -1249,9 +1197,6 @@
         })();
 
         updateSearchPlaceholder();
-        if(localStorage.getItem('announceClosed') === 'yes'){
-            document.getElementById('announceBar').style.display = 'none';
-        }
 
         (function bindSearch(){
             const el = document.getElementById('searchInput');
@@ -1755,7 +1700,7 @@
             '接口：' + esc(diag.endpoint) + '\n' +
             '接口响应：' + st(diag.proxy) + '　快照响应：' + st(diag.snapshot) + '\n' +
             '响应字段：' + esc(diag.payloadKeys.join(', ') || '—') + '\n' +
-            '今日好货 ' + (c.todayFinds ?? '—') + ' · 新上架好货 ' + (c.newListing ?? '—') +
+            '今日发现 ' + (c.todayFinds ?? '—') + ' · 刚刚上新 ' + (c.newListing ?? '—') +
             ' · 情报 ' + (diag.intelCount ?? '—') +
             (diag.skipped ? ' · <span class="warn">已跳过空行/缺标题的行 ' + diag.skipped + '</span>' : '') + '\n' +
             '首条记录字段：' + esc(diag.sampleKeys.join(', ') || '—') +

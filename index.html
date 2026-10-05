@@ -68,19 +68,19 @@
     <meta name="twitter:description" content="Singapore-based discovery platform for Chinese antiques and collectibles.">
     <meta name="twitter:image" content="og-cover.png">
 
-    <link rel="manifest" href="manifest.json">
+    <link rel="manifest" href="../../Downloads/manifest.json">
     <meta name="theme-color" content="#7A4E33">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="古董圈">
-    <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon-120x120.png" sizes="120x120">
-    <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon-152x152.png" sizes="152x152">
-    <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon-180x180.png" sizes="180x180">
-    <link rel="apple-touch-icon" href="assets/icons/icon-1024.png" sizes="1024x1024">
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <link rel="icon" type="image/png" sizes="16x16" href="assets/icons/favicon-16x16.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32x32.png">
+    <link rel="apple-touch-icon" href="../../Downloads/assets/icons/apple-touch-icon-120x120.png" sizes="120x120">
+    <link rel="apple-touch-icon" href="../../Downloads/assets/icons/apple-touch-icon-152x152.png" sizes="152x152">
+    <link rel="apple-touch-icon" href="../../Downloads/assets/icons/apple-touch-icon-180x180.png" sizes="180x180">
+    <link rel="apple-touch-icon" href="../../Downloads/assets/icons/icon-1024.png" sizes="1024x1024">
+    <link rel="icon" type="image/x-icon" href="../../Downloads/favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../Downloads/assets/icons/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../Downloads/assets/icons/favicon-32x32.png">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -283,6 +283,7 @@
         .sidebar-overlay {
             position: fixed; inset: 0;
             background: rgba(20, 17, 14, .45);
+
 
 
             -webkit-backdrop-filter: blur(2px);
@@ -1323,7 +1324,11 @@
         }
 
         @media (max-width: 900px) {
-            .brand p { display: none; }
+            /* 手机/平板：保留 GUDONG.APP，仅缩小字号，避免被隐藏 */
+            .header-left { flex: 1 1 auto; min-width: 0; }
+            .brand { flex-shrink: 1; }
+            .brand-text { overflow: hidden; }
+            .brand p { display: block; font-size: .6rem; letter-spacing: .14em; margin-top: .2rem; }
         }
 
         @media (max-width: 820px) {
@@ -1343,7 +1348,9 @@
             body { font-size: 15px; }
             .brand-logo-img { height: 30px; }
             .brand h1 { font-size: 1.12rem; }
-            .brand p { display: none; }
+            .brand { gap: .5rem; }
+            .brand p { display: block; font-size: .55rem; letter-spacing: .1em; margin-top: .18rem; }
+            .header-left { gap: .6rem; }
             .header-right { gap: .4rem; }
             .btn-publish-text { display: none; }
             .container { padding: 2rem 4.5% 3rem; }
@@ -1374,10 +1381,10 @@
         <div class="header-left">
             <button class="menu-toggle" onclick="openSidebar()" aria-label="menu" aria-expanded="false" id="menuToggle">☰</button>
             <a href="#hero" class="brand">
-                <img src="assets/icons/logo-mark.png" alt="古董圈 Gudong" class="brand-logo-img" onerror="this.style.display='none'">
+                <img src="../../Downloads/assets/icons/logo-mark.png" alt="古董圈 Gudong" class="brand-logo-img" onerror="this.style.display='none'">
                 <div class="brand-text">
                     <h1><span class="zh">古董圈</span><span class="en">GUDONG</span></h1>
-                    <p><span class="zh">GUDONG.APP</span><span class="en">GUDONG.APP&amp; Collectibles</span></p>
+                    <p><span class="zh">GUDONG.APP</span><span class="en">GUDONG.APP</span></p>
                 </div>
             </a>
         </div>
@@ -1398,16 +1405,16 @@
             <a href="#daily-intel" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 今日捡漏</span><span class="en">· Daily Radar</span></a>
             <a href="#today-finds" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 今日发现</span><span class="en">· Today's Finds</span></a>
             <a href="#new-listings" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 刚刚上新</span><span class="en">· Just Listed</span></a>
-            <a href="collection.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">藏品库</span><span class="en">Collection</span></a>
-            <a href="categories/porcelain.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 瓷器</span><span class="en">· Porcelain</span></a>
-            <a href="categories/jade.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 玉器</span><span class="en">· Jade</span></a>
-            <a href="categories/bronze.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 铜器</span><span class="en">· Bronzes</span></a>
-            <a href="categories/coins.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 钱币</span><span class="en">· Coins</span></a>
-            <a href="categories/paintings.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 书画</span><span class="en">· Paintings &amp; Calligraphy</span></a>
-            <a href="categories/misc.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 杂项</span><span class="en">· Miscellaneous</span></a>
-            <a href="sellers/index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">藏家展馆</span><span class="en">Collector Gallery</span></a>
-            <a href="insights.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">情报 / 知识</span><span class="en">Insights</span></a>
-            <a href="about.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">关于我们</span><span class="en">About</span></a>
+            <a href="../../Downloads/collection.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">藏品库</span><span class="en">Collection</span></a>
+            <a href="../../Downloads/categories/porcelain.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 瓷器</span><span class="en">· Porcelain</span></a>
+            <a href="../../Downloads/categories/jade.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 玉器</span><span class="en">· Jade</span></a>
+            <a href="../../Downloads/categories/bronze.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 铜器</span><span class="en">· Bronzes</span></a>
+            <a href="../../Downloads/categories/coins.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 钱币</span><span class="en">· Coins</span></a>
+            <a href="../../Downloads/categories/paintings.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 书画</span><span class="en">· Paintings &amp; Calligraphy</span></a>
+            <a href="../../Downloads/categories/misc.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 杂项</span><span class="en">· Miscellaneous</span></a>
+            <a href="../../Downloads/sellers/index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">藏家展馆</span><span class="en">Collector Gallery</span></a>
+            <a href="../../Downloads/insights.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">情报 / 知识</span><span class="en">Insights</span></a>
+            <a href="../../Downloads/about.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">关于我们</span><span class="en">About</span></a>
             <button type="button" class="sidebar-lang-btn" onclick="toggleLang()" aria-label="Switch language"><span class="zh">🌐 English</span><span class="en">🌐 中文</span></button>
         </nav>
     </aside>
@@ -1479,8 +1486,8 @@
                     <span class="sub-line zh">最新发布的藏品</span>
                     <span class="sub-line en">The latest listings</span>
                 </div>
-                <a href="collection.html" class="more zh">查看全部 →</a>
-                <a href="collection.html" class="more en">View All →</a>
+                <a href="../../Downloads/collection.html" class="more zh">查看全部 →</a>
+                <a href="../../Downloads/collection.html" class="more en">View All →</a>
             </div>
             <div class="goods-list" id="itemList"></div>
             <div id="noResult" class="no-result zh" style="display:none;">暂无匹配藏品</div>
@@ -1495,46 +1502,46 @@
                     <span class="sub-line zh">从你喜欢的类别开始继续逛</span>
                     <span class="sub-line en">Start from the categories you love</span>
                 </div>
-                <a href="collection.html" class="more zh">查看完整藏品库 →</a>
-                <a href="collection.html" class="more en">View Full Collection →</a>
+                <a href="../../Downloads/collection.html" class="more zh">查看完整藏品库 →</a>
+                <a href="../../Downloads/collection.html" class="more en">View Full Collection →</a>
             </div>
             <div class="browse-grid">
-                <a href="categories/porcelain.html" class="browse-card">
+                <a href="../../Downloads/categories/porcelain.html" class="browse-card">
                     <span class="cat-name zh">瓷器</span><span class="cat-name en">Porcelain</span>
                     <span class="cat-en zh">Porcelain</span><span class="cat-en en">瓷器</span>
                     <span class="cat-stats zh" data-cat-count="porcelain">— 件在售</span>
                     <span class="cat-stats en" data-cat-count="porcelain">— items</span>
                     <span class="cat-range">S$80 – S$12,000</span>
                 </a>
-                <a href="categories/jade.html" class="browse-card">
+                <a href="../../Downloads/categories/jade.html" class="browse-card">
                     <span class="cat-name zh">玉器</span><span class="cat-name en">Jade</span>
                     <span class="cat-en zh">Jade</span><span class="cat-en en">玉器</span>
                     <span class="cat-stats zh" data-cat-count="jade">— 件在售</span>
                     <span class="cat-stats en" data-cat-count="jade">— items</span>
                     <span class="cat-range">S$150 – S$8,000</span>
                 </a>
-                <a href="categories/coins.html" class="browse-card">
+                <a href="../../Downloads/categories/coins.html" class="browse-card">
                     <span class="cat-name zh">钱币</span><span class="cat-name en">Coins</span>
                     <span class="cat-en zh">Coins</span><span class="cat-en en">钱币</span>
                     <span class="cat-stats zh" data-cat-count="coins">— 件在售</span>
                     <span class="cat-stats en" data-cat-count="coins">— items</span>
                     <span class="cat-range">S$20 – S$3,500</span>
                 </a>
-                <a href="categories/paintings.html" class="browse-card">
+                <a href="../../Downloads/categories/paintings.html" class="browse-card">
                     <span class="cat-name zh">书画</span><span class="cat-name en">Paintings</span>
                     <span class="cat-en zh">Paintings &amp; Calligraphy</span><span class="cat-en en">书画</span>
                     <span class="cat-stats zh" data-cat-count="paintings">— 件在售</span>
                     <span class="cat-stats en" data-cat-count="paintings">— items</span>
                     <span class="cat-range">S$200 – S$15,000</span>
                 </a>
-                <a href="categories/bronze.html" class="browse-card">
+                <a href="../../Downloads/categories/bronze.html" class="browse-card">
                     <span class="cat-name zh">铜器</span><span class="cat-name en">Bronzes</span>
                     <span class="cat-en zh">Bronzes</span><span class="cat-en en">铜器</span>
                     <span class="cat-stats zh">香炉 · 造像 · 佛具</span>
                     <span class="cat-stats en">Censers · Figures · Ritual ware</span>
                     <span class="cat-range">S$50 – S$10,000</span>
                 </a>
-                <a href="categories/misc.html" class="browse-card">
+                <a href="../../Downloads/categories/misc.html" class="browse-card">
                     <span class="cat-name zh">杂项</span><span class="cat-name en">Miscellaneous</span>
                     <span class="cat-en zh">Miscellaneous</span><span class="cat-en en">杂项</span>
                     <span class="cat-stats zh" data-cat-count="misc">— 件在售</span>
@@ -1544,8 +1551,8 @@
             </div>
 
             <div style="margin-top:1.6rem;">
-                <a href="sellers/index.html" class="more-btn zh">藏家展馆 →</a>
-                <a href="sellers/index.html" class="more-btn en">Collector Gallery →</a>
+                <a href="../../Downloads/sellers/index.html" class="more-btn zh">藏家展馆 →</a>
+                <a href="../../Downloads/sellers/index.html" class="more-btn en">Collector Gallery →</a>
             </div>
         </section>
 
@@ -1575,32 +1582,32 @@
                     <span class="sub-line zh">看懂器物，才敢放心入手</span>
                     <span class="sub-line en">Know the piece, then buy with confidence</span>
                 </div>
-                <a href="insights.html" class="more zh">全部情报 →</a>
-                <a href="insights.html" class="more en">All insights →</a>
+                <a href="../../Downloads/insights.html" class="more zh">全部情报 →</a>
+                <a href="../../Downloads/insights.html" class="more en">All insights →</a>
             </div>
             <div class="insight-grid">
-                <a href="insights/qing-porcelain-dating.html" class="insight-card">
+                <a href="../../Downloads/insights/qing-porcelain-dating.html" class="insight-card">
                     <div class="insight-kicker zh">入门指南</div><div class="insight-kicker en">BEGINNER</div>
                     <div class="insight-title zh">清代民窑青花怎么分辨年代？3 个上手要点</div>
                     <div class="insight-title en">Dating Qing folk kiln blue-and-white: 3 hands-on signals</div>
                     <div class="insight-desc zh">釉面、胎质、发色，三个最容易上手的判断维度。</div>
                     <div class="insight-desc en">Glaze, body, and pigment tone — three of the easiest entry points.</div>
                 </a>
-                <a href="insights/singapore-coin-market.html" class="insight-card">
+                <a href="../../Downloads/insights/singapore-coin-market.html" class="insight-card">
                     <div class="insight-kicker zh">行情观察</div><div class="insight-kicker en">MARKET</div>
                     <div class="insight-title zh">新加坡本地钱币市场近半年行情简析</div>
                     <div class="insight-title en">Singapore coin market: a half-year snapshot</div>
                     <div class="insight-desc zh">清钱、民国币、东南亚流通币的成交趋势与价格区间。</div>
                     <div class="insight-desc en">Qing, Republican, and SE-Asian circulating coins trends.</div>
                 </a>
-                <a href="insights/jade-buyer-pitfalls.html" class="insight-card">
+                <a href="../../Downloads/insights/jade-buyer-pitfalls.html" class="insight-card">
                     <div class="insight-kicker zh">避坑手册</div><div class="insight-kicker en">PITFALLS</div>
                     <div class="insight-title zh">新手买玉器，最容易踩的 5 个坑</div>
                     <div class="insight-title en">5 pitfalls new jade buyers fall into</div>
                     <div class="insight-desc zh">从「和田」二字说起，谈谈如何不被话术带走。</div>
                     <div class="insight-desc en">Starting from the word "Hetian" — how not to be talked into it.</div>
                 </a>
-                <a href="insights/what-is-jianlou.html" class="insight-card">
+                <a href="../../Downloads/insights/what-is-jianlou.html" class="insight-card">
                     <div class="insight-kicker zh">捡漏逻辑</div><div class="insight-kicker en">STRATEGY</div>
                     <div class="insight-title zh">什么是"捡漏"？古董捡漏的 3 个真实逻辑</div>
                     <div class="insight-title en">What is "jianlou"? 3 real logics behind bargain hunting</div>
@@ -1683,7 +1690,7 @@
                 <div class="desc en">Show your pieces to more collectors. Founding Collectors · Limited 88 seats.</div>
 
                 <div class="seller-actions">
-                    <a href="pricing.html#seller-services" class="btn-publish">
+                    <a href="../../Downloads/pricing.html#seller-services" class="btn-publish">
                         <span class="zh">申请成为创始藏家 领 2 个免费展位</span>
                         <span class="en">Apply as Founding Collector (2 free slots)</span>
                         <span class="arrow">→</span>
@@ -1712,12 +1719,12 @@
 
     <footer>
         <div class="footer-nav">
-            <a href="about.html" class="zh">联系我们</a><a href="about.html" class="en">Contact</a>
-            <a href="pricing.html#seller-services" class="zh">卖家服务</a><a href="pricing.html#seller-services" class="en">Seller Services</a>
-            <a href="pricing.html#buyer-services" class="zh">买家指南</a><a href="pricing.html#buyer-services" class="en">Buyer Guide</a>
-            <a href="pricing.html#price-table" class="zh">服务收费</a><a href="pricing.html#price-table" class="en">Price List</a>
-            <a href="privacy.html" class="zh">隐私政策</a><a href="privacy.html" class="en">Privacy</a>
-            <a href="terms.html" class="zh">用户条款</a><a href="terms.html" class="en">Terms</a>
+            <a href="../../Downloads/about.html" class="zh">联系我们</a><a href="../../Downloads/about.html" class="en">Contact</a>
+            <a href="../../Downloads/pricing.html#seller-services" class="zh">卖家服务</a><a href="../../Downloads/pricing.html#seller-services" class="en">Seller Services</a>
+            <a href="../../Downloads/pricing.html#buyer-services" class="zh">买家指南</a><a href="../../Downloads/pricing.html#buyer-services" class="en">Buyer Guide</a>
+            <a href="../../Downloads/pricing.html#price-table" class="zh">服务收费</a><a href="../../Downloads/pricing.html#price-table" class="en">Price List</a>
+            <a href="../../Downloads/privacy.html" class="zh">隐私政策</a><a href="../../Downloads/privacy.html" class="en">Privacy</a>
+            <a href="../../Downloads/terms.html" class="zh">用户条款</a><a href="../../Downloads/terms.html" class="en">Terms</a>
         </div>
         <p class="footer-disclaimer zh">gudong.app 是高级古董发现平台，仅提供信息、展示与连接服务，不参与买卖交易。</p>
         <p class="footer-disclaimer en">gudong.app is a premium antiques discovery platform. It provides information, display and connection services only, and does not participate in any sale or transaction.</p>

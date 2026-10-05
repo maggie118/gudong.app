@@ -930,15 +930,12 @@
                 <img src="assets/icons/logo-mark.png" alt="古董圈 Gudong" class="brand-logo-img" onerror="this.style.display='none'">
                 <div class="brand-text">
                     <h1><span class="zh">古董圈</span><span class="en">GUDONG</span></h1>
-                    <p><span class="zh">GUDONG.APP</span><span class="en">Chinese Antiques &amp; Collectibles</span></p>
+                    <p><span class="zh">GUDONG.APP</span><span class="en">GUDONG.APP</span></p>
                 </div>
             </a>
         </div>
 
         <div class="header-right">
-            <a href="pricing.html#seller-services" class="btn-publish-text">
-                <span class="zh">发布藏品</span><span class="en">Publish</span>
-            </a>
             <button class="lang-btn" onclick="toggleLang()" aria-label="Switch language">EN</button>
         </div>
     </header>
@@ -998,7 +995,9 @@
             <div>
                 <span class="title zh">全部藏品</span><span class="title en">All Listings</span>
             </div>
-            </div>
+            <a href="javascript:void(0)" class="more zh" id="retouchEntry" onclick="openPhotoRetouchModal()">想让图片也这么好看？ →</a>
+            <a href="javascript:void(0)" class="more en" onclick="openPhotoRetouchModal()">Want photos like these? →</a>
+        </div>
 
         <div class="col-grid" id="allItemsGrid"></div>
 

@@ -12,6 +12,10 @@
 //  - All Chinese strings encoded as \uXXXX escapes to avoid encoding issues.
 //  - FIXED: English prefix bug — auto intel "en" fields now use English prefixes
 //           instead of Chinese ones (PIN_EN + PREFIX_EN_* added).
+//
+// 2026-10-05 v5
+//  - CORS 更新：允许所有来源（含 file:// 与 localhost），
+//    便于本地预览与开发调试。公开只读 API，数据本身是公开的。
 
 const BASE           = process.env.AIRTABLE_BASE_ID;
 const TABLE          = process.env.AIRTABLE_TABLE;
@@ -62,8 +66,8 @@ const CAT_EN = {
 };
 
 // ---------- Reusable prefixes ----------
-const PIN    = '\uD83D\uDCCC ';   // ?? (space) for Chinese
-const PIN_EN = '\uD83D\uDCCC ';   // ?? (space) for English
+const PIN    = '\uD83D\uDCCC ';   // ?? (Pushpin) for Chinese
+const PIN_EN = '\uD83D\uDCCD ';   // ?? (Round Pushpin) for English
 
 // Chinese prefixes
 const PREFIX_NEW       = PIN + '\u65b0\u4e0a\u67b6\uff1a';             // ?? 新上架：
@@ -289,6 +293,7 @@ function buildAutoIntel(items) {
       bestPair = { cat, low, high, diff };
     }
   });
+
   if (bestPair && bestPair.diff > 0.2) {
     const { low, high } = bestPair;
     const lowPrice = Number(low.fixed_price).toLocaleString('en-SG');
@@ -465,19 +470,16 @@ async function getData() {
 
 // ---------- Handler ----------
 export default async function handler(req, res) {
-  const origin = req.headers.origin || '';
-  const allowed = ['https://gudong.app', 'https://www.gudong.app'];
-  const isLocal = /^https?:\/\/(127\.0\.0\.1|localhost)(:\d+)?$/.test(origin);
-
-  if (origin && !allowed.includes(origin) && !isLocal) {
-    return res.status(403).json({ error: 'Forbidden' });
-  }
-  if (origin) {
-    res.setHeader('Access-Control-Allow-Origin', origin);
-    res.setHeader('Vary', 'Origin');
-  }
+  // ============================================================
+  // CORS —— 公开只读 API，允许所有来源（含 file:// 与 localhost）
+  // ============================================================
+  res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, HEAD, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  res.setHeader('Vary', 'Origin');
+  res.setHeader('X-Content-Type-Options', 'nosniff');
+  res.setHeader('Access-Control-Max-Age', '86400');
+
   if (req.method === 'OPTIONS') return res.status(200).end();
   if (req.method !== 'GET' && req.method !== 'HEAD') {
     res.setHeader('Allow', 'GET, HEAD, OPTIONS');

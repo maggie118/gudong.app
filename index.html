@@ -18,7 +18,7 @@
           "name": "古董圈 Gudong",
           "alternateName": "Gudong.app",
           "url": "https://gudong.app/",
-          "logo": { "@type": "ImageObject", "url": "https://gudong.app/assets/icons/apple-touch-icon-180x180.png", "width": 180, "height": 180 },
+          "logo": { "@type": "ImageObject", "url": "assets/icons/apple-touch-icon-180x180.png", "width": 180, "height": 180 },
           "description": "新加坡中国古董及藏品信息发现平台。汇集瓷器、玉器、钱币、书画及杂项，买卖双方直接联系。平台不参与鉴定、估价与交易。",
           "address": { "@type": "PostalAddress", "addressCountry": "SG" },
           "areaServed": { "@type": "Country", "name": "Singapore" },
@@ -58,8 +58,7 @@
     <meta property="og:description" content="Singapore-based discovery platform for Chinese antiques. Daily intel, price comparison, direct seller contact.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://gudong.app">
-    <meta property="og:image" content="https://gudong.app/og-cover.png">
-    <meta property="og:image:secure_url" content="https://gudong.app/og-cover.webp">
+    <meta property="og:image" content="og-cover.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="og:image:type" content="image/png">
@@ -67,334 +66,794 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="古董圈 Gudong.app | 古董捡漏 · 寻宝情报站">
     <meta name="twitter:description" content="Singapore-based discovery platform for Chinese antiques and collectibles.">
-    <meta name="twitter:image" content="https://gudong.app/og-cover.png">
+    <meta name="twitter:image" content="og-cover.png">
 
-   <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#7A4E33">
-<!-- iOS PWA配置 -->
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="apple-mobile-web-app-title" content="古董圈">
-<link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon-120x120.png" sizes="120x120">
-<link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon-152x152.png" sizes="152x152">
-<link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon-180x180.png" sizes="180x180">
-<link rel="apple-touch-icon" href="/assets/icons/icon-1024.png" sizes="1024x1024">
-<!-- 浏览器标签favicon -->
-<link rel="icon" type="image/x-icon" href="favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#7A4E33">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="古董圈">
+    <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon-120x120.png" sizes="120x120">
+    <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon-152x152.png" sizes="152x152">
+    <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon-180x180.png" sizes="180x180">
+    <link rel="apple-touch-icon" href="assets/icons/icon-1024.png" sizes="1024x1024">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/icons/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32x32.png">
 
-    <!-- Premium Serif Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Noto+Serif+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Noto+Serif+SC:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
+        /* ============================================================
+           DESIGN TOKENS
+           ============================================================ */
         :root {
-            --color-bg: #F5F2EC;
+            --color-bg: #F7F4EF;
+            --color-bg-alt: #F1ECE4;
             --color-surface: #FFFFFF;
-            --color-white: #FFFFFF;
-            --color-border: #E4DED5;
+            --color-border: #E7E1D8;
+            --color-border-soft: #F0EBE3;
+
             --color-primary: #7A4E33;
             --color-primary-dark: #5C3A26;
-            --color-primary-light: #F1E8DF;
-            --color-text: #25221E;
-            --color-text-secondary: #5C564F;
-            --color-text-muted: #A49D94;
+            --color-primary-light: #F3EAE0;
+
+            --color-text: #241F1A;
+            --color-text-secondary: #5A544C;
+            --color-text-muted: #9E968C;
+
             --color-gold: #9C7A3A;
-            --color-gold-soft: rgba(156,122,58,.10);
-            --color-bronze-muted: #9C8558;
+            --color-gold-soft: rgba(156, 122, 58, .10);
+            --color-bronze-muted: #A08A63;
             --color-qianjinzong: #948268;
+
             --color-success: #526657;
             --color-danger: #9A554B;
             --color-far-mountain: #2E4A52;
-            --card-radius: 12px;
-            --img-radius: 4px;
+
+            --card-radius: 14px;
+            --img-radius: 6px;
+            --btn-radius: 8px;
+
+            --shadow-xs: 0 1px 2px rgba(36, 31, 26, .04);
+            --shadow-sm: 0 2px 8px rgba(36, 31, 26, .05);
+            --shadow-md: 0 10px 28px rgba(36, 31, 26, .08);
+            --shadow-lg: 0 20px 48px rgba(36, 31, 26, .12);
+            --ring: 0 0 0 4px rgba(156, 122, 58, .14);
+
+            --ease: cubic-bezier(.22, .61, .36, 1);
+            --dur: .32s;
+
             --font-serif: "Playfair Display", "Noto Serif SC", "Songti SC", "STSong", Georgia, serif;
-            --font-display: "Inter", "Geist", "Inter Display", "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Helvetica, Arial, sans-serif;
-            --font-latin: "Inter", "Geist", "Inter Display", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-            --font-zh-sans: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "PingFang SC",
+                         "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
         }
 
-        h1, h2, h3 { font-family: var(--font-serif); }
-        .title { font-family: var(--font-serif); }
-        * { margin: 0; padding: 0; box-sizing: border-box;
-            font-family: "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif; }
-        html { scroll-behavior: smooth; }
-        body { background: var(--color-bg); color: var(--color-text); line-height: 1.65; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: var(--font-sans); }
 
-        /* ---------- Header ---------- */
+        html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+        body {
+            background: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.68;
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+        }
+
+        h1, h2, h3, .title { font-family: var(--font-serif); }
+
+        img { max-width: 100%; }
+
+        ::selection { background: rgba(156, 122, 58, .22); color: var(--color-text); }
+
+        /* ============================================================
+           HEADER
+           ============================================================ */
         header {
-            background: rgba(255,255,255,.96); backdrop-filter: blur(6px);
-            color: var(--color-text); padding: 0 5%; height: 68px;
-            display: flex; align-items: center; justify-content: space-between;
-            gap: 1.5rem; border-bottom: 1px solid var(--color-border);
-            position: sticky; top: 0; z-index: 50;
+            background: rgba(255, 255, 255, .92);
+            -webkit-backdrop-filter: saturate(180%) blur(12px);
+            backdrop-filter: saturate(180%) blur(12px);
+            color: var(--color-text);
+            padding: 0 5%;
+            height: 72px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1.5rem;
+            border-bottom: 1px solid var(--color-border);
+            position: sticky;
+            top: 0;
+            z-index: 50;
         }
+        .header-left { display: flex; align-items: center; gap: .9rem; min-width: 0; }
+
         .brand {
             display: flex;
             flex-direction: row;
             align-items: center;
-            gap: 0.6rem;
+            gap: .7rem;
             line-height: 1;
             flex-shrink: 0;
             text-decoration: none;
             color: inherit;
+            min-width: 0;
         }
-        .brand-logo-img {
-            height: 36px;
-            width: auto;
-            display: block;
-            object-fit: contain;
-        }
-        .brand-text {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
+        .brand-logo-img { height: 38px; width: auto; display: block; object-fit: contain; }
+        .brand-text { display: flex; flex-direction: column; justify-content: center; min-width: 0; }
         .brand h1 {
-        font-size: 1.4rem;
-        font-weight: 700;
-        letter-spacing: .02em;
-        line-height: 1.15;
-        color: var(--color-primary-dark);
+            font-size: 1.32rem;
+            font-weight: 700;
+            letter-spacing: .01em;
+            line-height: 1.2;
+            color: var(--color-primary-dark);
         }
         .brand p {
-        color: var(--color-qianjinzong);
-        margin-top: .2rem;
-        font-size: .75rem;
-        letter-spacing: .18em;
-        text-transform: uppercase;
+            color: var(--color-qianjinzong);
+            margin-top: .25rem;
+            font-size: .68rem;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
         .brand h1 .en, .brand p .en, .sidebar-brand .en {
-        font-family: "Inter Display", "Inter", "Geist",
-        -apple-system, BlinkMacSystemFont, "Segoe UI",
-        "Helvetica Neue", Arial, sans-serif;
-        letter-spacing: normal;
+            font-family: var(--font-sans);
+            letter-spacing: normal;
         }
-        .header-right { display: flex; align-items: center; gap: .8rem; flex-shrink: 0; }
+
+        .header-right { display: flex; align-items: center; gap: .7rem; flex-shrink: 0; }
+
         .btn-publish {
             display: inline-flex; align-items: center; gap: .35rem;
-            background: var(--color-primary); color: #fff; padding: .75rem 1.1rem;
-            border-radius: 6px; font-size: .85rem; font-weight: 600;
-            text-decoration: none; white-space: nowrap; min-height: 44px; transition: .3s cubic-bezier(.25,.1,.25,1);
+            background: var(--color-primary); color: #fff;
+            padding: .75rem 1.15rem;
+            border-radius: var(--btn-radius);
+            font-size: .85rem; font-weight: 600;
+            text-decoration: none; white-space: nowrap;
+            min-height: 44px;
+            box-shadow: var(--shadow-xs);
+            transition: background var(--dur) var(--ease), transform var(--dur) var(--ease),
+                        box-shadow var(--dur) var(--ease);
         }
-        .btn-publish:hover { background: var(--color-primary-dark); }
+        .btn-publish:hover {
+            background: var(--color-primary-dark);
+            transform: translateY(-1px);
+            box-shadow: 0 6px 18px rgba(122, 78, 51, .28);
+        }
+
         .btn-publish-text {
             display: inline-flex; align-items: center;
             background: transparent; color: var(--color-text-secondary);
-            padding: .45rem .5rem; font-size: .88rem; font-weight: 500;
+            padding: .45rem .55rem;
+            font-size: .88rem; font-weight: 500;
             text-decoration: none; white-space: nowrap;
-            transition: .3s cubic-bezier(.25,.1,.25,1);
+            border-radius: 6px;
+            transition: color var(--dur) var(--ease), background var(--dur) var(--ease);
         }
-        .btn-publish-text:hover { color: var(--color-primary); }
-        .lang-btn {
-            border: 1px solid var(--color-border); background: transparent;
-            color: var(--color-text-secondary); padding: .55rem .85rem; min-height: 44px;
-            border-radius: 6px; cursor: pointer; font-size: .75rem;
-            letter-spacing: .04em; transition: .4s cubic-bezier(.25,.1,.25,1);
-        }
-        .lang-btn:hover { border-color: var(--color-primary); color: var(--color-primary); background: var(--color-primary-light); }
-        .menu-toggle {
-            width: 44px; height: 44px; border: 1px solid var(--color-border);
-            background: transparent; border-radius: 8px; font-size: 1.05rem;
-            color: var(--color-text); cursor: pointer; display: flex;
-            align-items: center; justify-content: center; flex-shrink: 0; transition: .4s cubic-bezier(.25,.1,.25,1);
-        }
-        .menu-toggle:hover { border-color: var(--color-primary); color: var(--color-primary); background: var(--color-primary-light); }
+        .btn-publish-text:hover { color: var(--color-primary); background: var(--color-gold-soft); }
 
-        /* ---------- Sidebar (synced with pricing.html) ---------- */
+        .lang-btn {
+            border: 1px solid var(--color-border);
+            background: transparent;
+            color: var(--color-text-secondary);
+            padding: .55rem .85rem;
+            min-height: 44px;
+            min-width: 44px;
+            border-radius: var(--btn-radius);
+            cursor: pointer;
+            font-size: .75rem;
+            font-weight: 600;
+            letter-spacing: .06em;
+            transition: all var(--dur) var(--ease);
+        }
+        .lang-btn:hover {
+            border-color: var(--color-primary);
+            color: var(--color-primary);
+            background: var(--color-primary-light);
+        }
+
+        .menu-toggle {
+            width: 44px; height: 44px;
+            border: 1px solid var(--color-border);
+            background: transparent;
+            border-radius: var(--btn-radius);
+            font-size: 1.05rem;
+            color: var(--color-text);
+            cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+            transition: all var(--dur) var(--ease);
+        }
+        .menu-toggle:hover {
+            border-color: var(--color-primary);
+            color: var(--color-primary);
+            background: var(--color-primary-light);
+        }
+
+        /* ============================================================
+           SIDEBAR
+           ============================================================ */
         .sidebar-overlay {
-            position: fixed; inset: 0; background: rgba(20,17,14,.4);
-            opacity: 0; pointer-events: none; transition: opacity .25s ease; z-index: 90;
+            position: fixed; inset: 0;
+            background: rgba(20, 17, 14, .45);
+
+            -webkit-backdrop-filter: blur(2px);
+            backdrop-filter: blur(2px);
+            opacity: 0; pointer-events: none;
+            transition: opacity .3s var(--ease);
+            z-index: 90;
         }
         .sidebar-overlay.show { opacity: 1; pointer-events: auto; }
+
         .sidebar {
-        position: fixed;
-        top: 0;
-        left: 0;
-        height: 100vh;
-        height: 100dvh;
-        width: 264px;
-        max-width: 78vw;
-        background: var(--color-white);
-        box-shadow: 4px 0 24px rgba(37,34,30,.18);
-        transform: translateX(-100%);
-        transition: transform .3s ease;
-        z-index: 95;
-        overflow-y: auto;
-        -webkit-overflow-scrolling: touch;
-        padding-bottom: 2rem;
+            position: fixed; top: 0; left: 0;
+            height: 100vh; height: 100dvh;
+            width: 272px; max-width: 80vw;
+            background: var(--color-surface);
+            box-shadow: 6px 0 32px rgba(36, 31, 26, .18);
+            transform: translateX(-100%);
+            transition: transform .34s var(--ease);
+            z-index: 95;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            padding-bottom: 2rem;
         }
         .sidebar.open { transform: translateX(0); }
+
         .sidebar-toggle-inner {
-            display: block; width: 100%; padding: .9rem 0; background: transparent;
-            border: none; border-bottom: 1px solid var(--color-border);
-            font-size: 1.15rem; color: var(--color-text-secondary); cursor: pointer; text-align: center;
+            display: block; width: 100%;
+            padding: .9rem 0;
+            background: transparent; border: none;
+            border-bottom: 1px solid var(--color-border);
+            font-size: 1.15rem; color: var(--color-text-secondary);
+            cursor: pointer; text-align: center;
+            transition: color var(--dur) var(--ease);
         }
         .sidebar-toggle-inner:hover { color: var(--color-primary); }
+
         .sidebar-brand {
             display: flex; flex-direction: column; align-items: center; justify-content: center;
-            gap: .1rem; padding: 1.1rem 0; font-weight: 700; color: var(--color-text);
+            gap: .15rem;
+            padding: 1.2rem 0;
+            font-weight: 700;
+            color: var(--color-primary-dark);
             border-bottom: 1px solid var(--color-border);
+            font-family: var(--font-serif);
         }
-        .sidebar-brand .zh { font-size: 1.05rem; }
-        .sidebar-brand .en { font-size: 1.05rem; letter-spacing: .04em; }
-        .sidebar-nav { display: flex; flex-direction: column; padding: .3rem 0; }
+        .sidebar-brand .zh { font-size: 1.08rem; letter-spacing: .06em; }
+        .sidebar-brand .en { font-size: .82rem; letter-spacing: .22em; color: var(--color-qianjinzong); }
+
+        .sidebar-nav { display: flex; flex-direction: column; padding: .4rem 0; }
+
         .sidebar-link {
-            padding: .85rem 1.4rem; color: var(--color-text); text-decoration: none;
-            font-size: .95rem; transition: .4s cubic-bezier(.25,.1,.25,1);
+            padding: .85rem 1.4rem;
+            color: var(--color-text);
+            text-decoration: none;
+            font-size: .95rem;
+            transition: all var(--dur) var(--ease);
         }
         .sidebar-link:hover { background: var(--color-primary-light); color: var(--color-primary); }
         .sidebar-link.active { background: var(--color-primary-light); color: var(--color-primary); font-weight: 600; }
-        .sidebar-group-title {
-        padding: .85rem 1.4rem .3rem;
-        color: var(--color-text);
-        font-size: .95rem;
-        font-weight: 600;
-        }
+
         .sidebar-sub {
-        display: block;
-        padding: .55rem 1.4rem .55rem 2.2rem;
-        color: var(--color-text-secondary);
-        text-decoration: none;
-        font-size: .88rem;
-        transition: .4s cubic-bezier(.25,.1,.25,1);
+            display: block;
+            padding: .5rem 1.4rem .5rem 2.3rem;
+            color: var(--color-text-secondary);
+            text-decoration: none;
+            font-size: .86rem;
+            transition: all var(--dur) var(--ease);
         }
         .sidebar-sub:hover { color: var(--color-primary); background: var(--color-primary-light); }
+
         .sidebar-lang-btn {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: .4rem;
-        width: calc(100% - 2.8rem);
-        margin: 1rem 1.4rem .8rem;
-        padding: .75rem .9rem;
-        min-height: 44px;
-        border: 1px solid var(--color-border);
-        border-radius: 12px;
-        background: var(--color-white);
-        color: var(--color-text-secondary);
-        font-family: inherit;
-        font-size: .9rem;
-        font-weight: 600;
-        cursor: pointer;
-        transition: .4s cubic-bezier(.25,.1,.25,1);
+            display: flex; align-items: center; justify-content: center; gap: .4rem;
+            width: calc(100% - 2.8rem);
+            margin: 1rem 1.4rem .8rem;
+            padding: .75rem .9rem;
+            min-height: 44px;
+            border: 1px solid var(--color-border);
+            border-radius: 999px;
+            background: var(--color-surface);
+            color: var(--color-text-secondary);
+            font-family: inherit;
+            font-size: .88rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--dur) var(--ease);
         }
-        .sidebar-lang-btn:hover { border-color: var(--color-primary); color: var(--color-primary); background: var(--color-primary-light); }
+        .sidebar-lang-btn:hover {
+            border-color: var(--color-primary);
+            color: var(--color-primary);
+            background: var(--color-primary-light);
+        }
 
-        /* ---------- Layout ---------- */
-        .container { max-width: 1200px; margin: 0 auto; padding: 3.2rem 5% 4rem; min-height: 80vh; }
-        section { margin-bottom: 5rem; scroll-margin-top: 90px; }
-        h2 { color: var(--color-text); margin-bottom: 1.35rem; font-size: 1.75rem; font-weight: 700; letter-spacing: -.02em; font-family: var(--font-serif); }
+        /* ============================================================
+           LAYOUT
+           ============================================================ */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3.4rem 5% 4.5rem;
+            min-height: 80vh;
+        }
+        section { margin-bottom: 5.5rem; scroll-margin-top: 96px; }
 
-        /* ---------- Hero ---------- */
-        .hero-clean { text-align: center; max-width: 680px; margin: 0 auto 1rem; padding: 1.4rem 0 .5rem; }
+        /* ============================================================
+           HERO
+           ============================================================ */
+        .hero-clean {
+            text-align: center;
+            max-width: 720px;
+            margin: 0 auto 1rem;
+            padding: 1.5rem 0 .5rem;
+        }
         .hero-eyebrow {
-            font-family: var(--font-serif); font-style: italic;
-            font-size: .92rem; color: var(--color-bronze-muted); letter-spacing: .01em; margin-bottom: .9rem;
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: .94rem;
+            color: var(--color-bronze-muted);
+            letter-spacing: .04em;
+            margin-bottom: 1rem;
+        }
+        .hero-eyebrow::after {
+            content: '';
+            display: block;
+            width: 42px; height: 1px;
+            background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
+            margin: 1rem auto 0;
         }
         .hero-title-main {
             font-family: var(--font-serif);
-            font-size: clamp(1.7rem, 4.2vw, 2.5rem); font-weight: 600;
-            color: var(--color-text); line-height: 1.35; margin-bottom: 1rem;
+            font-size: clamp(1.75rem, 4.3vw, 2.6rem);
+            font-weight: 600;
+            color: var(--color-text);
+            line-height: 1.38;
+            letter-spacing: -.01em;
+            margin-bottom: 1.1rem;
         }
-        .hero-desc { font-size: .95rem; color: var(--color-text-secondary); margin-bottom: 1.5rem; line-height: 1.6; }
-        .hero-guide { font-size: .85rem; color: var(--color-gold); margin-bottom: 1.3rem; font-weight: 600; letter-spacing: .01em; }
+        .hero-desc {
+            font-size: .96rem;
+            color: var(--color-text-secondary);
+            margin-bottom: 1rem;
+            line-height: 1.7;
+        }
+        .hero-guide {
+            font-size: .84rem;
+            color: var(--color-gold);
+            margin-bottom: 1.6rem;
+            font-weight: 600;
+            letter-spacing: .01em;
+        }
         .hero-btn {
-            display: inline-block; background: var(--color-primary); color: #fff;
-            padding: .72rem 1.8rem; border-radius: 6px; text-decoration: none;
-            font-weight: 600; font-size: .88rem; transition: .3s cubic-bezier(.25,.1,.25,1);
+            display: inline-block;
+            background: var(--color-primary);
+            color: #fff;
+            padding: .78rem 2rem;
+            border-radius: var(--btn-radius);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: .88rem;
+            letter-spacing: .02em;
+            box-shadow: 0 6px 20px rgba(122, 78, 51, .22);
+            transition: all var(--dur) var(--ease);
         }
-        .hero-btn:hover { background: var(--color-primary-dark); }
+        .hero-btn:hover {
+            background: var(--color-primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 28px rgba(122, 78, 51, .30);
+        }
 
-        .search-box { max-width: 560px; margin: 2.2rem auto .65rem; position: relative; }
+        /* Search */
+        .search-box { max-width: 580px; margin: 2.4rem auto .7rem; position: relative; }
         .search-box input {
-            width: 100%; height: 50px; padding: 0 3rem 0 1.2rem;
-            border: 1px solid #DED7CE; border-radius: 8px; font-size: .95rem;
-            background: #FFFFFF; color: var(--color-text); transition: .3s cubic-bezier(.25,.1,.25,1);
+            width: 100%;
+            height: 52px;
+            padding: 0 3.2rem 0 1.3rem;
+            border: 1px solid var(--color-border);
+            border-radius: 10px;
+            font-size: .95rem;
+            background: var(--color-surface);
+            color: var(--color-text);
+            box-shadow: var(--shadow-xs);
+            transition: border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
         }
-        .search-box input:focus { outline: none; border-color: var(--color-gold); box-shadow: 0 0 0 4px var(--color-gold-soft); }
+        .search-box input::placeholder { color: var(--color-text-muted); }
+        .search-box input:focus {
+            outline: none;
+            border-color: var(--color-gold);
+            box-shadow: var(--ring);
+        }
         .search-box button {
-            position: absolute; right: 1rem; top: 50%; transform: translateY(-50%);
-            background: transparent; border: none; color: var(--color-primary); font-size: 1rem; cursor: pointer;
-            min-width: 44px; min-height: 44px; display: flex; align-items: center; justify-content: center;
+            position: absolute; right: .9rem; top: 50%;
+            transform: translateY(-50%);
+            background: transparent; border: none;
+            color: var(--color-primary);
+            font-size: 1rem; cursor: pointer;
+            min-width: 44px; min-height: 44px;
+            display: flex; align-items: center; justify-content: center;
+            border-radius: 8px;
+            transition: background var(--dur) var(--ease);
         }
-        .search-tip { font-size: .78rem; color: var(--color-text-muted); text-align: center; margin-bottom: 1rem; }
-        .hero-stats { display: flex; align-items: center; justify-content: center; gap: .55rem; flex-wrap: wrap; font-size: .82rem; color: var(--color-text-secondary); margin-bottom: 1.6rem; }
+        .search-box button:hover { background: var(--color-gold-soft); }
+
+        .search-tip { font-size: .78rem; color: var(--color-text-muted); text-align: center; margin-bottom: .8rem; }
+
         .search-result-tip {
-            font-size: .82rem; color: var(--color-primary); text-align: center;
-            margin: -.8rem 0 1.6rem; font-weight: 600;
+            font-size: .83rem;
+            color: var(--color-primary);
+            text-align: center;
+            margin: -.7rem 0 1.7rem;
+            font-weight: 600;
         }
+
         .hot-tags {
-            display: flex; flex-wrap: wrap; justify-content: center; gap: .5rem;
-            max-width: 600px; margin: 0 auto 1.4rem;
+            display: flex; flex-wrap: wrap; justify-content: center;
+            gap: .5rem;
+            max-width: 620px;
+            margin: 0 auto 1.5rem;
         }
         .hot-tag {
-            border: 1px solid var(--color-border); background: var(--color-white);
-            color: var(--color-text-secondary); font-size: .78rem; padding: .5rem .85rem; min-height: 44px;
-            border-radius: 999px; cursor: pointer; transition: .3s cubic-bezier(.25,.1,.25,1);
+            border: 1px solid var(--color-border);
+            background: var(--color-surface);
+            color: var(--color-text-secondary);
+            font-size: .78rem;
+            padding: .5rem .9rem;
+            min-height: 40px;
+            border-radius: 999px;
+            cursor: pointer;
+            transition: all var(--dur) var(--ease);
             display: inline-flex; align-items: center; justify-content: center;
         }
-        .hot-tag:hover { border-color: var(--color-primary); color: var(--color-primary); background: var(--color-primary-light); }
+        .hot-tag:hover {
+            border-color: var(--color-gold);
+            color: var(--color-primary);
+            background: var(--color-gold-soft);
+            transform: translateY(-1px);
+        }
 
-        /* ---------- 今日情报 · 捡漏雷达 ---------- */
+        /* ============================================================
+           SECTION HEADS
+           ============================================================ */
+        .section-head2 {
+            margin-bottom: 1.5rem;
+            display: flex; align-items: flex-end; justify-content: space-between;
+            gap: 1rem; flex-wrap: wrap;
+        }
+        .section-head2 .title {
+            display: inline-block;
+            position: relative;
+            padding-left: .8rem;
+            font-size: 1.32rem;
+            font-weight: 700;
+            color: var(--color-text);
+            letter-spacing: -.01em;
+        }
+        .section-head2 .title::before {
+            content: '';
+            position: absolute;
+            left: 0; top: .3em; bottom: .18em;
+            width: 3px;
+            border-radius: 2px;
+            background: linear-gradient(180deg, var(--color-gold), rgba(156, 122, 58, .12));
+        }
+        .section-head2 .sub-line {
+            font-size: .85rem;
+            color: var(--color-text-secondary);
+            margin-top: .35rem;
+            display: block;
+            padding-left: .8rem;
+        }
+        .section-head2 .more {
+            font-size: .85rem;
+            color: var(--color-text-secondary);
+            text-decoration: none;
+            white-space: nowrap;
+            padding: .4rem .2rem;
+            transition: color var(--dur) var(--ease);
+        }
+        .section-head2 .more:hover { color: var(--color-primary); }
+
+        .more-btn {
+            display: inline-flex; align-items: center;
+            border: 1px solid var(--color-border);
+            background: var(--color-surface);
+            color: var(--color-text-secondary);
+            font-size: .85rem;
+            font-weight: 500;
+            padding: .55rem 1.3rem;
+            border-radius: 999px;
+            text-decoration: none;
+            transition: all var(--dur) var(--ease);
+        }
+        .more-btn:hover {
+            border-color: var(--color-gold);
+            color: var(--color-primary);
+            background: var(--color-gold-soft);
+            transform: translateY(-1px);
+        }
+
+        .section-note {
+            font-size: .78rem;
+            color: var(--color-text-muted);
+            line-height: 1.65;
+            margin-top: -.9rem;
+            margin-bottom: 2rem;
+        }
+
+        /* ============================================================
+           TODAY'S FINDS
+           ============================================================ */
+        .finds-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.9rem; }
+
+        .finds-card {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            transition: transform var(--dur) var(--ease);
+        }
+        .finds-card:hover { transform: translateY(-3px); }
+
+        .finds-image {
+            position: relative;
+            aspect-ratio: 1 / 1;
+            border-radius: var(--img-radius);
+            overflow: hidden;
+            background: var(--color-bg-alt);
+            margin-bottom: .85rem;
+            box-shadow: var(--shadow-xs);
+            transition: box-shadow var(--dur) var(--ease);
+        }
+        .finds-card:hover .finds-image { box-shadow: var(--shadow-md); }
+
+        .finds-image img {
+            width: 100%; height: 100%;
+            object-fit: cover; display: block;
+            transition: transform .7s var(--ease);
+        }
+        .finds-card:hover .finds-image img { transform: scale(1.05); }
+
+        .finds-title {
+            font-size: .98rem;
+            font-weight: 600;
+            color: var(--color-text);
+            margin-bottom: .2rem;
+            font-family: var(--font-serif);
+            line-height: 1.45;
+        }
+        .finds-meta { font-size: .8rem; color: var(--color-text-secondary); margin-bottom: .45rem; }
+
+        .finds-badge {
+            position: absolute; top: .55rem; right: .55rem;
+            display: inline-block;
+            font-size: .7rem;
+            font-weight: 600;
+            letter-spacing: .03em;
+            padding: .22rem .55rem;
+            border-radius: 4px;
+            background: rgba(255, 255, 255, .92);
+            -webkit-backdrop-filter: blur(4px);
+            backdrop-filter: blur(4px);
+            color: var(--color-success);
+            border: 1px solid rgba(82, 102, 87, .35);
+        }
+
+        .finds-reason {
+            font-size: .78rem;
+            color: var(--color-primary);
+            background: var(--color-gold-soft);
+            border-left: 2px solid var(--color-gold);
+            padding: .32rem .55rem;
+            border-radius: 3px;
+            margin: .4rem 0 .45rem;
+            line-height: 1.55;
+        }
+        .finds-timestamp { font-size: .74rem; color: var(--color-text-muted); }
+        .finds-caption { font-size: .72rem; color: var(--color-text-muted); margin-top: .1rem; }
+
+        /* ============================================================
+           PRICE
+           ============================================================ */
+        .finds-price, .item-price { display: flex; align-items: baseline; gap: .35rem; flex-wrap: wrap; }
+        .finds-price { margin: 0 0 .5rem; font-size: .9rem; }
+        .price-main { color: var(--color-primary); font-weight: 700; letter-spacing: .01em; font-variant-numeric: tabular-nums; }
+        .price-main--enquiry { color: var(--color-text-secondary); font-weight: 600; letter-spacing: .04em; }
+        .price-tag {
+            display: inline-block;
+            font-size: .72rem;
+            font-weight: 500;
+            color: var(--color-text-muted);
+            border: 1px solid var(--color-border);
+            padding: 0 .3rem;
+            border-radius: 3px;
+            line-height: 1.6;
+            letter-spacing: .02em;
+        }
+        .price-tag--enquiry { color: var(--color-bronze-muted); border-color: var(--color-bronze-muted); }
+
+        /* ============================================================
+           JUST LISTED
+           ============================================================ */
+        .goods-list { display: grid; grid-template-columns: repeat(6, 1fr); gap: 1.25rem; margin-top: .5rem; }
+        .goods-list .item-card { aspect-ratio: auto; min-width: 0; min-height: 0; height: auto; }
+        .goods-list .item-card img {
+            width: 100%; height: auto;
+            aspect-ratio: 1 / 1;
+            max-height: none;
+            object-fit: cover;
+        }
+
+        .item-card {
+            position: relative;
+            display: block;
+            aspect-ratio: 1 / 1;
+            border-radius: var(--img-radius);
+            overflow: hidden;
+            background: var(--color-bg-alt);
+            text-decoration: none;
+            box-shadow: var(--shadow-xs);
+            transition: box-shadow var(--dur) var(--ease), transform var(--dur) var(--ease);
+        }
+        .item-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+        }
+        .item-card img {
+            width: 100%; height: 100%;
+            object-fit: cover; display: block;
+            transition: transform .7s var(--ease);
+        }
+        .item-card:hover img { transform: scale(1.05); }
+
+        .item-card .item-info {
+            position: absolute;
+            left: .55rem; right: .55rem; bottom: .55rem;
+            background: rgba(20, 17, 14, .66);
+            -webkit-backdrop-filter: blur(8px);
+            backdrop-filter: blur(8px);
+            color: #fff;
+            padding: .34rem .62rem;
+            border-radius: 5px;
+            display: flex; flex-direction: column; gap: .1rem;
+        }
+        .item-card .item-price { font-size: .75rem; gap: .3rem; }
+        .item-card .price-main { color: #F3EAE0; font-weight: 600; }
+        .item-card .price-main--enquiry { color: rgba(243, 234, 224, .92); font-weight: 500; }
+        .item-card .price-tag {
+            font-size: .7rem;
+            padding: 0 .25rem;
+            color: rgba(243, 234, 224, .78);
+            border-color: rgba(243, 234, 224, .35);
+        }
+        .item-card .price-tag--enquiry { color: rgba(243, 234, 224, .88); border-color: rgba(243, 234, 224, .55); }
+
+        /* ============================================================
+           STATES
+           ============================================================ */
+        .no-result { text-align: center; padding: 3rem 1rem; color: var(--color-text-muted); font-size: .9rem; }
+
+        .load-error-tip {
+            text-align: center;
+            padding: 2rem 1rem;
+            color: var(--color-text-muted);
+            font-size: .85rem;
+            line-height: 1.7;
+            border: 1px dashed var(--color-border);
+            border-radius: 10px;
+            grid-column: 1 / -1;
+        }
+        .load-error-tip strong { color: var(--color-danger); }
+
+        @keyframes gd-shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+        .skeleton-card {
+            border-radius: var(--img-radius);
+            background: linear-gradient(90deg, var(--color-bg-alt) 25%, #FBF8F3 50%, var(--color-bg-alt) 75%);
+            background-size: 200% 100%;
+            animation: gd-shimmer 1.5s linear infinite;
+        }
+        .skeleton-card--square { aspect-ratio: 1 / 1; }
+        @media (prefers-reduced-motion: reduce) {
+            .skeleton-card { animation: none; }
+            * { transition-duration: .01ms !important; }
+        }
+        [hidden] { display: none !important; }
+
+        /* ============================================================
+           DAILY INTEL
+           ============================================================ */
         .intel-section {
-            background: linear-gradient(135deg, #2B2620 0%, #352E27 100%);
-            border: 1px solid rgba(217,182,121,.30);
+            background: linear-gradient(140deg, #2B2620 0%, #38302A 100%);
+            border: 1px solid rgba(217, 182, 121, .28);
             border-radius: var(--card-radius);
-            padding: 2.2rem 1.8rem 1.6rem;
+            padding: 2.3rem 1.9rem 1.7rem;
             color: #F1E8DF;
-            margin: -1rem 0 4.5rem;
-            box-shadow: 0 8px 28px rgba(20,17,14,.16);
+            margin: -1rem 0 5rem;
+            box-shadow: 0 14px 40px rgba(20, 17, 14, .18);
+            position: relative;
+            overflow: hidden;
+        }
+        .intel-section::before {
+            content: '';
+            position: absolute;
+            top: -80px; right: -60px;
+            width: 260px; height: 260px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(217, 182, 121, .12), transparent 68%);
+            pointer-events: none;
         }
         .intel-head {
             display: flex; align-items: flex-end; justify-content: space-between;
-            gap: 1rem; flex-wrap: wrap; margin-bottom: 1.2rem;
+            gap: 1rem; flex-wrap: wrap;
+            margin-bottom: 1.3rem;
+            position: relative;
         }
         .intel-head .title {
-            font-size: 1.3rem; font-weight: 600; color: #E8C87E;
-            letter-spacing: .01em; font-family: var(--font-serif);
+            font-size: 1.28rem;
+            font-weight: 600;
+            color: #E8C87E;
+            letter-spacing: .01em;
+            font-family: var(--font-serif);
         }
         .intel-head .sub {
-            font-size: .82rem; color: rgba(201,182,138,.75);
-            margin-top: .3rem; display: block;
+            font-size: .82rem;
+            color: rgba(201, 182, 138, .75);
+            margin-top: .35rem;
+            display: block;
         }
         .intel-live {
-            display: inline-flex; align-items: center; gap: .35rem;
-            font-size: .75rem; color: rgba(201,182,138,.8);
+            display: inline-flex; align-items: center; gap: .38rem;
+            font-size: .74rem;
+            color: rgba(201, 182, 138, .82);
+            letter-spacing: .04em;
         }
         .intel-live::before {
-            content: ''; width: 7px; height: 7px; border-radius: 50%;
+            content: '';
+            width: 7px; height: 7px;
+            border-radius: 50%;
             background: #E8C87E;
-            box-shadow: 0 0 0 0 rgba(232,200,126,.55);
-            animation: intelPulse 2s infinite;
+            box-shadow: 0 0 0 0 rgba(232, 200, 126, .55);
+            animation: intelPulse 2.2s infinite;
         }
         @keyframes intelPulse {
-            0% { box-shadow: 0 0 0 0 rgba(232,200,126,.55); }
-            70% { box-shadow: 0 0 0 8px rgba(232,200,126,0); }
-            100% { box-shadow: 0 0 0 0 rgba(232,200,126,0); }
+            0%   { box-shadow: 0 0 0 0 rgba(232, 200, 126, .55); }
+            70%  { box-shadow: 0 0 0 8px rgba(232, 200, 126, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(232, 200, 126, 0); }
         }
+
         .intel-scroll {
-            display: flex; gap: .9rem; overflow-x: auto; padding-bottom: .6rem;
-            scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;
+            display: flex; gap: .9rem;
+            overflow-x: auto;
+            padding-bottom: .7rem;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            position: relative;
         }
         .intel-scroll::-webkit-scrollbar { height: 6px; }
-        .intel-scroll::-webkit-scrollbar-thumb { background: rgba(217,182,121,.35); border-radius: 3px; }
+        .intel-scroll::-webkit-scrollbar-track { background: rgba(255, 255, 255, .05); border-radius: 3px; }
+        .intel-scroll::-webkit-scrollbar-thumb { background: rgba(217, 182, 121, .35); border-radius: 3px; }
+        .intel-scroll::-webkit-scrollbar-thumb:hover { background: rgba(217, 182, 121, .55); }
+
         .intel-card {
-            flex: 0 0 268px; scroll-snap-align: start;
-            background: #3A322B;
-            border: 1px solid rgba(217,182,121,.22);
-            border-radius: var(--card-radius); padding: 1.1rem 1.15rem;
+            flex: 0 0 272px;
+            scroll-snap-align: start;
+            background: #38302A;
+            border: 1px solid rgba(217, 182, 121, .2);
+            border-radius: var(--card-radius);
+            padding: 1.15rem 1.2rem;
             color: #F1E8DF;
-            display: flex; flex-direction: column; gap: .55rem;
-            transition: .4s cubic-bezier(.25,.1,.25,1);
+            display: flex; flex-direction: column; gap: .6rem;
+            transition: all var(--dur) var(--ease);
         }
         .intel-card:hover {
             background: #423A32;
-            border-color: rgba(217,182,121,.55);
+            border-color: rgba(217, 182, 121, .5);
+            transform: translateY(-2px);
         }
         .intel-card:first-child {
             background: #423A32;
@@ -402,307 +861,510 @@
             border-width: 1.5px;
         }
         .intel-type {
-            display: inline-block; font-size: .75rem; font-weight: 700; letter-spacing: .06em;
-            padding: .25rem .55rem; border-radius: 4px; align-self: flex-start;
-            background: rgba(232,200,126,.14); color: #E8C87E;
-            border: 1px solid rgba(232,200,126,.5);
+            display: inline-block;
+            font-size: .7rem;
+            font-weight: 700;
+            letter-spacing: .08em;
+            padding: .26rem .6rem;
+            border-radius: 4px;
+            align-self: flex-start;
+            background: rgba(232, 200, 126, .14);
+            color: #E8C87E;
+            border: 1px solid rgba(232, 200, 126, .5);
         }
-        .intel-type--drop {
-            background: rgba(201,107,90,.18); color: #E8A79B;
-            border-color: rgba(232,167,155,.5);
-        }
-        .intel-type--new {
-            background: rgba(159,208,138,.14); color: #A8CE9A;
-            border-color: rgba(168,206,154,.45);
-        }
-        .intel-type--compare {
-            background: rgba(143,195,207,.14); color: #9BC5D0;
-            border-color: rgba(155,197,208,.45);
-        }
-        .intel-type--collector {
-            background: rgba(201,169,220,.14); color: #C9A9DC;
-            border-color: rgba(201,169,220,.45);
-        }
-        .intel-type--platform {
-            background: rgba(232,200,126,.14); color: #E8C87E;
-            border-color: rgba(232,200,126,.5);
-        }
-        .intel-text { font-size: .88rem; line-height: 1.65; color: rgba(241,232,223,.92); }
-        .intel-meta { font-size: .75rem; color: rgba(201,182,138,.55); margin-top: auto; }
+        .intel-type--drop { background: rgba(201, 107, 90, .18); color: #E8A79B; border-color: rgba(232, 167, 155, .5); }
+        .intel-type--new { background: rgba(159, 208, 138, .14); color: #A8CE9A; border-color: rgba(168, 206, 154, .45); }
+        .intel-type--compare { background: rgba(143, 195, 207, .14); color: #9BC5D0; border-color: rgba(155, 197, 208, .45); }
+        .intel-type--collector { background: rgba(201, 169, 220, .14); color: #C9A9DC; border-color: rgba(201, 169, 220, .45); }
+        .intel-type--platform { background: rgba(232, 200, 126, .14); color: #E8C87E; border-color: rgba(232, 200, 126, .5); }
+
+        .intel-text { font-size: .87rem; line-height: 1.7; color: rgba(241, 232, 223, .93); }
+        .intel-meta { font-size: .74rem; color: rgba(201, 182, 138, .55); margin-top: auto; letter-spacing: .02em; }
         .intel-note {
-            font-size: .75rem; color: rgba(201,182,138,.5);
-            margin-top: 1rem; line-height: 1.6;
+            font-size: .74rem;
+            color: rgba(201, 182, 138, .5);
+            margin-top: 1rem;
+            line-height: 1.65;
+            position: relative;
         }
 
-        /* ---------- 区块标题 ---------- */
-        .section-head2 { margin-bottom: 1.4rem; display: flex; align-items: flex-end; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
-        .section-head2 .title { font-size: 1.3rem; font-weight: 700; color: var(--color-text); font-family: var(--font-serif); }
-        .section-head2 .sub-line { font-size: .85rem; color: var(--color-text-secondary); margin-top: .25rem; display: block; }
-        .section-head2 .more { font-size: .85rem; color: var(--color-text-secondary); text-decoration: none; white-space: nowrap; }
-        .section-head2 .more:hover { color: var(--color-primary); }
-        .more-btn {
-            display: inline-flex; align-items: center;
-            border: 1px solid var(--color-border); background: var(--color-white);
-            color: var(--color-text-secondary); font-size: .85rem; font-weight: 500;
-            padding: .5rem 1.25rem; border-radius: 999px; text-decoration: none;
-            transition: .3s cubic-bezier(.25,.1,.25,1);
-        }
-        .more-btn:hover { border-color: var(--color-gold); color: var(--color-primary); background: var(--color-gold-soft); }
-        .section-note { font-size: .78rem; color: var(--color-text-muted); line-height: 1.6; margin-top: -.8rem; margin-bottom: 2rem; }
+        /* ============================================================
+           BROWSE BY CATEGORY
+           ============================================================ */
+        .browse-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(184px, 1fr)); gap: 1.15rem; }
 
-        /* ---------- 今日发现 ---------- */
-        .finds-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.8rem; }
-        .finds-card { text-decoration: none; color: inherit; display: block; }
-        .finds-image {
-            position: relative; aspect-ratio: 1 / 1; border-radius: var(--img-radius);
-            overflow: hidden; background: var(--color-primary-light); margin-bottom: .8rem;
+        .browse-card {
+            position: relative;
+            display: flex; flex-direction: column; gap: .35rem;
+            padding: 1.5rem 1.3rem;
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: var(--card-radius);
+            text-decoration: none;
+            color: var(--color-text);
+            cursor: pointer;
+            box-shadow: var(--shadow-xs);
+            transition: all var(--dur) var(--ease);
+            overflow: hidden;
         }
-        .finds-image img { width: 100%; height: 100%; object-fit: cover; display: block; transition: .5s cubic-bezier(.25,.1,.25,1); }
-        .finds-card:hover .finds-image img { transform: scale(1.04); }
-        .finds-title { font-size: .98rem; font-weight: 600; color: var(--color-text); margin-bottom: .15rem; font-family: var(--font-serif); }
-        .finds-meta { font-size: .8rem; color: var(--color-text-secondary); margin-bottom: .4rem; }
-        .finds-badge {
-            position: absolute; top: .5rem; right: .5rem; display: inline-block;
-            font-size: .75rem; font-weight: 600; padding: .2rem .55rem; border-radius: 4px;
+        .browse-card::after {
+            content: '→';
+            position: absolute;
+            right: 1.1rem; bottom: 1.05rem;
+            font-size: .95rem;
+            color: var(--color-gold);
+            opacity: 0;
+            transform: translateX(-6px);
+            transition: all var(--dur) var(--ease);
         }
-        .finds-card--organic .finds-badge, .finds-card--promoted .finds-badge {
-            background: transparent; color: var(--color-success); border: 1px solid var(--color-success);
+        .browse-card:hover {
+            border-color: var(--color-gold);
+            box-shadow: var(--shadow-md);
+            transform: translateY(-3px);
         }
-        .finds-reason {
-            font-size: .78rem; color: var(--color-primary);
-            background: var(--color-gold-soft); border-left: 2px solid var(--color-gold);
-            padding: .28rem .5rem; border-radius: 3px; margin: .35rem 0 .4rem;
+        .browse-card:hover::after { opacity: 1; transform: translateX(0); }
+
+        .browse-card .cat-name { font-weight: 600; font-size: 1.06rem; font-family: var(--font-serif); }
+        .browse-card .cat-en { font-size: .74rem; color: var(--color-text-muted); letter-spacing: .1em; text-transform: uppercase; }
+        .browse-card .cat-stats { font-size: .78rem; color: var(--color-text-secondary); margin-top: .45rem; }
+        .browse-card .cat-range { font-size: .78rem; color: var(--color-bronze-muted); font-variant-numeric: tabular-nums; }
+
+        /* ============================================================
+           INSIGHTS
+           ============================================================ */
+        .insight-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.35rem; }
+
+        .insight-card {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: var(--card-radius);
+            padding: 1.5rem 1.4rem 1.6rem;
+            text-decoration: none;
+            color: var(--color-text);
+            display: block;
+            box-shadow: var(--shadow-xs);
+            transition: all var(--dur) var(--ease);
+            position: relative;
+            overflow: hidden;
+        }
+        .insight-card::before {
+            content: '';
+            position: absolute;
+            left: 0; top: 0; bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, var(--color-gold), rgba(156, 122, 58, .05));
+            opacity: 0;
+            transition: opacity var(--dur) var(--ease);
+        }
+        .insight-card:hover {
+            border-color: var(--color-gold);
+            box-shadow: var(--shadow-md);
+            transform: translateY(-3px);
+        }
+        .insight-card:hover::before { opacity: 1; }
+
+        .insight-kicker {
+            font-size: .72rem;
+            font-weight: 700;
+            letter-spacing: .12em;
+            color: var(--color-bronze-muted);
+            margin-bottom: .55rem;
+            text-transform: uppercase;
+        }
+        .insight-title {
+            font-size: 1.06rem;
+            font-weight: 600;
+            margin-bottom: .55rem;
             line-height: 1.5;
+            font-family: var(--font-serif);
+            letter-spacing: -.005em;
         }
-        .finds-timestamp { font-size: .75rem; color: var(--color-text-muted); }
-        .finds-caption { font-size: .75rem; color: var(--color-text-muted); }
+        .insight-desc { font-size: .83rem; color: var(--color-text-secondary); line-height: 1.62; }
 
-        /* ---------- 价格 ---------- */
-        .finds-price, .item-price { display: flex; align-items: baseline; gap: .35rem; flex-wrap: wrap; }
-        .finds-price { margin: 0 0 .5rem; font-size: .88rem; }
-        .price-main { color: var(--color-primary); font-weight: 700; letter-spacing: .01em; }
-        .price-main--enquiry { color: var(--color-text-secondary); font-weight: 600; letter-spacing: .02em; }
-        .price-tag {
-            display: inline-block; font-size: .75rem; font-weight: 500;
-            color: var(--color-text-muted); border: 1px solid var(--color-border);
-            padding: 0 .3rem; border-radius: 3px; line-height: 1.5; letter-spacing: .02em;
+        /* ============================================================
+           WHY GUDONG
+           ============================================================ */
+        h2 {
+            color: var(--color-text);
+            margin-bottom: 1.35rem;
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: -.02em;
+            font-family: var(--font-serif);
         }
-        .price-tag--enquiry { color: var(--color-bronze-muted); border-color: var(--color-bronze-muted); }
+        .how-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.45rem;
+            margin: 1.7rem 0 1.4rem;
+            text-align: left;
+        }
+        .how-card {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: var(--card-radius);
+            padding: 1.6rem 1.4rem 1.7rem;
+            box-shadow: var(--shadow-xs);
+            transition: all var(--dur) var(--ease);
+            position: relative;
+        }
+        .how-card:hover {
+            border-color: var(--color-gold);
+            box-shadow: var(--shadow-md);
+            transform: translateY(-3px);
+        }
+        .how-num {
+            font-family: var(--font-sans);
+            font-size: .74rem;
+            font-weight: 700;
+            color: var(--color-bronze-muted);
+            letter-spacing: .14em;
+            margin-bottom: .55rem;
+        }
+        .how-title {
+            font-size: 1.06rem;
+            font-weight: 600;
+            color: var(--color-text);
+            margin-bottom: .5rem;
+            line-height: 1.4;
+            font-family: var(--font-serif);
+        }
+        .how-desc { font-size: .83rem; color: var(--color-text-secondary); line-height: 1.62; }
+        .how-sub { font-size: .85rem; color: var(--color-text-secondary); margin: .4rem 0 0; letter-spacing: .02em; }
 
-        /* ---------- 刚刚上新 ---------- */
-        .goods-list { display: grid; grid-template-columns: repeat(6, 1fr); gap: 1.2rem; margin-top: .5rem; }
-        .goods-list .item-card { aspect-ratio: auto; min-width: 0; min-height: 0; height: auto; }
-        .goods-list .item-card img { width: 100%; height: auto; aspect-ratio: 1 / 1; max-height: none; object-fit: cover; }
-        .item-card {
-            position: relative; display: block; aspect-ratio: 1 / 1; border-radius: var(--img-radius);
-            overflow: hidden; background: var(--color-primary-light); text-decoration: none; transition: .4s cubic-bezier(.25,.1,.25,1);
+        /* ============================================================
+           SELLER CTA
+           ============================================================ */
+        .seller-cta {
+            background: linear-gradient(145deg, #FDFBF7 0%, #F3EAE0 100%);
+            border: 1px solid rgba(122, 78, 51, 0.12);
+            border-radius: var(--card-radius);
+            padding: 3rem 2rem 2.8rem;
+            text-align: center;
+            box-shadow: 0 16px 40px rgba(36, 31, 26, 0.06);
+            position: relative;
+            overflow: hidden;
         }
-        .item-card:hover { box-shadow: 0 4px 16px rgba(37,34,30,.10); }
-        .item-card img { width: 100%; height: 100%; object-fit: cover; display: block; }
-        .item-card .item-info {
-            position: absolute; left: .55rem; right: .55rem; bottom: .55rem;
-            background: rgba(20,17,14,.62); color: #fff; padding: .32rem .6rem;
-            border-radius: 4px; display: flex; flex-direction: column; gap: .1rem;
+        /* 顶部金色装饰线 */
+        .seller-cta::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 50%;
+            transform: translateX(-50%);
+            width: 80px; height: 3px;
+            background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
+            border-radius: 0 0 3px 3px;
         }
-        .item-card .item-price { font-size: .75rem; gap: .3rem; }
-        .item-card .price-main { color: #F1E8DF; font-weight: 600; }
-        .item-card .price-main--enquiry { color: rgba(241,232,223,.9); font-weight: 500; }
-        .item-card .price-tag { font-size: .75rem; padding: 0 .25rem; color: rgba(241,232,223,.75); border-color: rgba(241,232,223,.35); }
-        .item-card .price-tag--enquiry { color: rgba(241,232,223,.85); border-color: rgba(241,232,223,.55); }
+        .seller-cta .title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--color-text);
+            margin-bottom: 0.8rem;
+            font-family: var(--font-serif);
+            letter-spacing: -0.01em;
+        }
+        .seller-cta .desc {
+            font-size: 0.95rem;
+            color: var(--color-text-secondary);
+            margin-bottom: 2.2rem;
+            line-height: 1.7;
+            max-width: 520px;
+            margin-left: auto;
+            margin-right: auto;
+        }
 
-        /* ---------- 状态 ---------- */
-        .no-result { text-align: center; padding: 3rem 1rem; color: var(--color-text-muted); }
-        .load-error-tip {
-            text-align: center; padding: 2rem 1rem; color: var(--color-text-muted);
-            font-size: .85rem; line-height: 1.7; border: 1px dashed var(--color-border);
-            border-radius: 8px; grid-column: 1 / -1;
+        /* 按钮与席位条容器 */
+        .seller-actions {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 1.8rem;
         }
-        .load-error-tip strong { color: var(--color-danger); }
-        @keyframes gd-shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
-        .skeleton-card {
-            border-radius: 8px;
-            background: linear-gradient(90deg, var(--color-primary-light) 25%, #FAF6F0 50%, var(--color-primary-light) 75%);
-            background-size: 200% 100%; animation: gd-shimmer 1.4s linear infinite;
-        }
-        .skeleton-card--square { aspect-ratio: 1 / 1; }
-        @media (prefers-reduced-motion: reduce) { .skeleton-card { animation: none; } }
-        [hidden] { display: none !important; }
 
-        /* ---------- Debug ---------- */
+        /* 主按钮 */
+        .seller-cta .btn-publish {
+            font-size: 0.95rem;
+            padding: 0.9rem 2.2rem;
+            min-height: 48px;
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+            box-shadow: 0 8px 24px rgba(122, 78, 51, 0.25);
+            border-radius: var(--btn-radius);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            transition: all 0.3s cubic-bezier(0.22, 0.61, 0.36, 1);
+        }
+        .seller-cta .btn-publish:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 32px rgba(122, 78, 51, 0.35);
+        }
+        .seller-cta .btn-publish .arrow {
+            transition: transform 0.3s ease;
+        }
+        .seller-cta .btn-publish:hover .arrow {
+            transform: translateX(4px);
+        }
+
+        /* ============================================================
+           SEATS METER (实时席位条)
+           ============================================================ */
+        .seats-meter {
+            max-width: 440px;
+            width: 100%;
+            margin: 0 auto;
+        }
+        .seats-meter-head {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-bottom: .6rem;
+        }
+        .seats-label {
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+            color: var(--color-text-secondary);
+            font-size: .82rem;
+            font-weight: 500;
+            letter-spacing: .01em;
+        }
+        .seats-label .dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--color-success);
+            box-shadow: 0 0 0 3px rgba(82, 102, 87, .15);
+            animation: pulse-dot 2.2s infinite;
+        }
+        @keyframes pulse-dot {
+            0%   { box-shadow: 0 0 0 0 rgba(82, 102, 87, .32); }
+            70%  { box-shadow: 0 0 0 8px rgba(82, 102, 87, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(82, 102, 87, 0); }
+        }
+
+        .seats-count {
+            display: inline-flex;
+            align-items: baseline;
+            gap: .22rem;
+            font-variant-numeric: tabular-nums;
+        }
+        .seats-count .seats-num {
+            font-size: 1.08rem;
+            font-weight: 800;
+            color: var(--color-primary);
+            letter-spacing: .01em;
+        }
+        .seats-count .seats-total {
+            font-size: .78rem;
+            color: var(--color-text-muted);
+        }
+
+        /* 进度轨道 */
+        .seats-track {
+            height: 4px;
+            border-radius: 999px;
+            background: rgba(122, 78, 51, .10);
+            overflow: hidden;
+            position: relative;
+        }
+        .seats-fill {
+            height: 100%;
+            width: 0;
+            border-radius: 999px;
+            background: linear-gradient(90deg, var(--color-gold) 0%, var(--color-primary) 100%);
+            transition: width 1.4s cubic-bezier(.22, .61, .36, 1);
+            position: relative;
+        }
+        /* 微光扫过 —— 让它有“活着”的实时感 */
+        .seats-fill::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, .45) 50%, transparent 100%);
+            animation: seats-shine 2.8s ease-in-out infinite;
+        }
+        @keyframes seats-shine {
+            0%   { transform: translateX(-100%); }
+            60%  { transform: translateX(100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        /* ============================================================
+           FAQ
+           ============================================================ */
+        .faq-list { max-width: 780px; margin: 0 auto; }
+        .faq-item { border-bottom: 1px solid var(--color-border); }
+        .faq-item:first-child { border-top: 1px solid var(--color-border); }
+        .faq-item summary {
+            cursor: pointer;
+            padding: 1.05rem .3rem;
+            font-size: .95rem;
+            font-weight: 600;
+            color: var(--color-text);
+            list-style: none;
+            position: relative;
+            padding-right: 2.4rem;
+            transition: color var(--dur) var(--ease);
+        }
+        .faq-item summary:hover { color: var(--color-primary); }
+        .faq-item summary::-webkit-details-marker { display: none; }
+        .faq-item summary::after {
+            content: '+';
+            position: absolute;
+            right: .3rem; top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.2rem;
+            font-weight: 300;
+            color: var(--color-gold);
+            transition: transform var(--dur) var(--ease);
+        }
+        .faq-item[open] summary::after { content: '−'; }
+        .faq-item .faq-answer {
+            font-size: .86rem;
+            color: var(--color-text-secondary);
+            line-height: 1.78;
+            padding: 0 .3rem 1.2rem;
+        }
+
+        /* ============================================================
+           FOOTER
+           ============================================================ */
+        footer {
+            text-align: center;
+            padding: 2.6rem 5% 2rem;
+            background: var(--color-surface);
+            color: var(--color-text-secondary);
+            margin-top: 1rem;
+            font-size: .78rem;
+            border-top: 1px solid var(--color-border);
+        }
+        .footer-nav {
+            display: flex; flex-wrap: wrap; justify-content: center;
+            gap: 1.4rem;
+            margin-bottom: 1.3rem;
+        }
+        .footer-nav a {
+            color: var(--color-text-secondary);
+            text-decoration: none;
+            font-size: .82rem;
+            transition: color var(--dur) var(--ease);
+        }
+        .footer-nav a:hover { color: var(--color-primary); }
+        .footer-disclaimer {
+            max-width: 640px;
+            margin: 0 auto 1.2rem;
+            font-size: .77rem;
+            line-height: 1.7;
+            color: var(--color-text-muted);
+        }
+
+        .app-install-btn {
+            display: inline-flex; align-items: center; gap: .3rem;
+            margin-left: .6rem;
+            padding: .5rem .85rem;
+            min-height: 40px;
+            border: 1px solid var(--color-border);
+            border-radius: 999px;
+            color: var(--color-qianjinzong);
+            font-size: .76rem;
+            text-decoration: none;
+            vertical-align: middle;
+            transition: all var(--dur) var(--ease);
+        }
+        .app-install-btn:hover {
+            border-color: var(--color-primary);
+            color: var(--color-primary);
+            background: var(--color-primary-light);
+        }
+        .app-install-btn svg { width: 12px; height: 12px; flex-shrink: 0; fill: currentColor; }
+
+        /* ============================================================
+           DEBUG
+           ============================================================ */
         .gd-debug {
             position: fixed; left: 8px; bottom: 8px; z-index: 9999;
-            max-width: min(94vw, 440px); max-height: 60vh; overflow: auto;
-            background: rgba(20,17,14,.94); color: #E8E2D8;
+            max-width: min(94vw, 460px); max-height: 60vh; overflow: auto;
+            background: rgba(20, 17, 14, .95);
+            color: #E8E2D8;
             font: 12px/1.6 ui-monospace, Menlo, Consolas, monospace;
-            padding: 10px 12px; border-radius: 8px; white-space: pre-wrap; word-break: break-all;
+            padding: 10px 12px;
+            border-radius: 8px;
+            white-space: pre-wrap; word-break: break-all;
+            box-shadow: var(--shadow-lg);
         }
         .gd-debug .ok { color: #9FD08A; }
         .gd-debug .warn { color: #E6C46B; }
         .gd-debug .bad { color: #F0A090; }
 
-        /* ---------- 按类别逛藏品 ---------- */
-        .browse-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1.1rem; }
-        .browse-card {
-            position: relative; display: flex; flex-direction: column; gap: .35rem;
-            padding: 1.4rem 1.2rem; background: var(--color-white);
-            border: 1px solid var(--color-border); border-radius: var(--card-radius);
-            text-decoration: none; color: var(--color-text); cursor: pointer; transition: .4s cubic-bezier(.25,.1,.25,1);
-            overflow: hidden;
-        }
-        .browse-card:hover { border-color: var(--color-gold); color: var(--color-primary); box-shadow: 0 4px 16px rgba(37,34,30,.08); }
-        .browse-card .cat-name { font-weight: 600; font-size: 1.05rem; font-family: var(--font-serif); }
-        .browse-card .cat-en { font-size: .78rem; color: var(--color-text-muted); letter-spacing: .04em; }
-        .browse-card .cat-stats { font-size: .78rem; color: var(--color-text-secondary); margin-top: .3rem; }
-        .browse-card .cat-range { font-size: .78rem; color: var(--color-bronze-muted); }
+        /* ============================================================
+           LANG VISIBILITY
+           ============================================================ */
+        body[data-lang="en"] .zh { display: none; }
+        body[data-lang="zh"] .en { display: none; }
 
-        /* ---------- 情报/知识 ---------- */
-        .insight-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.3rem; }
-        .insight-card {
-            background: var(--color-white); border: 1px solid var(--color-border);
-            border-radius: var(--card-radius); padding: 1.4rem 1.3rem 1.5rem;
-            text-decoration: none; color: var(--color-text); transition: .4s cubic-bezier(.25,.1,.25,1); display: block;
-        }
-        .insight-card:hover { border-color: var(--color-gold); box-shadow: 0 4px 16px rgba(37,34,30,.08); }
-        .insight-kicker { font-size: .75rem; font-weight: 600; letter-spacing: .08em; color: var(--color-bronze-muted); margin-bottom: .45rem; }
-        .insight-title { font-size: 1.05rem; font-weight: 600; margin-bottom: .45rem; line-height: 1.4; font-family: var(--font-serif); }
-        .insight-desc { font-size: .82rem; color: var(--color-text-secondary); line-height: 1.55; }
-
-        /* ---------- 平台如何帮你避坑 ---------- */
-        .how-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.4rem; margin: 1.6rem 0 1.4rem; text-align: left; }
-        .how-card {
-            background: var(--color-white); border: 1px solid var(--color-border);
-            border-radius: var(--card-radius); padding: 1.4rem 1.3rem 1.5rem; transition: .4s cubic-bezier(.25,.1,.25,1);
-        }
-        .how-card:hover { border-color: var(--color-gold); box-shadow: 0 4px 16px rgba(37,34,30,.08); }
-        .how-num {
-            font-family: "Inter Display", "Inter", "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
-            font-size: .78rem; font-weight: 600; color: var(--color-bronze-muted);
-            letter-spacing: .08em; margin-bottom: .4rem;
-        }
-        .how-title { font-size: 1.05rem; font-weight: 600; color: var(--color-text); margin-bottom: .4rem; line-height: 1.35; font-family: var(--font-serif); }
-        .how-desc { font-size: .82rem; color: var(--color-text-secondary); line-height: 1.55; }
-        .how-sub { font-size: .85rem; color: var(--color-text-secondary); margin: .35rem 0 0; letter-spacing: .02em; }
-
-        /* ---------- 卖家招募 ---------- */
-        .seller-cta {
-            background: linear-gradient(135deg, var(--color-primary-light) 0%, #FAF3EA 100%);
-            border: 1px solid var(--color-border); border-radius: var(--card-radius);
-            padding: 2.4rem 1.8rem; text-align: center;
-        }
-        .seller-cta .title { font-size: 1.4rem; font-weight: 600; color: var(--color-text); margin-bottom: .55rem; font-family: var(--font-serif); }
-        .seller-cta .desc { font-size: .9rem; color: var(--color-text-secondary); margin-bottom: 1.3rem; line-height: 1.65; }
-        .seller-cta .btn-publish { font-size: .92rem; padding: .8rem 1.7rem; min-height: 44px; }
-        /* 实时剩余席位 */
-        .seats-line {
-            display: inline-flex; align-items: center; gap: .5rem;
-            margin-top: .7rem; padding: .5rem 1.1rem;
-            background: rgba(255,255,255,.75); border: 1px solid var(--color-border);
-            border-radius: 999px; font-size: .84rem; color: var(--color-text-secondary);
-        }
-        .seats-line .seats-label { display: inline-flex; align-items: center; gap: .35rem; }
-        .seats-line .dot {
-            width: 7px; height: 7px; border-radius: 50%; background: var(--color-success);
-            display: inline-block; box-shadow: 0 0 0 3px rgba(82,102,87,.15);
-        }
-        .seats-line .seats-num {
-            font-weight: 800; color: var(--color-primary); font-size: 1.02rem;
-            font-variant-numeric: tabular-nums; letter-spacing: .02em;
-        }
-        .seats-line .seats-total { color: var(--color-text-muted); font-size: .78rem; }
-
-        /* ---------- FAQ ---------- */
-        .faq-list { max-width: 760px; margin: 0 auto; }
-        .faq-item { border-bottom: 1px solid var(--color-border); padding: .2rem 0; }
-        .faq-item summary {
-            cursor: pointer; padding: .95rem .2rem; font-size: .95rem; font-weight: 600;
-            color: var(--color-text); list-style: none; position: relative; padding-right: 2rem;
-        }
-        .faq-item summary::-webkit-details-marker { display: none; }
-        .faq-item summary::after {
-            content: '+'; position: absolute; right: .2rem; top: 50%; transform: translateY(-50%);
-            font-size: 1.15rem; color: var(--color-primary); font-weight: 400; transition: .4s cubic-bezier(.25,.1,.25,1);
-        }
-        .faq-item[open] summary::after { content: '−'; }
-        .faq-item .faq-answer { font-size: .86rem; color: var(--color-text-secondary); line-height: 1.7; padding: 0 .2rem 1rem; }
-
-        /* ---------- Footer ---------- */
-        footer {
-        text-align: center;
-        padding: 2.2rem 5% 1.8rem;
-        background: var(--color-white);
-        color: var(--color-text-secondary);
-        margin-top: 1rem;
-        font-size: .78rem;
-        border-top: 1px solid var(--color-border);
-        }
-        .footer-nav {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 1.3rem;
-        margin-bottom: 1.2rem;
-        }
-        .footer-nav a { color: var(--color-text-secondary); text-decoration: none; font-size: .82rem; }
-        .footer-nav a:hover { color: var(--color-primary); }
-        .footer-disclaimer {
-        max-width: 620px;
-        margin: 0 auto 1.1rem;
-        font-size: .78rem;
-        line-height: 1.65;
-        color: var(--color-text-muted);
-        }
-
-        .app-install-btn {
-            display: inline-flex; align-items: center; gap: .3rem; margin-left: .6rem;
-            padding: .55rem .85rem; min-height: 44px; border: 1px solid #e3d9cf; border-radius: 999px;
-            color: #7a6a5c; font-size: .78rem; text-decoration: none; vertical-align: middle; transition: .4s cubic-bezier(.25,.1,.25,1);
-        }
-        .app-install-btn:hover { border-color: #7A4E33; color: #7A4E33; background: #f0e4d8; }
-        .app-install-btn svg { width: 12px; height: 12px; flex-shrink: 0; fill: currentColor; }
-
-        [data-lang="en"] .zh { display: none; }
-        [data-lang="zh"] .en { display: none; }
-
-        /* ---------- 响应式 ---------- */
+        /* ============================================================
+           RESPONSIVE
+           ============================================================ */
         @media (max-width: 1100px) {
             .how-grid { grid-template-columns: repeat(3, 1fr); }
         }
-        @media (max-width: 820px) {
-            header { height: 62px; gap: .6rem; }
-            .btn-publish { padding: .65rem .85rem; font-size: .8rem; min-height: 44px; }
-            .container { padding-top: 2.4rem; }
-            .finds-grid { grid-template-columns: repeat(2, 1fr); }
-            .goods-list { grid-template-columns: repeat(4, 1fr); }
-            .intel-card { flex: 0 0 230px; }
-            .how-grid { grid-template-columns: repeat(2, 1fr); }
+
+        @media (max-width: 900px) {
+            .brand p { display: none; }
         }
+
+        @media (max-width: 820px) {
+            header { height: 64px; gap: .6rem; }
+            .brand-logo-img { height: 34px; }
+            .btn-publish { padding: .65rem .9rem; font-size: .8rem; }
+            .container { padding-top: 2.5rem; }
+            .finds-grid { grid-template-columns: repeat(2, 1fr); gap: 1.2rem; }
+            .goods-list { grid-template-columns: repeat(4, 1fr); }
+            .intel-card { flex: 0 0 236px; }
+            .how-grid { grid-template-columns: repeat(2, 1fr); }
+            .intel-section { padding: 1.9rem 1.4rem 1.4rem; }
+        }
+
         @media (max-width: 560px) {
+            body { font-size: 15px; }
             .brand-logo-img { height: 30px; }
-            .brand h1 { font-size: 1.15rem; }
+            .brand h1 { font-size: 1.12rem; }
+            .brand p { display: none; }
+            .header-right { gap: .4rem; }
+            .btn-publish-text { display: none; }
             .container { padding: 2rem 4.5% 3rem; }
-            section { margin-bottom: 3.8rem; }
-            .goods-list { grid-template-columns: repeat(3, 1fr); gap: .6rem; }
-            .finds-grid { grid-template-columns: repeat(2, 1fr); gap: .8rem; }
+            section { margin-bottom: 4rem; }
+            h2 { font-size: 1.5rem; }
+            .section-head2 .title { font-size: 1.18rem; }
+            .hero-title-main { font-size: 1.6rem; }
+            .goods-list { grid-template-columns: repeat(3, 1fr); gap: .7rem; }
+            .finds-grid { grid-template-columns: repeat(2, 1fr); gap: .9rem; }
             .item-card .item-info { padding: .3rem .5rem; gap: .1rem; }
             .item-card .item-price { font-size: .78rem; gap: .25rem; }
-            .item-card .price-tag { font-size: .75rem; padding: .1rem .3rem; }
-            .finds-price { font-size: .82rem; }
+            .item-card .price-tag { font-size: .7rem; padding: .1rem .3rem; }
+            .finds-price { font-size: .84rem; }
             .how-grid { grid-template-columns: 1fr; }
-            .intel-section { padding: 1.4rem 1.1rem 1.1rem; border-radius: var(--card-radius); }
-            .intel-card { flex: 0 0 210px; }
+            .intel-section { padding: 1.5rem 1.15rem 1.1rem; margin-bottom: 4rem; }
+            .intel-card { flex: 0 0 214px; padding: 1rem 1.05rem; }
             .intel-text { font-size: .84rem; }
+            .seller-cta { padding: 2.2rem 1.3rem 2rem; }
+            .seller-cta .title { font-size: 1.35rem; }
+            .seller-cta .desc { font-size: .88rem; margin-bottom: 1.6rem; }
+            .seller-cta .btn-publish { font-size: .88rem; padding: .8rem 1.6rem; }
         }
     </style>
 </head>
 <body data-lang="zh">
     <header>
-        <div style="display:flex; align-items:center; gap:.9rem;">
+        <div class="header-left">
             <button class="menu-toggle" onclick="openSidebar()" aria-label="menu" aria-expanded="false" id="menuToggle">☰</button>
             <a href="#hero" class="brand">
-                <img src="assets/icons/logo-mark.png" alt="古董圈 Gudong" class="brand-logo-img">
+                <img src="assets/icons/logo-mark.png" alt="古董圈 Gudong" class="brand-logo-img" onerror="this.style.display='none'">
                 <div class="brand-text">
                     <h1><span class="zh">古董圈</span><span class="en">GUDONG</span></h1>
-                    <p><span class="zh">GUDONG.APP</span><span class="en">Gudong — The Collector Circle of Chinese Antiques & Collectibles</span></p>
+                    <p><span class="zh">GUDONG.APP</span><span class="en">Chinese Antiques &amp; Collectibles</span></p>
                 </div>
             </a>
         </div>
@@ -711,7 +1373,7 @@
             <a href="pricing.html#seller-services" class="btn-publish-text">
                 <span class="zh">发布藏品</span><span class="en">Publish</span>
             </a>
-            <button class="lang-btn" onclick="toggleLang()">EN</button>
+            <button class="lang-btn" onclick="toggleLang()" aria-label="Switch language">EN</button>
         </div>
     </header>
 
@@ -780,7 +1442,7 @@
                 </div>
                 <div class="search-tip zh">瓷器 · 玉器 · 钱币 · 书画 · 杂项</div>
                 <div class="search-tip en">Porcelain · Jade · Coins · Paintings · Miscellaneous</div>
-               </div>
+            </div>
         </section>
 
         <!-- ============ 今日发现 ============ -->
@@ -871,7 +1533,7 @@
                 </a>
             </div>
 
-            <div style="margin-top:1.4rem;">
+            <div style="margin-top:1.6rem;">
                 <a href="sellers/index.html" class="more-btn zh">藏家展馆 →</a>
                 <a href="sellers/index.html" class="more-btn en">Collector Gallery →</a>
             </div>
@@ -1007,14 +1669,32 @@
             <div class="seller-cta">
                 <div class="title zh">你也有藏品想展示？</div>
                 <div class="title en">Got pieces you'd like to show?</div>
-                <div class="desc zh">让更多收藏者看到你的藏品。创始藏家 · 现开放限量88席位。</div>
+                <div class="desc zh">让更多收藏者看到你的藏品。创始藏家 · 现开放限量 88 席位。</div>
                 <div class="desc en">Show your pieces to more collectors. Founding Collectors · Limited 88 seats.</div>
-                <a href="pricing.html#seller-services" class="btn-publish">
-                    <span class="zh">申请成为创始藏家 领2个免费展位 →</span><span class="en">Apply as Founding Collector (2 free slots) →</span>
-                </a>
-                <div class="seats-line" id="seatsLine" role="status" aria-live="polite">
-                    <span class="seats-label zh"><span class="dot"></span>实时剩余席位：<span class="seats-num" id="seatsNum">—</span><span class="seats-total">/ 88 席</span></span>
-                    <span class="seats-label en"><span class="dot"></span>Seats remaining: <span class="seats-num" id="seatsNumEn">—</span><span class="seats-total">/ 88</span></span>
+
+                <div class="seller-actions">
+                    <a href="pricing.html#seller-services" class="btn-publish">
+                        <span class="zh">申请成为创始藏家 领 2 个免费展位</span>
+                        <span class="en">Apply as Founding Collector (2 free slots)</span>
+                        <span class="arrow">→</span>
+                    </a>
+
+                    <div class="seats-meter" id="seatsLine" role="status" aria-live="polite">
+                        <div class="seats-meter-head">
+                            <span class="seats-label">
+                                <span class="dot"></span>
+                                <span class="zh">创始藏家席位</span>
+                                <span class="en">Founding Collector Seats</span>
+                            </span>
+                            <span class="seats-count">
+                                <span class="seats-num" id="seatsNum">—</span>
+                                <span class="seats-total">/ 88</span>
+                            </span>
+                        </div>
+                        <div class="seats-track">
+                            <div class="seats-fill" id="seatsFill"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -1036,18 +1716,21 @@
     </footer>
 
     <script>
-        /* ============ 语言 & 侧栏 ============ */
+        /* ============================================================
+           语言 & 侧栏
+           ============================================================ */
         let currentLang = (function () {
             try { return localStorage.getItem('gudong_lang') || 'zh'; }
             catch (e) { return 'zh'; }
         })();
         let currentCat = 'all';
 
-        const API_BASE = (
-            location.hostname === '127.0.0.1' ||
-            location.hostname === 'localhost' ||
-            location.protocol === 'file:'
-        ) ? 'https://gudong.app' : '';
+        /* ------------------------------------------------------------
+           数据源配置：
+           - API_BASE 指向 Vercel 上的 Airtable 代理端点（完整 URL）
+           - 图片 / 本地快照仍使用相对路径，便于同域部署与本地预览
+           ------------------------------------------------------------ */
+        const API_BASE = "https://gudong-app.vercel.app/api/airtable-proxy";
 
         (function applyLang(lang) {
             const map = { zh: 'zh-SG', en: 'en-SG' };
@@ -1058,16 +1741,16 @@
             updateSearchPlaceholder();
         })(currentLang);
 
-        function updateSearchPlaceholder(){
-          const inp = document.getElementById('searchInput');
-          if(!inp) return;
-          if(currentLang === 'zh'){
-            inp.placeholder = "试试搜「青花」「康熙通宝」「和田玉」…";
-            inp.setAttribute('aria-label', '搜索藏品');
-          }else{
-            inp.placeholder = "Try \"blue and white\", \"Kangxi coin\", \"Hetian jade\"…";
-            inp.setAttribute('aria-label', 'Search antiques');
-          }
+        function updateSearchPlaceholder() {
+            const inp = document.getElementById('searchInput');
+            if (!inp) return;
+            if (currentLang === 'zh') {
+                inp.placeholder = "试试搜「青花」「康熙通宝」「和田玉」…";
+                inp.setAttribute('aria-label', '搜索藏品');
+            } else {
+                inp.placeholder = "Try \"blue and white\", \"Kangxi coin\", \"Hetian jade\"…";
+                inp.setAttribute('aria-label', 'Search antiques');
+            }
         }
 
         function openSidebar() {
@@ -1089,31 +1772,35 @@
             document.body.dataset.lang = currentLang;
             document.documentElement.lang = currentLang === 'zh' ? 'zh-SG' : 'en-SG';
             try { localStorage.setItem('gudong_lang', currentLang); } catch (e) {}
-            document.querySelector('.lang-btn').textContent = currentLang === 'zh' ? 'EN' : '中';
+            const lb = document.querySelector('.lang-btn');
+            if (lb) lb.textContent = currentLang === 'zh' ? 'EN' : '中';
             updateSearchPlaceholder();
             renderIntel();
-            if (document.getElementById('searchInput').value.trim()) filterAll();
+            const si = document.getElementById('searchInput');
+            if (si && si.value.trim()) filterAll();
         }
 
-        /* ESC 关闭侧栏 */
         document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeSidebar(); });
-        /* 宽屏自动收起，避免遮罩残留 */
         window.addEventListener('resize', function () { if (window.innerWidth > 900) closeSidebar(); });
 
-        /* ============ 搜索 ============ */
+        /* ============================================================
+           搜索
+           ============================================================ */
         const SEARCH_GROUPS = [
             '#todayFindsGrid .finds-card',
-            '#itemList .item-card',
+            '#itemList .item-card'
         ];
         let firstMatchEl = null;
 
         function searchHaystack(card) {
-            const alt = card.querySelector('img')?.alt || '';
+            const img = card.querySelector('img');
+            const alt = img ? (img.alt || '') : '';
             return ((card.dataset.keywords || '') + ' ' + alt + ' ' + card.textContent).toLowerCase();
         }
 
         function filterAll() {
-            const kw = document.getElementById('searchInput').value.trim().toLowerCase();
+            const kwEl = document.getElementById('searchInput');
+            const kw = kwEl ? kwEl.value.trim().toLowerCase() : '';
             let visible = 0;
             firstMatchEl = null;
 
@@ -1169,19 +1856,22 @@
 
         function doSearch() {
             const visible = filterAll();
-            const kw = document.getElementById('searchInput').value.trim();
+            const kwEl = document.getElementById('searchInput');
+            const kw = kwEl ? kwEl.value.trim() : '';
             if (!kw) {
-                document.getElementById('new-listings')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                const nl = document.getElementById('new-listings');
+                if (nl) nl.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 return;
             }
             if (visible > 0 && firstMatchEl) {
                 firstMatchEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
             } else {
-                document.getElementById('searchResultTip')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                const tip = document.getElementById('searchResultTip');
+                if (tip) tip.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }
         }
 
-        (function bindHotTags(){
+        (function bindHotTags() {
             const wrap = document.getElementById('hotTags');
             if (!wrap) return;
             wrap.addEventListener('click', e => {
@@ -1195,9 +1885,7 @@
             });
         })();
 
-        updateSearchPlaceholder();
-
-        (function bindSearch(){
+        (function bindSearch() {
             const el = document.getElementById('searchInput');
             if (!el) return;
             el.addEventListener('keydown', e => {
@@ -1208,8 +1896,10 @@
             el.addEventListener('search', () => filterAll());
         })();
 
-        /* ============ PWA（SW 必须同域，保持相对路径） ============ */
-        if ('serviceWorker' in navigator) {
+        /* ============================================================
+           PWA（SW 必须同域，保持相对路径）
+           ============================================================ */
+        if ('serviceWorker' in navigator && location.protocol !== 'file:') {
             let updateReady = false;
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('sw.js').then(reg => {
@@ -1238,6 +1928,7 @@
                 }
             });
         }
+
         let lastHiddenAt = Date.now();
         document.addEventListener('visibilitychange', () => {
             if (document.visibilityState === 'hidden') {
@@ -1251,6 +1942,381 @@
                 window.location.reload();
             }
         });
+
+        /* ============================================================
+           工具函数
+           ============================================================ */
+        function esc(s) {
+            return String(s == null ? '' : s)
+                .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+        }
+
+        /* 内联 SVG 占位图 —— 不依赖任何外部文件，本地预览也不会破图 */
+        function svgPlaceholder(label) {
+            const text = String(label == null ? '古董圈' : label).slice(0, 10);
+            const svg =
+                '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="600" height="600">' +
+                '<defs>' +
+                '<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">' +
+                '<stop offset="0" stop-color="#FBF8F3"/>' +
+                '<stop offset="1" stop-color="#ECE4D8"/>' +
+                '</linearGradient>' +
+                '</defs>' +
+                '<rect width="600" height="600" fill="url(#bg)"/>' +
+                '<circle cx="300" cy="262" r="104" fill="none" stroke="#D3C4AC" stroke-width="1.5" opacity=".75"/>' +
+                '<circle cx="300" cy="262" r="70" fill="none" stroke="#D3C4AC" stroke-width="1" opacity=".55"/>' +
+                '<text x="300" y="282" text-anchor="middle" font-family="Georgia,\'Songti SC\',serif" font-size="52" fill="#C0AC8E">古</text>' +
+                '<text x="300" y="452" text-anchor="middle" font-family="-apple-system,\'PingFang SC\',sans-serif" font-size="24" fill="#A9A096">' + esc(text) + '</text>' +
+                '</svg>';
+            return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
+        }
+        const PLACEHOLDER_IMG = svgPlaceholder('古董圈');
+        window.__GD_PH__ = PLACEHOLDER_IMG;
+
+        function catKey(c) {
+            const map = {
+                '瓷器': 'porcelain', '玉器': 'jade', '钱币': 'coins',
+                '书画': 'paintings', '铜器': 'bronze', '杂项': 'misc',
+                'porcelain': 'porcelain', 'jade': 'jade', 'coins': 'coins',
+                'paintings': 'paintings', 'painting': 'paintings', 'calligraphy': 'paintings',
+                'bronze': 'bronze', 'bronzes': 'bronze',
+                'misc': 'misc', 'miscellaneous': 'misc'
+            };
+            return map[String(c == null ? '' : c).trim().toLowerCase()] || map[c] || 'misc';
+        }
+
+        function normId(v) {
+            return String(v == null ? '' : v)
+                .replace(/[\u2010\u2011\u2012\u2013\u2014\u2015\u2212\uFE58\uFF0D]/g, '-')
+                .trim();
+        }
+        function normKey(k) { return String(k).trim().toLowerCase().replace(/[\s\-]+/g, '_'); }
+        function asBool(v) {
+            if (typeof v === 'string') return /^(true|yes|y|1|是|✓|✔)$/i.test(v.trim());
+            return !!v;
+        }
+        function getF(f, ...names) {
+            for (const n of names) {
+                const v = f[n];
+                if (v !== undefined && v !== null && v !== '') return v;
+            }
+            return null;
+        }
+        function attachmentUrl(v) {
+            if (!v) return '';
+            if (Array.isArray(v)) v = v[0];
+            if (v && typeof v === 'object') {
+                return (v.thumbnails && v.thumbnails.large && v.thumbnails.large.url) || v.url || '';
+            }
+            return typeof v === 'string' ? v.trim() : '';
+        }
+        function defaultImgPath(f) {
+            const id = normId(f.item_id || '');
+            if (!id) return '';
+            let seller = '';
+            if (id.startsWith('item-lim-')) seller = 'lim-kw';
+            else if (id.startsWith('item-ng-')) seller = 'ng-lk';
+            else if (id.startsWith('item-ngcy-')) seller = 'ng-cy';
+            else if (id.startsWith('item-yak-')) seller = 'yak-bc';
+            if (!seller) return '';
+            return seller + '/' + id + '.jpg';
+        }
+
+        /* ------------------------------------------------------------
+           图片路径：
+           - 优先使用 API 返回的完整 http(s) URL / data URI
+           - 否则走同域相对路径 assets/images/...
+           - 都没有则回落到内联 SVG 占位图（不会破图）
+           ------------------------------------------------------------ */
+        function imgPath(f) {
+            const u = attachmentUrl(f.img_url);
+            if (/^https?:\/\//i.test(u)) return u;
+            if (/^data:image\//i.test(u)) return u;
+
+            const firstFile = (normId(f.img_file || '').split(/\s+/)[0] || '') || defaultImgPath(f);
+            if (firstFile) return 'assets/images/' + firstFile;
+
+            const label = f.title_zh || f.title_en || f.category || '古董圈';
+            return svgPlaceholder(label);
+        }
+
+        function attrKeywords(f) {
+            return esc([f.title_zh, f.title_en, f.era_zh, f.era_en, f.category].filter(Boolean).join(' '));
+        }
+
+        function normalizeRecord(rec) {
+            if (!rec || typeof rec !== 'object') return null;
+            const src = (rec.fields && typeof rec.fields === 'object') ? rec.fields : rec;
+            const out = {};
+            Object.keys(src).forEach(k => {
+                let v = src[k];
+                if (Array.isArray(v)) {
+                    if (!v.length) v = null;
+                    else if (v.every(x => x === null || typeof x !== 'object')) v = v[0];
+                }
+                const key = normKey(k);
+                out[key] = /^is_/.test(key) ? asBool(v) : v;
+            });
+            [['title_zh', 'title_en'], ['era_zh', 'era_en']].forEach(([zh, en]) => {
+                if (!out[zh] && out[en]) out[zh] = out[en];
+                if (!out[en] && out[zh]) out[en] = out[zh];
+            });
+            return out;
+        }
+
+        function pickList(json, ...keys) {
+            for (const k of keys) if (Array.isArray(json[k])) return json[k];
+            return null;
+        }
+
+        function normalizePayload(json) {
+            if (!json || typeof json !== 'object') throw new Error('响应不是 JSON 对象');
+            if (json.error) {
+                const m = typeof json.error === 'string' ? json.error : (json.error.message || JSON.stringify(json.error));
+                throw new Error('接口返回错误：' + String(m).slice(0, 120));
+            }
+            diag.payloadKeys = Array.isArray(json) ? ['(array)'] : Object.keys(json);
+
+            const tf = pickList(json, 'todayFinds', 'today_finds');
+            const nl = pickList(json, 'newListing', 'newListings', 'new_listing', 'new_listings');
+            const flat = Array.isArray(json) ? json : (Array.isArray(json.records) ? json.records : null);
+
+            let groups;
+            if (tf || nl) {
+                groups = { todayFinds: tf || [], newListing: nl || [] };
+            } else if (flat) {
+                const all = flat.map(normalizeRecord).filter(Boolean);
+                groups = { todayFinds: all.filter(f => f.is_today_finds), newListing: all };
+            } else {
+                throw new Error('响应中找不到 todayFinds / newListing（实际字段：' + diag.payloadKeys.join(', ') + '）');
+            }
+
+            let total = 0, kept = 0;
+            const clean = list => list.map(normalizeRecord).filter(f => {
+                total++;
+                if (f && normId(f.item_id) && (f.title_zh || f.title_en)) { kept++; return true; }
+                diag.skipped++;
+                return false;
+            });
+            const out = {
+                todayFinds: clean(groups.todayFinds),
+                newListing: clean(groups.newListing)
+            };
+            if (total > 0 && kept === 0) throw new Error('所有记录都缺少 item_id 或 title_zh/title_en，请检查字段名');
+
+            const first = out.todayFinds[0] || out.newListing[0];
+            diag.sampleKeys = first ? Object.keys(first) : [];
+            diag.counts = { todayFinds: out.todayFinds.length, newListing: out.newListing.length };
+            return out;
+        }
+
+        function joinPrice(label, amount) {
+            if (!label) return amount || '';
+            if (!amount || label.indexOf(amount) !== -1) return label;
+            return /[:：]\s*$/.test(label) ? label + amount : label + ' ' + amount;
+        }
+        function fmtMoney(v) {
+            v = Array.isArray(v) ? v[0] : v;
+            if (v == null || v === '') return '';
+            const str = String(v).trim();
+            if (/^(S?\$)?\s*[\d,]+(\.\d+)?$/i.test(str)) {
+                const n = Number(str.replace(/[S$\s,]/gi, ''));
+                if (!isFinite(n) || n <= 0) return '';
+                return 'S$' + new Intl.NumberFormat('en-SG', { maximumFractionDigits: 2 }).format(n);
+            }
+            return str;
+        }
+        function resolvePrice(f) {
+            const type = String(getF(f, 'price_type', 'price type') || '').trim();
+            const enquiry = { zh: '私聊询价', en: 'Enquire', enquiry: true };
+            if (/私聊|询价|enquir|inquir|message/i.test(type)) return enquiry;
+            const fixed = fmtMoney(getF(f, 'fixed_price'));
+            if (fixed && (!type || /一口价|fixed/i.test(type))) return { zh: fixed, en: fixed };
+            const zh = joinPrice(getF(f, 'price_display_zh'), getF(f, 'price_zh')) || joinPrice(getF(f, 'price_display_en'), getF(f, 'price_en'));
+            const en = joinPrice(getF(f, 'price_display_en'), getF(f, 'price_en')) || joinPrice(getF(f, 'price_display_zh'), getF(f, 'price_zh'));
+            if (zh || en) return { zh: zh || en, en: en || zh };
+            return enquiry;
+        }
+        function priceHtml(f, wrapperClass) {
+            const p = resolvePrice(f);
+            if (p.enquiry) {
+                return `<div class="${wrapperClass}"><span class="price-main price-main--enquiry"><span class="zh">${p.zh}</span><span class="en">${p.en}</span></span></div>`;
+            }
+            return `<div class="${wrapperClass}">
+                <span class="price-main zh">${esc(p.zh)}</span>
+                <span class="price-main en">${esc(p.en)}</span>
+              </div>`;
+        }
+
+        function reasonFor(f) {
+            const rz = getF(f, 'reason_zh', 'reason');
+            const re = getF(f, 'reason_en', 'reason_en_us') || rz;
+            if (rz || re) return { zh: rz || re, en: re || rz };
+            return null;
+        }
+        function timeAgo(f) {
+            const raw = getF(f, 'listed_at', 'listed_time', 'created_at', 'updated_at');
+            if (!raw) return null;
+            const t = new Date(raw);
+            if (isNaN(t.getTime())) return null;
+            const diff = Date.now() - t.getTime();
+            const h = Math.floor(diff / 3600000);
+            if (h < 1) return { zh: '刚刚上架', en: 'Just listed' };
+            if (h < 24) return { zh: `${h} 小时前上架`, en: `Listed ${h}h ago` };
+            const d = Math.floor(h / 24);
+            if (d < 30) return { zh: `${d} 天前上架`, en: `Listed ${d}d ago` };
+            return null;
+        }
+
+        function renderFindsCard(f) {
+            const promoted = f.is_today_finds;
+            const badgeZh = promoted ? '藏家自荐' : '人工精选';
+            const badgeEn = promoted ? 'Collector Pick' : 'Editor Pick';
+            const cls = promoted ? 'finds-card--promoted' : 'finds-card--organic';
+            const kw = attrKeywords(f);
+            const metaZh = [f.era_zh, f.category].filter(Boolean).join(' · ');
+            const metaEn = [f.era_en, f.category].filter(Boolean).join(' · ');
+            const reason = reasonFor(f);
+            const reasonHtml = reason ? `
+                <div class="finds-reason zh">💡 ${esc(reason.zh)}</div>
+                <div class="finds-reason en">💡 ${esc(reason.en)}</div>` : '';
+            const ta = timeAgo(f);
+            const taHtml = ta ? `
+                <div class="finds-timestamp zh">${esc(ta.zh)}</div>
+                <div class="finds-timestamp en">${esc(ta.en)}</div>` : '';
+            return `
+              <a href="items/${esc(normId(f.item_id))}.html" class="finds-card ${cls}" data-cat="${catKey(f.category)}" data-keywords="${kw}">
+                <div class="finds-image">
+                  <img src="${imgPath(f)}" alt="${esc(f.title_zh)} ${esc(f.title_en)} - Chinese antiques Singapore" loading="lazy" onerror="this.onerror=null;this.src=window.__GD_PH__">
+                  <span class="finds-badge zh">${badgeZh}</span><span class="finds-badge en">${badgeEn}</span>
+                </div>
+                <div class="finds-title zh">${esc(f.title_zh)}</div><div class="finds-title en">${esc(f.title_en)}</div>
+                <div class="finds-meta zh">${esc(metaZh)}</div><div class="finds-meta en">${esc(metaEn)}</div>
+                ${priceHtml(f, 'finds-price')}
+                ${reasonHtml}
+                ${taHtml}
+                <div class="finds-caption zh">卖家提供资料</div><div class="finds-caption en">Seller-provided information</div>
+              </a>`;
+        }
+
+        function renderCards(containerId, items) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+            container.innerHTML = items.map(f => {
+                const imgSrc = imgPath(f);
+                const detailUrl = 'items/' + esc(normId(f.item_id)) + '.html';
+                const kw = attrKeywords(f);
+                const nz = f.title_zh || f.title_en || '';
+                return `
+                  <a href="${detailUrl}" class="item-card" data-cat="${catKey(f.category)}" data-keywords="${kw}" aria-label="${esc(nz)}">
+                    <img src="${imgSrc}" alt="${esc(f.title_zh)} ${esc(f.title_en)} - Chinese antiques Singapore" loading="lazy" onerror="this.onerror=null;this.src=window.__GD_PH__">
+                    <div class="item-info">${priceHtml(f, 'item-price')}</div>
+                  </a>`;
+            }).join('');
+        }
+
+        function showSkeleton() {
+            const fill = (id, n, cls) => {
+                const el = document.getElementById(id);
+                if (!el) return;
+                el.setAttribute('aria-busy', 'true');
+                el.innerHTML = Array(n).fill('<div class="skeleton-card ' + cls + '"></div>').join('');
+            };
+            fill('todayFindsGrid', 4, 'skeleton-card--square');
+            fill('itemList', 6, 'skeleton-card--square');
+        }
+
+        function showLoadError() {
+            const msgZh = '<strong>藏品加载失败</strong><br>请刷新页面重试。如持续出现，请稍后再访问。';
+            const msgEn = '<strong>Failed to load listings</strong><br>Please refresh the page. If the issue persists, try again later.';
+            const html = `<div class="load-error-tip"><span class="zh">${msgZh}</span><span class="en">${msgEn}</span></div>`;
+            ['todayFindsGrid', 'itemList'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) { el.removeAttribute('aria-busy'); el.innerHTML = html; }
+            });
+        }
+
+        function updateCategoryCounts(newListing) {
+            const counts = { porcelain: 0, jade: 0, coins: 0, paintings: 0, bronze: 0, misc: 0 };
+            (newListing || []).forEach(f => {
+                const k = catKey(f.category);
+                if (counts[k] !== undefined) counts[k]++;
+            });
+            document.querySelectorAll('[data-cat-count]').forEach(el => {
+                const k = el.getAttribute('data-cat-count');
+                const n = counts[k] || 0;
+                el.textContent = n > 0
+                    ? (el.classList.contains('zh') ? `${n} 件在售` : `${n} items`)
+                    : (el.classList.contains('zh') ? '待上架' : 'Coming soon');
+            });
+        }
+
+        /* ---------- 实时剩余席位 ----------
+         * SEATS_TOTAL 为总席位；SEATS_BASELINE_ADMITTED 为已确认入驻数。
+         * 若线上藏品数据里出现的藏家数量更多，则以数据为准自动上调，保证数字不会虚高。
+         * 进度条展示的是「已入驻比例」，视觉上更直观地体现“席位珍稀”。 */
+        const SEATS_TOTAL = 88;
+        const SEATS_BASELINE_ADMITTED = 5;
+
+        function renderSeats(listings) {
+            const ids = new Set();
+            (listings || []).forEach(function (it) {
+                const id = String(it.seller_id || it.sellerId || '').trim();
+                if (id) ids.add(id);
+            });
+            const admitted = Math.max(SEATS_BASELINE_ADMITTED, ids.size);
+            const left = Math.max(0, SEATS_TOTAL - admitted);
+            const pct = Math.min(100, Math.max(0, (admitted / SEATS_TOTAL) * 100));
+
+            ['seatsNum', 'seatsNumEn'].forEach(function (id) {
+                const el = document.getElementById(id);
+                if (el) el.textContent = String(left);
+
+            });
+
+            const fill = document.getElementById('seatsFill');
+            if (fill) {
+                // 双帧延迟，确保宽度从 0 到目标值有过渡动画
+                requestAnimationFrame(() => {
+                    requestAnimationFrame(() => {
+                        fill.style.width = pct.toFixed(2) + '%';
+                    });
+                });
+            }
+        }
+
+        function applyListingData(data) {
+            renderSeats(data.newListing);
+            const fillSection = (id, items, renderFn) => {
+                const el = document.getElementById(id);
+                if (!el) return;
+                const sec = el.closest('section');
+                el.removeAttribute('aria-busy');
+                if (items.length) {
+                    el.innerHTML = items.map(renderFn).join('');
+                    if (sec) sec.hidden = false;
+                } else {
+                    el.innerHTML = '';
+                    if (sec) sec.hidden = true;
+                }
+            };
+            fillSection('todayFindsGrid', data.todayFinds, renderFindsCard);
+
+            const list = document.getElementById('itemList');
+            if (list) {
+                list.removeAttribute('aria-busy');
+                if (data.newListing.length) {
+                    renderCards('itemList', data.newListing);
+                } else {
+                    list.innerHTML = '<div class="no-result" style="grid-column:1/-1;padding:2rem 1rem;"><span class="zh">暂无藏品，敬请期待</span><span class="en">No listings yet — please check back soon</span></div>';
+                }
+            }
+            updateCategoryCounts(data.newListing);
+            const kwEl = document.getElementById('searchInput');
+            const kw = kwEl ? kwEl.value.trim() : '';
+            if (kw || currentCat !== 'all') filterAll(); else checkNoResult();
+        }
 
         /* ============================================================
            今日情报 · 捡漏雷达
@@ -1313,452 +2379,207 @@
                 const metaZh = esc(it.meta || it.meta_zh || '编辑整理');
                 const metaEn = esc(it.metaEn || it.meta_en || 'Editorial');
                 return `
-                    <div class="intel-card">
-                        <span class="intel-type ${t.cls}"><span class="zh">${t.zh}</span><span class="en">${t.en}</span></span>
-                        <div class="intel-text zh">${zh}</div>
-                        <div class="intel-text en">${en}</div>
-                        <div class="intel-meta"><span class="zh">${metaZh}</span><span class="en">${metaEn}</span></div>
-                    </div>`;
+                  <div class="intel-card">
+                    <span class="intel-type ${t.cls}"><span class="zh">${t.zh}</span><span class="en">${t.en}</span></span>
+                    <div class="intel-text zh">${zh}</div>
+                    <div class="intel-text en">${en}</div>
+                    <div class="intel-meta"><span class="zh">${metaZh}</span><span class="en">${metaEn}</span></div>
+                  </div>`;
             }).join('');
         }
         renderIntel();
 
-        /* ============ Airtable 数据层 ============ */
+        /* ============================================================
+           数据层
+           ============================================================ */
         const DEBUG = new URLSearchParams(location.search).get('debug') === '1';
-        const diag = { source: 'pending', endpoint: '', proxy: null, snapshot: null,
-                       payloadKeys: [], counts: {}, skipped: 0, sampleKeys: [], errors: [],
-                       intelCount: null };
+        const diag = {
+            source: 'pending', endpoint: '', proxy: null, snapshot: null,
+            payloadKeys: [], counts: {}, skipped: 0, sampleKeys: [], errors: [],
+            intelCount: null
+        };
 
-        function catKey(c) {
-          const map = {
-            '瓷器': 'porcelain', '玉器': 'jade', '钱币': 'coins',
-            '书画': 'paintings', '杂项': 'misc',
-            'porcelain': 'porcelain', 'jade': 'jade', 'coins': 'coins',
-            'paintings': 'paintings', 'painting': 'paintings', 'calligraphy': 'paintings',
-            'misc': 'misc', 'miscellaneous': 'misc'
-          };
-          return map[String(c == null ? '' : c).trim().toLowerCase()] || map[c] || 'misc';
-        }
-        function esc(s) {
-          return String(s == null ? '' : s)
-            .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
-            .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
-        }
-        function attachmentUrl(v) {
-          if (!v) return '';
-          if (Array.isArray(v)) v = v[0];
-          if (v && typeof v === 'object') {
-            return (v.thumbnails && v.thumbnails.large && v.thumbnails.large.url) || v.url || '';
-          }
-          return typeof v === 'string' ? v.trim() : '';
-        }
-        function defaultImgPath(f) {
-          const id = normId(f.item_id || '');
-          if (!id) return '';
-          let seller = '';
-          if (id.startsWith('item-lim-'))  seller = 'lim-kw';
-          else if (id.startsWith('item-ng-'))   seller = 'ng-lk';
-          else if (id.startsWith('item-ngcy-')) seller = 'ng-cy';
-          else if (id.startsWith('item-yak-'))  seller = 'yak-bc';
-          if (!seller) return '';
-          return seller + '/' + id + '.jpg';
-        }
-        function imgPath(f) {
-          const u = attachmentUrl(f.img_url);
-          if (/^https?:\/\//i.test(u)) return u;
-          const firstFile = (normId(f.img_file || '').split(/\s+/)[0] || '') || defaultImgPath(f);
-          const file = firstFile;
-          if (window.__LOCAL_DATA__ || location.protocol === 'file:') {
-            return 'assets/images/' + (file || 'placeholder.jpg');
-          }
-          const base = (typeof API_BASE === 'string' && API_BASE) ? API_BASE : '';
-          if (file) return base + '/assets/images/' + file;
-          return base + '/assets/images/placeholder.jpg';
-        }
-        function attrKeywords(f) {
-          return esc([f.title_zh, f.title_en, f.era_zh, f.era_en, f.category].filter(Boolean).join(' '));
-        }
-        function getF(f, ...names) {
-          for (const n of names) {
-            const v = f[n];
-            if (v !== undefined && v !== null && v !== '') return v;
-          }
-          return null;
-        }
-        function normId(v) {
-          return String(v == null ? '' : v).replace(/[\u2010\u2011\u2012\u2013\u2014\u2015\u2212\uFE58\uFF0D]/g, '-').trim();
-        }
-        function normKey(k) { return String(k).trim().toLowerCase().replace(/[\s\-]+/g, '_'); }
-        function asBool(v) {
-          if (typeof v === 'string') return /^(true|yes|y|1|是|✓|✔)$/i.test(v.trim());
-          return !!v;
-        }
-        function normalizeRecord(rec) {
-          if (!rec || typeof rec !== 'object') return null;
-          const src = (rec.fields && typeof rec.fields === 'object') ? rec.fields : rec;
-          const out = {};
-          Object.keys(src).forEach(k => {
-            let v = src[k];
-            if (Array.isArray(v)) {
-              if (!v.length) v = null;
-              else if (v.every(x => x === null || typeof x !== 'object')) v = v[0];
-            }
-            const key = normKey(k);
-            out[key] = /^is_/.test(key) ? asBool(v) : v;
-          });
-          [['title_zh', 'title_en'], ['era_zh', 'era_en']].forEach(([zh, en]) => {
-            if (!out[zh] && out[en]) out[zh] = out[en];
-            if (!out[en] && out[zh]) out[en] = out[zh];
-          });
-          return out;
-        }
-        function pickList(json, ...keys) {
-          for (const k of keys) if (Array.isArray(json[k])) return json[k];
-          return null;
-        }
-        function normalizePayload(json) {
-          if (!json || typeof json !== 'object') throw new Error('响应不是 JSON 对象');
-          if (json.error) {
-            const m = typeof json.error === 'string' ? json.error : (json.error.message || JSON.stringify(json.error));
-            throw new Error('接口返回错误：' + String(m).slice(0, 120));
-          }
-          diag.payloadKeys = Array.isArray(json) ? ['(array)'] : Object.keys(json);
-
-          const tf = pickList(json, 'todayFinds', 'today_finds');
-          const nl = pickList(json, 'newListing', 'newListings', 'new_listing', 'new_listings');
-          const flat = Array.isArray(json) ? json : (Array.isArray(json.records) ? json.records : null);
-
-          let groups;
-          if (tf || nl) {
-            groups = { todayFinds: tf || [], newListing: nl || [] };
-          } else if (flat) {
-            const all = flat.map(normalizeRecord).filter(Boolean);
-            groups = { todayFinds: all.filter(f => f.is_today_finds), newListing: all };
-          } else {
-            throw new Error('响应中找不到 todayFinds / newListing（实际字段：' + diag.payloadKeys.join(', ') + '）');
-          }
-
-          let total = 0, kept = 0;
-          const clean = list => list.map(normalizeRecord).filter(f => {
-            total++;
-            if (f && normId(f.item_id) && (f.title_zh || f.title_en)) { kept++; return true; }
-            diag.skipped++;
-            return false;
-          });
-          const out = {
-            todayFinds: clean(groups.todayFinds),
-            newListing: clean(groups.newListing)
-          };
-          if (total > 0 && kept === 0) throw new Error('所有记录都缺少 item_id 或 title_zh/title_en，请检查 Airtable 字段名');
-
-          const first = out.todayFinds[0] || out.newListing[0];
-          diag.sampleKeys = first ? Object.keys(first) : [];
-          diag.counts = { todayFinds: out.todayFinds.length, newListing: out.newListing.length };
-          return out;
-        }
-
-        function joinPrice(label, amount) {
-          if (!label) return amount || '';
-          if (!amount || label.indexOf(amount) !== -1) return label;
-          return /[:：]\s*$/.test(label) ? label + amount : label + ' ' + amount;
-        }
-        function fmtMoney(v) {
-          v = Array.isArray(v) ? v[0] : v;
-          if (v == null || v === '') return '';
-          const str = String(v).trim();
-          if (/^(S?\$)?\s*[\d,]+(\.\d+)?$/i.test(str)) {
-            const n = Number(str.replace(/[S$\s,]/gi, ''));
-            if (!isFinite(n) || n <= 0) return '';
-            return 'S$' + new Intl.NumberFormat('en-SG', { maximumFractionDigits: 2 }).format(n);
-          }
-          return str;
-        }
-        function resolvePrice(f) {
-          const type = String(getF(f, 'price_type', 'price type') || '').trim();
-          const enquiry = { zh: '私聊询价', en: 'Enquire', enquiry: true };
-          if (/私聊|询价|enquir|inquir|message/i.test(type)) return enquiry;
-          const fixed = fmtMoney(getF(f, 'fixed_price'));
-          if (fixed && (!type || /一口价|fixed/i.test(type))) return { zh: fixed, en: fixed };
-          const zh = joinPrice(getF(f, 'price_display_zh'), getF(f, 'price_zh')) || joinPrice(getF(f, 'price_display_en'), getF(f, 'price_en'));
-          const en = joinPrice(getF(f, 'price_display_en'), getF(f, 'price_en')) || joinPrice(getF(f, 'price_display_zh'), getF(f, 'price_zh'));
-          if (zh || en) return { zh: zh || en, en: en || zh };
-          return enquiry;
-        }
-        function priceHtml(f, wrapperClass) {
-          const p = resolvePrice(f);
-          if (p.enquiry) {
-            return `<div class="${wrapperClass}"><span class="price-main price-main--enquiry"><span class="zh">${p.zh}</span><span class="en">${p.en}</span></span></div>`;
-          }
-          return `<div class="${wrapperClass}">
-              <span class="price-main zh">${esc(p.zh)}</span>
-              <span class="price-main en">${esc(p.en)}</span>
-            </div>`;
-        }
-
-        function reasonFor(f) {
-          const rz = getF(f, 'reason_zh', 'reason');
-          const re = getF(f, 'reason_en', 'reason_en_us') || rz;
-          if (rz || re) return { zh: rz || re, en: re || rz };
-          return null;
-        }
-        function timeAgo(f) {
-          const raw = getF(f, 'listed_at', 'listed_time', 'created_at', 'updated_at');
-          if (!raw) return null;
-          const t = new Date(raw);
-          if (isNaN(t.getTime())) return null;
-          const diff = Date.now() - t.getTime();
-          const h = Math.floor(diff / 3600000);
-          if (h < 1) return { zh: '刚刚上架', en: 'Just listed' };
-          if (h < 24) return { zh: `${h} 小时前上架`, en: `Listed ${h}h ago` };
-          const d = Math.floor(h / 24);
-          if (d < 30) return { zh: `${d} 天前上架`, en: `Listed ${d}d ago` };
-          return null;
-        }
-
-        function renderFindsCard(f) {
-          const promoted = f.is_today_finds;
-          const badgeZh = promoted ? '藏家自荐' : '人工精选';
-          const badgeEn = promoted ? 'Collector Pick' : 'Editor Pick';
-          const cls = promoted ? 'finds-card--promoted' : 'finds-card--organic';
-          const kw = attrKeywords(f);
-          const metaZh = [f.era_zh, f.category].filter(Boolean).join(' · ');
-          const metaEn = [f.era_en, f.category].filter(Boolean).join(' · ');
-          const reason = reasonFor(f);
-          const reasonHtml = reason ? `
-              <div class="finds-reason zh">💡 ${esc(reason.zh)}</div>
-              <div class="finds-reason en">💡 ${esc(reason.en)}</div>` : '';
-          const ta = timeAgo(f);
-          const taHtml = ta ? `
-              <div class="finds-timestamp zh">${esc(ta.zh)}</div>
-              <div class="finds-timestamp en">${esc(ta.en)}</div>` : '';
-          return `
-            <a href="${API_BASE}/items/${esc(normId(f.item_id))}.html" class="finds-card ${cls}" data-cat="${catKey(f.category)}" data-keywords="${kw}">
-              <div class="finds-image">
-                <img src="${imgPath(f)}" alt="${esc(f.title_zh)} ${esc(f.title_en)} - Chinese antiques Singapore" loading="lazy" onerror="this.onerror=null;this.src='${API_BASE}/assets/images/placeholder.jpg'">
-                <span class="finds-badge zh">${badgeZh}</span><span class="finds-badge en">${badgeEn}</span>
-              </div>
-              <div class="finds-title zh">${esc(f.title_zh)}</div><div class="finds-title en">${esc(f.title_en)}</div>
-              <div class="finds-meta zh">${esc(metaZh)}</div><div class="finds-meta en">${esc(metaEn)}</div>
-              ${priceHtml(f, 'finds-price')}
-              ${reasonHtml}
-              ${taHtml}
-              <div class="finds-caption zh">卖家提供资料</div><div class="finds-caption en">Seller-provided information</div>
-            </a>`;
-        }
-
-        function renderCards(containerId, items) {
-          const container = document.getElementById(containerId);
-          if (!container) return;
-          container.innerHTML = items.map(f => {
-            const imgSrc = imgPath(f);
-            const detailUrl = `${API_BASE}/items/${esc(normId(f.item_id))}.html`;
-            const kw = attrKeywords(f);
-            const nz = f.title_zh || f.title_en || '';
-            return `
-              <a href="${detailUrl}" class="item-card" data-cat="${catKey(f.category)}" data-keywords="${kw}" aria-label="${esc(nz)}">
-                <img src="${imgSrc}" alt="${esc(f.title_zh)} ${esc(f.title_en)} - Chinese antiques Singapore" loading="lazy" onerror="this.onerror=null;this.src='${API_BASE}/assets/images/placeholder.jpg'">
-                <div class="item-info">${priceHtml(f, 'item-price')}</div>
-              </a>`;
-          }).join('');
-        }
-
-        function showSkeleton() {
-          const fill = (id, n, cls) => {
-            const el = document.getElementById(id);
-            if (!el) return;
-            el.setAttribute('aria-busy', 'true');
-            el.innerHTML = Array(n).fill('<div class="skeleton-card ' + cls + '"></div>').join('');
-          };
-          fill('todayFindsGrid', 4, 'skeleton-card--square');
-          fill('itemList', 6, 'skeleton-card--square');
-        }
-
-        function showLoadError() {
-          const msgZh = '<strong>藏品加载失败</strong><br>请刷新页面重试。如持续出现，请稍后再访问。';
-          const msgEn = '<strong>Failed to load listings</strong><br>Please refresh the page. If the issue persists, try again later.';
-          const html = `<div class="load-error-tip"><span class="zh">${msgZh}</span><span class="en">${msgEn}</span></div>`;
-          ['todayFindsGrid', 'itemList'].forEach(id => {
-            const el = document.getElementById(id);
-            if (el) { el.removeAttribute('aria-busy'); el.innerHTML = html; }
-          });
-        }
-
-        function updateCategoryCounts(newListing) {
-          const counts = { porcelain: 0, jade: 0, coins: 0, paintings: 0, misc: 0 };
-          (newListing || []).forEach(f => {
-            const k = catKey(f.category);
-            if (counts[k] !== undefined) counts[k]++;
-          });
-          document.querySelectorAll('[data-cat-count]').forEach(el => {
-            const k = el.getAttribute('data-cat-count');
-            const n = counts[k] || 0;
-            el.textContent = n > 0 ? (el.classList.contains('zh') ? `${n} 件在售` : `${n} items`) : (el.classList.contains('zh') ? '待上架' : 'Coming soon');
-          });
-        }
-
-        /* ---------- 实时剩余席位 ----------
-         * 创始藏家限量 88 席。SEATS_TOTAL 为总席位，SEATS_BASELINE_ADMITTED 为已确认入驻数
-         * （与 pricing.html 公告口径一致：截至 10 月 1 日已有 5 位藏家入驻）。
-         * 若线上藏品数据里出现的藏家数量更多，则以数据为准自动上调，保证数字不会虚高。 */
-        const SEATS_TOTAL = 88;
-        const SEATS_BASELINE_ADMITTED = 5;
-
-        function renderSeats(listings) {
-          const ids = new Set();
-          (listings || []).forEach(function (it) {
-            const id = (it.seller_id || it.sellerId || '').trim();
-            if (id) ids.add(id);
-          });
-          const admitted = Math.max(SEATS_BASELINE_ADMITTED, ids.size);
-          const left = Math.max(0, SEATS_TOTAL - admitted);
-          ['seatsNum', 'seatsNumEn'].forEach(function (id) {
-            const el = document.getElementById(id);
-            if (el) el.textContent = String(left);
-          });
-        }
-
-        function applyListingData(data) {
-          renderSeats(data.newListing);
-          const fillSection = (id, items, renderFn) => {
-            const el = document.getElementById(id);
-            if (!el) return;
-            const sec = el.closest('section');
-            el.removeAttribute('aria-busy');
-            if (items.length) {
-              el.innerHTML = items.map(renderFn).join('');
-              if (sec) sec.hidden = false;
-            } else {
-              el.innerHTML = '';
-              if (sec) sec.hidden = true;
-            }
-          };
-          fillSection('todayFindsGrid', data.todayFinds, renderFindsCard);
-
-          const list = document.getElementById('itemList');
-          if (list) {
-            list.removeAttribute('aria-busy');
-            if (data.newListing.length) {
-              renderCards('itemList', data.newListing);
-            } else {
-              list.innerHTML = '<div class="no-result" style="grid-column:1/-1;padding:2rem 1rem;"><span class="zh">暂无藏品，敬请期待</span><span class="en">No listings yet — please check back soon</span></div>';
-            }
-          }
-          updateCategoryCounts(data.newListing);
-          const kw = document.getElementById('searchInput').value.trim();
-          if (kw || currentCat !== 'all') filterAll(); else checkNoResult();
-        }
+        /* 内置兜底数据：当接口与本地快照都不可用时启用，
+           保证页面在任何环境（含本地直接打开 index.html）都有内容可看。 */
+        const DEMO_PAYLOAD = {
+            todayFinds: [
+                {
+                    item_id: 'demo-qing-bowl', title_zh: '清康熙 青花缠枝莲纹碗',
+                    title_en: 'Kangxi Blue & White Lotus Bowl', era_zh: '清康熙', era_en: 'Kangxi Period',
+                    category: '瓷器', fixed_price: 420, seller_id: 'lim-kw', is_today_finds: true,
+                    reason_zh: '同类器型本周成交价约 S$680，此件标价明显偏低。',
+                    reason_en: 'Comparable sold near S$680 this week — clearly under market.'
+                },
+                {
+                    item_id: 'demo-hetian-pendant', title_zh: '和田玉 素面平安扣',
+                    title_en: 'Hetian Jade Plain Pendant', era_zh: '近代', era_en: 'Modern',
+                    category: '玉器', fixed_price: 260, seller_id: 'ng-lk',
+                    reason_zh: '玉质细腻，无绺裂，附卖家自述来源。',
+                    reason_en: 'Fine grain, no cracks; seller-provided provenance.'
+                },
+                {
+                    item_id: 'demo-kangxi-coin', title_zh: '康熙通宝 宝泉局 小平钱',
+                    title_en: 'Kangxi Tongbao Coin', era_zh: '清', era_en: 'Qing Dynasty',
+                    category: '钱币', price_type: '私聊询价', seller_id: 'ng-cy',
+                    reason_zh: '包浆自然，字口清晰，单枚可议。',
+                    reason_en: 'Natural patina, crisp characters, negotiable for singles.'
+                },
+                {
+                    item_id: 'demo-bronze-censer', title_zh: '清中期 铜鬲式香炉',
+                    title_en: 'Mid-Qing Bronze Censer', era_zh: '清中期', era_en: 'Mid-Qing',
+                    category: '铜器', fixed_price: 880, seller_id: 'yak-bc',
+                    reason_zh: '皮壳沉稳，同类器近期关注度上升。',
+                    reason_en: 'Deep patina; comparable censers gaining attention lately.'
+                }
+            ],
+            newListing: [
+                { item_id: 'demo-1', title_zh: '清乾隆 青花山水笔筒', title_en: 'Qianlong Blue & White Brush Pot', era_zh: '清乾隆', era_en: 'Qianlong', category: '瓷器', fixed_price: 1280, seller_id: 'lim-kw' },
+                { item_id: 'demo-2', title_zh: '和田玉 双面雕玉佩', title_en: 'Hetian Jade Double-Sided Pendant', era_zh: '清', era_en: 'Qing', category: '玉器', price_type: '私聊询价', seller_id: 'ng-lk' },
+                { item_id: 'demo-3', title_zh: '光绪元宝 广东省造 库平七钱二分', title_en: 'Guangxu Silver Dollar, Guangdong', era_zh: '清末', era_en: 'Late Qing', category: '钱币', fixed_price: 1680, seller_id: 'ng-cy' },
+                { item_id: 'demo-4', title_zh: '清代 设色山水小品（无款）', title_en: 'Qing Landscape Painting (Unsigned)', era_zh: '清', era_en: 'Qing', category: '书画', fixed_price: 640, seller_id: 'yak-bc' },
+                { item_id: 'demo-5', title_zh: '明末 青花花卉小罐', title_en: 'Late-Ming Blue & White Jar', era_zh: '明末', era_en: 'Late Ming', category: '瓷器', fixed_price: 980, seller_id: 'lim-kw' },
+                { item_id: 'demo-6', title_zh: '老蜜蜡 桶珠手串', title_en: 'Antique Amber Barrel Bead Bracelet', era_zh: '民国', era_en: 'Republican', category: '杂项', price_type: '私聊询价', seller_id: 'ng-lk' },
+                { item_id: 'demo-7', title_zh: '民国 铜胎掐丝珐琅小盒', title_en: 'Republican Cloisonné Box', era_zh: '民国', era_en: 'Republican', category: '铜器', fixed_price: 320, seller_id: 'yak-bc' },
+                { item_id: 'demo-8', title_zh: '民国 白玉圆镯（内径 58mm）', title_en: 'Republican White Jade Bangle (58mm)', era_zh: '民国', era_en: 'Republican', category: '玉器', fixed_price: 1450, seller_id: 'ng-cy' }
+            ]
+        };
 
         async function fetchJson(url, ms, tag) {
-          const ctl = new AbortController();
-          const timer = setTimeout(() => ctl.abort(), ms);
-          const t0 = performance.now();
-          try {
-            const res = await fetch(url, { cache: 'no-store', signal: ctl.signal, headers: { 'Accept': 'application/json' } });
-            diag[tag] = { status: res.status, ms: Math.round(performance.now() - t0) };
-            if (!res.ok) throw new Error('HTTP ' + res.status);
-            return await res.json();
-          } catch (e) {
-            if (!diag[tag]) diag[tag] = { status: 'no response', ms: Math.round(performance.now() - t0) };
-            if (e.name === 'AbortError') throw new Error('请求超时（' + ms + 'ms）');
-            throw e;
-          } finally {
-            clearTimeout(timer);
-          }
+            const ctl = new AbortController();
+            const timer = setTimeout(() => ctl.abort(), ms);
+            const t0 = performance.now();
+            try {
+                const res = await fetch(url, {
+                    cache: 'no-store',
+                    signal: ctl.signal,
+                    headers: { 'Accept': 'application/json' }
+                });
+                diag[tag] = { status: res.status, ms: Math.round(performance.now() - t0) };
+                if (!res.ok) throw new Error('HTTP ' + res.status);
+                return await res.json();
+            } catch (e) {
+                if (!diag[tag]) diag[tag] = { status: 'no response', ms: Math.round(performance.now() - t0) };
+                if (e.name === 'AbortError') throw new Error('请求超时（' + ms + 'ms）');
+                throw e;
+            } finally {
+                clearTimeout(timer);
+            }
         }
 
         async function fetchProxy(url) {
-          try {
-            return await fetchJson(url, 8000, 'proxy');
-          } catch (e) {
-            if (!/超时|HTTP 5\d\d/.test(e.message)) throw e;
-            diag.errors.push('proxy 第 1 次失败：' + e.message + '，重试中');
-            await new Promise(r => setTimeout(r, 800));
-            return await fetchJson(url, 8000, 'proxy');
-          }
+            try {
+                return await fetchJson(url, 8000, 'proxy');
+            } catch (e) {
+                if (!/超时|HTTP 5\d\d/.test(e.message)) throw e;
+                diag.errors.push('proxy 第 1 次失败：' + e.message + '，重试中');
+                await new Promise(r => setTimeout(r, 800));
+                return await fetchJson(url, 8000, 'proxy');
+            }
         }
 
         function renderDebug() {
-          console.info('[Gudong] 数据来源:', diag.source, diag.counts);
-          if (!DEBUG) return;
-          let el = document.getElementById('gdDebug');
-          if (!el) {
-            el = document.createElement('div');
-            el.id = 'gdDebug';
-            el.className = 'gd-debug';
-            document.body.appendChild(el);
-          }
-          const live = diag.source === 'airtable-proxy';
-          const srcLabel = live ? '<span class="ok">✔ Airtable 实时数据（经 /api/airtable-proxy）</span>'
-            : diag.source === 'local-snapshot' ? '<span class="warn">⚠ 本地快照 data/listings.json —— 不是 Airtable 实时数据</span>'
-            : '<span class="bad">✖ 没有任何数据来源</span>';
-          const st = o => o ? esc(o.status) + ' · ' + o.ms + 'ms' : '—';
-          const c = diag.counts || {};
-          el.innerHTML =
-            '<b>GUDONG 数据诊断</b>\n' +
-            '数据来源：' + srcLabel + '\n' +
-            '接口：' + esc(diag.endpoint) + '\n' +
-            '接口响应：' + st(diag.proxy) + '　快照响应：' + st(diag.snapshot) + '\n' +
-            '响应字段：' + esc(diag.payloadKeys.join(', ') || '—') + '\n' +
-            '今日发现 ' + (c.todayFinds ?? '—') + ' · 刚刚上新 ' + (c.newListing ?? '—') +
-            ' · 情报 ' + (diag.intelCount ?? '—') +
-            (diag.skipped ? ' · <span class="warn">已跳过空行/缺标题的行 ' + diag.skipped + '</span>' : '') + '\n' +
-            '首条记录字段：' + esc(diag.sampleKeys.join(', ') || '—') +
-            (diag.errors.length ? '\n<span class="bad">错误：\n' + diag.errors.map(esc).join('\n') + '</span>' : '');
+            console.info('[Gudong] 数据来源:', diag.source, diag.counts);
+            if (!DEBUG) return;
+            let el = document.getElementById('gdDebug');
+            if (!el) {
+                el = document.createElement('div');
+                el.id = 'gdDebug';
+                el.className = 'gd-debug';
+                document.body.appendChild(el);
+            }
+            const srcLabel =
+                diag.source === 'airtable-proxy' ? '<span class="ok">✔ Airtable 实时数据（经 Vercel 代理）</span>' :
+                diag.source === 'local-snapshot' ? '<span class="warn">⚠ 本地快照 data/listings.json —— 不是实时数据</span>' :
+                diag.source === 'demo' ? '<span class="warn">⚠ 内置演示数据（接口与快照均不可用）</span>' :
+                '<span class="bad">✖ 没有任何数据来源</span>';
+            const st = o => o ? esc(o.status) + ' · ' + o.ms + 'ms' : '—';
+            const c = diag.counts || {};
+            el.innerHTML =
+                '<b>GUDONG 数据诊断</b>\n' +
+                '数据来源：' + srcLabel + '\n' +
+                '接口：' + esc(diag.endpoint) + '\n' +
+                '接口响应：' + st(diag.proxy) + '　快照响应：' + st(diag.snapshot) + '\n' +
+                '响应字段：' + esc(diag.payloadKeys.join(', ') || '—') + '\n' +
+                '今日发现 ' + (c.todayFinds != null ? c.todayFinds : '—') +
+                ' · 刚刚上新 ' + (c.newListing != null ? c.newListing : '—') +
+                ' · 情报 ' + (diag.intelCount != null ? diag.intelCount : '—') +
+                (diag.skipped ? ' · <span class="warn">已跳过空行/缺标题的行 ' + diag.skipped + '</span>' : '') + '\n' +
+                '首条记录字段：' + esc(diag.sampleKeys.join(', ') || '—') +
+                (diag.errors.length ? '\n<span class="bad">错误：\n' + diag.errors.map(esc).join('\n') + '</span>' : '');
         }
 
         async function loadAirtableData() {
-          showSkeleton();
-          diag.endpoint = API_BASE + '/api/airtable-proxy';
-          try {
-            const raw = await fetchProxy(diag.endpoint);
-            if (raw && Array.isArray(raw.intel)) {
-              diag.intelCount = raw.intel.length;
-              if (raw.intel.length) renderIntel(raw.intel);
-            }
-            const data = normalizePayload(raw);
-            diag.source = 'airtable-proxy';
-            applyListingData(data);
-          } catch (e) {
-            console.warn('线上 API 加载失败，回退到本地快照：', e);
-            diag.errors.push('proxy：' + e.message);
-            diag.skipped = 0;
+            showSkeleton();
+            diag.endpoint = API_BASE;   /* ← 完整端点，不再拼接 /api/airtable-proxy */
+
+            /* 1) 在线接口 */
             try {
-              const raw = await fetchJson((API_BASE || '') + '/data/listings.json', 5000, 'snapshot');
-              if (raw && Array.isArray(raw.intel)) {
-                diag.intelCount = raw.intel.length;
-                if (raw.intel.length) renderIntel(raw.intel);
-              }
-              const data = normalizePayload(raw);
-              window.__LOCAL_DATA__ = true;
-              diag.source = 'local-snapshot';
-              applyListingData(data);
-            } catch (e2) {
-              console.warn('本地快照也加载失败：', e2);
-              diag.errors.push('snapshot：' + e2.message);
-              diag.source = 'none';
-              showLoadError();
-              renderSeats(null);
+                const raw = await fetchProxy(diag.endpoint);
+                if (raw && Array.isArray(raw.intel)) {
+                    diag.intelCount = raw.intel.length;
+                    if (raw.intel.length) renderIntel(raw.intel);
+                }
+                const data = normalizePayload(raw);
+                diag.source = 'airtable-proxy';
+                applyListingData(data);
+                renderDebug();
+                return;
+            } catch (e) {
+                console.warn('线上 API 加载失败，回退到本地快照：', e);
+                diag.errors.push('proxy：' + e.message);
+                diag.skipped = 0;
             }
-          }
-          renderDebug();
+
+            /* 2) 本地快照（同域相对路径） */
+            try {
+                const raw = await fetchJson('data/listings.json', 5000, 'snapshot');
+                if (raw && Array.isArray(raw.intel)) {
+                    diag.intelCount = raw.intel.length;
+                    if (raw.intel.length) renderIntel(raw.intel);
+                }
+                const data = normalizePayload(raw);
+                diag.source = 'local-snapshot';
+                applyListingData(data);
+                renderDebug();
+                return;
+            } catch (e2) {
+                console.warn('本地快照也加载失败，启用内置演示数据：', e2);
+                diag.errors.push('snapshot：' + e2.message);
+            }
+
+            /* 3) 内置演示数据（保证任何环境都有内容） */
+            try {
+                const data = normalizePayload(DEMO_PAYLOAD);
+                diag.source = 'demo';
+                diag.payloadKeys = ['todayFinds', 'newListing'];
+                applyListingData(data);
+            } catch (e3) {
+                diag.source = 'none';
+                diag.errors.push('demo：' + e3.message);
+                showLoadError();
+                renderSeats(null);
+            }
+            renderDebug();
         }
+
         loadAirtableData();
     </script>
 
     <!-- PWA 安装引导弹层 -->
     <style>
-    .gd-install-modal { position: fixed; inset: 0; z-index: 9999; display: none; align-items: center; justify-content: center; background: rgba(0,0,0,.45); padding: 1.2rem; }
+    .gd-install-modal { position: fixed; inset: 0; z-index: 9999; display: none; align-items: center; justify-content: center; background: rgba(20,17,14,.5); -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px); padding: 1.2rem; }
     .gd-install-modal.open { display: flex; }
-    .gd-install-card { background: #fff; border-radius: var(--card-radius); max-width: 350px; width: 100%; padding: 1.6rem 1.4rem 1.2rem; text-align: center; box-shadow: 0 18px 50px rgba(0,0,0,.25); position: relative; }
-    .gd-install-close { position: absolute; top: .5rem; right: .7rem; border: 0; background: none; font-size: 1.4rem; color: #999; cursor: pointer; padding: .5rem; min-width: 44px; min-height: 44px; display: inline-flex; align-items: center; justify-content: center; line-height: 1; }
-    .gd-install-title { font-size: 1.08rem; font-weight: 700; color: #3d2b1f; margin: .2rem 0 1rem; }
-    .gd-install-steps { text-align: left; margin: 0 auto 1rem; max-width: 290px; }
-    .gd-install-step { display: flex; align-items: flex-start; gap: .6rem; padding: .5rem 0; color: #5a4636; font-size: .9rem; line-height: 1.5; }
-    .gd-install-step .n { flex-shrink: 0; width: 22px; height: 22px; border-radius: 50%; background: #f0e4d8; color: #7A4E33; font-weight: 700; font-size: .78rem; display: flex; align-items: center; justify-content: center; margin-top: .1rem; }
+    .gd-install-card { background: #fff; border-radius: 16px; max-width: 360px; width: 100%; padding: 1.8rem 1.5rem 1.3rem; text-align: center; box-shadow: 0 24px 60px rgba(0,0,0,.28); position: relative; }
+    .gd-install-close { position: absolute; top: .5rem; right: .7rem; border: 0; background: none; font-size: 1.4rem; color: #A49D94; cursor: pointer; padding: .5rem; min-width: 44px; min-height: 44px; display: inline-flex; align-items: center; justify-content: center; line-height: 1; border-radius: 8px; transition: .3s; }
+    .gd-install-close:hover { color: #7A4E33; background: #F3EAE0; }
+    .gd-install-title { font-size: 1.1rem; font-weight: 700; color: #3d2b1f; margin: .2rem 0 1.1rem; font-family: var(--font-serif); }
+    .gd-install-steps { text-align: left; margin: 0 auto 1rem; max-width: 296px; }
+    .gd-install-step { display: flex; align-items: flex-start; gap: .65rem; padding: .5rem 0; color: #5a4636; font-size: .9rem; line-height: 1.55; }
+    .gd-install-step .n { flex-shrink: 0; width: 22px; height: 22px; border-radius: 50%; background: #F3EAE0; color: #7A4E33; font-weight: 700; font-size: .76rem; display: flex; align-items: center; justify-content: center; margin-top: .1rem; }
     .gd-install-step svg { flex-shrink: 0; width: 22px; height: 22px; fill: #007AFF; margin-top: .1rem; }
-    .gd-install-note { font-size: .78rem; color: #9a8d80; margin-top: .5rem; line-height: 1.5; }
-    .gd-install-modal [data-lang="en"] .zh, body[data-lang="en"] .gd-install-modal .zh { display: none; }
-    .gd-install-modal [data-lang="zh"] .en, body[data-lang="zh"] .gd-install-modal .en { display: none; }
+    .gd-install-note { font-size: .78rem; color: #9a8d80; margin-top: .5rem; line-height: 1.55; }
+    body[data-lang="en"] .gd-install-modal .zh { display: none; }
+    body[data-lang="zh"] .gd-install-modal .en { display: none; }
     </style>
     <div class="gd-install-modal" id="gdInstallModal" role="dialog" aria-modal="true" aria-label="Install guide">
         <div class="gd-install-card">
@@ -1801,12 +2622,4 @@
                 return;
             }
             var ua = navigator.userAgent;
-            var isIOS = /iPad|iPhone|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-            document.getElementById('gdStepsIos').style.display = isIOS ? '' : 'none';
-            document.getElementById('gdStepsOther').style.display = isIOS ? 'none' : '';
-            modal.classList.add('open');
-        });
-    })();
-    </script>
-</body>
-</html>
+            var isIOS = /iPad|iPhone|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.max

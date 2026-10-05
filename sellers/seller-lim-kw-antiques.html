@@ -663,8 +663,8 @@ footer {
             GD.load().then(r => {
                 GD.diag.page = 'sellers/' + SELLER_ID;
                 applySeller(GD.sellerMap(r.data)[SELLER_ID]);
-                allItems = GD.dedupe([].concat(r.data.newListing, r.data.todayFinds, r.data.editorPicks))
-                    .filter(f => GD.normId(f.seller_id) === SELLER_ID);
+               allItems = GD.dedupe([].concat(r.data.newListing, r.data.todayFinds, r.data.editorPicks))
+    .filter(f => (GD.normId(f.seller_id) || '').toLowerCase() === SELLER_ID.toLowerCase());
                 document.getElementById('itemCount').textContent = allItems.length;
                 filteredItems = allItems.slice();
                 renderVisible();

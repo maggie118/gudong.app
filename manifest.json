@@ -1,8 +1,8 @@
 {
     "id": "/",
     "name": "古董圈 Gudong",
-    "short_name": "Gudong",
-    "description": "Gudong 古董圈是一个帮助收藏家经营线上藏馆和获得收藏家曝光的平台",
+    "short_name": "古董圈",
+    "description": "Gudong 古董圈是一个高级古董发现平台，提供信息、展示与连接服务以及帮助收藏家经营线上藏馆的平台",
     "start_url": "/",
     "scope": "/",
     "display": "standalone",

@@ -284,6 +284,7 @@
             position: fixed; inset: 0;
             background: rgba(20, 17, 14, .45);
 
+
             -webkit-backdrop-filter: blur(2px);
             backdrop-filter: blur(2px);
             opacity: 0; pointer-events: none;
@@ -588,9 +589,18 @@
         }
 
         /* ============================================================
-           TODAY'S FINDS
+           TODAY'S FINDS（flex 居中：不足一行时自动居中，不留“半边空”）
            ============================================================ */
-        .finds-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.9rem; }
+        .finds-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.9rem;
+        }
+        .finds-grid .finds-card {
+            flex: 0 0 calc((100% - 1.9rem * 3) / 4);
+            min-width: 0;
+        }
 
         .finds-card {
             text-decoration: none;
@@ -999,6 +1009,7 @@
             margin: 1.7rem 0 1.4rem;
             text-align: left;
         }
+
         .how-card {
             background: var(--color-surface);
             border: 1px solid var(--color-border);
@@ -1320,7 +1331,8 @@
             .brand-logo-img { height: 34px; }
             .btn-publish { padding: .65rem .9rem; font-size: .8rem; }
             .container { padding-top: 2.5rem; }
-            .finds-grid { grid-template-columns: repeat(2, 1fr); gap: 1.2rem; }
+            .finds-grid { gap: 1.2rem; }
+            .finds-grid .finds-card { flex: 0 0 calc((100% - 1.2rem) / 2); }
             .goods-list { grid-template-columns: repeat(4, 1fr); }
             .intel-card { flex: 0 0 236px; }
             .how-grid { grid-template-columns: repeat(2, 1fr); }
@@ -1340,7 +1352,8 @@
             .section-head2 .title { font-size: 1.18rem; }
             .hero-title-main { font-size: 1.6rem; }
             .goods-list { grid-template-columns: repeat(3, 1fr); gap: .7rem; }
-            .finds-grid { grid-template-columns: repeat(2, 1fr); gap: .9rem; }
+            .finds-grid { gap: .9rem; }
+            .finds-grid .finds-card { flex: 0 0 calc((100% - .9rem) / 2); }
             .item-card .item-info { padding: .3rem .5rem; gap: .1rem; }
             .item-card .item-price { font-size: .78rem; gap: .25rem; }
             .item-card .price-tag { font-size: .7rem; padding: .1rem .3rem; }
@@ -2272,7 +2285,6 @@
             ['seatsNum', 'seatsNumEn'].forEach(function (id) {
                 const el = document.getElementById(id);
                 if (el) el.textContent = String(left);
-
             });
 
             const fill = document.getElementById('seatsFill');
@@ -2622,4 +2634,12 @@
                 return;
             }
             var ua = navigator.userAgent;
-            var isIOS = /iPad|iPhone|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.max
+            var isIOS = /iPad|iPhone|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+            document.getElementById('gdStepsIos').style.display = isIOS ? '' : 'none';
+            document.getElementById('gdStepsOther').style.display = isIOS ? 'none' : '';
+            modal.classList.add('open');
+        });
+    })();
+    </script>
+</body>
+</html>

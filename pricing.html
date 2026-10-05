@@ -12,8 +12,8 @@
 <meta property="og:description" content="88席创始藏家首发 · 前2件免费上架 · 单件S$198 · 专属藏家数字旗舰馆S$1,499（10件合包创始特惠，一键全包，0%佣金）。">
 <meta property="og:url" content="https://gudong.app/pricing.html">
 <meta property="og:image" content="https://gudong.app/assets/icons/icon-512.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="assets/icons/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32x32.png">
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#7A4E33">
 <meta name="mobile-web-app-capable" content="yes">
@@ -238,21 +238,255 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
   .sourcing-divider { writing-mode: horizontal-tb; padding: .5rem 0; }
 }
 
-/* 弹窗设计 */
-.publish-modal { position: fixed; inset: 0; z-index: 10000; display: none; align-items: center; justify-content: center; background: rgba(0,0,0,.5); padding: 1.2rem; }
+/* ============================================================
+   弹窗设计（精简整合版：单件上架 + 图片精修合并）
+   ============================================================ */
+.publish-modal {
+  position: fixed; inset: 0; z-index: 10000;
+  display: none; align-items: center; justify-content: center;
+  background: rgba(20,17,14,.55);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+  padding: 1.2rem;
+}
 .publish-modal.open { display: flex; }
-.publish-card { background: #fff; border-radius: var(--card-radius); max-width: 480px; width: 100%; padding: 2rem 1.8rem 1.5rem; box-shadow: 0 18px 50px rgba(0,0,0,.3); position: relative; max-height: 90vh; overflow-y: auto; }
-.publish-close { position: absolute; top: .5rem; right: .7rem; border: 0; background: none; font-size: 1.5rem; color: #999; cursor: pointer; padding: .5rem; }
-.publish-card h3 { font-family: var(--font-serif); font-size: 1.25rem; color: var(--color-primary-dark); margin-bottom: .5rem; }
-.price-box { background: #FDF9F0; border: 1px solid #E8DCC8; border-radius: 8px; padding: 1rem; margin-bottom: 1rem; font-size: .8rem; color: var(--color-text-secondary); }
-.price-box .price-highlight { font-weight: 700; color: #7A4E33; font-size: 1rem; }
-.warning-box { background: #FFF8E7; border: 1px solid #F0E6D2; padding: .8rem 1rem; border-radius: 6px; font-size: .75rem; color: #8A6D3B; line-height: 1.6; margin-bottom: 1.2rem; display: flex; gap: .5rem; }
-.publish-form-group { margin-bottom: 1rem; }
-.publish-form-group label { display: block; font-size: .8rem; font-weight: 600; color: var(--color-text); margin-bottom: .35rem; }
-.publish-input, .publish-textarea { width: 100%; padding: .65rem .8rem; border: 1px solid var(--color-border); border-radius: 6px; font-size: .85rem; font-family: inherit; background: #fff; }
-.publish-textarea { min-height: 80px; resize: vertical; }
-.submit-btn { display: flex; align-items: center; justify-content: center; gap: .5rem; padding: .85rem 1rem; border-radius: 6px; font-weight: 700; width: 100%; background: #7A4E33; color: #fff; border: none; cursor: pointer; margin-top: 1rem; }
-.submit-btn:hover { background: #5C3A26; }
+
+.publish-card {
+  background: #fff;
+  border-radius: 16px;
+  max-width: 500px; width: 100%;
+  padding: 2rem 1.8rem 1.6rem;
+  box-shadow: 0 24px 60px rgba(0,0,0,.28);
+  position: relative;
+  max-height: 92vh; overflow-y: auto;
+  animation: pm-in .22s cubic-bezier(.22,.61,.36,1);
+}
+@keyframes pm-in {
+  from { opacity: 0; transform: translateY(8px) scale(.98); }
+  to   { opacity: 1; transform: none; }
+}
+.publish-close {
+  position: absolute; top: .6rem; right: .8rem;
+  border: 0; background: none;
+  font-size: 1.4rem; color: #A49D94;
+  cursor: pointer;
+  padding: .5rem; min-width: 44px; min-height: 44px;
+  display: inline-flex; align-items: center; justify-content: center;
+  border-radius: 8px; line-height: 1;
+  transition: all .3s;
+}
+.publish-close:hover { color: #7A4E33; background: #F1E8DF; }
+
+.publish-card h3 {
+  font-family: var(--font-serif);
+  font-size: 1.28rem; font-weight: 700;
+  color: var(--color-primary-dark);
+  margin-bottom: 1rem;
+  letter-spacing: -.005em;
+}
+
+/* 价格 + 服务清单块 */
+.price-box {
+  background: linear-gradient(145deg, #FDFBF7 0%, #F3EAE0 100%);
+  border: 1px solid #EADFC8;
+  border-radius: 12px;
+  padding: 1.1rem 1.2rem .9rem;
+  margin-bottom: 1rem;
+}
+.price-head {
+  display: flex;
+  align-items: baseline;
+  gap: .35rem;
+  flex-wrap: wrap;
+  margin-bottom: .7rem;
+}
+.price-highlight {
+  font-family: var(--font-serif);
+  font-size: 1.75rem; font-weight: 700;
+  color: var(--color-primary-dark);
+  letter-spacing: -.01em;
+  line-height: 1;
+}
+.price-unit-suffix {
+  font-size: .8rem;
+  color: var(--color-text-secondary);
+}
+.price-original {
+  font-size: .82rem;
+  color: var(--color-text-muted);
+  margin-left: auto;
+  font-weight: 400;
+}
+
+.service-list {
+  list-style: none;
+  padding: 0; margin: 0 0 .6rem;
+}
+.service-list li {
+  position: relative;
+  padding: .32rem 0 .32rem 1.1rem;
+  font-size: .8rem;
+  color: var(--color-text);
+  line-height: 1.55;
+}
+.service-list li + li { border-top: 1px dashed rgba(156,122,58,.18); }
+.service-list li::before {
+  content: "";
+  position: absolute; left: 2px; top: .75rem;
+  width: 5px; height: 5px;
+  background: var(--color-gold);
+  transform: rotate(45deg);
+}
+
+.service-note {
+  font-size: .74rem;
+  color: var(--color-text-muted);
+  line-height: 1.55;
+  padding-top: .55rem;
+  border-top: 1px solid rgba(156,122,58,.15);
+}
+
+/* 精简协议提示 */
+.compact-warning {
+  display: flex;
+  gap: .5rem;
+  background: #FFF8E7;
+  border: 1px solid #F0E6D2;
+  border-radius: 8px;
+  padding: .7rem .9rem;
+  font-size: .74rem;
+  color: #8A6D3B;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+.compact-warning > span { flex-shrink: 0; }
+.compact-warning b { color: #6E5326; }
+
+/* 表单 */
+.publish-form-group { margin-bottom: .9rem; }
+.publish-form-group label {
+  display: block;
+  font-size: .79rem; font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: .35rem;
+}
+.publish-input, .publish-textarea {
+  width: 100%;
+  padding: .68rem .85rem;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  font-size: .85rem;
+  font-family: inherit;
+  color: var(--color-text);
+  background: #fff;
+  transition: all .3s;
+}
+.publish-input:focus, .publish-textarea:focus {
+  outline: none;
+  border-color: var(--color-gold);
+  box-shadow: 0 0 0 4px rgba(156,122,58,.14);
+}
+.publish-textarea { min-height: 72px; resize: vertical; }
+
+/* 文件上传 */
+.publish-file {
+  display: block;
+  border: 1.5px dashed var(--color-border);
+  border-radius: 8px;
+  padding: 1rem;
+  text-align: center;
+  cursor: pointer;
+  background: #FAFAF7;
+  transition: all .3s;
+}
+.publish-file:hover {
+  border-color: var(--color-primary);
+  background: var(--color-primary-light);
+}
+.publish-file input { display: none; }
+.publish-file-plus {
+  display: block;
+  font-size: 1.3rem; font-weight: 700;
+  color: var(--color-primary);
+  line-height: 1;
+}
+.publish-file-text {
+  display: block;
+  font-size: .78rem;
+  color: var(--color-text-secondary);
+  margin-top: .25rem;
+}
+.publish-file-count {
+  display: none;
+  font-size: .74rem;
+  color: var(--color-success);
+  margin-top: .2rem;
+}
+.publish-file.has .publish-file-count { display: block; }
+
+/* 协议勾选行 */
+.agree-row {
+  display: flex;
+  align-items: flex-start;
+  gap: .6rem;
+  margin-top: .6rem;
+  background: #FAF7F2;
+  padding: .75rem .85rem;
+  border-radius: 8px;
+  border: 1px solid #EAE3D6;
+}
+.agree-row input[type="checkbox"] {
+  width: 18px; height: 18px;
+  accent-color: #7A4E33;
+  margin-top: 2px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.agree-row label {
+  margin-bottom: 0;
+  font-size: .76rem;
+  font-weight: 400;
+  color: var(--color-text);
+  cursor: pointer;
+  line-height: 1.55;
+}
+.agree-row label a {
+  color: #7A4E33; font-weight: 600;
+  text-decoration: underline;
+}
+
+/* 工作流提示 */
+.workflow-hint {
+  font-size: .72rem;
+  color: var(--color-text-muted);
+  text-align: center;
+  line-height: 1.6;
+  padding: .55rem .2rem .7rem;
+  border-top: 1px dashed var(--color-border);
+  margin-top: .4rem;
+}
+
+/* 主按钮 */
+.submit-btn {
+  display: flex; align-items: center; justify-content: center;
+  gap: .5rem;
+  padding: .9rem 1rem;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: .92rem;
+  width: 100%;
+  background: linear-gradient(135deg, #7A4E33 0%, #5C3A26 100%);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 8px 22px rgba(122,78,51,.25);
+  transition: all .3s;
+}
+.submit-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 28px rgba(122,78,51,.35);
+}
+.submit-btn:active { transform: translateY(0); }
 </style>
 </head>
 <body data-lang="zh">
@@ -260,7 +494,7 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
     <div style="display:flex; align-items:center; gap:.9rem;">
       <button class="menu-toggle" onclick="openSidebar()" aria-label="菜单">☰</button>
       <a href="index.html" class="brand">
-        <img src="assets/icons/logo-mark.png" alt="古董圈 Gudong" class="brand-logo-img">
+        <img src="assets/icons/logo-mark.png" alt="古董圈 Gudong" class="brand-logo-img" onerror="this.style.display='none'">
         <div class="brand-text">
           <h1><span class="zh">古董圈</span><span class="en">GUDONG</span></h1>
           <p><span class="zh">GUDONG.APP</span><span class="en">Chinese Antiques Platform</span></p>
@@ -350,7 +584,7 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
         <div class="price"><span class="cur">S$</span>198</div>
         <div class="price-unit"><span class="zh">/ 件 / 年（第 3 件起计费）</span><span class="en">/ item / year (from 3rd item)</span></div>
         <ul>
-          <li><strong><span class="zh">专业图片精修</span><span class="en">Professional Retouching</span></strong><span class="zh">：还原器物本色与岁月包浆</span><span class="en"> — restore natural color & patina</span></li>
+          <li><strong><span class="zh">专业图片精修</span><span class="en">Professional Retouching</span></strong><span class="zh">：保留器物本色与岁月包浆</span><span class="en"> — restore natural color & patina</span></li>
           <li><strong><span class="zh">平台标品上架</span><span class="en">Standard Slot Listing</span></strong><span class="zh">：快速上线展示与私域直连</span><span class="en"> — quick display & direct connection</span></li>
           <li><strong><span class="zh">一年在线展示</span><span class="en">1-Year Online Display</span></strong><span class="zh">：基础档位便捷出货</span><span class="en"> — convenient basic tier circulation</span></li>
         </ul>
@@ -480,53 +714,100 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
   <p class="en" style="margin-bottom:0;">© 2026 Gudong · gudong.app All Rights Reserved.</p>
 </footer>
 
-<!-- 统一服务预约弹窗（已引入《卖家背书与免责协议》勾选验证） -->
+<!-- ============================================================
+     统一服务预约弹窗（整合「单件上架」+「图片精修服务清单」）
+     ============================================================ -->
 <div class="publish-modal" id="serviceModal" role="dialog" aria-modal="true">
   <div class="publish-card">
     <button type="button" class="publish-close" onclick="closeServiceModal()" aria-label="关闭">×</button>
-    <h3 id="modalTitle"><span class="zh">服务申请</span><span class="en">Service Application</span></h3>
+
+    <h3 id="modalTitle">
+      <span class="zh">单件专业上架申请</span>
+      <span class="en">Professional Single Listing</span>
+    </h3>
+
+    <!-- 价格 + 服务清单（整合 collection 的图片精修内容） -->
     <div class="price-box" id="modalPriceBox">
-      <span class="price-highlight" id="modalPriceHighlight">S$198 / 件</span> <span id="modalPriceDesc"><span class="zh">（含专业图片精修与平台标品上架、一年展示）</span><span class="en">(Includes professional retouching, standard slot listing & 1-year display)</span></span>
+      <div class="price-head">
+        <span class="price-highlight" id="modalPriceHighlight">S$198</span>
+        <span class="price-unit-suffix" id="modalPriceUnit">
+          <span class="zh">/ 件 · 一年在线</span>
+          <span class="en">/ item · 1-year</span>
+        </span>
+        <s class="price-original" id="modalPriceOriginal"></s>
+      </div>
+
+      <ul class="service-list">
+        <li>
+          <span class="zh"><b>图片精修（4 张 / 件）</b>：正面 · 背面 · 底部 · 细节</span>
+          <span class="en"><b>Photo retouching (4 photos / item)</b>: front · back · base · detail</span>
+        </li>
+        <li>
+          <span class="zh"><b>标题 · 描述 · 标签</b>：如实整理，不鉴定真伪</span>
+          <span class="en"><b>Title · Description · Tags</b>: as-is, no authentication</span>
+        </li>
+        <li>
+          <span class="zh"><b>确认后上架</b> gudong.app，一年在线展示</span>
+          <span class="en"><b>Listed on gudong.app</b> after your approval · 1-year display</span>
+        </li>
+      </ul>
+
+      <div class="service-note">
+        <span class="zh">不改变器物真实颜色、形状与品相。</span>
+        <span class="en">We never alter the item's true colour, shape or condition.</span>
+      </div>
     </div>
-    
-    <!-- 引入《卖家背书与免责协议》（Consignor Agreement）核心条款提示与强制勾选 -->
-    <div class="warning-box">
-      <span>⚠️</span>
-      <div id="modalWarningText">
-        <span class="zh">
-          <b>权属与真实性承诺：</b>您保证对送检藏品的合法来源负责，承诺所提供信息真实有效。因真伪引发的纠纷由买卖双方自行解决，与 gudong.app 无关；同时您授权平台优化图片与公开展示。
-        </span>
-        <span class="en">
-          <b>Authenticity & Ownership Commitment:</b> You guarantee the legal source of items and truthfulness of provided info. Any authenticity dispute is resolved between parties, unrelated to gudong.app. You authorize the platform to optimize and publicly display images.
-        </span>
+
+    <!-- 精简后的协议提示 -->
+    <div class="compact-warning">
+      <span>⚠</span>
+      <div>
+        <span class="zh"><b>权属与真实性承诺：</b>藏品来源须合法、信息真实；真伪纠纷由买卖双方自理，平台不介入货款、不抽佣金。</span>
+        <span class="en"><b>Ownership & Authenticity:</b> Legal source, truthful info. Disputes resolved between parties. Platform never handles payment.</span>
       </div>
     </div>
 
     <div class="publish-form-group">
-      <label><span class="zh">Seller ID（古董圈网站 ID） *</span><span class="en">Seller ID (Website ID) *</span></label>
+      <label><span class="zh">Seller ID *</span><span class="en">Seller ID *</span></label>
       <input type="text" class="publish-input" id="serviceSellerId" placeholder="seller-lim-antiques">
     </div>
+
     <div class="publish-form-group">
-      <label><span class="zh">WhatsApp 号码 *</span><span class="en">WhatsApp Number *</span></label>
+      <label><span class="zh">WhatsApp *</span><span class="en">WhatsApp *</span></label>
       <input type="text" class="publish-input" id="serviceWhatsapp" placeholder="+65 xxxxxxxx">
     </div>
+
     <div class="publish-form-group">
-      <label><span class="zh">藏品备注与视觉要求（可选）</span><span class="en">Notes & Visual Requirements (Optional)</span></label>
-      <textarea class="publish-textarea" id="serviceNotes" placeholder="例如：青花瓷器，需突出釉面与底款细节... / e.g., Porcelain, highlighting glaze and base marks..."></textarea>
+      <label><span class="zh">上传图片（可多选，最多 4 张）</span><span class="en">Upload photos (max 4)</span></label>
+      <label class="publish-file" id="serviceFileWrap">
+        <input type="file" id="serviceImages" multiple accept="image/*">
+        <span class="publish-file-plus">＋</span>
+        <span class="publish-file-text"><span class="zh">点击上传图片</span><span class="en">Click to upload</span></span>
+        <span class="publish-file-count" id="serviceFileCount"></span>
+      </label>
     </div>
 
-    <!-- 强制勾选《卖家背书与免责协议》 -->
-    <div class="publish-form-group" style="display: flex; align-items: flex-start; gap: 0.6rem; margin-top: 0.8rem; background: #FAF7F2; padding: 0.7rem; border-radius: 6px; border: 1px solid #EAE3D6;">
-      <input type="checkbox" id="agreeConsignor" style="width: 18px; height: 18px; accent-color: #7A4E33; margin-top: 2px; cursor: pointer;">
-      <label for="agreeConsignor" style="margin-bottom: 0; font-size: 0.76rem; font-weight: normal; color: var(--color-text); cursor: pointer; line-height: 1.5;">
-        <span class="zh">我已阅读并同意 <a href="terms.html" target="_blank" style="color: #7A4E33; font-weight: 600; text-decoration: underline;">《卖家背书与免责协议》（Consignor Agreement）</a>：承诺藏品合法、信息真实，授权平台优化展示，且已知悉平台不介入货款、免除真伪纠纷责任。</span>
-        <span class="en">I have read and agree to the <a href="terms.html" target="_blank" style="color: #7A4E33; font-weight: 600; text-decoration: underline;">Consignor Agreement</a>: guaranteeing item legitimacy, authorizing platform display, and acknowledging platform exemption from authenticity disputes.</span>
+    <div class="publish-form-group">
+      <label><span class="zh">备注（可选）</span><span class="en">Notes (optional)</span></label>
+      <textarea class="publish-textarea" id="serviceNotes" placeholder="希望重点优化哪里？ / Anything to highlight?"></textarea>
+    </div>
+
+    <div class="publish-form-group agree-row">
+      <input type="checkbox" id="agreeConsignor">
+      <label for="agreeConsignor">
+        <span class="zh">我已阅读并同意 <a href="terms.html" target="_blank">《卖家背书与免责协议》</a></span>
+        <span class="en">I agree to the <a href="terms.html" target="_blank">Consignor Agreement</a></span>
       </label>
+    </div>
+
+    <div class="workflow-hint">
+      <span class="zh">提交 → WhatsApp 发送 PayNow → 付款截图回传 → 3 个工作日内发布</span>
+      <span class="en">Submit → PayNow via WhatsApp → Send receipt → Published in 3 business days</span>
     </div>
 
     <button class="submit-btn" onclick="submitServiceForm()">
       <span class="zh">同意协议并跳转 WhatsApp 获取 PayNow →</span>
-      <span class="en">Agree & Go to WhatsApp for PayNow →</span>
+      <span class="en">Agree & Get PayNow via WhatsApp →</span>
     </button>
   </div>
 </div>
@@ -539,75 +820,145 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
     var modal = document.getElementById('serviceModal');
     var title = document.getElementById('modalTitle');
     var priceHighlight = document.getElementById('modalPriceHighlight');
-    var priceDesc = document.getElementById('modalPriceDesc');
-    var warningText = document.getElementById('modalWarningText');
-    
-    // 每次打开时清空勾选状态，确保合规体验
+    var priceUnit = document.getElementById('modalPriceUnit');
+    var priceOriginal = document.getElementById('modalPriceOriginal');
+    var list = document.querySelector('.service-list');
+
+    // 清空勾选与文件（每次打开重置）
     var agreeBox = document.getElementById('agreeConsignor');
     if (agreeBox) agreeBox.checked = false;
+    var fileInput = document.getElementById('serviceImages');
+    if (fileInput) fileInput.value = '';
+    var fileWrap = document.getElementById('serviceFileWrap');
+    if (fileWrap) fileWrap.classList.remove('has');
+    var fileCount = document.getElementById('serviceFileCount');
+    if (fileCount) fileCount.textContent = '';
 
     if (type === 'gallery') {
-      title.innerHTML = '<span class="zh">10件数字旗舰馆开通申请</span><span class="en">10-Item Digital Gallery Application</span>';
-      priceHighlight.textContent = 'S$1,499 / 10件合包';
-      priceDesc.innerHTML = '<span class="zh">（创始特惠：含一键全包、独立网页、私域雅集、2个月黄金位、2次顾问品鉴与0%佣金）</span><span class="en">(Founding Special: All-inclusive web, private salon, 2-mo gold spot, 2 advisories & 0% commission)</span>';
-      warningText.innerHTML = '<span class="zh"><b>权属与真实性承诺：</b>本服务包含10件重器一键全包建馆。您保证对藏品合法来源负责，真伪纠纷由买卖双方自理，与 gudong.app 无关；并授权平台优化图片与公开展示。</span><span class="en"><b>Authenticity & Ownership Commitment:</b> Includes all-inclusive archiving for 10 items. You guarantee item legitimacy, any disputes are self-resolved, and you authorize platform display.</span>';
+      title.innerHTML = '<span class="zh">10件数字旗舰馆开通申请</span><span class="en">10-Item Digital Gallery</span>';
+      priceHighlight.textContent = 'S$1,499';
+      priceUnit.innerHTML = '<span class="zh">/ 10 件合包</span><span class="en">/ 10-item package</span>';
+      priceOriginal.textContent = 'S$2,499';
+      list.innerHTML = ''
+        + '<li><span class="zh"><b>一键全包</b>：10 件精修 · 标题 · 描述 · 标签</span><span class="en"><b>All-inclusive</b>: retouching · title · description · tags for 10 items</span></li>'
+        + '<li><span class="zh"><b>独立藏家主页</b> + 一年在线展示</span><span class="en"><b>Dedicated collector homepage</b> + 1-year display</span></li>'
+        + '<li><span class="zh"><b>首页黄金位 2 个月</b> + 资深顾问品鉴 2 次</span><span class="en"><b>2-month homepage feature</b> + 2 expert advisories</span></li>'
+        + '<li><span class="zh"><b>0% 交易佣金</b>：成交利润全归您</span><span class="en"><b>0% commission</b>: keep all proceeds</span></li>';
     } else {
-      title.innerHTML = '<span class="zh">单件专业上架申请</span><span class="en">Professional Single Listing Application</span>';
-      priceHighlight.textContent = 'S$198 / 件';
-      priceDesc.innerHTML = '<span class="zh">（含专业图片精修与平台标品上架、一年展示）</span><span class="en">(Includes professional retouching, standard slot listing & 1-year display)</span>';
-      warningText.innerHTML = '<span class="zh"><b>权属与真实性承诺：</b>本服务包含专业视觉优化与标品上架。您保证藏品来源合法、信息真实，真伪纠纷与 gudong.app 无关，并授权平台优化及展示。</span><span class="en"><b>Authenticity & Ownership Commitment:</b> Includes professional visual optimization and slot listing. You guarantee item legitimacy, authorize platform display, and exempt gudong.app from disputes.</span>';
+      title.innerHTML = '<span class="zh">单件专业上架申请</span><span class="en">Professional Single Listing</span>';
+      priceHighlight.textContent = 'S$198';
+      priceUnit.innerHTML = '<span class="zh">/ 件 · 一年在线</span><span class="en">/ item · 1-year</span>';
+      priceOriginal.textContent = '';
+      list.innerHTML = ''
+        + '<li><span class="zh"><b>图片精修</b>：光影 / 色彩 / 裁剪 / 背景清理</span><span class="en"><b>Photo retouching</b>: light, colour, crop, background</span></li>'
+        + '<li><span class="zh"><b>标题 · 描述 · 标签</b>：如实整理，不鉴定真伪</span><span class="en"><b>Title · Description · Tags</b>: as-is, no authentication</span></li>'
+        + '<li><span class="zh"><b>确认后上架</b> gudong.app，一年在线展示</span><span class="en"><b>Listed on gudong.app</b> after your approval · 1-year display</span></li>';
     }
 
     if (modal) modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
   }
 
   function closeServiceModal() {
     var modal = document.getElementById('serviceModal');
     if (modal) modal.classList.remove('open');
+    document.body.style.overflow = '';
   }
+
+  // 图片上传计数
+  (function bindServiceFile() {
+    var input = document.getElementById('serviceImages');
+    var wrap = document.getElementById('serviceFileWrap');
+    var count = document.getElementById('serviceFileCount');
+    if (!input || !wrap || !count) return;
+    input.addEventListener('change', function () {
+      var n = input.files ? input.files.length : 0;
+      if (n > 4) {
+        alert(currentLang === 'zh' ? '一次最多上传 4 张图片' : 'Maximum 4 photos per order');
+        input.value = '';
+        wrap.classList.remove('has');
+        count.textContent = '';
+        return;
+      }
+      if (n > 0) {
+        wrap.classList.add('has');
+        count.textContent = currentLang === 'zh'
+          ? ('已选择 ' + n + ' 张')
+          : (n + (n > 1 ? ' photos' : ' photo') + ' selected');
+      } else {
+        wrap.classList.remove('has');
+        count.textContent = '';
+      }
+    });
+  })();
 
   function submitServiceForm() {
     var sId = document.getElementById('serviceSellerId').value.trim();
     var wa = document.getElementById('serviceWhatsapp').value.trim();
     var notes = document.getElementById('serviceNotes').value.trim();
     var agree = document.getElementById('agreeConsignor').checked;
-    
+    var fileInput = document.getElementById('serviceImages');
+    var n = fileInput && fileInput.files ? fileInput.files.length : 0;
+
     if (!sId || !wa) {
-      alert(currentLang === 'zh' ? '请填写必填项（Seller ID 和 WhatsApp）' : 'Please fill in required fields (Seller ID and WhatsApp).');
+      alert(currentLang === 'zh'
+        ? '请填写必填项（Seller ID 和 WhatsApp）'
+        : 'Please fill in required fields (Seller ID and WhatsApp).');
       return;
     }
 
-    // 强制校验是否勾选《卖家背书与免责协议》
     if (!agree) {
-      alert(currentLang === 'zh' ? '请先勾选并同意《卖家背书与免责协议》（Consignor Agreement）方可提交申请。' : 'Please check and agree to the Consignor Agreement before submitting.');
+      alert(currentLang === 'zh'
+        ? '请先勾选并同意《卖家背书与免责协议》方可提交。'
+        : 'Please check and agree to the Consignor Agreement before submitting.');
       return;
     }
 
-    var msg = '';
+    var title, feeLine, photosLine;
     if (currentServiceType === 'gallery') {
-      msg = `【10件数字旗舰馆申请 - 古董圈】\nSeller ID：${sId}\nWhatsApp：${wa}\n备注：${notes || '无'}\n\n[已确认同意《卖家背书与免责协议》]\n专属藏家数字旗舰馆合包（S$1,499/10件合包），请发送 PayNow 付款二维码。`;
+      title = '【10件数字旗舰馆申请 - 古董圈】';
+      feeLine = '专属藏家数字旗舰馆合包（S$1,499 / 10件合包）';
+      photosLine = n > 0 ? ('\n参考图片：' + n + ' 张（其余与客服后续沟通）') : '\n参考图片：后续与客服沟通';
     } else {
-      msg = `【单件专业上架申请 - 古董圈】\nSeller ID：${sId}\nWhatsApp：${wa}\n备注：${notes || '无'}\n\n[已确认同意《卖家背书与免责协议》]\n单件上架服务（S$198/件），请发送 PayNow 付款二维码。`;
+      title = '【单件专业上架申请 - 古董圈】';
+      feeLine = '单件上架服务（S$198 / 件）';
+      photosLine = n > 0 ? ('\n图片数量：' + n + ' 张') : '\n图片数量：待上传';
     }
 
-    window.open(`https://wa.me/6591888952?text=${encodeURIComponent(msg)}`, '_blank');
+    var msg = title + '\nSeller ID：' + sId + '\nWhatsApp：' + wa + photosLine +
+              '\n备注：' + (notes || '无') +
+              '\n\n[已确认同意《卖家背书与免责协议》]\n' +
+              feeLine + '，请发送 PayNow 付款二维码，我付款后会回传付款截图。';
+
+    window.open('https://wa.me/6591888952?text=' + encodeURIComponent(msg), '_blank');
     closeServiceModal();
   }
 
+  // 点击遮罩关闭
   var serviceModal = document.getElementById('serviceModal');
   if (serviceModal) {
-    serviceModal.addEventListener('click', function(e) {
+    serviceModal.addEventListener('click', function (e) {
       if (e.target === this) closeServiceModal();
     });
   }
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeServiceModal();
+  });
 
+  /* ============================================================
+     侧栏 & 语言
+     ============================================================ */
   function openSidebar() {
     document.getElementById('sidebar').classList.add('open');
     document.getElementById('sidebarOverlay').classList.add('show');
+    document.body.style.overflow = 'hidden';
   }
   function closeSidebar() {
     document.getElementById('sidebar').classList.remove('open');
     document.getElementById('sidebarOverlay').classList.remove('show');
+    if (!document.getElementById('serviceModal').classList.contains('open')) {
+      document.body.style.overflow = '';
+    }
   }
 
   let currentLang = (function () { try { return localStorage.getItem('gudong_lang') === 'en' ? 'en' : 'zh'; } catch (e) { return 'zh'; } })();

@@ -1,4 +1,6 @@
 /* 古董圈 Gudong · Service Worker
+ * 2026-10-6：v12 → v13
+ * - 提升缓存版本号，确保已安装 PWA 的用户拉取最新资源
  * 2026-10-5：v11 → v12
  * - 修复手机端 header 品牌行 GUDONG.APP 被 CSS 隐藏的问题（index/collection）；
    提升缓存版本号，确保已安装 PWA 的用户拿到新页面
@@ -16,7 +18,7 @@
  * - v8 → v9：配合首页改版提升缓存版本号
  */
 
-const CACHE_NAME = 'antique-collection-v12';
+const CACHE_NAME = 'antique-collection-v13';
 
 // 预缓存清单：核心页面 + 常用图标 + 占位图
 // 注意：改用逐个 cache.add，单个 404 不会导致整个 install 失败

@@ -154,6 +154,9 @@
 
         /* ---------- 文章容器（杂志排版） ---------- */
         .article-wrap { max-width: 720px; margin: 0 auto; padding: 0 5% 4.5rem; }
+        .breadcrumb { font-size: .78rem; color: var(--color-text-muted); margin-bottom: 1.8rem; display: flex; flex-wrap: wrap; gap: .35rem; align-items: center; }
+        .breadcrumb a { color: var(--color-text-secondary); text-decoration: none; } .breadcrumb a:hover { color: var(--color-primary); }
+        .breadcrumb .sep { color: var(--color-border); }
 
         .magazine-hero {
             position: relative;
@@ -549,6 +552,16 @@
     </aside>
 
     <main class="article-wrap">
+
+        <nav class="breadcrumb" aria-label="breadcrumb">
+            <a href="../index.html"><span class="zh">首页</span><span class="en">Home</span></a>
+            <span class="sep">/</span>
+            <a href="../insights.html"><span class="zh">情报 / 知识</span><span class="en">Insights</span></a>
+            <span class="sep">/</span>
+            <span class="zh">透过地理看古董</span><span class="en">GEOGRAPHY</span>
+        </nav>
+
+
 
         <div class="magazine-hero">
             <div class="hero-mark" aria-hidden="true"></div>

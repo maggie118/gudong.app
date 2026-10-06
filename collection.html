@@ -130,8 +130,9 @@
             line-height: 1; flex-shrink: 0; text-decoration: none;
             color: inherit; min-width: 0;
         }
-        .brand-logo-img { height: 38px; width: auto; display: block; object-fit: contain; }
+        .brand-logo-img { height: 36px; width: auto; display: block; object-fit: contain; }
         .brand-text { display: flex; flex-direction: column; justify-content: center; min-width: 0; }
+        @media (max-width: 640px) { .brand-logo-img { height: 30px; } }
         .brand h1 {
             font-size: 1.32rem; font-weight: 700; letter-spacing: .01em;
             line-height: 1.2; color: var(--color-primary-dark);
@@ -891,7 +892,6 @@
            ============================================================ */
             @media (max-width: 820px) {
             header { height: 64px; gap: .6rem; }
-            .brand-logo-img { height: 34px; }
             .btn-publish { padding: .65rem .9rem; font-size: .8rem; }
             .container { padding-top: 2.4rem; }
             .col-grid { grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 1rem; }
@@ -899,7 +899,6 @@
         }
         @media (max-width: 560px) {
             body { font-size: 15px; }
-            .brand-logo-img { height: 30px; }
             .brand h1 { font-size: 1.12rem; }
             .brand p {
     font-size: 0.52rem;

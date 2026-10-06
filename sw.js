@@ -1,4 +1,7 @@
 /* 古董圈 Gudong · Service Worker
+ * 2026-10-6：v15 → v16
+ * - 为 24 篇杂志风格 insights 文章补回面包屑导航（首页/情报·知识/系列分类）；
+ *   提升缓存版本号确保客户端拉取最新页面
  * 2026-10-6：v14 → v15
  * - collection.html 品牌区 GUDONG.APP 字号对齐 about.html（.68rem→.75rem，
  *   移除移动端 .52rem 覆盖）；提升缓存版本号确保客户端拉取最新页面
@@ -24,7 +27,7 @@
  * - v8 → v9：配合首页改版提升缓存版本号
  */
 
-const CACHE_NAME = 'antique-collection-v15';
+const CACHE_NAME = 'antique-collection-v16';
 
 // 预缓存清单：核心页面 + 常用图标 + 占位图
 // 注意：改用逐个 cache.add，单个 404 不会导致整个 install 失败

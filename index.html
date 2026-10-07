@@ -1,1417 +1,311 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="zh-SG">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no, viewport-fit=cover">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
-    <title>古董圈 Gudong.app | 新加坡古董捡漏 · 寻宝情报站</title>
-    <link rel="canonical" href="https://gudong.app/" />
-
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@graph": [
-        {
-          "@type": "Organization",
-          "@id": "https://gudong.app/#organization",
-          "name": "古董圈 Gudong",
-          "alternateName": "Gudong.app",
-          "url": "https://gudong.app/",
-          "logo": { "@type": "ImageObject", "url": "assets/icons/apple-touch-icon-180x180.png", "width": 180, "height": 180 },
-          "description": "新加坡中国古董及藏品信息发现平台。汇集瓷器、玉器、钱币、书画及杂项，买卖双方直接联系。平台不参与鉴定、估价与交易。",
-          "address": { "@type": "PostalAddress", "addressCountry": "SG" },
-          "areaServed": { "@type": "Country", "name": "Singapore" },
-          "knowsLanguage": ["zh-SG", "en-SG"]
-        },
-        {
-          "@type": "WebSite",
-          "@id": "https://gudong.app/#website",
-          "url": "https://gudong.app/",
-          "name": "古董圈 Gudong",
-          "inLanguage": ["zh-SG", "en-SG"],
-          "publisher": { "@id": "https://gudong.app/#organization" }
-        },
-        {
-          "@type": "FAQPage",
-          "@id": "https://gudong.app/#faq",
-          "mainEntity": [
-            { "@type": "Question", "name": "平台会帮忙鉴定藏品吗？",
-              "acceptedAnswer": { "@type": "Answer", "text": "不会。古董圈是信息发现平台，不提供鉴定、估价或保真服务。所有藏品描述与图片均由卖家提供，请自行核验或咨询独立专家。" } },
-            { "@type": "Question", "name": "可以请平台推荐专家给参考意见吗？",
-              "acceptedAnswer": { "@type": "Answer", "text": "可以。平台可应要求引荐专家提供个人意见，仅供参考，但不构成真伪鉴定。是否采纳由你决定，平台不介入、不担保；费用与结论由你与专家直接沟通。" } },
-            { "@type": "Question", "name": "怎么联系藏家？",
-              "acceptedAnswer": { "@type": "Answer", "text": "在藏品详情页可直接看到卖家提供的联系方式，买卖双方直接沟通，平台不经手交易。" } },
-            { "@type": "Question", "name": "藏品价格是平台定的吗？",
-              "acceptedAnswer": { "@type": "Answer", "text": "不是。所有价格由卖家自行设定，平台仅提供展示。部分藏品为「私聊询价」，需直接联系藏家获取报价。" } }
-          ]
-        }
-      ]
-    }
+    <script>
+        if (!/\/$|\.html?$/.test(location.pathname)) history.replaceState(null, '', location.pathname + '/' + location.search + location.hash);
     </script>
-
-    <meta name="description" content="古董圈 gudong.app —— 新加坡古董捡漏与寻宝情报站。每日情报、同类价格对比、藏家直供瓷器、玉器、钱币、书画。买家直接联系藏家，平台不参与鉴定与交易。">
-    <meta name="keywords" content="Singapore antiques, Chinese porcelain, Jade collection, 古董圈, 新加坡古董, 古董捡漏, 瓷器收藏, 玉器钱币">
-
-    <meta property="og:site_name" content="古董圈 Gudong.app">
-    <meta property="og:title" content="古董圈 Gudong.app | 新加坡古董捡漏 · 寻宝情报站">
-    <meta property="og:description" content="Singapore-based discovery platform for Chinese antiques. Daily intel, price comparison, direct seller contact.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>私家藏馆 | Private Collection Gallery | Gudong</title>
+    <meta name="keywords" content="古董圈, Gudong, 新加坡古董, Singapore antiques">
+    <meta name="description" content="浏览古董圈私家藏馆，查看各商号与藏家的全部藏品。 Browse Private Collection Gallery on Gudong and see each dealer's full collection.">
+    <link rel="canonical" href="https://gudong.app/sellers/index.html">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://gudong.app">
-    <meta property="og:image" content="og-cover.png">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-    <meta property="og:image:type" content="image/png">
-
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="古董圈 Gudong.app | 古董捡漏 · 寻宝情报站">
-    <meta name="twitter:description" content="Singapore-based discovery platform for Chinese antiques and collectibles.">
-    <meta name="twitter:image" content="og-cover.png">
-
-    <link rel="manifest" href="manifest.json">
+    <meta property="og:site_name" content="古董圈 Gudong">
+    <meta property="og:title" content="私家藏馆 | Private Museums | Gudong">
+    <meta property="og:description" content="浏览古董圈私家藏馆，查看各商号与藏家的全部藏品。">
+    <meta property="og:url" content="https://gudong.app/sellers/index.html">
+    <meta property="og:image" content="https://gudong.app/assets/icons/icon-512.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://gudong.app/assets/icons/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://gudong.app/assets/icons/favicon-32x32.png">
+    <link rel="manifest" href="https://gudong.app/manifest.json">
     <meta name="theme-color" content="#7A4E33">
-    <meta name="mobile-web-app-capable" content="yes">
+	<meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <meta name="apple-mobile-web-app-title" content="古董圈">
-    <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon-120x120.png" sizes="120x120">
-    <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon-152x152.png" sizes="152x152">
-    <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon-180x180.png" sizes="180x180">
-    <link rel="apple-touch-icon" href="assets/icons/icon-1024.png" sizes="1024x1024">
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <link rel="icon" type="image/png" sizes="16x16" href="assets/icons/favicon-16x16.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32x32.png">
-
+    <link rel="apple-touch-icon" href="https://gudong.app/assets/icons/icon-192.png">    <!-- Premium Serif Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Noto+Serif+SC:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Noto+Serif+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
+
 
     <style>
-        /* ============================================================
-           DESIGN TOKENS
-           ============================================================ */
         :root {
-            --color-bg: #F7F4EF;
-            --color-bg-alt: #F1ECE4;
+            --color-bg: #F5F2EC;
             --color-surface: #FFFFFF;
-            --color-border: #E7E1D8;
-            --color-border-soft: #F0EBE3;
-
+            --color-white: #FFFFFF;
+            --color-border: #E4DED5;
             --color-primary: #7A4E33;
             --color-primary-dark: #5C3A26;
-            --color-primary-light: #F3EAE0;
-
-            --color-text: #241F1A;
-            --color-text-secondary: #5A544C;
-            --color-text-muted: #9E968C;
-
+            --color-primary-light: #F1E8DF;
+            --color-text: #25221E;
+            --color-text-secondary: #5C564F;
+            --color-text-muted: #A49D94;
             --color-gold: #9C7A3A;
-            --color-gold-soft: rgba(156, 122, 58, .10);
-            --color-bronze-muted: #A08A63;
+            --color-gold-soft: rgba(156,122,58,.10);
+            --color-bronze-muted: #9C8558;
             --color-qianjinzong: #948268;
-
             --color-success: #526657;
             --color-danger: #9A554B;
             --color-far-mountain: #2E4A52;
-
-            --card-radius: 14px;
-            --img-radius: 6px;
-            --btn-radius: 8px;
-
-            --shadow-xs: 0 1px 2px rgba(36, 31, 26, .04);
-            --shadow-sm: 0 2px 8px rgba(36, 31, 26, .05);
-            --shadow-md: 0 10px 28px rgba(36, 31, 26, .08);
-            --shadow-lg: 0 20px 48px rgba(36, 31, 26, .12);
-            --ring: 0 0 0 4px rgba(156, 122, 58, .14);
-
-            --ease: cubic-bezier(.22, .61, .36, 1);
-            --dur: .32s;
-
+            --card-radius: 12px;
+            --img-radius: 4px;
             --font-serif: "Playfair Display", "Noto Serif SC", "Songti SC", "STSong", Georgia, serif;
-            --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "PingFang SC",
-                         "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            --font-display: "Inter", "Geist", "Inter Display", "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            --font-latin: "Inter", "Geist", "Inter Display", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            --font-zh-sans: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Helvetica, Arial, sans-serif;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: var(--font-sans); }
+        h1, h2, h3 { font-family: var(--font-serif); }
+        .title { font-family: var(--font-serif); }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif; }
+        html { scroll-behavior: smooth; }
+        body { background: var(--color-bg); color: var(--color-text); line-height: 1.65; }
 
-        html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
-
-        body {
-            background: var(--color-bg);
-            color: var(--color-text);
-            line-height: 1.68;
-            font-size: 16px;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            text-rendering: optimizeLegibility;
-        }
-
-        h1, h2, h3, .title { font-family: var(--font-serif); }
-
-        img { max-width: 100%; }
-
-        ::selection { background: rgba(156, 122, 58, .22); color: var(--color-text); }
-
-        /* ============================================================
-           HEADER
-           ============================================================ */
-        header {
-            background: rgba(255, 255, 255, .92);
-            -webkit-backdrop-filter: saturate(180%) blur(12px);
-            backdrop-filter: saturate(180%) blur(12px);
-            color: var(--color-text);
-            padding: 0 5%;
-            height: 72px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 1.5rem;
-            border-bottom: 1px solid var(--color-border);
-            position: sticky;
-            top: 0;
-            z-index: 50;
-        }
-        .header-left { display: flex; align-items: center; gap: .9rem; min-width: 0; }
-
-        .brand {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            gap: .7rem;
-            line-height: 1;
-            flex-shrink: 0;
-            text-decoration: none;
-            color: inherit;
-            min-width: 0;
-        }
-        .brand-logo-img { height: 36px; width: auto; display: block; object-fit: contain; }
-        .brand-text { display: flex; flex-direction: column; justify-content: center; min-width: 0; }
-        @media (max-width: 640px) { .brand-logo-img { height: 30px; } }
-        .brand h1 {
-            font-size: 1.32rem;
-            font-weight: 700;
-            letter-spacing: .01em;
-            line-height: 1.2;
+        /* ---------- Header (synced with pricing.html) ---------- */
+        /* ---------- Announcement bar ---------- */
+        .announce-bar {
+            background: var(--color-primary-light);
             color: var(--color-primary-dark);
+            font-size: .8rem;
+            text-align: center;
+            padding: .55rem 2.6rem;
+            position: relative;
+            line-height: 1.4;
         }
-        .brand p {
-            color: var(--color-qianjinzong);
-            margin-top: .2rem;
-            font-size: .75rem;
-            letter-spacing: .18em;
-            text-transform: uppercase;
+
+        .announce-close {
+            position: absolute;
+            right: .9rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            font-size: 1.05rem;
+            line-height: 1;
+            color: var(--color-text-secondary);
+            cursor: pointer;
+            padding: .2rem;
         }
+
+        .announce-close:hover { color: var(--color-primary); }
+
+        header {
+            background: rgba(255,255,255,.96); backdrop-filter: blur(6px);
+            color: var(--color-text); padding: 0 5%; height: 68px;
+            display: flex; align-items: center; justify-content: space-between;
+            gap: 1.5rem; border-bottom: 1px solid var(--color-border);
+            position: sticky; top: 0; z-index: 50;
+        }
+        .brand { display: flex; flex-direction: column; justify-content: center; line-height: 1; flex-shrink: 0; text-decoration: none; color: inherit; }
+        .brand { flex-direction: row; align-items: center; gap: .6rem; }
+        .brand-logo-img { height: 36px; width: auto; display: block; object-fit: contain; }
+        .brand-text { display: flex; flex-direction: column; justify-content: center; }
+        @media (max-width: 640px) { .brand-logo-img { height: 30px; } }
+        .brand h1 { font-size: 1.4rem; font-weight: 700; letter-spacing: .02em; line-height: 1.15; color: var(--color-primary-dark); }
+        .brand p { color: var(--color-qianjinzong); margin-top: .2rem; font-size: .75rem; letter-spacing: .18em; text-transform: uppercase; }
         .brand h1 .en, .brand p .en, .sidebar-brand .en {
-            font-family: var(--font-sans);
+            font-family: "Inter Display", "Inter", "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
             letter-spacing: normal;
         }
-
-        .header-right { display: flex; align-items: center; gap: .7rem; flex-shrink: 0; }
-
+        .header-right { display: flex; align-items: center; gap: .8rem; flex-shrink: 0; }
         .btn-publish {
             display: inline-flex; align-items: center; gap: .35rem;
             background: var(--color-primary); color: #fff;
-            padding: .75rem 1.15rem;
-            border-radius: var(--btn-radius);
-            font-size: .85rem; font-weight: 600;
-            text-decoration: none; white-space: nowrap;
-            min-height: 44px;
-            box-shadow: var(--shadow-xs);
-            transition: background var(--dur) var(--ease), transform var(--dur) var(--ease),
-                        box-shadow var(--dur) var(--ease);
+            padding: .75rem 1.1rem; min-height: 44px; border-radius: 8px;
+            font-size: .85rem; font-weight: 600; text-decoration: none;
+            white-space: nowrap; transition: .4s cubic-bezier(.25,.1,.25,1);
         }
-        .btn-publish:hover {
-            background: var(--color-primary-dark);
-            transform: translateY(-1px);
-            box-shadow: 0 6px 18px rgba(122, 78, 51, .28);
-        }
-
+        .btn-publish:hover { background: var(--color-primary-dark); }
         .btn-publish-text {
             display: inline-flex; align-items: center;
             background: transparent; color: var(--color-text-secondary);
-            padding: .45rem .55rem;
-            font-size: .88rem; font-weight: 500;
+            padding: .45rem .5rem; font-size: .88rem; font-weight: 500;
             text-decoration: none; white-space: nowrap;
-            border-radius: 6px;
-            transition: color var(--dur) var(--ease), background var(--dur) var(--ease);
+            transition: .3s cubic-bezier(.25,.1,.25,1);
         }
-        .btn-publish-text:hover { color: var(--color-primary); background: var(--color-gold-soft); }
+        .btn-publish-text:hover { color: var(--color-primary); }
 
         .lang-btn {
-            border: 1px solid var(--color-border);
-            background: transparent;
-            color: var(--color-text-secondary);
-            padding: .55rem .85rem;
-            min-height: 44px;
-            min-width: 44px;
-            border-radius: var(--btn-radius);
-            cursor: pointer;
-            font-size: .75rem;
-            font-weight: 600;
-            letter-spacing: .06em;
-            transition: all var(--dur) var(--ease);
+            border: 1px solid var(--color-border); background: transparent;
+            color: var(--color-text-secondary); padding: .55rem .85rem; min-height: 44px;
+            border-radius: 6px; cursor: pointer; font-size: .75rem;
+            letter-spacing: .04em; transition: .4s cubic-bezier(.25,.1,.25,1);
         }
-        .lang-btn:hover {
-            border-color: var(--color-primary);
-            color: var(--color-primary);
-            background: var(--color-primary-light);
-        }
-
+        .lang-btn:hover { border-color: var(--color-primary); color: var(--color-primary); background: var(--color-primary-light); }
         .menu-toggle {
-            width: 44px; height: 44px;
-            border: 1px solid var(--color-border);
-            background: transparent;
-            border-radius: var(--btn-radius);
-            font-size: 1.05rem;
-            color: var(--color-text);
-            cursor: pointer;
-            display: flex; align-items: center; justify-content: center;
-            flex-shrink: 0;
-            transition: all var(--dur) var(--ease);
+            width: 44px; height: 44px; border: 1px solid var(--color-border);
+            background: transparent; border-radius: 8px; font-size: 1.05rem;
+            color: var(--color-text); cursor: pointer; display: flex;
+            align-items: center; justify-content: center; flex-shrink: 0; transition: .4s cubic-bezier(.25,.1,.25,1);
         }
-        .menu-toggle:hover {
-            border-color: var(--color-primary);
-            color: var(--color-primary);
-            background: var(--color-primary-light);
-        }
+        .menu-toggle:hover { border-color: var(--color-primary); color: var(--color-primary); background: var(--color-primary-light); }
 
-        /* ============================================================
-           SIDEBAR
-           ============================================================ */
-        .sidebar-overlay {
-            position: fixed; inset: 0;
-            background: rgba(20, 17, 14, .45);
-
-
-            -webkit-backdrop-filter: blur(2px);
-            backdrop-filter: blur(2px);
-            opacity: 0; pointer-events: none;
-            transition: opacity .3s var(--ease);
-            z-index: 90;
-        }
+        /* ---------- Sidebar (synced with pricing.html) ---------- */
+        .sidebar-overlay { position: fixed; inset: 0; background: rgba(20,17,14,.4); opacity: 0; pointer-events: none; transition: opacity .25s ease; z-index: 90; }
         .sidebar-overlay.show { opacity: 1; pointer-events: auto; }
-
         .sidebar {
-            position: fixed; top: 0; left: 0;
-            height: 100vh; height: 100dvh;
-            width: 272px; max-width: 80vw;
-            background: var(--color-surface);
-            box-shadow: 6px 0 32px rgba(36, 31, 26, .18);
-            transform: translateX(-100%);
-            transition: transform .34s var(--ease);
-            z-index: 95;
-            overflow-y: auto;
-            -webkit-overflow-scrolling: touch;
-            padding-bottom: 2rem;
+            position: fixed; top: 0; left: 0; height: 100vh; height: 100dvh; width: 264px; max-width: 78vw;
+            background: var(--color-white); box-shadow: 4px 0 24px rgba(37,34,30,.18);
+            transform: translateX(-100%); transition: transform .3s ease; z-index: 95;
+            overflow-y: auto; -webkit-overflow-scrolling: touch; padding-bottom: 2rem;
         }
         .sidebar.open { transform: translateX(0); }
-
         .sidebar-toggle-inner {
-            display: block; width: 100%;
-            padding: .9rem 0;
-            background: transparent; border: none;
-            border-bottom: 1px solid var(--color-border);
-            font-size: 1.15rem; color: var(--color-text-secondary);
-            cursor: pointer; text-align: center;
-            transition: color var(--dur) var(--ease);
+            display: block; width: 100%; padding: .9rem 0; background: transparent;
+            border: none; border-bottom: 1px solid var(--color-border); font-size: 1.15rem;
+            color: var(--color-text-secondary); cursor: pointer; text-align: center;
         }
         .sidebar-toggle-inner:hover { color: var(--color-primary); }
-
         .sidebar-brand {
             display: flex; flex-direction: column; align-items: center; justify-content: center;
-            gap: .15rem;
-            padding: 1.2rem 0;
-            font-weight: 700;
-            color: var(--color-primary-dark);
+            gap: .1rem; padding: 1.1rem 0; font-weight: 700; color: var(--color-text);
             border-bottom: 1px solid var(--color-border);
-            font-family: var(--font-serif);
         }
-        .sidebar-brand .zh { font-size: 1.08rem; letter-spacing: .06em; }
-        .sidebar-brand .en { font-size: .82rem; letter-spacing: .22em; color: var(--color-qianjinzong); }
-
-        .sidebar-nav { display: flex; flex-direction: column; padding: .4rem 0; }
-
-        .sidebar-link {
-            padding: .85rem 1.4rem;
-            color: var(--color-text);
-            text-decoration: none;
-            font-size: .95rem;
-            transition: all var(--dur) var(--ease);
-        }
+        .sidebar-brand .zh { font-size: 1.05rem; }
+        .sidebar-brand .en { font-size: 1.05rem; letter-spacing: .04em; }
+        .sidebar-nav { display: flex; flex-direction: column; padding: .3rem 0; }
+        .sidebar-link { padding: .85rem 1.4rem; color: var(--color-text); text-decoration: none; font-size: .95rem; transition: .4s cubic-bezier(.25,.1,.25,1); }
         .sidebar-link:hover { background: var(--color-primary-light); color: var(--color-primary); }
         .sidebar-link.active { background: var(--color-primary-light); color: var(--color-primary); font-weight: 600; }
-
-        .sidebar-sub {
-            display: block;
-            padding: .5rem 1.4rem .5rem 2.3rem;
-            color: var(--color-text-secondary);
-            text-decoration: none;
-            font-size: .86rem;
-            transition: all var(--dur) var(--ease);
-        }
+        .sidebar-group-title { padding: .85rem 1.4rem .3rem; color: var(--color-text); font-size: .95rem; font-weight: 600; }
+        .sidebar-sub { display: block; padding: .55rem 1.4rem .55rem 2.2rem; color: var(--color-text-secondary); text-decoration: none; font-size: .88rem; transition: .4s cubic-bezier(.25,.1,.25,1); }
         .sidebar-sub:hover { color: var(--color-primary); background: var(--color-primary-light); }
-
         .sidebar-lang-btn {
             display: flex; align-items: center; justify-content: center; gap: .4rem;
-            width: calc(100% - 2.8rem);
-            margin: 1rem 1.4rem .8rem;
-            padding: .75rem .9rem;
-            min-height: 44px;
-            border: 1px solid var(--color-border);
-            border-radius: 999px;
-            background: var(--color-surface);
-            color: var(--color-text-secondary);
-            font-family: inherit;
-            font-size: .88rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all var(--dur) var(--ease);
+            width: calc(100% - 2.8rem); margin: 1rem 1.4rem .8rem;
+            padding: .62rem .9rem; border: 1px solid var(--color-border);
+            border-radius: 12px; background: var(--color-white);
+            color: var(--color-text-secondary); font-family: inherit;
+            font-size: .9rem; font-weight: 600; cursor: pointer; transition: .4s cubic-bezier(.25,.1,.25,1);
         }
-        .sidebar-lang-btn:hover {
-            border-color: var(--color-primary);
-            color: var(--color-primary);
-            background: var(--color-primary-light);
-        }
+        .sidebar-lang-btn:hover { border-color: var(--color-primary); color: var(--color-primary); background: var(--color-primary-light); }
 
-        /* ============================================================
-           LAYOUT
-           ============================================================ */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 3.4rem 5% 4.5rem;
-            min-height: 80vh;
-        }
-        section { margin-bottom: 5.5rem; scroll-margin-top: 96px; }
+        /* ---------- Content ---------- */
+        .container { max-width: 1000px; margin: 0 auto; padding: 2.4rem 5% 4rem; min-height: 80vh; }
+        .breadcrumb { font-size: .8rem; color: var(--color-text-muted); margin-bottom: 1.2rem; }
+        .breadcrumb a { color: var(--color-text-secondary); text-decoration: none; }
+        .breadcrumb a:hover { color: var(--color-primary); }
 
-        /* ============================================================
-           HERO
-           ============================================================ */
-        .hero-clean {
-            text-align: center;
-            max-width: 720px;
-            margin: 0 auto 1rem;
-            padding: 1.5rem 0 .5rem;
-        }
-        .hero-eyebrow {
-            font-family: var(--font-serif);
-            font-style: italic;
-            font-size: .94rem;
-            color: var(--color-bronze-muted);
-            letter-spacing: .04em;
-            margin-bottom: 1rem;
-        }
-        .hero-eyebrow::after {
-            content: '';
-            display: block;
-            width: 42px; height: 1px;
-            background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
-            margin: 1rem auto 0;
-        }
-        .hero-title-main {
-            font-family: var(--font-serif);
-            font-size: clamp(1.75rem, 4.3vw, 2.6rem);
-            font-weight: 600;
-            color: var(--color-text);
-            line-height: 1.38;
-            letter-spacing: -.01em;
-            margin-bottom: 1.1rem;
-        }
-        .hero-desc {
-            font-size: .96rem;
-            color: var(--color-text-secondary);
-            margin-bottom: 1rem;
-            line-height: 1.7;
-        }
-        .hero-guide {
-            font-size: .84rem;
-            color: var(--color-gold);
-            margin-bottom: 1.6rem;
-            font-weight: 600;
-            letter-spacing: .01em;
-        }
-        .hero-btn {
-            display: inline-block;
-            background: var(--color-primary);
-            color: #fff;
-            padding: .78rem 2rem;
-            border-radius: var(--btn-radius);
-            text-decoration: none;
-            font-weight: 600;
-            font-size: .88rem;
-            letter-spacing: .02em;
-            box-shadow: 0 6px 20px rgba(122, 78, 51, .22);
-            transition: all var(--dur) var(--ease);
-        }
-        .hero-btn:hover {
-            background: var(--color-primary-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 28px rgba(122, 78, 51, .30);
-        }
+        .page-title { font-size: 1.7rem; font-weight: 700; color: var(--color-text); margin-bottom: .5rem; }
+        .page-sub { font-size: .92rem; color: var(--color-text-secondary); margin-bottom: 2.4rem; }
 
-        /* Search */
-        .search-box { max-width: 580px; margin: 2.4rem auto .7rem; position: relative; }
-        .search-box input {
-            width: 100%;
-            height: 52px;
-            padding: 0 3.2rem 0 1.3rem;
+        .gallery-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.2rem; }
+
+        .gallery-card {
+            background: var(--color-white);
             border: 1px solid var(--color-border);
             border-radius: 10px;
-            font-size: .95rem;
-            background: var(--color-surface);
-            color: var(--color-text);
-            box-shadow: var(--shadow-xs);
-            transition: border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
-        }
-        .search-box input::placeholder { color: var(--color-text-muted); }
-        .search-box input:focus {
-            outline: none;
-            border-color: var(--color-gold);
-            box-shadow: var(--ring);
-        }
-        .search-box button {
-            position: absolute; right: .9rem; top: 50%;
-            transform: translateY(-50%);
-            background: transparent; border: none;
-            color: var(--color-primary);
-            font-size: 1rem; cursor: pointer;
-            min-width: 44px; min-height: 44px;
-            display: flex; align-items: center; justify-content: center;
-            border-radius: 8px;
-            transition: background var(--dur) var(--ease);
-        }
-        .search-box button:hover { background: var(--color-gold-soft); }
-
-        .search-tip { font-size: .78rem; color: var(--color-text-muted); text-align: center; margin-bottom: .8rem; }
-
-        .search-result-tip {
-            font-size: .83rem;
-            color: var(--color-primary);
-            text-align: center;
-            margin: -.7rem 0 1.7rem;
-            font-weight: 600;
-        }
-
-        .hot-tags {
-            display: flex; flex-wrap: wrap; justify-content: center;
-            gap: .5rem;
-            max-width: 620px;
-            margin: 0 auto 1.5rem;
-        }
-        .hot-tag {
-            border: 1px solid var(--color-border);
-            background: var(--color-surface);
-            color: var(--color-text-secondary);
-            font-size: .78rem;
-            padding: .5rem .9rem;
-            min-height: 40px;
-            border-radius: 999px;
-            cursor: pointer;
-            transition: all var(--dur) var(--ease);
-            display: inline-flex; align-items: center; justify-content: center;
-        }
-        .hot-tag:hover {
-            border-color: var(--color-gold);
-            color: var(--color-primary);
-            background: var(--color-gold-soft);
-            transform: translateY(-1px);
-        }
-
-        /* ============================================================
-           SECTION HEADS
-           ============================================================ */
-        .section-head2 {
-            margin-bottom: 1.5rem;
-            display: flex; align-items: flex-end; justify-content: space-between;
-            gap: 1rem; flex-wrap: wrap;
-        }
-        .section-head2 .title {
-            display: inline-block;
-            position: relative;
-            padding-left: .8rem;
-            font-size: 1.32rem;
-            font-weight: 700;
-            color: var(--color-text);
-            letter-spacing: -.01em;
-        }
-        .section-head2 .title::before {
-            content: '';
-            position: absolute;
-            left: 0; top: .3em; bottom: .18em;
-            width: 3px;
-            border-radius: 2px;
-            background: linear-gradient(180deg, var(--color-gold), rgba(156, 122, 58, .12));
-        }
-        .section-head2 .sub-line {
-            font-size: .85rem;
-            color: var(--color-text-secondary);
-            margin-top: .35rem;
-            display: block;
-            padding-left: .8rem;
-        }
-        .section-head2 .more {
-            font-size: .85rem;
-            color: var(--color-text-secondary);
-            text-decoration: none;
-            white-space: nowrap;
-            padding: .4rem .2rem;
-            transition: color var(--dur) var(--ease);
-        }
-        .section-head2 .more:hover { color: var(--color-primary); }
-
-        .more-btn {
-            display: inline-flex; align-items: center;
-            border: 1px solid var(--color-border);
-            background: var(--color-surface);
-            color: var(--color-text-secondary);
-            font-size: .85rem;
-            font-weight: 500;
-            padding: .55rem 1.3rem;
-            border-radius: 999px;
-            text-decoration: none;
-            transition: all var(--dur) var(--ease);
-        }
-        .more-btn:hover {
-            border-color: var(--color-gold);
-            color: var(--color-primary);
-            background: var(--color-gold-soft);
-            transform: translateY(-1px);
-        }
-
-        .section-note {
-            font-size: .78rem;
-            color: var(--color-text-muted);
-            line-height: 1.65;
-            margin-top: -.9rem;
-            margin-bottom: 2rem;
-        }
-
-        /* ============================================================
-           TODAY'S FINDS（flex 居中：不足一行时自动居中，不留“半边空”）
-           ============================================================ */
-        .finds-grid {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 1.9rem;
-        }
-        .finds-grid .finds-card {
-            flex: 0 0 calc((100% - 1.9rem * 3) / 4);
-            min-width: 0;
-        }
-
-        .finds-card {
+            padding: 1.6rem 1.7rem;
             text-decoration: none;
             color: inherit;
-            display: block;
-            transition: transform var(--dur) var(--ease);
-        }
-        .finds-card:hover { transform: translateY(-3px); }
-
-        .finds-image {
-            position: relative;
-            aspect-ratio: 1 / 1;
-            border-radius: var(--img-radius);
-            overflow: hidden;
-            background: var(--color-bg-alt);
-            margin-bottom: .85rem;
-            box-shadow: var(--shadow-xs);
-            transition: box-shadow var(--dur) var(--ease);
-        }
-        .finds-card:hover .finds-image { box-shadow: var(--shadow-md); }
-
-        .finds-image img {
-            width: 100%; height: 100%;
-            object-fit: cover; display: block;
-            transition: transform .7s var(--ease);
-        }
-        .finds-card:hover .finds-image img { transform: scale(1.05); }
-
-        .finds-title {
-            font-size: .98rem;
-            font-weight: 600;
-            color: var(--color-text);
-            margin-bottom: .2rem;
-            font-family: var(--font-serif);
-            line-height: 1.45;
-        }
-        .finds-meta { font-size: .8rem; color: var(--color-text-secondary); margin-bottom: .45rem; }
-
-        .finds-badge {
-            position: absolute; top: .55rem; right: .55rem;
-            display: inline-block;
-            font-size: .7rem;
-            font-weight: 600;
-            letter-spacing: .03em;
-            padding: .22rem .55rem;
-            border-radius: 4px;
-            background: rgba(255, 255, 255, .92);
-            -webkit-backdrop-filter: blur(4px);
-            backdrop-filter: blur(4px);
-            color: var(--color-success);
-            border: 1px solid rgba(82, 102, 87, .35);
-        }
-
-        .finds-reason {
-            font-size: .78rem;
-            color: var(--color-primary);
-            background: var(--color-gold-soft);
-            border-left: 2px solid var(--color-gold);
-            padding: .32rem .55rem;
-            border-radius: 3px;
-            margin: .4rem 0 .45rem;
-            line-height: 1.55;
-        }
-        .finds-timestamp { font-size: .74rem; color: var(--color-text-muted); }
-        .finds-caption { font-size: .72rem; color: var(--color-text-muted); margin-top: .1rem; }
-
-        /* —— 点击信号：上新角标 / 调价徽章 / 同类参考价 —— */
-        .finds-new {
-            position: absolute; top: .55rem; left: .55rem;
-            display: inline-block;
-            font-size: .68rem;
-            font-weight: 600;
-            letter-spacing: .03em;
-            padding: .22rem .55rem;
-            border-radius: 4px;
-            background: rgba(255, 255, 255, .92);
-            -webkit-backdrop-filter: blur(4px);
-            backdrop-filter: blur(4px);
-            color: var(--color-success);
-            border: 1px solid rgba(82, 102, 87, .4);
-        }
-        .finds-drop {
-            display: inline-block;
-            font-size: .72rem;
-            font-weight: 600;
-            color: var(--color-danger);
-            background: rgba(154, 85, 75, .10);
-            border: 1px solid rgba(154, 85, 75, .45);
-            padding: 0 .35rem;
-            border-radius: 3px;
-            line-height: 1.55;
-            letter-spacing: .02em;
-            white-space: nowrap;
-        }
-        .finds-ref {
-            font-size: .76rem;
-            color: var(--color-success);
-            font-weight: 500;
-            margin: .1rem 0 .35rem;
-        }
-
-        /* ============================================================
-           PRICE
-           ============================================================ */
-        .finds-price, .item-price { display: flex; align-items: baseline; gap: .35rem; flex-wrap: wrap; }
-        .finds-price { margin: 0 0 .5rem; font-size: .9rem; }
-        .price-main { color: var(--color-primary); font-weight: 700; letter-spacing: .01em; font-variant-numeric: tabular-nums; }
-        .price-main--enquiry { color: var(--color-text-secondary); font-weight: 600; letter-spacing: .04em; }
-        .price-tag {
-            display: inline-block;
-            font-size: .72rem;
-            font-weight: 500;
-            color: var(--color-text-muted);
-            border: 1px solid var(--color-border);
-            padding: 0 .3rem;
-            border-radius: 3px;
-            line-height: 1.6;
-            letter-spacing: .02em;
-        }
-        .price-tag--enquiry { color: var(--color-bronze-muted); border-color: var(--color-bronze-muted); }
-
-        /* ============================================================
-           JUST LISTED
-           ============================================================ */
-        .goods-list { display: grid; grid-template-columns: repeat(6, 1fr); gap: 1.25rem; margin-top: .5rem; }
-        .goods-list .item-card { aspect-ratio: auto; min-width: 0; min-height: 0; height: auto; }
-        .goods-list .item-card img {
-            width: 100%; height: auto;
-            aspect-ratio: 1 / 1;
-            max-height: none;
-            object-fit: cover;
-        }
-
-        .item-card {
-            position: relative;
-            display: block;
-            aspect-ratio: 1 / 1;
-            border-radius: var(--img-radius);
-            overflow: hidden;
-            background: var(--color-bg-alt);
-            text-decoration: none;
-            box-shadow: var(--shadow-xs);
-            transition: box-shadow var(--dur) var(--ease), transform var(--dur) var(--ease);
-        }
-        .item-card:hover {
-            box-shadow: var(--shadow-md);
-            transform: translateY(-2px);
-        }
-        .item-card img {
-            width: 100%; height: 100%;
-            object-fit: cover; display: block;
-            transition: transform .7s var(--ease);
-        }
-        .item-card:hover img { transform: scale(1.05); }
-
-        .item-card .item-info {
-            position: absolute;
-            left: .55rem; right: .55rem; bottom: .55rem;
-            background: rgba(20, 17, 14, .66);
-            -webkit-backdrop-filter: blur(8px);
-            backdrop-filter: blur(8px);
-            color: #fff;
-            padding: .34rem .62rem;
-            border-radius: 5px;
-            display: flex; flex-direction: column; gap: .1rem;
-        }
-        .item-card .item-price { font-size: .75rem; gap: .3rem; }
-        .item-card .price-main { color: #F3EAE0; font-weight: 600; }
-        .item-card .price-main--enquiry { color: rgba(243, 234, 224, .92); font-weight: 500; }
-        .item-card .price-tag {
-            font-size: .7rem;
-            padding: 0 .25rem;
-            color: rgba(243, 234, 224, .78);
-            border-color: rgba(243, 234, 224, .35);
-        }
-        .item-card .price-tag--enquiry { color: rgba(243, 234, 224, .88); border-color: rgba(243, 234, 224, .55); }
-
-        /* ============================================================
-           STATES
-           ============================================================ */
-        .no-result { text-align: center; padding: 3rem 1rem; color: var(--color-text-muted); font-size: .9rem; }
-
-        .load-error-tip {
-            text-align: center;
-            padding: 2rem 1rem;
-            color: var(--color-text-muted);
-            font-size: .85rem;
-            line-height: 1.7;
-            border: 1px dashed var(--color-border);
-            border-radius: 10px;
-            grid-column: 1 / -1;
-        }
-        .load-error-tip strong { color: var(--color-danger); }
-
-        @keyframes gd-shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
-        .skeleton-card {
-            border-radius: var(--img-radius);
-            background: linear-gradient(90deg, var(--color-bg-alt) 25%, #FBF8F3 50%, var(--color-bg-alt) 75%);
-            background-size: 200% 100%;
-            animation: gd-shimmer 1.5s linear infinite;
-        }
-        .skeleton-card--square { aspect-ratio: 1 / 1; }
-        @media (prefers-reduced-motion: reduce) {
-            .skeleton-card { animation: none; }
-            * { transition-duration: .01ms !important; }
-        }
-        [hidden] { display: none !important; }
-
-        /* ============================================================
-           DAILY INTEL
-           ============================================================ */
-        .intel-section {
-            background: linear-gradient(140deg, #2B2620 0%, #38302A 100%);
-            border: 1px solid rgba(217, 182, 121, .28);
-            border-radius: var(--card-radius);
-            padding: 2.3rem 1.9rem 1.7rem;
-            color: #F1E8DF;
-            margin: -1rem 0 5rem;
-            box-shadow: 0 14px 40px rgba(20, 17, 14, .18);
-            position: relative;
-            overflow: hidden;
-        }
-        .intel-section::before {
-            content: '';
-            position: absolute;
-            top: -80px; right: -60px;
-            width: 260px; height: 260px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(217, 182, 121, .12), transparent 68%);
-            pointer-events: none;
-        }
-        .intel-head {
-            display: flex; align-items: flex-end; justify-content: space-between;
-            gap: 1rem; flex-wrap: wrap;
-            margin-bottom: 1.3rem;
-            position: relative;
-        }
-        .intel-head .title {
-            font-size: 1.28rem;
-            font-weight: 600;
-            color: #E8C87E;
-            letter-spacing: .01em;
-            font-family: var(--font-serif);
-        }
-        .intel-head .sub {
-            font-size: .82rem;
-            color: rgba(201, 182, 138, .75);
-            margin-top: .35rem;
-            display: block;
-        }
-        .intel-live {
-            display: inline-flex; align-items: center; gap: .38rem;
-            font-size: .74rem;
-            color: rgba(201, 182, 138, .82);
-            letter-spacing: .04em;
-        }
-        .intel-live::before {
-            content: '';
-            width: 7px; height: 7px;
-            border-radius: 50%;
-            background: #E8C87E;
-            box-shadow: 0 0 0 0 rgba(232, 200, 126, .55);
-            animation: intelPulse 2.2s infinite;
-        }
-        @keyframes intelPulse {
-            0%   { box-shadow: 0 0 0 0 rgba(232, 200, 126, .55); }
-            70%  { box-shadow: 0 0 0 8px rgba(232, 200, 126, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(232, 200, 126, 0); }
-        }
-
-        .intel-scroll {
-            display: flex; gap: .9rem;
-            overflow-x: auto;
-            padding-bottom: .7rem;
-            scroll-snap-type: x mandatory;
-            -webkit-overflow-scrolling: touch;
-            position: relative;
-        }
-        .intel-scroll::-webkit-scrollbar { height: 6px; }
-        .intel-scroll::-webkit-scrollbar-track { background: rgba(255, 255, 255, .05); border-radius: 3px; }
-        .intel-scroll::-webkit-scrollbar-thumb { background: rgba(217, 182, 121, .35); border-radius: 3px; }
-        .intel-scroll::-webkit-scrollbar-thumb:hover { background: rgba(217, 182, 121, .55); }
-
-        .intel-card {
-            flex: 0 0 272px;
-            scroll-snap-align: start;
-            background: #38302A;
-            border: 1px solid rgba(217, 182, 121, .2);
-            border-radius: var(--card-radius);
-            padding: 1.15rem 1.2rem;
-            color: #F1E8DF;
-            display: flex; flex-direction: column; gap: .6rem;
-            transition: all var(--dur) var(--ease);
-        }
-        .intel-card:hover {
-            background: #423A32;
-            border-color: rgba(217, 182, 121, .5);
-            transform: translateY(-2px);
-        }
-        .intel-card:first-child {
-            background: #423A32;
-            border-color: #D9B679;
-            border-width: 1.5px;
-        }
-        .intel-type {
-            display: inline-block;
-            font-size: .7rem;
-            font-weight: 700;
-            letter-spacing: .08em;
-            padding: .26rem .6rem;
-            border-radius: 4px;
-            align-self: flex-start;
-            background: rgba(232, 200, 126, .14);
-            color: #E8C87E;
-            border: 1px solid rgba(232, 200, 126, .5);
-        }
-        .intel-type--drop { background: rgba(201, 107, 90, .18); color: #E8A79B; border-color: rgba(232, 167, 155, .5); }
-        .intel-type--new { background: rgba(159, 208, 138, .14); color: #A8CE9A; border-color: rgba(168, 206, 154, .45); }
-        .intel-type--compare { background: rgba(143, 195, 207, .14); color: #9BC5D0; border-color: rgba(155, 197, 208, .45); }
-        .intel-type--collector { background: rgba(201, 169, 220, .14); color: #C9A9DC; border-color: rgba(201, 169, 220, .45); }
-        .intel-type--platform { background: rgba(232, 200, 126, .14); color: #E8C87E; border-color: rgba(232, 200, 126, .5); }
-
-        .intel-text { font-size: .87rem; line-height: 1.7; color: rgba(241, 232, 223, .93); }
-        .intel-meta { font-size: .74rem; color: rgba(201, 182, 138, .55); margin-top: auto; letter-spacing: .02em; }
-        .intel-note {
-            font-size: .74rem;
-            color: rgba(201, 182, 138, .5);
-            margin-top: 1rem;
-            line-height: 1.65;
-            position: relative;
-        }
-
-        /* ============================================================
-           BROWSE BY CATEGORY
-           ============================================================ */
-        .browse-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(184px, 1fr)); gap: 1.15rem; }
-
-        .browse-card {
-            position: relative;
-            display: flex; flex-direction: column; gap: .35rem;
-            padding: 1.5rem 1.3rem;
-            background: var(--color-surface);
-            border: 1px solid var(--color-border);
-            border-radius: var(--card-radius);
-            text-decoration: none;
-            color: var(--color-text);
-            cursor: pointer;
-            box-shadow: var(--shadow-xs);
-            transition: all var(--dur) var(--ease);
-            overflow: hidden;
-        }
-        .browse-card::after {
-            content: '→';
-            position: absolute;
-            right: 1.1rem; bottom: 1.05rem;
-            font-size: .95rem;
-            color: var(--color-gold);
-            opacity: 0;
-            transform: translateX(-6px);
-            transition: all var(--dur) var(--ease);
-        }
-        .browse-card:hover {
-            border-color: var(--color-gold);
-            box-shadow: var(--shadow-md);
-            transform: translateY(-3px);
-        }
-        .browse-card:hover::after { opacity: 1; transform: translateX(0); }
-
-        .browse-card .cat-name { font-weight: 600; font-size: 1.06rem; font-family: var(--font-serif); }
-        .browse-card .cat-en { font-size: .74rem; color: var(--color-text-muted); letter-spacing: .1em; text-transform: uppercase; }
-        .browse-card .cat-stats { font-size: .78rem; color: var(--color-text-secondary); margin-top: .45rem; }
-        .browse-card .cat-range { font-size: .78rem; color: var(--color-bronze-muted); font-variant-numeric: tabular-nums; }
-
-        /* ============================================================
-           INSIGHTS
-           ============================================================ */
-        .insight-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.35rem; }
-
-        .insight-card {
-            background: var(--color-surface);
-            border: 1px solid var(--color-border);
-            border-radius: var(--card-radius);
-            padding: 1.5rem 1.4rem 1.6rem;
-            text-decoration: none;
-            color: var(--color-text);
-            display: block;
-            box-shadow: var(--shadow-xs);
-            transition: all var(--dur) var(--ease);
-            position: relative;
-            overflow: hidden;
-        }
-        .insight-card::before {
-            content: '';
-            position: absolute;
-            left: 0; top: 0; bottom: 0;
-            width: 3px;
-            background: linear-gradient(180deg, var(--color-gold), rgba(156, 122, 58, .05));
-            opacity: 0;
-            transition: opacity var(--dur) var(--ease);
-        }
-        .insight-card:hover {
-            border-color: var(--color-gold);
-            box-shadow: var(--shadow-md);
-            transform: translateY(-3px);
-        }
-        .insight-card:hover::before { opacity: 1; }
-
-        .insight-kicker {
-            font-size: .72rem;
-            font-weight: 700;
-            letter-spacing: .12em;
-            color: var(--color-bronze-muted);
-            margin-bottom: .55rem;
-            text-transform: uppercase;
-        }
-        .insight-title {
-            font-size: 1.06rem;
-            font-weight: 600;
-            margin-bottom: .55rem;
-            line-height: 1.5;
-            font-family: var(--font-serif);
-            letter-spacing: -.005em;
-        }
-        .insight-desc { font-size: .83rem; color: var(--color-text-secondary); line-height: 1.62; }
-
-        /* ============================================================
-           WHY GUDONG
-           ============================================================ */
-        h2 {
-            color: var(--color-text);
-            margin-bottom: 1.35rem;
-            font-size: 1.8rem;
-            font-weight: 700;
-            letter-spacing: -.02em;
-            font-family: var(--font-serif);
-        }
-        .how-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1.45rem;
-            margin: 1.7rem 0 1.4rem;
-            text-align: left;
-        }
-
-        .how-card {
-            background: var(--color-surface);
-            border: 1px solid var(--color-border);
-            border-radius: var(--card-radius);
-            padding: 1.6rem 1.4rem 1.7rem;
-            box-shadow: var(--shadow-xs);
-            transition: all var(--dur) var(--ease);
-            position: relative;
-        }
-        .how-card:hover {
-            border-color: var(--color-gold);
-            box-shadow: var(--shadow-md);
-            transform: translateY(-3px);
-        }
-        .how-num {
-            font-family: var(--font-sans);
-            font-size: .74rem;
-            font-weight: 700;
-            color: var(--color-bronze-muted);
-            letter-spacing: .14em;
-            margin-bottom: .55rem;
-        }
-        .how-title {
-            font-size: 1.06rem;
-            font-weight: 600;
-            color: var(--color-text);
-            margin-bottom: .5rem;
-            line-height: 1.4;
-            font-family: var(--font-serif);
-        }
-        .how-desc { font-size: .83rem; color: var(--color-text-secondary); line-height: 1.62; }
-        .how-sub { font-size: .85rem; color: var(--color-text-secondary); margin: .4rem 0 0; letter-spacing: .02em; }
-
-        /* ============================================================
-           SELLER CTA
-           ============================================================ */
-        .seller-cta {
-            background: linear-gradient(145deg, #FDFBF7 0%, #F3EAE0 100%);
-            border: 1px solid rgba(122, 78, 51, 0.12);
-            border-radius: var(--card-radius);
-            padding: 3rem 2rem 2.8rem;
-            text-align: center;
-            box-shadow: 0 16px 40px rgba(36, 31, 26, 0.06);
-            position: relative;
-            overflow: hidden;
-        }
-        /* 顶部金色装饰线 */
-        .seller-cta::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 50%;
-            transform: translateX(-50%);
-            width: 80px; height: 3px;
-            background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
-            border-radius: 0 0 3px 3px;
-        }
-        .seller-cta .title {
-            font-size: 1.6rem;
-            font-weight: 700;
-            color: var(--color-text);
-            margin-bottom: 0.8rem;
-            font-family: var(--font-serif);
-            letter-spacing: -0.01em;
-        }
-        .seller-cta .desc {
-            font-size: 0.95rem;
-            color: var(--color-text-secondary);
-            margin-bottom: 2.2rem;
-            line-height: 1.7;
-            max-width: 520px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        /* 按钮与席位条容器 */
-        .seller-actions {
             display: flex;
             flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 1.8rem;
+            transition: .4s cubic-bezier(.25,.1,.25,1);
+            position: relative;
         }
+        .gallery-card:hover {  box-shadow: 0 8px 20px rgba(37,34,30,.08); }
 
-        /* 主按钮 */
-        .seller-cta .btn-publish {
-            font-size: 0.95rem;
-            padding: 0.9rem 2.2rem;
-            min-height: 48px;
-            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
-            box-shadow: 0 8px 24px rgba(122, 78, 51, 0.25);
-            border-radius: var(--btn-radius);
-            display: inline-flex;
-            align-items: center;
-            gap: 0.6rem;
-            transition: all 0.3s cubic-bezier(0.22, 0.61, 0.36, 1);
-        }
-        .seller-cta .btn-publish:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 32px rgba(122, 78, 51, 0.35);
-        }
-        .seller-cta .btn-publish .arrow {
-            transition: transform 0.3s ease;
-        }
-        .seller-cta .btn-publish:hover .arrow {
-            transform: translateX(4px);
-        }
-
-        /* ============================================================
-           SEATS METER (实时席位条)
-           ============================================================ */
-        .seats-meter {
-            max-width: 440px;
-            width: 100%;
-            margin: 0 auto;
-        }
-        .seats-meter-head {
-            display: flex;
-            align-items: baseline;
-            justify-content: space-between;
-            gap: 1rem;
-            margin-bottom: .6rem;
-        }
-        .seats-label {
-            display: inline-flex;
-            align-items: center;
-            gap: .5rem;
-            color: var(--color-text-secondary);
-            font-size: .82rem;
-            font-weight: 500;
-            letter-spacing: .01em;
-        }
-        .seats-label .dot {
-            width: 7px;
-            height: 7px;
-            border-radius: 50%;
-            background: var(--color-success);
-            box-shadow: 0 0 0 3px rgba(82, 102, 87, .15);
-            animation: pulse-dot 2.2s infinite;
-        }
-        @keyframes pulse-dot {
-            0%   { box-shadow: 0 0 0 0 rgba(82, 102, 87, .32); }
-            70%  { box-shadow: 0 0 0 8px rgba(82, 102, 87, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(82, 102, 87, 0); }
-        }
-
-        .seats-count {
-            display: inline-flex;
-            align-items: baseline;
-            gap: .22rem;
-            font-variant-numeric: tabular-nums;
-        }
-        .seats-count .seats-num {
-            font-size: 1.08rem;
-            font-weight: 800;
-            color: var(--color-primary);
-            letter-spacing: .01em;
-        }
-        .seats-count .seats-total {
+        .gallery-badge {
+            align-self: flex-start;
+            background: var(--color-primary);
+            color: #fff;
             font-size: .78rem;
-            color: var(--color-text-muted);
+            font-weight: 700;
+            padding: .28rem .65rem;
+            border-radius: 5px;
+            margin-bottom: .9rem;
         }
-
-        /* 进度轨道 */
-        .seats-track {
-            height: 4px;
-            border-radius: 999px;
-            background: rgba(122, 78, 51, .10);
-            overflow: hidden;
-            position: relative;
-        }
-        .seats-fill {
-            height: 100%;
-            width: 0;
-            border-radius: 999px;
-            background: linear-gradient(90deg, var(--color-gold) 0%, var(--color-primary) 100%);
-            transition: width 1.4s cubic-bezier(.22, .61, .36, 1);
-            position: relative;
-        }
-        /* 微光扫过 —— 让它有“活着”的实时感 */
-        .seats-fill::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, .45) 50%, transparent 100%);
-            animation: seats-shine 2.8s ease-in-out infinite;
-        }
-        @keyframes seats-shine {
-            0%   { transform: translateX(-100%); }
-            60%  { transform: translateX(100%); }
-            100% { transform: translateX(100%); }
-        }
-
-        /* ============================================================
-           FAQ
-           ============================================================ */
-        .faq-list { max-width: 780px; margin: 0 auto; }
-        .faq-item { border-bottom: 1px solid var(--color-border); }
-        .faq-item:first-child { border-top: 1px solid var(--color-border); }
-        .faq-item summary {
-            cursor: pointer;
-            padding: 1.05rem .3rem;
-            font-size: .95rem;
-            font-weight: 600;
+        .gallery-name {
+            font-size: 1.15rem;
+            font-weight: 700;
             color: var(--color-text);
-            list-style: none;
-            position: relative;
-            padding-right: 2.4rem;
-            transition: color var(--dur) var(--ease);
+            margin-bottom: .55rem;
+            display: flex; align-items: center; gap: .5rem; flex-wrap: wrap;
         }
-        .faq-item summary:hover { color: var(--color-primary); }
-        .faq-item summary::-webkit-details-marker { display: none; }
-        .faq-item summary::after {
-            content: '+';
-            position: absolute;
-            right: .3rem; top: 50%;
-            transform: translateY(-50%);
-            font-size: 1.2rem;
-            font-weight: 300;
-            color: var(--color-gold);
-            transition: transform var(--dur) var(--ease);
-        }
-        .faq-item[open] summary::after { content: '−'; }
-        .faq-item .faq-answer {
-            font-size: .86rem;
-            color: var(--color-text-secondary);
-            line-height: 1.78;
-            padding: 0 .3rem 1.2rem;
-        }
+        .gallery-desc { font-size: .88rem; color: var(--color-text-secondary); margin-bottom: .8rem; line-height: 1.55; }
+        .gallery-stats { font-size: .8rem; color: var(--color-text-muted); margin-bottom: 1.1rem; }
+        .gallery-link { font-size: .88rem; font-weight: 600; color: var(--color-gold); margin-top: auto; }
 
-        /* ============================================================
-           FOOTER
-           ============================================================ */
+        /* 创始卖家徽章 */
+        .founder-badge {
+            display: inline-flex; align-items: center; gap: .28rem;
+            background: linear-gradient(135deg, #9C7A3A 0%, #D4AF6A 50%, #9C7A3A 100%);
+            color: #FFFFFF; font-size: .75rem; font-weight: 700;
+            letter-spacing: .08em;
+            padding: .25rem .55rem .25rem .42rem; border-radius: 20px;
+            white-space: nowrap; vertical-align: middle;
+            box-shadow: 0 1px 3px rgba(176,138,69,.35), inset 0 1px 0 rgba(255,255,255,.25);
+        }
+        .founder-badge svg { width: 12px; height: 12px; flex-shrink: 0; display: block; }
+        .founder-badge .badge-num { font-weight: 800; font-size: .82rem; letter-spacing: 0; }
+
+        .cta-banner {
+            background: var(--color-white);
+            border: 1px solid var(--color-border);
+            border-radius: 10px;
+            padding: 1.8rem 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            text-align: right;
+            gap: .5rem;
+            margin-top: 2rem;
+        }
+        .cta-line { font-size: 1rem; color: var(--color-text); font-weight: 600; }
+        .cta-link { font-size: .9rem; color: var(--color-primary); text-decoration: none; font-weight: 600; }
+        .cta-link:hover { text-decoration: underline; }
+
         footer {
-            text-align: center;
-            padding: 2.6rem 5% 2rem;
-            background: var(--color-surface);
-            color: var(--color-text-secondary);
-            margin-top: 1rem;
-            font-size: .78rem;
+            text-align: center; padding: 2.2rem 5% 1.8rem;
+            background: var(--color-white); color: var(--color-text-secondary);
+            margin-top: 1rem; font-size: .78rem;
             border-top: 1px solid var(--color-border);
         }
-        .footer-nav {
-            display: flex; flex-wrap: wrap; justify-content: center;
-            gap: 1.4rem;
-            margin-bottom: 1.3rem;
-        }
-        .footer-nav a {
-            color: var(--color-text-secondary);
-            text-decoration: none;
-            font-size: .82rem;
-            transition: color var(--dur) var(--ease);
-        }
+        .footer-nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 1.3rem; margin-bottom: 1.2rem; }
+        .footer-nav a { color: var(--color-text-secondary); text-decoration: none; font-size: .82rem; }
         .footer-nav a:hover { color: var(--color-primary); }
-        .footer-disclaimer {
-            max-width: 640px;
-            margin: 0 auto 1.2rem;
-            font-size: .77rem;
-            line-height: 1.7;
-            color: var(--color-text-muted);
-        }
+        .footer-disclaimer { max-width: 620px; margin: 0 auto 1.1rem; font-size: .78rem; line-height: 1.65; color: var(--color-text-muted); }
 
-        .app-install-btn {
-            display: inline-flex; align-items: center; gap: .3rem;
-            margin-left: .6rem;
-            padding: .5rem .85rem;
-            min-height: 40px;
-            border: 1px solid var(--color-border);
-            border-radius: 999px;
-            color: var(--color-qianjinzong);
-            font-size: .76rem;
-            text-decoration: none;
-            vertical-align: middle;
-            transition: all var(--dur) var(--ease);
-        }
-        .app-install-btn:hover {
-            border-color: var(--color-primary);
-            color: var(--color-primary);
-            background: var(--color-primary-light);
-        }
-        .app-install-btn svg { width: 12px; height: 12px; flex-shrink: 0; fill: currentColor; }
+        [data-lang="en"] .zh { display: none; }
+        [data-lang="zh"] .en { display: none; }
 
-        /* ============================================================
-           DEBUG
-           ============================================================ */
-        .gd-debug {
-            position: fixed; left: 8px; bottom: 8px; z-index: 9999;
-            max-width: min(94vw, 460px); max-height: 60vh; overflow: auto;
-            background: rgba(20, 17, 14, .95);
-            color: #E8E2D8;
-            font: 12px/1.6 ui-monospace, Menlo, Consolas, monospace;
-            padding: 10px 12px;
-            border-radius: 8px;
-            white-space: pre-wrap; word-break: break-all;
-            box-shadow: var(--shadow-lg);
-        }
-        .gd-debug .ok { color: #9FD08A; }
-        .gd-debug .warn { color: #E6C46B; }
-        .gd-debug .bad { color: #F0A090; }
-
-        /* ============================================================
-           LANG VISIBILITY
-           ============================================================ */
-        body[data-lang="en"] .zh { display: none; }
-        body[data-lang="zh"] .en { display: none; }
-
-        /* ============================================================
-           RESPONSIVE
-           ============================================================ */
-        @media (max-width: 1100px) {
-            .how-grid { grid-template-columns: repeat(3, 1fr); }
-        }
-
-           @media (max-width: 820px) {
-            header { height: 64px; gap: .6rem; }
-            .btn-publish { padding: .65rem .9rem; font-size: .8rem; }
-            .container { padding-top: 2.5rem; }
-            .finds-grid { gap: 1.2rem; }
-            .finds-grid .finds-card { flex: 0 0 calc((100% - 1.2rem) / 2); }
-            .goods-list { grid-template-columns: repeat(4, 1fr); }
-            .intel-card { flex: 0 0 236px; }
-            .how-grid { grid-template-columns: repeat(2, 1fr); }
-            .intel-section { padding: 1.9rem 1.4rem 1.4rem; }
-        }
-
-        @media (max-width: 560px) {
-            body { font-size: 15px; }
-            .brand h1 { font-size: 1.12rem; }
-
-            .header-right { gap: .4rem; }
-            .btn-publish-text { display: none; }
-            .container { padding: 2rem 4.5% 3rem; }
-            section { margin-bottom: 4rem; }
-            h2 { font-size: 1.5rem; }
-            .section-head2 .title { font-size: 1.18rem; }
-            .hero-title-main { font-size: 1.6rem; }
-            .goods-list { grid-template-columns: repeat(3, 1fr); gap: .7rem; }
-            .finds-grid { gap: .9rem; }
-            .finds-grid .finds-card { flex: 0 0 calc((100% - .9rem) / 2); }
-            .item-card .item-info { padding: .3rem .5rem; gap: .1rem; }
-            .item-card .item-price { font-size: .78rem; gap: .25rem; }
-            .item-card .price-tag { font-size: .7rem; padding: .1rem .3rem; }
-            .finds-price { font-size: .84rem; }
-            .how-grid { grid-template-columns: 1fr; }
-            .intel-section { padding: 1.5rem 1.15rem 1.1rem; margin-bottom: 4rem; }
-            .intel-card { flex: 0 0 214px; padding: 1rem 1.05rem; }
-            .intel-text { font-size: .84rem; }
-            .seller-cta { padding: 2.2rem 1.3rem 2rem; }
-            .seller-cta .title { font-size: 1.35rem; }
-            .seller-cta .desc { font-size: .88rem; margin-bottom: 1.6rem; }
-            .seller-cta .btn-publish { font-size: .88rem; padding: .8rem 1.6rem; }
+        @media (max-width: 700px) {
+            header { height: 62px; }
+            .btn-publish { padding: .65rem .85rem; font-size: .8rem; min-height: 44px; }
+            .container { padding: 1.8rem 5% 3rem; }
+            .gallery-grid { grid-template-columns: 1fr; }
+            .page-title { font-size: 1.4rem; }
+            .cta-banner { align-items: flex-start; text-align: left; }
         }
     </style>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "私家藏馆 | Private Collection Gallery | Gudong",
+      "description": "浏览古董圈私家藏馆，查看各商号与藏家的全部藏品。 Browse Private Collection Gallery on Gudong and see each dealer",
+      "url": "https://gudong.app/sellers/index.html",
+      "isPartOf": { "@type": "WebSite", "name": "古董圈 Gudong", "url": "https://gudong.app/" },
+      "inLanguage": "zh-SG"
+    }
+    </script>
 </head>
 <body data-lang="zh">
-    <header>
-        <div class="header-left">
+     <header>
+        <div style="display:flex; align-items:center; gap:.9rem;">
             <button class="menu-toggle" onclick="openSidebar()" aria-label="menu" aria-expanded="false" id="menuToggle">☰</button>
-            <a href="#hero" class="brand">
-                <img src="assets/icons/logo-mark.png" alt="古董圈 Gudong" class="brand-logo-img" onerror="this.style.display='none'">
+            <a href="https://gudong.app/index.html" class="brand">
+                <img src="../assets/icons/logo-mark.png" alt="古董圈 Gudong" class="brand-logo-img">
                 <div class="brand-text">
-                    <h1><span class="zh">古董圈</span><span class="en">GUDONG</span></h1>
-                    <p><span class="zh">GUDONG.APP</span><span class="en">GUDONG.APP</span></p>
+                <h1><span class="zh">古董圈</span><span class="en">GUDONG</span></h1>
+                <p><span class="zh">GUDONG.APP</span><span class="en">GUDONG.APP</span></p>
                 </div>
             </a>
         </div>
-
         <div class="header-right">
             <button type="button" class="gd-share-btn" onclick="gdSharePage()" aria-label="分享 / Share" title="分享 / Share"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92-1.31-2.92-2.92-2.92z"/></svg></button>
-            <button class="lang-btn" onclick="toggleLang()" aria-label="Switch language">EN</button>
+           <button class="lang-btn" onclick="toggleLang()">EN</button>
         </div>
     </header>
 
@@ -1422,330 +316,129 @@
             <span class="zh">古董圈</span><span class="en">GUDONG</span>
         </div>
         <nav class="sidebar-nav">
-            <a href="#hero" class="sidebar-link active" onclick="closeSidebar()"><span class="zh">首页</span><span class="en">Home</span></a>
-            <a href="my/saved.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">我的收藏 · 关注</span><span class="en">Saved &amp; Followed</span></a>
-            <a href="my/briefing.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">今日简报</span><span class="en">Today's Brief</span></a>
-            <a href="#daily-intel" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 今日捡漏</span><span class="en">· Daily Radar</span></a>
-            <a href="#today-finds" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 今日发现</span><span class="en">· Today's Finds</span></a>
-            <a href="#new-listings" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 刚刚上新</span><span class="en">· Just Listed</span></a>
-            <a href="collection.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">藏品库</span><span class="en">Collection</span></a>
-            <a href="categories/porcelain.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 瓷器</span><span class="en">· Porcelain</span></a>
-            <a href="categories/jade.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 玉器</span><span class="en">· Jade</span></a>
-            <a href="categories/bronze.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 铜器</span><span class="en">· Bronzes</span></a>
-            <a href="categories/coins.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 钱币</span><span class="en">· Coins</span></a>
-            <a href="categories/paintings.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 书画</span><span class="en">· Paintings &amp; Calligraphy</span></a>
-            <a href="categories/misc.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 杂项</span><span class="en">· Miscellaneous</span></a>
-            <a href="sellers/index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">藏家展馆</span><span class="en">Collector Gallery</span></a>
-            <a href="insights.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">情报 / 知识</span><span class="en">Insights</span></a>
-            <a href="about.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">关于我们</span><span class="en">About</span></a>
+            <a href="https://gudong.app/index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">首页</span><span class="en">Home</span></a>
+            <a href="https://gudong.app/index.html#daily-intel" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 捡漏情报</span><span class="en">· Insider Tips</span></a>
+            <a href="https://gudong.app/index.html#today-finds" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 今日好货</span><span class="en">· Today's Picks</span></a>
+            <a href="https://gudong.app/index.html#new-listings" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 刚刚上新</span><span class="en">· Just Listed</span></a>
+            <a href="https://gudong.app/collection.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">藏品库</span><span class="en">Collection</span></a>
+            <a href="https://gudong.app/categories/porcelain.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 瓷器</span><span class="en">· Porcelain</span></a>
+            <a href="https://gudong.app/categories/jade.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 玉器</span><span class="en">· Jade</span></a>
+            <a href="https://gudong.app/categories/bronze.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 铜器</span><span class="en">· Bronzes</span></a>
+            <a href="https://gudong.app/categories/coins.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 钱币</span><span class="en">· Coins</span></a>
+            <a href="https://gudong.app/categories/paintings.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 书画</span><span class="en">· Paintings &amp; Calligraphy</span></a>
+            <a href="https://gudong.app/categories/misc.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 杂项</span><span class="en">· Miscellaneous</span></a>
+            <a href="https://gudong.app/sellers/index.html" class="sidebar-link active" onclick="closeSidebar()"><span class="zh">藏家展馆</span><span class="en">Collector Gallery</span></a>
+            <a href="https://gudong.app/insights.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">情报 / 知识</span><span class="en">Insights</span></a>
+            <a href="https://gudong.app/about.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">关于我们</span><span class="en">About</span></a>
             <button type="button" class="sidebar-lang-btn" onclick="toggleLang()" aria-label="Switch language"><span class="zh">🌐 English</span><span class="en">🌐 中文</span></button>
         </nav>
     </aside>
 
     <main class="container">
-        <!-- ============ HERO ============ -->
-        <section id="hero" style="padding-top: 0;">
-            <div class="hero-clean">
-                <div class="hero-eyebrow">Chinese Antiques &amp; Collectibles</div>
-                <div class="hero-title-main">
-                    <span class="zh">每天 5 分钟，看看今天有什么漏可捡</span>
-                    <span class="en">5 minutes a day. See what's undervalued today.</span>
-                </div>
-                <div class="hero-desc">
-                    <span class="zh">每天都有新藏品、新价格、新发现。</span>
-                    <span class="en">New collections, new prices, new discoveries every day.</span>
-                </div>
-                <div class="hero-guide">
-                    <span class="zh">搜你正在找的东西。搜关键词找藏品，或往下逛「今日发现」与「刚刚上新」</span>
-                    <span class="en">Find what you’re looking for. Search by keyword, or scroll for Today's Finds &amp; Just Listed</span>
-                </div>
-                <a href="#new-listings" class="hero-btn"><span class="zh">开始寻宝</span><span class="en">Start Hunting</span></a>
+        <div class="breadcrumb">
+            <a href="https://gudong.app/index.html" class="zh">首页</a><a href="https://gudong.app/index.html" class="en">Home</a>
+            <span class="zh"> / 私家主页</span><span class="en"> / Collector Gallery</span>
+        </div>
 
-                <div class="search-box">
-                    <input type="text" id="searchInput"
-                           placeholder="试试搜「青花」「康熙通宝」「和田玉」…"
-                           aria-label="搜索藏品" />
-                    <button type="button" onclick="doSearch()" aria-label="search">🔍</button>
-                </div>
+        <h1 class="page-title zh">私家藏馆 · 藏家与商号</h1>
+        <h1 class="page-title en">Private Collection Gallery</h1>
 
-                <div class="hot-tags" id="hotTags">
-                    <button type="button" class="hot-tag" data-kw="青花"><span class="zh">青花瓷</span><span class="en">Blue &amp; White</span></button>
-                    <button type="button" class="hot-tag" data-kw="康熙通宝"><span class="zh">康熙通宝</span><span class="en">Kangxi Coin</span></button>
-                    <button type="button" class="hot-tag" data-kw="和田玉"><span class="zh">和田玉</span><span class="en">Hetian Jade</span></button>
-                    <button type="button" class="hot-tag" data-kw="书画"><span class="zh">清代书画</span><span class="en">Qing Painting</span></button>
-                    <button type="button" class="hot-tag" data-kw="蜜蜡"><span class="zh">老蜜蜡</span><span class="en">Amber</span></button>
-                    <button type="button" class="hot-tag" data-kw="香炉"><span class="zh">铜香炉</span><span class="en">Bronze Censer</span></button>
-                </div>
+        <div class="gallery-grid">
+            <a href="https://gudong.app/sellers/seller-lim-kw-antiques.html" class="gallery-card" data-seller-id="Lim-KW">
+                <div class="gallery-badge zh">新入驻</div><div class="gallery-badge en">New</div>
+                <div class="gallery-name">
+                    <span class="zh">林记古玩</span><span class="en">Lim KW Antiques</span>
+                    <span class="founder-badge" title="创始卖家 · 2026" aria-label="Founder-Dealer 2026">
 
-                <div id="searchResultTip" class="search-result-tip" role="status" aria-live="polite" style="display:none;">
-                    <span class="zh"></span><span class="en"></span>
-                </div>
-                <div class="search-tip zh">瓷器 · 玉器 · 钱币 · 书画 · 杂项</div>
-                <div class="search-tip en">Porcelain · Jade · Coins · Paintings · Miscellaneous</div>
-            </div>
-        </section>
-
-        <!-- ============ 今日发现 ============ -->
-        <section id="today-finds">
-            <div class="section-head2">
-                <div>
-                    <span class="title zh">今日发现</span>
-                    <span class="title en">Today's Finds</span>
-                    <span class="sub-line zh">今天新出现、正在降价、价格值得比较，或值得收藏者留意的藏品。</span>
-                    <span class="sub-line en">New listings today, price reductions, items worth comparing, or collectibles worthy of collectors’ attention.</span>
-                </div>
-            </div>
-            <div class="finds-grid" id="todayFindsGrid"></div>
-        </section>
-
-        <!-- ============ 刚刚上新 ============ -->
-        <section id="new-listings">
-            <div class="section-head2">
-                <div>
-                    <span class="title zh">刚刚上新</span>
-                    <span class="title en">Just Listed</span>
-                    <span class="sub-line zh">最新发布的藏品</span>
-                    <span class="sub-line en">The latest listings</span>
-                </div>
-                <a href="collection.html" class="more zh">查看全部 →</a>
-                <a href="collection.html" class="more en">View All →</a>
-            </div>
-            <div class="goods-list" id="itemList"></div>
-            <div id="noResult" class="no-result zh" style="display:none;">暂无匹配藏品</div>
-            <div id="noResultEn" class="no-result en" style="display:none;">No items found</div>
-        </section>
-
-        <!-- ============ 按类别逛藏品 ============ -->
-        <section id="browse">
-            <div class="section-head2">
-                <div>
-                    <span class="title zh">按类别逛藏品</span><span class="title en">Browse by Category</span>
-                    <span class="sub-line zh">从你喜欢的类别开始继续逛</span>
-                    <span class="sub-line en">Start from the categories you love</span>
-                </div>
-                <a href="collection.html" class="more zh">查看完整藏品库 →</a>
-                <a href="collection.html" class="more en">View Full Collection →</a>
-            </div>
-            <div class="browse-grid">
-                <a href="categories/porcelain.html" class="browse-card">
-                    <span class="cat-name zh">瓷器</span><span class="cat-name en">Porcelain</span>
-                    <span class="cat-en zh">Porcelain</span><span class="cat-en en">瓷器</span>
-                    <span class="cat-stats zh" data-cat-count="porcelain">— 件在售</span>
-                    <span class="cat-stats en" data-cat-count="porcelain">— items</span>
-                    <span class="cat-range">S$80 – S$12,000</span>
-                </a>
-                <a href="categories/jade.html" class="browse-card">
-                    <span class="cat-name zh">玉器</span><span class="cat-name en">Jade</span>
-                    <span class="cat-en zh">Jade</span><span class="cat-en en">玉器</span>
-                    <span class="cat-stats zh" data-cat-count="jade">— 件在售</span>
-                    <span class="cat-stats en" data-cat-count="jade">— items</span>
-                    <span class="cat-range">S$150 – S$8,000</span>
-                </a>
-                <a href="categories/coins.html" class="browse-card">
-                    <span class="cat-name zh">钱币</span><span class="cat-name en">Coins</span>
-                    <span class="cat-en zh">Coins</span><span class="cat-en en">钱币</span>
-                    <span class="cat-stats zh" data-cat-count="coins">— 件在售</span>
-                    <span class="cat-stats en" data-cat-count="coins">— items</span>
-                    <span class="cat-range">S$20 – S$3,500</span>
-                </a>
-                <a href="categories/paintings.html" class="browse-card">
-                    <span class="cat-name zh">书画</span><span class="cat-name en">Paintings</span>
-                    <span class="cat-en zh">Paintings &amp; Calligraphy</span><span class="cat-en en">书画</span>
-                    <span class="cat-stats zh" data-cat-count="paintings">— 件在售</span>
-                    <span class="cat-stats en" data-cat-count="paintings">— items</span>
-                    <span class="cat-range">S$200 – S$15,000</span>
-                </a>
-                <a href="categories/bronze.html" class="browse-card">
-                    <span class="cat-name zh">铜器</span><span class="cat-name en">Bronzes</span>
-                    <span class="cat-en zh">Bronzes</span><span class="cat-en en">铜器</span>
-                    <span class="cat-stats zh">香炉 · 造像 · 佛具</span>
-                    <span class="cat-stats en">Censers · Figures · Ritual ware</span>
-                    <span class="cat-range">S$50 – S$10,000</span>
-                </a>
-                <a href="categories/misc.html" class="browse-card">
-                    <span class="cat-name zh">杂项</span><span class="cat-name en">Miscellaneous</span>
-                    <span class="cat-en zh">Miscellaneous</span><span class="cat-en en">杂项</span>
-                    <span class="cat-stats zh" data-cat-count="misc">— 件在售</span>
-                    <span class="cat-stats en" data-cat-count="misc">— items</span>
-                    <span class="cat-range">S$30 – S$6,000</span>
-                </a>
-            </div>
-
-            <div style="margin-top:1.6rem;">
-                <a href="sellers/index.html" class="more-btn zh">藏家展馆 →</a>
-                <a href="sellers/index.html" class="more-btn en">Collector Gallery →</a>
-            </div>
-        </section>
-
-        <!-- ============ 今日情报 · 捡漏雷达 ============ -->
-        <section id="daily-intel" class="intel-section" aria-labelledby="intelTitle">
-            <div class="intel-head">
-                <div>
-                    <span class="title" id="intelTitle">
-                        <span class="zh">📡 今日情报 · 古董捡漏寻宝</span>
-                        <span class="en">📡 Today's Intel · Antique Treasure Hunt</span>
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <path d="M3 8L6 14L9 7L12 13L15 7L18 14L21 8V17C21 17.55 20.55 18 20 18H4C3.45 18 3 17.55 3 17V8Z" fill="currentColor" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/>
+                            <circle cx="3" cy="8" r="1.4" fill="currentColor"/>
+                            <circle cx="12" cy="6" r="1.4" fill="currentColor"/>
+                            <circle cx="21" cy="8" r="1.4" fill="currentColor"/>
+                        </svg>
+                        <span class="badge-num">88</span>
                     </span>
-                    <span class="sub zh">编辑整理，不是商品广告。看看今天市场在发生什么。</span>
-                    <span class="sub en">Editorially curated. Not ads. What's moving in the market today.</span>
                 </div>
-                <span class="intel-live"><span class="zh">实时更新</span><span class="en">Live</span></span>
-            </div>
-            <div class="intel-scroll" id="intelScroll" aria-busy="true"></div>
-            <p class="intel-note zh">情报由平台编辑整理，部分内容可能引用卖家提供的信息；不构成鉴定、估价或投资建议。</p>
-            <p class="intel-note en">Compiled by editors; some items reference seller-provided info. Not authentication, valuation, or investment advice.</p>
-        </section>
+                <div class="gallery-desc zh">专注高古青铜与明清瓷器</div>
+                <div class="gallery-desc en">Archaic bronzes and Ming-Qing porcelain</div>
+                <div class="gallery-stats zh">藏品数：4 · 入驻：2026年</div>
+                <div class="gallery-stats en">4 items · Joined 2026</div>
+                <div class="gallery-link zh">进入藏馆 →</div><div class="gallery-link en">Enter Gallery →</div>
+            </a>
+            <a href="https://gudong.app/sellers/seller-yak-bc-antiques.html" class="gallery-card" data-seller-id="Yak-BC">
+                <div class="gallery-badge zh">新入驻</div><div class="gallery-badge en">New</div>
+                <div class="gallery-name">
+                    <span class="zh">Yak BC</span><span class="en">Yak BC</span>
+                    <span class="founder-badge" title="创始卖家 · 2026" aria-label="Founder-Dealer 2026">
 
-        <!-- ============ 情报 / 知识 ============ -->
-        <section id="insights">
-            <div class="section-head2">
-                <div>
-                    <span class="title zh">📖 情报 / 知识</span><span class="title en">📖 Insights &amp; Guides</span>
-                    <span class="sub-line zh">看懂器物，才敢放心入手</span>
-                    <span class="sub-line en">Know the piece, then buy with confidence</span>
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <path d="M3 8L6 14L9 7L12 13L15 7L18 14L21 8V17C21 17.55 20.55 18 20 18H4C3.45 18 3 17.55 3 17V8Z" fill="currentColor" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/>
+                            <circle cx="3" cy="8" r="1.4" fill="currentColor"/>
+                            <circle cx="12" cy="6" r="1.4" fill="currentColor"/>
+                            <circle cx="21" cy="8" r="1.4" fill="currentColor"/>
+                        </svg>
+                        <span class="badge-num">88</span>
+                    </span>
                 </div>
-                <a href="insights.html" class="more zh">全部情报 →</a>
-                <a href="insights.html" class="more en">All insights →</a>
-            </div>
-            <div class="insight-grid">
-                <a href="insights/qing-porcelain-dating.html" class="insight-card">
-                    <div class="insight-kicker zh">入门指南</div><div class="insight-kicker en">BEGINNER</div>
-                    <div class="insight-title zh">清代民窑青花怎么分辨年代？3 个上手要点</div>
-                    <div class="insight-title en">Dating Qing folk kiln blue-and-white: 3 hands-on signals</div>
-                    <div class="insight-desc zh">釉面、胎质、发色，三个最容易上手的判断维度。</div>
-                    <div class="insight-desc en">Glaze, body, and pigment tone — three of the easiest entry points.</div>
-                </a>
-                <a href="insights/singapore-coin-market.html" class="insight-card">
-                    <div class="insight-kicker zh">行情观察</div><div class="insight-kicker en">MARKET</div>
-                    <div class="insight-title zh">新加坡本地钱币市场近半年行情简析</div>
-                    <div class="insight-title en">Singapore coin market: a half-year snapshot</div>
-                    <div class="insight-desc zh">清钱、民国币、东南亚流通币的成交趋势与价格区间。</div>
-                    <div class="insight-desc en">Qing, Republican, and SE-Asian circulating coins trends.</div>
-                </a>
-                <a href="insights/jade-buyer-pitfalls.html" class="insight-card">
-                    <div class="insight-kicker zh">避坑手册</div><div class="insight-kicker en">PITFALLS</div>
-                    <div class="insight-title zh">新手买玉器，最容易踩的 5 个坑</div>
-                    <div class="insight-title en">5 pitfalls new jade buyers fall into</div>
-                    <div class="insight-desc zh">从「和田」二字说起，谈谈如何不被话术带走。</div>
-                    <div class="insight-desc en">Starting from the word "Hetian" — how not to be talked into it.</div>
-                </a>
-                <a href="insights/what-is-jianlou.html" class="insight-card">
-                    <div class="insight-kicker zh">捡漏逻辑</div><div class="insight-kicker en">STRATEGY</div>
-                    <div class="insight-title zh">什么是"捡漏"？古董捡漏的 3 个真实逻辑</div>
-                    <div class="insight-title en">What is "jianlou"? 3 real logics behind bargain hunting</div>
-                    <div class="insight-desc zh">信息差、时间差、认知差——捡漏不是运气。</div>
-                    <div class="insight-desc en">Information, timing, and knowledge gaps — not luck.</div>
-                </a>
-            </div>
-        </section>
+                <div class="gallery-desc zh">古董收藏爱好者</div>
+                <div class="gallery-desc en">Antique collector</div>
+                <div class="gallery-stats zh">藏品数：1 · 入驻：2026年</div>
+                <div class="gallery-stats en">1 item · Joined 2026</div>
+                <div class="gallery-link zh">进入藏馆 →</div><div class="gallery-link en">Enter Gallery →</div>
+            </a>
+            <a href="https://gudong.app/sellers/seller-ng-lk-antiques.html" class="gallery-card" data-seller-id="Ng-LK">
+                <div class="gallery-badge zh">新入驻</div><div class="gallery-badge en">New</div>
+                <div class="gallery-name">
+                    <span class="zh">聚珍阁</span><span class="en">Ng LK Antiques</span>
+                    <span class="founder-badge" title="创始卖家 · 2026" aria-label="Founder-Dealer 2026">
 
-        <!-- ============ 为什么在古董圈找藏品 ============ -->
-        <section id="services">
-            <div style="text-align:center;max-width:1080px;margin:0 auto;">
-                <h2 class="zh">为什么在古董圈找藏品？</h2>
-                <h2 class="en">Why use Gudong?</h2>
-                <p class="how-sub zh">藏品展示 · 行情参考 · 藏家直连</p>
-                <p class="how-sub en">Artefact listings・Market reference・Direct contact with collectors</p>
-                <div class="how-grid">
-                    <div class="how-card">
-                        <div class="how-num">01</div>
-                        <div class="how-title zh">浏览藏品</div>
-                        <div class="how-title en">Browse Artefacts</div>
-                        <div class="how-desc zh">在线阅览藏品资料，按需深入了解。</div>
-                        <div class="how-desc en">View artefact details before further discussion.</div>
-                    </div>
-                    <div class="how-card">
-                        <div class="how-num">02</div>
-                        <div class="how-title zh">对接藏家</div>
-                        <div class="how-title en">Contact Collectors</div>
-                        <div class="how-desc zh">对藏品感兴趣，可直接联系藏家交流。</div>
-                        <div class="how-desc en">Reach out directly to collectors for items you are interested in.</div>
-                    </div>
-                    <div class="how-card">
-                        <div class="how-num">03</div>
-                        <div class="how-title zh">自主甄别</div>
-                        <div class="how-title en">Self Verification</div>
-                        <div class="how-desc zh">平台仅展示信息，不提供鉴定、估价，不介入交易。</div>
-                        <div class="how-desc en">Gudong.app only displays information. We do not provide authentication, valuation or handle transactions.</div>
-                    </div>
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <path d="M3 8L6 14L9 7L12 13L15 7L18 14L21 8V17C21 17.55 20.55 18 20 18H4C3.45 18 3 17.55 3 17V8Z" fill="currentColor" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/>
+                            <circle cx="3" cy="8" r="1.4" fill="currentColor"/>
+                            <circle cx="12" cy="6" r="1.4" fill="currentColor"/>
+                            <circle cx="21" cy="8" r="1.4" fill="currentColor"/>
+                        </svg>
+                        <span class="badge-num">88</span>
+                    </span>
                 </div>
-            </div>
-        </section>
+                <div class="gallery-desc zh">古董收藏爱好者</div>
+                <div class="gallery-desc en">Antique collector</div>
+                <div class="gallery-stats zh">藏品数：3 · 入驻：2026年</div>
+                <div class="gallery-stats en">3 items · Joined 2026</div>
+                <div class="gallery-link zh">进入藏馆 →</div><div class="gallery-link en">Enter Gallery →</div>
+            </a>
+            <a href="https://gudong.app/sellers/seller-ng-cy-antiques.html" class="gallery-card" data-seller-id="Ng-CY">
+                <div class="gallery-badge zh">新入驻</div><div class="gallery-badge en">New</div>
+                <div class="gallery-name">
+                    <span class="zh">博古斋</span><span class="en">Ng CY Antiques</span>
+                    <span class="founder-badge" title="创始卖家 · 2026" aria-label="Founder-Dealer 2026">
 
-        <!-- ============ FAQ ============ -->
-        <section id="faq">
-            <div class="section-head2" style="justify-content:center;text-align:center;">
-                <div>
-                    <span class="title zh">常见问题</span><span class="title en">Frequently Asked</span>
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <path d="M3 8L6 14L9 7L12 13L15 7L18 14L21 8V17C21 17.55 20.55 18 20 18H4C3.45 18 3 17.55 3 17V8Z" fill="currentColor" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/>
+                            <circle cx="3" cy="8" r="1.4" fill="currentColor"/>
+                            <circle cx="12" cy="6" r="1.4" fill="currentColor"/>
+                            <circle cx="21" cy="8" r="1.4" fill="currentColor"/>
+                        </svg>
+                        <span class="badge-num">88</span>
+                    </span>
                 </div>
-            </div>
-            <div class="faq-list">
-                <details class="faq-item">
-                    <summary><span class="zh">平台会帮忙鉴定藏品吗？</span><span class="en">Does Gudong authenticate items?</span></summary>
-                    <div class="faq-answer zh">不会。古董圈是信息发现平台，不提供鉴定、估价或保真服务。所有藏品描述与图片均由卖家提供，请自行核验或咨询独立专家。</div>
-                    <div class="faq-answer en">No. Gudong is a discovery platform and does not provide authentication, valuation, or guarantees. All descriptions and images are seller-provided — verify independently or consult a specialist.</div>
-                </details>
-                <details class="faq-item">
-                    <summary><span class="zh">怎么联系藏家？</span><span class="en">How do I contact a collector?</span></summary>
-                    <div class="faq-answer zh">在藏品详情页可直接看到卖家提供的联系方式，买卖双方直接沟通，平台不经手交易。</div>
-                    <div class="faq-answer en">Contact details are shown on the item detail page. Buyers and sellers communicate directly; the platform does not handle transactions.</div>
-                </details>
-                <details class="faq-item">
-                    <summary><span class="zh">藏品价格是平台定的吗？</span><span class="en">Does Gudong set the prices?</span></summary>
-                    <div class="faq-answer zh">不是。所有价格由卖家自行设定，平台仅提供展示。部分藏品为「私聊询价」，需直接联系藏家获取报价。</div>
-                    <div class="faq-answer en">No. All prices are set by sellers. Some items are "Enquire" only — contact the seller directly for pricing.</div>
-                </details>
-                <details class="faq-item">
-                    <summary><span class="zh">可以请平台推荐专家给参考意见吗？</span><span class="en">Can Gudong refer me to an expert for a reference opinion?</span></summary>
-                    <div class="faq-answer zh">可以。平台可应要求引荐专业人士提供个人意见，仅供参考，但不构成真伪鉴定。是否采纳由您决定，平台不介入、不担保；相关看法由您与专业人士直接沟通。</div>
-                    <div class="faq-answer en">Yes. The platform may, upon request, introduce a professional to provide personal opinions for reference only. These opinions do not constitute an authenticity appraisal. It is up to you to decide whether to accept them. The platform does not intervene or offer any guarantees. All views are discussed directly between you and the professional.</div>
-                </details>
-            </div>
-        </section>
-
-        <!-- ============ 卖家招募 ============ -->
-        <section id="seller-cta">
-            <div class="seller-cta">
-                <div class="title zh">你也有藏品想展示？</div>
-                <div class="title en">Got pieces you'd like to show?</div>
-                <div class="desc zh">让真正对古董感兴趣的人看到你的藏品。创始藏家 · 现开放限量 88 席位。</div>
-                <div class="desc en">Show your pieces to more collectors. Founding Collectors · Limited 88 seats.</div>
-
-                <div class="seller-actions">
-                    <a href="pricing.html#collector-services" class="btn-publish">
-                        <span class="zh">申请成为创始藏家 领 2 个免费展位</span>
-                        <span class="en">Apply as Founding Collector (2 free slots)</span>
-                        <span class="arrow">→</span>
-                    </a>
-
-                    <div class="seats-meter" id="seatsLine" role="status" aria-live="polite">
-                        <div class="seats-meter-head">
-                            <span class="seats-label">
-                                <span class="dot"></span>
-                                <span class="zh">创始藏家席位</span>
-                                <span class="en">Founding Collector Seats</span>
-                            </span>
-                            <span class="seats-count">
-                                <span class="seats-num" id="seatsNum">—</span>
-                                <span class="seats-total">/ 88</span>
-                            </span>
-                        </div>
-                        <div class="seats-track">
-                            <div class="seats-fill" id="seatsFill"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+                <div class="gallery-desc zh">古董收藏爱好者</div>
+                <div class="gallery-desc en">Antique collector</div>
+                <div class="gallery-stats zh">藏品数：5 · 入驻：2026年</div>
+                <div class="gallery-stats en">5 items · Joined 2026</div>
+                <div class="gallery-link zh">进入藏馆 →</div><div class="gallery-link en">Enter Gallery →</div>
+            </a>
+        </div>
     </main>
 
     <footer>
         <div class="footer-nav">
-            <a href="about.html" class="zh">联系我们</a><a href="about.html" class="en">Contact</a>
-            <a href="pricing.html#collector-services" class="zh">藏家服务</a><a href="pricing.html#collector-services" class="en">Collector Services</a>
-            <a href="pricing.html#buyer-services" class="zh">买家指南</a><a href="pricing.html#buyer-services" class="en">Buyer Guide</a>
-            <a href="pricing.html#price-table" class="zh">服务收费</a><a href="pricing.html#price-table" class="en">Price List</a>
-            <a href="privacy.html" class="zh">隐私政策</a><a href="privacy.html" class="en">Privacy</a>
-            <a href="terms.html" class="zh">用户条款</a><a href="terms.html" class="en">Terms</a>
+            <a href="https://gudong.app/about.html" class="zh">联系我们</a><a href="https://gudong.app/about.html" class="en">Contact</a>
+            <a href="https://gudong.app/pricing.html#collector-services" class="zh">藏家服务</a><a href="https://gudong.app/pricing.html#collector-services" class="en">Collector Services</a>
+            <a href="https://gudong.app/pricing.html#buyer-services" class="zh">买家指南</a><a href="https://gudong.app/pricing.html#buyer-services" class="en">Buyer Guide</a>
+            <a href="https://gudong.app/pricing.html#price-table" class="zh">服务收费</a><a href="https://gudong.app/pricing.html#price-table" class="en">Price List</a>
+            <a href="https://gudong.app/privacy.html" class="zh">隐私政策</a><a href="https://gudong.app/privacy.html" class="en">Privacy</a>
+            <a href="https://gudong.app/terms.html" class="zh">用户条款</a><a href="https://gudong.app/terms.html" class="en">Terms</a>
         </div>
         <p class="footer-disclaimer zh">gudong.app 是高级古董发现平台，仅提供信息、展示与连接服务，不参与买卖交易。</p>
         <p class="footer-disclaimer en">gudong.app is a premium antiques discovery platform. It provides information, display and connection services only, and does not participate in any sale or transaction.</p>
@@ -1754,43 +447,6 @@
     </footer>
 
     <script>
-        /* ============================================================
-           语言 & 侧栏
-           ============================================================ */
-        let currentLang = (function () {
-            try { return localStorage.getItem('gudong_lang') || 'zh'; }
-            catch (e) { return 'zh'; }
-        })();
-        let currentCat = 'all';
-
-        /* ------------------------------------------------------------
-           数据源配置：
-           - API_BASE 指向 Vercel 上的 Airtable 代理端点（完整 URL）
-           - 图片 / 本地快照仍使用相对路径，便于同域部署与本地预览
-           ------------------------------------------------------------ */
-        const API_BASE = "https://gudong-app.vercel.app/api/airtable-proxy";
-
-        (function applyLang(lang) {
-            const map = { zh: 'zh-SG', en: 'en-SG' };
-            document.documentElement.lang = map[lang] || 'zh-SG';
-            document.body.dataset.lang = lang;
-            const btn = document.querySelector('.lang-btn');
-            if (btn) btn.textContent = lang === 'zh' ? 'EN' : '中';
-            updateSearchPlaceholder();
-        })(currentLang);
-
-        function updateSearchPlaceholder() {
-            const inp = document.getElementById('searchInput');
-            if (!inp) return;
-            if (currentLang === 'zh') {
-                inp.placeholder = "试试搜「青花」「康熙通宝」「和田玉」…";
-                inp.setAttribute('aria-label', '搜索藏品');
-            } else {
-                inp.placeholder = "Try \"blue and white\", \"Kangxi coin\", \"Hetian jade\"…";
-                inp.setAttribute('aria-label', 'Search antiques');
-            }
-        }
-
         function openSidebar() {
             document.getElementById('sidebar').classList.add('open');
             document.getElementById('sidebarOverlay').classList.add('show');
@@ -1798,6 +454,7 @@
             var t = document.getElementById('menuToggle');
             if (t) t.setAttribute('aria-expanded', 'true');
         }
+
         function closeSidebar() {
             document.getElementById('sidebar').classList.remove('open');
             document.getElementById('sidebarOverlay').classList.remove('show');
@@ -1805,942 +462,140 @@
             var t = document.getElementById('menuToggle');
             if (t) t.setAttribute('aria-expanded', 'false');
         }
+
+        /* 全站统一的语言偏好与公告条（localStorage：gudong_lang / announceClosed） */
+        let currentLang = (function () { try { return localStorage.getItem('gudong_lang') === 'en' ? 'en' : 'zh'; } catch (e) { return 'zh'; } })();
+        function applyLang() {
+            document.body.dataset.lang = currentLang;
+            document.documentElement.lang = currentLang === 'en' ? 'en-SG' : 'zh-SG';
+            var b = document.querySelector('.lang-btn');
+            if (b) b.textContent = currentLang === 'zh' ? 'EN' : '中';
+        }
         function toggleLang() {
             currentLang = currentLang === 'zh' ? 'en' : 'zh';
-            document.body.dataset.lang = currentLang;
-            document.documentElement.lang = currentLang === 'zh' ? 'zh-SG' : 'en-SG';
+            applyLang();
             try { localStorage.setItem('gudong_lang', currentLang); } catch (e) {}
-            const lb = document.querySelector('.lang-btn');
-            if (lb) lb.textContent = currentLang === 'zh' ? 'EN' : '中';
-            updateSearchPlaceholder();
-            renderIntel();
-            const si = document.getElementById('searchInput');
-            if (si && si.value.trim()) filterAll();
+        }
+        function closeAnnounce() {
+            var b = document.getElementById('announceBar');
+            if (b) b.style.display = 'none';
+            try { localStorage.setItem('announceClosed', 'yes'); } catch (e) {}
         }
 
-        document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeSidebar(); });
-        window.addEventListener('resize', function () { if (window.innerWidth > 900) closeSidebar(); });
+        /* ESC 关闭侧栏 */
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') closeSidebar();
+        });
 
-        /* ============================================================
-           搜索
-           ============================================================ */
-        const SEARCH_GROUPS = [
-            '#todayFindsGrid .finds-card',
-            '#itemList .item-card'
-        ];
-        let firstMatchEl = null;
+        /* 桌面宽度时自动收起，避免遮罩残留 */
+        window.addEventListener('resize', function () {
+            if (window.innerWidth > 900) closeSidebar();
+        });
 
-        function searchHaystack(card) {
-            const img = card.querySelector('img');
-            const alt = img ? (img.alt || '') : '';
-            return ((card.dataset.keywords || '') + ' ' + alt + ' ' + card.textContent).toLowerCase();
+        applyLang();
+        try { if (localStorage.getItem('announceClosed') === 'yes') { var __ab = document.getElementById('announceBar'); if (__ab) __ab.style.display = 'none'; } } catch (e) {}
+
+        /* Service Worker：同域根相对路径（items/ 下写 'sw.js' 会解析成 /items/sw.js） */
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function () {
+                navigator.serviceWorker.register('/sw.js').catch(function () {});
+            });
         }
-
-        function filterAll() {
-            const kwEl = document.getElementById('searchInput');
-            const kw = kwEl ? kwEl.value.trim().toLowerCase() : '';
-            let visible = 0;
-            firstMatchEl = null;
-
-            SEARCH_GROUPS.forEach(sel => {
-                document.querySelectorAll(sel).forEach(card => {
-                    const okCat = currentCat === 'all' || card.dataset.cat === currentCat;
-                    const okKw = !kw || searchHaystack(card).includes(kw);
-                    const ok = okCat && okKw;
-                    card.style.display = ok ? '' : 'none';
-                    if (ok) {
-                        visible++;
-                        if (!firstMatchEl) firstMatchEl = card;
+    </script>
+    <script src="https://gudong.app/assets/js/gudong-data.js"></script>
+    <script>
+        if (window.GudongData) {
+            GudongData.load().then(function (r) {
+                var all = GudongData.dedupe([].concat(r.data.newListing, r.data.todayFinds, r.data.editorPicks));
+                var sellers = GudongData.sellerMap(r.data);
+                document.querySelectorAll('.gallery-card[data-seller-id]').forEach(function (card) {
+                    var id = card.getAttribute('data-seller-id');
+                    var n = all.filter(function (f) { return GudongData.normId(f.seller_id) === id; }).length;
+                    var zh = card.querySelector('.gallery-stats.zh'), en = card.querySelector('.gallery-stats.en');
+                    if (zh) zh.textContent = zh.textContent.replace(/藏品数：\d+/, '藏品数：' + n);
+                    if (en) en.textContent = en.textContent.replace(/^\d+ items?/, n + (n === 1 ? ' item' : ' items'));
+                    var sl = sellers[id];
+                    if (sl) {
+                        var nz = card.querySelector('.gallery-name .zh'), ne = card.querySelector('.gallery-name .en');
+                        if (nz && sl.display_zh) nz.textContent = sl.display_zh;
+                        if (ne && sl.display_en) ne.textContent = sl.display_en;
+                        if (sl.since_year) {
+                            if (zh) zh.textContent = zh.textContent.replace(/入驻：\d+年/, '入驻：' + sl.since_year + '年');
+                            if (en) en.textContent = en.textContent.replace(/Joined \d+/, 'Joined ' + sl.since_year);
+                        }
                     }
                 });
-            });
-
-            showSearchTip(kw, visible);
-            checkNoResult(kw);
-
-            ['todayFindsGrid'].forEach(id => {
-                const grid = document.getElementById(id);
-                if (!grid) return;
-                const sec = grid.closest('section');
-                if (!sec) return;
-                const anyVisible = Array.from(grid.querySelectorAll('a')).some(a => a.style.display !== 'none');
-                sec.style.display = (kw && !anyVisible) ? 'none' : '';
-            });
-
-            return visible;
+            }).catch(function () {});
         }
-
-        function showSearchTip(kw, visible) {
-            const tip = document.getElementById('searchResultTip');
-            if (!tip) return;
-            if (!kw) { tip.style.display = 'none'; return; }
-            const zh = tip.querySelector('.zh'), en = tip.querySelector('.en');
-            if (visible > 0) {
-                zh.textContent = `找到 ${visible} 件藏品`;
-                en.textContent = `${visible} item${visible > 1 ? 's' : ''} found`;
-            } else {
-                zh.textContent = '未找到匹配藏品，试试「青花」「玉器」「钱币」等关键词';
-                en.textContent = 'No match. Try keywords like "porcelain", "jade", "coins".';
-            }
-            tip.style.display = 'block';
-        }
-
-        function checkNoResult(kw) {
-            const visNormal = Array.from(document.querySelectorAll('#itemList .item-card')).some(c => c.style.display !== 'none');
-            const noneEl = currentLang === 'zh' ? document.getElementById('noResult') : document.getElementById('noResultEn');
-            if (!noneEl) return;
-            noneEl.style.display = (!visNormal && kw) ? 'block' : 'none';
-        }
-
-        function doSearch() {
-            const visible = filterAll();
-            const kwEl = document.getElementById('searchInput');
-            const kw = kwEl ? kwEl.value.trim() : '';
-            if (!kw) {
-                const nl = document.getElementById('new-listings');
-                if (nl) nl.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                return;
-            }
-            if (visible > 0 && firstMatchEl) {
-                firstMatchEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            } else {
-                const tip = document.getElementById('searchResultTip');
-                if (tip) tip.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            }
-        }
-
-        (function bindHotTags() {
-            const wrap = document.getElementById('hotTags');
-            if (!wrap) return;
-            wrap.addEventListener('click', e => {
-                const btn = e.target.closest('.hot-tag');
-                if (!btn) return;
-                const kw = btn.dataset.kw || btn.textContent.trim();
-                const inp = document.getElementById('searchInput');
-                inp.value = kw;
-                filterAll();
-                inp.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            });
-        })();
-
-        (function bindSearch() {
-            const el = document.getElementById('searchInput');
-            if (!el) return;
-            el.addEventListener('keydown', e => {
-                if (e.key === 'Enter') { e.preventDefault(); doSearch(); }
-                if (e.key === 'Escape') { el.value = ''; filterAll(); }
-            });
-            el.addEventListener('input', () => filterAll());
-            el.addEventListener('search', () => filterAll());
-        })();
-
-        /* ============================================================
-           PWA（SW 必须同域，保持相对路径）
-           ============================================================ */
-        if ('serviceWorker' in navigator && location.protocol !== 'file:') {
-            let updateReady = false;
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('sw.js').then(reg => {
-                    reg.addEventListener('updatefound', () => {
-                        const newWorker = reg.installing;
-                        if (!newWorker) return;
-                        newWorker.addEventListener('statechange', () => {
-                            if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                                updateReady = true;
-                            }
-                        });
-                    });
-                    setInterval(() => reg.update().catch(() => {}), 60 * 60 * 1000);
-                    const checkUpdate = () => {
-                        if (document.visibilityState === 'visible') reg.update().catch(() => {});
-                    };
-                    document.addEventListener('visibilitychange', checkUpdate);
-                    window.addEventListener('pageshow', e => { if (e.persisted) checkUpdate(); });
-                }).catch(err => console.warn('[PWA] SW registration failed:', err));
-            });
-            let refreshing = false;
-            navigator.serviceWorker.addEventListener('controllerchange', () => {
-                if (updateReady && !refreshing) {
-                    refreshing = true;
-                    window.location.reload();
-                }
-            });
-        }
-
-        let lastHiddenAt = Date.now();
-        document.addEventListener('visibilitychange', () => {
-            if (document.visibilityState === 'hidden') {
-                lastHiddenAt = Date.now();
-            } else if (Date.now() - lastHiddenAt > 10 * 60 * 1000) {
-                window.location.reload();
-            }
-        });
-        window.addEventListener('pageshow', e => {
-            if (e.persisted && Date.now() - lastHiddenAt > 10 * 60 * 1000) {
-                window.location.reload();
-            }
-        });
-
-        /* ============================================================
-           工具函数
-           ============================================================ */
-        function esc(s) {
-            return String(s == null ? '' : s)
-                .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
-                .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
-        }
-
-        /* 内联 SVG 占位图 —— 不依赖任何外部文件，本地预览也不会破图 */
-        function svgPlaceholder(label) {
-            const text = String(label == null ? '古董圈' : label).slice(0, 10);
-            const svg =
-                '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="600" height="600">' +
-                '<defs>' +
-                '<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">' +
-                '<stop offset="0" stop-color="#FBF8F3"/>' +
-                '<stop offset="1" stop-color="#ECE4D8"/>' +
-                '</linearGradient>' +
-                '</defs>' +
-                '<rect width="600" height="600" fill="url(#bg)"/>' +
-                '<circle cx="300" cy="262" r="104" fill="none" stroke="#D3C4AC" stroke-width="1.5" opacity=".75"/>' +
-                '<circle cx="300" cy="262" r="70" fill="none" stroke="#D3C4AC" stroke-width="1" opacity=".55"/>' +
-                '<text x="300" y="282" text-anchor="middle" font-family="Georgia,\'Songti SC\',serif" font-size="52" fill="#C0AC8E">古</text>' +
-                '<text x="300" y="452" text-anchor="middle" font-family="-apple-system,\'PingFang SC\',sans-serif" font-size="24" fill="#A9A096">' + esc(text) + '</text>' +
-                '</svg>';
-            return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
-        }
-        const PLACEHOLDER_IMG = svgPlaceholder('古董圈');
-        window.__GD_PH__ = PLACEHOLDER_IMG;
-
-        function catKey(c) {
-            const map = {
-                '瓷器': 'porcelain', '玉器': 'jade', '钱币': 'coins',
-                '书画': 'paintings', '铜器': 'bronze', '杂项': 'misc',
-                'porcelain': 'porcelain', 'jade': 'jade', 'coins': 'coins',
-                'paintings': 'paintings', 'painting': 'paintings', 'calligraphy': 'paintings',
-                'bronze': 'bronze', 'bronzes': 'bronze',
-                'misc': 'misc', 'miscellaneous': 'misc'
-            };
-            return map[String(c == null ? '' : c).trim().toLowerCase()] || map[c] || 'misc';
-        }
-
-        function normId(v) {
-            return String(v == null ? '' : v)
-                .replace(/[\u2010\u2011\u2012\u2013\u2014\u2015\u2212\uFE58\uFF0D]/g, '-')
-                .trim();
-        }
-        function normKey(k) { return String(k).trim().toLowerCase().replace(/[\s\-]+/g, '_'); }
-        function asBool(v) {
-            if (typeof v === 'string') return /^(true|yes|y|1|是|✓|✔)$/i.test(v.trim());
-            return !!v;
-        }
-        function getF(f, ...names) {
-            for (const n of names) {
-                const v = f[n];
-                if (v !== undefined && v !== null && v !== '') return v;
-            }
-            return null;
-        }
-        function attachmentUrl(v) {
-            if (!v) return '';
-            if (Array.isArray(v)) v = v[0];
-            if (v && typeof v === 'object') {
-                return (v.thumbnails && v.thumbnails.large && v.thumbnails.large.url) || v.url || '';
-            }
-            return typeof v === 'string' ? v.trim() : '';
-        }
-        function defaultImgPath(f) {
-            const id = normId(f.item_id || '');
-            if (!id) return '';
-            let seller = '';
-            if (id.startsWith('item-lim-')) seller = 'lim-kw';
-            else if (id.startsWith('item-ng-')) seller = 'ng-lk';
-            else if (id.startsWith('item-ngcy-')) seller = 'ng-cy';
-            else if (id.startsWith('item-yak-')) seller = 'yak-bc';
-            if (!seller) return '';
-            return seller + '/' + id + '.jpg';
-        }
-
-        /* ------------------------------------------------------------
-           图片路径：
-           - 优先使用 API 返回的完整 http(s) URL / data URI
-           - 否则走同域相对路径 assets/images/...
-           - 都没有则回落到内联 SVG 占位图（不会破图）
-           ------------------------------------------------------------ */
-        function imgPath(f) {
-            const u = attachmentUrl(f.img_url);
-            if (/^https?:\/\//i.test(u)) return u;
-            if (/^data:image\//i.test(u)) return u;
-
-            const firstFile = (normId(f.img_file || '').split(/\s+/)[0] || '') || defaultImgPath(f);
-            if (firstFile) return 'assets/images/' + firstFile;
-
-            const label = f.title_zh || f.title_en || f.category || '古董圈';
-            return svgPlaceholder(label);
-        }
-
-        function attrKeywords(f) {
-            return esc([f.title_zh, f.title_en, f.era_zh, f.era_en, f.category].filter(Boolean).join(' '));
-        }
-
-        function normalizeRecord(rec) {
-            if (!rec || typeof rec !== 'object') return null;
-            const src = (rec.fields && typeof rec.fields === 'object') ? rec.fields : rec;
-            const out = {};
-            Object.keys(src).forEach(k => {
-                let v = src[k];
-                if (Array.isArray(v)) {
-                    if (!v.length) v = null;
-                    else if (v.every(x => x === null || typeof x !== 'object')) v = v[0];
-                }
-                const key = normKey(k);
-                out[key] = /^is_/.test(key) ? asBool(v) : v;
-            });
-            [['title_zh', 'title_en'], ['era_zh', 'era_en']].forEach(([zh, en]) => {
-                if (!out[zh] && out[en]) out[zh] = out[en];
-                if (!out[en] && out[zh]) out[en] = out[zh];
-            });
-            return out;
-        }
-
-        function pickList(json, ...keys) {
-            for (const k of keys) if (Array.isArray(json[k])) return json[k];
-            return null;
-        }
-
-        function normalizePayload(json) {
-            if (!json || typeof json !== 'object') throw new Error('响应不是 JSON 对象');
-            if (json.error) {
-                const m = typeof json.error === 'string' ? json.error : (json.error.message || JSON.stringify(json.error));
-                throw new Error('接口返回错误：' + String(m).slice(0, 120));
-            }
-            diag.payloadKeys = Array.isArray(json) ? ['(array)'] : Object.keys(json);
-
-            const tf = pickList(json, 'todayFinds', 'today_finds');
-            const nl = pickList(json, 'newListing', 'newListings', 'new_listing', 'new_listings');
-            const flat = Array.isArray(json) ? json : (Array.isArray(json.records) ? json.records : null);
-
-            let groups;
-            if (tf || nl) {
-                groups = { todayFinds: tf || [], newListing: nl || [] };
-            } else if (flat) {
-                const all = flat.map(normalizeRecord).filter(Boolean);
-                groups = { todayFinds: all.filter(f => f.is_today_finds), newListing: all };
-            } else {
-                throw new Error('响应中找不到 todayFinds / newListing（实际字段：' + diag.payloadKeys.join(', ') + '）');
-            }
-
-            let total = 0, kept = 0;
-            const clean = list => list.map(normalizeRecord).filter(f => {
-                total++;
-                if (f && normId(f.item_id) && (f.title_zh || f.title_en)) { kept++; return true; }
-                diag.skipped++;
-                return false;
-            });
-            const out = {
-                todayFinds: clean(groups.todayFinds),
-                newListing: clean(groups.newListing)
-            };
-            if (total > 0 && kept === 0) throw new Error('所有记录都缺少 item_id 或 title_zh/title_en，请检查字段名');
-
-            const first = out.todayFinds[0] || out.newListing[0];
-            diag.sampleKeys = first ? Object.keys(first) : [];
-            diag.counts = { todayFinds: out.todayFinds.length, newListing: out.newListing.length };
-            return out;
-        }
-
-        function joinPrice(label, amount) {
-            if (!label) return amount || '';
-            if (!amount || label.indexOf(amount) !== -1) return label;
-            return /[:：]\s*$/.test(label) ? label + amount : label + ' ' + amount;
-        }
-        function fmtMoney(v) {
-            v = Array.isArray(v) ? v[0] : v;
-            if (v == null || v === '') return '';
-            const str = String(v).trim();
-            if (/^(S?\$)?\s*[\d,]+(\.\d+)?$/i.test(str)) {
-                const n = Number(str.replace(/[S$\s,]/gi, ''));
-                if (!isFinite(n) || n <= 0) return '';
-                return 'S$' + new Intl.NumberFormat('en-SG', { maximumFractionDigits: 2 }).format(n);
-            }
-            return str;
-        }
-        function resolvePrice(f) {
-            const type = String(getF(f, 'price_type', 'price type') || '').trim();
-            const enquiry = { zh: '私聊询价', en: 'Enquire', enquiry: true };
-            if (/私聊|询价|enquir|inquir|message/i.test(type)) return enquiry;
-            const fixed = fmtMoney(getF(f, 'fixed_price'));
-            if (fixed && (!type || /一口价|fixed/i.test(type))) return { zh: fixed, en: fixed };
-            const zh = joinPrice(getF(f, 'price_display_zh'), getF(f, 'price_zh')) || joinPrice(getF(f, 'price_display_en'), getF(f, 'price_en'));
-            const en = joinPrice(getF(f, 'price_display_en'), getF(f, 'price_en')) || joinPrice(getF(f, 'price_display_zh'), getF(f, 'price_zh'));
-            if (zh || en) return { zh: zh || en, en: en || zh };
-            return enquiry;
-        }
-        function priceHtml(f, wrapperClass) {
-            const p = resolvePrice(f);
-            if (p.enquiry) {
-                return `<div class="${wrapperClass}"><span class="price-main price-main--enquiry"><span class="zh">${p.zh}</span><span class="en">${p.en}</span></span></div>`;
-            }
-            return `<div class="${wrapperClass}">
-                <span class="price-main zh">${esc(p.zh)}</span>
-                <span class="price-main en">${esc(p.en)}</span>
-              </div>`;
-        }
-
-        function reasonFor(f) {
-            const rz = getF(f, 'reason_zh', 'reason');
-            const re = getF(f, 'reason_en', 'reason_en_us') || rz;
-            if (rz || re) return { zh: rz || re, en: re || rz };
-            return null;
-        }
-        function timeAgo(f) {
-            const raw = getF(f, 'listed_at', 'listed_time', 'created_at', '_createdTime', 'updated_at');
-            if (!raw) return null;
-            const t = new Date(raw);
-            if (isNaN(t.getTime())) return null;
-            const diff = Date.now() - t.getTime();
-            const h = Math.floor(diff / 3600000);
-            if (h < 1) return { zh: '刚刚上架', en: 'Just listed' };
-            if (h < 24) return { zh: `${h} 小时前上架`, en: `Listed ${h}h ago` };
-            const d = Math.floor(h / 24);
-            if (d < 30) return { zh: `${d} 天前上架`, en: `Listed ${d}d ago` };
-            return null;
-        }
-
-        /* —— 今日发现 · 点击信号（均只在对应数据命中时显示） —— */
-        function numPrice(f) {
-            for (const k of ['price_num', 'fixed_price_num', 'amount', 'price_value', 'price']) {
-                const n = Number(getF(f, k) || '');
-                if (isFinite(n) && n > 0) return n;
-            }
-            const str = getF(f, 'fixed_price', 'price_display_zh', 'price_zh');
-            if (str) {
-                const m = String(str).replace(/[S$\s,]/gi, '').match(/\d+(\.\d+)?/);
-                if (m) { const n = Number(m[0]); if (isFinite(n) && n > 0) return n; }
-            }
-            return null;
-        }
-
-        // 最近调价：仅当降价幅度 ≥5% 时返回 {pct}，否则返回 null（避免噪音）
-        function priceDrop(f) {
-            const direct = Number(getF(f, 'price_drop_pct', 'drop_pct', 'reduced_pct') || '');
-            if (isFinite(direct) && direct >= 5) return { pct: Math.round(direct) };
-            const cur = numPrice(f);
-            const prev = Number(getF(f, 'prev_price', 'previous_price', 'original_price', 'was_price', 'old_price', 'price_before') || '');
-            if (cur && isFinite(prev) && prev > cur) {
-                const pct = (prev - cur) / prev * 100;
-                if (pct >= 5) return { pct: Math.round(pct) };
-            }
-            return null;
-        }
-
-        // 价格行 + 调价徽章
-        function findsPriceBlock(f) {
-            const p = resolvePrice(f);
-            const drop = priceDrop(f);
-            const dropHtml = drop ? `
-                <span class="finds-drop zh">↓ 最近调价 ${drop.pct}%</span>
-                <span class="finds-drop en">↓ ${drop.pct}% drop</span>` : '';
-            if (p.enquiry) {
-                return `<div class="finds-price"><span class="price-main price-main--enquiry"><span class="zh">${p.zh}</span><span class="en">${p.en}</span></span>${dropHtml}</div>`;
-            }
-            return `<div class="finds-price">
-                <span class="price-main zh">${esc(p.zh)}</span>
-                <span class="price-main en">${esc(p.en)}</span>
-                ${dropHtml}
-              </div>`;
-        }
-
-        // 同类近期在售参考：只在参考价 > 现价时显示（显得划算）
-        function referenceHtml(f) {
-            const ref = Number(getF(f, 'reference_price', 'ref_price', 'market_price', 'comparable_price', 'similar_price', 'est_price') || '');
-            const cur = numPrice(f);
-            if (!(isFinite(ref) && ref > 0)) return '';
-            if (cur && ref <= cur) return '';
-            const zh = `同类近期在售参考约 ${fmtMoney(ref)}`;
-            const en = `Comparables listed around ${fmtMoney(ref)}`;
-            return `<div class="finds-ref"><span class="zh">${esc(zh)}</span><span class="en">${esc(en)}</span></div>`;
-        }
-
-        // 上新角标：24 小时内上架才显示在图片左上角
-        function findsNewBadge(f) {
-            const raw = getF(f, 'listed_at', 'listed_time', 'created_at', '_createdTime', 'updated_at');
-            if (!raw) return null;
-            const t = new Date(raw);
-            if (isNaN(t.getTime())) return null;
-            const h = Math.floor((Date.now() - t.getTime()) / 3600000);
-            if (h < 1) return { zh: '刚刚上架', en: 'Just listed' };
-            if (h < 24) return { zh: `新上架 · ${h} 小时前`, en: `New · ${h}h ago` };
-            return null;
-        }
-
-        function renderFindsCard(f) {
-            const promoted = f.is_today_finds;
-            const badgeZh = promoted ? '藏家本周重点' : '人工精选';
-            const badgeEn = promoted ? 'Collector Highlight' : 'Editor Pick';
-            const cls = promoted ? 'finds-card--promoted' : 'finds-card--organic';
-            const kw = attrKeywords(f);
-            const metaZh = [f.era_zh, f.category].filter(Boolean).join(' · ');
-            const metaEn = [f.era_en, f.category].filter(Boolean).join(' · ');
-            const reason = reasonFor(f);
-            const reasonHtml = reason ? `
-                <div class="finds-reason zh">💡 ${esc(reason.zh)}</div>
-                <div class="finds-reason en">💡 ${esc(reason.en)}</div>` : '';
-            const newBadge = findsNewBadge(f);
-            const newHtml = newBadge ? `
-                <span class="finds-new"><span class="zh">${esc(newBadge.zh)}</span><span class="en">${esc(newBadge.en)}</span></span>` : '';
-            const ta = timeAgo(f);
-            const taHtml = (ta && !newBadge) ? `
-                <div class="finds-timestamp zh">${esc(ta.zh)}</div>
-                <div class="finds-timestamp en">${esc(ta.en)}</div>` : '';
-            return `
-              <a href="items/${esc(normId(f.item_id))}.html" class="finds-card ${cls}" data-cat="${catKey(f.category)}" data-keywords="${kw}">
-                <div class="finds-image">
-                  <img src="${imgPath(f)}" alt="${esc(f.title_zh)} ${esc(f.title_en)} - Chinese antiques Singapore" loading="lazy" onerror="this.onerror=null;this.src=window.__GD_PH__">
-                  ${newHtml}
-                  <span class="finds-badge zh">${badgeZh}</span><span class="finds-badge en">${badgeEn}</span>
-                </div>
-                <div class="finds-title zh">${esc(f.title_zh)}</div><div class="finds-title en">${esc(f.title_en)}</div>
-                <div class="finds-meta zh">${esc(metaZh)}</div><div class="finds-meta en">${esc(metaEn)}</div>
-                ${findsPriceBlock(f)}
-                ${referenceHtml(f)}
-                ${reasonHtml}
-                ${taHtml}
-                <div class="finds-caption zh">卖家提供资料</div><div class="finds-caption en">Seller-provided information</div>
-              </a>`;
-        }
-
-        function renderCards(containerId, items) {
-            const container = document.getElementById(containerId);
-            if (!container) return;
-            container.innerHTML = items.map(f => {
-                const imgSrc = imgPath(f);
-                const detailUrl = 'items/' + esc(normId(f.item_id)) + '.html';
-                const kw = attrKeywords(f);
-                const nz = f.title_zh || f.title_en || '';
-                return `
-                  <a href="${detailUrl}" class="item-card" data-cat="${catKey(f.category)}" data-keywords="${kw}" aria-label="${esc(nz)}">
-                    <img src="${imgSrc}" alt="${esc(f.title_zh)} ${esc(f.title_en)} - Chinese antiques Singapore" loading="lazy" onerror="this.onerror=null;this.src=window.__GD_PH__">
-                    <div class="item-info">${priceHtml(f, 'item-price')}</div>
-                  </a>`;
-            }).join('');
-        }
-
-        function showSkeleton() {
-            const fill = (id, n, cls) => {
-                const el = document.getElementById(id);
-                if (!el) return;
-                el.setAttribute('aria-busy', 'true');
-                el.innerHTML = Array(n).fill('<div class="skeleton-card ' + cls + '"></div>').join('');
-            };
-            fill('todayFindsGrid', 4, 'skeleton-card--square');
-            fill('itemList', 6, 'skeleton-card--square');
-        }
-
-        function showLoadError() {
-            const msgZh = '<strong>藏品加载失败</strong><br>请刷新页面重试。如持续出现，请稍后再访问。';
-            const msgEn = '<strong>Failed to load listings</strong><br>Please refresh the page. If the issue persists, try again later.';
-            const html = `<div class="load-error-tip"><span class="zh">${msgZh}</span><span class="en">${msgEn}</span></div>`;
-            ['todayFindsGrid', 'itemList'].forEach(id => {
-                const el = document.getElementById(id);
-                if (el) { el.removeAttribute('aria-busy'); el.innerHTML = html; }
-            });
-        }
-
-        function updateCategoryCounts(newListing) {
-            const counts = { porcelain: 0, jade: 0, coins: 0, paintings: 0, bronze: 0, misc: 0 };
-            (newListing || []).forEach(f => {
-                const k = catKey(f.category);
-                if (counts[k] !== undefined) counts[k]++;
-            });
-            document.querySelectorAll('[data-cat-count]').forEach(el => {
-                const k = el.getAttribute('data-cat-count');
-                const n = counts[k] || 0;
-                el.textContent = n > 0
-                    ? (el.classList.contains('zh') ? `${n} 件在售` : `${n} items`)
-                    : (el.classList.contains('zh') ? '待上架' : 'Coming soon');
-            });
-        }
-
-        /* ---------- 实时剩余席位 ----------
-         * SEATS_TOTAL 为总席位；SEATS_BASELINE_ADMITTED 为已确认入驻数。
-         * 若线上藏品数据里出现的藏家数量更多，则以数据为准自动上调，保证数字不会虚高。
-         * 进度条展示的是「已入驻比例」，视觉上更直观地体现“席位珍稀”。 */
-        const SEATS_TOTAL = 88;
-        const SEATS_BASELINE_ADMITTED = 5;
-
-        function renderSeats(listings) {
-            const ids = new Set();
-            (listings || []).forEach(function (it) {
-                const id = String(it.seller_id || it.sellerId || '').trim();
-                if (id) ids.add(id);
-            });
-            const admitted = Math.max(SEATS_BASELINE_ADMITTED, ids.size);
-            const left = Math.max(0, SEATS_TOTAL - admitted);
-            const pct = Math.min(100, Math.max(0, (admitted / SEATS_TOTAL) * 100));
-
-            ['seatsNum', 'seatsNumEn'].forEach(function (id) {
-                const el = document.getElementById(id);
-                if (el) el.textContent = String(left);
-            });
-
-            const fill = document.getElementById('seatsFill');
-            if (fill) {
-                // 双帧延迟，确保宽度从 0 到目标值有过渡动画
-                requestAnimationFrame(() => {
-                    requestAnimationFrame(() => {
-                        fill.style.width = pct.toFixed(2) + '%';
-                    });
-                });
-            }
-        }
-
-        function applyListingData(data) {
-            renderSeats(data.newListing);
-            const fillSection = (id, items, renderFn) => {
-                const el = document.getElementById(id);
-                if (!el) return;
-                const sec = el.closest('section');
-                el.removeAttribute('aria-busy');
-                if (items.length) {
-                    el.innerHTML = items.map(renderFn).join('');
-                    if (sec) sec.hidden = false;
-                } else {
-                    el.innerHTML = '';
-                    if (sec) sec.hidden = true;
-                }
-            };
-            fillSection('todayFindsGrid', data.todayFinds, renderFindsCard);
-
-            const list = document.getElementById('itemList');
-            if (list) {
-                list.removeAttribute('aria-busy');
-                if (data.newListing.length) {
-                    renderCards('itemList', data.newListing);
-                } else {
-                    list.innerHTML = '<div class="no-result" style="grid-column:1/-1;padding:2rem 1rem;"><span class="zh">暂无藏品，敬请期待</span><span class="en">No listings yet — please check back soon</span></div>';
-                }
-            }
-            updateCategoryCounts(data.newListing);
-            const kwEl = document.getElementById('searchInput');
-            const kw = kwEl ? kwEl.value.trim() : '';
-            if (kw || currentCat !== 'all') filterAll(); else checkNoResult();
-        }
-
-        /* ============================================================
-           今日情报 · 捡漏雷达
-           ============================================================ */
-        const INTEL_FEED = [
-            {
-                type: 'new',
-                zh: '📌 新上架：今日已有 12 件新藏品进入，钱币类占 5 件，其中 3 件为「私聊询价」。',
-                en: '📌 New arrivals: 12 items today, 5 in coins — 3 of them "Enquire only".',
-                meta: '平台数据 · 今日',
-                metaEn: 'Platform data · today'
-            },
-            {
-                type: 'drop',
-                zh: '📌 降价信号：民国玉镯类目近 3 天有 4 件下调价格，平均降幅约 12%，可留意议价空间。',
-                en: '📌 Price drop: 4 Republican-era jade bangles reduced in the last 3 days, avg. cut ~12% — room to negotiate.',
-                meta: '市场快照 · 3 天',
-                metaEn: 'Market snapshot · 3 days'
-            },
-            {
-                type: 'compare',
-                zh: '📌 同类对比：一只明末青花碗（同类器型）本周成交价 S$680，平台内现有一件同类标价 S$420。',
-                en: '📌 Comparable: a late-Ming blue-and-white bowl sold at S$680 this week; a similar piece is listed here at S$420.',
-                meta: '同类参照 · 仅供参考',
-                metaEn: 'Comparable reference · for reference only'
-            },
-            {
-                type: 'collector',
-                zh: '📌 藏家动态：本地一位藏家本周集中上架 8 件钱币，均为单件，可私聊打包。',
-                en: '📌 Collector activity: a local collector listed 8 coins this week, all singles, bundle negotiable.',
-                meta: '藏家动态',
-                metaEn: 'Collector activity'
-            },
-            {
-                type: 'platform',
-                zh: '📌 平台快讯：创始藏家招募进行中，限量 88 席免费入驻，前 2 件藏品免费刊登。',
-                en: '📌 Platform note: Founding Collector seats are open — limited to 88, join free, first 2 listings free.',
-                meta: '平台公告',
-                metaEn: 'Platform notice'
-            }
-        ];
-
-        const INTEL_TYPE_LABEL = {
-            new:       { zh: '新上架',   en: 'NEW',        cls: 'intel-type--new' },
-            drop:      { zh: '降价',     en: 'PRICE DROP', cls: 'intel-type--drop' },
-            compare:   { zh: '同类对比', en: 'COMPARE',    cls: 'intel-type--compare' },
-            collector: { zh: '藏家动态', en: 'COLLECTOR',  cls: 'intel-type--collector' },
-            platform:  { zh: '平台快讯', en: 'PLATFORM',   cls: 'intel-type--platform' }
-        };
-
-        function renderIntel(items) {
-            const box = document.getElementById('intelScroll');
-            if (!box) return;
-            const list = (items && items.length) ? items : INTEL_FEED;
-            box.removeAttribute('aria-busy');
-            box.innerHTML = list.map(it => {
-                const t = INTEL_TYPE_LABEL[it.type] || INTEL_TYPE_LABEL.new;
-                const zh = esc(it.zh || it.text_zh || '');
-                const en = esc(it.en || it.text_en || zh);
-                const metaZh = esc(it.meta || it.meta_zh || '编辑整理');
-                const metaEn = esc(it.metaEn || it.meta_en || 'Editorial');
-                return `
-                  <div class="intel-card">
-                    <span class="intel-type ${t.cls}"><span class="zh">${t.zh}</span><span class="en">${t.en}</span></span>
-                    <div class="intel-text zh">${zh}</div>
-                    <div class="intel-text en">${en}</div>
-                    <div class="intel-meta"><span class="zh">${metaZh}</span><span class="en">${metaEn}</span></div>
-                  </div>`;
-            }).join('');
-        }
-        renderIntel();
-
-        /* ============================================================
-           数据层
-           ============================================================ */
-        const DEBUG = new URLSearchParams(location.search).get('debug') === '1';
-        const diag = {
-            source: 'pending', endpoint: '', proxy: null, snapshot: null,
-            payloadKeys: [], counts: {}, skipped: 0, sampleKeys: [], errors: [],
-            intelCount: null
-        };
-
-        /* 内置兜底数据：当接口与本地快照都不可用时启用，
-           保证页面在任何环境（含本地直接打开 index.html）都有内容可看。 */
-        const DEMO_PAYLOAD = {
-            todayFinds: [
-                {
-                    item_id: 'demo-qing-bowl', title_zh: '清康熙 青花缠枝莲纹碗',
-                    title_en: 'Kangxi Blue & White Lotus Bowl', era_zh: '清康熙', era_en: 'Kangxi Period',
-                    category: '瓷器', fixed_price: 420, seller_id: 'lim-kw', is_today_finds: true,
-                    reference_price: 680, listed_at: '2026-10-06T14:00:00+08:00',
-                    reason_zh: '同类器型本周成交价约 S$680，此件标价明显偏低。',
-                    reason_en: 'Comparable sold near S$680 this week — clearly under market.'
-                },
-                {
-                    item_id: 'demo-hetian-pendant', title_zh: '和田玉 素面平安扣',
-                    title_en: 'Hetian Jade Plain Pendant', era_zh: '近代', era_en: 'Modern',
-                    category: '玉器', fixed_price: 260, seller_id: 'ng-lk',
-                    reference_price: 320, listed_at: '2026-10-07T08:30:00+08:00',
-                    reason_zh: '玉质细腻，无绺裂，附卖家自述来源。',
-                    reason_en: 'Fine grain, no cracks; seller-provided provenance.'
-                },
-                {
-                    item_id: 'demo-kangxi-coin', title_zh: '康熙通宝 宝泉局 小平钱',
-                    title_en: 'Kangxi Tongbao Coin', era_zh: '清', era_en: 'Qing Dynasty',
-                    category: '钱币', price_type: '私聊询价', seller_id: 'ng-cy',
-                    reason_zh: '包浆自然，字口清晰，单枚可议。',
-                    reason_en: 'Natural patina, crisp characters, negotiable for singles.'
-                },
-                {
-                    item_id: 'demo-bronze-censer', title_zh: '清中期 铜鬲式香炉',
-                    title_en: 'Mid-Qing Bronze Censer', era_zh: '清中期', era_en: 'Mid-Qing',
-                    category: '铜器', fixed_price: 880, prev_price: 990, seller_id: 'yak-bc',
-                    listed_at: '2026-10-07T17:45:00+08:00',
-                    reason_zh: '皮壳沉稳，同类器近期关注度上升。',
-                    reason_en: 'Deep patina; comparable censers gaining attention lately.'
-                }
-            ],
-            newListing: [
-                { item_id: 'demo-1', title_zh: '清乾隆 青花山水笔筒', title_en: 'Qianlong Blue & White Brush Pot', era_zh: '清乾隆', era_en: 'Qianlong', category: '瓷器', fixed_price: 1280, seller_id: 'lim-kw' },
-                { item_id: 'demo-2', title_zh: '和田玉 双面雕玉佩', title_en: 'Hetian Jade Double-Sided Pendant', era_zh: '清', era_en: 'Qing', category: '玉器', price_type: '私聊询价', seller_id: 'ng-lk' },
-                { item_id: 'demo-3', title_zh: '光绪元宝 广东省造 库平七钱二分', title_en: 'Guangxu Silver Dollar, Guangdong', era_zh: '清末', era_en: 'Late Qing', category: '钱币', fixed_price: 1680, seller_id: 'ng-cy' },
-                { item_id: 'demo-4', title_zh: '清代 设色山水小品（无款）', title_en: 'Qing Landscape Painting (Unsigned)', era_zh: '清', era_en: 'Qing', category: '书画', fixed_price: 640, seller_id: 'yak-bc' },
-                { item_id: 'demo-5', title_zh: '明末 青花花卉小罐', title_en: 'Late-Ming Blue & White Jar', era_zh: '明末', era_en: 'Late Ming', category: '瓷器', fixed_price: 980, seller_id: 'lim-kw' },
-                { item_id: 'demo-6', title_zh: '老蜜蜡 桶珠手串', title_en: 'Antique Amber Barrel Bead Bracelet', era_zh: '民国', era_en: 'Republican', category: '杂项', price_type: '私聊询价', seller_id: 'ng-lk' },
-                { item_id: 'demo-7', title_zh: '民国 铜胎掐丝珐琅小盒', title_en: 'Republican Cloisonné Box', era_zh: '民国', era_en: 'Republican', category: '铜器', fixed_price: 320, seller_id: 'yak-bc' },
-                { item_id: 'demo-8', title_zh: '民国 白玉圆镯（内径 58mm）', title_en: 'Republican White Jade Bangle (58mm)', era_zh: '民国', era_en: 'Republican', category: '玉器', fixed_price: 1450, seller_id: 'ng-cy' }
-            ]
-        };
-
-        async function fetchJson(url, ms, tag) {
-            const ctl = new AbortController();
-            const timer = setTimeout(() => ctl.abort(), ms);
-            const t0 = performance.now();
-            try {
-                const res = await fetch(url, {
-                    cache: 'no-store',
-                    signal: ctl.signal,
-                    headers: { 'Accept': 'application/json' }
-                });
-                diag[tag] = { status: res.status, ms: Math.round(performance.now() - t0) };
-                if (!res.ok) throw new Error('HTTP ' + res.status);
-                return await res.json();
-            } catch (e) {
-                if (!diag[tag]) diag[tag] = { status: 'no response', ms: Math.round(performance.now() - t0) };
-                if (e.name === 'AbortError') throw new Error('请求超时（' + ms + 'ms）');
-                throw e;
-            } finally {
-                clearTimeout(timer);
-            }
-        }
-
-        async function fetchProxy(url) {
-            try {
-                return await fetchJson(url, 8000, 'proxy');
-            } catch (e) {
-                if (!/超时|HTTP 5\d\d/.test(e.message)) throw e;
-                diag.errors.push('proxy 第 1 次失败：' + e.message + '，重试中');
-                await new Promise(r => setTimeout(r, 800));
-                return await fetchJson(url, 8000, 'proxy');
-            }
-        }
-
-        function renderDebug() {
-            console.info('[Gudong] 数据来源:', diag.source, diag.counts);
-            if (!DEBUG) return;
-            let el = document.getElementById('gdDebug');
-            if (!el) {
-                el = document.createElement('div');
-                el.id = 'gdDebug';
-                el.className = 'gd-debug';
-                document.body.appendChild(el);
-            }
-            const srcLabel =
-                diag.source === 'airtable-proxy' ? '<span class="ok">✔ Airtable 实时数据（经 Vercel 代理）</span>' :
-                diag.source === 'local-snapshot' ? '<span class="warn">⚠ 本地快照 data/listings.json —— 不是实时数据</span>' :
-                diag.source === 'demo' ? '<span class="warn">⚠ 内置演示数据（接口与快照均不可用）</span>' :
-                '<span class="bad">✖ 没有任何数据来源</span>';
-            const st = o => o ? esc(o.status) + ' · ' + o.ms + 'ms' : '—';
-            const c = diag.counts || {};
-            el.innerHTML =
-                '<b>GUDONG 数据诊断</b>\n' +
-                '数据来源：' + srcLabel + '\n' +
-                '接口：' + esc(diag.endpoint) + '\n' +
-                '接口响应：' + st(diag.proxy) + '　快照响应：' + st(diag.snapshot) + '\n' +
-                '响应字段：' + esc(diag.payloadKeys.join(', ') || '—') + '\n' +
-                '今日发现 ' + (c.todayFinds != null ? c.todayFinds : '—') +
-                ' · 刚刚上新 ' + (c.newListing != null ? c.newListing : '—') +
-                ' · 情报 ' + (diag.intelCount != null ? diag.intelCount : '—') +
-                (diag.skipped ? ' · <span class="warn">已跳过空行/缺标题的行 ' + diag.skipped + '</span>' : '') + '\n' +
-                '首条记录字段：' + esc(diag.sampleKeys.join(', ') || '—') +
-                (diag.errors.length ? '\n<span class="bad">错误：\n' + diag.errors.map(esc).join('\n') + '</span>' : '');
-        }
-
-        async function loadAirtableData() {
-            showSkeleton();
-            diag.endpoint = API_BASE;   /* ← 完整端点，不再拼接 /api/airtable-proxy */
-
-            /* 1) 在线接口 */
-            try {
-                const raw = await fetchProxy(diag.endpoint);
-                if (raw && Array.isArray(raw.intel)) {
-                    diag.intelCount = raw.intel.length;
-                    if (raw.intel.length) renderIntel(raw.intel);
-                }
-                const data = normalizePayload(raw);
-                diag.source = 'airtable-proxy';
-                applyListingData(data);
-                renderDebug();
-                return;
-            } catch (e) {
-                console.warn('线上 API 加载失败，回退到本地快照：', e);
-                diag.errors.push('proxy：' + e.message);
-                diag.skipped = 0;
-            }
-
-            /* 2) 本地快照（同域相对路径） */
-            try {
-                const raw = await fetchJson('data/listings.json', 5000, 'snapshot');
-                if (raw && Array.isArray(raw.intel)) {
-                    diag.intelCount = raw.intel.length;
-                    if (raw.intel.length) renderIntel(raw.intel);
-                }
-                const data = normalizePayload(raw);
-                diag.source = 'local-snapshot';
-                applyListingData(data);
-                renderDebug();
-                return;
-            } catch (e2) {
-                console.warn('本地快照也加载失败，启用内置演示数据：', e2);
-                diag.errors.push('snapshot：' + e2.message);
-            }
-
-            /* 3) 内置演示数据（保证任何环境都有内容） */
-            try {
-                const data = normalizePayload(DEMO_PAYLOAD);
-                diag.source = 'demo';
-                diag.payloadKeys = ['todayFinds', 'newListing'];
-                applyListingData(data);
-            } catch (e3) {
-                diag.source = 'none';
-                diag.errors.push('demo：' + e3.message);
-                showLoadError();
-                renderSeats(null);
-            }
-            renderDebug();
-        }
-
-        loadAirtableData();
     </script>
-
-    <!-- PWA 安装引导弹层 -->
-    <style>
-    .gd-install-modal { position: fixed; inset: 0; z-index: 9999; display: none; align-items: center; justify-content: center; background: rgba(20,17,14,.5); -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px); padding: 1.2rem; }
-    .gd-install-modal.open { display: flex; }
-    .gd-install-card { background: #fff; border-radius: 16px; max-width: 360px; width: 100%; padding: 1.8rem 1.5rem 1.3rem; text-align: center; box-shadow: 0 24px 60px rgba(0,0,0,.28); position: relative; }
-    .gd-install-close { position: absolute; top: .5rem; right: .7rem; border: 0; background: none; font-size: 1.4rem; color: #A49D94; cursor: pointer; padding: .5rem; min-width: 44px; min-height: 44px; display: inline-flex; align-items: center; justify-content: center; line-height: 1; border-radius: 8px; transition: .3s; }
-    .gd-install-close:hover { color: #7A4E33; background: #F3EAE0; }
-    .gd-install-title { font-size: 1.1rem; font-weight: 700; color: #3d2b1f; margin: .2rem 0 1.1rem; font-family: var(--font-serif); }
-    .gd-install-steps { text-align: left; margin: 0 auto 1rem; max-width: 296px; }
-    .gd-install-step { display: flex; align-items: flex-start; gap: .65rem; padding: .5rem 0; color: #5a4636; font-size: .9rem; line-height: 1.55; }
-    .gd-install-step .n { flex-shrink: 0; width: 22px; height: 22px; border-radius: 50%; background: #F3EAE0; color: #7A4E33; font-weight: 700; font-size: .76rem; display: flex; align-items: center; justify-content: center; margin-top: .1rem; }
-    .gd-install-step svg { flex-shrink: 0; width: 22px; height: 22px; fill: #007AFF; margin-top: .1rem; }
-    .gd-install-note { font-size: .78rem; color: #9a8d80; margin-top: .5rem; line-height: 1.55; }
-    body[data-lang="en"] .gd-install-modal .zh { display: none; }
-    body[data-lang="zh"] .gd-install-modal .en { display: none; }
-    </style>
-    <div class="gd-install-modal" id="gdInstallModal" role="dialog" aria-modal="true" aria-label="Install guide">
-        <div class="gd-install-card">
-            <button type="button" class="gd-install-close" onclick="gdCloseInstall()" aria-label="close">×</button>
-            <div class="gd-install-title zh">安装 古董.app 到主屏幕</div>
-            <div class="gd-install-title en">Add Gudong.app to Home Screen</div>
-            <div class="gd-install-steps" id="gdStepsIos">
-                <div class="gd-install-step"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18.2c-4.5 0-8.2-3.7-8.2-8.2S7.5 3.8 12 3.8s8.2 3.7 8.2 8.2-3.7 8.2-8.2 8.2zM11 7l-4 4h3v6h2v-6h3l-4-4z"/></svg><span class="zh">点击 Safari 底部工具栏的「分享」按钮</span><span class="en">Tap the Share button in Safari's bottom toolbar</span></div>
-                <div class="gd-install-step"><span class="n">2</span><span class="zh">在分享菜单中选择「添加到主屏幕」</span><span class="en">Choose "Add to Home Screen" in the share menu</span></div>
-                <div class="gd-install-step"><span class="n">3</span><span class="zh">点击右上角「添加」，桌面即出现古董.app 图标</span><span class="en">Tap "Add" — the Gudong.app icon appears on your Home Screen</span></div>
-            </div>
-            <div class="gd-install-steps" id="gdStepsOther" style="display:none;">
-                <div class="gd-install-step"><span class="n">1</span><span class="zh">点击浏览器地址栏右侧的「安装」图标</span><span class="en">Click the install icon at the right of the address bar</span></div>
-                <div class="gd-install-step"><span class="n">2</span><span class="zh">或通过浏览器菜单 →「安装古董圈」</span><span class="en">Or open the browser menu → "Install Gudong"</span></div>
-            </div>
-            <div class="gd-install-note zh">安装后可像原生 App 一样全屏使用，无需应用商店。</div>
-            <div class="gd-install-note en">Runs full-screen like a native app. No app store needed.</div>
+<!-- 2026-09-23：PWA 安装引导弹层（iOS 图文步骤 / 桌面提示），全站统一 -->
+<style>
+.gd-install-modal { position: fixed; inset: 0; z-index: 9999; display: none; align-items: center; justify-content: center; background: rgba(0,0,0,.45); padding: 1.2rem; }
+.gd-install-modal.open { display: flex; }
+.gd-install-card { background: #fff; border-radius: var(--card-radius); max-width: 350px; width: 100%; padding: 1.6rem 1.4rem 1.2rem; text-align: center; box-shadow: 0 18px 50px rgba(0,0,0,.25); position: relative; }
+.gd-install-close { position: absolute; top: .5rem; right: .7rem; border: 0; background: none; font-size: 1.4rem; color: #999; cursor: pointer; padding: .5rem; min-width: 44px; min-height: 44px; display: inline-flex; align-items: center; justify-content: center; line-height: 1; }
+.gd-install-title { font-size: 1.08rem; font-weight: 700; color: #3d2b1f; margin: .2rem 0 1rem; }
+.gd-install-steps { text-align: left; margin: 0 auto 1rem; max-width: 290px; }
+.gd-install-step { display: flex; align-items: flex-start; gap: .6rem; padding: .5rem 0; color: #5a4636; font-size: .9rem; line-height: 1.5; }
+.gd-install-step .n { flex-shrink: 0; width: 22px; height: 22px; border-radius: 50%; background: #f0e4d8; color: #7A4E33; font-weight: 700; font-size: .78rem; display: flex; align-items: center; justify-content: center; margin-top: .1rem; }
+.gd-install-step svg { flex-shrink: 0; width: 22px; height: 22px; fill: #007AFF; margin-top: .1rem; }
+.gd-install-note { font-size: .78rem; color: #9a8d80; margin-top: .5rem; line-height: 1.5; }
+.gd-install-modal [data-lang="en"] .zh, body[data-lang="en"] .gd-install-modal .zh { display: none; }
+.gd-install-modal [data-lang="zh"] .en, body[data-lang="zh"] .gd-install-modal .en { display: none; }
+.app-install-btn { display: inline-flex; align-items: center; gap: .3rem; margin-left: .6rem; padding: .3rem .7rem; border: 1px solid #e3d9cf; border-radius: 999px; color: #7a6a5c; font-size: .78rem; text-decoration: none; vertical-align: middle; transition: .4s cubic-bezier(.25,.1,.25,1); }
+.app-install-btn:hover { border-color: #7A4E33; color: #7A4E33; background: #f0e4d8; }
+.app-install-btn svg { width: 12px; height: 12px; flex-shrink: 0; fill: currentColor; }
+</style>
+<div class="gd-install-modal" id="gdInstallModal" role="dialog" aria-modal="true" aria-label="Install guide">
+    <div class="gd-install-card">
+        <button type="button" class="gd-install-close" onclick="gdCloseInstall()" aria-label="close">×</button>
+        <div class="gd-install-title zh">安装 古董.app 到主屏幕</div>
+        <div class="gd-install-title en">Add Gudong.app to Home Screen</div>
+        <div class="gd-install-steps" id="gdStepsIos">
+            <div class="gd-install-step"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18.2c-4.5 0-8.2-3.7-8.2-8.2S7.5 3.8 12 3.8s8.2 3.7 8.2 8.2-3.7 8.2-8.2 8.2zM11 7l-4 4h3v6h2v-6h3l-4-4z"/></svg><span class="zh">点击 Safari 底部工具栏的「分享」按钮</span><span class="en">Tap the Share button in Safari's bottom toolbar</span></div>
+            <div class="gd-install-step"><span class="n">2</span><span class="zh">在分享菜单中选择「添加到主屏幕」</span><span class="en">Choose "Add to Home Screen" in the share menu</span></div>
+            <div class="gd-install-step"><span class="n">3</span><span class="zh">点击右上角「添加」，桌面即出现古董.app 图标</span><span class="en">Tap "Add" — the Gudong.app icon appears on your Home Screen</span></div>
         </div>
+        <div class="gd-install-steps" id="gdStepsOther" style="display:none;">
+            <div class="gd-install-step"><span class="n">1</span><span class="zh">点击浏览器地址栏右侧的「安装」图标</span><span class="en">Click the install icon at the right of the address bar</span></div>
+            <div class="gd-install-step"><span class="n">2</span><span class="zh">或通过浏览器菜单 →「安装古董圈」</span><span class="en">Or open the browser menu → "Install Gudong"</span></div>
+        </div>
+        <div class="gd-install-note zh">安装后可像原生 App 一样全屏使用，无需应用商店。</div>
+        <div class="gd-install-note en">Runs full-screen like a native app. No app store needed.</div>
     </div>
-    <script>
-    (function () {
-        var modal = document.getElementById('gdInstallModal');
-        if (!modal) return;
-        window.gdCloseInstall = function () { modal.classList.remove('open'); };
-        modal.addEventListener('click', function (e) { if (e.target === modal) gdCloseInstall(); });
+</div>
+<script>
+(function () {
+    var modal = document.getElementById('gdInstallModal');
+    if (!modal) return;
+    window.gdCloseInstall = function () { modal.classList.remove('open'); };
+    modal.addEventListener('click', function (e) { if (e.target === modal) gdCloseInstall(); });
 
-        var deferredPrompt = null;
-        window.addEventListener('beforeinstallprompt', function (e) { e.preventDefault(); deferredPrompt = e; });
-        window.addEventListener('appinstalled', function () {
-            document.querySelectorAll('.app-install-btn').forEach(function (b) { b.style.display = 'none'; });
-        });
+    var deferredPrompt = null;
+    window.addEventListener('beforeinstallprompt', function (e) { e.preventDefault(); deferredPrompt = e; });
+    window.addEventListener('appinstalled', function () {
+        document.querySelectorAll('.app-install-btn').forEach(function (b) { b.style.display = 'none'; });
+    });
 
-        document.addEventListener('click', function (e) {
-            var btn = e.target && e.target.closest ? e.target.closest('.app-install-btn') : null;
-            if (!btn) return;
-            e.preventDefault();
-            if (deferredPrompt) {
-                deferredPrompt.prompt();
-                deferredPrompt.userChoice.then(function () { deferredPrompt = null; }).catch(function () {});
-                return;
-            }
-            var ua = navigator.userAgent;
-            var isIOS = /iPad|iPhone|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-            document.getElementById('gdStepsIos').style.display = isIOS ? '' : 'none';
-            document.getElementById('gdStepsOther').style.display = isIOS ? 'none' : '';
-            modal.classList.add('open');
-        });
-    })();
-    </script>
+    document.addEventListener('click', function (e) {
+        var btn = e.target && e.target.closest ? e.target.closest('.app-install-btn') : null;
+        if (!btn) return;
+        e.preventDefault();
+        if (deferredPrompt) {
+            deferredPrompt.prompt();
+            deferredPrompt.userChoice.then(function () { deferredPrompt = null; }).catch(function () {});
+            return;
+        }
+        // 无原生安装提示（iOS Safari / 未触发的浏览器）→ 显示图文引导
+        var ua = navigator.userAgent;
+        var isIOS = /iPad|iPhone|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+        document.getElementById('gdStepsIos').style.display = isIOS ? '' : 'none';
+        document.getElementById('gdStepsOther').style.display = isIOS ? 'none' : '';
+        modal.classList.add('open');
+    });
+})();
+</script>
+
 <!-- 2026-10-07：分享功能（Web Share API + 剪贴板降级 + Toast 反馈），全站统一 -->
 <style>
 .gd-share-btn {
@@ -2818,8 +673,8 @@
 window.gdSharePage = function () {
     var lang = (document.body.dataset && document.body.dataset.lang) || "zh";
     window.gdShare({
-        title: lang === "zh" ? "古董圈 Gudong.app · 新加坡古董捡漏情报站" : "Gudong.app · Singapore Antiques Daily Radar",
-        text: lang === "zh" ? "每天 5 分钟，看看今天有什么漏可捡" : "5 minutes a day. See what's undervalued today."
+        title: lang === "zh" ? "古董圈 · 私家藏馆" : "Gudong · Private Collection Gallery",
+        text: lang === "zh" ? "来古董圈逛逛藏家们的私家藏馆" : "Browse private collector galleries on gudong.app"
     });
 };
 </script>

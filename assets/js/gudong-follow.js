@@ -106,6 +106,11 @@
   function mount(btn, opts) {
     if (!btn || !opts || !opts.type || !opts.term) return;
     injectCss();
+    /* 挂上共享样式类：页面若只用自己的 class（如 .gf-follow-btn），
+       注入的 .gf-btn 规则会全部落空 —— 按钮内的内联 SVG 只有 viewBox、
+       没有 width/height，会被 flex 容器撑成巨型图标盖住卡片。
+       这里统一补一个 .gf-btn，保证共享样式永远命中。 */
+    if (!btn.classList.contains('gf-btn')) btn.classList.add('gf-btn');
     var zh = document.body.dataset.lang !== 'en';
     var fZh = opts.followZh || '\u5173\u6ce8';            // 关注
     var fEn = opts.followEn || 'Follow';

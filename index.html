@@ -1396,7 +1396,25 @@
     }
     .gd-heart--card.on { background: var(--color-primary); border-color: var(--color-primary); color: #fff; }
     .finds-actions { display: flex; align-items: center; gap: .55rem; margin: .55rem 0 0; }
-    .finds-actions .gf-follow-btn { flex: 1; }
+    /* 关注按钮：gf-follow-btn 自身兜底样式。
+       gudong-follow.js 注入的共享样式只覆盖 .gf-btn，不覆盖 .gf-follow-btn，
+       若不写这段，mount() 塞进来的内联 SVG（只有 viewBox、无 width/height）
+       会在 flex:1 的按钮里被撑成巨型人形图标，盖住整张卡片。 */
+    .finds-actions .gf-follow-btn {
+        flex: 1;
+        display: inline-flex; align-items: center; justify-content: center; gap: .35rem;
+        min-width: 0; min-height: 40px; padding: .5rem .9rem;
+        border: 1px solid #7A4E33; border-radius: 8px;
+        background: transparent; color: #7A4E33;
+        font-family: inherit; font-size: .82rem; font-weight: 600; line-height: 1.2;
+        white-space: nowrap; cursor: pointer;
+        transition: background .3s cubic-bezier(.25,.1,.25,1), color .3s;
+    }
+    .finds-actions .gf-follow-btn:hover { background: #F1E8DF; }
+    .finds-actions .gf-follow-btn.on { background: #7A4E33; border-color: #7A4E33; color: #fff; }
+    .finds-actions .gf-follow-btn.on:hover { background: #5C3A26; }
+    .finds-actions .gf-follow-btn svg { width: 15px; height: 15px; flex: 0 0 15px; fill: currentColor; }
+    .finds-actions .gf-follow-btn > span { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
     .finds-alert {
         margin: .5rem 0 0; padding: .38rem .68rem; border-radius: 8px;
         font-size: .78rem; font-weight: 600; line-height: 1.45;
@@ -1461,12 +1479,12 @@
                     <span class="en">5 minutes a day. See what's undervalued today.</span>
                 </div>
                 <div class="hero-desc">
-                    <span class="zh">新加坡本地藏家直供 · 瓷器 / 玉器 / 钱币 / 书画 / 杂项</span>
-                    <span class="en">Direct from Singapore collectors · Porcelain · Jade · Coins · Paintings · Misc</span>
+                    <span class="zh">每天都有新藏品、新价格、新发现。</span>
+                    <span class="en">New pieces, new prices, new discoveries — every day.</span>
                 </div>
                 <div class="hero-guide">
-                    <span class="zh">搜关键词找藏品，或往下逛「今日发现」与「刚刚上新」</span>
-                    <span class="en">Search by keyword, or scroll for Today's Finds &amp; Just Listed</span>
+                    <span class="zh">搜你正在找的东西，或往下逛「今日发现」与「刚刚上新」</span>
+                    <span class="en">Find what you're searching for, or scroll for Today's Finds &amp; Just Listed</span>
                 </div>
                 <a href="#new-listings" class="hero-btn"><span class="zh">开始寻宝</span><span class="en">Start Hunting</span></a>
 
@@ -1500,12 +1518,10 @@
                 <div>
                     <span class="title zh">今日发现</span>
                     <span class="title en">Today's Finds</span>
-                    <span class="sub-line zh">今天值得看看的一些藏品</span>
-                    <span class="sub-line en">A few pieces worth a look today</span>
+                    <span class="sub-line zh">今天新出现、正在降价、价格值得比较，或值得收藏者留意的藏品。</span>
+                    <span class="sub-line en">New arrivals, falling prices, deals worth comparing — and pieces no collector should overlook.</span>
                 </div>
             </div>
-            <p class="section-note zh">为本平台编辑精选或藏家自荐，仅供信息参考，不代表平台鉴定或保真。</p>
-            <p class="section-note en">Editorially selected or collector-submitted. For reference only; no authentication or authenticity guarantee is provided.</p>
             <div class="finds-grid" id="todayFindsGrid"></div>
         </section>
 
@@ -1718,8 +1734,8 @@
             <div class="seller-cta">
                 <div class="title zh">你也有藏品想展示？</div>
                 <div class="title en">Got pieces you'd like to show?</div>
-                <div class="desc zh">让更多收藏者看到你的藏品。创始藏家 · 现开放限量 88 席位。</div>
-                <div class="desc en">Show your pieces to more collectors. Founding Collectors · Limited 88 seats.</div>
+                <div class="desc zh">在古董圈展示你的藏品，让买家主动发现、收藏并直接联系你。创始藏家 · 现开放限量 88 席位。</div>
+                <div class="desc en">Showcase your pieces in the Gudong circle — and let buyers discover them, save them, and reach you directly. Founding Collectors · Limited 88 seats.</div>
 
                 <div class="seller-actions">
                     <a href="pricing.html#seller-services" class="btn-publish">

@@ -1,4 +1,7 @@
 /* 古董圈 Gudong · Service Worker
+ * 2026-10-7：v16 → v17
+ * - 全站 90 个 HTML 页面注入分享功能（header 分享按钮 + Web Share API/剪贴板降级 + Toast 反馈）；
+ *   覆盖 terms/privacy/pricing/collection/about/insights hub/items×14/categories×6/insights×62/templates
  * 2026-10-6：v15 → v16
  * - 为 24 篇杂志风格 insights 文章补回面包屑导航（首页/情报·知识/系列分类）；
  *   提升缓存版本号确保客户端拉取最新页面
@@ -27,7 +30,7 @@
  * - v8 → v9：配合首页改版提升缓存版本号
  */
 
-const CACHE_NAME = 'antique-collection-v16';
+const CACHE_NAME = 'antique-collection-v18';
 
 // 预缓存清单：核心页面 + 常用图标 + 占位图
 // 注意：改用逐个 cache.add，单个 404 不会导致整个 install 失败

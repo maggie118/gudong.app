@@ -665,6 +665,41 @@
         .finds-timestamp { font-size: .74rem; color: var(--color-text-muted); }
         .finds-caption { font-size: .72rem; color: var(--color-text-muted); margin-top: .1rem; }
 
+        /* —— 点击信号：上新角标 / 调价徽章 / 同类参考价 —— */
+        .finds-new {
+            position: absolute; top: .55rem; left: .55rem;
+            display: inline-block;
+            font-size: .68rem;
+            font-weight: 600;
+            letter-spacing: .03em;
+            padding: .22rem .55rem;
+            border-radius: 4px;
+            background: rgba(255, 255, 255, .92);
+            -webkit-backdrop-filter: blur(4px);
+            backdrop-filter: blur(4px);
+            color: var(--color-success);
+            border: 1px solid rgba(82, 102, 87, .4);
+        }
+        .finds-drop {
+            display: inline-block;
+            font-size: .72rem;
+            font-weight: 600;
+            color: var(--color-danger);
+            background: rgba(154, 85, 75, .10);
+            border: 1px solid rgba(154, 85, 75, .45);
+            padding: 0 .35rem;
+            border-radius: 3px;
+            line-height: 1.55;
+            letter-spacing: .02em;
+            white-space: nowrap;
+        }
+        .finds-ref {
+            font-size: .76rem;
+            color: var(--color-success);
+            font-weight: 500;
+            margin: .1rem 0 .35rem;
+        }
+
         /* ============================================================
            PRICE
            ============================================================ */
@@ -1415,12 +1450,12 @@
                     <span class="en">5 minutes a day. See what's undervalued today.</span>
                 </div>
                 <div class="hero-desc">
-                    <span class="zh">新加坡本地藏家直供 · 瓷器 / 玉器 / 钱币 / 书画 / 杂项</span>
-                    <span class="en">Direct from Singapore collectors · Porcelain · Jade · Coins · Paintings · Misc</span>
+                    <span class="zh">每天都有新藏品、新价格、新发现。</span>
+                    <span class="en">New collections, new prices, new discoveries every day.</span>
                 </div>
                 <div class="hero-guide">
-                    <span class="zh">搜关键词找藏品，或往下逛「今日发现」与「刚刚上新」</span>
-                    <span class="en">Search by keyword, or scroll for Today's Finds &amp; Just Listed</span>
+                    <span class="zh">搜你正在找的东西。搜关键词找藏品，或往下逛「今日发现」与「刚刚上新」</span>
+                    <span class="en">Find what you’re looking for. Search by keyword, or scroll for Today's Finds &amp; Just Listed</span>
                 </div>
                 <a href="#new-listings" class="hero-btn"><span class="zh">开始寻宝</span><span class="en">Start Hunting</span></a>
 
@@ -1454,12 +1489,10 @@
                 <div>
                     <span class="title zh">今日发现</span>
                     <span class="title en">Today's Finds</span>
-                    <span class="sub-line zh">今天值得看看的一些藏品</span>
-                    <span class="sub-line en">A few pieces worth a look today</span>
+                    <span class="sub-line zh">今天新出现、正在降价、价格值得比较，或值得收藏者留意的藏品。</span>
+                    <span class="sub-line en">New listings today, price reductions, items worth comparing, or collectibles worthy of collectors’ attention.</span>
                 </div>
             </div>
-            <p class="section-note zh">为本平台编辑精选或藏家自荐，仅供信息参考，不代表平台鉴定或保真。</p>
-            <p class="section-note en">Editorially selected or collector-submitted. For reference only; no authentication or authenticity guarantee is provided.</p>
             <div class="finds-grid" id="todayFindsGrid"></div>
         </section>
 
@@ -1672,7 +1705,7 @@
             <div class="seller-cta">
                 <div class="title zh">你也有藏品想展示？</div>
                 <div class="title en">Got pieces you'd like to show?</div>
-                <div class="desc zh">让更多收藏者看到你的藏品。创始藏家 · 现开放限量 88 席位。</div>
+                <div class="desc zh">让真正对古董感兴趣的人看到你的藏品。创始藏家 · 现开放限量 88 席位。</div>
                 <div class="desc en">Show your pieces to more collectors. Founding Collectors · Limited 88 seats.</div>
 
                 <div class="seller-actions">
@@ -2172,10 +2205,77 @@
             return null;
         }
 
+        /* —— 今日发现 · 点击信号（均只在对应数据命中时显示） —— */
+        function numPrice(f) {
+            for (const k of ['price_num', 'fixed_price_num', 'amount', 'price_value', 'price']) {
+                const n = Number(getF(f, k) || '');
+                if (isFinite(n) && n > 0) return n;
+            }
+            const str = getF(f, 'fixed_price', 'price_display_zh', 'price_zh');
+            if (str) {
+                const m = String(str).replace(/[S$\s,]/gi, '').match(/\d+(\.\d+)?/);
+                if (m) { const n = Number(m[0]); if (isFinite(n) && n > 0) return n; }
+            }
+            return null;
+        }
+
+        // 最近调价：仅当降价幅度 ≥5% 时返回 {pct}，否则返回 null（避免噪音）
+        function priceDrop(f) {
+            const direct = Number(getF(f, 'price_drop_pct', 'drop_pct', 'reduced_pct') || '');
+            if (isFinite(direct) && direct >= 5) return { pct: Math.round(direct) };
+            const cur = numPrice(f);
+            const prev = Number(getF(f, 'prev_price', 'previous_price', 'original_price', 'was_price', 'old_price', 'price_before') || '');
+            if (cur && isFinite(prev) && prev > cur) {
+                const pct = (prev - cur) / prev * 100;
+                if (pct >= 5) return { pct: Math.round(pct) };
+            }
+            return null;
+        }
+
+        // 价格行 + 调价徽章
+        function findsPriceBlock(f) {
+            const p = resolvePrice(f);
+            const drop = priceDrop(f);
+            const dropHtml = drop ? `
+                <span class="finds-drop zh">↓ 最近调价 ${drop.pct}%</span>
+                <span class="finds-drop en">↓ ${drop.pct}% drop</span>` : '';
+            if (p.enquiry) {
+                return `<div class="finds-price"><span class="price-main price-main--enquiry"><span class="zh">${p.zh}</span><span class="en">${p.en}</span></span>${dropHtml}</div>`;
+            }
+            return `<div class="finds-price">
+                <span class="price-main zh">${esc(p.zh)}</span>
+                <span class="price-main en">${esc(p.en)}</span>
+                ${dropHtml}
+              </div>`;
+        }
+
+        // 同类近期在售参考：只在参考价 > 现价时显示（显得划算）
+        function referenceHtml(f) {
+            const ref = Number(getF(f, 'reference_price', 'ref_price', 'market_price', 'comparable_price', 'similar_price', 'est_price') || '');
+            const cur = numPrice(f);
+            if (!(isFinite(ref) && ref > 0)) return '';
+            if (cur && ref <= cur) return '';
+            const zh = `同类近期在售参考约 ${fmtMoney(ref)}`;
+            const en = `Comparables listed around ${fmtMoney(ref)}`;
+            return `<div class="finds-ref"><span class="zh">${esc(zh)}</span><span class="en">${esc(en)}</span></div>`;
+        }
+
+        // 上新角标：24 小时内上架才显示在图片左上角
+        function findsNewBadge(f) {
+            const raw = getF(f, 'listed_at', 'listed_time', 'created_at', 'updated_at');
+            if (!raw) return null;
+            const t = new Date(raw);
+            if (isNaN(t.getTime())) return null;
+            const h = Math.floor((Date.now() - t.getTime()) / 3600000);
+            if (h < 1) return { zh: '刚刚上架', en: 'Just listed' };
+            if (h < 24) return { zh: `新上架 · ${h} 小时前`, en: `New · ${h}h ago` };
+            return null;
+        }
+
         function renderFindsCard(f) {
             const promoted = f.is_today_finds;
-            const badgeZh = promoted ? '藏家自荐' : '人工精选';
-            const badgeEn = promoted ? 'Collector Pick' : 'Editor Pick';
+            const badgeZh = promoted ? '藏家本周重点' : '人工精选';
+            const badgeEn = promoted ? 'Collector Highlight' : 'Editor Pick';
             const cls = promoted ? 'finds-card--promoted' : 'finds-card--organic';
             const kw = attrKeywords(f);
             const metaZh = [f.era_zh, f.category].filter(Boolean).join(' · ');
@@ -2184,19 +2284,24 @@
             const reasonHtml = reason ? `
                 <div class="finds-reason zh">💡 ${esc(reason.zh)}</div>
                 <div class="finds-reason en">💡 ${esc(reason.en)}</div>` : '';
+            const newBadge = findsNewBadge(f);
+            const newHtml = newBadge ? `
+                <span class="finds-new"><span class="zh">${esc(newBadge.zh)}</span><span class="en">${esc(newBadge.en)}</span></span>` : '';
             const ta = timeAgo(f);
-            const taHtml = ta ? `
+            const taHtml = (ta && !newBadge) ? `
                 <div class="finds-timestamp zh">${esc(ta.zh)}</div>
                 <div class="finds-timestamp en">${esc(ta.en)}</div>` : '';
             return `
               <a href="items/${esc(normId(f.item_id))}.html" class="finds-card ${cls}" data-cat="${catKey(f.category)}" data-keywords="${kw}">
                 <div class="finds-image">
                   <img src="${imgPath(f)}" alt="${esc(f.title_zh)} ${esc(f.title_en)} - Chinese antiques Singapore" loading="lazy" onerror="this.onerror=null;this.src=window.__GD_PH__">
+                  ${newHtml}
                   <span class="finds-badge zh">${badgeZh}</span><span class="finds-badge en">${badgeEn}</span>
                 </div>
                 <div class="finds-title zh">${esc(f.title_zh)}</div><div class="finds-title en">${esc(f.title_en)}</div>
                 <div class="finds-meta zh">${esc(metaZh)}</div><div class="finds-meta en">${esc(metaEn)}</div>
-                ${priceHtml(f, 'finds-price')}
+                ${findsPriceBlock(f)}
+                ${referenceHtml(f)}
                 ${reasonHtml}
                 ${taHtml}
                 <div class="finds-caption zh">卖家提供资料</div><div class="finds-caption en">Seller-provided information</div>
@@ -2409,6 +2514,7 @@
                     item_id: 'demo-qing-bowl', title_zh: '清康熙 青花缠枝莲纹碗',
                     title_en: 'Kangxi Blue & White Lotus Bowl', era_zh: '清康熙', era_en: 'Kangxi Period',
                     category: '瓷器', fixed_price: 420, seller_id: 'lim-kw', is_today_finds: true,
+                    reference_price: 680, listed_at: '2026-10-06T14:00:00+08:00',
                     reason_zh: '同类器型本周成交价约 S$680，此件标价明显偏低。',
                     reason_en: 'Comparable sold near S$680 this week — clearly under market.'
                 },
@@ -2416,6 +2522,7 @@
                     item_id: 'demo-hetian-pendant', title_zh: '和田玉 素面平安扣',
                     title_en: 'Hetian Jade Plain Pendant', era_zh: '近代', era_en: 'Modern',
                     category: '玉器', fixed_price: 260, seller_id: 'ng-lk',
+                    reference_price: 320, listed_at: '2026-10-07T08:30:00+08:00',
                     reason_zh: '玉质细腻，无绺裂，附卖家自述来源。',
                     reason_en: 'Fine grain, no cracks; seller-provided provenance.'
                 },
@@ -2429,7 +2536,8 @@
                 {
                     item_id: 'demo-bronze-censer', title_zh: '清中期 铜鬲式香炉',
                     title_en: 'Mid-Qing Bronze Censer', era_zh: '清中期', era_en: 'Mid-Qing',
-                    category: '铜器', fixed_price: 880, seller_id: 'yak-bc',
+                    category: '铜器', fixed_price: 880, prev_price: 990, seller_id: 'yak-bc',
+                    listed_at: '2026-10-07T17:45:00+08:00',
                     reason_zh: '皮壳沉稳，同类器近期关注度上升。',
                     reason_en: 'Deep patina; comparable censers gaining attention lately.'
                 }

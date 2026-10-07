@@ -629,17 +629,17 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
                 <a href="https://wa.me/6596269929" class="contact-btn zh" data-wa-contact data-lang="zh" target="_blank" rel="noopener">💬 联系藏家（WhatsApp）</a>
                 <a href="https://wa.me/6596269929" class="contact-btn en" data-wa-contact data-lang="en" target="_blank" rel="noopener">💬 Contact Collector (WhatsApp)</a>
 
-                <a href="#expert-call-modal" class="contact-btn expert-call-btn zh">📞预约专家连线（参考意见）</a>
-                <a href="#expert-call-modal" class="contact-btn expert-call-btn en">📞Book Expert Video-Call (Advisory Opinion)</a>
+                <a href="#expert-call-modal" class="contact-btn expert-call-btn zh">📞预约顾问连线（参考意见）</a>
+                <a href="#expert-call-modal" class="contact-btn expert-call-btn en">📞Book Advisor Video-Call (Advisory Opinion)</a>
 
                 <div class="modal-overlay" id="expert-call-modal">
                     <div class="modal-box">
                         <button class="modal-close" onclick="closeExpertCallModal()">×</button>
-                        <h3 class="zh">预约专家语音/视频连线</h3>
-                        <h3 class="en">Book Expert Voice / Video Consultation</h3>
+                        <h3 class="zh">预约顾问语音/视频连线</h3>
+                        <h3 class="en">Book Advisor Voice / Video Consultation</h3>
 
-                        <p class="zh">填写信息提交预约，提交后跳转 WhatsApp，客服将发送 PayNow 付款二维码。完成S$50付款后平台才会匹配专家、发送视频通话链接。<br>⚠️专家意见仅为参考，不属于法定鉴定，不能用于交易、诉讼依据。</p>
-                        <p class="en">Fill in the form. You will be directed to WhatsApp, our support will send you PayNow QR code. Expert will be assigned after S$50 payment confirmed.<br>⚠️Expert feedback is advisory only, not formal authentication, cannot be used for legal or sales purposes.</p>
+                        <p class="zh">填写信息提交预约，提交后跳转 WhatsApp，客服将发送 PayNow 付款二维码。完成S$188付款后平台才会匹配顾问、发送视频通话链接。<br>⚠️顾问意见仅为参考，不属于法定鉴定，不能用于交易、诉讼依据。</p>
+                        <p class="en">Fill in the form. You will be directed to WhatsApp, our support will send you PayNow QR code. Advisor will be assigned after S$188 payment confirmed.<br>⚠️Advisor feedback is advisory only, not formal authentication, cannot be used for legal or sales purposes.</p>
 
                         <div class="form-row">
                             <label class="zh">希望连线时段（新加坡时间）<span style="color:#9A554B">*</span></label>
@@ -663,17 +663,17 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
                         </div>
 
                         <div class="payment-note">
-                            <div class="payment-title zh">服务费用：S$50 / 单次专家视频连线</div>
-                            <div class="payment-title en">Service Fee: S$50 per video consultation</div>
+                            <div class="payment-title zh">服务费用：S$188 / 单次顾问视频连线</div>
+                            <div class="payment-title en">Service Fee: S$188 per video consultation</div>
                             <div class="payment-desc zh">
                                 • 付款方式：WhatsApp 内接收 PayNow 二维码扫码付款<br>
                                 • 远程视频参考意见，不提供纸质鉴定证书<br>
-                                • 平台根据客户要求完成并部署上线后（如完成专家匹配、发送视频通话链接），费用不予退款
+                                • 平台根据客户要求完成并部署上线后（如完成顾问匹配、发送视频通话链接），费用不予退款
                             </div>
                             <div class="payment-desc en">
                                 • Payment: PayNow QR code will be sent via WhatsApp<br>
                                 • Remote advisory opinion only, no formal certificate<br>
-                                • Non-refundable once the platform has completed and delivered the requested service (e.g. expert matched and video-call link sent)
+                                • Non-refundable once the platform has completed and delivered the requested service (e.g. advisor matched and video-call link sent)
                             </div>
                         </div>
 
@@ -685,10 +685,10 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
                         </div>
 
                         <div class="modal-note zh">
-                        温馨提示：专家通过照片、视频远程观察有局限，<strong>无法替代实物上手鉴定</strong>；Gudong平台不担保专家观点，交易务必实物当面核验。付费服务仅提供远程参考意见。
+                        温馨提示：顾问通过照片、视频远程观察有局限，<strong>无法替代实物上手鉴定</strong>；Gudong平台不担保顾问观点，交易务必实物当面核验。付费服务仅提供远程参考意见。
                         </div>
                         <div class="modal-note en">
-                        Note: Remote video review has limitations and cannot replace physical inspection. Gudong does not guarantee expert views; always inspect items in-person before purchase. Paid service provides remote advisory opinion only.
+                        Note: Remote video review has limitations and cannot replace physical inspection. Gudong does not guarantee advisor views; always inspect items in-person before purchase. Paid service provides remote advisory opinion only.
                         </div>
                     </div>
                 </div>
@@ -806,9 +806,9 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
 
             let msg;
             if(isZh){
-                msg = `【专家预约申请】\n藏品ID：${itemId}\nSeller ID：${sellerId}\n藏品名称：${titleZh}\n期望时段：${timeslotZh}\n咨询问题：${questionZh}\n用户WhatsApp：${waZh}\n服务费S$50，请发送 PayNow 付款二维码，办理付款及预约安排。`;
+                msg = `【顾问预约申请】\n藏品ID：${itemId}\nSeller ID：${sellerId}\n藏品名称：${titleZh}\n期望时段：${timeslotZh}\n咨询问题：${questionZh}\n用户WhatsApp：${waZh}\n服务费S$188，请发送 PayNow 付款二维码，办理付款及预约安排。`;
             }else{
-                msg = `【Expert Booking Request】\nItem ID：${itemId}\nSeller ID：${sellerId}\nItem Name：${titleEn}\nPreferred slot：${timeslotEn}\nQuestions：${questionEn}\nUser WhatsApp：${waEn}\nService fee S$50, please send PayNow QR for payment and booking arrangement.`;
+                msg = `【Advisor Booking Request】\nItem ID：${itemId}\nSeller ID：${sellerId}\nItem Name：${titleEn}\nPreferred slot：${timeslotEn}\nQuestions：${questionEn}\nUser WhatsApp：${waEn}\nService fee S$188, please send PayNow QR for payment and booking arrangement.`;
             }
             const platformWa = "6591888952";
             const url = `https://wa.me/${platformWa}?text=${encodeURIComponent(msg)}`;

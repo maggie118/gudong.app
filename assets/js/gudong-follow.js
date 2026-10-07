@@ -5,13 +5,16 @@
  *   1) <script src="assets/js/gudong-follow.js"></script>
  *   2) 页面里放一个按钮容器，然后：
  *        GudongFollow.mount(el, { type:'seller', term:'Lim-KW',
- *                                 followZh:'关注卖家', followEn:'Follow Seller' });
+ *                                 followZh:'关注藏家', followEn:'Follow Collector' });
  *   3) 收藏·关注页：GudongFollow.subsOf('seller'|'tag') / GudongFollow.matches(item, subs)
  */
 (function (global) {
   'use strict';
 
   var KEY = 'gudong_follow';
+  var KEY_SEEN = 'gudong_last_seen';
+  var KEY_WATCH = 'gudong_price_watch';
+  var _sessionSeen = 0;
 
   /* ---------- 存储 ---------- */
   function read() {
@@ -152,9 +155,86 @@
     render();
   }
 
+  /* ---------- 提醒（站内）：上次访问时间 / 个人降价 / 上新 ---------- */
+  function getF(f, keys) {
+    if (!f) return null;
+    for (var i = 0; i < keys.length; i++) {
+      var v = f[keys[i]];
+      if (v !== undefined && v !== null && v !== '') return v;
+    }
+    return null;
+  }
+  function getSeen() {
+    try { var v = localStorage.getItem(KEY_SEEN); var n = Number(v); return isFinite(n) && n > 0 ? n : 0; } catch (e) { return 0; }
+  }
+  function markSeen() {
+    try { localStorage.setItem(KEY_SEEN, String(Date.now())); return true; } catch (e) { return false; }
+  }
+  /* 进入"提醒会话"：记住上次访问时间，然后刷新到当前（本会话用 sessionSeen 判定"新"） */
+  function beginSession() {
+    _sessionSeen = getSeen();
+    markSeen();
+    return _sessionSeen;
+  }
+  function sessionSeen() { return _sessionSeen || getSeen(); }
+
+  function parsePrice(f) {
+    if (!f) return null;
+    var np = Number(f.fixed_price);
+    if (isFinite(np) && np > 0) return np;
+    var cands = ['price_num', 'fixed_price_num', 'amount', 'price_value', 'price'];
+    for (var i = 0; i < cands.length; i++) {
+      var v = f[cands[i]];
+      if (v === undefined || v === null || v === '') continue;
+      var n = Number(String(v).replace(/[S$\s,]/gi, ''));
+      if (isFinite(n) && n > 0) return n;
+    }
+    var s = [f.price_zh, f.price_en, f.price_display_zh, f.price_display_en].filter(function (x) { return x && /[\d]/.test(String(x)); })[0];
+    if (s) { var m = String(s).replace(/[S$\s,]/gi, '').match(/\d+(\.\d+)?/); if (m) { var nn = Number(m[0]); if (isFinite(nn) && nn > 0) return nn; } }
+    return null;
+  }
+  function readWatch() { try { var raw = localStorage.getItem(KEY_WATCH); var o = raw ? JSON.parse(raw) : {}; return (o && typeof o === 'object' && !Array.isArray(o)) ? o : {}; } catch (e) { return {}; } }
+  function writeWatch(o) { try { localStorage.setItem(KEY_WATCH, JSON.stringify(o)); } catch (e) {} }
+  /* 记录本次看到的价格；若相对上次记录下降，返回 {dropped,pct,from,to} */
+  function watchPrice(itemId, price) {
+    if (!itemId) return null;
+    var w = readWatch();
+    var prev = w[itemId];
+    var rec = { price: (price == null ? null : price), ts: Date.now() };
+    w[itemId] = rec; writeWatch(w);
+    if (prev && prev.price != null && price != null && price < prev.price) {
+      var pct = (prev.price - price) / prev.price * 100;
+      if (pct >= 1) return { dropped: true, pct: Math.round(pct), from: prev.price, to: price };
+    }
+    return null;
+  }
+  /* 综合降价：数据自带最近调价，或相对上次看到的价格下降 */
+  function dropAlert(f) {
+    if (!f) return null;
+    var cur = parsePrice(f);
+    var direct = Number(getF(f, ['price_drop_pct', 'drop_pct', 'reduced_pct']) || '');
+    if (isFinite(direct) && direct >= 1) return { pct: Math.round(direct), source: 'data' };
+    var prev = Number(getF(f, ['prev_price', 'previous_price', 'original_price', 'was_price', 'old_price', 'price_before']) || '');
+    if (cur && isFinite(prev) && prev > cur) { var p = (prev - cur) / prev * 100; if (p >= 1) return { pct: Math.round(p), source: 'prev' }; }
+    return null;
+  }
+  /* 上新：上架时间晚于"本次会话开始时记录的上次访问" */
+  function isNewSinceSeen(f) {
+    var seen = sessionSeen();
+    if (!seen) return false;
+    var raw = getF(f, ['listed_at', 'listed_time', 'created_at', '_createdTime', 'updated_at']);
+    if (!raw) return false;
+    var t = new Date(raw);
+    if (isNaN(t.getTime())) return false;
+    return t.getTime() > seen;
+  }
+
   global.GudongFollow = {
-    KEY: KEY, read: read, write: write, all: all,
+    KEY: KEY, KEY_SEEN: KEY_SEEN, KEY_WATCH: KEY_WATCH,
+    read: read, write: write, all: all,
     isFollowing: isFollowing, toggle: toggle, subsOf: subsOf, count: count,
-    matches: matches, injectCss: injectCss, mount: mount, mountChip: mountChip
+    matches: matches, injectCss: injectCss, mount: mount, mountChip: mountChip,
+    getSeen: getSeen, markSeen: markSeen, beginSession: beginSession, sessionSeen: sessionSeen,
+    parsePrice: parsePrice, watchPrice: watchPrice, dropAlert: dropAlert, isNewSinceSeen: isNewSinceSeen
   };
 })(window);

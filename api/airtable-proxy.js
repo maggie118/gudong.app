@@ -10,12 +10,12 @@
 //  - Auto intel generation from antiques data (new / drop / collector / compare)
 //  - Manual override via Intel table (platform / any type)
 //  - All Chinese strings encoded as \uXXXX escapes to avoid encoding issues.
-//  - FIXED: English prefix bug ¡ª auto intel "en" fields now use English prefixes
+//  - FIXED: English prefix bug ï¿½ï¿½ auto intel "en" fields now use English prefixes
 //           instead of Chinese ones (PIN_EN + PREFIX_EN_* added).
 //
 // 2026-10-05 v5
-//  - CORS ¸üÐÂ£ºÔÊÐíËùÓÐÀ´Ô´£¨º¬ file:// Óë localhost£©£¬
-//    ±ãÓÚ±¾µØÔ¤ÀÀÓë¿ª·¢µ÷ÊÔ¡£¹«¿ªÖ»¶Á API£¬Êý¾Ý±¾ÉíÊÇ¹«¿ªµÄ¡£
+//  - CORS ï¿½ï¿½ï¿½Â£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô´ï¿½ï¿½ï¿½ï¿½ file:// ï¿½ï¿½ localhostï¿½ï¿½ï¿½ï¿½
+//    ï¿½ï¿½ï¿½Ú±ï¿½ï¿½ï¿½Ô¤ï¿½ï¿½ï¿½ë¿ªï¿½ï¿½ï¿½ï¿½ï¿½Ô¡ï¿½ï¿½ï¿½ï¿½ï¿½Ö»ï¿½ï¿½ APIï¿½ï¿½ï¿½ï¿½ï¿½Ý±ï¿½ï¿½ï¿½ï¿½Ç¹ï¿½ï¿½ï¿½ï¿½Ä¡ï¿½
 
 const BASE           = process.env.AIRTABLE_BASE_ID;
 const TABLE          = process.env.AIRTABLE_TABLE;
@@ -35,7 +35,7 @@ const PUBLIC_FIELDS = [
   'seller_id', 'seller_whatsapp',
   'is_today_finds', 'is_editor_picks', 'is_new_listing', 'status',
   'reason_zh', 'reason_en', 'listed_at',
-  'previous_price',
+  'previous_price', 'reference_price',
 ];
 
 const HYPHEN_VARIANTS = /[\u2010\u2011\u2012\u2013\u2014\u2015\u2212\uFE58\uFF0D]/g;
@@ -51,11 +51,11 @@ const INTEL_PUBLIC_FIELDS = ['type', 'text_zh', 'text_en', 'meta_zh', 'meta_en',
 const INTEL_TYPES = ['new', 'drop', 'compare', 'collector', 'platform'];
 
 // ---------- Category names (unicode-escaped) ----------
-const CAT_PORCELAIN = '\u74f7\u5668';           // ´ÉÆ÷
-const CAT_JADE      = '\u7389\u5668';           // ÓñÆ÷
-const CAT_COINS     = '\u94b1\u5e01';           // Ç®±Ò
-const CAT_PAINTINGS = '\u4e66\u753b';           // Êé»­
-const CAT_MISC      = '\u6742\u9879';           // ÔÓÏî
+const CAT_PORCELAIN = '\u74f7\u5668';           // ï¿½ï¿½ï¿½ï¿½
+const CAT_JADE      = '\u7389\u5668';           // ï¿½ï¿½ï¿½ï¿½
+const CAT_COINS     = '\u94b1\u5e01';           // Ç®ï¿½ï¿½
+const CAT_PAINTINGS = '\u4e66\u753b';           // ï¿½é»­
+const CAT_MISC      = '\u6742\u9879';           // ï¿½ï¿½ï¿½ï¿½
 
 const CAT_EN = {
   [CAT_PORCELAIN]: 'porcelain',
@@ -70,11 +70,11 @@ const PIN    = '\uD83D\uDCCC ';   // ?? (Pushpin) for Chinese
 const PIN_EN = '\uD83D\uDCCD ';   // ?? (Round Pushpin) for English
 
 // Chinese prefixes
-const PREFIX_NEW       = PIN + '\u65b0\u4e0a\u67b6\uff1a';             // ?? ÐÂÉÏ¼Ü£º
-const PREFIX_DROP      = PIN + '\u964d\u4ef7\u4fe1\u53f7\uff1a';       // ?? ½µ¼ÛÐÅºÅ£º
-const PREFIX_COLLECTOR = PIN + '\u85cf\u5bb6\u52a8\u6001\uff1a';       // ?? ²Ø¼Ò¶¯Ì¬£º
-const PREFIX_COMPARE   = PIN + '\u540c\u7c7b\u5bf9\u6bd4\uff1a';       // ?? Í¬Àà¶Ô±È£º
-const PREFIX_PLATFORM  = PIN + '\u5e73\u53f0\u5feb\u8baf\uff1a';       // ?? Æ½Ì¨¿ìÑ¶£º
+const PREFIX_NEW       = PIN + '\u65b0\u4e0a\u67b6\uff1a';             // ?? ï¿½ï¿½ï¿½Ï¼Ü£ï¿½
+const PREFIX_DROP      = PIN + '\u964d\u4ef7\u4fe1\u53f7\uff1a';       // ?? ï¿½ï¿½ï¿½ï¿½ï¿½ÅºÅ£ï¿½
+const PREFIX_COLLECTOR = PIN + '\u85cf\u5bb6\u52a8\u6001\uff1a';       // ?? ï¿½Ø¼Ò¶ï¿½Ì¬ï¿½ï¿½
+const PREFIX_COMPARE   = PIN + '\u540c\u7c7b\u5bf9\u6bd4\uff1a';       // ?? Í¬ï¿½ï¿½Ô±È£ï¿½
+const PREFIX_PLATFORM  = PIN + '\u5e73\u53f0\u5feb\u8baf\uff1a';       // ?? Æ½Ì¨ï¿½ï¿½Ñ¶ï¿½ï¿½
 
 // English prefixes
 const PREFIX_EN_NEW       = PIN_EN + 'New arrivals: ';
@@ -84,11 +84,11 @@ const PREFIX_EN_COMPARE   = PIN_EN + 'Comparable: ';
 const PREFIX_EN_PLATFORM  = PIN_EN + 'Platform note: ';
 
 // Meta labels
-const META_TODAY       = '\u5e73\u53f0\u6570\u636e \u00b7 \u4eca\u65e5';      // Æ½Ì¨Êý¾Ý ¡¤ ½ñÈÕ
-const META_7D          = '\u5e02\u573a\u5feb\u7167 \u00b7 7 \u5929';        // ÊÐ³¡¿ìÕÕ ¡¤ 7 Ìì
-const META_WEEK        = '\u85cf\u5bb6\u52a8\u6001 \u00b7 \u672c\u5468';      // ²Ø¼Ò¶¯Ì¬ ¡¤ ±¾ÖÜ
-const META_COMPARE     = '\u540c\u7c7b\u53c2\u7167 \u00b7 \u4ec5\u4f9b\u53c2\u8003';  // Í¬Àà²ÎÕÕ ¡¤ ½ö¹©²Î¿¼
-const META_PLATFORM    = '\u5e73\u53f0\u516c\u544a';                  // Æ½Ì¨¹«¸æ
+const META_TODAY       = '\u5e73\u53f0\u6570\u636e \u00b7 \u4eca\u65e5';      // Æ½Ì¨ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+const META_7D          = '\u5e02\u573a\u5feb\u7167 \u00b7 7 \u5929';        // ï¿½Ð³ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ 7 ï¿½ï¿½
+const META_WEEK        = '\u85cf\u5bb6\u52a8\u6001 \u00b7 \u672c\u5468';      // ï¿½Ø¼Ò¶ï¿½Ì¬ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+const META_COMPARE     = '\u540c\u7c7b\u53c2\u7167 \u00b7 \u4ec5\u4f9b\u53c2\u8003';  // Í¬ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Î¿ï¿½
+const META_PLATFORM    = '\u5e73\u53f0\u516c\u544a';                  // Æ½Ì¨ï¿½ï¿½ï¿½ï¿½
 const META_EN_TODAY    = 'Platform data \u00b7 today';
 const META_EN_7D       = 'Market snapshot \u00b7 7 days';
 const META_EN_WEEK     = 'Collector activity \u00b7 this week';
@@ -471,7 +471,7 @@ async function getData() {
 // ---------- Handler ----------
 export default async function handler(req, res) {
   // ============================================================
-  // CORS ¡ª¡ª ¹«¿ªÖ»¶Á API£¬ÔÊÐíËùÓÐÀ´Ô´£¨º¬ file:// Óë localhost£©
+  // CORS ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ö»ï¿½ï¿½ APIï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô´ï¿½ï¿½ï¿½ï¿½ file:// ï¿½ï¿½ localhostï¿½ï¿½
   // ============================================================
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, HEAD, OPTIONS');

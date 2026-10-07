@@ -20,7 +20,10 @@
       "is_today_finds": true,
       "is_new_listing": true,
       "status": "active",
-      "has_surface_damage": false
+      "has_surface_damage": false,
+      "listed_at": "2026-09-22T04:22:33.000Z",
+      "reference_price": null,
+      "prev_price": null
     },
     {
       "item_id": "item-lim-04",
@@ -45,7 +48,10 @@
       "is_new_listing": true,
       "status": "active",
       "has_surface_damage": false,
-      "seller_name_en": "Lim-KW"
+      "seller_name_en": "Lim-KW",
+      "listed_at": "2026-09-12T16:54:27.000Z",
+      "reference_price": null,
+      "prev_price": null
     },
     {
       "item_id": "item-lim-02",
@@ -70,7 +76,10 @@
       "is_new_listing": true,
       "status": "active",
       "has_surface_damage": false,
-      "seller_name_en": "Lim-KW"
+      "seller_name_en": "Lim-KW",
+      "listed_at": "2026-09-12T16:54:27.000Z",
+      "reference_price": null,
+      "prev_price": null
     },
     {
       "item_id": "item-lim-03",
@@ -95,7 +104,10 @@
       "is_new_listing": true,
       "status": "active",
       "has_surface_damage": false,
-      "seller_name_en": "Lim-KW"
+      "seller_name_en": "Lim-KW",
+      "listed_at": "2026-09-12T16:54:27.000Z",
+      "reference_price": null,
+      "prev_price": null
     },
     {
       "item_id": "item-lim-01",
@@ -118,7 +130,10 @@
       "seller_whatsapp": "6589765832",
       "is_today_finds": true,
       "is_new_listing": true,
-      "status": "active"
+      "status": "active",
+      "listed_at": "2026-09-12T16:54:27.000Z",
+      "reference_price": null,
+      "prev_price": null
     },
     {
       "item_id": "item-yak-02",
@@ -139,7 +154,9 @@
       "seller_whatsapp": "+601114356891",
       "is_today_finds": true,
       "is_new_listing": true,
-      "status": "active"
+      "status": "active",
+      "reference_price": null,
+      "prev_price": null
     },
     {
       "item_id": "item-yak-03",
@@ -160,7 +177,9 @@
       "seller_whatsapp": "+601114356891",
       "is_today_finds": true,
       "is_new_listing": true,
-      "status": "active"
+      "status": "active",
+      "reference_price": null,
+      "prev_price": null
     },
     {
       "item_id": "item-ng-01",
@@ -181,7 +200,9 @@
       "seller_whatsapp": "65-80110225",
       "is_today_finds": true,
       "is_new_listing": true,
-      "status": "active"
+      "status": "active",
+      "reference_price": null,
+      "prev_price": null
     },
     {
       "item_id": "item-ng-02",
@@ -202,7 +223,9 @@
       "seller_whatsapp": "65-80110225",
       "is_today_finds": true,
       "is_new_listing": true,
-      "status": "active"
+      "status": "active",
+      "reference_price": null,
+      "prev_price": null
     },
     {
       "item_id": "item-ng-03",
@@ -223,7 +246,9 @@
       "seller_whatsapp": "65-80110225",
       "is_today_finds": true,
       "is_new_listing": true,
-      "status": "active"
+      "status": "active",
+      "reference_price": null,
+      "prev_price": null
     },
     {
       "item_id": "item-ngcy-01",
@@ -244,7 +269,9 @@
       "seller_whatsapp": "+65 96269929",
       "is_today_finds": true,
       "is_new_listing": true,
-      "status": "active"
+      "status": "active",
+      "reference_price": null,
+      "prev_price": null
     },
     {
       "item_id": "item-ngcy-02",
@@ -265,7 +292,9 @@
       "seller_whatsapp": "+65 96269929",
       "is_today_finds": true,
       "is_new_listing": true,
-      "status": "active"
+      "status": "active",
+      "reference_price": null,
+      "prev_price": null
     },
     {
       "item_id": "item-ngcy-03",
@@ -286,7 +315,9 @@
       "seller_whatsapp": "+65 96269929",
       "is_today_finds": true,
       "is_new_listing": true,
-      "status": "active"
+      "status": "active",
+      "reference_price": null,
+      "prev_price": null
     },
     {
       "item_id": "item-ngcy-04",
@@ -307,7 +338,9 @@
       "seller_whatsapp": "+65 96269929",
       "is_today_finds": true,
       "is_new_listing": true,
-      "status": "active"
+      "status": "active",
+      "reference_price": null,
+      "prev_price": null
     },
     {
       "item_id": "item-ngcy-05",
@@ -328,7 +361,9 @@
       "seller_whatsapp": "+65 96269929",
       "is_today_finds": true,
       "is_new_listing": true,
-      "status": "active"
+      "status": "active",
+      "reference_price": null,
+      "prev_price": null
     }
   ],
   "editorPicks": [

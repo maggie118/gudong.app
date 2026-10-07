@@ -1409,7 +1409,7 @@
     <header>
         <div class="header-left">
             <button class="menu-toggle" onclick="openSidebar()" aria-label="menu" aria-expanded="false" id="menuToggle">☰</button>
-            <a href="#hero" class="brand">
+            <a href="index.html" class="brand">
                 <img src="assets/icons/logo-mark.png" alt="古董圈 Gudong" class="brand-logo-img" onerror="this.style.display='none'">
                 <div class="brand-text">
                     <h1><span class="zh">古董圈</span><span class="en">GUDONG</span></h1>
@@ -1431,7 +1431,7 @@
             <span class="zh">古董圈</span><span class="en">GUDONG</span>
         </div>
         <nav class="sidebar-nav">
-            <a href="#hero" class="sidebar-link active" onclick="closeSidebar()"><span class="zh">首页</span><span class="en">Home</span></a>
+            <a href="index.html" class="sidebar-link active" onclick="closeSidebar()"><span class="zh">首页</span><span class="en">Home</span></a>
             <a href="my/saved.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">我的收藏 · 关注</span><span class="en">Saved &amp; Followed</span></a>
             <a href="my/briefing.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">今日简报</span><span class="en">Today's Brief</span></a>
             <a href="#daily-intel" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 捡漏情报</span><span class="en">· Insider Tips</span></a>
@@ -2501,41 +2501,41 @@
                 {
                     item_id: 'demo-qing-bowl', title_zh: '清康熙 青花缠枝莲纹碗',
                     title_en: 'Kangxi Blue & White Lotus Bowl', era_zh: '清康熙', era_en: 'Kangxi Period',
-                    category: '瓷器', fixed_price: 420, seller_id: 'lim-kw', is_today_finds: true,
+                    category: '瓷器', fixed_price: 420, seller_id: 'lim-kw', img_file: 'lim-kw/item-lim-01.jpg', is_today_finds: true,
                     reason_zh: '同类器型本周成交价约 S$680，此件标价明显偏低。',
                     reason_en: 'Comparable sold near S$680 this week — clearly under market.'
                 },
                 {
                     item_id: 'demo-hetian-pendant', title_zh: '和田玉 素面平安扣',
                     title_en: 'Hetian Jade Plain Pendant', era_zh: '近代', era_en: 'Modern',
-                    category: '玉器', fixed_price: 260, seller_id: 'ng-lk',
+                    category: '玉器', fixed_price: 260, seller_id: 'ng-lk', img_file: 'ng-lk/item-ng-01.jpg',
                     reason_zh: '玉质细腻，无绺裂，附卖家自述来源。',
                     reason_en: 'Fine grain, no cracks; seller-provided provenance.'
                 },
                 {
                     item_id: 'demo-kangxi-coin', title_zh: '康熙通宝 宝泉局 小平钱',
                     title_en: 'Kangxi Tongbao Coin', era_zh: '清', era_en: 'Qing Dynasty',
-                    category: '钱币', price_type: '私聊询价', seller_id: 'ng-cy',
+                    category: '钱币', price_type: '私聊询价', seller_id: 'ng-cy', img_file: 'ng-cy/item-ngcy-01.jpg',
                     reason_zh: '包浆自然，字口清晰，单枚可议。',
                     reason_en: 'Natural patina, crisp characters, negotiable for singles.'
                 },
                 {
                     item_id: 'demo-bronze-censer', title_zh: '清中期 铜鬲式香炉',
                     title_en: 'Mid-Qing Bronze Censer', era_zh: '清中期', era_en: 'Mid-Qing',
-                    category: '铜器', fixed_price: 880, seller_id: 'yak-bc',
+                    category: '铜器', fixed_price: 880, seller_id: 'yak-bc', img_file: 'yak-bc/item-yak-01.jpg',
                     reason_zh: '皮壳沉稳，同类器近期关注度上升。',
                     reason_en: 'Deep patina; comparable censers gaining attention lately.'
                 }
             ],
             newListing: [
-                { item_id: 'demo-1', title_zh: '清乾隆 青花山水笔筒', title_en: 'Qianlong Blue & White Brush Pot', era_zh: '清乾隆', era_en: 'Qianlong', category: '瓷器', fixed_price: 1280, seller_id: 'lim-kw' },
-                { item_id: 'demo-2', title_zh: '和田玉 双面雕玉佩', title_en: 'Hetian Jade Double-Sided Pendant', era_zh: '清', era_en: 'Qing', category: '玉器', price_type: '私聊询价', seller_id: 'ng-lk' },
-                { item_id: 'demo-3', title_zh: '光绪元宝 广东省造 库平七钱二分', title_en: 'Guangxu Silver Dollar, Guangdong', era_zh: '清末', era_en: 'Late Qing', category: '钱币', fixed_price: 1680, seller_id: 'ng-cy' },
-                { item_id: 'demo-4', title_zh: '清代 设色山水小品（无款）', title_en: 'Qing Landscape Painting (Unsigned)', era_zh: '清', era_en: 'Qing', category: '书画', fixed_price: 640, seller_id: 'yak-bc' },
-                { item_id: 'demo-5', title_zh: '明末 青花花卉小罐', title_en: 'Late-Ming Blue & White Jar', era_zh: '明末', era_en: 'Late Ming', category: '瓷器', fixed_price: 980, seller_id: 'lim-kw' },
-                { item_id: 'demo-6', title_zh: '老蜜蜡 桶珠手串', title_en: 'Antique Amber Barrel Bead Bracelet', era_zh: '民国', era_en: 'Republican', category: '杂项', price_type: '私聊询价', seller_id: 'ng-lk' },
-                { item_id: 'demo-7', title_zh: '民国 铜胎掐丝珐琅小盒', title_en: 'Republican Cloisonné Box', era_zh: '民国', era_en: 'Republican', category: '铜器', fixed_price: 320, seller_id: 'yak-bc' },
-                { item_id: 'demo-8', title_zh: '民国 白玉圆镯（内径 58mm）', title_en: 'Republican White Jade Bangle (58mm)', era_zh: '民国', era_en: 'Republican', category: '玉器', fixed_price: 1450, seller_id: 'ng-cy' }
+                { item_id: 'demo-1', title_zh: '清乾隆 青花山水笔筒', title_en: 'Qianlong Blue & White Brush Pot', era_zh: '清乾隆', era_en: 'Qianlong', category: '瓷器', fixed_price: 1280, seller_id: 'lim-kw', img_file: 'lim-kw/item-lim-02.jpg' },
+                { item_id: 'demo-2', title_zh: '和田玉 双面雕玉佩', title_en: 'Hetian Jade Double-Sided Pendant', era_zh: '清', era_en: 'Qing', category: '玉器', price_type: '私聊询价', seller_id: 'ng-lk', img_file: 'ng-lk/item-ng-02.jpg' },
+                { item_id: 'demo-3', title_zh: '光绪元宝 广东省造 库平七钱二分', title_en: 'Guangxu Silver Dollar, Guangdong', era_zh: '清末', era_en: 'Late Qing', category: '钱币', fixed_price: 1680, seller_id: 'ng-cy', img_file: 'ng-cy/item-ngcy-02.jpg' },
+                { item_id: 'demo-4', title_zh: '清代 设色山水小品（无款）', title_en: 'Qing Landscape Painting (Unsigned)', era_zh: '清', era_en: 'Qing', category: '书画', fixed_price: 640, seller_id: 'yak-bc', img_file: 'yak-bc/item-yak-02.jpg' },
+                { item_id: 'demo-5', title_zh: '明末 青花花卉小罐', title_en: 'Late-Ming Blue & White Jar', era_zh: '明末', era_en: 'Late Ming', category: '瓷器', fixed_price: 980, seller_id: 'lim-kw', img_file: 'lim-kw/item-lim-03.jpg' },
+                { item_id: 'demo-6', title_zh: '老蜜蜡 桶珠手串', title_en: 'Antique Amber Barrel Bead Bracelet', era_zh: '民国', era_en: 'Republican', category: '杂项', price_type: '私聊询价', seller_id: 'ng-lk', img_file: 'ng-lk/item-ng-03.jpg' },
+                { item_id: 'demo-7', title_zh: '民国 铜胎掐丝珐琅小盒', title_en: 'Republican Cloisonné Box', era_zh: '民国', era_en: 'Republican', category: '铜器', fixed_price: 320, seller_id: 'yak-bc', img_file: 'yak-bc/item-yak-03.jpg' },
+                { item_id: 'demo-8', title_zh: '民国 白玉圆镯（内径 58mm）', title_en: 'Republican White Jade Bangle (58mm)', era_zh: '民国', era_en: 'Republican', category: '玉器', fixed_price: 1450, seller_id: 'ng-cy', img_file: 'ng-cy/item-ngcy-03.jpg' }
             ]
         };
 

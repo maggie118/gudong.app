@@ -2192,7 +2192,7 @@
             return null;
         }
         function timeAgo(f) {
-            const raw = getF(f, 'listed_at', 'listed_time', 'created_at', 'updated_at');
+            const raw = getF(f, 'listed_at', 'listed_time', 'created_at', '_createdTime', 'updated_at');
             if (!raw) return null;
             const t = new Date(raw);
             if (isNaN(t.getTime())) return null;
@@ -2262,7 +2262,7 @@
 
         // 上新角标：24 小时内上架才显示在图片左上角
         function findsNewBadge(f) {
-            const raw = getF(f, 'listed_at', 'listed_time', 'created_at', 'updated_at');
+            const raw = getF(f, 'listed_at', 'listed_time', 'created_at', '_createdTime', 'updated_at');
             if (!raw) return null;
             const t = new Date(raw);
             if (isNaN(t.getTime())) return null;

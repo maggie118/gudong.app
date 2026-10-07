@@ -1,1 +1,518 @@
+<!DOCTYPE html>
+<html lang="zh-SG">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的收藏 · 关注 | My Saved &amp; Followed | Gudong</title>
+    <meta name="description" content="我的收藏 · 关注：我收藏的藏品、关注的卖家上新、关注的品类上新。 My saved items, followed sellers and followed categories on gudong.app.">
+    <meta name="keywords" content="古董圈, Gudong, 收藏, 关注, 新加坡古董, Singapore antiques, 我的收藏, follow, saved">
+    <link rel="canonical" href="https://gudong.app/my/saved.html">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://gudong.app/assets/icons/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://gudong.app/assets/icons/favicon-32x32.png">
+    <link rel="manifest" href="https://gudong.app/manifest.json">
+    <meta name="theme-color" content="#7A4E33">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <link rel="apple-touch-icon" href="https://gudong.app/assets/icons/icon-192.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Noto+Serif+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-bg: #F5F2EC;
+            --color-surface: #FFFFFF;
+            --color-white: #FFFFFF;
+            --color-border: #E4DED5;
+            --color-primary: #7A4E33;
+            --color-primary-dark: #5C3A26;
+            --color-primary-light: #F1E8DF;
+            --color-text: #25221E;
+            --color-text-secondary: #5C564F;
+            --color-text-muted: #A49D94;
+            --color-gold: #9C7A3A;
+            --color-gold-soft: rgba(156,122,58,.10);
+            --color-success: #526657;
+            --color-danger: #9A554B;
+            --color-bg-alt: #F5F2EC;
+            --card-radius: 12px;
+            --img-radius: 4px;
+            --dur: .4s;
+            --ease: cubic-bezier(.25,.1,.25,1);
+            --shadow-xs: 0 1px 2px rgba(37,34,30,.05);
+            --shadow-md: 0 8px 22px rgba(37,34,30,.10);
+            --font-serif: "Playfair Display", "Noto Serif SC", "Songti SC", "STSong", Georgia, serif;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif; }
+        html { scroll-behavior: smooth; }
+        body { background: var(--color-bg); color: var(--color-text); line-height: 1.65; }
 
+        header {
+            background: rgba(255,255,255,.96); backdrop-filter: blur(6px);
+            color: var(--color-text); padding: 0 5%; height: 68px;
+            display: flex; align-items: center; justify-content: space-between;
+            gap: 1.5rem; border-bottom: 1px solid var(--color-border);
+            position: sticky; top: 0; z-index: 50;
+        }
+        .brand { display: flex; flex-direction: row; align-items: center; gap: .6rem; text-decoration: none; color: inherit; flex-shrink: 0; }
+        .brand-logo-img { height: 36px; width: auto; display: block; object-fit: contain; }
+        .brand h1 { font-size: 1.4rem; font-weight: 700; letter-spacing: .02em; line-height: 1.15; color: var(--color-primary-dark); font-family: var(--font-serif); }
+        .brand p { color: #948268; margin-top: .2rem; font-size: .75rem; letter-spacing: .18em; text-transform: uppercase; }
+        .brand h1 .en, .brand p .en { font-family: "Inter Display","Inter","Geist",sans-serif; letter-spacing: normal; }
+        .header-right { display: flex; align-items: center; gap: .8rem; flex-shrink: 0; }
+        .lang-btn {
+            border: 1px solid var(--color-border); background: transparent;
+            color: var(--color-text-secondary); padding: .55rem .85rem; min-height: 44px;
+            border-radius: 6px; cursor: pointer; font-size: .75rem;
+            letter-spacing: .04em; transition: .4s var(--ease);
+        }
+        .lang-btn:hover { border-color: var(--color-primary); color: var(--color-primary); background: var(--color-primary-light); }
+        .menu-toggle {
+            width: 44px; height: 44px; border: 1px solid var(--color-border);
+            background: transparent; border-radius: 8px; font-size: 1.05rem;
+            color: var(--color-text); cursor: pointer; display: flex;
+            align-items: center; justify-content: center; flex-shrink: 0; transition: .4s var(--ease);
+        }
+        .menu-toggle:hover { border-color: var(--color-primary); color: var(--color-primary); background: var(--color-primary-light); }
+
+        .sidebar-overlay { position: fixed; inset: 0; background: rgba(20,17,14,.4); opacity: 0; pointer-events: none; transition: opacity .25s ease; z-index: 90; }
+        .sidebar-overlay.show { opacity: 1; pointer-events: auto; }
+        .sidebar {
+            position: fixed; top: 0; left: 0; height: 100vh; height: 100dvh; width: 264px; max-width: 78vw;
+            background: var(--color-white); box-shadow: 4px 0 24px rgba(37,34,30,.18);
+            transform: translateX(-100%); transition: transform .3s ease; z-index: 95;
+            overflow-y: auto; -webkit-overflow-scrolling: touch; padding-bottom: 2rem;
+        }
+        .sidebar.open { transform: translateX(0); }
+        .sidebar-toggle-inner {
+            display: block; width: 100%; padding: .9rem 0; background: transparent;
+            border: none; border-bottom: 1px solid var(--color-border); font-size: 1.15rem;
+            color: var(--color-text-secondary); cursor: pointer; text-align: center;
+        }
+        .sidebar-brand {
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            gap: .1rem; padding: 1.1rem 0; font-weight: 700; color: var(--color-text);
+            border-bottom: 1px solid var(--color-border);
+        }
+        .sidebar-nav { display: flex; flex-direction: column; padding: .3rem 0; }
+        .sidebar-link { padding: .85rem 1.4rem; color: var(--color-text); text-decoration: none; font-size: .95rem; transition: .4s var(--ease); }
+        .sidebar-link:hover { background: var(--color-primary-light); color: var(--color-primary); }
+        .sidebar-link.active { background: var(--color-primary-light); color: var(--color-primary); font-weight: 600; }
+        .sidebar-group-title { padding: .85rem 1.4rem .3rem; color: var(--color-text); font-size: .95rem; font-weight: 600; }
+        .sidebar-sub { display: block; padding: .55rem 1.4rem .55rem 2.2rem; color: var(--color-text-secondary); text-decoration: none; font-size: .88rem; transition: .4s var(--ease); }
+        .sidebar-sub:hover { color: var(--color-primary); background: var(--color-primary-light); }
+        .sidebar-lang-btn {
+            display: flex; align-items: center; justify-content: center; gap: .4rem;
+            width: calc(100% - 2.8rem); margin: 1rem 1.4rem .8rem;
+            padding: .62rem .9rem; border: 1px solid var(--color-border);
+            border-radius: 12px; background: var(--color-white);
+            color: var(--color-text-secondary); font-family: inherit;
+            font-size: .9rem; font-weight: 600; cursor: pointer; transition: .4s var(--ease);
+        }
+        .sidebar-lang-btn:hover { border-color: var(--color-primary); color: var(--color-primary); background: var(--color-primary-light); }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 2.4rem 5% 4rem; min-height: 70vh; }
+        .breadcrumb { font-size: .8rem; color: var(--color-text-muted); margin-bottom: 1.2rem; }
+        .breadcrumb a { color: var(--color-text-secondary); text-decoration: none; }
+        .breadcrumb a:hover { color: var(--color-primary); }
+        .page-head { margin-bottom: .6rem; }
+        .page-title { font-size: 1.7rem; font-weight: 800; color: var(--color-primary-dark); font-family: var(--font-serif); }
+        .page-sub { font-size: .86rem; color: var(--color-text-secondary); margin-top: .3rem; }
+        .empty-state { text-align: center; padding: 3.4rem 1rem; color: var(--color-text-muted); border: 1px dashed var(--color-border); border-radius: 8px; grid-column: 1 / -1; }
+        .empty-state .hint { font-size: .82rem; margin-top: .4rem; }
+
+        /* ---- finds-card（与首页"今日发现"同款，含点击信号） ---- */
+        .finds-grid { display: flex; flex-wrap: wrap; justify-content: flex-start; gap: 1.4rem; margin-top: .4rem; }
+        .finds-grid .finds-card { flex: 0 0 calc((100% - 1.4rem * 3) / 4); min-width: 0; }
+        .finds-card { text-decoration: none; color: inherit; display: block; transition: transform var(--dur) var(--ease); }
+        .finds-card:hover { transform: translateY(-3px); }
+        .finds-image {
+            position: relative; aspect-ratio: 1 / 1; border-radius: var(--img-radius);
+            overflow: hidden; background: var(--color-bg-alt); margin-bottom: .85rem;
+            box-shadow: var(--shadow-xs); transition: box-shadow var(--dur) var(--ease);
+        }
+        .finds-card:hover .finds-image { box-shadow: var(--shadow-md); }
+        .finds-image img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .7s var(--ease); }
+        .finds-card:hover .finds-image img { transform: scale(1.05); }
+        .finds-title { font-size: .98rem; font-weight: 600; color: var(--color-text); margin-bottom: .2rem; font-family: var(--font-serif); line-height: 1.45; }
+        .finds-meta { font-size: .8rem; color: var(--color-text-secondary); margin-bottom: .45rem; }
+        .finds-badge {
+            position: absolute; top: .55rem; right: .55rem; display: inline-block;
+            font-size: .7rem; font-weight: 600; letter-spacing: .03em; padding: .22rem .55rem;
+            border-radius: 4px; background: rgba(255,255,255,.92); -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px);
+            color: var(--color-success); border: 1px solid rgba(82,102,87,.35);
+        }
+        .finds-reason {
+            font-size: .78rem; color: var(--color-primary); background: var(--color-gold-soft);
+            border-left: 2px solid var(--color-gold); padding: .32rem .55rem; border-radius: 3px;
+            margin: .4rem 0 .45rem; line-height: 1.55;
+        }
+        .finds-timestamp { font-size: .74rem; color: var(--color-text-muted); }
+        .finds-caption { font-size: .72rem; color: var(--color-text-muted); margin-top: .1rem; }
+        .finds-new {
+            position: absolute; top: .55rem; left: .55rem; display: inline-block;
+            font-size: .68rem; font-weight: 600; letter-spacing: .03em; padding: .22rem .55rem;
+            border-radius: 4px; background: rgba(255,255,255,.92); -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px);
+            color: var(--color-success); border: 1px solid rgba(82,102,87,.4);
+        }
+        .finds-drop {
+            display: inline-block; font-size: .72rem; font-weight: 600; color: var(--color-danger);
+            background: rgba(154,85,75,.10); border: 1px solid rgba(154,85,75,.45);
+            padding: 0 .35rem; border-radius: 3px; line-height: 1.55; letter-spacing: .02em; white-space: nowrap;
+        }
+        .finds-ref { font-size: .76rem; color: var(--color-success); font-weight: 500; margin: .1rem 0 .35rem; }
+        .finds-price { display: flex; align-items: baseline; gap: .35rem; flex-wrap: wrap; margin: 0 0 .5rem; font-size: .9rem; }
+        .price-main { color: var(--color-primary); font-weight: 700; letter-spacing: .01em; font-variant-numeric: tabular-nums; }
+        .price-main--enquiry { color: var(--color-text-secondary); font-weight: 600; letter-spacing: .04em; }
+
+        footer {
+            text-align: center; padding: 2.2rem 5% 1.8rem;
+            background: var(--color-white); color: var(--color-text-secondary);
+            margin-top: 1rem; font-size: .78rem;
+            border-top: 1px solid var(--color-border);
+        }
+        .footer-nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 1.3rem; margin-bottom: 1.2rem; }
+        .footer-nav a { color: var(--color-text-secondary); text-decoration: none; font-size: .82rem; }
+        .footer-nav a:hover { color: var(--color-primary); }
+        .footer-disclaimer { max-width: 620px; margin: 0 auto 1.1rem; font-size: .78rem; line-height: 1.65; color: var(--color-text-muted); }
+
+        [data-lang="en"] .zh { display: none; }
+        [data-lang="zh"] .en { display: none; }
+
+        @media (max-width: 900px) {
+            .finds-grid .finds-card { flex: 0 0 calc((100% - 1.2rem) / 2); }
+        }
+        @media (max-width: 560px) {
+            .brand h1 { font-size: 1.15rem; }
+            .container { padding: 1.5rem 4.5% 3rem; }
+            .finds-grid .finds-card { flex: 0 0 calc((100% - .9rem) / 2); }
+            .finds-price { font-size: .84rem; }
+        }
+    </style>
+</head>
+<body data-lang="zh">
+     <header>
+        <div style="display:flex; align-items:center; gap:.9rem;">
+            <button class="menu-toggle" onclick="openSidebar()" aria-label="menu" aria-expanded="false" id="menuToggle">☰</button>
+            <a href="https://gudong.app/index.html" class="brand">
+                <img src="../assets/icons/logo-mark.png" alt="古董圈 GuDong" class="brand-logo-img">
+                <div class="brand-text" style="display:flex;flex-direction:column;">
+                <h1><span class="zh">古董圈</span><span class="en">GUDONG</span></h1>
+                <p><span class="zh">GUDONG.APP</span><span class="en">GUDONG.APP</span></p>
+                </div>
+            </a>
+        </div>
+        <div class="header-right">
+            <button class="lang-btn" onclick="toggleLang()">EN</button>
+        </div>
+    </header>
+
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+    <aside class="sidebar" id="sidebar">
+        <button class="sidebar-toggle-inner" onclick="closeSidebar()" aria-label="close menu">☰</button>
+        <div class="sidebar-brand">
+            <span class="zh">古董圈</span><span class="en">GUDONG</span>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="https://gudong.app/index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">首页</span><span class="en">Home</span></a>
+            <a href="https://gudong.app/index.html#daily-intel" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 今日捡漏</span><span class="en">· Daily Radar</span></a>
+            <a href="https://gudong.app/index.html#today-finds" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 今日好货</span><span class="en">· Today's Picks</span></a>
+            <a href="https://gudong.app/index.html#new-listings" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 新上架好货</span><span class="en">· New Arrivals</span></a>
+            <a href="https://gudong.app/my/saved.html" class="sidebar-link active" onclick="closeSidebar()"><span class="zh">我的收藏 · 关注</span><span class="en">Saved &amp; Followed</span></a>
+            <a href="https://gudong.app/collection.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">藏品库</span><span class="en">Collection</span></a>
+            <a href="https://gudong.app/categories/porcelain.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 瓷器</span><span class="en">· Porcelain</span></a>
+            <a href="https://gudong.app/categories/jade.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 玉器</span><span class="en">· Jade</span></a>
+            <a href="https://gudong.app/categories/bronze.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 铜器</span><span class="en">· Bronzes</span></a>
+            <a href="https://gudong.app/categories/coins.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 钱币</span><span class="en">· Coins</span></a>
+            <a href="https://gudong.app/categories/paintings.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 书画</span><span class="en">· Paintings &amp; Calligraphy</span></a>
+            <a href="https://gudong.app/categories/misc.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 杂项</span><span class="en">· Miscellaneous</span></a>
+            <a href="https://gudong.app/sellers/index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">藏家展馆</span><span class="en">Collector Gallery</span></a>
+            <a href="https://gudong.app/insights.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">情报 / 知识</span><span class="en">Insights</span></a>
+            <a href="https://gudong.app/about.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">关于我们</span><span class="en">About</span></a>
+            <button type="button" class="sidebar-lang-btn" onclick="toggleLang()" aria-label="Switch language"><span class="zh">🌐 English</span><span class="en">🌐 中文</span></button>
+        </nav>
+    </aside>
+
+    <main class="container">
+        <div class="breadcrumb">
+            <a href="https://gudong.app/index.html" class="zh">首页</a><a href="https://gudong.app/index.html" class="en">Home</a>
+            <span class="zh"> / 我的收藏 · 关注</span><span class="en"> / Saved &amp; Followed</span>
+        </div>
+
+        <div class="page-head">
+            <div class="page-title"><span class="zh">我的收藏 · 关注</span><span class="en">My Saved &amp; Followed</span></div>
+            <p class="page-sub zh">收藏喜欢的藏品、关注卖家与品类，新品上架自动出现在这里。</p>
+            <p class="page-sub en">Save items, follow sellers and categories — new listings appear here automatically.</p>
+        </div>
+
+        <!-- Tabs -->
+        <div class="gf-saved-tabs" id="savedTabs">
+            <button type="button" class="gf-tab on" data-tab="saved" onclick="switchTab('saved')">
+                <span class="zh">我收藏的藏品</span><span class="en">Saved Items</span>
+                <b class="tab-count" id="cntSaved" style="opacity:.7;font-weight:700">0</b>
+            </button>
+            <button type="button" class="gf-tab" data-tab="sellers" onclick="switchTab('sellers')">
+                <span class="zh">关注的卖家上新</span><span class="en">Followed Sellers</span>
+                <b class="tab-count" id="cntSellers" style="opacity:.7;font-weight:700">0</b>
+            </button>
+            <button type="button" class="gf-tab" data-tab="tags" onclick="switchTab('tags')">
+                <span class="zh">关注的品类上新</span><span class="en">Followed Categories</span>
+                <b class="tab-count" id="cntTags" style="opacity:.7;font-weight:700">0</b>
+            </button>
+        </div>
+
+        <!-- 快捷关注 chips（点一下即关注品类关键词） -->
+        <div class="gf-chips" id="quickChips">
+            <span class="gf-chip" data-term="瓷器" data-zh="瓷器" data-en="Porcelain">瓷器</span>
+            <span class="gf-chip" data-term="青花" data-zh="青花" data-en="Blue &amp; White">青花</span>
+            <span class="gf-chip" data-term="青铜" data-zh="青铜" data-en="Bronze">青铜</span>
+            <span class="gf-chip" data-term="玉器" data-zh="玉器" data-en="Jade">玉器</span>
+            <span class="gf-chip" data-term="唐三彩" data-zh="唐三彩" data-en="Sancai">唐三彩</span>
+        </div>
+        <p class="page-sub zh" style="font-size:.76rem;color:var(--color-text-muted);margin-top:.1rem;">点击上方关键词关注某个品类，本页即可追踪该类上新。</p>
+        <p class="page-sub en" style="font-size:.76rem;color:var(--color-text-muted);margin-top:.1rem;">Tap a keyword to follow that category — new items in it will show up here.</p>
+
+        <!-- 结果网格 -->
+        <div class="finds-grid" id="savedGrid" aria-busy="true"></div>
+
+        <div class="empty-state" id="noFollowHint" style="display:none;">
+            <span class="zh"><strong>还没有收藏或关注</strong><br><span class="hint">去藏品详情页点 ♥ 收藏，或点"关注卖家 / 关注品类"即可在此追踪。</span></span>
+            <span class="en"><strong>Nothing saved or followed yet</strong><br><span class="hint">Tap ♥ on an item to save it, or follow a seller / category to track new listings here.</span></span>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-nav">
+            <a href="https://gudong.app/about.html" class="zh">联系我们</a><a href="https://gudong.app/about.html" class="en">Contact</a>
+            <a href="https://gudong.app/pricing.html#seller-services" class="zh">卖家服务</a><a href="https://gudong.app/pricing.html#seller-services" class="en">Seller Services</a>
+            <a href="https://gudong.app/pricing.html#buyer-services" class="zh">买家指南</a><a href="https://gudong.app/pricing.html#buyer-services" class="en">Buyer Guide</a>
+            <a href="https://gudong.app/pricing.html#price-table" class="zh">服务收费</a><a href="https://gudong.app/pricing.html#price-table" class="en">Price List</a>
+            <a href="https://gudong.app/privacy.html" class="zh">隐私政策</a><a href="https://gudong.app/privacy.html" class="en">Privacy</a>
+            <a href="https://gudong.app/terms.html" class="zh">用户条款</a><a href="https://gudong.app/terms.html" class="en">Terms</a>
+        </div>
+        <p class="footer-disclaimer zh">gudong.app 是高级古董发现平台，仅提供信息、展示与连接服务，不参与买卖交易。</p>
+        <p class="footer-disclaimer en">gudong.app is a premium antiques discovery platform. It provides information, display and connection services only, and does not participate in any sale or transaction.</p>
+        <p class="zh" style="margin-bottom:0;">© 2026 古董圈 · gudong.app</p>
+        <p class="en" style="margin-bottom:0;">© 2026 Gudong · gudong.app</p>
+    </footer>
+
+    <script src="../assets/js/gudong-data.js" data-root="../"></script>
+    <script src="../assets/js/gudong-follow.js"></script>
+    <script>
+        (function () {
+            'use strict';
+            var GD = window.GudongData;
+            var GF = window.GudongFollow;
+            var FAV_KEY = 'gudong_fav';
+
+            /* ---- 语言 / 侧栏 / 公告 ---- */
+            var currentLang = (function () { try { return localStorage.getItem('gudong_lang') === 'en' ? 'en' : 'zh'; } catch (e) { return 'zh'; } })();
+            function applyLang() {
+                document.body.dataset.lang = currentLang;
+                document.documentElement.lang = currentLang === 'en' ? 'en-SG' : 'zh-SG';
+                var b = document.querySelector('.lang-btn');
+                if (b) b.textContent = currentLang === 'zh' ? 'EN' : '中';
+            }
+            window.toggleLang = function () { currentLang = currentLang === 'zh' ? 'en' : 'zh'; applyLang(); try { localStorage.setItem('gudong_lang', currentLang); } catch (e) {} };
+            window.openSidebar = function () { document.getElementById('sidebar').classList.add('open'); document.getElementById('sidebarOverlay').classList.add('show'); document.body.style.overflow = 'hidden'; var t = document.getElementById('menuToggle'); if (t) t.setAttribute('aria-expanded','true'); };
+            window.closeSidebar = function () { document.getElementById('sidebar').classList.remove('open'); document.getElementById('sidebarOverlay').classList.remove('show'); document.body.style.overflow = ''; var t = document.getElementById('menuToggle'); if (t) t.setAttribute('aria-expanded','false'); };
+            document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeSidebar(); });
+            window.addEventListener('resize', function () { if (window.innerWidth > 900) closeSidebar(); });
+            applyLang();
+
+            if ('serviceWorker' in navigator) {
+                window.addEventListener('load', function () { navigator.serviceWorker.register('/sw.js').catch(function () {}); });
+            }
+
+            /* ---- 帮助函数（复用 GD） ---- */
+            function getF(f) { for (var i = 1; i < arguments.length; i++) { var v = f[arguments[i]]; if (v !== undefined && v !== null && v !== '') return v; } return null; }
+            function fmtMoney(v) {
+                v = Array.isArray(v) ? v[0] : v;
+                if (v == null || v === '') return '';
+                var str = String(v).trim();
+                if (/^(S?\$)?\s*[\d,]+(\.\d+)?$/i.test(str)) {
+                    var n = Number(str.replace(/[S$\s,]/gi, ''));
+                    if (!isFinite(n) || n <= 0) return '';
+                    return 'S$' + new Intl.NumberFormat('en-SG', { maximumFractionDigits: 2 }).format(n);
+                }
+                return str;
+            }
+            function numPrice(f) {
+                for (var i = 0; i < ['price_num','fixed_price_num','amount','price_value','price'].length; i++) {
+                    var n = Number(getF(f, ['price_num','fixed_price_num','amount','price_value','price'][i]) || '');
+                    if (isFinite(n) && n > 0) return n;
+                }
+                var str = getF(f, 'fixed_price', 'price_display_zh', 'price_zh');
+                if (str) { var m = String(str).replace(/[S$\s,]/gi, '').match(/\d+(\.\d+)?/); if (m) { var nn = Number(m[0]); if (isFinite(nn) && nn > 0) return nn; } }
+                return null;
+            }
+            function priceDrop(f) {
+                var direct = Number(getF(f, 'price_drop_pct', 'drop_pct', 'reduced_pct') || '');
+                if (isFinite(direct) && direct >= 5) return { pct: Math.round(direct) };
+                var cur = numPrice(f);
+                var prev = Number(getF(f, 'prev_price', 'previous_price', 'original_price', 'was_price', 'old_price', 'price_before') || '');
+                if (cur && isFinite(prev) && prev > cur) { var pct = (prev - cur) / prev * 100; if (pct >= 5) return { pct: Math.round(pct) }; }
+                return null;
+            }
+            function findsPriceBlock(f) {
+                var p = GD.resolvePrice(f);
+                var drop = priceDrop(f);
+                var dropHtml = drop ? '<span class="finds-drop zh">↓ 最近调价 ' + drop.pct + '%</span><span class="finds-drop en">↓ ' + drop.pct + '% drop</span>' : '';
+                if (p.enquiry) return '<div class="finds-price"><span class="price-main price-main--enquiry"><span class="zh">' + p.zh + '</span><span class="en">' + p.en + '</span></span>' + dropHtml + '</div>';
+                return '<div class="finds-price"><span class="price-main zh">' + GD.esc(p.zh) + '</span><span class="price-main en">' + GD.esc(p.en) + '</span>' + dropHtml + '</div>';
+            }
+            function referenceHtml(f) {
+                var ref = Number(getF(f, 'reference_price', 'ref_price', 'market_price', 'comparable_price', 'similar_price', 'est_price') || '');
+                var cur = numPrice(f);
+                if (!(isFinite(ref) && ref > 0)) return '';
+                if (cur && ref <= cur) return '';
+                var zh = '同类近期在售参考约 ' + fmtMoney(ref);
+                var en = 'Comparables listed around ' + fmtMoney(ref);
+                return '<div class="finds-ref"><span class="zh">' + GD.esc(zh) + '</span><span class="en">' + GD.esc(en) + '</span></div>';
+            }
+            function findsNewBadge(f) {
+                var raw = getF(f, 'listed_at', 'listed_time', 'created_at', '_createdTime', 'updated_at');
+                if (!raw) return null;
+                var t = new Date(raw);
+                if (isNaN(t.getTime())) return null;
+                var h = Math.floor((Date.now() - t.getTime()) / 3600000);
+                if (h < 1) return { zh: '刚刚上架', en: 'Just listed' };
+                if (h < 24) return { zh: '新上架 · ' + h + ' 小时前', en: 'New · ' + h + 'h ago' };
+                return null;
+            }
+            function timeAgo(f) {
+                var raw = getF(f, 'listed_at', 'listed_time', 'created_at', '_createdTime', 'updated_at');
+                if (!raw) return null;
+                var t = new Date(raw);
+                if (isNaN(t.getTime())) return null;
+                var h = Math.floor((Date.now() - t.getTime()) / 3600000);
+                if (h < 1) return { zh: '刚刚上架', en: 'Just listed' };
+                if (h < 24) return { zh: h + ' 小时前上架', en: 'Listed ' + h + 'h ago' };
+                var d = Math.floor(h / 24);
+                if (d < 30) return { zh: d + ' 天前上架', en: 'Listed ' + d + 'd ago' };
+                return null;
+            }
+            function reasonFor(f) {
+                var rz = getF(f, 'reason_zh', 'reason');
+                var re = getF(f, 'reason_en', 'reason_en_us') || rz;
+                if (rz || re) return { zh: rz || re, en: re || rz };
+                return null;
+            }
+
+            function renderFindsCard(f) {
+                var promoted = f.is_today_finds;
+                var badgeZh = promoted ? '藏家本周重点' : '人工精选';
+                var badgeEn = promoted ? 'Collector Highlight' : 'Editor Pick';
+                var cls = promoted ? 'finds-card--promoted' : 'finds-card--organic';
+                var metaZh = [f.era_zh, f.category].filter(Boolean).join(' · ');
+                var metaEn = [f.era_en, f.category].filter(Boolean).join(' · ');
+                var reason = reasonFor(f);
+                var reasonHtml = reason ? '<div class="finds-reason zh">💡 ' + GD.esc(reason.zh) + '</div><div class="finds-reason en">💡 ' + GD.esc(reason.en) + '</div>' : '';
+                var nb = findsNewBadge(f);
+                var newHtml = nb ? '<span class="finds-new"><span class="zh">' + GD.esc(nb.zh) + '</span><span class="en">' + GD.esc(nb.en) + '</span></span>' : '';
+                var ta = timeAgo(f);
+                var taHtml = (ta && !nb) ? '<div class="finds-timestamp zh">' + GD.esc(ta.zh) + '</div><div class="finds-timestamp en">' + GD.esc(ta.en) + '</div>' : '';
+                var catAttr = GD.catKey(f.category);
+                return '<a href="' + GD.itemHref(f) + '" class="finds-card ' + cls + '" data-cat="' + GD.esc(catAttr) + '">' +
+                    '<div class="finds-image"><img src="' + GD.esc(GD.imgUrl(f)) + '" alt="' + GD.esc(f.title_zh) + ' ' + GD.esc(f.title_en) + '" loading="lazy" onerror="this.onerror=null;this.src=&#39;/assets/images/placeholder.jpg&#39;">' +
+                    newHtml + '<span class="finds-badge zh">' + badgeZh + '</span><span class="finds-badge en">' + badgeEn + '</span></div>' +
+                    '<div class="finds-title zh">' + GD.esc(f.title_zh) + '</div><div class="finds-title en">' + GD.esc(f.title_en) + '</div>' +
+                    '<div class="finds-meta zh">' + GD.esc(metaZh) + '</div><div class="finds-meta en">' + GD.esc(metaEn) + '</div>' +
+                    findsPriceBlock(f) + referenceHtml(f) + reasonHtml + taHtml +
+                    '<div class="finds-caption zh">卖家提供资料</div><div class="finds-caption en">Seller-provided information</div></a>';
+            }
+
+            /* ---- 数据 + 收藏读取 ---- */
+            function readFav() {
+                try { var raw = localStorage.getItem(FAV_KEY); if (!raw) return []; var arr = JSON.parse(raw); if (!Array.isArray(arr)) return []; return arr.filter(function (x) { return typeof x === 'string' && x; }); } catch (e) { return []; }
+            }
+            function normId(v) { return GD.normId(v); }
+
+            var allItems = [];
+            var currentTab = 'saved';
+
+            function switchTab(tab) {
+                currentTab = tab;
+                document.querySelectorAll('#savedTabs .gf-tab').forEach(function (b) { b.classList.toggle('on', b.getAttribute('data-tab') === tab); });
+                renderGrid();
+            }
+            window.switchTab = switchTab;
+
+            function buildIndexes(data) {
+                var favSet = {};
+                readFav().forEach(function (id) { favSet[normId(id)] = true; });
+                var sellerSubs = GF.subsOf('seller').map(function (t) { return { type: 'seller', term: t }; });
+                var tagSubs = GF.subsOf('tag').map(function (t) { return { type: 'tag', term: t }; });
+                return { favSet: favSet, sellerSubs: sellerSubs, tagSubs: tagSubs };
+            }
+
+            function collect(tab, idx) {
+                if (tab === 'saved') return allItems.filter(function (f) { return idx.favSet[normId(f.item_id)]; });
+                if (tab === 'sellers') return allItems.filter(function (f) { return idx.sellerSubs.length && GF.matches(f, idx.sellerSubs); });
+                if (tab === 'tags') return allItems.filter(function (f) { return idx.tagSubs.length && GF.matches(f, idx.tagSubs); });
+                return [];
+            }
+
+            function renderGrid() {
+                var grid = document.getElementById('savedGrid');
+                var hint = document.getElementById('noFollowHint');
+                var idx = buildIndexes(dataCache || {});
+                var items = collect(currentTab, idx);
+                if (!dataCache) return;
+                document.getElementById('cntSaved').textContent = idx.favSet ? Object.keys(idx.favSet).length : 0;
+                document.getElementById('cntSellers').textContent = idx.sellerSubs.length ? idx.sellerSubs.length : 0;
+                document.getElementById('cntTags').textContent = idx.tagSubs.length ? idx.tagSubs.length : 0;
+                grid.removeAttribute('aria-busy');
+                if (!items.length) {
+                    grid.innerHTML = '';
+                    var hasAny = readFav().length > 0 || GF.count('seller') > 0 || GF.count('tag') > 0;
+                    hint.style.display = hasAny ? 'none' : '';
+                    if (hasAny) {
+                        var emptyZh = currentTab === 'saved' ? '还没有收藏的藏品' : currentTab === 'sellers' ? '关注的卖家暂未上新' : '关注的品类暂未上新';
+                        var emptyEn = currentTab === 'saved' ? 'No saved items yet' : currentTab === 'sellers' ? 'No new items from followed sellers yet' : 'No new items in followed categories yet';
+                        grid.innerHTML = '<div class="empty-state"><span class="zh">' + emptyZh + '</span><span class="en">' + emptyEn + '</span></div>';
+                    }
+                    return;
+                }
+                hint.style.display = 'none';
+                grid.innerHTML = items.map(renderFindsCard).join('');
+            }
+
+            var dataCache = null;
+
+            /* ---- 快捷 chips ---- */
+            function mountChips() {
+                document.querySelectorAll('#quickChips .gf-chip').forEach(function (chip) {
+                    var term = chip.getAttribute('data-term');
+                    chip.innerHTML = '<span class="zh">' + chip.getAttribute('data-zh') + '</span><span class="en">' + chip.getAttribute('data-en') + '</span>';
+                    GF.mountChip(chip, { term: term, onToggle: function () { renderGrid(); } });
+                });
+            }
+
+            /* ---- init ---- */
+            if (!GD) { document.getElementById('savedGrid').innerHTML = GD ? '' : '<div class="empty-state">数据模块未加载</div>'; return; }
+            GD.injectCss();
+            GD.skeleton(document.getElementById('savedGrid'), 4, 'aspect-ratio:1/1;min-height:240px');
+            mountChips();
+            GF.injectCss();
+            GF.mountChip = GF.mountChip; // ensure
+            GD.load().then(function (r) {
+                dataCache = r.data;
+                allItems = GD.dedupe([].concat(r.data.newListing, r.data.todayFinds, r.data.editorPicks));
+                GD.diag.page = 'my/saved';
+                renderGrid();
+                GD.renderDebug('我的收藏·关注：total ' + allItems.length);
+            }).catch(function () {
+                var grid = document.getElementById('savedGrid');
+                grid.removeAttribute('aria-busy');
+                grid.innerHTML = GD.errorHtml();
+            });
+
+            // 跨标签页：收藏/关注变化时刷新
+            window.addEventListener('storage', function (e) {
+                if (e && (e.key === FAV_KEY || e.key === GF.KEY)) renderGrid();
+            });
+        })();
+    </script>
+</body>
+</html>

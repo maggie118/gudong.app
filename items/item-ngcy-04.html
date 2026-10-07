@@ -1292,5 +1292,85 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
 })();
 </script>
 
+<style>
+.gd-share-btn {
+    border: 1px solid var(--color-border); background: transparent;
+    color: var(--color-text-secondary); padding: .55rem .7rem; min-height: 44px; min-width: 44px;
+    border-radius: var(--btn-radius); cursor: pointer; display: inline-flex;
+    align-items: center; justify-content: center; flex-shrink: 0;
+    transition: all var(--dur) var(--ease);
+}
+.gd-share-btn:hover { border-color: var(--color-primary); color: var(--color-primary); background: var(--color-primary-light); }
+.gd-share-btn svg { width: 16px; height: 16px; fill: currentColor; display: block; }
+.gd-toast {
+    position: fixed; left: 50%; bottom: 30px; transform: translateX(-50%) translateY(10px);
+    background: rgba(36,31,26,.92); color: #fff; font-size: .85rem;
+    padding: .62rem 1.15rem; border-radius: 999px; z-index: 10000;
+    opacity: 0; pointer-events: none; transition: opacity .3s ease, transform .3s ease;
+    box-shadow: 0 8px 24px rgba(36,31,26,.25); white-space: nowrap;
+    max-width: 88vw; overflow: hidden; text-overflow: ellipsis;
+}
+.gd-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+</style>
+<script>
+(function () {
+    var toastEl = null, toastTimer = null;
+    function gdToast(msg) {
+        if (!toastEl) {
+            toastEl = document.createElement("div");
+            toastEl.className = "gd-toast";
+            document.body.appendChild(toastEl);
+        }
+        toastEl.textContent = msg;
+        toastEl.classList.add("show");
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(function () { toastEl.classList.remove("show"); }, 2200);
+    }
+    function gdCopyText(text, done, fail) {
+        function legacy() {
+            var ta = document.createElement("textarea");
+            ta.value = text;
+            ta.setAttribute("readonly", "");
+            ta.style.cssText = "position:fixed;left:-9999px;top:0;opacity:0;";
+            document.body.appendChild(ta);
+            ta.select();
+            if (ta.setSelectionRange) ta.setSelectionRange(0, text.length);
+            var ok = false;
+            try { ok = document.execCommand("copy"); } catch (e) {}
+            document.body.removeChild(ta);
+            if (ok) { done(); } else if (fail) { fail(); }
+        }
+        if (navigator.clipboard && window.isSecureContext) {
+            navigator.clipboard.writeText(text).then(done, function () { legacy(); });
+        } else { legacy(); }
+    }
+    window.gdShare = function (opts) {
+        opts = opts || {};
+        var can = document.querySelector('link[rel="canonical"]');
+        var url = opts.url || (can ? can.href : location.href);
+        var lang = (document.body.dataset && document.body.dataset.lang) || "zh";
+        var title = opts.title || document.title;
+        var text = opts.text || "";
+        if (navigator.share) {
+            navigator.share({ title: title, text: text, url: url }).then(function () {}, function () {});
+            return;
+        }
+        gdCopyText(url, function () {
+            gdToast(lang === "zh" ? "链接已复制，去分享给朋友吧" : "Link copied — share it with friends");
+        }, function () {
+            gdToast(lang === "zh" ? "复制失败，请手动复制地址栏链接" : "Copy failed — please copy the URL from the address bar");
+        });
+    };
+})();
+</script>
+<script>
+window.gdSharePage = function () {
+    var lang = (document.body.dataset && document.body.dataset.lang) || "zh";
+    window.gdShare({
+        title: lang === "zh" ? "古董圈 Gudong.app · 新加坡古董捡漏情报站" : "Gudong.app · Singapore Antiques Daily Radar",
+        text: lang === "zh" ? "每天 5 分钟，看看今天有什么漏可捡" : "5 minutes a day. See what's undervalued today."
+    });
+};
+</script>
 </body>
 </html>

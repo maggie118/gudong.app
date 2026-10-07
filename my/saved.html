@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>我的收藏 · 关注 | My Saved &amp; Followed | Gudong</title>
-    <meta name="description" content="我的收藏 · 关注：我收藏的藏品、关注的卖家上新、关注的品类上新。 My saved items, followed sellers and followed categories on gudong.app.">
+    <meta name="description" content="我的收藏 · 关注：我收藏的藏品、关注的藏家上新、关注的品类上新。 My saved items, followed collectors and followed categories on gudong.app.">
     <meta name="keywords" content="古董圈, Gudong, 收藏, 关注, 新加坡古董, Singapore antiques, 我的收藏, follow, saved">
     <link rel="canonical" href="https://gudong.app/my/saved.html">
     <link rel="icon" type="image/png" sizes="16x16" href="https://gudong.app/assets/icons/favicon-16x16.png">
@@ -164,6 +164,21 @@
         .finds-price { display: flex; align-items: baseline; gap: .35rem; flex-wrap: wrap; margin: 0 0 .5rem; font-size: .9rem; }
         .price-main { color: var(--color-primary); font-weight: 700; letter-spacing: .01em; font-variant-numeric: tabular-nums; }
         .price-main--enquiry { color: var(--color-text-secondary); font-weight: 600; letter-spacing: .04em; }
+        .finds-alert {
+            display: flex; align-items: center; gap: .3rem; font-size: .76rem; font-weight: 600;
+            color: #8a2f22; background: rgba(193,68,50,.09); border: 1px solid rgba(193,68,50,.5);
+            padding: .4rem .55rem; border-radius: 5px; margin: 0 0 .45rem; line-height: 1.5;
+        }
+        .finds-alert--new { color: var(--color-success); background: rgba(82,102,87,.09); border-color: rgba(82,102,87,.45); }
+        .alert-banner {
+            display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: .6rem;
+            background: linear-gradient(90deg, rgba(193,68,50,.10), rgba(198,139,80,.14));
+            border: 1px solid rgba(193,68,50,.35); border-radius: 10px;
+            padding: .7rem 1rem; margin: .2rem 0 1rem; font-size: .88rem; font-weight: 600; color: #6d2a1c;
+        }
+        .alert-banner a { color: #8a2f22; text-decoration: underline; font-size: .8rem; font-weight: 700; white-space: nowrap; }
+        .alert-banner--quiet { color: var(--color-text-muted); background: var(--color-bg-alt); border-color: var(--color-border); }
+        .alert-banner--quiet a { color: var(--color-primary); }
 
         footer {
             text-align: center; padding: 2.2rem 5% 1.8rem;
@@ -241,7 +256,7 @@
 
         <div class="page-head">
             <div class="page-title"><span class="zh">我的收藏 · 关注</span><span class="en">My Saved &amp; Followed</span></div>
-            <p class="page-sub zh">收藏喜欢的藏品、关注卖家与品类，新品上架自动出现在这里。</p>
+            <p class="page-sub zh">收藏喜欢的藏品、关注藏家与品类，新品上架自动出现在这里。</p>
             <p class="page-sub en">Save items, follow sellers and categories — new listings appear here automatically.</p>
         </div>
 
@@ -252,13 +267,21 @@
                 <b class="tab-count" id="cntSaved" style="opacity:.7;font-weight:700">0</b>
             </button>
             <button type="button" class="gf-tab" data-tab="sellers" onclick="switchTab('sellers')">
-                <span class="zh">关注的卖家上新</span><span class="en">Followed Sellers</span>
+                <span class="zh">关注的藏家上新</span><span class="en">Followed Collectors</span>
                 <b class="tab-count" id="cntSellers" style="opacity:.7;font-weight:700">0</b>
             </button>
             <button type="button" class="gf-tab" data-tab="tags" onclick="switchTab('tags')">
                 <span class="zh">关注的品类上新</span><span class="en">Followed Categories</span>
                 <b class="tab-count" id="cntTags" style="opacity:.7;font-weight:700">0</b>
             </button>
+        </div>
+
+        <!-- 站内提醒横幅：新上架 / 已降价 -->
+        <div id="alertBanner" class="alert-banner" style="display:none;">
+            <span class="zh" id="alertTextZh"></span>
+            <span class="en" id="alertTextEn"></span>
+            <a href="briefing.html" class="zh">看今日简报 →</a>
+            <a href="briefing.html" class="en">Today's brief →</a>
         </div>
 
         <!-- 快捷关注 chips（点一下即关注品类关键词） -->
@@ -276,7 +299,7 @@
         <div class="finds-grid" id="savedGrid" aria-busy="true"></div>
 
         <div class="empty-state" id="noFollowHint" style="display:none;">
-            <span class="zh"><strong>还没有收藏或关注</strong><br><span class="hint">去藏品详情页点 ♥ 收藏，或点"关注卖家 / 关注品类"即可在此追踪。</span></span>
+            <span class="zh"><strong>还没有收藏或关注</strong><br><span class="hint">去藏品详情页点 ♥ 收藏，或点"关注藏家 / 关注品类"即可在此追踪。</span></span>
             <span class="en"><strong>Nothing saved or followed yet</strong><br><span class="hint">Tap ♥ on an item to save it, or follow a seller / category to track new listings here.</span></span>
         </div>
     </main>
@@ -399,7 +422,8 @@
                 return null;
             }
 
-            function renderFindsCard(f) {
+            var droppedSet = {};   // item_id -> {pct} 本会话已降价
+            function renderFindsCard(f, tab) {
                 var promoted = f.is_today_finds;
                 var badgeZh = promoted ? '藏家本周重点' : '人工精选';
                 var badgeEn = promoted ? 'Collector Highlight' : 'Editor Pick';
@@ -413,12 +437,20 @@
                 var ta = timeAgo(f);
                 var taHtml = (ta && !nb) ? '<div class="finds-timestamp zh">' + GD.esc(ta.zh) + '</div><div class="finds-timestamp en">' + GD.esc(ta.en) + '</div>' : '';
                 var catAttr = GD.catKey(f.category);
+                var alertHtml = '';
+                var fid = normId(f.item_id);
+                if (tab === 'saved') {
+                    var drop = droppedSet[fid];
+                    if (drop) alertHtml = '<div class="finds-alert"><span class="zh">🔔 你收藏的这件已降价 ↓' + drop.pct + '%</span><span class="en">🔔 This saved item dropped ↓' + drop.pct + '%</span></div>';
+                } else if (tab === 'sellers' || tab === 'tags') {
+                    if (GF.isNewSinceSeen(f)) alertHtml = '<div class="finds-alert finds-alert--new"><span class="zh">🆕 你关注的内容有新上架</span><span class="en">🆕 New from your follows</span></div>';
+                }
                 return '<a href="' + GD.itemHref(f) + '" class="finds-card ' + cls + '" data-cat="' + GD.esc(catAttr) + '">' +
                     '<div class="finds-image"><img src="' + GD.esc(GD.imgUrl(f)) + '" alt="' + GD.esc(f.title_zh) + ' ' + GD.esc(f.title_en) + '" loading="lazy" onerror="this.onerror=null;this.src=&#39;/assets/images/placeholder.jpg&#39;">' +
                     newHtml + '<span class="finds-badge zh">' + badgeZh + '</span><span class="finds-badge en">' + badgeEn + '</span></div>' +
                     '<div class="finds-title zh">' + GD.esc(f.title_zh) + '</div><div class="finds-title en">' + GD.esc(f.title_en) + '</div>' +
                     '<div class="finds-meta zh">' + GD.esc(metaZh) + '</div><div class="finds-meta en">' + GD.esc(metaEn) + '</div>' +
-                    findsPriceBlock(f) + referenceHtml(f) + reasonHtml + taHtml +
+                    findsPriceBlock(f) + referenceHtml(f) + reasonHtml + taHtml + alertHtml +
                     '<div class="finds-caption zh">卖家提供资料</div><div class="finds-caption en">Seller-provided information</div></a>';
             }
 
@@ -453,6 +485,49 @@
                 return [];
             }
 
+            /* ---- 降价/上新提醒 ---- */
+            function primeAlerts(items) {
+                droppedSet = {};
+                var favIds = {};
+                readFav().forEach(function (id) { favIds[normId(id)] = true; });
+                items.forEach(function (f) {
+                    var id = normId(f.item_id);
+                    if (favIds[id]) {
+                        var d = GF.watchPrice(id, GF.parsePrice(f));
+                        if (d && d.dropped) droppedSet[id] = d;
+                    }
+                });
+            }
+            function countAlerts(idx) {
+                var newN = 0, dropN = 0;
+                allItems.forEach(function (f) {
+                    var id = normId(f.item_id);
+                    var fav = idx.favSet[id];
+                    var fol = (idx.sellerSubs.length && GF.matches(f, idx.sellerSubs)) || (idx.tagSubs.length && GF.matches(f, idx.tagSubs));
+                    if (!fav && !fol) return;
+                    if (GF.isNewSinceSeen(f)) newN++;
+                    if (fav && droppedSet[id]) dropN++;
+                });
+                return { newN: newN, dropN: dropN };
+            }
+            function refreshBanner(idx) {
+                var banner = document.getElementById('alertBanner');
+                if (!banner) return;
+                var al = countAlerts(idx);
+                if (al.newN > 0 || al.dropN > 0) {
+                    banner.style.display = '';
+                    banner.classList.remove('alert-banner--quiet');
+                    var zh = (al.newN > 0 ? '🆕 你收藏/关注的内容有 ' + al.newN + ' 件新上架' : '')
+                           + (al.dropN > 0 ? (al.newN > 0 ? '；' : '') + '🔔 你收藏的藏品有 ' + al.dropN + ' 件已降价' : '');
+                    var en = (al.newN > 0 ? '🆕 ' + al.newN + ' new in your follows' : '')
+                           + (al.dropN > 0 ? (al.newN > 0 ? ' · ' : '') + '🔔 ' + al.dropN + ' saved item(s) dropped' : '');
+                    document.getElementById('alertTextZh').textContent = zh;
+                    document.getElementById('alertTextEn').textContent = en;
+                } else {
+                    banner.style.display = 'none';
+                }
+            }
+
             function renderGrid() {
                 var grid = document.getElementById('savedGrid');
                 var hint = document.getElementById('noFollowHint');
@@ -463,19 +538,20 @@
                 document.getElementById('cntSellers').textContent = idx.sellerSubs.length ? idx.sellerSubs.length : 0;
                 document.getElementById('cntTags').textContent = idx.tagSubs.length ? idx.tagSubs.length : 0;
                 grid.removeAttribute('aria-busy');
+                refreshBanner(idx);
                 if (!items.length) {
                     grid.innerHTML = '';
                     var hasAny = readFav().length > 0 || GF.count('seller') > 0 || GF.count('tag') > 0;
                     hint.style.display = hasAny ? 'none' : '';
                     if (hasAny) {
-                        var emptyZh = currentTab === 'saved' ? '还没有收藏的藏品' : currentTab === 'sellers' ? '关注的卖家暂未上新' : '关注的品类暂未上新';
-                        var emptyEn = currentTab === 'saved' ? 'No saved items yet' : currentTab === 'sellers' ? 'No new items from followed sellers yet' : 'No new items in followed categories yet';
+                        var emptyZh = currentTab === 'saved' ? '还没有收藏的藏品' : currentTab === 'sellers' ? '关注的藏家暂未上新' : '关注的品类暂未上新';
+                        var emptyEn = currentTab === 'saved' ? 'No saved items yet' : currentTab === 'sellers' ? 'No new items from followed collectors yet' : 'No new items in followed categories yet';
                         grid.innerHTML = '<div class="empty-state"><span class="zh">' + emptyZh + '</span><span class="en">' + emptyEn + '</span></div>';
                     }
                     return;
                 }
                 hint.style.display = 'none';
-                grid.innerHTML = items.map(renderFindsCard).join('');
+                grid.innerHTML = items.map(function (f) { return renderFindsCard(f, currentTab); }).join('');
             }
 
             var dataCache = null;
@@ -500,6 +576,8 @@
                 dataCache = r.data;
                 allItems = GD.dedupe([].concat(r.data.newListing, r.data.todayFinds, r.data.editorPicks));
                 GD.diag.page = 'my/saved';
+                GF.beginSession();          // 记录本次访问时间，供"上次访问后上新"判定
+                primeAlerts(allItems);      // 记录已收藏藏品价格，标记本会话降价
                 renderGrid();
                 GD.renderDebug('我的收藏·关注：total ' + allItems.length);
             }).catch(function () {

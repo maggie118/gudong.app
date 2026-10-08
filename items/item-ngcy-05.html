@@ -186,25 +186,24 @@ header {
 
 .image-nav {
     position: absolute; top: 50%; transform: translateY(-50%);
-    width: 44px; height: 44px; border-radius: 50%;
-    background: rgba(20,17,14,.42); color: #fff;
-    border: none; font-size: 1.25rem; line-height: 1;
+    width: 32px; height: 32px; border-radius: 50%;
+    background: transparent; color: #94928C;
+    border: none; font-size: 18px; font-weight: 300; line-height: 1;
     cursor: pointer;
     display: flex; align-items: center; justify-content: center;
-    z-index: 3; transition: .4s cubic-bezier(.25,.1,.25,1);
-    backdrop-filter: blur(3px);
+    z-index: 3; transition: color .18s ease, transform .18s ease;
     -webkit-tap-highlight-color: transparent;
 }
-.image-nav:hover { background: rgba(20,17,14,.72); }
+.image-nav:hover { background: transparent; color: #94928C; }
 .image-nav.prev { left: 10px; }
 .image-nav.next { right: 10px; }
 
 .image-counter {
     position: absolute; right: 12px; top: 12px;
-    background: rgba(20,17,14,.55); color: #fff;
-    padding: .22rem .6rem; border-radius: 999px;
-    font-size: .75rem; letter-spacing: .05em;
-    z-index: 3; backdrop-filter: blur(3px);
+    background: transparent; color: #94928C;
+    padding: 0; border-radius: 0;
+    font-size: .75rem; font-weight: 400; letter-spacing: .05em;
+    z-index: 3; backdrop-filter: none;
     font-variant-numeric: tabular-nums;
 }
 
@@ -239,7 +238,14 @@ header {
 }
 .item-detail-image.single .image-thumbs,
 .item-detail-image.single .image-nav,
-.item-detail-image.single .image-counter { display: none; }
+.item-detail-image.single .image-counter {
+    position: absolute; right: 12px; top: 12px;
+    background: transparent; color: #94928C;
+    padding: 0; border-radius: 0;
+    font-size: .75rem; font-weight: 400; letter-spacing: .05em;
+    z-index: 3; backdrop-filter: none;
+    font-variant-numeric: tabular-nums;
+}
 .item-detail-meta { font-size: .88rem; color: var(--color-text-secondary); margin-bottom: .5rem; }
 .item-detail-title { font-family: Georgia, "Songti SC", "STSong", serif; font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 600; margin-bottom: .7rem; }
 .item-detail-price {
@@ -426,9 +432,9 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
     border: none;
     padding: 0;
     margin: 0;
-    color: var(--color-gold);
-    width: 44px;
-    height: 44px;
+    color: #94928C;
+    width: 32px;
+    height: 32px;
     line-height: 1;
     cursor: pointer;
     display: flex;
@@ -439,28 +445,27 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
     -webkit-user-select: none;
     user-select: none;
     filter:
-        drop-shadow(0 0 2px rgba(255,255,255,.95))
-        drop-shadow(0 0 5px rgba(255,255,255,.7))
-        drop-shadow(0 1px 2px rgba(0,0,0,.35));
+        drop-shadow(0 1px 1px rgba(0,0,0,.22));
 }
 .fav-btn svg {
-    width: 44px;
-    height: 44px;
+    width: 18px;
+    height: 18px;
     display: block;
     overflow: visible;
     fill: none;
     stroke: currentColor;
-    stroke-width: 2.4;
+    stroke-width: 1.55;
     stroke-linecap: round;
     stroke-linejoin: round;
     transition: fill .18s ease, stroke-width .18s ease;
 }
+.fav-btn.active { color: #8A5A3B; }
 .fav-btn.active svg {
     fill: currentColor;
     stroke: currentColor;
-    stroke-width: 2;
+    stroke-width: 1.55;
 }
-.fav-btn:hover { transform: scale(1.12); color: var(--color-primary); }
+.fav-btn:hover { transform: scale(1.12); color: #8A5A3B; }
 .fav-btn:active { transform: scale(.94); }
 .fav-btn:focus-visible { outline: 2px solid var(--color-gold); outline-offset: 3px; border-radius: 4px; }
 .fav-btn .fav-icon { display: block; pointer-events: none; }
@@ -477,7 +482,7 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
     .container { padding-top: 2rem; }
     .item-detail { grid-template-columns: 1fr; gap: 1.6rem; }
     .image-thumb { flex: 0 0 54px; width: 54px; height: 54px; }
-    .image-nav { width: 44px; height: 44px; font-size: 1.1rem; }
+    .image-nav { width: 32px; height: 32px; font-size: 18px; }
 }
 @media (max-width: 560px) {
     .brand h1 { font-size: 1.15rem; }
@@ -541,7 +546,7 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
             <a href="https://gudong.app/categories/coins.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 钱币</span><span class="en">· Coins</span></a>
             <a href="https://gudong.app/categories/paintings.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 书画</span><span class="en">· Paintings &amp; Calligraphy</span></a>
             <a href="https://gudong.app/categories/misc.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 杂项</span><span class="en">· Miscellaneous</span></a>
-            <a href="https://gudong.app/sellers/index.html" class="sidebar-link active" onclick="closeSidebar()"><span class="zh">藏家展馆</span><span class="en">Collector Gallery</span></a>
+            <a href="../sellers/index.html" class="sidebar-link active" onclick="closeSidebar()"><span class="zh">藏家展馆</span><span class="en">Collector Gallery</span></a>
             <a href="https://gudong.app/insights.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">情报 / 知识</span><span class="en">Insights</span></a>
             <a href="https://gudong.app/about.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">关于我们</span><span class="en">About</span></a>
             <button type="button" class="sidebar-lang-btn" onclick="toggleLang()" aria-label="Switch language"><span class="zh">🌐 English</span><span class="en">🌐 中文</span></button>

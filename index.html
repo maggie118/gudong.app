@@ -36,14 +36,11 @@
           "@type": "FAQPage",
           "@id": "https://gudong.app/#faq",
           "mainEntity": [
-            { "@type": "Question", "name": "平台会帮忙鉴定藏品吗？",
-              "acceptedAnswer": { "@type": "Answer", "text": "不会。古董圈是信息发现平台，不提供鉴定、估价或保真服务。所有藏品描述与图片均由卖家提供，请自行核验或咨询独立专家。" } },
-            { "@type": "Question", "name": "可以请平台推荐专家给参考意见吗？",
-              "acceptedAnswer": { "@type": "Answer", "text": "可以。平台可应要求引荐顾问提供个人意见，仅供参考，但不构成真伪鉴定。是否采纳由你决定，平台不介入、不担保；费用与结论由你与专家直接沟通。" } },
-            { "@type": "Question", "name": "怎么联系卖家？",
-              "acceptedAnswer": { "@type": "Answer", "text": "在藏品详情页可直接看到卖家提供的联系方式，买卖双方直接沟通，平台不经手交易。" } },
-            { "@type": "Question", "name": "藏品价格是平台定的吗？",
-              "acceptedAnswer": { "@type": "Answer", "text": "不是。所有价格由卖家自行设定，平台仅提供展示。部分藏品为「私聊询价」，需直接联系卖家获取报价。" } }
+            { "@type": "Question", "name": "古董圈是什么？", "acceptedAnswer": { "@type": "Answer", "text": "古董圈是古董信息发现与藏家连接平台。买家可免费浏览、收藏藏品并直接联系卖家。" } },
+            { "@type": "Question", "name": "怎么购买藏品？", "acceptedAnswer": { "@type": "Answer", "text": "在藏品详情页查看卖家联系方式，直接与卖家沟通，确认藏品情况、价格及交付安排。买卖双方直接交易，平台不经手付款。" } },
+            { "@type": "Question", "name": "藏品价格是谁定的？", "acceptedAnswer": { "@type": "Answer", "text": "藏品价格由卖家自行设定，平台不定价。标注“私聊询价”的藏品，请直接联系卖家了解报价。" } },
+            { "@type": "Question", "name": "古董圈提供鉴定吗？", "acceptedAnswer": { "@type": "Answer", "text": "不提供。古董圈不提供鉴定、估价或保真服务。藏品描述和图片由卖家提供，请自行核验或咨询独立专家。" } },
+            { "@type": "Question", "name": "如何成为藏家 / 发布藏品？", "acceptedAnswer": { "@type": "Answer", "text": "点击“了解藏家服务”，查看入驻说明并按页面指引联系平台。成为藏家后，可提交藏品资料与图片进行发布。" } }
           ]
         }
       ]
@@ -1233,6 +1230,7 @@
         .faq-list { max-width: 780px; margin: 0 auto; }
         .faq-item { border-bottom: 1px solid var(--color-border); }
         .faq-item:first-child { border-top: 1px solid var(--color-border); }
+        .faq-index { display: inline-block; width: 2.15rem; color: var(--color-gold); font-size: .76rem; font-weight: 600; letter-spacing: .04em; font-variant-numeric: tabular-nums; }
         .faq-item summary {
             cursor: pointer;
             padding: 1.05rem .3rem;
@@ -1494,18 +1492,18 @@
             <div class="hero-clean">
                 <div class="hero-eyebrow">Chinese Antiques &amp; Collectibles</div>
                 <div class="hero-title-main">
-                    <span class="zh">每天 5 分钟，看看今天有什么漏可捡</span>
-                    <span class="en">5 minutes a day. See what's undervalued today.</span>
+                    <span class="zh">每天看看，有没有值得收藏的东西。</span>
+                    <span class="en">Discover something worth collecting, every day.</span>
                 </div>
                 <div class="hero-desc">
-                    <span class="zh">每天都有新藏品、新价格、新发现。</span>
-                    <span class="en">New pieces, new prices, new discoveries — every day.</span>
+                    <span class="zh">新藏品、新价格、新发现。让值得留意的中国古董，每天出现在你眼前。</span>
+                    <span class="en">New pieces, changing prices, and discoveries worth a closer look.</span>
                 </div>
                 <div class="hero-guide">
                     <span class="zh">搜你正在找的东西，或往下逛「今日发现」与「刚刚上新」</span>
                     <span class="en">Find what you're searching for, or scroll for Today's Finds &amp; Just Listed</span>
                 </div>
-                <a href="#new-listings" class="hero-btn"><span class="zh">开始寻宝</span><span class="en">Start Hunting</span></a>
+                <a href="#new-listings" class="hero-btn"><span class="zh">开始浏览</span><span class="en">Explore the Collection</span></a>
 
                 <div class="search-box">
                     <input type="text" id="searchInput"
@@ -1537,8 +1535,8 @@
                 <div>
                     <span class="title zh">今日发现</span>
                     <span class="title en">Today's Finds</span>
-                    <span class="sub-line zh">今天新出现、正在降价、价格值得比较，或值得收藏者留意的藏品。</span>
-                    <span class="sub-line en">New arrivals, falling prices, deals worth comparing — and pieces no collector should overlook.</span>
+                    <span class="sub-line zh">每天挑出值得留意的藏品。</span>
+                    <span class="sub-line en">A daily selection of pieces worth a closer look.</span>
                 </div>
             </div>
             <div class="finds-grid" id="todayFindsGrid"></div>
@@ -1622,13 +1620,13 @@
             <div class="intel-head">
                 <div>
                     <span class="title" id="intelTitle">
-                        <span class="zh">📡 今日情报 · 古董捡漏寻宝</span>
-                        <span class="en">📡 Today's Intel · Antique Treasure Hunt</span>
+                        <span class="zh">📡 今日情报 · 捡漏雷达</span>
+                        <span class="en">📡 Daily Brief・Find Radar</span>
                     </span>
                     <span class="sub zh">编辑整理，不是商品广告。看看今天市场在发生什么。</span>
                     <span class="sub en">Editorially curated. Not ads. What's moving in the market today.</span>
                 </div>
-                <span class="intel-live"><span class="zh">实时更新</span><span class="en">Live</span></span>
+                <span class="intel-live"><span class="zh">编辑更新</span><span class="en">Editorially updated</span></span>
             </div>
             <div class="intel-scroll" id="intelScroll" aria-busy="true"></div>
             <p class="intel-note zh">情报由平台编辑整理，部分内容可能引用卖家提供的信息；不构成鉴定、估价或投资建议。</p>
@@ -1678,34 +1676,32 @@
             </div>
         </section>
 
-        <!-- ============ 为什么在古董圈找藏品 ============ -->
+        <!-- ============ 为什么是古董圈 ============ -->
         <section id="services">
             <div style="text-align:center;max-width:1080px;margin:0 auto;">
-                <h2 class="zh">为什么在古董圈找藏品？</h2>
-                <h2 class="en">Why use Gudong?</h2>
-                <p class="how-sub zh">藏品展示 · 行情参考 · 藏家直连</p>
-                <p class="how-sub en">Artefact listings・Market reference・Direct contact with collectors</p>
-                <div class="how-grid">
+                <h2 class="zh">为什么是古董圈？</h2>
+                <h2 class="en">Why the Antique Community?</h2>
+                    <div class="how-grid">
                     <div class="how-card">
                         <div class="how-num">01</div>
-                        <div class="how-title zh">浏览藏品</div>
-                        <div class="how-title en">Browse Artefacts</div>
-                        <div class="how-desc zh">在线阅览藏品资料，按需深入了解。</div>
-                        <div class="how-desc en">View artefact details before further discussion.</div>
+                        <div class="how-title zh">每天都有新发现</div>
+                        <div class="how-title en">New discoveries every day.</div>
+                        <div class="how-desc zh">新藏品、新价格、新机会，持续更新。</div>
+                        <div class="how-desc en">New Entries, New Pricing, New Opportunities. Continuously Updated.</div>
                     </div>
                     <div class="how-card">
                         <div class="how-num">02</div>
-                        <div class="how-title zh">对接藏家</div>
-                        <div class="how-title en">Contact Collectors</div>
-                        <div class="how-desc zh">对藏品感兴趣，可直接联系藏家交流。</div>
-                        <div class="how-desc en">Reach out directly to collectors for items you are interested in.</div>
+                        <div class="how-title zh">直接连接真正的藏家</div>
+                        <div class="how-title en">Connect directly with genuine collectors.</div>
+                        <div class="how-desc zh">不绕平台、不经过中间层，直接与藏家沟通。</div>
+                        <div class="how-desc en">No platform mediation, no middlemen. Communicate directly with collectors.</div>
                     </div>
                     <div class="how-card">
                         <div class="how-num">03</div>
-                        <div class="how-title zh">自主甄别</div>
-                        <div class="how-title en">Self Verification</div>
-                        <div class="how-desc zh">平台仅展示信息，不提供鉴定、估价，不介入交易。</div>
-                        <div class="how-desc en">Gudong.app only displays information. We do not provide authentication, valuation or handle transactions.</div>
+                        <div class="how-title zh">信息透明，自己判断</div>
+                        <div class="how-title en">Transparent information. Make your own judgment.</div>
+                        <div class="how-desc zh">价格由卖家设定，资料来自卖家；平台提供信息与发现，不替你做鉴定决定。</div>
+                        <div class="how-desc en">Prices set by sellers, information provided by sellers. The platform offers listings and discoveries, and does not make appraisal decisions on your behalf.</div>
                     </div>
                 </div>
             </div>
@@ -1720,24 +1716,29 @@
             </div>
             <div class="faq-list">
                 <details class="faq-item">
-                    <summary><span class="zh">平台会帮忙鉴定藏品吗？</span><span class="en">Does Gudong authenticate items?</span></summary>
-                    <div class="faq-answer zh">不会。古董圈是信息发现平台，不提供鉴定、估价或保真服务。所有藏品描述与图片均由卖家提供，请自行核验或咨询独立专家。</div>
-                    <div class="faq-answer en">No. Gudong is a discovery platform and does not provide authentication, valuation, or guarantees. All descriptions and images are seller-provided — verify independently or consult a specialist.</div>
+                    <summary><span class="faq-index">01</span><span class="zh">古董圈是什么？</span><span class="en">What is Gudong?</span></summary>
+                    <div class="faq-answer zh">古董圈是古董信息发现与藏家连接平台。买家可免费浏览、收藏藏品并直接联系卖家。</div>
+                    <div class="faq-answer en">Gudong is a platform for discovering antiques and connecting collectors. Buyers can browse and save items, and contact sellers directly for free.</div>
                 </details>
                 <details class="faq-item">
-                    <summary><span class="zh">怎么联系卖家？</span><span class="en">How do I contact a seller?</span></summary>
-                    <div class="faq-answer zh">在藏品详情页可直接看到卖家提供的联系方式，买卖双方直接沟通，平台不经手交易。</div>
-                    <div class="faq-answer en">Contact details are shown on the item detail page. Buyers and sellers communicate directly; the platform does not handle transactions.</div>
+                    <summary><span class="faq-index">02</span><span class="zh">怎么购买藏品？</span><span class="en">How do I buy an item?</span></summary>
+                    <div class="faq-answer zh">在藏品详情页查看卖家联系方式，直接与卖家沟通，确认藏品情况、价格及交付安排。买卖双方直接交易，平台不经手付款。</div>
+                    <div class="faq-answer en">Use the contact details on the item page to speak with the seller and confirm the item's condition, price, and delivery arrangements. Buyers and sellers transact directly; Gudong does not handle payment.</div>
                 </details>
                 <details class="faq-item">
-                    <summary><span class="zh">藏品价格是平台定的吗？</span><span class="en">Does Gudong set the prices?</span></summary>
-                    <div class="faq-answer zh">不是。所有价格由卖家自行设定，平台仅提供展示。部分藏品为「私聊询价」，需直接联系卖家获取报价。</div>
-                    <div class="faq-answer en">No. All prices are set by sellers. Some items are "Enquire" only — contact the seller directly for pricing.</div>
+                    <summary><span class="faq-index">03</span><span class="zh">藏品价格是谁定的？</span><span class="en">Who sets the item prices?</span></summary>
+                    <div class="faq-answer zh">藏品价格由卖家自行设定，平台不定价。标注“私聊询价”的藏品，请直接联系卖家了解报价。</div>
+                    <div class="faq-answer en">Sellers set their own prices; Gudong does not price items. For items marked “Enquire”, contact the seller directly for a quote.</div>
                 </details>
                 <details class="faq-item">
-                    <summary><span class="zh">可以请平台推荐专家给参考意见吗？</span><span class="en">Can Gudong refer me to an expert for a reference opinion?</span></summary>
-                    <div class="faq-answer zh">可以。平台可应要求引荐专业人士提供个人意见，仅供参考，但不构成真伪鉴定。是否采纳由您决定，平台不介入、不担保；相关看法由您与专业人士直接沟通。</div>
-                    <div class="faq-answer en">Yes. The platform may, upon request, introduce a professional to provide personal opinions for reference only. These opinions do not constitute an authenticity appraisal. It is up to you to decide whether to accept them. The platform does not intervene or offer any guarantees. All views are discussed directly between you and the professional.</div>
+                    <summary><span class="faq-index">04</span><span class="zh">古董圈提供鉴定吗？</span><span class="en">Does Gudong authenticate antiques?</span></summary>
+                    <div class="faq-answer zh">不提供。古董圈不提供鉴定、估价或保真服务。藏品描述和图片由卖家提供，请自行核验或咨询独立专家。</div>
+                    <div class="faq-answer en">No. Gudong does not provide authentication, valuation, or guarantees. Item descriptions and photos are provided by sellers; please verify independently or consult an independent expert.</div>
+                </details>
+                <details class="faq-item">
+                    <summary><span class="faq-index">05</span><span class="zh">如何成为藏家 / 发布藏品？</span><span class="en">How do I become a collector or list an item?</span></summary>
+                    <div class="faq-answer zh">点击“了解藏家服务”，查看入驻说明并按页面指引联系平台。成为藏家后，可提交藏品资料与图片进行发布。</div>
+                    <div class="faq-answer en">Select “Learn about Collector Services” for joining information and follow the page instructions to contact the platform. Once onboarded, submit item details and photos for publication.</div>
                 </details>
             </div>
         </section>
@@ -1745,15 +1746,15 @@
         <!-- ============ 卖家招募 ============ -->
         <section id="seller-cta">
             <div class="seller-cta">
-                <div class="title zh">你也有藏品想展示？</div>
-                <div class="title en">Got pieces you'd like to show?</div>
-                <div class="desc zh">在古董圈展示你的藏品，让买家主动发现、收藏并直接联系你。<p>创始藏家 · 现开放限量 88 席位。</p></div>
-                <div class="desc en">Showcase your pieces in the Gudong circle — and let buyers discover them, save them, and reach you directly. Founding Collectors · Limited 88 seats.</div>
+                <div class="title zh">让你的藏品，被更多真正懂收藏的人看到。</div>
+                <div class="title en">Have your collections seen by more serious collectors.</div>
+                <div class="desc zh">在古董圈建立你的线上藏馆，展示藏品，让感兴趣的买家发现、收藏并直接联系你。</div>
+                <div class="desc en">Build your online gallery within the antique community. Showcase your artifacts, so interested buyers can discover, collect and contact you directly.</div>
 
                 <div class="seller-actions">
                     <a href="pricing.html#seller-services" class="btn-publish">
-                        <span class="zh">申请成为创始藏家 领 2 个免费展位</span>
-                        <span class="en">Apply as Founding Collector (2 free slots)</span>
+                        <span class="zh">了解藏家服务 </span>
+                        <span class="en">Learn about Collector Services</span>
                         <span class="arrow">→</span>
                     </a>
 
@@ -1787,8 +1788,8 @@
             <a href="privacy.html" class="zh">隐私政策</a><a href="privacy.html" class="en">Privacy</a>
             <a href="terms.html" class="zh">用户条款</a><a href="terms.html" class="en">Terms</a>
         </div>
-        <p class="footer-disclaimer zh">gudong.app 是高级古董发现平台+ 藏家网络，仅提供信息、展示与连接服务，不参与买卖交易。</p>
-        <p class="footer-disclaimer en">gudong.app is a premium antique discovery platform + collector network. It provides information, display and connection services only, and does not participate in any sale or transaction.</p>
+        <p class="footer-disclaimer zh">gudong.app 是高级古董发现平台+ 藏家网络，平台仅提供信息与连接服务；藏品真伪、品相及价格由买卖双方自行判断。</p>
+        <p class="footer-disclaimer en">ggudong.app is a premium antique discovery platform and collector network. The platform only provides information and connection services. Authenticity, condition and pricing of artifacts are to be assessed by buyers and sellers independently.</p>
         <p class="zh" style="margin-bottom:0;">© 2026 古董圈 · gudong.app <a href="javascript:void(0)" class="app-install-btn" onclick="event.preventDefault();"><svg viewBox="0 0 24 24" aria-hidden="true" width="12" height="12"><path d="M5 20h14v-2H5v2zM19 9h-4V3H9v6H5l7 7 7-7z"/></svg>安装古董.app</a></p>
         <p class="en" style="margin-bottom:0;">© 2026 Gudong · gudong.app <a href="javascript:void(0)" class="app-install-btn" onclick="event.preventDefault();"><svg viewBox="0 0 24 24" aria-hidden="true" width="12" height="12"><path d="M5 20h14v-2H5v2zM19 9h-4V3H9v6H5l7 7 7-7z"/></svg>Install gudong.app</a></p>
     </footer>

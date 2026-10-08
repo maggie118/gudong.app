@@ -9,12 +9,12 @@
     <title>私家藏馆 | Private Collection Gallery | Gudong</title>
     <meta name="keywords" content="古董圈, Gudong, 新加坡古董, Singapore antiques">
     <meta name="description" content="浏览古董圈私家藏馆，查看各商号与藏家的全部藏品。 Browse Private Collection Gallery on Gudong and see each dealer's full collection.">
-    <link rel="canonical" href="https://gudong.app/sellers/index.html">
+    <link rel="canonical" href="index.html">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="古董圈 Gudong">
     <meta property="og:title" content="私家藏馆 | Private Museums | Gudong">
     <meta property="og:description" content="浏览古董圈私家藏馆，查看各商号与藏家的全部藏品。">
-    <meta property="og:url" content="https://gudong.app/sellers/index.html">
+    <meta property="og:url" content="index.html">
     <meta property="og:image" content="https://gudong.app/assets/icons/icon-512.png">
     <link rel="icon" type="image/png" sizes="16x16" href="https://gudong.app/assets/icons/favicon-16x16.png">
     <link rel="icon" type="image/png" sizes="32x32" href="https://gudong.app/assets/icons/favicon-32x32.png">
@@ -227,19 +227,17 @@
         .gallery-stats { font-size: .8rem; color: var(--color-text-muted); margin-bottom: 1.1rem; }
         .gallery-link { font-size: .88rem; font-weight: 600; color: var(--color-gold); margin-top: auto; }
 
-        /* 创始卖家徽章 */
+        /* 创始藏家徽章 */
         .founder-badge {
-            display: inline-flex; align-items: center; gap: .28rem;
-            background: linear-gradient(135deg, #9C7A3A 0%, #D4AF6A 50%, #9C7A3A 100%);
-            color: #FFFFFF; font-size: .75rem; font-weight: 700;
-            letter-spacing: .08em;
-            padding: .25rem .55rem .25rem .42rem; border-radius: 20px;
-            white-space: nowrap; vertical-align: middle;
-            box-shadow: 0 1px 3px rgba(176,138,69,.35), inset 0 1px 0 rgba(255,255,255,.25);
-        }
-        .founder-badge svg { width: 12px; height: 12px; flex-shrink: 0; display: block; }
-        .founder-badge .badge-num { font-weight: 800; font-size: .82rem; letter-spacing: 0; }
-
+    display: inline-flex; align-items: center; gap: .2rem;
+    background: transparent; color: #FFFFFF;
+    padding: 0; border: 0; border-radius: 0;
+    white-space: nowrap; vertical-align: middle;
+    box-shadow: none;
+}
+.founder-badge-icon { display: block; width: 34px; height: 43px; object-fit: contain; flex: 0 0 auto; }
+.founder-badge .badge-num { font-weight: 800; font-size: .82rem; letter-spacing: 0; color: #D4AF6A; }
+        
         .cta-banner {
             background: var(--color-white);
             border: 1px solid var(--color-border);
@@ -285,7 +283,7 @@
       "@type": "WebPage",
       "name": "私家藏馆 | Private Collection Gallery | Gudong",
       "description": "浏览古董圈私家藏馆，查看各商号与藏家的全部藏品。 Browse Private Collection Gallery on Gudong and see each dealer",
-      "url": "https://gudong.app/sellers/index.html",
+      "url": "index.html",
       "isPartOf": { "@type": "WebSite", "name": "古董圈 Gudong", "url": "https://gudong.app/" },
       "inLanguage": "zh-SG"
     }
@@ -327,7 +325,7 @@
             <a href="https://gudong.app/categories/coins.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 钱币</span><span class="en">· Coins</span></a>
             <a href="https://gudong.app/categories/paintings.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 书画</span><span class="en">· Paintings &amp; Calligraphy</span></a>
             <a href="https://gudong.app/categories/misc.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 杂项</span><span class="en">· Miscellaneous</span></a>
-            <a href="https://gudong.app/sellers/index.html" class="sidebar-link active" onclick="closeSidebar()"><span class="zh">藏家展馆</span><span class="en">Collector Gallery</span></a>
+            <a href="index.html" class="sidebar-link active" onclick="closeSidebar()"><span class="zh">藏家展馆</span><span class="en">Collector Gallery</span></a>
             <a href="https://gudong.app/insights.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">情报 / 知识</span><span class="en">Insights</span></a>
             <a href="https://gudong.app/about.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">关于我们</span><span class="en">About</span></a>
             <button type="button" class="sidebar-lang-btn" onclick="toggleLang()" aria-label="Switch language"><span class="zh">🌐 English</span><span class="en">🌐 中文</span></button>
@@ -348,14 +346,9 @@
                 <div class="gallery-badge zh">新入驻</div><div class="gallery-badge en">New</div>
                 <div class="gallery-name">
                     <span class="zh">林记古玩</span><span class="en">Lim KW Antiques</span>
-                    <span class="founder-badge" title="创始卖家 · 2026" aria-label="Founder-Dealer 2026">
+                    <span class="founder-badge" title="创始藏家 · 2026" aria-label="Founding Collector 2026">
 
-                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                            <path d="M3 8L6 14L9 7L12 13L15 7L18 14L21 8V17C21 17.55 20.55 18 20 18H4C3.45 18 3 17.55 3 17V8Z" fill="currentColor" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/>
-                            <circle cx="3" cy="8" r="1.4" fill="currentColor"/>
-                            <circle cx="12" cy="6" r="1.4" fill="currentColor"/>
-                            <circle cx="21" cy="8" r="1.4" fill="currentColor"/>
-                        </svg>
+                        <img class="founder-badge-icon" src="../assets/images/foundingcollector.jpg" alt="创始藏家 Founder Collector">
                         <span class="badge-num">88</span>
                     </span>
                 </div>
@@ -368,15 +361,10 @@
             <a href="https://gudong.app/sellers/seller-yak-bc-antiques.html" class="gallery-card" data-seller-id="Yak-BC">
                 <div class="gallery-badge zh">新入驻</div><div class="gallery-badge en">New</div>
                 <div class="gallery-name">
-                    <span class="zh">Yak BC</span><span class="en">Yak BC</span>
-                    <span class="founder-badge" title="创始卖家 · 2026" aria-label="Founder-Dealer 2026">
+                    <span class="zh">古韵斋</span><span class="en">Yak BC</span>
+                    <span class="founder-badge" title="创始藏家 · 2026" aria-label="Founding Collector 2026">
 
-                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                            <path d="M3 8L6 14L9 7L12 13L15 7L18 14L21 8V17C21 17.55 20.55 18 20 18H4C3.45 18 3 17.55 3 17V8Z" fill="currentColor" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/>
-                            <circle cx="3" cy="8" r="1.4" fill="currentColor"/>
-                            <circle cx="12" cy="6" r="1.4" fill="currentColor"/>
-                            <circle cx="21" cy="8" r="1.4" fill="currentColor"/>
-                        </svg>
+                        <img class="founder-badge-icon" src="../assets/images/foundingcollector.jpg" alt="创始藏家 Founder Collector">
                         <span class="badge-num">88</span>
                     </span>
                 </div>
@@ -390,14 +378,9 @@
                 <div class="gallery-badge zh">新入驻</div><div class="gallery-badge en">New</div>
                 <div class="gallery-name">
                     <span class="zh">聚珍阁</span><span class="en">Ng LK Antiques</span>
-                    <span class="founder-badge" title="创始卖家 · 2026" aria-label="Founder-Dealer 2026">
+                    <span class="founder-badge" title="创始藏家 · 2026" aria-label="Founding Collector 2026">
 
-                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                            <path d="M3 8L6 14L9 7L12 13L15 7L18 14L21 8V17C21 17.55 20.55 18 20 18H4C3.45 18 3 17.55 3 17V8Z" fill="currentColor" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/>
-                            <circle cx="3" cy="8" r="1.4" fill="currentColor"/>
-                            <circle cx="12" cy="6" r="1.4" fill="currentColor"/>
-                            <circle cx="21" cy="8" r="1.4" fill="currentColor"/>
-                        </svg>
+                        <img class="founder-badge-icon" src="../assets/images/foundingcollector.jpg" alt="创始藏家 Founder Collector">
                         <span class="badge-num">88</span>
                     </span>
                 </div>
@@ -411,14 +394,9 @@
                 <div class="gallery-badge zh">新入驻</div><div class="gallery-badge en">New</div>
                 <div class="gallery-name">
                     <span class="zh">博古斋</span><span class="en">Ng CY Antiques</span>
-                    <span class="founder-badge" title="创始卖家 · 2026" aria-label="Founder-Dealer 2026">
+                    <span class="founder-badge" title="创始藏家 · 2026" aria-label="Founding Collector 2026">
 
-                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                            <path d="M3 8L6 14L9 7L12 13L15 7L18 14L21 8V17C21 17.55 20.55 18 20 18H4C3.45 18 3 17.55 3 17V8Z" fill="currentColor" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/>
-                            <circle cx="3" cy="8" r="1.4" fill="currentColor"/>
-                            <circle cx="12" cy="6" r="1.4" fill="currentColor"/>
-                            <circle cx="21" cy="8" r="1.4" fill="currentColor"/>
-                        </svg>
+                        <img class="founder-badge-icon" src="../assets/images/foundingcollector.jpg" alt="创始藏家 Founder Collector">
                         <span class="badge-num">88</span>
                     </span>
                 </div>

@@ -197,18 +197,16 @@ header {
 }
 .museum-meta b { color: #fff; font-weight: 600; }
 
-/* 创始卖家徽章 */
+/* 创始藏家徽章 */
 .founder-badge {
-    display: inline-flex; align-items: center; gap: .28rem;
-    background: linear-gradient(135deg, #9C7A3A 0%, #D4AF6A 50%, #9C7A3A 100%);
-    color: #FFFFFF; font-size: .75rem; font-weight: 700;
-    letter-spacing: .08em;
-    padding: .25rem .55rem .25rem .42rem; border-radius: 20px;
+    display: inline-flex; align-items: center; gap: .2rem;
+    background: transparent; color: #FFFFFF;
+    padding: 0; border: 0; border-radius: 0;
     white-space: nowrap; vertical-align: middle;
-    box-shadow: 0 1px 3px rgba(0,0,0,.25), inset 0 1px 0 rgba(255,255,255,.3);
+    box-shadow: none;
 }
-.founder-badge svg { width: 11px; height: 11px; flex-shrink: 0; display: block; }
-.founder-badge .badge-num { font-weight: 800; font-size: .82rem; letter-spacing: 0; }
+.founder-badge-icon { display: block; width: 42px; height: 53px; object-fit: contain; flex: 0 0 auto; }
+.founder-badge .badge-num { font-weight: 800; font-size: .82rem; letter-spacing: 0; color: #D4AF6A; }
 
 /* 简介 + 联系方式 */
 .museum-info {
@@ -421,13 +419,8 @@ footer {
             <div class="museum-name">
                 <span class="zh" id="sellerNameZh">博古斋</span>
                 <span class="en" id="sellerNameEn">Ng CY Antiques</span>
-                <span class="founder-badge" id="founderBadge" title="创始卖家 · 2026（限量 88 席）" aria-label="Founder-Dealer 2026">
-                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                        <path d="M3 8L6 14L9 7L12 13L15 7L18 14L21 8V17C21 17.55 20.55 18 20 18H4C3.45 18 3 17.55 3 17V8Z" fill="currentColor" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/>
-                        <circle cx="3" cy="8" r="1.4" fill="currentColor"/>
-                        <circle cx="12" cy="6" r="1.4" fill="currentColor"/>
-                        <circle cx="21" cy="8" r="1.4" fill="currentColor"/>
-                    </svg>
+                <span class="founder-badge" id="founderBadge" title="创始藏家 · 2026（限量 88 席）" aria-label="Founding Collector 2026">
+                    <img class="founder-badge-icon" src="../assets/images/Founding%20Collector.jpeg" alt="创始藏家 Founder Collector">
                     <span class="badge-num">88</span>
                 </span>
             </div>

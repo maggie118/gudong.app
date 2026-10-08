@@ -81,7 +81,7 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Noto+Serif+SC:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital,wght@0,400;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Noto+Serif+SC:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
         /* ============================================================
@@ -395,14 +395,32 @@
             padding: 2.2rem 0 .5rem;
             position: relative;
         }
+        @font-face {
+            font-family: "QIJIC";
+            src: url("https://github.com/LingDong-/qiji-font/releases/download/0.0.4/qiji-combo.woff2") format("woff2");
+            font-style: normal;
+            font-weight: 400;
+            font-display: swap;
+            unicode-range: U+53E4, U+8463, U+53D1, U+73B0, U+4E0E, U+85CF, U+5BB6, U+7F51, U+7EDC;
+        }
         .hero-eyebrow {
-            font-family: var(--font-serif);
+            font-family: "Playfair Display", "Noto Serif SC", Georgia, serif;
             font-style: italic;
-            font-size: .92rem;
+            font-size: 1.3rem;
+            font-weight: 400;
             color: var(--color-bronze-muted);
             letter-spacing: .12em;
             text-transform: uppercase;
             margin-bottom: 1rem;
+        }
+        .hero-eyebrow .en {
+            font-size: .525rem;
+            font-family: "IM Fell English", "Times New Roman", serif;
+            font-style: italic;
+        }
+        .hero-eyebrow .zh {
+            font-family: "QIJIC", "黄令东齐伋复刻体", "Noto Serif SC", serif;
+            font-style: normal;
         }
         .hero-eyebrow::after {
             content: '';
@@ -1490,7 +1508,7 @@
         <!-- ============ HERO ============ -->
         <section id="hero" style="padding-top: 0;">
             <div class="hero-clean">
-                <div class="hero-eyebrow"><span class="zh">古董发现与藏家网络</span><span class="en">Antiques Discovery &amp; Collector Network</span></div>
+                <div class="hero-eyebrow"><span class="zh">古董圈 · 古董发现与藏家网络</span><span class="en">Antiques Discovery &amp; Collector Network</span></div>
                 <div class="hero-title-main">
                     <span class="zh">每天看看，有没有值得收藏的东西。</span>
                     <span class="en">Discover something worth collecting, every day.</span>

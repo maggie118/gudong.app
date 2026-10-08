@@ -1043,6 +1043,12 @@
             letter-spacing: -.02em;
             font-family: var(--font-serif);
         }
+        .services-tagline {
+            margin: -.8rem 0 1.2rem;
+            color: var(--color-bronze-muted);
+            font-size: .92rem;
+            letter-spacing: .12em;
+        }
         .how-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -1417,13 +1423,13 @@
     <script src="assets/js/gudong-follow.js"></script>
     <style>
     /* 收藏按钮（心形）—— 与藏品详情页 items/*.html 的 .fav-btn 同一套视觉语言：
-       无边框透明底 · 金色描边 · 未收藏空心 / 收藏实心 · hover 放大并转主色。
+       32px 点击热区 · 18px 细线心形 · 未收藏浅灰 / 已收藏青铜棕实心。
        尺寸比详情页（44px）小一档，首页卡片里不抢视觉。 */
     .gd-heart {
         display: inline-flex; align-items: center; justify-content: center;
-        width: 30px; height: 30px; padding: 0; margin: 0; flex-shrink: 0;
+        width: 32px; height: 32px; padding: 0; margin: 0; flex-shrink: 0;
         background: transparent; border: none; border-radius: 4px;
-        color: var(--color-gold); line-height: 1; cursor: pointer;
+        color: #94928C; line-height: 1; cursor: pointer;
         -webkit-tap-highlight-color: transparent; -webkit-user-select: none; user-select: none;
         transition: transform .18s ease, color .18s ease;
     }
@@ -1431,26 +1437,24 @@
     .gd-heart:active { transform: scale(.94); }
     .gd-heart:focus-visible { outline: 2px solid var(--color-gold); outline-offset: 3px; border-radius: 4px; }
     .gd-heart svg {
-        width: 22px; height: 22px; display: block; overflow: visible; pointer-events: none;
-        fill: none; stroke: currentColor; stroke-width: 2.4;
+        width: 18px; height: 18px; display: block; overflow: visible; pointer-events: none;
+        fill: none; stroke: currentColor; stroke-width: 1.55;
         stroke-linecap: round; stroke-linejoin: round;
         transition: fill .18s ease, stroke-width .18s ease;
     }
-    .gd-heart.on svg { fill: currentColor; stroke: currentColor; stroke-width: 2; }
+    .gd-heart.on { color: #8A5A3B; }
+    .gd-heart.on svg { fill: currentColor; stroke: currentColor; stroke-width: 1.55; }
     .gd-heart .fav-icon { display: block; pointer-events: none; }
     @keyframes favPop { 0% { transform: scale(1); } 45% { transform: scale(1.28); } 100% { transform: scale(1); } }
     .gd-heart.pop svg { animation: favPop .32s ease; }
     /* 卡片浮层上的收藏：悬在图片上，加白色光晕保证任何底图上都读得清（与详情页同思路）
-       --card：刚刚上新卡片（图片右上角）；--finds：今日发现卡片（图片右下角，2026-10-08） */
+       --card：刚刚上新卡片（图片右下角）；--finds：今日发现卡片（图片右下角） */
     .gd-heart--card, .gd-heart--finds {
         position: absolute; z-index: 3;
-        filter:
-            drop-shadow(0 0 2px rgba(255,255,255,.95))
-            drop-shadow(0 0 5px rgba(255,255,255,.7))
-            drop-shadow(0 1px 2px rgba(0,0,0,.35));
+        filter: drop-shadow(0 1px 1px rgba(0,0,0,.22));
     }
-    .gd-heart--card { top: auto; right: .6rem; bottom: .6rem; }
-    .gd-heart--finds { right: .6rem; bottom: .6rem; }
+    .gd-heart--card { top: auto; right: .45rem; bottom: .45rem; }
+    .gd-heart--finds { top: auto; right: .45rem; bottom: .45rem; }
     .finds-alert {
         margin: .5rem 0 0; padding: .38rem .68rem; border-radius: 8px;
         font-size: .78rem; font-weight: 600; line-height: 1.45;
@@ -1509,7 +1513,7 @@
         <!-- ============ HERO ============ -->
         <section id="hero" style="padding-top: 0;">
             <div class="hero-clean">
-                <div class="hero-eyebrow"><span class="zh">古董圈 · 古董发现与藏家网络</span><span class="en">Antiques Discovery &amp; Collector Network</span></div>
+                <div class="hero-eyebrow"><span class="zh">古董圈｜发现值得收藏的中国古董，连接真正的藏家。</span><span class="en">Gudong — Discover Chinese antiques. Connect with collectors.</span></div>
                 <div class="hero-title-main">
                     <span class="zh">每天看看，有没有值得收藏的东西。</span>
                     <span class="en">Discover something worth collecting, every day.</span>
@@ -1522,8 +1526,6 @@
                     <span class="zh">搜你正在找的东西，或往下逛「今日发现」与「刚刚上新」</span>
                     <span class="en">Find what you're searching for, or scroll for Today's Finds &amp; Just Listed</span>
                 </div>
-                <a href="#today-finds" class="hero-btn"><span class="zh">开始浏览</span><span class="en">Explore the Collection</span></a>
-
                 <div class="search-box">
                     <input type="text" id="searchInput"
                            placeholder="试试搜「青花」「康熙通宝」「和田玉」…"
@@ -1545,6 +1547,7 @@
                 </div>
                 <div class="search-tip zh">瓷器 · 玉器 · 钱币 · 书画 · 杂项</div>
                 <div class="search-tip en">Porcelain · Jade · Coins · Paintings · Miscellaneous</div>
+                <a href="#today-finds" class="hero-btn"><span class="zh">开始浏览</span><span class="en">Explore the Collection</span></a>
             </div>
         </section>
 
@@ -1639,8 +1642,8 @@
             <div class="intel-head">
                 <div>
                     <span class="title" id="intelTitle">
-                        <span class="zh">📡 今日情报 · 捡漏雷达</span>
-                        <span class="en">📡 Daily Brief・Find Radar</span>
+                        <span class="zh">今日情报 · 捡漏雷达</span>
+                        <span class="en">Daily Brief・Find Radar</span>
                     </span>
                     <span class="sub zh">编辑整理，不是商品广告。看看今天市场在发生什么。</span>
                     <span class="sub en">Editorially curated. Not ads. What's moving in the market today.</span>
@@ -1656,7 +1659,7 @@
         <section id="insights">
             <div class="section-head2">
                 <div>
-                    <span class="title zh">📖 情报 / 知识</span><span class="title en">📖 Insights &amp; Guides</span>
+                    <span class="title zh">情报 / 知识</span><span class="title en">Insights &amp; Guides</span>
                     <span class="sub-line zh">看懂器物，才敢放心入手</span>
                     <span class="sub-line en">Know the piece, then buy with confidence</span>
                 </div>
@@ -1700,6 +1703,7 @@
             <div style="text-align:center;max-width:1080px;margin:0 auto;">
                 <h2 class="zh">为什么是古董圈？</h2>
                 <h2 class="en">Why the Antique Community?</h2>
+                <p class="services-tagline"><span class="zh">发现 · 收藏 · 连接</span><span class="en">Discover · Collect · Connect</span></p>
                     <div class="how-grid">
                     <div class="how-card">
                         <div class="how-num">01</div>
@@ -2275,7 +2279,7 @@
             try { var raw = localStorage.getItem(FAV_KEY); if (!raw) return []; var arr = JSON.parse(raw); if (!Array.isArray(arr)) return []; return arr.filter(function (x) { return typeof x === 'string' && x; }); } catch (e) { return []; }
         }
         function isFav(id) { var ni = normId(id); return readFav().indexOf(ni) !== -1; }
-        function updateHearts() { document.querySelectorAll('.gd-heart').forEach(function (h) { var id = h.getAttribute('data-fav-id'); h.classList.toggle('on', !!(id && isFav(id))); }); }
+        function updateHearts() { document.querySelectorAll('.gd-heart').forEach(function (h) { var id = h.getAttribute('data-fav-id'); var on = !!(id && isFav(id)); h.classList.toggle('on', on); h.setAttribute('aria-pressed', on ? 'true' : 'false'); }); }
         document.addEventListener('click', function (e) {
             var h = e.target && e.target.closest ? e.target.closest('.gd-heart') : null;
             if (!h) return;
@@ -2329,6 +2333,9 @@
               <a href="items/${esc(normId(f.item_id))}.html" class="finds-card ${cls}" data-cat="${catKey(f.category)}" data-keywords="${kw}">
                 <div class="finds-image">
                   <img src="${imgPath(f)}" alt="${esc(f.title_zh)} ${esc(f.title_en)} - Chinese antiques Singapore" loading="lazy" onerror="this.onerror=null;this.src=window.__GD_PH__">
+                  <button type="button" class="gd-heart gd-heart--finds" data-fav-id="${esc(normId(f.item_id))}" aria-pressed="false" aria-label="收藏 / Add to favourites" title="收藏 / Add to favourites">
+                    <svg class="fav-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                  </button>
                 </div>
                 <div class="finds-title zh">${esc(f.title_zh)}</div><div class="finds-title en">${esc(f.title_en)}</div>
                 ${priceHtml(f, 'finds-price')}
@@ -2351,6 +2358,9 @@
                   <a href="${detailUrl}" class="item-card" data-cat="${catKey(f.category)}" data-keywords="${kw}" aria-label="${esc(nz)}">
                     <div class="item-image">
                       <img src="${imgSrc}" alt="${esc(f.title_zh)} ${esc(f.title_en)} - Chinese antiques Singapore" loading="lazy" onerror="this.onerror=null;this.src=window.__GD_PH__">
+                      <button type="button" class="gd-heart gd-heart--card" data-fav-id="${esc(normId(f.item_id))}" aria-pressed="false" aria-label="收藏 / Add to favourites" title="收藏 / Add to favourites">
+                        <svg class="fav-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                      </button>
                                           </div>
                     <div class="item-info">
                       <div class="item-title zh">${esc(f.title_zh || f.title_en || '')}</div>
@@ -2470,36 +2480,36 @@
         const INTEL_FEED = [
             {
                 type: 'new',
-                zh: '📌 新上架：今日已有 12 件新藏品进入，钱币类占 5 件，其中 3 件为「私聊询价」。',
-                en: '📌 New arrivals: 12 items today, 5 in coins — 3 of them "Enquire only".',
+                zh: '新上架：今日已有 12 件新藏品进入，钱币类占 5 件，其中 3 件为「私聊询价」。',
+                en: 'New arrivals: 12 items today, 5 in coins — 3 of them "Enquire only".',
                 meta: '平台数据 · 今日',
                 metaEn: 'Platform data · today'
             },
             {
                 type: 'drop',
-                zh: '📌 降价信号：民国玉镯类目近 3 天有 4 件下调价格，平均降幅约 12%，可留意议价空间。',
-                en: '📌 Price drop: 4 Republican-era jade bangles reduced in the last 3 days, avg. cut ~12% — room to negotiate.',
+                zh: '降价信号：民国玉镯类目近 3 天有 4 件下调价格，平均降幅约 12%，可留意议价空间。',
+                en: 'Price drop: 4 Republican-era jade bangles reduced in the last 3 days, avg. cut ~12% — room to negotiate.',
                 meta: '市场快照 · 3 天',
                 metaEn: 'Market snapshot · 3 days'
             },
             {
                 type: 'compare',
-                zh: '📌 同类对比：一只明末青花碗（同类器型）本周成交价 S$680，平台内现有一件同类标价 S$420。',
-                en: '📌 Comparable: a late-Ming blue-and-white bowl sold at S$680 this week; a similar piece is listed here at S$420.',
+                zh: '同类对比：一只明末青花碗（同类器型）本周成交价 S$680，平台内现有一件同类标价 S$420。',
+                en: 'Comparable: a late-Ming blue-and-white bowl sold at S$680 this week; a similar piece is listed here at S$420.',
                 meta: '同类参照 · 仅供参考',
                 metaEn: 'Comparable reference · for reference only'
             },
             {
                 type: 'collector',
-                zh: '📌 藏家动态：本地一位藏家本周集中上架 8 件钱币，均为单件，可私聊打包。',
-                en: '📌 Collector activity: a local collector listed 8 coins this week, all singles, bundle negotiable.',
+                zh: '藏家动态：本地一位藏家本周集中上架 8 件钱币，均为单件，可私聊打包。',
+                en: 'Collector activity: a local collector listed 8 coins this week, all singles, bundle negotiable.',
                 meta: '藏家动态',
                 metaEn: 'Collector activity'
             },
             {
                 type: 'platform',
-                zh: '📌 平台快讯：创始藏家招募进行中，限量 88 席免费入驻，前 2 件藏品免费曝光。',
-                en: '📌 Platform note: Founding Collector seats are open — limited to 88, join free, first 2 pieces get free exposure',
+                zh: '平台快讯：创始藏家招募进行中，限量 88 席免费入驻，前 2 件藏品免费曝光。',
+                en: 'Platform note: Founding Collector seats are open — limited to 88, join free, first 2 pieces get free exposure',
                 meta: '平台公告',
                 metaEn: 'Platform notice'
             }
@@ -2520,8 +2530,8 @@
             box.removeAttribute('aria-busy');
             box.innerHTML = list.map(it => {
                 const t = INTEL_TYPE_LABEL[it.type] || INTEL_TYPE_LABEL.new;
-                const zh = esc(it.zh || it.text_zh || '');
-                const en = esc(it.en || it.text_en || zh);
+                const zh = esc(String(it.zh || it.text_zh || '').replace(/[📌📡]/g, ''));
+                const en = esc(String(it.en || it.text_en || zh).replace(/[📌📡]/g, ''));
                 const metaZh = esc(it.meta || it.meta_zh || '编辑整理');
                 const metaEn = esc(it.metaEn || it.meta_en || 'Editorial');
                 return `

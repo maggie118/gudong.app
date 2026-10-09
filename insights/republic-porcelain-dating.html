@@ -412,9 +412,11 @@
         </div>
         <nav class="sidebar-nav">
             <a href="../index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">首页</span><span class="en">Home</span></a>
-            <a href="../index.html#daily-intel" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 今日捡漏</span><span class="en">· Daily Radar</span></a>
-            <a href="../index.html#today-finds" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 今日好货</span><span class="en">· Today's Picks</span></a>
-            <a href="../index.html#new-listings" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 新上架好货</span><span class="en">· New Arrivals</span></a>
+            <a href="../my/saved.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">我的收藏 · 关注</span><span class="en">Saved &amp; Followed</span></a>
+            <a href="../my/briefing.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">今日简报</span><span class="en">Today's Brief</span></a>
+            <a href="../index.html#daily-intel" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 捡漏情报</span><span class="en">· Insider Tips</span></a>
+            <a href="../index.html#today-finds" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 今日发现</span><span class="en">· Today's Finds</span></a>
+            <a href="../index.html#new-listings" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 刚刚上新</span><span class="en">· Just Listed</span></a>
             <a href="../collection.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">藏品库</span><span class="en">Collection</span></a>
             <a href="../categories/porcelain.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 瓷器</span><span class="en">· Porcelain</span></a>
             <a href="../categories/jade.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 玉器</span><span class="en">· Jade</span></a>
@@ -423,10 +425,9 @@
             <a href="../categories/paintings.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 书画</span><span class="en">· Paintings &amp; Calligraphy</span></a>
             <a href="../categories/misc.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 杂项</span><span class="en">· Miscellaneous</span></a>
             <a href="../sellers/index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">藏家展馆</span><span class="en">Collector Gallery</span></a>
-            <a href="../insights.html" class="sidebar-link active" onclick="closeSidebar()"><span class="zh">情报 / 知识</span><span class="en">Insights</span></a>
+            <a href="../insights.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">情报 / 知识</span><span class="en">Insights</span></a>
             <a href="../about.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">关于我们</span><span class="en">About</span></a>
-            <button type="button" class="sidebar-lang-btn" onclick="toggleLang()" aria-label="Switch language"><span class="zh">🌐 English</span><span class="en">🌐 中文</span></button>
-        </nav>
+            <button type="button" class="sidebar-lang-btn" onclick="toggleLang()" aria-label="Switch language"><span class="zh">🌐 English</span><span class="en">🌐 中文</span></button></nav>
     </aside>
 
     <main class="article-wrap">
@@ -733,6 +734,12 @@
         </section>
     </main>
 
+        <style>
+        /* 2026-10-09：footer 品牌区/免责声明/版权（全站统一·精简版） */
+        .footer-brand { font-weight: 700; font-size: .84rem; color: #5c564f; margin-bottom: .35rem; }
+        .footer-disclaimer { max-width: 680px; margin: 0 auto 1.1rem; font-size: .78rem; line-height: 1.65; color: #8a8178; }
+        .footer-copyright { margin-bottom: .3rem; }
+        </style>
     <footer>
         <div class="footer-nav">
             <a href="../about.html" class="zh">联系我们</a><a href="../about.html" class="en">Contact</a>
@@ -742,10 +749,9 @@
             <a href="../privacy.html" class="zh">隐私政策</a><a href="../privacy.html" class="en">Privacy</a>
             <a href="../terms.html" class="zh">用户条款</a><a href="../terms.html" class="en">Terms</a>
         </div>
-        <p class="footer-disclaimer zh">gudong.app 是高级古董发现平台，仅提供信息、展示与连接服务，不参与买卖交易。</p>
-        <p class="footer-disclaimer en">gudong.app is a premium antiques discovery platform. It provides information, display and connection services only, and does not participate in any sale or transaction.</p>
-        <p class="zh" style="margin-bottom:0;">© 2026 古董圈 · gudong.app <a href="javascript:void(0)" class="app-install-btn" onclick="event.preventDefault();"><svg viewBox="0 0 24 24" aria-hidden="true" width="12" height="12"><path d="M5 20h14v-2H5v2zM19 9h-4V3H9v6H5l7 7 7-7z"/></svg>安装古董.app</a></p>
-        <p class="en" style="margin-bottom:0;">© 2026 Gudong · gudong.app <a href="javascript:void(0)" class="app-install-btn" onclick="event.preventDefault();"><svg viewBox="0 0 24 24" aria-hidden="true" width="12" height="12"><path d="M5 20h14v-2H5v2zM19 9h-4V3H9v6H5l7 7 7-7z"/></svg>Install gudong.app</a></p>
+        <p class="footer-brand"><span class="zh">gudong.app — 高端古董发现平台与藏家网络</span><span class="en">gudong.app — Premium antiques discovery platform &amp; collector network</span></p>
+        <p class="footer-disclaimer"><span class="zh">平台仅提供藏品信息展示与藏家连接服务，不参与任何买卖交易，真伪、品相及价格由双方自行判断。</span><span class="en">The platform provides item display and collector connection services only and does not participate in any transaction; authenticity, condition and pricing are to be judged solely by the buyer and seller.</span></p>
+        <p class="footer-copyright"><span class="zh">© 2026 gudong.app 版权所有 · <a href="javascript:void(0)" class="app-install-btn" onclick="event.preventDefault();"><svg viewBox="0 0 24 24" aria-hidden="true" width="12" height="12"><path d="M5 20h14v-2H5v2zM19 9h-4V3H9v6H5l7 7 7-7z"/></svg>安装古董.app</a></span><span class="en">© 2026 gudong.app All rights reserved · <a href="javascript:void(0)" class="app-install-btn" onclick="event.preventDefault();"><svg viewBox="0 0 24 24" aria-hidden="true" width="12" height="12"><path d="M5 20h14v-2H5v2zM19 9h-4V3H9v6H5l7 7 7-7z"/></svg>Install gudong.app</a></span></p>
     </footer>
 
     <script>

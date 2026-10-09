@@ -192,13 +192,10 @@ main section[id] { scroll-margin-top: 92px; }
 .tier-tag.flagship { background: linear-gradient(135deg, #9C7A3A 0%, #D4AF6A 100%); color: #FFFFFF; box-shadow: 0 2px 6px rgba(156,122,58,.3); }
 
 /* 倒计时进度条 */
-.progress-block { width: 100%; margin: 1.2rem 0; }
-.progress-label { display: flex; justify-content: space-between; align-items: baseline; font-size: .72rem; font-weight: 700; color: var(--color-primary-dark); margin-bottom: .4rem; }
-.progress-label .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--color-gold); display: inline-block; margin-right: 4px; box-shadow: 0 0 0 3px rgba(156,122,58,.18); }
-.progress-count { color: var(--color-gold); font-size: .9rem; }
-.progress-track { position: relative; height: 8px; background: rgba(156,122,58,.15); border-radius: 999px; overflow: hidden; }
-.progress-fill { position: absolute; left: 0; top: 0; bottom: 0; width: 5.68%; background: linear-gradient(90deg, #9C7A3A, #D4AF6A); border-radius: 999px; }
-.progress-foot { margin-top: .5rem; font-size: .68rem; color: var(--color-text-secondary); }
+.founding-note { width: 100%; margin: 1.2rem 0; }
+.founding-note .fn-title { display: flex; align-items: center; font-size: .78rem; font-weight: 700; color: var(--color-primary-dark); }
+.founding-note .dot { flex: none; width: 6px; height: 6px; border-radius: 50%; background: var(--color-gold); display: inline-block; margin-right: 6px; box-shadow: 0 0 0 3px rgba(156,122,58,.18); }
+.founding-note .fn-desc { margin-top: .45rem; font-size: .68rem; line-height: 1.6; color: var(--color-text-secondary); }
 
 /* 委托找货区 */
 .sourcing-section { margin: 3rem auto 0; padding: 2rem; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 18px; }
@@ -575,15 +572,9 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
           <li><span style="color:#9C7A3A; font-weight:700;"><img src="assets/images/foundingcollector.webp" alt="创始藏家勋章 Founding Collector Badge" style="width:26px;height:auto;vertical-align:-7px;margin-right:6px;"><span class="zh">专属创始藏家尊贵勋章</span><span class="en">Exclusive Founding Badge</span></span></li>
         </ul>
         
-        <div class="progress-block">
-          <div class="progress-label">
-            <span><span class="dot"></span><span class="zh">创始席位倒计时</span><span class="en">Founding Countdown</span></span>
-            <span class="progress-count">5 / 88 席</span>
-          </div>
-          <div class="progress-track">
-            <div class="progress-fill" style="width:5.68%"></div>
-          </div>
-          <div class="progress-foot"><span class="zh">仅剩 <strong>83</strong> 席，越早入驻越显行业先机</span><span class="en">Only <strong>83</strong> seats left — secure your edge early</span></div>
+        <div class="founding-note">
+          <div class="fn-title"><span class="dot"></span><span class="zh">2026 创始藏家计划</span><span class="en">2026 Founding Collector Programme</span></div>
+          <div class="fn-desc"><span class="zh">限额 88 位，申请资格以平台确认结果为准。</span><span class="en">Limited to 88 seats. Eligibility is subject to the platform's confirmation.</span></div>
         </div>
 
          <a class="card-cta" href="https://airtable.com/apprn6XDQnAm8bkaT/shrlQLTRfG5RlYjD4" target="_blank" rel="noopener noreferrer"><span class="zh">申请成为创始藏家 →</span><span class="en">Apply for Founding Seat →</span></a>

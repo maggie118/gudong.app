@@ -25,12 +25,6 @@
 
     <link rel="canonical" href="https://www.gudong.app/collection">
 
-
-
-
-
-
-
     <link rel="manifest" href="/manifest.json">
     <meta name="theme-color" content="#7A4E33">
     <meta name="mobile-web-app-capable" content="yes">
@@ -133,24 +127,48 @@
         }
         .header-left { display: flex; align-items: center; gap: .9rem; min-width: 0; }
 
+        /* 与 index.html 完全一致的品牌 LOGO */
         .brand {
-            display: flex; flex-direction: row; align-items: center; gap: .7rem;
-            line-height: 1; flex-shrink: 0; text-decoration: none;
-            color: inherit; min-width: 0;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: .7rem;
+            line-height: 1;
+            flex-shrink: 0;
+            text-decoration: none;
+            color: inherit;
+            min-width: 0;
         }
-        .brand-logo-img { height: 36px; width: auto; display: block; object-fit: contain; }
-        .brand-text { display: flex; flex-direction: column; justify-content: center; min-width: 0; }
-        @media (max-width: 640px) { .brand-logo-img { height: 30px; } }
-        .brand h1 {
-            font-size: 1.32rem; font-weight: 700; letter-spacing: .01em;
-            line-height: 1.2; color: var(--color-primary-dark);
+        .brand:hover { text-decoration: none; }
+        .brand-logo-img { height: 38px; width: auto; display: block; object-fit: contain; flex-shrink: 0; }
+        .brand-text {
+            display: flex; flex-direction: column; justify-content: center; min-width: 0;
+            line-height: 1.15; letter-spacing: -.005em;
         }
-        .brand p {
-            color: var(--color-qianjinzong); margin-top: .2rem;
-            font-size: .75rem; letter-spacing: .18em; text-transform: uppercase;
+        .brand-line1 { display: flex; align-items: baseline; gap: .32rem; }
+        .brand-zh {
+            font-family: var(--font-serif);
+            font-weight: 700;
+            color: var(--color-primary-dark);
+            letter-spacing: .005em;
+            font-size: 1.32rem;
         }
-        .brand h1 .en, .brand p .en, .sidebar-brand .en {
-            font-family: var(--font-sans); letter-spacing: normal;
+        .brand-en {
+            font-family: var(--font-sans);
+            font-weight: 600;
+            color: var(--color-primary-dark);
+            letter-spacing: -.012em;
+            font-size: 1.32rem;
+        }
+        .brand-text small {
+            display: block;
+            color: var(--color-qianjinzong);
+            font-family: var(--font-sans);
+            font-weight: 500;
+            font-size: .68rem;
+            letter-spacing: .14em;
+            margin-top: 2px;
+            text-transform: uppercase;
         }
 
         .header-right { display: flex; align-items: center; gap: .7rem; flex-shrink: 0; }
@@ -244,15 +262,37 @@
         }
         .sidebar-toggle-inner:hover { color: var(--color-primary); }
 
+        /* 侧边栏品牌区 —— 与 index.html 完全一致 */
         .sidebar-brand {
             display: flex; flex-direction: column; align-items: center; justify-content: center;
-            gap: .15rem; padding: 1.2rem 0;
-            font-weight: 700; color: var(--color-primary-dark);
+            gap: .1rem;
+            padding: 1.1rem 0;
+            font-weight: 700;
+            color: var(--color-primary-dark);
             border-bottom: 1px solid var(--color-border);
-            font-family: var(--font-serif);
         }
-        .sidebar-brand .zh { font-size: 1.08rem; letter-spacing: .06em; }
-        .sidebar-brand .en { font-size: .82rem; letter-spacing: .22em; color: var(--color-qianjinzong); }
+        .sidebar-brand .logo-zh {
+            font-size: 1.05rem;
+            font-family: var(--font-serif);
+            font-weight: 700;
+            color: var(--color-primary-dark);
+            letter-spacing: .005em;
+        }
+        .sidebar-brand .logo-en {
+            font-size: 1.05rem;
+            letter-spacing: normal;
+            font-family: var(--font-sans);
+            font-weight: 600;
+            color: var(--color-primary-dark);
+        }
+        .sidebar-brand .logo-tagline {
+            font-size: .62rem;
+            letter-spacing: .16em;
+            color: var(--color-qianjinzong);
+            text-transform: uppercase;
+            font-family: var(--font-sans);
+            font-weight: 500;
+        }
 
         .sidebar-nav { display: flex; flex-direction: column; padding: .4rem 0; }
 
@@ -261,10 +301,16 @@
             text-decoration: none; font-size: .95rem;
             transition: all var(--dur) var(--ease);
         }
-        .sidebar-link:hover { background: var(--color-primary-light); color: var(--color-primary); }
+        /* hover 时不再出现下划线（覆盖全局 a:hover） */
+        .sidebar-link:hover {
+            background: var(--color-primary-light);
+            color: var(--color-primary);
+            text-decoration: none;
+        }
         .sidebar-link.active {
             background: var(--color-primary-light);
             color: var(--color-primary); font-weight: 600;
+            text-decoration: none;
         }
 
         .sidebar-sub {
@@ -274,7 +320,18 @@
             text-decoration: none; font-size: .86rem;
             transition: all var(--dur) var(--ease);
         }
-        .sidebar-sub:hover { color: var(--color-primary); background: var(--color-primary-light); }
+        /* hover 时不再出现下划线（覆盖全局 a:hover） */
+        .sidebar-sub:hover {
+            color: var(--color-primary);
+            background: var(--color-primary-light);
+            text-decoration: none;
+        }
+        .sidebar-sub.active {
+            color: var(--color-primary);
+            background: var(--color-primary-light);
+            font-weight: 600;
+            text-decoration: none;
+        }
 
         .sidebar-lang-btn {
             display: flex; align-items: center; justify-content: center; gap: .4rem;
@@ -897,8 +954,11 @@
         /* ============================================================
            RESPONSIVE
            ============================================================ */
-            @media (max-width: 820px) {
+        @media (max-width: 820px) {
             header { height: 64px; gap: .6rem; }
+            .brand-logo-img { height: 34px; }
+            .brand-zh, .brand-en { font-size: 1.18rem; }
+            .brand-text small { font-size: .6rem; letter-spacing: .12em; }
             .btn-publish { padding: .65rem .9rem; font-size: .8rem; }
             .container { padding-top: 2.4rem; }
             .col-grid { grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 1rem; }
@@ -906,8 +966,11 @@
         }
         @media (max-width: 560px) {
             body { font-size: 15px; }
-            .brand h1 { font-size: 1.12rem; }
-
+            .brand-logo-img { height: 30px; }
+            .brand-zh, .brand-en { font-size: 1.08rem; }
+            .brand-text small { font-size: .55rem; letter-spacing: .1em; margin-top: 1px; }
+            .brand { gap: .5rem; }
+            .header-left { gap: .6rem; }
             .header-right { gap: .4rem; }
             .btn-publish-text { display: none; }
             .container { padding: 2rem 4.5% 3rem; }
@@ -931,12 +994,12 @@
     <header>
         <div class="header-left">
             <button class="menu-toggle" onclick="openSidebar()" aria-label="menu" aria-expanded="false" id="menuToggle">☰</button>
-            <a href="index.html" class="brand">
+            <a href="index.html" class="brand" aria-label="古董圈 Gudong 首页">
                 <img src="assets/icons/logo-mark.png" alt="古董圈 Gudong" class="brand-logo-img" onerror="this.style.display='none'">
-                <div class="brand-text">
-                    <h1><span class="zh">古董圈</span><span class="en">GUDONG</span></h1>
-                    <p><span class="zh">GUDONG.APP</span><span class="en">GUDONG.APP</span></p>
-                </div>
+                <span class="brand-text">
+                    <span class="brand-line1"><span class="brand-zh">古董圈</span> <span class="brand-en">Gudong</span></span>
+                    <small>Collectors' Network</small>
+                </span>
             </a>
         </div>
 
@@ -950,7 +1013,8 @@
     <aside class="sidebar" id="sidebar">
         <button class="sidebar-toggle-inner" onclick="closeSidebar()" aria-label="close menu">☰</button>
         <div class="sidebar-brand">
-            <span class="zh">古董圈</span><span class="en">GUDONG</span>
+            <span class="logo-zh">古董圈 <span class="logo-en">Gudong</span></span>
+            <span class="logo-tagline">Collectors' Network</span>
         </div>
         <nav class="sidebar-nav">
             <a href="index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">首页</span><span class="en">Home</span></a>
@@ -968,8 +1032,15 @@
             <a href="categories/misc.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 杂项</span><span class="en">· Miscellaneous</span></a>
             <a href="sellers/index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">藏家展馆</span><span class="en">Collector Gallery</span></a>
             <a href="insights.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">情报 / 知识</span><span class="en">Insights</span></a>
+            <a href="tools/index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">工具</span><span class="en">Tools</span></a>
+            <a href="tools/index.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 工具汇总首页</span><span class="en">· Tools Home</span></a>
+            <a href="tools/year-since.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 年份距今计算器</span><span class="en">· Years-since-year Calculator</span></a>
+            <a href="tools/ganzhi.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 干支公历换算器</span><span class="en">· Sexagenary-Gregorian Converter</span></a>
+            <a href="tools/era-lookup.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 古文化·朝代年代速查表</span><span class="en">· Culture &amp; Dynasty Era Lookup</span></a>
+            <a href="tools/currencyconvert.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 拍卖藏品货币参考换算器</span><span class="en">· Currency Reference Converter</span></a>
             <a href="about.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">关于我们</span><span class="en">About</span></a>
-            <button type="button" class="sidebar-lang-btn" onclick="toggleLang()" aria-label="Switch language"><span class="zh">🌐 English</span><span class="en">🌐 中文</span></button></nav>
+            <button type="button" class="sidebar-lang-btn" onclick="toggleLang()" aria-label="Switch language"><span class="zh">🌐 English</span><span class="en">🌐 中文</span></button>
+        </nav>
     </aside>
 
     <main class="container">
@@ -1180,7 +1251,6 @@
         let ALL_ITEMS = [];
         let CURRENT_CAT = 'all';
 
-        /* 演示数据（预览兜底，永远能渲染） */
         const DEMO_ITEMS = [
             { id: 'demo-1', title_zh: '清乾隆 青花山水笔筒', title_en: 'Qianlong Blue & White Brush Pot', era_zh: '清乾隆', category: 'porcelain', price: 1280 },
             { id: 'demo-2', title_zh: '和田玉 双面雕玉佩', title_en: 'Hetian Jade Double-Sided Pendant', era_zh: '清', category: 'jade', price: '私聊询价' },
@@ -1241,10 +1311,8 @@
             applyFilter();
         }
 
-        /* 当 gudong-data.js 完成渲染时，同步索引 */
         document.addEventListener('gd:rendered', buildItemIndex);
 
-        /* 筛选 */
         function applyFilter() {
             let visible = 0;
             ALL_ITEMS.forEach(it => {
@@ -1264,7 +1332,6 @@
         }
         window.setFilter = setFilter;
 
-        /* 启动：先尝试 gudong-data.js；若不可用则使用演示数据 */
         (function init() {
             showSkeleton();
             if (GD && typeof GD.mountCategory === 'function') {
@@ -1275,7 +1342,6 @@
                         page: 'collection',
                         style: 'card'
                     });
-                    /* 保险：若 3 秒内仍无卡片渲染，回落到演示数据 */
                     setTimeout(function () {
                         const grid = document.getElementById('allItemsGrid');
                         if (grid && !grid.querySelector('.item-card')) {
@@ -1429,7 +1495,7 @@
         });
     })();
     </script>
-<!-- 2026-10-07：分享功能（Web Share API + 剪贴板降级 + Toast 反馈），全站统一 -->
+<!-- 分享功能（Web Share API + 剪贴板降级 + Toast 反馈），全站统一 -->
 <style>
 .gd-share-btn {
     border: 1px solid var(--color-border); background: transparent;
@@ -1451,7 +1517,6 @@
 .gd-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 </style>
 <script>
-/* 分享：Web Share API（原生分享面板）→ navigator.clipboard → execCommand 三级降级 */
 (function () {
     var toastEl = null, toastTimer = null;
     function gdToast(msg) {
@@ -1506,12 +1571,10 @@
 window.gdSharePage = function () {
     var lang = (document.body.dataset && document.body.dataset.lang) || "zh";
     window.gdShare({
-        text: lang === "zh" ? "来自古董圈 Gudong.app 的精选内容" : "From Gudong.app — Singapore antiques"
+        title: lang === "zh" ? "藏品库｜古董圈Gudong.app" : "Collection Library｜Gudong.app",
+        text: lang === "zh" ? "来自古董圈 Gudong.app 的精选藏品，瓷器、玉器、钱币、书画、铜器、杂项。" : "Curated listings from Gudong.app — porcelain, jade, coins, paintings, bronzes and curios."
     });
 };
 </script>
 </body>
 </html>
-
-
-

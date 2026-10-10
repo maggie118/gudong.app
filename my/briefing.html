@@ -42,6 +42,7 @@
             --shadow-xs: 0 1px 2px rgba(37,34,30,.05);
             --shadow-md: 0 8px 22px rgba(37,34,30,.10);
             --font-serif: "Playfair Display", "Noto Serif SC", "Songti SC", "STSong", Georgia, serif;
+            --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif; }
         html { scroll-behavior: smooth; }
@@ -54,11 +55,13 @@
             gap: 1.5rem; border-bottom: 1px solid var(--color-border);
             position: sticky; top: 0; z-index: 50;
         }
-        .brand { display: flex; flex-direction: row; align-items: center; gap: .6rem; text-decoration: none; color: inherit; flex-shrink: 0; }
-        .brand-logo-img { height: 36px; width: auto; display: block; object-fit: contain; }
-        .brand h1 { font-size: 1.4rem; font-weight: 700; letter-spacing: .02em; line-height: 1.15; color: var(--color-primary-dark); font-family: var(--font-serif); }
-        .brand p { color: #948268; margin-top: .2rem; font-size: .75rem; letter-spacing: .18em; text-transform: uppercase; }
-        .brand h1 .en, .brand p .en { font-family: "Inter Display","Inter","Geist",sans-serif; letter-spacing: normal; }
+        .brand { display: flex; flex-direction: row; align-items: center; gap: .7rem; line-height: 1; flex-shrink: 0; text-decoration: none; color: inherit; min-width: 0; }
+        .brand:hover { text-decoration: none; }
+        .brand-logo-img { height: 38px; width: auto; display: block; object-fit: contain; flex-shrink: 0; }
+        .brand-line1 { display: flex; align-items: baseline; gap: .32rem; }
+        .brand-zh { font-size: 1.4rem; font-weight: 700; letter-spacing: .02em; line-height: 1.15; color: var(--color-primary-dark); font-family: var(--font-serif); }
+        .brand-en { font-size: 1.4rem; font-weight: 600; letter-spacing: -.012em; line-height: 1.15; color: var(--color-primary-dark); font-family: var(--font-sans); }
+        .brand-text small { display: block; color: var(--color-qianjinzong); font-family: var(--font-sans); font-weight: 500; font-size: .68rem; letter-spacing: .14em; margin-top: 2px; text-transform: uppercase; }
         .header-right { display: flex; align-items: center; gap: .8rem; flex-shrink: 0; }
         .lang-btn {
             border: 1px solid var(--color-border); background: transparent;
@@ -91,9 +94,12 @@
         }
         .sidebar-brand {
             display: flex; flex-direction: column; align-items: center; justify-content: center;
-            gap: .1rem; padding: 1.1rem 0; font-weight: 700; color: var(--color-text);
+            gap: .1rem; padding: 1.1rem 0; font-weight: 700; color: var(--color-primary-dark);
             border-bottom: 1px solid var(--color-border);
         }
+        .sidebar-brand .logo-zh { font-size: 1.05rem; font-family: var(--font-serif); font-weight: 700; color: var(--color-primary-dark); letter-spacing: .005em; }
+        .sidebar-brand .logo-en { font-size: 1.05rem; letter-spacing: normal; font-family: var(--font-sans); font-weight: 600; color: var(--color-primary-dark); }
+        .sidebar-brand .logo-tagline { font-size: .62rem; letter-spacing: .16em; color: var(--color-qianjinzong); text-transform: uppercase; font-family: var(--font-sans); font-weight: 500; }
         .sidebar-nav { display: flex; flex-direction: column; padding: .3rem 0; }
         .sidebar-link { padding: .85rem 1.4rem; color: var(--color-text); text-decoration: none; font-size: .95rem; transition: .4s var(--ease); }
         .sidebar-link:hover { background: var(--color-primary-light); color: var(--color-primary); }
@@ -210,7 +216,8 @@
             .finds-grid .finds-card { flex: 0 0 calc((100% - 1.2rem) / 2); }
         }
         @media (max-width: 560px) {
-            .brand h1 { font-size: 1.15rem; }
+            .brand-zh { font-size: 1.15rem; font-family: var(--font-serif); }
+        .brand-en { font-size: 1.15rem; font-family: var(--font-sans); font-weight: 600; letter-spacing: -.012em; }
             .container { padding: 1.5rem 4.5% 3rem; }
             .finds-grid .finds-card { flex: 0 0 calc((100% - .9rem) / 2); }
             .finds-price { font-size: .84rem; }
@@ -221,12 +228,12 @@
      <header>
         <div style="display:flex; align-items:center; gap:.9rem;">
             <button class="menu-toggle" onclick="openSidebar()" aria-label="menu" aria-expanded="false" id="menuToggle">☰</button>
-            <a href="../index.html" class="brand">
-                <img src="../assets/icons/logo-mark.png" alt="古董圈 GuDong" class="brand-logo-img">
-                <div class="brand-text" style="display:flex;flex-direction:column;">
-                <h1><span class="zh">古董圈</span><span class="en">GUDONG</span></h1>
-                <p><span class="zh">GUDONG.APP</span><span class="en">GUDONG.APP</span></p>
-                </div>
+            <a href="../index.html" class="brand" aria-label="古董圈 Gudong 首页">
+                <img src="../assets/icons/logo-mark.png" alt="古董圈 Gudong" class="brand-logo-img" onerror="this.style.display='none'">
+                <span class="brand-text">
+                    <span class="brand-line1"><span class="brand-zh">古董圈</span> <span class="brand-en">Gudong</span></span>
+                    <small>Collectors' Network</small>
+                </span>
             </a>
         </div>
         <div class="header-right">
@@ -240,7 +247,8 @@
     <aside class="sidebar" id="sidebar">
         <button class="sidebar-toggle-inner" onclick="closeSidebar()" aria-label="close menu">☰</button>
         <div class="sidebar-brand">
-            <span class="zh">古董圈</span><span class="en">GUDONG</span>
+            <span class="logo-zh">古董圈 <span class="logo-en">Gudong</span></span>
+            <span class="logo-tagline">Collectors' Network</span>
         </div>
         <nav class="sidebar-nav">
             <a href="../index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">首页</span><span class="en">Home</span></a>
@@ -258,6 +266,11 @@
             <a href="../categories/misc.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 杂项</span><span class="en">· Miscellaneous</span></a>
             <a href="../sellers/index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">藏家展馆</span><span class="en">Collector Gallery</span></a>
             <a href="../insights.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">情报 / 知识</span><span class="en">Insights</span></a>
+            <a href="../tools/index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">工具</span><span class="en">Tools</span></a>
+            <a href="../tools/index.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 工具汇总首页</span><span class="en">· Tools Home</span></a>
+            <a href="../tools/year-since.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 年份距今计算器</span><span class="en">· Years-since-year Calculator</span></a>
+            <a href="../tools/ganzhi.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 干支公历换算器</span><span class="en">· Sexagenary-Gregorian Converter</span></a>
+            <!-- 未上线先注释：· 古文化·朝代年代速查表 Culture & Dynasty Era Lookup → tools/era-lookup.html -->
             <a href="../about.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">关于我们</span><span class="en">About</span></a>
             <button type="button" class="sidebar-lang-btn" onclick="toggleLang()" aria-label="Switch language"><span class="zh">🌐 English</span><span class="en">🌐 中文</span></button></nav>
     </aside>

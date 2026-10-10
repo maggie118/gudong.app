@@ -1,5 +1,9 @@
 /* 古董圈 Gudong · Service Worker
  * 2026-10-10：v21 → v22
+ * 2026-10-10：v22 → v23
+ * 2026-10-10：v23 → v24
+ * - 为签名卖家回复链接页面启用网络直连，避免缓存带 Token 的 URL
+ * - 新增匿名站内聊天资源与藏品页离线预缓存
  * - 更新 PWA 缓存版本，并预缓存最新定价页 pricing.html
  * - 切换版本时清理旧缓存，确保用户安装/重访后取得最新页面
 
@@ -34,7 +38,7 @@
  * - v8 → v9：配合首页改版提升缓存版本号
  */
 
-const CACHE_NAME = 'antique-collection-v22';
+const CACHE_NAME = 'antique-collection-v24';
 
 // 预缓存清单：核心页面 + 常用图标 + 占位图
 // 注意：改用逐个 cache.add，单个 404 不会导致整个 install 失败
@@ -43,6 +47,22 @@ const PRECACHE_ASSETS = [
   '/index.html',
   '/collection.html',
   '/pricing.html',
+  '/assets/js/item-chat.js',
+  '/items/item-lim-01.html',
+  '/items/item-lim-02.html',
+  '/items/item-lim-03.html',
+  '/items/item-lim-04.html',
+  '/items/item-ng-01.html',
+  '/items/item-ng-02.html',
+  '/items/item-ng-03.html',
+  '/items/item-ngcy-01.html',
+  '/items/item-ngcy-02.html',
+  '/items/item-ngcy-03.html',
+  '/items/item-ngcy-04.html',
+  '/items/item-ngcy-05.html',
+  '/items/item-yak-01.html',
+  '/items/item-yak-02.html',
+  '/items/item-yak-03.html',
   '/manifest.json',
   '/assets/icons/favicon-32x32.png',
   '/assets/icons/icon-192.png',
@@ -109,6 +129,11 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
+  // Reply links carry a bearer token in the query string; never store those URLs in Cache Storage.
+  if (url.pathname === '/seller-reply.html') {
+    event.respondWith(fetch(req).catch(() => new Response('Online connection required', { status: 503, statusText: 'Offline' })));
+    return;
+  }
   // 5) HTML 导航请求：网络优先 → 缓存页面 → 首页兜底
   const isNavigate =
     req.mode === 'navigate' ||
@@ -151,3 +176,5 @@ self.addEventListener('fetch', (event) => {
     }
   })());
 });
+
+

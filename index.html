@@ -5,65 +5,143 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no, viewport-fit=cover">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>古董圈 Gudong.app | 新加坡古董捡漏 · 寻宝情报站</title>
+    <title>新加坡古董收藏与藏家平台 | Chinese antiques | Singapore | Gudong.app</title>
     <link rel="canonical" href="https://www.gudong.app/">
 
-    <script type="application/ld+json">
+    <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
     {
-      "@context": "https://schema.org",
-      "@graph": [
+      "@type": "Organization",
+      "@id": "https://www.gudong.app/#organization",
+      "name": "古董圈 Gudong",
+      "alternateName": "Gudong.app",
+      "url": "https://www.gudong.app/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "assets/icons/apple-touch-icon-180x180.png",
+        "width": 180,
+        "height": 180
+      },
+      "description": "Singapore-based Chinese antiques discovery platform and collector network. Gudong.app displays seller-provided information, does not authenticate or appraise antiques, and does not participate in transactions.",
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "SG"
+      },
+      "areaServed": [
         {
-          "@type": "Organization",
-          "@id": "https://www.gudong.app/#organization",
-          "name": "古董圈 Gudong",
-          "alternateName": "Gudong.app",
-          "url": "https://www.gudong.app/",
-          "logo": { "@type": "ImageObject", "url": "assets/icons/apple-touch-icon-180x180.png", "width": 180, "height": 180 },
-          "description": "新加坡高级古董发现平台 + 藏家网络。汇集瓷器、玉器、钱币、书画及杂项，买卖双方直接联系。平台不参与鉴定、估价与交易。",
-          "address": { "@type": "PostalAddress", "addressCountry": "SG" },
-          "areaServed": { "@type": "Country", "name": "Singapore" },
-          "knowsLanguage": ["zh-SG", "en-SG"]
+          "name": "Singapore",
+          "@type": "Country"
         },
         {
-          "@type": "WebSite",
-          "@id": "https://www.gudong.app/#website",
-          "url": "https://www.gudong.app/",
-          "name": "古董圈 Gudong",
-          "inLanguage": ["zh-SG", "en-SG"],
-          "publisher": { "@id": "https://www.gudong.app/#organization" }
+          "name": "Malaysia",
+          "@type": "Country"
         },
         {
-          "@type": "FAQPage",
-          "@id": "https://www.gudong.app/#faq",
-          "mainEntity": [
-            { "@type": "Question", "name": "古董圈是什么？", "acceptedAnswer": { "@type": "Answer", "text": "古董圈是古董信息发现与藏家连接平台。买家可免费浏览、收藏藏品并直接联系卖家。" } },
-            { "@type": "Question", "name": "怎么购买藏品？", "acceptedAnswer": { "@type": "Answer", "text": "在藏品详情页查看卖家联系方式，直接与卖家沟通，确认藏品情况、价格及交付安排。买卖双方直接交易，平台不经手付款。" } },
-            { "@type": "Question", "name": "藏品价格是谁定的？", "acceptedAnswer": { "@type": "Answer", "text": "藏品价格由卖家自行设定，平台不定价。标注“私聊询价”的藏品，请直接联系卖家了解报价。" } },
-            { "@type": "Question", "name": "古董圈提供鉴定吗？", "acceptedAnswer": { "@type": "Answer", "text": "不提供。古董圈不提供鉴定、估价或保真服务。藏品描述和图片由卖家提供，请自行核验或咨询独立专家。" } },
-            { "@type": "Question", "name": "如何成为藏家 / 发布藏品？", "acceptedAnswer": { "@type": "Answer", "text": "点击“了解藏家服务”，查看入驻说明并按页面指引联系平台。成为藏家后，可提交藏品资料与图片进行发布。" } }
-          ]
+          "name": "Indonesia",
+          "@type": "Country"
+        },
+        {
+          "name": "Thailand",
+          "@type": "Country"
+        },
+        {
+          "name": "United States",
+          "@type": "Country"
+        },
+        {
+          "name": "United Kingdom",
+          "@type": "Country"
+        },
+        {
+          "name": "Europe",
+          "@type": "Place"
+        }
+      ],
+      "knowsLanguage": [
+        "zh-SG",
+        "en-SG"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://www.gudong.app/#website",
+      "url": "https://www.gudong.app/",
+      "name": "古董圈 Gudong",
+      "inLanguage": [
+        "zh-SG",
+        "en-SG"
+      ],
+      "publisher": {
+        "@id": "https://www.gudong.app/#organization"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://www.gudong.app/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "古董圈是什么？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "古董圈是古董信息发现与藏家连接平台。买家可免费浏览、收藏藏品并直接联系卖家。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "怎么购买藏品？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "在藏品详情页点击「站内咨询」向卖家留言，并在站内对话中沟通。买卖双方自行确认藏品情况、价格及交付安排并直接交易；平台不经手付款，也不公开卖家的真实联系方式。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "藏品价格是谁定的？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "藏品价格由卖家自行设定，平台不定价。标注“私聊询价”的藏品，请直接联系卖家了解报价。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "古董圈提供鉴定吗？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "不提供。古董圈不提供鉴定、估价或保真服务。藏品描述和图片由卖家提供，请自行核验或咨询独立专家。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "如何成为藏家 / 发布藏品？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "点击“了解藏家服务”，查看入驻说明并按页面指引联系平台。成为藏家后，可提交藏品资料与图片进行发布。"
+          }
         }
       ]
     }
-    </script>
+  ]
+}</script>
 
-    <meta name="description" content="古董圈 gudong.app —— 新加坡古董捡漏与寻宝情报站。每日情报、同类价格对比、藏家直供瓷器、玉器、钱币、书画。买家直接联系卖家，平台不参与鉴定与交易。">
-    <meta name="keywords" content="Singapore antiques, Chinese porcelain, Jade collection, 古董圈, 新加坡古董, 古董捡漏, 瓷器收藏, 玉器钱币">
+    <meta name="description" content="古董圈「新加坡古董收藏」页面，面向新加坡、东南亚及海外藏家，提供藏品信息与站内咨询；平台不鉴定，也不参与交易。 Gudong.app: Singapore antiques discovery; seller listings, no authentication or sales. 供藏家参考。">
+    <meta name="keywords" content="Singapore antiques, 新加坡古董, Chinese antiques discovery, 古董收藏, 藏家平台, Chinese porcelain">
 
     <meta property="og:site_name" content="古董圈 Gudong.app">
-    <meta property="og:title" content="古董圈 Gudong.app | 新加坡古董捡漏 · 寻宝情报站">
-    <meta property="og:description" content="Singapore-based discovery platform for Chinese antiques. Daily intel, price comparison, direct seller contact.">
+    <meta property="og:title" content="新加坡古董收藏与藏家平台 | Chinese antiques | Singapore | Gudong.app">
+    <meta property="og:description" content="古董圈「新加坡古董收藏」页面，面向新加坡、东南亚及海外藏家，提供藏品信息与站内咨询；平台不鉴定，也不参与交易。 Gudong.app: Singapore antiques discovery; seller listings, no authentication or sales. 供藏家参考。">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://www.gudong.app/">
-    <meta property="og:image" content="og-cover.png">
+    <meta property="og:image" content="https://www.gudong.app/og-cover.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="og:image:type" content="image/png">
 
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="古董圈 Gudong.app | 古董捡漏 · 寻宝情报站">
-    <meta name="twitter:description" content="Singapore-based discovery platform for Chinese antiques and collectibles.">
-    <meta name="twitter:image" content="og-cover.png">
+    <meta name="twitter:title" content="新加坡古董收藏与藏家平台 | Chinese antiques | Singapore | Gudong.app">
+    <meta name="twitter:description" content="古董圈「新加坡古董收藏」页面，面向新加坡、东南亚及海外藏家，提供藏品信息与站内咨询；平台不鉴定，也不参与交易。 Gudong.app: Singapore antiques discovery; seller listings, no authentication or sales. 供藏家参考。">
+    <meta name="twitter:image" content="https://www.gudong.app/og-cover.png">
 
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#7A4E33">
@@ -1463,6 +1541,8 @@
     }
     .finds-alert--new { background: #EAF2EC; color: #3E6B52; }
     </style>
+    <meta property="og:locale" content="zh_SG">
+    <meta property="og:locale:alternate" content="en_SG">
 </head>
 <body data-lang="zh">
     <header>

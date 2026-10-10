@@ -58,6 +58,7 @@
             --card-radius: 12px;
             --img-radius: 4px;
             --font-serif: "Playfair Display", "Noto Serif SC", "Songti SC", "STSong", Georgia, serif;
+            --font-sans: "Inter", "Geist", "Inter Display", "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Helvetica, Arial, sans-serif;
             --font-display: "Inter", "Geist", "Inter Display", "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Helvetica, Arial, sans-serif;
             --font-latin: "Inter", "Geist", "Inter Display", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
             --font-zh-sans: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -79,12 +80,15 @@ header {
   gap: 1.5rem; border-bottom: 1px solid var(--color-border);
   position: sticky; top: 0; z-index: 50;
 }
-.brand { display: flex; flex-direction: row; align-items: center; gap: .6rem; line-height: 1; flex-shrink: 0; text-decoration: none; color: inherit; }
-.brand-logo-img { height: 36px; width: auto; display: block; object-fit: contain; }
-.brand-text { display: flex; flex-direction: column; justify-content: center; }
-@media (max-width: 640px) { .brand-logo-img { height: 30px; } }
-.brand h1 { font-size: 1.4rem; font-weight: 700; letter-spacing: .02em; line-height: 1.15; color: var(--color-primary-dark); }
-.brand p { color: var(--color-qianjinzong); margin-top: .2rem; font-size: .75rem; letter-spacing: .18em; text-transform: uppercase; }
+.brand { display: flex; flex-direction: row; align-items: center; gap: .7rem; line-height: 1; flex-shrink: 0; text-decoration: none; color: inherit; min-width: 0; }
+.brand:hover { text-decoration: none; }
+        .brand-logo-img { height: 38px; width: auto; display: block; object-fit: contain; flex-shrink: 0; }
+.brand-line1 { display: flex; align-items: baseline; gap: .32rem; }
+        .brand-text { display: flex; flex-direction: column; justify-content: center; min-width: 0; line-height: 1.15; letter-spacing: -.005em; }
+@media (max-width: 640px) { .brand-logo-img { height: 30px; width: auto; display: block; object-fit: contain; flex-shrink: 0; } }
+.brand-zh { font-size: 1.4rem; font-weight: 700; letter-spacing: .02em; line-height: 1.15; color: var(--color-primary-dark); font-family: var(--font-serif); }
+        .brand-en { font-size: 1.4rem; font-weight: 600; letter-spacing: -.012em; line-height: 1.15; color: var(--color-primary-dark); font-family: var(--font-sans); }
+.brand-text small { display: block; color: var(--color-qianjinzong); font-family: var(--font-sans); font-weight: 500; font-size: .68rem; letter-spacing: .14em; margin-top: 2px; text-transform: uppercase; }
 .header-right { display: flex; align-items: center; gap: .8rem; flex-shrink: 0; }
 .lang-btn {
   border: 1px solid var(--color-border); background: transparent; color: var(--color-text-secondary);
@@ -108,7 +112,10 @@ header {
 }
 .sidebar.open { transform: translateX(0); }
 .sidebar-toggle-inner { display: block; width: 100%; padding: .9rem 0; background: transparent; border: none; border-bottom: 1px solid var(--color-border); font-size: 1.15rem; color: var(--color-text-secondary); cursor: pointer; text-align: center; }
-.sidebar-brand { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .1rem; padding: 1.1rem 0; font-weight: 700; color: var(--color-text); border-bottom: 1px solid var(--color-border); }
+.sidebar-brand { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .1rem; padding: 1.1rem 0; font-weight: 700; color: var(--color-primary-dark); border-bottom: 1px solid var(--color-border); }
+.sidebar-brand .logo-zh { font-size: 1.05rem; font-family: var(--font-serif); font-weight: 700; color: var(--color-primary-dark); letter-spacing: .005em; }
+.sidebar-brand .logo-en { font-size: 1.05rem; letter-spacing: normal; font-family: var(--font-sans); font-weight: 600; color: var(--color-primary-dark); }
+.sidebar-brand .logo-tagline { font-size: .62rem; letter-spacing: .16em; color: var(--color-qianjinzong); text-transform: uppercase; font-family: var(--font-sans); font-weight: 500; }
 .sidebar-nav { display: flex; flex-direction: column; padding: .3rem 0; }
 .sidebar-link { padding: .85rem 1.4rem; color: var(--color-text); text-decoration: none; font-size: .95rem; transition: .4s; }
 .sidebar-link:hover { background: var(--color-primary-light); color: var(--color-primary); }
@@ -495,13 +502,13 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
   <header>
     <div style="display:flex; align-items:center; gap:.9rem;">
       <button class="menu-toggle" onclick="openSidebar()" aria-label="菜单">☰</button>
-      <a href="index.html" class="brand">
-        <img src="assets/icons/logo-mark.png" alt="古董圈 Gudong" class="brand-logo-img" onerror="this.style.display='none'">
-        <div class="brand-text">
-          <h1><span class="zh">古董圈</span><span class="en">GUDONG</span></h1>
-          <p><span class="zh">GUDONG.APP</span><span class="en">GUDONG.APP</span></p>
-        </div>
-      </a>
+      <a href="index.html" class="brand" aria-label="古董圈 Gudong 首页">
+                <img src="assets/icons/logo-mark.png" alt="古董圈 Gudong" class="brand-logo-img" onerror="this.style.display='none'">
+                <span class="brand-text">
+                    <span class="brand-line1"><span class="brand-zh">古董圈</span> <span class="brand-en">Gudong</span></span>
+                    <small>Collectors' Network</small>
+                </span>
+            </a>
     </div>
     <div class="header-right">
         <button type="button" class="gd-share-btn" onclick="gdSharePage()" aria-label="分享 / Share" title="分享 / Share"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92-1.31-2.92-2.92-2.92z"/></svg></button>
@@ -512,7 +519,10 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
   <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
   <aside class="sidebar" id="sidebar">
     <button class="sidebar-toggle-inner" onclick="closeSidebar()" aria-label="关闭菜单">☰</button>
-    <div class="sidebar-brand"><span class="zh">古董圈</span><span class="en">GUDONG</span></div>
+    <div class="sidebar-brand">
+            <span class="logo-zh">古董圈 <span class="logo-en">Gudong</span></span>
+            <span class="logo-tagline">Collectors' Network</span>
+        </div>
     <nav class="sidebar-nav">
             <a href="index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">首页</span><span class="en">Home</span></a>
             <a href="my/saved.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">我的收藏 · 关注</span><span class="en">Saved &amp; Followed</span></a>
@@ -529,6 +539,11 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
             <a href="categories/misc.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 杂项</span><span class="en">· Miscellaneous</span></a>
             <a href="sellers/index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">藏家展馆</span><span class="en">Collector Gallery</span></a>
             <a href="insights.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">情报 / 知识</span><span class="en">Insights</span></a>
+            <a href="tools/index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">工具</span><span class="en">Tools</span></a>
+            <a href="tools/index.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 工具汇总首页</span><span class="en">· Tools Home</span></a>
+            <a href="tools/year-since.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 年份距今计算器</span><span class="en">· Years-since-year Calculator</span></a>
+            <a href="tools/ganzhi.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 干支公历换算器</span><span class="en">· Sexagenary-Gregorian Converter</span></a>
+            <!-- 未上线先注释：· 古文化·朝代年代速查表 Culture & Dynasty Era Lookup → tools/era-lookup.html -->
             <a href="about.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">关于我们</span><span class="en">About</span></a>
             <button type="button" class="sidebar-lang-btn" onclick="toggleLang()" aria-label="Switch language"><span class="zh">🌐 English</span><span class="en">🌐 中文</span></button></nav>
   </aside>

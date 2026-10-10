@@ -630,8 +630,19 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
                         <span class="zh">查看全部藏品 →</span><span class="en">View all items →</span>
                     </a>
                 </div>
-                <a href="https://wa.me/6596269929" class="contact-btn zh" data-wa-contact data-lang="zh" target="_blank" rel="noopener">💬 联系藏家（WhatsApp）</a>
-                <a href="https://wa.me/6596269929" class="contact-btn en" data-wa-contact data-lang="en" target="_blank" rel="noopener">💬 Contact Collector (WhatsApp)</a>
+                <div class="gd-chat" data-gudong-chat data-item-id="item-ngcy-01" data-seller-id="Ng-CY">
+  <button type="button" class="contact-btn" data-chat-toggle aria-expanded="false" aria-controls="gd-chat-panel-item-ngcy-01">
+    <span class="zh">💬 站内咨询（免注册）</span><span class="en">💬 Message Collector (No account needed)</span>
+  </button>
+  <section class="gd-chat-panel" id="gd-chat-panel-item-ngcy-01" data-chat-panel hidden aria-label="Collector chat">
+    <div class="gd-chat-head"><div><div class="gd-chat-title"><span class="zh">咨询藏家</span><span class="en">Message the Collector</span></div><div class="gd-chat-subtitle"><span class="zh">关于这件藏品的对话</span><span class="en">Conversation about this item</span></div></div><button type="button" class="gd-chat-close" data-chat-close aria-label="Close chat">×</button></div>
+    <div class="gd-chat-body"><div class="gd-chat-guest" data-chat-guest></div><div data-chat-status role="status" aria-live="polite"></div><ol data-chat-messages aria-live="polite"></ol>
+      <form data-chat-form><label class="sr-only" for="gd-chat-input-item-ngcy-01"><span class="zh">输入消息</span><span class="en">Type a message</span></label><textarea id="gd-chat-input-item-ngcy-01" data-chat-input maxlength="1000" required></textarea><button type="submit"><span class="zh">发送</span><span class="en">Send</span></button></form>
+      <p class="gd-chat-note"><span class="zh">访客编号和聊天记录保存在此设备。请勿发送付款密码或敏感个人资料。</span><span class="en">Your guest ID and chat history are saved on this device. Do not send passwords or sensitive personal information.</span></p>
+    </div>
+  </section>
+</div>
+                
 
                 <a href="#expert-call-modal" class="contact-btn expert-call-btn zh">📞预约顾问连线（参考意见）</a>
                 <a href="#expert-call-modal" class="contact-btn expert-call-btn en">📞Book Advisor Video-Call (Advisory Opinion)</a>
@@ -1036,35 +1047,6 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
             changes.push('gallery → ' + imgs.length + ' 张');
             window.__gdSetGalleryImages(imgs);
         }
-        function setWhatsApp(f) {
-            var wa = String(first(f.seller_whatsapp) || '').replace(/\D/g, '');
-            if (!wa) return;
-            if (!/^(65[3689]\d{7}|601\d{8,9})$/.test(wa)) { changes.push('whatsapp 号码无效(' + wa + ')'); return; }
-
-            var id  = clean(first(f.item_id));
-            var tzh = clean(first(f.title_zh)) || id;
-            var ten = clean(first(f.title_en)) || tzh;
-
-            document.querySelectorAll('a[data-wa-contact]').forEach(function (a) {
-                var lang = a.getAttribute('data-lang') || 'zh';
-                var title = lang === 'en' ? ten : tzh;
-                var text;
-                if (lang === 'en') {
-                    text = "Hi, I'm interested in this item on Gudong:\n"
-                         + title + " (" + id + ")\n"
-                         + "Could you share more details?";
-                } else {
-                    text = "你好，我在 Gudong 看到你的藏品：\n"
-                         + "「" + title + "」(" + id + ")\n"
-                         + "想了解更详细的资料，谢谢。";
-                }
-                var href = 'https://wa.me/' + wa + '?text=' + encodeURIComponent(text);
-                if (a.getAttribute('href') !== href) {
-                    changes.push('whatsapp[' + lang + '] → wa.me/' + wa);
-                    a.setAttribute('href', href);
-                }
-            });
-        }
         function computeCondition(f) {
             var wear = f.has_surface_wear === true;
             var damage = f.has_surface_damage === true;
@@ -1140,7 +1122,6 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
                 setGallery(f);
                 setSpec(f);
                 setSellerCard(f, data);
-                setWhatsApp(f);
                 if (f.title_zh) { var t = document.title.split(' | '); t[0] = clean(first(f.title_zh)); if (sen && t.length > 1) t[1] = sen; document.title = t.join(' | '); }
                 document.documentElement.dataset.source = 'airtable';
                 badge('✔ Airtable · ' + ID + '\n' + (changes.length ? changes.join('\n') : '与静态页一致'), true);
@@ -1380,5 +1361,6 @@ window.gdSharePage = function () {
     });
 };
 </script>
+<script src="/assets/js/item-chat.js" defer></script>
 </body>
 </html>

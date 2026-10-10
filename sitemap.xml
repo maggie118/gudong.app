@@ -95,7 +95,19 @@
   <url><loc>https://www.gudong.app/sellers/seller-ng-lk-antiques</loc></url>
   <url><loc>https://www.gudong.app/sellers/seller-yak-bc-antiques</loc></url>
   <url><loc>https://www.gudong.app/terms</loc></url>
+  <url><loc>https://www.gudong.app/tools/</loc></url>
   <url><loc>https://www.gudong.app/tools/year-since</loc></url>
   <url><loc>https://www.gudong.app/tools/ganzhi</loc></url>
-  <url><loc>https://www.gudong.app/tools/era-lookup</loc></url>
+  <url>
+    <loc>https://www.gudong.app/tools/era-lookup</loc>
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.gudong.app/tools/currencyconvert</loc>
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
 </urlset>

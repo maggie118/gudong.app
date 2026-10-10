@@ -1,13 +1,13 @@
 {
     "id": "/",
-    "name": "古董圈 GuDong",
+    "name": "古董圈 Gudong.app",
     "short_name": "古董圈",
-    "description": "Gudong 古董圈是一个高级古董发现平台，提供信息、展示与连接服务以及帮助收藏家经营线上藏馆的平台",
-    "start_url": "/",
+    "description": "新加坡高端古董发现藏家网络，连接新加坡、东南亚与欧美中国古董藏家；浏览瓷器、古玉、书画藏品，买家直接对接藏家。平台不提供鉴定，不参与藏品交易。",
+    "start_url": "https://gudong.app/?utm_source=pwa_home_screen",
     "scope": "/",
     "display": "standalone",
     "background_color": "#F5F2EC",
-    "theme_color": "#8A5A3B",
+    "theme_color": "#7A4E33",
     "orientation": "portrait-primary",
     "lang": "zh-SG",
     "categories": [
@@ -41,4 +41,3 @@
         }
     ]
 }
- 

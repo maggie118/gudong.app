@@ -1,4 +1,8 @@
 /* 古董圈 Gudong · Service Worker
+ * 2026-10-10：v21 → v22
+ * - 更新 PWA 缓存版本，并预缓存最新定价页 pricing.html
+ * - 切换版本时清理旧缓存，确保用户安装/重访后取得最新页面
+
  * 2026-10-7：v16 → v17
  * - 全站 90 个 HTML 页面注入分享功能（header 分享按钮 + Web Share API/剪贴板降级 + Toast 反馈）；
  *   覆盖 terms/privacy/pricing/collection/about/insights hub/items×14/categories×6/insights×62/templates
@@ -30,7 +34,7 @@
  * - v8 → v9：配合首页改版提升缓存版本号
  */
 
-const CACHE_NAME = 'antique-collection-v18';
+const CACHE_NAME = 'antique-collection-v22';
 
 // 预缓存清单：核心页面 + 常用图标 + 占位图
 // 注意：改用逐个 cache.add，单个 404 不会导致整个 install 失败
@@ -38,6 +42,7 @@ const PRECACHE_ASSETS = [
   '/',
   '/index.html',
   '/collection.html',
+  '/pricing.html',
   '/manifest.json',
   '/assets/icons/favicon-32x32.png',
   '/assets/icons/icon-192.png',

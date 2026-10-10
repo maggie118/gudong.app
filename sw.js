@@ -2,6 +2,8 @@
  * 2026-10-10：v21 → v22
  * 2026-10-10：v22 → v23
  * 2026-10-10：v23 → v24
+ * 2026-10-10：v24 → v25
+ * - 新增藏家站内收件箱脚本；卖家收件箱页面走网络直连，不缓存带访问凭证的内容
  * - 为签名卖家回复链接页面启用网络直连，避免缓存带 Token 的 URL
  * - 新增匿名站内聊天资源与藏品页离线预缓存
  * - 更新 PWA 缓存版本，并预缓存最新定价页 pricing.html
@@ -38,7 +40,7 @@
  * - v8 → v9：配合首页改版提升缓存版本号
  */
 
-const CACHE_NAME = 'antique-collection-v24';
+const CACHE_NAME = 'antique-collection-v25';
 
 // 预缓存清单：核心页面 + 常用图标 + 占位图
 // 注意：改用逐个 cache.add，单个 404 不会导致整个 install 失败
@@ -48,6 +50,7 @@ const PRECACHE_ASSETS = [
   '/collection.html',
   '/pricing.html',
   '/assets/js/item-chat.js',
+  '/assets/js/seller-inbox.js',
   '/items/item-lim-01.html',
   '/items/item-lim-02.html',
   '/items/item-lim-03.html',
@@ -131,6 +134,10 @@ self.addEventListener('fetch', (event) => {
 
   // Reply links carry a bearer token in the query string; never store those URLs in Cache Storage.
   if (url.pathname === '/seller-reply.html') {
+    event.respondWith(fetch(req).catch(() => new Response('Online connection required', { status: 503, statusText: 'Offline' })));
+    return;
+  }
+  if (url.pathname === '/seller-inbox.html') {
     event.respondWith(fetch(req).catch(() => new Response('Online connection required', { status: 503, statusText: 'Offline' })));
     return;
   }

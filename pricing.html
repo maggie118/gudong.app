@@ -543,9 +543,11 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
             <a href="tools/index.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 工具汇总首页</span><span class="en">· Tools Home</span></a>
             <a href="tools/year-since.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 年份距今计算器</span><span class="en">· Years-since-year Calculator</span></a>
             <a href="tools/ganzhi.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 干支公历换算器</span><span class="en">· Sexagenary-Gregorian Converter</span></a>
-            <!-- 未上线先注释：· 古文化·朝代年代速查表 Culture & Dynasty Era Lookup → tools/era-lookup.html -->
+            <a href="tools/era-lookup.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 古文化·朝代年代速查表</span><span class="en">· Culture &amp; Dynasty Era Lookup</span></a>
+            <a href="tools/currency-convert.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 拍卖藏品货币参考换算器</span><span class="en">· Currency Reference Converter</span></a>
             <a href="about.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">关于我们</span><span class="en">About</span></a>
-            <button type="button" class="sidebar-lang-btn" onclick="toggleLang()" aria-label="Switch language"><span class="zh">🌐 English</span><span class="en">🌐 中文</span></button></nav>
+            <button type="button" class="sidebar-lang-btn" onclick="toggleLang()" aria-label="Switch language"><span class="zh">🌐 English</span><span class="en">🌐 中文</span></button>
+        </nav>
   </aside>
 
 <main class="container">
@@ -579,48 +581,44 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
         <div class="price-unit"><span class="zh">/（约 S$149.90／件）</span><span class="en">/(~S$149.90 / piece)</span></div>
         <ul>
           <li><strong><span class="zh">一站式建馆</span><span class="en">One-stop gallery setup:</span></strong><span class="zh">：协助图片优化、文字整理与展馆上线</span><span class="en"> Help with photo editing, content organization, and launching your gallery.</span></li>
-          <li><strong><span class="zh">10 件藏品展示</span><span class="en">10-piece display：</span></strong><span class="zh">：集中呈现您的收藏，建立统一的专业形象</span><span class="en">Present your collection in one place and build a unified, professional image.</span></li>
+          <li><strong><span class="zh">展示你上架的所有藏品，无数量限制</span><span class="en">Display all the pieces you list — with no limit on quantity.：</span></strong><span class="zh">：集中呈现您的收藏，建立统一的专业形象</span><span class="en">Present your collection in one place and build a unified, professional image.</span></li>
           <li><strong><span class="zh">专属展馆主页</span><span class="en">One year of gallery display：</span></strong><span class="zh">：拥有独立页面与专属网址，方便分享给客户和收藏圈</span><span class="en"> Comes with its own page and dedicated URL — easy to share with clients and the collector community.</span></li>
           <li><strong><span class="zh">展馆展示一年</span><span class="en">One year of gallery display:</span></strong><span class="zh">：让您的藏品持续在线，方便买家随时浏览</span><span class="en"> Keep your pieces online — easy for buyers to browse anytime.</span></li>
-          <li><strong><span class="zh">2 个月首页精选展示</span><span class="en">2 months of homepage featuring：</span></strong><span class="zh">：为展馆争取额外的首页曝光机会</span><span class="en"> Get extra homepage exposure for your gallery.</span></li>
-          <li><strong><span class="zh">2 次顾问咨询</span><span class="en">Two advisory sessions：</span></strong><span class="zh">：提供参考意见或收藏咨询。</span><span class="en">Provides reference opinions or collection consultation.</span></li>
-		  <li><strong><span class="zh">成交不抽佣金</span><span class="en">No commission on transactions：</span></strong><span class="zh">：藏品成交后，交易款项由买卖双方直接处理，古董圈不收取成交佣金。</span><span class="en">After a sale, payment is settled directly between the two parties; Antique Circle takes no commission.</span></li>
+          <li><strong><span class="zh">成交不抽佣金</span><span class="en">No commission on transactions：</span></strong><span class="zh">：藏品成交后，交易款项由买卖双方直接处理，古董圈不收取成交佣金。</span><span class="en">After a sale, payment is settled directly between the two parties; Antique Circle takes no commission.</span></li>
         </ul>
         <a class="card-cta" href="javascript:void(0)" onclick="openServiceModal('gallery')"><span class="zh">开启我的专属藏家展馆 →</span><span class="en">Start My Gallery →</span></a>
       </div>
 
       <!-- 2. 单件上架 -->
       <div class="card">
-        <span class="tier-tag growth"><span class="zh">灵活选择</span><span class="en">SINGLE LISTING</span></span>
+        <span class="tier-tag growth"><span class="zh">按需发布</span><span class="en">SINGLE LISTING</span></span>
         <h3><span class="zh">单件专业上架</span><span class="en">Professional Single Listing</span></h3>
-        <p class="card-desc"><span class="zh">适合只想发布少量藏品的卖家。</span><span class="en">Ideal for sellers who only want to list a few pieces.</span></p>
+        <p class="card-desc"><span class="zh">适合按件发布；创始藏家每月前 2 件免费，超出额度享单件 8 折。</span><span class="en">List as needed. Founding Collectors get 2 free listings monthly, then 20% off each additional listing.</span></p>
         <div class="price"><span class="cur">S$</span>198</div>
-        <div class="price-unit"><span class="zh">/ 件 / 年</span><span class="en">/ item / year</span></div>
+        <div class="price-unit"><span class="zh">/ 件 · 普通价；创始藏家超额价 S$158（8 折）</span><span class="en">/ item · Standard price; S$158 (20% off) for Founding Collectors</span></div>
         <ul>
-          <li><strong><span class="zh">图片优化</span><span class="en">Photo optimization</span></strong><span class="zh">：让藏品照片更整洁、清晰</span><span class="en"> Make your collection photos tidier and clearer.</span></li>
-          <li><strong><span class="zh">资料整理</span><span class="en">Listing organization</span></strong><span class="zh">：协助完善标题、描述与分类</span><span class="en"> Help refine titles, descriptions, and categories.</span></li>
-          <li><strong><span class="zh">线上展示</span><span class="en">Online Display</span></strong><span class="zh">：藏品在古董圈展示一年</span><span class="en">Your pieces are displayed on Antique Circle for one year.</span></li>
-		  <li><strong><span class="zh">直接联系</span><span class="en">Contact directly</span></strong><span class="zh">：方便感兴趣的买家向您咨询</span><span class="en">Make it easy for interested buyers to reach out to you.</span></li>
+          <li><strong><span class="zh">图片优化</span><span class="en">Photo optimization</span></strong><span class="zh">：每件最多 4 张基础图片优化</span><span class="en">: up to 4 photos optimized per item.</span></li>
+          <li><strong><span class="zh">资料整理</span><span class="en">Listing organization</span></strong><span class="zh">：协助完善标题、描述与分类，不提供真伪鉴定</span><span class="en">: title, description, and category support; no authentication.</span></li>
+          <li><strong><span class="zh">一年线上展示</span><span class="en">One-year online display</span></strong><span class="zh">：确认资料后在古董圈上架，方便买家浏览与联系</span><span class="en">: listed on Gudong.app after your approval for buyers to browse and contact you.</span></li>
         </ul>
         <a class="card-cta" href="javascript:void(0)" onclick="openServiceModal('single')"><span class="zh">申请单件专业上架 →</span><span class="en">Apply for Single Listing →</span></a>
       </div>
 
-      <!-- 3. 创始藏家：免费破冰 -->
+      <!-- 3. 创始藏家：每月免费发布 + 永久升级优惠 -->
       <div class="card">
-        <span class="tier-tag free"><span class="zh">限额计划</span><span class="en">FOUNDING COLLECTOR</span></span>
-        <h3><span class="zh">创始藏家体验席</span><span class="en">Founding Collector Trial</span></h3>
-        <div class="price"><span class="free-word"><span class="zh">免费</span><span class="en">FREE</span></span></div>
-        <div class="price-unit"><span class="zh">/ 前 2 件藏品免费发布，轻松体验线上展示</span><span class="en">/ Your first 2 listings are free — an easy way to try online display.</span></div>
+        <span class="tier-tag free"><span class="zh">前 88 位 · 永久权益</span><span class="en">FIRST 88 · LIFETIME BENEFITS</span></span>
+        <h3><span class="zh">创始藏家体验席</span><span class="en">Founding Collector Programme</span></h3>
+        <div class="price"><span class="free-word"><span class="zh">每月 2 件免费</span><span class="en">2 FREE / MONTH</span></span></div>
+        <div class="price-unit"><span class="zh">前 88 位入驻藏家永久享有</span><span class="en">Lifetime benefit for the first 88 collectors</span></div>
         <ul>
-          <li><strong><span class="zh">每件包含 4 张图片优化服务</span><span class="en">Per piece: 4 images optimized.</span></strong></li>
-          <li><strong><span class="zh">含两件藏品 8 张基础优化图片</span><span class="en">8 basic optimized photos across two pieces</span></strong></li>
-          <li><strong><span class="zh">在古董圈展示藏品，方便买家浏览与联系</span><span class="en">Display your pieces on gudong.app so buyers can easily browse and reach out.</span></strong></li>
+          <li><strong><span class="zh">每月 2 个免费发布名额</span><span class="en">2 free listings every month</span></strong><span class="zh">：藏品享基础曝光与正常展示</span><span class="en">: standard display and basic exposure for free listings.</span></li>
+          <li><strong><span class="zh">超额发布及升级套餐永久 8 折</span><span class="en">20% off additional listings and upgraded plans for life</span></strong><span class="zh">：单件上架 S$158（原价 S$198）</span><span class="en">: S$158 per single listing (regularly S$198).</span></li>
           <li><span style="color:#9C7A3A; font-weight:700;"><img src="assets/images/foundingcollector.webp" alt="创始藏家勋章 Founding Collector Badge" style="width:26px;height:auto;vertical-align:-7px;margin-right:6px;"><span class="zh">获得专属「创始藏家」身份标识</span><span class="en">Get your exclusive "Founding Collector" badge.</span></span></li>
         </ul>
 
         <div class="founding-note">
           <div class="fn-title"><span class="dot"></span><span class="zh">2026 创始藏家计划</span><span class="en">2026 Founding Collector Programme</span></div>
-          <div class="fn-desc"><span class="zh">限额 88 位，申请资格以平台确认结果为准。</span><span class="en">Limited to 88 seats; eligibility is subject to platform confirmation.</span></div>
+          <div class="fn-desc"><span class="zh">本轮限额 88 位，资格以平台确认为准；满额后开放下一轮候补：前 188 位每月免费发布 1 件，入驻享 9 折，并逐步过渡至标准定价。</span><span class="en">This round is limited to 88, subject to platform confirmation. Once full, the next round will open a waitlist: its first 188 members receive 1 free listing per month and 10% off upon joining, as benefits gradually transition to standard pricing.</span></div>
         </div>
 
          <a class="card-cta" href="https://airtable.com/apprn6XDQnAm8bkaT/shrlQLTRfG5RlYjD4" target="_blank" rel="noopener noreferrer"><span class="zh">申请成为创始藏家 →</span><span class="en">Apply for Founding Collector →</span></a>
@@ -628,11 +626,65 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
     </div>
   </section>
 
-  <!-- 其他增值服务（中高端定价） -->
+  <!-- 发布套餐与增值服务 -->
   <section id="price-table" style="margin-top: 3rem;">
     <div class="sec-head tight">
+      <div class="eyebrow"><span class="zh">发布套餐 · 灵活选择</span><span class="en">LISTING PLANS</span></div>
+      <h2 class="sec-title"><span class="zh">发布套餐 &amp; 费用</span><span class="en">Listing Plans &amp; Pricing</span></h2>
+      <p class="sec-sub"><span class="zh">前 88 位创始藏家永久享每月 2 件免费发布；升级任意套餐及超额单件发布享 8 折。</span><span class="en">The first 88 Founding Collectors receive 2 free listings monthly for life, plus 20% off additional listings and all upgraded plans.</span></p>
+    </div>
+    <div class="frame">
+      <div class="rows">
+        <div class="row">
+          <div>
+            <div class="row-title"><span class="zh">每月 2 件发布</span><span class="en">2 Listings per Month</span></div>
+            <div class="row-desc"><span class="zh">创始藏家专属，每月 1 日重置，不累积、不结转；免费藏品享基础曝光与正常展示。</span><span class="en">For Founding Collectors; resets on the 1st with no carry-over. Free listings receive standard display and basic exposure.</span></div>
+          </div>
+          <div class="row-price text-right">
+            <span class="amount"><span class="zh">永久免费</span><span class="en">FREE FOR LIFE</span></span>
+            <span class="unit"><span class="zh">仅限经确认的前 88 位创始藏家</span><span class="en">For confirmed members among the first 88</span></span>
+          </div>
+        </div>
+        <div class="row">
+          <div>
+            <div class="row-title"><span class="zh">单件专业上架（超出免费额度）</span><span class="en">Professional Single Listing (Beyond Free Quota)</span></div>
+            <div class="row-desc"><span class="zh">适合散发或加急上架；每件最多 4 张基础图片优化，资料确认后展示一年。</span><span class="en">For occasional or urgent listings; includes up to 4 basic photo edits and one-year display after details are approved.</span></div>
+          </div>
+          <div class="row-price text-right">
+            <span class="amount">S$198 <span class="zh">/ 件</span><span class="en">/ item</span></span>
+            <span class="unit"><span class="zh">创始藏家 S$158 / 件（8 折）</span><span class="en">Founding Collector: S$158 / item (20% off)</span></span>
+          </div>
+        </div>
+        <div class="row">
+          <div>
+            <div class="row-title"><span class="zh">月度发布包（5 件 / 月）</span><span class="en">Monthly Listing Pack (5 Items)</span></div>
+            <div class="row-desc"><span class="zh">适合稳定、高频发布的卖家。</span><span class="en">A good fit for sellers with regular, frequent listings.</span></div>
+          </div>
+          <div class="row-price text-right">
+            <span class="amount">S$688 <span class="zh">/ 月</span><span class="en">/ month</span></span>
+            <span class="unit"><span class="zh">创始藏家 S$550 / 月（8 折）</span><span class="en">Founding Collector: S$550 / month (20% off)</span></span>
+          </div>
+        </div>
+        <div class="row">
+          <div>
+            <div class="row-title"><span class="zh">年度无限发布</span><span class="en">Annual Unlimited Listings</span></div>
+            <div class="row-desc"><span class="zh">适合商家与画廊；全年不限发布件数。</span><span class="en">For dealers and galleries, with unlimited listings throughout the year.</span></div>
+          </div>
+          <div class="row-price text-right">
+            <span class="amount">S$5,888 <span class="zh">/ 年</span><span class="en">/ year</span></span>
+            <span class="unit"><span class="zh">创始藏家 S$4,710 / 年（8 折）</span><span class="en">Founding Collector: S$4,710 / year (20% off)</span></span>
+          </div>
+        </div>
+      </div>
+      <div class="note-bar">
+        <span>※</span>
+        <div><b><span class="zh">创始藏家权益：</span><span class="en">Founding Collector benefits:</span></b><span class="zh">前 88 位经平台确认的藏家永久享每月 2 件免费发布；免费额度不累积、不结转。超额单件及升级套餐永久 8 折，套餐优惠价以本页所列为准。</span><span class="en">Confirmed members among the first 88 receive 2 free listings monthly for life; unused quota does not carry over. Additional listings and upgraded plans are 20% off for life at the prices shown here.</span></div>
+      </div>
+    </div>
+
+    <div class="sec-head tight" style="margin-top:2rem;">
       <div class="eyebrow"><span class="zh">增 值 选 配</span><span class="en">ADD-ON SERVICES</span></div>
-      <h2 class="sec-title"><span class="zh">高端特选赋能服务</span><span class="en">Optional Add-on Services</span></h2>
+      <h2 class="sec-title"><span class="zh">曝光增值服务（让藏品更快成交）</span><span class="en">Exposure Add-on Services（Move your pieces — faster）</span></h2>
     </div>
     <div class="frame">
       <div class="rows">
@@ -644,6 +696,16 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
           <div class="row-price text-right">
             <span class="amount">S$298</span>
             <span class="unit"><span class="zh">/ 月（S$2,980/年 · 节省 2个月费用）</span><span class="en">/ month (S$2,980/yr · Save 2 months)</span></span>
+          </div>
+        </div>
+		   <div class="row">
+          <div>
+            <div class="row-title"><span class="zh">买家精准推送</span><span class="en">Buyer Targeted Push</span></div>
+            <div class="row-desc"><span class="zh">把您的藏品定向推送给匹配意向买家，让好藏品更快被看见、更快成交。</span><span class="en">Push your piece directly to matching, interested buyers — get it seen and sold faster.</span></div>
+          </div>
+          <div class="row-price text-right">
+            <span class="amount">S$58</span>
+            <span class="unit"><span class="zh">/件/次(S$150/3 次，更划算）)</span><span class="en">/ month/piece/push(S$150 / 3 pushes · better value）)</span></span>
           </div>
         </div>
         <div class="row">
@@ -673,13 +735,12 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
     </div>
     <div class="frame">
       <div class="faq-item">
-        <div class="faq-q"><span class="zh">S$1,499 的 10 件数字旗舰馆为什么是创始藏家首选？</span><span class="en">Why is the S$1,499 10-item gallery the top choice for founding collectors?</span></div>
-        <div class="faq-a"><span class="zh">作为创始藏家专享特惠（常规 S$2,499），一次性打包 <b>10件重器的一键全包建档</b>（含专业精修、文字美化、独立网页）。同时尊享<b>私域发链接高效促成雅集</b>、<b>首页黄金位曝光 2 个月</b>、<b>2次顾问咨询</b>，且享受<b>0% 交易佣金</b>，是建立个人艺术品品牌最高效的方案。</span><span class="en">As a founding-exclusive offer (regular S$2,499), it bundles all-inclusive archiving for 10 pieces — retouching, copywriting, and a dedicated web page. It also includes private link sharing, 2 months of homepage featuring, 2 advisory sessions, and 0% commission.</span></div>
+        <div class="faq-q"><span class="zh">S$1,499 的数字旗舰馆为什么是创始藏家首选？</span><span class="en">Why is the S$1,499 gallery the top choice for founding collectors?</span></div>
+        <div class="faq-a"><span class="zh">作为创始藏家专享特惠（常规 S$2,499），一次性打包 <b>10件重器的一键全包建档</b>（含专业精修、文字美化、独立网页）。同时尊享<b>无数量限制展示所有上架藏品</b>，且享受<b>0% 交易佣金</b>，是建立个人艺术品品牌最高效的方案。</span><span class="en">As a founding-exclusive offer (regular S$2,499), it bundles all-No quantity limit — display all your listed pieces. — retouching, copywriting, and a dedicated web page, and 0% commission.</span></div>
       </div>
       <div class="faq-item">
-        <div class="faq-q"><span class="zh">创始藏家的前 2 件免费包含哪些权益？</span><span class="en">What's included in the first 2 free items?</span></div>
-
-        <div class="faq-a"><span class="zh">每件包含最多 4 张基础视觉优化修图、gudong.app 标品展位上线及 1 年期展示。点击右上角即可提交创始席位申请。</span><span class="en">Each piece includes up to 4 basic optimized photos, a standard gudong.app listing, and 1-year display. Click top right to apply for a founding spot.</span></div>
+        <div class="faq-q"><span class="zh">创始藏家体验席包含哪些权益？</span><span class="en">What is included in the Founding Collector programme?</span></div>
+        <div class="faq-a"><span class="zh">前 88 位经确认的创始藏家永久享有每月 2 件免费发布额度，每月 1 日重置且不累积、不结转；免费藏品正常展示并享基础曝光。超额单件上架及升级套餐享 8 折，单件为 S$158（原价 S$198）。</span><span class="en">Confirmed members among the first 88 receive 2 free listings each month for life. The quota resets on the 1st with no carry-over; free listings receive standard display and basic exposure. Additional single listings and upgraded plans are 20% off; a single listing is S$158 (regularly S$198).</span></div>
       </div>
       <div class="faq-item">
         <div class="faq-q"><span class="zh">交易过程如何保障？平台是否介入资金？</span><span class="en">How are transactions secured? Does the platform handle funds?</span></div>
@@ -874,10 +935,10 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
     } else {
       title.innerHTML = '<span class="zh">单件专业上架申请</span><span class="en">Professional Single Listing</span>';
       priceHighlight.textContent = 'S$198';
-      priceUnit.innerHTML = '<span class="zh">/ 件 · 一年在线</span><span class="en">/ item · 1-year</span>';
+      priceUnit.innerHTML = '<span class="zh">/ 件 · 普通价；创始藏家超额价 S$158（8 折）</span><span class="en">/ item · Standard; S$158 (20% off) for Founding Collectors</span>';
       priceOriginal.textContent = '';
       list.innerHTML = ''
-        + '<li><span class="zh"><b>图片精修</b>：光影 / 色彩 / 裁剪 / 背景清理</span><span class="en"><b>Photo retouching</b>: light, colour, crop, background</span></li>'
+        + '<li><span class="zh"><b>图片精修</b>：最多 4 张基础图片优化</span><span class="en"><b>Photo retouching</b>: up to 4 basic photo edits</span></li>'
         + '<li><span class="zh"><b>标题 · 描述 · 标签</b>：如实整理，不鉴定真伪</span><span class="en"><b>Title · description · tags</b>: listed as-is, no authentication</span></li>'
         + '<li><span class="zh"><b>确认后上架</b> gudong.app，一年在线展示</span><span class="en"><b>Listed on gudong.app</b> after your approval · 1-year display</span></li>';
     }
@@ -948,7 +1009,7 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
       photosLine = n > 0 ? ('\n参考图片：' + n + ' 张（其余与客服后续沟通）') : '\n参考图片：后续与客服沟通';
     } else {
       title = '【单件专业上架申请 - 古董圈】';
-      feeLine = '单件上架服务（S$198 / 件）';
+      feeLine = '单件上架服务（普通价 S$198 / 件；经确认的创始藏家超额价 S$158 / 件）';
       photosLine = n > 0 ? ('\n图片数量：' + n + ' 张') : '\n图片数量：待上传';
     }
 

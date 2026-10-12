@@ -55,17 +55,16 @@
             --color-far-mountain: #2E4A52;
             --color-wa: #25D366;
             --color-wa-dark: #128C7E;
+            --color-ink: #1F1B17;
             --card-radius: 12px;
             --img-radius: 4px;
             --font-serif: "Playfair Display", "Noto Serif SC", "Songti SC", "STSong", Georgia, serif;
             --font-sans: "Inter", "Geist", "Inter Display", "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Helvetica, Arial, sans-serif;
-            --font-display: "Inter", "Geist", "Inter Display", "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Helvetica, Arial, sans-serif;
             --font-latin: "Inter", "Geist", "Inter Display", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
             --font-zh-sans: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Helvetica, Arial, sans-serif;
         }
 
         h1, h2, h3 { font-family: var(--font-serif); text-wrap: balance; }
-        .title { font-family: var(--font-serif); }
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: var(--font-latin), var(--font-zh-sans); }
 html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
 body { background: var(--color-bg); color: var(--color-text); line-height: 1.65; overflow-x: hidden; }
@@ -81,13 +80,11 @@ header {
   position: sticky; top: 0; z-index: 50;
 }
 .brand { display: flex; flex-direction: row; align-items: center; gap: .7rem; line-height: 1; flex-shrink: 0; text-decoration: none; color: inherit; min-width: 0; }
-.brand:hover { text-decoration: none; }
-        .brand-logo-img { height: 38px; width: auto; display: block; object-fit: contain; flex-shrink: 0; }
+.brand-logo-img { height: 38px; width: auto; display: block; object-fit: contain; flex-shrink: 0; }
+.brand-text { display: flex; flex-direction: column; justify-content: center; min-width: 0; line-height: 1.15; letter-spacing: -.005em; }
 .brand-line1 { display: flex; align-items: baseline; gap: .32rem; }
-        .brand-text { display: flex; flex-direction: column; justify-content: center; min-width: 0; line-height: 1.15; letter-spacing: -.005em; }
-@media (max-width: 640px) { .brand-logo-img { height: 30px; width: auto; display: block; object-fit: contain; flex-shrink: 0; } }
 .brand-zh { font-size: 1.4rem; font-weight: 700; letter-spacing: .02em; line-height: 1.15; color: var(--color-primary-dark); font-family: var(--font-serif); white-space: nowrap; }
-        .brand-en { font-size: 1.4rem; font-weight: 600; letter-spacing: -.012em; line-height: 1.15; color: var(--color-primary-dark); font-family: var(--font-sans); white-space: nowrap; }
+.brand-en { font-size: 1.4rem; font-weight: 600; letter-spacing: -.012em; line-height: 1.15; color: var(--color-primary-dark); font-family: var(--font-sans); white-space: nowrap; }
 .brand-text small { display: block; color: var(--color-qianjinzong); font-family: var(--font-sans); font-weight: 500; font-size: .68rem; letter-spacing: .14em; margin-top: 2px; text-transform: uppercase; white-space: nowrap; }
 .header-right { display: flex; align-items: center; gap: .55rem; flex-shrink: 0; }
 .lang-btn {
@@ -102,6 +99,7 @@ header {
 }
 .menu-toggle:hover { border-color: var(--color-primary); color: var(--color-primary); background: var(--color-primary-light); }
 
+@media (max-width: 640px) { .brand-logo-img { height: 30px; } }
 @media (max-width: 400px) {
   .brand-zh, .brand-en { font-size: 1.12rem; }
   .brand-text small { font-size: .55rem; letter-spacing: .08em; }
@@ -120,8 +118,8 @@ header {
 .sidebar.open { transform: translateX(0); }
 .sidebar-toggle-inner { display: block; width: 100%; padding: .9rem 0; background: transparent; border: none; border-bottom: 1px solid var(--color-border); font-size: 1.15rem; color: var(--color-text-secondary); cursor: pointer; text-align: center; }
 .sidebar-brand { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .1rem; padding: 1.1rem 0; font-weight: 700; color: var(--color-primary-dark); border-bottom: 1px solid var(--color-border); }
-.sidebar-brand .logo-zh { font-size: 1.05rem; font-family: var(--font-serif); font-weight: 700; color: var(--color-primary-dark); letter-spacing: .005em; }
-.sidebar-brand .logo-en { font-size: 1.05rem; letter-spacing: normal; font-family: var(--font-sans); font-weight: 600; color: var(--color-primary-dark); }
+.sidebar-brand .logo-zh { font-size: 1.05rem; font-family: var(--font-serif); font-weight: 700; color: var(--color-primary-dark); }
+.sidebar-brand .logo-en { font-size: 1.05rem; font-family: var(--font-sans); font-weight: 600; color: var(--color-primary-dark); }
 .sidebar-brand .logo-tagline { font-size: .62rem; letter-spacing: .16em; color: var(--color-qianjinzong); text-transform: uppercase; font-family: var(--font-sans); font-weight: 500; }
 .sidebar-nav { display: flex; flex-direction: column; padding: .3rem 0; }
 .sidebar-link { padding: .85rem 1.4rem; color: var(--color-text); text-decoration: none; font-size: .95rem; transition: .4s; }
@@ -179,14 +177,12 @@ main section[id] { scroll-margin-top: 92px; }
   flex-direction: column;
   box-shadow: 0 1px 3px rgba(0,0,0,.04);
   position: relative;
-  transition: border-color .4s cubic-bezier(.25,.1,.25,1), box-shadow .4s cubic-bezier(.25,.1,.25,1);
+  transition: border-color .4s cubic-bezier(.25,.1,.25,1), box-shadow .4s cubic-bezier(.25,.1,.25,1), transform .4s;
 }
 .card:hover { border-color: var(--color-gold); box-shadow: 0 8px 24px rgba(37,34,30,.08); }
-.card .card-eyebrow { font-size: .75rem; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--color-gold); margin-bottom: .55rem; }
 .card h3 { font-family: var(--font-serif); font-size: 1.18rem; font-weight: 600; color: var(--color-text); margin-bottom: .45rem; line-height: 1.4; }
 .card .card-desc { font-size: .82rem; color: var(--color-text-secondary); line-height: 1.7; min-height: 2.8rem; }
 
-/* 价格行：flex 基线对齐，窄屏自动换行不挤字 */
 .card .price {
   display: flex;
   align-items: baseline;
@@ -213,7 +209,6 @@ main section[id] { scroll-margin-top: 92px; }
 }
 .card .price .free-word { font-size: .9em; color: var(--color-primary-dark); }
 .card .price-unit { font-size: .78rem; color: var(--color-gold); letter-spacing: .02em; line-height: 1.6; }
-.card .price-unit s { color: var(--color-text-muted); font-weight: 500; }
 .card ul { list-style: none; margin: 1.2rem 0 1.5rem; }
 .card li { position: relative; padding: .48rem 0 .48rem 1.15rem; font-size: .8rem; color: var(--color-text-secondary); line-height: 1.7; word-break: break-word; }
 .card li + li { border-top: 1px dashed var(--color-border); }
@@ -227,13 +222,38 @@ main section[id] { scroll-margin-top: 92px; }
 }
 .card .card-cta:hover { background: var(--color-primary-dark); }
 
-/* 特色旗舰卡片 */
+/* 主推旗舰卡片（C 位） */
 .card.featured {
-  border-color: var(--color-gold);
+  border: 1.5px solid var(--color-gold);
   background: linear-gradient(180deg, #FFFDF9 0%, #FFFAF2 100%);
-  box-shadow: 0 4px 16px rgba(37,34,30,.08);
+  box-shadow: 0 12px 32px rgba(156,122,58,.14);
+  transform: translateY(-4px);
 }
+.card.featured:hover { box-shadow: 0 16px 40px rgba(156,122,58,.22); transform: translateY(-6px); }
 .card.featured .price { color: var(--color-primary-dark); }
+
+/* 最受藏家欢迎徽章 */
+.popular-ribbon {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, #9C7A3A 0%, #C9A55B 50%, #9C7A3A 100%);
+  color: #fff;
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  padding: .32rem .9rem;
+  border-radius: 999px;
+  white-space: nowrap;
+  box-shadow: 0 4px 12px rgba(156,122,58,.35);
+  font-family: var(--font-sans);
+  display: inline-flex;
+  align-items: center;
+  gap: .3rem;
+}
+
 .tier-tag {
   display: inline-flex; align-items: center; gap: .3rem; font-size: .7rem; font-weight: 700;
   letter-spacing: .1em; text-transform: uppercase; padding: .22rem .6rem; border-radius: 4px;
@@ -243,11 +263,65 @@ main section[id] { scroll-margin-top: 92px; }
 .tier-tag.growth { background: #F1E8DF; color: #7A4E33; }
 .tier-tag.flagship { background: linear-gradient(135deg, #9C7A3A 0%, #D4AF6A 100%); color: #FFFFFF; box-shadow: 0 2px 6px rgba(156,122,58,.3); }
 
+/* 限时立省标签 */
+.saving-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+  background: linear-gradient(135deg, #FFF3D6 0%, #FFE8B8 100%);
+  border: 1px solid #E5C878;
+  color: #6E5326;
+  font-size: .74rem;
+  font-weight: 700;
+  padding: .38rem .75rem;
+  border-radius: 8px;
+  margin-top: .55rem;
+  line-height: 1.5;
+  letter-spacing: .02em;
+}
+.saving-badge::before { content: "🔥"; font-size: .85em; }
+
 /* 创始计划说明 */
 .founding-note { width: 100%; margin: 1.1rem 0; }
 .founding-note .fn-title { display: flex; align-items: center; font-size: .78rem; font-weight: 700; color: var(--color-primary-dark); }
 .founding-note .dot { flex: none; width: 6px; height: 6px; border-radius: 50%; background: var(--color-gold); display: inline-block; margin-right: 6px; box-shadow: 0 0 0 3px rgba(156,122,58,.18); }
 .founding-note .fn-desc { margin-top: .45rem; font-size: .72rem; line-height: 1.7; color: var(--color-text-secondary); }
+
+/* 席位进度条 */
+.seat-progress {
+  background: #fff;
+  border: 1px solid #EADFC8;
+  border-radius: 10px;
+  padding: .85rem .95rem .95rem;
+  margin-bottom: 1rem;
+}
+.seat-progress-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: .76rem;
+  margin-bottom: .5rem;
+  line-height: 1.5;
+}
+.seat-progress-head .sp-taken { font-weight: 700; color: var(--color-primary-dark); }
+.seat-progress-head .sp-taken b { color: #B54A34; font-size: 1.05em; }
+.seat-progress-head .sp-remain { font-size: .72rem; color: var(--color-text-muted); }
+.seat-progress-bar {
+  height: 7px;
+  border-radius: 999px;
+  background: #F1E8DF;
+  overflow: hidden;
+  position: relative;
+}
+.seat-progress-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #C9A55B 0%, #B54A34 100%);
+  width: 70.5%;
+  box-shadow: 0 0 8px rgba(201,165,91,.4);
+  animation: seatFill 1.2s ease-out;
+}
+@keyframes seatFill { from { width: 0; } to { width: 70.5%; } }
 
 /* ============ 席位阶梯预告 ============ */
 .tier-ladder {
@@ -307,10 +381,7 @@ main section[id] { scroll-margin-top: 92px; }
 }
 .referral-head { display: flex; align-items: center; gap: .55rem; flex-wrap: wrap; margin-bottom: .9rem; }
 .referral-icon { font-size: 1.1rem; line-height: 1; flex-shrink: 0; }
-.referral-head h3 {
-  font-family: var(--font-serif); font-size: 1.05rem; font-weight: 600;
-  color: var(--color-text); margin: 0; line-height: 1.5;
-}
+.referral-head h3 { font-family: var(--font-serif); font-size: 1.05rem; font-weight: 600; color: var(--color-text); margin: 0; line-height: 1.5; }
 .referral-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .7rem; }
 .referral-item {
   background: #fff; border: 1px solid #F0E3C8; border-radius: 10px;
@@ -319,6 +390,105 @@ main section[id] { scroll-margin-top: 92px; }
 }
 .referral-item .arrow { color: var(--color-gold); font-weight: 700; flex-shrink: 0; }
 .referral-item b { color: var(--color-primary-dark); font-weight: 700; }
+
+/* ============ 创始藏家铭牌展示卡 ============ */
+.honor-card {
+  margin-top: 1rem;
+  background: linear-gradient(135deg, #221B15 0%, #3A2C20 50%, #221B15 100%);
+  border: 1px solid #4A3A28;
+  border-radius: 14px;
+  padding: 1.6rem 1.4rem;
+  display: flex;
+  align-items: center;
+  gap: 1.3rem;
+  color: #F5EDDD;
+  position: relative;
+  overflow: hidden;
+}
+.honor-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 85% 20%, rgba(201,165,91,.22) 0%, transparent 55%);
+  pointer-events: none;
+}
+.honor-badge-wrap { flex-shrink: 0; position: relative; z-index: 1; }
+.honor-badge-wrap img { width: 68px; height: 68px; object-fit: contain; filter: drop-shadow(0 0 12px rgba(201,165,91,.5)); }
+.honor-badge-fallback {
+  width: 68px; height: 68px; border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #E5C878 0%, #9C7A3A 60%, #6E5326 100%);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-serif); font-size: 1.6rem; font-weight: 700; color: #221B15;
+  box-shadow: inset 0 -4px 8px rgba(0,0,0,.25), 0 0 18px rgba(201,165,91,.45);
+}
+.honor-text { position: relative; z-index: 1; min-width: 0; }
+.honor-eyebrow {
+  font-size: .68rem; font-weight: 700; letter-spacing: .22em; text-transform: uppercase;
+  color: #C9A55B; margin-bottom: .35rem;
+}
+.honor-title { font-family: var(--font-serif); font-size: 1.15rem; font-weight: 600; color: #F5EDDD; line-height: 1.4; margin-bottom: .3rem; }
+.honor-desc { font-size: .78rem; line-height: 1.7; color: #C7B99F; }
+
+/* ============ 藏家之声 ============ */
+.testimonials-section { margin-top: 3rem; }
+.testimonial-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+.testimonial-card {
+  background: #fff;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  padding: 1.35rem 1.25rem 1.15rem;
+  display: flex;
+  flex-direction: column;
+  gap: .85rem;
+  position: relative;
+  transition: border-color .4s, box-shadow .4s;
+}
+.testimonial-card:hover { border-color: var(--color-gold); box-shadow: 0 6px 18px rgba(37,34,30,.06); }
+.testimonial-card::before {
+  content: "“";
+  position: absolute;
+  top: .35rem;
+  right: .9rem;
+  font-family: var(--font-serif);
+  font-size: 2.6rem;
+  color: rgba(156,122,58,.18);
+  line-height: 1;
+}
+.testimonial-quote {
+  font-size: .82rem;
+  line-height: 1.85;
+  color: var(--color-text-secondary);
+  flex-grow: 1;
+}
+.testimonial-author {
+  display: flex;
+  flex-direction: column;
+  gap: .12rem;
+  padding-top: .75rem;
+  border-top: 1px dashed var(--color-border);
+}
+.author-name {
+  font-family: var(--font-serif);
+  font-size: .88rem;
+  font-weight: 600;
+  color: var(--color-primary-dark);
+  display: flex;
+  align-items: center;
+  gap: .35rem;
+}
+.author-name .fc-mini-badge {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 16px; height: 16px; border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #E5C878 0%, #9C7A3A 70%);
+  color: #221B15; font-size: .58rem; font-weight: 800;
+  font-family: var(--font-sans);
+  flex-shrink: 0;
+}
+.author-role { font-size: .72rem; color: var(--color-text-muted); letter-spacing: .02em; }
 
 /* ============ 委托找货区 ============ */
 .sourcing-section { margin: 3rem auto 0; padding: 2rem 1.6rem; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 18px; }
@@ -370,10 +540,14 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
 @media (max-width: 900px) {
   .core-grid { grid-template-columns: 1fr; max-width: 520px; margin: 0 auto; }
   .card { --price-size: 2rem; }
+  .card.featured { transform: none; }
+  .card.featured:hover { transform: translateY(-2px); }
   .sourcing-grid { grid-template-columns: 1fr; }
   .sourcing-divider { writing-mode: horizontal-tb; padding: .5rem 0; }
   .tier-steps { grid-template-columns: 1fr; }
   .referral-grid { grid-template-columns: 1fr; }
+  .testimonial-grid { grid-template-columns: 1fr; max-width: 520px; margin: 0 auto; }
+  .honor-card { flex-direction: column; text-align: center; gap: .9rem; padding: 1.5rem 1.2rem; }
 }
 @media (max-width: 640px) {
   .container { padding: 1.6rem 4.5% 3rem; }
@@ -386,10 +560,11 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
   .row { flex-direction: column; gap: .55rem; }
   .row-price { text-align: left; }
   .sec-head { margin-top: 2.2rem; }
+  .popular-ribbon { font-size: .62rem; padding: .28rem .75rem; }
 }
 
 /* ============================================================
-   弹窗设计（精简整合版：单件上架 + 图片精修合并）
+   弹窗设计（含 Order Bump + 三步流程条 + Sticky 提交）
    ============================================================ */
 .publish-modal {
   position: fixed; inset: 0; z-index: 10000;
@@ -405,11 +580,13 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
   background: #fff;
   border-radius: 16px;
   max-width: 500px; width: 100%;
-  padding: 2rem 1.8rem 1.6rem;
+  padding: 2rem 1.8rem 0;
   box-shadow: 0 24px 60px rgba(0,0,0,.28);
   position: relative;
   max-height: 92vh; overflow-y: auto;
   animation: pm-in .22s cubic-bezier(.22,.61,.36,1);
+  display: flex;
+  flex-direction: column;
 }
 @keyframes pm-in {
   from { opacity: 0; transform: translateY(8px) scale(.98); }
@@ -424,6 +601,7 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
   display: inline-flex; align-items: center; justify-content: center;
   border-radius: 8px; line-height: 1;
   transition: all .3s;
+  z-index: 2;
 }
 .publish-close:hover { color: #7A4E33; background: #F1E8DF; }
 
@@ -459,22 +637,10 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
   letter-spacing: -.01em;
   line-height: 1.1;
 }
-.price-unit-suffix {
-  font-size: .8rem;
-  color: var(--color-text-secondary);
-  line-height: 1.5;
-}
-.price-original {
-  font-size: .82rem;
-  color: var(--color-text-muted);
-  margin-left: auto;
-  font-weight: 400;
-}
+.price-unit-suffix { font-size: .8rem; color: var(--color-text-secondary); line-height: 1.5; }
+.price-original { font-size: .82rem; color: var(--color-text-muted); margin-left: auto; font-weight: 400; }
 
-.service-list {
-  list-style: none;
-  padding: 0; margin: 0 0 .6rem;
-}
+.service-list { list-style: none; padding: 0; margin: 0 0 .6rem; }
 .service-list li {
   position: relative;
   padding: .32rem 0 .32rem 1.1rem;
@@ -499,6 +665,45 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
   border-top: 1px solid rgba(156,122,58,.15);
 }
 
+/* Order Bump 加购 */
+.order-bump {
+  display: flex;
+  align-items: flex-start;
+  gap: .6rem;
+  background: linear-gradient(135deg, #FFF9E8 0%, #FFFCF3 100%);
+  border: 1.5px dashed #E5C878;
+  border-radius: 10px;
+  padding: .85rem .95rem;
+  margin-bottom: 1rem;
+  cursor: pointer;
+  transition: all .3s;
+  position: relative;
+}
+.order-bump:hover { border-color: #C9A55B; background: linear-gradient(135deg, #FFF6DC 0%, #FFFAEE 100%); }
+.order-bump input[type="checkbox"] {
+  width: 18px; height: 18px;
+  accent-color: #9C7A3A;
+  margin-top: 2px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.order-bump label { margin-bottom: 0; cursor: pointer; font-size: .82rem; line-height: 1.6; color: var(--color-text); font-weight: 400; }
+.order-bump label b { color: #B54A34; font-weight: 700; }
+.order-bump .bump-tag {
+  display: inline-block;
+  font-size: .64rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  background: #B54A34;
+  color: #fff;
+  padding: .1rem .42rem;
+  border-radius: 4px;
+  margin-right: .4rem;
+  vertical-align: 1px;
+  line-height: 1.5;
+}
+.order-bump .bump-hint { display: block; font-size: .72rem; color: var(--color-text-muted); margin-top: .2rem; line-height: 1.55; }
+
 /* 精简协议提示 */
 .compact-warning {
   display: flex;
@@ -514,6 +719,7 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
 }
 .compact-warning > span { flex-shrink: 0; }
 .compact-warning b { color: #6E5326; }
+.compact-warning .cw-title { display: block; font-weight: 700; color: #6E5326; margin-bottom: .15rem; }
 
 /* 表单 */
 .publish-form-group { margin-bottom: .9rem; }
@@ -553,30 +759,11 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
   background: #FAFAF7;
   transition: all .3s;
 }
-.publish-file:hover {
-  border-color: var(--color-primary);
-  background: var(--color-primary-light);
-}
+.publish-file:hover { border-color: var(--color-primary); background: var(--color-primary-light); }
 .publish-file input { display: none; }
-.publish-file-plus {
-  display: block;
-  font-size: 1.3rem; font-weight: 700;
-  color: var(--color-primary);
-  line-height: 1;
-}
-.publish-file-text {
-  display: block;
-  font-size: .78rem;
-  color: var(--color-text-secondary);
-  margin-top: .25rem;
-  line-height: 1.6;
-}
-.publish-file-count {
-  display: none;
-  font-size: .74rem;
-  color: var(--color-success);
-  margin-top: .2rem;
-}
+.publish-file-plus { display: block; font-size: 1.3rem; font-weight: 700; color: var(--color-primary); line-height: 1; }
+.publish-file-text { display: block; font-size: .78rem; color: var(--color-text-secondary); margin-top: .25rem; line-height: 1.6; }
+.publish-file-count { display: none; font-size: .74rem; color: var(--color-success); margin-top: .2rem; }
 .publish-file.has .publish-file-count { display: block; }
 
 /* 协议勾选行 */
@@ -597,35 +784,67 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
   cursor: pointer;
   flex-shrink: 0;
 }
-.agree-row label {
-  margin-bottom: 0;
-  font-size: .76rem;
-  font-weight: 400;
-  color: var(--color-text);
-  cursor: pointer;
-  line-height: 1.65;
-}
-.agree-row label a {
-  color: #7A4E33; font-weight: 600;
-  text-decoration: underline;
-}
+.agree-row label { margin-bottom: 0; font-size: .76rem; font-weight: 400; color: var(--color-text); cursor: pointer; line-height: 1.65; }
+.agree-row label a { color: #7A4E33; font-weight: 600; text-decoration: underline; }
 
-/* 工作流提示 */
-.workflow-hint {
-  font-size: .72rem;
-  color: var(--color-text-muted);
-  text-align: center;
-  line-height: 1.7;
-  padding: .55rem .2rem .7rem;
+/* ============ 三步流程条 ============ */
+.workflow-steps {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .3rem;
+  padding: .85rem .35rem .9rem;
   border-top: 1px dashed var(--color-border);
   margin-top: .4rem;
+}
+.workflow-step {
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+  flex: 1;
+  min-width: 0;
+}
+.ws-num {
+  flex-shrink: 0;
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  background: var(--color-primary-light);
+  color: var(--color-primary-dark);
+  font-size: .7rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-sans);
+}
+.ws-text {
+  font-size: .7rem;
+  color: var(--color-text-secondary);
+  line-height: 1.4;
+  font-weight: 500;
+}
+.workflow-arrow {
+  color: var(--color-gold);
+  font-size: .8rem;
+  flex-shrink: 0;
+  opacity: .7;
+}
+
+/* 底部 Sticky 提交条 */
+.submit-bar {
+  position: sticky;
+  bottom: 0;
+  margin: 0 -1.8rem;
+  padding: .9rem 1.8rem 1.3rem;
+  background: linear-gradient(180deg, rgba(255,255,255,0) 0%, #ffffff 22%, #ffffff 100%);
+  z-index: 3;
 }
 
 /* 主按钮 */
 .submit-btn {
   display: flex; align-items: center; justify-content: center;
   gap: .5rem;
-  padding: .9rem 1rem;
+  padding: .95rem 1rem;
   border-radius: 10px;
   font-weight: 700;
   font-size: .92rem;
@@ -639,23 +858,25 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
   line-height: 1.5;
   text-align: center;
 }
-.submit-btn:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 12px 28px rgba(122,78,51,.35);
-}
+.submit-btn:hover { transform: translateY(-1px); box-shadow: 0 12px 28px rgba(122,78,51,.35); }
 .submit-btn:active { transform: translateY(0); }
+
+/* 移动端弹窗细节 */
+@media (max-width: 560px) {
+  .publish-card { padding: 1.6rem 1.2rem 0; max-height: 94vh; }
+  .submit-bar { margin: 0 -1.2rem; padding: .8rem 1.2rem 1.1rem; }
+  .workflow-step { gap: .3rem; }
+  .ws-text { font-size: .66rem; }
+  .ws-num { width: 20px; height: 20px; font-size: .66rem; }
+}
 </style>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"藏家服务与收费 | Collector Services & Pricing","description":"古董圈藏家入驻、线上展馆服务收费说明，面向新加坡及海外古董藏家；平台不提供古董鉴定，不参与藏品交易。","url":"https://www.gudong.app/pricing","publisher":{"@id":"https://www.gudong.app/#organization"}}</script>
-
-
-
     <meta name="apple-mobile-web-app-title" content="古董圈">
 </head>
 <body data-lang="zh">
   <header>
     <div style="display:flex; align-items:center; gap:.9rem; min-width:0;">
       <button class="menu-toggle" onclick="openSidebar()" aria-label="菜单">☰</button>
-      <!-- 修改点：LOGO链接改为 jindex.html -->
       <a href="jindex.html" class="brand" aria-label="古董圈 Gudong 首页">
                 <img src="assets/icons/logo-mark.png" alt="古董圈 Gudong" class="brand-logo-img" onerror="this.style.display='none'">
                 <span class="brand-text">
@@ -681,24 +902,10 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
             <a href="index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">首页</span><span class="en">Home</span></a>
             <a href="my/saved.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">我的收藏 · 关注</span><span class="en">Saved &amp; Followed</span></a>
             <a href="my/briefing.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">今日简报</span><span class="en">Today's Brief</span></a>
-            <a href="index.html#daily-intel" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 捡漏情报</span><span class="en">· Insider Tips</span></a>
-            <a href="index.html#today-finds" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 今日发现</span><span class="en">· Today's Finds</span></a>
-            <a href="index.html#new-listings" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 刚刚上新</span><span class="en">· Just Listed</span></a>
             <a href="collection.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">藏品库</span><span class="en">Collection</span></a>
-            <a href="categories/porcelain.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 瓷器</span><span class="en">· Porcelain</span></a>
-            <a href="categories/jade.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 玉器</span><span class="en">· Jade</span></a>
-            <a href="categories/bronze.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 铜器</span><span class="en">· Bronzes</span></a>
-            <a href="categories/coins.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 钱币</span><span class="en">· Coins</span></a>
-            <a href="categories/paintings.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 书画</span><span class="en">· Paintings &amp; Calligraphy</span></a>
-            <a href="categories/misc.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 杂项</span><span class="en">· Miscellaneous</span></a>
             <a href="sellers/index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">藏家展馆</span><span class="en">Collector Gallery</span></a>
             <a href="insights.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">情报 / 知识</span><span class="en">Insights</span></a>
             <a href="tools/index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">工具</span><span class="en">Tools</span></a>
-            <a href="tools/index.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 工具汇总首页</span><span class="en">· Tools Home</span></a>
-            <a href="tools/year-since.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 年份距今计算器</span><span class="en">· Years-since-year Calculator</span></a>
-            <a href="tools/ganzhi.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 干支公历换算器</span><span class="en">· Sexagenary-Gregorian Converter</span></a>
-            <a href="tools/era-lookup.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 古文化·朝代年代速查表</span><span class="en">· Culture &amp; Dynasty Era Lookup</span></a>
-            <a href="tools/currency-convert.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 拍卖藏品货币参考换算器</span><span class="en">· Currency Reference Converter</span></a>
             <a href="about.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">关于我们</span><span class="en">About</span></a>
             <button type="button" class="sidebar-lang-btn" onclick="toggleLang()" aria-label="Switch language"><span class="zh">🌐 English</span><span class="en">🌐 中文</span></button>
         </nav>
@@ -706,7 +913,6 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
 
 <main class="container">
   <div class="breadcrumb">
-    <!-- 修改点：面包屑“首页”链接改为 jindex.html -->
     <span class="zh"><a href="jindex.html">首页</a> / 服务价格</span>
     <span class="en"><a href="jindex.html">Home</a> / Pricing</span>
   </div>
@@ -717,20 +923,53 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
     <h1 class="sec-title"><span class="zh">让每一件藏品，都有专业的展示空间</span><span class="en">Every piece deserves a professional showcase.</span></h1>
     <p class="sec-sub"><span class="zh">从单件藏品发布，到专属线上藏家展馆。古董圈帮助您整理藏品资料、优化展示图片，让更多感兴趣的收藏者发现您的藏品，并直接联系您。</span><span class="en">From a single piece to your own dedicated online gallery. We help you organize collection details, optimize your photos, and get discovered — and contacted directly — by interested collectors.</span></p>
     <div class="hero-chips">
+      <span class="zh">恪守行规 · 尊崇私密</span><span class="en">Privacy-first · Zero Commission</span>
       <span class="zh">单件发布</span><span class="en">Single Listing</span>
       <span class="zh">专属展馆</span><span class="en">Dedicated Gallery</span>
-      <span class="zh">精选展示</span><span class="en">Featured Display</span>
     </div>
     <div class="sec-divider" aria-hidden="true"><span></span></div>
   </div>
 
-  <!-- 三层黄金定价 -->
+  <!-- 三层黄金定价（排序：创始藏家 → 数字旗舰馆（C位）→ 单件上架） -->
   <section id="collector-services">
     <div class="core-grid">
 
-      <!-- 1. 专属藏家数字旗舰馆 -->
+      <!-- ① 创始藏家体验席（门槛最低） -->
+      <div class="card">
+        <span class="tier-tag free"><span class="zh">前 88 位 · 永久权益</span><span class="en">FIRST 88 · LIFETIME</span></span>
+        <h3><span class="zh">创始藏家体验席</span><span class="en">Founding Collector Programme</span></h3>
+        <p class="card-desc"><span class="zh">免费入驻，无需年费；先到先得，满额即止。</span><span class="en">Free to join, no annual fee. First come, first served — while seats last.</span></p>
+
+        <!-- 动态进度条 -->
+        <div class="seat-progress" aria-label="Seat progress">
+          <div class="seat-progress-head">
+            <span class="sp-taken"><span class="zh">已抢占 <b>62</b> / 88 席</span><span class="en"><b>62</b> / 88 seats taken</span></span>
+            <span class="sp-remain"><span class="zh">剩余 26 席</span><span class="en">26 left</span></span>
+          </div>
+          <div class="seat-progress-bar"><div class="seat-progress-fill"></div></div>
+        </div>
+
+        <div class="price">
+          <span class="free-word"><span class="zh">每月 2 件免费</span><span class="en">2 FREE / MO</span></span>
+        </div>
+        <div class="price-unit"><span class="zh">前 88 位入驻藏家永久享有</span><span class="en">Lifetime benefit for the first 88 collectors</span></div>
+        <ul>
+          <li><strong><span class="zh">每月 2 个免费发布名额：</span><span class="en">2 free listings monthly: </span></strong><span class="zh">享基础曝光与正常展示</span><span class="en">standard display and basic exposure.</span></li>
+          <li><strong><span class="zh">超额发布及升级套餐永久 8 折：</span><span class="en">20% off for life: </span></strong><span class="zh">单件上架 S$158（原价 S$198）</span><span class="en">S$158 per single listing (regularly S$198).</span></li>
+          <li style="color:#9C7A3A; font-weight:700;"><img src="assets/images/foundingcollector.webp" alt="创始藏家勋章 Founding Collector Badge" style="width:22px;height:22px;object-fit:contain;vertical-align:-6px;margin-right:6px;" onerror="this.style.display='none'"><span class="zh">获得专属「创始藏家」身份标识</span><span class="en">Get your exclusive "Founding Collector" badge.</span></li>
+        </ul>
+
+        <div class="founding-note">
+          <div class="fn-title"><span class="dot"></span><span class="zh">2026 创始藏家计划</span><span class="en">2026 Founding Collector Programme</span></div>
+          <div class="fn-desc"><span class="zh">本轮限额 88 位，资格以平台确认为准；满额后开放下一轮候补。</span><span class="en">Limited to 88 seats this round, subject to platform confirmation. A waitlist opens once full.</span></div>
+        </div>
+
+         <a class="card-cta" href="https://airtable.com/apprn6XDQnAm8bkaT/shrlQLTRfG5RlYjD4" target="_blank" rel="noopener noreferrer"><span class="zh">申请成为创始藏家 →</span><span class="en">Apply for Founding Collector →</span></a>
+      </div>
+
+      <!-- ② 专属藏家数字旗舰馆（C 位主推） -->
       <div class="card featured">
-        <span class="tier-tag flagship"><span class="zh">完整展馆方案</span><span class="en">DEDICATED GALLERY</span></span>
+        <span class="popular-ribbon">⭐ <span class="zh">最受藏家欢迎</span><span class="en">MOST POPULAR</span></span>
         <h3><span class="zh">专属藏家数字旗舰馆</span><span class="en">Collector Digital Gallery</span></h3>
         <p class="card-desc"><span class="zh">不只是发布藏品，而是为您的收藏建立一个专属的线上展示空间。</span><span class="en">Not just listings — a dedicated online showcase built for your collection.</span></p>
         <div class="price">
@@ -738,6 +977,13 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
           <s class="was">S$2,499</s>
         </div>
         <div class="price-unit"><span class="zh">/（约 S$149.90／件）</span><span class="en">/(~S$149.90 / piece)</span></div>
+
+        <!-- 限时立省标签 -->
+        <span class="saving-badge">
+          <span class="zh">限时立省 S$1,000 + 赠 2 个月首页精选</span>
+          <span class="en">Save S$1,000 + 2 months of homepage featuring</span>
+        </span>
+
         <ul>
           <li><strong><span class="zh">一站式建馆：</span><span class="en">One-stop setup: </span></strong><span class="zh">协助图片优化、文字整理与展馆上线</span><span class="en">photo editing, content organization, and gallery launch support.</span></li>
           <li><strong><span class="zh">展示全部上架藏品，无数量限制：</span><span class="en">Unlimited display: </span></strong><span class="zh">集中呈现您的收藏，建立统一的专业形象</span><span class="en">present your collection in one place and build a unified, professional image.</span></li>
@@ -748,7 +994,7 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
         <a class="card-cta" href="javascript:void(0)" onclick="openServiceModal('gallery')"><span class="zh">开启我的专属藏家展馆 →</span><span class="en">Start My Gallery →</span></a>
       </div>
 
-      <!-- 2. 单件上架 -->
+      <!-- ③ 单件专业上架（按需补充） -->
       <div class="card">
         <span class="tier-tag growth"><span class="zh">按需发布</span><span class="en">SINGLE LISTING</span></span>
         <h3><span class="zh">单件专业上架</span><span class="en">Professional Single Listing</span></h3>
@@ -763,29 +1009,6 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
           <li><strong><span class="zh">一年线上展示：</span><span class="en">One-year display: </span></strong><span class="zh">确认资料后上架，方便买家浏览与联系</span><span class="en">listed on gudong.app after your approval, for buyers to browse and contact you.</span></li>
         </ul>
         <a class="card-cta" href="javascript:void(0)" onclick="openServiceModal('single')"><span class="zh">申请单件专业上架 →</span><span class="en">Apply for Single Listing →</span></a>
-      </div>
-
-      <!-- 3. 创始藏家 -->
-      <div class="card">
-        <span class="tier-tag free"><span class="zh">前 88 位 · 永久权益</span><span class="en">FIRST 88 · LIFETIME</span></span>
-        <h3><span class="zh">创始藏家体验席</span><span class="en">Founding Collector Programme</span></h3>
-        <p class="card-desc"><span class="zh">免费入驻，无需年费；先到先得，满额即止。</span><span class="en">Free to join, no annual fee. First come, first served — while seats last.</span></p>
-        <div class="price">
-          <span class="free-word"><span class="zh">每月 2 件免费</span><span class="en">2 FREE / MO</span></span>
-        </div>
-        <div class="price-unit"><span class="zh">前 88 位入驻藏家永久享有</span><span class="en">Lifetime benefit for the first 88 collectors</span></div>
-        <ul>
-          <li><strong><span class="zh">每月 2 个免费发布名额：</span><span class="en">2 free listings monthly: </span></strong><span class="zh">享基础曝光与正常展示</span><span class="en">standard display and basic exposure.</span></li>
-          <li><strong><span class="zh">超额发布及升级套餐永久 8 折：</span><span class="en">20% off for life: </span></strong><span class="zh">单件上架 S$158（原价 S$198）</span><span class="en">S$158 per single listing (regularly S$198).</span></li>
-          <li style="color:#9C7A3A; font-weight:700;"><img src="assets/images/foundingcollector.webp" alt="创始藏家勋章 Founding Collector Badge" style="width:22px;height:22px;object-fit:contain;vertical-align:-6px;margin-right:6px;"><span class="zh">获得专属「创始藏家」身份标识</span><span class="en">Get your exclusive "Founding Collector" badge.</span></li>
-        </ul>
-
-        <div class="founding-note">
-          <div class="fn-title"><span class="dot"></span><span class="zh">2026 创始藏家计划</span><span class="en">2026 Founding Collector Programme</span></div>
-          <div class="fn-desc"><span class="zh">本轮限额 88 位，资格以平台确认为准；满额后开放下一轮候补。</span><span class="en">Limited to 88 seats this round, subject to platform confirmation. A waitlist opens once full.</span></div>
-        </div>
-
-         <a class="card-cta" href="https://airtable.com/apprn6XDQnAm8bkaT/shrlQLTRfG5RlYjD4" target="_blank" rel="noopener noreferrer"><span class="zh">申请成为创始藏家 →</span><span class="en">Apply for Founding Collector →</span></a>
       </div>
     </div>
 
@@ -829,6 +1052,18 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
           <span class="arrow" aria-hidden="true">→</span>
           <span><span class="zh"><b>上不封顶！</b>多推多得，额度当月有效</span><span class="en"><b>No cap!</b> The more you refer, the more you earn — credits valid within the current month.</span></span>
         </div>
+      </div>
+    </div>
+
+    <!-- ===== 创始藏家黑金徽章展示 ===== -->
+    <div class="honor-card">
+      <div class="honor-badge-wrap">
+        <img src="assets/images/foundingcollector.webp" alt="创始藏家徽章 Founding Collector Badge" onerror="this.outerHTML='<div class=&quot;honor-badge-fallback&quot;>藏</div>'">
+      </div>
+      <div class="honor-text">
+        <div class="honor-eyebrow"><span class="zh">荣誉身份 · 终身铭刻</span><span class="en">HONORARY · LIFETIME</span></div>
+        <div class="honor-title"><span class="zh">入驻即尊享「创始藏家」专属黑金数字徽章</span><span class="en">Join to receive your exclusive "Founding Collector" black-gold digital Badge</span></div>
+        <div class="honor-desc"><span class="zh">展馆主页与藏品详情页同步展示暗金边框徽标，向圈内买家传递您的资深身份与信誉背书。</span><span class="en">A dark-gold badge appears on your gallery page and item detail pages — signalling seniority and trust to fellow collectors.</span></div>
       </div>
     </div>
   </section>
@@ -933,6 +1168,37 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
     </div>
   </section>
 
+  <!-- ===== 藏家之声 ===== -->
+  <section id="testimonials" class="testimonials-section">
+    <div class="sec-head tight">
+      <div class="eyebrow"><span class="zh">藏 家 之 声</span><span class="en">COLLECTORS' VOICES</span></div>
+      <h2 class="sec-title"><span class="zh">圈内藏家的真实反馈</span><span class="en">What fellow collectors say</span></h2>
+    </div>
+    <div class="testimonial-grid">
+      <div class="testimonial-card">
+        <p class="testimonial-quote"><span class="zh">「终于有一个画面干净、没有乱七八糟广告的线上展馆了。图片精修后传给朋友看非常体面，而且可以直接 WhatsApp 联系我，很符合我们圈子的习惯。」</span><span class="en">"Finally, a clean online gallery with no noisy ads. After retouching, the photos look presentable to share with friends — and buyers can reach me directly on WhatsApp, just how our circle works."</span></p>
+        <div class="testimonial-author">
+          <span class="author-name"><span class="fc-mini-badge">藏</span><span class="zh">新加坡求真斋主</span><span class="en">Zhenqiu Studio, Singapore</span></span>
+          <span class="author-role"><span class="zh">瓷器藏家 · 入驻 1 年</span><span class="en">Porcelain collector · 1 year</span></span>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-quote"><span class="zh">「每月 2 件的免费额度对我来说刚刚好，不够用的时候升级一下也才 S$158，比市面上动辄抽佣的平台省心太多。不抽佣这点最让我放心。」</span><span class="en">"Two free listings a month is exactly enough for me. When I need more, upgrading is only S$158 — far easier than commission-based platforms. Zero commission is what gives me peace of mind."</span></p>
+        <div class="testimonial-author">
+          <span class="author-name"><span class="fc-mini-badge">藏</span><span class="zh">南洋瓷器藏家 Lim 先生</span><span class="en">Mr. Lim, Nanyang Porcelain</span></span>
+          <span class="author-role"><span class="zh">创始藏家 · 第 12 席</span><span class="en">Founding Collector · Seat #12</span></span>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-quote"><span class="zh">「数字旗舰馆帮我一次性梳理了 10 件旧藏，独立网址分享给海外买家非常方便。整个流程私密、体面，很符合古董圈该有的格调。」</span><span class="en">"The digital gallery helped me organize 10 old pieces in one go. Sharing my dedicated URL with overseas buyers is effortless — the whole process feels private and dignified, exactly the tone our circle deserves."</span></p>
+        <div class="testimonial-author">
+          <span class="author-name"><span class="fc-mini-badge">藏</span><span class="zh">东南亚玉器行家 · 匿名藏家</span><span class="en">SEA Jade Specialist · Anonymous</span></span>
+          <span class="author-role"><span class="zh">数字旗舰馆用户</span><span class="en">Digital Gallery user</span></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- 常见问题 -->
   <section id="faq" style="margin-top: 3rem;">
     <div class="sec-head">
@@ -964,9 +1230,9 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
   <section id="buyer-services" style="margin-top: 3rem;">
     <div class="sourcing-section">
       <div class="sourcing-head">
-        <div class="eyebrow"><span class="zh">资 深 委 托 寻 宝</span><span class="en">EXPERT SOURCING SERVICE</span></div>
-        <h3 class="sourcing-title"><span class="zh">S$280 启动专属检索，成交再付 S$800</span><span class="en">S$280 to start the search — S$800 on completion</span></h3>
-        <p class="sourcing-desc"><span class="zh">依托资深顾问网络，人工定向检索、多方严苛初筛、私密联系藏家。深度寻找并成交后支付 S$800。</span><span class="en">Drawing on expert networks for targeted search, strict screening, and private outreach. Pay S$800 only when a deal is reached.</span></p>
+        <div class="eyebrow"><span class="zh">定 向 寻 珍 · 私 密 委 寻</span><span class="en">PRIVATE EXPERT SOURCING</span></div>
+        <h3 class="sourcing-title"><span class="zh">寻宝启动金 S$280，达成交割后付 S$800</span><span class="en">S$280 to begin the search — S$800 on completion</span></h3>
+        <p class="sourcing-desc"><span class="zh">依托资深顾问网络，人工定向检索、多方严苛初筛、私密联系藏家。深度寻找并成交后支付 S$800；未寻得心仪重器，绝不收取后置服务费。</span><span class="en">Drawing on expert networks for targeted search, strict screening, and private outreach. Pay S$800 only upon completion; no post-service fee if no ideal piece is found.</span></p>
       </div>
       <div class="sourcing-grid">
         <div class="sourcing-step">
@@ -986,7 +1252,6 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
 </main>
 
 <style>
-/* 2026-10-09：footer 品牌区/免责声明/版权（全站统一·精简版） */
 .footer-brand { font-weight: 700; font-size: .84rem; color: #5c564f; margin-bottom: .35rem; }
 .footer-disclaimer { max-width: 680px; margin: 0 auto 1.1rem; font-size: .78rem; line-height: 1.65; color: #8a8178; }
 .footer-copyright { margin-bottom: .3rem; }
@@ -995,7 +1260,7 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
     margin-left: .6rem; padding: .5rem .85rem; min-height: 40px;
     border: 1px solid var(--color-border); border-radius: 999px;
     color: var(--color-qianjinzong); font-size: .76rem; text-decoration: none;
-    vertical-align: middle; transition: all var(--dur, .3s) var(--ease, ease);
+    vertical-align: middle; transition: all .3s ease;
 }
 .app-install-btn:hover { border-color: var(--color-primary); color: var(--color-primary); background: var(--color-primary-light); }
 .app-install-btn svg { width: 12px; height: 12px; flex-shrink: 0; fill: currentColor; }
@@ -1015,7 +1280,7 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
     </footer>
 
 <!-- ============================================================
-     统一服务预约弹窗（整合「单件上架」+「图片精修服务清单」）
+     统一服务预约弹窗（含 Order Bump + 三步流程条 + Sticky 提交）
      ============================================================ -->
 <div class="publish-modal" id="serviceModal" role="dialog" aria-modal="true">
   <div class="publish-card">
@@ -1036,7 +1301,7 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
         <s class="price-original" id="modalPriceOriginal"></s>
       </div>
 
-      <ul class="service-list">
+      <ul class="service-list" id="modalServiceList">
         <li>
           <span class="zh"><b>图片精修</b>：光影 / 色彩 / 裁剪 / 背景清理</span>
           <span class="en"><b>Photo retouching</b>: light, colour, crop, background</span>
@@ -1057,11 +1322,24 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
       </div>
     </div>
 
+    <!-- Order Bump（仅单件上架显示） -->
+    <label class="order-bump" id="orderBumpWrap" for="bumpHomepage">
+      <input type="checkbox" id="bumpHomepage" onchange="updateOrderBump()">
+      <span>
+        <span class="bump-tag"><span class="zh">推荐加购</span><span class="en">ADD-ON</span></span>
+        <span class="zh"><label for="bumpHomepage" style="display:inline; margin:0; padding:0; font-size:inherit; font-weight:400; cursor:pointer;">加 <b>S$48</b> 升级首周首页精选（原价 S$75）</label></span>
+        <span class="en"><label for="bumpHomepage" style="display:inline; margin:0; padding:0; font-size:inherit; font-weight:400; cursor:pointer;">Add <b>S$48</b> for a first-week homepage feature (reg. S$75)</label></span>
+        <span class="bump-hint"><span class="zh">首周即登上首页精选板块，曝光量提升约 5–8 倍。</span><span class="en">Get featured on the homepage for the first week — roughly 5–8× more exposure.</span></span>
+      </span>
+    </label>
+
+    <!-- 精简协议提示（话术升级） -->
     <div class="compact-warning">
-      <span>⚠</span>
+      <span>🪭</span>
       <div>
-        <span class="zh"><b>权属与真实性承诺：</b>藏品来源须合法、信息真实；真伪纠纷由买卖双方自理，平台不介入货款、不抽佣金。</span>
-        <span class="en"><b>Ownership &amp; Authenticity:</b> Items must be legally sourced with truthful information. Disputes are resolved between the parties. The platform never handles payments.</span>
+        <span class="cw-title"><span class="zh">藏家背书 · 诚意相交</span><span class="en">Collector's Endorsement · Sincere Exchange</span></span>
+        <span class="zh">阁下上架之藏品须确保来源清晰合法。古董圈提供高精度数字美化与整理服务，真实品相由藏家自行背书，共同维护圈内高尚交流环境。</span>
+        <span class="en">Items you list must be legally and clearly sourced. Gudong offers refined digital enhancement and organization services; authenticity is endorsed by the collector, keeping our community's standards high.</span>
       </div>
     </div>
 
@@ -1093,25 +1371,43 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
     <div class="publish-form-group agree-row">
       <input type="checkbox" id="agreeConsignor">
       <label for="agreeConsignor">
-        <span class="zh">我已阅读并同意 <a href="terms.html" target="_blank">《卖家背书与免责协议》</a></span>
-        <span class="en">I agree to the <a href="terms.html" target="_blank">Consignor Agreement</a></span>
+        <span class="zh">我已阅读并同意 <a href="terms.html" target="_blank">《藏家背书与免责协议》</a></span>
+        <span class="en">I agree to the <a href="terms.html" target="_blank">Collector's Endorsement Agreement</a></span>
       </label>
     </div>
 
-    <div class="workflow-hint">
-      <span class="zh">提交 → WhatsApp 发送 PayNow → 付款截图回传 → 3 个工作日内发布</span>
-      <span class="en">Submit → PayNow via WhatsApp → Send receipt → Published in 3 business days</span>
+    <!-- 三步流程图标条 -->
+    <div class="workflow-steps" aria-label="Process steps">
+      <div class="workflow-step">
+        <span class="ws-num">1</span>
+        <span class="ws-text"><span class="zh">提交申请</span><span class="en">Submit</span></span>
+      </div>
+      <span class="workflow-arrow" aria-hidden="true">→</span>
+      <div class="workflow-step">
+        <span class="ws-num">2</span>
+        <span class="ws-text"><span class="zh">WhatsApp 付 PayNow</span><span class="en">Pay via PayNow</span></span>
+      </div>
+      <span class="workflow-arrow" aria-hidden="true">→</span>
+      <div class="workflow-step">
+        <span class="ws-num">3</span>
+        <span class="ws-text"><span class="zh">3 个工作日发布</span><span class="en">Publish in 3 days</span></span>
+      </div>
     </div>
 
-    <button class="submit-btn" onclick="submitServiceForm()">
-      <span class="zh">同意协议并跳转 WhatsApp 获取 PayNow →</span>
-      <span class="en">Agree &amp; Get PayNow via WhatsApp →</span>
-    </button>
+    <div class="submit-bar">
+      <button class="submit-btn" onclick="submitServiceForm()">
+        <span id="submitBtnLabel">
+          <span class="zh">同意协议并跳转 WhatsApp 获取 PayNow →</span>
+          <span class="en">Agree &amp; Get PayNow via WhatsApp →</span>
+        </span>
+      </button>
+    </div>
   </div>
 </div>
 
 <script>
   let currentServiceType = 'single';
+  const BUMP_PRICE = 48;
 
   function openServiceModal(type) {
     currentServiceType = type;
@@ -1120,7 +1416,9 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
     var priceHighlight = document.getElementById('modalPriceHighlight');
     var priceUnit = document.getElementById('modalPriceUnit');
     var priceOriginal = document.getElementById('modalPriceOriginal');
-    var list = document.querySelector('.service-list');
+    var list = document.getElementById('modalServiceList');
+    var bumpWrap = document.getElementById('orderBumpWrap');
+    var bumpCheckbox = document.getElementById('bumpHomepage');
 
     // 清空勾选与文件（每次打开重置）
     var agreeBox = document.getElementById('agreeConsignor');
@@ -1131,6 +1429,7 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
     if (fileWrap) fileWrap.classList.remove('has');
     var fileCount = document.getElementById('serviceFileCount');
     if (fileCount) fileCount.textContent = '';
+    if (bumpCheckbox) bumpCheckbox.checked = false;
 
     if (type === 'gallery') {
       title.innerHTML = '<span class="zh">10件数字旗舰馆开通申请</span><span class="en">10-Item Digital Gallery</span>';
@@ -1142,6 +1441,8 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
         + '<li><span class="zh"><b>独立藏家主页</b> + 一年在线展示</span><span class="en"><b>Dedicated collector homepage</b> + 1-year display</span></li>'
         + '<li><span class="zh"><b>首页黄金位 2 个月</b> + 资深顾问品鉴 2 次</span><span class="en"><b>2-month homepage featuring</b> + 2 expert advisory sessions</span></li>'
         + '<li><span class="zh"><b>0% 交易佣金</b>：成交利润全归您</span><span class="en"><b>0% commission</b>: keep all proceeds</span></li>';
+      // 旗舰馆隐藏加购框
+      if (bumpWrap) bumpWrap.style.display = 'none';
     } else {
       title.innerHTML = '<span class="zh">单件专业上架申请</span><span class="en">Professional Single Listing</span>';
       priceHighlight.textContent = 'S$198';
@@ -1151,10 +1452,39 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
         + '<li><span class="zh"><b>图片精修</b>：最多 4 张基础图片优化</span><span class="en"><b>Photo retouching</b>: up to 4 basic photo edits</span></li>'
         + '<li><span class="zh"><b>标题 · 描述 · 标签</b>：如实整理，不鉴定真伪</span><span class="en"><b>Title · description · tags</b>: listed as-is, no authentication</span></li>'
         + '<li><span class="zh"><b>确认后上架</b> gudong.app，一年在线展示</span><span class="en"><b>Listed on gudong.app</b> after your approval · 1-year display</span></li>';
+      // 单件上架显示加购框
+      if (bumpWrap) bumpWrap.style.display = 'flex';
     }
+    updateOrderBump();
 
     if (modal) modal.classList.add('open');
     document.body.style.overflow = 'hidden';
+  }
+
+  // 实时更新加购后的价格与按钮文案
+  function updateOrderBump() {
+    var bumpCheckbox = document.getElementById('bumpHomepage');
+    var priceHighlight = document.getElementById('modalPriceHighlight');
+    var priceUnit = document.getElementById('modalPriceUnit');
+    var submitLabel = document.getElementById('submitBtnLabel');
+    if (!priceHighlight) return;
+    var checked = bumpCheckbox && bumpCheckbox.checked;
+
+    if (currentServiceType === 'single') {
+      if (checked) {
+        priceHighlight.textContent = 'S$246';
+        priceUnit.innerHTML = '<span class="zh">/ 件（含首周首页精选加购）</span><span class="en">/ item (incl. first-week feature)</span>';
+        submitLabel.innerHTML = '<span class="zh">同意协议并跳转 WhatsApp 获取 PayNow（S$246）→</span><span class="en">Agree &amp; Get PayNow (S$246) →</span>';
+      } else {
+        priceHighlight.textContent = 'S$198';
+        priceUnit.innerHTML = '<span class="zh">/ 件 · 普通价；创始藏家超额价 S$158（8 折）</span><span class="en">/ item · Standard; S$158 (20% off) for Founding Collectors</span>';
+        submitLabel.innerHTML = '<span class="zh">同意协议并跳转 WhatsApp 获取 PayNow →</span><span class="en">Agree &amp; Get PayNow via WhatsApp →</span>';
+      }
+    } else {
+      // 旗舰馆保持原价
+      priceHighlight.textContent = 'S$1,499';
+      submitLabel.innerHTML = '<span class="zh">同意协议并跳转 WhatsApp 获取 PayNow →</span><span class="en">Agree &amp; Get PayNow via WhatsApp →</span>';
+    }
   }
 
   function closeServiceModal() {
@@ -1197,6 +1527,7 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
     var agree = document.getElementById('agreeConsignor').checked;
     var fileInput = document.getElementById('serviceImages');
     var n = fileInput && fileInput.files ? fileInput.files.length : 0;
+    var bumpChecked = document.getElementById('bumpHomepage') && document.getElementById('bumpHomepage').checked;
 
     if (!sId || !wa) {
       alert(currentLang === 'zh'
@@ -1207,25 +1538,30 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
 
     if (!agree) {
       alert(currentLang === 'zh'
-        ? '请先勾选并同意《卖家背书与免责协议》方可提交。'
-        : 'Please check and agree to the Consignor Agreement before submitting.');
+        ? '请先勾选并同意《藏家背书与免责协议》方可提交。'
+        : 'Please check and agree to the Collector\'s Endorsement Agreement before submitting.');
       return;
     }
 
-    var title, feeLine, photosLine;
+    var title, feeLine, photosLine, bumpLine = '';
     if (currentServiceType === 'gallery') {
       title = '【10件数字旗舰馆申请 - 古董圈】';
       feeLine = '专属藏家数字旗舰馆合包（S$1,499 / 10件合包）';
       photosLine = n > 0 ? ('\n参考图片：' + n + ' 张（其余与客服后续沟通）') : '\n参考图片：后续与客服沟通';
     } else {
       title = '【单件专业上架申请 - 古董圈】';
-      feeLine = '单件上架服务（普通价 S$198 / 件；经确认的创始藏家超额价 S$158 / 件）';
+      if (bumpChecked) {
+        feeLine = '单件上架服务（S$198）+ 首周首页精选加购（S$48）= 合计 S$246';
+        bumpLine = '\n加购：首周首页精选（加 S$48，原价 S$75）';
+      } else {
+        feeLine = '单件上架服务（普通价 S$198 / 件；经确认的创始藏家超额价 S$158 / 件）';
+      }
       photosLine = n > 0 ? ('\n图片数量：' + n + ' 张') : '\n图片数量：待上传';
     }
 
-    var msg = title + '\nSeller ID：' + sId + '\nWhatsApp：' + wa + photosLine +
+    var msg = title + '\nSeller ID：' + sId + '\nWhatsApp：' + wa + photosLine + bumpLine +
               '\n备注：' + (notes || '无') +
-              '\n\n[已确认同意《卖家背书与免责协议》]\n' +
+              '\n\n[已确认同意《藏家背书与免责协议》]\n' +
               feeLine + '，请发送 PayNow 付款二维码，我付款后会回传付款截图。';
 
     window.open('https://wa.me/6591888952?text=' + encodeURIComponent(msg), '_blank');
@@ -1265,6 +1601,8 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
     document.documentElement.lang = currentLang === 'en' ? 'en-SG' : 'zh-SG';
     var b = document.querySelector('.lang-btn');
     if (b) b.textContent = currentLang === 'zh' ? 'EN' : '中';
+    // 语言切换后刷新加购文案
+    updateOrderBump();
   }
   function toggleLang() {
     currentLang = currentLang === 'zh' ? 'en' : 'zh';
@@ -1273,14 +1611,15 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
   }
   applyLang();
 </script>
-<!-- 2026-10-07：分享功能（Web Share API + 剪贴板降级 + Toast 反馈），全站统一 -->
+<!-- 分享功能 -->
 <style>
 .gd-share-btn {
     border: 1px solid var(--color-border); background: transparent;
     color: var(--color-text-secondary); padding: .55rem .7rem; min-height: 44px; min-width: 44px;
-    border-radius: var(--btn-radius); cursor: pointer; display: inline-flex;
+
+    border-radius: 6px; cursor: pointer; display: inline-flex;
     align-items: center; justify-content: center; flex-shrink: 0;
-    transition: all var(--dur) var(--ease);
+    transition: all .3s ease;
 }
 .gd-share-btn:hover { border-color: var(--color-primary); color: var(--color-primary); background: var(--color-primary-light); }
 .gd-share-btn svg { width: 16px; height: 16px; fill: currentColor; display: block; }
@@ -1295,7 +1634,6 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
 .gd-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 </style>
 <script>
-/* 分享：Web Share API（原生分享面板）→ navigator.clipboard → execCommand 三级降级 */
 (function () {
     var toastEl = null, toastTimer = null;
     function gdToast(msg) {
@@ -1345,8 +1683,6 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
         });
     };
 })();
-</script>
-<script>
 window.gdSharePage = function () {
     var lang = (document.body.dataset && document.body.dataset.lang) || "zh";
     window.gdShare({
@@ -1354,69 +1690,70 @@ window.gdSharePage = function () {
     });
 };
 </script>
+
 <!-- PWA 安装引导弹层 -->
-    <style>
-    .gd-install-modal { position: fixed; inset: 0; z-index: 9999; display: none; align-items: center; justify-content: center; background: rgba(20,17,14,.5); -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px); padding: 1.2rem; }
-    .gd-install-modal.open { display: flex; }
-    .gd-install-card { background: #fff; border-radius: 16px; max-width: 360px; width: 100%; padding: 1.8rem 1.5rem 1.3rem; text-align: center; box-shadow: 0 24px 60px rgba(0,0,0,.28); position: relative; }
-    .gd-install-close { position: absolute; top: .5rem; right: .7rem; border: 0; background: none; font-size: 1.4rem; color: #A49D94; cursor: pointer; padding: .5rem; min-width: 44px; min-height: 44px; display: inline-flex; align-items: center; justify-content: center; line-height: 1; border-radius: 8px; transition: .3s; }
-    .gd-install-close:hover { color: #7A4E33; background: #F3EAE0; }
-    .gd-install-title { font-size: 1.1rem; font-weight: 700; color: #3d2b1f; margin: .2rem 0 1.1rem; font-family: var(--font-serif); }
-    .gd-install-steps { text-align: left; margin: 0 auto 1rem; max-width: 296px; }
-    .gd-install-step { display: flex; align-items: flex-start; gap: .65rem; padding: .5rem 0; color: #5a4636; font-size: .9rem; line-height: 1.55; }
-    .gd-install-step .n { flex-shrink: 0; width: 22px; height: 22px; border-radius: 50%; background: #F3EAE0; color: #7A4E33; font-weight: 700; font-size: .76rem; display: flex; align-items: center; justify-content: center; margin-top: .1rem; }
-    .gd-install-step svg { flex-shrink: 0; width: 22px; height: 22px; fill: #007AFF; margin-top: .1rem; }
-    .gd-install-note { font-size: .78rem; color: #9a8d80; margin-top: .5rem; line-height: 1.55; }
-    body[data-lang="en"] .gd-install-modal .zh { display: none; }
-    body[data-lang="zh"] .gd-install-modal .en { display: none; }
-    </style>
-    <div class="gd-install-modal" id="gdInstallModal" role="dialog" aria-modal="true" aria-label="Install guide">
-        <div class="gd-install-card">
-            <button type="button" class="gd-install-close" onclick="gdCloseInstall()" aria-label="close">×</button>
-            <div class="gd-install-title zh">安装 古董.app 到主屏幕</div>
-            <div class="gd-install-title en">Add Gudong.app to Home Screen</div>
-            <div class="gd-install-steps" id="gdStepsIos">
-                <div class="gd-install-step"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18.2c-4.5 0-8.2-3.7-8.2-8.2S7.5 3.8 12 3.8s8.2 3.7 8.2 8.2-3.7 8.2-8.2 8.2zM11 7l-4 4h3v6h2v-6h3l-4-4z"/></svg><span class="zh">点击 Safari 底部工具栏的「分享」按钮</span><span class="en">Tap the Share button in Safari's bottom toolbar</span></div>
-                <div class="gd-install-step"><span class="n">2</span><span class="zh">在分享菜单中选择「添加到主屏幕」</span><span class="en">Choose "Add to Home Screen" in the share menu</span></div>
-                <div class="gd-install-step"><span class="n">3</span><span class="zh">点击右上角「添加」，桌面即出现古董.app 图标</span><span class="en">Tap "Add" — the Gudong.app icon appears on your Home Screen</span></div>
-            </div>
-            <div class="gd-install-steps" id="gdStepsOther" style="display:none;">
-                <div class="gd-install-step"><span class="n">1</span><span class="zh">点击浏览器地址栏右侧的「安装」图标</span><span class="en">Click the install icon at the right of the address bar</span></div>
-                <div class="gd-install-step"><span class="n">2</span><span class="zh">或通过浏览器菜单 →「安装古董圈」</span><span class="en">Or open the browser menu → "Install Gudong"</span></div>
-            </div>
-            <div class="gd-install-note zh">安装后可像原生 App 一样全屏使用，无需应用商店。</div>
-            <div class="gd-install-note en">Runs full-screen like a native app. No app store needed.</div>
+<style>
+.gd-install-modal { position: fixed; inset: 0; z-index: 9999; display: none; align-items: center; justify-content: center; background: rgba(20,17,14,.5); -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px); padding: 1.2rem; }
+.gd-install-modal.open { display: flex; }
+.gd-install-card { background: #fff; border-radius: 16px; max-width: 360px; width: 100%; padding: 1.8rem 1.5rem 1.3rem; text-align: center; box-shadow: 0 24px 60px rgba(0,0,0,.28); position: relative; }
+.gd-install-close { position: absolute; top: .5rem; right: .7rem; border: 0; background: none; font-size: 1.4rem; color: #A49D94; cursor: pointer; padding: .5rem; min-width: 44px; min-height: 44px; display: inline-flex; align-items: center; justify-content: center; line-height: 1; border-radius: 8px; transition: .3s; }
+.gd-install-close:hover { color: #7A4E33; background: #F3EAE0; }
+.gd-install-title { font-size: 1.1rem; font-weight: 700; color: #3d2b1f; margin: .2rem 0 1.1rem; font-family: var(--font-serif); }
+.gd-install-steps { text-align: left; margin: 0 auto 1rem; max-width: 296px; }
+.gd-install-step { display: flex; align-items: flex-start; gap: .65rem; padding: .5rem 0; color: #5a4636; font-size: .9rem; line-height: 1.55; }
+.gd-install-step .n { flex-shrink: 0; width: 22px; height: 22px; border-radius: 50%; background: #F3EAE0; color: #7A4E33; font-weight: 700; font-size: .76rem; display: flex; align-items: center; justify-content: center; margin-top: .1rem; }
+.gd-install-step svg { flex-shrink: 0; width: 22px; height: 22px; fill: #007AFF; margin-top: .1rem; }
+.gd-install-note { font-size: .78rem; color: #9a8d80; margin-top: .5rem; line-height: 1.55; }
+body[data-lang="en"] .gd-install-modal .zh { display: none; }
+body[data-lang="zh"] .gd-install-modal .en { display: none; }
+</style>
+<div class="gd-install-modal" id="gdInstallModal" role="dialog" aria-modal="true" aria-label="Install guide">
+    <div class="gd-install-card">
+        <button type="button" class="gd-install-close" onclick="gdCloseInstall()" aria-label="close">×</button>
+        <div class="gd-install-title zh">安装 古董.app 到主屏幕</div>
+        <div class="gd-install-title en">Add Gudong.app to Home Screen</div>
+        <div class="gd-install-steps" id="gdStepsIos">
+            <div class="gd-install-step"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18.2c-4.5 0-8.2-3.7-8.2-8.2S7.5 3.8 12 3.8s8.2 3.7 8.2 8.2-3.7 8.2-8.2 8.2zM11 7l-4 4h3v6h2v-6h3l-4-4z"/></svg><span class="zh">点击 Safari 底部工具栏的「分享」按钮</span><span class="en">Tap the Share button in Safari's bottom toolbar</span></div>
+            <div class="gd-install-step"><span class="n">2</span><span class="zh">在分享菜单中选择「添加到主屏幕」</span><span class="en">Choose "Add to Home Screen" in the share menu</span></div>
+            <div class="gd-install-step"><span class="n">3</span><span class="zh">点击右上角「添加」，桌面即出现古董.app 图标</span><span class="en">Tap "Add" — the Gudong.app icon appears on your Home Screen</span></div>
         </div>
+        <div class="gd-install-steps" id="gdStepsOther" style="display:none;">
+            <div class="gd-install-step"><span class="n">1</span><span class="zh">点击浏览器地址栏右侧的「安装」图标</span><span class="en">Click the install icon at the right of the address bar</span></div>
+            <div class="gd-install-step"><span class="n">2</span><span class="zh">或通过浏览器菜单 →「安装古董圈」</span><span class="en">Or open the browser menu → "Install Gudong"</span></div>
+        </div>
+        <div class="gd-install-note zh">安装后可像原生 App 一样全屏使用，无需应用商店。</div>
+        <div class="gd-install-note en">Runs full-screen like a native app. No app store needed.</div>
     </div>
-    <script>
-    (function () {
-        var modal = document.getElementById('gdInstallModal');
-        if (!modal) return;
-        window.gdCloseInstall = function () { modal.classList.remove('open'); };
-        modal.addEventListener('click', function (e) { if (e.target === modal) gdCloseInstall(); });
+</div>
+<script>
+(function () {
+    var modal = document.getElementById('gdInstallModal');
+    if (!modal) return;
+    window.gdCloseInstall = function () { modal.classList.remove('open'); };
+    modal.addEventListener('click', function (e) { if (e.target === modal) gdCloseInstall(); });
 
-        var deferredPrompt = null;
-        window.addEventListener('beforeinstallprompt', function (e) { e.preventDefault(); deferredPrompt = e; });
-        window.addEventListener('appinstalled', function () {
-            document.querySelectorAll('.app-install-btn').forEach(function (b) { b.style.display = 'none'; });
-        });
+    var deferredPrompt = null;
+    window.addEventListener('beforeinstallprompt', function (e) { e.preventDefault(); deferredPrompt = e; });
+    window.addEventListener('appinstalled', function () {
+        document.querySelectorAll('.app-install-btn').forEach(function (b) { b.style.display = 'none'; });
+    });
 
-        document.addEventListener('click', function (e) {
-            var btn = e.target && e.target.closest ? e.target.closest('.app-install-btn') : null;
-            if (!btn) return;
-            e.preventDefault();
-            if (deferredPrompt) {
-                deferredPrompt.prompt();
-                deferredPrompt.userChoice.then(function () { deferredPrompt = null; }).catch(function () {});
-                return;
-            }
-            var ua = navigator.userAgent;
-            var isIOS = /iPad|iPhone|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-            document.getElementById('gdStepsIos').style.display = isIOS ? '' : 'none';
-            document.getElementById('gdStepsOther').style.display = isIOS ? 'none' : '';
-            modal.classList.add('open');
-        });
-    })();
-    </script>
+    document.addEventListener('click', function (e) {
+        var btn = e.target && e.target.closest ? e.target.closest('.app-install-btn') : null;
+        if (!btn) return;
+        e.preventDefault();
+        if (deferredPrompt) {
+            deferredPrompt.prompt();
+            deferredPrompt.userChoice.then(function () { deferredPrompt = null; }).catch(function () {});
+            return;
+        }
+        var ua = navigator.userAgent;
+        var isIOS = /iPad|iPhone|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+        document.getElementById('gdStepsIos').style.display = isIOS ? '' : 'none';
+        document.getElementById('gdStepsOther').style.display = isIOS ? 'none' : '';
+        modal.classList.add('open');
+    });
+})();
+</script>
 </body>
 </html>

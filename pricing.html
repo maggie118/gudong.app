@@ -317,11 +317,11 @@ main section[id] { scroll-margin-top: 92px; }
   height: 100%;
   border-radius: 999px;
   background: linear-gradient(90deg, #C9A55B 0%, #B54A34 100%);
-  width: 70.5%;
+  width: var(--seat-progress, 0%);
   box-shadow: 0 0 8px rgba(201,165,91,.4);
   animation: seatFill 1.2s ease-out;
 }
-@keyframes seatFill { from { width: 0; } to { width: 70.5%; } }
+@keyframes seatFill { from { width: 0; } to { width: var(--seat-progress, 0%); } }
 
 /* ============ 席位阶梯预告 ============ */
 .tier-ladder {
@@ -954,11 +954,11 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
         <h3><span class="zh">创始藏家体验席</span><span class="en">Founding Collector Programme</span></h3>
         <p class="card-desc"><span class="zh">免费入驻，无需年费；先到先得，满额即止。</span><span class="en">Free to join, no annual fee. First come, first served — while seats last.</span></p>
 
-        <!-- 动态进度条 -->
-        <div class="seat-progress" aria-label="Seat progress">
+        <!-- 动态进度条：进度由 data-taken / data-total 计算 -->
+        <div class="seat-progress" data-taken="62" data-total="88" aria-label="Seat progress">
           <div class="seat-progress-head">
-            <span class="sp-taken"><span class="zh">已抢占 <b>62</b> / 88 席</span><span class="en"><b>62</b> / 88 seats taken</span></span>
-            <span class="sp-remain"><span class="zh">剩余 26 席</span><span class="en">26 left</span></span>
+            <span class="sp-taken"><span class="zh">已抢占 <b class="taken-num">62</b> / <span class="total-num">88</span> 席</span><span class="en"><b class="taken-num">62</b> / <span class="total-num">88</span> seats taken</span></span>
+            <span class="sp-remain"><span class="zh">剩余 <b class="remain-num">26</b> 席</span><span class="en"><b class="remain-num">26</b> left</span></span>
           </div>
           <div class="seat-progress-bar"><div class="seat-progress-fill"></div></div>
         </div>
@@ -1767,6 +1767,27 @@ body[data-lang="zh"] .gd-install-modal .en { display: none; }
         document.getElementById('gdStepsOther').style.display = isIOS ? 'none' : '';
         modal.classList.add('open');
     });
+})();
+
+/* 创始藏家席位进度条：由 data-taken / data-total 真实计算 */
+(function () {
+    var prog = document.querySelector('.seat-progress');
+    if (!prog) return;
+    var taken = parseInt(prog.getAttribute('data-taken'), 10);
+    var total = parseInt(prog.getAttribute('data-total'), 10);
+    if (isNaN(taken) || isNaN(total) || total <= 0) return;
+    if (taken < 0) taken = 0;
+    if (taken > total) taken = total;
+    var pct = (taken / total * 100).toFixed(1) + '%';
+    var fill = prog.querySelector('.seat-progress-fill');
+    if (fill) {
+        fill.style.setProperty('--seat-progress', pct);
+        fill.style.width = pct;
+    }
+    var remain = total - taken;
+    prog.querySelectorAll('.taken-num').forEach(function (el) { el.textContent = taken; });
+    prog.querySelectorAll('.total-num').forEach(function (el) { el.textContent = total; });
+    prog.querySelectorAll('.remain-num').forEach(function (el) { el.textContent = remain; });
 })();
 </script>
 </body>

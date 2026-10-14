@@ -1,7 +1,13 @@
 /* 古董圈 Gudong · Service Worker
- * 2026-10-10：v25 → v26
+ * 2026-10-15：v27 → v28
+ * - 修复致命 bug：文件内 58 处 U+2011（非断行连字符）混入路径字符串，
+ *   导致预缓存清单中 21 个 URL（14 藏品页 + item-chat/seller-inbox.js + 4 图标）
+ *   404 被静默跳过；seller-reply/seller-inbox 的禁缓存判断也永不命中；
+ *   全部替换为 ASCII 连字符，并提升缓存版本强制刷新
+ * - 预缓存新增 /assets/js/gudong-data.js（核心数据层，配合 2026-10-14 相对路径改造）
+ * 2026-10-10：v26 → v27
  * - 版本升级v26：刷新缓存，同步更新manifest.json、首页HTML SEO/OG/Schema元标签；
- * - HTML导航保持network‑first网络优先，保证搜索引擎获取最新meta与社交分享元数据；
+ * - HTML导航保持network-first网络优先，保证搜索引擎获取最新meta与社交分享元数据；
  * - 保留收件箱、签名回复页面禁止缓存逻辑不变；保留预缓存容错逻辑不变。
  * 2026-10-10：v24 → v25
  * - 新增藏家站内收件箱脚本；卖家收件箱页面走网络直连，不缓存带访问凭证的内容
@@ -28,18 +34,18 @@
    提升缓存版本号，确保已安装 PWA 的用户拿到新页面
  * - 预缓存新增 collection.html 与 logo-mark.png
  * v10 → v11
- * - 移动端适配收尾：搜索按钮/hot‑tag/sidebar‑lang‑btn 44px、
- *   item 页 image‑nav/fav‑btn 44px、contact‑btn 加高、
- *   btn‑publish 全站 min‑height:44px、article‑cta 44px、
- *   series‑chip/app‑install‑btn/gd‑install‑close 44px、
+ * - 移动端适配收尾：搜索按钮/hot-tag/sidebar-lang-btn 44px、
+ *   item 页 image-nav/fav-btn 44px、contact-btn 加高、
+ *   btn-publish 全站 min-height:44px、article-cta 44px、
+ *   series-chip/app-install-btn/gd-install-close 44px、
  *   剩余 .6x/.7x 小字号统一提升至 ≥12px
- * 2026‑10‑4：v9 → v10
- * - 移动端适配：header 触控目标提升至 44px、announce‑close 44px、
- *   item 主图 object‑fit 改 contain 不裁切、全站小字号提升至 ≥12px、
+ * 2026-10-4：v9 → v10
+ * - 移动端适配：header 触控目标提升至 44px、announce-close 44px、
+ *   item 主图 object-fit 改 contain 不裁切、全站小字号提升至 ≥12px、
  *   seller 徽章/标签字号提升
  * - v8 → v9：配合首页改版提升缓存版本号
  */
-const CACHE_NAME = 'antique-collection-v27';
+const CACHE_NAME = 'antique-collection-v28';
 // 预缓存清单：核心页面 + 常用图标 + 占位图
 // 注意：改用逐个 cache.add，单个 404 不会导致整个 install 失败
 const PRECACHE_ASSETS = [
@@ -47,28 +53,29 @@ const PRECACHE_ASSETS = [
   '/index.html',
   '/collection.html',
   '/pricing.html',
-  '/assets/js/item‑chat.js',
-  '/assets/js/seller‑inbox.js',
-  '/items/item‑lim‑01.html',
-  '/items/item‑lim‑02.html',
-  '/items/item‑lim‑03.html',
-  '/items/item‑lim‑04.html',
-  '/items/item‑ng‑01.html',
-  '/items/item‑ng‑02.html',
-  '/items/item‑ng‑03.html',
-  '/items/item‑ngcy‑01.html',
-  '/items/item‑ngcy‑02.html',
-  '/items/item‑ngcy‑03.html',
-  '/items/item‑ngcy‑04.html',
-  '/items/item‑ngcy‑05.html',
-  '/items/item‑yak‑01.html',
-  '/items/item‑yak‑02.html',
-  '/items/item‑yak‑03.html',
+  '/assets/js/item-chat.js',
+  '/assets/js/seller-inbox.js',
+  '/assets/js/gudong-data.js',
+  '/items/item-lim-01.html',
+  '/items/item-lim-02.html',
+  '/items/item-lim-03.html',
+  '/items/item-lim-04.html',
+  '/items/item-ng-01.html',
+  '/items/item-ng-02.html',
+  '/items/item-ng-03.html',
+  '/items/item-ngcy-01.html',
+  '/items/item-ngcy-02.html',
+  '/items/item-ngcy-03.html',
+  '/items/item-ngcy-04.html',
+  '/items/item-ngcy-05.html',
+  '/items/item-yak-01.html',
+  '/items/item-yak-02.html',
+  '/items/item-yak-03.html',
   '/manifest.json',
-  '/assets/icons/favicon‑32x32.png',
-  '/assets/icons/icon‑192.png',
-  '/assets/icons/icon‑512.png',
-  '/assets/icons/logo‑mark.png',
+  '/assets/icons/favicon-32x32.png',
+  '/assets/icons/icon-192.png',
+  '/assets/icons/icon-512.png',
+  '/assets/icons/logo-mark.png',
   '/assets/images/placeholder.jpg'
 ];
 // ---- install：预缓存核心资源（逐个 add，容错） ----
@@ -115,18 +122,18 @@ self.addEventListener('fetch', (event) => {
         {
           status: 503,
           statusText: 'Offline',
-          headers: { 'Content‑Type': 'application/json' }
+          headers: { 'Content-Type': 'application/json' }
         }
       ))
     );
     return;
   }
   // Reply links carry a bearer token in the query string; never store those URLs in Cache Storage.
-  if (url.pathname === '/seller‑reply.html') {
+  if (url.pathname === '/seller-reply.html') {
     event.respondWith(fetch(req).catch(() => new Response('Online connection required', { status: 503, statusText: 'Offline' })));
     return;
   }
-  if (url.pathname === '/seller‑inbox.html') {
+  if (url.pathname === '/seller-inbox.html') {
     event.respondWith(fetch(req).catch(() => new Response('Online connection required', { status: 503, statusText: 'Offline' })));
     return;
   }

@@ -31,18 +31,19 @@
 
 
 
+
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"ItemList","name":"情报 / 知识 | Antique Collecting Guides","description":"古董圈情报知识栏目，提供古董收藏入门、辨伪参考、市场行情观察；仅供收藏学习参考，平台不提供古董鉴定，不参与藏品交易。","url":"https://www.gudong.app/insights","publisher":{"@id":"https://www.gudong.app/#organization"}}</script>
 
-    <link rel="manifest" href="/manifest.json">
+    <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#7A4E33">
 	<meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="古董圈">
-    <link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon-180x180.png" sizes="180x180">
+    <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon-180x180.png" sizes="180x180">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">    <!-- Premium Serif Fonts -->
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/icons/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32x32.png">    <!-- Premium Serif Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Noto+Serif+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -120,7 +121,7 @@
         .brand:hover { text-decoration: none; }
         .brand-logo-img { height: 38px; width: auto; display: block; object-fit: contain; flex-shrink: 0; }
         .brand-line1 { display: flex; align-items: baseline; gap: .32rem; }
-        .brand-text { display: flex; flex-direction: column; justify-content: center; min-width: 0; line-height: 1.15; letter-spacing: -.005em; overflow: hidden;}
+        .brand-text { display: flex; flex-direction: column; justify-content: center; min-width: 0; line-height: 1.15; letter-spacing: -.005em; overflow: hidden; white-space: nowrap;}
         @media (max-width: 640px) { .brand-logo-img { height: 30px; width: auto; display: block; object-fit: contain; flex-shrink: 0; } }
         .brand-zh { font-size: 1.4rem; font-weight: 700; letter-spacing: .02em; line-height: 1.15; color: var(--color-primary-dark); font-family: var(--font-serif); }
         .brand-en { font-size: 1.4rem; font-weight: 600; letter-spacing: -.012em; line-height: 1.15; color: var(--color-primary-dark); font-family: var(--font-sans); }
@@ -216,6 +217,7 @@
         font-size: .88rem;
         transition: .4s cubic-bezier(.25,.1,.25,1);
         }
+
         .sidebar-sub:hover { color: var(--color-primary); background: var(--color-primary-light); }
         .sidebar-lang-btn {
         display: flex;
@@ -588,8 +590,8 @@
                     <span class="en">📖 Insights &amp; Guides</span>
                 </div>
                 <div class="page-desc">
-                    <span class="zh">看懂器物，比买到器物更重要。十大系列，从断代辨伪到本地行情，从历史时空到地理脉络，写给新加坡本地藏家的实战笔记。</span>
-                    <span class="en">Knowing the piece matters more than owning it. Ten series — from dating and authentication to local market notes, history, and geography.</span>
+                    <span class="zh">看懂器物，比买到器物更重要。十大系列，从断代辨伪到本地行情，从历史时空到地理脉络，从保存养护到修复避坑，写给新加坡本地藏家的实战笔记。</span>
+                    <span class="en">Knowing the piece matters more than owning it. Ten series — from dating and authentication to local market notes, history, geography, and conservation.</span>
                 </div>
 
                 <div class="search-box">
@@ -720,7 +722,7 @@
 
         try { if (localStorage.getItem('announceClosed') === 'yes') { var __ab = document.getElementById('announceBar'); if (__ab) __ab.style.display = 'none'; } } catch (e) {}
 
-        /* ============ 数据：10 大系列，共 62 篇 ============ */
+        /* ============ 数据：10 大系列，共 70 篇 ============ */
         const SERIES = [
             {
                 id: 'porcelain',
@@ -895,8 +897,8 @@
             },
             {
                 id: 'care',
-                name: { zh: '收藏与保存', en: 'Collection Care' },
-                desc: { zh: '买回来之后怎么办——保存、养护与第一次收藏', en: 'After you buy — storage, care, and how to start collecting' },
+                name: { zh: '收藏、保存与修复', en: 'Collection, Care & Restoration' },
+                desc: { zh: '买回来之后怎么办——保存、养护、清洁、运输、修复与避坑，写给藏家的完整保存与修复常识', en: 'After you buy — storage, care, cleaning, shipping, restoration, and pitfalls. A complete guide for collectors.' },
                 articles: [
                     { slug: 'how-to-store-collection', tone: 'guide', mark: '藏', kicker: { zh: '入门指南', en: 'BEGINNER' },
                       title: { zh: '怎么保存藏品？六个环境要素决定藏品寿命', en: 'How to store a collection: 6 environmental factors' },
@@ -905,7 +907,39 @@
                     { slug: 'first-collection', tone: 'guide', mark: '初', kicker: { zh: '入门指南', en: 'BEGINNER' },
                       title: { zh: '新手第一件藏品买什么？先想清楚这 5 件事', en: 'Your first antique: 5 questions before you buy' },
                       desc: { zh: '别急着买，先回答五个问题。第一件藏品决定了你之后的收藏路径。', en: 'Don\'t rush. Answer five questions — your first piece sets your path.' },
-                      tags: '新手 入门 收藏 first collection beginner', date: '2026-01-28', read: { zh: '6 分钟', en: '6 min' } }
+                      tags: '新手 入门 收藏 first collection beginner', date: '2026-01-28', read: { zh: '6 分钟', en: '6 min' } },
+                    { slug: 'storage-mistakes', tone: 'pitfall', mark: '藏', kicker: { zh: '避坑手册 · 保存养护', en: 'PITFALLS · STORAGE' },
+                      title: { zh: '传家宝不是毁在岁月，而是毁在这7个保存习惯', en: 'Family heirlooms are not ruined by time — they are ruined by these 7 storage habits' },
+                      desc: { zh: '光照、密封、樟脑丸、裸手、空调、不除尘、乱上油——7 个最常见的保存误区，一次讲清。', en: 'Light, sealing, mothballs, bare hands, AC, dust, random oiling — 7 of the most common storage mistakes.' },
+                      tags: '古董保存 藏品养护 收藏湿度 光照 防虫 storage collection care', date: '2026-03-25', read: { zh: '6 分钟', en: '6 min' } },
+                    { slug: 'porcelain-crack-repair', tone: 'guide', mark: '瓷', kicker: { zh: '入门指南 · 修复判断', en: 'GUIDE · REPAIR' },
+                      title: { zh: '瓷器裂了到底修不修？先看这3点，别花冤枉钱', en: 'Should you repair a cracked porcelain? 3 checks before spending money' },
+                      desc: { zh: '价值、结构、可逆性——瓷器裂纹、缺口、冲线，三个维度帮你判断该不该修。', en: 'Value, structure, reversibility — three checks to decide whether to repair a cracked or chipped porcelain.' },
+                      tags: '瓷器修复 瓷器裂纹 瓷器缺口 修复判断 porcelain repair', date: '2026-03-26', read: { zh: '6 分钟', en: '6 min' } },
+                    { slug: 'woodware-oil-damage', tone: 'pitfall', mark: '木', kicker: { zh: '避坑手册 · 木器保养', en: 'PITFALLS · WOOD' },
+                      title: { zh: '木器越擦越亮？你用的核桃油，可能正在毁掉包浆', en: 'Shinier is not better: walnut oil may be ruining your wood\'s patina' },
+                      desc: { zh: '上油、湿擦、暴晒、杀虫剂、汽车蜡——木器保养最常见的 5 个误区。', en: 'Oiling, damp wiping, sunning, insecticide, car wax — 5 common wood-care mistakes.' },
+                      tags: '木器保养 核桃油 包浆 木器开裂 wood care patina', date: '2026-03-27', read: { zh: '5 分钟', en: '5 min' } },
+                    { slug: 'painting-mold-rescue', tone: 'guide', mark: '画', kicker: { zh: '入门指南 · 书画急救', en: 'GUIDE · FIRST AID' },
+                      title: { zh: '书画发霉、虫蛀、发黄：先别水洗！家庭急救只有这4步', en: 'Mould, insects, yellowing: don\'t wash it — only these 4 first-aid steps' },
+                      desc: { zh: '隔离、控湿、记录、求助——书画发霉、虫蛀、发黄时的正确急救四步，以及为什么不能水洗。', en: 'Isolate, stabilise, record, refer — the correct four-step first aid for mould, insects, and yellowing.' },
+                      tags: '书画修复 书画发霉 虫蛀 书画急救 painting conservation', date: '2026-03-28', read: { zh: '6 分钟', en: '6 min' } },
+                    { slug: 'metal-jade-cleaning', tone: 'pitfall', mark: '清', kicker: { zh: '避坑手册 · 材质清洁', en: 'PITFALLS · CLEANING' },
+                      title: { zh: '铜器、银器、玉器清洁黑名单：这5种“偏方”谁用谁后悔', en: 'Bronze, silver, jade: 5 cleaning shortcuts that ruin antiques' },
+                      desc: { zh: '醋、牙膏、钢丝球、超声波、强酸强碱——为什么这 5 种清洁偏方不能用。', en: 'Vinegar, toothpaste, steel wool, ultrasonic, acids — why these 5 cleaning shortcuts ruin antiques.' },
+                      tags: '铜器清洁 银器清洁 玉器保养 清洁黑名单 bronze silver jade cleaning', date: '2026-03-29', read: { zh: '5 分钟', en: '5 min' } },
+                    { slug: 'antique-shipping', tone: 'guide', mark: '运', kicker: { zh: '入门指南 · 运输包装', en: 'GUIDE · SHIPPING' },
+                      title: { zh: '快递摔碎一只乾隆碗？古董运输包装的8层防护法', en: 'Smashed Qianlong bowl in transit? The 8-layer packing method for antiques' },
+                      desc: { zh: '无酸纸、气泡膜、泡沫护角、悬浮包装、双箱、留证——瓷器、书画、木器运输的 8 层防护法。', en: 'Acid-free paper, bubble wrap, foam corners, suspension packing, double boxes, records — the 8-layer method for shipping antiques.' },
+                      tags: '古董运输 古董包装 瓷器运输 古董快递 antique shipping packing', date: '2026-03-30', read: { zh: '6 分钟', en: '6 min' } },
+                    { slug: 'restoration-process', tone: 'guide', mark: '修', kicker: { zh: '入门指南 · 修复案例', en: 'GUIDE · RESTORATION' },
+                      title: { zh: '从“废品”到“藏品”：一件残器的修复全过程，报价和风险都摊开讲', en: 'From scrap to collection: the full restoration process, costs, and risks' },
+                      desc: { zh: '清洗、拼对、补配、做色、做旧、可逆性检查——修复的 6 个标准步骤，以及报价逻辑、风险点与验收标准。', en: 'Cleaning, joining, infill, tinting, ageing, reversibility — the 6 standard steps, plus pricing logic, risks, and acceptance criteria.' },
+                      tags: '瓷器修复流程 古董修复报价 残器修复 修复可逆 restoration process', date: '2026-03-31', read: { zh: '7 分钟', en: '7 min' } },
+                    { slug: 'conservator-questions', tone: 'pitfall', mark: '问', kicker: { zh: '避坑手册 · 修复避坑', en: 'PITFALLS · CONSERVATOR' },
+                      title: { zh: '找古董修复师前，必须问清这10个问题，否则越修越不值钱', en: 'Before hiring an antique conservator: 10 questions to ask' },
+                      desc: { zh: '资质、案例、可逆材料、做旧程度、再交易影响、合同、报价、保险、周期、售后——找修复师前必问的 10 个问题。', en: 'Qualifications, case studies, reversible materials, ageing, resale, contract, quote, insurance, timeline, aftercare — 10 questions before hiring a conservator.' },
+                      tags: '古董修复师 修复师资质 修复避坑 修复师必问 conservator questions', date: '2026-04-01', read: { zh: '6 分钟', en: '6 min' } }
                 ]
             },
             {
@@ -1352,6 +1386,3 @@ window.gdSharePage = function () {
 </script>
 </body>
 </html>
-
-
-

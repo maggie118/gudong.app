@@ -25,7 +25,7 @@
 
     <link rel="canonical" href="https://www.gudong.app/collection">
 
-    <link rel="manifest" href="/manifest.json">
+    <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#7A4E33">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -143,8 +143,7 @@
         .brand-logo-img { height: 38px; width: auto; display: block; object-fit: contain; flex-shrink: 0; }
         .brand-text {
             display: flex; flex-direction: column; justify-content: center; min-width: 0;
-            line-height: 1.15; letter-spacing: -.005em; overflow: hidden;
-        }
+            line-height: 1.15; letter-spacing: -.005em; overflow: hidden; white-space: nowrap;}
         .brand-line1 { display: flex; align-items: baseline; gap: .32rem; }
         .brand-zh {
             font-family: var(--font-serif);
@@ -1158,7 +1157,7 @@
         <p class="footer-copyright"><span class="zh">© 2026 gudong.app 版权所有 · <a href="javascript:void(0)" class="app-install-btn" onclick="event.preventDefault();"><svg viewBox="0 0 24 24" aria-hidden="true" width="12" height="12"><path d="M5 20h14v-2H5v2zM19 9h-4V3H9v6H5l7 7 7-7z"/></svg>安装古董.app</a></span><span class="en">© 2026 gudong.app All rights reserved · <a href="javascript:void(0)" class="app-install-btn" onclick="event.preventDefault();"><svg viewBox="0 0 24 24" aria-hidden="true" width="12" height="12"><path d="M5 20h14v-2H5v2zM19 9h-4V3H9v6H5l7 7 7-7z"/></svg>Install gudong.app</a></span></p>
     </footer>
 
-    <script src="assets/js/gudong-data.js"></script>
+    <script src="assets/js/gudong-data.js" data-root="./"></script>
     <script>
         /* ============================================================
            语言切换

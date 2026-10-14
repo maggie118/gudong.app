@@ -25,7 +25,7 @@
 <link rel="canonical" href="https://www.gudong.app/pricing">
 <link rel="icon" type="image/png" sizes="16x16" href="assets/icons/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32x32.png">
-<link rel="manifest" href="/manifest.json">
+<link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#7A4E33">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -81,7 +81,7 @@ header {
 }
 .brand { display: flex; flex-direction: row; align-items: center; gap: .7rem; line-height: 1; flex-shrink: 1; text-decoration: none; color: inherit; min-width: 0; }
 .brand-logo-img { height: 38px; width: auto; display: block; object-fit: contain; flex-shrink: 0; }
-.brand-text { display: flex; flex-direction: column; justify-content: center; min-width: 0; line-height: 1.15; letter-spacing: -.005em; overflow: hidden;}
+.brand-text { display: flex; flex-direction: column; justify-content: center; min-width: 0; line-height: 1.15; letter-spacing: -.005em; overflow: hidden; white-space: nowrap;}
 .brand-line1 { display: flex; align-items: baseline; gap: .32rem; }
 .brand-zh { font-size: 1.4rem; font-weight: 700; letter-spacing: .02em; line-height: 1.15; color: var(--color-primary-dark); font-family: var(--font-serif); white-space: nowrap; }
 .brand-en { font-size: 1.4rem; font-weight: 600; letter-spacing: -.012em; line-height: 1.15; color: var(--color-primary-dark); font-family: var(--font-sans); white-space: nowrap; }
@@ -927,8 +927,8 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
 
 <main class="container">
   <div class="breadcrumb">
-    <span class="zh"><a href="jindex.html">首页</a> / 服务价格</span>
-    <span class="en"><a href="jindex.html">Home</a> / Pricing</span>
+    <span class="zh"><a href="index.html">首页</a> / 服务价格</span>
+    <span class="en"><a href="index.html">Home</a> / Pricing</span>
   </div>
 
   <!-- 页首 -->
@@ -955,7 +955,7 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
         <p class="card-desc"><span class="zh">免费入驻，无需年费；先到先得，满额即止。</span><span class="en">Free to join, no annual fee. First come, first served — while seats last.</span></p>
 
         <!-- 动态进度条：进度由 data-taken / data-total 计算 -->
-        <div class="seat-progress" data-taken="62" data-total="88" aria-label="Seat progress">
+        <div class="seat-progress" data-taken="4" data-total="88" aria-label="Seat progress">
           <div class="seat-progress-head">
             <span class="sp-taken"><span class="zh">已抢占 <b class="taken-num">62</b> / <span class="total-num">88</span> 席</span><span class="en"><b class="taken-num">62</b> / <span class="total-num">88</span> seats taken</span></span>
             <span class="sp-remain"><span class="zh">剩余 <b class="remain-num">26</b> 席</span><span class="en"><b class="remain-num">26</b> left</span></span>
@@ -1769,25 +1769,42 @@ body[data-lang="zh"] .gd-install-modal .en { display: none; }
     });
 })();
 
-/* 创始藏家席位进度条：由 data-taken / data-total 真实计算 */
+/* 创始藏家席位进度条：先按 data-taken 渲染回退值，再从 Airtable 拉取真实数量 */
 (function () {
     var prog = document.querySelector('.seat-progress');
     if (!prog) return;
-    var taken = parseInt(prog.getAttribute('data-taken'), 10);
-    var total = parseInt(prog.getAttribute('data-total'), 10);
-    if (isNaN(taken) || isNaN(total) || total <= 0) return;
-    if (taken < 0) taken = 0;
-    if (taken > total) taken = total;
-    var pct = (taken / total * 100).toFixed(1) + '%';
-    var fill = prog.querySelector('.seat-progress-fill');
-    if (fill) {
-        fill.style.setProperty('--seat-progress', pct);
-        fill.style.width = pct;
+
+    function render(taken, total) {
+        if (isNaN(taken) || isNaN(total) || total <= 0) return;
+        if (taken < 0) taken = 0;
+        if (taken > total) taken = total;
+        var pct = (taken / total * 100).toFixed(1) + '%';
+        var fill = prog.querySelector('.seat-progress-fill');
+        if (fill) {
+            fill.style.setProperty('--seat-progress', pct);
+            fill.style.width = pct;
+        }
+        var remain = total - taken;
+        prog.querySelectorAll('.taken-num').forEach(function (el) { el.textContent = taken; });
+        prog.querySelectorAll('.total-num').forEach(function (el) { el.textContent = total; });
+        prog.querySelectorAll('.remain-num').forEach(function (el) { el.textContent = remain; });
     }
-    var remain = total - taken;
-    prog.querySelectorAll('.taken-num').forEach(function (el) { el.textContent = taken; });
-    prog.querySelectorAll('.total-num').forEach(function (el) { el.textContent = total; });
-    prog.querySelectorAll('.remain-num').forEach(function (el) { el.textContent = remain; });
+
+    // 先用 data-* 静态值渲染（防止 API 失败时进度条空白）
+    var staticTaken = parseInt(prog.getAttribute('data-taken'), 10);
+    var staticTotal = parseInt(prog.getAttribute('data-total'), 10);
+    render(staticTaken, staticTotal);
+
+    // 再从 Airtable 代理拉取真实创始藏家数量
+    var API_BASE = 'https://gudong-app.vercel.app/api/airtable-proxy';
+    fetch(API_BASE, { cache: 'no-store' })
+        .then(function (r) { return r.json(); })
+        .then(function (data) {
+            if (data && typeof data.founderCount === 'number') {
+                render(data.founderCount, staticTotal);
+            }
+        })
+        .catch(function () { /* 失败则保留静态回退值 */ });
 })();
 </script>
 </body>

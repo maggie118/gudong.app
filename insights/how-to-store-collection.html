@@ -1057,6 +1057,28 @@
   }
 }
 /*<<</gd-mobile-header-fix-2026-10-16>>>*/
+/*<<<gd-header-logo-fit-2026-10-16>>> 窄屏 LOGO 完整性修复（仅 ≤480px 生效，桌面端保持原样）*/
+@media (max-width: 480px){
+  body > header { padding-left: 3% !important; padding-right: 3% !important; gap: .45rem !important; }
+  body > header > div:first-child { gap: .45rem !important; }
+  body > header .brand-logo-img { height: 28px !important; }
+  .brand { gap: .45rem !important; }
+  .brand-zh, .brand-en { font-size: min(1.05rem, 4.2vw) !important; }
+  .brand-text small { font-size: .58rem !important; letter-spacing: .05em !important; }
+  .header-right { gap: .4rem !important; }
+}
+@media (max-width: 360px){
+  body > header { padding-left: 2% !important; padding-right: 2% !important; gap: .35rem !important; }
+  body > header > div:first-child { gap: .35rem !important; }
+  .brand { gap: .35rem !important; }
+  .header-right { gap: .3rem !important; }
+  .brand-zh, .brand-en { font-size: min(1.05rem, 4vw) !important; }
+  .brand-text small { display: none !important; }
+  .menu-toggle { width: 40px !important; height: 40px !important; }
+  .gd-share-btn { min-width: 40px !important; min-height: 40px !important; padding: .35rem !important; }
+  .lang-btn { min-width: 40px !important; min-height: 40px !important; padding: .35rem .5rem !important; }
+}
+/*<<</gd-header-logo-fit-2026-10-16>>>*/
 </style>
 <script>
 /* 分享：Web Share API（原生分享面板）→ navigator.clipboard → execCommand 三级降级 */

@@ -839,6 +839,44 @@
     max-width: 88vw; overflow: hidden; text-overflow: ellipsis;
 }
 .gd-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+/*<<<gd-mobile-header-fix-2026-10-16>>> 移动端顶部导航适配（仅 <768px 生效，桌面端保持原样）*/
+:root{
+  --gd-header-h-m: 58px;
+  --gd-safe-top: env(safe-area-inset-top, 0px);
+  --gd-header-total-m: calc(var(--gd-header-h-m) + var(--gd-safe-top));
+}
+@media (max-width: 767px){
+  html, body { scroll-padding-top: calc(var(--gd-header-total-m) + 12px); }
+  body > header{
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    height: var(--gd-header-total-m) !important;
+    min-height: var(--gd-header-total-m) !important;
+    max-height: var(--gd-header-total-m) !important;
+    padding: var(--gd-safe-top) 5% 0 !important;
+    margin: 0 !important;
+    align-items: center !important;
+    z-index: 80 !important;
+    -webkit-transition: height .28s ease, padding .28s ease, background-color .28s ease, box-shadow .28s ease;
+    transition: height .28s ease, padding .28s ease, background-color .28s ease, box-shadow .28s ease;
+  }
+  body > header .brand-logo-img{
+    height: 30px !important;
+    width: auto !important;
+    max-width: 76px !important;
+    opacity: 1 !important;
+    -webkit-transition: height .28s ease, max-width .28s ease;
+    transition: height .28s ease, max-width .28s ease;
+  }
+  body > header ~ main{
+    padding-top: calc(var(--gd-header-total-m) + 12px) !important;
+  }
+}
+/*<<</gd-mobile-header-fix-2026-10-16>>>*/
 </style>
 <script>
 /* 分享：Web Share API（原生分享面板）→ navigator.clipboard → execCommand 三级降级 */

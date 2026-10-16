@@ -12,7 +12,45 @@
     .layout{display:grid;grid-template-columns:minmax(240px,330px) 1fr;min-height:70vh;background:white;border:1px solid var(--line);border-radius:15px;overflow:hidden;box-shadow:0 10px 28px #241f1a10}.threads{border-right:1px solid var(--line);overflow:auto;max-height:75vh}.threads-head{padding:14px 16px;border-bottom:1px solid var(--line);font-weight:700;color:#5c3a26}.thread{display:block;width:100%;text-align:left;padding:13px 16px;border:0;border-bottom:1px solid #f0ece6;background:white;color:inherit;cursor:pointer;font:inherit}.thread:hover,.thread.active{background:#f7f4ef}.thread-line{display:flex;justify-content:space-between;gap:8px;font-weight:650}.thread-sub,.thread-last{display:block;color:var(--muted);font-size:.78rem;margin-top:3px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.badge{display:inline-flex;min-width:21px;height:21px;justify-content:center;align-items:center;border-radius:99px;background:#a84536;color:white;font-size:.7rem;padding:0 5px}.conversation{display:flex;flex-direction:column;min-width:0}.conv-head{padding:14px 18px;border-bottom:1px solid var(--line)}.conv-head strong{display:block;color:#5c3a26}.conv-head span{color:var(--muted);font-size:.82rem}.messages{flex:1;list-style:none;margin:0;padding:18px;overflow:auto;max-height:55vh;display:flex;flex-direction:column;gap:9px}.msg{align-self:flex-start;max-width:85%;padding:9px 12px;background:#f1ece4;border-radius:12px;white-space:pre-wrap;overflow-wrap:anywhere}.msg.seller{align-self:flex-end;background:var(--brown);color:white}.time{display:block;font-size:.68rem;opacity:.7;margin-top:3px}.reply{padding:14px 16px;border-top:1px solid var(--line);display:grid;grid-template-columns:1fr auto;align-items:end;gap:9px}.reply textarea{width:100%;min-height:48px;max-height:140px;resize:vertical;border:1px solid #d8d0c5;border-radius:8px;padding:10px;font:inherit}.reply button{min-height:45px;padding:0 17px;border:0;border-radius:8px;background:var(--brown);color:white;font:inherit;font-weight:650;cursor:pointer}.reply button:disabled{opacity:.6}.status{padding:0 17px 12px;min-height:1.5em;font-size:.82rem;color:var(--muted)}.empty{padding:24px;color:var(--muted)}
     [data-lang="en"] .zh,[data-lang="zh"] .en{display:none!important}
     @media(max-width:700px){.page{padding:12px 10px}.layout{grid-template-columns:1fr;min-height:80vh}.threads{max-height:28vh;border-right:0;border-bottom:1px solid var(--line)}.messages{max-height:42vh}.reply{grid-template-columns:1fr}.reply button{width:100%}}
-  </style>
+  
+/*<<<gd-mobile-header-fix-2026-10-16>>> 移动端顶部导航适配（仅 <768px 生效，桌面端保持原样）*/
+:root{
+  --gd-header-h-m: 58px;
+  --gd-safe-top: env(safe-area-inset-top, 0px);
+  --gd-header-total-m: calc(var(--gd-header-h-m) + var(--gd-safe-top));
+}
+@media (max-width: 767px){
+  html, body { scroll-padding-top: calc(var(--gd-header-total-m) + 12px); }
+  body > header{
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    height: var(--gd-header-total-m) !important;
+    min-height: var(--gd-header-total-m) !important;
+    max-height: var(--gd-header-total-m) !important;
+    padding: var(--gd-safe-top) 5% 0 !important;
+    margin: 0 !important;
+    align-items: center !important;
+    z-index: 80 !important;
+    -webkit-transition: height .28s ease, padding .28s ease, background-color .28s ease, box-shadow .28s ease;
+    transition: height .28s ease, padding .28s ease, background-color .28s ease, box-shadow .28s ease;
+  }
+  body > header .brand-logo-img{
+    height: 30px !important;
+    width: auto !important;
+    max-width: 76px !important;
+    opacity: 1 !important;
+    -webkit-transition: height .28s ease, max-width .28s ease;
+    transition: height .28s ease, max-width .28s ease;
+  }
+  body > header ~ main{
+    padding-top: calc(var(--gd-header-total-m) + 12px) !important;
+  }
+}
+/*<<</gd-mobile-header-fix-2026-10-16>>>*/
+</style>
 </head>
 <body data-lang="zh">
   <main class="page">

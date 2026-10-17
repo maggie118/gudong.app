@@ -1,1 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>古董圈 · 品牌标识规范</title>
+<style>
+  :root{
+    --bg:#F5F2EC; --surface:#FFFFFF; --border:#E4DED5;
+    --primary:#8A5A3B; --primary-dark:#68432D; --primary-light:#F1E8DF;
+    --text:#25221E; --text-sec:#716B63; --muted:#A49D94;
+    --gold:#B08A45; --bronze:#9C8558;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--text);
+    font-family:'Noto Serif SC','Source Han Serif SC','Songti SC','STSong','SimSun',serif;
+    padding:56px 24px;max-width:960px;margin:0 auto}
+  h1{font-size:26px;font-weight:700;letter-spacing:6px;text-align:center;color:var(--primary-dark)}
+  .sub{text-align:center;color:var(--text-sec);font-size:13px;letter-spacing:3px;margin-top:10px}
+  .rule{width:64px;height:2px;background:var(--gold);margin:32px auto;border-radius:2px}
+  section{background:var(--surface);border:1px solid var(--border);border-radius:12px;
+    padding:32px;margin-bottom:24px}
+  h2{font-size:16px;font-weight:700;letter-spacing:3px;color:var(--primary);margin-bottom:6px}
+  .desc{font-size:13px;color:var(--text-sec);line-height:1.8;margin-bottom:24px}
+  .row{display:flex;flex-wrap:wrap;gap:24px;align-items:flex-start;justify-content:center}
+  img{display:block}
+  .sizes{display:flex;gap:20px;align-items:flex-end;justify-content:center;flex-wrap:wrap}
+  .sizes img{border-radius:6px}
+  .cap{text-align:center;font-size:12px;color:var(--muted);margin-top:8px;letter-spacing:1px}
+  .swatches{display:flex;flex-wrap:wrap;gap:14px;justify-content:center}
+  .sw{width:126px;border:1px solid var(--border);border-radius:8px;overflow:hidden;background:var(--surface)}
+  .sw .chip{height:64px}
+  .sw .info{padding:10px 12px;font-size:12px;line-height:1.7;color:var(--text-sec)}
+  .sw .info b{display:block;color:var(--text);font-size:13px;letter-spacing:2px}
+  ul{list-style:none;font-size:13px;line-height:2.1;color:var(--text-sec)}
+  ul li::before{content:"— ";color:var(--gold)}
 
+</style>
+</head>
+<body>
+  <h1>古董圈 · 品牌标识</h1>
+  <div class="sub">博古架概念 · GUDONG.APP BRAND MARK</div>
+  <div class="rule"></div>
+
+  <section>
+    <h2>设计概念</h2>
+    <div class="desc">以明式博古架为形：一具格架，三件陈设 —— 左格梅瓶、右上玉璧、右下铜鼎，取「博古通今、雅器成圈」之意。外沿一圈册页式细线，衬宣纸底色，鎏金点于璧心。</div>
+    <div class="row"><img src="logo-mark.svg" width="240" alt="博古架标志"></div>
+  </section>
+
+  <section>
+    <h2>竖版组合</h2>
+    <div class="desc">用于启动页、分享卡片、公众号头图等纵向版面。中文字标配宋体，下承鎏金短横与拉丁字标。</div>
+    <div class="row"><img src="logo-primary.svg" width="300" alt="竖版组合"></div>
+  </section>
+
+  <section>
+    <h2>横版组合</h2>
+    <div class="desc">用于网站页眉、邮件签名、水印等横向版面。</div>
+    <div class="row"><img src="logo-horizontal.svg" width="440" alt="横版组合"></div>
+  </section>
+
+  <section>
+    <h2>墨色单色版</h2>
+    <div class="desc">用于印章雕刻、单色印刷、传真水印等仅支持单色的场景。</div>
+    <div class="row"><img src="logo-mark-ink.svg" width="200" alt="墨色版"></div>
+  </section>
+
+  <section>
+    <h2>小尺寸适配</h2>
+    <div class="desc">矢量文件可无损缩放；32px 以下建议仅保留博古架轮廓（隐藏陈设器物），16px favicon 沿用站内现有 theme-color 赭石底。</div>
+    <div class="sizes">
+      <div><img src="logo-mark.svg" width="96" alt=""><div class="cap">96px</div></div>
+      <div><img src="logo-mark.svg" width="48" alt=""><div class="cap">48px</div></div>
+      <div><img src="logo-mark.svg" width="32" alt=""><div class="cap">32px</div></div>
+      <div><img src="logo-mark.svg" width="24" alt=""><div class="cap">24px</div></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>色彩规范</h2>
+    <div class="desc">全部取自 gudong.app 站内既有设计令牌，与线上页面完全一致。</div>
+    <div class="swatches">
+      <div class="sw"><div class="chip" style="background:#F5F2EC"></div><div class="info"><b>宣纸</b>#F5F2EC · 背景底色</div></div>
+      <div class="sw"><div class="chip" style="background:#8A5A3B"></div><div class="info"><b>赭石</b>#8A5A3B · 器物主色</div></div>
+      <div class="sw"><div class="chip" style="background:#68432D"></div><div class="info"><b>深赭</b>#68432D · 架体结构</div></div>
+      <div class="sw"><div class="chip" style="background:#B08A45"></div><div class="info"><b>鎏金</b>#B08A45 · 璧心点缀</div></div>
+      <div class="sw"><div class="chip" style="background:#25221E"></div><div class="info"><b>墨色</b>#25221E · 字标</div></div>
+      <div class="sw"><div class="chip" style="background:#9C8558"></div><div class="info"><b>绢金</b>#9C8558 · 拉丁字标</div></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>使用要点</h2>
+    <ul>
+      <li>标志四周保留不小于标志宽度 1/8 的留白，不与其他元素挤压。</li>
+      <li>字标交付印刷前应将「古董圈」三字转曲（outline），避免跨设备字体差异。</li>
+      <li>深色页面上使用时，宣纸底块保留，册页细线可提亮至 #E4DED5。</li>
+      <li>禁止拉伸变形、加投影、更改器物陈设位置。</li>
+    </ul>
+  </section>
+</body>
+</html>

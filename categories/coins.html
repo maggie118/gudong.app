@@ -471,65 +471,6 @@
 }
 .gd-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
-/*<<<gd-mobile-header-fix-2026-10-16>>> 移动端顶部导航适配（仅 <768px 生效，桌面端保持原样）*/
-:root{
-  --gd-header-h-m: 58px;
-  --gd-safe-top: env(safe-area-inset-top, 0px);
-  --gd-header-total-m: calc(var(--gd-header-h-m) + var(--gd-safe-top));
-}
-@media (max-width: 767px){
-  html, body { scroll-padding-top: calc(var(--gd-header-total-m) + 12px); }
-  body > header{
-    position: fixed !important;
-    top: 0 !important;
-    left: 0 !important;
-    right: 0 !important;
-    width: 100% !important;
-    height: var(--gd-header-total-m) !important;
-    min-height: var(--gd-header-total-m) !important;
-    max-height: var(--gd-header-total-m) !important;
-    padding: var(--gd-safe-top) 5% 0 !important;
-    margin: 0 !important;
-    align-items: center !important;
-    z-index: 80 !important;
-    -webkit-transition: height .28s ease, padding .28s ease, background-color .28s ease, box-shadow .28s ease;
-    transition: height .28s ease, padding .28s ease, background-color .28s ease, box-shadow .28s ease;
-  }
-  body > header .brand-logo-img{
-    height: 30px !important;
-    width: auto !important;
-    max-width: 76px !important;
-    opacity: 1 !important;
-    -webkit-transition: height .28s ease, max-width .28s ease;
-    transition: height .28s ease, max-width .28s ease;
-  }
-  body > header ~ main{
-    padding-top: calc(var(--gd-header-total-m) + 12px) !important;
-  }
-}
-/*<<</gd-mobile-header-fix-2026-10-16>>>*/
-/*<<<gd-header-logo-fit-2026-10-16>>> 窄屏 LOGO 完整性修复（仅 ≤480px 生效，桌面端保持原样）*/
-@media (max-width: 480px){
-  body > header { padding-left: 3% !important; padding-right: 3% !important; gap: .45rem !important; }
-  body > header > div:first-child { gap: .45rem !important; }
-  body > header .brand-logo-img { height: 28px !important; }
-  .brand { gap: .45rem !important; }
-  .brand-zh, .brand-en { font-size: min(1.05rem, 4.2vw) !important; }
-  .brand-text small { font-size: .58rem !important; letter-spacing: .05em !important; }
-  .header-right { gap: .4rem !important; }
-}
-@media (max-width: 360px){
-  body > header { padding-left: 2% !important; padding-right: 2% !important; gap: .35rem !important; }
-  body > header > div:first-child { gap: .35rem !important; }
-  .brand { gap: .35rem !important; }
-  .header-right { gap: .3rem !important; }
-  .brand-zh, .brand-en { font-size: min(1.05rem, 4vw) !important; }
-  .brand-text small { display: none !important; }
-  .menu-toggle { width: 40px !important; height: 40px !important; }
-  .gd-share-btn { min-width: 40px !important; min-height: 40px !important; padding: .35rem !important; }
-  .lang-btn { min-width: 40px !important; min-height: 40px !important; padding: .35rem .5rem !important; }
-}
-/*<<</gd-header-logo-fit-2026-10-16>>>*/
 </style>
 <script>
 (function () {

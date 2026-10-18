@@ -48,6 +48,43 @@ function normHyphen(v) {
 // 注意：故意不暴露 whatsapp / email，避免藏家私人联系方式进公开 API。
 const SELLER_PUBLIC_FIELDS = ['seller_id', 'display_zh', 'display_en', 'since_year', 'intro_zh', 'intro_en', 'page_url', 'wa_username'];
 
+// WhatsApp 用户名的候选字段名（Airtable 里命名可能不一致，逐一兜底）
+const WA_USERNAME_KEYS = [
+  'wa_username', 'waUsername', 'WA_Username',
+  'whatsapp_username', 'whatsappUsername', 'WhatsApp Username', 'WhatsApp username',
+  'whatsapp_user', 'wa_user', 'waUser', 'wa_name',
+];
+
+// 从卖家原始字段里挑出 WhatsApp 用户名，统一以 wa_username 输出。
+// 兜底：若填在 whatsapp 字段里且不是纯电话号码（含字母/下划线），也按用户名处理。
+function pickWaUsername(f) {
+  if (!f) return null;
+  for (const k of WA_USERNAME_KEYS) {
+    const v = f[k];
+    if (typeof v === 'string' && v.trim()) return v.trim().replace(/^@/, '');
+    if (Array.isArray(v) && v.length && typeof v[0] === 'string' && v[0].trim()) {
+      return v[0].trim().replace(/^@/, '');
+    }
+  }
+  const PHONE_ISH = /^[+\d\s()\-]+$/;
+  // 模糊兜底：字段名以 wa / whatsapp 开头，且值不是纯电话号码
+  for (const k of Object.keys(f)) {
+    if (!/^(wa|whats_?app)/i.test(k)) continue;
+    const v = f[k];
+    if (typeof v === 'string' && v.trim() && !PHONE_ISH.test(v.trim())) {
+      return v.trim().replace(/^@/, '');
+    }
+  }
+  // 最后：填在 whatsapp 字段里且不是纯电话号码的，也按用户名处理
+  for (const k of ['whatsapp', 'whatsapp_phone', 'WhatsApp']) {
+    const v = f[k];
+    if (typeof v === 'string' && v.trim() && !PHONE_ISH.test(v.trim())) {
+      return v.trim().replace(/^@/, '');
+    }
+  }
+  return null;
+}
+
 const INTEL_PUBLIC_FIELDS = ['type', 'text_zh', 'text_en', 'meta_zh', 'meta_en', 'publish_date', 'active'];
 
 const INTEL_TYPES = ['new', 'drop', 'compare', 'collector', 'platform'];
@@ -150,6 +187,10 @@ function toPublicSellers(rawRecords) {
       const out = {};
       for (const k of SELLER_PUBLIC_FIELDS) {
         if (rec.fields[k] !== undefined && rec.fields[k] !== null && rec.fields[k] !== '') out[k] = rec.fields[k];
+      }
+      if (!out.wa_username) {
+        const wa = pickWaUsername(rec.fields);
+        if (wa) out.wa_username = wa;
       }
       if (out.seller_id) out.seller_id = normHyphen(out.seller_id);
       return out;

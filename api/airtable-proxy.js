@@ -32,7 +32,7 @@ const PUBLIC_FIELDS = [
   'dimensions', 'weight', 'condition_zh', 'condition_en', 'has_surface_wear', 'has_surface_damage',
   'price_type', 'fixed_price', 'price_zh', 'price_en', 'price_display_zh', 'price_display_en',
   'img_file',
-  'seller_id', 'seller_whatsapp',
+  'seller_id',
   'is_today_finds', 'is_editor_picks', 'is_new_listing', 'status',
   'reason_zh', 'reason_en', 'listed_at',
   'previous_price', 'reference_price',
@@ -428,19 +428,29 @@ async function debugReport() {
 // ---------- Cache ----------
 const FRESH_MS = 30 * 1000;
 const STALE_MS = 60 * 60 * 1000;
-let cache = { items: null, sellers: [], intel: [], at: 0 };
+let cache = { items: null, sellers: [], intel: [], founderCount: 0, at: 0 };
 
 async function getData() {
   const now = Date.now();
   if (cache.items && now - cache.at < FRESH_MS) {
-    return { items: cache.items, sellers: cache.sellers, intel: cache.intel, stale: false };
+    return { items: cache.items, sellers: cache.sellers, intel: cache.intel, founderCount: cache.founderCount, stale: false };
   }
   try {
     const items = toPublicItems(await fetchAllRecords(TABLE));
 
     let sellers = cache.sellers;
+    let founderCount = cache.founderCount || 0;
     if (SELLERS_TABLE) {
-      try { sellers = toPublicSellers(await fetchAllRecords(SELLERS_TABLE)); }
+      try {
+        const rawSellers = await fetchAllRecords(SELLERS_TABLE);
+        sellers = toPublicSellers(rawSellers);
+        founderCount = rawSellers.filter(r => {
+          const f = r.fields || {};
+          const isSeed = f.is_seed_member === true || String(f.is_seed_member).toLowerCase() === 'true';
+          const status = String(f.status || '').trim().toLowerCase();
+          return isSeed && status === 'active';
+        }).length;
+      }
       catch (e) { console.warn('[airtable-proxy] sellers table read failed:', e.message); }
     } else {
       sellers = [];
@@ -457,12 +467,12 @@ async function getData() {
     const autoIntel = buildAutoIntel(items);
     const mergedIntel = mergeIntel(autoIntel, intel);
 
-    cache = { items, sellers, intel: mergedIntel, at: Date.now() };
-    return { items, sellers, intel: mergedIntel, stale: false };
+    cache = { items, sellers, intel: mergedIntel, founderCount, at: Date.now() };
+    return { items, sellers, intel: mergedIntel, founderCount, stale: false };
   } catch (e) {
     if (cache.items && now - cache.at < STALE_MS) {
       console.warn('[airtable-proxy] upstream failed, using cache:', e.message);
-      return { items: cache.items, sellers: cache.sellers, intel: cache.intel, stale: true };
+      return { items: cache.items, sellers: cache.sellers, intel: cache.intel, founderCount: cache.founderCount, stale: true };
     }
     throw e;
   }
@@ -508,7 +518,7 @@ export default async function handler(req, res) {
   const cat = String(req.query.cat || 'all').trim();
 
   try {
-    const { items: all, sellers, intel, stale } = await getData();
+    const { items: all, sellers, intel, founderCount, stale } = await getData();
     let items = all;
 
     if (q) {
@@ -533,6 +543,7 @@ export default async function handler(req, res) {
       newListing:  items,
       sellers,
       intel,
+      founderCount: founderCount || 0,
       total:       items.length,
     });
 

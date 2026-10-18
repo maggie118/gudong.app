@@ -44,7 +44,9 @@ function normHyphen(v) {
   return v.replace(HYPHEN_VARIANTS, '-').trim();
 }
 
-const SELLER_PUBLIC_FIELDS = ['seller_id', 'display_zh', 'display_en', 'since_year', 'intro_zh', 'intro_en', 'page_url'];
+// wa_username: WhatsApp 用户名（wa.me/<username>），双方看不到对方手机号。
+// 注意：故意不暴露 whatsapp / email，避免藏家私人联系方式进公开 API。
+const SELLER_PUBLIC_FIELDS = ['seller_id', 'display_zh', 'display_en', 'since_year', 'intro_zh', 'intro_en', 'page_url', 'wa_username'];
 
 const INTEL_PUBLIC_FIELDS = ['type', 'text_zh', 'text_en', 'meta_zh', 'meta_en', 'publish_date', 'active'];
 

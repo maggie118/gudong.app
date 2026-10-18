@@ -17,4 +17,4 @@ Disallow: /.vercel/
 Disallow: /.workbuddy/
 Disallow: /assets/brand/logo-preview
 
-Sitemap: https://www.gudong.app/sitemap.xml
+Sitemap: https://gudong.app/sitemap.xml

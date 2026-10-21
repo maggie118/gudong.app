@@ -2062,7 +2062,7 @@
            - API_BASE 指向 Vercel 上的 Airtable 代理端点（完整 URL）
            - 图片 / 本地快照仍使用相对路径，便于同域部署与本地预览
            ------------------------------------------------------------ */
-        const API_BASE = "https://gudong-app.vercel.app/api/airtable-proxy";
+        const API_BASE = ((location.hostname === '127.0.0.1' || location.hostname === 'localhost' || location.protocol === 'file:') ? 'https://www.gudong.app' : '') + '/api/airtable-proxy';
 
         (function applyLang(lang) {
             const map = { zh: 'zh-SG', en: 'en-SG' };
@@ -2612,7 +2612,7 @@
             if (!container) return;
             container.innerHTML = items.map(f => {
                 const imgSrc = imgPath(f);
-                const detailUrl = 'items/' + esc(normId(f.item_id)) + '.html';
+                const detailUrl = 'item.html?id=' + encodeURIComponent(normId(f.item_id));
                 const kw = attrKeywords(f);
                 const nz = f.title_zh || f.title_en || '';
                 return `

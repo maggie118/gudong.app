@@ -645,7 +645,7 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
                                 <circle cx="12" cy="6" r="1.4" fill="currentColor" />
                                 <circle cx="21" cy="8" r="1.4" fill="currentColor" />
                             </svg>
-                            <span class="badge-num">88</span>
+                            <span class="badge-num">18</span>
                         </span>
                     </div>
                     <div class="seller-card-id">Seller ID: <span id="sellerId"></span></div>
@@ -1142,7 +1142,15 @@ function setSellerCard(f, data) {
                 if (zh) setText('#sellerNameZh', zh, 'seller.zh');
                 if (en) setText('#sellerNameEn', en, 'seller.en');
                 var link = document.getElementById('sellerLink');
-                if (link && sl.page_url) link.href = sl.page_url;
+                if (link) {
+                    var fallback = 'collection.html?seller=' + encodeURIComponent(sid);
+                    link.href = sl.page_url || fallback;
+                    if (sl.page_url) {
+                        fetch(sl.page_url, { method: 'HEAD' }).then(function (r) {
+                            if (!r.ok) link.href = fallback;
+                        }).catch(function () { link.href = fallback; });
+                    }
+                }
             }
         }
         function showNotFound() {

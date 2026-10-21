@@ -415,6 +415,25 @@
             padding-bottom: 1.6rem;
             border-bottom: 1px solid var(--color-border);
         }
+        .seller-filter-bar {
+            display: flex; flex-wrap: wrap; align-items: center; gap: .4rem .9rem;
+            margin: -1.2rem 0 2rem;
+            padding: .7rem 1rem;
+            background: var(--color-primary-light);
+            border: 1px solid var(--color-border);
+            border-radius: var(--card-radius);
+            font-size: .88rem;
+            color: var(--color-text);
+        }
+        .seller-filter-bar b { color: var(--color-primary); }
+        .seller-filter-clear {
+            margin-left: auto;
+            color: var(--color-primary);
+            border-bottom: 1px solid currentColor;
+            font-size: .85rem;
+            min-height: 44px;
+            display: inline-flex; align-items: center;
+        }
         .filter-chip {
             border: 1px solid var(--color-border);
             background: var(--color-surface);
@@ -1069,6 +1088,13 @@
             <button class="filter-chip" data-cat="misc" onclick="setFilter('misc', this)"><span class="zh">杂项</span><span class="en">Miscellaneous</span></button>
         </div>
 
+        <!-- 藏家筛选提示：从藏品页「查看全部藏品」进入且该藏家暂无主页时显示 -->
+        <div class="seller-filter-bar" id="sellerFilterBar" style="display:none;">
+            <span class="zh">仅显示藏家 <b id="sellerFilterName">—</b> 的藏品</span>
+            <span class="en">Showing items from <b id="sellerFilterNameEn">—</b> only</span>
+            <a href="collection.html" class="seller-filter-clear"><span class="zh">查看全部藏品</span><span class="en">View all items</span></a>
+        </div>
+
         <!-- ============ SECTION HEAD + GRID ============ -->
         <div class="section-head2">
             <div>
@@ -1251,6 +1277,7 @@
         const GD = window.GudongData;
         let ALL_ITEMS = [];
         let CURRENT_CAT = 'all';
+        const SELLER_FILTER = (new URLSearchParams(location.search).get('seller') || '').trim().toLowerCase();
 
         const DEMO_ITEMS = [
             { id: 'demo-1', title_zh: '清乾隆 青花山水笔筒', title_en: 'Qianlong Blue & White Brush Pot', era_zh: '清乾隆', category: 'porcelain', price: 1280 },
@@ -1307,7 +1334,8 @@
             if (!grid) { ALL_ITEMS = []; return; }
             ALL_ITEMS = Array.from(grid.querySelectorAll('.item-card')).map(card => ({
                 el: card,
-                cat: localCatKey(card.dataset.cat || '')
+                cat: localCatKey(card.dataset.cat || ''),
+                seller: (card.dataset.seller || '').trim().toLowerCase()
             }));
             applyFilter();
         }
@@ -1317,7 +1345,9 @@
         function applyFilter() {
             let visible = 0;
             ALL_ITEMS.forEach(it => {
-                const show = CURRENT_CAT === 'all' || it.cat === CURRENT_CAT;
+                const catOk = CURRENT_CAT === 'all' || it.cat === CURRENT_CAT;
+                const sellerOk = !SELLER_FILTER || it.seller === SELLER_FILTER;
+                const show = catOk && sellerOk;
                 it.el.style.display = show ? '' : 'none';
                 if (show) visible++;
             });
@@ -1334,6 +1364,15 @@
         window.setFilter = setFilter;
 
         (function init() {
+            if (SELLER_FILTER) {
+                const raw = (new URLSearchParams(location.search).get('seller') || '').trim();
+                const bar = document.getElementById('sellerFilterBar');
+                const n1 = document.getElementById('sellerFilterName');
+                const n2 = document.getElementById('sellerFilterNameEn');
+                if (n1) n1.textContent = raw;
+                if (n2) n2.textContent = raw;
+                if (bar) bar.style.display = '';
+            }
             showSkeleton();
             if (GD && typeof GD.mountCategory === 'function') {
                 try {

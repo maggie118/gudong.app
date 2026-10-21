@@ -260,6 +260,29 @@ header {
 }
 .item-detail-desc { font-size: .92rem; color: var(--color-text); line-height: 1.8; margin-bottom: 1.6rem; }
 .item-detail-desc:empty { display: none; }
+
+/* 藏品描述板块：位于图片/详情下方，中英双语 */
+.item-desc-block {
+    margin-top: 2.8rem;
+    padding-top: 1.8rem;
+    border-top: 1px solid var(--color-border);
+}
+.item-desc-title {
+    font-family: Georgia, "Songti SC", "STSong", serif;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: .9rem;
+}
+.item-desc-text {
+    font-size: .95rem;
+    line-height: 1.95;
+    color: var(--color-text-secondary);
+    white-space: pre-line;
+    margin-bottom: 1rem;
+}
+.item-desc-text:empty { display: none; }
+.item-desc-block[hidden] { display: none; }
 .specs-block {
     position: relative;
     background: var(--color-surface);
@@ -586,8 +609,6 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
                     <span class="zh">私聊询价</span>
                     <span class="en">Enquire</span>
                 </div>
-                <p class="item-detail-desc zh">正在加载藏品信息...</p>
-                <p class="item-detail-desc en">Loading item details...</p>
                 <div class="specs-block">
                     <div class="specs-title zh">藏品规格</div>
                     <div class="specs-title en">Specifications</div>
@@ -713,6 +734,13 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
                 <div class="disclaimer-box en"><strong>Please note:</strong> Gudong only displays item information and facilitates contact — we do not authenticate items, guarantee sales, or process payments. Always inspect items in person before dealing.</div>
             </div>
         </div>
+
+        <section class="item-desc-block" id="itemDescBlock" hidden>
+            <h2 class="item-desc-title zh">藏品描述</h2>
+            <h2 class="item-desc-title en">Description</h2>
+            <p class="item-desc-text zh" id="itemDescZh"></p>
+            <p class="item-desc-text en" id="itemDescEn"></p>
+        </section>
     </main>
         <style>
         /* 2026-10-09：footer 品牌区/免责声明/版权（全站统一·精简版） */
@@ -1150,8 +1178,13 @@ function setSellerCard(f, data) {
                 if (szh) setText('.back-link.zh', '← 返回 ' + szh + ' 私家藏馆', 'back_zh');
                 if (sen) setText('.back-link.en', '← Back to ' + sen, 'back_en');
                 setPrice(f);
-                setText('.item-detail-desc.zh', f.desc_zh, 'desc_zh');
-                setText('.item-detail-desc.en', f.desc_en, 'desc_en');
+                var dz = clean(first(f.desc_zh) || first(f.description_zh)), de = clean(first(f.desc_en) || first(f.description_en));
+                if (dz || de) {
+                    setText('#itemDescZh', dz, 'desc_zh');
+                    setText('#itemDescEn', de, 'desc_en');
+                    var descBlock = document.getElementById('itemDescBlock');
+                    if (descBlock) descBlock.hidden = false;
+                }
                 setGallery(f);
                 setSpec(f);
                 setSellerCard(f, data);

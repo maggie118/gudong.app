@@ -45,7 +45,7 @@
  *   seller 徽章/标签字号提升
  * - v8 → v9：配合首页改版提升缓存版本号
  */
-const CACHE_NAME = 'antique-collection-v35';
+const CACHE_NAME = 'antique-collection-v36';
 // 预缓存清单：核心页面 + 常用图标 + 占位图
 // 注意：改用逐个 cache.add，单个 404 不会导致整个 install 失败
 const PRECACHE_ASSETS = [

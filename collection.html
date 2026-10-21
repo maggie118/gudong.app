@@ -529,7 +529,7 @@
         }
         .item-image img {
             width: 100%; height: 100%;
-            object-fit: cover;
+            object-fit: contain;
             display: block;
             transition: transform .7s var(--ease);
         }
@@ -1433,7 +1433,7 @@
             } else {
                 msg = '【图片精修申请】\nSeller ID：' + sid + '\nWhatsApp：' + wa + '\n图片数量：' + imgs.length + ' 张\n备注：' + (rk || '无') + '\n服务费 S$198/件，请发送 PayNow 付款二维码，我付款后会回传付款截图。';
             }
-            window.open('https://wa.me/6591888952?text=' + encodeURIComponent(msg), '_blank');
+            window.open('https://wa.me/gudong.app?text=' + encodeURIComponent(msg), '_blank');
             closePhotoRetouchModal();
         }
 

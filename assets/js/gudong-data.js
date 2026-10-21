@@ -224,7 +224,7 @@
     return '/assets/images/' + (file || 'placeholder.jpg');
   }
   var IMG_FALLBACK = "this.onerror=null;this.src='/assets/images/placeholder.jpg'";
-  function itemHref(f) { return '/items/' + esc(normId(f.item_id)) + '.html'; }
+  function itemHref(f) { return '/item.html?id=' + encodeURIComponent(normId(f.item_id)); }
 
   /* ---------- network ---------- */
   function fetchJson(url, ms, tag) {

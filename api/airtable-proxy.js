@@ -27,7 +27,7 @@ const DEBUG_KEY      = process.env.AIRTABLE_DEBUG_KEY;
 const PUBLIC_STATUSES = ['active'];
 
 const PUBLIC_FIELDS = [
-  'title_zh', 'title_en', 'desc_zh', 'desc_en', 'era_zh', 'era_en', 'category',
+  'title_zh', 'title_en', 'desc_zh', 'desc_en', 'description_zh', 'description_en', 'era_zh', 'era_en', 'category',
   'material_zh', 'material_en', 'kiln_zh', 'kiln_en', 'mark_zh', 'mark_en', 'certificate_no', 'tags',
   'dimensions', 'weight', 'condition_zh', 'condition_en', 'has_surface_wear', 'has_surface_damage',
   'price_type', 'fixed_price', 'price_zh', 'price_en', 'price_display_zh', 'price_display_en',

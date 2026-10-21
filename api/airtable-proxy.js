@@ -375,8 +375,8 @@ function mergeIntel(autoIntel, manualIntel) {
   if (!result.find(r => r.type === 'platform')) {
     result.push({
       type: 'platform',
-      zh: PREFIX_PLATFORM + '\u521b\u59cb\u85cf\u5bb6\u62db\u52df\u8fdb\u884c\u4e2d\uff0c\u9650\u91cf 88 \u5e2d\u514d\u8d39\u5165\u9a7b\uff0c\u524d 2 \u4ef6\u85cf\u54c1\u514d\u8d39\u520a\u767b\u3002',
-      en: PREFIX_EN_PLATFORM + 'Founding Collector seats are open \u2014 limited to 88, join free, first 2 listings free.',
+      zh: PREFIX_PLATFORM + '\u521b\u59cb\u85cf\u5bb6\u62db\u52df\u8fdb\u884c\u4e2d\uff0c\u9650\u91cf 18 \u5e2d\u514d\u8d39\u5165\u9a7b\uff0c\u524d 2 \u4ef6\u85cf\u54c1\u514d\u8d39\u520a\u767b\u3002',
+      en: PREFIX_EN_PLATFORM + 'Founding Collector seats are open \u2014 limited to 18, join free, first 2 listings free.',
       meta: META_PLATFORM,
       metaEn: META_EN_PLATFORM,
     });

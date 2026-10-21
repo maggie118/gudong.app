@@ -746,7 +746,7 @@
 
         .finds-image img {
             width: 100%; height: 100%;
-            object-fit: cover; display: block;
+            object-fit: contain; display: block;
             transition: transform .7s var(--ease);
         }
         .finds-card:hover .finds-image img { transform: scale(1.04); }
@@ -836,7 +836,7 @@
             width: 100%; height: auto;
             aspect-ratio: 1 / 1;
             max-height: none;
-            object-fit: cover;
+            object-fit: contain;
         }
 
         .item-card {
@@ -863,7 +863,7 @@
         .item-card:hover .item-image { box-shadow: 0 4px 16px rgba(37, 34, 30, .10); }
         .item-card img {
             width: 100%; height: 100%;
-            object-fit: cover; display: block;
+            object-fit: contain; display: block;
             transition: transform .7s var(--ease);
         }
         .item-card:hover img { transform: scale(1.05); }

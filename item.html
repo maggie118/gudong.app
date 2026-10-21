@@ -1143,7 +1143,7 @@ function setSellerCard(f, data) {
                 if (en) setText('#sellerNameEn', en, 'seller.en');
                 var link = document.getElementById('sellerLink');
                 if (link) {
-                    var fallback = 'collection.html?seller=' + encodeURIComponent(sid);
+                    var fallback = 'collection.html';
                     link.href = sl.page_url || fallback;
                     if (sl.page_url) {
                         fetch(sl.page_url, { method: 'HEAD' }).then(function (r) {

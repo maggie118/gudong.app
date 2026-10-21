@@ -524,7 +524,7 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
     .image-thumb { flex: 0 0 50px; width: 50px; height: 50px; }
 }
     </style>
-    <script type="application/ld+json">{"image":["https://www.gudong.app/assets/images/placeholder.jpg"],"@type":"Product","name":"藏品详情 / Item Detail","description":"藏品详情 / Item Detail. Seller-provided listing information. Gudong.app does not authenticate the item or participate in a sale.","inLanguage":["zh-SG","en-SG"],"url":"https://www.gudong.app/item.html","@context":"https://schema.org"}</script>
+    <script type="application/ld+json" id="product-jsonld">{"image":["https://www.gudong.app/assets/images/placeholder.jpg"],"@type":"Product","name":"藏品详情 / Item Detail","description":"藏品详情 / Item Detail. Seller-provided listing information. Gudong.app does not authenticate the item or participate in a sale.","inLanguage":["zh-SG","en-SG"],"url":"https://www.gudong.app/item.html","@context":"https://schema.org"}</script>
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="藏品详情 | Singapore antiques | Singapore | Gudong.app">
     <meta name="twitter:description" content="「藏品详情」藏品由藏家发布，面向新加坡、东南亚及海外藏家。古董圈仅展示信息；平台不提供古董鉴定，不参与藏品交易。 Gudong.app listing; seller-provided, does not authenticate antiques or participate in transactions. For Singapore collectors.">
@@ -1111,6 +1111,41 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
                 if (el && el.textContent.trim() !== v) { el.textContent = v; changes.push('spec.' + key + ' → ' + v.slice(0, 20)); }
             });
         }
+        // ---- Product JSON-LD: rebuild with real data + offers after Airtable loads ----
+        function setProductJsonLd(f) {
+            var el = document.getElementById('product-jsonld');
+            if (!el) return;
+            var name = clean(first(f.title_zh) || first(f.title_en));
+            if (!name) return;
+            // 主图：第一张实际图片
+            var imgs = parseImgFiles(f);
+            var image = imgs.length ? imgs : ['https://www.gudong.app/assets/images/placeholder.jpg'];
+            var desc = clean(first(f.desc_zh) || first(f.desc_en) || first(f.description_zh) || first(f.description_en));
+            // 价格：优先 fixed_price（数字），否则按 price_type 判断
+            var priceNum = Number(f.fixed_price);
+            var priceType = String(first(f.price_type) || '').trim();
+            var isEnquire = /私聊|询价|enquir|inquir|message/i.test(priceType);
+            var offers = null;
+            if (!isEnquire && isFinite(priceNum) && priceNum > 0) {
+                offers = {
+                    '@type': 'Offer',
+                    'price': String(priceNum),
+                    'priceCurrency': 'SGD',
+                    'availability': 'https://schema.org/InStock'
+                };
+            }
+            var ld = {
+                '@context': 'https://schema.org',
+                '@type': 'Product',
+                'name': name,
+                'image': image,
+                'url': 'https://www.gudong.app/items/' + ID,
+                'inLanguage': ['zh-SG', 'en-SG']
+            };
+            if (desc) ld.description = desc;
+            if (offers) ld.offers = offers;
+            try { el.textContent = JSON.stringify(ld); } catch (e) {}
+        }
                 /* gd-wa-username-2026-10-18 · gd-wa-bind-v2 —— 卖家 WhatsApp 用户名动态绑定：所有 a[data-wa-bind="seller"] 一并处理 */
         function setWaContact(sl) {
             var PLATFORM_WA_USERNAME = "gudong.app";
@@ -1195,6 +1230,7 @@ function setSellerCard(f, data) {
                 }
                 setGallery(f);
                 setSpec(f);
+                setProductJsonLd(f);
                 setSellerCard(f, data);
                 setWaContact(sl);
                 if (f.title_zh) { var t = document.title.split(' | '); t[0] = clean(first(f.title_zh)); if (sen && t.length > 1) t[1] = sen; document.title = t.join(' | '); }

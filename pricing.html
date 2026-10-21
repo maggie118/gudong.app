@@ -1433,15 +1433,15 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
       </div>
     </div>
 
-    <!-- 3. 首页精选轮换推荐卡片 -->
+    <!-- 3. 首页精选推荐卡片 -->
     <div class="row" style="padding: 1.25rem 1.5rem; border-bottom: 1px solid var(--border-color, #eee); display: flex; justify-content: space-between; align-items: center; gap: 1rem;">
       <div style="flex: 1;">
         <div class="row-title" style="font-size: 1.05rem; font-weight: 600; color: var(--text-main, #2c2c2c); margin-bottom: 0.3rem;">
-          <span class="zh">3. 首页精选轮换推荐卡片</span>
+          <span class="zh">3. 首页精选推荐卡片</span>
           <span class="en">Homepage Rotating Featured Card</span>
         </div>
         <div class="row-desc" style="font-size: 0.875rem; color: var(--text-sub, #666); line-height: 1.5;">
-          <span class="zh">平台首页核心精选轮换位，全球买家与访客进入网站的第一时间即可优先瞩目呈现。</span>
+          <span class="zh">平台首页核心精选位，全球买家与访客进入网站的第一时间即可优先瞩目呈现。</span>
           <span class="en">Featured in the primary homepage rotation for immediate high-traffic exposure.</span>
         </div>
       </div>
@@ -2190,7 +2190,7 @@ body[data-lang="zh"] .gd-install-modal .en { display: none; }
     render(staticTaken, staticTotal);
 
     // 再从 Airtable 代理拉取真实创始藏家数量
-    var API_BASE = 'https://gudong-app.vercel.app/api/airtable-proxy';
+    var API_BASE = ((location.hostname === '127.0.0.1' || location.hostname === 'localhost' || location.protocol === 'file:') ? 'https://www.gudong.app' : '') + '/api/airtable-proxy';
     fetch(API_BASE, { cache: 'no-store' })
         .then(function (r) { return r.json(); })
         .then(function (data) {

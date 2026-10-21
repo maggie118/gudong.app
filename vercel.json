@@ -1,6 +1,9 @@
 {
   "version": 2,
   "cleanUrls": true,
+  "rewrites": [
+    { "source": "/sitemap.xml", "destination": "/api/sitemap.xml" }
+  ],
   "headers": [
     {
       "source": "/(.*)",

@@ -630,18 +630,15 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
                         <span class="zh">查看全部藏品 →</span><span class="en">View all items →</span>
                     </a>
                 </div>
-                <div class="gd-chat" data-gudong-chat data-item-id="item-ngcy-05" data-seller-id="Ng-CY">
-  <button type="button" class="contact-btn" data-chat-toggle aria-expanded="false" aria-controls="gd-chat-panel-item-ngcy-05">
-    <span class="zh">💬 站内咨询（免注册）</span><span class="en">💬 Message Collector (No account needed)</span>
-  </button>
-  <section class="gd-chat-panel" id="gd-chat-panel-item-ngcy-05" data-chat-panel hidden aria-label="Collector chat">
-    <div class="gd-chat-head"><div><div class="gd-chat-title"><span class="zh">咨询藏家</span><span class="en">Message the Collector</span></div><div class="gd-chat-subtitle"><span class="zh">关于这件藏品的对话</span><span class="en">Conversation about this item</span></div></div><button type="button" class="gd-chat-close" data-chat-close aria-label="Close chat">×</button></div>
-    <div class="gd-chat-body"><div class="gd-chat-guest" data-chat-guest></div><div data-chat-status role="status" aria-live="polite"></div><ol data-chat-messages aria-live="polite"></ol>
-      <form data-chat-form><label class="sr-only" for="gd-chat-input-item-ngcy-05"><span class="zh">输入消息</span><span class="en">Type a message</span></label><textarea id="gd-chat-input-item-ngcy-05" data-chat-input maxlength="1000" required></textarea><button type="submit"><span class="zh">发送</span><span class="en">Send</span></button></form>
-      <p class="gd-chat-note"><span class="zh">访客编号和聊天记录保存在此设备。请勿发送付款密码或敏感个人资料。</span><span class="en">Your guest ID and chat history are saved on this device. Do not send passwords or sensitive personal information.</span></p>
-    </div>
-  </section>
-</div>
+                                <div class="pwa-action-container" data-gd-wa-btn>
+                    <a href="https://wa.me/gudong.app" target="_blank" rel="noopener noreferrer" class="pwa-wa-username-btn" data-wa-bind="seller">
+                        <svg class="wa-svg-icon" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.717-1.456L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.37 9.864-9.799.002-2.63-1.023-5.101-2.885-6.965C16.528 1.977 14.053.953 11.434.953c-5.442 0-9.866 4.372-9.87 9.802 0 1.714.47 3.387 1.357 4.847L1.872 21.03l5.632-1.462z"/>
+                        </svg>
+                        <span class="zh">🟢 通过 WhatsApp 用户名咨询藏家</span><span class="en">🟢 Message the collector on WhatsApp</span>
+                    </a>
+                    <p class="gd-wa-privacy-note"><span class="zh">通过 WhatsApp 用户名联系，双方均不会看到对方手机号。</span><span class="en">Connect by WhatsApp username — neither side sees the other’s phone number.</span></p>
+                </div>
                 
 
                 <a href="#expert-call-modal" class="contact-btn expert-call-btn zh">📞预约顾问连线（参考意见）</a>
@@ -671,10 +668,10 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
                         </div>
 
                         <div class="form-row">
-                            <label class="zh">你的 WhatsApp 联系方式<span style="color:#9A554B">*</span></label>
-                            <label class="en">Your WhatsApp number <span style="color:#9A554B">*</span></label>
-                            <input class="expert-input zh" id="exp_whatsapp_zh" placeholder="+65 xxxxxxxx">
-                            <input class="expert-input en" id="exp_whatsapp_en" placeholder="+65 xxxxxxxx">
+                            <label class="zh">你的 WhatsApp 用户名或手机号<span style="color:#9A554B">*</span></label>
+                            <label class="en">Your WhatsApp username or phone <span style="color:#9A554B">*</span></label>
+                            <input class="expert-input zh" id="exp_whatsapp_zh" placeholder="例如：username 或 +65 xxxxxxxx">
+                            <input class="expert-input en" id="exp_whatsapp_en" placeholder="e.g. username or +65 xxxxxxxx">
                         </div>
 
                         <div class="payment-note">
@@ -822,20 +819,20 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
             if(isZh){
                 if(!timeslotZh){ alert("请填写希望连线时段"); return; }
                 if(!questionZh){ alert("请填写主要咨询问题"); return; }
-                if(!waZh){ alert("请填写你的 WhatsApp 联系方式"); return; }
+                if(!waZh){ alert("请填写你的 WhatsApp 用户名或手机号"); return; }
             }else{
                 if(!timeslotEn){ alert("Please fill in preferred time slot"); return; }
                 if(!questionEn){ alert("Please fill in your main questions"); return; }
-                if(!waEn){ alert("Please fill in your WhatsApp number"); return; }
+                if(!waEn){ alert("Please fill in your WhatsApp username or phone number"); return; }
             }
 
             let msg;
             if(isZh){
-                msg = `【顾问预约申请】\n藏品ID：${itemId}\nSeller ID：${sellerId}\n藏品名称：${titleZh}\n期望时段：${timeslotZh}\n咨询问题：${questionZh}\n用户WhatsApp：${waZh}\n服务费S$188，请发送 PayNow 付款二维码，办理付款及预约安排。`;
+                msg = `【顾问预约申请】\n藏品ID：${itemId}\nSeller ID：${sellerId}\n藏品名称：${titleZh}\n期望时段：${timeslotZh}\n咨询问题：${questionZh}\n用户WhatsApp（用户名/手机号）：${waZh}\n服务费S$188，请发送 PayNow 付款二维码，办理付款及预约安排。`;
             }else{
-                msg = `【Advisor Booking Request】\nItem ID：${itemId}\nSeller ID：${sellerId}\nItem Name：${titleEn}\nPreferred slot：${timeslotEn}\nQuestions：${questionEn}\nUser WhatsApp：${waEn}\nService fee S$188, please send PayNow QR for payment and booking arrangement.`;
+                msg = `【Advisor Booking Request】\nItem ID：${itemId}\nSeller ID：${sellerId}\nItem Name：${titleEn}\nPreferred slot：${timeslotEn}\nQuestions：${questionEn}\nUser WhatsApp (username/phone)：${waEn}\nService fee S$188, please send PayNow QR for payment and booking arrangement.`;
             }
-            const platformWa = "6591888952";
+            const platformWa = "gudong.app";
             const url = `https://wa.me/${platformWa}?text=${encodeURIComponent(msg)}`;
             window.open(url,"_blank");
             closeExpertCallModal();
@@ -1074,7 +1071,26 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
                 if (el && el.textContent.trim() !== v) { el.textContent = v; changes.push('spec.' + key + ' → ' + v.slice(0, 20)); }
             });
         }
-        function setSellerCard(f, data) {
+                /* gd-wa-username-2026-10-18 · gd-wa-bind-v2 —— 卖家 WhatsApp 用户名动态绑定：所有 a[data-wa-bind="seller"] 一并处理 */
+        function setWaContact(sl) {
+            var PLATFORM_WA_USERNAME = "gudong.app";
+            var links = document.querySelectorAll('a[data-wa-bind="seller"]');
+            if (!links.length) return;
+            var raw = '';
+            if (sl) raw = String(clean(first(sl.wa_username)) || '');
+            var isUsername = !!(sl && clean(first(sl.wa_username)));
+            /* gd-wa-hide-phone-2026-10-19 —— 纯数字一律不输出（隐藏手机号码） */
+            var norm = /^[0-9]+$/.test(raw.trim()) ? '' : raw.trim().replace(/^@/, '').replace(/[^A-Za-z0-9_.]/g, '');
+            var from = norm ? 'seller' : 'platform';
+            if (!norm) norm = PLATFORM_WA_USERNAME;
+            if (!norm) return;
+            for (var i = 0; i < links.length; i++) {
+                links[i].href = 'https://wa.me/' + norm;
+                links[i].setAttribute('data-wa-username', norm);
+                links[i].setAttribute('data-wa-from', from);
+            }
+        }
+function setSellerCard(f, data) {
             var sid = clean(first(f.seller_id));
             if (!sid) return;
             document.getElementById('sellerId').textContent = sid;
@@ -1127,6 +1143,7 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
                 setGallery(f);
                 setSpec(f);
                 setSellerCard(f, data);
+                setWaContact(sl);
                 if (f.title_zh) { var t = document.title.split(' | '); t[0] = clean(first(f.title_zh)); if (sen && t.length > 1) t[1] = sen; document.title = t.join(' | '); }
                 document.documentElement.dataset.source = 'airtable';
                 badge('✔ Airtable · ' + ID + '\n' + (changes.length ? changes.join('\n') : '与静态页一致'), true);
@@ -1305,6 +1322,75 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
     max-width: 88vw; overflow: hidden; text-overflow: ellipsis;
 }
 .gd-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+
+/*<<<gd-mobile-header-fix-2026-10-16>>> 移动端顶部导航适配（仅 <768px 生效，桌面端保持原样）*/
+:root{
+  --gd-header-h-m: 58px;
+  --gd-safe-top: env(safe-area-inset-top, 0px);
+  --gd-header-total-m: calc(var(--gd-header-h-m) + var(--gd-safe-top));
+}
+@media (max-width: 767px){
+  html, body { scroll-padding-top: calc(var(--gd-header-total-m) + 12px); }
+  body > header{
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    height: var(--gd-header-total-m) !important;
+    min-height: var(--gd-header-total-m) !important;
+    max-height: var(--gd-header-total-m) !important;
+    padding: var(--gd-safe-top) 5% 0 !important;
+    margin: 0 !important;
+    align-items: center !important;
+    z-index: 80 !important;
+    -webkit-transition: height .28s ease, padding .28s ease, background-color .28s ease, box-shadow .28s ease;
+    transition: height .28s ease, padding .28s ease, background-color .28s ease, box-shadow .28s ease;
+  }
+  body > header .brand-logo-img{
+    height: 30px !important;
+    width: auto !important;
+    max-width: 76px !important;
+    opacity: 1 !important;
+    -webkit-transition: height .28s ease, max-width .28s ease;
+    transition: height .28s ease, max-width .28s ease;
+  }
+  body > header ~ main{
+    padding-top: calc(var(--gd-header-total-m) + 12px) !important;
+  }
+}
+/*<<</gd-mobile-header-fix-2026-10-16>>>*/
+
+/*<<<gd-header-logo-fit-2026-10-16>>> 窄屏 LOGO 区完整性修复（仅 ≤480px 生效，桌面端保持原样）*/
+@media (max-width: 480px){
+  body > header { padding-left: 3% !important; padding-right: 3% !important; gap: .45rem !important; }
+  body > header > div:first-child { gap: .45rem !important; }
+  body > header .brand-logo-img { height: 28px !important; }
+  .brand { gap: .45rem !important; }
+  .brand-zh, .brand-en { font-size: min(1.05rem, 4.2vw) !important; }
+  .brand-text small { font-size: .58rem !important; letter-spacing: .05em !important; }
+  .header-right { gap: .4rem !important; }
+}
+@media (max-width: 360px){
+  body > header { padding-left: 2% !important; padding-right: 2% !important; gap: .35rem !important; }
+  body > header > div:first-child { gap: .35rem !important; }
+  .brand { gap: .35rem !important; }
+  .header-right { gap: .3rem !important; }
+  .brand-zh, .brand-en { font-size: min(1.05rem, 4vw) !important; }
+  .brand-text small { display: none !important; }
+  .menu-toggle { width: 40px !important; height: 40px !important; }
+  .gd-share-btn { min-width: 40px !important; min-height: 40px !important; padding: .35rem !important; }
+  .lang-btn { min-width: 40px !important; min-height: 40px !important; padding: .35rem .5rem !important; }
+}
+/*<<</gd-header-logo-fit-2026-10-16>>>*/
+
+/* gd-wa-btn-2026-10-18 —— 站内咨询改为 WhatsApp 直连按钮 */
+.pwa-action-container{width:100%;max-width:400px;padding:0;margin-bottom:1rem;box-sizing:border-box;}
+.pwa-wa-username-btn{display:inline-flex;align-items:center;justify-content:center;width:100%;padding:14px 20px;background-color:#25D366;color:#FFFFFF;text-decoration:none;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;font-size:16px;font-weight:600;border-radius:12px;box-shadow:0 4px 12px rgba(37,211,102,0.25);transition:transform 0.1s ease,background-color 0.2s ease;cursor:pointer;-webkit-tap-highlight-color:transparent;box-sizing:border-box;}
+.pwa-wa-username-btn:active{transform:scale(0.97);background-color:#1EBE55;box-shadow:0 2px 6px rgba(37,211,102,0.15);}
+.pwa-wa-username-btn .wa-svg-icon{width:24px;height:24px;margin-right:10px;fill:#FFFFFF;flex-shrink:0;}
+.gd-wa-privacy-note{margin:8px 0 0;padding:0 4px;font-size:12px;line-height:1.55;color:rgba(28,25,22,.62);text-align:center;}.pwa-wa-username-btn+.gd-wa-privacy-note,[data-gd-wa-btn] .gd-wa-privacy-note{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
 
 </style>
 <script>

@@ -93,12 +93,14 @@ const INTEL_TYPES = ['new', 'drop', 'compare', 'collector', 'platform'];
 const CAT_PORCELAIN = '\u74f7\u5668';           // ����
 const CAT_JADE      = '\u7389\u5668';           // ����
 const CAT_COINS     = '\u94b1\u5e01';           // Ǯ��
+const CAT_BRONZE    = '\u94dc\u5668';
 const CAT_PAINTINGS = '\u4e66\u753b';           // �黭
 const CAT_MISC      = '\u6742\u9879';           // ����
 
 const CAT_EN = {
   [CAT_PORCELAIN]: 'porcelain',
   [CAT_JADE]:      'jade',
+  [CAT_BRONZE]:    'bronzes',
   [CAT_COINS]:     'coins',
   [CAT_PAINTINGS]: 'paintings',
   [CAT_MISC]:      'miscellaneous',
@@ -227,6 +229,7 @@ function normCat(c) {
   const v = String(c == null ? '' : c).trim().toLowerCase();
   if (/\u74f7|porcelain|ceramic/.test(v)) return CAT_PORCELAIN;
   if (/\u7389|jade/.test(v)) return CAT_JADE;
+  if (/\u94dc|bronze/.test(v)) return CAT_BRONZE;
   if (/\u5e01|\u94b1|coin|numismat/.test(v)) return CAT_COINS;
   if (/\u753b|\u4e66\u6cd5|painting|calligraph/.test(v)) return CAT_PAINTINGS;
   return CAT_MISC;
@@ -401,6 +404,7 @@ function pageOfCategory(c) {
   if (exact[v]) return { page: exact[v], standard: true };
   if (/\u74f7|porcelain|ceramic/.test(v)) return { page: CAT_PORCELAIN, standard: false };
   if (/\u7389|jade/.test(v)) return { page: CAT_JADE, standard: false };
+  if (/\u94dc|bronze/.test(v)) return { page: CAT_BRONZE, standard: false };
   if (/\u5e01|\u94b1|coin|numismat/.test(v)) return { page: CAT_COINS, standard: false };
   if (/\u753b|\u4e66\u6cd5|painting|calligraph/.test(v)) return { page: CAT_PAINTINGS, standard: false };
   return { page: CAT_MISC, standard: false };

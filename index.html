@@ -483,59 +483,6 @@
             margin-right: auto;
         }
 
-        /* ============ 首屏信任标签（Trust & Identity Pill） ============ */
-        .hero-trust-pill {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: .6rem;
-            flex-wrap: wrap;
-            max-width: 100%;
-            margin: 0 auto 1.6rem;
-            padding: .6rem 1.15rem;
-            background: linear-gradient(135deg, rgba(82, 102, 87, .07) 0%, rgba(156, 122, 58, .05) 100%);
-            border: 1px solid rgba(82, 102, 87, .18);
-            border-radius: 999px;
-            font-size: .79rem;
-            color: var(--color-text-secondary);
-            line-height: 1.5;
-            font-weight: 500;
-            letter-spacing: .01em;
-            animation: trustPillIn .8s var(--ease) both;
-        }
-        @keyframes trustPillIn {
-            from { opacity: 0; transform: translateY(-6px); }
-            to   { opacity: 1; transform: none; }
-        }
-        .hero-trust-pill .pill-dot {
-            display: inline-block;
-            width: 7px; height: 7px;
-            border-radius: 50%;
-            background: var(--color-success);
-            box-shadow: 0 0 0 3px rgba(82, 102, 87, .18);
-            flex-shrink: 0;
-            animation: pulse-dot 2.2s infinite;
-        }
-        .hero-trust-pill b {
-            color: var(--color-primary-dark);
-            font-weight: 700;
-            font-variant-numeric: tabular-nums;
-            letter-spacing: 0;
-        }
-        .hero-trust-pill .sep {
-            color: var(--color-text-muted);
-            opacity: .55;
-            font-weight: 400;
-        }
-
-        .hero-guide {
-            font-size: .83rem;
-            color: var(--color-gold);
-            margin-bottom: 1.8rem;
-            font-weight: 500;
-            letter-spacing: .04em;
-            text-transform: uppercase;
-        }
         .hero-btn {
             margin-top: .8rem;
             display: inline-block;
@@ -634,25 +581,6 @@
             color: var(--color-primary);
             background: var(--color-gold-soft);
             box-shadow: 0 4px 14px rgba(156, 122, 58, .12);
-        }
-        .hot-tag--era {
-            border-color: rgba(156, 122, 58, .32);
-            background: rgba(156, 122, 58, .06);
-            color: var(--color-primary-dark);
-            font-weight: 600;
-        }
-        .hot-tag--era:hover {
-            background: rgba(156, 122, 58, .14);
-            border-color: var(--color-gold);
-        }
-        .hot-tag-divider {
-            display: inline-flex;
-            align-items: center;
-            font-size: .72rem;
-            color: var(--color-text-muted);
-            letter-spacing: .06em;
-            padding: 0 .25rem;
-            user-select: none;
         }
 
         /* ============================================================
@@ -1608,7 +1536,6 @@
             .intel-card { flex: 0 0 204px; }
             .how-grid { grid-template-columns: repeat(2, 1fr); }
             .intel-section { padding: 1.5rem 1.2rem 1.1rem; }
-            .hero-trust-pill { font-size: .74rem; padding: .5rem .95rem; }
         }
 
         @media (max-width: 560px) {
@@ -1643,8 +1570,6 @@
             .seller-cta .title { font-size: 1.35rem; }
             .seller-cta .desc { font-size: .88rem; margin-bottom: 1.6rem; }
             .seller-cta .btn-publish { font-size: .88rem; padding: .8rem 1.6rem; }
-            .hero-trust-pill { font-size: .72rem; padding: .5rem .85rem; gap: .45rem; }
-            .hero-trust-pill .sep { display: none; }
             .trust-tagline { font-size: .84rem; padding: 1.3rem 1.25rem 1.2rem; }
         }
     </style>
@@ -1730,9 +1655,8 @@
             <a href="categories/misc.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 杂项</span><span class="en">· Miscellaneous</span></a>
             <a href="sellers/index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">藏家展馆</span><span class="en">Collector Gallery</span></a>
             <a href="insights.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">情报 / 知识</span><span class="en">Insights</span></a>
-            <a href="tools/index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">工具</span><span class="en">Tools</span></a>
-            <a href="tools/index.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 工具汇总首页</span><span class="en">· Tools Home</span></a>
-            <a href="tools/year-since.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 年份距今计算器</span><span class="en">· Years-since-year Calculator</span></a>
+            <a href="tools/index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">藏家工具包</span><span class="en">Collector's Toolkit</span></a>
+                        <a href="tools/year-since.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 年份距今计算器</span><span class="en">· Years-since-year Calculator</span></a>
             <a href="tools/ganzhi.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 干支公历换算器</span><span class="en">· Sexagenary-Gregorian Converter</span></a>
             <a href="tools/era-lookup.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 古文化·朝代年代速查表</span><span class="en">· Culture &amp; Dynasty Era Lookup</span></a>
             <a href="tools/currency-convert.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 拍卖藏品货币参考换算器</span><span class="en">· Currency Reference Converter</span></a>
@@ -1763,25 +1687,6 @@
                     <span class="en">Built for high-net-worth collectors worldwide. No registration needed — search pieces instantly, use scholarly dating tools, and connect directly with private sellers via end-to-end encrypted channels.</span>
                 </div>
 
-                <!-- 首屏信任标签（动态数值由 JS 注入） -->
-                <div class="hero-trust-pill" id="heroTrustPill" role="status" aria-live="polite">
-                    <span class="pill-dot" aria-hidden="true"></span>
-                    <span class="zh">
-                        <b id="trustSellers">62</b> 位本地藏家入驻展馆
-                        <span class="sep">｜</span>
-                        <b id="trustItems">300+</b> 精选瓷器 · 古玉 · 钱币
-                    </span>
-                    <span class="en">
-                        <b id="trustSellersEn">62</b> collectors onboard
-                        <span class="sep">|</span>
-                        <b id="trustItemsEn">300+</b> curated pieces
-                    </span>
-                </div>
-
-                <div class="hero-guide">
-                    <span class="zh">搜你正在找的东西，或往下逛「今日发现」与「刚刚上新」</span>
-                    <span class="en">Find what you're searching for, or scroll for Today's Finds &amp; Just Listed</span>
-                </div>
                 <div class="search-box">
                     <input type="text" id="searchInput"
                            placeholder="试试搜「官窑 Neizao」「娘惹瓷 Nyonya Ware」「高古玉 Archaic Jade」「大清乾隆年制 Qianlong Mark」…"
@@ -1791,12 +1696,6 @@
 
                 <!-- 热门标签 + 朝代标签（硬核藏家搜索习惯） -->
                 <div class="hot-tags" id="hotTags">
-                    <button type="button" class="hot-tag hot-tag--era" data-kw="明清"><span class="zh">#明清陶瓷</span><span class="en">#Ming &amp; Qing</span></button>
-                    <button type="button" class="hot-tag hot-tag--era" data-kw="高古"><span class="zh">#高古玉</span><span class="en">#Archaic Jade</span></button>
-                    <button type="button" class="hot-tag hot-tag--era" data-kw="康熙"><span class="zh">#康熙</span><span class="en">#Kangxi</span></button>
-                    <button type="button" class="hot-tag hot-tag--era" data-kw="乾隆"><span class="zh">#乾隆</span><span class="en">#Qianlong</span></button>
-                    <button type="button" class="hot-tag hot-tag--era" data-kw="民国"><span class="zh">#民国</span><span class="en">#Republican</span></button>
-                    <span class="hot-tag-divider" aria-hidden="true">·</span>
                     <button type="button" class="hot-tag" data-kw="青花"><span class="zh">青花瓷</span><span class="en">Blue &amp; White</span></button>
                     <button type="button" class="hot-tag" data-kw="康熙通宝"><span class="zh">康熙通宝</span><span class="en">Kangxi Coin</span></button>
                     <button type="button" class="hot-tag" data-kw="和田玉"><span class="zh">和田玉</span><span class="en">Hetian Jade</span></button>
@@ -2696,25 +2595,6 @@
         }
 
         /* ============ 首屏信任标签动态数值 ============ */
-        function updateHeroTrust(listings) {
-            const ids = new Set();
-            (listings || []).forEach(function (it) {
-                const id = String(it.seller_id || it.sellerId || '').trim();
-                if (id) ids.add(id);
-            });
-            const sellers = Math.max(8, ids.size);
-            const items = (listings || []).length;
-            const itemsShown = items >= 100 ? (Math.floor(items / 100) * 100) + '+' : (items > 0 ? String(items) : '300+');
-            const zhSellers = document.getElementById('trustSellers');
-            const enSellers = document.getElementById('trustSellersEn');
-            const zhItems = document.getElementById('trustItems');
-            const enItems = document.getElementById('trustItemsEn');
-            if (zhSellers) zhSellers.textContent = sellers;
-            if (enSellers) enSellers.textContent = sellers;
-            if (zhItems) zhItems.textContent = itemsShown;
-            if (enItems) enItems.textContent = itemsShown;
-        }
-
         const SEATS_TOTAL = 88;
         const SEATS_BASELINE_ADMITTED = 5;
 
@@ -2751,7 +2631,6 @@
            ============================================================ */
         function applyListingData(data) {
             renderSeats(data.newListing);
-            updateHeroTrust(data.newListing);
 
             const tfgrid = document.getElementById('todayFindsGrid');
             if (tfgrid) {
@@ -3072,7 +2951,6 @@
                 diag.errors.push('demo：' + e3.message);
                 showLoadError();
                 renderSeats(null);
-                updateHeroTrust(null);
             }
             renderDebug();
         }

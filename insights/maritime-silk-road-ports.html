@@ -585,8 +585,9 @@
         <nav class="sidebar-nav">
             <a href="../index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">首页</span><span class="en">Home</span></a>
             <a href="../my/saved.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">我的收藏 · 关注</span><span class="en">Saved &amp; Followed</span></a>
+<div class="saved-hint" style="margin:-.15rem 0 .5rem 1.4rem;font-size:.64rem;color:#8a8178;letter-spacing:.02em;line-height:1.5;"><span class="zh">在您的设备本地保存，零数据追踪。</span><span class="en">Saved locally on your device. Zero data tracked.</span></div>
             <a href="../my/briefing.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">今日简报</span><span class="en">Today's Brief</span></a>
-            <a href="../index.html#daily-intel" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 捡漏情报</span><span class="en">· Insider Tips</span></a>
+            <a href="../index.html#daily-intel" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 释出动态</span><span class="en">· Curated Disposals</span></a>
             <a href="../index.html#today-finds" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 今日发现</span><span class="en">· Today's Finds</span></a>
             <a href="../index.html#new-listings" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 刚刚上新</span><span class="en">· Just Listed</span></a>
             <a href="../collection.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">藏品库</span><span class="en">Collection</span></a>
@@ -596,11 +597,10 @@
             <a href="../categories/coins.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 钱币</span><span class="en">· Coins</span></a>
             <a href="../categories/paintings.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 书画</span><span class="en">· Paintings &amp; Calligraphy</span></a>
             <a href="../categories/misc.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 杂项</span><span class="en">· Miscellaneous</span></a>
-            <a href="../sellers/index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">藏家展馆</span><span class="en">Collector Gallery</span></a>
+            <a href="../sellers/index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">私家藏馆</span><span class="en">Private Gallery</span></a>
             <a href="../insights.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">情报 / 知识</span><span class="en">Insights</span></a>
-            <a href="../tools/index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">工具</span><span class="en">Tools</span></a>
-            <a href="../tools/index.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 工具汇总首页</span><span class="en">· Tools Home</span></a>
-            <a href="../tools/year-since.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 年份距今计算器</span><span class="en">· Years-since-year Calculator</span></a>
+            <a href="../tools/index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">藏家工具包</span><span class="en">Collector's Toolkit</span></a>
+                        <a href="../tools/year-since.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 年份距今计算器</span><span class="en">· Years-since-year Calculator</span></a>
             <a href="../tools/ganzhi.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 干支公历换算器</span><span class="en">· Sexagenary-Gregorian Converter</span></a>
             <a href="../tools/era-lookup.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 古文化·朝代年代速查表</span><span class="en">· Culture &amp; Dynasty Era Lookup</span></a>
             <a href="../tools/currency-convert.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 拍卖藏品货币参考换算器</span><span class="en">· Currency Reference Converter</span></a>
@@ -1161,6 +1161,67 @@
 }
 .gd-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
+
+/*<<<gd-mobile-header-fix-2026-10-16>>> 移动端顶部导航适配（仅 <768px 生效，桌面端保持原样）*/
+:root{
+  --gd-header-h-m: 58px;
+  --gd-safe-top: env(safe-area-inset-top, 0px);
+  --gd-header-total-m: calc(var(--gd-header-h-m) + var(--gd-safe-top));
+}
+@media (max-width: 767px){
+  html, body { scroll-padding-top: calc(var(--gd-header-total-m) + 12px); }
+  body > header{
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    height: var(--gd-header-total-m) !important;
+    min-height: var(--gd-header-total-m) !important;
+    max-height: var(--gd-header-total-m) !important;
+    padding: var(--gd-safe-top) 5% 0 !important;
+    margin: 0 !important;
+    align-items: center !important;
+    z-index: 80 !important;
+    -webkit-transition: height .28s ease, padding .28s ease, background-color .28s ease, box-shadow .28s ease;
+    transition: height .28s ease, padding .28s ease, background-color .28s ease, box-shadow .28s ease;
+  }
+  body > header .brand-logo-img{
+    height: 30px !important;
+    width: auto !important;
+    max-width: 76px !important;
+    opacity: 1 !important;
+    -webkit-transition: height .28s ease, max-width .28s ease;
+    transition: height .28s ease, max-width .28s ease;
+  }
+  body > header ~ main{
+    padding-top: calc(var(--gd-header-total-m) + 12px) !important;
+  }
+}
+/*<<</gd-mobile-header-fix-2026-10-16>>>*/
+
+/*<<<gd-header-logo-fit-2026-10-16>>> 窄屏 LOGO 区完整性修复（仅 ≤480px 生效，桌面端保持原样）*/
+@media (max-width: 480px){
+  body > header { padding-left: 3% !important; padding-right: 3% !important; gap: .45rem !important; }
+  body > header > div:first-child { gap: .45rem !important; }
+  body > header .brand-logo-img { height: 28px !important; }
+  .brand { gap: .45rem !important; }
+  .brand-zh, .brand-en { font-size: min(1.05rem, 4.2vw) !important; }
+  .brand-text small { font-size: .58rem !important; letter-spacing: .05em !important; }
+  .header-right { gap: .4rem !important; }
+}
+@media (max-width: 360px){
+  body > header { padding-left: 2% !important; padding-right: 2% !important; gap: .35rem !important; }
+  body > header > div:first-child { gap: .35rem !important; }
+  .brand { gap: .35rem !important; }
+  .header-right { gap: .3rem !important; }
+  .brand-zh, .brand-en { font-size: min(1.05rem, 4vw) !important; }
+  .brand-text small { display: none !important; }
+  .menu-toggle { width: 40px !important; height: 40px !important; }
+  .gd-share-btn { min-width: 40px !important; min-height: 40px !important; padding: .35rem !important; }
+  .lang-btn { min-width: 40px !important; min-height: 40px !important; padding: .35rem .5rem !important; }
+}
+/*<<</gd-header-logo-fit-2026-10-16>>>*/
 </style>
 <script>
 /* 分享：Web Share API（原生分享面板）→ navigator.clipboard → execCommand 三级降级 */

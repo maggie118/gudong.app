@@ -381,7 +381,7 @@
         .item-card { display: flex; flex-direction: column; background: var(--color-white); border: 1px solid var(--color-border); border-radius: 8px; overflow: hidden; text-decoration: none; color: inherit; transition: .4s cubic-bezier(.25,.1,.25,1); }
         .item-card:hover {  box-shadow: 0 6px 18px rgba(37,34,30,.10); border-color: var(--color-primary); }
         .item-image { aspect-ratio: 1 / 1; background: var(--color-primary-light); overflow: hidden; }
-        .item-image img { width: 100%; height: 100%; object-fit: cover; display: block; transition: .4s cubic-bezier(.25,.1,.25,1); }
+        .item-image img { width: 100%; height: 100%; object-fit: contain; display: block; transition: .4s cubic-bezier(.25,.1,.25,1); }
         .item-card:hover .item-image img { transform: scale(1.04); }
         .item-body { padding: .75rem .9rem .9rem; flex: 1; display: flex; flex-direction: column; }
         .item-title { font-size: .92rem; font-weight: 700; color: var(--color-text); margin-bottom: .25rem; line-height: 1.4; }
@@ -395,7 +395,7 @@
         /* ---------- item detail page ---------- */
         .item-detail { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
         .item-detail-image { aspect-ratio: 1 / 1; border-radius: 10px; overflow: hidden; background: var(--color-primary-light); }
-        .item-detail-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .item-detail-image img { width: 100%; height: 100%; object-fit: contain; display: block; }
         .item-detail-meta { font-size: .88rem; color: var(--color-text-secondary); margin-bottom: .5rem; }
         .item-detail-title { font-family: Georgia, "Songti SC", "STSong", serif; font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 600; margin-bottom: .7rem; }
         .item-detail-price { font-size: 1.4rem; font-weight: 700; color: var(--color-primary); margin-bottom: 1.2rem; }
@@ -471,8 +471,9 @@
         <nav class="sidebar-nav">
             <a href="../index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">首页</span><span class="en">Home</span></a>
             <a href="../my/saved.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">我的收藏 · 关注</span><span class="en">Saved &amp; Followed</span></a>
+<div class="saved-hint" style="margin:-.15rem 0 .5rem 1.4rem;font-size:.64rem;color:#8a8178;letter-spacing:.02em;line-height:1.5;"><span class="zh">在您的设备本地保存，零数据追踪。</span><span class="en">Saved locally on your device. Zero data tracked.</span></div>
             <a href="../my/briefing.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">今日简报</span><span class="en">Today's Brief</span></a>
-            <a href="../index.html#daily-intel" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 捡漏情报</span><span class="en">· Insider Tips</span></a>
+            <a href="../index.html#daily-intel" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 释出动态</span><span class="en">· Curated Disposals</span></a>
             <a href="../index.html#today-finds" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 今日发现</span><span class="en">· Today's Finds</span></a>
             <a href="../index.html#new-listings" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 刚刚上新</span><span class="en">· Just Listed</span></a>
             <a href="../collection.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">藏品库</span><span class="en">Collection</span></a>
@@ -484,9 +485,8 @@
             <a href="../categories/misc.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 杂项</span><span class="en">· Miscellaneous</span></a>
             <a href="../sellers/index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">藏家展馆</span><span class="en">Collector Gallery</span></a>
             <a href="../insights.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">情报 / 知识</span><span class="en">Insights</span></a>
-            <a href="../tools/index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">工具</span><span class="en">Tools</span></a>
-            <a href="../tools/index.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 工具汇总首页</span><span class="en">· Tools Home</span></a>
-            <a href="../tools/year-since.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 年份距今计算器</span><span class="en">· Years-since-year Calculator</span></a>
+            <a href="../tools/index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">藏家工具包</span><span class="en">Collector's Toolkit</span></a>
+                        <a href="../tools/year-since.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 年份距今计算器</span><span class="en">· Years-since-year Calculator</span></a>
             <a href="../tools/ganzhi.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 干支公历换算器</span><span class="en">· Sexagenary-Gregorian Converter</span></a>
             <a href="../tools/era-lookup.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 古文化·朝代年代速查表</span><span class="en">· Culture &amp; Dynasty Era Lookup</span></a>
             <a href="../tools/currency-convert.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 拍卖藏品货币参考换算器</span><span class="en">· Currency Reference Converter</span></a>
@@ -832,7 +832,7 @@
 window.gdSharePage = function () {
     var lang = (document.body.dataset && document.body.dataset.lang) || "zh";
     window.gdShare({
-        title: lang === "zh" ? "古董圈 Gudong.app · 新加坡古董捡漏情报站" : "Gudong.app · Singapore Antiques Daily Radar",
+        title: lang === "zh" ? "古董圈 Gudong.app · 新加坡古董释出动态站" : "Gudong.app · Singapore Antiques Daily Radar",
         text: lang === "zh" ? "每天 5 分钟，看看今天有什么漏可捡" : "5 minutes a day. See what's undervalued today."
     });
 };

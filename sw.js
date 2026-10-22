@@ -1,4 +1,11 @@
 /* 古董圈 Gudong · Service Worker
+ * 2026-10-22：v40 → v41
+ * - 首屏 hero 文案改版：主标题「传世重器，静候知音」、副标题「高古遗珍 · 名窑佳器 · 私人藏家网络」、
+ *   信任行去除 emoji 改为「免注册 · 不留存 · 端到端私密直连」，正文段落重写
+ * - 全站术语统一：左侧导航「藏家展馆 / Collector Gallery」→「藏家博物馆 / Collector Museum」
+ *   （含 826 处侧栏、pricing/sellers 列表页 SEO 元标签、4 个藏家主页）
+ * - 术语统一：「私家博物馆」→「私家藏馆」（藏家页 title、分享文案、面包屑）
+ * - 提升缓存版本号，强制预缓存 index.html 刷新，离线用户也能拿到新首屏
  * 2026-10-15：v27 → v28
  * - 修复致命 bug：文件内 58 处 U+2011（非断行连字符）混入路径字符串，
  *   导致预缓存清单中 21 个 URL（14 藏品页 + item-chat/seller-inbox.js + 4 图标）
@@ -45,7 +52,7 @@
  *   seller 徽章/标签字号提升
  * - v8 → v9：配合首页改版提升缓存版本号
  */
-const CACHE_NAME = 'antique-collection-v39';
+const CACHE_NAME = 'antique-collection-v41';
 // 预缓存清单：核心页面 + 常用图标 + 占位图
 // 注意：改用逐个 cache.add，单个 404 不会导致整个 install 失败
 const PRECACHE_ASSETS = [

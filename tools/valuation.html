@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="zh-SG">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>Chinese Antique Valuation Estimate Tool｜古董在线简易估值参考｜Gudong.app</title>
+<meta name="description" content="Chinese antique valuation estimate tool 与古董在线简易估值：按品类、年代、完整度与工艺级别选择，得出藏家心理预期的参考市场区间与行情趋势说明，附历史拍场落槌价参照与逐项系数拆解。中英双语，纯前端；仅市场参考，不作为鉴定、估价或法律依据。">
+<meta name="keywords" content="chinese antique valuation estimate tool,antique valuation reference,chinese antique price guide,antique market value estimator,古董在线简易估值,瓷器估值参考,古董价格区间,明清瓷器估价,古玩心理价位,auction price reference singapore">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<link rel="canonical" href="https://www.gudong.app/tools/valuation">
+<link rel="alternate" hreflang="zh-SG" href="https://www.gudong.app/tools/valuation" />
+<link rel="alternate" hreflang="en-SG" href="https://www.gudong.app/tools/valuation" />
+<link rel="alternate" hreflang="x-default" href="https://www.gudong.app/tools/valuation" />
+<meta property="og:site_name" content="Gudong.app">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.gudong.app/tools/valuation">
+<meta property="og:title" content="简易估值参考｜Antique Market Valuation Reference">
+<meta property="og:description" content="按品类、年代、完整度与工艺级别估算参考市场区间与行情趋势。Reference price range & trend for Asian antiques — not an appraisal.">
+<meta property="og:image" content="https://www.gudong.app/og-cover.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta property="og:locale" content="en_SG">
+<meta property="og:locale:alternate" content="zh_SG">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Antique Market Valuation Reference | Gudong.app">
+<meta name="twitter:description" content="Estimate a reference market range by category, era, condition and craft level. Not an appraisal.">
+<meta name="twitter:image" content="https://www.gudong.app/og-cover.png">
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"WebApplication",
+  "name":"Antique Market Valuation Reference | 简易估值参考",
+  "description":"按品类、年代、完整度与工艺级别给出参考市场区间与行情趋势的免费中英双语工具。仅市场参考，不构成鉴定、估价或法律依据。",
+  "url":"https://www.gudong.app/tools/valuation",
+  "applicationCategory":"UtilitiesApplication",
+  "operatingSystem":"All (Web App)",
+  "publisher":{"@id":"https://www.gudong.app/#organization"}
+}
+</script>
+<link rel="icon" type="image/png" sizes="16x16" href="../assets/icons/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/icons/favicon-32x32.png">
+<link rel="manifest" href="../manifest.json">
+<meta name="theme-color" content="#7A4E33">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="古董圈">
+<link rel="apple-touch-icon" href="../assets/icons/icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Noto+Serif+SC:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --color-bg:#F5F2EC; --color-surface:#FFFFFF; --color-white:#FFFFFF;
+  --color-border:#E4DED5; --color-primary:#7A4E33; --color-primary-dark:#5C3A26;
+  --color-primary-light:#F1E8DF; --color-text:#25221E; --color-text-secondary:#5C564F;
+  --color-text-muted:#A49D94; --color-gold:#9C7A3A; --color-gold-soft:rgba(156,122,58,.10);
+  --color-bronze-muted:#9C8558; --color-qianjinzong:#948268;
+  --card-radius:12px; --btn-radius:8px; --dur:.26s; --ease:cubic-bezier(.25,.1,.25,1);
+  --font-serif:"Playfair Display","Noto Serif SC","Songti SC","STSong",Georgia,serif;
+            --font-sans: "Inter","Geist","Inter Display","Microsoft YaHei","PingFang SC","Helvetica Neue",Helvetica,Arial,sans-serif;
+  --font-display:"Inter","Geist","Inter Display","Microsoft YaHei","PingFang SC","Helvetica Neue",Helvetica,Arial,sans-serif;
+  --font-zh-sans:"Microsoft YaHei","PingFang SC","Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+h1,h2,h3{font-family:var(--font-serif)}
+*{margin:0;padding:0;box-sizing:border-box;font-family:"PingFang SC","Microsoft YaHei","Helvetica Neue",Helvetica,Arial,sans-serif}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--color-bg);color:var(--color-text);line-height:1.65;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+a{color:var(--color-primary);text-decoration:none}
+a:hover{text-decoration:underline;text-underline-offset:3px}
+button,input,select{font:inherit;color:inherit}
+[data-lang="en"] .zh{display:none}
+[data-lang="zh"] .en{display:none}
+
+/* ---------- Header ---------- */
+header{background:rgba(255,255,255,.96);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);color:var(--color-text);padding:0 5%;height:68px;display:flex;align-items:center;justify-content:space-between;gap:1.5rem;border-bottom:1px solid var(--color-border);position:sticky;top:0;z-index:50}
+.brand { display: flex; flex-direction: row; align-items: center; gap: .7rem; line-height: 1; flex-shrink: 1; text-decoration: none; color: inherit; min-width: 0; }
+.brand:hover{text-decoration:none}
+.brand-logo-img { height: 38px; width: auto; display: block; object-fit: contain; flex-shrink: 0; }
+.brand-line1 { display: flex; align-items: baseline; gap: .32rem; }
+        .brand-text { display: flex; flex-direction: column; justify-content: center; min-width: 0; line-height: 1.15; letter-spacing: -.005em; overflow: hidden; white-space: nowrap;}
+.brand-zh { font-size: 1.4rem; font-weight: 700; letter-spacing: .02em; line-height: 1.15; color: var(--color-primary-dark); white-space: nowrap; font-family: var(--font-serif); }
+        .brand-en { font-size: 1.4rem; font-weight: 600; letter-spacing: -.012em; line-height: 1.15; color: var(--color-primary-dark); white-space: nowrap; font-family: var(--font-sans); }
+.brand-zh { font-family:var(--font-zh-sans);font-weight:700 }
+        .sidebar-brand .logo-zh { font-family:var(--font-zh-sans);font-weight:700 }
+.brand-en { font-family:var(--font-display);font-weight:600;letter-spacing:normal }
+        .sidebar-brand .logo-en { font-family:var(--font-display);font-weight:600;letter-spacing:normal }
+.brand-text small { display: block; color: var(--color-qianjinzong); font-family: var(--font-sans); font-weight: 500; font-size: .68rem; letter-spacing: .14em; margin-top: 2px; text-transform: uppercase; }
+.brand-text small { font-family:var(--font-display);font-style:normal }
+        .sidebar-brand .logo-tagline { font-family:var(--font-display);font-style:normal }
+.header-right{display:flex;align-items:center;gap:.8rem;flex-shrink:0}
+.lang-btn{border:1px solid var(--color-border);background:transparent;color:var(--color-text-secondary);padding:.55rem .85rem;min-height:44px;border-radius:6px;cursor:pointer;font-size:.75rem;letter-spacing:.04em;transition:.4s var(--ease)}
+.lang-btn:hover{border-color:var(--color-primary);color:var(--color-primary);background:var(--color-primary-light)}
+.menu-toggle{width:44px;height:44px;border:1px solid var(--color-border);background:transparent;border-radius:8px;font-size:1.05rem;color:var(--color-text);cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:.4s var(--ease)}
+.menu-toggle:hover{border-color:var(--color-primary);color:var(--color-primary);background:var(--color-primary-light)}
+
+/* ---------- Sidebar ---------- */
+.sidebar-overlay{position:fixed;inset:0;background:rgba(20,17,14,.4);opacity:0;pointer-events:none;transition:opacity .25s ease;z-index:90}
+.sidebar-overlay.show{opacity:1;pointer-events:auto}
+.sidebar{position:fixed;top:0;left:0;height:100vh;height:100dvh;width:264px;max-width:78vw;background:var(--color-white);box-shadow:4px 0 24px rgba(37,34,30,.18);transform:translateX(-100%);transition:transform .3s ease;z-index:95;overflow-y:auto;-webkit-overflow-scrolling:touch;padding-bottom:2rem}
+.sidebar.open{transform:translateX(0)}
+.sidebar-toggle-inner{display:block;width:100%;padding:.9rem 0;background:transparent;border:none;border-bottom:1px solid var(--color-border);font-size:1.15rem;color:var(--color-text-secondary);cursor:pointer;text-align:center}
+.sidebar-toggle-inner:hover{color:var(--color-primary)}
+.sidebar-brand{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.1rem;padding:1.1rem 0;font-weight:700;color:var(--color-text);border-bottom:1px solid var(--color-border)}
+.sidebar-brand .logo-zh{font-size:1.05rem}
+.sidebar-brand .logo-en{font-size:1.05rem;letter-spacing:normal}
+.sidebar-brand .logo-tagline{font-size:.62rem;letter-spacing:.16em;color:var(--color-qianjinzong);text-transform:uppercase}
+.sidebar-nav{display:flex;flex-direction:column;padding:.3rem 0}
+.sidebar-link{padding:.85rem 1.4rem;color:var(--color-text);text-decoration:none;font-size:.95rem;transition:.4s var(--ease)}
+/* hover / active 显式去掉下划线 */
+.sidebar-link:hover{background:var(--color-primary-light);color:var(--color-primary);text-decoration:none!important}
+.sidebar-link.active{background:var(--color-primary-light);color:var(--color-primary);font-weight:600;text-decoration:none!important}
+.sidebar-sub{display:block;padding:.55rem 1.4rem .55rem 2.2rem;color:var(--color-text-secondary);text-decoration:none;font-size:.88rem;transition:.4s var(--ease)}
+/* hover / active 显式去掉下划线 */
+.sidebar-sub:hover{color:var(--color-primary);background:var(--color-primary-light);text-decoration:none!important}
+.sidebar-sub.active{color:var(--color-primary);font-weight:600;background:var(--color-primary-light);text-decoration:none!important}
+.sidebar-lang-btn{display:flex;align-items:center;justify-content:center;gap:.4rem;width:calc(100% - 2.8rem);margin:1rem 1.4rem .8rem;padding:.62rem .9rem;border:1px solid var(--color-border);border-radius:12px;background:var(--color-white);color:var(--color-text-secondary);font-family:inherit;font-size:.9rem;font-weight:600;cursor:pointer;transition:.4s var(--ease)}
+.sidebar-lang-btn:hover{border-color:var(--color-primary);color:var(--color-primary);background:var(--color-primary-light)}
+
+/* ---------- Page ---------- */
+.container{max-width:820px;margin:0 auto;padding:3.2rem 5% 4rem;background:transparent;min-height:80vh}
+.breadcrumb{font-size:.82rem;color:var(--color-text-secondary);margin-bottom:1.4rem}
+.breadcrumb a{color:var(--color-primary);text-decoration:none}
+.breadcrumb a:hover{text-decoration:underline}
+.breadcrumb .current{color:var(--color-text-muted)}
+.hero-clean{text-align:center;max-width:640px;margin:0 auto 1.6rem;padding:1.4rem 0 .5rem}
+.hero-eyebrow{font-family:Georgia,"Songti SC","STSong",serif;font-style:italic;font-size:.92rem;color:var(--color-bronze-muted);letter-spacing:.01em;margin-bottom:.9rem}
+.hero-title-main{font-family:Georgia,"Songti SC","STSong",serif;font-size:clamp(1.7rem,4.2vw,2.5rem);font-weight:600;color:var(--color-text);line-height:1.35;margin-bottom:1rem}
+.hero-desc{font-size:.95rem;color:var(--color-text-secondary);margin-bottom:1.5rem;line-height:1.6}
+
+.notice{max-width:680px;margin:0 auto 1.5rem;padding:1.05rem 1.2rem;border-left:4px solid var(--color-gold);border-radius:0 10px 10px 0;background:var(--color-primary-light);color:var(--color-text-secondary);font-size:.88rem;line-height:1.72}
+.notice b{display:block;color:var(--color-primary-dark);margin-bottom:.3rem;font-size:.92rem;font-weight:600}
+.notice strong{color:var(--color-primary-dark);font-weight:600}
+
+.panel{background:var(--color-surface);border:1px solid var(--color-border);border-radius:16px;box-shadow:0 4px 16px rgba(36,31,26,.06);padding:clamp(1.5rem,4vw,2.1rem);max-width:680px;margin:0 auto 1.5rem}
+.panel h2{font-size:1.22rem;margin:0 0 1.35rem;color:var(--color-primary-dark);letter-spacing:-.012em}
+.field{margin:0 0 1.3rem}
+.field label{display:block;font-weight:600;font-size:.88rem;margin:0 0 .45rem;color:var(--color-text)}
+.field-help{display:block;font-size:.8rem;color:#81796f;margin-top:.4rem;line-height:1.55}
+input,select{width:100%;height:50px;padding:0 .95rem;border:1px solid var(--color-border);border-radius:8px;background:#fff;color:var(--color-text);font-size:.95rem;transition:border-color var(--dur) var(--ease),box-shadow var(--dur) var(--ease);appearance:none;-webkit-appearance:none}
+select{background-image:url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath fill='none' stroke='%237A4E33' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round' d='M2 2l4 4 4-4'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 1rem center;background-size:11px 8px;padding-right:2.5rem}
+input:focus,select:focus{outline:none;border-color:var(--color-gold);box-shadow:0 0 0 4px rgba(156,122,58,.16)}
+input::placeholder{color:#A8A096}
+
+.result{margin-top:1.4rem;padding:1.4rem 1.2rem;border-radius:12px;background:var(--color-primary-light);text-align:center}
+.result[hidden]{display:none}
+.result strong{display:block;color:var(--color-primary);font-family:var(--font-serif);font-size:1.85rem;font-weight:600;letter-spacing:-.018em;line-height:1.2}
+.result p{margin:.5rem 0 0;color:var(--color-text-secondary);font-size:.92rem;line-height:1.6}
+.result p.era-ago{color:var(--color-primary);font-weight:600;font-size:1rem;margin-top:.65rem;font-variant-numeric:tabular-nums;letter-spacing:-.008em}
+.result .era-actions{display:flex;flex-wrap:wrap;gap:.55rem;justify-content:center;margin-top:1.15rem}
+.result .btn-link{display:inline-block;width:auto;padding:.7rem 1.35rem;border-radius:999px;background:var(--color-primary);color:#fff;font-weight:600;text-decoration:none;font-size:.9rem;letter-spacing:.005em;transition:background var(--dur) var(--ease)}
+.result .btn-link:hover{background:var(--color-primary-dark);text-decoration:none}
+.result .btn-link[hidden]{display:none}
+.era-ganzhi-note{margin-top:1rem!important;font-size:.82rem!important;color:var(--color-text-secondary)!important;line-height:1.65;padding-top:.85rem;border-top:1px dashed rgba(92,58,38,.18)}
+.era-ganzhi-note[hidden]{display:none}
+
+.disclaimer{max-width:680px;margin:1.4rem auto;padding:1.05rem 1.2rem;border-left:4px solid var(--color-gold);border-radius:0 10px 10px 0;background:var(--color-primary-light);color:var(--color-text-secondary);font-size:.86rem;line-height:1.72}
+.disclaimer b{display:block;color:var(--color-text);margin-bottom:.5rem;font-size:.9rem;font-weight:600}
+.disclaimer ol{margin:0;padding-left:1.2rem}
+.disclaimer li{margin:.25rem 0}
+.disclaimer strong{color:var(--color-text);font-weight:600}
+
+.related{max-width:680px;margin:2rem auto;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.85rem}
+.related a{display:block;padding:1.1rem 1.15rem;border:1px solid var(--color-border);border-radius:12px;background:#fff;text-decoration:none;color:var(--color-text);font-weight:600;font-size:.95rem;letter-spacing:-.005em;transition:all var(--dur) var(--ease)}
+.related a:hover{border-color:var(--color-gold);background:#FCFAF7;text-decoration:none}
+.related small{display:block;font-weight:400;color:var(--color-text-secondary);margin-top:.25rem;font-size:.8rem;line-height:1.55}
+
+.cite{max-width:680px;margin:2rem auto 0;padding-top:1.3rem;border-top:1px solid var(--color-border);color:var(--color-text-secondary);font-size:.86rem;line-height:1.7}
+.cite a{overflow-wrap:anywhere;word-break:break-word}
+
+/* ---------- Footer ---------- */
+footer{text-align:center;padding:2.2rem 5% 1.8rem;background:var(--color-white);color:var(--color-text-secondary);margin-top:1rem;font-size:.78rem;border-top:1px solid var(--color-border)}
+.footer-nav{display:flex;flex-wrap:wrap;justify-content:center;gap:1.3rem;margin-bottom:1.2rem}
+.footer-nav a{color:var(--color-text-secondary);text-decoration:none;font-size:.82rem}
+.footer-nav a:hover{color:var(--color-primary)}
+.footer-brand{font-weight:700;font-size:.84rem;color:#5c564f;margin-bottom:.35rem}
+.footer-disclaimer{max-width:680px;margin:0 auto 1.1rem;font-size:.78rem;line-height:1.65;color:#8a8178}
+.footer-copyright{margin-bottom:.3rem}
+
+@media (max-width:820px){header{height:62px;gap:.6rem}.container{padding-top:2.4rem}}
+@media (max-width:640px){.brand-logo-img { height: 30px; width: auto; display: block; object-fit: contain; flex-shrink: 0; }}
+@media (max-width:600px){.result strong{font-size:1.6rem}.result .era-actions{flex-direction:column}.result .btn-link{width:100%;text-align:center}.related{grid-template-columns:1fr;gap:.65rem}.related a{padding:1rem}}
+@media (max-width:560px){.brand-zh { font-size: 1.15rem; font-family: var(--font-serif); }
+        .brand-en { font-size: 1.15rem; font-family: var(--font-sans); font-weight: 600; letter-spacing: -.012em; }.container{padding:2rem 4.5% 3rem}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;scroll-behavior:auto!important;animation:none!important}}
+</style>
+</head>
+<body data-lang="zh">
+
+<header>
+  <div style="display:flex;align-items:center;gap:.9rem;min-width:0;">
+    <button class="menu-toggle" onclick="openSidebar()" aria-label="menu" aria-expanded="false" id="menuToggle">☰</button>
+    <a href="../index.html" class="brand" aria-label="古董圈 Gudong 首页">
+                <img src="../assets/icons/logo-mark.png" alt="古董圈 Gudong" class="brand-logo-img" onerror="this.style.display='none'">
+                <span class="brand-text">
+                    <span class="brand-line1"><span class="brand-zh">古董圈</span> <span class="brand-en">Gudong</span></span>
+                    <small>Collectors' Network</small>
+                </span>
+            </a>
+  </div>
+  <div class="header-right">
+    <button type="button" class="gd-share-btn" onclick="gdSharePage()" aria-label="分享 / Share" title="分享 / Share"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92-1.31-2.92-2.92-2.92z"/></svg></button>
+    <button class="lang-btn" onclick="toggleLang()">EN</button>
+  </div>
+</header>
+
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+<aside class="sidebar" id="sidebar">
+  <button class="sidebar-toggle-inner" onclick="closeSidebar()" aria-label="close menu">☰</button>
+  <div class="sidebar-brand">
+    <span class="logo-zh">古董圈 <span class="logo-en">Gudong</span></span>
+    <span class="logo-tagline">Collectors' Network</span>
+  </div>
+  <nav class="sidebar-nav">
+            <a href="../index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">首页</span><span class="en">Home</span></a>
+            <a href="../my/saved.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">我的收藏 · 关注</span><span class="en">Saved &amp; Followed</span></a>
+<div class="saved-hint" style="margin:-.15rem 0 .5rem 1.4rem;font-size:.64rem;color:#8a8178;letter-spacing:.02em;line-height:1.5;"><span class="zh">在您的设备本地保存，零数据追踪。</span><span class="en">Saved locally on your device. Zero data tracked.</span></div>
+            <a href="../my/briefing.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">今日简报</span><span class="en">Today's Brief</span></a>
+            <a href="../index.html#daily-intel" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 释出动态</span><span class="en">· Curated Disposals</span></a>
+            <a href="../index.html#today-finds" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 今日发现</span><span class="en">· Today's Finds</span></a>
+            <a href="../index.html#new-listings" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 刚刚上新</span><span class="en">· Just Listed</span></a>
+            <a href="../collection.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">藏品库</span><span class="en">Collection</span></a>
+            <a href="../categories/porcelain.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 瓷器</span><span class="en">· Porcelain</span></a>
+            <a href="../categories/jade.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 玉器</span><span class="en">· Jade</span></a>
+            <a href="../categories/bronze.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 铜器</span><span class="en">· Bronzes</span></a>
+            <a href="../categories/coins.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 钱币</span><span class="en">· Coins</span></a>
+            <a href="../categories/paintings.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 书画</span><span class="en">· Paintings &amp; Calligraphy</span></a>
+            <a href="../categories/misc.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 杂项</span><span class="en">· Miscellaneous</span></a>
+            <a href="../sellers/index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">私家藏馆</span><span class="en">Private Gallery</span></a>
+            <a href="../insights.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">情报 / 知识</span><span class="en">Insights</span></a>
+            <a href="../tools/index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">藏家工具包</span><span class="en">Collector's Toolkit</span></a>
+                        <a href="../tools/year-since.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 年份距今计算器</span><span class="en">· Years-since-year Calculator</span></a>
+            <a href="../tools/ganzhi.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 干支公历换算器</span><span class="en">· Sexagenary-Gregorian Converter</span></a>
+            <a href="../tools/era-lookup.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 古文化·朝代年代速查表</span><span class="en">· Culture &amp; Dynasty Era Lookup</span></a>
+            <a href="../tools/currency-convert.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 拍卖藏品货币参考换算器</span><span class="en">· Currency Reference Converter</span></a>
+            <a href="../tools/mark-lookup.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 瓷器底款快查</span><span class="en">· Porcelain Mark &amp; Seal Lookup</span></a>
+            <a href="../tools/valuation.html" class="sidebar-sub active" onclick="closeSidebar()"><span class="zh">· 简易估值参考</span><span class="en">· Market Valuation Reference</span></a>
+            <a href="../about.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">关于我们</span><span class="en">About</span></a>
+            <button type="button" class="sidebar-lang-btn" onclick="toggleLang()" aria-label="Switch language"><span class="zh">🌐 English</span><span class="en">🌐 中文</span></button>
+        </nav>
+</aside>
+
+<main class="container">
+  <nav class="breadcrumb" aria-label="breadcrumb">
+    <a href="../index.html"><span class="zh">首页</span><span class="en">Home</span></a>
+    <span> / </span>
+    <a href="../tools/index.html"><span class="zh">藏家工具包</span><span class="en">Collector's Toolkit</span></a>
+    <span> / </span>
+    <span class="current"><span class="zh">简易估值参考</span><span class="en">Market Valuation Reference</span></span>
+  </nav>
+
+  <section class="hero-clean">
+    <div class="hero-eyebrow"><span class="zh">估值参考工具</span><span class="en">Valuation Reference</span></div>
+    <div class="hero-title-main">
+      <span class="zh">简易估值参考</span>
+      <span class="en">Market Valuation Reference</span>
+    </div>
+    <div class="hero-desc">
+      <span class="zh">买卖前先建立合理的心理价位。按品类、年代、完整度与工艺级别选择，得出参考市场区间与行情趋势。</span>
+      <span class="en">Set a realistic price expectation before buying or selling. Pick category, era, condition and craft level to see a reference range and trend.</span>
+    </div>
+  </section>
+
+  <aside class="notice" aria-label="Scope notice">
+    <b><span class="zh">使用范围提示</span><span class="en">Scope notice</span></b>
+    <span class="zh">本工具基于<strong>品类基准价 × 年代 / 完整度 / 工艺系数</strong>的简化模型，只帮你建立<strong>心理预期区间</strong>。同一器物因来源、品相、市场时点差异巨大，<strong>不能代替专业估价或鉴定</strong>。</span>
+    <span class="en">This tool uses a simplified <strong>category base × era / condition / craft factor</strong> model to set a <strong>psychological price band</strong>. Real prices vary hugely by provenance, condition and timing; <strong>it cannot replace a professional appraisal</strong>.</span>
+  </aside>
+
+  <section class="panel" aria-labelledby="val-title">
+    <h2 id="val-title"><span class="zh">① 选择评估维度</span><span class="en">① Choose the factors</span></h2>
+    <div class="field">
+      <label for="catSel"><span class="zh">品类</span><span class="en">Category</span></label>
+      <select id="catSel"></select>
+    </div>
+    <div class="field">
+      <label for="eraSel"><span class="zh">年代</span><span class="en">Era</span></label>
+      <select id="eraSel"></select>
+    </div>
+    <div class="field">
+      <label for="condSel"><span class="zh">完整度</span><span class="en">Condition</span></label>
+      <select id="condSel"></select>
+    </div>
+    <div class="field">
+      <label for="craftSel"><span class="zh">工艺级别</span><span class="en">Craft level</span></label>
+      <select id="craftSel"></select>
+    </div>
+
+    <div class="result" id="valResult" aria-live="polite" hidden>
+      <strong><span class="zh">参考市场区间</span><span class="en">Reference market range (SGD)</span></strong>
+      <div class="mark-badge" id="valRange"></div>
+      <p id="valTrend"></p>
+      <div class="val-breakdown" id="valBreakdown"></div>
+      <p id="valAuction"></p>
+      <p class="mark-fake" id="valFormula"></p>
+    </div>
+  </section>
+
+  <aside class="disclaimer">
+    <b><span class="zh">免责声明</span><span class="en">Disclaimer</span></b>
+    <span class="zh">
+      <ol>
+        <li>本工具为<strong>简化心理预期模型</strong>，非实时行情、非成交记录，结果仅供<strong>建立价格预期</strong>。</li>
+        <li><strong>不作为官方鉴定、专业估价或法律依据</strong>，不承诺任何成交价。</li>
+        <li>来源（Provenance）、流传有序、稀有度与实物品相会使实际价格大幅偏离区间，重要藏品请咨询合资格专家或独立顾问。</li>
+        <li>历史拍场价格为<strong>同类粗略参照</strong>，受拍卖行、地区与币种影响，不代表当前市场价。</li>
+      </ol>
+    </span>
+    <span class="en">
+      <ol>
+        <li>This is a <strong>simplified expectation model</strong>, not live market data or transaction records; results are for <strong>setting a price band</strong>.</li>
+        <li><strong>Not an official authentication, professional appraisal or legal basis</strong>; no transaction price is guaranteed.</li>
+        <li>Provenance, publication, rarity and actual condition can move the price far outside the band. Consult qualified experts or an independent advisor for important pieces.</li>
+        <li>Auction price references are <strong>rough comparables</strong>, vary by house, region and currency, and are not current market prices.</li>
+      </ol>
+    </span>
+  </aside>
+
+  <nav class="related" aria-label="Related links">
+    <a href="mark-lookup.html"><span class="zh">瓷器底款快查 →</span><span class="en">Porcelain Mark Lookup →</span><small><span class="zh">先辨款识再估值</span><span class="en">Check the mark first</span></small></a>
+    <a href="currency-convert.html"><span class="zh">拍卖货币换算 →</span><span class="en">Currency Converter →</span><small><span class="zh">SGD / USD / HKD 换算</span><span class="en">Convert across currencies</span></small></a>
+    <a href="../categories/porcelain.html"><span class="zh">瓷器分类 →</span><span class="en">Porcelain collection →</span><small><span class="zh">参考真实上架藏品</span><span class="en">See real listings</span></small></a>
+    <a href="../pricing.html#collector-services"><span class="zh">付费顾问意见 →</span><span class="en">Paid expert opinion →</span><small><span class="zh">需要更权威的估价</span><span class="en">Need a formal opinion</span></small></a>
+    <a href="../tools/index.html"><span class="zh">返回藏家工具包 →</span><span class="en">Back to Collector's Toolkit →</span><small><span class="zh">古董圈收藏参考工具合集</span><span class="en">All collecting reference tools</span></small></a>
+  </nav>
+
+  <div class="cite">
+    <span class="zh">引用提示：欢迎引用并链接本工具：<a href="https://www.gudong.app/tools/valuation">gudong.app/tools/valuation</a>。</span>
+    <span class="en">Citation: If you reference this tool, please link to <a href="https://www.gudong.app/tools/valuation">gudong.app/tools/valuation</a>.</span>
+  </div>
+</main>
+
+<style>
+        /* 2026-10-09：footer 品牌区/免责声明/版权（全站统一·精简版） */
+        .footer-brand { font-weight: 700; font-size: .84rem; color: #5c564f; margin-bottom: .35rem; }
+        .footer-disclaimer { max-width: 680px; margin: 0 auto 1.1rem; font-size: .78rem; line-height: 1.65; color: #8a8178; }
+        .footer-copyright { margin-bottom: .3rem; }
+        .mark-badge { font-family: Georgia,"Songti SC","STSong",serif; font-size: clamp(1.6rem,5vw,2.2rem); letter-spacing:.04em; color:#5C3A26; background:#F1E8DF; border:1px solid #E4DED5; border-radius:10px; padding:.8rem 1rem; margin:.9rem 0; text-align:center; font-weight:600; }
+        .mark-fake { background:#FBF3EC; border-left:3px solid #9C7A3A; padding:.6rem .8rem; border-radius:0 8px 8px 0; font-size:.86rem; color:#5C564F; margin-top:.6rem; }
+        .result p { margin:.45rem 0; font-size:.92rem; color:#3d3833; line-height:1.6; }
+        .val-breakdown { margin:.6rem 0; }
+        .val-table { width:100%; max-width:420px; border-collapse:collapse; font-size:.88rem; }
+        .val-table td { padding:.4rem .6rem; border-bottom:1px solid #E8E1D6; }
+        .val-table td:last-child { text-align:right; font-weight:600; color:#7A4E33; font-variant-numeric:tabular-nums; }
+        .val-table tr:last-child td { border-bottom:none; border-top:2px solid #9C7A3A; font-weight:700; }
+        .field { margin-bottom: 1rem; }
+        .field select { width:100%; padding:.65rem .8rem; border:1px solid var(--color-border); border-radius:8px; background:#fff; font-size:.95rem; }
+        </style>
+
+<footer>
+  <div class="footer-nav">
+    <a href="../about.html" class="zh">联系我们</a><a href="../about.html" class="en">Contact</a>
+    <a href="../pricing.html#collector-services" class="zh">藏家服务</a><a href="../pricing.html#collector-services" class="en">Collector Services</a>
+    <a href="../pricing.html#buyer-services" class="zh">买家指南</a><a href="../pricing.html#buyer-services" class="en">Buyer Guide</a>
+    <a href="../pricing.html#price-table" class="zh">服务收费</a><a href="../pricing.html#price-table" class="en">Price List</a>
+    <a href="../privacy.html" class="zh">隐私政策</a><a href="../privacy.html" class="en">Privacy</a>
+    <a href="../terms.html" class="zh">用户条款</a><a href="../terms.html" class="en">Terms</a>
+  </div>
+  <p class="footer-brand"><span class="zh">gudong.app — 高端古董发现平台与藏家网络</span><span class="en">gudong.app — Premium antiques discovery platform &amp; collector network</span></p>
+  <p class="footer-disclaimer"><span class="zh">平台仅提供藏品信息展示与藏家连接服务，不参与任何买卖交易，真伪、品相及价格由双方自行判断。</span><span class="en">The platform provides item display and collector connection services only and does not participate in any transaction; authenticity, condition and pricing are to be judged solely by the buyer and seller.</span></p>
+  <p class="footer-copyright"><span class="zh">© 2026 gudong.app 版权所有 · <a href="javascript:void(0)" class="app-install-btn" onclick="event.preventDefault();"><svg viewBox="0 0 24 24" aria-hidden="true" width="12" height="12"><path d="M5 20h14v-2H5v2zM19 9h-4V3H9v6H5l7 7 7-7z"/></svg>安装古董.app</a></span><span class="en">© 2026 gudong.app All rights reserved · <a href="javascript:void(0)" class="app-install-btn" onclick="event.preventDefault();"><svg viewBox="0 0 24 24" aria-hidden="true" width="12" height="12"><path d="M5 20h14v-2H5v2zM19 9h-4V3H9v6H5l7 7 7-7z"/></svg>Install gudong.app</a></span></p>
+</footer>
+
+<script>
+function openSidebar(){document.getElementById('sidebar').classList.add('open');document.getElementById('sidebarOverlay').classList.add('show');document.body.style.overflow='hidden';var t=document.getElementById('menuToggle');if(t)t.setAttribute('aria-expanded','true');}
+function closeSidebar(){document.getElementById('sidebar').classList.remove('open');document.getElementById('sidebarOverlay').classList.remove('show');document.body.style.overflow='';var t=document.getElementById('menuToggle');if(t)t.setAttribute('aria-expanded','false');}
+let currentLang=(function(){try{return localStorage.getItem('gudong_lang')==='en'?'en':'zh';}catch(e){return 'zh';}})();
+function applyLang(){document.body.dataset.lang=currentLang;document.documentElement.lang=currentLang==='en'?'en-SG':'zh-SG';var b=document.querySelector('.lang-btn');if(b)b.textContent=currentLang==='zh'?'EN':'中';}
+function toggleLang(){currentLang=currentLang==='zh'?'en':'zh';applyLang();try{localStorage.setItem('gudong_lang',currentLang);}catch(e){}if(window.onLangChanged)try{window.onLangChanged(currentLang);}catch(e){}}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeSidebar();});
+window.addEventListener('resize',function(){if(window.innerWidth>900)closeSidebar();});
+applyLang();
+if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('../sw.js').catch(function(){});});}
+</script>
+
+<!-- 分享 -->
+<style>
+.gd-share-btn{border:1px solid var(--color-border);background:transparent;color:var(--color-text-secondary);padding:.55rem .7rem;min-height:44px;min-width:44px;border-radius:var(--btn-radius);cursor:pointer;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;transition:all var(--dur) var(--ease)}
+.gd-share-btn:hover{border-color:var(--color-primary);color:var(--color-primary);background:var(--color-primary-light)}
+.gd-share-btn svg{width:16px;height:16px;fill:currentColor;display:block}
+.gd-toast{position:fixed;left:50%;bottom:30px;transform:translateX(-50%) translateY(10px);background:rgba(36,31,26,.92);color:#fff;font-size:.85rem;padding:.62rem 1.15rem;border-radius:999px;z-index:10000;opacity:0;pointer-events:none;transition:opacity .3s ease,transform .3s ease;box-shadow:0 8px 24px rgba(36,31,26,.25);white-space:nowrap;max-width:88vw;overflow:hidden;text-overflow:ellipsis}
+.gd-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+</style>
+<script>
+(function(){var toastEl=null,toastTimer=null;
+function gdToast(msg){if(!toastEl){toastEl=document.createElement("div");toastEl.className="gd-toast";document.body.appendChild(toastEl);}toastEl.textContent=msg;toastEl.classList.add("show");clearTimeout(toastTimer);toastTimer=setTimeout(function(){toastEl.classList.remove("show");},2200);}
+function gdCopyText(text,done,fail){function legacy(){var ta=document.createElement("textarea");ta.value=text;ta.setAttribute("readonly","");ta.style.cssText="position:fixed;left:-9999px;top:0;opacity:0;";document.body.appendChild(ta);ta.select();if(ta.setSelectionRange)ta.setSelectionRange(0,text.length);var ok=false;try{ok=document.execCommand("copy");}catch(e){}document.body.removeChild(ta);if(ok){done();}else if(fail){fail();}}
+if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(text).then(done,function(){legacy();});}else{legacy();}}
+window.gdShare=function(opts){opts=opts||{};var can=document.querySelector('link[rel="canonical"]');var url=opts.url||(can?can.href:location.href);var lang=(document.body.dataset&&document.body.dataset.lang)||"zh";var title=opts.title||document.title;var text=opts.text||"";if(navigator.share){navigator.share({title:title,text:text,url:url}).then(function(){},function(){});return;}gdCopyText(url,function(){gdToast(lang==="zh"?"链接已复制，去分享给朋友吧":"Link copied — share it with friends");},function(){gdToast(lang==="zh"?"复制失败，请手动复制地址栏链接":"Copy failed — please copy the URL from the address bar");});};})();
+window.gdSharePage=function(){var lang=(document.body.dataset&&document.body.dataset.lang)||"zh";window.gdShare({title:lang==="zh"?"古文化·朝代年代速查表｜古董圈Gudong.app":"Culture & Dynasty Era Lookup｜Gudong.app",text:lang==="zh"?"红山、良渚到明清的年代区间速查，仅供历史参考。":"Era lookup from Hongshan to the Qing, for historical reference only."});};
+</script>
+
+<!-- PWA 安装引导弹层 -->
+<style>
+.gd-install-modal{position:fixed;inset:0;z-index:9999;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.45);padding:1.2rem}
+.gd-install-modal.open{display:flex}
+.gd-install-card{background:#fff;border-radius:var(--card-radius);max-width:350px;width:100%;padding:1.6rem 1.4rem 1.2rem;text-align:center;box-shadow:0 18px 50px rgba(0,0,0,.25);position:relative}
+.gd-install-close{position:absolute;top:.5rem;right:.7rem;border:0;background:none;font-size:1.4rem;color:#999;cursor:pointer;padding:.5rem;min-width:44px;min-height:44px;display:inline-flex;align-items:center;justify-content:center;line-height:1}
+.gd-install-title{font-size:1.08rem;font-weight:700;color:#3d2b1f;margin:.2rem 0 1rem}
+.gd-install-steps{text-align:left;margin:0 auto 1rem;max-width:290px}
+.gd-install-step{display:flex;align-items:flex-start;gap:.6rem;padding:.5rem 0;color:#5a4636;font-size:.9rem;line-height:1.5}
+.gd-install-step .n{flex-shrink:0;width:22px;height:22px;border-radius:50%;background:#f0e4d8;color:#7A4E33;font-weight:700;font-size:.78rem;display:flex;align-items:center;justify-content:center;margin-top:.1rem}
+.gd-install-step svg{flex-shrink:0;width:22px;height:22px;fill:#007AFF;margin-top:.1rem}
+.gd-install-note{font-size:.78rem;color:#9a8d80;margin-top:.5rem;line-height:1.5}
+body[data-lang="en"] .gd-install-modal .zh{display:none}
+body[data-lang="zh"] .gd-install-modal .en{display:none}
+.app-install-btn{display:inline-flex;align-items:center;gap:.3rem;margin-left:.6rem;padding:.3rem .7rem;border:1px solid #e3d9cf;border-radius:999px;color:#7a6a5c;font-size:.78rem;text-decoration:none;vertical-align:middle;transition:.4s cubic-bezier(.25,.1,.25,1)}
+.app-install-btn:hover{border-color:#7A4E33;color:#7A4E33;background:#f0e4d8;text-decoration:none}
+.app-install-btn svg{width:12px;height:12px;flex-shrink:0;fill:currentColor}
+
+/*<<<gd-mobile-header-fix-2026-10-16>>> 移动端顶部导航适配（仅 <768px 生效，桌面端保持原样）*/
+:root{
+  --gd-header-h-m: 58px;
+  --gd-safe-top: env(safe-area-inset-top, 0px);
+  --gd-header-total-m: calc(var(--gd-header-h-m) + var(--gd-safe-top));
+}
+@media (max-width: 767px){
+  html, body { scroll-padding-top: calc(var(--gd-header-total-m) + 12px); }
+  body > header{
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    height: var(--gd-header-total-m) !important;
+    min-height: var(--gd-header-total-m) !important;
+    max-height: var(--gd-header-total-m) !important;
+    padding: var(--gd-safe-top) 5% 0 !important;
+    margin: 0 !important;
+    align-items: center !important;
+    z-index: 80 !important;
+    -webkit-transition: height .28s ease, padding .28s ease, background-color .28s ease, box-shadow .28s ease;
+    transition: height .28s ease, padding .28s ease, background-color .28s ease, box-shadow .28s ease;
+  }
+  body > header .brand-logo-img{
+    height: 30px !important;
+    width: auto !important;
+    max-width: 76px !important;
+    opacity: 1 !important;
+    -webkit-transition: height .28s ease, max-width .28s ease;
+    transition: height .28s ease, max-width .28s ease;
+  }
+  body > header ~ main{
+    padding-top: calc(var(--gd-header-total-m) + 12px) !important;
+  }
+}
+/*<<</gd-mobile-header-fix-2026-10-16>>>*/
+/*<<<gd-header-logo-fit-2026-10-16>>> 窄屏 LOGO 完整性修复（仅 ≤480px 生效，桌面端保持原样）*/
+@media (max-width: 480px){
+  body > header { padding-left: 3% !important; padding-right: 3% !important; gap: .45rem !important; }
+  body > header > div:first-child { gap: .45rem !important; }
+  body > header .brand-logo-img { height: 28px !important; }
+  .brand { gap: .45rem !important; }
+  .brand-zh, .brand-en { font-size: min(1.05rem, 4.2vw) !important; }
+  .brand-text small { font-size: .58rem !important; letter-spacing: .05em !important; }
+  .header-right { gap: .4rem !important; }
+}
+@media (max-width: 360px){
+  body > header { padding-left: 2% !important; padding-right: 2% !important; gap: .35rem !important; }
+  body > header > div:first-child { gap: .35rem !important; }
+  .brand { gap: .35rem !important; }
+  .header-right { gap: .3rem !important; }
+  .brand-zh, .brand-en { font-size: min(1.05rem, 4vw) !important; }
+  .brand-text small { display: none !important; }
+  .menu-toggle { width: 40px !important; height: 40px !important; }
+  .gd-share-btn { min-width: 40px !important; min-height: 40px !important; padding: .35rem !important; }
+  .lang-btn { min-width: 40px !important; min-height: 40px !important; padding: .35rem .5rem !important; }
+}
+/*<<</gd-header-logo-fit-2026-10-16>>>*/
+</style>
+<div class="gd-install-modal" id="gdInstallModal" role="dialog" aria-modal="true" aria-label="Install guide">
+  <div class="gd-install-card">
+    <button type="button" class="gd-install-close" onclick="gdCloseInstall()" aria-label="close">×</button>
+    <div class="gd-install-title zh">安装 古董.app 到主屏幕</div>
+    <div class="gd-install-title en">Add Gudong.app to Home Screen</div>
+    <div class="gd-install-steps" id="gdStepsIos">
+      <div class="gd-install-step"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18.2c-4.5 0-8.2-3.7-8.2-8.2S7.5 3.8 12 3.8s8.2 3.7 8.2 8.2-3.7 8.2-8.2 8.2zM11 7l-4 4h3v6h2v-6h3l-4-4z"/></svg><span class="zh">点击 Safari 底部工具栏的「分享」按钮</span><span class="en">Tap the Share button in Safari's bottom toolbar</span></div>
+      <div class="gd-install-step"><span class="n">2</span><span class="zh">在分享菜单中选择「添加到主屏幕」</span><span class="en">Choose "Add to Home Screen" in the share menu</span></div>
+      <div class="gd-install-step"><span class="n">3</span><span class="zh">点击右上角「添加」，桌面即出现古董.app 图标</span><span class="en">Tap "Add" — the Gudong.app icon appears on your Home Screen</span></div>
+    </div>
+    <div class="gd-install-steps" id="gdStepsOther" style="display:none;">
+      <div class="gd-install-step"><span class="n">1</span><span class="zh">点击浏览器地址栏右侧的「安装」图标</span><span class="en">Click the install icon at the right of the address bar</span></div>
+      <div class="gd-install-step"><span class="n">2</span><span class="zh">或通过浏览器菜单 →「安装古董圈」</span><span class="en">Or open the browser menu → "Install Gudong"</span></div>
+    </div>
+    <div class="gd-install-note zh">安装后可像原生 App 一样全屏使用，无需应用商店。</div>
+    <div class="gd-install-note en">Runs full-screen like a native app. No app store needed.</div>
+  </div>
+</div>
+<script>
+(function(){var modal=document.getElementById('gdInstallModal');if(!modal)return;
+window.gdCloseInstall=function(){modal.classList.remove('open');};
+modal.addEventListener('click',function(e){if(e.target===modal)gdCloseInstall();});
+var deferredPrompt=null;
+window.addEventListener('beforeinstallprompt',function(e){e.preventDefault();deferredPrompt=e;});
+window.addEventListener('appinstalled',function(){document.querySelectorAll('.app-install-btn').forEach(function(b){b.style.display='none';});});
+document.addEventListener('click',function(e){var btn=e.target&&e.target.closest?e.target.closest('.app-install-btn'):null;if(!btn)return;e.preventDefault();
+if(deferredPrompt){deferredPrompt.prompt();deferredPrompt.userChoice.then(function(){deferredPrompt=null;}).catch(function(){});return;}
+var ua=navigator.userAgent;var isIOS=/iPad|iPhone|iPod/.test(ua)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+document.getElementById('gdStepsIos').style.display=isIOS?'':'none';
+document.getElementById('gdStepsOther').style.display=isIOS?'none':'';
+modal.classList.add('open');});})();
+</script>
+
+<!-- 年代速查核心逻辑 -->
+<script>
+(function(){
+'use strict';
+var CATS=[
+{id:'porcelain',zh:'瓷器',en:'Porcelain',base:4000,auction:{zh:'同类青花/彩瓷在新加坡与香港拍场，完整器常见落槌区间约 S$2,000–15,000，官窑精品可显著更高。',en:'Comparable blue-and-white / polychrome pieces commonly hammer at S$2,000–15,000 in SG & HK; official-kiln pieces can go far higher.'}},
+{id:'jade',zh:'玉器',en:'Jade',base:6000,auction:{zh:'明清白玉件拍场差异大，完整带工件常见 S$3,000–20,000，高古玉视沁色与工艺浮动。',en:'Ming-Qing white-jade carvings commonly S$3,000–20,000; archaic jade varies by patina and workmanship.'}},
+{id:'bronze',zh:'铜器',en:'Bronzes',base:5000,auction:{zh:'铜炉/铜造像完整包浆件常见 S$2,000–12,000，重器与带款者更高。',en:'Censers / bronze figures with good patina commonly S$2,000–12,000; major or signed pieces higher.'}},
+{id:'coins',zh:'钱币',en:'Coins',base:800,auction:{zh:'普通机制币/铜钱常见 S$50–800，品相与稀有度决定价格。',en:'Common cash / machine-struck coins commonly S$50–800; grade and rarity decide.'}},
+{id:'paintings',zh:'书画',en:'Paintings',base:9000,auction:{zh:'近现代与地方名家立轴常见 S$2,000–30,000，真伪与来源是关键。',en:'Modern / regional-master scrolls commonly S$2,000–30,000; authenticity and provenance are key.'}},
+{id:'misc',zh:'杂项',en:'Miscellaneous',base:1500,auction:{zh:'家具、文房、珐琅等杂项完整件常见 S$800–6,000，材质与工艺差异大。',en:'Furniture, scholar objects, cloisonne etc. commonly S$800–6,000; wide material/craft spread.'}}
+];
+var ERAS=[
+{id:'archaic',zh:'明以前高古',en:'Pre-Ming / archaic',f:1.5},
+{id:'peak',zh:'明清盛世',en:'Ming-Qing heyday',f:1.8},
+{id:'late',zh:'晚清民国',en:'Late Qing / Republic',f:0.7},
+{id:'modern',zh:'现当代',en:'Modern / contemporary',f:0.35}
+];
+var CONDS=[
+{id:'perfect',zh:'全品（无冲无修）',en:'Perfect (no hairline / repair)',f:1.0},
+{id:'hairline',zh:'有冲线/小修',en:'Hairline / minor repair',f:0.45},
+{id:'damaged',zh:'残损',en:'Damaged / broken',f:0.18}
+];
+var CRAFTS=[
+{id:'official',zh:'官窑/宫廷',en:'Official kiln / imperial',f:3.5},
+{id:'fine',zh:'民窑精细',en:'Fine popular kiln',f:1.5},
+{id:'coarse',zh:'民窑粗品',en:'Coarse popular kiln',f:0.6}
+];
+var TRENDS={zh:'近年精品官窑与带清晰来源（Provenance）者稳健，普品与残件偏疲软；具体随拍场时点与经济环境波动。',en:'Top official-kiln pieces with clear provenance have held up; common and damaged pieces soften — timing and the market cycle move these.'};
+
+function $(id){return document.getElementById(id);}
+function lang(){return document.body.dataset.lang==='en'?'en':'zh';}
+function fmt(n){return 'S$'+Math.round(n).toLocaleString('en-US');}
+
+function fillSelect(sel,arr,labelFn){
+  arr.forEach(function(it){
+    var o=document.createElement('option'); o.value=it.id; o.textContent=labelFn(it); sel.appendChild(o);
+  });
+}
+fillSelect($('catSel'),CATS,function(it){return it.zh+' · '+it.en;});
+fillSelect($('eraSel'),ERAS,function(it){return it.zh+' · '+it.en;});
+fillSelect($('condSel'),CONDS,function(it){return it.zh+' · '+it.en;});
+fillSelect($('craftSel'),CRAFTS,function(it){return it.zh+' · '+it.en;});
+$('catSel').value='porcelain';
+$('eraSel').value='peak';
+$('condSel').value='perfect';
+$('craftSel').value='fine';
+
+function calc(){
+  var cat=CATS.filter(function(c){return c.id===$('catSel').value;})[0];
+  var era=ERAS.filter(function(e){return e.id===$('eraSel').value;})[0];
+  var cond=CONDS.filter(function(c){return c.id===$('condSel').value;})[0];
+  var craft=CRAFTS.filter(function(c){return c.id===$('craftSel').value;})[0];
+  if(!cat||!era||!cond||!craft)return;
+  var mid=cat.base*era.f*cond.f*craft.f;
+  var lo=mid*0.7, hi=mid*1.3;
+  var L=lang();
+  $('valResult').hidden=false;
+  $('valRange').textContent=fmt(lo)+' – '+fmt(hi);
+  $('valTrend').textContent=(L==='zh'?'行情趋势：':'Trend: ')+TRENDS[L];
+  var rows=[
+    [(L==='zh'?'品类基准价':'Category base'),fmt(cat.base)],
+    ['× '+(L==='zh'?'年代系数':'Era factor')+' ('+era[L]+')','×'+era.f],
+    ['× '+(L==='zh'?'完整度系数':'Condition factor')+' ('+cond[L]+')','×'+cond.f],
+    ['× '+(L==='zh'?'工艺系数':'Craft factor')+' ('+craft[L]+')','×'+craft.f],
+    [(L==='zh'?'中间价（区间中点）':'Midpoint (band centre)'),fmt(mid)]
+  ];
+  $('valBreakdown').innerHTML='<table class="val-table"><tbody>'+rows.map(function(r){
+    return '<tr><td>'+r[0]+'</td><td>'+r[1]+'</td></tr>';
+  }).join('')+'</tbody></table>';
+  $('valAuction').textContent=(L==='zh'?'拍场参照：':'Auction reference: ')+cat.auction[L];
+  $('valFormula').textContent=(L==='zh'?'计算口径：':'Formula: ')+(L==='zh'?'基准价 × 年代 × 完整度 × 工艺（±30% 浮动），仅为心理预期模型。':'base × era × condition × craft (±30% band) — an expectation model only.');
+}
+['catSel','eraSel','condSel','craftSel'].forEach(function(id){ $(id).addEventListener('change',calc); });
+window.onLangChanged=function(){ calc(); };
+calc();
+</script>
+
+<style>
+.gd-install-modal { position: fixed; inset: 0; z-index: 9999; display: none; align-items: center; justify-content: center; background: rgba(0,0,0,.45); padding: 1.2rem; }
+.gd-install-modal.open { display: flex; }
+.gd-install-card { background: #fff; border-radius: var(--card-radius); max-width: 350px; width: 100%; padding: 1.6rem 1.4rem 1.2rem; text-align: center; box-shadow: 0 18px 50px rgba(0,0,0,.25); position: relative; }
+.gd-install-close { position: absolute; top: .5rem; right: .7rem; border: 0; background: none; font-size: 1.4rem; color: #999; cursor: pointer; padding: .5rem; min-width: 44px; min-height: 44px; display: inline-flex; align-items: center; justify-content: center; line-height: 1; }
+.gd-install-title { font-size: 1.08rem; font-weight: 700; color: #3d2b1f; margin: .2rem 0 1rem; }
+.gd-install-steps { text-align: left; margin: 0 auto 1rem; max-width: 290px; }
+.gd-install-step { display: flex; align-items: flex-start; gap: .6rem; padding: .5rem 0; color: #5a4636; font-size: .9rem; line-height: 1.5; }
+.gd-install-step .n { flex-shrink: 0; width: 22px; height: 22px; border-radius: 50%; background: #f0e4d8; color: #7A4E33; font-weight: 700; font-size: .78rem; display: flex; align-items: center; justify-content: center; margin-top: .1rem; }
+.gd-install-step svg { flex-shrink: 0; width: 22px; height: 22px; fill: #007AFF; margin-top: .1rem; }
+.gd-install-note { font-size: .78rem; color: #9a8d80; margin-top: .5rem; line-height: 1.5; }
+.gd-install-modal [data-lang="en"] .zh, body[data-lang="en"] .gd-install-modal .zh { display: none; }
+.gd-install-modal [data-lang="zh"] .en, body[data-lang="zh"] .gd-install-modal .en { display: none; }
+.app-install-btn { display: inline-flex; align-items: center; gap: .3rem; margin-left: .6rem; padding: .3rem .7rem; border: 1px solid #e3d9cf; border-radius: 999px; color: #7a6a5c; font-size: .78rem; text-decoration: none; vertical-align: middle; transition: .4s cubic-bezier(.25,.1,.25,1); }
+.app-install-btn:hover { border-color: #7A4E33; color: #7A4E33; background: #f0e4d8; }
+.app-install-btn svg { width: 12px; height: 12px; flex-shrink: 0; fill: currentColor; }
+</style>
+
+<!-- 2026-10-07：分享功能（Web Share API + 剪贴板降级 + Toast 反馈），全站统一 -->
+<style>
+.gd-share-btn {
+    border: 1px solid var(--color-border); background: transparent;
+    color: var(--color-text-secondary); padding: .55rem .7rem; min-height: 44px; min-width: 44px;
+    border-radius: var(--btn-radius); cursor: pointer; display: inline-flex;
+    align-items: center; justify-content: center; flex-shrink: 0;
+    transition: all var(--dur) var(--ease);
+}
+.gd-share-btn:hover { border-color: var(--color-primary); color: var(--color-primary); background: var(--color-primary-light); }
+.gd-share-btn svg { width: 16px; height: 16px; fill: currentColor; display: block; }
+.gd-toast {
+    position: fixed; left: 50%; bottom: 30px; transform: translateX(-50%) translateY(10px);
+    background: rgba(36,31,26,.92); color: #fff; font-size: .85rem;
+    padding: .62rem 1.15rem; border-radius: 999px; z-index: 10000;
+    opacity: 0; pointer-events: none; transition: opacity .3s ease, transform .3s ease;
+    box-shadow: 0 8px 24px rgba(36,31,26,.25); white-space: nowrap;
+    max-width: 88vw; overflow: hidden; text-overflow: ellipsis;
+}
+.gd-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+</style>
+
+<script>
+/* 分享：Web Share API（原生分享面板）→ navigator.clipboard → execCommand 三级降级 */
+(function () {
+    var toastEl = null, toastTimer = null;
+    function gdToast(msg) {
+        if (!toastEl) {
+            toastEl = document.createElement("div");
+            toastEl.className = "gd-toast";
+            document.body.appendChild(toastEl);
+        }
+        toastEl.textContent = msg;
+        toastEl.classList.add("show");
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(function () { toastEl.classList.remove("show"); }, 2200);
+    }
+    function gdCopyText(text, done, fail) {
+        function legacy() {
+            var ta = document.createElement("textarea");
+            ta.value = text;
+            ta.setAttribute("readonly", "");
+            ta.style.cssText = "position:fixed;left:-9999px;top:0;opacity:0;";
+            document.body.appendChild(ta);
+            ta.select();
+            if (ta.setSelectionRange) ta.setSelectionRange(0, text.length);
+            var ok = false;
+            try { ok = document.execCommand("copy"); } catch (e) {}
+            document.body.removeChild(ta);
+            if (ok) { done(); } else if (fail) { fail(); }
+        }
+        if (navigator.clipboard && window.isSecureContext) {
+            navigator.clipboard.writeText(text).then(done, function () { legacy(); });
+        } else { legacy(); }
+    }
+    window.gdShare = function (opts) {
+        opts = opts || {};
+        var can = document.querySelector('link[rel="canonical"]');
+        var url = opts.url || (can ? can.href : location.href);
+        var lang = (document.body.dataset && document.body.dataset.lang) || "zh";
+        var title = opts.title || document.title;
+        var text = opts.text || "";
+        if (navigator.share) {
+            navigator.share({ title: title, text: text, url: url }).then(function () {}, function () {});
+            return;
+        }
+        gdCopyText(url, function () {
+            gdToast(lang === "zh" ? "链接已复制，去分享给朋友吧" : "Link copied — share it with friends");
+        }, function () {
+            gdToast(lang === "zh" ? "复制失败，请手动复制地址栏链接" : "Copy failed — please copy the URL from the address bar");
+        });
+    };
+})();
+</script>
+
+<script>
+window.gdSharePage = function () {
+    var lang = (document.body.dataset && document.body.dataset.lang) || "zh";
+    window.gdShare({
+        text: lang === "zh" ? "来自古董圈 Gudong.app 的精选内容" : "From Gudong.app — Singapore antiques"
+    });
+};
+</script>
+
+<script src="/gd-install.js" defer></script>
+</body>
+</html>

@@ -732,6 +732,9 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
 
                 <div class="disclaimer-box zh"><strong>请注意：</strong>Gudong 仅提供藏品信息展示与联系引荐，不鉴定真伪、不担保成交、不代收款项。请务必当面核验实物后再行交易。</div>
                 <div class="disclaimer-box en"><strong>Please note:</strong> Gudong only displays item information and facilitates contact — we do not authenticate items, guarantee sales, or process payments. Always inspect items in person before dealing.</div>
+
+                <div class="disclaimer-box zh" style="border-left:3px solid #9C7A3A;background:#FBF3EC;">💡 <strong>温馨提示：</strong>古玩交易存在鉴赏门槛。线上沟通后，建议买卖双方线下看实物，并使用本站的<a href="./tools/contract.html" style="color:#7A4E33;font-weight:600;">《买卖契约生成工具》</a>签署书面协议，明确卖家是否承诺"包老包真"或"按现状（As-Is）交割"，把责任归属写在纸面上。</div>
+                <div class="disclaimer-box en" style="border-left:3px solid #9C7A3A;background:#FBF3EC;">💡 <strong>Tip:</strong> Antique dealing has a steep learning curve. After chatting online, inspect in person, then use our <a href="./tools/contract.html" style="color:#7A4E33;font-weight:600;">Contract Generator</a> to sign a written agreement — stating clearly whether the seller guarantees age/authenticity or sells As-Is — and put liability on paper.</div>
             </div>
         </div>
 
@@ -1233,7 +1236,26 @@ function setSellerCard(f, data) {
                 setProductJsonLd(f);
                 setSellerCard(f, data);
                 setWaContact(sl);
-                if (f.title_zh) { var t = document.title.split(' | '); t[0] = clean(first(f.title_zh)); if (sen && t.length > 1) t[1] = sen; document.title = t.join(' | '); }
+                // ---- Per-item SEO: bilingual title, dynamic meta description, canonical ----
+                var tEnSeo = clean(first(f.title_en)) || '';
+                var tZhSeo = clean(first(f.title_zh)) || '';
+                var eraEnSeo = tidyEra(f.era_en) || '';
+                var catEnSeo = catEn(f.category) || '';
+                if (tEnSeo) {
+                    var headPart = [eraEnSeo, catEnSeo].filter(Boolean).join(' ');
+                    document.title = tEnSeo + ' for Sale in Singapore' + (headPart ? ' | ' + headPart : '') + ' | Gudong.app';
+                } else if (tZhSeo) {
+                    document.title = tZhSeo + '｜新加坡' + (catEnSeo ? ' ' + catEnSeo : '') + '｜古董圈 Gudong.app';
+                }
+                var mdSeo = document.querySelector('meta[name="description"]');
+                if (mdSeo) {
+                    var lead = tEnSeo || tZhSeo || 'Chinese antique';
+                    var mdText = lead + (catEnSeo ? ' — ' + catEnSeo : '') + (eraEnSeo ? ' (' + eraEnSeo + ')' : '')
+                        + ' for sale in Singapore. Contact the private collector directly via WhatsApp; Gudong.app does not authenticate items or handle payment.';
+                    mdSeo.setAttribute('content', mdText.slice(0, 165));
+                }
+                var canSeo = document.querySelector('link[rel="canonical"]');
+                if (canSeo) canSeo.setAttribute('href', 'https://www.gudong.app/item?id=' + encodeURIComponent(ID));
                 document.documentElement.dataset.source = 'airtable';
                 badge('✔ Airtable · ' + ID + '\n' + (changes.length ? changes.join('\n') : '与静态页一致'), true);
             })
@@ -1544,6 +1566,7 @@ window.gdSharePage = function () {
 };
 </script>
 <script src="assets/js/item-chat.js" defer></script>
+<script src="/gd-install.js" defer></script>
 </body>
 </html>
 

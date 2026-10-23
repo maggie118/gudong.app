@@ -32,6 +32,9 @@ const STATIC = [
   { loc: '/tools/era-lookup',        lastmod: '2026-10-15' },
   { loc: '/tools/ganzhi',            lastmod: '2026-10-15' },
   { loc: '/tools/year-since',        lastmod: '2026-10-15' },
+  { loc: '/tools/mark-lookup',       lastmod: '2026-10-23' },
+  { loc: '/tools/valuation',         lastmod: '2026-10-23' },
+  { loc: '/tools/contract',          lastmod: '2026-10-23' },
   // Categories
   { loc: '/categories/bronze',     lastmod: '2026-10-15' },
   { loc: '/categories/coins',       lastmod: '2026-10-15' },

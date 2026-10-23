@@ -273,19 +273,39 @@ footer{text-align:center;padding:2.2rem 5% 1.8rem;background:var(--color-white);
     <h2 id="val-title"><span class="zh">① 选择评估维度</span><span class="en">① Choose the factors</span></h2>
     <div class="field">
       <label for="catSel"><span class="zh">品类</span><span class="en">Category</span></label>
-      <select id="catSel"></select>
+      <select id="catSel">
+        <option value="porcelain" selected>瓷器 · Porcelain</option>
+        <option value="jade">玉器 · Jade</option>
+        <option value="bronze">铜器 · Bronzes</option>
+        <option value="coins">钱币 · Coins</option>
+        <option value="paintings">书画 · Paintings</option>
+        <option value="misc">杂项 · Miscellaneous</option>
+      </select>
     </div>
     <div class="field">
       <label for="eraSel"><span class="zh">年代</span><span class="en">Era</span></label>
-      <select id="eraSel"></select>
+      <select id="eraSel">
+        <option value="archaic">明以前高古 · Pre-Ming / archaic</option>
+        <option value="peak" selected>明清盛世 · Ming-Qing heyday</option>
+        <option value="late">晚清民国 · Late Qing / Republic</option>
+        <option value="modern">现当代 · Modern / contemporary</option>
+      </select>
     </div>
     <div class="field">
       <label for="condSel"><span class="zh">完整度</span><span class="en">Condition</span></label>
-      <select id="condSel"></select>
+      <select id="condSel">
+        <option value="perfect" selected>全品（无冲无修）· Perfect</option>
+        <option value="hairline">有冲线/小修 · Hairline / minor repair</option>
+        <option value="damaged">残损 · Damaged / broken</option>
+      </select>
     </div>
     <div class="field">
       <label for="craftSel"><span class="zh">工艺级别</span><span class="en">Craft level</span></label>
-      <select id="craftSel"></select>
+      <select id="craftSel">
+        <option value="official">官窑/宫廷 · Official kiln / imperial</option>
+        <option value="fine" selected>民窑精细 · Fine popular kiln</option>
+        <option value="coarse">民窑粗品 · Coarse popular kiln</option>
+      </select>
     </div>
 
     <div class="result" id="valResult" aria-live="polite" hidden>
@@ -542,10 +562,6 @@ function fillSelect(sel,arr,labelFn){
     var o=document.createElement('option'); o.value=it.id; o.textContent=labelFn(it); sel.appendChild(o);
   });
 }
-fillSelect($('catSel'),CATS,function(it){return it.zh+' · '+it.en;});
-fillSelect($('eraSel'),ERAS,function(it){return it.zh+' · '+it.en;});
-fillSelect($('condSel'),CONDS,function(it){return it.zh+' · '+it.en;});
-fillSelect($('craftSel'),CRAFTS,function(it){return it.zh+' · '+it.en;});
 $('catSel').value='porcelain';
 $('eraSel').value='peak';
 $('condSel').value='perfect';

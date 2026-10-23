@@ -87,16 +87,28 @@ function toDateStr(v) {
   return String(v).slice(0, 10);
 }
 
+// Hard budget for the whole Airtable pull. We must respond well under Vercel's
+// function timeout so a slow/dead Airtable never surfaces as a 504 to Google
+// (this was the root cause of GSC "无法抓取" on first cold fetch).
+const UPSTREAM_BUDGET_MS = 4000;
+const PER_PAGE_TIMEOUT_MS = 2500;
+const MAX_PAGES = 5; // 5 x 100 = 500 records is plenty for this catalog.
+
 async function fetchActiveItemIds() {
   if (!BASE || !TABLE || !TOKEN) return null; // signal "upstream unavailable"
+  const startedAt = Date.now();
   const records = [];
   let offset = null;
+  let pages = 0;
   do {
+    // Stop early if we are running out of budget — partial results are fine,
+    // the caller merges with the seed fallback below.
+    if (Date.now() - startedAt > UPSTREAM_BUDGET_MS) break;
     const url = new URL(`https://api.airtable.com/v0/${BASE}/${encodeURIComponent(TABLE)}`);
     url.searchParams.set('pageSize', '100');
     if (offset) url.searchParams.set('offset', offset);
     const ctl = new AbortController();
-    const timer = setTimeout(() => ctl.abort(), 8000);
+    const timer = setTimeout(() => ctl.abort(), PER_PAGE_TIMEOUT_MS);
     let r;
     try {
       r = await fetch(url.toString(), { headers: { Authorization: `Bearer ${TOKEN}` }, signal: ctl.signal });
@@ -107,7 +119,8 @@ async function fetchActiveItemIds() {
     const j = await r.json();
     records.push(...(j.records || []));
     offset = j.offset || null;
-  } while (offset);
+    pages += 1;
+  } while (offset && pages < MAX_PAGES);
 
   // Keep only active items with a non-empty item_id; dedupe.
   const seen = new Set();
@@ -141,7 +154,11 @@ function buildXml(staticUrls, items) {
   }
   for (const it of items) {
     parts.push(`  <url>`);
-    parts.push(`    <loc>${esc(SITE + '/items/' + it.item_id)}</loc>`);
+    // Use the live SPA route /item?id=<id>. The /items/<id> pretty URL only
+    // works for pre-rendered static pages in /items/*; brand-new Airtable items
+    // have no static html yet and 404 there. Since this sitemap pulls items
+    // LIVE from Airtable, every item must point to the route that always resolves.
+    parts.push(`    <loc>${esc(SITE + '/item?id=' + it.item_id)}</loc>`);
     if (it.lastmod) parts.push(`    <lastmod>${esc(it.lastmod)}</lastmod>`);
     parts.push(`  </url>`);
   }

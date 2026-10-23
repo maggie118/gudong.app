@@ -1470,7 +1470,8 @@
             display: inline-flex; align-items: center; gap: .3rem;
             margin-left: .6rem;
             padding: .5rem .85rem;
-            min-height: 40px;
+            min-width: 44px;
+            min-height: 44px;
             border: 1px solid var(--color-border);
             border-radius: 999px;
             color: var(--color-qianjinzong);
@@ -1479,6 +1480,7 @@
             vertical-align: middle;
             transition: all var(--dur) var(--ease);
         }
+        .app-install-btn.hidden { display: none !important; }
         .app-install-btn:hover {
             border-color: var(--color-primary);
             color: var(--color-primary);
@@ -2971,6 +2973,7 @@
     .gd-install-step .n { flex-shrink: 0; width: 22px; height: 22px; border-radius: 50%; background: #F3EAE0; color: #7A4E33; font-weight: 700; font-size: .76rem; display: flex; align-items: center; justify-content: center; margin-top: .1rem; }
     .gd-install-step svg { flex-shrink: 0; width: 22px; height: 22px; fill: #007AFF; margin-top: .1rem; }
     .gd-install-note { font-size: .78rem; color: #9a8d80; margin-top: .5rem; line-height: 1.55; }
+    .gd-install-warning { background: #F3EAE0; border-radius: 10px; padding: .8rem; color: #7A4E33; font-size: .85rem; line-height: 1.55; margin-bottom: .8rem; text-align: left; }
     body[data-lang="en"] .gd-install-modal .zh { display: none; }
     body[data-lang="zh"] .gd-install-modal .en { display: none; }
     </style>
@@ -2979,10 +2982,14 @@
             <button type="button" class="gd-install-close" onclick="gdCloseInstall()" aria-label="close">×</button>
             <div class="gd-install-title zh">安装 古董.app 到主屏幕</div>
             <div class="gd-install-title en">Add Gudong.app to Home Screen</div>
+            <div class="gd-install-warning" id="gdInAppWarning" style="display:none;">
+                <div class="zh">你当前使用的应用内浏览器（如微信、微博等）不支持直接安装。请先用 Safari 打开本页，再按下方步骤操作。</div>
+                <div class="en">Your current in-app browser doesn't support Add to Home Screen. Please open this page in Safari first, then follow the steps below.</div>
+            </div>
             <div class="gd-install-steps" id="gdStepsIos">
-                <div class="gd-install-step"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18.2c-4.5 0-8.2-3.7-8.2-8.2S7.5 3.8 12 3.8s8.2 3.7 8.2 8.2-3.7 8.2-8.2 8.2zM11 7l-4 4h3v6h2v-6h3l-4-4z"/></svg><span class="zh">点击 Safari 底部工具栏的「分享」按钮</span><span class="en">Tap the Share button in Safari's bottom toolbar</span></div>
-                <div class="gd-install-step"><span class="n">2</span><span class="zh">在分享菜单中选择「添加到主屏幕」</span><span class="en">Choose "Add to Home Screen" in the share menu</span></div>
-                <div class="gd-install-step"><span class="n">3</span><span class="zh">点击右上角「添加」，桌面即出现古董.app 图标</span><span class="en">Tap "Add" — the Gudong.app icon appears on your Home Screen</span></div>
+                <div class="gd-install-step"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C12 2 8 6 8 6h3v6h2V6h3l-4-4zM5 9v9c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V9h-2v9H7V9H5z"/></svg><span class="zh">点击 Safari 底部工具栏的「分享」按钮</span><span class="en">Tap the Share button in Safari's bottom toolbar</span></div>
+                <div class="gd-install-step"><span class="n">2</span><span class="zh">上滑分享菜单，选择「添加到主屏幕」</span><span class="en">Scroll the share sheet and choose "Add to Home Screen"</span></div>
+                <div class="gd-install-step"><span class="n">3</span><span class="zh">点击右上角「添加」，古董.app 即出现在桌面</span><span class="en">Tap "Add" in the top right — Gudong.app appears on your Home Screen</span></div>
             </div>
             <div class="gd-install-steps" id="gdStepsOther" style="display:none;">
                 <div class="gd-install-step"><span class="n">1</span><span class="zh">点击浏览器地址栏右侧的「安装」图标</span><span class="en">Click the install icon at the right of the address bar</span></div>
@@ -3000,9 +3007,19 @@
         modal.addEventListener('click', function (e) { if (e.target === modal) gdCloseInstall(); });
 
         var deferredPrompt = null;
+        var ua = navigator.userAgent || '';
+        var isIOS = /iPad|iPhone|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+        var isInAppBrowser = /MicroMessenger|Weibo|FBAN|FBAV|Instagram|Line|Twitter|WhatsApp|Snapchat|TikTok/i.test(ua);
+        var isStandalone = window.navigator.standalone === true || window.matchMedia('(display-mode: standalone)').matches;
+
+        // 已处于 PWA 模式则隐藏安装入口
+        if (isStandalone) {
+            document.querySelectorAll('.app-install-btn').forEach(function (b) { b.classList.add('hidden'); });
+        }
+
         window.addEventListener('beforeinstallprompt', function (e) { e.preventDefault(); deferredPrompt = e; });
         window.addEventListener('appinstalled', function () {
-            document.querySelectorAll('.app-install-btn').forEach(function (b) { b.style.display = 'none'; });
+            document.querySelectorAll('.app-install-btn').forEach(function (b) { b.classList.add('hidden'); });
         });
 
         document.addEventListener('click', function (e) {
@@ -3014,10 +3031,10 @@
                 deferredPrompt.userChoice.then(function () { deferredPrompt = null; }).catch(function () {});
                 return;
             }
-            var ua = navigator.userAgent;
-            var isIOS = /iPad|iPhone|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
             document.getElementById('gdStepsIos').style.display = isIOS ? '' : 'none';
             document.getElementById('gdStepsOther').style.display = isIOS ? 'none' : '';
+            var warning = document.getElementById('gdInAppWarning');
+            if (warning) warning.style.display = (isIOS && isInAppBrowser) ? '' : 'none';
             modal.classList.add('open');
         });
     })();

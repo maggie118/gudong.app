@@ -1,4 +1,8 @@
 /* 古董圈 Gudong · Service Worker
+ * 2026-10-23：v41 → v42
+ * - 修复 iOS PWA 安装引导：index.html 安装按钮触控目标提升至 44×44px；
+ *   新增已安装 PWA 状态检测（自动隐藏安装按钮）、iOS 应用内浏览器检测与 Safari 跳转提示、
+ *   更准确的 iOS 分享图标与安装步骤文案
  * 2026-10-22：v40 → v41
  * - 首屏 hero 文案改版：主标题「传世重器，静候知音」、副标题「高古遗珍 · 名窑佳器 · 私人藏家网络」、
  *   信任行去除 emoji 改为「免注册 · 不留存 · 端到端私密直连」，正文段落重写
@@ -52,7 +56,7 @@
  *   seller 徽章/标签字号提升
  * - v8 → v9：配合首页改版提升缓存版本号
  */
-const CACHE_NAME = 'antique-collection-v41';
+const CACHE_NAME = 'antique-collection-v42';
 // 预缓存清单：核心页面 + 常用图标 + 占位图
 // 注意：改用逐个 cache.add，单个 404 不会导致整个 install 失败
 const PRECACHE_ASSETS = [

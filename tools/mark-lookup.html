@@ -231,12 +231,14 @@ footer{text-align:center;padding:2.2rem 5% 1.8rem;background:var(--color-white);
             <a href="../sellers/index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">私家藏馆</span><span class="en">Private Gallery</span></a>
             <a href="../insights.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">情报 / 知识</span><span class="en">Insights</span></a>
             <a href="../tools/index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">藏家工具包</span><span class="en">Collector's Toolkit</span></a>
-                        <a href="../tools/year-since.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 年份距今计算器</span><span class="en">· Years-since-year Calculator</span></a>
+            <a href="../tools/year-since.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 年份对照计算器</span><span class="en">· Years-since-year Calculator</span></a>
             <a href="../tools/ganzhi.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 干支公历换算器</span><span class="en">· Sexagenary-Gregorian Converter</span></a>
-            <a href="../tools/era-lookup.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 古文化·朝代年代速查表</span><span class="en">· Culture &amp; Dynasty Era Lookup</span></a>
-            <a href="../tools/currency-convert.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 拍卖藏品货币参考换算器</span><span class="en">· Currency Reference Converter</span></a>
+            <a href="../tools/era-lookup.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 古文化朝代年代速查</span><span class="en">· Culture &amp; Dynasty Era Lookup</span></a>
+            <a href="../tools/currency-convert.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 拍卖货币实时换算</span><span class="en">· Currency Reference Converter</span></a>
             <a href="../tools/mark-lookup.html" class="sidebar-sub active" onclick="closeSidebar()"><span class="zh">· 瓷器底款快查</span><span class="en">· Porcelain Mark &amp; Seal Lookup</span></a>
-            <a href="../about.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">关于我们</span><span class="en">About</span></a>
+            <a href="../tools/valuation.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 简易估值参考</span><span class="en">· Market Valuation Reference</span></a>
+            <a href="../tools/contract.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 买卖契约与卖家背书生成器</span><span class="en">· Contract &amp; Endorsement Generator</span></a>
+            href="../about.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">关于我们</span><span class="en">About</span></a>
             <button type="button" class="sidebar-lang-btn" onclick="toggleLang()" aria-label="Switch language"><span class="zh">🌐 English</span><span class="en">🌐 中文</span></button>
         </nav>
 </aside>
@@ -324,7 +326,7 @@ footer{text-align:center;padding:2.2rem 5% 1.8rem;background:var(--color-white);
 
   <nav class="related" aria-label="Related links">
     <a href="../tools/era-lookup.html"><span class="zh">朝代年表速查 →</span><span class="en">Dynasty Chronology →</span><small><span class="zh">各朝起止年份</span><span class="en">Dynasty year ranges</span></small></a>
-    <a href="../tools/year-since.html"><span class="zh">年份距今计算器 →</span><span class="en">Years-since Calculator →</span><small><span class="zh">年号距今多少年</span><span class="en">How long ago a reign was</span></small></a>
+    <a href="../tools/year-since.html"><span class="zh">年份对照计算器 →</span><span class="en">Years-since Calculator →</span><small><span class="zh">年号年份对照多少年</span><span class="en">How long ago a reign was</span></small></a>
     <a href="../tools/ganzhi.html"><span class="zh">干支公历换算器 →</span><span class="en">Ganzhi Converter →</span><small><span class="zh">干支纪年互查</span><span class="en">Sexagenary converter</span></small></a>
     <a href="../categories/porcelain.html"><span class="zh">瓷器分类 →</span><span class="en">Porcelain collection →</span><small><span class="zh">查看古董圈瓷器藏品</span><span class="en">Explore porcelain listings</span></small></a>
     <a href="../insights/qing-porcelain-dating.html"><span class="zh">清代青花断代专题 →</span><span class="en">Qing porcelain dating guide →</span><small><span class="zh">青花发色与款识详解</span><span class="en">Blue &amp; white dating guide</span></small></a>
@@ -395,7 +397,7 @@ function gdToast(msg){if(!toastEl){toastEl=document.createElement("div");toastEl
 function gdCopyText(text,done,fail){function legacy(){var ta=document.createElement("textarea");ta.value=text;ta.setAttribute("readonly","");ta.style.cssText="position:fixed;left:-9999px;top:0;opacity:0;";document.body.appendChild(ta);ta.select();if(ta.setSelectionRange)ta.setSelectionRange(0,text.length);var ok=false;try{ok=document.execCommand("copy");}catch(e){}document.body.removeChild(ta);if(ok){done();}else if(fail){fail();}}
 if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(text).then(done,function(){legacy();});}else{legacy();}}
 window.gdShare=function(opts){opts=opts||{};var can=document.querySelector('link[rel="canonical"]');var url=opts.url||(can?can.href:location.href);var lang=(document.body.dataset&&document.body.dataset.lang)||"zh";var title=opts.title||document.title;var text=opts.text||"";if(navigator.share){navigator.share({title:title,text:text,url:url}).then(function(){},function(){});return;}gdCopyText(url,function(){gdToast(lang==="zh"?"链接已复制，去分享给朋友吧":"Link copied — share it with friends");},function(){gdToast(lang==="zh"?"复制失败，请手动复制地址栏链接":"Copy failed — please copy the URL from the address bar");});};})();
-window.gdSharePage=function(){var lang=(document.body.dataset&&document.body.dataset.lang)||"zh";window.gdShare({title:lang==="zh"?"古文化·朝代年代速查表｜古董圈Gudong.app":"Culture & Dynasty Era Lookup｜Gudong.app",text:lang==="zh"?"红山、良渚到明清的年代区间速查，仅供历史参考。":"Era lookup from Hongshan to the Qing, for historical reference only."});};
+window.gdSharePage=function(){var lang=(document.body.dataset&&document.body.dataset.lang)||"zh";window.gdShare({title:lang==="zh"?"古文化朝代年代速查｜古董圈Gudong.app":"Culture & Dynasty Era Lookup｜Gudong.app",text:lang==="zh"?"红山、良渚到明清的年代区间速查，仅供历史参考。":"Era lookup from Hongshan to the Qing, for historical reference only."});};
 </script>
 
 <!-- PWA 安装引导弹层 -->

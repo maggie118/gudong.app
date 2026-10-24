@@ -231,13 +231,14 @@ footer{text-align:center;padding:2.2rem 5% 1.8rem;background:var(--color-white);
             <a href="../sellers/index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">私家藏馆</span><span class="en">Private Gallery</span></a>
             <a href="../insights.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">情报 / 知识</span><span class="en">Insights</span></a>
             <a href="../tools/index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">藏家工具包</span><span class="en">Collector's Toolkit</span></a>
-                        <a href="../tools/year-since.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 年份距今计算器</span><span class="en">· Years-since-year Calculator</span></a>
+            <a href="../tools/year-since.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 年份对照计算器</span><span class="en">· Years-since-year Calculator</span></a>
             <a href="../tools/ganzhi.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 干支公历换算器</span><span class="en">· Sexagenary-Gregorian Converter</span></a>
-            <a href="../tools/era-lookup.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 古文化·朝代年代速查表</span><span class="en">· Culture &amp; Dynasty Era Lookup</span></a>
-            <a href="../tools/currency-convert.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 拍卖藏品货币参考换算器</span><span class="en">· Currency Reference Converter</span></a>
+            <a href="../tools/era-lookup.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 古文化朝代年代速查</span><span class="en">· Culture &amp; Dynasty Era Lookup</span></a>
+            <a href="../tools/currency-convert.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 拍卖货币实时换算</span><span class="en">· Currency Reference Converter</span></a>
             <a href="../tools/mark-lookup.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 瓷器底款快查</span><span class="en">· Porcelain Mark &amp; Seal Lookup</span></a>
             <a href="../tools/valuation.html" class="sidebar-sub active" onclick="closeSidebar()"><span class="zh">· 简易估值参考</span><span class="en">· Market Valuation Reference</span></a>
-            <a href="../about.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">关于我们</span><span class="en">About</span></a>
+            <a href="../tools/contract.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 买卖契约与卖家背书生成器</span><span class="en">· Contract &amp; Endorsement Generator</span></a>
+            href="../about.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">关于我们</span><span class="en">About</span></a>
             <button type="button" class="sidebar-lang-btn" onclick="toggleLang()" aria-label="Switch language"><span class="zh">🌐 English</span><span class="en">🌐 中文</span></button>
         </nav>
 </aside>
@@ -273,19 +274,41 @@ footer{text-align:center;padding:2.2rem 5% 1.8rem;background:var(--color-white);
     <h2 id="val-title"><span class="zh">① 选择评估维度</span><span class="en">① Choose the factors</span></h2>
     <div class="field">
       <label for="catSel"><span class="zh">品类</span><span class="en">Category</span></label>
-      <select id="catSel">
+      <div class="chip-group" data-target="catSel">
+        <button type="button" class="chip selected" data-value="porcelain"><span class="zh">瓷器</span><span class="en">Porcelain</span></button>
+        <button type="button" class="chip" data-value="jade"><span class="zh">玉器</span><span class="en">Jade</span></button>
+        <button type="button" class="chip" data-value="bronze"><span class="zh">铜器</span><span class="en">Bronzes</span></button>
+        <button type="button" class="chip" data-value="coins"><span class="zh">钱币</span><span class="en">Coins</span></button>
+        <button type="button" class="chip" data-value="paintings"><span class="zh">书画</span><span class="en">Paintings</span></button>
+        <button type="button" class="chip" data-value="misc"><span class="zh">杂项</span><span class="en">Misc.</span></button>
+        <button type="button" class="chip" data-value="seabuddha"><span class="zh">东南亚佛像</span><span class="en">SEA Buddha</span></button>
+        <button type="button" class="chip" data-value="nyonya"><span class="zh">娘惹瓷</span><span class="en">Nyonya Ware</span></button>
+        <button type="button" class="chip" data-value="vietnamese"><span class="zh">越南瓷</span><span class="en">Vietnamese</span></button>
+        <button type="button" class="chip" data-value="majapahit"><span class="zh">满者伯夷</span><span class="en">Majapahit</span></button>
+      </div>
+      <select id="catSel" class="visually-hidden" aria-hidden="true" tabindex="-1">
         <option value="porcelain" selected>瓷器 · Porcelain</option>
         <option value="jade">玉器 · Jade</option>
         <option value="bronze">铜器 · Bronzes</option>
         <option value="coins">钱币 · Coins</option>
         <option value="paintings">书画 · Paintings</option>
-        <option value="misc">杂项 · Miscellaneous</option>
+        <option value="misc">杂项 · Misc.</option>
+        <option value="seabuddha">东南亚佛像造像 · SEA bronze Buddha</option>
+        <option value="nyonya">娘惹瓷 · Nyonya / Peranakan ware</option>
+        <option value="vietnamese">越南瓷 · Vietnamese / Hoi An</option>
+        <option value="majapahit">满者伯夷/室利佛逝 · Majapahit / Srivijaya</option>
       </select>
     </div>
     <div class="field">
       <label for="eraSel"><span class="zh">年代</span><span class="en">Era</span></label>
-      <select id="eraSel">
-        <option value="archaic">明以前高古 · Pre-Ming / archaic</option>
+      <div class="chip-group" data-target="eraSel">
+        <button type="button" class="chip" data-value="archaic"><span class="zh">明以前高古</span><span class="en">Pre-Ming</span></button>
+        <button type="button" class="chip selected" data-value="peak"><span class="zh">明清盛世</span><span class="en">Ming-Qing</span></button>
+        <button type="button" class="chip" data-value="late"><span class="zh">晚清民国</span><span class="en">Late Qing/ROC</span></button>
+        <button type="button" class="chip" data-value="modern"><span class="zh">现当代</span><span class="en">Modern</span></button>
+      </div>
+      <select id="eraSel" class="visually-hidden" aria-hidden="true" tabindex="-1">
+        <option value="archaic">明以前高古 · Pre-Ming</option>
         <option value="peak" selected>明清盛世 · Ming-Qing heyday</option>
         <option value="late">晚清民国 · Late Qing / Republic</option>
         <option value="modern">现当代 · Modern / contemporary</option>
@@ -293,7 +316,12 @@ footer{text-align:center;padding:2.2rem 5% 1.8rem;background:var(--color-white);
     </div>
     <div class="field">
       <label for="condSel"><span class="zh">完整度</span><span class="en">Condition</span></label>
-      <select id="condSel">
+      <div class="chip-group" data-target="condSel">
+        <button type="button" class="chip selected" data-value="perfect"><span class="zh">全品（无冲无修）</span><span class="en">Perfect</span></button>
+        <button type="button" class="chip" data-value="hairline"><span class="zh">有冲线/小修</span><span class="en">Hairline</span></button>
+        <button type="button" class="chip" data-value="damaged"><span class="zh">残损</span><span class="en">Damaged</span></button>
+      </div>
+      <select id="condSel" class="visually-hidden" aria-hidden="true" tabindex="-1">
         <option value="perfect" selected>全品（无冲无修）· Perfect</option>
         <option value="hairline">有冲线/小修 · Hairline / minor repair</option>
         <option value="damaged">残损 · Damaged / broken</option>
@@ -301,15 +329,22 @@ footer{text-align:center;padding:2.2rem 5% 1.8rem;background:var(--color-white);
     </div>
     <div class="field">
       <label for="craftSel"><span class="zh">工艺级别</span><span class="en">Craft level</span></label>
-      <select id="craftSel">
+      <div class="chip-group" id="craftGroup" data-target="craftSel">
+        <button type="button" class="chip" data-value="official"><span class="zh">官窑/宫廷</span><span class="en">Official kiln</span></button>
+        <button type="button" class="chip selected" data-value="fine"><span class="zh">民窑精细</span><span class="en">Fine popular kiln</span></button>
+        <button type="button" class="chip" data-value="coarse"><span class="zh">民窑粗品</span><span class="en">Coarse kiln</span></button>
+      </div>
+      <select id="craftSel" class="visually-hidden" aria-hidden="true" tabindex="-1">
         <option value="official">官窑/宫廷 · Official kiln / imperial</option>
         <option value="fine" selected>民窑精细 · Fine popular kiln</option>
         <option value="coarse">民窑粗品 · Coarse popular kiln</option>
       </select>
     </div>
 
+    <div id="eraTip" style="display:none;margin:.2rem 0 .4rem;padding:.7rem .9rem;border-radius:10px;background:#fbf3e6;border:1px dashed #e0c9a6;font-size:.84rem;line-height:1.6;color:#8a6d3b;"></div>
+
     <div class="result" id="valResult" aria-live="polite" hidden>
-      <strong><span class="zh">参考市场区间</span><span class="en">Reference market range (SGD)</span></strong>
+      <strong><span class="zh">💰 参考估值区间</span><span class="en">💰 Reference market range (SGD)</span></strong>
       <div class="mark-badge" id="valRange"></div>
       <p id="valTrend"></p>
       <div class="val-breakdown" id="valBreakdown"></div>
@@ -360,6 +395,11 @@ footer{text-align:center;padding:2.2rem 5% 1.8rem;background:var(--color-white);
         .mark-badge { font-family: Georgia,"Songti SC","STSong",serif; font-size: clamp(1.6rem,5vw,2.2rem); letter-spacing:.04em; color:#5C3A26; background:#F1E8DF; border:1px solid #E4DED5; border-radius:10px; padding:.8rem 1rem; margin:.9rem 0; text-align:center; font-weight:600; }
         .mark-fake { background:#FBF3EC; border-left:3px solid #9C7A3A; padding:.6rem .8rem; border-radius:0 8px 8px 0; font-size:.86rem; color:#5C564F; margin-top:.6rem; }
         .result p { margin:.45rem 0; font-size:.92rem; color:#3d3833; line-height:1.6; }
+        .visually-hidden { position:absolute !important; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
+        .chip-group { display:flex; flex-wrap:wrap; gap:.5rem; }
+        .chip { padding:.55rem .9rem; border:1px solid var(--color-border); border-radius:999px; background:#fff; color:var(--color-text-secondary); font-size:.88rem; cursor:pointer; transition:.15s; min-height:44px; }
+        .chip:hover { border-color:var(--color-gold); }
+        .chip.selected { background:var(--color-primary); border-color:var(--color-primary); color:#fff; font-weight:600; }
         .val-breakdown { margin:.6rem 0; }
         .val-table { width:100%; max-width:420px; border-collapse:collapse; font-size:.88rem; }
         .val-table td { padding:.4rem .6rem; border-bottom:1px solid #E8E1D6; }
@@ -409,7 +449,7 @@ function gdToast(msg){if(!toastEl){toastEl=document.createElement("div");toastEl
 function gdCopyText(text,done,fail){function legacy(){var ta=document.createElement("textarea");ta.value=text;ta.setAttribute("readonly","");ta.style.cssText="position:fixed;left:-9999px;top:0;opacity:0;";document.body.appendChild(ta);ta.select();if(ta.setSelectionRange)ta.setSelectionRange(0,text.length);var ok=false;try{ok=document.execCommand("copy");}catch(e){}document.body.removeChild(ta);if(ok){done();}else if(fail){fail();}}
 if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(text).then(done,function(){legacy();});}else{legacy();}}
 window.gdShare=function(opts){opts=opts||{};var can=document.querySelector('link[rel="canonical"]');var url=opts.url||(can?can.href:location.href);var lang=(document.body.dataset&&document.body.dataset.lang)||"zh";var title=opts.title||document.title;var text=opts.text||"";if(navigator.share){navigator.share({title:title,text:text,url:url}).then(function(){},function(){});return;}gdCopyText(url,function(){gdToast(lang==="zh"?"链接已复制，去分享给朋友吧":"Link copied — share it with friends");},function(){gdToast(lang==="zh"?"复制失败，请手动复制地址栏链接":"Copy failed — please copy the URL from the address bar");});};})();
-window.gdSharePage=function(){var lang=(document.body.dataset&&document.body.dataset.lang)||"zh";window.gdShare({title:lang==="zh"?"古文化·朝代年代速查表｜古董圈Gudong.app":"Culture & Dynasty Era Lookup｜Gudong.app",text:lang==="zh"?"红山、良渚到明清的年代区间速查，仅供历史参考。":"Era lookup from Hongshan to the Qing, for historical reference only."});};
+window.gdSharePage=function(){var lang=(document.body.dataset&&document.body.dataset.lang)||"zh";window.gdShare({title:lang==="zh"?"古文化朝代年代速查｜古董圈Gudong.app":"Culture & Dynasty Era Lookup｜Gudong.app",text:lang==="zh"?"红山、良渚到明清的年代区间速查，仅供历史参考。":"Era lookup from Hongshan to the Qing, for historical reference only."});};
 </script>
 
 <!-- PWA 安装引导弹层 -->
@@ -528,12 +568,16 @@ modal.classList.add('open');});})();
 (function(){
 'use strict';
 var CATS=[
-{id:'porcelain',zh:'瓷器',en:'Porcelain',base:4000,auction:{zh:'同类青花/彩瓷在新加坡与香港拍场，完整器常见落槌区间约 S$2,000–15,000，官窑精品可显著更高。',en:'Comparable blue-and-white / polychrome pieces commonly hammer at S$2,000–15,000 in SG & HK; official-kiln pieces can go far higher.'}},
-{id:'jade',zh:'玉器',en:'Jade',base:6000,auction:{zh:'明清白玉件拍场差异大，完整带工件常见 S$3,000–20,000，高古玉视沁色与工艺浮动。',en:'Ming-Qing white-jade carvings commonly S$3,000–20,000; archaic jade varies by patina and workmanship.'}},
-{id:'bronze',zh:'铜器',en:'Bronzes',base:5000,auction:{zh:'铜炉/铜造像完整包浆件常见 S$2,000–12,000，重器与带款者更高。',en:'Censers / bronze figures with good patina commonly S$2,000–12,000; major or signed pieces higher.'}},
-{id:'coins',zh:'钱币',en:'Coins',base:800,auction:{zh:'普通机制币/铜钱常见 S$50–800，品相与稀有度决定价格。',en:'Common cash / machine-struck coins commonly S$50–800; grade and rarity decide.'}},
-{id:'paintings',zh:'书画',en:'Paintings',base:9000,auction:{zh:'近现代与地方名家立轴常见 S$2,000–30,000，真伪与来源是关键。',en:'Modern / regional-master scrolls commonly S$2,000–30,000; authenticity and provenance are key.'}},
-{id:'misc',zh:'杂项',en:'Miscellaneous',base:1500,auction:{zh:'家具、文房、珐琅等杂项完整件常见 S$800–6,000，材质与工艺差异大。',en:'Furniture, scholar objects, cloisonne etc. commonly S$800–6,000; wide material/craft spread.'}}
+{id:'porcelain',zh:'瓷器',en:'Porcelain',base:15000,auction:{zh:'参照苏富比/佳士得/中国嘉德香港明清瓷落槌价（港币），按 1 港币≈0.17 新币换算：民窑精细完整青花/彩瓷常见约港币8万–45万 → 约新币1.4万–7.8万；官窑御窑精品可达数十万至千万元（港币）。',en:'HK hammer (Sotheby\'s / Christie\'s / China Guardian) converted HKD→SGD at ~0.17: fine popular-kiln blue-and-white / polychrome commonly HK$80k–450k ≈ S$14k–78k; imperial pieces reach millions (HKD).'}},
+{id:'jade',zh:'玉器',en:'Jade',base:25000,auction:{zh:'参照香港拍场明清白玉/翡翠雕件落槌价（港币）按 1 港币≈0.17 新币换算：完整带工件常见约港币17万–85万 → 约新币2.9万–14.5万；高古玉与老坑翡翠视沁色、种水显著上浮。',en:'HK hammer converted HKD→SGD ~0.17: Ming-Qing jade/jadeite carvings commonly HK$170k–850k ≈ S$29k–145k; archaic jade and top jadeite vary widely.'}},
+{id:'bronze',zh:'铜器',en:'Bronzes',base:18000,auction:{zh:'参照香港拍场铜炉/铜造像落槌价（港币）按 1 港币≈0.17 新币换算：完整包浆件常见约港币8.5万–57万 → 约新币1.5万–9.7万；带款、重器与宫廷造像明显更高。',en:'HK hammer converted HKD→SGD ~0.17: censers / bronze figures commonly HK$85k–570k ≈ S$15k–97k; signed, major or imperial pieces higher.'}},
+{id:'coins',zh:'钱币',en:'Coins',base:2000,auction:{zh:'参照香港/北京拍场落槌价（港币）按 1 港币≈0.17 新币换算：普通品常见约港币1,200–2.9万 → 约新币200–5,000；高分评级与稀珍品可达数万至数十万元。',en:'HK / Beijing hammer converted HKD→SGD ~0.17: common coins HK$1.2k–29k ≈ S$200–5k; high-grade slabbed / rare pieces reach tens of thousands.'}},
+{id:'paintings',zh:'书画',en:'Paintings',base:28000,auction:{zh:'参照香港苏富比/佳士得近现代及古代书画落槌价（港币）按 1 港币≈0.17 新币换算：名家立轴常见约港币17万–116万 → 约新币2.9万–20万；真伪与著录来源（Provenance）是关键。',en:'HK Sotheby\'s / Christie\'s hammer converted HKD→SGD ~0.17: master scrolls commonly HK$170k–1.16M ≈ S$29k–200k; authenticity and documented provenance are decisive.'}},
+{id:'misc',zh:'杂项',en:'Miscellaneous',base:5000,auction:{zh:'参照香港拍场家具、文房、珐琅等落槌价（港币）按 1 港币≈0.17 新币换算：完整件常见约港币2.9万–23万 → 约新币5,000–4万；材质与工艺差异大。',en:'HK hammer converted HKD→SGD ~0.17: furniture, scholar objects, cloisonne commonly HK$29k–230k ≈ S$5k–40k; wide material/craft spread.'}},
+{id:'seabuddha',zh:'东南亚佛像造像',en:'SEA bronze Buddha',base:12000,auction:{zh:'参照 Larasati / 33 Auctions（雅加达/新加坡）东南亚高古造像专场：室利佛逝、吴哥、爪哇铜佛与石造像完整件常见约新币8,000–6万，带明确来源与出土记录者显著更高；残件、修复件大幅折让。',en:'Larasati / 33 Auctions (Jakarta/Singapore) SEA archaic sculpture: Srivijaya, Khmer, Javanese bronze/stone figures commonly S$8k–60k; provenance and excavated records matter; damaged/restored pieces discounted heavily.'}},
+{id:'nyonya',zh:'娘惹瓷',en:'Nyonya ware',base:3000,auction:{zh:'参照新加坡本地及东南亚娘惹瓷专场：完整珠彩/粉彩娘惹餐具、摆件常见约新币1,000–8,000，名家订制与成套餐具更高。',en:'Singapore / SEA Peranakan sales: complete nyonya ware pieces commonly S$1k–8k; commissioned or sets higher.'}},
+{id:'vietnamese',zh:'越南瓷',en:'Vietnamese / Hoi An',base:2500,auction:{zh:'参照会安沉船（Hoi An Hoard）及越南青花专场：常见贸易瓷完整件约新币1,500–6,000，精品纹样与底款完整者更高。',en:'Hoi An Hoard & Vietnamese blue-and-white sales: common trade pieces S$1.5k–6k; fine decorated pieces with clear base higher.'}},
+{id:'majapahit',zh:'满者伯夷/室利佛逝',en:'Majapahit / Srivijaya',base:4000,auction:{zh:'参照 Larasati 东南亚高古陶与金饰专场：满者伯夷釉陶、陶塑与小金饰常见约新币2,000–1.5万，工艺精细、带出土来源者更高。',en:'Larasati SEA archaic ceramics & gold: Majapahit glazed earthenware, terracotta and small gold commonly S$2k–15k; fine workmanship with documented excavation higher.'}}
 ];
 var ERAS=[
 {id:'archaic',zh:'明以前高古',en:'Pre-Ming / archaic',f:1.5},
@@ -551,7 +595,7 @@ var CRAFTS=[
 {id:'fine',zh:'民窑精细',en:'Fine popular kiln',f:1.5},
 {id:'coarse',zh:'民窑粗品',en:'Coarse popular kiln',f:0.6}
 ];
-var TRENDS={zh:'近年精品官窑与带清晰来源（Provenance）者稳健，普品与残件偏疲软；具体随拍场时点与经济环境波动。',en:'Top official-kiln pieces with clear provenance have held up; common and damaged pieces soften — timing and the market cycle move these.'};
+var TRENDS={zh:'行情参照苏富比/佳士得/中国嘉德香港等全球东方艺术拍场：近年带清晰著录（Provenance）的官窑精品与老坑翡翠稳健上行，普品与残件仍偏疲软；具体随拍场时点、汇率与全球藏家需求波动。',en:'Benchmarked against global Asian-art auctions (Sotheby\'s / Christie\'s / China Guardian HK): official-kiln pieces with clear provenance and top jadeite have held up; common and damaged pieces soften — timing, FX and collector demand move these.'};
 
 function $(id){return document.getElementById(id);}
 function lang(){return document.body.dataset.lang==='en'?'en':'zh';}
@@ -567,7 +611,72 @@ $('eraSel').value='peak';
 $('condSel').value='perfect';
 $('craftSel').value='fine';
 
-function calc(){
+// 可见选项按钮（chips）联动
+document.querySelectorAll('.chip-group').forEach(function(grp){
+  var target=$(grp.getAttribute('data-target'));
+  grp.querySelectorAll('.chip').forEach(function(ch){
+    ch.addEventListener('click',function(){
+      grp.querySelectorAll('.chip').forEach(function(x){x.classList.remove('selected');});
+      ch.classList.add('selected');
+      if(target) target.value=ch.getAttribute('data-value');
+      if(grp.getAttribute('data-target')==='catSel'){ refreshCraftLabels(); updateEraTip(); }
+      calc(true);
+    });
+  });
+});
+
+// 工艺级别标签随品类切换（不同品类用各自的档位词）
+var CRAFT_LABELS={
+  porcelain:{official:{zh:'官窑/宫廷',en:'Official kiln'},fine:{zh:'民窑精细',en:'Fine popular kiln'},coarse:{zh:'民窑粗品',en:'Coarse kiln'}},
+  jade:{official:{zh:'帝王玉/高古重器',en:'Imperial / archaic'},fine:{zh:'一般明清玉件',en:'Standard Ming-Qing jade'},coarse:{zh:'普通饰件/残件',en:'Ordinary / damaged'}},
+  coins:{official:{zh:'稀见高分评级',en:'Rare high-grade'},fine:{zh:'常见好品',en:'Common nice grade'},coarse:{zh:'普通通货',en:'Common circulated'}},
+  paintings:{official:{zh:'名家/大家',en:'Major master'},fine:{zh:'地方/一般名家',en:'Regional master'},coarse:{zh:'应酬/商品/佚名',en:'Commercial / anonymous'}},
+  bronze:{official:{zh:'宫廷造像/重器',en:'Imperial / major'},fine:{zh:'普通铜炉/铜件',en:'Standard censer'},coarse:{zh:'粗铜件',en:'Plain bronze'}},
+  misc:{official:{zh:'名家/宫廷工艺',en:'Master / imperial'},fine:{zh:'一般工艺',en:'Standard craft'},coarse:{zh:'普通粗工',en:'Plain coarse'}},
+  seabuddha:{official:{zh:'王室/宫廷造像',en:'Royal / court'},fine:{zh:'寺院常见像',en:'Standard temple'},coarse:{zh:'民间小品',en:'Folk small piece'}},
+  nyonya:{official:{zh:'名家订制/成套',en:'Commissioned / set'},fine:{zh:'一般日用件',en:'Standard piece'},coarse:{zh:'粗品残件',en:'Coarse / damaged'}},
+  vietnamese:{official:{zh:'精品纹样/完整底款',en:'Fine decor / clear base'},fine:{zh:'常见贸易瓷',en:'Common trade ware'},coarse:{zh:'粗劣残件',en:'Coarse / damaged'}},
+  majapahit:{official:{zh:'精细陶塑/金饰',en:'Fine terracotta/gold'},fine:{zh:'常见釉陶',en:'Standard glazed'},coarse:{zh:'残片粗品',en:'Fragments / coarse'}}
+};
+function refreshCraftLabels(){
+  var cat=$('catSel').value, map=CRAFT_LABELS[cat]||CRAFT_LABELS.porcelain;
+  var grp=$('craftGroup'); if(!grp) return;
+  grp.querySelectorAll('.chip').forEach(function(ch){
+    var v=ch.getAttribute('data-value');
+    if(map[v]) ch.innerHTML='<span class="zh">'+map[v].zh+'</span><span class="en">'+map[v].en+'</span>';
+  });
+  var sel=$('craftSel'); if(!sel) return;
+  sel.querySelectorAll('option').forEach(function(o){
+    if(map[o.value]) o.textContent=map[o.value].zh+' · '+map[o.value].en;
+  });
+}
+refreshCraftLabels();
+
+// 年代智能提示：东南亚高古造像/满者伯夷 → 明以前；娘惹瓷 → 晚清民国
+var ERA_TIP={
+  seabuddha:{era:'archaic',zh:'小提示：东南亚高古造像（室利佛逝/吴哥/爪哇）属"明以前"，已为你把年代切到「明以前高古」，系数才准确。',en:'Tip: SEA archaic figures are pre-Ming — era set to Pre-Ming for the correct factor.'},
+  majapahit:{era:'archaic',zh:'小提示：满者伯夷/室利佛逝陶金饰属"明以前"，已为你把年代切到「明以前高古」。',en:'Tip: Majapahit / Srivijaya ware is pre-Ming — era set to Pre-Ming.'},
+  nyonya:{era:'late',zh:'小提示：娘惹瓷多为19–20世纪，已为你把年代切到「晚清民国」更准；属高古精品可改回「明以前高古」。',en:'Tip: Nyonya ware is mostly 19th–20th c. — era set to Late Qing/ROC; switch to Pre-Ming if it is an archaic piece.'},
+  vietnamese:{era:'peak',zh:'小提示：越南会安瓷约当明清，年代保持「明清盛世」即可。',en:'Tip: Vietnamese / Hoi An ware is roughly Ming-Qing — keep era at Ming-Qing.'}
+};
+function setEra(v){
+  if($('eraSel')) $('eraSel').value=v;
+  var grp=document.querySelector('.chip-group[data-target="eraSel"]'); if(!grp) return;
+  grp.querySelectorAll('.chip').forEach(function(ch){
+    ch.classList.toggle('selected', ch.getAttribute('data-value')===v);
+  });
+}
+function updateEraTip(){
+  var cat=$('catSel').value, tip=$('eraTip'), L=lang();
+  var t=ERA_TIP[cat];
+  if(!t){ tip.style.display='none'; tip.innerHTML=''; return; }
+  tip.style.display='block';
+  setEra(t.era);
+  tip.textContent=(L==='zh')?t.zh:t.en;
+}
+updateEraTip();
+
+function calc(scroll){
   var cat=CATS.filter(function(c){return c.id===$('catSel').value;})[0];
   var era=ERAS.filter(function(e){return e.id===$('eraSel').value;})[0];
   var cond=CONDS.filter(function(c){return c.id===$('condSel').value;})[0];
@@ -577,13 +686,15 @@ function calc(){
   var lo=mid*0.7, hi=mid*1.3;
   var L=lang();
   $('valResult').hidden=false;
+  if(scroll){ try{ $('valResult').scrollIntoView({behavior:'smooth',block:'center'}); }catch(e){} }
   $('valRange').textContent=fmt(lo)+' – '+fmt(hi);
   $('valTrend').textContent=(L==='zh'?'行情趋势：':'Trend: ')+TRENDS[L];
+  var craftLabel = (CRAFT_LABELS[cat.id] && CRAFT_LABELS[cat.id][craft.id]) ? CRAFT_LABELS[cat.id][craft.id][L] : craft[L];
   var rows=[
     [(L==='zh'?'品类基准价':'Category base'),fmt(cat.base)],
     ['× '+(L==='zh'?'年代系数':'Era factor')+' ('+era[L]+')','×'+era.f],
     ['× '+(L==='zh'?'完整度系数':'Condition factor')+' ('+cond[L]+')','×'+cond.f],
-    ['× '+(L==='zh'?'工艺系数':'Craft factor')+' ('+craft[L]+')','×'+craft.f],
+    ['× '+(L==='zh'?'工艺系数':'Craft factor')+' ('+craftLabel+')','×'+craft.f],
     [(L==='zh'?'中间价（区间中点）':'Midpoint (band centre)'),fmt(mid)]
   ];
   $('valBreakdown').innerHTML='<table class="val-table"><tbody>'+rows.map(function(r){
@@ -593,8 +704,9 @@ function calc(){
   $('valFormula').textContent=(L==='zh'?'计算口径：':'Formula: ')+(L==='zh'?'基准价 × 年代 × 完整度 × 工艺（±30% 浮动），仅为心理预期模型。':'base × era × condition × craft (±30% band) — an expectation model only.');
 }
 ['catSel','eraSel','condSel','craftSel'].forEach(function(id){ $(id).addEventListener('change',calc); });
-window.onLangChanged=function(){ calc(); };
+window.onLangChanged=function(){ updateEraTip(); calc(); };
 calc();
+})();
 </script>
 
 <style>

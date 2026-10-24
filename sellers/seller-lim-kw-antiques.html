@@ -401,10 +401,13 @@ footer {
             <a href="../sellers/index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">私家藏馆</span><span class="en">Private Gallery</span></a>
             <a href="../insights.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">情报 / 知识</span><span class="en">Insights</span></a>
             <a href="../tools/index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">藏家工具包</span><span class="en">Collector's Toolkit</span></a>
-                        <a href="../tools/year-since.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 年份距今计算器</span><span class="en">· Years-since-year Calculator</span></a>
+                        <a href="../tools/year-since.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 年份对照计算器</span><span class="en">· Years-since-year Calculator</span></a>
             <a href="../tools/ganzhi.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 干支公历换算器</span><span class="en">· Sexagenary-Gregorian Converter</span></a>
-            <a href="../tools/era-lookup.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 古文化·朝代年代速查表</span><span class="en">· Culture &amp; Dynasty Era Lookup</span></a>
-            <a href="../tools/currency-convert.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 拍卖藏品货币参考换算器</span><span class="en">· Currency Reference Converter</span></a>
+            <a href="../tools/era-lookup.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 古文化朝代年代速查</span><span class="en">· Culture &amp; Dynasty Era Lookup</span></a>
+            <a href="../tools/currency-convert.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 拍卖货币实时换算</span><span class="en">· Currency Reference Converter</span></a>
+            <a href="../tools/mark-lookup.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 瓷器底款快查</span><span class="en">· Porcelain Mark Lookup</span></a>
+            <a href="../tools/valuation.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 简易估值参考</span><span class="en">· Market Valuation Reference</span></a>
+            <a href="../tools/contract.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 买卖契约生成器</span><span class="en">· Contract &amp; Endorsement Generator</span></a>
             <a href="../about.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">关于我们</span><span class="en">About</span></a>
             <button type="button" class="sidebar-lang-btn" onclick="toggleLang()" aria-label="Switch language"><span class="zh">🌐 English</span><span class="en">🌐 中文</span></button>
         </nav>
@@ -656,13 +659,30 @@ footer {
             if (sl.intro_zh) document.getElementById('bioZh').textContent = sl.intro_zh;
             if (sl.intro_en) document.getElementById('bioEn').textContent = sl.intro_en;
             /* gd-wa-username-2026-10-18 —— username 优先；旧的纯数字清洗会毁掉 username，故分开处理 */
-            /* gd-wa-hide-phone-2026-10-19 —— 只用 username，号码不再出现在链接里 */
+            /* gd-wa-bind-v3 —— 优先用户名，未填用户名则回退手机号（wa.me 需纯数字国际格式）；点击附带 gudong.app 咨询话术 */
             if (sl.wa_username) {
                 const el = document.getElementById('contactWhatsapp');
                 const PLATFORM_WA_USERNAME = "gudong.app";
                 const raw = String(sl.wa_username || '').trim().replace(/^@/, '');
-                const norm = /^[0-9]+$/.test(raw) ? '' : raw.replace(/[^A-Za-z0-9_.]/g, '');
-                el.href = 'https://wa.me/' + (norm || PLATFORM_WA_USERNAME);
+                const compact = raw.replace(/[\s\-().]/g, '');
+                let norm = '', from = 'platform';
+                if (/^\+?[0-9]{7,15}$/.test(compact)) {
+                    norm = compact.replace(/[^0-9]/g, '');
+                    if (norm) from = 'seller';
+                } else if (raw) {
+                    norm = raw.replace(/[^A-Za-z0-9_.]/g, '');
+                    if (norm) from = 'seller';
+                }
+                if (!norm) norm = PLATFORM_WA_USERNAME;
+                const waText = () => (currentLang === 'en'
+                    ? 'Hi! I found your private collection "' + (sl.display_en || sl.display_zh || '') + '" on gudong.app and would like to learn more about your items.'
+                    : '您好！我在 gudong.app 看到您的私家藏馆「' + (sl.display_zh || sl.display_en || '') + '」，想进一步了解藏品，方便介绍一下吗？');
+                el.href = 'https://wa.me/' + norm + '?text=' + encodeURIComponent(waText());
+                el.setAttribute('data-wa-username', norm);
+                el.setAttribute('data-wa-from', from);
+                el.addEventListener('click', () => {
+                    el.href = 'https://wa.me/' + el.getAttribute('data-wa-username') + '?text=' + encodeURIComponent(waText());
+                });
                 el.hidden = false;
             }
             if (sl.email) {
@@ -931,6 +951,7 @@ window.gdSharePage = function () {
     });
 })();
 </script>
+<script src="/gd-install.js" defer></script>
 </body>
 </html>
 

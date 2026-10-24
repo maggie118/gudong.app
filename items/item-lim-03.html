@@ -633,7 +633,7 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
                     </a>
                 </div>
                                 <div class="pwa-action-container" data-gd-wa-btn>
-                    <a href="https://wa.me/gudong.app" target="_blank" rel="noopener noreferrer" class="pwa-wa-username-btn" data-wa-bind="seller">
+                    <a href="#" target="_blank" rel="noopener noreferrer" class="pwa-wa-username-btn" data-wa-bind="seller">
                         <svg class="wa-svg-icon" viewBox="0 0 24 24" aria-hidden="true">
                             <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.717-1.456L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.37 9.864-9.799.002-2.63-1.023-5.101-2.885-6.965C16.528 1.977 14.053.953 11.434.953c-5.442 0-9.866 4.372-9.87 9.802 0 1.714.47 3.387 1.357 4.847L1.872 21.03l5.632-1.462z"/>
                         </svg>
@@ -1056,7 +1056,7 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
         }
                 /* gd-wa-username-2026-10-18 · gd-wa-bind-v3 —— 卖家 WhatsApp 动态绑定：优先用户名，未填用户名则回退手机号；点击附带 gudong.app 藏品咨询话术 */
         function setWaContact(sl, item) {
-            var PLATFORM_WA_USERNAME = "gudong.app";
+            var phoneAlt = String(clean(first(sl && sl.wa_phone)) || '').replace(/[^0-9]/g, '');
             var links = document.querySelectorAll('a[data-wa-bind="seller"]');
             if (!links.length) return;
             var raw = '';
@@ -1072,8 +1072,12 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
                 if (norm) from = 'seller';
             }
             /* 优先用户名；未填用户名 → 回退手机号 */
-            if (!norm) norm = PLATFORM_WA_USERNAME;
-            if (!norm) return;
+            if (!norm && phoneAlt) { norm = phoneAlt; from = 'seller'; }
+            if (!norm) {
+                /* 用户名和手机号都没有 → 隐藏按钮（@gudong.app 未注册 WhatsApp，不再兜底） */
+                for (var k = 0; k < links.length; k++) links[k].hidden = true;
+                return;
+            }
             for (var i = 0; i < links.length; i++) {
                 var tZh = clean(first(item && item.title_zh)) || clean(first(item && item.title_en)) || '';
                 var tEn = clean(first(item && item.title_en)) || clean(first(item && item.title_zh)) || '';

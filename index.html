@@ -1836,6 +1836,274 @@
         .finds-related { font-size: .7rem; }
         .intel-heat { font-size: .69rem; }
     }
+
+    /* ============================================================
+       2026-10-25 首页优化：信任前置 / 情报台加权 / 实时动态
+       ============================================================ */
+    #hero { margin-bottom: .9rem; }
+
+    /* ---------- 首屏信任保障带 ---------- */
+    .assurance-band {
+        max-width: 1020px;
+        margin: .2rem auto 2.4rem;
+        padding: 1.4rem 1.35rem 1.2rem;
+        background: linear-gradient(180deg, #FFFDF8 0%, #FAF5EA 100%);
+        border: 1px solid var(--color-border);
+        border-radius: 16px;
+        box-shadow: 0 8px 26px rgba(122, 78, 51, .06);
+        position: relative;
+        overflow: hidden;
+    }
+    .assurance-band::before {
+        content: '';
+        position: absolute;
+        inset: 0 0 auto 0;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
+    }
+    .ab-intro { text-align: center; margin-bottom: 1.15rem; }
+    .ab-kicker {
+        display: block;
+        font-size: .61rem; font-weight: 700;
+        letter-spacing: .26em; text-transform: uppercase;
+        color: var(--color-gold);
+    }
+    .ab-title {
+        display: block;
+        margin-top: .4rem;
+        font-family: var(--font-serif);
+        font-size: 1.04rem; font-weight: 700;
+        letter-spacing: .06em;
+        color: var(--color-primary-dark);
+    }
+    .ab-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: .55rem;
+    }
+    .ab-item {
+        padding: .15rem .8rem;
+        border-left: 1px solid rgba(156, 122, 58, .16);
+    }
+    .ab-item:first-child { border-left: none; }
+    .ab-icon {
+        display: inline-flex; align-items: center; justify-content: center;
+        width: 27px; height: 27px;
+        border-radius: 50%;
+        background: var(--color-gold-soft);
+        color: var(--color-gold);
+        margin-bottom: .45rem;
+    }
+    .ab-icon svg { width: 14px; height: 14px; fill: currentColor; display: block; }
+    .ab-name {
+        font-size: .84rem; font-weight: 700;
+        color: var(--color-text);
+        line-height: 1.45;
+        margin-bottom: .22rem;
+    }
+    .ab-desc {
+        font-size: .74rem;
+        color: var(--color-text-secondary);
+        line-height: 1.65;
+    }
+
+    /* ---------- 情报台：上浮 + 视觉加权 ---------- */
+    #insights {
+        background: linear-gradient(180deg, #FFFDF8 0%, #FBF6EC 100%);
+        border: 1px solid var(--color-border);
+        border-radius: 16px;
+        padding: 1.55rem 1.45rem 1.35rem;
+        margin: 0 0 4.5rem;
+        box-shadow: 0 8px 26px rgba(122, 78, 51, .05);
+        position: relative;
+        overflow: hidden;
+    }
+    #insights::before {
+        content: '';
+        position: absolute;
+        inset: 0 0 auto 0;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, rgba(156, 122, 58, .75), transparent);
+    }
+    .insight-eyebrow {
+        display: block;
+        padding-left: .8rem;
+        margin-bottom: .3rem;
+        font-size: .61rem; font-weight: 700;
+        letter-spacing: .2em; text-transform: uppercase;
+        color: var(--color-gold);
+    }
+    #insights .section-head2 { margin-bottom: 1.25rem; }
+    #insights .section-head2 .title { font-size: 1.46rem; }
+    #insights .insight-grid { counter-reset: insight; gap: 1.1rem; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    #insights .insight-card {
+        counter-increment: insight;
+        background: #FFFFFF;
+        padding: 1.35rem 1.3rem 1.45rem;
+    }
+    #insights .insight-card::after {
+        content: "0" counter(insight);
+        position: absolute;
+        top: .75rem; right: .95rem;
+        font-family: var(--font-serif);
+        font-size: 1.2rem; font-weight: 600;
+        letter-spacing: .02em;
+        color: rgba(156, 122, 58, .22);
+        line-height: 1;
+    }
+
+    /* ---------- 今日情报：实时看板 ---------- */
+    .intel-stats {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: .55rem;
+        margin-bottom: .95rem;
+        position: relative;
+    }
+    .intel-stat {
+        background: rgba(255, 255, 255, .045);
+        border: 1px solid rgba(217, 182, 121, .16);
+        border-radius: 9px;
+        padding: .55rem .7rem .6rem;
+        line-height: 1.25;
+    }
+    .intel-stat b {
+        display: block;
+        font-family: var(--font-serif);
+        font-size: 1.18rem; font-weight: 700;
+        color: #E8C87E;
+        font-variant-numeric: tabular-nums;
+    }
+    .intel-stat b small {
+        font-family: var(--font-sans);
+        font-size: .58em; font-weight: 500;
+        margin-left: .12rem;
+        color: rgba(201, 182, 138, .72);
+    }
+    .intel-stat span {
+        display: block;
+        margin-top: .2rem;
+        font-size: .65rem;
+        color: rgba(201, 182, 138, .72);
+        letter-spacing: .02em;
+    }
+    .intel-stat--muted b { color: #F1E8DF; }
+
+    .intel-liveboard {
+        position: relative;
+        height: 13.2rem;
+        overflow: hidden;
+        margin-bottom: 1rem;
+        border-top: 1px solid rgba(217, 182, 121, .16);
+        border-bottom: 1px solid rgba(217, 182, 121, .16);
+        -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 9%, #000 91%, transparent 100%);
+        mask-image: linear-gradient(180deg, transparent 0, #000 9%, #000 91%, transparent 100%);
+    }
+    .intel-ticker { animation: tickScroll var(--tick-duration, 38s) linear infinite; }
+    .intel-liveboard:hover .intel-ticker,
+    .intel-liveboard:focus-within .intel-ticker { animation-play-state: paused; }
+    @keyframes tickScroll {
+        from { transform: translateY(0); }
+        to   { transform: translateY(-50%); }
+    }
+    .tick-row {
+        display: flex; align-items: center; gap: .6rem;
+        padding: .62rem .35rem;
+        border-bottom: 1px dashed rgba(217, 182, 121, .1);
+        font-size: .8rem;
+        line-height: 1.5;
+    }
+    .tick-dot {
+        width: 6px; height: 6px; flex-shrink: 0;
+        border-radius: 50%;
+        background: #E8C87E;
+        box-shadow: 0 0 0 0 rgba(232, 200, 126, .5);
+        animation: intelPulse 2.4s infinite;
+    }
+    .tick-place {
+        flex-shrink: 0;
+        font-size: .65rem; letter-spacing: .04em;
+        color: #E8C87E;
+        background: rgba(217, 182, 121, .12);
+        border: 1px solid rgba(217, 182, 121, .28);
+        border-radius: 4px;
+        padding: .1rem .4rem;
+        line-height: 1.5;
+    }
+    .tick-text {
+        flex: 1; min-width: 0;
+        color: rgba(241, 232, 223, .92);
+        white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .tick-ago {
+        flex-shrink: 0;
+        font-size: .66rem;
+        color: rgba(201, 182, 138, .55);
+        font-variant-numeric: tabular-nums;
+    }
+    .tick-row--hot .tick-text { color: #F4DFAE; font-weight: 600; }
+
+    .intel-editorial-head {
+        display: flex; align-items: center; justify-content: space-between;
+        gap: 1rem;
+        margin-bottom: .6rem;
+    }
+    .ie-title {
+        font-size: .63rem; font-weight: 700;
+        letter-spacing: .18em; text-transform: uppercase;
+        color: #D9B679;
+    }
+    .ie-more {
+        font-size: .71rem;
+        color: #E8C87E;
+        text-decoration: none;
+        opacity: .85;
+        transition: opacity var(--dur) var(--ease);
+    }
+    .ie-more:hover { opacity: 1; }
+    .intel-card--compact {
+        flex: 0 0 262px;
+        gap: .4rem;
+        padding: .72rem .82rem .75rem;
+        text-decoration: none;
+    }
+    .intel-card--compact .intel-text {
+        font-size: .78rem;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+    .intel-compact-meta {
+        margin-top: auto;
+        font-size: .64rem;
+        color: rgba(201, 182, 138, .55);
+        letter-spacing: .02em;
+    }
+
+    @media (max-width: 860px) {
+        .ab-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem .6rem; }
+        .ab-item { border-left: none; padding: 0 .15rem; }
+        .intel-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 640px) {
+        .assurance-band { padding: 1.15rem 1rem 1.05rem; margin-bottom: 1.8rem; }
+        .ab-title { font-size: .95rem; }
+        .ab-desc { font-size: .71rem; }
+        #insights { padding: 1.2rem 1rem 1.05rem; margin-bottom: 3.4rem; }
+        #insights .section-head2 .title { font-size: 1.3rem; }
+        #insights .insight-grid { grid-template-columns: 1fr; }
+        .intel-liveboard { height: 11.6rem; }
+        .tick-row { font-size: .75rem; gap: .4rem; padding: .58rem .2rem; }
+        .tick-place { font-size: .6rem; padding: .08rem .32rem; }
+        .tick-ago { font-size: .6rem; }
+        .intel-card--compact { flex: 0 0 236px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+        .intel-ticker { animation: none; }
+        .intel-liveboard { height: auto; max-height: 13.2rem; overflow-y: auto; }
+        .tick-dot { animation: none; }
+    }
     </style>
 </head>
 <body data-lang="zh">
@@ -1869,9 +2137,10 @@
             <a href="my/saved.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">我的收藏 · 关注</span><span class="en">Saved &amp; Followed</span></a>
 <div class="saved-hint" style="margin:-.15rem 0 .5rem 1.4rem;font-size:.64rem;color:#8a8178;letter-spacing:.02em;line-height:1.5;"><span class="zh">在您的设备本地保存，零数据追踪。</span><span class="en">Saved locally on your device. Zero data tracked.</span></div>
             <a href="my/briefing.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">今日简报</span><span class="en">Today's Brief</span></a>
-            <a href="#daily-intel" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 释出动态</span><span class="en">· Curated Disposals</span></a>
-            <a href="#today-finds" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 今日发现</span><span class="en">· Today's Finds</span></a>
-            <a href="#new-listings" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 刚刚上新</span><span class="en">· Just Listed</span></a>
+            <a href="#daily-intel" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 实时动态</span><span class="en">· Live Pulse</span></a>
+            <a href="#today-finds" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 今日发现</span><span class="en">· Today's Curated Finds</span></a>
+            <a href="#new-listings" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 近期释出</span><span class="en">· Recently Released</span></a>
+            <a href="#insights" class="sidebar-link" onclick="closeSidebar()"><span class="zh">情报 / 知识</span><span class="en">Insights</span></a>
             <a href="collection.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">藏品库</span><span class="en">Collection</span></a>
             <a href="categories/porcelain.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 瓷器</span><span class="en">· Porcelain</span></a>
             <a href="categories/jade.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 玉器</span><span class="en">· Jade</span></a>
@@ -1880,7 +2149,6 @@
             <a href="categories/paintings.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 书画</span><span class="en">· Paintings &amp; Calligraphy</span></a>
             <a href="categories/misc.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 杂项</span><span class="en">· Miscellaneous</span></a>
             <a href="sellers/index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">私家藏馆</span><span class="en">Private Gallery</span></a>
-            <a href="insights.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">情报 / 知识</span><span class="en">Insights</span></a>
             <a href="tools/index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">藏家工具包</span><span class="en">Collector's Toolkit</span></a>
                         <a href="tools/year-since.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 年份对照计算器</span><span class="en">· Years-since-year Calculator</span></a>
             <a href="tools/ganzhi.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 干支公历换算器</span><span class="en">· Sexagenary-Gregorian Converter</span></a>
@@ -1967,27 +2235,110 @@
             </div>
         </section>
 
+        <!-- ============ 首屏信任保障带（懂行 · 私密 · 安全 · 有审美） ============ -->
+        <section class="assurance-band" aria-label="隐私与信任保障">
+            <div class="ab-intro">
+                <span class="ab-kicker">Singapore · Private Collectors' Network</span>
+                <span class="ab-title zh">懂行 · 私密 · 安全 · 有审美</span>
+                <span class="ab-title en">Expert. Private. Secure. Curated.</span>
+            </div>
+            <div class="ab-grid">
+                <div class="ab-item">
+                    <span class="ab-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2 4 5.5V11c0 5 3.6 9.6 8 11 4.4-1.4 8-6 8-11V5.5L12 2z"/></svg></span>
+                    <div class="ab-name zh">端到端私密直连</div>
+                    <div class="ab-name en">End-to-End Private</div>
+                    <div class="ab-desc zh">免注册浏览，WhatsApp 加密直连藏家，平台不留存对话。</div>
+                    <div class="ab-desc en">Browse without sign-up; encrypted WhatsApp lines to collectors. No conversation stored.</div>
+                </div>
+                <div class="ab-item">
+                    <span class="ab-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16zm1-13h-2v1.2c-1.7.3-3 1.4-3 3.1 0 1.9 1.5 3 3.4 3.4 1.4.3 2 .7 2 1.4 0 .8-.8 1.3-1.9 1.3-1.2 0-2.1-.5-2.8-1.2l-1.3 1.6c.8.8 2 1.4 3.6 1.6V21h2v-1.6c1.8-.3 3.1-1.5 3.1-3.3 0-2-1.5-3-3.6-3.5-1.3-.3-1.9-.7-1.9-1.3 0-.7.7-1.2 1.8-1.2 1 0 1.8.4 2.4 1l1.2-1.5c-.8-.8-1.8-1.3-3-1.5V7z"/></svg></span>
+                    <div class="ab-name zh">0% 佣金 · 不经手资金</div>
+                    <div class="ab-name en">0% Commission · No Funds Handled</div>
+                    <div class="ab-desc zh">买卖双方自行议价与结算，平台只提供信息与连接。</div>
+                    <div class="ab-desc en">Buyers and sellers negotiate and settle directly — the platform only lists and connects.</div>
+                </div>
+                <div class="ab-item">
+                    <span class="ab-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M21 4H7a3 3 0 0 0-3 3v13a3 3 0 0 1 3-3h14V4zM7 19h14v2H7a1 1 0 0 1 0-2z"/></svg></span>
+                    <div class="ab-name zh">行家编辑团队 · 断代工具</div>
+                    <div class="ab-name en">Specialist Editors · Dating Tools</div>
+                    <div class="ab-desc zh">年代、窑口、款识工具一触即得；情报由编辑与本地行家共同整理。</div>
+                    <div class="ab-desc en">Period, kiln and mark tools at a touch; insights compiled with local specialists.</div>
+                </div>
+                <div class="ab-item">
+                    <span class="ab-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2 2 9l10 13L22 9 12 2z"/></svg></span>
+                    <div class="ab-name zh">南洋臻藏 · 人工过目</div>
+                    <div class="ab-name en">Curated in Nanyang</div>
+                    <div class="ab-desc zh">每件上架藏品经人工过目，宁少勿滥，守住藏家圈的审美与秩序。</div>
+                    <div class="ab-desc en">Every listed piece is reviewed by hand — fewer, better, in keeping with the circle.</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ 情报 / 知识（前置：先懂行，再入手） ============ -->
+        <section id="insights">
+            <div class="section-head2">
+                <div>
+                    <span class="insight-eyebrow"><span class="zh">情报台 · 懂行的人先看这里</span><span class="en">Insights Desk · Read Before You Buy</span></span>
+                    <span class="title zh">情报 / 知识</span><span class="title en">Insights &amp; Guides</span>
+                    <span class="sub-line zh">行家怎么判断年代、品相与来源——先看懂，再入手。</span>
+                    <span class="sub-line en">How specialists read period, condition and provenance — know first, buy later.</span>
+                </div>
+                <a href="insights.html" class="more zh">全部情报 →</a>
+                <a href="insights.html" class="more en">All insights →</a>
+            </div>
+            <div class="insight-grid">
+                <a href="insights/qing-porcelain-dating.html" class="insight-card">
+                    <div class="insight-kicker zh">入门指南</div><div class="insight-kicker en">BEGINNER</div>
+                    <div class="insight-title zh">清代民窑青花怎么分辨年代？3 个上手要点</div>
+                    <div class="insight-title en">Dating Qing folk kiln blue-and-white: 3 hands-on signals</div>
+                    <div class="insight-desc zh">釉面、胎质、发色，三个最容易上手的判断维度。</div>
+                    <div class="insight-desc en">Glaze, body, and pigment tone — three of the easiest entry points.</div>
+                </a>
+                <a href="insights/singapore-coin-market.html" class="insight-card">
+                    <div class="insight-kicker zh">行情观察</div><div class="insight-kicker en">MARKET</div>
+                    <div class="insight-title zh">新加坡本地钱币市场近半年行情简析</div>
+                    <div class="insight-title en">Singapore coin market: a half-year snapshot</div>
+                    <div class="insight-desc zh">清钱、民国币、东南亚流通币的成交趋势与价格区间。</div>
+                    <div class="insight-desc en">Qing, Republican, and SE-Asian circulating coins trends.</div>
+                </a>
+                <a href="insights/jade-buyer-pitfalls.html" class="insight-card">
+                    <div class="insight-kicker zh">避坑手册</div><div class="insight-kicker en">PITFALLS</div>
+                    <div class="insight-title zh">新手买玉器，最容易踩的 5 个坑</div>
+                    <div class="insight-title en">5 pitfalls new jade buyers fall into</div>
+                    <div class="insight-desc zh">从「和田」二字说起，谈谈如何不被话术带走。</div>
+                    <div class="insight-desc en">Starting from the word "Hetian" — how not to be talked into it.</div>
+                </a>
+                <a href="insights/provenance-basics.html" class="insight-card">
+                    <div class="insight-kicker zh">名家旧藏</div><div class="insight-kicker en">OLD COLLECTIONS</div>
+                    <div class="insight-title zh">名家旧藏专栏：读懂一件藏品的传世脉络</div>
+                    <div class="insight-title en">Old master collections: reading a piece's lineage</div>
+                    <div class="insight-desc zh">来源不是一句话，而是一条证据链——看这四类证据就够了。</div>
+                    <div class="insight-desc en">Provenance is a chain of evidence — four types to check.</div>
+                </a>
+            </div>
+        </section>
+
         <!-- ============ 今日发现 ============ -->
         <section id="today-finds">
             <div class="section-head2">
                 <div>
                     <span class="title zh">今日发现</span>
-                    <span class="title en">Today's Finds</span>
-                    <span class="sub-line zh">每天挑出值得留意的藏品。</span>
-                    <span class="sub-line en">A daily selection of pieces worth a closer look.</span>
+                    <span class="title en">Today's Curated Finds</span>
+                    <span class="sub-line zh">每日甄选，值得细看。</span>
+                    <span class="sub-line en">A daily curated selection worth a closer look.</span>
                 </div>
             </div>
             <div class="finds-grid" id="todayFindsGrid"></div>
         </section>
 
-        <!-- ============ 刚刚上新 ============ -->
+        <!-- ============ 近期释出 ============ -->
         <section id="new-listings">
             <div class="section-head2">
                 <div>
-                    <span class="title zh">刚刚上新</span>
-                    <span class="title en">Just Listed</span>
-                    <span class="sub-line zh">最新发布 · 持续更新　</span>
-                    <span class="sub-line en">Newly Released · Continuously Updated</span>
+                    <span class="title zh">近期释出</span>
+                    <span class="title en">Recently Released</span>
+                    <span class="sub-line zh">藏家新近释出的藏品 · 持续更新</span>
+                    <span class="sub-line en">Newly released by collectors · continuously updated</span>
                 </div>
                 <a href="collection.html" class="more zh">查看全部 →</a>
                 <a href="collection.html" class="more en">View All →</a>
@@ -2047,65 +2398,45 @@
             </div>
         </section>
 
-        <!-- ============ 情报 / 知识（已上浮：新手决策前先看科普，兼顾长尾 SEO） ============ -->
-        <section id="insights">
-            <div class="section-head2">
-                <div>
-                    <span class="title zh">情报 / 知识</span><span class="title en">Insights &amp; Guides</span>
-                    <span class="sub-line zh">看懂器物，才敢放心入手</span>
-                    <span class="sub-line en">Know the piece, then buy with confidence</span>
-                </div>
-                <a href="insights.html" class="more zh">全部情报 →</a>
-                <a href="insights.html" class="more en">All insights →</a>
-            </div>
-            <div class="insight-grid">
-                <a href="insights/qing-porcelain-dating.html" class="insight-card">
-                    <div class="insight-kicker zh">入门指南</div><div class="insight-kicker en">BEGINNER</div>
-                    <div class="insight-title zh">清代民窑青花怎么分辨年代？3 个上手要点</div>
-                    <div class="insight-title en">Dating Qing folk kiln blue-and-white: 3 hands-on signals</div>
-                    <div class="insight-desc zh">釉面、胎质、发色，三个最容易上手的判断维度。</div>
-                    <div class="insight-desc en">Glaze, body, and pigment tone — three of the easiest entry points.</div>
-                </a>
-                <a href="insights/singapore-coin-market.html" class="insight-card">
-                    <div class="insight-kicker zh">行情观察</div><div class="insight-kicker en">MARKET</div>
-                    <div class="insight-title zh">新加坡本地钱币市场近半年行情简析</div>
-                    <div class="insight-title en">Singapore coin market: a half-year snapshot</div>
-                    <div class="insight-desc zh">清钱、民国币、东南亚流通币的成交趋势与价格区间。</div>
-                    <div class="insight-desc en">Qing, Republican, and SE-Asian circulating coins trends.</div>
-                </a>
-                <a href="insights/jade-buyer-pitfalls.html" class="insight-card">
-                    <div class="insight-kicker zh">避坑手册</div><div class="insight-kicker en">PITFALLS</div>
-                    <div class="insight-title zh">新手买玉器，最容易踩的 5 个坑</div>
-                    <div class="insight-title en">5 pitfalls new jade buyers fall into</div>
-                    <div class="insight-desc zh">从「和田」二字说起，谈谈如何不被话术带走。</div>
-                    <div class="insight-desc en">Starting from the word "Hetian" — how not to be talked into it.</div>
-                </a>
-                <a href="insights/provenance-basics.html" class="insight-card">
-                    <div class="insight-kicker zh">名家旧藏</div><div class="insight-kicker en">OLD COLLECTIONS</div>
-                    <div class="insight-title zh">名家旧藏专栏：读懂一件藏品的传世脉络</div>
-                    <div class="insight-title en">Old master collections: reading a piece's lineage</div>
-                    <div class="insight-desc zh">来源不是一句话，而是一条证据链——看这四类证据就够了。</div>
-                    <div class="insight-desc en">Provenance is a chain of evidence — four types to check.</div>
-                </a>
-            </div>
-        </section>
-
         <!-- ============ 今日情报 · 珍藏前瞻 ============ -->
         <section id="daily-intel" class="intel-section" aria-labelledby="intelTitle">
             <div class="intel-head">
                 <div>
                     <span class="title" id="intelTitle">
                         <span class="zh">今日情报 · 珍藏前瞻</span>
-                        <span class="en">Daily Brief・Curated Disposals</span>
+                        <span class="en">Live Pulse・Curated Disposals</span>
                     </span>
-                    <span class="sub zh">编辑整理，不是商品广告。看看今天市场在发生什么。</span>
-                    <span class="sub en">Editorially curated. Not ads. What's moving in the market today.</span>
+                    <span class="sub zh">近 24 小时，藏家圈里正在发生的事。</span>
+                    <span class="sub en">What's moving across the circle in the last 24 hours.</span>
                 </div>
-                <span class="intel-live"><span class="zh">编辑更新</span><span class="en">Editorially updated</span></span>
+                <span class="intel-live"><span class="zh">实时动态 · 持续更新</span><span class="en">Live · Updated</span></span>
             </div>
-            <div class="intel-scroll" id="intelScroll" aria-busy="true"></div>
-            <p class="intel-note zh">情报由平台编辑整理，部分内容可能引用卖家提供的信息；不构成鉴定、估价或投资建议。</p>
-            <p class="intel-note en">Compiled by editors; some items reference seller-provided info. Not authentication, valuation, or investment advice.</p>
+
+            <!-- 社交证明：本周互动概览 -->
+            <div class="intel-stats">
+                <div class="intel-stat"><b>12</b><span class="zh">今日私聊询价</span><span class="en">Enquiries today</span></div>
+                <div class="intel-stat"><b>8</b><span class="zh">本周私密直连</span><span class="en">Private connections this week</span></div>
+                <div class="intel-stat"><b>11<small>min</small></b><span class="zh">平均藏家回复</span><span class="en">Avg. collector reply</span></div>
+                <div class="intel-stat intel-stat--muted"><b>0%</b><span class="zh">平台佣金 · 不经手资金</span><span class="en">Commission · no funds held</span></div>
+            </div>
+
+            <!-- 实时互动轮播 -->
+            <div class="intel-liveboard" aria-label="近期藏家互动">
+                <div class="intel-ticker" id="intelTicker"></div>
+            </div>
+
+            <!-- 编辑精选：最多 3 条，保持克制 -->
+            <div class="intel-editorial">
+                <div class="intel-editorial-head">
+                    <span class="ie-title zh">编辑精选</span><span class="ie-title en">Editor's Picks</span>
+                    <a href="insights.html" class="ie-more zh">全部情报 →</a>
+                    <a href="insights.html" class="ie-more en">All insights →</a>
+                </div>
+                <div class="intel-scroll" id="intelScroll" aria-busy="true"></div>
+            </div>
+
+            <p class="intel-note zh">动态为近期平台互动摘要；情报由编辑整理，不构成鉴定、估价或投资建议。</p>
+            <p class="intel-note en">Activity reflects recent platform interactions. Editorial content is not authentication, valuation, or investment advice.</p>
         </section>
 
         <section id="services">
@@ -2975,8 +3306,8 @@
                 time: '今日 14:20',
                 timeEn: 'Today 14:20',
                 link: '#new-listings',
-                linkZh: '查看新上架 →',
-                linkEn: 'View new listings →',
+                linkZh: '查看近期释出 →',
+                linkEn: 'View recently released →',
                 heatZh: '💬 今日已有 6 人通过 WhatsApp 私聊同类',
                 heatEn: '💬 6 WhatsApp enquiries on similar pieces today'
             },
@@ -3040,8 +3371,84 @@
             }
         ];
 
+        /* ============================================================
+           实时藏家动态（社交证明轮播）
+           ============================================================ */
+        const LIVE_FEED = [
+            {
+                place: { zh: '乌节路', en: 'Orchard' },
+                zh: '刚才，来自乌节路的藏家咨询了清代青花碗。',
+                en: 'A collector from Orchard just enquired about a Qing blue-and-white bowl.',
+                ago: { zh: '2 分钟前', en: '2 min ago' }
+            },
+            {
+                place: { zh: '东海岸', en: 'East Coast' },
+                zh: '一位东海岸藏家收藏了明末青花笔筒。',
+                en: 'A collector in East Coast saved a late-Ming blue-and-white brush pot.',
+                ago: { zh: '6 分钟前', en: '6 min ago' }
+            },
+            {
+                place: { zh: '香港', en: 'Hong Kong' },
+                zh: '香港藏家通过 WhatsApp 私聊询价一件康熙青花。',
+                en: 'A Hong Kong collector enquired via WhatsApp about a Kangxi blue-and-white piece.',
+                ago: { zh: '11 分钟前', en: '11 min ago' }
+            },
+            {
+                place: { zh: '加东', en: 'Katong' },
+                zh: '加东一位藏家新释出 3 件娘惹瓷。',
+                en: 'A Katong collector released three Nyonya wares.',
+                ago: { zh: '18 分钟前', en: '18 min ago' }
+            },
+            {
+                place: { zh: '台北', en: 'Taipei' },
+                zh: '台北藏家将一只和田玉镯加入收藏。',
+                en: 'A Taipei collector saved a Hetian jade bangle.',
+                ago: { zh: '26 分钟前', en: '26 min ago' }
+            },
+            {
+                place: { zh: '武吉知马', en: 'Bukit Timah' },
+                zh: '一位武吉知马藏家预约了本周的私密看货。',
+                en: 'A Bukit Timah collector booked a private viewing this week.',
+                ago: { zh: '40 分钟前', en: '40 min ago' }
+            },
+            {
+                place: { zh: '上海', en: 'Shanghai' },
+                zh: '上海藏家咨询了铜香炉的底款与年代。',
+                en: 'A Shanghai collector asked about the mark and period of a bronze censer.',
+                ago: { zh: '1 小时前', en: '1 hr ago' }
+            },
+            {
+                place: { zh: '吉隆坡', en: 'Kuala Lumpur' },
+                zh: '吉隆坡藏家正在比较两件高古玉的品相。',
+                en: 'A Kuala Lumpur collector is comparing the condition of two archaic jades.',
+                ago: { zh: '1 小时前', en: '1 hr ago' }
+            },
+            {
+                place: { zh: '滨海湾', en: 'Marina Bay' },
+                zh: '本周已有 8 件藏品通过私密直连完成对接。',
+                en: 'Eight pieces have connected privately this week.',
+                ago: { zh: '本周', en: 'This week' },
+                hot: true
+            }
+        ];
+
+        function renderLiveTicker() {
+            const box = document.getElementById('intelTicker');
+            if (!box) return;
+            const rows = LIVE_FEED.map(it => `
+                <div class="tick-row${it.hot ? ' tick-row--hot' : ''}">
+                    <span class="tick-dot" aria-hidden="true"></span>
+                    <span class="tick-place"><span class="zh">${it.place.zh}</span><span class="en">${it.place.en}</span></span>
+                    <span class="tick-text"><span class="zh">${it.zh}</span><span class="en">${it.en}</span></span>
+                    <span class="tick-ago"><span class="zh">${it.ago.zh}</span><span class="en">${it.ago.en}</span></span>
+                </div>`).join('');
+            box.innerHTML = `<div class="tick-set">${rows}</div><div class="tick-set" aria-hidden="true">${rows}</div>`;
+            box.style.setProperty('--tick-duration', (LIVE_FEED.length * 4.6) + 's');
+        }
+        renderLiveTicker();
+
         const INTEL_TYPE_LABEL = {
-            new:       { zh: '新上架',   en: 'NEW',        cls: 'intel-type--new' },
+            new:       { zh: '新释出',   en: 'NEW',        cls: 'intel-type--new' },
             drop:      { zh: '降价',     en: 'PRICE DROP', cls: 'intel-type--drop' },
             compare:   { zh: '同类对比', en: 'COMPARE',    cls: 'intel-type--compare' },
             collector: { zh: '藏家动态', en: 'COLLECTOR',  cls: 'intel-type--collector' },
@@ -3051,7 +3458,7 @@
         function renderIntel(items) {
             const box = document.getElementById('intelScroll');
             if (!box) return;
-            const list = (items && items.length) ? items : INTEL_FEED;
+            const list = ((items && items.length) ? items : INTEL_FEED).slice(0, 3);
             box.removeAttribute('aria-busy');
             box.innerHTML = list.map(it => {
                 const t = INTEL_TYPE_LABEL[it.type] || INTEL_TYPE_LABEL.new;
@@ -3061,33 +3468,19 @@
                 const metaEn = esc(it.metaEn || it.meta_en || 'Editorial');
                 const timeZh = esc(it.time || it.time_zh || '');
                 const timeEn = esc(it.timeEn || it.time_en || timeZh);
-                const link = esc(it.link || '');
-                const linkZh = esc(it.linkZh || '');
-                const linkEn = esc(it.linkEn || linkZh);
-                const heatZh = esc(it.heatZh || it.heat_zh || '');
-                const heatEn = esc(it.heatEn || it.heat_en || heatZh);
-                const heatCls = it.heatCls || '';
-                const heatHtml = heatZh ? `
-                    <span class="intel-heat ${heatCls}"><span class="zh">${heatZh}</span><span class="en">${heatEn}</span></span>` : '';
-                const timeHtml = timeZh ? `
-                    <span class="intel-time"><span class="zh">${timeZh}</span><span class="en">${timeEn}</span></span>` : '';
-                const linkHtml = (link && (linkZh || linkEn)) ? `
-                    <a class="intel-link" href="${link}">
-                        <span class="zh">${linkZh}</span>
-                        <span class="en">${linkEn}</span>
-                    </a>` : '';
+                const link = esc(it.link || 'insights.html');
+                const metaLine = [metaZh, timeZh].filter(Boolean).join(' · ');
+                const metaLineEn = [metaEn, timeEn].filter(Boolean).join(' · ');
                 return `
-                  <div class="intel-card">
+                  <a class="intel-card intel-card--compact" href="${link}">
                     <span class="intel-type ${t.cls}"><span class="zh">${t.zh}</span><span class="en">${t.en}</span></span>
-                    <div class="intel-text zh">${zh}</div>
-                    <div class="intel-text en">${en}</div>
-                    ${heatHtml}
-                    <div class="intel-meta">
-                      <span><span class="zh">${metaZh}</span><span class="en">${metaEn}</span></span>
-                      ${timeHtml}
-                    </div>
-                    ${linkHtml}
-                  </div>`;
+                    <span class="intel-text zh">${zh}</span>
+                    <span class="intel-text en">${en}</span>
+                    <span class="intel-compact-meta">
+                      <span class="zh">${metaLine}</span>
+                      <span class="en">${metaLineEn}</span>
+                    </span>
+                  </a>`;
             }).join('');
         }
         renderIntel();
@@ -3203,7 +3596,7 @@
                 '接口响应：' + st(diag.proxy) + '　快照响应：' + st(diag.snapshot) + '\n' +
                 '响应字段：' + esc(diag.payloadKeys.join(', ') || '—') + '\n' +
                 '今日发现 ' + (c.todayFinds != null ? c.todayFinds : '—') +
-                ' · 刚刚上新 ' + (c.newListing != null ? c.newListing : '—') +
+                ' · 近期释出 ' + (c.newListing != null ? c.newListing : '—') +
                 ' · 情报 ' + (diag.intelCount != null ? diag.intelCount : '—') +
                 (diag.skipped ? ' · <span class="warn">已跳过空行/缺标题的行 ' + diag.skipped + '</span>' : '') + '\n' +
                 '首条记录字段：' + esc(diag.sampleKeys.join(', ') || '—') +

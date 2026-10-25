@@ -2414,22 +2414,22 @@
                         <span class="zh">今日情报 · 珍藏前瞻</span>
                         <span class="en">Live Pulse・Curated Disposals</span>
                     </span>
-                    <span class="sub zh">近 24 小时，藏家圈里正在发生的事。</span>
-                    <span class="sub en">What's moving across the circle in the last 24 hours.</span>
+                    <span class="sub zh">平台在售藏品的真实动态，数据实时拉取。</span>
+                    <span class="sub en">Real activity from live listings, refreshed automatically.</span>
                 </div>
                 <span class="intel-live"><span class="zh">实时动态 · 持续更新</span><span class="en">Live · Updated</span></span>
             </div>
 
-            <!-- 社交证明：本周互动概览 -->
-            <div class="intel-stats">
-                <div class="intel-stat"><b>12</b><span class="zh">今日私聊询价</span><span class="en">Enquiries today</span></div>
-                <div class="intel-stat"><b>8</b><span class="zh">本周私密直连</span><span class="en">Private connections this week</span></div>
-                <div class="intel-stat"><b>11<small>min</small></b><span class="zh">平均藏家回复</span><span class="en">Avg. collector reply</span></div>
-                <div class="intel-stat intel-stat--muted"><b>0%</b><span class="zh">平台佣金 · 不经手资金</span><span class="en">Commission · no funds held</span></div>
+            <!-- 实时数据概览：全部来自当前在售数据实时计算，无数据时整块隐藏 -->
+            <div class="intel-stats" id="intelStats" hidden>
+                <div class="intel-stat"><b id="statToday">0</b><span class="zh">今日新释出</span><span class="en">New today</span></div>
+                <div class="intel-stat"><b id="statWeek">0</b><span class="zh">本周新释出</span><span class="en">New this week</span></div>
+                <div class="intel-stat"><b id="statTotal">0</b><span class="zh">在售藏品</span><span class="en">Active listings</span></div>
+                <div class="intel-stat intel-stat--muted"><b id="statSellers">0</b><span class="zh">入驻藏家</span><span class="en">Collectors</span></div>
             </div>
 
-            <!-- 实时互动轮播 -->
-            <div class="intel-liveboard" aria-label="近期藏家互动">
+            <!-- 实时动态：按真实上架时间生成，无时间戳数据时隐藏 -->
+            <div class="intel-liveboard" id="intelLiveboard" hidden aria-label="近期上架动态">
                 <div class="intel-ticker" id="intelTicker"></div>
             </div>
 
@@ -2443,8 +2443,8 @@
                 <div class="intel-scroll" id="intelScroll" aria-busy="true"></div>
             </div>
 
-            <p class="intel-note zh">动态为近期平台互动摘要；情报由编辑整理，不构成鉴定、估价或投资建议。</p>
-            <p class="intel-note en">Activity reflects recent platform interactions. Editorial content is not authentication, valuation, or investment advice.</p>
+            <p class="intel-note zh">动态由在售数据实时生成；情报由编辑整理，不构成鉴定、估价或投资建议。</p>
+            <p class="intel-note en">Activity is generated live from listing data. Editorial content is not authentication, valuation, or investment advice.</p>
         </section>
 
         <section id="services">
@@ -3298,162 +3298,116 @@
             if (kw || currentCat !== 'all') filterAll(); else checkNoResult();
             mountActions();
             if (window.GudongFollow) window.GudongFollow.beginSession();
+
+            // 实时看板：统计与动态全部来自当前在售数据，无实时数据则隐藏
+            const seenIds = new Set();
+            const uniqItems = (data.todayFinds || []).concat(data.newListing || []).filter(f => {
+                const id = normId(f.item_id);
+                if (seenIds.has(id)) return false;
+                seenIds.add(id);
+                return true;
+            });
+            updateLiveBoard(uniqItems, diag.source);
         }
 
         /* ============================================================
            今日情报 · 珍藏前瞻
-           —— 每条带具体时间戳 + 相关藏品互动入口
+           —— 编辑精选只展示接口返回的真实情报，无数据时整块隐藏
            ============================================================ */
-        const INTEL_FEED = [
-            {
-                type: 'new',
-                zh: '新上架：今日已有 12 件新藏品进入，钱币类占 5 件，其中 3 件为「私聊询价」。',
-                en: 'New arrivals: 12 items today, 5 in coins — 3 of them "Enquire only".',
-                meta: '平台数据',
-                metaEn: 'Platform data',
-                time: '今日 14:20',
-                timeEn: 'Today 14:20',
-                link: '#new-listings',
-                linkZh: '查看近期释出 →',
-                linkEn: 'View recently released →',
-                heatZh: '💬 今日已有 6 人通过 WhatsApp 私聊同类',
-                heatEn: '💬 6 WhatsApp enquiries on similar pieces today'
-            },
-            {
-                type: 'drop',
-                zh: '降价信号：民国玉镯类目近 3 天有 4 件下调价格，平均降幅约 12%，可留意议价空间。',
-                en: 'Price drop: 4 Republican-era jade bangles reduced in the last 3 days, avg. cut ~12% — room to negotiate.',
-                meta: '市场快照',
-                metaEn: 'Market snapshot',
-                time: '今日 11:05',
-                timeEn: 'Today 11:05',
-                link: 'categories/jade.html',
-                linkZh: '查看玉器类目 →',
-                linkEn: 'View Jade →',
-                heatZh: '🕒 近 3 天同类议价 4 次',
-                heatEn: '🕒 4 negotiations on similar pieces in 3 days'
-            },
-            {
-                type: 'compare',
-                zh: '同类对比：一只明末青花碗（同类器型）本周成交价 S$680，平台内现有一件同类标价 S$420。',
-                en: 'Comparable: a late-Ming blue-and-white bowl sold at S$680 this week; a similar piece is listed here at S$420.',
-                meta: '同类参照 · 仅供参考',
-                metaEn: 'Comparable reference',
-                time: '昨日 21:15',
-                timeEn: 'Yesterday 21:15',
-                link: 'categories/porcelain.html',
-                linkZh: '查看瓷器类目 →',
-                linkEn: 'View Porcelain →',
-                heatZh: '⚖ 同类参照 S$680 → 本站 S$420',
-                heatEn: '⚖ Comparable S$680 → listed S$420',
-                heatCls: 'intel-heat--ref'
-            },
-            {
-                type: 'collector',
-                zh: '藏家动态：本地一位藏家本周集中上架 8 件钱币，均为单件，可私聊打包。',
-                en: 'Collector activity: a local collector listed 8 coins this week, all singles, bundle negotiable.',
-                meta: '藏家动态',
-                metaEn: 'Collector activity',
-                time: '昨日 18:40',
-                timeEn: 'Yesterday 18:40',
-                link: 'categories/coins.html',
-                linkZh: '查看钱币类目 →',
-                linkEn: 'View Coins →',
-                heatZh: '💬 5 人已私聊问过打包价',
-                heatEn: '💬 5 members asked about a bundle'
-            },
-            {
-                type: 'platform',
-                zh: '平台快讯：创始藏家席位开放申领，名额有限、逐位审核，前 2 件藏品免费曝光。',
-                en: 'Platform note: Founding Collector seats are open — limited seats, reviewed one by one; first 2 pieces get free exposure',
-                meta: '平台公告',
-                metaEn: 'Platform notice',
-                time: '2 天前 09:40',
-                timeEn: '2d ago 09:40',
-                link: 'pricing.html#collector-services',
-                linkZh: '查看藏家服务 →',
-                linkEn: 'Collector services →',
-                heatZh: '🎟 剩余席位有限 · 先申先审',
-                heatEn: '🎟 Limited seats · first come, first reviewed',
-                heatCls: 'intel-heat--ref'
-            }
-        ];
+        let liveRefreshTimer = null;
 
-        /* ============================================================
-           实时藏家动态（社交证明轮播）
-           ============================================================ */
-        const LIVE_FEED = [
-            {
-                place: { zh: '乌节路', en: 'Orchard' },
-                zh: '刚才，来自乌节路的藏家咨询了清代青花碗。',
-                en: 'A collector from Orchard just enquired about a Qing blue-and-white bowl.',
-                ago: { zh: '2 分钟前', en: '2 min ago' }
-            },
-            {
-                place: { zh: '东海岸', en: 'East Coast' },
-                zh: '一位东海岸藏家收藏了明末青花笔筒。',
-                en: 'A collector in East Coast saved a late-Ming blue-and-white brush pot.',
-                ago: { zh: '6 分钟前', en: '6 min ago' }
-            },
-            {
-                place: { zh: '香港', en: 'Hong Kong' },
-                zh: '香港藏家通过 WhatsApp 私聊询价一件康熙青花。',
-                en: 'A Hong Kong collector enquired via WhatsApp about a Kangxi blue-and-white piece.',
-                ago: { zh: '11 分钟前', en: '11 min ago' }
-            },
-            {
-                place: { zh: '加东', en: 'Katong' },
-                zh: '加东一位藏家新释出 3 件娘惹瓷。',
-                en: 'A Katong collector released three Nyonya wares.',
-                ago: { zh: '18 分钟前', en: '18 min ago' }
-            },
-            {
-                place: { zh: '台北', en: 'Taipei' },
-                zh: '台北藏家将一只和田玉镯加入收藏。',
-                en: 'A Taipei collector saved a Hetian jade bangle.',
-                ago: { zh: '26 分钟前', en: '26 min ago' }
-            },
-            {
-                place: { zh: '武吉知马', en: 'Bukit Timah' },
-                zh: '一位武吉知马藏家预约了本周的私密看货。',
-                en: 'A Bukit Timah collector booked a private viewing this week.',
-                ago: { zh: '40 分钟前', en: '40 min ago' }
-            },
-            {
-                place: { zh: '上海', en: 'Shanghai' },
-                zh: '上海藏家咨询了铜香炉的底款与年代。',
-                en: 'A Shanghai collector asked about the mark and period of a bronze censer.',
-                ago: { zh: '1 小时前', en: '1 hr ago' }
-            },
-            {
-                place: { zh: '吉隆坡', en: 'Kuala Lumpur' },
-                zh: '吉隆坡藏家正在比较两件高古玉的品相。',
-                en: 'A Kuala Lumpur collector is comparing the condition of two archaic jades.',
-                ago: { zh: '1 小时前', en: '1 hr ago' }
-            },
-            {
-                place: { zh: '滨海湾', en: 'Marina Bay' },
-                zh: '本周已有 8 件藏品通过私密直连完成对接。',
-                en: 'Eight pieces have connected privately this week.',
-                ago: { zh: '本周', en: 'This week' },
-                hot: true
-            }
-        ];
+        function listedTs(f) {
+            const raw = getF(f, 'listed_at', 'listed_time', 'created_at', 'updated_at');
+            const t = raw ? new Date(raw).getTime() : NaN;
+            return isNaN(t) ? null : t;
+        }
+        function relTime(ts) {
+            const diff = Date.now() - ts;
+            const m = Math.floor(diff / 60000);
+            if (m < 1) return { zh: '刚刚', en: 'just now' };
+            if (m < 60) return { zh: m + ' 分钟前', en: m + ' min ago' };
+            const h = Math.floor(m / 60);
+            if (h < 24) return { zh: h + ' 小时前', en: h + ' hr ago' };
+            const d = Math.floor(h / 24);
+            return { zh: d + ' 天前', en: d + 'd ago' };
+        }
 
-        function renderLiveTicker() {
+        function updateLiveBoard(allItems, source) {
+            const statsBox = document.getElementById('intelStats');
+            const board = document.getElementById('intelLiveboard');
+            // 接口与快照均不可用（演示数据）→ 不展示任何“实时”内容
+            if (source === 'demo' || !allItems.length) {
+                if (statsBox) statsBox.hidden = true;
+                if (board) board.hidden = true;
+                return;
+            }
+
+            // —— 统计：全部基于当前在售数据实时计算 ——
+            const now = Date.now();
+            const dayStart = new Date(); dayStart.setHours(0, 0, 0, 0);
+            let todayN = 0, weekN = 0;
+            const sellers = new Set();
+            allItems.forEach(f => {
+                const ts = listedTs(f);
+                if (ts != null) {
+                    if (ts >= dayStart.getTime()) todayN++;
+                    if (now - ts <= 7 * 86400000) weekN++;
+                }
+                const sid = String(f.seller_id || f.sellerId || '').trim();
+                if (sid) sellers.add(sid);
+            });
+            const setNum = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
+            setNum('statToday', todayN);
+            setNum('statWeek', weekN);
+            setNum('statTotal', allItems.length);
+            setNum('statSellers', sellers.size);
+            if (statsBox) statsBox.hidden = false;
+
+            // —— 动态流：最近上架的真实藏品（需带时间戳，不足 3 条则隐藏） ——
+            const recent = allItems
+                .map(f => ({ f, ts: listedTs(f) }))
+                .filter(x => x.ts != null)
+                .sort((a, b) => b.ts - a.ts)
+                .slice(0, 9);
+            if (recent.length < 3) { if (board) board.hidden = true; return; }
+            if (board) board.hidden = false;
+            renderLiveTicker(recent, todayN);
+            if (liveRefreshTimer) clearInterval(liveRefreshTimer);
+            liveRefreshTimer = setInterval(() => renderLiveTicker(recent, todayN), 60000); // 相对时间每分钟刷新
+        }
+
+        function renderLiveTicker(recent, todayN) {
             const box = document.getElementById('intelTicker');
             if (!box) return;
-            const rows = LIVE_FEED.map(it => `
+            const rowsArr = [];
+            if (todayN > 0) {
+                rowsArr.push({
+                    hot: true,
+                    badge: { zh: '今日', en: 'Today' },
+                    zh: '今日已有 ' + todayN + ' 件藏品新释出。',
+                    en: todayN + ' piece' + (todayN > 1 ? 's' : '') + ' released today.',
+                    ago: { zh: '实时', en: 'live' }
+                });
+            }
+            recent.forEach(x => {
+                const f = x.f;
+                rowsArr.push({
+                    badge: { zh: f.category || '藏品', en: f.category || 'Item' },
+                    zh: '新释出：' + (f.title_zh || f.title_en || ''),
+                    en: 'Released: ' + (f.title_en || f.title_zh || ''),
+                    ago: relTime(x.ts)
+                });
+            });
+            const rows = rowsArr.map(it => `
                 <div class="tick-row${it.hot ? ' tick-row--hot' : ''}">
                     <span class="tick-dot" aria-hidden="true"></span>
-                    <span class="tick-place"><span class="zh">${it.place.zh}</span><span class="en">${it.place.en}</span></span>
-                    <span class="tick-text"><span class="zh">${it.zh}</span><span class="en">${it.en}</span></span>
-                    <span class="tick-ago"><span class="zh">${it.ago.zh}</span><span class="en">${it.ago.en}</span></span>
+                    <span class="tick-place"><span class="zh">${esc(it.badge.zh)}</span><span class="en">${esc(it.badge.en)}</span></span>
+                    <span class="tick-text"><span class="zh">${esc(it.zh)}</span><span class="en">${esc(it.en)}</span></span>
+                    <span class="tick-ago"><span class="zh">${esc(it.ago.zh)}</span><span class="en">${esc(it.ago.en)}</span></span>
                 </div>`).join('');
             box.innerHTML = `<div class="tick-set">${rows}</div><div class="tick-set" aria-hidden="true">${rows}</div>`;
-            box.style.setProperty('--tick-duration', (LIVE_FEED.length * 4.6) + 's');
+            box.style.setProperty('--tick-duration', (rowsArr.length * 4.6) + 's');
         }
-        renderLiveTicker();
 
         const INTEL_TYPE_LABEL = {
             new:       { zh: '新释出',   en: 'NEW',        cls: 'intel-type--new' },
@@ -3466,7 +3420,11 @@
         function renderIntel(items) {
             const box = document.getElementById('intelScroll');
             if (!box) return;
-            const list = ((items && items.length) ? items : INTEL_FEED).slice(0, 3);
+            // 只展示接口返回的真实情报；无数据时整块隐藏，不使用兜底内容
+            const list = (items || []).filter(Boolean).slice(0, 3);
+            const wrap = box.closest('.intel-editorial');
+            if (!list.length) { if (wrap) wrap.style.display = 'none'; return; }
+            if (wrap) wrap.style.display = '';
             box.removeAttribute('aria-busy');
             box.innerHTML = list.map(it => {
                 const t = INTEL_TYPE_LABEL[it.type] || INTEL_TYPE_LABEL.new;

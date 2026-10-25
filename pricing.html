@@ -159,7 +159,7 @@ main section[id] { scroll-margin-top: 92px; }
   border-radius: 999px; padding: .28rem .78rem; line-height: 1.5; white-space: nowrap;
 }
 
-/* ============ 核心三卡 ============ */
+/* ============ 方案卡片栅格 ============ */
 .core-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -167,6 +167,9 @@ main section[id] { scroll-margin-top: 92px; }
   align-items: stretch;
   margin-bottom: 1rem;
 }
+.core-grid.one { grid-template-columns: minmax(0, 620px); justify-content: center; }
+.core-grid.two { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 840px; margin-left: auto; margin-right: auto; }
+
 .card {
   --price-size: 2.15rem;
   background: var(--color-surface);
@@ -198,15 +201,6 @@ main section[id] { scroll-margin-top: 92px; }
   letter-spacing: -.01em;
 }
 .card .price .cur { font-size: .44em; font-weight: 500; }
-.card .price .was {
-  font-family: var(--font-sans);
-  font-size: .5em;
-  font-weight: 400;
-  color: var(--color-text-muted);
-  text-decoration: line-through;
-  text-decoration-thickness: 1px;
-  white-space: nowrap;
-}
 .card .price .free-word { font-size: .9em; color: var(--color-primary-dark); }
 .card .price-unit { font-size: .78rem; color: var(--color-gold); letter-spacing: .02em; line-height: 1.6; }
 .card ul { list-style: none; margin: 1.2rem 0 1.5rem; }
@@ -218,11 +212,11 @@ main section[id] { scroll-margin-top: 92px; }
   display: inline-flex; justify-content: center; align-items: center; gap: .35rem; margin-top: auto;
   padding: .78rem 1.1rem; border-radius: 6px; background: var(--color-primary); color: #fff;
   text-decoration: none; font-size: .84rem; font-weight: 600; line-height: 1.45;
-  text-align: center; transition: .4s;
+  text-align: center; transition: .4s; cursor: pointer;
 }
 .card .card-cta:hover { background: var(--color-primary-dark); }
 
-/* 主推旗舰卡片（C 位） */
+/* 主推卡片（高级专业发布） */
 .card.featured {
   border: 1.5px solid var(--color-gold);
   background: linear-gradient(180deg, #FFFDF9 0%, #FFFAF2 100%);
@@ -232,7 +226,7 @@ main section[id] { scroll-margin-top: 92px; }
 .card.featured:hover { box-shadow: 0 16px 40px rgba(156,122,58,.22); transform: translateY(-6px); }
 .card.featured .price { color: var(--color-primary-dark); }
 
-/* 最受藏家欢迎徽章 */
+/* 推荐徽章 */
 .popular-ribbon {
   position: absolute;
   top: -12px;
@@ -263,255 +257,25 @@ main section[id] { scroll-margin-top: 92px; }
 .tier-tag.growth { background: #F1E8DF; color: #7A4E33; }
 .tier-tag.flagship { background: linear-gradient(135deg, #9C7A3A 0%, #D4AF6A 100%); color: #FFFFFF; box-shadow: 0 2px 6px rgba(156,122,58,.3); }
 
-/* 限时立省标签 */
-.saving-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: .35rem;
-  background: linear-gradient(135deg, #FFF3D6 0%, #FFE8B8 100%);
-  border: 1px solid #E5C878;
-  color: #6E5326;
-  font-size: .74rem;
-  font-weight: 700;
-  padding: .38rem .75rem;
-  border-radius: 8px;
-  margin-top: .55rem;
-  line-height: 1.5;
-  letter-spacing: .02em;
-}
-.saving-badge::before { content: "🔥"; font-size: .85em; }
+/* 创始藏家准入期许 */
+.eligibility { background: var(--color-primary-light); border-radius: 10px; padding: .95rem 1.05rem; margin: .2rem 0 1.35rem; }
+.eligibility-title { font-size: .82rem; font-weight: 700; color: var(--color-primary-dark); margin-bottom: .5rem; line-height: 1.5; }
+.eligibility ul { list-style: none; margin: 0; }
+.eligibility li { position: relative; padding: .3rem 0 .3rem 1.15rem; font-size: .78rem; color: var(--color-text-secondary); line-height: 1.65; }
+.eligibility li + li { border-top: none; }
+.eligibility li::before { content: ""; position: absolute; left: 2px; top: .72rem; width: 5px; height: 5px; background: var(--color-gold); transform: rotate(45deg); }
 
-/* 创始计划说明 */
-.founding-note { width: 100%; margin: 1.1rem 0; }
-.founding-note .fn-title { display: flex; align-items: center; font-size: .78rem; font-weight: 700; color: var(--color-primary-dark); }
-.founding-note .dot { flex: none; width: 6px; height: 6px; border-radius: 50%; background: var(--color-gold); display: inline-block; margin-right: 6px; box-shadow: 0 0 0 3px rgba(156,122,58,.18); }
-.founding-note .fn-desc { margin-top: .45rem; font-size: .72rem; line-height: 1.7; color: var(--color-text-secondary); }
-.founding-warning-note{
-  background: var(--color-primary-light);
-  border-left:3px solid var(--color-gold);
-  padding:0.6rem 0.8rem;
-  border-radius:6px;
-  margin:0.8rem 0;
-  font-size:0.74rem;
-  color:var(--color-primary-dark);
-}
-/* 席位进度条 */
-.seat-progress {
-  background: #fff;
-  border: 1px solid #EADFC8;
-  border-radius: 10px;
-  padding: .85rem .95rem .95rem;
-  margin-bottom: 1rem;
-}
-.seat-progress-head {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  font-size: .76rem;
-  margin-bottom: .5rem;
-  line-height: 1.5;
-}
-.seat-progress-head .sp-taken { font-weight: 700; color: var(--color-primary-dark); }
-.seat-progress-head .sp-taken b { color: #B54A34; font-size: 1.05em; }
-.seat-progress-head .sp-remain { font-size: .72rem; color: var(--color-text-muted); }
-.seat-progress-bar {
-  height: 7px;
-  border-radius: 999px;
-  background: #F1E8DF;
-  overflow: hidden;
-  position: relative;
-}
-.seat-progress-fill {
-  height: 100%;
-  border-radius: 999px;
-  background: linear-gradient(90deg, #C9A55B 0%, #B54A34 100%);
-  width: var(--seat-progress, 0%);
-  box-shadow: 0 0 8px rgba(201,165,91,.4);
-  animation: seatFill 1.2s ease-out;
-}
-@keyframes seatFill { from { width: 0; } to { width: var(--seat-progress, 0%); } }
+/* ============ 规格对比表 ============ */
+.compare-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.compare-table { width: 100%; border-collapse: collapse; font-size: .82rem; min-width: 540px; }
+.compare-table th, .compare-table td { padding: .68rem .9rem; text-align: center; border-bottom: 1px solid var(--color-border); line-height: 1.6; }
+.compare-table thead th { font-family: var(--font-serif); font-size: .92rem; font-weight: 600; color: var(--color-primary-dark); border-bottom: 1px solid var(--color-gold); }
+.compare-table td:first-child, .compare-table th:first-child { text-align: left; color: var(--color-text-secondary); }
+.compare-table tbody tr:last-child td { border-bottom: none; }
+.compare-table td.c-premium, .compare-table th.c-premium { background: #FFFCF5; color: var(--color-primary-dark); font-weight: 600; }
+.compare-table thead th.c-premium { color: var(--color-gold); }
 
-/* ============ 席位阶梯预告 ============ */
-.tier-ladder {
-  margin-top: 1.5rem;
-  background: linear-gradient(180deg, #FFFDF9 0%, #FDF9F2 100%);
-  border: 1px solid #EADFC8;
-  border-radius: 14px;
-  padding: 1.5rem 1.4rem 1.3rem;
-}
-.tier-ladder-head { text-align: center; }
-.tier-ladder-eyebrow {
-  display: inline-flex; align-items: center; gap: .35rem;
-  font-size: .72rem; font-weight: 700; letter-spacing: .06em;
-  color: var(--color-primary-dark); background: var(--color-primary-light);
-  border: 1px solid rgba(156,122,58,.2);
-  padding: .32rem .8rem; border-radius: 999px; line-height: 1.5;
-}
-.tier-ladder-title {
-  font-family: var(--font-serif); font-size: 1.15rem; font-weight: 600;
-  color: var(--color-text); margin: .75rem 0 0; letter-spacing: .02em;
-}
-.tier-steps {
-  list-style: none; margin: 1.15rem 0 0; padding: 0;
-  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .7rem;
-}
-.tier-step {
-  background: #fff; border: 1px solid var(--color-border); border-radius: 10px;
-  padding: .85rem .9rem; display: flex; flex-direction: column; gap: .35rem;
-}
-.tier-step.is-open {
-  border-color: var(--color-gold);
-  background: #FFFCF5;
-  box-shadow: 0 2px 10px rgba(156,122,58,.14);
-}
-.tier-step-badge {
-  font-size: .68rem; font-weight: 700; letter-spacing: .08em;
-  color: var(--color-gold); text-transform: uppercase; line-height: 1.5;
-}
-.tier-step.is-open .tier-step-badge { color: var(--color-primary); }
-.tier-step-text { font-size: .8rem; line-height: 1.65; color: var(--color-text-secondary); }
-.tier-step.is-open .tier-step-text { color: var(--color-text); font-weight: 600; }
-.tier-urgency {
-  margin-top: 1rem; text-align: center;
-  font-size: .8rem; font-weight: 700; line-height: 1.7;
-  color: var(--color-primary-dark);
-  background: var(--color-primary-light);
-  border-radius: 9px; padding: .65rem .9rem;
-}
-
-/* ============ 拉新奖励 ============ */
-.referral-card {
-  margin-top: 1rem;
-  background: linear-gradient(135deg, #FFFBF3 0%, #FFFFFF 70%);
-  border: 1px solid #F0E3C8;
-  border-radius: 14px;
-  padding: 1.35rem 1.4rem 1.25rem;
-}
-.referral-head { display: flex; align-items: center; gap: .55rem; flex-wrap: wrap; margin-bottom: .9rem; }
-.referral-icon { font-size: 1.1rem; line-height: 1; flex-shrink: 0; }
-.referral-head h3 { font-family: var(--font-serif); font-size: 1.05rem; font-weight: 600; color: var(--color-text); margin: 0; line-height: 1.5; }
-.referral-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .7rem; }
-.referral-item {
-  background: #fff; border: 1px solid #F0E3C8; border-radius: 10px;
-  padding: .75rem .9rem; font-size: .81rem; line-height: 1.7;
-  color: var(--color-text-secondary); display: flex; align-items: flex-start; gap: .5rem;
-}
-.referral-item .arrow { color: var(--color-gold); font-weight: 700; flex-shrink: 0; }
-.referral-item b { color: var(--color-primary-dark); font-weight: 700; }
-
-/* ============ 创始藏家铭牌展示卡 ============ */
-.honor-card {
-  margin-top: 1rem;
-  background: linear-gradient(135deg, #221B15 0%, #3A2C20 50%, #221B15 100%);
-  border: 1px solid #4A3A28;
-  border-radius: 14px;
-  padding: 1.6rem 1.4rem;
-  display: flex;
-  align-items: center;
-  gap: 1.3rem;
-  color: #F5EDDD;
-  position: relative;
-  overflow: hidden;
-}
-.honor-card::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at 85% 20%, rgba(201,165,91,.22) 0%, transparent 55%);
-  pointer-events: none;
-}
-.honor-badge-wrap { flex-shrink: 0; position: relative; z-index: 1; }
-.honor-badge-wrap img { width: 68px; height: 68px; object-fit: contain; filter: drop-shadow(0 0 12px rgba(201,165,91,.5)); }
-.honor-badge-fallback {
-  width: 68px; height: 68px; border-radius: 50%;
-  background: radial-gradient(circle at 35% 30%, #E5C878 0%, #9C7A3A 60%, #6E5326 100%);
-  display: flex; align-items: center; justify-content: center;
-  font-family: var(--font-serif); font-size: 1.6rem; font-weight: 700; color: #221B15;
-  box-shadow: inset 0 -4px 8px rgba(0,0,0,.25), 0 0 18px rgba(201,165,91,.45);
-}
-.honor-text { position: relative; z-index: 1; min-width: 0; }
-.honor-eyebrow {
-  font-size: .68rem; font-weight: 700; letter-spacing: .22em; text-transform: uppercase;
-  color: #C9A55B; margin-bottom: .35rem;
-}
-.honor-title { font-family: var(--font-serif); font-size: 1.15rem; font-weight: 600; color: #F5EDDD; line-height: 1.4; margin-bottom: .3rem; }
-.honor-desc { font-size: .78rem; line-height: 1.7; color: #C7B99F; }
-
-/* ============ 藏家之声 ============ */
-.testimonials-section { margin-top: 3rem; }
-.testimonial-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1rem;
-}
-.testimonial-card {
-  background: #fff;
-  border: 1px solid var(--color-border);
-  border-radius: 12px;
-  padding: 1.35rem 1.25rem 1.15rem;
-  display: flex;
-  flex-direction: column;
-  gap: .85rem;
-  position: relative;
-  transition: border-color .4s, box-shadow .4s;
-}
-.testimonial-card:hover { border-color: var(--color-gold); box-shadow: 0 6px 18px rgba(37,34,30,.06); }
-.testimonial-card::before {
-  content: "“";
-  position: absolute;
-  top: .35rem;
-  right: .9rem;
-  font-family: var(--font-serif);
-  font-size: 2.6rem;
-  color: rgba(156,122,58,.18);
-  line-height: 1;
-}
-.testimonial-quote {
-  font-size: .82rem;
-  line-height: 1.85;
-  color: var(--color-text-secondary);
-  flex-grow: 1;
-}
-.testimonial-author {
-  display: flex;
-  flex-direction: column;
-  gap: .12rem;
-  padding-top: .75rem;
-  border-top: 1px dashed var(--color-border);
-}
-.author-name {
-  font-family: var(--font-serif);
-  font-size: .88rem;
-  font-weight: 600;
-  color: var(--color-primary-dark);
-  display: flex;
-  align-items: center;
-  gap: .35rem;
-}
-.author-name .fc-mini-badge {
-  display: inline-flex; align-items: center; justify-content: center;
-  width: 16px; height: 16px; border-radius: 50%;
-  background: radial-gradient(circle at 35% 30%, #E5C878 0%, #9C7A3A 70%);
-  color: #221B15; font-size: .58rem; font-weight: 800;
-  font-family: var(--font-sans);
-  flex-shrink: 0;
-}
-.author-role { font-size: .72rem; color: var(--color-text-muted); letter-spacing: .02em; }
-
-/* ============ 委托找货区 ============ */
-.sourcing-section { margin: 3rem auto 0; padding: 2rem 1.6rem; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 18px; }
-.sourcing-head { max-width: 640px; margin: 0 auto; text-align: center; }
-.sourcing-title { font-family: var(--font-serif); font-size: clamp(1.1rem, 4vw, 1.35rem); font-weight: 600; color: var(--color-text); margin: .5rem 0; line-height: 1.5; }
-.sourcing-desc { font-size: .84rem; color: var(--color-text-secondary); line-height: 1.85; }
-.sourcing-grid { display: grid; grid-template-columns: 1fr auto 1fr; align-items: stretch; max-width: 760px; margin: 1.8rem auto 0; border: 1px solid var(--color-border); border-radius: var(--card-radius); overflow: hidden; }
-.sourcing-step { padding: 1.4rem 1.3rem; background: #fff; text-align: center; }
-.sourcing-step .step-label { font-size: .75rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--color-gold); margin-bottom: .5rem; }
-.sourcing-step .step-price { font-size: 1.6rem; font-weight: 700; color: var(--color-text); font-family: var(--font-serif); }
-.sourcing-step .step-price .cur { font-size: .6em; font-weight: 500; }
-.sourcing-step .step-desc { font-size: .78rem; color: var(--color-text-secondary); margin-top: .5rem; }
-.sourcing-divider { display: flex; align-items: center; justify-content: center; background: var(--color-primary-light); color: var(--color-primary-dark); font-size: .7rem; font-weight: 700; padding: 0 .55rem; writing-mode: vertical-rl; }
-
-/* ============ 价格行 / FAQ ============ */
+/* ============ 附加服务（低调行式排版） ============ */
 .rows { display: flex; flex-direction: column; }
 .row { display: flex; align-items: flex-start; justify-content: space-between; gap: 1.5rem; padding: 1.25rem .2rem; border-bottom: 1px solid var(--color-border); }
 .row:last-child { border-bottom: none; }
@@ -522,19 +286,6 @@ main section[id] { scroll-margin-top: 92px; }
 .row-price .unit { display: block; font-size: .75rem; color: var(--color-gold); margin-top: .15rem; line-height: 1.6; }
 
 .frame { position: relative; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 16px; padding: 1.5rem 1.6rem; box-shadow: 0 1px 3px rgba(0,0,0,.04); }
-.faq-item { padding: 1.1rem .2rem; border-bottom: 1px dashed var(--color-border); }
-.faq-item:last-child { border-bottom: none; }
-.faq-q { font-family: var(--font-serif); font-size: .95rem; font-weight: 600; color: var(--color-text); margin-bottom: .4rem; line-height: 1.55; }
-.faq-a { font-size: .8rem; color: var(--color-text-secondary); line-height: 1.85; }
-.faq-item.faq-highlight {
-  background: linear-gradient(90deg, #FFFBF2 0%, #FFFDF9 100%);
-  border-left: 3px solid var(--color-gold);
-  border-bottom: none;
-  border-radius: 8px;
-  padding: 1.15rem 1.05rem;
-  margin: .3rem 0 .5rem;
-}
-.faq-item.faq-highlight .faq-a { font-size: .84rem; color: var(--color-text); font-weight: 500; }
 
 .note-bar { display: flex; gap: .7rem; background: var(--color-primary-light); border-left: 3px solid var(--color-gold); border-radius: 8px; padding: .9rem 1.05rem; font-size: .78rem; color: var(--color-text-secondary); margin-top: 1.3rem; line-height: 1.75; }
 .note-bar > span { flex-shrink: 0; }
@@ -546,25 +297,16 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
 
 /* ============ 响应式 ============ */
 @media (max-width: 900px) {
-  .core-grid { grid-template-columns: 1fr; max-width: 520px; margin: 0 auto; }
+  .core-grid, .core-grid.two, .core-grid.one { grid-template-columns: 1fr; max-width: 520px; margin-left: auto; margin-right: auto; }
   .card { --price-size: 2rem; }
   .card.featured { transform: none; }
   .card.featured:hover { transform: translateY(-2px); }
-  .sourcing-grid { grid-template-columns: 1fr; }
-  .sourcing-divider { writing-mode: horizontal-tb; padding: .5rem 0; }
-  .tier-steps { grid-template-columns: 1fr; }
-  .referral-grid { grid-template-columns: 1fr; }
-  .testimonial-grid { grid-template-columns: 1fr; max-width: 520px; margin: 0 auto; }
-  .honor-card { flex-direction: column; text-align: center; gap: .9rem; padding: 1.5rem 1.2rem; }
 }
 @media (max-width: 640px) {
   .container { padding: 1.6rem 4.5% 3rem; }
   .card { padding: 1.5rem 1.25rem 1.4rem; --price-size: 1.9rem; }
   .card .card-desc { min-height: 0; }
   .frame { padding: 1.2rem 1.1rem; }
-  .tier-ladder { padding: 1.25rem 1.05rem 1.1rem; }
-  .referral-card { padding: 1.15rem 1.05rem 1.05rem; }
-  .sourcing-section { padding: 1.5rem 1.1rem; }
   .row { flex-direction: column; gap: .55rem; }
   .row-price { text-align: left; }
   .sec-head { margin-top: 2.2rem; }
@@ -955,644 +697,210 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
     <div class="sec-divider" aria-hidden="true"><span></span></div>
   </div>
 
-<!-- ===== 页面顶端核心服务三卡阵列（优化版：桌面端强制一排三列） ===== -->
-<style>
-  .pricing-cards-container {
-    display: grid;
-    grid-template-columns: 1fr; /* 默认手机端单列 */
-    gap: 1.5rem;
-    align-items: stretch;
-  }
-  
-  /* 桌面端（屏幕宽度 >= 992px）强制 3 列并排一行 */
-  @media (min-width: 992px) {
-    .pricing-cards-container {
-      grid-template-columns: repeat(3, 1fr) !important;
-    }
-  }
-</style>
-
-<section class="pricing-grid-section" style="margin-bottom: 2.5rem;">
-  <div class="pricing-cards-container">
-
-    <!-- 卡片 1：创始藏家席位（免费特权） -->
-    <div class="price-card" style="background: var(--bg-card, #ffffff); border: 1px solid var(--border-color, #e5e0d8); border-radius: 12px; padding: 1.75rem 1.5rem; display: flex; flex-direction: column; justify-content: space-between; position: relative;">
-      <div>
-        <div class="card-badge" style="display: inline-block; font-size: 0.75rem; letter-spacing: 1px; color: #8c6d31; background: rgba(197, 160, 89, 0.15); padding: 0.25rem 0.75rem; border-radius: 20px; margin-bottom: 1rem; font-weight: 600;">
-          <span class="zh">席位限定 · 0 佣金</span><span class="en">LIMITED SEATS</span>
-        </div>
-        <h3 style="font-size: 1.25rem; margin-bottom: 0.5rem; color: var(--text-main, #2c2c2c);">
-          <span class="zh">创始藏家尊享席</span><span class="en">Founding Collector</span>
-        </h3>
-        <p style="font-size: 0.825rem; color: var(--text-sub, #666); margin-bottom: 1.25rem; min-height: 2.5em;">
-          <span class="zh">面向受邀入驻的资深藏家，享有永久免费上新与专享折扣特权。</span>
-          <span class="en">Exclusive tier for invited collectors with ongoing free listings.</span>
-        </p >
-
-        <div class="price-box" style="margin-bottom: 1.25rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border-color, #eee);">
-          <span style="font-size: 2rem; font-weight: 700; color: var(--text-main, #2c2c2c);">S$0</span>
-          <span style="font-size: 0.85rem; color: #888;"> / <span class="zh">永久席位</span><span class="en">forever</span></span>
-          <div style="font-size: 0.775rem; color: #8c6d31; margin-top: 0.25rem;" class="zh">首期仅限前 18 位经确认藏家</div>
-        </div>
-
-        <ul style="list-style: none; padding: 0; margin: 0 0 1.5rem 0; font-size: 0.85rem; line-height: 1.7; color: var(--text-sub, #444);">
-          <li>✓ <span class="zh"><b>每月 2 件免费发布额度</b>（展示期 6 个月）</span><span class="en"><b>2 Free listings / mo</b> (6-mo duration)</span></li>
-          <li>✓ <span class="zh">升级套餐享<b>永久 8 折</b>，超额单件按创始藏家特惠价</span><span class="en"><b>Permanent 20% off</b> on upgrades; extra single listings at the Founding Collector rate</span></li>
-          <li>✓ <span class="zh">0% 交易佣金，保护私密沟通</span><span class="en">0% Transaction commission</span></li>
+  <!-- ===== 第一部分：创始藏家计划 ===== -->
+  <section id="founding" style="margin-top: 1.5rem;">
+    <div class="sec-head tight">
+      <div class="eyebrow"><span class="zh">创 始 藏 家 计 划</span><span class="en">FOUNDING COLLECTOR PLAN</span></div>
+      <h2 class="sec-title"><span class="zh">创始藏家尊享席</span><span class="en">Founding Collector Privilege</span></h2>
+      <p class="sec-sub"><span class="zh">用于吸引早期优质藏家入驻：明确免费权益、适用条件及有效期限。</span><span class="en">Designed to welcome early, quality collectors — with clear free benefits, eligibility and validity.</span></p>
+    </div>
+    <div class="core-grid one">
+      <div class="card">
+        <span class="tier-tag free"><span class="zh">席位限定 · 0 佣金</span><span class="en">Limited Slots · 0 Commission</span></span>
+        <h3><span class="zh">创始藏家尊享席</span><span class="en">Founding Collector Privilege</span></h3>
+        <p class="card-desc"><span class="zh">面向受邀入驻的资深藏家，享有永久免费上新与专享折扣特权。</span><span class="en">By invitation only for seasoned collectors, with lifelong free listing benefits and exclusive discounts.</span></p>
+        <div class="price"><span class="free-word">S$0</span></div>
+        <div class="price-unit"><span class="zh">/ 永久席位 · 首期仅限前 18 位经确认藏家</span><span class="en">/ Lifetime slot · Limited to the first 18 verified collectors in this launch batch</span></div>
+        <ul>
+          <li><span class="zh">每月 <strong>2 件免费发布额度</strong>（展示期 6 个月）</span><span class="en"><strong>2 free listings per month</strong> (6-month display period)</span></li>
+          <li><span class="zh">升级套餐享<strong>永久 8 折</strong>，超额单件按创始藏家特惠价</span><span class="en"><strong>20% permanent discount</strong> on upgraded plans; extra listings at founding collector special rates</span></li>
+          <li><span class="zh"><strong>0% 交易佣金</strong>，保护私密沟通</span><span class="en"><strong>0% transaction commission</strong>, private direct communication</span></li>
+        </ul>
+        <div class="eligibility">
+          <div class="eligibility-title"><span class="zh">【创始藏家准入期许】</span><span class="en">Eligibility Expectations for Founding Collectors</span></div>
+          <ul>
+            <li><span class="zh">拥有值得公开展示的藏品</span><span class="en">Own collectibles worthy of public showcase</span></li>
+            <li><span class="zh">愿意持续更新藏品</span><span class="en">Commit to regular updates of your collection</span></li>
+            <li><span class="zh">认真完善每件藏品档案资料</span><span class="en">Prepare detailed, accurate records for each item</span></li>
+            <li><span class="zh">乐于向同好分享、拓展收藏社群</span><span class="en">Willing to grow the collecting community by introducing fellow collectors</span></li>
+            <li><span class="zh">有长期使用线上藏馆或推广服务的规划</span><span class="en">Intend to use the online gallery and promotion services long-term</span></li>
           </ul>
-      </div>
-      <a href="https://airtable.com/apprn6XDQnAm8bkaT/shrlQLTRfG5RlYjD4" target="_blank" rel="noopener noreferrer" class="btn-card" style="display: block; text-align: center; padding: 0.75rem; border-radius: 6px; border: 1px solid var(--border-color, #ccc); color: var(--text-main, #333); text-decoration: none; font-weight: 600;">
-        <span class="zh">申请创始席位</span><span class="en">Apply for Seat</span>
-      </a >
-    </div>
-
-    <!-- 卡片 2：专属藏家数字旗舰馆（C位主推，黑金调性） -->
-    <div class="price-card popular" style="background: var(--bg-card-dark, #1c1a17); border: 2px solid var(--gold-color, #c5a059); border-radius: 12px; padding: 1.75rem 1.5rem; display: flex; flex-direction: column; justify-content: space-between; position: relative; box-shadow: 0 10px 30px rgba(0,0,0,0.15);">
-      <div style="position: absolute; top: -12px; right: 15px; background: var(--gold-color, #c5a059); color: #fff; font-size: 0.7rem; font-weight: 700; padding: 0.2rem 0.6rem; border-radius: 12px; letter-spacing: 0.5px;">
-        POPULAR · <span class="zh">主推套餐</span><span class="en">RECOMMENDED</span>
-      </div>
-
-      <div>
-        <div class="card-badge" style="display: inline-block; font-size: 0.75rem; letter-spacing: 1px; color: #c5a059; background: rgba(197, 160, 89, 0.2); padding: 0.25rem 0.75rem; border-radius: 20px; margin-bottom: 1rem; font-weight: 600;">
-          <span class="zh">年度尊享私人线上藏馆</span><span class="en">ANNUAL PRIVATE Online Gallery</span>
         </div>
-        <h3 style="font-size: 1.25rem; margin-bottom: 0.5rem; color: #ffffff;">
-          <span class="zh">专属线上私家藏馆</span><span class="en">Private Online Gallery</span>
-        </h3>
-        <p style="font-size: 0.825rem; color: #a59e95; margin-bottom: 1.25rem; min-height: 2.5em;">
-          <span class="zh">为您的收藏建立一个专属的线上展示空间。集中展示藏品、整理收藏资料，并通过专属链接向潜在买家及收藏圈分享。
-不收取成交佣金。买家直接联系您，交易由双方自行协商。</span>
-          <span class="en">Create a dedicated online gallery for your collection.
-Showcase your items in one place, organize collection records, and share with prospective buyers and the collecting community via your unique link.
-No commission on sales. Buyers contact you directly, and all transactions are negotiated privately between both parties.</span>
-        </p >
-
-        <div class="price-box" style="margin-bottom: 1.25rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(255,255,255,0.1);">
-          <span style="font-size: 2rem; font-weight: 700; color: #c5a059;">S$1,499</span>
-          <span style="font-size: 0.85rem; color: #888;"> / <span class="zh">年</span><span class="en">year</span></span>
-          <div style="font-size: 0.775rem; color: #a59e95; margin-top: 0.25rem;">
-            <span class="zh">标准价 <del>S$2,499</del>，创始藏家特惠立省 S$1,000</span>
-            <span class="en">Standard <del>S$2,499</del>, Save S$1,000</span>
-          </div>
-        </div>
-
-        <ul style="list-style: none; padding: 0; margin: 0 0 1.5rem 0; font-size: 0.85rem; line-height: 1.7; color: #d5cfc7;">
-          <li>✓ <span class="zh">一站式 <b>10 件重器全包建档</b>（精修、美化、独立网页）</span><span class="en"><b>10 Items full setup</b> (retouching & page layout)</span></li>
-          <li>✓ <span class="zh"><b>无数量限制展示</b>全馆藏品，独立专属展馆 URL</span><span class="en"><b>Unlimited item display</b> & custom gallery URL</span></li>
-          <li>✓ <span class="zh">平台<b>首页黄金位曝光</b> + 黑金尊贵勋章标识</span><span class="en"><b>Homepage placement</b> & Black Gold badge</span></li>
-          <li>✓ <span class="zh">买家一对一直连，<b>0% 交易佣金</b></span><span class="en">Direct buyer contact with <b>0% commission</b></span></li>
-        </ul>
-      </div>
-
-      <a href="javascript:void(0)" onclick="openServiceModal('gallery')" class="btn-card" style="display: block; text-align: center; padding: 0.75rem; border-radius: 6px; background: var(--gold-color, #c5a059); color: #fff; text-decoration: none; font-weight: 700;">
-        <span class="zh">立即开通私人线上博物馆</span><span class="en">Subscribe Private Online Museum</span>
-      </a >
-    </div>
-
-    <!-- 卡片 3：单件专业上架 -->
-    <div class="price-card" style="background: var(--bg-card, #ffffff); border: 1px solid var(--border-color, #e5e0d8); border-radius: 12px; padding: 1.75rem 1.5rem; display: flex; flex-direction: column; justify-content: space-between; position: relative;">
-      <div>
-        <div class="card-badge" style="display: inline-block; font-size: 0.75rem; letter-spacing: 1px; color: #555; background: rgba(0,0,0,0.05); padding: 0.25rem 0.75rem; border-radius: 20px; margin-bottom: 1rem; font-weight: 600;">
-          <span class="zh">灵活单件按需</span><span class="en">PAY PER ITEM</span>
-        </div>
-        <h3 style="font-size: 1.25rem; margin-bottom: 0.5rem; color: var(--text-main, #2c2c2c);">
-          <span class="zh">单件专业上架</span><span class="en">Single Professional Listing</span>
-        </h3>
-        <p style="font-size: 0.825rem; color: var(--text-sub, #666); margin-bottom: 1.25rem; min-height: 2.5em;">
-          <span class="zh">适合有特定重器需要单独试水或快速测款的藏家，提供更极致的学术包装。</span>
-          <span class="en">Ideal for testing individual items in the market, with refined scholarly packaging.</span>
-        </p >
-
-        <div class="price-box" style="margin-bottom: 1.25rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border-color, #eee);">
-          <span style="font-size: 2rem; font-weight: 700; color: var(--text-main, #2c2c2c);">S$588</span>
-          <span style="font-size: 0.85rem; color: #888;"> / <span class="zh">件</span><span class="en">item</span></span>
-          <div style="font-size: 0.775rem; color: #8c6d31; margin-top: 0.25rem;">
-            <span class="zh">创始藏家特惠价：<b>S$388 / 件</b></span>
-            <span class="en">Founding Collector price: <b>S$388 / item</b></span>
-          </div>
-        </div>
-
-        <ul style="list-style: none; padding: 0; margin: 0 0 1.5rem 0; font-size: 0.85rem; line-height: 1.7; color: var(--text-sub, #444);">
-          <li>✓ <span class="zh">最多 <b>4 张图片专业优化</b>与描述合规整理</span><span class="en">Up to <b>4 retouched photos</b> & description optimization</span></li>
-          <li>✓ <span class="zh"><b>6 个月标准在线展示期</b>（公开发布在垂直品类库）</span><span class="en"><b>6-Month display period</b> in category channels</span></li>
-          <li>✓ <span class="zh">精准索引匹配，买家直接私密联系</span><span class="en">Direct buyer leads via category search</span></li>
-          <li>✓ <span class="zh">可选微加购：+S$99解锁细节扩展包；+S$100 首周首页精选</span><span class="en">Optional order bumps: +S$99 Detail expansion pack; +S$100 1st-wk feature</span></li>
-        </ul>
-      </div>
-
-      <a href="javascript:void(0)" onclick="openServiceModal('single')" class="btn-card" style="display: block; text-align: center; padding: 0.75rem; border-radius: 6px; border: 1px solid var(--border-color, #ccc); color: var(--text-main, #333); text-decoration: none; font-weight: 600;">
-        <span class="zh">单件发布藏品</span><span class="en">List Single Item</span>
-      </a >
-    </div>
-
-  </div>
-	<!-- ===== 创始藏家黑金徽章展示 ===== -->
-    <div class="honor-card">
-      <div class="honor-badge-wrap">
-        <img src="assets/images/foundingcollector.webp" alt="创始藏家徽章 Founding Collector Badge" onerror="this.outerHTML='<div class=&quot;honor-badge-fallback&quot;>藏</div>'">
-      </div>
-      <div class="honor-text">
-        <div class="honor-eyebrow"><span class="zh">荣誉身份 · 终身铭刻</span><span class="en">HONORARY · LIFETIME</span></div>
-        <div class="honor-title"><span class="zh">入驻即尊享「创始藏家」专属黑金数字徽章</span><span class="en">Join to receive your exclusive "Founding Collector" black-gold digital Badge</span></div>
-        <div class="honor-desc"><span class="zh">展馆主页与藏品详情页同步展示暗金边框徽标，向圈内买家传递您的资深身份与信誉背书。</span><span class="en">A dark-gold badge appears on your gallery page and item detail pages — signalling seniority and trust to fellow collectors.</span></div>
+        <a href="https://airtable.com/apprn6XDQnAm8bkaT/shrlQLTRfG5RlYjD4" target="_blank" rel="noopener noreferrer" class="card-cta"><span class="zh">申请创始席位</span><span class="en">Apply for Founding Slot</span></a>
       </div>
     </div>
-	  <!-- ===== 席位阶梯预告 ===== -->
-    <div class="tier-ladder">
-      <div class="tier-ladder-head">
-        <span class="tier-ladder-eyebrow">🔄 <span class="zh">首期 18 名创始藏家席位抢占中</span><span class="en">First 18 Founding Collector seats — now open</span></span>
-        <h2 class="tier-ladder-title"><span class="zh">席位阶梯预告</span><span class="en">Seat Tiers Roadmap</span></h2>
-      </div>
-
-      <ol class="tier-steps">
-        <li class="tier-step is-open">
-          <span class="tier-step-badge"><span class="zh">第 1 期</span><span class="en">PHASE 1</span></span>
-          <span class="tier-step-text"><span class="zh">18 席开放中（每月免费 2 件）</span><span class="en">18 seats open · 2 free listings / month</span></span>
-        </li>
-        <li class="tier-step">
-          <span class="tier-step-badge"><span class="zh">第 2 期</span><span class="en">PHASE 2</span></span>
-          <span class="tier-step-text"><span class="zh">预计：累计开放至 28 席 · 每月免费 1 件 + 入驻 9 折</span><span class="en">Planned: cumulative up to 28 seats · 1 free listing / month + 10% off joining</span></span>
-        </li>
-        <li class="tier-step">
-          <span class="tier-step-badge"><span class="zh">第 3 期起</span><span class="en">PHASE 3+</span></span>
-          <span class="tier-step-text"><span class="zh">恢复标准定价，福利逐步收紧</span><span class="en">Standard pricing resumes; benefits taper off</span></span>
-        </li>
-      </ol>
-
-      <p class="tier-urgency">⏳ <span class="zh">越早入驻，福利越久越划算！名额满即止，不另行通知。</span><span class="en">Join earlier, enjoy longer. Seats close when full — no further notice.</span></p>
-    </div>
-
-	
-	 <div class="note-bar">
-        <span>※</span>
-        <div><b><span class="zh">创始藏家权益：</span><span class="en">Founding Collector benefits: </span></b><span class="zh">前 18 位经平台确认的藏家永久享每月 2 件免费发布；免费额度不累积、不结转。超额单件按创始藏家特惠价、升级套餐永久 8 折，套餐优惠价以本页所列为准。</span><span class="en">Confirmed members among the first 18 receive 2 free listings monthly for life; unused quota does not carry over. Upgraded plans are 20% off for life; extra single listings are at the Founding Collector rate shown here.</span></div>
-      </div>
-	
-	      <!-- ===== 单件上架随单加购包 (Order Bump) ===== -->
-    <div style="margin-top: 1.25rem; background: rgba(212, 175, 55, 0.05); border: 1px dashed var(--gold-color, #c5a059); padding: 1.25rem; border-radius: 8px;">
-      <div style="font-weight: 600; margin-bottom: 0.75rem; color: var(--gold-dark, #8c6d31); display: flex; align-items: center; justify-content: space-between;">
-        <span>⚡ 单件上架·随单微加购（Order Bump）</span>
-        <span style="font-size: 0.8rem; background: var(--gold-color, #c5a059); color: #fff; padding: 0.1rem 0.5rem; border-radius: 4px;" class="zh">发布时一键勾选</span>
-      </div>
-      
-      <div class="rows" style="gap: 0.75rem;">
-        <!-- 加购项 1 -->
-        <div class="row" style="padding: 0.5rem 0; border-bottom: 1px solid rgba(0,0,0,0.05);">
-          <div>
-            <div class="row-title" style="font-size: 0.95rem;">
-              <span class="zh">🎬 重器细节扩展包</span>
-              <span class="en">Masterpiece Detail Expansion Pack</span>
-            </div>
-            <div class="row-desc" style="font-size: 0.85rem;">
-              <span class="zh">解锁多达 10 张高清细节图、不限字数的流传考证说明。</span>
-              <span class="en">Unlock up to 10 HD detail photos, and unlimited provenance text.</span>
-            </div>
-          </div>
-          <div class="row-price" style="text-align: right;">
-            <span class="amount" style="font-size: 1.1rem; font-weight: bold; color: var(--text-main, #2c2c2c);">+S$99</span>
-            <span class="unit" style="font-size: 0.75rem; display: block;"><span class="zh">/ 件</span><span class="en">/ item</span></span>
-          </div>
-        </div>
-        
-        <!-- 加购项 2 -->
-        <div class="row" style="padding: 0.5rem 0 0 0;">
-          <div>
-            <div class="row-title" style="font-size: 0.95rem;">
-              <span class="zh">🚀 首周首页精选加购</span>
-              <span class="en">First-Week Homepage Feature Add-on</span>
-            </div>
-            <div class="row-desc" style="font-size: 0.85rem;">
-              <span class="zh">单件上架时随单加购，获得首周首页精选展示机会，增加藏品在平台首页被发现的机会。</span>
-              <span class="en">Add during single listing; Get homepage featured exposure for your first week, helping your collections get discovered on the platform homepage.</span>
-            </div>
-          </div>
-          <div class="row-price" style="text-align: right;">
-            <span class="amount" style="font-size: 1.1rem; font-weight: bold; color: var(--text-main, #2c2c2c);">+S$280</span>
-            <span class="unit" style="font-size: 0.75rem; display: block; opacity: 0.7;"><del>S$1960</del> <span class="zh">随单特惠</span></span>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- ===== 展示周期与续展机制说明 ===== -->
-    <div class="note-bar" style="margin-top: 1.5rem; background: var(--bg-card, #faf9f6); border: 1px solid var(--border-color, #e5e0d8); padding: 1.25rem; border-radius: 8px;">
-      <div style="font-weight: 600; margin-bottom: 0.5rem; color: var(--text-main, #2c2c2c); display: flex; align-items: center; gap: 0.5rem;">
-        <span>⏳</span>
-        <span class="zh">藏品展示周期与到期续展机制</span>
-        <span class="en">Listing Duration & Renewal Mechanism</span>
-      </div>
-      <div style="font-size: 0.9rem; line-height: 1.6; color: var(--text-sub, #555);">
-        <p style="margin-bottom: 0.4rem;">
-          <b class="zh">1. 初始展示期：</b><b class="en">1. Initial Period: </b>
-          <span class="zh">所有上架藏品初始在线展示期统一为 <b>6 个月</b>，以保持平台“生货”流动性与内容新鲜度。</span>
-          <span class="en">All listed items have an initial 6-month display period to maintain fresh platform inventory.</span>
-        </p >
-        <p style="margin-bottom: 0.4rem;">
-          <b class="zh">2. 到期续展选择：</b><b class="en">2. Renewal Options: </b>
-          <span class="zh">展示期满前系统将自动提醒。藏家可选：</span>
-          <span class="en">System reminds before expiry. Options:</span>
-          <br>
-          <span class="zh">▸ <b>扣除额度</b>：创始藏家可直接消耗 1 个当月免费发布额度延长 6 个月。</span>
-          <span class="en">▸ <b>Use Quota</b>: Founding Collectors can use 1 monthly free quota to extend for 6 months.</span>
-          <br>
-          <span class="zh">▸ <b>小额续费</b>：支付 <b>S$388 / 件</b> 延长 6 个月展示期。</span>
-          <span class="en">▸ <b>Micro-fee</b>: Pay S$388/item to extend for another 6 months.</span>
-        </p >
-        <p style="margin: 0; opacity: 0.85;">
-          <span class="zh">※ 若选择不续展，藏品将自动转入后台私密归档（不删除数据），您可随时重新激活。</span>
-          <span class="en">※ Unrenewed items will automatically move to private archives without losing data, and can be reactivated anytime.</span>
-        </p >
-      </div>
-    </div>
-  
-    <!-- ===== 拉新奖励 ===== -->
-    <div class="referral-card">
-      <div class="referral-head">
-        <span class="referral-icon" aria-hidden="true">🎁</span>
-        <h3><span class="zh">藏家圈层引荐计划</span><span class="en">Connoisseur Invitation Program</span></h3>
-      </div>
-      <div class="referral-grid">
-        <div class="referral-item">
-          <span class="arrow" aria-hidden="true">→</span>
-          <span><span class="zh">为了确保社区的藏品质量，创始藏家仅限引荐同行级资深藏家入驻。</span><span class="en">To safeguard the quality of the community, Founding Collectors may only invite fellow veteran collectors of comparable standing.</span></span>
-        </div>
-        <div class="referral-item">
-          <span class="arrow" aria-hidden="true">→</span>
-          <span><span class="zh">成功引荐一位经平台审核通过的藏家，您将在当月获得 <b>3 个发布额度</b>（上不封顶）。</span><span class="en">For every collector referral approved by the platform, you receive <b>3 listing credits</b> in the current month — no cap.</span></span>
-        </div>
-      </div>
-    </div>
-
-    
   </section>
 
-  <!-- 发布套餐与增值服务 -->
-  <section id="price-table" style="margin-top: 3rem;">
+  <!-- ===== 第二部分：专业发布服务（全页最醒目的收费产品） ===== -->
+  <section id="listing-plans" style="margin-top: 3.5rem;">
     <div class="sec-head tight">
-      <div class="eyebrow"><span class="zh">发布套餐 · 灵活选择</span><span class="en">LISTING PLANS</span></div>
-      <h2 class="sec-title"><span class="zh">发布套餐 &amp; 费用</span><span class="en">Listing Plans &amp; Pricing</span></h2>
-      <p class="sec-sub"><span class="zh">前 18 位创始藏家永久享每月 2 件免费发布；升级任意套餐享 8 折，超额单件按创始藏家特惠价。</span><span class="en">The first 18 Founding Collectors receive 2 free listings monthly for life, plus 20% off all upgraded plans and Founding Collector pricing on extra single listings.</span></p>
+      <div class="eyebrow"><span class="zh">专 业 发 布 服 务</span><span class="en">PROFESSIONAL LISTING SERVICES</span></div>
+      <h2 class="sec-title"><span class="zh">专业发布服务</span><span class="en">Professional Listing Services</span></h2>
+      <p class="sec-sub"><span class="zh">从资料整理到图片优化，由专业团队协助您完成上架；展示期 6 个月，买家直接联系您，平台 0% 成交佣金。</span><span class="en">From material organization to photo optimization, our team assists with your listing. 6-month display, buyers contact you directly, 0% commission.</span></p>
+      <div class="sec-divider" aria-hidden="true"><span></span></div>
+    </div>
+
+    <div class="core-grid two">
+      <!-- 标准专业发布 -->
+      <div class="card">
+        <span class="tier-tag growth"><span class="zh">标准发布</span><span class="en">STANDARD</span></span>
+        <h3><span class="zh">标准专业发布</span><span class="en">Standard Professional Listing</span></h3>
+        <p class="card-desc"><span class="zh">适合单件藏品的规范上架，基础图片优化与资料整理一应俱全。</span><span class="en">For a single piece properly listed — essential photo optimization and material organization included.</span></p>
+        <div class="price"><span class="cur">S$</span>188</div>
+        <div class="price-unit"><span class="zh">/ 件 · 展示期 6 个月</span><span class="en">/ item · 6-month display</span></div>
+        <ul>
+          <li><span class="zh">最多 <strong>4 张</strong>基础图片优化</span><span class="en">Up to <strong>4</strong> basic photo optimizations</span></li>
+          <li><span class="zh">标题、描述及标签整理</span><span class="en">Title, description &amp; tag organization</span></li>
+          <li><span class="zh">协助完成上架</span><span class="en">Listing assistance</span></li>
+          <li><span class="zh">分类展示 <strong>6 个月</strong></span><span class="en"><strong>6-month</strong> category display</span></li>
+          <li><span class="zh">买家直接联系卖家</span><span class="en">Buyers contact you directly</span></li>
+          <li><span class="zh"><strong>0%</strong> 成交佣金</span><span class="en"><strong>0%</strong> commission</span></li>
+        </ul>
+        <a href="javascript:void(0)" onclick="openServiceModal('standard')" class="card-cta"><span class="zh">选择标准发布</span><span class="en">Choose Standard</span></a>
+      </div>
+
+      <!-- 高级专业发布（主推） -->
+      <div class="card featured">
+        <span class="popular-ribbon"><span class="zh">推荐</span><span class="en">RECOMMENDED</span></span>
+        <span class="tier-tag flagship"><span class="zh">高级发布</span><span class="en">PREMIUM</span></span>
+        <h3><span class="zh">高级专业发布</span><span class="en">Premium Professional Listing</span></h3>
+        <p class="card-desc"><span class="zh">更完整的资料编排与双倍图片优化，含首页推荐 7 天，为重器争取更大曝光。</span><span class="en">Fuller material curation with twice the photo optimization, plus a 7-day homepage feature for greater exposure.</span></p>
+        <div class="price"><span class="cur">S$</span>388</div>
+        <div class="price-unit"><span class="zh">/ 件 · 展示期 6 个月 · 含首页推荐 7 天</span><span class="en">/ item · 6-month display · incl. 7-day homepage feature</span></div>
+        <ul>
+          <li><span class="zh">最多 <strong>8 张</strong>基础图片优化</span><span class="en">Up to <strong>8</strong> basic photo optimizations</span></li>
+          <li><span class="zh"><strong>更完整的资料编排</strong>（标题、描述及标签整理）</span><span class="en"><strong>Fuller material curation</strong> (title, description &amp; tags)</span></li>
+          <li><span class="zh">协助完成上架</span><span class="en">Listing assistance</span></li>
+          <li><span class="zh">分类展示 <strong>6 个月</strong></span><span class="en"><strong>6-month</strong> category display</span></li>
+          <li><span class="zh"><strong>首页推荐 7 天</strong></span><span class="en"><strong>7-day homepage feature</strong></span></li>
+          <li><span class="zh">买家直接联系卖家</span><span class="en">Buyers contact you directly</span></li>
+          <li><span class="zh"><strong>0%</strong> 成交佣金</span><span class="en"><strong>0%</strong> commission</span></li>
+        </ul>
+        <a href="javascript:void(0)" onclick="openServiceModal('premium')" class="card-cta"><span class="zh">选择高级发布</span><span class="en">Choose Premium</span></a>
+      </div>
+    </div>
+
+    <!-- 规格对比表 -->
+    <div class="frame" style="max-width: 840px; margin: 1.4rem auto 0;">
+      <div class="compare-wrap">
+        <table class="compare-table">
+          <thead>
+            <tr>
+              <th><span class="zh">服务内容</span><span class="en">Service</span></th>
+              <th><span class="zh">标准专业发布</span><span class="en">Standard</span></th>
+              <th class="c-premium"><span class="zh">高级专业发布</span><span class="en">Premium</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="zh">价格</span><span class="en">Price</span></td>
+              <td>S$188</td>
+              <td class="c-premium">S$388</td>
+            </tr>
+            <tr>
+              <td><span class="zh">展示期限</span><span class="en">Display period</span></td>
+              <td><span class="zh">6 个月</span><span class="en">6 months</span></td>
+              <td class="c-premium"><span class="zh">6 个月</span><span class="en">6 months</span></td>
+            </tr>
+            <tr>
+              <td><span class="zh">基础图片优化</span><span class="en">Basic photo optimization</span></td>
+              <td><span class="zh">最多 4 张</span><span class="en">Up to 4 photos</span></td>
+              <td class="c-premium"><span class="zh">最多 8 张</span><span class="en">Up to 8 photos</span></td>
+            </tr>
+            <tr>
+              <td><span class="zh">标题、描述及标签整理</span><span class="en">Title, description &amp; tags</span></td>
+              <td>✓</td>
+              <td class="c-premium">✓</td>
+            </tr>
+            <tr>
+              <td><span class="zh">协助完成上架</span><span class="en">Listing assistance</span></td>
+              <td>✓</td>
+              <td class="c-premium">✓</td>
+            </tr>
+            <tr>
+              <td><span class="zh">首页推荐位置</span><span class="en">Homepage feature</span></td>
+              <td>—</td>
+              <td class="c-premium"><span class="zh">7 天</span><span class="en">7 days</span></td>
+            </tr>
+            <tr>
+              <td><span class="zh">买家直接联系卖家</span><span class="en">Direct buyer contact</span></td>
+              <td>✓</td>
+              <td class="c-premium">✓</td>
+            </tr>
+            <tr>
+              <td><span class="zh">成交佣金</span><span class="en">Commission</span></td>
+              <td>0%</td>
+              <td class="c-premium">0%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 第三部分：专属线上藏馆 ===== -->
+  <section id="private-gallery" style="margin-top: 3.5rem;">
+    <div class="sec-head tight">
+      <div class="eyebrow"><span class="zh">专 属 线 上 藏 馆</span><span class="en">PRIVATE ONLINE GALLERY</span></div>
+      <h2 class="sec-title"><span class="zh">专属线上藏馆</span><span class="en">Your Private Online Gallery</span></h2>
+      <p class="sec-sub"><span class="zh">针对拥有多件藏品、需要独立主页并希望持续经营线上展示空间的藏家。</span><span class="en">For collectors with multiple pieces who need a dedicated homepage and wish to maintain a lasting online showcase.</span></p>
+      <div class="sec-divider" aria-hidden="true"><span></span></div>
+    </div>
+    <div class="core-grid one">
+      <div class="card">
+        <span class="tier-tag growth"><span class="zh">年度藏馆</span><span class="en">ANNUAL GALLERY</span></span>
+        <h3><span class="zh">专属线上藏馆</span><span class="en">Private Online Gallery</span></h3>
+        <p class="card-desc"><span class="zh">独立主页、专属链接，把您的收藏集中呈现并全年在线经营。</span><span class="en">A dedicated homepage with a unique link — present your collection in one place, online all year.</span></p>
+        <div class="price"><span class="cur">S$</span>888</div>
+        <div class="price-unit"><span class="zh">/ 年（相当于每月 S$74）· 创始藏家优惠价 <strong>S$588 / 年</strong></span><span class="en">/ year (equiv. S$74/month) · Founding Collector rate <strong>S$588 / year</strong></span></div>
+        <ul>
+          <li><span class="zh">独立藏家主页及专属链接</span><span class="en">Dedicated collector homepage with a unique link</span></li>
+          <li><span class="zh">首批 <strong>10 件</strong>藏品的标题、描述、标签整理及图片优化</span><span class="en">First <strong>10 items</strong>: title, description, tags &amp; photo optimization</span></li>
+          <li><span class="zh">藏馆内<strong>不限数量</strong>展示藏品</span><span class="en"><strong>Unlimited</strong> items displayed in your gallery</span></li>
+          <li><span class="zh">全年在线展示</span><span class="en">Year-round online display</span></li>
+          <li><span class="zh"><strong>首页推荐 7 天</strong>，作为开馆推广权益</span><span class="en"><strong>7-day homepage feature</strong> as your opening promotion</span></li>
+          <li><span class="zh">买家直接联系藏家</span><span class="en">Buyers contact you directly</span></li>
+          <li><span class="zh"><strong>0%</strong> 成交佣金</span><span class="en"><strong>0%</strong> commission</span></li>
+        </ul>
+        <a href="javascript:void(0)" onclick="openServiceModal('gallery')" class="card-cta"><span class="zh">开通专属线上藏馆</span><span class="en">Open Your Private Gallery</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 第四部分：可选附加服务（低调行式排版，不与核心套餐同级） ===== -->
+  <section id="add-ons" style="margin-top: 3.5rem;">
+    <div class="sec-head tight">
+      <div class="eyebrow"><span class="zh">可 选 附 加 服 务</span><span class="en">OPTIONAL ADD-ONS</span></div>
+      <h2 class="sec-title"><span class="zh">可选附加服务</span><span class="en">Optional Add-on Services</span></h2>
+      <p class="sec-sub"><span class="zh">按需搭配已上架藏品使用，不影响核心套餐的选择。</span><span class="en">Pair with your listed items as needed — independent of the core plans above.</span></p>
     </div>
     <div class="frame">
       <div class="rows">
         <div class="row">
           <div>
-            <div class="row-title"><span class="zh">每月 2 件发布</span><span class="en">2 Listings per Month</span></div>
-            <div class="row-desc"><span class="zh">创始藏家专属，每月 1 日重置，不累积、不结转；免费藏品享基础曝光与正常展示。</span><span class="en">For Founding Collectors; resets on the 1st with no carry-over. Free listings receive standard display and basic exposure.</span></div>
+            <div class="row-title"><span class="zh">藏品细节扩展包</span><span class="en">Collection Detail Expansion Pack</span></div>
+            <div class="row-desc"><span class="zh">最多 10 张额外细节图片的整理与优化；协助整理藏品背景、来源及相关说明。由藏家提供资料，平台协助编排。</span><span class="en">Up to 10 additional detail photos organized and optimized; assistance organizing the item's background, provenance and related notes. Materials provided by the collector, arranged by the platform.</span></div>
           </div>
           <div class="row-price">
-            <span class="amount"><span class="zh">永久免费</span><span class="en">FREE FOR LIFE</span></span>
-            <span class="unit"><span class="zh">仅限经确认的前 18 位创始藏家</span><span class="en">For confirmed members among the first 18</span></span>
+            <span class="amount">S$59</span>
+            <span class="unit"><span class="zh">/ 件</span><span class="en">/ item</span></span>
           </div>
         </div>
         <div class="row">
           <div>
-            <div class="row-title"><span class="zh">单件专业上架（超出免费额度）</span><span class="en">Professional Single Listing (Beyond Free Quota)</span></div>
-            <div class="row-desc"><span class="zh">适合散发或加急上架；每件最多 4 张基础图片优化，资料确认后展示6个月，并提供更极致的学术包装。</span><span class="en">For occasional or urgent listings; includes up to 4 basic photo edits, six-month display after details are approved, with refined scholarly packaging.</span></div>
+            <div class="row-title"><span class="zh">首页推荐</span><span class="en">Homepage Feature</span></div>
+            <div class="row-desc"><span class="zh">首页独立推荐区域展示 7 天；不保证成交，不包含专业发布服务。</span><span class="en">7 days in a dedicated homepage recommendation area; sales not guaranteed; professional listing not included.</span></div>
           </div>
           <div class="row-price">
-            <span class="amount">S$588 <span class="zh">/ 件</span><span class="en">/ item</span></span>
-            <span class="unit"><span class="zh">创始藏家特惠价 S$388 / 件</span><span class="en">Founding Collector price: S$388 / item</span></span>
-          </div>
-        </div>
-        <div class="row">
-          <div>
-            <div class="row-title"><span class="zh">月度发布包（10 件 / 月）</span><span class="en">Monthly Listing Pack (5 Items)</span></div>
-            <div class="row-desc"><span class="zh">适合稳定、高频发布的卖家。</span><span class="en">A good fit for sellers with regular, frequent listings.</span></div>
-          </div>
-          <div class="row-price">
-            <span class="amount">S$4900 <span class="zh">/ 月</span><span class="en">/ month</span></span>
-            <span class="unit"><span class="zh">创始藏家 S$3920 / 月（8 折）</span><span class="en">Founding Collector: S$3920 / month (20% off)</span></span>
-          </div>
-        </div>
-        <div class="row">
-          <div>
-            <div class="row-title"><span class="zh">年度无限发布</span><span class="en">Annual Unlimited Listings</span></div>
-            <div class="row-desc"><span class="zh">适合商家与画廊；全年不限发布件数。</span><span class="en">For dealers and galleries, with unlimited listings throughout the year.</span></div>
-          </div>
-          <div class="row-price">
-            <span class="amount">S$58,800 <span class="zh">/ 年</span><span class="en">/ year</span></span>
-            <span class="unit"><span class="zh">创始藏家 S$39,2000 / 年（8 折）</span><span class="en">Founding Collector: S$39,200 / year (20% off)</span></span>
+            <span class="amount">S$100</span>
+            <span class="unit"><span class="zh">/ 7 天</span><span class="en">/ 7 days</span></span>
           </div>
         </div>
       </div>
-     
     </div>
-    <!-- ===== 藏家档案与行家意见服务（独立专业配套） ===== -->
-<div class="sec-head tight" style="margin-top: 3rem;">
-  <div class="eyebrow"><span class="zh">独 立 专 业 赋 能</span><span class="en">INDEPENDENT SERVICES</span></div>
-  <h2 class="sec-title"><span class="zh">独立专业配套增值服务</span><span class="en">Independent Professional Supporting Value-Added Services</span></h2>
-  <p class="sec-sub">
-    <span class="zh">提供拍卖级别的数字建档、摄影排版与行家观感服务。独立签约，与平台上架或成交与否无关。</span>
-    <span class="en">Auction-grade digital archiving, photography, and independent expert observations. Signed separately, independent of listing or sales.</span>
-  </p >
-</div>
-
-<div class="frame" style="background: var(--bg-card, #ffffff); border: 1px solid var(--border-color, #e5e0d8); border-radius: 12px; overflow: hidden; margin-top: 1.5rem;">
-  <div class="rows">
-
-    <!-- 1. 古董静物专业拍摄+精修 -->
-    <div class="row" style="padding: 1.25rem 1.5rem; border-bottom: 1px solid var(--border-color, #eee); display: flex; justify-content: space-between; align-items: center; gap: 1rem;">
-      <div style="flex: 1;">
-        <div class="row-title" style="font-size: 1.05rem; font-weight: 600; color: var(--text-main, #2c2c2c); margin-bottom: 0.3rem;">
-          <span class="zh">1. 古董静物专业拍摄与精修</span>
-          <span class="en">Professional Antique Still-Life Photography</span>
-        </div>
-        <div class="row-desc" style="font-size: 0.875rem; color: var(--text-sub, #666); line-height: 1.5;">
-          <span class="zh">博物馆/拍卖级专业灯光布景拍摄，交付最多 8 张高清精修原图。如需上门拍摄另计差旅费用。</span>
-          <span class="en">Auction-grade studio lighting setup; delivers up to 8 HD retouched original photos. On-site shooting travel extra.</span>
-        </div>
-      </div>
-      <div class="row-price" style="text-align: right; white-space: nowrap;">
-        <span class="amount" style="font-size: 1.2rem; font-weight: 700; color: var(--text-main, #2c2c2c);">SGD 220</span>
-        <span class="unit" style="font-size: 0.8rem; color: #888; display: block;"><span class="zh">/ 件</span><span class="en">/ item</span></span>
-      </div>
-    </div>
-
-    <!-- 2. 拍卖级中英双语藏品文案 -->
-    <div class="row" style="padding: 1.25rem 1.5rem; border-bottom: 1px solid var(--border-color, #eee); display: flex; justify-content: space-between; align-items: center; gap: 1rem;">
-      <div style="flex: 1;">
-        <div class="row-title" style="font-size: 1.05rem; font-weight: 600; color: var(--text-main, #2c2c2c); margin-bottom: 0.3rem;">
-          <span class="zh">2. 拍卖级中英双语藏品文案</span>
-          <span class="en">Auction-Grade Bilingual Copywriting</span>
-        </div>
-        <div class="row-desc" style="font-size: 0.875rem; color: var(--text-sub, #666); line-height: 1.5;">
-          <span class="zh">由专业艺术团队撰写考究的器型描述、纹饰解析与流传背景，输出高水准中英双语文案。</span>
-          <span class="en">High-standard bilingual Chinese & English description, motif analysis, and provenance narrative.</span>
-        </div>
-      </div>
-      <div class="row-price" style="text-align: right; white-space: nowrap;">
-        <span class="amount" style="font-size: 1.2rem; font-weight: 700; color: var(--text-main, #2c2c2c);">SGD 150</span>
-        <span class="unit" style="font-size: 0.8rem; color: #888; display: block;"><span class="zh">/ 件</span><span class="en">/ item</span></span>
-      </div>
-    </div>
-
-    <!-- 3. 精装数字化藏家自述藏品PDF档案 -->
-    <div class="row" style="padding: 1.25rem 1.5rem; border-bottom: 1px solid var(--border-color, #eee); display: flex; justify-content: space-between; align-items: center; gap: 1rem;">
-      <div style="flex: 1;">
-        <div class="row-title" style="font-size: 1.05rem; font-weight: 600; color: var(--text-main, #2c2c2c); margin-bottom: 0.3rem;">
-          <span class="zh">3. 精装数字化《藏家自述与传承档案》PDF</span>
-          <span class="en">Hardcover Digital Collector's Narrative PDF</span>
-        </div>
-        <div class="row-desc" style="font-size: 0.875rem; color: var(--text-sub, #666); line-height: 1.5;">
-          <span class="zh">包含卖家/藏家自述、传承细节、高解析度图片排版与留资下载专页。</span>
-          <span class="en">Fully typeset digital PDF featuring collector's narrative, provenance detail, and downloadable lead-capture layout.</span>
-        </div>
-      </div>
-      <div class="row-price" style="text-align: right; white-space: nowrap;">
-        <span class="amount" style="font-size: 1.2rem; font-weight: 700; color: var(--text-main, #2c2c2c);">SGD 380</span>
-        <span class="unit" style="font-size: 0.8rem; color: #888; display: block;"><span class="zh">/ 件（精装定制）</span><span class="en">/ item (full design)</span></span>
-      </div>
-    </div>
-
-    <!-- 4. 30秒藏品360°高清展示短视频 -->
-    <div class="row" style="padding: 1.25rem 1.5rem; border-bottom: 1px solid var(--border-color, #eee); display: flex; justify-content: space-between; align-items: center; gap: 1rem;">
-      <div style="flex: 1;">
-        <div class="row-title" style="font-size: 1.05rem; font-weight: 600; color: var(--text-main, #2c2c2c); margin-bottom: 0.3rem;">
-          <span class="zh">4. 30秒藏品 360° 高清展示短视频</span>
-          <span class="en">30-Second 360° HD Exhibition Video</span>
-        </div>
-        <div class="row-desc" style="font-size: 0.875rem; color: var(--text-sub, #666); line-height: 1.5;">
-          <span class="zh">包含 360 度转盘光影呈现、局部细节特写与雅致配乐剪辑，完美展现古董重器的质感与光泽。</span>
-          <span class="en">360-degree studio turntable video capture, detail close-ups, and background soundtrack editing.</span>
-        </div>
-      </div>
-      <div class="row-price" style="text-align: right; white-space: nowrap;">
-        <span class="amount" style="font-size: 1.2rem; font-weight: 700; color: var(--text-main, #2c2c2c);">SGD 320</span>
-        <span class="unit" style="font-size: 0.8rem; color: #888; display: block;"><span class="zh">/ 件</span><span class="en">/ item</span></span>
-      </div>
-    </div>
-
-    <!-- 5. 资深行家收藏参考意见书 -->
-    <div class="row" style="padding: 1.25rem 1.5rem; background: rgba(197, 160, 89, 0.05); display: flex; justify-content: space-between; align-items: center; gap: 1rem;">
-      <div style="flex: 1;">
-        <div class="row-title" style="font-size: 1.05rem; font-weight: 700; color: #8c6d31; margin-bottom: 0.3rem;">
-          <span class="zh">5. 《资深行家观感报告》（独立收藏参考意见书）</span>
-          <span class="en">Senior Expert Independent Observation Report</span>
-        </div>
-        <div class="row-desc" style="font-size: 0.875rem; color: var(--text-sub, #555); line-height: 1.5;">
-          <span class="zh">由圈内资深行家出具的 1–3 页 PDF 书面观感意见书，提供客观品鉴与圈内市场参考（明确标注为个人收藏参考，不是法定鉴定证书）。</span>
-          <span class="en">3–5 page written PDF report by a veteran collector offering independent insights (for personal collection reference only, not legal authentication).</span>
-        </div>
-      </div>
-      <div class="row-price" style="text-align: right; white-space: nowrap;">
-        <span class="amount" style="font-size: 1.25rem; font-weight: 800; color: #8c6d31;">SGD 880-1200</span>
-        <span class="unit" style="font-size: 0.8rem; color: #888; display: block;"><span class="zh">/ 件</span><span class="en">/ report</span></span>
-      </div>
-    </div>
-
-  </div>
-</div>
-
-<!-- 服务免责与分账提示 -->
-   <div class="note-bar">
-      <span>※</span>
-      <div><b><span class="zh">服务权责说明：</span><span class="en">Service Clarification: </span></b><span class="zh">《藏家自述与传承档案》内容由卖家自行背书；《资深行家观感报告》仅作为个人收藏与学术参考观感，平台及行家不承担法定鉴定责任。</span><span class="en">Contents of the Collector's Narrative Dossier are endorsed by the seller. The Observation Report serves as collector reference opinion only.</span></div>
-    </div>
-      </div>
-    </div>
-   <!-- ===== 曝光增值服务（流量与品牌加速矩阵） ===== -->
-<div class="sec-head tight" style="margin-top: 3rem;">
-  <div class="eyebrow"><span class="zh">流 量 与 品牌 加 速</span><span class="en">EXPOSURE & PROMOTION</span></div>
-  <h2 class="sec-title"><span class="zh">曝光推广服务</span><span class="en">Boost & Featured Promotions</span></h2>
-  <p class="sec-sub">
-    <span class="zh">为高价值重器与精品提供多阶曝光资源，精准触达新加坡及海外高净值买家与收藏家圈层。</span>
-    <span class="en">Amplify visibility for premium items across high-net-worth collector networks in Singapore and internationally.</span>
-  </p >
-</div>
-
-<div class="frame" style="background: var(--bg-card, #ffffff); border: 1px solid var(--border-color, #e5e0d8); border-radius: 12px; overflow: hidden; margin-top: 1.5rem;">
-  <div class="rows">
-
-    <!-- 1. 品类列表置顶推荐 -->
-    <div class="row" style="padding: 1.25rem 1.5rem; border-bottom: 1px solid var(--border-color, #eee); display: flex; justify-content: space-between; align-items: center; gap: 1rem;">
-      <div style="flex: 1;">
-        <div class="row-title" style="font-size: 1.05rem; font-weight: 600; color: var(--text-main, #2c2c2c); margin-bottom: 0.3rem;">
-          <span class="zh">1. 品类列表置顶推荐</span>
-          <span class="en">Category Sticky Top Feature</span>
-        </div>
-        <div class="row-desc" style="font-size: 0.875rem; color: var(--text-sub, #666); line-height: 1.5;">
-          <span class="zh">在藏品所属的垂直品类列表（如瓷器、玉器、杂项等）顶部置顶并优先排序，有效大幅提升自然询盘量。</span>
-          <span class="en">Pinned at the top of category collection feeds for maximum organic buyer inquiries.</span>
-        </div>
-      </div>
-      <div class="row-price" style="text-align: right; white-space: nowrap;">
-        <span class="amount" style="font-size: 1.2rem; font-weight: 700; color: var(--text-main, #2c2c2c);">SGD 80</span>
-        <span class="unit" style="font-size: 0.8rem; color: #888; display: block;"><span class="zh">/ 30 天</span><span class="en">/ 30 days</span></span>
-      </div>
-    </div>
-
-    <!-- 2. 专题专栏收录 -->
-    <div class="row" style="padding: 1.25rem 1.5rem; border-bottom: 1px solid var(--border-color, #eee); display: flex; justify-content: space-between; align-items: center; gap: 1rem;">
-      <div style="flex: 1;">
-        <div class="row-title" style="font-size: 1.05rem; font-weight: 600; color: var(--text-main, #2c2c2c); margin-bottom: 0.3rem;">
-          <span class="zh">2. 专题专栏收录（平台主题专场）</span>
-          <span class="en">Curated Special Theme Exhibition</span>
-        </div>
-        <div class="row-desc" style="font-size: 0.875rem; color: var(--text-sub, #666); line-height: 1.5;">
-          <span class="zh">纳入宋瓷、明清玉器、紫砂、书画等独立主题专场页面，并同步推送至平台藏家每月邮件通讯。</span>
-          <span class="en">Included in curated online exhibitions (e.g. Song Porcelain, Jade, Yixing Zisha) and monthly collector EDMs.</span>
-        </div>
-      </div>
-      <div class="row-price" style="text-align: right; white-space: nowrap;">
-        <span class="amount" style="font-size: 1.2rem; font-weight: 700; color: var(--text-main, #2c2c2c);">SGD 160</span>
-        <span class="unit" style="font-size: 0.8rem; color: #888; display: block;"><span class="zh">/ 30 天</span><span class="en">/ 30 days</span></span>
-      </div>
-    </div>
-
-    <!-- 3. 首页精选推荐卡片 -->
-    <div class="row" style="padding: 1.25rem 1.5rem; border-bottom: 1px solid var(--border-color, #eee); display: flex; justify-content: space-between; align-items: center; gap: 1rem;">
-      <div style="flex: 1;">
-        <div class="row-title" style="font-size: 1.05rem; font-weight: 600; color: var(--text-main, #2c2c2c); margin-bottom: 0.3rem;">
-          <span class="zh">3. 首页精选推荐卡片</span>
-          <span class="en">Homepage Rotating Featured Card</span>
-        </div>
-        <div class="row-desc" style="font-size: 0.875rem; color: var(--text-sub, #666); line-height: 1.5;">
-          <span class="zh">平台首页核心精选位，全球买家与访客进入网站的第一时间即可优先瞩目呈现。</span>
-          <span class="en">Featured in the primary homepage rotation for immediate high-traffic exposure.</span>
-        </div>
-      </div>
-      <div class="row-price" style="text-align: right; white-space: nowrap;">
-        <span class="amount" style="font-size: 1.2rem; font-weight: 700; color: var(--text-main, #2c2c2c);">SGD 280</span>
-        <span class="unit" style="font-size: 0.8rem; color: #888; display: block;"><span class="zh">/ 30 天</span><span class="en">/ 30 days</span></span>
-      </div>
-    </div>
-
-    <!-- 4. 首页封面主位（黑金高亮卡片） -->
-    <div class="row" style="padding: 1.25rem 1.5rem; border-bottom: 1px solid var(--border-color, #eee); background: rgba(197, 160, 89, 0.06); display: flex; justify-content: space-between; align-items: center; gap: 1rem;">
-      <div style="flex: 1;">
-        <div class="row-title" style="font-size: 1.05rem; font-weight: 700; color: #8c6d31; margin-bottom: 0.3rem; display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
-          <span>4. 首页封面主位（顶配重器位）</span>
-          <span style="font-size: 0.7rem; background: #8c6d31; color: #fff; padding: 0.1rem 0.5rem; border-radius: 4px; font-weight: 600;">每月严格仅限 4 席</span>
-        </div>
-        <div class="row-desc" style="font-size: 0.875rem; color: var(--text-sub, #555); line-height: 1.5;">
-          <span class="zh">平台最高级别曝光资源！含首页 Head Banner 大图主推、当月电子图录封面以及专属邮件通讯首图，面向高净值海外藏家与画廊定向曝光。先订先得。</span>
-          <span class="en">The ultimate platform feature: Homepage main hero banner, digital catalog cover, and prime email header spot targeting high-net-worth collectors. Strictly 4 seats/mo.</span>
-        </div>
-      </div>
-      <div class="row-price" style="text-align: right; white-space: nowrap;">
-        <span class="amount" style="font-size: 1.25rem; font-weight: 800; color: #8c6d31;">SGD 600</span>
-        <span class="unit" style="font-size: 0.8rem; color: #888; display: block;"><span class="zh">/ 30 天</span><span class="en">/ 30 days</span></span>
-      </div>
-    </div>
-
-    <!-- 5. 附加增值推送（可叠加） -->
-    <div class="row" style="padding: 1.25rem 1.5rem; display: flex; justify-content: space-between; align-items: center; gap: 1rem;">
-      <div style="flex: 1;">
-        <div class="row-title" style="font-size: 1.05rem; font-weight: 600; color: var(--text-main, #2c2c2c); margin-bottom: 0.3rem; display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
-          <span>5. 附加增值推送：收藏家定向邮件专推送</span>
-          <span style="font-size: 0.7rem; background: rgba(0,0,0,0.06); color: #555; padding: 0.1rem 0.5rem; border-radius: 4px;" class="zh">可叠加任意推广位</span>
-        </div>
-        <div class="row-desc" style="font-size: 0.875rem; color: var(--text-sub, #666); line-height: 1.5;">
-          <span class="zh">针对单件特定重器，向平台精准收藏家数据库发送独立单图/单页专版电子通讯邮件（一次性直达推送）。</span>
-          <span class="en">Exclusive targeted single-item EDM dispatch sent directly to verified collector databases.</span>
-        </div>
-      </div>
-      <div class="row-price" style="text-align: right; white-space: nowrap;">
-        <span class="amount" style="font-size: 1.2rem; font-weight: 700; color: var(--text-main, #2c2c2c);">SGD 200</span>
-        <span class="unit" style="font-size: 0.8rem; color: #888; display: block;"><span class="zh">/ 件（单次）</span><span class="en">/ item (one-off)</span></span>
-      </div>
-    </div>
-
-  </div>
-</div>
     <div class="note-bar">
       <span>※</span>
-      <div><b><span class="zh">合规说明：</span><span class="en">Compliance Note: </span></b><span class="zh">所有标价均以新加坡元 (SGD) 计价，不含消费税。支持 PayNow 或银行转账。<b>本平台严格不处理买卖双方货款，0% 抽取任何交易佣金</b>。</span><span class="en">All prices are in SGD, GST excluded. PayNow or bank transfer accepted. <b>The platform does not handle buyer-seller payments and charges 0% commission</b>.</span></div>
-    </div><div class="note-bar">
-  <span>※</span>
-  <div><b><span class="zh">创始藏家权益与激活规则：</span><span class="en">Founding Collector Terms & Activation: </span></b><span class="zh">前 18 位经平台确认的藏家永久享每月 2 件免费发布；免费额度不累积、不结转。<b>若连续 8 个月未有任何免费额度使用记录，平台将收回创始藏家尊享权益，顺延开放给候补用户</b>。超额单件按创始藏家特惠价、升级套餐永久 8 折。</span><span class="en">Confirmed members among the first 18 receive 2 free listings monthly for life; unused quota does not carry over. <b>Seats will be reclaimed and given to the waitlist if no free listings are used for 8 consecutive months</b>. Extra single listings are at the Founding Collector rate, and upgrades are 20% off.</span></div>
-</div>
-  </section>
-
-  <!-- ===== 藏家之声 ===== -->
-  <section id="testimonials" class="testimonials-section">
-    <div class="sec-head tight">
-      <div class="eyebrow"><span class="zh">藏 家 之 声</span><span class="en">COLLECTORS' VOICES</span></div>
-      <h2 class="sec-title"><span class="zh">圈内藏家的真实反馈</span><span class="en">What fellow collectors say</span></h2>
-    </div>
-    <div class="testimonial-grid">
-      <div class="testimonial-card">
-        <p class="testimonial-quote"><span class="zh">「终于有一个画面干净、没有乱七八糟广告的线上展馆了。图片精修后传给朋友看非常体面，而且可以直接 WhatsApp 联系我，很符合我们圈子的习惯。」</span><span class="en">"Finally, a clean online gallery with no noisy ads. After retouching, the photos look presentable to share with friends — and buyers can reach me directly on WhatsApp, just how our circle works."</span></p>
-        <div class="testimonial-author">
-          <span class="author-name"><span class="fc-mini-badge">藏</span><span class="zh">新加坡求真斋主</span><span class="en">Zhenqiu Studio, Singapore</span></span>
-          <span class="author-role"><span class="zh">瓷器藏家 · 入驻 1 年</span><span class="en">Porcelain collector · 1 year</span></span>
-        </div>
-      </div>
-      <div class="testimonial-card">
-        <p class="testimonial-quote"><span class="zh">「每月 2 件的免费额度对我来说刚刚好，不够用的时候升级一下也才 S$388，比市面上动辄抽佣的平台省心太多。不抽佣这点最让我放心。」</span><span class="en">"Two free listings a month is exactly enough for me. When I need more, upgrading is only S$388 — far easier than commission-based platforms. Zero commission is what gives me peace of mind."</span></p>
-        <div class="testimonial-author">
-          <span class="author-name"><span class="fc-mini-badge">藏</span><span class="zh">南洋瓷器藏家 Lim 先生</span><span class="en">Mr. Lim, Nanyang Porcelain</span></span>
-          <span class="author-role"><span class="zh">创始藏家 · 第 12 席</span><span class="en">Founding Collector · Seat #12</span></span>
-        </div>
-      </div>
-      <div class="testimonial-card">
-        <p class="testimonial-quote"><span class="zh">「专属私人线上博物馆帮我一次性梳理了 10 件旧藏，独立网址分享给海外买家非常方便。整个流程私密、体面，很符合古董圈该有的格调。」</span><span class="en">"The private online museum helped me organize 10 old pieces in one go. Sharing my dedicated URL with overseas buyers is effortless — the whole process feels private and dignified, exactly the tone our circle deserves."</span></p>
-        <div class="testimonial-author">
-          <span class="author-name"><span class="fc-mini-badge">藏</span><span class="zh">东南亚玉器行家 · 匿名藏家</span><span class="en">SEA Jade Specialist · Anonymous</span></span>
-          <span class="author-role"><span class="zh">专属私人线上博物馆用户</span><span class="en">Private Online Museum user</span></span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 常见问题 -->
-  <section id="faq" style="margin-top: 3rem;">
-    <div class="sec-head">
-      <div class="eyebrow"><span class="zh">常 见 问 答</span><span class="en">FAQ</span></div>
-      <h2 class="sec-title"><span class="zh">为您解析核心价值</span><span class="en">Common Questions</span></h2>
-      <div class="sec-divider" aria-hidden="true"><span></span></div>
-    </div>
-    <div class="frame">
-      <div class="faq-item faq-highlight">
-        <div class="faq-q"><span class="zh">30 秒看懂怎么用</span><span class="en">How it works — in one line</span></div>
-        <div class="faq-a"><span class="zh">2 个免费永远有，够用就一直免；不够发就升级，曝光主页随心选；18 名满等下轮，早进早享终身折！</span><span class="en">Two free listings, always — stay free if that's enough. Need more? Upgrade. Want visibility? Feature your gallery. If the 18 seats fill, wait for the next round — join early to lock in lifetime discounts.</span></div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q"><span class="zh">S$1,499 的专属私人线上博物馆为什么是创始藏家首选？</span><span class="en">Why is the S$1,499 private online museum the top choice for founding collectors?</span></div>
-        <div class="faq-a"><span class="zh">作为创始藏家专享特惠（常规 S$2,499），一次性打包 <b>所有重器的一键全包建档</b>（含专业精修、文字美化、独立网页）。同时尊享<b>无数量限制展示所有上架藏品</b>，且享受 <b>0% 交易佣金</b>，是建立个人艺术品品牌最高效的方案。</span><span class="en">As a founding-exclusive offer (regular S$2,499), it bundles retouching, copywriting, and a dedicated web page for all — with no quantity limit on display and 0% commission.</span></div>
-      </div>
-     <div class="faq-item">
-  <div class="faq-q"><span class="zh">创始藏家体验席包含哪些权益与规则？</span><span class="en">What are the benefits and rules of the Founding Collector programme?</span></div>
-  <div class="faq-a"><span class="zh">前 18 位经确认的创始藏家永久享有每月 2 件免费发布额度（不累积、不结转）。<b>注意：若连续 8 个月未曾使用该免费额度，尊享资格将被收回并释放给候补藏家</b>。超额单件上架按创始藏家特惠价 S$388 / 件，升级套餐享 8 折。</span><span class="en">Confirmed members among the first 18 receive 2 free listings monthly for life (no carry-over). <b>Note: If no free listings are used for 8 consecutive months, the status will be reclaimed and given to the waitlist</b>. Extra single listings are S$388/item at the Founding Collector rate, and upgrades are 20% off.</span></div>
-</div>
-		<div class="faq-item">
-  <div class="faq-q">
-    <span class="zh">创始藏家的每月 2 件免费藏品展示在哪里？与付费首页有什么区别？</span>
-    <span class="en">Where are Founding Collectors' 2 free listings displayed? How do they differ from paid homepage features?</span>
-  </div>
-  <div class="faq-a">
-    <span class="zh">创始藏家每月的 2 件免费发布藏品，将永久展示在<b>【各垂直品类藏品库频道】</b>（如瓷器、玉器等分类页）以及您的<b>【个人数字展馆主页】</b>中，供全球买家检索与私密联系。平台首页的黄金位属于付费或套餐增值曝光区域，免费额度不包含首页置顶。若您的重器需要首页千万级曝光，可随时按需加购“首周首页精选”服务。</span>
-    <span class="en">Founding Collectors' 2 monthly free listings are permanently displayed in the <b>Category Collection Channels</b> (e.g., Porcelain, Jade) and your <b>Personal Digital Gallery Page</b> for global buyers to browse. The platform's homepage featured positions are reserved for paid or package-upgraded exposure. If you need homepage placement for a high-value piece, you can opt for the "First-Week Homepage Feature" add-on at any time.</span>
-  </div>
-</div>
-      <div class="faq-item">
-        <div class="faq-q"><span class="zh">交易过程如何保障？平台是否介入资金？</span><span class="en">How are transactions secured? Does the platform handle funds?</span></div>
-        <div class="faq-a"><span class="zh">安全且绝对合规。平台仅作为高端数字化展示与直连通道，<b>绝不介入任何买卖货款资金流转，也不收取任何交易佣金</b>，买卖双方直接交割，确保最高级别的隐私与自主权。</span><span class="en">Safe and fully compliant. The platform serves only as a digital display and direct-connection channel — it <b>never handles funds or charges sales commissions</b>, ensuring full privacy and autonomy for both parties.</span></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 买家委托寻宝 -->
-  <section id="buyer-services" style="margin-top: 3rem;">
-    <div class="sourcing-section">
-      <div class="sourcing-head">
-        <div class="eyebrow"><span class="zh">定 向 寻 珍 · 私 密 委 寻</span><span class="en">PRIVATE EXPERT SOURCING</span></div>
-        <h3 class="sourcing-title"><span class="zh">高端专家定向寻宝：S$500 启动费，达成交割后按器物稀缺度收取定制化顾问费</span><span class="en">Premium Expert Sourcing: S$500 initiation fee, bespoke consultation fee by rarity</span></h3>
-        <p class="sourcing-desc"><span class="zh">高端专家定向寻宝：S$500 启动费；达成交割后，根据器物稀缺度收取定制化顾问费。未寻得心仪重器，不收取后置服务费。</span><span class="en">Premium Expert Sourcing: S$500 initiation fee for strict global archival screening. Upon successful acquisition, a bespoke consultation fee applies depending on the rarity of the artifact. No post-service fee if no ideal piece is found.</span></p>
-      </div>
-      <div class="sourcing-grid">
-        <div class="sourcing-step">
-          <div class="step-label"><span class="zh">启动检索</span><span class="en">Start Search</span></div>
-          <div class="step-price"><span class="cur">S$</span>500</div>
-          <div class="step-desc"><span class="zh">严格全球档案级初筛与资质审核</span><span class="en">Strict global archival screening &amp; vetting</span></div>
-        </div>
-        <div class="sourcing-divider">→</div>
-        <div class="sourcing-step">
-          <div class="step-label"><span class="zh">成交</span><span class="en">On Completion</span></div>
-          <div class="step-price"><span class="cur"></span><span class="zh">按稀缺度定制</span><span class="en">By rarity</span></div>
-          <div class="step-desc"><span class="zh">成交后按器物稀缺度收取定制化顾问费</span><span class="en">Bespoke consultation fee by rarity on completion</span></div>
-        </div>
-      </div>
+      <div><b><span class="zh">服务说明：</span><span class="en">Please note: </span></b><span class="zh">藏品细节扩展包仅为资料整理与展示优化服务，古董圈不为藏品鉴定真伪，亦不验证未经证实的收藏历史。</span><span class="en">The Collection Detail Expansion Pack covers material organization and presentation only — Gudong does not authenticate items, nor verify unproven collecting history.</span></div>
     </div>
   </section>
 </main>
@@ -1614,9 +922,10 @@ No commission on sales. Buyers contact you directly, and all transactions are ne
 <footer>
         <div class="footer-nav">
             <a href="about.html" class="zh">联系我们</a><a href="about.html" class="en">Contact</a>
-            <a href="pricing.html#collector-services" class="zh">藏家服务</a><a href="pricing.html#collector-services" class="en">Collector Services</a>
-            <a href="pricing.html#buyer-services" class="zh">买家指南</a><a href="pricing.html#buyer-services" class="en">Buyer Guide</a>
-            <a href="pricing.html#price-table" class="zh">服务收费</a><a href="pricing.html#price-table" class="en">Price List</a>
+            <a href="pricing.html#founding" class="zh">创始藏家</a><a href="pricing.html#founding" class="en">Founding Plan</a>
+            <a href="pricing.html#listing-plans" class="zh">发布服务</a><a href="pricing.html#listing-plans" class="en">Listing Services</a>
+            <a href="pricing.html#private-gallery" class="zh">专属藏馆</a><a href="pricing.html#private-gallery" class="en">Private Gallery</a>
+            <a href="pricing.html#add-ons" class="zh">附加服务</a><a href="pricing.html#add-ons" class="en">Add-ons</a>
             <a href="privacy.html" class="zh">隐私政策</a><a href="privacy.html" class="en">Privacy</a>
             <a href="terms.html" class="zh">用户条款</a><a href="terms.html" class="en">Terms</a>
         </div>
@@ -1633,59 +942,59 @@ No commission on sales. Buyers contact you directly, and all transactions are ne
     <button type="button" class="publish-close" onclick="closeServiceModal()" aria-label="关闭">×</button>
 
     <h3 id="modalTitle">
-      <span class="zh">单件专业上架申请</span>
-      <span class="en">Professional Single Listing</span>
+      <span class="zh">标准专业发布申请</span>
+      <span class="en">Standard Professional Listing</span>
     </h3>
 
     <div class="price-box" id="modalPriceBox">
       <div class="price-head">
-        <span class="price-highlight" id="modalPriceHighlight">S$588</span>
+        <span class="price-highlight" id="modalPriceHighlight">S$188</span>
         <span class="price-unit-suffix" id="modalPriceUnit">
-          <span class="zh">/ 件 · 6个月在线</span>
-          <span class="en">/ item · 6 month</span>
+          <span class="zh">/ 件 · 展示期 6 个月</span>
+          <span class="en">/ item · 6-month display</span>
         </span>
         <s class="price-original" id="modalPriceOriginal"></s>
       </div>
 
       <ul class="service-list" id="modalServiceList">
         <li>
-          <span class="zh"><b>图片精修</b>：光影 / 色彩 / 裁剪 / 背景清理</span>
-          <span class="en"><b>Photo retouching</b>: light, colour, crop, background</span>
+          <span class="zh"><b>图片优化</b>：最多 4 张基础图片优化</span>
+          <span class="en"><b>Photo optimization</b>: up to 4 basic edits</span>
         </li>
         <li>
           <span class="zh"><b>标题 · 描述 · 标签</b>：如实整理，不鉴定真伪</span>
-          <span class="en"><b>Title · description · tags</b>: listed as-is, no authentication</span>
+          <span class="en"><b>Title · description · tags</b>: organized as provided, no authentication</span>
         </li>
         <li>
-          <span class="zh"><b>确认后上架</b> gudong.app，6个月在线展示</span>
-          <span class="en"><b>Listed on gudong.app</b> after your approval · 6-month display</span>
+          <span class="zh"><b>协助完成上架</b>，确认后发布于对应品类</span>
+          <span class="en"><b>Listing assistance</b>, published to category after approval</span>
         </li>
       </ul>
 
-      <div class="service-note">
+      <div class="service-note" id="modalServiceNote">
         <span class="zh">不改变器物真实颜色、形状与品相。</span>
         <span class="en">We never alter the item's true colour, shape or condition.</span>
       </div>
     </div>
 
-    <!-- Order Bump（仅单件上架显示） -->
+    <!-- Order Bump（仅标准发布显示） -->
     <label class="order-bump" id="orderBumpWrap" for="bumpHomepage">
       <input type="checkbox" id="bumpHomepage" onchange="updateOrderBump()">
       <span>
         <span class="bump-tag"><span class="zh">推荐加购</span><span class="en">ADD-ON</span></span>
-        <span class="zh"><label for="bumpHomepage" style="display:inline; margin:0; padding:0; font-size:inherit; font-weight:400; cursor:pointer;">加 <b>S$100</b> 升级首周首页精选</label></span>
-        <span class="en"><label for="bumpHomepage" style="display:inline; margin:0; padding:0; font-size:inherit; font-weight:400; cursor:pointer;">Add <b>S$100</b> for a first-week homepage feature</label></span>
-        <span class="bump-hint"><span class="zh">首周即登上首页精选板块，曝光量提升约 5–8 倍。</span><span class="en">Get featured on the homepage for the first week — roughly 5–8× more exposure.</span></span>
+        <span class="zh"><label for="bumpHomepage" style="display:inline; margin:0; padding:0; font-size:inherit; font-weight:400; cursor:pointer;">加 <b>S$100</b> 升级首页推荐 7 天</label></span>
+        <span class="en"><label for="bumpHomepage" style="display:inline; margin:0; padding:0; font-size:inherit; font-weight:400; cursor:pointer;">Add <b>S$100</b> for a 7-day homepage feature</label></span>
+        <span class="bump-hint"><span class="zh">首页独立推荐区域展示 7 天（不保证成交）。</span><span class="en">7 days in a dedicated homepage recommendation area (sales not guaranteed).</span></span>
       </span>
     </label>
 
-    <!-- 精简协议提示（话术升级） -->
+    <!-- 精简协议提示 -->
 	  <div class="compact-warning">
   <span>ℹ️</span>
   <div>
     <span class="cw-title"><span class="zh">弹窗提示</span><span class="en">Modal notice</span></span>
-    <span class="zh">关闭弹窗会丢失表单填写内容，请重要信息自行复制备份；图片最多上传4张。创始藏家享有单件上架S$388特惠价。</span>
-    <span class="en">Closing this modal will clear your form entries, please back‑up important info. Max 4 images. Confirmed Founding‑Collectors qualify for S$388 single‑listing rate.</span>
+    <span class="zh">关闭弹窗会丢失表单填写内容，请重要信息自行复制备份。</span>
+    <span class="en">Closing this modal will clear your form entries — please back up important information first.</span>
   </div>
 </div>
     <div class="compact-warning">
@@ -1708,7 +1017,7 @@ No commission on sales. Buyers contact you directly, and all transactions are ne
     </div>
 
     <div class="publish-form-group">
-      <label><span class="zh">上传器物图片（最多 4 张：正面，背面，底足，细节）</span><span class="en">Upload images (max. 4: front, back, base, details)</span></label>
+      <label id="serviceFileLabel"><span class="zh">上传器物图片（最多 4 张：正面、背面、底足、细节）</span><span class="en">Upload images (max. 4: front, back, base, details)</span></label>
       <label class="publish-file" id="serviceFileWrap">
         <input type="file" id="serviceImages" multiple accept="image/*">
         <span class="publish-file-plus">＋</span>
@@ -1760,19 +1069,81 @@ No commission on sales. Buyers contact you directly, and all transactions are ne
 </div>
 
 <script>
-  let currentServiceType = 'single';
+  let currentServiceType = 'standard';
   const BUMP_PRICE = 100;
 
+  /* 三类服务的配置（与价格页一致） */
+  const SERVICE_CONFIGS = {
+    standard: {
+      price: 'S$188',
+      title: { zh: '标准专业发布申请', en: 'Standard Professional Listing' },
+      unit: { zh: '/ 件 · 展示期 6 个月', en: '/ item · 6-month display' },
+      original: '',
+      list: [
+        { zh: '<b>图片优化</b>：最多 4 张基础图片优化', en: '<b>Photo optimization</b>: up to 4 basic edits' },
+        { zh: '<b>标题 · 描述 · 标签</b>：如实整理，不鉴定真伪', en: '<b>Title · description · tags</b>: organized as provided, no authentication' },
+        { zh: '<b>协助完成上架</b>，确认后发布于对应品类', en: '<b>Listing assistance</b>, published to category after approval' }
+      ],
+      note: { zh: '不改变器物真实颜色、形状与品相。', en: "We never alter the item's true colour, shape or condition." },
+      bump: true,
+      maxPhotos: 4,
+      fileLabel: { zh: '上传器物图片（最多 4 张：正面、背面、底足、细节）', en: 'Upload images (max. 4: front, back, base, details)' },
+      fee: '标准专业发布（S$188 / 件 · 展示期 6 个月）',
+      msgTitle: '【标准专业发布申请 - 古董圈】'
+    },
+    premium: {
+      price: 'S$388',
+      title: { zh: '高级专业发布申请', en: 'Premium Professional Listing' },
+      unit: { zh: '/ 件 · 展示期 6 个月 · 含首页推荐 7 天', en: '/ item · 6-month display · incl. 7-day homepage feature' },
+      original: '',
+      list: [
+        { zh: '<b>图片优化</b>：最多 8 张基础图片优化', en: '<b>Photo optimization</b>: up to 8 basic edits' },
+        { zh: '<b>更完整的资料编排</b>：标题 · 描述 · 标签，如实整理，不鉴定真伪', en: '<b>Fuller material curation</b>: title · description · tags, organized as provided, no authentication' },
+        { zh: '<b>首页推荐 7 天</b>：独立推荐区域展示', en: '<b>7-day homepage feature</b> in a dedicated recommendation area' },
+        { zh: '<b>协助完成上架</b>，确认后发布于对应品类', en: '<b>Listing assistance</b>, published to category after approval' }
+      ],
+      note: { zh: '不改变器物真实颜色、形状与品相。', en: "We never alter the item's true colour, shape or condition." },
+      bump: false,
+      maxPhotos: 8,
+      fileLabel: { zh: '上传器物图片（最多 8 张：正面、背面、底足、细节等）', en: 'Upload images (max. 8: front, back, base, details, etc.)' },
+      fee: '高级专业发布（S$388 / 件 · 展示期 6 个月 · 含首页推荐 7 天）',
+      msgTitle: '【高级专业发布申请 - 古董圈】'
+    },
+    gallery: {
+      price: 'S$888',
+      title: { zh: '专属线上藏馆开通申请', en: 'Private Online Gallery Application' },
+      unit: { zh: '/ 年 · 创始藏家优惠价 S$588 / 年', en: '/ year · Founding Collector rate S$588 / year' },
+      original: '',
+      list: [
+        { zh: '<b>独立藏家主页</b>及专属链接，全年在线展示', en: '<b>Dedicated collector homepage</b> with a unique link, online all year' },
+        { zh: '<b>首批 10 件</b>藏品的标题 · 描述 · 标签整理及图片优化', en: '<b>First 10 items</b>: title · description · tags & photo optimization' },
+        { zh: '<b>不限数量</b>展示藏馆藏品', en: '<b>Unlimited</b> items displayed in your gallery' },
+        { zh: '<b>首页推荐 7 天</b>作为开馆推广权益 · <b>0% 成交佣金</b>', en: '<b>7-day homepage feature</b> as opening promotion · <b>0% commission</b>' }
+      ],
+      note: { zh: '买家直接联系藏家，平台不参与交易、不收取佣金。', en: 'Buyers contact you directly — the platform never joins transactions or charges commission.' },
+      bump: false,
+      maxPhotos: 10,
+      fileLabel: { zh: '上传首批藏品参考图片（最多 10 张，其余与客服沟通）', en: 'Upload reference photos of your first items (max. 10; the rest via our team)' },
+      fee: '专属线上藏馆（S$888 / 年；创始藏家优惠价 S$588 / 年）',
+      msgTitle: '【专属线上藏馆开通申请 - 古董圈】'
+    }
+  };
+
   function openServiceModal(type) {
+    if (!SERVICE_CONFIGS[type]) type = 'standard';
     currentServiceType = type;
+    var cfg = SERVICE_CONFIGS[type];
+
     var modal = document.getElementById('serviceModal');
     var title = document.getElementById('modalTitle');
     var priceHighlight = document.getElementById('modalPriceHighlight');
     var priceUnit = document.getElementById('modalPriceUnit');
     var priceOriginal = document.getElementById('modalPriceOriginal');
     var list = document.getElementById('modalServiceList');
+    var note = document.getElementById('modalServiceNote');
     var bumpWrap = document.getElementById('orderBumpWrap');
     var bumpCheckbox = document.getElementById('bumpHomepage');
+    var fileLabel = document.getElementById('serviceFileLabel');
 
     // 清空勾选与文件（每次打开重置）
     var agreeBox = document.getElementById('agreeConsignor');
@@ -1785,30 +1156,18 @@ No commission on sales. Buyers contact you directly, and all transactions are ne
     if (fileCount) fileCount.textContent = '';
     if (bumpCheckbox) bumpCheckbox.checked = false;
 
-    if (type === 'gallery') {
-      title.innerHTML = '<span class="zh">10件专属私人线上博物馆开通申请</span><span class="en">10-Item Private Online Museum</span>';
-      priceHighlight.textContent = 'S$1,499';
-      priceUnit.innerHTML = '<span class="zh">/ 10 件合包</span><span class="en">/ 10-item package</span>';
-      priceOriginal.textContent = 'S$2,499';
-      list.innerHTML = ''
-        + '<li><span class="zh"><b>一键全包</b>：10 件精修 · 标题 · 描述 · 标签</span><span class="en"><b>All-inclusive</b>: retouching · title · description · tags for 10 items</span></li>'
-        + '<li><span class="zh"><b>独立藏家主页</b> + 一年在线展示</span><span class="en"><b>Dedicated collector homepage</b> + 1-year display</span></li>'
-        + '<li><span class="zh"><b>首页黄金位 2 个月</b> + 资深顾问品鉴 2 次</span><span class="en"><b>2-month homepage featuring</b> + 2 expert advisory sessions</span></li>'
-        + '<li><span class="zh"><b>0% 交易佣金</b>：成交利润全归您</span><span class="en"><b>0% commission</b>: keep all proceeds</span></li>';
-      // 旗舰馆隐藏加购框
-      if (bumpWrap) bumpWrap.style.display = 'none';
-    } else {
-      title.innerHTML = '<span class="zh">单件专业上架申请</span><span class="en">Professional Single Listing</span>';
-      priceHighlight.textContent = 'S$588';
-      priceUnit.innerHTML = '<span class="zh">/ 件 · 普通价；创始藏家特惠价 S$388</span><span class="en">/ item · Standard; S$388 (Founding Collector)</span>';
-      priceOriginal.textContent = '';
-      list.innerHTML = ''
-        + '<li><span class="zh"><b>图片精修</b>：最多 4 张基础图片优化</span><span class="en"><b>Photo retouching</b>: up to 4 basic photo edits</span></li>'
-        + '<li><span class="zh"><b>标题 · 描述 · 标签</b>：如实整理，不鉴定真伪</span><span class="en"><b>Title · description · tags</b>: listed as-is, no authentication</span></li>'
-        + '<li><span class="zh"><b>确认后上架</b> gudong.app，6 个月在线展示</span><span class="en"><b>Listed on gudong.app</b> after your approval · 6-month display</span></li>';
-      // 单件上架显示加购框
-      if (bumpWrap) bumpWrap.style.display = 'flex';
-    }
+    title.innerHTML = '<span class="zh">' + cfg.title.zh + '</span><span class="en">' + cfg.title.en + '</span>';
+    priceUnit.innerHTML = '<span class="zh">' + cfg.unit.zh + '</span><span class="en">' + cfg.unit.en + '</span>';
+    priceOriginal.textContent = cfg.original || '';
+    list.innerHTML = cfg.list.map(function (item) {
+      return '<li><span class="zh">' + item.zh + '</span><span class="en">' + item.en + '</span></li>';
+    }).join('');
+    note.innerHTML = '<span class="zh">' + cfg.note.zh + '</span><span class="en">' + cfg.note.en + '</span>';
+    if (fileLabel) fileLabel.innerHTML = '<span class="zh">' + cfg.fileLabel.zh + '</span><span class="en">' + cfg.fileLabel.en + '</span>';
+
+    // Order Bump 仅标准发布显示（高级发布与藏馆已含首页推荐）
+    if (bumpWrap) bumpWrap.style.display = cfg.bump ? 'flex' : 'none';
+
     updateOrderBump();
 
     if (modal) modal.classList.add('open');
@@ -1817,26 +1176,18 @@ No commission on sales. Buyers contact you directly, and all transactions are ne
 
   // 实时更新加购后的价格与按钮文案
   function updateOrderBump() {
+    var cfg = SERVICE_CONFIGS[currentServiceType] || SERVICE_CONFIGS.standard;
     var bumpCheckbox = document.getElementById('bumpHomepage');
     var priceHighlight = document.getElementById('modalPriceHighlight');
-    var priceUnit = document.getElementById('modalPriceUnit');
     var submitLabel = document.getElementById('submitBtnLabel');
     if (!priceHighlight) return;
-    var checked = bumpCheckbox && bumpCheckbox.checked;
+    var checked = cfg.bump && bumpCheckbox && bumpCheckbox.checked;
 
-    if (currentServiceType === 'single') {
-      if (checked) {
-        priceHighlight.textContent = 'S$688';
-        priceUnit.innerHTML = '<span class="zh">/ 件（含首周首页精选加购）</span><span class="en">/ item (incl. first-week feature)</span>';
-        submitLabel.innerHTML = '<span class="zh">同意协议并跳转 WhatsApp 获取 PayNow（S$688）→</span><span class="en">Agree &amp; Get PayNow (S$688) →</span>';
-      } else {
-        priceHighlight.textContent = 'S$588';
-        priceUnit.innerHTML = '<span class="zh">/ 件 · 普通价；创始藏家特惠价 S$388</span><span class="en">/ item · Standard; S$388 (Founding Collector)</span>';
-        submitLabel.innerHTML = '<span class="zh">同意协议并跳转 WhatsApp 获取 PayNow →</span><span class="en">Agree &amp; Get PayNow via WhatsApp →</span>';
-      }
+    if (checked) {
+      priceHighlight.textContent = 'S$288';
+      submitLabel.innerHTML = '<span class="zh">同意协议并跳转 WhatsApp 获取 PayNow（S$288）→</span><span class="en">Agree &amp; Get PayNow (S$288) →</span>';
     } else {
-      // 旗舰馆保持原价
-      priceHighlight.textContent = 'S$1,499';
+      priceHighlight.textContent = cfg.price;
       submitLabel.innerHTML = '<span class="zh">同意协议并跳转 WhatsApp 获取 PayNow →</span><span class="en">Agree &amp; Get PayNow via WhatsApp →</span>';
     }
   }
@@ -1847,16 +1198,17 @@ No commission on sales. Buyers contact you directly, and all transactions are ne
     document.body.style.overflow = '';
   }
 
-  // 图片上传计数
+  // 图片上传计数（上限随服务类型变化）
   (function bindServiceFile() {
     var input = document.getElementById('serviceImages');
     var wrap = document.getElementById('serviceFileWrap');
     var count = document.getElementById('serviceFileCount');
     if (!input || !wrap || !count) return;
     input.addEventListener('change', function () {
+      var max = (SERVICE_CONFIGS[currentServiceType] || SERVICE_CONFIGS.standard).maxPhotos;
       var n = input.files ? input.files.length : 0;
-      if (n > 4) {
-        alert(currentLang === 'zh' ? '一次最多上传 4 张图片' : 'Maximum 4 photos per order');
+      if (n > max) {
+        alert(currentLang === 'zh' ? ('一次最多上传 ' + max + ' 张图片') : ('Maximum ' + max + ' photos per order'));
         input.value = '';
         wrap.classList.remove('has');
         count.textContent = '';
@@ -1875,13 +1227,14 @@ No commission on sales. Buyers contact you directly, and all transactions are ne
   })();
 
   function submitServiceForm() {
+    var cfg = SERVICE_CONFIGS[currentServiceType] || SERVICE_CONFIGS.standard;
     var sId = document.getElementById('serviceSellerId').value.trim();
     var wa = document.getElementById('serviceWhatsapp').value.trim();
     var notes = document.getElementById('serviceNotes').value.trim();
     var agree = document.getElementById('agreeConsignor').checked;
     var fileInput = document.getElementById('serviceImages');
     var n = fileInput && fileInput.files ? fileInput.files.length : 0;
-    var bumpChecked = document.getElementById('bumpHomepage') && document.getElementById('bumpHomepage').checked;
+    var bumpChecked = cfg.bump && document.getElementById('bumpHomepage') && document.getElementById('bumpHomepage').checked;
 
     if (!sId || !wa) {
       alert(currentLang === 'zh'
@@ -1897,23 +1250,18 @@ No commission on sales. Buyers contact you directly, and all transactions are ne
       return;
     }
 
-    var title, feeLine, photosLine, bumpLine = '';
+    var feeLine = cfg.fee;
+    var bumpLine = '';
+    if (currentServiceType === 'standard' && bumpChecked) {
+      feeLine = '标准专业发布（S$188 / 件）+ 首页推荐 7 天（S$100）= 合计 S$288';
+      bumpLine = '\n加购：首页推荐 7 天（加 S$100）';
+    }
+    var photosLine = n > 0 ? ('\n图片数量：' + n + ' 张') : '\n图片数量：待上传';
     if (currentServiceType === 'gallery') {
-      title = '【10件专属私人线上博物馆申请 - 古董圈】';
-      feeLine = '专属私人线上博物馆合包（S$1,499 / 10件合包）';
       photosLine = n > 0 ? ('\n参考图片：' + n + ' 张（其余与客服后续沟通）') : '\n参考图片：后续与客服沟通';
-    } else {
-      title = '【单件专业上架申请 - 古董圈】';
-      if (bumpChecked) {
-        feeLine = '单件上架服务（S$588）+ 首周首页精选加购（S$100）= 合计 S$688';
-        bumpLine = '\n加购：首周首页精选（加 S$100）';
-      } else {
-        feeLine = '单件上架服务（普通价 S$588 / 件；经确认的创始藏家特惠价 S$388 / 件）';
-      }
-      photosLine = n > 0 ? ('\n图片数量：' + n + ' 张') : '\n图片数量：待上传';
     }
 
-    var msg = title + '\nSeller ID：' + sId + '\nWhatsApp：' + wa + photosLine + bumpLine +
+    var msg = cfg.msgTitle + '\nSeller ID：' + sId + '\nWhatsApp：' + wa + photosLine + bumpLine +
               '\n备注：' + (notes || '无') +
               '\n\n[已确认同意《藏家背书与免责协议》]\n' +
               feeLine + '，请发送 PayNow 付款二维码，我付款后会回传付款截图。';
@@ -2168,45 +1516,7 @@ body[data-lang="zh"] .gd-install-modal .en { display: none; }
         modal.classList.add('open');
     });
 })();
-
-/* 创始藏家席位进度条：先按 data-taken 渲染回退值，再从 Airtable 拉取真实数量 */
-(function () {
-    var prog = document.querySelector('.seat-progress');
-    if (!prog) return;
-
-    function render(taken, total) {
-        if (isNaN(taken) || isNaN(total) || total <= 0) return;
-        if (taken < 0) taken = 0;
-        if (taken > total) taken = total;
-        var pct = (taken / total * 100).toFixed(1) + '%';
-        var fill = prog.querySelector('.seat-progress-fill');
-        if (fill) {
-            fill.style.setProperty('--seat-progress', pct);
-            fill.style.width = pct;
-        }
-        var remain = total - taken;
-        prog.querySelectorAll('.taken-num').forEach(function (el) { el.textContent = taken; });
-        prog.querySelectorAll('.total-num').forEach(function (el) { el.textContent = total; });
-        prog.querySelectorAll('.remain-num').forEach(function (el) { el.textContent = remain; });
-    }
-
-    // 先用 data-* 静态值渲染（防止 API 失败时进度条空白）
-    var staticTaken = parseInt(prog.getAttribute('data-taken'), 10);
-    var staticTotal = parseInt(prog.getAttribute('data-total'), 10);
-    render(staticTaken, staticTotal);
-
-    // 再从 Airtable 代理拉取真实创始藏家数量
-    var API_BASE = ((location.hostname === '127.0.0.1' || location.hostname === 'localhost' || location.protocol === 'file:') ? 'https://www.gudong.app' : '') + '/api/airtable-proxy';
-    fetch(API_BASE, { cache: 'no-store' })
-        .then(function (r) { return r.json(); })
-        .then(function (data) {
-            if (data && typeof data.founderCount === 'number') {
-                render(data.founderCount, staticTotal);
-            }
-        })
-        .catch(function () { /* 失败则保留静态回退值 */ });
-})();
 </script>
-<script src="/gd-install.js" defer></script>
+<script src="/gd-install.js?v=20261025" defer></script>
 </body>
 </html>

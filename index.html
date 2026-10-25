@@ -2008,6 +2008,7 @@
     }
     .tick-row {
         display: flex; align-items: center; gap: .6rem;
+        flex-wrap: nowrap;
         padding: .62rem .35rem;
         border-bottom: 1px dashed rgba(217, 182, 121, .1);
         font-size: .8rem;
@@ -2022,6 +2023,7 @@
     }
     .tick-place {
         flex-shrink: 0;
+        white-space: nowrap;
         font-size: .65rem; letter-spacing: .04em;
         color: #E8C87E;
         background: rgba(217, 182, 121, .12);
@@ -2037,6 +2039,7 @@
     }
     .tick-ago {
         flex-shrink: 0;
+        white-space: nowrap;
         font-size: .66rem;
         color: rgba(201, 182, 138, .55);
         font-variant-numeric: tabular-nums;
@@ -2098,6 +2101,11 @@
         .tick-place { font-size: .6rem; padding: .08rem .32rem; }
         .tick-ago { font-size: .6rem; }
         .intel-card--compact { flex: 0 0 236px; }
+    }
+    /* 超窄屏（≤400px）：时间标签让位给正文，正文仍保持单行省略 */
+    @media (max-width: 400px) {
+        .tick-ago { display: none; }
+        .tick-row { gap: .35rem; }
     }
     @media (prefers-reduced-motion: reduce) {
         .intel-ticker { animation: none; }
@@ -2560,7 +2568,7 @@
 
     <!-- 2026-10-25 移动端：WhatsApp 私密直连（拇指热区 · ≤560px 显示） -->
     <div class="gd-mobar" id="gdMobar" role="complementary" aria-label="私聊询价的快捷入口 / Quick private-enquiry bar">
-        <a class="gd-mobar-btn gd-mobar-btn--wa" data-mobar-wa href="https://wa.me/gudong.app" target="_blank" rel="noopener">
+        <a class="gd-mobar-btn gd-mobar-btn--wa" data-mobar-wa href="https://wa.me/6591888952" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.86 9.86 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zm5.79 14.09c-.24.68-1.4 1.3-1.93 1.35-.53.05-1.01.24-3.4-.71-2.86-1.13-4.65-4.13-4.79-4.32-.14-.19-1.13-1.56-1.11-2.97.02-1.41.73-2.1.99-2.39.26-.29.57-.36.76-.36.19 0 .38 0 .55.01.18.01.42-.07.65.5.24.57.8 1.97.87 2.11.07.14.12.31.02.5-.1.19-.14.31-.29.48l-.43.5c-.14.14-.29.3-.13.59.17.29.75 1.29 1.61 2.09 1.11 1.03 2.04 1.35 2.33 1.5.29.15.46.13.63-.07.17-.21.72-.84.91-1.13.19-.29.39-.24.65-.14.26.09 1.68.79 1.97.94.29.14.48.22.55.34.07.12.07.7-.17 1.38z"/></svg>
             <span class="zh">🔒 WhatsApp 私聊藏家</span>
             <span class="en">🔒 WhatsApp the collector</span>
@@ -3823,9 +3831,36 @@ window.gdSharePage = function () {
 (function initMobileActionBar() {
     var bar = document.getElementById('gdMobar');
     if (!bar) return;
-    var PLATFORM_WA = 'https://wa.me/gudong.app';
+    // 部署配置：平台 WhatsApp 商务号码（纯数字，勿带 +、空格或分隔符）
+    var PLATFORM_WA_NUMBER = '6591888952';
     var waLink = bar.querySelector('[data-mobar-wa]');
-    if (waLink && PLATFORM_WA) waLink.setAttribute('href', PLATFORM_WA);
+
+    // 构建带预填文案的 wa.me 链接；用户刚点过某件藏品时，把标题带入聊天框
+    function mobarWaHref() {
+        var isZh = (document.body.dataset.lang || 'zh') !== 'en';
+        var lastTitle = '';
+        try { lastTitle = sessionStorage.getItem('gd_last_item_title') || ''; } catch (e) {}
+        var msg = lastTitle
+            ? (isZh ? '您好，我对贵站古董圈的「' + lastTitle + '」很感兴趣，想私聊询价。'
+                    : 'Hello, I\'m interested in "' + lastTitle + '" on Gudong.app and would like to enquire privately.')
+            : (isZh ? '您好，我在古董圈（Gudong.app）上看到心仪的藏品，想私聊询价。'
+                    : 'Hello, I found an interesting piece on Gudong.app and would like to enquire privately.');
+        return 'https://wa.me/' + PLATFORM_WA_NUMBER + '?text=' + encodeURIComponent(msg);
+    }
+    if (waLink) {
+        waLink.setAttribute('href', mobarWaHref());
+        // 点击瞬间重建链接：语言切换、最近浏览藏品变化都能即时生效
+        waLink.addEventListener('click', function () { waLink.href = mobarWaHref(); });
+    }
+
+    // 记录用户最近点击的藏品标题（本会话内有效，供行动条带入询价文案）
+    document.addEventListener('click', function (ev) {
+        var a = ev.target && ev.target.closest ? ev.target.closest('a[href*="item"]') : null;
+        if (!a) return;
+        var t = a.querySelector('.finds-title.zh, .item-title.zh') || a.querySelector('.finds-title, .item-title');
+        var title = t ? t.textContent.trim() : (a.getAttribute('aria-label') || '').trim();
+        if (title) { try { sessionStorage.setItem('gd_last_item_title', title.slice(0, 80)); } catch (e) {} }
+    }, true);
 
     try { if (sessionStorage.getItem('gd_mobar_off') === '1') return; } catch (e) {}
 

@@ -617,6 +617,19 @@ eraSelect.addEventListener('change',function(){
   var era=ERAS.filter(function(e){return e.id===id;})[0];
   if(era){renderEra(era);}
 });
+
+function applyHashYear(){
+  var m=(window.location.hash||'').match(/[#&]y=(-?\d+)/);
+  if(!m)return;
+  var year=parseInt(m[1],10);
+  var era=ERAS.filter(function(e){return e.from<=year&&e.to>=year;})[0];
+  if(!era)return;
+  eraSelect.value=era.id;
+  renderEra(era);
+  window.setTimeout(function(){eraResult.scrollIntoView({behavior:'smooth',block:'center'});},50);
+}
+window.addEventListener('hashchange',applyHashYear);
+applyHashYear();
 })();
 </script>
 

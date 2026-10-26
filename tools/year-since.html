@@ -147,6 +147,11 @@ input[aria-invalid="true"]{border-color:#B4554A;box-shadow:0 0 0 4px rgba(180,85
 .result[hidden]{display:none}
 .result strong{display:block;color:var(--color-primary);font-family:var(--font-serif);font-size:2.2rem;font-weight:600;letter-spacing:-.02em;line-height:1.15;font-variant-numeric:tabular-nums}
 .result p{margin:.4rem 0 0;color:var(--color-text-secondary);font-size:.9rem;line-height:1.6}
+.year-history{margin-top:1.1rem;padding-top:1rem;border-top:1px solid var(--color-border);text-align:left}
+.year-history[hidden]{display:none}
+.year-history h3{margin:0;color:var(--color-text);font-size:1.08rem}
+.year-history-actions{display:flex;flex-wrap:wrap;gap:.6rem 1rem;margin-top:.75rem}
+.year-history-actions a{color:var(--color-primary);font-size:.84rem;font-weight:600}
 
 .disclaimer{max-width:680px;margin:1.4rem auto;padding:1.05rem 1.2rem;border-left:4px solid var(--color-gold);border-radius:0 10px 10px 0;background:var(--color-primary-light);color:var(--color-text-secondary);font-size:.86rem;line-height:1.72}
 .disclaimer b{display:block;color:var(--color-text);margin-bottom:.3rem;font-size:.9rem;font-weight:600}
@@ -290,6 +295,13 @@ footer{text-align:center;padding:2.2rem 5% 1.8rem;background:var(--color-white);
     <div class="result" id="result" aria-live="polite" hidden>
       <strong id="resultNum"></strong>
       <p id="resultText"></p>
+      <section class="year-history" id="yearHistory" hidden>
+        <h3 id="yearHistoryTitle"></h3>
+        <p id="yearHistoryReign"></p>
+        <p id="yearHistoryEvent"></p>
+        <p id="yearHistoryPorcelain"></p>
+        <div class="year-history-actions" id="yearHistoryActions"></div>
+      </section>
     </div>
   </section>
 
@@ -481,7 +493,13 @@ modal.classList.add('open');});})();
 'use strict';
 var body=document.body,input=document.getElementById('yearInput'),select=document.getElementById('reignSelect');
 var result=document.getElementById('result'),resultNum=document.getElementById('resultNum'),resultText=document.getElementById('resultText');
+var yearHistory=document.getElementById('yearHistory'),yearHistoryTitle=document.getElementById('yearHistoryTitle'),yearHistoryReign=document.getElementById('yearHistoryReign'),yearHistoryEvent=document.getElementById('yearHistoryEvent'),yearHistoryPorcelain=document.getElementById('yearHistoryPorcelain'),yearHistoryActions=document.getElementById('yearHistoryActions');
 var MIN_YEAR=-3000,MAX_YEAR=3000;
+var GENGZI_CONTEXT={
+  1900:{reignZh:'清·光绪二十六年',reignEn:'Qing · Guangxu 26',eventZh:'义和团运动与八国联军战争期间。',eventEn:'During the Boxer movement and the Eight-Nation Alliance intervention.',porcelainZh:'晚清外销瓷与传统彩绘生产并行，可留意广彩等外销装饰的浓艳色彩与繁密构图；仅作时代背景。',porcelainEn:'Late-Qing export wares and traditional painted ceramics coexisted; Canton famille-rose export decoration is known for vivid colors and dense compositions. Period context only.',source:'https://www.zhmuseum.org.cn/zhanlan/linInfo?id=22'},
+  1840:{reignZh:'清·道光二十年',reignEn:'Qing · Daoguang 20',eventZh:'第一次鸦片战争爆发。',eventEn:'The First Opium War began.',porcelainZh:'道光朝器物中可见粉彩装饰等品类；不同器类与窑口面貌多样，不宜用单一风格判断年代。',porcelainEn:'Famille-rose decoration is represented among Daoguang-period wares; styles vary by object type and kiln, so no single style dates an object.',source:'https://aziatischekeramiek.nl/dadd/25838'},
+  1780:{reignZh:'清·乾隆四十五年',reignEn:'Qing · Qianlong 45',eventZh:'乾隆盛世后期，宫廷审美影响瓷器装饰。',eventEn:'The later Qianlong reign, when court taste influenced porcelain decoration.',porcelainZh:'乾隆时期粉彩软彩丰富，常见细致的绘画式装饰；须结合器形、款识和工艺综合判断。',porcelainEn:'Qianlong-period famille-rose soft enamels enabled a rich palette and finely painted decoration; assess form, marks and technique together.',source:'https://www.metmuseum.org/exhibitions/listings/2007/excellence-and-elegance/photo-gallery'}
+};
 function toAstronomical(y){return y>0?y:y+1;}
 function formatYearLabel(y){
   var L=body.dataset.lang==='en'?'en':'zh';
@@ -492,6 +510,7 @@ function calculate(){
   var L=body.dataset.lang==='en'?'en':'zh';
   var raw=input.value.trim(),year=Number(raw),current=new Date().getFullYear();
   result.hidden=false;
+  yearHistory.hidden=true;yearHistoryActions.innerHTML='';
   if(!raw||!Number.isInteger(year)||year===0||year<MIN_YEAR||year>MAX_YEAR){
     resultNum.textContent='—';
     resultText.textContent=L==='zh'?'请输入 '+MIN_YEAR+' 至 '+MAX_YEAR+' 之间的有效年份（负数表示公元前，0 无效）。':'Enter a valid year between '+MIN_YEAR+' and '+MAX_YEAR+' (negative for BCE; 0 is invalid).';
@@ -507,6 +526,20 @@ function calculate(){
   }else{
     resultNum.textContent=Math.abs(diff)+' '+(L==='zh'?'年后':'years ahead');
     resultText.textContent=L==='zh'?yearLabel+'比当前公历年份 '+current+' 年晚 '+Math.abs(diff)+' 年。':yearLabel+' is '+Math.abs(diff)+' years after the current Gregorian year ('+current+').';
+  }
+  var context=GENGZI_CONTEXT[year];
+  if(context){
+    yearHistory.hidden=false;
+    yearHistoryTitle.textContent=L==='zh'?'历史上的庚子年':'Gengzi year in history';
+    yearHistoryReign.textContent=L==='zh'?'年号：'+context.reignZh:'Reign: '+context.reignEn;
+    yearHistoryEvent.textContent=(L==='zh'?'历史事件：':'Historical event: ')+(L==='zh'?context.eventZh:context.eventEn);
+    yearHistoryPorcelain.textContent=(L==='zh'?'瓷器背景：':'Porcelain context: ')+(L==='zh'?context.porcelainZh:context.porcelainEn);
+    var links=[
+      {href:'../tools/ganzhi.html#y='+year,zh:'打开干支换算 →',en:'Open ganzhi converter →'},
+      {href:'../tools/era-lookup.html#y='+year,zh:'朝代速查 →',en:'Era lookup →'},
+      {href:context.source,zh:'参考资料 ↗',en:'Reference ↗',external:true}
+    ];
+    links.forEach(function(item){var a=document.createElement('a');a.href=item.href;a.textContent=L==='zh'?item.zh:item.en;if(item.external){a.target='_blank';a.rel='noopener noreferrer';}yearHistoryActions.appendChild(a);});
   }
 }
 function applyHashYear(){

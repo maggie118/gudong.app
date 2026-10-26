@@ -567,7 +567,7 @@ modal.classList.add('open');});})();
 (function(){
 'use strict';
 var CATS=[
-{id:'porcelain',zh:'瓷器',en:'Porcelain',base:15000,auction:{zh:'参照苏富比/佳士得/中国嘉德香港明清瓷落槌价（港币），按 1 港币≈0.17 新币换算：民窑精细完整青花/彩瓷常见约港币8万–45万 → 约新币1.4万–7.8万；官窑御窑精品可达数十万至千万元（港币）。',en:'HK hammer (Sotheby\'s / Christie\'s / China Guardian) converted HKD→SGD at ~0.17: fine popular-kiln blue-and-white / polychrome commonly HK$80k–450k ≈ S$14k–78k; imperial pieces reach millions (HKD).'}},
+{id:'porcelain',zh:'瓷器',en:'Porcelain',base:15000,auction:{zh:'此处区间为简化模型，非拍卖数据库统计。拍品大小、纹饰、来源与品相差异会造成巨大价差。',en:'This band comes from a simplified model, not an auction database. Size, decoration, provenance and condition create wide price differences.'}},
 {id:'jade',zh:'玉器',en:'Jade',base:25000,auction:{zh:'参照香港拍场明清白玉/翡翠雕件落槌价（港币）按 1 港币≈0.17 新币换算：完整带工件常见约港币17万–85万 → 约新币2.9万–14.5万；高古玉与老坑翡翠视沁色、种水显著上浮。',en:'HK hammer converted HKD→SGD ~0.17: Ming-Qing jade/jadeite carvings commonly HK$170k–850k ≈ S$29k–145k; archaic jade and top jadeite vary widely.'}},
 {id:'bronze',zh:'铜器',en:'Bronzes',base:18000,auction:{zh:'参照香港拍场铜炉/铜造像落槌价（港币）按 1 港币≈0.17 新币换算：完整包浆件常见约港币8.5万–57万 → 约新币1.5万–9.7万；带款、重器与宫廷造像明显更高。',en:'HK hammer converted HKD→SGD ~0.17: censers / bronze figures commonly HK$85k–570k ≈ S$15k–97k; signed, major or imperial pieces higher.'}},
 {id:'coins',zh:'钱币',en:'Coins',base:2000,auction:{zh:'参照香港/北京拍场落槌价（港币）按 1 港币≈0.17 新币换算：普通品常见约港币1,200–2.9万 → 约新币200–5,000；高分评级与稀珍品可达数万至数十万元。',en:'HK / Beijing hammer converted HKD→SGD ~0.17: common coins HK$1.2k–29k ≈ S$200–5k; high-grade slabbed / rare pieces reach tens of thousands.'}},
@@ -594,7 +594,7 @@ var CRAFTS=[
 {id:'fine',zh:'民窑精细',en:'Fine popular kiln',f:1.5},
 {id:'coarse',zh:'民窑粗品',en:'Coarse popular kiln',f:0.6}
 ];
-var TRENDS={zh:'行情参照苏富比/佳士得/中国嘉德香港等全球东方艺术拍场：近年带清晰著录（Provenance）的官窑精品与老坑翡翠稳健上行，普品与残件仍偏疲软；具体随拍场时点、汇率与全球藏家需求波动。',en:'Benchmarked against global Asian-art auctions (Sotheby\'s / Christie\'s / China Guardian HK): official-kiln pieces with clear provenance and top jadeite have held up; common and damaged pieces soften — timing, FX and collector demand move these.'};
+var TRENDS={zh:'古董价格受器形、品相、来源、市场时点与地区影响显著；本工具结果是简化模型，不能替代具体成交记录或专业估价。',en:'Antique prices vary widely with form, condition, provenance, timing and region. This tool is a simplified model, not a substitute for specific sale records or a professional appraisal.'};
 
 function $(id){return document.getElementById(id);}
 function lang(){return document.body.dataset.lang==='en'?'en':'zh';}

@@ -3566,8 +3566,11 @@
     .gd-install-step svg { flex-shrink: 0; width: 22px; height: 22px; fill: #007AFF; margin-top: .1rem; }
     .gd-install-note { font-size: .78rem; color: #9a8d80; margin-top: .5rem; line-height: 1.55; }
     .gd-install-warning { background: #F3EAE0; border-radius: 10px; padding: .8rem; color: #7A4E33; font-size: .85rem; line-height: 1.55; margin-bottom: .8rem; text-align: left; }
+    .gd-install-hint { text-align: center; color: #5a4636; font-size: .9rem; line-height: 1.6; margin: .2rem 0 1rem; }
     body[data-lang="en"] .gd-install-modal .zh { display: none; }
     body[data-lang="zh"] .gd-install-modal .en { display: none; }
+    .gd-install-modal[data-lang="en"] .zh { display: none; }
+    .gd-install-modal[data-lang="zh"] .en { display: none; }
     </style>
     <div class="gd-install-modal" id="gdInstallModal" role="dialog" aria-modal="true" aria-label="Install guide">
         <div class="gd-install-card">
@@ -3586,6 +3589,10 @@
             <div class="gd-install-steps" id="gdStepsOther" style="display:none;">
                 <div class="gd-install-step"><span class="n">1</span><span class="zh">点击浏览器地址栏右侧的「安装」图标</span><span class="en">Click the install icon at the right of the address bar</span></div>
                 <div class="gd-install-step"><span class="n">2</span><span class="zh">或通过浏览器菜单 →「安装古董圈」</span><span class="en">Or open the browser menu → "Install Gudong"</span></div>
+            </div>
+            <div class="gd-install-hint" id="gdInstallHint" style="display:none;">
+                <span class="zh">请使用浏览器菜单中的「安装应用」完成安装。</span>
+                <span class="en">Use your browser menu&rsquo;s &ldquo;Install app&rdquo; option to complete installation.</span>
             </div>
             <div class="gd-install-note zh">安装后可像原生 App 一样全屏使用，无需应用商店。</div>
             <div class="gd-install-note en">Runs full-screen like a native app. No app store needed.</div>
@@ -3624,7 +3631,11 @@
                 return;
             }
             document.getElementById('gdStepsIos').style.display = isIOS ? '' : 'none';
-            document.getElementById('gdStepsOther').style.display = isIOS ? 'none' : '';
+            document.getElementById('gdStepsOther').style.display = 'none';
+            var lang = (document.body && document.body.dataset && document.body.dataset.lang === 'en') ? 'en' : 'zh';
+            modal.setAttribute('data-lang', lang);
+            var hint = document.getElementById('gdInstallHint');
+            if (hint) hint.style.display = isIOS ? 'none' : '';
             var warning = document.getElementById('gdInAppWarning');
             if (warning) warning.style.display = (isIOS && isInAppBrowser) ? '' : 'none';
             modal.classList.add('open');

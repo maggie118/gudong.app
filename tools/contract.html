@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <title>Antique Sales Contract Generator Singapore｜古玩民间买卖契约协议生成器｜Gudong.app</title>
-<meta name="description" content="Antique sales contract generator singapore 与古玩民间买卖契约协议生成器：免费生成《古董民间买卖交割协议》与新加坡古董买卖免责声明，填写买卖双方、藏品、金额与交割方式，选择"包老包真"或"按现状 As-Is"条款，一键生成带平台编号与双方签字区、可打印留存的书面协议。中英双语，纯前端；平台非交易当事方。">
+<meta name="description" content="Antique sales contract generator Singapore 与古玩民间买卖契约协议生成器：支持手写签名、SHA-256 文档指纹、二维码、中英双语 PDF，以及跨境运输风险和进口税费分配条款。平台非交易当事方，不提供鉴真或法律认证。">
 <meta name="keywords" content="antique sales contract generator singapore,古玩民间买卖契约协议生成器,新加坡古董买卖免责协议,古董买卖协议,古玩交易合同,seller endorsement agreement,as-is clause,包老包真条款,古董交割书,singapore antique purchase agreement,卖家免责声明">
 <meta name="robots" content="index,follow,max-image-preview:large">
 <link rel="canonical" href="https://www.gudong.app/tools/contract">
@@ -250,6 +250,7 @@ footer{text-align:center;padding:2.2rem 5% 1.8rem;background:var(--color-white);
     <span> / </span>
     <span class="current"><span class="zh">买卖契约生成器</span><span class="en">Contract Generator</span></span>
   </nav>
+  <aside class="trace-lookup" id="traceLookup" hidden><strong><span class="zh">协议内容指纹</span><span class="en">Agreement content fingerprint</span></strong><code id="traceLookupCode"></code><p><span class="zh">此静态页面不会查询平台登记记录。该代码是生成时交易字段与手写签名图像的 SHA-256 摘要，不是 PDF 文件校验、身份核验或平台认证。</span><span class="en">This static page does not query a platform registry. This SHA-256 digest covers the entered terms and signature images; it is not a PDF-file check, identity verification or platform certification.</span></p></aside>
 
   <section class="hero-clean">
     <div class="hero-eyebrow"><span class="zh">契约生成工具</span><span class="en">Contract Generator</span></div>
@@ -273,6 +274,13 @@ footer{text-align:center;padding:2.2rem 5% 1.8rem;background:var(--color-white);
     <h2 id="form-title"><span class="zh">① 填写交易信息</span><span class="en">① Fill in the deal</span></h2>
     <div class="field"><label for="fSeller"><span class="zh">卖家名称</span><span class="en">Seller name</span></label><input id="fSeller" type="text" placeholder="如：陈先生 / Seller ID"></div>
     <div class="field"><label for="fBuyer"><span class="zh">买家名称</span><span class="en">Buyer name</span></label><input id="fBuyer" type="text" placeholder="如：Ms Tan"></div>
+    <div class="field-row">
+      <div class="field"><label for="fSellerCountry"><span class="zh">卖家所在国家 / 地区</span><span class="en">Seller country / region</span></label><input id="fSellerCountry" type="text" value="Singapore" autocomplete="country-name"></div>
+      <div class="field"><label for="fBuyerCountry"><span class="zh">买家所在国家 / 地区</span><span class="en">Buyer country / region</span></label><input id="fBuyerCountry" type="text" value="Singapore" autocomplete="country-name"></div>
+    </div>
+    <div class="field"><label for="fTradeType"><span class="zh">交易方式</span><span class="en">Trade type</span></label>
+      <select id="fTradeType"><option value="domestic">境内交易 / Domestic</option><option value="crossborder">跨境交易 / Cross-border</option></select>
+    </div>
     <div class="field"><label for="fItem"><span class="zh">藏品名称 / 描述</span><span class="en">Item name / description</span></label><input id="fItem" type="text" placeholder="如：清乾隆 青花缠枝莲纹瓶"></div>
     <div class="field"><label for="fItemId"><span class="zh">平台藏品编号（选填）</span><span class="en">Platform item ID (optional)</span></label><input id="fItemId" type="text" placeholder="如：item-limck-01"></div>
     <div class="field-row">
@@ -282,13 +290,39 @@ footer{text-align:center;padding:2.2rem 5% 1.8rem;background:var(--color-white);
       </div>
     </div>
     <div class="field"><label for="fDeliver"><span class="zh">交割方式</span><span class="en">Delivery method</span></label>
-      <select id="fDeliver"><option><span class="zh">当面看货自提</span><span class="en">In-person pickup</span></option><option><span class="zh">邮寄（保价）</span><span class="en">Insured shipping</span></option><option><span class="zh">第三方托管 / 中介交割</span><span class="en">Escrow / broker handover</span></option></select>
+      <select id="fDeliver"><option value="pickup">当面看货自提 / In-person pickup</option><option value="insured">邮寄（保价） / Insured shipping</option><option value="escrow">第三方托管 / 中介交割 / Escrow or broker handover</option></select>
+    </div>
+    <div id="crossBorderFields" hidden>
+      <div class="field-row">
+        <div class="field"><label for="fShipCost"><span class="zh">国际运输费承担方</span><span class="en">International freight paid by</span></label>
+          <select id="fShipCost"><option value="seller">卖家 / Seller</option><option value="buyer" selected>买家 / Buyer</option><option value="shared">双方均摊 / Shared equally</option></select>
+        </div>
+        <div class="field"><label for="fDuty"><span class="zh">进口关税、GST/VAT 与清关费用承担方</span><span class="en">Import duties, GST/VAT &amp; clearance paid by</span></label>
+          <select id="fDuty"><option value="buyer" selected>买家 / Buyer</option><option value="seller">卖家 / Seller</option><option value="shared">双方均摊 / Shared equally</option></select>
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label for="fRisk"><span class="zh">运输途中灭失 / 损坏风险转移点</span><span class="en">When transit risk transfers</span></label>
+          <select id="fRisk"><option value="carrier">交给首位承运人时 / On handover to first carrier</option><option value="destination" selected>送达约定地点、可供买家接收时 / At named destination, ready for receipt</option><option value="inspection">买家签收并检查后 / After buyer receives and inspects</option><option value="custom">按下方另行约定 / At the point specified below</option></select>
+        </div>
+        <div class="field"><label for="fInsurance"><span class="zh">运输保险费承担方</span><span class="en">Cargo insurance paid by</span></label>
+          <select id="fInsurance"><option value="seller">卖家 / Seller</option><option value="buyer" selected>买家 / Buyer</option><option value="shared">双方均摊 / Shared equally</option><option value="none">不投保 / No insurance agreed</option></select>
+        </div>
+      </div>
+      <div class="field"><label for="fRiskPoint"><span class="zh">约定交付地点 / 风险转移补充条件</span><span class="en">Named destination / additional risk terms</span></label><input id="fRiskPoint" type="text" placeholder="如：买家新加坡地址；以承运人签收记录为准 / e.g. buyer's Singapore address"></div>
+      <p class="field-help"><span class="zh">双方应写明具体交付地点、承运人、保险与清关安排。以上是双方可编辑的分配选项，不自动套用 Incoterms®；适用时请另列规则、版本及指定地点。</span><span class="en">Specify the delivery point, carrier, insurance and clearance arrangements. These editable allocations do not automatically apply Incoterms®; if used, state the rule, edition and named place.</span></p>
     </div>
     <fieldset class="field mode-group"><legend><span class="zh">卖家背书条款</span><span class="en">Seller endorsement clause</span></legend>
-      <label class="mode"><input type="radio" name="mode" value="guarantee" checked> <span class="zh">卖家背书：承诺包老包真（Guarantee age &amp; authenticity）</span><span class="en"></span></label>
-      <label class="mode"><input type="radio" name="mode" value="asis"> <span class="zh">按现状交割：As-Is，买家已看清实物，卖家对已有瑕疵免责</span><span class="en"></span></label>
+      <label class="mode"><input type="radio" name="mode" value="guarantee" checked> <span class="zh">卖家背书：承诺包老包真</span><span class="en">Seller guarantee: stated age and authenticity</span></label>
+      <label class="mode"><input type="radio" name="mode" value="asis"> <span class="zh">按现状交割：As-Is，买家确认已查看实物及披露瑕疵</span><span class="en">As-Is: buyer confirms inspection and disclosed defects</span></label>
     </fieldset>
     <div class="field"><label for="fNotes"><span class="zh">补充备注（选填）</span><span class="en">Additional notes (optional)</span></label><textarea id="fNotes" rows="2" placeholder="如：含原配锦盒 / 已说明冲线一处"></textarea></div>
+    <label class="bilingual-toggle"><input type="checkbox" id="fBilingual" checked> <span class="zh">导出中英双语对照版</span><span class="en">Include parallel Chinese–English text</span></label>
+    <div class="signature-inputs">
+      <div class="signature-input"><label for="sellerSignature"><span class="zh">卖家手写签名（选填）</span><span class="en">Seller handwritten signature (optional)</span></label><canvas id="sellerSignature" class="signature-pad" width="720" height="180" aria-label="Seller signature pad"></canvas><button type="button" class="sig-clear" data-clear-signature="sellerSignature"><span class="zh">清除</span><span class="en">Clear</span></button></div>
+      <div class="signature-input"><label for="buyerSignature"><span class="zh">买家手写签名（选填）</span><span class="en">Buyer handwritten signature (optional)</span></label><canvas id="buyerSignature" class="signature-pad" width="720" height="180" aria-label="Buyer signature pad"></canvas><button type="button" class="sig-clear" data-clear-signature="buyerSignature"><span class="zh">清除</span><span class="en">Clear</span></button></div>
+    </div>
+    <p class="field-help"><span class="zh">签名只在当前浏览器内处理，不会上传。手写签名图片仅用于生成文档，不代表电子签名服务或认证。</span><span class="en">Signatures are processed in this browser and are not uploaded. Signature images are for the document only; this is not an e-signature or identity-verification service.</span></p>
     <div class="doc-actions">
       <button type="button" class="btn-primary" id="genBtn"><span class="zh">生成协议</span><span class="en">Generate agreement</span></button>
       <button type="button" class="btn-secondary" id="printBtn" hidden><span class="zh">打印 / 存为 PDF</span><span class="en">Print / Save PDF</span></button>
@@ -299,15 +333,16 @@ footer{text-align:center;padding:2.2rem 5% 1.8rem;background:var(--color-white);
     <div class="doc-head">
       <div class="doc-platform">Gudong.app · 古董圈</div>
       <div class="doc-title"><span class="zh">古董民间买卖交割协议</span><span class="en">Antique Private Sales Agreement</span></div>
-      <div class="doc-ref"><span class="zh">协议编号：</span><span id="docRef"></span></div>
+      <div class="doc-ref"><span class="zh">协议指纹编号：</span><span class="en">Agreement fingerprint ID:</span><span id="docRef"></span></div>
     </div>
     <div class="doc-body" id="docBody"></div>
     <div class="doc-sign">
-      <div class="sig-block"><span class="zh">卖家签字：</span><span class="en">Seller signature:</span><div class="sig-line"></div></div>
-      <div class="sig-block"><span class="zh">买家签字：</span><span class="en">Buyer signature:</span><div class="sig-line"></div></div>
-      <div class="sig-block"><span class="zh">日期：</span><span class="en">Date:</span><div class="sig-line"></div></div>
+      <div class="sig-block"><span class="zh">卖家签字：</span><span class="en">Seller signature:</span><div class="sig-line" id="sellerSignatureOutput"></div></div>
+      <div class="sig-block"><span class="zh">买家签字：</span><span class="en">Buyer signature:</span><div class="sig-line" id="buyerSignatureOutput"></div></div>
+      <div class="sig-block"><span class="zh">日期：</span><span class="en">Date:</span><div class="sig-line" id="signatureDate"></div></div>
     </div>
-    <div class="doc-platform-note"><span class="zh">本协议由买卖双方自行签署并留存；Gudong.app 仅提供文书模板，非交易当事方，不经手付款、不担保真伪。</span><span class="en">Signed and retained by buyer and seller; Gudong.app provides this template only and is not a party to the transaction, nor does it handle payment or guarantee authenticity.</span></div>
+    <div class="doc-trace"><div><strong><span class="zh">协议内容指纹（SHA-256）</span><span class="en">Agreement content fingerprint (SHA-256)</span></strong><div id="docFingerprint" class="fingerprint"></div><small><span class="zh">二维码仅包含内容指纹，不含双方姓名、藏品描述或价格；二维码图像服务会收到此指纹。该摘要由本机计算，覆盖输入条款与签名图像，不是 PDF 文件哈希。Gudong.app 未登记或认证本协议，不构成鉴真或防伪证明。</span><span class="en">The QR contains only the content fingerprint, not party names, item description or price; the QR image service receives this fingerprint. Computed locally from entered terms and signature images, it is not a PDF hash. Gudong.app has not registered or certified this agreement; it is not proof of authenticity.</span></small></div><img id="docQr" alt="Agreement content fingerprint QR code" width="112" height="112" hidden></div>
+    <div class="doc-platform-note"><span class="zh">本协议由买卖双方自行签署并留存；手写签名图像不包含身份验证或可信时间戳。Gudong.app 仅提供文书模板，非交易当事方，不经手付款、不担保真伪。</span><span class="en">The parties sign and retain this agreement themselves; handwritten signature images do not include identity verification or a trusted timestamp. Gudong.app provides this template only and is not a party to the transaction, nor does it handle payment or guarantee authenticity.</span></div>
   </section>
 
   <aside class="disclaimer">
@@ -315,15 +350,17 @@ footer{text-align:center;padding:2.2rem 5% 1.8rem;background:var(--color-white);
     <span class="zh">
       <ol>
         <li>本工具生成的是<strong>通用文书模板</strong>，不构成法律意见；跨境、高价值或争议交易请由执业律师审核。</li>
-        <li>协议效力以双方真实签署与当地法律为准；平台不参与、不担保、不调解。</li>
+        <li>协议效力以双方签署方式与当地法律为准；手写签名图片不包含身份核验或可信时间戳，平台不参与、不担保、不调解。</li>
         <li>建议先线下看实物、再书面签约，付款尽量走可追溯渠道。</li>
+        <li>跨境条款为双方自定义分配，不自动套用 Incoterms®。可查阅 <a href="https://iccwbo.org/business-solutions/incoterms-rules/incoterms-2020/" target="_blank" rel="noopener noreferrer">ICC Incoterms® 2020 说明</a>；新加坡进口税费与申报要求请核对 <a href="https://www.customs.gov.sg/doing-business/import-operations/import-procedures/import-procedures-overview/" target="_blank" rel="noopener noreferrer">新加坡海关指南</a>。</li>
       </ol>
     </span>
     <span class="en">
       <ol>
         <li>This tool generates a <strong>generic template</strong>, not legal advice; have it reviewed by a qualified lawyer for cross-border, high-value or disputed deals.</li>
-        <li>Enforceability depends on real signatures and local law; the platform does not participate in, guarantee or mediate.</li>
+        <li>Enforceability depends on the signing method and local law; a signature image does not include identity verification or a trusted timestamp. The platform does not participate in, guarantee or mediate.</li>
         <li>Inspect in person, sign in writing, and use traceable payment channels.</li>
+        <li>Cross-border allocations are custom terms and do not automatically incorporate Incoterms®. See the <a href="https://iccwbo.org/business-solutions/incoterms-rules/incoterms-2020/" target="_blank" rel="noopener noreferrer">ICC Incoterms® 2020 overview</a>; verify import taxes and declaration requirements with <a href="https://www.customs.gov.sg/doing-business/import-operations/import-procedures/import-procedures-overview/" target="_blank" rel="noopener noreferrer">Singapore Customs</a>.</li>
       </ol>
     </span>
   </aside>
@@ -364,8 +401,29 @@ footer{text-align:center;padding:2.2rem 5% 1.8rem;background:var(--color-white);
         @media(min-width:640px){ .doc-sign{ grid-template-columns:1fr 1fr 1fr; } }
         .sig-block { font-size:.88rem; color:var(--color-text-secondary); }
         .sig-line { border-bottom:1px solid #333; height:2.6rem; margin-top:.3rem; }
+        .signature-inputs{display:grid;grid-template-columns:1fr;gap:1rem;margin:1rem 0}
+        @media(min-width:640px){.signature-inputs{grid-template-columns:1fr 1fr}}
+        .signature-input label{display:block;font-size:.85rem;color:var(--color-text-secondary);margin-bottom:.35rem}
+        .signature-pad{width:100%;height:auto;display:block;border:1px solid var(--color-border);border-radius:8px;background:repeating-linear-gradient(to bottom,#fff 0,#fff 42px,#eee7df 43px,#fff 44px);touch-action:none;cursor:crosshair}
+        .sig-clear{margin-top:.35rem;padding:.35rem .7rem;border:1px solid var(--color-border);border-radius:7px;background:#fff;color:var(--color-text-secondary);cursor:pointer;min-height:38px}
+        .bilingual-toggle{display:flex;align-items:center;gap:.5rem;margin:.7rem 0;padding:.7rem .85rem;border-radius:8px;background:#fcfaf7;font-size:.9rem;cursor:pointer}
+        .doc-signature{display:block;width:min(100%,260px);height:64px;object-fit:contain;object-position:left bottom}
+        .doc-trace{display:grid;grid-template-columns:minmax(0,1fr) 112px;align-items:center;gap:1rem;margin-top:1rem;padding:1rem 0;border-top:1px dashed var(--color-border);border-bottom:1px dashed var(--color-border);overflow-wrap:anywhere}
+        .doc-trace strong{font-size:.8rem;color:var(--color-primary-dark)}
+        .doc-trace small{display:block;margin-top:.35rem;font-size:.7rem;line-height:1.5;color:#81796f}
+        .fingerprint{margin-top:.35rem;font-family:monospace;font-size:.72rem;letter-spacing:.035em;overflow-wrap:anywhere;color:#44372f}
+        .doc-trace img{width:112px;height:112px;object-fit:contain}
+        .doc-sheet{position:relative;isolation:isolate;overflow:hidden}
+        .doc-sheet:before{content:"GUDONG.APP · DOCUMENT FINGERPRINT";position:absolute;z-index:0;left:50%;top:48%;transform:translate(-50%,-50%) rotate(-28deg);font-size:clamp(1.2rem,5vw,2.5rem);font-weight:700;letter-spacing:.12em;color:rgba(122,78,51,.055);white-space:nowrap;pointer-events:none}
+        .doc-sheet>*{position:relative;z-index:1}
+        #docSheet.doc-bilingual .zh,#docSheet.doc-bilingual .en{display:inline!important}
+        .trace-lookup{margin:0 auto 1rem;max-width:680px;padding:1rem;border:1px solid var(--color-border);border-radius:10px;background:#fff}
+        .trace-lookup code{display:block;margin:.4rem 0;font-size:.8rem;overflow-wrap:anywhere}
+        .trace-lookup p{font-size:.8rem;color:var(--color-text-secondary)}
+        #crossBorderFields[hidden]{display:none}
         .doc-platform-note { margin-top:1.4rem; font-size:.76rem; color:#8a8178; line-height:1.6; border-top:1px dashed var(--color-border); padding-top:.8rem; }
-        @media print { header,.sidebar,.notice,.disclaimer,.related,.breadcrumb,.doc-actions,.hero-clean,.panel,.cite,footer,.gd-share-btn,.app-install-btn { display:none !important; } body{background:#fff;} .doc-sheet{border:none;box-shadow:none;margin:0;max-width:100%;} }
+        @page{size:A4;margin:16mm}
+        @media print { header,.sidebar,.notice,.disclaimer,.related,.breadcrumb,.trace-lookup,.doc-actions,.hero-clean,.panel,.cite,footer,.gd-share-btn,.app-install-btn { display:none !important; } body{background:#fff;} .doc-sheet{border:none;box-shadow:none;margin:0;max-width:100%;border-radius:0;overflow:visible;} .doc-trace{break-inside:avoid;} .doc-sign{break-inside:avoid;} }
         </style>
 
 <footer>
@@ -553,32 +611,72 @@ function clause(){
 }
 
 function generate(){
-  var L=lang();
-  var seller=val('fSeller')||(L==='zh'?'卖家':'Seller');
-  var buyer=val('fBuyer')||(L==='zh'?'买家':'Buyer');
-  var item=val('fItem')||(L==='zh'?'（未填写）':'(unspecified)');
-  var itemId=val('fItemId');
-  var price=val('fPrice');
-  var cur=$('fCur').value;
-  var deliver=$('fDeliver').selectedOptions[0].textContent.trim();
-  var notes=val('fNotes');
-  var cl=clause();
-
-  $('docRef').textContent=genRef();
+  var L=lang(),bilingual=$('fBilingual').checked;
+  function t(zh,en){return bilingual?'<span class="zh">'+zh+'</span><span class="en">'+en+'</span>':(L==='zh'?zh:en);}
+  function party(v,zh,en){return t(zh,en)+' <strong>'+esc(v)+'</strong>';}
+  var seller=val('fSeller')||(L==='zh'?'卖家':'Seller'),buyer=val('fBuyer')||(L==='zh'?'买家':'Buyer');
+  var item=val('fItem')||(L==='zh'?'（未填写）':'(unspecified)'),itemId=val('fItemId'),price=val('fPrice'),cur=$('fCur').value,notes=val('fNotes');
+  var cross=$('fTradeType').value==='crossborder',deliver=$('fDeliver').value,today=new Date(),dateKey=today.getFullYear()+'-'+String(today.getMonth()+1).padStart(2,'0')+'-'+String(today.getDate()).padStart(2,'0');
+  if(cross&&(!val('fSellerCountry')||!val('fBuyerCountry')||!val('fRiskPoint'))){alert(L==='zh'?'跨境契约请填写双方所在国家 / 地区及约定交付地点。':'For cross-border agreements, enter both countries/regions and the named delivery point.');return;}
+  var deliveryLabels={pickup:['当面看货自提','In-person pickup'],insured:['邮寄（保价）','Insured shipping'],escrow:['第三方托管 / 中介交割','Escrow or broker handover']};
+  var cl=clause(),mode=document.querySelector('input[name="mode"]:checked').value;
+  var digestParts={seller:seller,buyer:buyer,sellerCountry:val('fSellerCountry'),buyerCountry:val('fBuyerCountry'),item:item,itemId:itemId,price:price,currency:cur,delivery:deliver,mode:mode,notes:notes,bilingual:bilingual,outputLanguage:L,tradeType:$('fTradeType').value,shipCost:cross?$('fShipCost').value:'',duty:cross?$('fDuty').value:'',risk:cross?$('fRisk').value:'',insurance:cross?$('fInsurance').value:'',riskPoint:cross?val('fRiskPoint'):'' ,sellerSignature:$('sellerSignature').toDataURL('image/png'),buyerSignature:$('buyerSignature').toDataURL('image/png'),date:new Date().toISOString().slice(0,10)};
+  digestParts.date=dateKey;
+  var canonical=JSON.stringify(digestParts),digestPromise=(window.crypto&&crypto.subtle)?crypto.subtle.digest('SHA-256',new TextEncoder().encode(canonical)).then(function(buf){return Array.prototype.map.call(new Uint8Array(buf),function(b){return b.toString(16).padStart(2,'0');}).join('');}):Promise.reject(new Error('SHA-256 unavailable'));
   $('docBody').innerHTML=
-    '<p>'+(L==='zh'?'甲方（卖家）：':'Party A (Seller): ')+'<strong>'+esc(seller)+'</strong>　'+(L==='zh'?'乙方（买家）：':'Party B (Buyer): ')+'<strong>'+esc(buyer)+'</strong></p>'+
-    '<p>'+(L==='zh'?'第一条 标的物：':'Clause 1 Subject: ')+(L==='zh'?'藏品名称':'Item')+' — <strong>'+esc(item)+'</strong>'+(itemId?'（'+(L==='zh'?'平台编号':'Platform ID')+': '+esc(itemId)+'）':'')+'</p>'+
-    '<p>'+cl[L]+'</p>'+
-    '<p>'+(L==='zh'?'第三条 成交金额：':'Clause 3 Price: ')+'<strong>'+cur+' '+(price?Number(price).toLocaleString('en-US'):'______')+'</strong>　'+(L==='zh'?'交割方式：':'Delivery: ')+esc(deliver)+'</p>'+
-    (notes?'<p>'+(L==='zh'?'补充约定：':'Additional terms: ')+esc(notes)+'</p>':'')+
-    '<p>'+(L==='zh'?'第四条 双方确认以上条款自愿达成，签字后生效。':'Clause 4 The parties agree to the above voluntarily; it takes effect upon signing.')+'</p>';
+    '<p>'+party(seller,'甲方（卖家）：','Party A (Seller):')+'　'+party(buyer,'乙方（买家）：','Party B (Buyer):')+'</p>'+
+    (cross?'<p>'+t('卖家所在地：','Seller location:')+' <strong>'+esc(digestParts.sellerCountry||'—')+'</strong>　'+t('买家所在地：','Buyer location:')+' <strong>'+esc(digestParts.buyerCountry||'—')+'</strong></p>':'')+
+    '<p>'+t('第一条 标的物：','Clause 1 Subject:')+' '+t('藏品名称','Item')+' — <strong>'+esc(item)+'</strong>'+(itemId?'（'+t('平台编号：','Platform ID:')+' '+esc(itemId)+'）':'')+'</p>'+
+    '<p>'+t(cl.zh,cl.en)+'</p>'+
+    '<p>'+t('第三条 成交金额：','Clause 3 Price:')+' <strong>'+cur+' '+(price?Number(price).toLocaleString('en-US'):'______')+'</strong>　'+t('交割方式：','Delivery:')+' '+t(deliveryLabels[deliver][0],deliveryLabels[deliver][1])+'</p>'+
+    (cross?buildCrossBorderClause(t,digestParts):'')+
+    (notes?'<p>'+t('补充约定：','Additional terms:')+' '+esc(notes)+'</p>':'')+
+    '<p>'+t('第四条 双方确认以上条款自愿达成，签字后生效。','Clause 4 The parties agree to the above voluntarily; it takes effect upon signing.')+'</p>';
+  $('docSheet').classList.toggle('doc-bilingual',bilingual);
+  setSignatureOutput('sellerSignature','sellerSignatureOutput',L==='zh'?'卖家手写签名':'Seller handwritten signature');
+  setSignatureOutput('buyerSignature','buyerSignatureOutput',L==='zh'?'买家手写签名':'Buyer handwritten signature');
+  $('signatureDate').textContent=today.toLocaleDateString(L==='zh'?'zh-SG':'en-SG',{year:'numeric',month:'long',day:'numeric'});
   $('docSheet').hidden=false;
   $('printBtn').hidden=false;
+  $('printBtn').disabled=true;
+  digestPromise.then(function(hash){
+    $('docFingerprint').textContent=hash.toUpperCase();
+    $('docRef').textContent='GD-'+dateKey.replace(/-/g,'')+'-'+hash.slice(0,10).toUpperCase();
+    var verifyUrl='https://www.gudong.app/tools/contract.html?trace='+hash;
+    var qr=$('docQr');qr.hidden=false;qr.alt=(L==='zh'?'文档指纹二维码':'Document fingerprint QR code');
+    qr.src='https://api.qrserver.com/v1/create-qr-code/?size=180x180&format=png&data='+encodeURIComponent(verifyUrl);
+    $('printBtn').disabled=false;
+  }).catch(function(){
+    $('docRef').textContent=genRef();$('docFingerprint').textContent=L==='zh'?'此浏览器不支持 SHA-256，未生成指纹。':'SHA-256 is unavailable in this browser; no fingerprint was generated.';$('docQr').hidden=true;
+    $('printBtn').disabled=false;
+  });
   $('docSheet').scrollIntoView({behavior:'smooth'});
 }
 
+function buildCrossBorderClause(t,d){
+  var payer={seller:['卖家','Seller'],buyer:['买家','Buyer'],shared:['双方均摊','Shared equally'],agreed:['双方另行约定','As agreed by the parties'],none:['不投保','No insurance agreed']};
+  var risk={carrier:['交给首位承运人时','when handed to the first carrier'],destination:['送达约定地点并可供买家接收时','at the named destination, ready for receipt'],inspection:['买家签收并检查后','after the buyer receives and inspects the item'],custom:['双方在本协议补充备注中写明的地点 / 时点','the place or point stated in the additional terms']};
+  var point=esc(d.riskPoint||'（未填写 / not specified）');
+  var insurance=$('fInsurance').value==='none'?t('双方未约定投保；运输风险仍按本条约定分配。','No cargo insurance is agreed; transit risk is allocated as stated in this clause.'):t('运输保险费由','Cargo insurance is paid by')+' <strong>'+t(payer[$('fInsurance').value][0],payer[$('fInsurance').value][1])+'</strong> '+t('承担。','.')
+  return '<p>'+t('第五条 跨境运输、税费与风险：','Clause 5 Cross-border shipping, taxes and risk:')+' '+t('运输费由','Freight is paid by')+' <strong>'+t(payer[$('fShipCost').value][0],payer[$('fShipCost').value][1])+'</strong> '+t('承担；进口关税、GST/VAT、清关及相关费用由','; import duties, GST/VAT, clearance and related charges are paid by')+' <strong>'+t(payer[$('fDuty').value][0],payer[$('fDuty').value][1])+'</strong> '+t('承担。','.')+insurance+' '+t('运输途中灭失或损坏风险于','Transit risk of loss or damage transfers')+' <strong>'+t(risk[$('fRisk').value][0],risk[$('fRisk').value][1])+'</strong> '+t('时转移。约定地点 / 补充条件：','Named place / additional terms:')+' <strong>'+point+'</strong>。'+t('上述约定仅分配双方之间的费用与风险，不改变进口国法律对申报人 / 进口人的法定义务。除非双方另行明确写明规则、版本与指定地点，本条不构成 Incoterms® 约定。','These terms allocate costs and risk only between the parties and do not change statutory obligations imposed on the declarant or importer under destination-country law. This clause does not incorporate Incoterms® unless the parties separately state the rule, edition and named place.')+'</p>';
+}
+
+function setSignatureOutput(canvasId,targetId,alt){var c=$(canvasId),out=$(targetId);out.innerHTML='';if(c.dataset.signed==='true'){var img=document.createElement('img');img.className='doc-signature';img.src=c.toDataURL('image/png');img.alt=alt;out.appendChild(img);}}
+
+function setupSignaturePad(id){var c=$(id),ctx=c.getContext('2d'),drawing=false;ctx.lineWidth=5;ctx.lineCap='round';ctx.lineJoin='round';ctx.strokeStyle='#25221e';
+  c.addEventListener('pointerdown',function(e){drawing=true;c.setPointerCapture(e.pointerId);var r=c.getBoundingClientRect();ctx.beginPath();ctx.moveTo((e.clientX-r.left)*c.width/r.width,(e.clientY-r.top)*c.height/r.height);c.dataset.signed='true';e.preventDefault();});
+  c.addEventListener('pointermove',function(e){if(!drawing)return;var r=c.getBoundingClientRect();ctx.lineTo((e.clientX-r.left)*c.width/r.width,(e.clientY-r.top)*c.height/r.height);ctx.stroke();e.preventDefault();});
+  ['pointerup','pointercancel','lostpointercapture'].forEach(function(type){c.addEventListener(type,function(){drawing=false;});});
+}
+
+function updateCrossBorder(){var on=$('fTradeType').value==='crossborder';$('crossBorderFields').hidden=!on;}
+setupSignaturePad('sellerSignature');setupSignaturePad('buyerSignature');
+document.querySelectorAll('[data-clear-signature]').forEach(function(btn){btn.addEventListener('click',function(){var c=$(btn.dataset.clearSignature);c.getContext('2d').clearRect(0,0,c.width,c.height);c.dataset.signed='false';});});
+$('fTradeType').addEventListener('change',updateCrossBorder);updateCrossBorder();
+var traceParam=new URLSearchParams(location.search).get('trace');if(traceParam&&/^[a-f0-9]{64}$/i.test(traceParam)){$('traceLookupCode').textContent=traceParam.toUpperCase();$('traceLookup').hidden=false;}
+
 $('genBtn').addEventListener('click',generate);
-$('printBtn').addEventListener('click',function(){window.print();});
+$('printBtn').addEventListener('click',function(){var qr=$('docQr');if(qr.hidden||qr.complete){window.print();return;}var called=false,done=function(){if(called)return;called=true;window.print();};qr.addEventListener('load',done,{once:true});qr.addEventListener('error',done,{once:true});setTimeout(done,2500);});
 
 </script>
 

@@ -1743,80 +1743,10 @@
     .finds-related .fr-icon { flex-shrink: 0; font-style: normal; }
     .finds-related .fr-word { color: var(--color-bronze-muted); font-weight: 600; }
 
-    /* ---------- 今日情报：流动性热度标签 ---------- */
-    .intel-heat {
-        display: inline-flex; align-items: center; gap: .3rem;
-        margin-top: .6rem; padding: .22rem .58rem;
-        border: 1px solid rgba(37, 211, 102, .28);
-        border-radius: 999px;
-        background: rgba(37, 211, 102, .08);
-        color: #1E9E52;
-        font-size: .7rem; font-weight: 600; letter-spacing: .02em;
-        line-height: 1.5; white-space: nowrap;
-    }
-    .intel-heat--ref {
-        border-color: rgba(156, 122, 58, .32);
-        background: var(--color-gold-soft);
-        color: var(--color-bronze-muted);
-    }
-
-    /* ---------- 席位倒计时增强 ---------- */
+    /* ---------- 卖家招募区按钮 ---------- */
     .seller-actions { display: flex; flex-direction: column; align-items: center; gap: .9rem; }
-    .seats-meter-note {
-        margin-top: .7rem;
-        font-size: .74rem; color: var(--color-text-muted);
-        text-align: center; line-height: 1.6;
-    }
-
-    /* ---------- 移动端 WhatsApp 拇指热区行动条 ---------- */
-    .gd-mobar {
-        position: fixed; left: 0; right: 0; bottom: 0;
-        z-index: 60; display: none;
-        align-items: center; gap: .5rem;
-        padding: .55rem .75rem calc(.55rem + env(safe-area-inset-bottom, 0px));
-        background: rgba(255, 255, 255, .96);
-        -webkit-backdrop-filter: saturate(180%) blur(14px);
-        backdrop-filter: saturate(180%) blur(14px);
-        border-top: 1px solid var(--color-border);
-        box-shadow: 0 -8px 24px rgba(36, 31, 26, .10);
-        transform: translateY(115%);
-        transition: transform .34s var(--ease);
-    }
-    .gd-mobar.is-visible { transform: translateY(0); }
-    .gd-mobar-btn {
-        flex: 1 1 auto; min-width: 0;
-        display: inline-flex; align-items: center; justify-content: center; gap: .38rem;
-        min-height: 48px; padding: .55rem .7rem;
-        border-radius: 10px; text-decoration: none;
-        font-size: .85rem; font-weight: 700; letter-spacing: .01em;
-        white-space: nowrap; overflow: hidden;
-        -webkit-tap-highlight-color: transparent;
-    }
-    .gd-mobar-btn--wa {
-        background: #25D366; color: #fff;
-        box-shadow: 0 6px 18px rgba(37, 211, 102, .3);
-    }
-    .gd-mobar-btn--wa:active { background: #1DA851; }
-    .gd-mobar-btn--wa svg { width: 17px; height: 17px; flex-shrink: 0; fill: currentColor; }
-    .gd-mobar-btn--ghost {
-        flex: 0 0 auto;
-        border: 1px solid var(--color-border);
-        background: transparent; color: var(--color-text-secondary);
-        font-weight: 600; padding: .55rem .8rem;
-    }
-    .gd-mobar-close {
-        flex: 0 0 auto;
-        width: 34px; height: 34px; padding: 0;
-        border: 1px solid var(--color-border); border-radius: 50%;
-        background: transparent; color: var(--color-text-muted);
-        font-size: 1rem; line-height: 1; cursor: pointer;
-        display: inline-flex; align-items: center; justify-content: center;
-        -webkit-tap-highlight-color: transparent;
-    }
-    body.mobar-on { padding-bottom: 82px; }
 
     @media (max-width: 560px) {
-        .gd-mobar { display: flex; }
         .hero-privacy-badge { font-size: .71rem; padding: .38rem .8rem .38rem .55rem; letter-spacing: .04em; gap: .38rem; }
         .hero-privacy-badge .hp-shield { width: 21px; height: 21px; }
         .hero-stats { gap: .4rem; }
@@ -1834,7 +1764,6 @@
         .finds-reason::before { left: .45rem; top: .5rem; font-size: .78rem; }
         .finds-reason::after { font-size: .6rem; right: .45rem; }
         .finds-related { font-size: .7rem; }
-        .intel-heat { font-size: .69rem; }
     }
 
     /* ============================================================
@@ -2476,6 +2405,21 @@
                     </div>
                 </div>
 
+                <!-- 2026-10-25 信任三件套：0 抽佣 / 不经手资金 / 私密直连 -->
+                <div class="trust-strip">
+                    <div class="trust-chip trust-chip--money">
+                        <svg viewBox="0 0 24 24" aria-hidden="true" width="15" height="15"><path d="M12 1 3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+                        <span class="zh">平台 0% 佣金，成交不抽成</span><span class="en">0% commission — we take nothing</span>
+                    </div>
+                    <div class="trust-chip trust-chip--wa">
+                        <svg viewBox="0 0 24 24" aria-hidden="true" width="15" height="15"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.86 9.86 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zm5.79 14.09c-.24.68-1.4 1.3-1.93 1.35-.53.05-1.01.24-3.4-.71-2.86-1.13-4.65-4.13-4.79-4.32-.14-.19-1.13-1.56-1.11-2.97.02-1.41.73-2.1.99-2.39.26-.29.57-.36.76-.36.19 0 .38 0 .55.01.18.01.42-.07.65.5.24.57.8 1.97.87 2.11.07.14.12.31.02.5-.1.19-.14.31-.29.48l-.43.5c-.14.14-.29.3-.13.59.17.29.75 1.29 1.61 2.09 1.11 1.03 2.04 1.35 2.33 1.5.29.15.46.13.63-.07.17-.21.72-.84.91-1.13.19-.29.39-.24.65-.14.26.09 1.68.79 1.97.94.29.14.48.22.55.34.07.12.07.7-.17 1.38z"/></svg>
+                        <span class="zh">不经手付款，不做资金托管</span><span class="en">No payments handled, no escrow</span>
+                    </div>
+                    <div class="trust-chip trust-chip--lock">
+                        <svg viewBox="0 0 24 24" aria-hidden="true" width="15" height="15"><path d="M18 8h-1V6A5 5 0 0 0 7 6v2H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2zM9 6a3 3 0 0 1 6 0v2H9V6zm3 12a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"/></svg>
+                        <span class="zh">WhatsApp 私密直连，互看不到手机号</span><span class="en">Private WhatsApp link — numbers stay hidden</span>
+                    </div>
+                </div>
                 <!-- 平台信任金句（合规 & 隐私双重定调） -->
                 <div class="trust-tagline">
                     <span class="zh"><b>不经手资金，不抽取佣金，私密直连。</b>您与藏家直接沟通，确保最高级别的交易隐私与自主权。</span>
@@ -2539,10 +2483,8 @@
                         <span class="arrow">→</span>
                     </a>
 
-                     </div>
                     </div>
                 </div>
-            </div>
         </section>
     </main>
 
@@ -2565,19 +2507,6 @@
         <p class="footer-disclaimer"><span class="zh">平台仅提供藏品信息展示与藏家连接服务，不参与任何买卖交易，真伪、品相及价格由双方自行判断。</span><span class="en">The platform provides item display and collector connection services only and does not participate in any transaction; authenticity, condition and pricing are to be judged solely by the buyer and seller.</span></p>
         <p class="footer-copyright"><span class="zh">© 2026 gudong.app 版权所有 · <a href="javascript:void(0)" class="app-install-btn" onclick="event.preventDefault();"><svg viewBox="0 0 24 24" aria-hidden="true" width="12" height="12"><path d="M5 20h14v-2H5v2zM19 9h-4V3H9v6H5l7 7 7-7z"/></svg>安装古董.app</a></span><span class="en">© 2026 gudong.app All rights reserved · <a href="javascript:void(0)" class="app-install-btn" onclick="event.preventDefault();"><svg viewBox="0 0 24 24" aria-hidden="true" width="12" height="12"><path d="M5 20h14v-2H5v2zM19 9h-4V3H9v6H5l7 7 7-7z"/></svg>Install gudong.app</a></span></p>
     </footer>
-
-    <!-- 2026-10-25 移动端：WhatsApp 私密直连（拇指热区 · ≤560px 显示） -->
-    <div class="gd-mobar" id="gdMobar" role="complementary" aria-label="私聊询价的快捷入口 / Quick private-enquiry bar">
-        <a class="gd-mobar-btn gd-mobar-btn--wa" data-mobar-wa href="https://wa.me/6591888952" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.86 9.86 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zm5.79 14.09c-.24.68-1.4 1.3-1.93 1.35-.53.05-1.01.24-3.4-.71-2.86-1.13-4.65-4.13-4.79-4.32-.14-.19-1.13-1.56-1.11-2.97.02-1.41.73-2.1.99-2.39.26-.29.57-.36.76-.36.19 0 .38 0 .55.01.18.01.42-.07.65.5.24.57.8 1.97.87 2.11.07.14.12.31.02.5-.1.19-.14.31-.29.48l-.43.5c-.14.14-.29.3-.13.59.17.29.75 1.29 1.61 2.09 1.11 1.03 2.04 1.35 2.33 1.5.29.15.46.13.63-.07.17-.21.72-.84.91-1.13.19-.29.39-.24.65-.14.26.09 1.68.79 1.97.94.29.14.48.22.55.34.07.12.07.7-.17 1.38z"/></svg>
-            <span class="zh">🔒 WhatsApp 私聊藏家</span>
-            <span class="en">🔒 WhatsApp the collector</span>
-        </a>
-        <a class="gd-mobar-btn gd-mobar-btn--ghost" href="pricing.html#collector-services">
-            <span class="zh">藏家服务</span><span class="en">Services</span>
-        </a>
-        <button type="button" class="gd-mobar-close" aria-label="关闭此条 / Dismiss">✕</button>
-    </div>
 
     <script>
         /* ============================================================
@@ -3782,76 +3711,6 @@ window.gdSharePage = function () {
   });
 };
 
-/* ============================================================
-   2026-10-25  移动端 WhatsApp 拇指热区行动条
-   —— 滚动过 Hero 后出现；≤560px 才显示；可关闭（本次会话记住）
-   ============================================================ */
-(function initMobileActionBar() {
-    var bar = document.getElementById('gdMobar');
-    if (!bar) return;
-    // 部署配置：平台 WhatsApp 商务号码（纯数字，勿带 +、空格或分隔符）
-    var PLATFORM_WA_NUMBER = '6591888952';
-    var waLink = bar.querySelector('[data-mobar-wa]');
-
-    // 构建带预填文案的 wa.me 链接；用户刚点过某件藏品时，把标题带入聊天框
-    function mobarWaHref() {
-        var isZh = (document.body.dataset.lang || 'zh') !== 'en';
-        var lastTitle = '';
-        try { lastTitle = sessionStorage.getItem('gd_last_item_title') || ''; } catch (e) {}
-        var msg = lastTitle
-            ? (isZh ? '您好，我对贵站古董圈的「' + lastTitle + '」很感兴趣，想私聊询价。'
-                    : 'Hello, I\'m interested in "' + lastTitle + '" on Gudong.app and would like to enquire privately.')
-            : (isZh ? '您好，我在古董圈（Gudong.app）上看到心仪的藏品，想私聊询价。'
-                    : 'Hello, I found an interesting piece on Gudong.app and would like to enquire privately.');
-        return 'https://wa.me/' + PLATFORM_WA_NUMBER + '?text=' + encodeURIComponent(msg);
-    }
-    if (waLink) {
-        waLink.setAttribute('href', mobarWaHref());
-        // 点击瞬间重建链接：语言切换、最近浏览藏品变化都能即时生效
-        waLink.addEventListener('click', function () { waLink.href = mobarWaHref(); });
-    }
-
-    // 记录用户最近点击的藏品标题（本会话内有效，供行动条带入询价文案）
-    document.addEventListener('click', function (ev) {
-        var a = ev.target && ev.target.closest ? ev.target.closest('a[href*="item"]') : null;
-        if (!a) return;
-        var t = a.querySelector('.finds-title.zh, .item-title.zh') || a.querySelector('.finds-title, .item-title');
-        var title = t ? t.textContent.trim() : (a.getAttribute('aria-label') || '').trim();
-        if (title) { try { sessionStorage.setItem('gd_last_item_title', title.slice(0, 80)); } catch (e) {} }
-    }, true);
-
-    try { if (sessionStorage.getItem('gd_mobar_off') === '1') return; } catch (e) {}
-
-    var closeBtn = bar.querySelector('.gd-mobar-close');
-    if (closeBtn) closeBtn.addEventListener('click', function (ev) {
-        ev.preventDefault();
-        bar.classList.remove('is-visible');
-        document.body.classList.remove('mobar-on');
-        try { sessionStorage.setItem('gd_mobar_off', '1'); } catch (e) {}
-    });
-
-    var hero = document.getElementById('hero');
-    var ticking = false;
-    function update() {
-        ticking = false;
-        var trigger = hero ? hero.getBoundingClientRect().bottom : 320;
-        var past = trigger < 80;
-        // 滚动到卖家招募区后收起，不再打扰最后的 CTA
-        var cta = document.getElementById('seller-cta');
-        var atCta = cta ? cta.getBoundingClientRect().top < window.innerHeight * 0.9 : false;
-        var show = past && !atCta;
-        bar.classList.toggle('is-visible', show);
-        document.body.classList.toggle('mobar-on', show);
-    }
-    function onScroll() {
-        if (ticking) return;
-        ticking = true;
-        requestAnimationFrame(update);
-    }
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll);
-    update();
-})();
 </script>
 </body>
 </html>

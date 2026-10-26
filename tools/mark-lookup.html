@@ -272,28 +272,38 @@ footer{text-align:center;padding:2.2rem 5% 1.8rem;background:var(--color-white);
   <section class="panel" aria-labelledby="lookup-title">
     <h2 id="lookup-title"><span class="zh">① 选择朝代 / 帝王</span><span class="en">① Choose a reign</span></h2>
     <div class="field">
+      <label for="markSearch"><span class="zh">搜索款识文字或年号</span><span class="en">Search mark text or reign</span></label>
+      <input id="markSearch" type="search" autocomplete="off" enterkeyhint="search" placeholder="乾隆 / Xuande / 大明成化年制">
+    </div>
+    <div class="field">
       <label for="markSelect"><span class="zh">朝代 / 帝王年号</span><span class="en">Dynasty / reign era</span></label>
       <select id="markSelect">
-        <option value=""><span class="zh">选择年号…</span><span class="en">Choose an era…</span></option>
+        <option value="">选择年号…</option>
       </select>
-      <span class="field-help"><span class="zh">款识为该朝典型官窑范式；实物常有变体与民窑款。</span><span class="en">Marks shown are typical official-kiln conventions; objects often vary and include folk-kiln marks.</span></span>
+      <span class="field-help"><span class="zh">也可点下方年号或图谱缩略图直达。款识为该朝典型官窑范式；实物常有变体与民窑款。</span><span class="en">Or tap a reign chip / sample photo below. Marks shown are typical official-kiln conventions; objects often vary and include folk-kiln marks.</span></span>
     </div>
+    <div class="era-chips" id="eraChips" role="toolbar" aria-label="Reign shortcuts"></div>
     <div class="result" id="markResult" aria-live="polite" hidden>
       <strong id="markName"></strong>
       <div class="mark-badge" id="markText"></div>
-      <figure class="mark-fig" id="markFig" hidden>
-        <img id="markImg" alt="" loading="lazy">
-        <figcaption id="markFigCap"></figcaption>
-      </figure>
-      <p id="markType"></p>
-      <p id="markColor"></p>
-      <p id="markBrush"></p>
-      <p class="mark-fake" id="markFake"></p>
+      <div class="mark-gallery" id="markGallery" hidden></div>
+      <div class="mark-facts">
+        <p id="markType"></p>
+        <p id="markColor"></p>
+        <p id="markBrush"></p>
+        <p class="mark-fake" id="markFake"></p>
+      </div>
     </div>
   </section>
 
+  <section class="panel atlas-panel" aria-labelledby="atlas-title">
+    <h2 id="atlas-title"><span class="zh">② 标准款识图谱速览</span><span class="en">② Sample mark atlas</span></h2>
+    <p class="atlas-lead"><span class="zh">点击缩略图即可打开对应年号详解。图为鉴赏参照样本，非鉴定证书。</span><span class="en">Tap a thumbnail to open that reign’s notes. Photos are study samples, not certificates of authenticity.</span></p>
+    <div class="atlas-grid" id="atlasGrid"></div>
+  </section>
+
   <section class="panel" aria-labelledby="type-title">
-    <h2 id="type-title"><span class="zh">② 款识形态分类（图谱要点）</span><span class="en">② Mark-type categories</span></h2>
+    <h2 id="type-title"><span class="zh">③ 款识形态分类（图谱要点）</span><span class="en">③ Mark-type categories</span></h2>
     <div class="mark-types">
       <div class="mark-type"><b><span class="zh">六字楷书款</span><span class="en">Six-char regular script</span></b><p><span class="zh">"大清××年制"六字两行或一行，端庄楷书。康熙、雍正朝典型，多为青花釉下。</span><span class="en">"Great Qing ×× era made" — six characters, upright regular script; typical Kangxi/Yongzheng, usually underglaze blue.</span></p></div>
       <div class="mark-type"><b><span class="zh">六字篆书款</span><span class="en">Six-char seal script</span></b><p><span class="zh">六字排成两行三列的篆书印章式，笔画匀净。乾隆朝盛行，笔力匀而板。</span><span class="en">Six characters in seal script arranged two rows of three; Qianlong-era hallmark, even and mechanical strokes.</span></p></div>
@@ -343,17 +353,49 @@ footer{text-align:center;padding:2.2rem 5% 1.8rem;background:var(--color-white);
         .footer-brand { font-weight: 700; font-size: .84rem; color: #5c564f; margin-bottom: .35rem; }
         .footer-disclaimer { max-width: 680px; margin: 0 auto 1.1rem; font-size: .78rem; line-height: 1.65; color: #8a8178; }
         .footer-copyright { margin-bottom: .3rem; }
-        .mark-badge { font-family: Georgia,"Songti SC","STSong",serif; font-size: clamp(2rem,6vw,2.8rem); letter-spacing:.12em; color:#5C3A26; background:#F1E8DF; border:1px solid #E4DED5; border-radius:10px; padding:.7rem 1rem; margin:.9rem 0; text-align:center; }
-        .mark-fig { margin:1rem 0; }
-        .mark-fig img { width:100%; max-width:520px; display:block; margin:0 auto; border-radius:10px; border:1px solid #E4DED5; box-shadow:0 4px 14px rgba(36,31,26,.10); }
-        .mark-fig figcaption { text-align:center; font-size:.8rem; color:#8a8178; margin-top:.45rem; line-height:1.5; }
-        .mark-fake { background:#FBF3EC; border-left:3px solid #9C7A3A; padding:.6rem .8rem; border-radius:0 8px 8px 0; font-size:.9rem; color:#5C564F; margin-top:.6rem; }
+        .mark-badge { font-family: Georgia,"Songti SC","STSong",serif; font-size: clamp(1.7rem,5.4vw,2.5rem); letter-spacing:.14em; color:#5C3A26; background:#fff; border:1px solid #E4DED5; border-radius:10px; padding:.75rem 1rem; margin:.85rem auto 1rem; text-align:center; max-width:28rem; }
+        .mark-gallery { display:grid; grid-template-columns:1fr; gap:.85rem; margin:0 0 1.1rem; }
+        .mark-gallery[hidden]{display:none}
+        .mark-gallery figure { margin:0; background:#fff; border:1px solid #E4DED5; border-radius:12px; overflow:hidden; }
+        .mark-gallery button { display:block; width:100%; padding:0; border:0; background:#f7f3ee; cursor:zoom-in; }
+        .mark-gallery img { width:100%; height:clamp(210px,38vw,360px); object-fit:contain; display:block; background:#f7f3ee; }
+        .mark-gallery figcaption { text-align:left; font-size:.8rem; color:#8a8178; padding:.55rem .8rem .7rem; line-height:1.5; }
+        .mark-facts { text-align:left; }
+        .mark-fake { background:#FBF3EC; border-left:3px solid #9C7A3A; padding:.7rem .85rem; border-radius:0 8px 8px 0; font-size:.9rem; color:#5C564F; margin-top:.7rem; }
         .mark-types { display:grid; grid-template-columns:1fr; gap:.9rem; }
         .mark-type { border:1px solid #E4DED5; border-radius:10px; padding:.8rem 1rem; background:#FCFAF6; }
         .mark-type b { color:#5C3A26; font-size:.95rem; }
         .mark-type p { font-size:.86rem; color:#5C564F; margin-top:.3rem; line-height:1.6; }
-        .result p { margin:.35rem 0; font-size:.92rem; color:#3d3833; }
-        @media(min-width:640px){ .mark-types{ grid-template-columns:1fr 1fr; } }
+        .result { text-align:center; background:#FCFAF7; border:1px solid rgba(156,122,58,.18); scroll-margin-top:88px; }
+        .result p { margin:.45rem 0; font-size:.92rem; color:#3d3833; line-height:1.65; }
+        .era-chips { display:flex; flex-wrap:wrap; gap:.45rem; margin:-.3rem 0 1.1rem; }
+        .era-chip { border:1px solid var(--color-border); background:#fff; color:var(--color-text-secondary); border-radius:999px; padding:.38rem .78rem; min-height:36px; font-size:.82rem; cursor:pointer; transition:all var(--dur) var(--ease); }
+        .era-chip:hover { border-color:var(--color-primary); color:var(--color-primary); background:var(--color-primary-light); }
+        .era-chip.active { background:var(--color-primary); border-color:var(--color-primary); color:#fff; }
+        .era-chip.has-photo { padding-right:.62rem; }
+        .era-chip .dot { display:inline-block; width:6px; height:6px; border-radius:50%; background:#9C7A3A; margin-left:.35rem; vertical-align:middle; }
+        .era-chip.active .dot { background:#fff; }
+        .atlas-lead { font-size:.88rem; color:var(--color-text-secondary); margin:-.4rem 0 1.1rem; line-height:1.6; }
+        .atlas-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:.75rem; }
+        .atlas-card { display:block; width:100%; padding:0; border:1px solid var(--color-border); border-radius:12px; overflow:hidden; background:#fff; cursor:pointer; text-align:left; color:inherit; transition:border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease), transform var(--dur) var(--ease); }
+        .atlas-card:hover { border-color:var(--color-gold); box-shadow:0 8px 20px rgba(36,31,26,.08); text-decoration:none; }
+        .atlas-card.active { border-color:var(--color-primary); box-shadow:0 0 0 2px rgba(122,78,51,.18); }
+        .atlas-card img { width:100%; aspect-ratio:4/3; height:auto; object-fit:contain; display:block; background:#f3eee7; }
+        .atlas-card span { display:block; padding:.55rem .7rem .7rem; font-size:.82rem; line-height:1.45; }
+        .atlas-card b { display:block; color:var(--color-primary-dark); font-size:.9rem; font-weight:600; }
+        .mark-lightbox { position:fixed; inset:0; z-index:12000; display:none; align-items:center; justify-content:center; background:rgba(20,17,14,.86); padding:1.2rem; }
+        .mark-lightbox.open { display:flex; }
+        .mark-lightbox img { max-width:min(920px,94vw); max-height:82vh; object-fit:contain; border-radius:8px; box-shadow:0 18px 50px rgba(0,0,0,.35); }
+        .mark-lightbox p { position:absolute; left:0; right:0; bottom:1.1rem; text-align:center; color:#f4efe8; font-size:.85rem; padding:0 1.2rem; }
+        .mark-lightbox button { position:absolute; top:.6rem; right:.7rem; border:0; background:rgba(255,255,255,.12); color:#fff; width:44px; height:44px; border-radius:50%; font-size:1.4rem; cursor:pointer; }
+        @media(min-width:640px){
+          .mark-types{ grid-template-columns:1fr 1fr; }
+          .atlas-grid{ grid-template-columns:repeat(3,minmax(0,1fr)); }
+          .mark-gallery:has(figure:nth-child(2)){ grid-template-columns:1fr 1fr; }
+        }
+        @media(max-width:600px){
+          .atlas-card img{ aspect-ratio:1/1; }
+        }
         </style>
 
 <footer>
@@ -396,7 +438,7 @@ function gdToast(msg){if(!toastEl){toastEl=document.createElement("div");toastEl
 function gdCopyText(text,done,fail){function legacy(){var ta=document.createElement("textarea");ta.value=text;ta.setAttribute("readonly","");ta.style.cssText="position:fixed;left:-9999px;top:0;opacity:0;";document.body.appendChild(ta);ta.select();if(ta.setSelectionRange)ta.setSelectionRange(0,text.length);var ok=false;try{ok=document.execCommand("copy");}catch(e){}document.body.removeChild(ta);if(ok){done();}else if(fail){fail();}}
 if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(text).then(done,function(){legacy();});}else{legacy();}}
 window.gdShare=function(opts){opts=opts||{};var can=document.querySelector('link[rel="canonical"]');var url=opts.url||(can?can.href:location.href);var lang=(document.body.dataset&&document.body.dataset.lang)||"zh";var title=opts.title||document.title;var text=opts.text||"";if(navigator.share){navigator.share({title:title,text:text,url:url}).then(function(){},function(){});return;}gdCopyText(url,function(){gdToast(lang==="zh"?"链接已复制，去分享给朋友吧":"Link copied — share it with friends");},function(){gdToast(lang==="zh"?"复制失败，请手动复制地址栏链接":"Copy failed — please copy the URL from the address bar");});};})();
-window.gdSharePage=function(){var lang=(document.body.dataset&&document.body.dataset.lang)||"zh";window.gdShare({title:lang==="zh"?"古文化朝代年代速查｜古董圈Gudong.app":"Culture & Dynasty Era Lookup｜Gudong.app",text:lang==="zh"?"红山、良渚到明清的年代区间速查，仅供历史参考。":"Era lookup from Hongshan to the Qing, for historical reference only."});};
+window.gdSharePage=function(){var lang=(document.body.dataset&&document.body.dataset.lang)||"zh";window.gdShare({title:lang==="zh"?"瓷器底款快查｜古董圈 Gudong.app":"Porcelain Mark Lookup｜Gudong.app",text:lang==="zh"?"明清官窑款识图谱：宣德、成化、康熙、雍正、乾隆标准底款对照。":"Ming–Qing official porcelain marks: Xuande, Chenghua, Kangxi, Yongzheng and Qianlong samples."});};
 </script>
 
 <!-- PWA 安装引导弹层 -->
@@ -510,102 +552,264 @@ document.getElementById('gdStepsOther').style.display=isIOS?'none':'';
 modal.classList.add('open');});})();
 </script>
 
-<!-- 年代速查核心逻辑 -->
+<div class="mark-lightbox" id="markLightbox" role="dialog" aria-modal="true">
+  <button type="button" id="markLightboxClose" aria-label="Close">×</button>
+  <img id="markLightboxImg" alt="">
+  <p id="markLightboxCap"></p>
+</div>
+
+<!-- 底款快查核心逻辑 -->
 <script>
 (function(){
 'use strict';
 var MARKS=[
 {id:'ming-yongle',group:'ming',zh:'永乐',en:'Yongle',years:'1403–1424',mark:'永乐年制',type:{zh:'四字篆书款（早期官窑）',en:'Four-char seal script (early official)'},color:{zh:'多为青花釉下，浓艳带铁锈斑',en:'Underglaze blue, deep with iron spots'},brush:{zh:'篆书笔法古拙，四字竖排少',en:'Archaic seal script, four chars rarely one column'},fake:{zh:'后世多寄托永乐款，胎釉青花风格对不上是重点',en:'Often apocryphal; mismatch of body/glaze/blue is key'}},
-{id:'ming-xuande',group:'ming',zh:'宣德',en:'Xuande',years:'1426–1435',mark:'大明宣德年制',img:'../images/marks/xuande.jpg',caption:{zh:'青花双圈六字楷书款·大明宣德年制（标准参照）',en:'Underglaze-blue double-circle six-char regular-script mark — Xuande (reference sample)'},type:{zh:'六字楷书/篆书款',en:'Six-char regular or seal script'},color:{zh:'青花釉下居多，苏麻离青浓艳',en:'Underglaze blue; sumali cobalt, rich'},brush:{zh:'楷书苍劲，"德"字心上少一横为常见特征',en:'Bold regular script; de often missing inner stroke'},fake:{zh:'宣德款被明清大量寄托仿造，款字易仿、胎釉难仿',en:'Heavily apocryphally copied; script easy, glaze hard'}},
-{id:'ming-chenghua',group:'ming',zh:'成化',en:'Chenghua',years:'1465–1487',mark:'大明成化年制',type:{zh:'六字楷书款（端秀）',en:'Six-char regular script (elegant)'},color:{zh:'青花淡雅平等青，斗彩款也常见',en:'Soft blue; also on doucai'},brush:{zh:'楷书圆润端秀，圈款外多双圈',en:'Rounded neat script, often within double circles'},fake:{zh:'成化斗彩名气大后仿极多，重点看彩料与胎质',en:'Much faked (doucai fame); check colors and body'}},
+{id:'ming-xuande',group:'ming',zh:'宣德',en:'Xuande',years:'1426–1435',mark:'大明宣德年制',photos:[{src:'../images/marks/xuande.jpg',caption:{zh:'青花双圈六字楷书款「大明宣德年制」·标准参照',en:'Underglaze-blue double-circle six-char regular-script mark “Da Ming Xuande nian zhi”'}}],type:{zh:'六字楷书 / 篆书款',en:'Six-char regular or seal script'},color:{zh:'青花釉下居多，苏麻离青浓艳',en:'Underglaze blue; sumali cobalt, rich'},brush:{zh:'楷书苍劲，「德」字心上常少一横',en:'Bold regular script; de often missing the inner stroke'},fake:{zh:'宣德款被明清大量寄托仿造，款字易仿、胎釉难仿',en:'Heavily apocryphally copied; script is easy, body and glaze are not'}},
+{id:'ming-chenghua',group:'ming',zh:'成化',en:'Chenghua',years:'1465–1487',mark:'大明成化年制',photos:[{src:'../images/marks/chenghua.jpg',caption:{zh:'斗彩器底青花双圈六字楷书款「大明成化年制」·标准参照',en:'Doucai dish: underglaze-blue double-circle six-char regular-script mark “Da Ming Chenghua nian zhi”'}}],type:{zh:'六字楷书款（端秀）',en:'Six-char regular script (elegant)'},color:{zh:'青花淡雅平等青，斗彩款也常见',en:'Soft pale blue; also common on doucai'},brush:{zh:'楷书圆润端秀，圈外多双圈，六字两行',en:'Rounded, neat script, usually two columns inside double circles'},fake:{zh:'成化斗彩名气大后仿极多，重点看彩料与胎质',en:'Much faked after doucai fame; check enamel and body, not the mark'}},
 {id:'ming-jiajing',group:'ming',zh:'嘉靖',en:'Jiajing',years:'1522–1566',mark:'大明嘉靖年制',type:{zh:'六字楷书款',en:'Six-char regular script'},color:{zh:'青花回青浓翠，也有矾红彩款',en:'Strong huiqing blue; also iron-red marks'},brush:{zh:'楷书瘦硬，笔法开张',en:'Slender, open regular script'},fake:{zh:'款字硬挺但胎釉较粗，仿品常只见款',en:'Script stiff; body coarser — fakes often show only a mark'}},
 {id:'ming-wanli',group:'ming',zh:'万历',en:'Wanli',years:'1573–1620',mark:'大明万历年制',type:{zh:'六字楷书款',en:'Six-char regular script'},color:{zh:'青花发色趋灰，民窑款增多',en:'Bluish-grey; more folk-kiln marks'},brush:{zh:'楷书略拘谨，早晚期差异大',en:'Tighter script; varies early vs late'},fake:{zh:'晚明民窑花押款多，纪年款真伪需结合器型',en:'Late Ming emblems common; date by form, not mark'}},
-{id:'qing-shunzhi',group:'qing',zh:'顺治',en:'Shunzhi',years:'1644–1661',mark:'大清顺治年制',type:{zh:'六字楷书款（过渡期少见）',en:'Six-char regular (rare, transitional)'},color:{zh:'青花呈明末遗风，灰蓝',en:'Blue still Ming-style, greyish'},brush:{zh:'楷书尚朴拙，多过渡民窑款',en:'Naive regular script; mostly transitional folk'},fake:{zh:'顺治官窑极少，多见寄托"大明"款',en:'Rare official; mostly Ming apocryphal marks'}},
-{id:'qing-kangxi',group:'qing',zh:'康熙',en:'Kangxi',years:'1662–1722',mark:'大清康熙年制',img:'../images/marks/kangxi.jpg',caption:{zh:'红釉器青花六字楷书款·大清康熙年制（标准参照）',en:'Underglaze-blue six-char regular-script mark on red glaze — Kangxi (reference sample)'},type:{zh:'六字楷书款（典型）',en:'Six-char regular script (hallmark)'},color:{zh:'青花翠毛蓝鲜亮，釉下为主',en:'Bright emerald underglaze blue'},brush:{zh:'楷书刚劲挺拔，六字两行，常双圈',en:'Strong upright script, two rows, double circles'},fake:{zh:'康熙款被大量仿，款字易板滞，看青花层次',en:'Much copied; script stiffens, check blue gradation'}},
-{id:'qing-yongzheng',group:'qing',zh:'雍正',en:'Yongzheng',years:'1723–1735',mark:'大清雍正年制',img:'../images/marks/yongzheng.jpg',caption:{zh:'粉青釉青花六字篆书款·大清雍正年制（标准参照）',en:'Underglaze-blue six-char seal-script mark on celadon glaze — Yongzheng (reference sample)'},type:{zh:'六字楷书款（精整）',en:'Six-char regular script (refined)'},color:{zh:'青花淡雅，粉彩款亦多',en:'Soft blue; also famille rose'},brush:{zh:'楷书工整秀丽，六字一行或两行',en:'Neat, refined script'},fake:{zh:'雍正款仿品多见，款精而胎釉浮则可疑',en:'Often faked; refined mark over flimsy glaze is suspect'}},
-{id:'qing-qianlong',group:'qing',zh:'乾隆',en:'Qianlong',years:'1736–1795',mark:'大清乾隆年制',img:'../images/marks/qianlong.jpg',caption:{zh:'青花六字篆书款·大清乾隆年制（标准参照）',en:'Underglaze-blue six-char seal-script mark — Qianlong (reference sample)'},type:{zh:'六字篆书款（印章式）',en:'Six-char seal script (stamp style)'},color:{zh:'青花釉下、矾红、描金款并存',en:'Underglaze blue, iron-red, gilt marks'},brush:{zh:'篆书笔画匀净板正，三列两行，笔力匀',en:'Even mechanical seal script, 2x3 grid'},fake:{zh:'篆书易写得匀而无骨，真款有轻重起伏',en:'Seal fakes look uniform; real strokes vary in weight'}},
-{id:'qing-jiaqing',group:'qing',zh:'嘉庆',en:'Jiaqing',years:'1796–1820',mark:'大清嘉庆年制',type:{zh:'六字篆书款',en:'Six-char seal script'},color:{zh:'青花发色趋灰暗',en:'Blue dulls to grey'},brush:{zh:'篆书较乾隆软，结构略散',en:'Softer seal script, looser structure'},fake:{zh:'嘉庆器渐粗，款精而器粗为仿',en:'Quality declines; refined mark on coarse ware is suspect'}},
-{id:'qing-daoguang',group:'qing',zh:'道光',en:'Daoguang',years:'1821–1850',mark:'大清道光年制',type:{zh:'六字篆书款',en:'Six-char seal script'},color:{zh:'青花灰蓝，多粉彩',en:'Greyish blue; much famille rose'},brush:{zh:'篆书拘谨，力度不足',en:'Tight, weaker seal script'},fake:{zh:'道光盘款多，后仿常见，看釉面与彩料老化',en:'Often copied; check glaze and color ageing'}}
+{id:'qing-shunzhi',group:'qing',zh:'顺治',en:'Shunzhi',years:'1644–1661',mark:'大清顺治年制',type:{zh:'六字楷书款（过渡期少见）',en:'Six-char regular (rare, transitional)'},color:{zh:'青花呈明末遗风，灰蓝',en:'Blue still Ming-style, greyish'},brush:{zh:'楷书尚朴拙，多过渡民窑款',en:'Naive regular script; mostly transitional folk'},fake:{zh:'顺治官窑极少，多见寄托「大明」款',en:'Rare official; mostly Ming apocryphal marks'}},
+{id:'qing-kangxi',group:'qing',zh:'康熙',en:'Kangxi',years:'1662–1722',mark:'大清康熙年制',photos:[{src:'../images/marks/kangxi.jpg',caption:{zh:'郎红釉器底青花六字三行楷书款「大清康熙年制」·标准参照',en:'Langyao-red base: underglaze-blue six-char regular script in three columns “Da Qing Kangxi nian zhi”'}}],type:{zh:'六字楷书款（典型）',en:'Six-char regular script (hallmark)'},color:{zh:'青花翠毛蓝鲜亮，釉下为主',en:'Bright emerald underglaze blue'},brush:{zh:'楷书刚劲挺拔，六字两行或三行，常双圈',en:'Strong upright script in two or three columns, often double-circled'},fake:{zh:'康熙款被大量仿，款字易板滞，看青花层次',en:'Much copied; script stiffens — check the blue gradation'}},
+{id:'qing-yongzheng',group:'qing',zh:'雍正',en:'Yongzheng',years:'1723–1735',mark:'大清雍正年制',photos:[{src:'../images/marks/yongzheng.jpg',caption:{zh:'粉青釉器底青花六字篆书款「大清雍正年制」·标准参照',en:'Celadon base: underglaze-blue six-char seal-script mark “Da Qing Yongzheng nian zhi”'}}],type:{zh:'六字楷书与六字篆书款并存',en:'Six-char regular and seal-script marks'},color:{zh:'青花淡雅，粉彩款亦多',en:'Soft blue; also famille rose'},brush:{zh:'楷书工整秀丽；篆书较乾隆更细挺',en:'Neat regular script; seal script slimmer than Qianlong'},fake:{zh:'雍正款仿品多见，款精而胎釉浮则可疑',en:'Often faked; a refined mark over a flimsy glaze is suspect'}},
+{id:'qing-qianlong',group:'qing',zh:'乾隆',en:'Qianlong',years:'1736–1795',mark:'大清乾隆年制',photos:[{src:'../images/marks/qianlong.jpg',caption:{zh:'青花六字篆书款「大清乾隆年制」·印章式三列两行',en:'Underglaze-blue six-char seal-script mark “Da Qing Qianlong nian zhi”, 2×3 stamp layout'}},{src:'../images/marks/qianlong2.jpg',caption:{zh:'青花四字篆书款「乾隆年制」·同朝常见变体',en:'Underglaze-blue four-char seal-script mark “Qianlong nian zhi”, a common variant of the same reign'}}],type:{zh:'六字篆书款（印章式），兼见四字篆书款',en:'Six-char seal script (stamp style); four-char seal also common'},color:{zh:'青花釉下、矾红、描金款并存',en:'Underglaze blue, iron-red, gilt marks'},brush:{zh:'篆书笔画匀净板正，三列两行；四字款更紧凑',en:'Even mechanical seal script in a 2×3 grid; four-char marks sit tighter'},fake:{zh:'篆书易写得匀而无骨，真款有轻重起伏',en:'Seal fakes look uniformly thin; genuine strokes vary in weight'}},
+{id:'qing-jiaqing',group:'qing',zh:'嘉庆',en:'Jiaqing',years:'1796–1820',mark:'大清嘉庆年制',type:{zh:'六字篆书款',en:'Six-char seal script'},color:{zh:'青花发色趋灰暗',en:'Blue dulls to grey'},brush:{zh:'篆书较乾隆软，结构略散',en:'Softer seal script, looser structure'},fake:{zh:'嘉庆器渐粗，款精而器粗为仿',en:'Quality declines; a refined mark on coarse ware is suspect'}},
+{id:'qing-daoguang',group:'qing',zh:'道光',en:'Daoguang',years:'1821–1850',mark:'大清道光年制',type:{zh:'六字篆书款',en:'Six-char seal script'},color:{zh:'青花灰蓝，多粉彩',en:'Greyish blue; much famille rose'},brush:{zh:'篆书拘谨，力度不足',en:'Tight, weaker seal script'},fake:{zh:'道光盘款多，后仿常见，看釉面与彩料老化',en:'Often copied; check glaze and enamel ageing'}}
 ];
 var body=document.body;
-var markSelect=document.getElementById('markSelect'),markResult=document.getElementById('markResult'),
-markName=document.getElementById('markName'),markText=document.getElementById('markText'),
-markType=document.getElementById('markType'),markColor=document.getElementById('markColor'),
-markBrush=document.getElementById('markBrush'),markFake=document.getElementById('markFake');
+var markSelect=document.getElementById('markSelect');
+var markSearch=document.getElementById('markSearch');
+var markResult=document.getElementById('markResult');
+var markName=document.getElementById('markName');
+var markText=document.getElementById('markText');
+var markGallery=document.getElementById('markGallery');
+var markType=document.getElementById('markType');
+var markColor=document.getElementById('markColor');
+var markBrush=document.getElementById('markBrush');
+var markFake=document.getElementById('markFake');
+var eraChips=document.getElementById('eraChips');
+var atlasGrid=document.getElementById('atlasGrid');
+var lightbox=document.getElementById('markLightbox');
+var lightboxImg=document.getElementById('markLightboxImg');
+var lightboxCap=document.getElementById('markLightboxCap');
+var GROUPS={ming:{zh:'明代官窑',en:'Ming official kilns'},qing:{zh:'清代官窑',en:'Qing official kilns'}};
+var ORDER=['ming','qing'];
 
 function lang(){return (body.dataset.lang==='en')?'en':'zh';}
+function byId(id){for(var i=0;i<MARKS.length;i++){if(MARKS[i].id===id)return MARKS[i];}return null;}
+function markPhotos(m){return (m&&m.photos)||[];}
+function labelOf(m){return m.zh+' · '+m.en+'（'+m.years+'）';}
 
-(function buildOptions(){
-  var groups={ming:{zh:'明代官窑',en:'Ming official kilns'},qing:{zh:'清代官窑',en:'Qing official kilns'}};
-  var order=['ming','qing'];
-  var frag=document.createDocumentFragment();
-  order.forEach(function(key){
+function openLightbox(src,cap,alt){
+  lightboxImg.src=src;
+  lightboxImg.alt=alt||'';
+  lightboxCap.textContent=cap||'';
+  lightbox.classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeLightbox(){
+  lightbox.classList.remove('open');
+  lightboxImg.removeAttribute('src');
+  document.body.style.overflow='';
+}
+
+function buildOptions(){
+  while(markSelect.options.length>1){markSelect.remove(1);}
+  var L=lang();
+  markSelect.options[0].textContent=L==='zh'?'选择年号…':'Choose an era…';
+  ORDER.forEach(function(key){
     var list=MARKS.filter(function(e){return e.group===key;});
     if(!list.length)return;
     var og=document.createElement('optgroup');
-    og.label=groups[key].zh+' · '+groups[key].en;
+    og.label=GROUPS[key].zh+' · '+GROUPS[key].en;
     list.forEach(function(e){
       var opt=document.createElement('option');
       opt.value=e.id;
-      opt.textContent=e.zh+' · '+e.en+'（'+e.years+'）';
+      opt.textContent=labelOf(e);
       og.appendChild(opt);
     });
-    frag.appendChild(og);
+    markSelect.appendChild(og);
   });
-  markSelect.appendChild(frag);
-})();
+}
+
+function buildChips(){
+  eraChips.innerHTML='';
+  MARKS.forEach(function(m){
+    var btn=document.createElement('button');
+    btn.type='button';
+    btn.className='era-chip'+(markPhotos(m).length?' has-photo':'');
+    btn.dataset.id=m.id;
+    btn.setAttribute('aria-pressed','false');
+    var L=lang();
+    btn.textContent=L==='zh'?m.zh:m.en;
+    if(markPhotos(m).length){
+      var dot=document.createElement('span');
+      dot.className='dot';
+      dot.setAttribute('aria-hidden','true');
+      btn.appendChild(dot);
+    }
+    btn.addEventListener('click',function(){selectMark(m.id,true);});
+    eraChips.appendChild(btn);
+  });
+}
+
+function buildAtlas(){
+  atlasGrid.innerHTML='';
+  var L=lang();
+  MARKS.forEach(function(m){
+    markPhotos(m).forEach(function(p,idx){
+      var card=document.createElement('button');
+      card.type='button';
+      card.className='atlas-card';
+      card.dataset.id=m.id;
+      var img=document.createElement('img');
+      img.src=p.src;
+      img.alt=(L==='zh'?m.zh:m.en)+' '+(p.caption&&p.caption[L]?p.caption[L]:m.mark);
+      img.loading='lazy';
+      img.decoding='async';
+      var cap=document.createElement('span');
+      var title=document.createElement('b');
+      title.textContent=(L==='zh'?m.zh:m.en)+' '+m.years;
+      cap.appendChild(title);
+      cap.appendChild(document.createTextNode(p.caption&&p.caption[L]?p.caption[L]:m.mark));
+      card.appendChild(img);
+      card.appendChild(cap);
+      card.addEventListener('click',function(){selectMark(m.id,true);});
+      atlasGrid.appendChild(card);
+    });
+  });
+}
+
+function syncActive(id){
+  Array.prototype.forEach.call(eraChips.querySelectorAll('.era-chip'),function(btn){
+    var on=btn.dataset.id===id;
+    btn.classList.toggle('active',on);
+    btn.setAttribute('aria-pressed',on?'true':'false');
+  });
+  Array.prototype.forEach.call(atlasGrid.querySelectorAll('.atlas-card'),function(card){
+    card.classList.toggle('active',card.dataset.id===id);
+  });
+}
+
+function renderGallery(m){
+  var L=lang();
+  var list=markPhotos(m);
+  markGallery.innerHTML='';
+  if(!list.length){markGallery.hidden=true;return;}
+  markGallery.hidden=false;
+  list.forEach(function(p){
+    var fig=document.createElement('figure');
+    var btn=document.createElement('button');
+    btn.type='button';
+    var img=document.createElement('img');
+    img.src=p.src;
+    img.alt=(L==='zh'?m.zh:m.en)+' '+(p.caption&&p.caption[L]?p.caption[L]:m.mark);
+    img.loading='lazy';
+    img.decoding='async';
+    btn.appendChild(img);
+    var capText=p.caption&&p.caption[L]?p.caption[L]:'';
+    btn.setAttribute('aria-label',(L==='zh'?'放大查看：':'View larger: ')+(capText||m.mark));
+    btn.addEventListener('click',function(){openLightbox(p.src,capText,img.alt);});
+    var fc=document.createElement('figcaption');
+    fc.textContent=capText;
+    fig.appendChild(btn);
+    fig.appendChild(fc);
+    markGallery.appendChild(fig);
+  });
+}
 
 function renderMark(m){
   var L=lang();
   markResult.hidden=false;
   markName.textContent=(L==='zh'?m.zh:m.en)+'（'+m.years+'）';
   markText.textContent=m.mark;
-  markType.textContent=(L==='zh'?'款识形态：':'Mark type：')+m.type[L];
-  markColor.textContent=(L==='zh'?'常见发色 / 釉性：':'Typical color & glaze：')+m.color[L];
-  markBrush.textContent=(L==='zh'?'书法要点：':'Calligraphy note：')+m.brush[L];
-  markFake.textContent=(L==='zh'?'避坑提示：':'Forgery tip：')+m.fake[L];
-  if(m.img){
-    markFig.hidden=false;
-    markImg.src=m.img;
-    markImg.alt=(L==='zh'?m.zh:m.en)+'官窑标准款识';
-    markFigCap.textContent=(m.caption&&m.caption[L])?m.caption[L]:'';
-  }else{
-    markFig.hidden=true;
-    markImg.removeAttribute('src');
-  }
+  markType.textContent=(L==='zh'?'款识形态：':'Mark type: ')+m.type[L];
+  markColor.textContent=(L==='zh'?'常见发色 / 釉性：':'Typical color & glaze: ')+m.color[L];
+  markBrush.textContent=(L==='zh'?'书法要点：':'Calligraphy note: ')+m.brush[L];
+  markFake.textContent=(L==='zh'?'避坑提示：':'Forgery tip: ')+m.fake[L];
+  renderGallery(m);
+  syncActive(m.id);
 }
 
-function rebuildSelectLabels(){
-  var groups={ming:{zh:'明代官窑',en:'Ming official kilns'},qing:{zh:'清代官窑',en:'Qing official kilns'}};
-  var order=['ming','qing'];
-  var ogList=markSelect.querySelectorAll('optgroup');
-  var i=0;
-  order.forEach(function(key){
-    var list=MARKS.filter(function(e){return e.group===key;});
-    if(!list.length||!ogList[i]){return;}
-    ogList[i].label=groups[key].zh+' · '+groups[key].en;
-    var opts=ogList[i].querySelectorAll('option');
-    list.forEach(function(e,j){ if(opts[j]){opts[j].textContent=e.zh+' · '+e.en+'（'+e.years+'）';} });
-    i++;
+function selectMark(id,scroll){
+  var m=byId(id);
+  if(!m){
+    markSelect.value='';
+    markResult.hidden=true;
+    syncActive('');
+    if(history.replaceState){history.replaceState(null,'',location.pathname+location.search);}
+    return;
+  }
+  markSelect.value=id;
+  renderMark(m);
+  if(history.replaceState){history.replaceState(null,'',location.pathname+location.search+'#'+id);}
+  else{location.hash=id;}
+  if(scroll){markResult.scrollIntoView({behavior:'smooth',block:'start'});}
+}
+
+function applySearchFilter(){
+  var q=(markSearch.value||'').trim().toLowerCase();
+  var L=lang();
+  Array.prototype.forEach.call(eraChips.querySelectorAll('.era-chip'),function(btn){
+    var m=byId(btn.dataset.id);
+    if(!m){return;}
+    var hay=[m.zh,m.en,m.mark,m.years,m.id].join(' ').toLowerCase();
+    btn.style.display=!q||hay.indexOf(q)!==-1?'':'none';
   });
-  var placeholder=markSelect.querySelector('option[value=""]');
-  if(placeholder){placeholder.textContent=lang()==='zh'?'选择年号…':'Choose an era…';}
+  Array.prototype.forEach.call(atlasGrid.querySelectorAll('.atlas-card'),function(card){
+    var m=byId(card.dataset.id);
+    if(!m){return;}
+    var extra='';
+    markPhotos(m).forEach(function(p){if(p.caption)extra+=' '+(p.caption.zh||'')+' '+(p.caption.en||'');});
+    var hay=[m.zh,m.en,m.mark,m.years,extra].join(' ').toLowerCase();
+    card.style.display=!q||hay.indexOf(q)!==-1?'':'none';
+  });
+  Array.prototype.forEach.call(markSelect.querySelectorAll('option'),function(opt){
+    if(!opt.value){return;}
+    var m=byId(opt.value);
+    if(!m){return;}
+    var hay=[m.zh,m.en,m.mark,m.years].join(' ').toLowerCase();
+    opt.disabled=!(!q||hay.indexOf(q)!==-1);
+    opt.hidden=opt.disabled;
+  });
+  markSearch.placeholder=L==='zh'?'如：乾隆、Xuande、大明成化年制':'e.g. Qianlong, 宣德, Da Ming Chenghua';
 }
 
-window.onLangChanged=function(){
-  rebuildSelectLabels();
-  if(!markResult.hidden&&markSelect.value){
-    var cur=MARKS.filter(function(e){return e.id===markSelect.value;})[0];
-    if(cur){renderMark(cur);}
+function refreshChrome(){
+  buildOptions();
+  buildChips();
+  buildAtlas();
+  applySearchFilter();
+  if(markSelect.value){
+    var cur=byId(markSelect.value);
+    if(cur){renderMark(cur);markSelect.value=cur.id;}
   }
-};
+}
+
+buildOptions();
+buildChips();
+buildAtlas();
+applySearchFilter();
 
 markSelect.addEventListener('change',function(){
-  var id=markSelect.value;
-  if(!id){markResult.hidden=true;return;}
-  var m=MARKS.filter(function(e){return e.id===id;})[0];
-  if(m){renderMark(m);}
+  selectMark(markSelect.value,false);
 });
+markSearch.addEventListener('input',applySearchFilter);
+document.getElementById('markLightboxClose').addEventListener('click',closeLightbox);
+lightbox.addEventListener('click',function(e){if(e.target===lightbox)closeLightbox();});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeLightbox();});
+
+window.onLangChanged=function(){
+  var keep=markSelect.value;
+  refreshChrome();
+  if(keep){markSelect.value=keep;var cur=byId(keep);if(cur)renderMark(cur);}
+};
+
+function applyHash(){
+  var id=decodeURIComponent((location.hash||'').replace(/^#/,''));
+  if(byId(id)){selectMark(id,false);}
+}
+window.addEventListener('hashchange',applyHash);
+applyHash();
 })();
 
 </script>
@@ -708,7 +912,8 @@ markSelect.addEventListener('change',function(){
 window.gdSharePage = function () {
     var lang = (document.body.dataset && document.body.dataset.lang) || "zh";
     window.gdShare({
-        text: lang === "zh" ? "来自古董圈 Gudong.app 的精选内容" : "From Gudong.app — Singapore antiques"
+        title: lang === "zh" ? "瓷器底款快查｜古董圈 Gudong.app" : "Porcelain Mark Lookup｜Gudong.app",
+        text: lang === "zh" ? "明清官窑款识图谱：宣德、成化、康熙、雍正、乾隆标准底款对照。" : "Ming–Qing official porcelain marks: Xuande, Chenghua, Kangxi, Yongzheng and Qianlong samples."
     });
 };
 </script>

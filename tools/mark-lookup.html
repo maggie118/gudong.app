@@ -273,6 +273,7 @@ footer{text-align:center;padding:2.2rem 5% 1.8rem;background:var(--color-white);
     <div class="field">
       <label for="markSearch"><span class="zh">搜索款识文字或年号</span><span class="en">Search mark text or reign</span></label>
       <input id="markSearch" type="search" autocomplete="off" enterkeyhint="search" placeholder="乾隆 / Xuande / 大明成化年制">
+      <span class="field-help search-status" id="markSearchStatus" aria-live="polite"></span>
     </div>
     <div class="field">
       <label for="markSelect"><span class="zh">朝代 / 帝王年号</span><span class="en">Dynasty / reign era</span></label>
@@ -375,9 +376,11 @@ footer{text-align:center;padding:2.2rem 5% 1.8rem;background:var(--color-white);
         .era-chip .dot { display:inline-block; width:6px; height:6px; border-radius:50%; background:#9C7A3A; margin-left:.35rem; vertical-align:middle; }
         .era-chip.active .dot { background:#fff; }
         .atlas-lead { font-size:.88rem; color:var(--color-text-secondary); margin:-.4rem 0 1.1rem; line-height:1.6; }
+        .search-status { min-height:1.3em; }
         .atlas-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:.75rem; }
         .atlas-card { display:block; width:100%; padding:0; border:1px solid var(--color-border); border-radius:12px; overflow:hidden; background:#fff; cursor:pointer; text-align:left; color:inherit; transition:border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease), transform var(--dur) var(--ease); }
         .atlas-card:hover { border-color:var(--color-gold); box-shadow:0 8px 20px rgba(36,31,26,.08); text-decoration:none; }
+        .atlas-card:focus-visible,.era-chip:focus-visible,.mark-gallery button:focus-visible { outline:3px solid rgba(156,122,58,.55); outline-offset:2px; }
         .atlas-card.active { border-color:var(--color-primary); box-shadow:0 0 0 2px rgba(122,78,51,.18); }
         .atlas-card img { width:100%; aspect-ratio:4/3; height:auto; object-fit:contain; display:block; background:#f3eee7; }
         .atlas-card span { display:block; padding:.55rem .7rem .7rem; font-size:.82rem; line-height:1.45; }
@@ -563,21 +566,22 @@ modal.classList.add('open');});})();
 (function(){
 'use strict';
 var MARKS=[
-{id:'ming-yongle',group:'ming',zh:'永乐',en:'Yongle',years:'1403–1424',mark:'永乐年制',type:{zh:'四字篆书款（早期官窑）',en:'Four-char seal script (early official)'},color:{zh:'多为青花釉下，浓艳带铁锈斑',en:'Underglaze blue, deep with iron spots'},brush:{zh:'篆书笔法古拙，四字竖排少',en:'Archaic seal script, four chars rarely one column'},fake:{zh:'后世多寄托永乐款，胎釉青花风格对不上是重点',en:'Often apocryphal; mismatch of body/glaze/blue is key'}},
+{id:'ming-yongle',group:'ming',zh:'永乐',en:'Yongle',years:'1403–1424',mark:'永乐年制',photos:[{src:'../images/marks/yongle.jpg',caption:{zh:'「永乐年制」款识实物参照',en:'Yongle nian zhi mark sample'}},{src:'../images/marks/yongle2.jpg',caption:{zh:'永乐款识另一实物参照',en:'A second Yongle mark sample'}}],type:{zh:'四字篆书款（早期官窑）',en:'Four-char seal script (early official)'},color:{zh:'多为青花釉下，浓艳带铁锈斑',en:'Underglaze blue, deep with iron spots'},brush:{zh:'篆书笔法古拙，四字竖排少',en:'Archaic seal script, four chars rarely one column'},fake:{zh:'后世多寄托永乐款，胎釉青花风格对不上是重点',en:'Often apocryphal; mismatch of body/glaze/blue is key'}},
 {id:'ming-xuande',group:'ming',zh:'宣德',en:'Xuande',years:'1426–1435',mark:'大明宣德年制',photos:[{src:'../images/marks/xuande.jpg',caption:{zh:'青花双圈六字楷书款「大明宣德年制」·标准参照',en:'Underglaze-blue double-circle six-char regular-script mark “Da Ming Xuande nian zhi”'}}],type:{zh:'六字楷书 / 篆书款',en:'Six-char regular or seal script'},color:{zh:'青花釉下居多，苏麻离青浓艳',en:'Underglaze blue; sumali cobalt, rich'},brush:{zh:'楷书苍劲，「德」字心上常少一横',en:'Bold regular script; de often missing the inner stroke'},fake:{zh:'宣德款被明清大量寄托仿造，款字易仿、胎釉难仿',en:'Heavily apocryphally copied; script is easy, body and glaze are not'}},
 {id:'ming-chenghua',group:'ming',zh:'成化',en:'Chenghua',years:'1465–1487',mark:'大明成化年制',photos:[{src:'../images/marks/chenghua.jpg',caption:{zh:'斗彩器底青花双圈六字楷书款「大明成化年制」·标准参照',en:'Doucai dish: underglaze-blue double-circle six-char regular-script mark “Da Ming Chenghua nian zhi”'}}],type:{zh:'六字楷书款（端秀）',en:'Six-char regular script (elegant)'},color:{zh:'青花淡雅平等青，斗彩款也常见',en:'Soft pale blue; also common on doucai'},brush:{zh:'楷书圆润端秀，圈外多双圈，六字两行',en:'Rounded, neat script, usually two columns inside double circles'},fake:{zh:'成化斗彩名气大后仿极多，重点看彩料与胎质',en:'Much faked after doucai fame; check enamel and body, not the mark'}},
-{id:'ming-jiajing',group:'ming',zh:'嘉靖',en:'Jiajing',years:'1522–1566',mark:'大明嘉靖年制',type:{zh:'六字楷书款',en:'Six-char regular script'},color:{zh:'青花回青浓翠，也有矾红彩款',en:'Strong huiqing blue; also iron-red marks'},brush:{zh:'楷书瘦硬，笔法开张',en:'Slender, open regular script'},fake:{zh:'款字硬挺但胎釉较粗，仿品常只见款',en:'Script stiff; body coarser — fakes often show only a mark'}},
-{id:'ming-wanli',group:'ming',zh:'万历',en:'Wanli',years:'1573–1620',mark:'大明万历年制',type:{zh:'六字楷书款',en:'Six-char regular script'},color:{zh:'青花发色趋灰，民窑款增多',en:'Bluish-grey; more folk-kiln marks'},brush:{zh:'楷书略拘谨，早晚期差异大',en:'Tighter script; varies early vs late'},fake:{zh:'晚明民窑花押款多，纪年款真伪需结合器型',en:'Late Ming emblems common; date by form, not mark'}},
-{id:'qing-shunzhi',group:'qing',zh:'顺治',en:'Shunzhi',years:'1644–1661',mark:'大清顺治年制',type:{zh:'六字楷书款（过渡期少见）',en:'Six-char regular (rare, transitional)'},color:{zh:'青花呈明末遗风，灰蓝',en:'Blue still Ming-style, greyish'},brush:{zh:'楷书尚朴拙，多过渡民窑款',en:'Naive regular script; mostly transitional folk'},fake:{zh:'顺治官窑极少，多见寄托「大明」款',en:'Rare official; mostly Ming apocryphal marks'}},
+{id:'ming-jiajing',group:'ming',zh:'嘉靖',en:'Jiajing',years:'1522–1566',mark:'大明嘉靖年制',photos:[{src:'../images/marks/jiajing.jpg',caption:{zh:'「大明嘉靖年制」款识实物参照',en:'Da Ming Jiajing nian zhi mark sample'}}],type:{zh:'六字楷书款',en:'Six-char regular script'},color:{zh:'青花回青浓翠，也有矾红彩款',en:'Strong huiqing blue; also iron-red marks'},brush:{zh:'楷书瘦硬，笔法开张',en:'Slender, open regular script'},fake:{zh:'款字硬挺但胎釉较粗，仿品常只见款',en:'Script stiff; body coarser — fakes often show only a mark'}},
+{id:'ming-wanli',group:'ming',zh:'万历',en:'Wanli',years:'1573–1620',mark:'大明万历年制',photos:[{src:'../images/marks/wanli_gudong.jpg',caption:{zh:'「大明万历年制」款识实物参照',en:'Da Ming Wanli nian zhi mark sample'}}],type:{zh:'六字楷书款',en:'Six-char regular script'},color:{zh:'青花发色趋灰，民窑款增多',en:'Bluish-grey; more folk-kiln marks'},brush:{zh:'楷书略拘谨，早晚期差异大',en:'Tighter script; varies early vs late'},fake:{zh:'晚明民窑花押款多，纪年款真伪需结合器型',en:'Late Ming emblems common; date by form, not mark'}},
+{id:'qing-shunzhi',group:'qing',zh:'顺治',en:'Shunzhi',years:'1644–1661',mark:'大清顺治年制',photos:[{src:'../images/marks/shunzhi.jpg',caption:{zh:'「大清顺治年制」款识实物参照',en:'Da Qing Shunzhi nian zhi mark sample'}}],type:{zh:'六字楷书款（过渡期少见）',en:'Six-char regular (rare, transitional)'},color:{zh:'青花呈明末遗风，灰蓝',en:'Blue still Ming-style, greyish'},brush:{zh:'楷书尚朴拙，多过渡民窑款',en:'Naive regular script; mostly transitional folk'},fake:{zh:'顺治官窑极少，多见寄托「大明」款',en:'Rare official; mostly Ming apocryphal marks'}},
 {id:'qing-kangxi',group:'qing',zh:'康熙',en:'Kangxi',years:'1662–1722',mark:'大清康熙年制',photos:[{src:'../images/marks/kangxi.jpg',caption:{zh:'郎红釉器底青花六字三行楷书款「大清康熙年制」·标准参照',en:'Langyao-red base: underglaze-blue six-char regular script in three columns “Da Qing Kangxi nian zhi”'}}],type:{zh:'六字楷书款（典型）',en:'Six-char regular script (hallmark)'},color:{zh:'青花翠毛蓝鲜亮，釉下为主',en:'Bright emerald underglaze blue'},brush:{zh:'楷书刚劲挺拔，六字两行或三行，常双圈',en:'Strong upright script in two or three columns, often double-circled'},fake:{zh:'康熙款被大量仿，款字易板滞，看青花层次',en:'Much copied; script stiffens — check the blue gradation'}},
-{id:'qing-yongzheng',group:'qing',zh:'雍正',en:'Yongzheng',years:'1723–1735',mark:'大清雍正年制',photos:[{src:'../images/marks/yongzheng.jpg',caption:{zh:'粉青釉器底青花六字篆书款「大清雍正年制」·标准参照',en:'Celadon base: underglaze-blue six-char seal-script mark “Da Qing Yongzheng nian zhi”'}}],type:{zh:'六字楷书与六字篆书款并存',en:'Six-char regular and seal-script marks'},color:{zh:'青花淡雅，粉彩款亦多',en:'Soft blue; also famille rose'},brush:{zh:'楷书工整秀丽；篆书较乾隆更细挺',en:'Neat regular script; seal script slimmer than Qianlong'},fake:{zh:'雍正款仿品多见，款精而胎釉浮则可疑',en:'Often faked; a refined mark over a flimsy glaze is suspect'}},
+{id:'qing-yongzheng',group:'qing',zh:'雍正',en:'Yongzheng',years:'1723–1735',mark:'大清雍正年制',photos:[{src:'../images/marks/yongzheng.jpg',caption:{zh:'粉青釉器底青花六字篆书款「大清雍正年制」·标准参照',en:'Celadon base: underglaze-blue six-char seal-script mark “Da Qing Yongzheng nian zhi”'}},{src:'../images/marks/yongzheng2_gudong.jpg',caption:{zh:'雍正款识另一实物参照',en:'A second Yongzheng mark sample'}}],type:{zh:'六字楷书与六字篆书款并存',en:'Six-char regular and seal-script marks'},color:{zh:'青花淡雅，粉彩款亦多',en:'Soft blue; also famille rose'},brush:{zh:'楷书工整秀丽；篆书较乾隆更细挺',en:'Neat regular script; seal script slimmer than Qianlong'},fake:{zh:'雍正款仿品多见，款精而胎釉浮则可疑',en:'Often faked; a refined mark over a flimsy glaze is suspect'}},
 {id:'qing-qianlong',group:'qing',zh:'乾隆',en:'Qianlong',years:'1736–1795',mark:'大清乾隆年制',photos:[{src:'../images/marks/qianlong.jpg',caption:{zh:'青花六字篆书款「大清乾隆年制」·印章式三列两行',en:'Underglaze-blue six-char seal-script mark “Da Qing Qianlong nian zhi”, 2×3 stamp layout'}},{src:'../images/marks/qianlong2.jpg',caption:{zh:'青花四字篆书款「乾隆年制」·同朝常见变体',en:'Underglaze-blue four-char seal-script mark “Qianlong nian zhi”, a common variant of the same reign'}}],type:{zh:'六字篆书款（印章式），兼见四字篆书款',en:'Six-char seal script (stamp style); four-char seal also common'},color:{zh:'青花釉下、矾红、描金款并存',en:'Underglaze blue, iron-red, gilt marks'},brush:{zh:'篆书笔画匀净板正，三列两行；四字款更紧凑',en:'Even mechanical seal script in a 2×3 grid; four-char marks sit tighter'},fake:{zh:'篆书易写得匀而无骨，真款有轻重起伏',en:'Seal fakes look uniformly thin; genuine strokes vary in weight'}},
-{id:'qing-jiaqing',group:'qing',zh:'嘉庆',en:'Jiaqing',years:'1796–1820',mark:'大清嘉庆年制',type:{zh:'六字篆书款',en:'Six-char seal script'},color:{zh:'青花发色趋灰暗',en:'Blue dulls to grey'},brush:{zh:'篆书较乾隆软，结构略散',en:'Softer seal script, looser structure'},fake:{zh:'嘉庆器渐粗，款精而器粗为仿',en:'Quality declines; a refined mark on coarse ware is suspect'}},
-{id:'qing-daoguang',group:'qing',zh:'道光',en:'Daoguang',years:'1821–1850',mark:'大清道光年制',type:{zh:'六字篆书款',en:'Six-char seal script'},color:{zh:'青花灰蓝，多粉彩',en:'Greyish blue; much famille rose'},brush:{zh:'篆书拘谨，力度不足',en:'Tight, weaker seal script'},fake:{zh:'道光盘款多，后仿常见，看釉面与彩料老化',en:'Often copied; check glaze and enamel ageing'}}
+{id:'qing-jiaqing',group:'qing',zh:'嘉庆',en:'Jiaqing',years:'1796–1820',mark:'大清嘉庆年制',photos:[{src:'../images/marks/jiaqing.jpg',caption:{zh:'「大清嘉庆年制」款识实物参照',en:'Da Qing Jiaqing nian zhi mark sample'}}],type:{zh:'六字篆书款',en:'Six-char seal script'},color:{zh:'青花发色趋灰暗',en:'Blue dulls to grey'},brush:{zh:'篆书较乾隆软，结构略散',en:'Softer seal script, looser structure'},fake:{zh:'嘉庆器渐粗，款精而器粗为仿',en:'Quality declines; a refined mark on coarse ware is suspect'}},
+{id:'qing-daoguang',group:'qing',zh:'道光',en:'Daoguang',years:'1821–1850',mark:'大清道光年制',photos:[{src:'../images/marks/daoguang_gudong.jpg',caption:{zh:'「大清道光年制」款识实物参照',en:'Da Qing Daoguang nian zhi mark sample'}}],type:{zh:'六字篆书款',en:'Six-char seal script'},color:{zh:'青花灰蓝，多粉彩',en:'Greyish blue; much famille rose'},brush:{zh:'篆书拘谨，力度不足',en:'Tight, weaker seal script'},fake:{zh:'道光盘款多，后仿常见，看釉面与彩料老化',en:'Often copied; check glaze and enamel ageing'}}
 ];
 var body=document.body;
 var markSelect=document.getElementById('markSelect');
 var markSearch=document.getElementById('markSearch');
+var markSearchStatus=document.getElementById('markSearchStatus');
 var markResult=document.getElementById('markResult');
 var markName=document.getElementById('markName');
 var markText=document.getElementById('markText');
@@ -749,29 +753,37 @@ function selectMark(id,scroll){
 function applySearchFilter(){
   var q=(markSearch.value||'').trim().toLowerCase();
   var L=lang();
+  var matchingMarks=0,matchingPhotos=0;
+  function searchText(m){
+    var extra='';
+    markPhotos(m).forEach(function(p){if(p.caption)extra+=' '+(p.caption.zh||'')+' '+(p.caption.en||'');});
+    return [m.zh,m.en,m.mark,m.years,m.id,extra].join(' ').toLowerCase();
+  }
   Array.prototype.forEach.call(eraChips.querySelectorAll('.era-chip'),function(btn){
     var m=byId(btn.dataset.id);
     if(!m){return;}
-    var hay=[m.zh,m.en,m.mark,m.years,m.id].join(' ').toLowerCase();
-    btn.style.display=!q||hay.indexOf(q)!==-1?'':'none';
+    var match=!q||searchText(m).indexOf(q)!==-1;
+    btn.style.display=match?'':'none';
+    if(match){matchingMarks++;matchingPhotos+=markPhotos(m).length;}
   });
   Array.prototype.forEach.call(atlasGrid.querySelectorAll('.atlas-card'),function(card){
     var m=byId(card.dataset.id);
     if(!m){return;}
-    var extra='';
-    markPhotos(m).forEach(function(p){if(p.caption)extra+=' '+(p.caption.zh||'')+' '+(p.caption.en||'');});
-    var hay=[m.zh,m.en,m.mark,m.years,extra].join(' ').toLowerCase();
+    var hay=searchText(m);
     card.style.display=!q||hay.indexOf(q)!==-1?'':'none';
   });
   Array.prototype.forEach.call(markSelect.querySelectorAll('option'),function(opt){
     if(!opt.value){return;}
     var m=byId(opt.value);
     if(!m){return;}
-    var hay=[m.zh,m.en,m.mark,m.years].join(' ').toLowerCase();
+    var hay=searchText(m);
     opt.disabled=!(!q||hay.indexOf(q)!==-1);
     opt.hidden=opt.disabled;
   });
   markSearch.placeholder=L==='zh'?'如：乾隆、Xuande、大明成化年制':'e.g. Qianlong, 宣德, Da Ming Chenghua';
+  markSearchStatus.textContent=L==='zh'
+    ? (q?(matchingMarks?'找到 '+matchingMarks+' 个年号 · '+matchingPhotos+' 张图片':'没有找到匹配年号或图片'):'共 '+matchingMarks+' 个年号 · '+matchingPhotos+' 张图片')
+    : (q?(matchingMarks?matchingMarks+' reigns · '+matchingPhotos+' images':'No matching reigns or images'):' '+matchingMarks+' reigns · '+matchingPhotos+' images');
 }
 
 function refreshChrome(){

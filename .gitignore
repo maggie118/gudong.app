@@ -1,0 +1,11 @@
+.vercel
+.env*
+# Trae IDE share packages (large zips, not part of the site)
+.trae-html-share-packages/
+*.zip
+# Trae workbuddy working dir
+.workbuddy/
+# temp / backup files
+*.tmp
+*.tmp.html
+sitemap.xml.static-backup

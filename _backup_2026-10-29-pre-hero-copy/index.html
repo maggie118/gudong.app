@@ -1,0 +1,3727 @@
+<!DOCTYPE html>
+<html lang="en-SG">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no, viewport-fit=cover">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Gudong App | Singapore Antique Directory & Collector Utility Tools | 藏家实用工具包</title>
+    <link rel="canonical" href="https://www.gudong.app/">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Gudong App">
+    <meta name="geo.region" content="SG">
+    <meta name="geo.placename" content="Singapore">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Gudong App Collector Tools (藏家工具包)","url":"https://www.gudong.app/","applicationCategory":"UtilitiesApplication","operatingSystem":"All (Web App)","description":"A suite of free online utilities for Asian art collectors including Chinese Reign Mark Date Calculator, Ganzhi to Gregorian Converter, and Cultural Dynasty Lookup.","featureList":["Reign Mark & Age Calculator (年号年份对照计算器)","Ganzhi to Gregorian Calendar Converter (干支公历换算器)","Ancient Culture & Dynasty Chronology Lookup (古文化朝代速查)"]}</script>
+
+    <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://www.gudong.app/#organization","name":"古董圈 Gudong","alternateName":"Gudong.app","url":"https://www.gudong.app/","logo":{"@type":"ImageObject","url":"https://www.gudong.app/assets/icons/apple-touch-icon-180x180.png","width":180,"height":180},"description":"Singapore-based Chinese antiques discovery platform and collector network. Gudong.app displays seller-provided information, does not authenticate or appraise antiques, and does not participate in transactions.","address":{"@type":"PostalAddress","addressCountry":"SG"},"areaServed":[{"name":"Singapore","@type":"Country"},{"name":"Malaysia","@type":"Country"},{"name":"Indonesia","@type":"Country"},{"name":"Thailand","@type":"Country"},{"name":"United States","@type":"Country"},{"name":"United Kingdom","@type":"Country"},{"name":"Europe","@type":"Place"}],"knowsLanguage":["zh-SG","en-SG"]},{"@type":"WebSite","@id":"https://www.gudong.app/#website","url":"https://www.gudong.app/","name":"古董圈 Gudong","inLanguage":["zh-SG","en-SG"],"publisher":{"@id":"https://www.gudong.app/#organization"}},{"@type":"FAQPage","@id":"https://www.gudong.app/#faq","mainEntity":[{"@type":"Question","name":"古董圈是什么？","acceptedAnswer":{"@type":"Answer","text":"古董圈是古董信息发现与藏家连接平台。买家可免费浏览、收藏藏品并直接联系卖家。"}},{"@type":"Question","name":"怎么购买藏品？","acceptedAnswer":{"@type":"Answer","text":"在藏品详情页点击「通过 WhatsApp 咨询藏家」按钮，跳转 WhatsApp 与卖家直接沟通。买卖双方自行确认藏品情况、价格及交付安排并直接交易；平台不经手付款，也不公开卖家的真实联系方式。"}},{"@type":"Question","name":"藏品价格是谁定的？","acceptedAnswer":{"@type":"Answer","text":"藏品价格由卖家自行设定，平台不定价。标注“私聊询价”的藏品，请直接联系卖家了解报价。"}},{"@type":"Question","name":"古董圈提供鉴定吗？","acceptedAnswer":{"@type":"Answer","text":"不提供官方担保。古董圈作为去中心化网络不参与交易，但为了给全球藏家提供决策参考，我们支持引入独立的第三方付费顾问意见。买家可在藏品页一键向平台顾问网络发起私密学术咨询。"}},{"@type":"Question","name":"如何成为藏家 / 发布藏品？","acceptedAnswer":{"@type":"Answer","text":"点击“了解藏家服务”，查看入驻说明并按页面指引联系平台。成为藏家后，可提交藏品资料与图片进行发布。"}},{"@type":"Question","name":"古董圈会抽取佣金或经手付款吗？","acceptedAnswer":{"@type":"Answer","text":"平台收取 0% 佣金，也不经手任何资金、不做资金托管。买家与卖家通过 WhatsApp 私密直连后自行议价、自行结算；古董圈只提供信息展示与发现，不参与成交环节，也不从中抽成。"}}]}]}</script>
+
+    <meta name="description" content="Discover Singapore antique directory & free collector tools: Reign mark date calculator, Ganzhi calendar converter & dynasty lookup. 新加坡古董信息目录与藏家工具包：支持年号年份对照计算、干支公历换算与朝代速查。">
+    <meta name="keywords" content="chinese reign mark date calculator, ganzhi calendar converter, chinese dynasty chronology lookup, 明清年号年份对照计算器, 干支公历换算器, 古文化朝代速查, 新加坡古董买卖, gudong.app">
+
+    <!-- Open Graph / Facebook | 商务正式版 -->
+    <meta property="og:site_name" content="Gudong App">
+    <meta property="og:title" content="Gudong App | Singapore Antique Directory & Asian Art Marketplace">
+    <meta property="og:description" content="Browse curated Qing Dynasty porcelain, Nyonya ceramics, and fine Asian art. Connect with reputable local sellers in Singapore. 新加坡及东南亚古董信息目录平台。">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.gudong.app/">
+    <meta property="og:image" content="https://www.gudong.app/og-cover.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:locale" content="en_SG">
+    <meta property="og:locale:alternate" content="zh_SG">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Gudong App | Singapore Antique Directory">
+    <meta name="twitter:description" content="Explore Asian antiques, Qing porcelain, and Nyonya ware from trusted sellers in Singapore. 新加坡古董买卖与寄卖信息平台。">
+    <meta name="twitter:image" content="https://www.gudong.app/og-cover.png">
+<link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#7A4E33">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="古董圈">
+    <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon-120x120.png" sizes="120x120">
+    <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon-152x152.png" sizes="152x152">
+    <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon-180x180.png" sizes="180x180">
+    <link rel="apple-touch-icon" href="assets/icons/icon-1024.png" sizes="1024x1024">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/icons/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32x32.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital,wght@0,400;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Noto+Serif+SC:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* ============================================================
+           DESIGN TOKENS
+           ============================================================ */
+        :root {
+            --color-bg: #F7F4EF;
+            --color-bg-alt: #F1ECE4;
+            --color-surface: #FFFFFF;
+            --color-border: #E7E1D8;
+            --color-border-soft: #F0EBE3;
+
+            --color-primary: #7A4E33;
+            --color-primary-dark: #5C3A26;
+            --color-primary-light: #F3EAE0;
+
+            --color-text: #241F1A;
+            --color-text-secondary: #5A544C;
+            --color-text-muted: #9E968C;
+
+            --color-gold: #9C7A3A;
+            --color-gold-soft: rgba(156, 122, 58, .10);
+            --color-bronze-muted: #A08A63;
+            --color-qianjinzong: #948268;
+
+            --color-success: #526657;
+            --color-danger: #9A554B;
+            --color-far-mountain: #2E4A52;
+
+            --card-radius: 14px;
+            --img-radius: 6px;
+            --btn-radius: 8px;
+
+            --shadow-xs: 0 1px 2px rgba(36, 31, 26, .04);
+            --shadow-sm: 0 2px 8px rgba(36, 31, 26, .05);
+            --shadow-md: 0 10px 28px rgba(36, 31, 26, .08);
+            --shadow-lg: 0 20px 48px rgba(36, 31, 26, .12);
+            --ring: 0 0 0 4px rgba(156, 122, 58, .14);
+
+            --ease: cubic-bezier(.22, .61, .36, 1);
+            --dur: .32s;
+
+            --font-serif: "Playfair Display", "Noto Serif SC", "Songti SC", "STSong", Georgia, serif;
+            --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "PingFang SC",
+                         "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: var(--font-sans); }
+
+        html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+        body {
+            background: var(--color-bg);
+            background-image:
+                radial-gradient(1200px 600px at 50% -10%, rgba(156, 122, 58, .06), transparent 60%),
+                radial-gradient(900px 500px at 90% 10%, rgba(122, 78, 51, .04), transparent 55%);
+            background-attachment: fixed;
+            color: var(--color-text);
+            line-height: 1.68;
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+        }
+
+        h1, h2, h3, .title { font-family: var(--font-serif); }
+
+        img { max-width: 100%; }
+
+        ::selection { background: rgba(156, 122, 58, .22); color: var(--color-text); }
+
+        /* ============================================================
+           HEADER
+           ============================================================ */
+        header {
+            background: rgba(255, 255, 255, .92);
+            -webkit-backdrop-filter: saturate(180%) blur(12px);
+            backdrop-filter: saturate(180%) blur(12px);
+            color: var(--color-text);
+            padding: 0 5%;
+            height: 72px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1.5rem;
+            border-bottom: 1px solid var(--color-border);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+        .header-left { display: flex; align-items: center; gap: .9rem; min-width: 0; }
+
+        .brand {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: .7rem;
+            line-height: 1;
+            flex-shrink: 0;
+            text-decoration: none;
+            color: inherit;
+            min-width: 0;
+        }
+        .brand:hover { text-decoration: none; }
+        .brand-logo-img { height: 38px; width: auto; display: block; object-fit: contain; flex-shrink: 0; }
+        .brand-text {
+            display: flex; flex-direction: column; justify-content: center; min-width: 0;
+            line-height: 1.15; letter-spacing: -.005em;
+        }
+        .brand-line1 { display: flex; align-items: baseline; gap: .32rem; }
+        .brand-zh {
+            font-family: var(--font-serif);
+            font-weight: 700;
+            color: var(--color-primary-dark);
+            letter-spacing: .005em;
+            font-size: 1.32rem;
+        }
+        .brand-en {
+            font-family: var(--font-sans);
+            font-weight: 600;
+            color: var(--color-primary-dark);
+            letter-spacing: -.012em;
+            font-size: 1.32rem;
+        }
+        .brand-text small {
+            display: block;
+            color: var(--color-qianjinzong);
+            font-family: var(--font-sans);
+            font-weight: 500;
+            font-size: .68rem;
+            letter-spacing: .14em;
+            margin-top: 2px;
+            text-transform: uppercase;
+        }
+
+        .header-right { display: flex; align-items: center; gap: .7rem; flex-shrink: 0; }
+
+        .btn-publish {
+            display: inline-flex; align-items: center; gap: .35rem;
+            background: var(--color-primary); color: #fff;
+            padding: .75rem 1.15rem;
+            border-radius: var(--btn-radius);
+            font-size: .85rem; font-weight: 600;
+            text-decoration: none; white-space: nowrap;
+            min-height: 44px;
+            box-shadow: var(--shadow-xs);
+            transition: background var(--dur) var(--ease), transform var(--dur) var(--ease),
+                        box-shadow var(--dur) var(--ease);
+        }
+        .btn-publish:hover {
+            background: var(--color-primary-dark);
+            transform: translateY(-1px);
+            box-shadow: 0 6px 18px rgba(122, 78, 51, .28);
+        }
+
+        .btn-publish-text {
+            display: inline-flex; align-items: center;
+            background: transparent; color: var(--color-text-secondary);
+            padding: .45rem .55rem;
+            font-size: .88rem; font-weight: 500;
+            text-decoration: none; white-space: nowrap;
+            border-radius: 6px;
+            transition: color var(--dur) var(--ease), background var(--dur) var(--ease);
+        }
+        .btn-publish-text:hover { color: var(--color-primary); background: var(--color-gold-soft); }
+
+        .lang-btn {
+            border: 1px solid var(--color-border);
+            background: transparent;
+            color: var(--color-text-secondary);
+            padding: .55rem .85rem;
+            min-height: 44px;
+            min-width: 44px;
+            border-radius: var(--btn-radius);
+            cursor: pointer;
+            font-size: .75rem;
+            font-weight: 600;
+            letter-spacing: .06em;
+            transition: all var(--dur) var(--ease);
+        }
+        .lang-btn:hover {
+            border-color: var(--color-primary);
+            color: var(--color-primary);
+            background: var(--color-primary-light);
+        }
+
+        .menu-toggle {
+            width: 44px; height: 44px;
+            border: 1px solid var(--color-border);
+            background: transparent;
+            border-radius: var(--btn-radius);
+            font-size: 1.05rem;
+            color: var(--color-text);
+            cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+            transition: all var(--dur) var(--ease);
+        }
+        .menu-toggle:hover {
+            border-color: var(--color-primary);
+            color: var(--color-primary);
+            background: var(--color-primary-light);
+        }
+
+        /* ============================================================
+           SIDEBAR
+           ============================================================ */
+        .sidebar-overlay {
+            position: fixed; inset: 0;
+            background: rgba(20, 17, 14, .45);
+            -webkit-backdrop-filter: blur(2px);
+            backdrop-filter: blur(2px);
+            opacity: 0; pointer-events: none;
+            transition: opacity .3s var(--ease);
+            z-index: 90;
+        }
+        .sidebar-overlay.show { opacity: 1; pointer-events: auto; }
+
+        .sidebar {
+            position: fixed; top: 0; left: 0;
+            height: 100vh; height: 100dvh;
+            width: 272px; max-width: 80vw;
+            background: var(--color-surface);
+            box-shadow: 6px 0 32px rgba(36, 31, 26, .18);
+            transform: translateX(-100%);
+            transition: transform .34s var(--ease);
+            z-index: 95;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            padding-bottom: 2rem;
+        }
+        .sidebar.open { transform: translateX(0); }
+
+        .sidebar-toggle-inner {
+            display: block; width: 100%;
+            padding: .9rem 0;
+            background: transparent; border: none;
+            border-bottom: 1px solid var(--color-border);
+            font-size: 1.15rem; color: var(--color-text-secondary);
+            cursor: pointer; text-align: center;
+            transition: color var(--dur) var(--ease);
+        }
+        .sidebar-toggle-inner:hover { color: var(--color-primary); }
+
+        .sidebar-brand {
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            gap: .1rem;
+            padding: 1.1rem 0;
+            font-weight: 700;
+            color: var(--color-primary-dark);
+            border-bottom: 1px solid var(--color-border);
+        }
+        .sidebar-brand .logo-zh {
+            font-size: 1.05rem;
+            font-family: var(--font-serif);
+            font-weight: 700;
+            color: var(--color-primary-dark);
+            letter-spacing: .005em;
+        }
+        .sidebar-brand .logo-en {
+            font-size: 1.05rem;
+            letter-spacing: normal;
+            font-family: var(--font-sans);
+            font-weight: 600;
+            color: var(--color-primary-dark);
+        }
+        .sidebar-brand .logo-tagline {
+            font-size: .62rem;
+            letter-spacing: .16em;
+            color: var(--color-qianjinzong);
+            text-transform: uppercase;
+            font-family: var(--font-sans);
+            font-weight: 500;
+        }
+
+        .sidebar-nav { display: flex; flex-direction: column; padding: .4rem 0; }
+
+        .sidebar-link {
+            padding: .85rem 1.4rem;
+            color: var(--color-text);
+            text-decoration: none;
+            font-size: .95rem;
+            transition: all var(--dur) var(--ease);
+        }
+        .sidebar-link:hover {
+            background: var(--color-primary-light);
+            color: var(--color-primary);
+            text-decoration: none;
+        }
+        .sidebar-link.active {
+            background: var(--color-primary-light);
+            color: var(--color-primary);
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .sidebar-sub {
+            display: block;
+            padding: .5rem 1.4rem .5rem 2.3rem;
+            color: var(--color-text-secondary);
+            text-decoration: none;
+            font-size: .86rem;
+            transition: all var(--dur) var(--ease);
+        }
+        .sidebar-sub:hover {
+            color: var(--color-primary);
+            background: var(--color-primary-light);
+            text-decoration: none;
+        }
+        .sidebar-sub.active {
+            color: var(--color-primary);
+            font-weight: 600;
+            background: var(--color-primary-light);
+            text-decoration: none;
+        }
+
+        .sidebar-lang-btn {
+            display: flex; align-items: center; justify-content: center; gap: .4rem;
+            width: calc(100% - 2.8rem);
+            margin: 1rem 1.4rem .8rem;
+            padding: .75rem .9rem;
+            min-height: 44px;
+            border: 1px solid var(--color-border);
+            border-radius: 999px;
+            background: var(--color-surface);
+            color: var(--color-text-secondary);
+            font-family: inherit;
+            font-size: .88rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--dur) var(--ease);
+        }
+        .sidebar-lang-btn:hover {
+            border-color: var(--color-primary);
+            color: var(--color-primary);
+            background: var(--color-primary-light);
+        }
+
+        /* ============================================================
+           LAYOUT
+           ============================================================ */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3.4rem 5% 4.5rem;
+            min-height: 80vh;
+        }
+        section { margin-bottom: 5.5rem; scroll-margin-top: 96px; }
+
+        /* ============================================================
+           HERO
+           ============================================================ */
+        .hero-clean {
+            text-align: center;
+            max-width: 760px;
+            margin: 0 auto 1rem;
+            padding: 2.2rem 0 .5rem;
+            position: relative;
+        }
+        @font-face {
+            font-family: "QIJIC";
+            src: url("https://github.com/LingDong-/qiji-font/releases/download/0.0.4/qiji-combo.woff2") format("woff2");
+            font-style: normal;
+            font-weight: 400;
+            font-display: swap;
+            unicode-range: U+53E4, U+8463, U+53D1, U+73B0, U+4E0E, U+85CF, U+5BB6, U+7F51, U+7EDC;
+        }
+        .hero-eyebrow {
+            font-family: "Playfair Display", "Noto Serif SC", Georgia, serif;
+            font-style: italic;
+            font-size: 1.3rem;
+            font-weight: 400;
+            color: var(--color-bronze-muted);
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+        .hero-eyebrow .en {
+            font-size: .8rem;
+            font-family: "IM Fell English", "Times New Roman", serif;
+            font-style: italic;
+        }
+        .hero-eyebrow .zh {
+            font-size: .9rem;
+            font-family: "QIJIC", "黄令东齐伋复刻体", "Noto Serif SC", serif;
+            font-style: normal;
+        }
+        .hero-eyebrow::after {
+            content: '';
+            display: block;
+            width: 56px; height: 1px;
+            background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
+            margin: 1.1rem auto 0;
+        }
+        .hero-title-main {
+            font-family: "Inter", "PingFang SC", "Microsoft YaHei", "SimHei", "Heiti SC", "Noto Sans SC", sans-serif;
+            font-size: clamp(1.9rem, 4.8vw, 3rem);
+            font-weight: 700;
+            color: var(--color-text);
+            line-height: 1.18;
+            letter-spacing: -.02em;
+            margin-bottom: .9rem;
+        }
+        .hero-subtitle {
+            font-family: var(--font-sans);
+            font-size: clamp(1.15rem, 2.5vw, 1.7rem);
+            font-weight: 400;
+            color: var(--color-text-secondary);
+            line-height: 1.5;
+            letter-spacing: -.005em;
+            margin-bottom: 1.05rem;
+        }
+        .hero-promise {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: .5rem;
+            flex-wrap: wrap;
+            font-size: 1.125rem;
+            font-weight: 500;
+            color: var(--color-text-secondary);
+            letter-spacing: .012em;
+            margin-bottom: 1.15rem;
+        }
+        .hero-desc {
+            font-size: .9375rem;
+            font-weight: 400;
+            color: var(--color-text-muted);
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+            max-width: 620px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-btn {
+            margin-top: .8rem;
+            display: inline-block;
+            background: var(--color-primary);
+            color: #fff;
+            padding: .85rem 2.2rem;
+            border-radius: var(--btn-radius);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: .9rem;
+            letter-spacing: .03em;
+            box-shadow: 0 8px 24px rgba(122, 78, 51, .22);
+            transition: background var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-btn::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,.18) 50%, transparent 70%);
+            transform: translateX(-120%);
+            transition: transform .6s var(--ease);
+        }
+        .hero-btn:hover {
+            background: var(--color-primary-dark);
+            box-shadow: 0 12px 32px rgba(122, 78, 51, .30);
+        }
+        .hero-btn:hover::after { transform: translateX(120%); }
+
+        /* Search */
+        .search-box { max-width: 600px; margin: 2.6rem auto .7rem; position: relative; }
+        .search-box input {
+            width: 100%;
+            height: 54px;
+            padding: 0 3.4rem 0 1.4rem;
+            border: 1px solid var(--color-border);
+            border-radius: 10px;
+            font-size: .95rem;
+            background: var(--color-surface);
+            color: var(--color-text);
+            box-shadow: 0 2px 8px rgba(36, 31, 26, .06), inset 0 1px 2px rgba(36, 31, 26, .04);
+            transition: border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+        }
+        .search-box input::placeholder { color: var(--color-text-muted); }
+        .search-box input:focus {
+            outline: none;
+            border-color: var(--color-gold);
+            box-shadow: var(--ring), 0 2px 8px rgba(36, 31, 26, .06);
+        }
+        .search-box button {
+            position: absolute; right: .8rem; top: 50%;
+            transform: translateY(-50%);
+            background: var(--color-gold-soft); border: none;
+            color: var(--color-primary);
+            font-size: 1rem; cursor: pointer;
+            min-width: 40px; min-height: 40px;
+            display: flex; align-items: center; justify-content: center;
+            border-radius: 8px;
+            transition: background var(--dur) var(--ease), color var(--dur) var(--ease);
+        }
+        .search-box button:hover { background: var(--color-gold); color: #fff; }
+
+        .search-tip { font-size: .78rem; color: var(--color-text-muted); text-align: center; margin-bottom: .8rem; }
+
+        .search-result-tip {
+            font-size: .83rem;
+            color: var(--color-primary);
+            text-align: center;
+            margin: -.7rem 0 1.7rem;
+            font-weight: 600;
+        }
+
+        /* 热门标签（+ 朝代标签） */
+        .hot-tags {
+            display: flex; flex-wrap: wrap; justify-content: center;
+            gap: .5rem;
+            max-width: 720px;
+            margin: 0 auto 1.5rem;
+        }
+        .hot-tag {
+            border: 1px solid var(--color-border);
+            background: var(--color-surface);
+            color: var(--color-text-secondary);
+            font-size: .78rem;
+            padding: .5rem .9rem;
+            min-height: 40px;
+            border-radius: 999px;
+            cursor: pointer;
+            transition: all var(--dur) var(--ease);
+            display: inline-flex; align-items: center; justify-content: center;
+            gap: .25rem;
+        }
+        .hot-tag:hover {
+            border-color: var(--color-gold);
+            color: var(--color-primary);
+            background: var(--color-gold-soft);
+            box-shadow: 0 4px 14px rgba(156, 122, 58, .12);
+        }
+
+        /* ============================================================
+           SECTION HEADS
+           ============================================================ */
+        .section-head2 {
+            margin-bottom: 1.5rem;
+            display: flex; align-items: flex-end; justify-content: space-between;
+            gap: 1rem; flex-wrap: wrap;
+        }
+        .section-head2 .title {
+            display: inline-block;
+            position: relative;
+            padding-left: .8rem;
+            font-size: 1.32rem;
+            font-weight: 700;
+            color: var(--color-text);
+            letter-spacing: -.01em;
+        }
+        .section-head2 .title::before {
+            content: '';
+            position: absolute;
+            left: 0; top: .3em; bottom: .18em;
+            width: 3px;
+            border-radius: 2px;
+            background: linear-gradient(180deg, var(--color-gold), rgba(156, 122, 58, .12));
+        }
+        .section-head2 .sub-line {
+            font-size: .85rem;
+            color: var(--color-text-secondary);
+            margin-top: .35rem;
+            display: block;
+            padding-left: .8rem;
+        }
+        .section-head2 .more {
+            font-size: .85rem;
+            color: var(--color-text-secondary);
+            text-decoration: none;
+            white-space: nowrap;
+            padding: .4rem .2rem;
+            transition: color var(--dur) var(--ease);
+        }
+        .section-head2 .more:hover { color: var(--color-primary); }
+
+        .more-btn {
+            display: inline-flex; align-items: center;
+            border: 1px solid var(--color-border);
+            background: var(--color-surface);
+            color: var(--color-text-secondary);
+            font-size: .85rem;
+            font-weight: 500;
+            padding: .55rem 1.3rem;
+            border-radius: 999px;
+            text-decoration: none;
+            transition: all var(--dur) var(--ease);
+        }
+        .more-btn:hover {
+            border-color: var(--color-gold);
+            color: var(--color-primary);
+            background: var(--color-gold-soft);
+            box-shadow: 0 4px 12px rgba(156, 122, 58, .10);
+        }
+
+        .section-note {
+            font-size: .78rem;
+            color: var(--color-text-muted);
+            line-height: 1.65;
+            margin-top: -.9rem;
+            margin-bottom: 2rem;
+        }
+
+        /* ============================================================
+           TODAY'S FINDS
+           ============================================================ */
+        .finds-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.9rem;
+        }
+        .finds-grid .finds-card {
+            flex: 0 0 calc((100% - 1.9rem * 3) / 4);
+            min-width: 0;
+        }
+
+        .finds-card {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            padding: .7rem;
+            border-radius: calc(var(--card-radius) + 2px);
+            border: 1px solid transparent;
+            background: transparent;
+            transition: border-color var(--dur) var(--ease), background var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+        }
+        .finds-card:hover {
+            border-color: var(--color-border);
+            background: var(--color-surface);
+            box-shadow: 0 4px 16px rgba(37, 34, 30, .08);
+        }
+
+        .finds-image {
+            position: relative;
+            aspect-ratio: 1 / 1;
+            border-radius: var(--img-radius);
+            overflow: hidden;
+            background: var(--color-bg-alt);
+            margin-bottom: .85rem;
+            box-shadow: var(--shadow-xs);
+            transition: box-shadow var(--dur) var(--ease);
+        }
+        .finds-card:hover .finds-image { box-shadow: 0 4px 12px rgba(36, 31, 26, .10); }
+
+        .finds-image img {
+            width: 100%; height: 100%;
+            object-fit: contain; display: block;
+            transition: transform .7s var(--ease);
+        }
+        .finds-card:hover .finds-image img { transform: scale(1.04); }
+
+        .finds-title {
+            font-size: .98rem;
+            font-weight: 600;
+            color: var(--color-text);
+            margin-bottom: .2rem;
+            font-family: var(--font-serif);
+            line-height: 1.45;
+        }
+        .finds-meta { font-size: .8rem; color: var(--color-text-secondary); margin-bottom: .45rem; }
+
+        /* ============ 行家私语 / 主理人手记质感 ============ */
+        .finds-reason {
+            position: relative;
+            padding: .6rem .75rem .6rem 2.05rem;
+            background: linear-gradient(135deg, #FBF7EE 0%, #F5EDDD 100%);
+            border: 1px solid rgba(156, 122, 58, .22);
+            border-left: 3px solid var(--color-gold);
+            border-radius: 6px;
+            font-size: .78rem;
+            color: #6B4E28;
+            line-height: 1.6;
+            font-style: italic;
+            letter-spacing: .005em;
+            margin: .4rem 0 .5rem;
+        }
+        .finds-reason::before {
+            content: "🔍";
+            position: absolute;
+            left: .5rem;
+            top: .55rem;
+            font-size: .8rem;
+            font-style: normal;
+            filter: grayscale(.25) sepia(.25);
+        }
+        .finds-reason::after {
+            content: "行家私语";
+            position: absolute;
+            right: .55rem;
+            top: -.55rem;
+            font-size: .58rem;
+            font-weight: 700;
+            letter-spacing: .1em;
+            color: var(--color-bronze-muted);
+            background: #FBF7EE;
+            padding: 0 .35rem;
+            font-style: normal;
+            border-radius: 3px;
+            opacity: .9;
+        }
+        .finds-reason.en::after { content: "EDITOR'S NOTE"; letter-spacing: .08em; }
+
+        .finds-timestamp { font-size: .74rem; color: var(--color-text-muted); }
+        .finds-caption { font-size: .72rem; color: var(--color-text-muted); margin-top: .1rem; }
+
+        /* ============================================================
+           PRICE
+           ============================================================ */
+        .finds-price, .item-price { display: flex; align-items: baseline; gap: .35rem; flex-wrap: wrap; }
+        .finds-price { margin: 0 0 .5rem; font-size: .9rem; }
+        .finds-card .finds-price { margin: 0 0 .5rem; font-size: .75rem; }
+        .price-main { color: var(--color-primary); font-weight: 700; letter-spacing: .01em; font-variant-numeric: tabular-nums; }
+        .price-main--enquiry { color: var(--color-text-secondary); font-weight: 600; letter-spacing: .04em; }
+        .finds-card .price-main--enquiry { font-weight: 500; letter-spacing: .01em; }
+        .price-tag {
+            display: inline-block;
+            font-size: .72rem;
+            font-weight: 500;
+            color: var(--color-text-muted);
+            border: 1px solid var(--color-border);
+            padding: 0 .3rem;
+            border-radius: 3px;
+            line-height: 1.6;
+            letter-spacing: .02em;
+        }
+        .price-tag--enquiry { color: var(--color-bronze-muted); border-color: var(--color-bronze-muted); }
+
+        /* ============================================================
+           JUST LISTED
+           ============================================================ */
+        .goods-list { display: grid; grid-template-columns: repeat(6, 1fr); gap: 1.25rem; margin-top: .5rem; }
+        .goods-list .item-card { aspect-ratio: auto; min-width: 0; min-height: 0; height: auto; }
+        .goods-list .item-card img {
+            width: 100%; height: auto;
+            aspect-ratio: 1 / 1;
+            max-height: none;
+            object-fit: contain;
+        }
+
+        .item-card {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            aspect-ratio: auto;
+            min-width: 0;
+            border-radius: var(--img-radius);
+            overflow: visible;
+            background: transparent;
+            text-decoration: none;
+            transition: box-shadow var(--dur) var(--ease);
+        }
+        .item-card .item-image {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            border-radius: var(--img-radius);
+            overflow: hidden;
+            background: var(--color-bg-alt);
+            box-shadow: var(--shadow-xs);
+        }
+        .item-card:hover .item-image { box-shadow: 0 4px 16px rgba(37, 34, 30, .10); }
+        .item-card img {
+            width: 100%; height: 100%;
+            object-fit: contain; display: block;
+            transition: transform .7s var(--ease);
+        }
+        .item-card:hover img { transform: scale(1.05); }
+        .item-card .item-info {
+            display: flex;
+            flex-direction: column;
+            gap: .08rem;
+            padding: .36rem .08rem 0;
+        }
+        .item-card .item-title {
+            margin-bottom: .06rem;
+            color: var(--color-text);
+            font-family: var(--font-serif);
+            font-size: .82rem;
+            font-weight: 600;
+            line-height: 1.4;
+        }
+        .item-card .item-price { font-size: .75rem; gap: .3rem; }
+        .item-card .price-main { color: var(--color-primary); font-weight: 600; }
+        .item-card .price-main--enquiry { color: var(--color-text-secondary); font-weight: 500; letter-spacing: .01em; }
+        .item-card .price-tag { font-size: .7rem; padding: 0 .25rem; }
+
+        /* ============================================================
+           STATES
+           ============================================================ */
+        .no-result { text-align: center; padding: 3rem 1rem; color: var(--color-text-muted); font-size: .9rem; }
+
+        .load-error-tip {
+            text-align: center;
+            padding: 2rem 1rem;
+            color: var(--color-text-muted);
+            font-size: .85rem;
+            line-height: 1.7;
+            border: 1px dashed var(--color-border);
+            border-radius: 10px;
+            grid-column: 1 / -1;
+        }
+        .load-error-tip strong { color: var(--color-danger); }
+
+        @keyframes gd-shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+        .skeleton-card {
+            border-radius: var(--img-radius);
+            background: linear-gradient(90deg, var(--color-bg-alt) 25%, #FBF8F3 50%, var(--color-bg-alt) 75%);
+            background-size: 200% 100%;
+            animation: gd-shimmer 1.5s linear infinite;
+        }
+        .skeleton-card--square { aspect-ratio: 1 / 1; }
+        @media (prefers-reduced-motion: reduce) {
+            .skeleton-card { animation: none; }
+            * { transition-duration: .01ms !important; }
+        }
+        [hidden] { display: none !important; }
+
+        /* ============================================================
+           DAILY INTEL
+           ============================================================ */
+        .intel-section {
+            background: linear-gradient(140deg, #2B2620 0%, #38302A 100%);
+            border: 1px solid rgba(217, 182, 121, .22);
+            border-radius: var(--card-radius);
+            padding: 1.7rem 1.4rem 1.25rem;
+            color: #F1E8DF;
+            margin: -.7rem 0 4.5rem;
+            box-shadow: 0 14px 40px rgba(20, 17, 14, .16);
+            position: relative;
+            overflow: hidden;
+        }
+        .intel-section::before {
+            content: '';
+            position: absolute;
+            top: -80px; right: -60px;
+            width: 260px; height: 260px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(217, 182, 121, .12), transparent 68%);
+            pointer-events: none;
+        }
+        .intel-head {
+            display: flex; align-items: flex-end; justify-content: space-between;
+            gap: 1rem; flex-wrap: wrap;
+            margin-bottom: 1.05rem;
+            position: relative;
+        }
+        .intel-head .title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #E8C87E;
+            letter-spacing: .01em;
+            font-family: var(--font-serif);
+        }
+        .intel-head .sub {
+            font-size: .78rem;
+            color: rgba(201, 182, 138, .75);
+            margin-top: .35rem;
+            display: block;
+        }
+        .intel-live {
+            display: inline-flex; align-items: center; gap: .38rem;
+            font-size: .74rem;
+            color: rgba(201, 182, 138, .82);
+            letter-spacing: .04em;
+        }
+        .intel-live::before {
+            content: '';
+            width: 7px; height: 7px;
+            border-radius: 50%;
+            background: #E8C87E;
+            box-shadow: 0 0 0 0 rgba(232, 200, 126, .55);
+            animation: intelPulse 2.2s infinite;
+        }
+        @keyframes intelPulse {
+            0%   { box-shadow: 0 0 0 0 rgba(232, 200, 126, .55); }
+            70%  { box-shadow: 0 0 0 8px rgba(232, 200, 126, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(232, 200, 126, 0); }
+        }
+
+        .intel-scroll {
+            display: flex; gap: .9rem;
+            overflow-x: auto;
+            padding-bottom: .7rem;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            position: relative;
+        }
+        .intel-scroll::-webkit-scrollbar { height: 6px; }
+        .intel-scroll::-webkit-scrollbar-track { background: rgba(255, 255, 255, .05); border-radius: 3px; }
+        .intel-scroll::-webkit-scrollbar-thumb { background: rgba(217, 182, 121, .35); border-radius: 3px; }
+        .intel-scroll::-webkit-scrollbar-thumb:hover { background: rgba(217, 182, 121, .55); }
+
+        .intel-card {
+            flex: 0 0 216px;
+            scroll-snap-align: start;
+            background: #352E28;
+            border: 1px solid rgba(217, 182, 121, .18);
+            border-radius: 10px;
+            padding: .85rem .9rem;
+            color: #F1E8DF;
+            display: flex; flex-direction: column; gap: .45rem;
+            transition: background var(--dur) var(--ease), border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+        }
+        .intel-card:hover {
+            background: #3E362F;
+            border-color: rgba(217, 182, 121, .42);
+            box-shadow: 0 6px 18px rgba(20, 17, 14, .22);
+        }
+        .intel-card:first-child {
+            background: linear-gradient(155deg, #3E362E 0%, #352E28 100%);
+            border-color: rgba(217, 182, 121, .55);
+            box-shadow: inset 0 1px 0 rgba(217, 182, 121, .12);
+        }
+        .intel-type {
+            display: inline-block;
+            font-size: .63rem;
+            font-weight: 600;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            padding: .18rem .45rem;
+            border-radius: 4px;
+            align-self: flex-start;
+            background: rgba(217, 182, 121, .12);
+            color: #D9B679;
+            border: 1px solid rgba(217, 182, 121, .38);
+        }
+        .intel-type--drop { background: rgba(201, 107, 90, .16); color: #E8A79B; border-color: rgba(232, 167, 155, .42); }
+        .intel-type--new { background: rgba(159, 208, 138, .12); color: #A8CE9A; border-color: rgba(168, 206, 154, .38); }
+        .intel-type--compare { background: rgba(143, 195, 207, .12); color: #9BC5D0; border-color: rgba(155, 197, 208, .38); }
+        .intel-type--collector { background: rgba(201, 169, 220, .12); color: #C9A9DC; border-color: rgba(201, 169, 220, .38); }
+        .intel-type--platform { background: rgba(217, 182, 121, .12); color: #D9B679; border-color: rgba(217, 182, 121, .38); }
+
+        .intel-text { font-size: .8rem; line-height: 1.6; color: rgba(241, 232, 223, .92); }
+        .intel-meta {
+            font-size: .68rem;
+            color: rgba(201, 182, 138, .5);
+            margin-top: auto;
+            letter-spacing: .03em;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: .4rem;
+            flex-wrap: wrap;
+        }
+        .intel-time {
+            color: rgba(217, 182, 121, .68);
+            font-variant-numeric: tabular-nums;
+            font-weight: 500;
+        }
+        .intel-link {
+            display: inline-flex;
+            align-items: center;
+            gap: .2rem;
+            margin-top: .4rem;
+            font-size: .7rem;
+            color: #E8C87E;
+            text-decoration: none;
+            opacity: .8;
+            transition: opacity .2s var(--ease), transform .2s var(--ease);
+            align-self: flex-start;
+        }
+        .intel-link:hover {
+            opacity: 1;
+            transform: translateX(2px);
+        }
+
+        .intel-note {
+            font-size: .68rem;
+            color: rgba(201, 182, 138, .5);
+            margin-top: .75rem;
+            line-height: 1.6;
+            position: relative;
+        }
+
+        /* ============================================================
+           BROWSE BY CATEGORY
+           ============================================================ */
+        .browse-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(184px, 1fr)); gap: 1.15rem; }
+
+        .browse-card {
+            position: relative;
+            display: flex; flex-direction: column; gap: .35rem;
+            padding: 1.5rem 1.3rem;
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: var(--card-radius);
+            text-decoration: none;
+            color: var(--color-text);
+            cursor: pointer;
+            box-shadow: var(--shadow-xs);
+            transition: border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+            overflow: hidden;
+        }
+        .browse-card::before {
+            content: '';
+            position: absolute;
+            left: 0; top: 0; right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--color-gold), rgba(156, 122, 58, 0));
+            opacity: 0;
+            transition: opacity var(--dur) var(--ease);
+        }
+        .browse-card::after {
+            content: '→';
+            position: absolute;
+            right: 1.1rem; bottom: 1.05rem;
+            font-size: .95rem;
+            color: var(--color-gold);
+            opacity: 0;
+            transform: translateX(-6px);
+            transition: all var(--dur) var(--ease);
+        }
+        .browse-card:hover {
+            border-color: var(--color-gold);
+            box-shadow: 0 4px 16px rgba(37, 34, 30, .08);
+        }
+        .browse-card:hover::before { opacity: 1; }
+        .browse-card:hover::after { opacity: 1; transform: translateX(0); }
+
+        .browse-card .cat-name { font-weight: 600; font-size: 1.06rem; font-family: var(--font-serif); }
+        .browse-card .cat-en { font-size: .74rem; color: var(--color-text-muted); letter-spacing: .1em; text-transform: uppercase; }
+        .browse-card .cat-stats { font-size: .78rem; color: var(--color-text-secondary); margin-top: .45rem; }
+
+        /* ============================================================
+           INSIGHTS
+           ============================================================ */
+        .insight-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.35rem; }
+
+        .insight-card {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: var(--card-radius);
+            padding: 1.5rem 1.4rem 1.6rem;
+            text-decoration: none;
+            color: var(--color-text);
+            display: block;
+            box-shadow: var(--shadow-xs);
+            transition: all var(--dur) var(--ease);
+            position: relative;
+            overflow: hidden;
+        }
+        .insight-card::before {
+            content: '';
+            position: absolute;
+            left: 0; top: 0; bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, var(--color-gold), rgba(156, 122, 58, .05));
+            opacity: 0;
+            transition: opacity var(--dur) var(--ease);
+        }
+        .insight-card:hover {
+            border-color: var(--color-gold);
+            box-shadow: 0 4px 16px rgba(37, 34, 30, .08);
+        }
+        .insight-card:hover::before { opacity: 1; }
+
+        .insight-kicker {
+            font-size: .72rem;
+            font-weight: 700;
+            letter-spacing: .12em;
+            color: var(--color-bronze-muted);
+            margin-bottom: .55rem;
+            text-transform: uppercase;
+        }
+        .insight-title {
+            font-size: 1.06rem;
+            font-weight: 600;
+            margin-bottom: .55rem;
+            line-height: 1.5;
+            font-family: var(--font-serif);
+            letter-spacing: -.005em;
+        }
+        .insight-desc { font-size: .83rem; color: var(--color-text-secondary); line-height: 1.62; }
+
+        /* ============================================================
+           WHY GUDONG
+           ============================================================ */
+        h2 {
+            color: var(--color-text);
+            margin-bottom: 1.35rem;
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: -.02em;
+            font-family: var(--font-serif);
+        }
+        .services-tagline {
+            margin: -.8rem 0 1.2rem;
+            color: var(--color-bronze-muted);
+            font-size: .92rem;
+            letter-spacing: .12em;
+        }
+        .how-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.45rem;
+            margin: 1.7rem 0 1.4rem;
+            text-align: left;
+        }
+
+        .how-card {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: var(--card-radius);
+            padding: 1.6rem 1.4rem 1.7rem;
+            box-shadow: var(--shadow-xs);
+            transition: all var(--dur) var(--ease);
+            position: relative;
+        }
+        .how-card:hover {
+            border-color: var(--color-gold);
+            box-shadow: var(--shadow-md);
+            transform: translateY(-3px);
+        }
+        .how-num {
+            font-family: var(--font-sans);
+            font-size: .74rem;
+            font-weight: 700;
+            color: var(--color-bronze-muted);
+            letter-spacing: .14em;
+            margin-bottom: .55rem;
+        }
+        .how-title {
+            font-size: 1.06rem;
+            font-weight: 600;
+            color: var(--color-text);
+            margin-bottom: .5rem;
+            line-height: 1.4;
+            font-family: var(--font-serif);
+        }
+        .how-desc { font-size: .83rem; color: var(--color-text-secondary); line-height: 1.62; }
+        .how-sub { font-size: .85rem; color: var(--color-text-secondary); margin: .4rem 0 0; letter-spacing: .02em; }
+
+        /* ============ 平台信任金句 ============ */
+        .trust-tagline {
+            max-width: 720px;
+            margin: 2rem auto 0;
+            padding: 1.5rem 1.75rem 1.4rem;
+            text-align: center;
+            background: linear-gradient(135deg, #FBF8F1 0%, #F5EDDD 100%);
+            border: 1px solid rgba(156, 122, 58, .22);
+            border-radius: 12px;
+            font-size: .9rem;
+            line-height: 1.85;
+            color: var(--color-text-secondary);
+            position: relative;
+            box-shadow: 0 2px 12px rgba(156, 122, 58, .06);
+        }
+        .trust-tagline::before {
+            content: '“';
+            position: absolute;
+            top: -.9rem;
+            left: 1.4rem;
+            font-family: var(--font-serif);
+            font-size: 3.4rem;
+            color: rgba(156, 122, 58, .28);
+            line-height: 1;
+            user-select: none;
+        }
+        .trust-tagline b {
+            color: var(--color-primary-dark);
+            font-weight: 700;
+        }
+        .trust-tagline .trust-sign {
+            display: block;
+            margin-top: .6rem;
+            font-size: .74rem;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+            color: var(--color-bronze-muted);
+            font-weight: 600;
+        }
+
+        /* ============================================================
+           SELLER CTA
+           ============================================================ */
+        .seller-cta {
+            background: linear-gradient(145deg, #FDFBF7 0%, #F3EAE0 100%);
+            border: 1px solid rgba(122, 78, 51, 0.12);
+            border-radius: var(--card-radius);
+            padding: 3rem 2rem 2.8rem;
+            text-align: center;
+            box-shadow: 0 16px 40px rgba(36, 31, 26, 0.06);
+            position: relative;
+            overflow: hidden;
+        }
+        .seller-cta::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 50%;
+            transform: translateX(-50%);
+            width: 80px; height: 3px;
+            background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
+            border-radius: 0 0 3px 3px;
+        }
+        .seller-cta .title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--color-text);
+            margin-bottom: 0.8rem;
+            font-family: var(--font-serif);
+            letter-spacing: -0.01em;
+        }
+        .seller-cta .desc {
+            font-size: 0.95rem;
+            color: var(--color-text-secondary);
+            margin-bottom: 2.2rem;
+            line-height: 1.7;
+            max-width: 520px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .seller-actions {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 1.8rem;
+        }
+
+        .seller-cta .btn-publish {
+            font-size: 0.95rem;
+            padding: 0.9rem 2.2rem;
+            min-height: 48px;
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+            box-shadow: 0 8px 24px rgba(122, 78, 51, 0.25);
+            border-radius: var(--btn-radius);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            transition: all 0.3s cubic-bezier(0.22, 0.61, 0.36, 1);
+            position: relative;
+            z-index: 1;
+        }
+
+        /* 卖家 CTA 按钮的柔和脉冲光晕 */
+        .seller-cta .btn-publish::before {
+            content: '';
+            position: absolute;
+            inset: -3px;
+            border-radius: calc(var(--btn-radius) + 3px);
+            background: linear-gradient(135deg, var(--color-gold), var(--color-primary));
+            opacity: 0;
+            z-index: -1;
+            animation: sellerPulse 3.4s ease-in-out infinite;
+            pointer-events: none;
+        }
+        @keyframes sellerPulse {
+            0%, 100% { opacity: 0;    transform: scale(1); }
+            50%      { opacity: .32;  transform: scale(1.03); }
+        }
+
+        .seller-cta .btn-publish:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 32px rgba(122, 78, 51, 0.35);
+        }
+        .seller-cta .btn-publish .arrow {
+            transition: transform 0.3s ease;
+        }
+        .seller-cta .btn-publish:hover .arrow {
+            transform: translateX(4px);
+        }
+
+        /* ============================================================
+           SEATS METER
+           ============================================================ */
+        .seats-meter {
+            max-width: 440px;
+            width: 100%;
+            margin: 0 auto;
+        }
+        .seats-meter-head {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-bottom: .6rem;
+        }
+        .seats-label {
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+            color: var(--color-text-secondary);
+            font-size: .82rem;
+            font-weight: 500;
+            letter-spacing: .01em;
+        }
+        .seats-label .dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--color-success);
+            box-shadow: 0 0 0 3px rgba(82, 102, 87, .15);
+            animation: pulse-dot 2.2s infinite;
+        }
+        @keyframes pulse-dot {
+            0%   { box-shadow: 0 0 0 0 rgba(82, 102, 87, .32); }
+            70%  { box-shadow: 0 0 0 8px rgba(82, 102, 87, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(82, 102, 87, 0); }
+        }
+
+        .seats-count {
+            display: inline-flex;
+            align-items: baseline;
+            gap: .22rem;
+            font-variant-numeric: tabular-nums;
+        }
+        .seats-count .seats-num {
+            font-size: 1.08rem;
+            font-weight: 800;
+            color: var(--color-primary);
+            letter-spacing: .01em;
+        }
+        .seats-count .seats-total {
+            font-size: .78rem;
+            color: var(--color-text-muted);
+        }
+
+        .seats-track {
+            height: 4px;
+            border-radius: 999px;
+            background: rgba(122, 78, 51, .10);
+            overflow: hidden;
+            position: relative;
+        }
+        .seats-fill {
+            height: 100%;
+            width: 0;
+            border-radius: 999px;
+            background: linear-gradient(90deg, var(--color-gold) 0%, var(--color-primary) 100%);
+            transition: width 1.4s cubic-bezier(.22, .61, .36, 1);
+            position: relative;
+        }
+        .seats-fill::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, .45) 50%, transparent 100%);
+            animation: seats-shine 2.8s ease-in-out infinite;
+        }
+        @keyframes seats-shine {
+            0%   { transform: translateX(-100%); }
+            60%  { transform: translateX(100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        /* ============================================================
+           FAQ
+           ============================================================ */
+        .faq-list { max-width: 780px; margin: 0 auto; }
+        .faq-item { border-bottom: 1px solid var(--color-border); }
+        .faq-item:first-child { border-top: 1px solid var(--color-border); }
+        .faq-index { display: inline-block; width: 2.15rem; color: var(--color-gold); font-size: .76rem; font-weight: 600; letter-spacing: .04em; font-variant-numeric: tabular-nums; }
+        .faq-item summary {
+            cursor: pointer;
+            padding: 1.05rem .3rem;
+            font-size: .95rem;
+            font-weight: 600;
+            color: var(--color-text);
+            list-style: none;
+            position: relative;
+            padding-right: 2.4rem;
+            transition: color var(--dur) var(--ease);
+        }
+        .faq-item summary:hover { color: var(--color-primary); }
+        .faq-item summary::-webkit-details-marker { display: none; }
+        .faq-item summary::after {
+            content: '+';
+            position: absolute;
+            right: .3rem; top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.2rem;
+            font-weight: 300;
+            color: var(--color-gold);
+            transition: transform var(--dur) var(--ease);
+        }
+        .faq-item[open] summary::after { content: '−'; }
+        .faq-item .faq-answer {
+            font-size: .86rem;
+            color: var(--color-text-secondary);
+            line-height: 1.78;
+            padding: 0 .3rem 1.2rem;
+        }
+
+        /* ============================================================
+           FOOTER
+           ============================================================ */
+        footer {
+            text-align: center;
+            padding: 2.6rem 5% 2rem;
+            background: var(--color-surface);
+            color: var(--color-text-secondary);
+            margin-top: 1rem;
+            font-size: .78rem;
+            border-top: 1px solid var(--color-border);
+        }
+        .footer-nav {
+            display: flex; flex-wrap: wrap; justify-content: center;
+            gap: 1.4rem;
+            margin-bottom: 1rem;
+        }
+        .footer-nav a {
+            color: var(--color-text-secondary);
+            text-decoration: none;
+            font-size: .82rem;
+            transition: color var(--dur) var(--ease);
+        }
+        .footer-nav a:hover { color: var(--color-primary); }
+        .footer-disclaimer {
+            max-width: 640px;
+            margin: 0 auto 1.2rem;
+            font-size: .77rem;
+            line-height: 1.7;
+            color: var(--color-text-muted);
+        }
+
+        .app-install-btn {
+            display: inline-flex; align-items: center; gap: .3rem;
+            margin-left: .6rem;
+            padding: .5rem .85rem;
+            min-width: 44px;
+            min-height: 44px;
+            border: 1px solid var(--color-border);
+            border-radius: 999px;
+            color: var(--color-qianjinzong);
+            font-size: .76rem;
+            text-decoration: none;
+            vertical-align: middle;
+            transition: all var(--dur) var(--ease);
+        }
+        .app-install-btn.hidden { display: none !important; }
+        .app-install-btn:hover {
+            border-color: var(--color-primary);
+            color: var(--color-primary);
+            background: var(--color-primary-light);
+        }
+        .app-install-btn svg { width: 12px; height: 12px; flex-shrink: 0; fill: currentColor; }
+
+        /* ============================================================
+           DEBUG
+           ============================================================ */
+        .gd-debug {
+            position: fixed; left: 8px; bottom: 8px; z-index: 9999;
+            max-width: min(94vw, 460px); max-height: 60vh; overflow: auto;
+            background: rgba(20, 17, 14, .95);
+            color: #E8E2D8;
+            font: 12px/1.6 ui-monospace, Menlo, Consolas, monospace;
+            padding: 10px 12px;
+            border-radius: 8px;
+            white-space: pre-wrap; word-break: break-all;
+            box-shadow: var(--shadow-lg);
+        }
+        .gd-debug .ok { color: #9FD08A; }
+        .gd-debug .warn { color: #E6C46B; }
+        .gd-debug .bad { color: #F0A090; }
+
+        /* ============================================================
+           LANG VISIBILITY
+           ============================================================ */
+        body[data-lang="en"] .zh { display: none; }
+        body[data-lang="zh"] .en { display: none; }
+
+        /* ============================================================
+           RESPONSIVE
+           ============================================================ */
+        @media (max-width: 1100px) {
+            .how-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+
+        @media (max-width: 900px) {
+            .header-left { flex: 1 1 auto; min-width: 0; }
+            .brand { flex-shrink: 1; }
+            .brand-text { overflow: hidden; }
+        }
+
+        @media (max-width: 820px) {
+            header { height: 64px; gap: .6rem; }
+            .brand-logo-img { height: 34px; }
+            .brand-zh, .brand-en { font-size: 1.18rem; }
+            .brand-text small { font-size: .6rem; letter-spacing: .12em; }
+            .btn-publish { padding: .65rem .9rem; font-size: .8rem; }
+            .container { padding-top: 2.5rem; }
+            .finds-grid { gap: 1.2rem; }
+            .finds-grid .finds-card { flex: 0 0 calc((100% - 1.2rem) / 2); }
+            .goods-list { grid-template-columns: repeat(4, 1fr); }
+            .intel-card { flex: 0 0 204px; }
+            .how-grid { grid-template-columns: repeat(2, 1fr); }
+            .intel-section { padding: 1.5rem 1.2rem 1.1rem; }
+        }
+
+        @media (max-width: 560px) {
+            body { font-size: 15px; }
+            .brand-logo-img { height: 30px; }
+            .brand-zh, .brand-en { font-size: 1.08rem; }
+            .brand-text small { font-size: .55rem; letter-spacing: .1em; margin-top: 1px; }
+            .brand { gap: .5rem; }
+            .header-left { gap: .6rem; }
+            .header-right { gap: .4rem; }
+            .btn-publish-text { display: none; }
+            .container { padding: 2rem 4.5% 3rem; }
+            section { margin-bottom: 4rem; }
+            h2 { font-size: 1.5rem; }
+            .section-head2 .title { font-size: 1.18rem; }
+            .hero-title-main { font-size: 1.9rem; }
+            .hero-subtitle { font-size: 1.05rem; }
+            .hero-promise { font-size: .98rem; margin-bottom: 1rem; }
+            .hero-desc { font-size: .86rem; }
+            .goods-list { grid-template-columns: repeat(3, 1fr); gap: .7rem; }
+            .finds-grid { gap: .9rem; }
+            .finds-grid .finds-card { flex: 0 0 calc((100% - .9rem) / 2); }
+            .item-card .item-info { padding: .3rem .5rem; gap: .1rem; }
+            .item-card .item-price { font-size: .78rem; gap: .25rem; }
+            .item-card .price-tag { font-size: .7rem; padding: .1rem .3rem; }
+            .finds-price { font-size: .84rem; }
+            .how-grid { grid-template-columns: 1fr; }
+            .intel-section { padding: 1.25rem .95rem .95rem; margin-bottom: 3.5rem; }
+            .intel-card { flex: 0 0 184px; padding: .78rem .82rem; }
+            .intel-text { font-size: .78rem; }
+            .seller-cta { padding: 2.2rem 1.3rem 2rem; }
+            .seller-cta .title { font-size: 1.35rem; }
+            .seller-cta .desc { font-size: .88rem; margin-bottom: 1.6rem; }
+            .seller-cta .btn-publish { font-size: .88rem; padding: .8rem 1.6rem; }
+            .trust-tagline { font-size: .84rem; padding: 1.3rem 1.25rem 1.2rem; }
+        }
+    </style>
+    <script src="assets/js/gudong-follow.js"></script>
+    <style>
+    /* 收藏按钮（心形）—— 与藏品详情页 items/*.html 的 .fav-btn 同一套视觉语言 */
+    .gd-heart {
+        display: inline-flex; align-items: center; justify-content: center;
+        width: 32px; height: 32px; padding: 0; margin: 0; flex-shrink: 0;
+        background: transparent; border: none; border-radius: 4px;
+        color: #94928C; line-height: 1; cursor: pointer;
+        -webkit-tap-highlight-color: transparent; -webkit-user-select: none; user-select: none;
+        transition: transform .18s ease, color .18s ease;
+    }
+    .gd-heart:hover { transform: scale(1.12); color: var(--color-primary); }
+    .gd-heart:active { transform: scale(.94); }
+    .gd-heart:focus-visible { outline: 2px solid var(--color-gold); outline-offset: 3px; border-radius: 4px; }
+    .gd-heart svg {
+        width: 18px; height: 18px; display: block; overflow: visible; pointer-events: none;
+        fill: none; stroke: currentColor; stroke-width: 1.55;
+        stroke-linecap: round; stroke-linejoin: round;
+        transition: fill .18s ease, stroke-width .18s ease;
+    }
+    .gd-heart.on { color: #8A5A3B; }
+    .gd-heart.on svg { fill: currentColor; stroke: currentColor; stroke-width: 1.55; }
+    .gd-heart .fav-icon { display: block; pointer-events: none; }
+    @keyframes favPop { 0% { transform: scale(1); } 45% { transform: scale(1.28); } 100% { transform: scale(1); } }
+    .gd-heart.pop svg { animation: favPop .32s ease; }
+    .gd-heart--card, .gd-heart--finds {
+        position: absolute; z-index: 3;
+        filter: drop-shadow(0 1px 1px rgba(0,0,0,.22));
+    }
+    .gd-heart--card { top: auto; right: .45rem; bottom: .45rem; }
+    .gd-heart--finds { top: auto; right: .45rem; bottom: .45rem; }
+    .finds-alert {
+        margin: .5rem 0 0; padding: .38rem .68rem; border-radius: 8px;
+        font-size: .78rem; font-weight: 600; line-height: 1.45;
+        background: #FBF3E4; color: #8A5A2B;
+    }
+    .finds-alert--new { background: #EAF2EC; color: #3E6B52; }
+    </style>
+
+    <style>
+    /* ============================================================
+       2026-10-25  首页转化优化补丁
+       隐私徽章 · 信任数据条 · 行家术语 · 情报热度标签 ·
+       卡片关联科普 · 席位倒计时 · 移动端 WhatsApp 拇指热区行动条
+       —— 放在所有主样式之后，同优先级可覆盖；勿改，改请另起补丁块
+       ============================================================ */
+
+    /* ---------- Hero 隐私徽章（第一视觉锚点） ---------- */
+    .hero-privacy-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: .45rem;
+        max-width: 100%;
+        margin: 0 auto 1.2rem;
+        padding: .42rem .95rem .42rem .62rem;
+        border: 1px solid rgba(156, 122, 58, .34);
+        border-radius: 999px;
+        background: linear-gradient(135deg, rgba(255, 255, 255, .96) 0%, rgba(251, 247, 238, .92) 100%);
+        box-shadow: 0 2px 10px rgba(122, 78, 51, .07);
+        color: var(--color-primary-dark);
+        font-size: .76rem;
+        font-weight: 600;
+        letter-spacing: .055em;
+        line-height: 1.4;
+    }
+    .hero-privacy-badge .hp-shield {
+        position: relative;
+        display: inline-flex; align-items: center; justify-content: center;
+        width: 23px; height: 23px; flex-shrink: 0;
+        border-radius: 50%;
+        background: var(--color-gold-soft);
+        color: var(--color-gold);
+    }
+    .hero-privacy-badge .hp-shield svg { display: block; fill: currentColor; }
+    .hero-privacy-badge .hp-shield::after {
+        content: ''; position: absolute; inset: -3px;
+        border-radius: 50%; border: 1px solid rgba(156, 122, 58, .5);
+        animation: hp-pulse 2.8s var(--ease) infinite;
+    }
+    @keyframes hp-pulse {
+        0%   { transform: scale(.88); opacity: .85; }
+        70%  { transform: scale(1.28); opacity: 0; }
+        100% { transform: scale(1.28); opacity: 0; }
+    }
+
+    /* ---------- 首屏信任数据条 ---------- */
+    .hero-stats {
+        display: flex; flex-wrap: wrap; justify-content: center;
+        gap: .55rem; max-width: 680px;
+        margin: 0 auto 1.35rem;
+    }
+    .hero-stat {
+        display: inline-flex; flex-direction: column;
+        align-items: center; justify-content: center;
+        padding: .5rem .95rem; min-width: 92px;
+        border: 1px solid var(--color-border);
+        border-radius: 10px;
+        background: rgba(255, 255, 255, .74);
+        line-height: 1.25;
+        text-align: center;
+    }
+    .hero-stat b {
+        font-family: var(--font-serif);
+        font-size: 1.16rem; font-weight: 700;
+        color: var(--color-primary);
+        font-variant-numeric: tabular-nums;
+        line-height: 1.2;
+    }
+    .hero-stat span { font-size: .71rem; color: var(--color-text-muted); letter-spacing: .02em; }
+    .hero-stat--accent { border-color: rgba(82, 102, 87, .3); background: rgba(82, 102, 87, .06); }
+    .hero-stat--accent b { color: var(--color-success); }
+
+    /* ---------- 行家术语标签 ---------- */
+    .hot-tags--pro { margin-top: -.65rem; margin-bottom: 1.35rem; }
+    .pro-tags-label {
+        display: inline-flex; align-items: center;
+        padding: 0 .35rem;
+        font-size: .66rem; font-weight: 700;
+        letter-spacing: .14em; text-transform: uppercase;
+        color: var(--color-bronze-muted);
+        white-space: nowrap;
+    }
+    .hot-tag--pro {
+        border-color: rgba(156, 122, 58, .38);
+        background: linear-gradient(135deg, #FFFDF9 0%, #F7EFE1 100%);
+        color: #6B4E28;
+        font-weight: 600; letter-spacing: .02em;
+    }
+    .hot-tag--pro:hover { border-color: var(--color-gold); background: var(--color-gold-soft); }
+
+    /* ---------- 信任金句三件套 ---------- */
+    .trust-strip {
+        display: flex; flex-wrap: wrap; justify-content: center;
+        gap: .55rem; max-width: 940px;
+        margin: 1.8rem auto 1.3rem;
+    }
+    .trust-chip {
+        display: inline-flex; align-items: center; gap: .42rem;
+        padding: .5rem .95rem; min-height: 44px;
+        border: 1px solid var(--color-border);
+        border-radius: 999px;
+        background: var(--color-surface);
+        box-shadow: var(--shadow-xs);
+        font-size: .8rem; font-weight: 600;
+        color: var(--color-text-secondary);
+        line-height: 1.4;
+    }
+    .trust-chip svg { flex-shrink: 0; display: block; }
+    .trust-chip--money svg { color: var(--color-success); }
+    .trust-chip--wa svg { color: #25D366; }
+    .trust-chip--lock svg { color: var(--color-primary); }
+
+    /* ---------- 今日发现：关联科普（隐性降低教育成本） ---------- */
+    .finds-related {
+        display: flex; align-items: flex-start; gap: .3rem;
+        margin-top: .55rem; padding-top: .45rem;
+        border-top: 1px dashed var(--color-border);
+        font-size: .71rem; line-height: 1.5;
+        color: var(--color-text-muted);
+    }
+    .finds-related .fr-icon { flex-shrink: 0; font-style: normal; }
+    .finds-related .fr-word { color: var(--color-bronze-muted); font-weight: 600; }
+
+    /* ---------- 卖家招募区按钮 ---------- */
+    .seller-actions { display: flex; flex-direction: column; align-items: center; gap: .9rem; }
+
+    @media (max-width: 560px) {
+        .hero-privacy-badge { font-size: .71rem; padding: .38rem .8rem .38rem .55rem; letter-spacing: .04em; gap: .38rem; }
+        .hero-privacy-badge .hp-shield { width: 21px; height: 21px; }
+        .hero-stats { gap: .4rem; }
+        .hero-stat { flex: 1 1 calc((100% - .8rem) / 3); min-width: 0; padding: .48rem .4rem; }
+        .hero-stat b { font-size: 1.04rem; }
+        .hero-stat span { font-size: .66rem; }
+        .trust-strip { gap: .4rem; }
+        .trust-chip { flex: 1 1 calc((100% - .8rem) / 2); justify-content: center; padding: .5rem .6rem; font-size: .76rem; }
+        /* 行家私语：移动端第一眼可读 */
+        .finds-reason {
+            font-size: .84rem; line-height: 1.68;
+            padding: .62rem .68rem .62rem 1.85rem;
+            margin: .45rem 0 .55rem;
+        }
+        .finds-reason::before { left: .45rem; top: .5rem; font-size: .78rem; }
+        .finds-reason::after { font-size: .6rem; right: .45rem; }
+        .finds-related { font-size: .7rem; }
+    }
+
+    /* ============================================================
+       2026-10-25 首页优化：信任前置 / 情报台加权 / 实时动态
+       ============================================================ */
+    #hero { margin-bottom: .9rem; }
+
+    /* ---------- 首屏信任保障带 ---------- */
+    .assurance-band {
+        max-width: 1020px;
+        margin: .2rem auto 2.4rem;
+        padding: 1.4rem 1.35rem 1.2rem;
+        background: linear-gradient(180deg, #FFFDF8 0%, #FAF5EA 100%);
+        border: 1px solid var(--color-border);
+        border-radius: 16px;
+        box-shadow: 0 8px 26px rgba(122, 78, 51, .06);
+        position: relative;
+        overflow: hidden;
+    }
+    .assurance-band::before {
+        content: '';
+        position: absolute;
+        inset: 0 0 auto 0;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
+    }
+    .ab-intro { text-align: center; margin-bottom: 1.15rem; }
+    .ab-kicker {
+        display: block;
+        font-size: .61rem; font-weight: 700;
+        letter-spacing: .26em; text-transform: uppercase;
+        color: var(--color-gold);
+    }
+    .ab-title {
+        display: block;
+        margin-top: .4rem;
+        font-family: var(--font-serif);
+        font-size: 1.04rem; font-weight: 700;
+        letter-spacing: .06em;
+        color: var(--color-primary-dark);
+    }
+    .ab-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: .55rem;
+    }
+    .ab-item {
+        padding: .15rem .8rem;
+        border-left: 1px solid rgba(156, 122, 58, .16);
+    }
+    .ab-item:first-child { border-left: none; }
+    .ab-icon {
+        display: inline-flex; align-items: center; justify-content: center;
+        width: 27px; height: 27px;
+        border-radius: 50%;
+        background: var(--color-gold-soft);
+        color: var(--color-gold);
+        margin-bottom: .45rem;
+    }
+    .ab-icon svg { width: 14px; height: 14px; fill: currentColor; display: block; }
+    .ab-name {
+        font-size: .84rem; font-weight: 700;
+        color: var(--color-text);
+        line-height: 1.45;
+        margin-bottom: .22rem;
+    }
+    .ab-desc {
+        font-size: .74rem;
+        color: var(--color-text-secondary);
+        line-height: 1.65;
+    }
+
+    /* ---------- 情报台：上浮 + 视觉加权 ---------- */
+    #insights {
+        background: linear-gradient(180deg, #FFFDF8 0%, #FBF6EC 100%);
+        border: 1px solid var(--color-border);
+        border-radius: 16px;
+        padding: 1.55rem 1.45rem 1.35rem;
+        margin: 0 0 4.5rem;
+        box-shadow: 0 8px 26px rgba(122, 78, 51, .05);
+        position: relative;
+        overflow: hidden;
+    }
+    #insights::before {
+        content: '';
+        position: absolute;
+        inset: 0 0 auto 0;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, rgba(156, 122, 58, .75), transparent);
+    }
+    .insight-eyebrow {
+        display: block;
+        padding-left: .8rem;
+        margin-bottom: .3rem;
+        font-size: .61rem; font-weight: 700;
+        letter-spacing: .2em; text-transform: uppercase;
+        color: var(--color-gold);
+    }
+    #insights .section-head2 { margin-bottom: 1.25rem; }
+    #insights .section-head2 .title { font-size: 1.46rem; }
+    #insights .insight-grid { counter-reset: insight; gap: 1.1rem; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    #insights .insight-card {
+        counter-increment: insight;
+        background: #FFFFFF;
+        padding: 1.35rem 1.3rem 1.45rem;
+    }
+    #insights .insight-card::after {
+        content: "0" counter(insight);
+        position: absolute;
+        top: .75rem; right: .95rem;
+        font-family: var(--font-serif);
+        font-size: 1.2rem; font-weight: 600;
+        letter-spacing: .02em;
+        color: rgba(156, 122, 58, .22);
+        line-height: 1;
+    }
+
+    /* ---------- 今日情报：实时看板 ---------- */
+    .intel-stats {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: .55rem;
+        margin-bottom: .95rem;
+        position: relative;
+    }
+    .intel-stat {
+        background: rgba(255, 255, 255, .045);
+        border: 1px solid rgba(217, 182, 121, .16);
+        border-radius: 9px;
+        padding: .55rem .7rem .6rem;
+        line-height: 1.25;
+    }
+    .intel-stat b {
+        display: block;
+        font-family: var(--font-serif);
+        font-size: 1.18rem; font-weight: 700;
+        color: #E8C87E;
+        font-variant-numeric: tabular-nums;
+    }
+    .intel-stat b small {
+        font-family: var(--font-sans);
+        font-size: .58em; font-weight: 500;
+        margin-left: .12rem;
+        color: rgba(201, 182, 138, .72);
+    }
+    .intel-stat span {
+        display: block;
+        margin-top: .2rem;
+        font-size: .65rem;
+        color: rgba(201, 182, 138, .72);
+        letter-spacing: .02em;
+    }
+    .intel-stat--muted b { color: #F1E8DF; }
+
+    .intel-liveboard {
+        position: relative;
+        height: 13.2rem;
+        overflow: hidden;
+        margin-bottom: 1rem;
+        border-top: 1px solid rgba(217, 182, 121, .16);
+        border-bottom: 1px solid rgba(217, 182, 121, .16);
+        -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 9%, #000 91%, transparent 100%);
+        mask-image: linear-gradient(180deg, transparent 0, #000 9%, #000 91%, transparent 100%);
+    }
+    .intel-ticker { animation: tickScroll var(--tick-duration, 38s) linear infinite; }
+    .intel-liveboard:hover .intel-ticker,
+    .intel-liveboard:focus-within .intel-ticker { animation-play-state: paused; }
+    @keyframes tickScroll {
+        from { transform: translateY(0); }
+        to   { transform: translateY(-50%); }
+    }
+    .tick-row {
+        display: flex; align-items: center; gap: .6rem;
+        flex-wrap: nowrap;
+        padding: .62rem .35rem;
+        border-bottom: 1px dashed rgba(217, 182, 121, .1);
+        font-size: .8rem;
+        line-height: 1.5;
+    }
+    .tick-dot {
+        width: 6px; height: 6px; flex-shrink: 0;
+        border-radius: 50%;
+        background: #E8C87E;
+        box-shadow: 0 0 0 0 rgba(232, 200, 126, .5);
+        animation: intelPulse 2.4s infinite;
+    }
+    .tick-place {
+        flex-shrink: 0;
+        white-space: nowrap;
+        font-size: .65rem; letter-spacing: .04em;
+        color: #E8C87E;
+        background: rgba(217, 182, 121, .12);
+        border: 1px solid rgba(217, 182, 121, .28);
+        border-radius: 4px;
+        padding: .1rem .4rem;
+        line-height: 1.5;
+    }
+    .tick-text {
+        flex: 1; min-width: 0;
+        color: rgba(241, 232, 223, .92);
+        white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .tick-ago {
+        flex-shrink: 0;
+        white-space: nowrap;
+        font-size: .66rem;
+        color: rgba(201, 182, 138, .55);
+        font-variant-numeric: tabular-nums;
+    }
+    .tick-row--hot .tick-text { color: #F4DFAE; font-weight: 600; }
+
+    .intel-editorial-head {
+        display: flex; align-items: center; justify-content: space-between;
+        gap: 1rem;
+        margin-bottom: .6rem;
+    }
+    .ie-title {
+        font-size: .63rem; font-weight: 700;
+        letter-spacing: .18em; text-transform: uppercase;
+        color: #D9B679;
+    }
+    .ie-more {
+        font-size: .71rem;
+        color: #E8C87E;
+        text-decoration: none;
+        opacity: .85;
+        transition: opacity var(--dur) var(--ease);
+    }
+    .ie-more:hover { opacity: 1; }
+    .intel-card--compact {
+        flex: 0 0 262px;
+        gap: .4rem;
+        padding: .72rem .82rem .75rem;
+        text-decoration: none;
+    }
+    .intel-card--compact .intel-text {
+        font-size: .78rem;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+    .intel-compact-meta {
+        margin-top: auto;
+        font-size: .64rem;
+        color: rgba(201, 182, 138, .55);
+        letter-spacing: .02em;
+    }
+
+    @media (max-width: 860px) {
+        .ab-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem .6rem; }
+        .ab-item { border-left: none; padding: 0 .15rem; }
+        .intel-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 640px) {
+        .assurance-band { padding: 1.15rem 1rem 1.05rem; margin-bottom: 1.8rem; }
+        .ab-title { font-size: .95rem; }
+        .ab-desc { font-size: .71rem; }
+        #insights { padding: 1.2rem 1rem 1.05rem; margin-bottom: 3.4rem; }
+        #insights .section-head2 .title { font-size: 1.3rem; }
+        #insights .insight-grid { grid-template-columns: 1fr; }
+        .intel-liveboard { height: 11.6rem; }
+        .tick-row { font-size: .75rem; gap: .4rem; padding: .58rem .2rem; }
+        .tick-place { font-size: .6rem; padding: .08rem .32rem; }
+        .tick-ago { font-size: .6rem; }
+        .intel-card--compact { flex: 0 0 236px; }
+    }
+    /* 超窄屏（≤400px）：时间标签让位给正文，正文仍保持单行省略 */
+    @media (max-width: 400px) {
+        .tick-ago { display: none; }
+        .tick-row { gap: .35rem; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+        .intel-ticker { animation: none; }
+        .intel-liveboard { height: auto; max-height: 13.2rem; overflow-y: auto; }
+        .tick-dot { animation: none; }
+    }
+    </style>
+</head>
+<body data-lang="zh">
+    <header>
+        <div class="header-left">
+            <button class="menu-toggle" onclick="openSidebar()" aria-label="menu" aria-expanded="false" id="menuToggle">☰</button>
+            <a href="index.html" class="brand" aria-label="古董圈 Gudong 首页">
+                <img src="assets/icons/logo-mark.png" alt="古董圈 Gudong" class="brand-logo-img" onerror="this.style.display='none'">
+                <span class="brand-text">
+                    <span class="brand-line1"><span class="brand-zh">古董圈</span> <span class="brand-en">Gudong</span></span>
+                    <small>Collectors' Network</small>
+                </span>
+            </a>
+        </div>
+
+        <div class="header-right">
+                    <button type="button" class="gd-share-btn" onclick="gdSharePage()" aria-label="分享 / Share" title="分享 / Share"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92-1.31-2.92-2.92-2.92z"/></svg></button>
+<button class="lang-btn" onclick="toggleLang()" aria-label="Switch language">EN</button>
+        </div>
+    </header>
+
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+    <aside class="sidebar" id="sidebar">
+        <button class="sidebar-toggle-inner" onclick="closeSidebar()" aria-label="close menu">☰</button>
+        <div class="sidebar-brand">
+            <span class="logo-zh">古董圈 <span class="logo-en">Gudong</span></span>
+            <span class="logo-tagline">Collectors' Network</span>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="index.html" class="sidebar-link active" onclick="closeSidebar()"><span class="zh">首页</span><span class="en">Home</span></a>
+            <a href="my/saved.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">我的收藏 · 关注</span><span class="en">Saved &amp; Followed</span></a>
+<div class="saved-hint" style="margin:-.15rem 0 .5rem 1.4rem;font-size:.64rem;color:#8a8178;letter-spacing:.02em;line-height:1.5;"><span class="zh">在您的设备本地保存，零数据追踪。</span><span class="en">Saved locally on your device. Zero data tracked.</span></div>
+            <a href="my/briefing.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">今日简报</span><span class="en">Today's Brief</span></a>
+            <a href="#daily-intel" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 实时动态</span><span class="en">· Live Pulse</span></a>
+            <a href="#today-finds" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 今日发现</span><span class="en">· Today's Curated Finds</span></a>
+            <a href="#new-listings" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 近期释出</span><span class="en">· Recently Released</span></a>
+            <a href="#insights" class="sidebar-link" onclick="closeSidebar()"><span class="zh">情报 / 科普</span><span class="en">Insights</span></a>
+            <a href="collection.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">藏品库</span><span class="en">Collection</span></a>
+            <a href="categories/porcelain.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 瓷器</span><span class="en">· Porcelain</span></a>
+            <a href="categories/jade.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 玉器</span><span class="en">· Jade</span></a>
+            <a href="categories/bronze.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 铜器</span><span class="en">· Bronzes</span></a>
+            <a href="categories/coins.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 钱币</span><span class="en">· Coins</span></a>
+            <a href="categories/paintings.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 书画</span><span class="en">· Paintings &amp; Calligraphy</span></a>
+            <a href="categories/misc.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 杂项</span><span class="en">· Miscellaneous</span></a>
+            <a href="sellers/index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">私家藏馆</span><span class="en">Private Gallery</span></a>
+            <a href="tools/index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">藏家工具包</span><span class="en">Collector's Toolkit</span></a>
+                        <a href="tools/year-since.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 年份对照计算器</span><span class="en">· Years-since-year Calculator</span></a>
+            <a href="tools/ganzhi.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 干支公历换算器</span><span class="en">· Sexagenary-Gregorian Converter</span></a>
+            <a href="tools/era-lookup.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 古文化朝代年代速查</span><span class="en">· Culture &amp; Dynasty Era Lookup</span></a>
+            <a href="tools/mark-lookup.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 瓷器底款快查</span><span class="en">· Porcelain Mark Lookup</span></a>
+            <a href="tools/valuation.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 简易估值参考</span><span class="en">· Market Valuation Reference</span></a>
+            <a href="tools/contract.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 买卖契约生成器</span><span class="en">· Contract &amp; Endorsement Generator</span></a>
+            <a href="about.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">关于我们</span><span class="en">About</span></a>
+            <button type="button" class="sidebar-lang-btn" onclick="toggleLang()" aria-label="Switch language"><span class="zh">🌐 English</span><span class="en">🌐 中文</span></button>
+        </nav>
+    </aside>
+
+    <main class="container">
+        <!-- ============ HERO ============ -->
+        <section id="hero" style="padding-top: 0;">
+            <div class="hero-clean">
+                <!-- 🔒 隐私徽章：第一视觉锚点（放大「私密」差异化卖点） -->
+                <div class="hero-privacy-badge" role="note" aria-label="免注册 · 不留存 · 端到端私密直连">
+                    <span class="hp-shield" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="13" height="13" focusable="false">
+                            <path d="M12 2 4 5.5V11c0 5 3.6 9.6 8 11 4.4-1.4 8-6 8-11V5.5L12 2zm-1 14-3-3 1.4-1.4L11 13.2l4.6-4.6L17 10l-6 6z"/>
+                        </svg>
+                    </span>
+                    <span class="hp-text zh">免注册 · 不留存 · 端到端私密直连</span>
+                    <span class="hp-text en">No Sign-Up · No Records · End-to-End Private</span>
+                </div>
+
+                <div class="hero-eyebrow"><span class="zh">南洋臻藏 · 世界共赏</span><span class="en">Where Nanyang Meets the World</span></div>
+                <div class="hero-title-main">
+                    <span class="zh">传世重器，静候知音</span>
+                    <span class="en">Rare Heirlooms, Awaiting Their Keeper</span>
+                </div>
+                <div class="hero-subtitle">
+                    <span class="zh">高古遗珍 · 名窑佳器 · 私人藏家网络</span>
+                    <span class="en">Ancient Relics · Imperial Kilns · Private Collector Network</span>
+                </div>
+                <div class="hero-desc">
+                    <span class="zh">这里没有竞价的喧嚣，只有值得藏家慢慢研读的器物。为全球藏家搜罗南洋遗珍与中国名窑重器——从满者伯夷的金铜佛、室利佛逝的陶塑，到五大名窑的传世瓷、紫砂名家的手作。免注册即可检索；学术断代工具，一触即得；加密通道直连私人卖家，沟通仅在藏家之间。</span>
+                    <span class="en">No noisy bidding here — only pieces worth a collector's patient study. We source Nanyang relics and Chinese imperial-ware heirlooms from across the world: Majapahit gilt-bronze Buddhas, Srivijaya terracottas, Song imperial-kiln porcelains, and master-crafted Yixing teapots. Search instantly with no sign-up; scholarly dating tools at a touch; encrypted channels connect you directly with private sellers — conversation stays only among collectors.</span>
+                </div>
+
+                <div class="search-box">
+                    <input type="text" id="searchInput"
+                           placeholder="试试搜「官窑 Neizao」「娘惹瓷 Nyonya Ware」「高古玉 Archaic Jade」「大清乾隆年制 Qianlong Mark」…"
+                           aria-label="搜索藏品" />
+                    <button type="button" onclick="doSearch()" aria-label="search">🔍</button>
+                </div>
+
+                <!-- 热门标签 + 朝代标签（硬核藏家搜索习惯） -->
+                <div class="hot-tags" id="hotTags">
+                    <button type="button" class="hot-tag" data-kw="青花"><span class="zh">青花瓷</span><span class="en">Blue &amp; White</span></button>
+                    <button type="button" class="hot-tag" data-kw="康熙通宝"><span class="zh">康熙通宝</span><span class="en">Kangxi Coin</span></button>
+                    <button type="button" class="hot-tag" data-kw="和田玉"><span class="zh">和田玉</span><span class="en">Hetian Jade</span></button>
+                    <button type="button" class="hot-tag" data-kw="书画"><span class="zh">清代书画</span><span class="en">Qing Painting</span></button>
+                    <button type="button" class="hot-tag" data-kw="蜜蜡"><span class="zh">老蜜蜡</span><span class="en">Amber</span></button>
+                    <button type="button" class="hot-tag" data-kw="香炉"><span class="zh">铜香炉</span><span class="en">Bronze Censer</span></button>
+                </div>
+
+                <!-- 行家术语：用「窑口 / 年代段 / 专有名词」筛出硬核买家 -->
+                <div class="hot-tags hot-tags--pro" id="hotTagsPro">
+                    <span class="pro-tags-label"><span class="zh">行家术语</span><span class="en">For Specialists</span></span>
+                    <button type="button" class="hot-tag hot-tag--pro" data-kw="官窑"><span class="zh">大清官窑</span><span class="en">Imperial Kiln</span></button>
+                    <button type="button" class="hot-tag hot-tag--pro" data-kw="明末"><span class="zh">明末清初</span><span class="en">Late Ming–Early Qing</span></button>
+                    <button type="button" class="hot-tag hot-tag--pro" data-kw="高古"><span class="zh">高古玉</span><span class="en">Archaic Jade</span></button>
+                    <button type="button" class="hot-tag hot-tag--pro" data-kw="蜜蜡"><span class="zh">老坑蜜蜡</span><span class="en">Old-Mine Amber</span></button>
+                    <button type="button" class="hot-tag hot-tag--pro" data-kw="款识"><span class="zh">年号款识</span><span class="en">Reign Marks</span></button>
+                    <button type="button" class="hot-tag hot-tag--pro" data-kw="紫砂"><span class="zh">紫砂名壶</span><span class="en">Yixing Teapot</span></button>
+                </div>
+
+                <div id="searchResultTip" class="search-result-tip" role="status" aria-live="polite" style="display:none;">
+                    <span class="zh"></span><span class="en"></span>
+                </div>
+                <div class="search-tip zh">瓷器 · 玉器 · 钱币 · 书画 · 杂项</div>
+                <div class="search-tip en">Porcelain · Jade · Coins · Paintings · Miscellaneous</div>
+
+                <!-- 首屏信任数据条：真实数据驱动 -->
+                <div class="hero-stats" id="heroStats" aria-live="polite">
+                    <span class="hero-stat"><b id="statSellers">—</b><span class="zh">位私家藏馆</span><span class="en">Private galleries</span></span>
+                    <span class="hero-stat"><b id="statItems">—</b><span class="zh">件在售重器</span><span class="en">Pieces listed</span></span>
+                    <span class="hero-stat hero-stat--accent"><b>0%</b><span class="zh">平台佣金 · 不经手资金</span><span class="en">Commission · No funds handled</span></span>
+                </div>
+                <a href="#today-finds" class="hero-btn"><span class="zh">开始浏览</span><span class="en">Explore the Collection</span></a>
+            </div>
+        </section>
+
+        <!-- ============ 首屏信任保障带（懂行 · 私密 · 安全 · 有审美） ============ -->
+        <section class="assurance-band" aria-label="隐私与信任保障">
+            <div class="ab-intro">
+                <span class="ab-kicker">Singapore · Private Collectors' Network</span>
+                <span class="ab-title zh">懂行 · 私密 · 安全 · 有审美</span>
+                <span class="ab-title en">Expert. Private. Secure. Curated.</span>
+            </div>
+            <div class="ab-grid">
+                <div class="ab-item">
+                    <span class="ab-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2 4 5.5V11c0 5 3.6 9.6 8 11 4.4-1.4 8-6 8-11V5.5L12 2z"/></svg></span>
+                    <div class="ab-name zh">端到端私密直连</div>
+                    <div class="ab-name en">End-to-End Private</div>
+                    <div class="ab-desc zh">免注册浏览，WhatsApp 加密直连藏家，平台不留存对话。</div>
+                    <div class="ab-desc en">Browse without sign-up; encrypted WhatsApp lines to collectors. No conversation stored.</div>
+                </div>
+                <div class="ab-item">
+                    <span class="ab-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16zm1-13h-2v1.2c-1.7.3-3 1.4-3 3.1 0 1.9 1.5 3 3.4 3.4 1.4.3 2 .7 2 1.4 0 .8-.8 1.3-1.9 1.3-1.2 0-2.1-.5-2.8-1.2l-1.3 1.6c.8.8 2 1.4 3.6 1.6V21h2v-1.6c1.8-.3 3.1-1.5 3.1-3.3 0-2-1.5-3-3.6-3.5-1.3-.3-1.9-.7-1.9-1.3 0-.7.7-1.2 1.8-1.2 1 0 1.8.4 2.4 1l1.2-1.5c-.8-.8-1.8-1.3-3-1.5V7z"/></svg></span>
+                    <div class="ab-name zh">0% 佣金 · 不经手资金</div>
+                    <div class="ab-name en">0% Commission · No Funds Handled</div>
+                    <div class="ab-desc zh">买卖双方自行议价与结算，平台只提供信息与连接。</div>
+                    <div class="ab-desc en">Buyers and sellers negotiate and settle directly — the platform only lists and connects.</div>
+                </div>
+                <div class="ab-item">
+                    <span class="ab-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M21 4H7a3 3 0 0 0-3 3v13a3 3 0 0 1 3-3h14V4zM7 19h14v2H7a1 1 0 0 1 0-2z"/></svg></span>
+                    <div class="ab-name zh">行家编辑团队 · 断代工具</div>
+                    <div class="ab-name en">Specialist Editors · Dating Tools</div>
+                    <div class="ab-desc zh">年代、窑口、款识工具一触即得；情报由编辑与本地行家共同整理。</div>
+                    <div class="ab-desc en">Period, kiln and mark tools at a touch; insights compiled with local specialists.</div>
+                </div>
+                <div class="ab-item">
+                    <span class="ab-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2 2 9l10 13L22 9 12 2z"/></svg></span>
+                    <div class="ab-name zh">南洋臻藏 · 人工过目</div>
+                    <div class="ab-name en">Curated in Nanyang</div>
+                    <div class="ab-desc zh">每件上架藏品经人工过目，宁少勿滥，守住藏家圈的审美与秩序。</div>
+                    <div class="ab-desc en">Every listed piece is reviewed by hand — fewer, better, in keeping with the circle.</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ 情报 / 科普（前置：先懂行，再入手） ============ -->
+        <section id="insights">
+            <div class="section-head2">
+                <div>
+                    <span class="insight-eyebrow"><span class="zh">情报台 · 懂行的人先看这里</span><span class="en">Insights Desk · Read Before You Buy</span></span>
+                    <span class="title zh">情报 / 科普</span><span class="title en">Insights &amp; Guides</span>
+                    <span class="sub-line zh">行家怎么判断年代、品相与来源——先看懂，再入手。</span>
+                    <span class="sub-line en">How specialists read period, condition and provenance — know first, buy later.</span>
+                </div>
+                <a href="insights.html" class="more zh">全部情报 →</a>
+                <a href="insights.html" class="more en">All insights →</a>
+            </div>
+            <div class="insight-grid">
+                <a href="insights/qing-porcelain-dating.html" class="insight-card">
+                    <div class="insight-kicker zh">入门指南</div><div class="insight-kicker en">BEGINNER</div>
+                    <div class="insight-title zh">清代民窑青花怎么分辨年代？3 个上手要点</div>
+                    <div class="insight-title en">Dating Qing folk kiln blue-and-white: 3 hands-on signals</div>
+                    <div class="insight-desc zh">釉面、胎质、发色，三个最容易上手的判断维度。</div>
+                    <div class="insight-desc en">Glaze, body, and pigment tone — three of the easiest entry points.</div>
+                </a>
+                <a href="insights/singapore-coin-market.html" class="insight-card">
+                    <div class="insight-kicker zh">行情观察</div><div class="insight-kicker en">MARKET</div>
+                    <div class="insight-title zh">新加坡本地钱币市场近半年行情简析</div>
+                    <div class="insight-title en">Singapore coin market: a half-year snapshot</div>
+                    <div class="insight-desc zh">清钱、民国币、东南亚流通币的成交趋势与价格区间。</div>
+                    <div class="insight-desc en">Qing, Republican, and SE-Asian circulating coins trends.</div>
+                </a>
+                <a href="insights/jade-buyer-pitfalls.html" class="insight-card">
+                    <div class="insight-kicker zh">避坑手册</div><div class="insight-kicker en">PITFALLS</div>
+                    <div class="insight-title zh">新手买玉器，最容易踩的 5 个坑</div>
+                    <div class="insight-title en">5 pitfalls new jade buyers fall into</div>
+                    <div class="insight-desc zh">从「和田」二字说起，谈谈如何不被话术带走。</div>
+                    <div class="insight-desc en">Starting from the word "Hetian" — how not to be talked into it.</div>
+                </a>
+                <a href="insights/provenance-basics.html" class="insight-card">
+                    <div class="insight-kicker zh">名家旧藏</div><div class="insight-kicker en">OLD COLLECTIONS</div>
+                    <div class="insight-title zh">名家旧藏专栏：读懂一件藏品的传世脉络</div>
+                    <div class="insight-title en">Old master collections: reading a piece's lineage</div>
+                    <div class="insight-desc zh">来源不是一句话，而是一条证据链——看这四类证据就够了。</div>
+                    <div class="insight-desc en">Provenance is a chain of evidence — four types to check.</div>
+                </a>
+            </div>
+        </section>
+
+        <!-- ============ 今日发现 ============ -->
+        <section id="today-finds">
+            <div class="section-head2">
+                <div>
+                    <span class="title zh">今日发现</span>
+                    <span class="title en">Today's Curated Finds</span>
+                    <span class="sub-line zh">每日甄选，值得细看。</span>
+                    <span class="sub-line en">A daily curated selection worth a closer look.</span>
+                </div>
+            </div>
+            <div class="finds-grid" id="todayFindsGrid"></div>
+        </section>
+
+        <!-- ============ 近期释出 ============ -->
+        <section id="new-listings">
+            <div class="section-head2">
+                <div>
+                    <span class="title zh">近期释出</span>
+                    <span class="title en">Recently Released</span>
+                    <span class="sub-line zh">藏家新近释出的藏品 · 持续更新</span>
+                    <span class="sub-line en">Newly released by collectors · continuously updated</span>
+                </div>
+                <a href="collection.html" class="more zh">查看全部 →</a>
+                <a href="collection.html" class="more en">View All →</a>
+            </div>
+            <div class="goods-list" id="itemList"></div>
+            <div id="noResult" class="no-result zh" style="display:none;">暂无匹配藏品</div>
+            <div id="noResultEn" class="no-result en" style="display:none;">No items found</div>
+        </section>
+
+        <!-- ============ 按类别逛藏品 ============ -->
+        <section id="browse">
+            <div class="section-head2">
+                <div>
+                    <span class="title zh">按类别逛藏品</span><span class="title en">Browse by Category</span>
+                    <span class="sub-line zh">从你喜欢的类别开始继续逛</span>
+                    <span class="sub-line en">Start from the categories you love</span>
+                </div>
+                <a href="collection.html" class="more zh">查看完整藏品库 →</a>
+                <a href="collection.html" class="more en">View Full Collection →</a>
+            </div>
+            <div class="browse-grid">
+                <a href="categories/porcelain.html" class="browse-card">
+                    <span class="cat-name zh">瓷器</span><span class="cat-name en">Porcelain</span>
+                    <span class="cat-stats zh" data-cat-count="porcelain">— 件在售</span>
+                    <span class="cat-stats en" data-cat-count="porcelain">— items</span>
+                </a>
+                <a href="categories/jade.html" class="browse-card">
+                    <span class="cat-name zh">玉器</span><span class="cat-name en">Jade</span>
+                    <span class="cat-stats zh" data-cat-count="jade">— 件在售</span>
+                    <span class="cat-stats en" data-cat-count="jade">— items</span>
+                </a>
+                <a href="categories/coins.html" class="browse-card">
+                    <span class="cat-name zh">钱币</span><span class="cat-name en">Coins</span>
+                    <span class="cat-stats zh" data-cat-count="coins">— 件在售</span>
+                    <span class="cat-stats en" data-cat-count="coins">— items</span>
+                </a>
+                <a href="categories/paintings.html" class="browse-card">
+                    <span class="cat-name zh">书画</span><span class="cat-name en">Paintings</span>
+                    <span class="cat-stats zh" data-cat-count="paintings">— 件在售</span>
+                    <span class="cat-stats en" data-cat-count="paintings">— items</span>
+                </a>
+                <a href="categories/bronze.html" class="browse-card">
+                    <span class="cat-name zh">铜器</span><span class="cat-name en">Bronzes</span>
+                    <span class="cat-stats zh">香炉 · 造像 · 佛具</span>
+                    <span class="cat-stats en">Censers · Figures · Ritual ware</span>
+                </a>
+                <a href="categories/misc.html" class="browse-card">
+                    <span class="cat-name zh">杂项</span><span class="cat-name en">Miscellaneous</span>
+                    <span class="cat-stats zh" data-cat-count="misc">— 件在售</span>
+                    <span class="cat-stats en" data-cat-count="misc">— items</span>
+                </a>
+            </div>
+
+            <div style="margin-top:1.6rem;">
+                <a href="sellers/index.html" class="more-btn zh">私家藏馆 →</a>
+                <a href="sellers/index.html" class="more-btn en">Private Gallery →</a>
+            </div>
+        </section>
+
+        <!-- ============ 今日情报 · 珍藏前瞻 ============ -->
+        <section id="daily-intel" class="intel-section" aria-labelledby="intelTitle">
+            <div class="intel-head">
+                <div>
+                    <span class="title" id="intelTitle">
+                        <span class="zh">今日情报 · 珍藏前瞻</span>
+                        <span class="en">Live Pulse・Curated Disposals</span>
+                    </span>
+                    <span class="sub zh">平台在售藏品的真实动态，数据实时拉取。</span>
+                    <span class="sub en">Real activity from live listings, refreshed automatically.</span>
+                </div>
+                <span class="intel-live"><span class="zh">实时动态 · 持续更新</span><span class="en">Live · Updated</span></span>
+            </div>
+
+            <!-- 实时数据概览：全部来自当前在售数据实时计算，无数据时整块隐藏 -->
+            <div class="intel-stats" id="intelStats" hidden>
+                <div class="intel-stat"><b id="statToday">0</b><span class="zh">今日新释出</span><span class="en">New today</span></div>
+                <div class="intel-stat"><b id="statWeek">0</b><span class="zh">本周新释出</span><span class="en">New this week</span></div>
+                <div class="intel-stat"><b id="statTotal">0</b><span class="zh">在售藏品</span><span class="en">Active listings</span></div>
+                <div class="intel-stat intel-stat--muted"><b id="statSellers">0</b><span class="zh">入驻藏家</span><span class="en">Collectors</span></div>
+            </div>
+
+            <!-- 实时动态：按真实上架时间生成，无时间戳数据时隐藏 -->
+            <div class="intel-liveboard" id="intelLiveboard" hidden aria-label="近期上架动态">
+                <div class="intel-ticker" id="intelTicker"></div>
+            </div>
+
+            <!-- 编辑精选：最多 3 条，保持克制 -->
+            <div class="intel-editorial">
+                <div class="intel-editorial-head">
+                    <span class="ie-title zh">编辑精选</span><span class="ie-title en">Editor's Picks</span>
+                    <a href="insights.html" class="ie-more zh">全部情报 →</a>
+                    <a href="insights.html" class="ie-more en">All insights →</a>
+                </div>
+                <div class="intel-scroll" id="intelScroll" aria-busy="true"></div>
+            </div>
+
+            <p class="intel-note zh">动态由在售数据实时生成；情报由编辑整理，不构成鉴定、估价或投资建议。</p>
+            <p class="intel-note en">Activity is generated live from listing data. Editorial content is not authentication, valuation, or investment advice.</p>
+        </section>
+
+        <section id="services">
+            <div style="text-align:center;max-width:1080px;margin:0 auto;">
+                <h2 class="zh">为什么是古董圈？</h2>
+                <h2 class="en">Why the Antique Community?</h2>
+                <p class="services-tagline"><span class="zh">发现 · 收藏 · 连接</span><span class="en">Discover · Collect · Connect</span></p>
+                    <div class="how-grid">
+                    <div class="how-card">
+                        <div class="how-num">01</div>
+                        <div class="how-title zh">每天都有新发现</div>
+                        <div class="how-title en">New discoveries every day.</div>
+                        <div class="how-desc zh">新藏品、新价格、新机会，持续更新。</div>
+                        <div class="how-desc en">New Entries, New Pricing, New Opportunities. Continuously Updated.</div>
+                    </div>
+                    <div class="how-card">
+                        <div class="how-num">02</div>
+                        <div class="how-title zh">直接连接真正的藏家</div>
+                        <div class="how-title en">Connect directly with genuine collectors.</div>
+                        <div class="how-desc zh">不绕平台、不经过中间层，直接与藏家沟通。</div>
+                        <div class="how-desc en">No platform mediation, no middlemen. Communicate directly with collectors.</div>
+                    </div>
+                    <div class="how-card">
+                        <div class="how-num">03</div>
+                        <div class="how-title zh">信息透明，自己判断</div>
+                        <div class="how-title en">Transparent information. Make your own judgment.</div>
+                        <div class="how-desc zh">价格由卖家设定，资料来自卖家；平台提供信息与发现，不替你做鉴定决定。</div>
+                        <div class="how-desc en">Prices set by sellers, information provided by sellers. The platform offers listings and discoveries, and does not make appraisal decisions on your behalf.</div>
+                    </div>
+                </div>
+
+                <!-- 2026-10-25 信任三件套：0 抽佣 / 不经手资金 / 私密直连 -->
+                <div class="trust-strip">
+                    <div class="trust-chip trust-chip--money">
+                        <svg viewBox="0 0 24 24" aria-hidden="true" width="15" height="15"><path d="M12 1 3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+                        <span class="zh">平台 0% 佣金，成交不抽成</span><span class="en">0% commission — we take nothing</span>
+                    </div>
+                    <div class="trust-chip trust-chip--wa">
+                        <svg viewBox="0 0 24 24" aria-hidden="true" width="15" height="15"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.86 9.86 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zm5.79 14.09c-.24.68-1.4 1.3-1.93 1.35-.53.05-1.01.24-3.4-.71-2.86-1.13-4.65-4.13-4.79-4.32-.14-.19-1.13-1.56-1.11-2.97.02-1.41.73-2.1.99-2.39.26-.29.57-.36.76-.36.19 0 .38 0 .55.01.18.01.42-.07.65.5.24.57.8 1.97.87 2.11.07.14.12.31.02.5-.1.19-.14.31-.29.48l-.43.5c-.14.14-.29.3-.13.59.17.29.75 1.29 1.61 2.09 1.11 1.03 2.04 1.35 2.33 1.5.29.15.46.13.63-.07.17-.21.72-.84.91-1.13.19-.29.39-.24.65-.14.26.09 1.68.79 1.97.94.29.14.48.22.55.34.07.12.07.7-.17 1.38z"/></svg>
+                        <span class="zh">不经手付款，不做资金托管</span><span class="en">No payments handled, no escrow</span>
+                    </div>
+                    <div class="trust-chip trust-chip--lock">
+                        <svg viewBox="0 0 24 24" aria-hidden="true" width="15" height="15"><path d="M18 8h-1V6A5 5 0 0 0 7 6v2H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2zM9 6a3 3 0 0 1 6 0v2H9V6zm3 12a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"/></svg>
+                        <span class="zh">WhatsApp 私密直连，互看不到手机号</span><span class="en">Private WhatsApp link — numbers stay hidden</span>
+                    </div>
+                </div>
+                <!-- 平台信任金句（合规 & 隐私双重定调） -->
+                <div class="trust-tagline">
+                    <span class="zh"><b>不经手资金，不抽取佣金，私密直连。</b>您与藏家直接沟通，确保最高级别的交易隐私与自主权。</span>
+                    <span class="en"><b>No funds handled. No commission. Private direct connection.</b> You speak with the collector directly — ensuring the highest level of trading privacy and autonomy.</span>
+                    <span class="trust-sign">Gudong · Privacy-first</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ FAQ ============ -->
+        <section id="faq">
+            <div class="section-head2" style="justify-content:center;text-align:center;">
+                <div>
+                    <span class="title zh">常见问题</span><span class="title en">Frequently Asked</span>
+                </div>
+            </div>
+            <div class="faq-list">
+                <details class="faq-item">
+                    <summary><span class="faq-index">01</span><span class="zh">古董圈是什么？</span><span class="en">What is Gudong?</span></summary>
+                    <div class="faq-answer zh">古董圈是古董信息发现与藏家连接平台。买家可免费浏览、收藏藏品并直接联系卖家。</div>
+                    <div class="faq-answer en">Gudong is a platform for discovering antiques and connecting collectors. Buyers can browse and save items, and contact sellers directly for free.</div>
+                </details>
+                <details class="faq-item">
+                    <summary><span class="faq-index">02</span><span class="zh">怎么购买藏品？</span><span class="en">How do I buy an item?</span></summary>
+                    <div class="faq-answer zh">在藏品详情页查看卖家联系方式，直接与卖家沟通，确认藏品情况、价格及交付安排。买卖双方直接交易，平台不经手付款。</div>
+                    <div class="faq-answer en">Use the contact details on the item page to speak with the seller and confirm the item's condition, price, and delivery arrangements. Buyers and sellers transact directly; Gudong does not handle payment.</div>
+                </details>
+                <details class="faq-item">
+                    <summary><span class="faq-index">03</span><span class="zh">藏品价格是谁定的？</span><span class="en">Who sets the item prices?</span></summary>
+                    <div class="faq-answer zh">藏品价格由卖家自行设定，平台不定价。标注“私聊询价”的藏品，请直接联系卖家了解报价。</div>
+                    <div class="faq-answer en">Sellers set their own prices; Gudong does not price items. For items marked “Enquire”, contact the seller directly for a quote.</div>
+                </details>
+                <details class="faq-item">
+                    <summary><span class="faq-index">04</span><span class="zh">古董圈提供鉴定吗？</span><span class="en">Does Gudong authenticate antiques?</span></summary>
+                    <div class="faq-answer zh">不提供官方担保。古董圈作为去中心化网络不参与交易，但为了给全球藏家提供决策参考，我们支持引入独立的第三方付费顾问意见。买家可在藏品页一键向平台顾问网络发起私密学术咨询。</div>
+                    <div class="faq-answer en">We provide no official guarantee. As a decentralised network, Gudong does not take part in transactions; to support collectors' decisions worldwide, we facilitate access to independent third-party paid advisory opinions. Buyers can initiate a private academic consultation with the platform's advisor network in one click from any item page.</div>
+                </details>
+                <details class="faq-item">
+                    <summary><span class="faq-index">05</span><span class="zh">如何成为藏家 / 发布藏品？</span><span class="en">How do I become a collector or list an item?</span></summary>
+                    <div class="faq-answer zh">点击“了解藏家服务”，查看入驻说明并按页面指引联系平台。成为藏家后，可提交藏品资料与图片进行发布。</div>
+                    <div class="faq-answer en">Select “Learn about Collector Services” for joining information and follow the page instructions to contact the platform. Once onboarded, submit item details and photos for publication.</div>
+                </details>
+                <details class="faq-item">
+                    <summary><span class="faq-index">06</span><span class="zh">古董圈会抽取佣金或经手付款吗？</span><span class="en">Does Gudong charge commission or handle payment?</span></summary>
+                    <div class="faq-answer zh">完全不会。平台<b>收取 0% 佣金</b>，也<b>不经手任何资金、不做资金托管</b>。买家与卖家通过 WhatsApp 私密直连后自行议价、自行结算；古董圈只提供信息展示与发现，不参与成交环节，也不从中抽成。</div>
+                    <div class="faq-answer en">Never. Gudong charges <b>0% commission</b> and <b>never handles or holds funds</b>. Buyers and sellers negotiate and settle directly over a private WhatsApp line. The platform only provides listing discovery — it takes no part in the transaction and takes no cut.</div>
+                </details>
+            </div>
+        </section>
+        <section id="seller-cta">
+            <div class="seller-cta">
+                <div class="title zh">让你的藏品，被更多真正懂收藏的人看到。</div>
+                <div class="title en">Have your collections seen by more serious collectors.</div>
+                <div class="desc zh">在古董圈建立你的线上藏馆，展示藏品，让感兴趣的买家发现、收藏并直接联系你。</div>
+                <div class="desc en">Build your online gallery within the antique community. Showcase your artifacts, so interested buyers can discover, collect and contact you directly.</div>
+
+                <div class="seller-actions">
+                    <a href="pricing.html#seller-services" class="btn-publish">
+                        <span class="zh">了解藏家服务 </span>
+                        <span class="en">Learn about Collector Services</span>
+                        <span class="arrow">→</span>
+                    </a>
+
+                    </div>
+                </div>
+        </section>
+    </main>
+
+        <style>
+        /* 2026-10-09：footer 品牌区/免责声明/版权（全站统一·精简版） */
+        .footer-brand { font-weight: 700; font-size: .84rem; color: #5c564f; margin-bottom: .35rem; }
+        .footer-disclaimer { max-width: 680px; margin: 0 auto 1.1rem; font-size: .78rem; line-height: 1.65; color: #8a8178; }
+        .footer-copyright { margin-bottom: .3rem; }
+        </style>
+    <footer>
+        <div class="footer-nav">
+            <a href="about.html" class="zh">联系我们</a><a href="about.html" class="en">Contact</a>
+            <a href="pricing.html#founding" class="zh">创始藏家</a><a href="pricing.html#founding" class="en">Founding Plan</a>
+            <a href="pricing.html#listing-plans" class="zh">发布服务</a><a href="pricing.html#listing-plans" class="en">Listing Services</a>
+            <a href="pricing.html#private-gallery" class="zh">专属藏馆</a><a href="pricing.html#private-gallery" class="en">Private Gallery</a>
+            <a href="pricing.html#add-ons" class="zh">附加服务</a><a href="pricing.html#add-ons" class="en">Add-ons</a>
+            <a href="privacy.html" class="zh">隐私政策</a><a href="privacy.html" class="en">Privacy</a>
+            <a href="terms.html" class="zh">用户条款</a><a href="terms.html" class="en">Terms</a>
+        </div>
+        <p class="footer-brand"><span class="zh">gudong.app — 高端古董发现平台与藏家网络</span><span class="en">gudong.app — Premium antiques discovery platform &amp; collector network</span></p>
+        <p class="footer-disclaimer"><span class="zh">平台仅提供藏品信息展示与藏家连接服务，不参与任何买卖交易，真伪、品相及价格由双方自行判断。</span><span class="en">The platform provides item display and collector connection services only and does not participate in any transaction; authenticity, condition and pricing are to be judged solely by the buyer and seller.</span></p>
+        <p class="footer-copyright"><span class="zh">© 2026 gudong.app 版权所有 · <a href="javascript:void(0)" class="app-install-btn" onclick="event.preventDefault();"><svg viewBox="0 0 24 24" aria-hidden="true" width="12" height="12"><path d="M5 20h14v-2H5v2zM19 9h-4V3H9v6H5l7 7 7-7z"/></svg>安装古董.app</a></span><span class="en">© 2026 gudong.app All rights reserved · <a href="javascript:void(0)" class="app-install-btn" onclick="event.preventDefault();"><svg viewBox="0 0 24 24" aria-hidden="true" width="12" height="12"><path d="M5 20h14v-2H5v2zM19 9h-4V3H9v6H5l7 7 7-7z"/></svg>Install gudong.app</a></span></p>
+    </footer>
+
+    <script>
+        /* ============================================================
+           语言 & 侧栏
+           ============================================================ */
+        let currentLang = (function () {
+            try { return localStorage.getItem('gudong_lang') || 'zh'; }
+            catch (e) { return 'zh'; }
+        })();
+        let currentCat = 'all';
+
+        /* ------------------------------------------------------------
+           数据源配置：
+           - API_BASE 指向 Vercel 上的 Airtable 代理端点（完整 URL）
+           - 图片 / 本地快照仍使用相对路径，便于同域部署与本地预览
+           ------------------------------------------------------------ */
+        const API_BASE = ((location.hostname === '127.0.0.1' || location.hostname === 'localhost' || location.protocol === 'file:') ? 'https://www.gudong.app' : '') + '/api/airtable-proxy';
+
+        (function applyLang(lang) {
+            const map = { zh: 'zh-SG', en: 'en-SG' };
+            document.documentElement.lang = map[lang] || 'zh-SG';
+            document.body.dataset.lang = lang;
+            const btn = document.querySelector('.lang-btn');
+            if (btn) btn.textContent = lang === 'zh' ? 'EN' : '中';
+            updateSearchPlaceholder();
+        })(currentLang);
+
+        function updateSearchPlaceholder() {
+            const inp = document.getElementById('searchInput');
+            if (!inp) return;
+            if (currentLang === 'zh') {
+                inp.placeholder = "试试搜「官窑 Neizao」「娘惹瓷 Nyonya Ware」「高古玉 Archaic Jade」「大清乾隆年制 Qianlong Mark」…";
+                inp.setAttribute('aria-label', '搜索藏品');
+            } else {
+                inp.placeholder = "Try \"Guan ware Neizao\", \"Nyonya ware\", \"Archaic jade\", \"Qianlong mark\"…";
+                inp.setAttribute('aria-label', 'Search antiques');
+            }
+        }
+
+        function openSidebar() {
+            document.getElementById('sidebar').classList.add('open');
+            document.getElementById('sidebarOverlay').classList.add('show');
+            document.body.style.overflow = 'hidden';
+            var t = document.getElementById('menuToggle');
+            if (t) t.setAttribute('aria-expanded', 'true');
+        }
+        function closeSidebar() {
+            document.getElementById('sidebar').classList.remove('open');
+            document.getElementById('sidebarOverlay').classList.remove('show');
+            document.body.style.overflow = '';
+            var t = document.getElementById('menuToggle');
+            if (t) t.setAttribute('aria-expanded', 'false');
+        }
+        function toggleLang() {
+            currentLang = currentLang === 'zh' ? 'en' : 'zh';
+            document.body.dataset.lang = currentLang;
+            document.documentElement.lang = currentLang === 'zh' ? 'zh-SG' : 'en-SG';
+            try { localStorage.setItem('gudong_lang', currentLang); } catch (e) {}
+            const lb = document.querySelector('.lang-btn');
+            if (lb) lb.textContent = currentLang === 'zh' ? 'EN' : '中';
+            updateSearchPlaceholder();
+            renderIntel();
+            const si = document.getElementById('searchInput');
+            if (si && si.value.trim()) filterAll();
+        }
+
+        document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeSidebar(); });
+        window.addEventListener('resize', function () { if (window.innerWidth > 900) closeSidebar(); });
+
+        /* ============================================================
+           搜索
+           ============================================================ */
+        const SEARCH_GROUPS = [
+            '#todayFindsGrid .finds-card',
+            '#itemList .item-card'
+        ];
+        let firstMatchEl = null;
+
+        function searchHaystack(card) {
+            const img = card.querySelector('img');
+            const alt = img ? (img.alt || '') : '';
+            return ((card.dataset.keywords || '') + ' ' + alt + ' ' + card.textContent).toLowerCase();
+        }
+
+        function filterAll() {
+            const kwEl = document.getElementById('searchInput');
+            const kw = kwEl ? kwEl.value.trim().toLowerCase() : '';
+            let visible = 0;
+            firstMatchEl = null;
+
+            SEARCH_GROUPS.forEach(sel => {
+                document.querySelectorAll(sel).forEach(card => {
+                    const okCat = currentCat === 'all' || card.dataset.cat === currentCat;
+                    const okKw = !kw || searchHaystack(card).includes(kw);
+                    const ok = okCat && okKw;
+                    card.style.display = ok ? '' : 'none';
+                    if (ok) {
+                        visible++;
+                        if (!firstMatchEl) firstMatchEl = card;
+                    }
+                });
+            });
+
+            showSearchTip(kw, visible);
+            checkNoResult(kw);
+
+            // 只隐藏“今日发现”板块（在搜索过滤后无任何可见卡片时），其它板块不处理
+            ['todayFindsGrid'].forEach(id => {
+                const grid = document.getElementById(id);
+                if (!grid) return;
+                const sec = grid.closest('section');
+                if (!sec) return;
+                const anyVisible = Array.from(grid.querySelectorAll('a')).some(a => a.style.display !== 'none');
+                sec.style.display = (kw && !anyVisible) ? 'none' : '';
+            });
+
+
+            return visible;
+        }
+
+        function showSearchTip(kw, visible) {
+            const tip = document.getElementById('searchResultTip');
+            if (!tip) return;
+            if (!kw) { tip.style.display = 'none'; return; }
+            const zh = tip.querySelector('.zh'), en = tip.querySelector('.en');
+            if (visible > 0) {
+                zh.textContent = `找到 ${visible} 件藏品`;
+                en.textContent = `${visible} item${visible > 1 ? 's' : ''} found`;
+            } else {
+                zh.textContent = '未找到匹配藏品，试试「青花」「玉器」「钱币」等关键词';
+                en.textContent = 'No match. Try keywords like "porcelain", "jade", "coins".';
+            }
+            tip.style.display = 'block';
+        }
+
+        function checkNoResult(kw) {
+            const visNormal = Array.from(document.querySelectorAll('#itemList .item-card')).some(c => c.style.display !== 'none');
+            const noneEl = currentLang === 'zh' ? document.getElementById('noResult') : document.getElementById('noResultEn');
+            if (!noneEl) return;
+            noneEl.style.display = (!visNormal && kw) ? 'block' : 'none';
+        }
+
+        function doSearch() {
+            const visible = filterAll();
+            const kwEl = document.getElementById('searchInput');
+            const kw = kwEl ? kwEl.value.trim() : '';
+            if (!kw) {
+                const nl = document.getElementById('new-listings');
+                if (nl) nl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                return;
+            }
+            if (visible > 0 && firstMatchEl) {
+                firstMatchEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            } else {
+                const tip = document.getElementById('searchResultTip');
+                if (tip) tip.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        }
+
+        (function bindHotTags() {
+            ['hotTags', 'hotTagsPro'].forEach(function (wrapId) {
+                const wrap = document.getElementById(wrapId);
+                if (!wrap) return;
+                wrap.addEventListener('click', e => {
+                    const btn = e.target.closest('.hot-tag');
+                    if (!btn) return;
+                    const kw = btn.dataset.kw || btn.textContent.trim();
+                    const inp = document.getElementById('searchInput');
+                    inp.value = kw;
+                    filterAll();
+                    inp.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    inp.focus({ preventScroll: true });
+                });
+            });
+        })();
+
+        (function bindSearch() {
+            const el = document.getElementById('searchInput');
+            if (!el) return;
+            el.addEventListener('keydown', e => {
+                if (e.key === 'Enter') { e.preventDefault(); doSearch(); }
+                if (e.key === 'Escape') { el.value = ''; filterAll(); }
+            });
+            el.addEventListener('input', () => filterAll());
+            el.addEventListener('search', () => filterAll());
+        })();
+
+        /* ============================================================
+           PWA（SW 必须同域，保持相对路径）
+           ============================================================ */
+        if ('serviceWorker' in navigator && location.protocol !== 'file:') {
+            let updateReady = false;
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js').then(reg => {
+                    reg.addEventListener('updatefound', () => {
+                        const newWorker = reg.installing;
+                        if (!newWorker) return;
+                        newWorker.addEventListener('statechange', () => {
+                            if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                                updateReady = true;
+                            }
+                        });
+                    });
+                    setInterval(() => reg.update().catch(() => {}), 60 * 60 * 1000);
+                    const checkUpdate = () => {
+                        if (document.visibilityState === 'visible') reg.update().catch(() => {});
+                    };
+                    document.addEventListener('visibilitychange', checkUpdate);
+                    window.addEventListener('pageshow', e => { if (e.persisted) checkUpdate(); });
+                }).catch(err => console.warn('[PWA] SW registration failed:', err));
+            });
+            let refreshing = false;
+            navigator.serviceWorker.addEventListener('controllerchange', () => {
+                if (updateReady && !refreshing) {
+                    refreshing = true;
+                    window.location.reload();
+                }
+            });
+        }
+
+        let lastHiddenAt = Date.now();
+        document.addEventListener('visibilitychange', () => {
+            if (document.visibilityState === 'hidden') {
+                lastHiddenAt = Date.now();
+            } else if (Date.now() - lastHiddenAt > 10 * 60 * 1000) {
+                window.location.reload();
+            }
+        });
+        window.addEventListener('pageshow', e => {
+            if (e.persisted && Date.now() - lastHiddenAt > 10 * 60 * 1000) {
+                window.location.reload();
+            }
+        });
+
+        /* ============================================================
+           工具函数
+           ============================================================ */
+        function esc(s) {
+            return String(s == null ? '' : s)
+                .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+        }
+
+        function svgPlaceholder(label) {
+            const text = String(label == null ? '古董圈' : label).slice(0, 10);
+            const svg =
+                '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="600" height="600">' +
+                '<defs>' +
+                '<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">' +
+                '<stop offset="0" stop-color="#FBF8F3"/>' +
+                '<stop offset="1" stop-color="#ECE4D8"/>' +
+                '</linearGradient>' +
+                '</defs>' +
+                '<rect width="600" height="600" fill="url(#bg)"/>' +
+                '<circle cx="300" cy="262" r="104" fill="none" stroke="#D3C4AC" stroke-width="1.5" opacity=".75"/>' +
+                '<circle cx="300" cy="262" r="70" fill="none" stroke="#D3C4AC" stroke-width="1" opacity=".55"/>' +
+                '<text x="300" y="282" text-anchor="middle" font-family="Georgia,serif" font-size="52" fill="#C0AC8E">古</text>' +
+                '<text x="300" y="452" text-anchor="middle" font-family="sans-serif" font-size="24" fill="#A9A096">' + esc(text) + '</text>' +
+                '</svg>';
+            return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
+        }
+        const PLACEHOLDER_IMG = svgPlaceholder('古董圈');
+        window.__GD_PH__ = PLACEHOLDER_IMG;
+
+        function catKey(c) {
+            const map = {
+                '瓷器': 'porcelain', '玉器': 'jade', '钱币': 'coins',
+                '书画': 'paintings', '铜器': 'bronze', '杂项': 'misc',
+                'porcelain': 'porcelain', 'jade': 'jade', 'coins': 'coins',
+                'paintings': 'paintings', 'painting': 'paintings', 'calligraphy': 'paintings',
+                'bronze': 'bronze', 'bronzes': 'bronze',
+                'misc': 'misc', 'miscellaneous': 'misc'
+            };
+            return map[String(c == null ? '' : c).trim().toLowerCase()] || map[c] || 'misc';
+        }
+
+        function normId(v) {
+            return String(v == null ? '' : v)
+                .replace(/[\u2010\u2011\u2012\u2013\u2014\u2015\u2212\uFE58\uFF0D]/g, '-')
+                .trim();
+        }
+        function normKey(k) { return String(k).trim().toLowerCase().replace(/[\s\-]+/g, '_'); }
+        function asBool(v) {
+            if (typeof v === 'string') return /^(true|yes|y|1|是|✓|✔)$/i.test(v.trim());
+            return !!v;
+        }
+        function getF(f, ...names) {
+            for (const n of names) {
+                const v = f[n];
+                if (v !== undefined && v !== null && v !== '') return v;
+            }
+            return null;
+        }
+        function attachmentUrl(v) {
+            if (!v) return '';
+            if (Array.isArray(v)) v = v[0];
+            if (v && typeof v === 'object') {
+                return (v.thumbnails && v.thumbnails.large && v.thumbnails.large.url) || v.url || '';
+            }
+            return typeof v === 'string' ? v.trim() : '';
+        }
+
+        /* ============================================================
+           图片路径智能解析（关键修复）
+           1) 优先 Airtable 附件 URL
+           2) img_file 若带子目录 → 直接用
+           3) img_file 无子目录 → 根据 seller_id / item_id 自动补全
+           4) 都拿不到 → 用 item_id 推导 defaultImgPath
+           5) 最后 → SVG 占位图
+           ============================================================ */
+        function sellerDirFor(f) {
+            // 1) 优先根据 seller_id 判断
+            const sid = String(f.seller_id || f.sellerId || '').trim().toLowerCase();
+            if (sid) {
+                if (/lim/.test(sid)) return 'lim-kw';
+                if (/ng[\-\s_]?cy/.test(sid)) return 'ng-cy';
+                if (/ng[\-\s_]?lk/.test(sid)) return 'ng-lk';
+                if (/ng/.test(sid)) return 'ng-lk';
+                if (/yak/.test(sid)) return 'yak-bc';
+            }
+            // 2) 兜底：根据 item_id 前缀
+            const id = normId(f.item_id || '').toLowerCase();
+            if (id.startsWith('item-lim-')) return 'lim-kw';
+            if (id.startsWith('item-ngcy-')) return 'ng-cy';
+            if (id.startsWith('item-ng-')) return 'ng-lk';
+            if (id.startsWith('item-yak-')) return 'yak-bc';
+            return '';
+        }
+
+        function defaultImgPath(f) {
+            const id = normId(f.item_id || '');
+            if (!id) return '';
+            const seller = sellerDirFor(f);
+            if (!seller) return '';
+            return seller + '/' + id + '.jpg';
+        }
+
+        function imgPath(f) {
+            // 1) 附件 URL
+            const u = attachmentUrl(f.img_url);
+            if (/^https?:\/\//i.test(u)) return u;
+            if (/^data:image\//i.test(u)) return u;
+
+            // 2) img_file 字段
+            let file = (normId(f.img_file || '').split(/\s+/)[0] || '').trim();
+            if (file) {
+                // 若 img_file 已带子目录，直接用
+                if (file.indexOf('/') !== -1) return 'assets/images/' + file;
+                // 若 img_file 无子目录，尝试智能补全
+                const dir = sellerDirFor(f);
+                if (dir) return 'assets/images/' + dir + '/' + file;
+                // 补不出目录，退回到通用路径
+                return 'assets/images/' + file;
+            }
+
+            // 3) 用 item_id 推导
+            const def = defaultImgPath(f);
+            if (def) return 'assets/images/' + def;
+
+            // 4) SVG 占位图
+            const label = f.title_zh || f.title_en || f.category || '古董圈';
+            return svgPlaceholder(label);
+        }
+
+        function attrKeywords(f) {
+            return esc([f.title_zh, f.title_en, f.era_zh, f.era_en, f.category].filter(Boolean).join(' '));
+        }
+
+        function normalizeRecord(rec) {
+            if (!rec || typeof rec !== 'object') return null;
+            const src = (rec.fields && typeof rec.fields === 'object') ? rec.fields : rec;
+            const out = {};
+            Object.keys(src).forEach(k => {
+                let v = src[k];
+                if (Array.isArray(v)) {
+                    if (!v.length) v = null;
+                    else if (v.every(x => x === null || typeof x !== 'object')) v = v[0];
+                }
+                const key = normKey(k);
+                out[key] = /^is_/.test(key) ? asBool(v) : v;
+            });
+            [['title_zh', 'title_en'], ['era_zh', 'era_en']].forEach(([zh, en]) => {
+                if (!out[zh] && out[en]) out[zh] = out[en];
+                if (!out[en] && out[zh]) out[en] = out[zh];
+            });
+            return out;
+        }
+
+        function pickList(json, ...keys) {
+            for (const k of keys) if (Array.isArray(json[k])) return json[k];
+            return null;
+        }
+
+        function normalizePayload(json) {
+            if (!json || typeof json !== 'object') throw new Error('响应不是 JSON 对象');
+            if (json.error) {
+                const m = typeof json.error === 'string' ? json.error : (json.error.message || JSON.stringify(json.error));
+                throw new Error('接口返回错误：' + String(m).slice(0, 120));
+            }
+            diag.payloadKeys = Array.isArray(json) ? ['(array)'] : Object.keys(json);
+
+            const tf = pickList(json, 'todayFinds', 'today_finds');
+            const nl = pickList(json, 'newListing', 'newListings', 'new_listing', 'new_listings');
+            const flat = Array.isArray(json) ? json : (Array.isArray(json.records) ? json.records : null);
+
+            let groups;
+            if (tf || nl) {
+                groups = { todayFinds: tf || [], newListing: nl || [] };
+            } else if (flat) {
+                const all = flat.map(normalizeRecord).filter(Boolean);
+                groups = { todayFinds: all.filter(f => f.is_today_finds), newListing: all };
+            } else {
+                throw new Error('响应中找不到 todayFinds / newListing（实际字段：' + diag.payloadKeys.join(', ') + '）');
+            }
+
+            let total = 0, kept = 0;
+            const clean = list => list.map(normalizeRecord).filter(f => {
+                total++;
+                if (f && normId(f.item_id) && (f.title_zh || f.title_en)) { kept++; return true; }
+                diag.skipped++;
+                return false;
+            });
+            const out = {
+                todayFinds: clean(groups.todayFinds),
+                newListing: clean(groups.newListing)
+            };
+            if (total > 0 && kept === 0) throw new Error('所有记录都缺少 item_id 或 title_zh/title_en，请检查字段名');
+
+            const first = out.todayFinds[0] || out.newListing[0];
+            diag.sampleKeys = first ? Object.keys(first) : [];
+            diag.counts = { todayFinds: out.todayFinds.length, newListing: out.newListing.length };
+            return out;
+        }
+
+        function joinPrice(label, amount) {
+            if (!label) return amount || '';
+            if (!amount || label.indexOf(amount) !== -1) return label;
+            return /[:：]\s*$/.test(label) ? label + amount : label + ' ' + amount;
+        }
+        function fmtMoney(v) {
+            v = Array.isArray(v) ? v[0] : v;
+            if (v == null || v === '') return '';
+            const str = String(v).trim();
+            if (/^(S?\$)?\s*[\d,]+(\.\d+)?$/i.test(str)) {
+                const n = Number(str.replace(/[S$\s,]/gi, ''));
+                if (!isFinite(n) || n <= 0) return '';
+                return 'S$' + new Intl.NumberFormat('en-SG', { maximumFractionDigits: 2 }).format(n);
+            }
+            return str;
+        }
+        function resolvePrice(f) {
+            const type = String(getF(f, 'price_type', 'price type') || '').trim();
+            const enquiry = { zh: '私聊询价', en: 'Enquire', enquiry: true };
+            if (/私聊|询价|enquir|inquir|message/i.test(type)) return enquiry;
+            const fixed = fmtMoney(getF(f, 'fixed_price'));
+            if (fixed && (!type || /一口价|fixed/i.test(type))) return { zh: fixed, en: fixed };
+            const zh = joinPrice(getF(f, 'price_display_zh'), getF(f, 'price_zh')) || joinPrice(getF(f, 'price_display_en'), getF(f, 'price_en'));
+            const en = joinPrice(getF(f, 'price_display_en'), getF(f, 'price_en')) || joinPrice(getF(f, 'price_display_zh'), getF(f, 'price_zh'));
+            if (zh || en) return { zh: zh || en, en: en || zh };
+            return enquiry;
+        }
+        function priceHtml(f, wrapperClass) {
+            const p = resolvePrice(f);
+            if (p.enquiry) {
+                const labelZh = (wrapperClass === 'item-price' || wrapperClass === 'finds-price') ? '私聊询价 →' : p.zh;
+                const labelEn = (wrapperClass === 'item-price' || wrapperClass === 'finds-price') ? 'Enquire →' : p.en;
+                return `<div class="${wrapperClass}"><span class="price-main price-main--enquiry"><span class="zh">${labelZh}</span><span class="en">${labelEn}</span></span></div>`;
+            }
+            return `<div class="${wrapperClass}">
+                <span class="price-main zh">${esc(p.zh)}</span>
+                <span class="price-main en">${esc(p.en)}</span>
+              </div>`;
+        }
+
+        function reasonFor(f) {
+            const rz = getF(f, 'reason_zh', 'reason');
+            const re = getF(f, 'reason_en', 'reason_en_us') || rz;
+            if (rz || re) return { zh: rz || re, en: re || rz };
+            return null;
+        }
+        function timeAgo(f) {
+            const raw = getF(f, 'listed_at', 'listed_time', 'created_at', 'updated_at');
+            if (!raw) return null;
+            const t = new Date(raw);
+            if (isNaN(t.getTime())) return null;
+            const diff = Date.now() - t.getTime();
+            const h = Math.floor(diff / 3600000);
+            if (h < 1) return { zh: '刚刚上架', en: 'Just listed' };
+            if (h < 24) return { zh: `${h} 小时前上架`, en: `Listed ${h}h ago` };
+            const d = Math.floor(h / 24);
+            if (d < 30) return { zh: `${d} 天前上架`, en: `Listed ${d}d ago` };
+            return null;
+        }
+
+        var FAV_KEY = 'gudong_fav';
+        function readFav() {
+            try { var raw = localStorage.getItem(FAV_KEY); if (!raw) return []; var arr = JSON.parse(raw); if (!Array.isArray(arr)) return []; return arr.filter(function (x) { return typeof x === 'string' && x; }); } catch (e) { return []; }
+        }
+        function isFav(id) { var ni = normId(id); return readFav().indexOf(ni) !== -1; }
+        function updateHearts() { document.querySelectorAll('.gd-heart').forEach(function (h) { var id = h.getAttribute('data-fav-id'); var on = !!(id && isFav(id)); h.classList.toggle('on', on); h.setAttribute('aria-pressed', on ? 'true' : 'false'); }); }
+        document.addEventListener('click', function (e) {
+            var h = e.target && e.target.closest ? e.target.closest('.gd-heart') : null;
+            if (!h) return;
+            var id = h.getAttribute('data-fav-id'); if (!id) return;
+            e.preventDefault(); e.stopPropagation();
+            var a = readFav(), ni = normId(id), i = a.indexOf(ni);
+            if (i === -1) a.push(ni); else a.splice(i, 1);
+            try { localStorage.setItem(FAV_KEY, JSON.stringify(a)); } catch (err) {}
+            var icon = h.querySelector('svg');
+            if (icon) { icon.classList.remove('pop'); void icon.offsetWidth; icon.classList.add('pop'); }
+            updateHearts();
+        });
+        function gfAlertHtml(f) {
+            if (!window.GudongFollow) return '';
+            var GF = window.GudongFollow, h = '';
+            if (GF.isNewSinceSeen(f)) h += '<div class="finds-alert finds-alert--new"><span class="zh">🆕 你上次访问后上架</span><span class="en">🆕 New since your last visit</span></div>';
+            var da = GF.dropAlert(f);
+            if (da) h += '<div class="finds-alert"><span class="zh">🔔 已降价 ↓' + da.pct + '%</span><span class="en">🔔 Price dropped ↓' + da.pct + '%</span></div>';
+            return h;
+        }
+        function mountActions() {
+            if (window.GudongFollow) {
+                document.querySelectorAll('.gf-follow-btn').forEach(function (btn) {
+                    var seller = btn.getAttribute('data-seller');
+                    if (!seller || btn.getAttribute('data-mounted')) return;
+                    btn.setAttribute('data-mounted', '1');
+                    window.GudongFollow.mount(btn, { type: 'seller', term: seller, followZh: '关注藏家', followEn: 'Follow', doneZh: '已关注', doneEn: 'Following' });
+                });
+            }
+            updateHearts();
+        }
+
+        /* ============ 今日发现 × 情报/科普：按类目隐性关联科普 ============ */
+        const RELATED_BY_CAT = {
+            '瓷器': { url: 'insights/qing-porcelain-dating.html', zh: '清代青花怎么断代', en: 'Dating Qing blue-and-white' },
+            '玉器': { url: 'insights/jade-buyer-pitfalls.html', zh: '新手买玉的 5 个坑', en: '5 jade buyer pitfalls' },
+            '钱币': { url: 'insights/singapore-coin-market.html', zh: '钱币行情半年简析', en: 'Coin market snapshot' },
+            '书画': { url: 'insights/provenance-basics.html', zh: '读懂藏品的传世脉络', en: 'Reading provenance' },
+            '铜器': { url: 'insights/provenance-basics.html', zh: '读懂藏品的传世脉络', en: 'Reading provenance' },
+            '杂项': { url: 'insights/jade-buyer-pitfalls.html', zh: '新手避坑手册', en: 'Buyer pitfalls guide' }
+        };
+        function relatedHtmlByCat(cat) {
+            const r = RELATED_BY_CAT[String(cat || '').trim()];
+            if (!r) return '';
+            return `
+                <div class="finds-related"><span class="fr-icon" aria-hidden="true">📖</span><span class="zh">相关科普 · <span class="fr-word">${esc(r.zh)}</span></span><span class="en">Further reading · <span class="fr-word">${esc(r.en)}</span></span></div>`;
+        }
+
+        function renderFindsCard(f) {
+            const promoted = f.is_today_finds;
+            const cls = promoted ? 'finds-card--promoted' : 'finds-card--organic';
+            const kw = attrKeywords(f);
+            const metaZh = [f.era_zh, f.category].filter(Boolean).join(' · ');
+            const metaEn = [f.era_en, f.category].filter(Boolean).join(' · ');
+            const reason = reasonFor(f);
+            const reasonHtml = reason ? `
+                <div class="finds-reason zh">${esc(reason.zh)}</div>
+                <div class="finds-reason en">${esc(reason.en)}</div>` : '';
+            const ta = timeAgo(f);
+            const taHtml = ta ? `
+                <div class="finds-timestamp zh">${esc(ta.zh)}</div>
+                <div class="finds-timestamp en">${esc(ta.en)}</div>` : '';
+            return `
+              <a href="items/${esc(normId(f.item_id))}.html" class="finds-card ${cls}" data-cat="${catKey(f.category)}" data-keywords="${kw}">
+                <div class="finds-image">
+                  <img src="${imgPath(f)}" alt="${esc(f.title_zh)} ${esc(f.title_en)} - Chinese antiques Singapore" loading="lazy" decoding="async" onerror="this.onerror=null;this.src=window.__GD_PH__">
+                  <button type="button" class="gd-heart gd-heart--finds" data-fav-id="${esc(normId(f.item_id))}" aria-pressed="false" aria-label="收藏 / Add to favourites" title="收藏 / Add to favourites">
+                    <svg class="fav-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                  </button>
+                </div>
+                <div class="finds-title zh">${esc(f.title_zh)}</div><div class="finds-title en">${esc(f.title_en)}</div>
+                ${priceHtml(f, 'finds-price')}
+                ${reasonHtml}
+                ${taHtml}
+                ${gfAlertHtml(f)}
+                ${relatedHtmlByCat(f.category)}
+                <div class="finds-caption zh">卖家提供资料</div><div class="finds-caption en">Seller-provided information</div>
+              </a>`;
+        }
+
+        function renderCards(containerId, items) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+            container.innerHTML = items.map(f => {
+                const imgSrc = imgPath(f);
+                const detailUrl = 'item.html?id=' + encodeURIComponent(normId(f.item_id));
+                const kw = attrKeywords(f);
+                const nz = f.title_zh || f.title_en || '';
+                return `
+                  <a href="${detailUrl}" class="item-card" data-cat="${catKey(f.category)}" data-keywords="${kw}" aria-label="${esc(nz)}">
+                    <div class="item-image">
+                      <img src="${imgSrc}" alt="${esc(f.title_zh)} ${esc(f.title_en)} - Chinese antiques Singapore" loading="lazy" decoding="async" onerror="this.onerror=null;this.src=window.__GD_PH__">
+                      <button type="button" class="gd-heart gd-heart--card" data-fav-id="${esc(normId(f.item_id))}" aria-pressed="false" aria-label="收藏 / Add to favourites" title="收藏 / Add to favourites">
+                        <svg class="fav-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                      </button>
+                                          </div>
+                    <div class="item-info">
+                      <div class="item-title zh">${esc(f.title_zh || f.title_en || '')}</div>
+                      <div class="item-title en">${esc(f.title_en || f.title_zh || '')}</div>
+                      ${priceHtml(f, 'item-price')}
+                    </div>
+                  </a>`;
+            }).join('');
+        }
+
+        function showSkeleton() {
+            const fill = (id, n, cls) => {
+                const el = document.getElementById(id);
+                if (!el) return;
+                el.setAttribute('aria-busy', 'true');
+                el.innerHTML = Array(n).fill('<div class="skeleton-card ' + cls + '"></div>').join('');
+            };
+            fill('todayFindsGrid', 4, 'skeleton-card--square');
+            fill('itemList', 6, 'skeleton-card--square');
+        }
+
+        function showLoadError() {
+            const msgZh = '<strong>藏品加载失败</strong><br>请刷新页面重试。如持续出现，请稍后再访问。';
+            const msgEn = '<strong>Failed to load listings</strong><br>Please refresh the page. If the issue persists, try again later.';
+            const html = `<div class="load-error-tip"><span class="zh">${msgZh}</span><span class="en">${msgEn}</span></div>`;
+            ['todayFindsGrid', 'itemList'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) { el.removeAttribute('aria-busy'); el.innerHTML = html; }
+            });
+        }
+
+        function updateCategoryCounts(newListing) {
+            const counts = { porcelain: 0, jade: 0, coins: 0, paintings: 0, bronze: 0, misc: 0 };
+            (newListing || []).forEach(f => {
+                const k = catKey(f.category);
+                if (counts[k] !== undefined) counts[k]++;
+            });
+            document.querySelectorAll('[data-cat-count]').forEach(el => {
+                const k = el.getAttribute('data-cat-count');
+                const n = counts[k] || 0;
+                el.textContent = n > 0
+                    ? (el.classList.contains('zh') ? `${n} 件在售` : `${n} items`)
+                    : (el.classList.contains('zh') ? '待上架' : 'Coming soon');
+            });
+        }
+
+        /* ============ 首屏信任标签动态数值 ============ */
+        const SEATS_TOTAL = 88;
+        const SEATS_BASELINE_ADMITTED = 5;
+
+        function renderSeats(listings) {
+            const ids = new Set();
+            (listings || []).forEach(function (it) {
+                const id = String(it.seller_id || it.sellerId || '').trim();
+                if (id) ids.add(id);
+            });
+            const admitted = Math.max(SEATS_BASELINE_ADMITTED, ids.size);
+            const left = Math.max(0, SEATS_TOTAL - admitted);
+            const pct = Math.min(100, Math.max(0, (admitted / SEATS_TOTAL) * 100));
+
+            const setTxt = function (id, v) { const el = document.getElementById(id); if (el) el.textContent = String(v); };
+            setTxt('seatsNum', left);
+            setTxt('seatsNumEn', left);
+            /* 首屏信任数据条：真实藏馆数 / 在售件数 */
+            setTxt('statSellers', admitted);
+            setTxt('statItems', (listings || []).length);
+
+            const fill = document.getElementById('seatsFill');
+            if (fill) {
+                requestAnimationFrame(() => {
+                    requestAnimationFrame(() => {
+                        fill.style.width = pct.toFixed(2) + '%';
+                    });
+                });
+            }
+        }
+
+        /* ============================================================
+           数据渲染（关键修复）
+           - “今日发现” 空数据时不隐藏 section：
+             · 优先从 newListing 取前 4 条兜底
+             · 若 newListing 也为空 → 显示友好空状态提示
+           ============================================================ */
+        function applyListingData(data) {
+            renderSeats(data.newListing);
+
+            const tfgrid = document.getElementById('todayFindsGrid');
+            if (tfgrid) {
+                tfgrid.removeAttribute('aria-busy');
+                let tf = (data.todayFinds || []).slice();
+                // 兜底：今日发现为空时，从 newListing 取前 4 条
+                if (!tf.length && (data.newListing || []).length) {
+                    tf = data.newListing.slice(0, 4);
+                }
+                if (tf.length) {
+                    tfgrid.innerHTML = tf.map(renderFindsCard).join('');
+                    const sec = tfgrid.closest('section');
+                    if (sec) sec.hidden = false;
+                } else {
+                    // 全部为空 → 显示友好空状态，不隐藏板块
+                    tfgrid.innerHTML = `
+                        <div class="no-result" style="flex:1 1 100%;padding:2.5rem 1rem;">
+                            <span class="zh">暂无今日精选，敬请期待明日更新</span>
+                            <span class="en">No featured picks today — check back tomorrow</span>
+                        </div>`;
+                    const sec = tfgrid.closest('section');
+                    if (sec) sec.hidden = false;
+                }
+            }
+
+            const list = document.getElementById('itemList');
+            if (list) {
+                list.removeAttribute('aria-busy');
+                if (data.newListing.length) {
+                    renderCards('itemList', data.newListing);
+                } else {
+                    list.innerHTML = '<div class="no-result" style="grid-column:1/-1;padding:2rem 1rem;"><span class="zh">暂无藏品，敬请期待</span><span class="en">No listings yet — please check back soon</span></div>';
+                }
+            }
+            updateCategoryCounts(data.newListing);
+            const kwEl = document.getElementById('searchInput');
+            const kw = kwEl ? kwEl.value.trim() : '';
+            if (kw || currentCat !== 'all') filterAll(); else checkNoResult();
+            mountActions();
+            if (window.GudongFollow) window.GudongFollow.beginSession();
+
+            // 实时看板：统计与动态全部来自当前在售数据，无实时数据则隐藏
+            const seenIds = new Set();
+            const uniqItems = (data.todayFinds || []).concat(data.newListing || []).filter(f => {
+                const id = normId(f.item_id);
+                if (seenIds.has(id)) return false;
+                seenIds.add(id);
+                return true;
+            });
+            updateLiveBoard(uniqItems, diag.source);
+        }
+
+        /* ============================================================
+           今日情报 · 珍藏前瞻
+           —— 编辑精选只展示接口返回的真实情报，无数据时整块隐藏
+           ============================================================ */
+        let liveRefreshTimer = null;
+
+        function listedTs(f) {
+            const raw = getF(f, 'listed_at', 'listed_time', 'created_at', 'updated_at');
+            const t = raw ? new Date(raw).getTime() : NaN;
+            return isNaN(t) ? null : t;
+        }
+        function relTime(ts) {
+            const diff = Date.now() - ts;
+            const m = Math.floor(diff / 60000);
+            if (m < 1) return { zh: '刚刚', en: 'just now' };
+            if (m < 60) return { zh: m + ' 分钟前', en: m + ' min ago' };
+            const h = Math.floor(m / 60);
+            if (h < 24) return { zh: h + ' 小时前', en: h + ' hr ago' };
+            const d = Math.floor(h / 24);
+            return { zh: d + ' 天前', en: d + 'd ago' };
+        }
+
+        function updateLiveBoard(allItems, source) {
+            const statsBox = document.getElementById('intelStats');
+            const board = document.getElementById('intelLiveboard');
+            // 接口与快照均不可用（演示数据）→ 不展示任何“实时”内容
+            if (source === 'demo' || !allItems.length) {
+                if (statsBox) statsBox.hidden = true;
+                if (board) board.hidden = true;
+                return;
+            }
+
+            // —— 统计：全部基于当前在售数据实时计算 ——
+            const now = Date.now();
+            const dayStart = new Date(); dayStart.setHours(0, 0, 0, 0);
+            let todayN = 0, weekN = 0;
+            const sellers = new Set();
+            allItems.forEach(f => {
+                const ts = listedTs(f);
+                if (ts != null) {
+                    if (ts >= dayStart.getTime()) todayN++;
+                    if (now - ts <= 7 * 86400000) weekN++;
+                }
+                const sid = String(f.seller_id || f.sellerId || '').trim();
+                if (sid) sellers.add(sid);
+            });
+            const setNum = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
+            setNum('statToday', todayN);
+            setNum('statWeek', weekN);
+            setNum('statTotal', allItems.length);
+            setNum('statSellers', sellers.size);
+            if (statsBox) statsBox.hidden = false;
+
+            // —— 动态流：最近上架的真实藏品（需带时间戳，不足 3 条则隐藏） ——
+            const recent = allItems
+                .map(f => ({ f, ts: listedTs(f) }))
+                .filter(x => x.ts != null)
+                .sort((a, b) => b.ts - a.ts)
+                .slice(0, 9);
+            if (recent.length < 3) { if (board) board.hidden = true; return; }
+            if (board) board.hidden = false;
+            renderLiveTicker(recent, todayN);
+            if (liveRefreshTimer) clearInterval(liveRefreshTimer);
+            liveRefreshTimer = setInterval(() => renderLiveTicker(recent, todayN), 60000); // 相对时间每分钟刷新
+        }
+
+        function renderLiveTicker(recent, todayN) {
+            const box = document.getElementById('intelTicker');
+            if (!box) return;
+            const rowsArr = [];
+            if (todayN > 0) {
+                rowsArr.push({
+                    hot: true,
+                    badge: { zh: '今日', en: 'Today' },
+                    zh: '今日已有 ' + todayN + ' 件藏品新释出。',
+                    en: todayN + ' piece' + (todayN > 1 ? 's' : '') + ' released today.',
+                    ago: { zh: '实时', en: 'live' }
+                });
+            }
+            recent.forEach(x => {
+                const f = x.f;
+                rowsArr.push({
+                    badge: { zh: f.category || '藏品', en: f.category || 'Item' },
+                    zh: '新释出：' + (f.title_zh || f.title_en || ''),
+                    en: 'Released: ' + (f.title_en || f.title_zh || ''),
+                    ago: relTime(x.ts)
+                });
+            });
+            const rows = rowsArr.map(it => `
+                <div class="tick-row${it.hot ? ' tick-row--hot' : ''}">
+                    <span class="tick-dot" aria-hidden="true"></span>
+                    <span class="tick-place"><span class="zh">${esc(it.badge.zh)}</span><span class="en">${esc(it.badge.en)}</span></span>
+                    <span class="tick-text"><span class="zh">${esc(it.zh)}</span><span class="en">${esc(it.en)}</span></span>
+                    <span class="tick-ago"><span class="zh">${esc(it.ago.zh)}</span><span class="en">${esc(it.ago.en)}</span></span>
+                </div>`).join('');
+            box.innerHTML = `<div class="tick-set">${rows}</div><div class="tick-set" aria-hidden="true">${rows}</div>`;
+            box.style.setProperty('--tick-duration', (rowsArr.length * 4.6) + 's');
+        }
+
+        const INTEL_TYPE_LABEL = {
+            new:       { zh: '新释出',   en: 'NEW',        cls: 'intel-type--new' },
+            drop:      { zh: '降价',     en: 'PRICE DROP', cls: 'intel-type--drop' },
+            compare:   { zh: '同类对比', en: 'COMPARE',    cls: 'intel-type--compare' },
+            collector: { zh: '藏家动态', en: 'COLLECTOR',  cls: 'intel-type--collector' },
+            platform:  { zh: '平台快讯', en: 'PLATFORM',   cls: 'intel-type--platform' }
+        };
+
+        function renderIntel(items) {
+            const box = document.getElementById('intelScroll');
+            if (!box) return;
+            // 只展示接口返回的真实情报；无数据时整块隐藏，不使用兜底内容
+            const list = (items || []).filter(Boolean).slice(0, 3);
+            const wrap = box.closest('.intel-editorial');
+            if (!list.length) { if (wrap) wrap.style.display = 'none'; return; }
+            if (wrap) wrap.style.display = '';
+            box.removeAttribute('aria-busy');
+            box.innerHTML = list.map(it => {
+                const t = INTEL_TYPE_LABEL[it.type] || INTEL_TYPE_LABEL.new;
+                const zh = esc(String(it.zh || it.text_zh || '').replace(/[📌📡]/g, ''));
+                const en = esc(String(it.en || it.text_en || zh).replace(/[📌📡]/g, ''));
+                const metaZh = esc(it.meta || it.meta_zh || '编辑整理');
+                const metaEn = esc(it.metaEn || it.meta_en || 'Editorial');
+                const timeZh = esc(it.time || it.time_zh || '');
+                const timeEn = esc(it.timeEn || it.time_en || timeZh);
+                const link = esc(it.link || 'insights.html');
+                const metaLine = [metaZh, timeZh].filter(Boolean).join(' · ');
+                const metaLineEn = [metaEn, timeEn].filter(Boolean).join(' · ');
+                return `
+                  <a class="intel-card intel-card--compact" href="${link}">
+                    <span class="intel-type ${t.cls}"><span class="zh">${t.zh}</span><span class="en">${t.en}</span></span>
+                    <span class="intel-text zh">${zh}</span>
+                    <span class="intel-text en">${en}</span>
+                    <span class="intel-compact-meta">
+                      <span class="zh">${metaLine}</span>
+                      <span class="en">${metaLineEn}</span>
+                    </span>
+                  </a>`;
+            }).join('');
+        }
+        renderIntel();
+
+        /* ============================================================
+           数据层
+           ============================================================ */
+        const DEBUG = new URLSearchParams(location.search).get('debug') === '1';
+        const diag = {
+            source: 'pending', endpoint: '', proxy: null, snapshot: null,
+            payloadKeys: [], counts: {}, skipped: 0, sampleKeys: [], errors: [],
+            intelCount: null
+
+        };
+
+        const DEMO_PAYLOAD = {
+            todayFinds: [
+                {
+                    item_id: 'demo-qing-bowl', title_zh: '清康熙 青花缠枝莲纹碗',
+                    title_en: 'Kangxi Blue & White Lotus Bowl', era_zh: '清康熙', era_en: 'Kangxi Period',
+                    category: '瓷器', fixed_price: 420, seller_id: 'lim-kw', img_file: 'lim-kw/item-lim-01.jpg', is_today_finds: true,
+                    reason_zh: '同类器型本周成交价约 S$680，此件标价明显偏低。',
+                    reason_en: 'Comparable sold near S$680 this week — clearly under market.'
+                },
+                {
+                    item_id: 'demo-hetian-pendant', title_zh: '和田玉 素面平安扣',
+                    title_en: 'Hetian Jade Plain Pendant', era_zh: '近代', era_en: 'Modern',
+                    category: '玉器', fixed_price: 260, seller_id: 'ng-lk', img_file: 'ng-lk/item-ng-01.jpg',
+                    reason_zh: '玉质细腻，无绺裂，附卖家自述来源。',
+                    reason_en: 'Fine grain, no cracks; seller-provided provenance.'
+                },
+                {
+                    item_id: 'demo-kangxi-coin', title_zh: '康熙通宝 宝泉局 小平钱',
+                    title_en: 'Kangxi Tongbao Coin', era_zh: '清', era_en: 'Qing Dynasty',
+                    category: '钱币', price_type: '私聊询价', seller_id: 'ng-cy', img_file: 'ng-cy/item-ngcy-01.jpg',
+                    reason_zh: '包浆自然，字口清晰，单枚可议。',
+                    reason_en: 'Natural patina, crisp characters, negotiable for singles.'
+                },
+                {
+                    item_id: 'demo-bronze-censer', title_zh: '清中期 铜鬲式香炉',
+                    title_en: 'Mid-Qing Bronze Censer', era_zh: '清中期', era_en: 'Mid-Qing',
+                    category: '铜器', fixed_price: 880, seller_id: 'yak-bc', img_file: 'yak-bc/item-yak-01.jpg',
+                    reason_zh: '皮壳沉稳，同类器近期关注度上升。',
+                    reason_en: 'Deep patina; comparable censers gaining attention lately.'
+                }
+            ],
+            newListing: [
+                { item_id: 'demo-1', title_zh: '清乾隆 青花山水笔筒', title_en: 'Qianlong Blue & White Brush Pot', era_zh: '清乾隆', era_en: 'Qianlong', category: '瓷器', fixed_price: 1280, seller_id: 'lim-kw', img_file: 'lim-kw/item-lim-02.jpg' },
+                { item_id: 'demo-2', title_zh: '和田玉 双面雕玉佩', title_en: 'Hetian Jade Double-Sided Pendant', era_zh: '清', era_en: 'Qing', category: '玉器', price_type: '私聊询价', seller_id: 'ng-lk', img_file: 'ng-lk/item-ng-02.jpg' },
+                { item_id: 'demo-3', title_zh: '光绪元宝 广东省造 库平七钱二分', title_en: 'Guangxu Silver Dollar, Guangdong', era_zh: '清末', era_en: 'Late Qing', category: '钱币', fixed_price: 1680, seller_id: 'ng-cy', img_file: 'ng-cy/item-ngcy-02.jpg' },
+                { item_id: 'demo-4', title_zh: '清代 设色山水小品（无款）', title_en: 'Qing Landscape Painting (Unsigned)', era_zh: '清', era_en: 'Qing', category: '书画', fixed_price: 640, seller_id: 'yak-bc', img_file: 'yak-bc/item-yak-02.jpg' },
+                { item_id: 'demo-5', title_zh: '明末 青花花卉小罐', title_en: 'Late-Ming Blue & White Jar', era_zh: '明末', era_en: 'Late Ming', category: '瓷器', fixed_price: 980, seller_id: 'lim-kw', img_file: 'lim-kw/item-lim-03.jpg' },
+                { item_id: 'demo-6', title_zh: '老蜜蜡 桶珠手串', title_en: 'Antique Amber Barrel Bead Bracelet', era_zh: '民国', era_en: 'Republican', category: '杂项', price_type: '私聊询价', seller_id: 'ng-lk', img_file: 'ng-lk/item-ng-03.jpg' },
+                { item_id: 'demo-7', title_zh: '民国 铜胎掐丝珐琅小盒', title_en: 'Republican Cloisonné Box', era_zh: '民国', era_en: 'Republican', category: '铜器', fixed_price: 320, seller_id: 'yak-bc', img_file: 'yak-bc/item-yak-03.jpg' },
+                { item_id: 'demo-8', title_zh: '民国 白玉圆镯（内径 58mm）', title_en: 'Republican White Jade Bangle (58mm)', era_zh: '民国', era_en: 'Republican', category: '玉器', fixed_price: 1450, seller_id: 'ng-cy', img_file: 'ng-cy/item-ngcy-03.jpg' }
+            ]
+        };
+
+        async function fetchJson(url, ms, tag) {
+            const ctl = new AbortController();
+            const timer = setTimeout(() => ctl.abort(), ms);
+            const t0 = performance.now();
+            try {
+                const res = await fetch(url, {
+                    cache: 'no-store',
+                    signal: ctl.signal,
+                    headers: { 'Accept': 'application/json' }
+                });
+                diag[tag] = { status: res.status, ms: Math.round(performance.now() - t0) };
+                if (!res.ok) throw new Error('HTTP ' + res.status);
+                return await res.json();
+            } catch (e) {
+                if (!diag[tag]) diag[tag] = { status: 'no response', ms: Math.round(performance.now() - t0) };
+                if (e.name === 'AbortError') throw new Error('请求超时（' + ms + 'ms）');
+                throw e;
+            } finally {
+                clearTimeout(timer);
+            }
+        }
+
+        async function fetchProxy(url) {
+            try {
+                return await fetchJson(url, 8000, 'proxy');
+            } catch (e) {
+                if (!/超时|HTTP 5\d\d/.test(e.message)) throw e;
+                diag.errors.push('proxy 第 1 次失败：' + e.message + '，重试中');
+                await new Promise(r => setTimeout(r, 800));
+                return await fetchJson(url, 8000, 'proxy');
+            }
+        }
+
+        function renderDebug() {
+            console.info('[Gudong] 数据来源:', diag.source, diag.counts);
+            if (!DEBUG) return;
+            let el = document.getElementById('gdDebug');
+            if (!el) {
+                el = document.createElement('div');
+                el.id = 'gdDebug';
+                el.className = 'gd-debug';
+                document.body.appendChild(el);
+            }
+            const srcLabel =
+                diag.source === 'airtable-proxy' ? '<span class="ok">✔ Airtable 实时数据（经 Vercel 代理）</span>' :
+                diag.source === 'local-snapshot' ? '<span class="warn">⚠ 本地快照 data/listings.json —— 不是实时数据</span>' :
+                diag.source === 'demo' ? '<span class="warn">⚠ 内置演示数据（接口与快照均不可用）</span>' :
+                '<span class="bad">✖ 没有任何数据来源</span>';
+            const st = o => o ? esc(o.status) + ' · ' + o.ms + 'ms' : '—';
+            const c = diag.counts || {};
+            el.innerHTML =
+                '<b>GUDONG 数据诊断</b>\n' +
+                '数据来源：' + srcLabel + '\n' +
+                '接口：' + esc(diag.endpoint) + '\n' +
+                '接口响应：' + st(diag.proxy) + '　快照响应：' + st(diag.snapshot) + '\n' +
+                '响应字段：' + esc(diag.payloadKeys.join(', ') || '—') + '\n' +
+                '今日发现 ' + (c.todayFinds != null ? c.todayFinds : '—') +
+                ' · 近期释出 ' + (c.newListing != null ? c.newListing : '—') +
+                ' · 情报 ' + (diag.intelCount != null ? diag.intelCount : '—') +
+                (diag.skipped ? ' · <span class="warn">已跳过空行/缺标题的行 ' + diag.skipped + '</span>' : '') + '\n' +
+                '首条记录字段：' + esc(diag.sampleKeys.join(', ') || '—') +
+                (diag.errors.length ? '\n<span class="bad">错误：\n' + diag.errors.map(esc).join('\n') + '</span>' : '');
+        }
+
+        async function loadAirtableData() {
+            showSkeleton();
+            diag.endpoint = API_BASE;
+
+            try {
+                const raw = await fetchProxy(diag.endpoint);
+                if (raw && Array.isArray(raw.intel)) {
+                    diag.intelCount = raw.intel.length;
+                    if (raw.intel.length) renderIntel(raw.intel);
+                }
+                const data = normalizePayload(raw);
+                diag.source = 'airtable-proxy';
+                applyListingData(data);
+                renderDebug();
+                return;
+            } catch (e) {
+                console.warn('线上 API 加载失败，回退到本地快照：', e);
+                diag.errors.push('proxy：' + e.message);
+                diag.skipped = 0;
+            }
+
+            try {
+                const raw = await fetchJson('data/listings.json', 5000, 'snapshot');
+                if (raw && Array.isArray(raw.intel)) {
+                    diag.intelCount = raw.intel.length;
+                    if (raw.intel.length) renderIntel(raw.intel);
+                }
+                const data = normalizePayload(raw);
+                diag.source = 'local-snapshot';
+                applyListingData(data);
+                renderDebug();
+                return;
+            } catch (e2) {
+                console.warn('本地快照也加载失败，启用内置演示数据：', e2);
+                diag.errors.push('snapshot：' + e2.message);
+            }
+
+            try {
+                const data = normalizePayload(DEMO_PAYLOAD);
+                diag.source = 'demo';
+                diag.payloadKeys = ['todayFinds', 'newListing'];
+                applyListingData(data);
+            } catch (e3) {
+                diag.source = 'none';
+                diag.errors.push('demo：' + e3.message);
+                showLoadError();
+                renderSeats(null);
+            }
+            renderDebug();
+        }
+
+        loadAirtableData();
+    </script>
+
+    <!-- PWA 安装引导弹层 -->
+    <style>
+    .gd-install-modal { position: fixed; inset: 0; z-index: 9999; display: none; align-items: center; justify-content: center; background: rgba(20,17,14,.5); -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px); padding: 1.2rem; }
+    .gd-install-modal.open { display: flex; }
+    .gd-install-card { background: #fff; border-radius: 16px; max-width: 360px; width: 100%; padding: 1.8rem 1.5rem 1.3rem; text-align: center; box-shadow: 0 24px 60px rgba(0,0,0,.28); position: relative; }
+    .gd-install-close { position: absolute; top: .5rem; right: .7rem; border: 0; background: none; font-size: 1.4rem; color: #A49D94; cursor: pointer; padding: .5rem; min-width: 44px; min-height: 44px; display: inline-flex; align-items: center; justify-content: center; line-height: 1; border-radius: 8px; transition: .3s; }
+    .gd-install-close:hover { color: #7A4E33; background: #F3EAE0; }
+    .gd-install-title { font-size: 1.1rem; font-weight: 700; color: #3d2b1f; margin: .2rem 0 1.1rem; font-family: var(--font-serif); }
+    .gd-install-steps { text-align: left; margin: 0 auto 1rem; max-width: 296px; }
+    .gd-install-step { display: flex; align-items: flex-start; gap: .65rem; padding: .5rem 0; color: #5a4636; font-size: .9rem; line-height: 1.55; }
+    .gd-install-step .n { flex-shrink: 0; width: 22px; height: 22px; border-radius: 50%; background: #F3EAE0; color: #7A4E33; font-weight: 700; font-size: .76rem; display: flex; align-items: center; justify-content: center; margin-top: .1rem; }
+    .gd-install-step svg { flex-shrink: 0; width: 22px; height: 22px; fill: #007AFF; margin-top: .1rem; }
+    .gd-install-note { font-size: .78rem; color: #9a8d80; margin-top: .5rem; line-height: 1.55; }
+    .gd-install-warning { background: #F3EAE0; border-radius: 10px; padding: .8rem; color: #7A4E33; font-size: .85rem; line-height: 1.55; margin-bottom: .8rem; text-align: left; }
+    .gd-install-hint { text-align: center; color: #5a4636; font-size: .9rem; line-height: 1.6; margin: .2rem 0 1rem; }
+    body[data-lang="en"] .gd-install-modal .zh { display: none; }
+    body[data-lang="zh"] .gd-install-modal .en { display: none; }
+    .gd-install-modal[data-lang="en"] .zh { display: none; }
+    .gd-install-modal[data-lang="zh"] .en { display: none; }
+    </style>
+    <div class="gd-install-modal" id="gdInstallModal" role="dialog" aria-modal="true" aria-label="Install guide">
+        <div class="gd-install-card">
+            <button type="button" class="gd-install-close" onclick="gdCloseInstall()" aria-label="close">×</button>
+            <div class="gd-install-title zh">安装 古董.app 到主屏幕</div>
+            <div class="gd-install-title en">Add Gudong.app to Home Screen</div>
+            <div class="gd-install-warning" id="gdInAppWarning" style="display:none;">
+                <div class="zh">你当前使用的应用内浏览器（如微信、微博等）不支持直接安装。请先用 Safari 打开本页，再按下方步骤操作。</div>
+                <div class="en">Your current in-app browser doesn't support Add to Home Screen. Please open this page in Safari first, then follow the steps below.</div>
+            </div>
+            <div class="gd-install-steps" id="gdStepsIos">
+                <div class="gd-install-step"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C12 2 8 6 8 6h3v6h2V6h3l-4-4zM5 9v9c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V9h-2v9H7V9H5z"/></svg><span class="zh">点击 Safari 底部工具栏的「分享」按钮</span><span class="en">Tap the Share button in Safari's bottom toolbar</span></div>
+                <div class="gd-install-step"><span class="n">2</span><span class="zh">上滑分享菜单，选择「添加到主屏幕」</span><span class="en">Scroll the share sheet and choose "Add to Home Screen"</span></div>
+                <div class="gd-install-step"><span class="n">3</span><span class="zh">点击右上角「添加」，古董.app 即出现在桌面</span><span class="en">Tap "Add" in the top right — Gudong.app appears on your Home Screen</span></div>
+            </div>
+            <div class="gd-install-steps" id="gdStepsOther" style="display:none;">
+                <div class="gd-install-step"><span class="n">1</span><span class="zh">点击浏览器地址栏右侧的「安装」图标</span><span class="en">Click the install icon at the right of the address bar</span></div>
+                <div class="gd-install-step"><span class="n">2</span><span class="zh">或通过浏览器菜单 →「安装古董圈」</span><span class="en">Or open the browser menu → "Install Gudong"</span></div>
+            </div>
+            <div class="gd-install-hint" id="gdInstallHint" style="display:none;">
+                <span class="zh">请使用浏览器菜单中的「安装应用」完成安装。</span>
+                <span class="en">Use your browser menu&rsquo;s &ldquo;Install app&rdquo; option to complete installation.</span>
+            </div>
+            <div class="gd-install-note zh">安装后可像原生 App 一样全屏使用，无需应用商店。</div>
+            <div class="gd-install-note en">Runs full-screen like a native app. No app store needed.</div>
+        </div>
+    </div>
+    <script>
+    (function () {
+        var modal = document.getElementById('gdInstallModal');
+        if (!modal) return;
+        window.gdCloseInstall = function () { modal.classList.remove('open'); };
+        modal.addEventListener('click', function (e) { if (e.target === modal) gdCloseInstall(); });
+
+        var deferredPrompt = null;
+        var ua = navigator.userAgent || '';
+        var isIOS = /iPad|iPhone|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+        var isInAppBrowser = /MicroMessenger|Weibo|FBAN|FBAV|Instagram|Line|Twitter|WhatsApp|Snapchat|TikTok/i.test(ua);
+        var isStandalone = window.navigator.standalone === true || window.matchMedia('(display-mode: standalone)').matches;
+
+        // 已处于 PWA 模式则隐藏安装入口
+        if (isStandalone) {
+            document.querySelectorAll('.app-install-btn').forEach(function (b) { b.classList.add('hidden'); });
+        }
+
+        window.addEventListener('beforeinstallprompt', function (e) { e.preventDefault(); deferredPrompt = e; });
+        window.addEventListener('appinstalled', function () {
+            document.querySelectorAll('.app-install-btn').forEach(function (b) { b.classList.add('hidden'); });
+        });
+
+        document.addEventListener('click', function (e) {
+            var btn = e.target && e.target.closest ? e.target.closest('.app-install-btn') : null;
+            if (!btn) return;
+            e.preventDefault();
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then(function () { deferredPrompt = null; }).catch(function () {});
+                return;
+            }
+            document.getElementById('gdStepsIos').style.display = isIOS ? '' : 'none';
+            document.getElementById('gdStepsOther').style.display = 'none';
+            var lang = (document.body && document.body.dataset && document.body.dataset.lang === 'en') ? 'en' : 'zh';
+            modal.setAttribute('data-lang', lang);
+            var hint = document.getElementById('gdInstallHint');
+            if (hint) hint.style.display = isIOS ? 'none' : '';
+            var warning = document.getElementById('gdInAppWarning');
+            if (warning) warning.style.display = (isIOS && isInAppBrowser) ? '' : 'none';
+            modal.classList.add('open');
+        });
+    })();
+    </script>
+<!-- 2026-10-08：分享功能（Web Share API + 剪贴板降级 + Toast 反馈），全站统一 -->
+<style>
+.gd-share-btn {
+    border: 1px solid var(--color-border); background: transparent;
+    color: var(--color-text-secondary); padding: .55rem .7rem; min-height: 44px; min-width: 44px;
+    border-radius: var(--btn-radius); cursor: pointer; display: inline-flex;
+    align-items: center; justify-content: center; flex-shrink: 0;
+    transition: all var(--dur) var(--ease);
+}
+.gd-share-btn:hover { border-color: var(--color-primary); color: var(--color-primary); background: var(--color-primary-light); }
+.gd-share-btn svg { width: 16px; height: 16px; fill: currentColor; display: block; }
+.gd-toast {
+    position: fixed; left: 50%; bottom: 30px; transform: translateX(-50%) translateY(10px);
+    background: rgba(36,31,26,.92); color: #fff; font-size: .85rem;
+    padding: .62rem 1.15rem; border-radius: 999px; z-index: 10000;
+    opacity: 0; pointer-events: none; transition: opacity .3s ease, transform .3s ease;
+    box-shadow: 0 8px 24px rgba(36,31,26,.25); white-space: nowrap;
+    max-width: 88vw; overflow: hidden; text-overflow: ellipsis;
+}
+.gd-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+</style>
+<script>
+(function () {
+    var toastEl = null, toastTimer = null;
+    function gdToast(msg) {
+        if (!toastEl) {
+            toastEl = document.createElement("div");
+            toastEl.className = "gd-toast";
+            document.body.appendChild(toastEl);
+        }
+        toastEl.textContent = msg;
+        toastEl.classList.add("show");
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(function () { toastEl.classList.remove("show"); }, 2200);
+    }
+    function gdCopyText(text, done, fail) {
+        function legacy() {
+            var ta = document.createElement("textarea");
+            ta.value = text;
+            ta.setAttribute("readonly", "");
+            ta.style.cssText = "position:fixed;left:-9999px;top:0;opacity:0;";
+            document.body.appendChild(ta);
+            ta.select();
+            if (ta.setSelectionRange) ta.setSelectionRange(0, text.length);
+            var ok = false;
+            try { ok = document.execCommand("copy"); } catch (e) {}
+            document.body.removeChild(ta);
+            if (ok) { done(); } else if (fail) { fail(); }
+        }
+        if (navigator.clipboard && window.isSecureContext) {
+            navigator.clipboard.writeText(text).then(done, function () { legacy(); });
+        } else { legacy(); }
+    }
+    window.gdShare = function (opts) {
+        opts = opts || {};
+        var can = document.querySelector('link[rel="canonical"]');
+        var url = opts.url || (can ? can.href : location.href);
+        var lang = (document.body.dataset && document.body.dataset.lang) || "zh";
+        var title = opts.title || document.title;
+        var text = opts.text || "";
+        if (navigator.share) {
+            navigator.share({ title: title, text: text, url: url }).then(function () {}, function () {});
+            return;
+        }
+        gdCopyText(url, function () {
+            gdToast(lang === "zh" ? "链接已复制，去分享给朋友吧" : "Link copied — share it with friends");
+        }, function () {
+            gdToast(lang === "zh" ? "复制失败，请手动复制地址栏链接" : "Copy failed — please copy the URL from the address bar");
+        });
+    };
+})();
+window.gdSharePage = function () {
+  var lang = (document.body.dataset && document.body.dataset.lang) || "zh";
+  window.gdShare({
+    title: lang === "zh" ? "古董圈 Gudong.app｜新加坡高端古董藏家网络" : "Gudong.app｜Singapore Chinese Antiques Collector Network",
+    text: lang === "zh" ? "新加坡古董发现平台，连接新加坡、东南亚与欧美中国古董藏家；浏览瓷器、古玉、书画藏品，买家直接对接藏家。平台不提供鉴定，不参与藏品交易。" : "Singapore-based Chinese antiques discovery platform connecting collectors across Southeast Asia, Europe and America. Browse porcelain, jade, paintings and more, connect directly with collectors. Platform does not authenticate antiques or handle transactions."
+  });
+};
+
+</script>
+</body>
+</html>

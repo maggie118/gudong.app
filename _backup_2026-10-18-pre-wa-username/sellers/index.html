@@ -1,0 +1,741 @@
+ <!DOCTYPE html>
+<html lang="zh-SG">
+<head>
+    <meta charset="UTF-8">
+    <script>
+        if (!/\/$|\.html?$/.test(location.pathname)) history.replaceState(null, '', location.pathname + '/' + location.search + location.hash);
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>私家藏馆｜新加坡古董藏家入驻展示｜古董圈Gudong.app | Private Gallery Singapore</title>
+    <meta name="description" content="古董圈私家藏馆，展示入驻的新加坡及海外古董藏家，浏览藏家线上馆藏；平台仅做信息展示，不提供古董鉴定，不参与藏品交易。">
+    <meta name="keywords" content="antique collector museum Singapore,新加坡古董藏家,私家藏馆,collector showcase">
+    <meta property="og:site_name" content="古董圈 Gudong.app">
+    <meta property="og:title" content="私家藏馆｜新加坡古董藏家入驻展示 | Private Gallery Singapore">
+    <meta property="og:description" content="浏览入驻的新加坡与海外古董藏家线上展馆，直接对接藏家。平台仅信息展示，不提供古董鉴定，不参与藏品交易。">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://gudong.app/sellers/">
+    <meta property="og:image" content="https://gudong.app/og-cover.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:locale" content="zh_SG">
+    <meta property="og:locale:alternate" content="en_SG">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Private Gallery｜Antique Collectors Showcase Singapore | Gudong.app">
+    <meta name="twitter:description" content="Browse online galleries of Singapore-based and overseas antique collectors. Platform displays information only, no authentication or transaction handling. 平台不提供古董鉴定，不参与藏品交易。 Gudong.app does not authenticate antiques or participate in transactions.">
+    <meta name="twitter:image" content="https://gudong.app/og-cover.png">
+
+    <link rel="canonical" href="https://gudong.app/sellers/">
+
+
+
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/icons/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/icons/favicon-32x32.png">
+    <link rel="manifest" href="../manifest.json">
+    <meta name="theme-color" content="#7A4E33">
+	<meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <link rel="apple-touch-icon" href="../assets/icons/icon-192.png">    <!-- Premium Serif Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Noto+Serif+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+
+    <style>
+        :root {
+            --color-bg: #F5F2EC;
+            --color-surface: #FFFFFF;
+            --color-white: #FFFFFF;
+            --color-border: #E4DED5;
+            --color-primary: #7A4E33;
+            --color-primary-dark: #5C3A26;
+            --color-primary-light: #F1E8DF;
+            --color-text: #25221E;
+            --color-text-secondary: #5C564F;
+            --color-text-muted: #A49D94;
+            --color-gold: #9C7A3A;
+            --color-gold-soft: rgba(156,122,58,.10);
+            --color-bronze-muted: #9C8558;
+            --color-qianjinzong: #948268;
+            --color-success: #526657;
+            --color-danger: #9A554B;
+            --color-far-mountain: #2E4A52;
+            --card-radius: 12px;
+            --img-radius: 4px;
+            --font-serif: "Playfair Display", "Noto Serif SC", "Songti SC", "STSong", Georgia, serif;
+            --font-sans: "Inter", "Geist", "Inter Display", "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            --font-display: "Inter", "Geist", "Inter Display", "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            --font-latin: "Inter", "Geist", "Inter Display", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            --font-zh-sans: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        }
+
+        h1, h2, h3 { font-family: var(--font-serif); }
+        .title { font-family: var(--font-serif); }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif; }
+        html { scroll-behavior: smooth; }
+        body { background: var(--color-bg); color: var(--color-text); line-height: 1.65; }
+
+        /* ---------- Header (synced with pricing.html) ---------- */
+        /* ---------- Announcement bar ---------- */
+        .announce-bar {
+            background: var(--color-primary-light);
+            color: var(--color-primary-dark);
+            font-size: .8rem;
+            text-align: center;
+            padding: .55rem 2.6rem;
+            position: relative;
+            line-height: 1.4;
+        }
+
+        .announce-close {
+            position: absolute;
+            right: .9rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            font-size: 1.05rem;
+            line-height: 1;
+            color: var(--color-text-secondary);
+            cursor: pointer;
+            padding: .2rem;
+        }
+
+        .announce-close:hover { color: var(--color-primary); }
+
+        header {
+            background: rgba(255,255,255,.96); backdrop-filter: blur(6px);
+            color: var(--color-text); padding: 0 5%; height: 68px;
+            display: flex; align-items: center; justify-content: space-between;
+            gap: 1.5rem; border-bottom: 1px solid var(--color-border);
+            position: sticky; top: 0; z-index: 50;
+        }
+        .brand { display: flex; flex-direction: row; align-items: center; gap: .7rem; line-height: 1; flex-shrink: 1; text-decoration: none; color: inherit; min-width: 0; }
+        .brand:hover { text-decoration: none; }
+        .brand-logo-img { height: 38px; width: auto; display: block; object-fit: contain; flex-shrink: 0; }
+        .brand-line1 { display: flex; align-items: baseline; gap: .32rem; }
+        .brand-text { display: flex; flex-direction: column; justify-content: center; min-width: 0; line-height: 1.15; letter-spacing: -.005em; overflow: hidden; white-space: nowrap;}
+        @media (max-width: 640px) { .brand-logo-img { height: 30px; } }
+        .brand-zh { font-size: 1.4rem; font-weight: 700; letter-spacing: .02em; line-height: 1.15; color: var(--color-primary-dark); font-family: var(--font-serif); }
+        .brand-en { font-size: 1.4rem; font-weight: 600; letter-spacing: -.012em; line-height: 1.15; color: var(--color-primary-dark); font-family: var(--font-sans); }
+        .brand-text small { display: block; color: var(--color-qianjinzong); font-family: var(--font-sans); font-weight: 500; font-size: .68rem; letter-spacing: .14em; margin-top: 2px; text-transform: uppercase; }
+        .header-right { display: flex; align-items: center; gap: .8rem; flex-shrink: 0; }
+        .btn-publish {
+            display: inline-flex; align-items: center; gap: .35rem;
+            background: var(--color-primary); color: #fff;
+            padding: .75rem 1.1rem; min-height: 44px; border-radius: 8px;
+            font-size: .85rem; font-weight: 600; text-decoration: none;
+            white-space: nowrap; transition: .4s cubic-bezier(.25,.1,.25,1);
+        }
+        .btn-publish:hover { background: var(--color-primary-dark); }
+        .btn-publish-text {
+            display: inline-flex; align-items: center;
+            background: transparent; color: var(--color-text-secondary);
+            padding: .45rem .5rem; font-size: .88rem; font-weight: 500;
+            text-decoration: none; white-space: nowrap;
+            transition: .3s cubic-bezier(.25,.1,.25,1);
+        }
+        .btn-publish-text:hover { color: var(--color-primary); }
+
+        .lang-btn {
+            border: 1px solid var(--color-border); background: transparent;
+            color: var(--color-text-secondary); padding: .55rem .85rem; min-height: 44px;
+            border-radius: 6px; cursor: pointer; font-size: .75rem;
+            letter-spacing: .04em; transition: .4s cubic-bezier(.25,.1,.25,1);
+        }
+        .lang-btn:hover { border-color: var(--color-primary); color: var(--color-primary); background: var(--color-primary-light); }
+        .menu-toggle {
+            width: 44px; height: 44px; border: 1px solid var(--color-border);
+            background: transparent; border-radius: 8px; font-size: 1.05rem;
+            color: var(--color-text); cursor: pointer; display: flex;
+            align-items: center; justify-content: center; flex-shrink: 0; transition: .4s cubic-bezier(.25,.1,.25,1);
+        }
+        .menu-toggle:hover { border-color: var(--color-primary); color: var(--color-primary); background: var(--color-primary-light); }
+
+        /* ---------- Sidebar (synced with pricing.html) ---------- */
+        .sidebar-overlay { position: fixed; inset: 0; background: rgba(20,17,14,.4); opacity: 0; pointer-events: none; transition: opacity .25s ease; z-index: 90; }
+        .sidebar-overlay.show { opacity: 1; pointer-events: auto; }
+        .sidebar {
+            position: fixed; top: 0; left: 0; height: 100vh; height: 100dvh; width: 264px; max-width: 78vw;
+            background: var(--color-white); box-shadow: 4px 0 24px rgba(37,34,30,.18);
+            transform: translateX(-100%); transition: transform .3s ease; z-index: 95;
+            overflow-y: auto; -webkit-overflow-scrolling: touch; padding-bottom: 2rem;
+        }
+        .sidebar.open { transform: translateX(0); }
+        .sidebar-toggle-inner {
+            display: block; width: 100%; padding: .9rem 0; background: transparent;
+            border: none; border-bottom: 1px solid var(--color-border); font-size: 1.15rem;
+            color: var(--color-text-secondary); cursor: pointer; text-align: center;
+        }
+        .sidebar-toggle-inner:hover { color: var(--color-primary); }
+        .sidebar-brand {
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            gap: .1rem; padding: 1.1rem 0; font-weight: 700; color: var(--color-primary-dark);
+            border-bottom: 1px solid var(--color-border);
+        }
+        .sidebar-brand .logo-zh { font-size: 1.05rem; font-family: var(--font-serif); font-weight: 700; color: var(--color-primary-dark); letter-spacing: .005em; }
+        .sidebar-brand .logo-en { font-size: 1.05rem; letter-spacing: normal; font-family: var(--font-sans); font-weight: 600; color: var(--color-primary-dark); }
+        .sidebar-brand .logo-tagline { font-size: .62rem; letter-spacing: .16em; color: var(--color-qianjinzong); text-transform: uppercase; font-family: var(--font-sans); font-weight: 500; }
+        .sidebar-nav { display: flex; flex-direction: column; padding: .3rem 0; }
+        .sidebar-link { padding: .85rem 1.4rem; color: var(--color-text); text-decoration: none; font-size: .95rem; transition: .4s cubic-bezier(.25,.1,.25,1); }
+        .sidebar-link:hover { background: var(--color-primary-light); color: var(--color-primary); }
+        .sidebar-link.active { background: var(--color-primary-light); color: var(--color-primary); font-weight: 600; }
+        .sidebar-group-title { padding: .85rem 1.4rem .3rem; color: var(--color-text); font-size: .95rem; font-weight: 600; }
+        .sidebar-sub { display: block; padding: .55rem 1.4rem .55rem 2.2rem; color: var(--color-text-secondary); text-decoration: none; font-size: .88rem; transition: .4s cubic-bezier(.25,.1,.25,1); }
+        .sidebar-sub:hover { color: var(--color-primary); background: var(--color-primary-light); }
+        .sidebar-lang-btn {
+            display: flex; align-items: center; justify-content: center; gap: .4rem;
+            width: calc(100% - 2.8rem); margin: 1rem 1.4rem .8rem;
+            padding: .62rem .9rem; border: 1px solid var(--color-border);
+            border-radius: 12px; background: var(--color-white);
+            color: var(--color-text-secondary); font-family: inherit;
+            font-size: .9rem; font-weight: 600; cursor: pointer; transition: .4s cubic-bezier(.25,.1,.25,1);
+        }
+        .sidebar-lang-btn:hover { border-color: var(--color-primary); color: var(--color-primary); background: var(--color-primary-light); }
+
+        /* ---------- Content ---------- */
+        .container { max-width: 1000px; margin: 0 auto; padding: 2.4rem 5% 4rem; min-height: 80vh; }
+        .breadcrumb { font-size: .8rem; color: var(--color-text-muted); margin-bottom: 1.2rem; }
+        .breadcrumb a { color: var(--color-text-secondary); text-decoration: none; }
+        .breadcrumb a:hover { color: var(--color-primary); }
+
+        .page-title { font-size: 1.7rem; font-weight: 700; color: var(--color-text); margin-bottom: .5rem; }
+        .page-sub { font-size: .92rem; color: var(--color-text-secondary); margin-bottom: 2.4rem; }
+
+        .gallery-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.2rem; }
+
+        .gallery-card {
+            background: var(--color-white);
+            border: 1px solid var(--color-border);
+            border-radius: 10px;
+            padding: 1.6rem 1.7rem;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            transition: .4s cubic-bezier(.25,.1,.25,1);
+            position: relative;
+        }
+        .gallery-card:hover {  box-shadow: 0 8px 20px rgba(37,34,30,.08); }
+
+        .gallery-badge {
+            align-self: flex-start;
+            background: var(--color-primary);
+            color: #fff;
+            font-size: .78rem;
+            font-weight: 700;
+            padding: .28rem .65rem;
+            border-radius: 5px;
+            margin-bottom: .9rem;
+        }
+        .gallery-name {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--color-text);
+            margin-bottom: .55rem;
+            display: flex; align-items: center; gap: .5rem; flex-wrap: wrap;
+        }
+        .gallery-desc { font-size: .88rem; color: var(--color-text-secondary); margin-bottom: .8rem; line-height: 1.55; }
+        .gallery-stats { font-size: .8rem; color: var(--color-text-muted); margin-bottom: 1.1rem; }
+        .gallery-link { font-size: .88rem; font-weight: 600; color: var(--color-gold); margin-top: auto; }
+
+        /* 创始藏家徽章 */
+        .founder-badge {
+    display: inline-flex; align-items: center; gap: .2rem;
+    background: transparent; color: #FFFFFF;
+    padding: 0; border: 0; border-radius: 0;
+    white-space: nowrap; vertical-align: middle;
+    box-shadow: none;
+}
+.founder-badge-icon { display: block; width: 34px; height: 43px; object-fit: contain; flex: 0 0 auto; }
+.founder-badge .badge-num { font-weight: 800; font-size: .82rem; letter-spacing: 0; color: #D4AF6A; }
+        
+        .cta-banner {
+            background: var(--color-white);
+            border: 1px solid var(--color-border);
+            border-radius: 10px;
+            padding: 1.8rem 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            text-align: right;
+            gap: .5rem;
+            margin-top: 2rem;
+        }
+        .cta-line { font-size: 1rem; color: var(--color-text); font-weight: 600; }
+        .cta-link { font-size: .9rem; color: var(--color-primary); text-decoration: none; font-weight: 600; }
+        .cta-link:hover { text-decoration: underline; }
+
+        footer {
+            text-align: center; padding: 2.2rem 5% 1.8rem;
+            background: var(--color-white); color: var(--color-text-secondary);
+            margin-top: 1rem; font-size: .78rem;
+            border-top: 1px solid var(--color-border);
+        }
+        .footer-nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 1.3rem; margin-bottom: 1.2rem; }
+        .footer-nav a { color: var(--color-text-secondary); text-decoration: none; font-size: .82rem; }
+        .footer-nav a:hover { color: var(--color-primary); }
+        .footer-disclaimer { max-width: 620px; margin: 0 auto 1.1rem; font-size: .78rem; line-height: 1.65; color: var(--color-text-muted); }
+
+        [data-lang="en"] .zh { display: none; }
+        [data-lang="zh"] .en { display: none; }
+
+        @media (max-width: 700px) {
+            header { height: 62px; }
+            .btn-publish { padding: .65rem .85rem; font-size: .8rem; min-height: 44px; }
+            .container { padding: 1.8rem 5% 3rem; }
+            .gallery-grid { grid-template-columns: 1fr; }
+            .page-title { font-size: 1.4rem; }
+            .cta-banner { align-items: flex-start; text-align: left; }
+        }
+    </style>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"ItemList","name":"私家藏馆 | Private Gallery","description":"古董圈私家藏馆，展示新加坡及海外古董藏家，平台仅信息展示，不提供古董鉴定，不参与藏品交易。","url":"https://gudong.app/sellers/","publisher":{"@id":"https://gudong.app/#organization"}}</script>
+
+
+
+    <meta name="apple-mobile-web-app-title" content="古董圈">
+</head>
+<body data-lang="zh">
+     <header>
+        <div style="display:flex; align-items:center; gap:.9rem; min-width:0;">
+            <button class="menu-toggle" onclick="openSidebar()" aria-label="menu" aria-expanded="false" id="menuToggle">☰</button>
+            <a href="../index.html" class="brand" aria-label="古董圈 Gudong 首页">
+                <img src="../assets/icons/logo-mark.png" alt="古董圈 Gudong" class="brand-logo-img" onerror="this.style.display='none'">
+                <span class="brand-text">
+                    <span class="brand-line1"><span class="brand-zh">古董圈</span> <span class="brand-en">Gudong</span></span>
+                    <small>Collectors' Network</small>
+                </span>
+            </a>
+        </div>
+        <div class="header-right">
+            <button type="button" class="gd-share-btn" onclick="gdSharePage()" aria-label="分享 / Share" title="分享 / Share"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92-1.31-2.92-2.92-2.92z"/></svg></button>
+           <button class="lang-btn" onclick="toggleLang()">EN</button>
+        </div>
+    </header>
+
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+    <aside class="sidebar" id="sidebar">
+        <button class="sidebar-toggle-inner" onclick="closeSidebar()" aria-label="close menu">☰</button>
+        <div class="sidebar-brand">
+            <span class="logo-zh">古董圈 <span class="logo-en">Gudong</span></span>
+            <span class="logo-tagline">Collectors' Network</span>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="../index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">首页</span><span class="en">Home</span></a>
+            <a href="../my/saved.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">我的收藏 · 关注</span><span class="en">Saved &amp; Followed</span></a>
+            <a href="../my/briefing.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">今日简报</span><span class="en">Today's Brief</span></a>
+            <a href="../index.html#daily-intel" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 捡漏情报</span><span class="en">· Insider Tips</span></a>
+            <a href="../index.html#today-finds" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 今日发现</span><span class="en">· Today's Finds</span></a>
+            <a href="../index.html#new-listings" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 刚刚上新</span><span class="en">· Just Listed</span></a>
+            <a href="../collection.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">藏品库</span><span class="en">Collection</span></a>
+            <a href="../categories/porcelain.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 瓷器</span><span class="en">· Porcelain</span></a>
+            <a href="../categories/jade.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 玉器</span><span class="en">· Jade</span></a>
+            <a href="../categories/bronze.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 铜器</span><span class="en">· Bronzes</span></a>
+            <a href="../categories/coins.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 钱币</span><span class="en">· Coins</span></a>
+            <a href="../categories/paintings.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 书画</span><span class="en">· Paintings &amp; Calligraphy</span></a>
+            <a href="../categories/misc.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 杂项</span><span class="en">· Miscellaneous</span></a>
+            <a href="../sellers/index.html" class="sidebar-link active" onclick="closeSidebar()"><span class="zh">私家藏馆</span><span class="en">Private Gallery</span></a>
+            <a href="../insights.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">情报 / 知识</span><span class="en">Insights</span></a>
+            <a href="../tools/index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">工具</span><span class="en">Tools</span></a>
+            <a href="../tools/index.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 工具汇总首页</span><span class="en">· Tools Home</span></a>
+            <a href="../tools/year-since.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 年份距今计算器</span><span class="en">· Years-since-year Calculator</span></a>
+            <a href="../tools/ganzhi.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 干支公历换算器</span><span class="en">· Sexagenary-Gregorian Converter</span></a>
+            <a href="../tools/era-lookup.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 古文化·朝代年代速查表</span><span class="en">· Culture &amp; Dynasty Era Lookup</span></a>
+            <a href="../tools/currency-convert.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 拍卖藏品货币参考换算器</span><span class="en">· Currency Reference Converter</span></a>
+            <a href="../about.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">关于我们</span><span class="en">About</span></a>
+            <button type="button" class="sidebar-lang-btn" onclick="toggleLang()" aria-label="Switch language"><span class="zh">🌐 English</span><span class="en">🌐 中文</span></button>
+        </nav>
+    </aside>
+
+    <main class="container">
+        <div class="breadcrumb">
+            <a href="../index.html" class="zh">首页</a><a href="../index.html" class="en">Home</a>
+            <span class="zh"> / 私家主页</span><span class="en"> / Private Gallery</span>
+        </div>
+
+        <h1 class="page-title zh">私家藏馆 · 藏家与商号</h1>
+        <h1 class="page-title en">Private Collection Gallery</h1>
+
+        <div class="gallery-grid">
+            <a href="https://gudong.app/sellers/seller-lim-kw-antiques" class="gallery-card" data-seller-id="Lim-KW">
+                <div class="gallery-badge zh">新入驻</div><div class="gallery-badge en">New</div>
+                <div class="gallery-name">
+                    <span class="zh">林记古玩</span><span class="en">Lim KW Antiques</span>
+                    <span class="founder-badge" title="创始藏家 · 2026" aria-label="Founding Collector 2026">
+
+                        <img class="founder-badge-icon" src="../assets/images/foundingcollector.webp" alt="创始藏家 Founder Collector">
+                        </span>
+                </div>
+                <div class="gallery-desc zh">专注高古青铜与明清瓷器</div>
+                <div class="gallery-desc en">Archaic bronzes and Ming-Qing porcelain</div>
+                <div class="gallery-stats zh">藏品数：4 · 入驻：2026年</div>
+                <div class="gallery-stats en">4 items · Joined 2026</div>
+                <div class="gallery-link zh">进入藏馆 →</div><div class="gallery-link en">Enter Gallery →</div>
+            </a>
+            <a href="https://gudong.app/sellers/seller-yak-bc-antiques" class="gallery-card" data-seller-id="Yak-BC">
+                <div class="gallery-badge zh">新入驻</div><div class="gallery-badge en">New</div>
+                <div class="gallery-name">
+                    <span class="zh">古韵斋</span><span class="en">Yak BC</span>
+                    <span class="founder-badge" title="创始藏家 · 2026" aria-label="Founding Collector 2026">
+
+                        <img class="founder-badge-icon" src="../assets/images/foundingcollector.webp" alt="创始藏家 Founder Collector">
+                        </span>
+                </div>
+                <div class="gallery-desc zh">古董收藏爱好者</div>
+                <div class="gallery-desc en">Antique collector</div>
+                <div class="gallery-stats zh">藏品数：1 · 入驻：2026年</div>
+                <div class="gallery-stats en">1 item · Joined 2026</div>
+                <div class="gallery-link zh">进入藏馆 →</div><div class="gallery-link en">Enter Gallery →</div>
+            </a>
+            <a href="https://gudong.app/sellers/seller-ng-lk-antiques" class="gallery-card" data-seller-id="Ng-LK">
+                <div class="gallery-badge zh">新入驻</div><div class="gallery-badge en">New</div>
+                <div class="gallery-name">
+                    <span class="zh">聚珍阁</span><span class="en">Ng LK Antiques</span>
+                    <span class="founder-badge" title="创始藏家 · 2026" aria-label="Founding Collector 2026">
+
+                        <img class="founder-badge-icon" src="../assets/images/foundingcollector.webp" alt="创始藏家 Founder Collector">
+                        </span>
+                </div>
+                <div class="gallery-desc zh">古董收藏爱好者</div>
+                <div class="gallery-desc en">Antique collector</div>
+                <div class="gallery-stats zh">藏品数：3 · 入驻：2026年</div>
+                <div class="gallery-stats en">3 items · Joined 2026</div>
+                <div class="gallery-link zh">进入藏馆 →</div><div class="gallery-link en">Enter Gallery →</div>
+            </a>
+            <a href="https://gudong.app/sellers/seller-ng-cy-antiques" class="gallery-card" data-seller-id="Ng-CY">
+                <div class="gallery-badge zh">新入驻</div><div class="gallery-badge en">New</div>
+                <div class="gallery-name">
+                    <span class="zh">博古斋</span><span class="en">Ng CY Antiques</span>
+                    <span class="founder-badge" title="创始藏家 · 2026" aria-label="Founding Collector 2026">
+
+                        <img class="founder-badge-icon" src="../assets/images/foundingcollector.webp" alt="创始藏家 Founder Collector">
+                        </span>
+                </div>
+                <div class="gallery-desc zh">古董收藏爱好者</div>
+                <div class="gallery-desc en">Antique collector</div>
+                <div class="gallery-stats zh">藏品数：5 · 入驻：2026年</div>
+                <div class="gallery-stats en">5 items · Joined 2026</div>
+                <div class="gallery-link zh">进入藏馆 →</div><div class="gallery-link en">Enter Gallery →</div>
+            </a>
+        </div>
+    </main>
+
+        <style>
+        /* 2026-10-09：footer 品牌区/免责声明/版权（全站统一·精简版） */
+        .footer-brand { font-weight: 700; font-size: .84rem; color: #5c564f; margin-bottom: .35rem; }
+        .footer-disclaimer { max-width: 680px; margin: 0 auto 1.1rem; font-size: .78rem; line-height: 1.65; color: #8a8178; }
+        .footer-copyright { margin-bottom: .3rem; }
+        </style>
+    <footer>
+        <div class="footer-nav">
+            <a href="../about.html" class="zh">联系我们</a><a href="../about.html" class="en">Contact</a>
+            <a href="../pricing.html#collector-services" class="zh">藏家服务</a><a href="../pricing.html#collector-services" class="en">Collector Services</a>
+            <a href="../pricing.html#buyer-services" class="zh">买家指南</a><a href="../pricing.html#buyer-services" class="en">Buyer Guide</a>
+            <a href="../pricing.html#price-table" class="zh">服务收费</a><a href="../pricing.html#price-table" class="en">Price List</a>
+            <a href="../privacy.html" class="zh">隐私政策</a><a href="../privacy.html" class="en">Privacy</a>
+            <a href="../terms.html" class="zh">用户条款</a><a href="../terms.html" class="en">Terms</a>
+        </div>
+        <p class="footer-brand"><span class="zh">gudong.app — 高端古董发现平台与藏家网络</span><span class="en">gudong.app — Premium antiques discovery platform &amp; collector network</span></p>
+        <p class="footer-disclaimer"><span class="zh">平台仅提供藏品信息展示与藏家连接服务，不参与任何买卖交易，真伪、品相及价格由双方自行判断。</span><span class="en">The platform provides item display and collector connection services only and does not participate in any transaction; authenticity, condition and pricing are to be judged solely by the buyer and seller.</span></p>
+        <p class="footer-copyright"><span class="zh">© 2026 gudong.app 版权所有 · <a href="javascript:void(0)" class="app-install-btn" onclick="event.preventDefault();"><svg viewBox="0 0 24 24" aria-hidden="true" width="12" height="12"><path d="M5 20h14v-2H5v2zM19 9h-4V3H9v6H5l7 7 7-7z"/></svg>安装古董.app</a></span><span class="en">© 2026 gudong.app All rights reserved · <a href="javascript:void(0)" class="app-install-btn" onclick="event.preventDefault();"><svg viewBox="0 0 24 24" aria-hidden="true" width="12" height="12"><path d="M5 20h14v-2H5v2zM19 9h-4V3H9v6H5l7 7 7-7z"/></svg>Install gudong.app</a></span></p>
+    </footer>
+
+    <script>
+        function openSidebar() {
+            document.getElementById('sidebar').classList.add('open');
+            document.getElementById('sidebarOverlay').classList.add('show');
+            document.body.style.overflow = 'hidden';
+            var t = document.getElementById('menuToggle');
+            if (t) t.setAttribute('aria-expanded', 'true');
+        }
+
+        function closeSidebar() {
+            document.getElementById('sidebar').classList.remove('open');
+            document.getElementById('sidebarOverlay').classList.remove('show');
+            document.body.style.overflow = '';
+            var t = document.getElementById('menuToggle');
+            if (t) t.setAttribute('aria-expanded', 'false');
+        }
+
+        /* 全站统一的语言偏好与公告条（localStorage：gudong_lang / announceClosed） */
+        let currentLang = (function () { try { return localStorage.getItem('gudong_lang') === 'en' ? 'en' : 'zh'; } catch (e) { return 'zh'; } })();
+        function applyLang() {
+            document.body.dataset.lang = currentLang;
+            document.documentElement.lang = currentLang === 'en' ? 'en-SG' : 'zh-SG';
+            var b = document.querySelector('.lang-btn');
+            if (b) b.textContent = currentLang === 'zh' ? 'EN' : '中';
+        }
+        function toggleLang() {
+            currentLang = currentLang === 'zh' ? 'en' : 'zh';
+            applyLang();
+            try { localStorage.setItem('gudong_lang', currentLang); } catch (e) {}
+        }
+        function closeAnnounce() {
+            var b = document.getElementById('announceBar');
+            if (b) b.style.display = 'none';
+            try { localStorage.setItem('announceClosed', 'yes'); } catch (e) {}
+        }
+
+        /* ESC 关闭侧栏 */
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') closeSidebar();
+        });
+
+        /* 桌面宽度时自动收起，避免遮罩残留 */
+        window.addEventListener('resize', function () {
+            if (window.innerWidth > 900) closeSidebar();
+        });
+
+        applyLang();
+        try { if (localStorage.getItem('announceClosed') === 'yes') { var __ab = document.getElementById('announceBar'); if (__ab) __ab.style.display = 'none'; } } catch (e) {}
+
+        /* Service Worker：同域根相对路径（items/ 下写 'sw.js' 会解析成 /items/sw.js） */
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function () {
+                navigator.serviceWorker.register('/sw.js').catch(function () {});
+            });
+        }
+    </script>
+    <script src="../assets/js/gudong-data.js" data-root="../"></script>
+    <script>
+        if (window.GudongData) {
+            GudongData.load().then(function (r) {
+                var all = GudongData.dedupe([].concat(r.data.newListing, r.data.todayFinds, r.data.editorPicks));
+                var sellers = GudongData.sellerMap(r.data);
+                document.querySelectorAll('.gallery-card[data-seller-id]').forEach(function (card) {
+                    var id = card.getAttribute('data-seller-id');
+                    var n = all.filter(function (f) { return GudongData.normId(f.seller_id) === id; }).length;
+                    var zh = card.querySelector('.gallery-stats.zh'), en = card.querySelector('.gallery-stats.en');
+                    if (zh) zh.textContent = zh.textContent.replace(/藏品数：\d+/, '藏品数：' + n);
+                    if (en) en.textContent = en.textContent.replace(/^\d+ items?/, n + (n === 1 ? ' item' : ' items'));
+                    var sl = sellers[id];
+                    if (sl) {
+                        var nz = card.querySelector('.gallery-name .zh'), ne = card.querySelector('.gallery-name .en');
+                        if (nz && sl.display_zh) nz.textContent = sl.display_zh;
+                        if (ne && sl.display_en) ne.textContent = sl.display_en;
+                        if (sl.since_year) {
+                            if (zh) zh.textContent = zh.textContent.replace(/入驻：\d+年/, '入驻：' + sl.since_year + '年');
+                            if (en) en.textContent = en.textContent.replace(/Joined \d+/, 'Joined ' + sl.since_year);
+                        }
+                    }
+                });
+            }).catch(function () {});
+        }
+    </script>
+<!-- 2026-09-23：PWA 安装引导弹层（iOS 图文步骤 / 桌面提示），全站统一 -->
+<style>
+.gd-install-modal { position: fixed; inset: 0; z-index: 9999; display: none; align-items: center; justify-content: center; background: rgba(0,0,0,.45); padding: 1.2rem; }
+.gd-install-modal.open { display: flex; }
+.gd-install-card { background: #fff; border-radius: var(--card-radius); max-width: 350px; width: 100%; padding: 1.6rem 1.4rem 1.2rem; text-align: center; box-shadow: 0 18px 50px rgba(0,0,0,.25); position: relative; }
+.gd-install-close { position: absolute; top: .5rem; right: .7rem; border: 0; background: none; font-size: 1.4rem; color: #999; cursor: pointer; padding: .5rem; min-width: 44px; min-height: 44px; display: inline-flex; align-items: center; justify-content: center; line-height: 1; }
+.gd-install-title { font-size: 1.08rem; font-weight: 700; color: #3d2b1f; margin: .2rem 0 1rem; }
+.gd-install-steps { text-align: left; margin: 0 auto 1rem; max-width: 290px; }
+.gd-install-step { display: flex; align-items: flex-start; gap: .6rem; padding: .5rem 0; color: #5a4636; font-size: .9rem; line-height: 1.5; }
+.gd-install-step .n { flex-shrink: 0; width: 22px; height: 22px; border-radius: 50%; background: #f0e4d8; color: #7A4E33; font-weight: 700; font-size: .78rem; display: flex; align-items: center; justify-content: center; margin-top: .1rem; }
+.gd-install-step svg { flex-shrink: 0; width: 22px; height: 22px; fill: #007AFF; margin-top: .1rem; }
+.gd-install-note { font-size: .78rem; color: #9a8d80; margin-top: .5rem; line-height: 1.5; }
+.gd-install-modal [data-lang="en"] .zh, body[data-lang="en"] .gd-install-modal .zh { display: none; }
+.gd-install-modal [data-lang="zh"] .en, body[data-lang="zh"] .gd-install-modal .en { display: none; }
+.app-install-btn { display: inline-flex; align-items: center; gap: .3rem; margin-left: .6rem; padding: .3rem .7rem; border: 1px solid #e3d9cf; border-radius: 999px; color: #7a6a5c; font-size: .78rem; text-decoration: none; vertical-align: middle; transition: .4s cubic-bezier(.25,.1,.25,1); }
+.app-install-btn:hover { border-color: #7A4E33; color: #7A4E33; background: #f0e4d8; }
+.app-install-btn svg { width: 12px; height: 12px; flex-shrink: 0; fill: currentColor; }
+</style>
+<div class="gd-install-modal" id="gdInstallModal" role="dialog" aria-modal="true" aria-label="Install guide">
+    <div class="gd-install-card">
+        <button type="button" class="gd-install-close" onclick="gdCloseInstall()" aria-label="close">×</button>
+        <div class="gd-install-title zh">安装 古董.app 到主屏幕</div>
+        <div class="gd-install-title en">Add Gudong.app to Home Screen</div>
+        <div class="gd-install-steps" id="gdStepsIos">
+            <div class="gd-install-step"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18.2c-4.5 0-8.2-3.7-8.2-8.2S7.5 3.8 12 3.8s8.2 3.7 8.2 8.2-3.7 8.2-8.2 8.2zM11 7l-4 4h3v6h2v-6h3l-4-4z"/></svg><span class="zh">点击 Safari 底部工具栏的「分享」按钮</span><span class="en">Tap the Share button in Safari's bottom toolbar</span></div>
+            <div class="gd-install-step"><span class="n">2</span><span class="zh">在分享菜单中选择「添加到主屏幕」</span><span class="en">Choose "Add to Home Screen" in the share menu</span></div>
+            <div class="gd-install-step"><span class="n">3</span><span class="zh">点击右上角「添加」，桌面即出现古董.app 图标</span><span class="en">Tap "Add" — the Gudong.app icon appears on your Home Screen</span></div>
+        </div>
+        <div class="gd-install-steps" id="gdStepsOther" style="display:none;">
+            <div class="gd-install-step"><span class="n">1</span><span class="zh">点击浏览器地址栏右侧的「安装」图标</span><span class="en">Click the install icon at the right of the address bar</span></div>
+            <div class="gd-install-step"><span class="n">2</span><span class="zh">或通过浏览器菜单 →「安装古董圈」</span><span class="en">Or open the browser menu → "Install Gudong"</span></div>
+        </div>
+        <div class="gd-install-note zh">安装后可像原生 App 一样全屏使用，无需应用商店。</div>
+        <div class="gd-install-note en">Runs full-screen like a native app. No app store needed.</div>
+    </div>
+</div>
+<script>
+(function () {
+    var modal = document.getElementById('gdInstallModal');
+    if (!modal) return;
+    window.gdCloseInstall = function () { modal.classList.remove('open'); };
+    modal.addEventListener('click', function (e) { if (e.target === modal) gdCloseInstall(); });
+
+    var deferredPrompt = null;
+    window.addEventListener('beforeinstallprompt', function (e) { e.preventDefault(); deferredPrompt = e; });
+    window.addEventListener('appinstalled', function () {
+        document.querySelectorAll('.app-install-btn').forEach(function (b) { b.style.display = 'none'; });
+    });
+
+    document.addEventListener('click', function (e) {
+        var btn = e.target && e.target.closest ? e.target.closest('.app-install-btn') : null;
+        if (!btn) return;
+        e.preventDefault();
+        if (deferredPrompt) {
+            deferredPrompt.prompt();
+            deferredPrompt.userChoice.then(function () { deferredPrompt = null; }).catch(function () {});
+            return;
+        }
+        // 无原生安装提示（iOS Safari / 未触发的浏览器）→ 显示图文引导
+        var ua = navigator.userAgent;
+        var isIOS = /iPad|iPhone|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+        document.getElementById('gdStepsIos').style.display = isIOS ? '' : 'none';
+        document.getElementById('gdStepsOther').style.display = isIOS ? 'none' : '';
+        modal.classList.add('open');
+    });
+})();
+</script>
+
+<!-- 2026-10-07：分享功能（Web Share API + 剪贴板降级 + Toast 反馈），全站统一 -->
+<style>
+.gd-share-btn {
+    border: 1px solid var(--color-border); background: transparent;
+    color: var(--color-text-secondary); padding: .55rem .7rem; min-height: 44px; min-width: 44px;
+    border-radius: var(--btn-radius); cursor: pointer; display: inline-flex;
+    align-items: center; justify-content: center; flex-shrink: 0;
+    transition: all var(--dur) var(--ease);
+}
+.gd-share-btn:hover { border-color: var(--color-primary); color: var(--color-primary); background: var(--color-primary-light); }
+.gd-share-btn svg { width: 16px; height: 16px; fill: currentColor; display: block; }
+.gd-toast {
+    position: fixed; left: 50%; bottom: 30px; transform: translateX(-50%) translateY(10px);
+    background: rgba(36,31,26,.92); color: #fff; font-size: .85rem;
+    padding: .62rem 1.15rem; border-radius: 999px; z-index: 10000;
+    opacity: 0; pointer-events: none; transition: opacity .3s ease, transform .3s ease;
+    box-shadow: 0 8px 24px rgba(36,31,26,.25); white-space: nowrap;
+    max-width: 88vw; overflow: hidden; text-overflow: ellipsis;
+}
+.gd-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+/*<<<gd-mobile-header-fix-2026-10-16>>> 移动端顶部导航适配（仅 <768px 生效，桌面端保持原样）*/
+:root{
+  --gd-header-h-m: 58px;
+  --gd-safe-top: env(safe-area-inset-top, 0px);
+  --gd-header-total-m: calc(var(--gd-header-h-m) + var(--gd-safe-top));
+}
+@media (max-width: 767px){
+  html, body { scroll-padding-top: calc(var(--gd-header-total-m) + 12px); }
+  body > header{
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    height: var(--gd-header-total-m) !important;
+    min-height: var(--gd-header-total-m) !important;
+    max-height: var(--gd-header-total-m) !important;
+    padding: var(--gd-safe-top) 5% 0 !important;
+    margin: 0 !important;
+    align-items: center !important;
+    z-index: 80 !important;
+    -webkit-transition: height .28s ease, padding .28s ease, background-color .28s ease, box-shadow .28s ease;
+    transition: height .28s ease, padding .28s ease, background-color .28s ease, box-shadow .28s ease;
+  }
+  body > header .brand-logo-img{
+    height: 30px !important;
+    width: auto !important;
+    max-width: 76px !important;
+    opacity: 1 !important;
+    -webkit-transition: height .28s ease, max-width .28s ease;
+    transition: height .28s ease, max-width .28s ease;
+  }
+  body > header ~ main{
+    padding-top: calc(var(--gd-header-total-m) + 12px) !important;
+  }
+}
+/*<<</gd-mobile-header-fix-2026-10-16>>>*/
+/*<<<gd-header-logo-fit-2026-10-16>>> 窄屏 LOGO 完整性修复（仅 ≤480px 生效，桌面端保持原样）*/
+@media (max-width: 480px){
+  body > header { padding-left: 3% !important; padding-right: 3% !important; gap: .45rem !important; }
+  body > header > div:first-child { gap: .45rem !important; }
+  body > header .brand-logo-img { height: 28px !important; }
+  .brand { gap: .45rem !important; }
+  .brand-zh, .brand-en { font-size: min(1.05rem, 4.2vw) !important; }
+  .brand-text small { font-size: .58rem !important; letter-spacing: .05em !important; }
+  .header-right { gap: .4rem !important; }
+}
+@media (max-width: 360px){
+  body > header { padding-left: 2% !important; padding-right: 2% !important; gap: .35rem !important; }
+  body > header > div:first-child { gap: .35rem !important; }
+  .brand { gap: .35rem !important; }
+  .header-right { gap: .3rem !important; }
+  .brand-zh, .brand-en { font-size: min(1.05rem, 4vw) !important; }
+  .brand-text small { display: none !important; }
+  .menu-toggle { width: 40px !important; height: 40px !important; }
+  .gd-share-btn { min-width: 40px !important; min-height: 40px !important; padding: .35rem !important; }
+  .lang-btn { min-width: 40px !important; min-height: 40px !important; padding: .35rem .5rem !important; }
+}
+/*<<</gd-header-logo-fit-2026-10-16>>>*/
+</style>
+<script>
+/* 分享：Web Share API（原生分享面板）→ navigator.clipboard → execCommand 三级降级 */
+/* 分享：Web Share API（原生分享面板）→ navigator.clipboard → execCommand 三级降级 */
+(function () {
+    var toastEl = null, toastTimer = null;
+    function gdToast(msg) {
+        if (!toastEl) {
+            toastEl = document.createElement("div");
+            toastEl.className = "gd-toast";
+            document.body.appendChild(toastEl);
+        }
+        toastEl.textContent = msg;
+        toastEl.classList.add("show");
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(function () { toastEl.classList.remove("show"); }, 2200);
+    }
+    function gdCopyText(text, done, fail) {
+        function legacy() {
+            var ta = document.createElement("textarea");
+            ta.value = text;
+            ta.setAttribute("readonly", "");
+            ta.style.cssText = "position:fixed;left:-9999px;top:0;opacity:0;";
+            document.body.appendChild(ta);
+            ta.select();
+            if (ta.setSelectionRange) ta.setSelectionRange(0, text.length);
+            var ok = false;
+            try { ok = document.execCommand("copy"); } catch (e) {}
+            document.body.removeChild(ta);
+            if (ok) { done(); } else if (fail) { fail(); }
+        }
+        if (navigator.clipboard && window.isSecureContext) {
+            navigator.clipboard.writeText(text).then(done, function () { legacy(); });
+        } else { legacy(); }
+    }
+    window.gdShare = function (opts) {
+        opts = opts || {};
+        var can = document.querySelector('link[rel="canonical"]');
+        var url = opts.url || (can ? can.href : location.href);
+        var lang = (document.body.dataset && document.body.dataset.lang) || "zh";
+        var title = opts.title || document.title;
+        var text = opts.text || "";
+        if (navigator.share) {
+            navigator.share({ title: title, text: text, url: url }).then(function () {}, function () {});
+            return;
+        }
+        gdCopyText(url, function () {
+            gdToast(lang === "zh" ? "链接已复制，去分享给朋友吧" : "Link copied — share it with friends");
+        }, function () {
+            gdToast(lang === "zh" ? "复制失败，请手动复制地址栏链接" : "Copy failed — please copy the URL from the address bar");
+        });
+    };
+})();
+</script>
+<script>
+window.gdSharePage = function () {
+    var lang = (document.body.dataset && document.body.dataset.lang) || "zh";
+    window.gdShare({
+        title: lang === "zh" ? "古董圈 · 私家藏馆" : "Gudong · Private Collection Gallery",
+        text: lang === "zh" ? "来古董圈逛逛藏家们的私家藏馆" : "Browse private collector galleries on gudong.app"
+    });
+};
+</script>
+</body>
+</html>
+
+
+

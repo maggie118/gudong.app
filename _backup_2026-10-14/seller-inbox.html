@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="zh-SG" data-lang="zh">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow"><meta name="referrer" content="no-referrer">
+  <meta name="theme-color" content="#f7f4ef">
+  <title>古董圈 · 藏家站内消息</title>
+  <style>
+    :root{color-scheme:light;--ink:#241f1a;--muted:#766c60;--paper:#f7f4ef;--line:#e7e1d8;--brown:#7a4e33}
+    *{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.5 Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+    .page{max-width:1050px;margin:auto;padding:22px 16px}.top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:16px}.top h1{font-size:1.35rem;color:#5c3a26;margin:0}.top p{margin:3px 0 0;color:var(--muted);font-size:.85rem}.lang{min-height:42px;border:1px solid var(--line);border-radius:8px;background:white;padding:0 12px;color:var(--ink);font:inherit}
+    .layout{display:grid;grid-template-columns:minmax(240px,330px) 1fr;min-height:70vh;background:white;border:1px solid var(--line);border-radius:15px;overflow:hidden;box-shadow:0 10px 28px #241f1a10}.threads{border-right:1px solid var(--line);overflow:auto;max-height:75vh}.threads-head{padding:14px 16px;border-bottom:1px solid var(--line);font-weight:700;color:#5c3a26}.thread{display:block;width:100%;text-align:left;padding:13px 16px;border:0;border-bottom:1px solid #f0ece6;background:white;color:inherit;cursor:pointer;font:inherit}.thread:hover,.thread.active{background:#f7f4ef}.thread-line{display:flex;justify-content:space-between;gap:8px;font-weight:650}.thread-sub,.thread-last{display:block;color:var(--muted);font-size:.78rem;margin-top:3px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.badge{display:inline-flex;min-width:21px;height:21px;justify-content:center;align-items:center;border-radius:99px;background:#a84536;color:white;font-size:.7rem;padding:0 5px}.conversation{display:flex;flex-direction:column;min-width:0}.conv-head{padding:14px 18px;border-bottom:1px solid var(--line)}.conv-head strong{display:block;color:#5c3a26}.conv-head span{color:var(--muted);font-size:.82rem}.messages{flex:1;list-style:none;margin:0;padding:18px;overflow:auto;max-height:55vh;display:flex;flex-direction:column;gap:9px}.msg{align-self:flex-start;max-width:85%;padding:9px 12px;background:#f1ece4;border-radius:12px;white-space:pre-wrap;overflow-wrap:anywhere}.msg.seller{align-self:flex-end;background:var(--brown);color:white}.time{display:block;font-size:.68rem;opacity:.7;margin-top:3px}.reply{padding:14px 16px;border-top:1px solid var(--line);display:grid;grid-template-columns:1fr auto;align-items:end;gap:9px}.reply textarea{width:100%;min-height:48px;max-height:140px;resize:vertical;border:1px solid #d8d0c5;border-radius:8px;padding:10px;font:inherit}.reply button{min-height:45px;padding:0 17px;border:0;border-radius:8px;background:var(--brown);color:white;font:inherit;font-weight:650;cursor:pointer}.reply button:disabled{opacity:.6}.status{padding:0 17px 12px;min-height:1.5em;font-size:.82rem;color:var(--muted)}.empty{padding:24px;color:var(--muted)}
+    [data-lang="en"] .zh,[data-lang="zh"] .en{display:none!important}
+    @media(max-width:700px){.page{padding:12px 10px}.layout{grid-template-columns:1fr;min-height:80vh}.threads{max-height:28vh;border-right:0;border-bottom:1px solid var(--line)}.messages{max-height:42vh}.reply{grid-template-columns:1fr}.reply button{width:100%}}
+  </style>
+</head>
+<body data-lang="zh">
+  <main class="page">
+    <div class="top"><div><h1><span class="zh">古董圈 · 藏家站内消息</span><span class="en">Gudong · Collector Inbox</span></h1><p><span class="zh">买家咨询会显示在这里，回复将回到买家的藏品聊天框。</span><span class="en">Buyer inquiries appear here. Replies return to the buyer's item chat.</span></p></div><button class="lang" id="lang-toggle" type="button">EN</button></div>
+    <div class="layout">
+      <aside class="threads"><div class="threads-head"><span class="zh">咨询列表</span><span class="en">Inquiries</span></div><div id="threads"><div class="empty"><span class="zh">正在加载…</span><span class="en">Loading…</span></div></div></aside>
+      <section class="conversation" aria-label="Conversation">
+        <header class="conv-head"><strong id="item-title"><span class="zh">选择一条咨询</span><span class="en">Choose an inquiry</span></strong><span id="conversation-meta"></span></header>
+        <ol class="messages" id="messages" aria-live="polite"><li class="empty"><span class="zh">选择左侧对话查看消息。</span><span class="en">Select a conversation to read messages.</span></li></ol>
+        <form class="reply" id="reply-form"><label for="reply-content" class="sr-only"><span class="zh">回复买家</span><span class="en">Reply to buyer</span></label><textarea id="reply-content" maxlength="1000" required disabled></textarea><button type="submit" disabled><span class="zh">发送回复</span><span class="en">Send reply</span></button></form>
+        <div class="status" id="status" role="status" aria-live="polite"></div>
+      </section>
+    </div>
+    <p class="status"><span class="zh">这是专属私密链接，请勿转发。持有链接的人可以查看并回复该藏家的全部咨询。</span><span class="en">This is a private access link. Do not forward it. Anyone with the link can view and reply to this collector's inquiries.</span></p>
+  </main>
+  <script src="/assets/js/seller-inbox.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+{
+  "name": "gudong-app",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "build": "node scripts/refresh-listings.js"
+  }
+}

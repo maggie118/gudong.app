@@ -1,0 +1,20 @@
+{
+  "name": "airtable-script",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "generate": "node generate.js",
+    "fix-data": "node fix-data.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "airtable": "^0.12.2",
+    "dotenv": "^17.4.2"
+  },
+  "private": true,
+  "engines": {
+    "node": ">=18"
+  }
+}

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="zh-SG" data-lang="zh">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow"><meta name="referrer" content="no-referrer">
+  <title>古董圈 · 私密咨询回复</title>
+  <style>
+    :root{color-scheme:light;--ink:#241f1a;--muted:#766c60;--paper:#f7f4ef;--line:#e7e1d8;--brown:#7a4e33}
+    *{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.55 Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+    .page{max-width:760px;margin:0 auto;padding:24px 16px}.card{background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:0 12px 30px #241f1a12;overflow:hidden}
+    header{padding:20px 22px;background:#fff;border-bottom:1px solid var(--line)}h1{font-size:1.25rem;margin:0 0 4px;color:#5c3a26}header p,.meta{margin:0;color:var(--muted);font-size:.9rem}
+    .info{padding:14px 22px;border-bottom:1px solid var(--line);background:#fbfaf8}.info strong{display:block}.messages{list-style:none;padding:18px;margin:0;min-height:170px;max-height:52vh;overflow:auto;display:flex;flex-direction:column;gap:10px}
+    .msg{align-self:flex-start;max-width:90%;padding:10px 13px;background:#f1ece4;border-radius:12px;white-space:pre-wrap;overflow-wrap:anywhere}.msg.seller{align-self:flex-end;background:var(--brown);color:white}.time{display:block;font-size:.7rem;opacity:.72;margin-top:4px}
+    form{padding:16px 18px;border-top:1px solid var(--line);display:grid;grid-template-columns:1fr auto;gap:10px}textarea{min-height:48px;max-height:150px;resize:vertical;border:1px solid #d8d0c5;border-radius:8px;padding:11px;font:inherit}button{border:0;border-radius:8px;background:var(--brown);color:#fff;padding:0 18px;min-height:46px;font:inherit;font-weight:600;cursor:pointer}button:disabled{opacity:.6;cursor:wait}#status{padding:0 20px 14px;color:var(--muted);font-size:.85rem}.warning{padding:12px 20px;color:#72542b;background:#fff8e9;font-size:.82rem}
+    [data-lang="en"] .zh,[data-lang="zh"] .en{display:none}
+    @media(max-width:520px){.page{padding:10px}.messages{max-height:58vh}form{grid-template-columns:1fr}button{width:100%}}
+  </style>
+</head>
+<body data-lang="zh">
+  <main class="page"><section class="card">
+    <header><h1><span class="zh">古董圈 · 藏家回复</span><span class="en">Gudong · Collector Reply</span></h1><p><span class="zh">这是此条咨询的专用回复页面。</span><span class="en">This is a private reply page for this inquiry.</span></p></header>
+    <div class="info"><strong id="item-title">正在载入藏品…</strong><span class="meta" id="conversation-meta"></span></div>
+    <div class="warning"><span class="zh">此链接可查看并回复这段对话，请勿转发。链接有效期 30 天。</span><span class="en">This link grants access to this conversation. Do not forward it. It expires in 30 days.</span></div>
+    <ol class="messages" id="messages" aria-live="polite"></ol>
+    <form id="reply-form"><label for="reply-content" class="zh">回复买家</label><label for="reply-content" class="en">Reply to buyer</label><textarea id="reply-content" maxlength="1000" required></textarea><button type="submit"><span class="zh">发送回复</span><span class="en">Send reply</span></button></form>
+    <div id="status" role="status" aria-live="polite">正在连接…</div>
+  </section></main>
+  <script src="/assets/js/seller-reply.js" defer></script>
+</body>
+</html>

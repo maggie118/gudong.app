@@ -1,0 +1,19 @@
+# Gudong.app — robots.txt
+User-agent: *
+Allow: /
+Disallow: /my/
+Disallow: /seller-inbox
+Disallow: /seller-reply
+Disallow: /templates/
+Disallow: /content/
+Disallow: /prototypes/
+Disallow: /_backup/
+Disallow: /_drafts/
+Disallow: /docs/
+Disallow: /scripts/
+Disallow: /airtable-script/
+Disallow: /.git/
+Disallow: /.vercel/
+Disallow: /.workbuddy/
+Disallow: /assets/brand/logo-preview
+Sitemap: https://www.gudong.app/sitemap.xml

@@ -1,0 +1,305 @@
+{
+  "updated": "2026-09-25",
+  "articles": [
+    {
+      "slug": "qing-porcelain-dating",
+      "cat": "guide",
+      "tone": "guide",
+      "mark": "青",
+      "kicker": {
+        "zh": "入门指南",
+        "en": "BEGINNER"
+      },
+      "title": {
+        "zh": "清代民窑青花怎么分辨年代？3 个上手要点",
+        "en": "Dating Qing folk kiln blue-and-white: 3 hands-on signals"
+      },
+      "desc": {
+        "zh": "釉面、胎质、发色，三个最容易上手的判断维度。",
+        "en": "Glaze, body, and pigment tone — three of the easiest entry points."
+      },
+      "tags": "青花 瓷器 断代 清代 民窑 porcelain blue and white",
+      "date": "2026-02-18",
+      "read": {
+        "zh": "6 分钟",
+        "en": "6 min"
+      },
+      "featured": false
+    },
+    {
+      "slug": "singapore-coin-market",
+      "cat": "market",
+      "tone": "market",
+      "mark": "泉",
+      "kicker": {
+        "zh": "行情观察",
+        "en": "MARKET"
+      },
+      "title": {
+        "zh": "新加坡本地钱币市场近半年行情简析",
+        "en": "Singapore coin market: a half-year snapshot"
+      },
+      "desc": {
+        "zh": "清钱、民国币、东南亚流通币的成交趋势与价格区间。",
+        "en": "Qing, Republican, and SE-Asian circulating coins — trends and price ranges."
+      },
+      "tags": "钱币 行情 新加坡 康熙通宝 coins market kangxi",
+      "date": "2026-02-15",
+      "read": {
+        "zh": "8 分钟",
+        "en": "8 min"
+      },
+      "featured": false
+    },
+    {
+      "slug": "jade-buyer-pitfalls",
+      "cat": "pitfall",
+      "tone": "pitfall",
+      "mark": "玉",
+      "kicker": {
+        "zh": "避坑手册",
+        "en": "PITFALLS"
+      },
+      "title": {
+        "zh": "新手买玉器，最容易踩的 5 个坑",
+        "en": "5 pitfalls new jade buyers fall into"
+      },
+      "desc": {
+        "zh": "从「和田」二字说起，谈谈如何不被话术带走。",
+        "en": "Starting from the word \"Hetian\" — how not to be talked into it."
+      },
+      "tags": "玉器 和田玉 避坑 jade hetian pitfalls",
+      "date": "2026-02-11",
+      "read": {
+        "zh": "7 分钟",
+        "en": "7 min"
+      },
+      "featured": false
+    },
+    {
+      "slug": "what-is-jianlou",
+      "cat": "strategy",
+      "tone": "strategy",
+      "mark": "鉴",
+      "kicker": {
+        "zh": "捡漏逻辑",
+        "en": "STRATEGY"
+      },
+      "title": {
+        "zh": "什么是“捡漏”？古董捡漏的 3 个真实逻辑",
+        "en": "What is \"jianlou\"? 3 real logics behind bargain hunting"
+      },
+      "desc": {
+        "zh": "信息差、时间差、认知差——捡漏不是运气。",
+        "en": "Information, timing, and knowledge gaps — not luck."
+      },
+      "tags": "捡漏 策略 判断 jianlou strategy",
+      "date": "2026-02-08",
+      "read": {
+        "zh": "5 分钟",
+        "en": "5 min"
+      },
+      "featured": true
+    },
+    {
+      "slug": "glaze-crackle-basics",
+      "cat": "guide",
+      "tone": "guide",
+      "mark": "釉",
+      "kicker": {
+        "zh": "入门指南",
+        "en": "BEGINNER"
+      },
+      "title": {
+        "zh": "瓷器釉面开片怎么看？自然开片与人工开片的区别",
+        "en": "Reading glaze crackle: natural vs. forced"
+      },
+      "desc": {
+        "zh": "开片不是瑕疵代名词，它同时是断代与辨伪的重要线索。",
+        "en": "Crackle is not just a flaw — it is a key clue for dating and authentication."
+      },
+      "tags": "瓷器 釉面 开片 辨伪 porcelain glaze crackle",
+      "date": "2026-02-04",
+      "read": {
+        "zh": "6 分钟",
+        "en": "6 min"
+      },
+      "featured": false
+    },
+    {
+      "slug": "singapore-flea-market-map",
+      "cat": "market",
+      "tone": "market",
+      "mark": "市",
+      "kicker": {
+        "zh": "本地指南",
+        "en": "LOCAL GUIDE"
+      },
+      "title": {
+        "zh": "新加坡古董市集地图：周末去哪里淘",
+        "en": "Singapore flea & antique market map: where to hunt on weekends"
+      },
+      "desc": {
+        "zh": "从牛车水到加东，几个本地藏家常去的市集与摊位类型。",
+        "en": "From Chinatown to Katong — markets local collectors actually visit."
+      },
+      "tags": "新加坡 市集 周末 淘货 singapore flea market weekend",
+      "date": "2026-01-30",
+      "read": {
+        "zh": "7 分钟",
+        "en": "7 min"
+      },
+      "featured": false
+    },
+    {
+      "slug": "coin-aging-tricks",
+      "cat": "pitfall",
+      "tone": "pitfall",
+      "mark": "伪",
+      "kicker": {
+        "zh": "避坑手册",
+        "en": "PITFALLS"
+      },
+      "title": {
+        "zh": "钱币做旧手法图解：这几种包浆要小心",
+        "en": "Coin ageing tricks illustrated: patinas to be careful with"
+      },
+      "desc": {
+        "zh": "化学做旧、土埋、火烧——常见手法与肉眼识别要点。",
+        "en": "Chemical ageing, burying, torching — common methods and how to spot them."
+      },
+      "tags": "钱币 做旧 包浆 辨伪 coins patina fake",
+      "date": "2026-01-26",
+      "read": {
+        "zh": "6 分钟",
+        "en": "6 min"
+      },
+      "featured": false
+    },
+    {
+      "slug": "painting-seals-signatures",
+      "cat": "guide",
+      "tone": "guide",
+      "mark": "印",
+      "kicker": {
+        "zh": "入门指南",
+        "en": "BEGINNER"
+      },
+      "title": {
+        "zh": "书画题跋与钤印：读懂落款里的信息",
+        "en": "Inscriptions and seals: reading what the signature tells you"
+      },
+      "desc": {
+        "zh": "上款、下款、闲章、鉴藏印，落款是最容易被忽略的线索区。",
+        "en": "Dedications, signatures, leisure seals, collector seals — an overlooked clue zone."
+      },
+      "tags": "书画 题跋 钤印 落款 painting calligraphy seals",
+      "date": "2026-01-22",
+      "read": {
+        "zh": "8 分钟",
+        "en": "8 min"
+      },
+      "featured": false
+    },
+    {
+      "slug": "amber-baked-vs-natural",
+      "cat": "pitfall",
+      "tone": "pitfall",
+      "mark": "蜡",
+      "kicker": {
+        "zh": "避坑手册",
+        "en": "PITFALLS"
+      },
+      "title": {
+        "zh": "老蜜蜡的“烤色”与天然氧化，怎么区分",
+        "en": "Baked amber vs. natural oxidation — how to tell"
+      },
+      "desc": {
+        "zh": "颜色深浅不等于年份长短，先看纹路再看光泽。",
+        "en": "Darker does not mean older — check the flow lines before the shine."
+      },
+      "tags": "蜜蜡 琥珀 烤色 避坑 amber beeswax pitfalls",
+      "date": "2026-01-18",
+      "read": {
+        "zh": "5 分钟",
+        "en": "5 min"
+      },
+      "featured": false
+    },
+    {
+      "slug": "bronze-censer-patina",
+      "cat": "guide",
+      "tone": "guide",
+      "mark": "炉",
+      "kicker": {
+        "zh": "入门指南",
+        "en": "BEGINNER"
+      },
+      "title": {
+        "zh": "铜香炉的皮壳与包浆：从手感说起",
+        "en": "Bronze censers: patina and surface feel"
+      },
+      "desc": {
+        "zh": "铜质、铸痕、皮色、重量——四步建立基本判断。",
+        "en": "Alloy, casting marks, surface colour, weight — four steps to a basic read."
+      },
+      "tags": "香炉 铜器 皮壳 包浆 bronze censer patina",
+      "date": "2026-01-14",
+      "read": {
+        "zh": "6 分钟",
+        "en": "6 min"
+      },
+      "featured": false
+    },
+    {
+      "slug": "auction-house-watch",
+      "cat": "market",
+      "tone": "market",
+      "mark": "拍",
+      "kicker": {
+        "zh": "行情观察",
+        "en": "MARKET"
+      },
+      "title": {
+        "zh": "新加坡拍卖行观察：本地成交价参考逻辑",
+        "en": "Singapore auction watch: how to read local hammer prices"
+      },
+      "desc": {
+        "zh": "成交价 ≠ 市场价，先弄懂佣金、品相与来源的加成。",
+        "en": "Hammer price is not market price — premiums, condition and provenance all count."
+      },
+      "tags": "拍卖 行情 新加坡 成交价 auction market price",
+      "date": "2026-01-09",
+      "read": {
+        "zh": "7 分钟",
+        "en": "7 min"
+      },
+      "featured": false
+    },
+    {
+      "slug": "how-to-brief-a-sourcing",
+      "cat": "strategy",
+      "tone": "strategy",
+      "mark": "委",
+      "kicker": {
+        "zh": "捡漏逻辑",
+        "en": "STRATEGY"
+      },
+      "title": {
+        "zh": "委托找货：如何准确描述你想要的那件藏品",
+        "en": "Sourcing briefs: describing the piece you actually want"
+      },
+      "desc": {
+        "zh": "器型、尺寸、年代、预算、可接受瑕疵——写清楚，成交率翻倍。",
+        "en": "Form, size, period, budget, acceptable flaws — clarity doubles your hit rate."
+      },
+      "tags": "委托 找货 沟通 sourcing brief",
+      "date": "2026-01-05",
+      "read": {
+        "zh": "5 分钟",
+        "en": "5 min"
+      },
+      "featured": false
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+# 2026-09-26：上线前整理 —— 以下文件仅为本地构建源/备份/临时产物，不部署到线上
+# 注意：api/、data/、assets/、各页面目录必须保留部署，勿加入此清单。
+
+# 备份与临时文件
+_backup*
+*.bak
+*.py
+_linkcheck*
+_navseo.json
+live-homepage-verify.png
+index.html.bak
+
+# 构建源文件（产物 insights/*.html 等已生成并提交）
+templates/
+content/
+build-insights.js
+generate.js
+generate-sellers.js
+# scripts/ 目录保留：Vercel build 时会跑 scripts/refresh-listings.js（SSG 快照生成）
+airtable-script/
+
+# 内部原型与文档
+prototypes/
+docs/
+*.md
+
+# 2026-10-03 上线前检查补充
+# 密钥/环境变量：.gitignore 只管 git，Vercel 部署看的是本文件，必须显式排除。
+# .env.local 内含 Vercel OIDC token（JWT），泄露可被他人冒用身份操作项目。
+.env
+.env.*
+!.env.example
+.vercel
+
+# 本地工具工作目录（含验证截图、临时提取的脚本片段、对话记忆）
+.workbuddy/
+
+# 编辑器 / 系统文件
+.DS_Store
+Thumbs.db
+*.log

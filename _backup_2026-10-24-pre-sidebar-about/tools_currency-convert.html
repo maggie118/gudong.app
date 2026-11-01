@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="zh-SG">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>Art Auction Currency Converter HKD SGD USD｜艺术品拍卖货币汇率换算｜Gudong.app</title>
+<meta name="description" content="艺术品拍卖货币换算工具（Art Auction Currency Converter）：SGD 新加坡元、CNY 人民币、USD 美元、HKD 港币、EUR、GBP、VND、MYR 双向实时参考换算，用于拍品估价与跨境比价。仅市场中间参考价，不作为成交结算或 GST 报税依据。">
+<meta name="keywords" content="art auction currency converter,hkd sgd usd converter,艺术品拍卖货币换算,拍品汇率,SGD CNY USD HKD EUR GBP VND MYR,auction valuation currency reference">
+<meta name="robots" content="index,follow,max-image-preview:large">
+
+<link rel="canonical" href="https://www.gudong.app/tools/currency-convert">
+<link rel="alternate" hreflang="zh-SG" href="https://www.gudong.app/tools/currency-convert" />
+<link rel="alternate" hreflang="en-SG" href="https://www.gudong.app/tools/currency-convert" />
+<link rel="alternate" hreflang="x-default" href="https://www.gudong.app/tools/currency-convert" />
+
+<meta property="og:site_name" content="古董圈 Gudong.app">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.gudong.app/tools/currency-convert">
+<meta property="og:title" content="拍卖货币实时换算｜SGD Singapore Dollar CNY USD HKD EUR GBP VND MYR">
+<meta property="og:description" content="古董拍卖藏品估价参考货币换算工具。仅市场中间参考价，不作为成交结算、GST报税依据。Reference-only converter for antique-auction valuation.">
+<meta property="og:image" content="https://www.gudong.app/og-cover.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta property="og:locale" content="zh_SG">
+<meta property="og:locale:alternate" content="en_SG">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Currency Reference Converter | Gudong.app">
+<meta name="twitter:description" content="Reference-only SGD ↔ CNY / USD / HKD / EUR / GBP / VND / MYR converter for antique-auction valuation. Not for settlement or IRAS GST filing.">
+<meta name="twitter:image" content="https://www.gudong.app/og-cover.png">
+
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@graph":[
+    {"@type":"Organization","@id":"https://www.gudong.app/#organization"},
+    {"@type":"WebPage",
+      "url":"https://www.gudong.app/tools/currency-convert",
+      "name":"拍卖货币实时换算｜SGD新加坡元 CNY USD HKD EUR GBP VND MYR 估价换算 | Currency Reference Converter",
+      "description":"古董拍卖藏品估价参考货币换算工具，SGD新加坡元、人民币、美元、港币、欧元、英镑、越南盾、马来西亚林吉特双向参考换算。仅市场中间参考价，不作为成交结算、GST报税依据。",
+      "publisher":{"@id":"https://www.gudong.app/#organization"}},
+    {"@type":"SoftwareApplication",
+      "name":"Auction Valuation Currency Reference Converter",
+      "applicationCategory":"UtilitiesApplication",
+      "operatingSystem":"Any",
+      "offers":{"@type":"Offer","price":"0","priceCurrency":"SGD"},
+      "description":"Reference-only currency converter for antique auction valuation: SGD, CNY, USD, HKD, EUR, GBP, VND, MYR. Not for settlement or tax filing."},
+    {"@type":"FAQPage",
+      "mainEntity":[
+        {"@type":"Question","name":"本换算器可以用于拍卖成交结算吗？","acceptedAnswer":{"@type":"Answer","text":"本工具仅展示市场中间参考汇率，不可用于拍卖成交结算，实际交易请以银行或拍卖机构正式报价为准。"}},
+        {"@type":"Question","name":"工具内汇率可以用于新加坡IRAS GST报税吗？","acceptedAnswer":{"@type":"Answer","text":"本工具汇率数值不可用于IRAS GST报税；报税请使用IRAS认可的官方汇率来源。"}}
+      ]}
+  ]
+}
+</script>
+
+<link rel="icon" type="image/png" sizes="16x16" href="../assets/icons/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/icons/favicon-32x32.png">
+<link rel="manifest" href="../manifest.json">
+<meta name="theme-color" content="#7A4E33">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="古董圈">
+<link rel="apple-touch-icon" href="../assets/icons/icon-192.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Noto+Serif+SC:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --color-bg:#F5F2EC; --color-surface:#FFFFFF; --color-white:#FFFFFF;
+  --color-border:#E4DED5; --color-primary:#7A4E33; --color-primary-dark:#5C3A26;
+  --color-primary-light:#F1E8DF; --color-text:#25221E; --color-text-secondary:#5C564F;
+  --color-text-muted:#A49D94; --color-gold:#9C7A3A; --color-gold-soft:rgba(156,122,58,.10);
+  --color-bronze-muted:#9C8558; --color-qianjinzong:#948268;
+  --card-radius:12px; --btn-radius:8px; --dur:.26s; --ease:cubic-bezier(.25,.1,.25,1);
+  --font-serif:"Playfair Display","Noto Serif SC","Songti SC","STSong",Georgia,serif;
+            --font-sans: "Inter","Geist","Inter Display","Microsoft YaHei","PingFang SC","Helvetica Neue",Helvetica,Arial,sans-serif;
+  --font-display:"Inter","Geist","Inter Display","Microsoft YaHei","PingFang SC","Helvetica Neue",Helvetica,Arial,sans-serif;
+  --font-zh-sans:"Microsoft YaHei","PingFang SC","Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+h1,h2,h3{font-family:var(--font-serif)}
+*{margin:0;padding:0;box-sizing:border-box;font-family:"PingFang SC","Microsoft YaHei","Helvetica Neue",Helvetica,Arial,sans-serif}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--color-bg);color:var(--color-text);line-height:1.65;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+a{color:var(--color-primary);text-decoration:none}
+a:hover{text-decoration:underline;text-underline-offset:3px}
+button,input,select{font:inherit;color:inherit}
+[data-lang="en"] .zh{display:none}
+[data-lang="zh"] .en{display:none}
+
+/* ---------- Header ---------- */
+header{background:rgba(255,255,255,.96);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);color:var(--color-text);padding:0 5%;height:68px;display:flex;align-items:center;justify-content:space-between;gap:1.5rem;border-bottom:1px solid var(--color-border);position:sticky;top:0;z-index:50}
+.brand { display: flex; flex-direction: row; align-items: center; gap: .7rem; line-height: 1; flex-shrink: 1; text-decoration: none; color: inherit; min-width: 0; }
+.brand:hover{text-decoration:none}
+.brand-logo-img { height: 38px; width: auto; display: block; object-fit: contain; flex-shrink: 0; }
+.brand-line1 { display: flex; align-items: baseline; gap: .32rem; }
+        .brand-text { display: flex; flex-direction: column; justify-content: center; min-width: 0; line-height: 1.15; letter-spacing: -.005em; overflow: hidden; white-space: nowrap;}
+.brand-zh { font-size: 1.4rem; font-weight: 700; letter-spacing: .02em; line-height: 1.15; color: var(--color-primary-dark); white-space: nowrap; font-family: var(--font-serif); }
+        .brand-en { font-size: 1.4rem; font-weight: 600; letter-spacing: -.012em; line-height: 1.15; color: var(--color-primary-dark); white-space: nowrap; font-family: var(--font-sans); }
+.brand-zh { font-family:var(--font-zh-sans);font-weight:700 }
+        .sidebar-brand .logo-zh { font-family:var(--font-zh-sans);font-weight:700 }
+.brand-en { font-family:var(--font-display);font-weight:600;letter-spacing:normal }
+        .sidebar-brand .logo-en { font-family:var(--font-display);font-weight:600;letter-spacing:normal }
+.brand-text small { display: block; color: var(--color-qianjinzong); font-family: var(--font-sans); font-weight: 500; font-size: .68rem; letter-spacing: .14em; margin-top: 2px; text-transform: uppercase; }
+.brand-text small { font-family:var(--font-display);font-style:normal }
+        .sidebar-brand .logo-tagline { font-family:var(--font-display);font-style:normal }
+.header-right{display:flex;align-items:center;gap:.8rem;flex-shrink:0}
+.lang-btn{border:1px solid var(--color-border);background:transparent;color:var(--color-text-secondary);padding:.55rem .85rem;min-height:44px;border-radius:6px;cursor:pointer;font-size:.75rem;letter-spacing:.04em;transition:.4s var(--ease)}
+.lang-btn:hover{border-color:var(--color-primary);color:var(--color-primary);background:var(--color-primary-light)}
+.menu-toggle{width:44px;height:44px;border:1px solid var(--color-border);background:transparent;border-radius:8px;font-size:1.05rem;color:var(--color-text);cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:.4s var(--ease)}
+.menu-toggle:hover{border-color:var(--color-primary);color:var(--color-primary);background:var(--color-primary-light)}
+
+/* ---------- Sidebar ---------- */
+.sidebar-overlay{position:fixed;inset:0;background:rgba(20,17,14,.4);opacity:0;pointer-events:none;transition:opacity .25s ease;z-index:90}
+.sidebar-overlay.show{opacity:1;pointer-events:auto}
+.sidebar{position:fixed;top:0;left:0;height:100vh;height:100dvh;width:264px;max-width:78vw;background:var(--color-white);box-shadow:4px 0 24px rgba(37,34,30,.18);transform:translateX(-100%);transition:transform .3s ease;z-index:95;overflow-y:auto;-webkit-overflow-scrolling:touch;padding-bottom:2rem}
+.sidebar.open{transform:translateX(0)}
+.sidebar-toggle-inner{display:block;width:100%;padding:.9rem 0;background:transparent;border:none;border-bottom:1px solid var(--color-border);font-size:1.15rem;color:var(--color-text-secondary);cursor:pointer;text-align:center}
+.sidebar-toggle-inner:hover{color:var(--color-primary)}
+.sidebar-brand{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.1rem;padding:1.1rem 0;font-weight:700;color:var(--color-text);border-bottom:1px solid var(--color-border)}
+.sidebar-brand .logo-zh{font-size:1.05rem}
+.sidebar-brand .logo-en{font-size:1.05rem;letter-spacing:normal}
+.sidebar-brand .logo-tagline{font-size:.62rem;letter-spacing:.16em;color:var(--color-qianjinzong);text-transform:uppercase}
+.sidebar-nav{display:flex;flex-direction:column;padding:.3rem 0}
+
+.sidebar-link{padding:.85rem 1.4rem;color:var(--color-text);text-decoration:none;font-size:.95rem;transition:.4s var(--ease)}
+/* hover 时不再出现下划线（覆盖全局 a:hover） */
+.sidebar-link:hover{background:var(--color-primary-light);color:var(--color-primary);text-decoration:none}
+.sidebar-link.active{background:var(--color-primary-light);color:var(--color-primary);font-weight:600;text-decoration:none}
+
+.sidebar-sub{display:block;padding:.55rem 1.4rem .55rem 2.2rem;color:var(--color-text-secondary);text-decoration:none;font-size:.88rem;transition:.4s var(--ease)}
+/* hover 时不再出现下划线（覆盖全局 a:hover） */
+.sidebar-sub:hover{color:var(--color-primary);background:var(--color-primary-light);text-decoration:none}
+.sidebar-sub.active{color:var(--color-primary);font-weight:600;text-decoration:none;background:var(--color-primary-light)}
+
+.sidebar-lang-btn{display:flex;align-items:center;justify-content:center;gap:.4rem;width:calc(100% - 2.8rem);margin:1rem 1.4rem .8rem;padding:.62rem .9rem;border:1px solid var(--color-border);border-radius:12px;background:var(--color-white);color:var(--color-text-secondary);font-family:inherit;font-size:.9rem;font-weight:600;cursor:pointer;transition:.4s var(--ease)}
+.sidebar-lang-btn:hover{border-color:var(--color-primary);color:var(--color-primary);background:var(--color-primary-light)}
+
+/* ---------- Page ---------- */
+.container{max-width:820px;margin:0 auto;padding:3.2rem 5% 4rem;background:transparent;min-height:80vh}
+.breadcrumb{font-size:.82rem;color:var(--color-text-secondary);margin-bottom:1.4rem}
+.breadcrumb a{color:var(--color-primary);text-decoration:none}
+.breadcrumb a:hover{text-decoration:underline}
+.breadcrumb .current{color:var(--color-text-muted)}
+.hero-clean{text-align:center;max-width:640px;margin:0 auto 1.6rem;padding:1.4rem 0 .5rem}
+.hero-eyebrow{font-family:Georgia,"Songti SC","STSong",serif;font-style:italic;font-size:.92rem;color:var(--color-bronze-muted);letter-spacing:.01em;margin-bottom:.9rem}
+.hero-title-main{font-family:Georgia,"Songti SC","STSong",serif;font-size:clamp(1.7rem,4.2vw,2.5rem);font-weight:600;color:var(--color-text);line-height:1.35;margin-bottom:1rem}
+.hero-desc{font-size:.95rem;color:var(--color-text-secondary);margin-bottom:1.5rem;line-height:1.6}
+
+.panel{background:var(--color-surface);border:1px solid var(--color-border);border-radius:16px;box-shadow:0 4px 16px rgba(36,31,26,.06);padding:clamp(1.5rem,4vw,2.1rem);max-width:680px;margin:0 auto 1.5rem}
+.panel h2{font-size:1.22rem;margin:0 0 1.35rem;color:var(--color-primary-dark);letter-spacing:-.012em}
+.field{margin:0 0 1.3rem}
+.field label{display:block;font-weight:600;font-size:.88rem;margin:0 0 .45rem;color:var(--color-text)}
+.field-help{display:block;font-size:.8rem;color:#81796f;margin-top:.4rem;line-height:1.55}
+input,select{width:100%;height:50px;padding:0 .95rem;border:1px solid var(--color-border);border-radius:8px;background:#fff;color:var(--color-text);font-size:.95rem;transition:border-color var(--dur) var(--ease),box-shadow var(--dur) var(--ease);appearance:none;-webkit-appearance:none}
+select{background-image:url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath fill='none' stroke='%237A4E33' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round' d='M2 2l4 4 4-4'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 1rem center;background-size:11px 8px;padding-right:2.5rem}
+input:focus,select:focus{outline:none;border-color:var(--color-gold);box-shadow:0 0 0 4px rgba(156,122,58,.16)}
+input::placeholder{color:#A8A096}
+input[aria-invalid="true"]{border-color:#B4554A;box-shadow:0 0 0 4px rgba(180,85,74,.14)}
+.button{width:100%;height:50px;border:0;border-radius:8px;background:var(--color-primary);color:#fff;font-weight:600;font-size:.95rem;cursor:pointer;transition:background var(--dur) var(--ease)}
+.button:hover{background:var(--color-primary-dark)}
+.button:focus-visible{outline:none;box-shadow:0 0 0 4px rgba(156,122,58,.16)}
+
+/* 汇率更新日期信息条（页内显眼展示） */
+.rate-meta{display:flex;align-items:flex-start;gap:.55rem;margin:0 0 1.35rem;padding:.85rem 1rem;background:var(--color-gold-soft);border:1px dashed rgba(156,122,58,.45);border-radius:10px;font-size:.82rem;line-height:1.6;color:var(--color-primary-dark)}
+.rate-meta .dot{flex-shrink:0;width:8px;height:8px;border-radius:50%;background:var(--color-gold);margin-top:.5rem}
+.rate-meta strong{font-weight:700;font-variant-numeric:tabular-nums}
+
+.result{margin-top:1.4rem;padding:1.4rem 1.2rem;border-radius:12px;background:var(--color-primary-light);text-align:center}
+.result[hidden]{display:none}
+.result-head{padding-bottom:.95rem;margin-bottom:1.05rem;border-bottom:1px dashed rgba(92,58,38,.18)}
+.result-head strong{display:block;color:var(--color-primary);font-family:var(--font-serif);font-size:1.75rem;font-weight:600;letter-spacing:-.018em;line-height:1.2;font-variant-numeric:tabular-nums}
+.result-head p{margin:.35rem 0 0;color:var(--color-text-secondary);font-size:.85rem}
+.result p.err{margin:0;color:#9A554B;font-weight:600;font-size:.92rem;line-height:1.6}
+
+.conv-list{display:flex;flex-direction:column;gap:.45rem;text-align:left}
+.conv-row{display:flex;align-items:baseline;justify-content:space-between;gap:.75rem;padding:.65rem .9rem;background:#fff;border:1px solid var(--color-border);border-radius:8px}
+.conv-row.is-base{border-color:var(--color-gold);background:#FCFAF7}
+.conv-label{display:flex;align-items:baseline;gap:.45rem;min-width:0}
+.conv-code{font-weight:700;color:var(--color-primary-dark);font-variant-numeric:tabular-nums;white-space:nowrap;font-size:.92rem}
+.conv-name{font-size:.82rem;color:var(--color-text-secondary);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.conv-value{font-family:var(--font-serif);font-weight:600;color:var(--color-primary);font-size:1.05rem;font-variant-numeric:tabular-nums;white-space:nowrap}
+.conv-row.is-base .conv-value{color:var(--color-primary-dark)}
+
+.result-footnote{margin:.95rem 0 0;padding-top:.8rem;border-top:1px dashed rgba(92,58,38,.18);font-size:.78rem;color:var(--color-text-secondary);line-height:1.6}
+
+/* 免责声明块（页面可见，不隐藏、不折叠） */
+.disclaimer{max-width:680px;margin:1.4rem auto;padding:1.1rem 1.2rem;border-left:4px solid var(--color-gold);border-radius:0 10px 10px 0;background:var(--color-primary-light);color:var(--color-text-secondary);font-size:.86rem;line-height:1.75}
+.disclaimer b{display:block;color:var(--color-primary-dark);margin-bottom:.55rem;font-size:.92rem;font-weight:700}
+.disclaimer strong{color:var(--color-primary-dark);font-weight:700}
+.disclaimer p + p{margin-top:.7rem}
+
+/* FAQ（可见文字必须与 JSON-LD 完全一致） */
+.faq{max-width:680px;margin:2rem auto}
+.faq h2{font-size:1.15rem;color:var(--color-primary-dark);margin-bottom:1rem;letter-spacing:-.012em}
+.faq-item{background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;padding:1.1rem 1.2rem;margin-bottom:.8rem}
+.faq-item h3{font-size:.98rem;color:var(--color-primary-dark);margin-bottom:.5rem;font-weight:600}
+.faq-item p{margin:0;color:var(--color-text-secondary);font-size:.88rem;line-height:1.72}
+
+.related{max-width:680px;margin:2rem auto;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.85rem}
+.related a{display:block;padding:1.1rem 1.15rem;border:1px solid var(--color-border);border-radius:12px;background:#fff;text-decoration:none;color:var(--color-text);font-weight:600;font-size:.95rem;transition:all var(--dur) var(--ease)}
+.related a:hover{border-color:var(--color-gold);background:#FCFAF7;text-decoration:none}
+.related small{display:block;font-weight:400;color:var(--color-text-secondary);margin-top:.25rem;font-size:.8rem;line-height:1.55}
+
+.cite{max-width:680px;margin:2rem auto 0;padding-top:1.3rem;border-top:1px solid var(--color-border);color:var(--color-text-secondary);font-size:.86rem;line-height:1.7}
+.cite a{overflow-wrap:anywhere;word-break:break-word}
+
+/* ---------- Footer ---------- */
+footer{text-align:center;padding:2.2rem 5% 1.8rem;background:var(--color-white);color:var(--color-text-secondary);margin-top:1rem;font-size:.78rem;border-top:1px solid var(--color-border)}
+.footer-nav{display:flex;flex-wrap:wrap;justify-content:center;gap:1.3rem;margin-bottom:1.2rem}
+.footer-nav a{color:var(--color-text-secondary);text-decoration:none;font-size:.82rem}
+.footer-nav a:hover{color:var(--color-primary)}
+.footer-brand{font-weight:700;font-size:.84rem;color:#5c564f;margin-bottom:.35rem}
+.footer-disclaimer{max-width:680px;margin:0 auto 1.1rem;font-size:.78rem;line-height:1.65;color:#8a8178}
+.footer-copyright{margin-bottom:.3rem}
+
+@media (max-width:820px){header{height:62px;gap:.6rem}.container{padding-top:2.4rem}}
+@media (max-width:640px){.brand-logo-img { height: 30px; width: auto; display: block; object-fit: contain; flex-shrink: 0; }}
+@media (max-width:600px){.result-head strong{font-size:1.5rem}.related{grid-template-columns:1fr;gap:.65rem}.related a{padding:1rem}.conv-name{display:none}}
+@media (max-width:560px){.brand-zh { font-size: 1.15rem; font-family: var(--font-serif); }
+        .brand-en { font-size: 1.15rem; font-family: var(--font-sans); font-weight: 600; letter-spacing: -.012em; }.container{padding:2rem 4.5% 3rem}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;scroll-behavior:auto!important;animation:none!important}}
+</style>
+</head>
+<body data-lang="zh">
+
+<header>
+  <div style="display:flex;align-items:center;gap:.9rem;min-width:0;">
+    <button class="menu-toggle" onclick="openSidebar()" aria-label="menu" aria-expanded="false" id="menuToggle">☰</button>
+    <a href="../index.html" class="brand" aria-label="古董圈 Gudong 首页">
+                <img src="../assets/icons/logo-mark.png" alt="古董圈 Gudong" class="brand-logo-img" onerror="this.style.display='none'">
+                <span class="brand-text">
+                    <span class="brand-line1"><span class="brand-zh">古董圈</span> <span class="brand-en">Gudong</span></span>
+                    <small>Collectors' Network</small>
+                </span>
+            </a>
+  </div>
+  <div class="header-right">
+    <button type="button" class="gd-share-btn" onclick="gdSharePage()" aria-label="分享 / Share" title="分享 / Share"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92-1.31-2.92-2.92-2.92z"/></svg></button>
+    <button class="lang-btn" onclick="toggleLang()">EN</button>
+  </div>
+</header>
+
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+<aside class="sidebar" id="sidebar">
+  <button class="sidebar-toggle-inner" onclick="closeSidebar()" aria-label="close menu">☰</button>
+  <div class="sidebar-brand">
+    <span class="logo-zh">古董圈 <span class="logo-en">Gudong</span></span>
+    <span class="logo-tagline">Collectors' Network</span>
+  </div>
+  <nav class="sidebar-nav">
+            <a href="../index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">首页</span><span class="en">Home</span></a>
+            <a href="../my/saved.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">我的收藏 · 关注</span><span class="en">Saved &amp; Followed</span></a>
+<div class="saved-hint" style="margin:-.15rem 0 .5rem 1.4rem;font-size:.64rem;color:#8a8178;letter-spacing:.02em;line-height:1.5;"><span class="zh">在您的设备本地保存，零数据追踪。</span><span class="en">Saved locally on your device. Zero data tracked.</span></div>
+            <a href="../my/briefing.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">今日简报</span><span class="en">Today's Brief</span></a>
+            <a href="../index.html#daily-intel" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 释出动态</span><span class="en">· Curated Disposals</span></a>
+            <a href="../index.html#today-finds" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 今日发现</span><span class="en">· Today's Finds</span></a>
+            <a href="../index.html#new-listings" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 刚刚上新</span><span class="en">· Just Listed</span></a>
+            <a href="../collection.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">藏品库</span><span class="en">Collection</span></a>
+            <a href="../categories/porcelain.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 瓷器</span><span class="en">· Porcelain</span></a>
+            <a href="../categories/jade.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 玉器</span><span class="en">· Jade</span></a>
+            <a href="../categories/bronze.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 铜器</span><span class="en">· Bronzes</span></a>
+            <a href="../categories/coins.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 钱币</span><span class="en">· Coins</span></a>
+            <a href="../categories/paintings.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 书画</span><span class="en">· Paintings &amp; Calligraphy</span></a>
+            <a href="../categories/misc.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 杂项</span><span class="en">· Miscellaneous</span></a>
+            <a href="../sellers/index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">私家藏馆</span><span class="en">Private Gallery</span></a>
+            <a href="../insights.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">情报 / 知识</span><span class="en">Insights</span></a>
+            <a href="../tools/index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">藏家工具包</span><span class="en">Collector's Toolkit</span></a>
+            <a href="../tools/year-since.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 年份对照计算器</span><span class="en">· Years-since-year Calculator</span></a>
+            <a href="../tools/ganzhi.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 干支公历换算器</span><span class="en">· Sexagenary-Gregorian Converter</span></a>
+            <a href="../tools/era-lookup.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 古文化朝代年代速查</span><span class="en">· Culture &amp; Dynasty Era Lookup</span></a>
+            <a href="../tools/currency-convert.html" class="sidebar-sub active" onclick="closeSidebar()"><span class="zh">· 拍卖货币实时换算</span><span class="en">· Currency Reference Converter</span></a>
+            <a href="../tools/mark-lookup.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 瓷器底款快查</span><span class="en">· Porcelain Mark &amp; Seal Lookup</span></a>
+            <a href="../tools/valuation.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 简易估值参考</span><span class="en">· Market Valuation Reference</span></a>
+            <a href="../tools/contract.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 买卖契约与卖家背书生成器</span><span class="en">· Contract &amp; Endorsement Generator</span></a>
+            href="../about.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">关于我们</span><span class="en">About</span></a>
+            <button type="button" class="sidebar-lang-btn" onclick="toggleLang()" aria-label="Switch language"><span class="zh">🌐 English</span><span class="en">🌐 中文</span></button>
+        </nav>
+</aside>
+
+<main class="container">
+  <nav class="breadcrumb" aria-label="breadcrumb">
+    <a href="../index.html"><span class="zh">首页</span><span class="en">Home</span></a>
+    <span> / </span>
+    <a href="../tools/index.html"><span class="zh">藏家工具包</span><span class="en">Collector's Toolkit</span></a>
+    <span> / </span>
+    <span class="current"><span class="zh">拍卖货币实时换算</span><span class="en">Currency Reference Converter</span></span>
+  </nav>
+
+  <section class="hero-clean">
+    <div class="hero-eyebrow"><span class="zh">拍卖估价辅助工具</span><span class="en">Auction Valuation Tool</span></div>
+    <div class="hero-title-main">
+      <span class="zh">拍卖货币实时换算</span>
+      <span class="en">Currency Reference Converter</span>
+    </div>
+    <div class="hero-desc">
+      <span class="zh">以 SGD 新加坡元为主基准，对 CNY 人民币、USD 美元、HKD 港币、EUR 欧元、GBP 英镑、VND 越南盾、MYR 马来西亚林吉特做双向参考换算，辅助古董拍卖藏品估价阅读。</span>
+      <span class="en">Bidirectional reference conversion between SGD and CNY, USD, HKD, EUR, GBP, VND, MYR — for reading antique-auction valuations.</span>
+    </div>
+  </section>
+
+  <section class="panel" aria-labelledby="conv-title">
+    <h2 id="conv-title"><span class="zh">① 输入金额与源币种</span><span class="en">① Enter amount and source currency</span></h2>
+
+    <!-- 汇率更新日期 —— 页面显眼展示 -->
+    <div class="rate-meta" role="note">
+      <span class="dot" aria-hidden="true"></span>
+      <span class="zh">参考汇率更新日期：<strong>2026-10-15</strong> · 市场中间参考价，仅供拍卖藏品估价参考</span>
+      <span class="en">Reference rate updated: <strong>2026-10-15</strong> · Mid-market reference only, for antique-auction valuation</span>
+    </div>
+
+    <div class="field">
+      <label for="amountInput"><span class="zh">金额</span><span class="en">Amount</span></label>
+      <input id="amountInput" type="text" inputmode="decimal" autocomplete="off" placeholder="12000.00" aria-describedby="amountHelp">
+      <span class="field-help" id="amountHelp"><span class="zh">只允许正数，最多 2 位小数（如 12000、12000.50）。</span><span class="en">Positive numbers only, up to 2 decimal places (e.g. 12000, 12000.50).</span></span>
+    </div>
+
+    <div class="field">
+      <label for="fromCurrency"><span class="zh">源币种</span><span class="en">Source currency</span></label>
+      <select id="fromCurrency">
+        <option value="SGD">S$ (SGD) · 新加坡元 Singapore Dollar</option>
+        <option value="CNY">¥ (CNY) · 人民币 Chinese Yuan</option>
+        <option value="USD">$ (USD) · 美元 US Dollar</option>
+        <option value="HKD">HK$ (HKD) · 港币 Hong Kong Dollar</option>
+        <option value="EUR">€ (EUR) · 欧元 Euro</option>
+        <option value="GBP">£ (GBP) · 英镑 British Pound</option>
+        <option value="VND">₫ (VND) · 越南盾 Vietnamese Dong</option>
+        <option value="MYR">RM (MYR) · 马来西亚林吉特 Malaysian Ringgit</option>
+      </select>
+      <span class="field-help"><span class="zh">同时展示全部 8 种币种的参考换算结果。</span><span class="en">All eight currencies are shown in the result.</span></span>
+    </div>
+
+    <button class="button" id="calcBtn" type="button"><span class="zh">换算参考金额</span><span class="en">Convert reference amount</span></button>
+
+    <div class="result" id="result" aria-live="polite" hidden>
+      <div class="result-head">
+        <strong id="resultBase"></strong>
+        <p id="resultBaseName"></p>
+      </div>
+      <div class="conv-list" id="convList"></div>
+      <p class="result-footnote">
+        <span class="zh">⚠️ 仅供估价参考，不可用于结算或报税</span>
+        <span class="en">⚠️ Valuation reference only — not for settlement or tax filing</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- 合规免责声明：页面可见，不折叠、不 display:none -->
+  <aside class="disclaimer" aria-label="Disclaimer">
+    <b><span class="zh">⚠️ 免责声明</span><span class="en">⚠️ Disclaimer</span></b>
+    <p class="zh">本工具展示的仅为<strong>市场中间参考汇率</strong>，并非银行、换汇店实际交易牌价，仅用于古董拍卖藏品估价、收藏学习参考。不可用于<strong>拍卖成交结算</strong>、<strong>IRAS 的 GST 税务申报</strong>、<strong>正式会计记账</strong>。本平台并非新加坡 <strong>MAS 持牌货币兑换机构</strong>，不提供任何货币兑换服务。实际交易、报税请以银行、拍卖机构、<strong>IRAS 税务局认可的官方汇率来源</strong>为准。</p>
+    <p class="en">Rates shown are <strong>mid-market reference figures only</strong>, not actual bank or money-changer bid-offer quotes. This tool is for antique-auction valuation and collecting-study reference only. Not valid for <strong>auction settlement of sale</strong>, <strong>IRAS GST tax filing</strong> or <strong>official accounting records</strong>. This platform is not a <strong>MAS-licensed money-changing service</strong> and does not offer currency-exchange services. For real-world transactions and tax filing, please refer to official rates from banks, auction houses or <strong>IRAS-approved sources</strong>.</p>
+  </aside>
+
+  <!-- FAQ：可见文字与 JSON-LD 完全一致 -->
+  <section class="faq" aria-labelledby="faq-title">
+    <h2 id="faq-title"><span class="zh">常见问题</span><span class="en">FAQ</span></h2>
+    <div class="faq-item">
+      <h3><span class="zh">本换算器可以用于拍卖成交结算吗？</span><span class="en">Can this converter be used for auction settlement of sale?</span></h3>
+      <p><span class="zh">本工具仅展示市场中间参考汇率，不可用于拍卖成交结算，实际交易请以银行或拍卖机构正式报价为准。</span><span class="en">This tool shows mid-market reference rates only and cannot be used for auction settlement of sale. For actual transactions, please rely on official quotes from banks or auction houses.</span></p>
+    </div>
+    <div class="faq-item">
+      <h3><span class="zh">工具内汇率可以用于新加坡IRAS GST报税吗？</span><span class="en">Can the rates here be used for Singapore IRAS GST filing?</span></h3>
+      <p><span class="zh">本工具汇率数值不可用于IRAS GST报税；报税请使用IRAS认可的官方汇率来源。</span><span class="en">The rates shown cannot be used for IRAS GST filing; please use IRAS-approved official rate sources for tax filing.</span></p>
+    </div>
+  </section>
+
+  <nav class="related" aria-label="Related links">
+    <a href="../tools/year-since.html"><span class="zh">年份对照计算器 →</span><span class="en">Years-since-year Calculator →</span><small><span class="zh">输入公元 / 公元前年份算年份对照</span><span class="en">CE / BCE years-ago calculator</span></small></a>
+    <a href="../tools/ganzhi.html"><span class="zh">干支公历换算器 →</span><span class="en">Sexagenary-Gregorian Converter →</span><small><span class="zh">干支 ↔ 公元年份双向换算</span><span class="en">Ganzhi ↔ Gregorian conversion</span></small></a>
+    <a href="../tools/era-lookup.html"><span class="zh">古文化朝代年代速查 →</span><span class="en">Culture &amp; Dynasty Era Lookup →</span><small><span class="zh">红山、良渚到明清的年代区间</span><span class="en">Year ranges from Hongshan to the Qing</span></small></a>
+    <a href="../tools/index.html"><span class="zh">返回藏家工具包 →</span><span class="en">Back to Collector's Toolkit →</span><small><span class="zh">古董圈收藏参考工具合集</span><span class="en">All collecting reference tools</span></small></a>
+  </nav>
+
+  <div class="cite">
+    <span class="zh">引用提示：撰写拍卖、估价或收藏主题文章时，欢迎引用并链接本工具：<a href="https://www.gudong.app/tools/currency-convert">gudong.app/tools/currency-convert</a>。本页仅为市场中间参考价，不可用于成交结算或 IRAS GST 报税。</span>
+    <span class="en">Citation: If you reference this converter, please link to <a href="https://www.gudong.app/tools/currency-convert">gudong.app/tools/currency-convert</a>. Rates are mid-market reference only and are not valid for settlement or IRAS GST filing.</span>
+  </div>
+</main>
+
+<style>
+        /* 2026-10-09：footer 品牌区/免责声明/版权（全站统一·精简版） */
+        .footer-brand { font-weight: 700; font-size: .84rem; color: #5c564f; margin-bottom: .35rem; }
+        .footer-disclaimer { max-width: 680px; margin: 0 auto 1.1rem; font-size: .78rem; line-height: 1.65; color: #8a8178; }
+        .footer-copyright { margin-bottom: .3rem; }
+        </style>
+
+<footer>
+  <div class="footer-nav">
+    <a href="../about.html" class="zh">联系我们</a><a href="../about.html" class="en">Contact</a>
+    <a href="../pricing.html#collector-services" class="zh">藏家服务</a><a href="../pricing.html#collector-services" class="en">Collector Services</a>
+    <a href="../pricing.html#buyer-services" class="zh">买家指南</a><a href="../pricing.html#buyer-services" class="en">Buyer Guide</a>
+    <a href="../pricing.html#price-table" class="zh">服务收费</a><a href="../pricing.html#price-table" class="en">Price List</a>
+    <a href="../privacy.html" class="zh">隐私政策</a><a href="../privacy.html" class="en">Privacy</a>
+    <a href="../terms.html" class="zh">用户条款</a><a href="../terms.html" class="en">Terms</a>
+  </div>
+  <p class="footer-brand"><span class="zh">gudong.app — 高端古董发现平台与藏家网络</span><span class="en">gudong.app — Premium antiques discovery platform &amp; collector network</span></p>
+  <p class="footer-disclaimer"><span class="zh">平台仅提供藏品信息展示与藏家连接服务，不参与任何买卖交易，真伪、品相及价格由双方自行判断。本工具不提供货币兑换服务，非 MAS 持牌机构。</span><span class="en">The platform provides item display and collector connection services only and does not participate in any transaction; authenticity, condition and pricing are to be judged solely by the buyer and seller. This tool does not offer currency-exchange services and is not a MAS-licensed entity.</span></p>
+  <p class="footer-copyright"><span class="zh">© 2026 gudong.app 版权所有 · <a href="javascript:void(0)" class="app-install-btn" onclick="event.preventDefault();"><svg viewBox="0 0 24 24" aria-hidden="true" width="12" height="12"><path d="M5 20h14v-2H5v2zM19 9h-4V3H9v6H5l7 7 7-7z"/></svg>安装古董.app</a></span><span class="en">© 2026 gudong.app All rights reserved · <a href="javascript:void(0)" class="app-install-btn" onclick="event.preventDefault();"><svg viewBox="0 0 24 24" aria-hidden="true" width="12" height="12"><path d="M5 20h14v-2H5v2zM19 9h-4V3H9v6H5l7 7 7-7z"/></svg>Install gudong.app</a></span></p>
+</footer>
+
+<script>
+function openSidebar(){document.getElementById('sidebar').classList.add('open');document.getElementById('sidebarOverlay').classList.add('show');document.body.style.overflow='hidden';var t=document.getElementById('menuToggle');if(t)t.setAttribute('aria-expanded','true');}
+function closeSidebar(){document.getElementById('sidebar').classList.remove('open');document.getElementById('sidebarOverlay').classList.remove('show');document.body.style.overflow='';var t=document.getElementById('menuToggle');if(t)t.setAttribute('aria-expanded','false');}
+let currentLang=(function(){try{return localStorage.getItem('gudong_lang')==='en'?'en':'zh';}catch(e){return 'zh';}})();
+function applyLang(){document.body.dataset.lang=currentLang;document.documentElement.lang=currentLang==='en'?'en-SG':'zh-SG';var b=document.querySelector('.lang-btn');if(b)b.textContent=currentLang==='zh'?'EN':'中';}
+function toggleLang(){currentLang=currentLang==='zh'?'en':'zh';applyLang();try{localStorage.setItem('gudong_lang',currentLang);}catch(e){}if(window.onLangChanged)try{window.onLangChanged(currentLang);}catch(e){}}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeSidebar();});
+window.addEventListener('resize',function(){if(window.innerWidth>900)closeSidebar();});
+applyLang();
+if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('../sw.js').catch(function(){});});}
+</script>
+
+<!-- 分享：Web Share API + 剪贴板降级 + Toast -->
+<style>
+.gd-share-btn{border:1px solid var(--color-border);background:transparent;color:var(--color-text-secondary);padding:.55rem .7rem;min-height:44px;min-width:44px;border-radius:var(--btn-radius);cursor:pointer;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;transition:all var(--dur) var(--ease)}
+.gd-share-btn:hover{border-color:var(--color-primary);color:var(--color-primary);background:var(--color-primary-light)}
+.gd-share-btn svg{width:16px;height:16px;fill:currentColor;display:block}
+.gd-toast{position:fixed;left:50%;bottom:30px;transform:translateX(-50%) translateY(10px);background:rgba(36,31,26,.92);color:#fff;font-size:.85rem;padding:.62rem 1.15rem;border-radius:999px;z-index:10000;opacity:0;pointer-events:none;transition:opacity .3s ease,transform .3s ease;box-shadow:0 8px 24px rgba(36,31,26,.25);white-space:nowrap;max-width:88vw;overflow:hidden;text-overflow:ellipsis}
+.gd-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+</style>
+<script>
+(function(){var toastEl=null,toastTimer=null;
+function gdToast(msg){if(!toastEl){toastEl=document.createElement("div");toastEl.className="gd-toast";document.body.appendChild(toastEl);}toastEl.textContent=msg;toastEl.classList.add("show");clearTimeout(toastTimer);toastTimer=setTimeout(function(){toastEl.classList.remove("show");},2200);}
+function gdCopyText(text,done,fail){function legacy(){var ta=document.createElement("textarea");ta.value=text;ta.setAttribute("readonly","");ta.style.cssText="position:fixed;left:-9999px;top:0;opacity:0;";document.body.appendChild(ta);ta.select();if(ta.setSelectionRange)ta.setSelectionRange(0,text.length);var ok=false;try{ok=document.execCommand("copy");}catch(e){}document.body.removeChild(ta);if(ok){done();}else if(fail){fail();}}
+if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(text).then(done,function(){legacy();});}else{legacy();}}
+window.gdShare=function(opts){opts=opts||{};var can=document.querySelector('link[rel="canonical"]');var url=opts.url||(can?can.href:location.href);var lang=(document.body.dataset&&document.body.dataset.lang)||"zh";var title=opts.title||document.title;var text=opts.text||"";if(navigator.share){navigator.share({title:title,text:text,url:url}).then(function(){},function(){});return;}gdCopyText(url,function(){gdToast(lang==="zh"?"链接已复制，去分享给朋友吧":"Link copied — share it with friends");},function(){gdToast(lang==="zh"?"复制失败，请手动复制地址栏链接":"Copy failed — please copy the URL from the address bar");});};})();
+window.gdSharePage=function(){var lang=(document.body.dataset&&document.body.dataset.lang)||"zh";window.gdShare({title:lang==="zh"?"拍卖货币实时换算｜古董圈Gudong.app":"Auction Currency Reference Converter｜Gudong.app",text:lang==="zh"?"SGD 新加坡元与 CNY / USD / HKD / EUR / GBP / VND / MYR 双向参考换算，仅市场中间参考价，仅供估价参考。":"Reference-only SGD ↔ CNY / USD / HKD / EUR / GBP / VND / MYR conversion for antique-auction valuation."});};
+</script>
+
+<!-- PWA 安装引导弹层 -->
+<style>
+.gd-install-modal{position:fixed;inset:0;z-index:9999;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.45);padding:1.2rem}
+.gd-install-modal.open{display:flex}
+.gd-install-card{background:#fff;border-radius:var(--card-radius);max-width:350px;width:100%;padding:1.6rem 1.4rem 1.2rem;text-align:center;box-shadow:0 18px 50px rgba(0,0,0,.25);position:relative}
+.gd-install-close{position:absolute;top:.5rem;right:.7rem;border:0;background:none;font-size:1.4rem;color:#999;cursor:pointer;padding:.5rem;min-width:44px;min-height:44px;display:inline-flex;align-items:center;justify-content:center;line-height:1}
+.gd-install-title{font-size:1.08rem;font-weight:700;color:#3d2b1f;margin:.2rem 0 1rem}
+.gd-install-steps{text-align:left;margin:0 auto 1rem;max-width:290px}
+.gd-install-step{display:flex;align-items:flex-start;gap:.6rem;padding:.5rem 0;color:#5a4636;font-size:.9rem;line-height:1.5}
+.gd-install-step .n{flex-shrink:0;width:22px;height:22px;border-radius:50%;background:#f0e4d8;color:#7A4E33;font-weight:700;font-size:.78rem;display:flex;align-items:center;justify-content:center;margin-top:.1rem}
+.gd-install-step svg{flex-shrink:0;width:22px;height:22px;fill:#007AFF;margin-top:.1rem}
+.gd-install-note{font-size:.78rem;color:#9a8d80;margin-top:.5rem;line-height:1.5}
+body[data-lang="en"] .gd-install-modal .zh{display:none}
+body[data-lang="zh"] .gd-install-modal .en{display:none}
+.app-install-btn{display:inline-flex;align-items:center;gap:.3rem;margin-left:.6rem;padding:.3rem .7rem;border:1px solid #e3d9cf;border-radius:999px;color:#7a6a5c;font-size:.78rem;text-decoration:none;vertical-align:middle;transition:.4s cubic-bezier(.25,.1,.25,1)}
+.app-install-btn:hover{border-color:#7A4E33;color:#7A4E33;background:#f0e4d8;text-decoration:none}
+.app-install-btn svg{width:12px;height:12px;flex-shrink:0;fill:currentColor}
+
+/*<<<gd-mobile-header-fix-2026-10-16>>> 移动端顶部导航适配（仅 <768px 生效，桌面端保持原样）*/
+:root{
+  --gd-header-h-m: 58px;
+  --gd-safe-top: env(safe-area-inset-top, 0px);
+  --gd-header-total-m: calc(var(--gd-header-h-m) + var(--gd-safe-top));
+}
+@media (max-width: 767px){
+  html, body { scroll-padding-top: calc(var(--gd-header-total-m) + 12px); }
+  body > header{
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    height: var(--gd-header-total-m) !important;
+    min-height: var(--gd-header-total-m) !important;
+    max-height: var(--gd-header-total-m) !important;
+    padding: var(--gd-safe-top) 5% 0 !important;
+    margin: 0 !important;
+    align-items: center !important;
+    z-index: 80 !important;
+    -webkit-transition: height .28s ease, padding .28s ease, background-color .28s ease, box-shadow .28s ease;
+    transition: height .28s ease, padding .28s ease, background-color .28s ease, box-shadow .28s ease;
+  }
+  body > header .brand-logo-img{
+    height: 30px !important;
+    width: auto !important;
+    max-width: 76px !important;
+    opacity: 1 !important;
+    -webkit-transition: height .28s ease, max-width .28s ease;
+    transition: height .28s ease, max-width .28s ease;
+  }
+  body > header ~ main{
+    padding-top: calc(var(--gd-header-total-m) + 12px) !important;
+  }
+}
+/*<<</gd-mobile-header-fix-2026-10-16>>>*/
+/*<<<gd-header-logo-fit-2026-10-16>>> 窄屏 LOGO 完整性修复（仅 ≤480px 生效，桌面端保持原样）*/
+@media (max-width: 480px){
+  body > header { padding-left: 3% !important; padding-right: 3% !important; gap: .45rem !important; }
+  body > header > div:first-child { gap: .45rem !important; }
+  body > header .brand-logo-img { height: 28px !important; }
+  .brand { gap: .45rem !important; }
+  .brand-zh, .brand-en { font-size: min(1.05rem, 4.2vw) !important; }
+  .brand-text small { font-size: .58rem !important; letter-spacing: .05em !important; }
+  .header-right { gap: .4rem !important; }
+}
+@media (max-width: 360px){
+  body > header { padding-left: 2% !important; padding-right: 2% !important; gap: .35rem !important; }
+  body > header > div:first-child { gap: .35rem !important; }
+  .brand { gap: .35rem !important; }
+  .header-right { gap: .3rem !important; }
+  .brand-zh, .brand-en { font-size: min(1.05rem, 4vw) !important; }
+  .brand-text small { display: none !important; }
+  .menu-toggle { width: 40px !important; height: 40px !important; }
+  .gd-share-btn { min-width: 40px !important; min-height: 40px !important; padding: .35rem !important; }
+  .lang-btn { min-width: 40px !important; min-height: 40px !important; padding: .35rem .5rem !important; }
+}
+/*<<</gd-header-logo-fit-2026-10-16>>>*/
+</style>
+<div class="gd-install-modal" id="gdInstallModal" role="dialog" aria-modal="true" aria-label="Install guide">
+  <div class="gd-install-card">
+    <button type="button" class="gd-install-close" onclick="gdCloseInstall()" aria-label="close">×</button>
+    <div class="gd-install-title zh">安装 古董.app 到主屏幕</div>
+    <div class="gd-install-title en">Add Gudong.app to Home Screen</div>
+    <div class="gd-install-steps" id="gdStepsIos">
+      <div class="gd-install-step"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18.2c-4.5 0-8.2-3.7-8.2-8.2S7.5 3.8 12 3.8s8.2 3.7 8.2 8.2-3.7 8.2-8.2 8.2zM11 7l-4 4h3v6h2v-6h3l-4-4z"/></svg><span class="zh">点击 Safari 底部工具栏的「分享」按钮</span><span class="en">Tap the Share button in Safari's bottom toolbar</span></div>
+      <div class="gd-install-step"><span class="n">2</span><span class="zh">在分享菜单中选择「添加到主屏幕」</span><span class="en">Choose "Add to Home Screen" in the share menu</span></div>
+      <div class="gd-install-step"><span class="n">3</span><span class="zh">点击右上角「添加」，桌面即出现古董.app 图标</span><span class="en">Tap "Add" — the Gudong.app icon appears on your Home Screen</span></div>
+    </div>
+    <div class="gd-install-steps" id="gdStepsOther" style="display:none;">
+      <div class="gd-install-step"><span class="n">1</span><span class="zh">点击浏览器地址栏右侧的「安装」图标</span><span class="en">Click the install icon at the right of the address bar</span></div>
+      <div class="gd-install-step"><span class="n">2</span><span class="zh">或通过浏览器菜单 →「安装古董圈」</span><span class="en">Or open the browser menu → "Install Gudong"</span></div>
+    </div>
+    <div class="gd-install-note zh">安装后可像原生 App 一样全屏使用，无需应用商店。</div>
+    <div class="gd-install-note en">Runs full-screen like a native app. No app store needed.</div>
+  </div>
+</div>
+<script>
+(function(){var modal=document.getElementById('gdInstallModal');if(!modal)return;
+window.gdCloseInstall=function(){modal.classList.remove('open');};
+modal.addEventListener('click',function(e){if(e.target===modal)gdCloseInstall();});
+var deferredPrompt=null;
+window.addEventListener('beforeinstallprompt',function(e){e.preventDefault();deferredPrompt=e;});
+window.addEventListener('appinstalled',function(){document.querySelectorAll('.app-install-btn').forEach(function(b){b.style.display='none';});});
+document.addEventListener('click',function(e){var btn=e.target&&e.target.closest?e.target.closest('.app-install-btn'):null;if(!btn)return;e.preventDefault();
+if(deferredPrompt){deferredPrompt.prompt();deferredPrompt.userChoice.then(function(){deferredPrompt=null;}).catch(function(){});return;}
+var ua=navigator.userAgent;var isIOS=/iPad|iPhone|iPod/.test(ua)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+document.getElementById('gdStepsIos').style.display=isIOS?'':'none';
+document.getElementById('gdStepsOther').style.display=isIOS?'none':'';
+modal.classList.add('open');});})();
+</script>
+
+<!-- 货币换算核心逻辑（纯前端，无第三方 API） -->
+<script>
+(function(){
+'use strict';
+
+/* 静态中间参考汇率（1 SGD = X 目标币）
+   更新本段时，请同步修改页面「参考汇率更新日期」与 sitemap 的 lastmod。 */
+var RATES = {
+  SGD: 1,
+  USD: 0.74,
+  CNY: 5.35,
+  HKD: 5.78,
+  EUR: 0.68,
+  GBP: 0.58,
+  VND: 19240,
+  MYR: 3.29
+};
+var ORDER = ['SGD', 'USD', 'HKD', 'CNY', 'EUR', 'GBP', 'VND', 'MYR'];
+var META = {
+  SGD: { symbol: 'S$',  zh: '新加坡元', en: 'Singapore Dollar' },
+  USD: { symbol: '$',   zh: '美元',     en: 'US Dollar' },
+  HKD: { symbol: 'HK$', zh: '港币',     en: 'Hong Kong Dollar' },
+  CNY: { symbol: '¥',   zh: '人民币',   en: 'Chinese Yuan' },
+  EUR: { symbol: '€',   zh: '欧元',     en: 'Euro' },
+  GBP: { symbol: '£',   zh: '英镑',     en: 'British Pound' },
+  VND: { symbol: '₫',   zh: '越南盾',   en: 'Vietnamese Dong' },
+  MYR: { symbol: 'RM',  zh: '马来西亚林吉特', en: 'Malaysian Ringgit' }
+};
+var AMOUNT_RE = /^\d+(\.\d{1,2})?$/;
+
+var amountInput = document.getElementById('amountInput');
+var fromCurrency = document.getElementById('fromCurrency');
+var result = document.getElementById('result');
+var resultBase = document.getElementById('resultBase');
+var resultBaseName = document.getElementById('resultBaseName');
+var convList = document.getElementById('convList');
+var calcBtn = document.getElementById('calcBtn');
+
+var lastState = null; /* { base, amount } */
+
+function lang(){ return (document.body.dataset.lang === 'en') ? 'en' : 'zh'; }
+
+function fmt(n){
+  return n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
+
+function showError(msgZh, msgEn){
+  result.hidden = false;
+  resultBase.textContent = '';
+  resultBaseName.textContent = '';
+  convList.innerHTML = '';
+  var p = document.createElement('p');
+  p.className = 'err';
+  p.innerHTML = '<span class="zh">' + msgZh + '</span><span class="en">' + msgEn + '</span>';
+  convList.appendChild(p);
+  lastState = null;
+}
+
+function convert(base, amount){
+  var sgd = amount / RATES[base];
+  var out = {};
+  ORDER.forEach(function(c){ out[c] = sgd * RATES[c]; });
+  return out;
+}
+
+function render(base, amount){
+  var res = convert(base, amount);
+  var L = lang();
+
+  result.hidden = false;
+  resultBase.textContent = fmt(amount) + ' ' + META[base].symbol + ' (' + base + ')';
+  resultBaseName.textContent = (L === 'zh' ? META[base].zh : META[base].en);
+
+  convList.innerHTML = '';
+  ORDER.forEach(function(code){
+    var row = document.createElement('div');
+    row.className = 'conv-row' + (code === base ? ' is-base' : '');
+    var label = document.createElement('span');
+    label.className = 'conv-label';
+    var codeEl = document.createElement('span');
+    codeEl.className = 'conv-code';
+    codeEl.textContent = META[code].symbol + ' (' + code + ')';
+    var nameEl = document.createElement('span');
+    nameEl.className = 'conv-name';
+    nameEl.textContent = (L === 'zh' ? META[code].zh : META[code].en);
+    label.appendChild(codeEl);
+    label.appendChild(nameEl);
+    var valEl = document.createElement('span');
+    valEl.className = 'conv-value';
+    valEl.textContent = fmt(res[code]);
+    row.appendChild(label);
+    row.appendChild(valEl);
+    convList.appendChild(row);
+  });
+
+  lastState = { base: base, amount: amount };
+}
+
+function calculate(){
+  var raw = amountInput.value.trim().replace(/[,\s]/g, '');
+  amountInput.removeAttribute('aria-invalid');
+
+  if(raw === ''){
+    amountInput.setAttribute('aria-invalid', 'true');
+    showError('请输入有效金额。', 'Please enter a valid amount.');
+    return;
+  }
+  if(!AMOUNT_RE.test(raw)){
+    amountInput.setAttribute('aria-invalid', 'true');
+    if(/^-/.test(raw)){
+      showError('金额必须为正数，不支持负数。', 'Amount must be a positive number; negative values are not supported.');
+    } else if(/[^\d.]/.test(raw)){
+      showError('金额只能包含数字与小数点。', 'Amount may contain digits and a decimal point only.');
+    } else {
+      showError('金额最多保留 2 位小数。', 'Amount may have at most 2 decimal places.');
+    }
+    return;
+  }
+  var amount = Number(raw);
+  if(!isFinite(amount) || amount <= 0){
+    amountInput.setAttribute('aria-invalid', 'true');
+    showError('金额必须大于 0。', 'Amount must be greater than 0.');
+    return;
+  }
+
+  render(fromCurrency.value, amount);
+}
+
+calcBtn.addEventListener('click', calculate);
+amountInput.addEventListener('keydown', function(e){ if(e.key === 'Enter'){ e.preventDefault(); calculate(); } });
+amountInput.addEventListener('input', function(){ amountInput.removeAttribute('aria-invalid'); });
+fromCurrency.addEventListener('change', function(){ if(lastState) calculate(); });
+
+window.onLangChanged = function(){
+  if(lastState){ render(lastState.base, lastState.amount); }
+};
+})();
+</script>
+
+<style>
+.gd-install-modal { position: fixed; inset: 0; z-index: 9999; display: none; align-items: center; justify-content: center; background: rgba(0,0,0,.45); padding: 1.2rem; }
+.gd-install-modal.open { display: flex; }
+.gd-install-card { background: #fff; border-radius: var(--card-radius); max-width: 350px; width: 100%; padding: 1.6rem 1.4rem 1.2rem; text-align: center; box-shadow: 0 18px 50px rgba(0,0,0,.25); position: relative; }
+.gd-install-close { position: absolute; top: .5rem; right: .7rem; border: 0; background: none; font-size: 1.4rem; color: #999; cursor: pointer; padding: .5rem; min-width: 44px; min-height: 44px; display: inline-flex; align-items: center; justify-content: center; line-height: 1; }
+.gd-install-title { font-size: 1.08rem; font-weight: 700; color: #3d2b1f; margin: .2rem 0 1rem; }
+.gd-install-steps { text-align: left; margin: 0 auto 1rem; max-width: 290px; }
+.gd-install-step { display: flex; align-items: flex-start; gap: .6rem; padding: .5rem 0; color: #5a4636; font-size: .9rem; line-height: 1.5; }
+.gd-install-step .n { flex-shrink: 0; width: 22px; height: 22px; border-radius: 50%; background: #f0e4d8; color: #7A4E33; font-weight: 700; font-size: .78rem; display: flex; align-items: center; justify-content: center; margin-top: .1rem; }
+.gd-install-step svg { flex-shrink: 0; width: 22px; height: 22px; fill: #007AFF; margin-top: .1rem; }
+.gd-install-note { font-size: .78rem; color: #9a8d80; margin-top: .5rem; line-height: 1.5; }
+.gd-install-modal [data-lang="en"] .zh, body[data-lang="en"] .gd-install-modal .zh { display: none; }
+.gd-install-modal [data-lang="zh"] .en, body[data-lang="zh"] .gd-install-modal .en { display: none; }
+.app-install-btn { display: inline-flex; align-items: center; gap: .3rem; margin-left: .6rem; padding: .3rem .7rem; border: 1px solid #e3d9cf; border-radius: 999px; color: #7a6a5c; font-size: .78rem; text-decoration: none; vertical-align: middle; transition: .4s cubic-bezier(.25,.1,.25,1); }
+.app-install-btn:hover { border-color: #7A4E33; color: #7A4E33; background: #f0e4d8; }
+.app-install-btn svg { width: 12px; height: 12px; flex-shrink: 0; fill: currentColor; }
+</style>
+
+<!-- 2026-10-07：分享功能（Web Share API + 剪贴板降级 + Toast 反馈），全站统一 -->
+<style>
+.gd-share-btn {
+    border: 1px solid var(--color-border); background: transparent;
+    color: var(--color-text-secondary); padding: .55rem .7rem; min-height: 44px; min-width: 44px;
+    border-radius: var(--btn-radius); cursor: pointer; display: inline-flex;
+    align-items: center; justify-content: center; flex-shrink: 0;
+    transition: all var(--dur) var(--ease);
+}
+.gd-share-btn:hover { border-color: var(--color-primary); color: var(--color-primary); background: var(--color-primary-light); }
+.gd-share-btn svg { width: 16px; height: 16px; fill: currentColor; display: block; }
+.gd-toast {
+    position: fixed; left: 50%; bottom: 30px; transform: translateX(-50%) translateY(10px);
+    background: rgba(36,31,26,.92); color: #fff; font-size: .85rem;
+    padding: .62rem 1.15rem; border-radius: 999px; z-index: 10000;
+    opacity: 0; pointer-events: none; transition: opacity .3s ease, transform .3s ease;
+    box-shadow: 0 8px 24px rgba(36,31,26,.25); white-space: nowrap;
+    max-width: 88vw; overflow: hidden; text-overflow: ellipsis;
+}
+.gd-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+</style>
+
+<script>
+/* 分享：Web Share API（原生分享面板）→ navigator.clipboard → execCommand 三级降级 */
+(function () {
+    var toastEl = null, toastTimer = null;
+    function gdToast(msg) {
+        if (!toastEl) {
+            toastEl = document.createElement("div");
+            toastEl.className = "gd-toast";
+            document.body.appendChild(toastEl);
+        }
+        toastEl.textContent = msg;
+        toastEl.classList.add("show");
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(function () { toastEl.classList.remove("show"); }, 2200);
+    }
+    function gdCopyText(text, done, fail) {
+        function legacy() {
+            var ta = document.createElement("textarea");
+            ta.value = text;
+            ta.setAttribute("readonly", "");
+            ta.style.cssText = "position:fixed;left:-9999px;top:0;opacity:0;";
+            document.body.appendChild(ta);
+            ta.select();
+            if (ta.setSelectionRange) ta.setSelectionRange(0, text.length);
+            var ok = false;
+            try { ok = document.execCommand("copy"); } catch (e) {}
+            document.body.removeChild(ta);
+            if (ok) { done(); } else if (fail) { fail(); }
+        }
+        if (navigator.clipboard && window.isSecureContext) {
+            navigator.clipboard.writeText(text).then(done, function () { legacy(); });
+        } else { legacy(); }
+    }
+    window.gdShare = function (opts) {
+        opts = opts || {};
+        var can = document.querySelector('link[rel="canonical"]');
+        var url = opts.url || (can ? can.href : location.href);
+        var lang = (document.body.dataset && document.body.dataset.lang) || "zh";
+        var title = opts.title || document.title;
+        var text = opts.text || "";
+        if (navigator.share) {
+            navigator.share({ title: title, text: text, url: url }).then(function () {}, function () {});
+            return;
+        }
+        gdCopyText(url, function () {
+            gdToast(lang === "zh" ? "链接已复制，去分享给朋友吧" : "Link copied — share it with friends");
+        }, function () {
+            gdToast(lang === "zh" ? "复制失败，请手动复制地址栏链接" : "Copy failed — please copy the URL from the address bar");
+        });
+    };
+})();
+</script>
+
+<script>
+window.gdSharePage = function () {
+    var lang = (document.body.dataset && document.body.dataset.lang) || "zh";
+    window.gdShare({
+        text: lang === "zh" ? "来自古董圈 Gudong.app 的精选内容" : "From Gudong.app — Singapore antiques"
+    });
+};
+</script>
+
+<script src="/gd-install.js" defer></script>
+</body>
+</html>

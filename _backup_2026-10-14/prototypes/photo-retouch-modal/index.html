@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="zh-SG">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>图片精修服务弹窗 · 创始卖家专属福利 | Gudong</title>
+<style>
+  :root{
+    --primary:#8A5A3B; --primary-hover:#68432D; --primary-soft:#F1E8DF;
+    --bg:#F5F2EC; --surface:#fff; --border:#E4DED5;
+    --text:#25221E; --text-sub:#716B63; --text-muted:#A49D94;
+    --gold:#B08A45; --gold-soft:rgba(176,138,69,.10);
+    --success:#526657;
+    --warn-bg:#FDF6EC; --warn-border:#F0E0C0; --warn-text:#8A6D3B;
+    --radius-sm:8px; --radius-md:10px; --radius-lg:12px;
+    --shadow-md:0 6px 18px rgba(37,34,30,.10);
+    --shadow-lg:0 18px 50px rgba(0,0,0,.22);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;font-family:"PingFang SC","Microsoft YaHei","Helvetica Neue",Helvetica,Arial,sans-serif;}
+  body{background:var(--bg);color:var(--text);line-height:1.65;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:2rem 1rem;}
+  .demo-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md);padding:2rem 2.4rem;max-width:520px;width:100%;text-align:center;box-shadow:var(--shadow-md);}
+  .demo-card h1{font-size:1.25rem;font-weight:700;margin-bottom:.4rem;}
+  .demo-card p{color:var(--text-sub);font-size:.9rem;margin-bottom:1.4rem;}
+  .trigger{color:var(--primary);font-weight:600;font-size:.92rem;text-decoration:none;border-bottom:1px solid transparent;transition:.2s;cursor:pointer;background:none;border-top:none;border-left:none;border-right:none;padding:0;}
+  .trigger:hover{border-bottom-color:var(--primary);}
+
+  /* ---------- Modal ---------- */
+  .pr-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:120;display:none;align-items:center;justify-content:center;padding:1rem;}
+  .pr-overlay.show{display:flex;}
+  .pr-box{background:var(--surface);border-radius:var(--radius-lg);max-width:560px;width:100%;padding:1.7rem 1.5rem;position:relative;max-height:90vh;overflow-y:auto;box-shadow:var(--shadow-lg);animation:pr-in .2s ease;}
+  @keyframes pr-in{from{opacity:0;transform:translateY(8px) scale(.98);}to{opacity:1;transform:none;}}
+  .pr-close{position:absolute;top:.7rem;right:.9rem;border:none;background:none;font-size:1.5rem;cursor:pointer;color:var(--text-sub);line-height:1;padding:.2rem;}
+  .pr-close:hover{color:var(--text);}
+  .pr-badge{display:inline-block;padding:.28rem .72rem;background:var(--gold-soft);color:var(--gold);border-radius:6px;font-size:.78rem;font-weight:700;margin-bottom:.75rem;}
+  .pr-title{font-size:1.25rem;font-weight:700;color:var(--text);margin-bottom:.9rem;line-height:1.4;}
+
+  .pr-price-block{background:var(--primary-soft);border-radius:var(--radius-md);padding:1rem 1.1rem;margin-bottom:1rem;}
+  .pr-price-main{font-size:1.1rem;font-weight:800;color:var(--primary);margin-bottom:.4rem;}
+  .pr-price-main .amt{font-size:1.5rem;}
+  .pr-example{font-size:.82rem;color:var(--text-sub);line-height:1.6;margin-bottom:.55rem;}
+  .pr-checklist{list-style:none;}
+  .pr-checklist li{display:flex;align-items:flex-start;gap:.5rem;font-size:.85rem;color:var(--text);padding:.2rem 0;}
+  .pr-checklist li svg{flex-shrink:0;width:16px;height:16px;color:var(--success);margin-top:.12rem;}
+  .pr-note{font-size:.78rem;color:var(--text-sub);line-height:1.6;margin-top:.5rem;}
+  .pr-price-sub{font-size:.88rem;font-weight:700;color:var(--primary);margin-top:.6rem;line-height:1.5;}
+
+  .pr-warning{background:var(--warn-bg);border:1px solid var(--warn-border);border-radius:var(--radius-sm);padding:.8rem 1rem;font-size:.78rem;color:var(--warn-text);line-height:1.6;margin-bottom:1rem;}
+
+  .pr-section-title{font-size:.95rem;font-weight:700;color:var(--text);margin:1rem 0 .5rem;}
+  .pr-workflow{background:#FAFAF7;border-radius:var(--radius-sm);padding:.8rem 1rem;margin-bottom:.3rem;}
+  .pr-workflow p{font-size:.83rem;color:var(--text-sub);line-height:1.7;margin:.3rem 0;}
+
+  .pr-row{margin-top:.9rem;}
+  .pr-row label.lbl{display:block;font-size:.82rem;margin-bottom:.35rem;color:var(--text-sub);font-weight:600;}
+  .pr-input,.pr-textarea{width:100%;padding:.65rem .8rem;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:.88rem;font-family:inherit;color:var(--text);background:var(--surface);transition:.2s;}
+  .pr-input:focus,.pr-textarea:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 4px var(--gold-soft);}
+  .pr-textarea{min-height:80px;resize:vertical;}
+
+  .pr-drop{border:1.5px dashed var(--border);border-radius:var(--radius-sm);padding:1rem;text-align:center;cursor:pointer;transition:.2s;background:#FAFAF7;display:block;}
+  .pr-drop:hover{border-color:var(--primary);background:var(--primary-soft);}
+  .pr-drop input{display:none;}
+  .pr-drop .plus{font-size:1.3rem;color:var(--primary);font-weight:700;line-height:1;}
+  .pr-drop .txt{font-size:.8rem;color:var(--text-sub);margin-top:.25rem;}
+  .pr-drop .count{font-size:.75rem;color:var(--success);margin-top:.2rem;display:none;}
+  .pr-drop.has .count{display:block;}
+
+  .pr-paynow{background:var(--primary-soft);border-radius:var(--radius-md);padding:1rem 1.1rem;margin-top:.9rem;}
+  .pr-paynow-amount{font-size:1.05rem;font-weight:800;color:var(--primary);margin-bottom:.5rem;}
+  .pr-qr{width:150px;height:150px;margin:.5rem auto;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;color:var(--text-muted);font-size:.78rem;text-align:center;line-height:1.5;}
+  .pr-qr svg{width:80px;height:80px;opacity:.25;}
+
+  .pr-submit{width:100%;padding:.9rem;background:var(--primary);color:#fff;border:none;border-radius:var(--radius-md);font-size:1rem;font-weight:700;cursor:pointer;margin-top:1.2rem;transition:.2s;}
+  .pr-submit:hover{background:var(--primary-hover);}
+  .pr-submit:active{transform:translateY(1px);}
+
+  @media(max-width:480px){
+    .pr-box{padding:1.3rem 1.1rem;}
+    .demo-card{padding:1.6rem 1.2rem;}
+  }
+</style>
+</head>
+<body>
+
+<div class="demo-card">
+  <h1>瓷器分类 · 藏品列表</h1>
+  <p>点击下方链接体验图片精修服务弹窗</p>
+  <button type="button" class="trigger" onclick="openPhotoRetouchModal()">想要同款图片效果？ →</button>
+</div>
+
+<!-- ============ Photo Retouch Modal ============ -->
+<div class="pr-overlay" id="photoRetouchModal" role="dialog" aria-modal="true" aria-label="图片精修申请">
+  <div class="pr-box">
+    <button type="button" class="pr-close" onclick="closePhotoRetouchModal()" aria-label="关闭">×</button>
+
+    <div class="pr-badge">⭐ 创始卖家专属福利</div>
+    <h3 class="pr-title">想让你的图片也有这样的效果？</h3>
+
+    <!-- Price block -->
+    <div class="pr-price-block">
+      <div class="pr-price-main">图片精修 <span class="amt">S$10</span> / 件</div>
+      <div class="pr-example">例如：一只瓷瓶有正面、背面、底部、细节图，共 4 张 → S$10。</div>
+      <ul class="pr-checklist">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>光线与亮度</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>色彩与白平衡</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>裁剪与构图</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>背景清理</li>
+      </ul>
+      <div class="pr-note">不会改变器物真实颜色、形状或实际品相。</div>
+      <div class="pr-price-sub">S$10 / 件（1 件藏品，可上传最多 4 张图片）<br>一次精修最多 4 张 = S$10</div>
+    </div>
+
+    <!-- Warning -->
+    <div class="pr-warning">⚠️ 温馨提示：本套餐为基础图片精修服务，仅处理光影、调色、裁剪、背景清理；不含重度修图、创意美化、器物修补、绘图重构等高阶效果，将按客户提交的基础需求完成处理。</div>
+
+    <!-- Workflow -->
+    <div class="pr-section-title">我们怎么工作：</div>
+    <div class="pr-workflow">
+      <p>表单资料 + 原图 + PayNow 截图 → 一次性提交</p>
+      <p>后台人工核验 5 项：1. 付款 2. 客户身份 3. 对应藏品 4. 提交原图 5. 客户基础需求</p>
+      <p>处理完成后通过 WhatsApp 发送成品给客户确认；客户认可后，才上传部署到藏品页面。</p>
+    </div>
+
+    <!-- Application form -->
+    <div class="pr-section-title">图片精修申请表</div>
+
+    <div class="pr-row">
+      <label class="lbl" for="pr_seller_id">Seller ID（藏家古董网站 ID）</label>
+      <input class="pr-input" id="pr_seller_id" placeholder="例如：seller-lim-kw-antiques">
+    </div>
+
+    <div class="pr-row">
+      <label class="lbl" for="pr_whatsapp">WhatsApp</label>
+      <input class="pr-input" id="pr_whatsapp" placeholder="+65 xxxxxxxx">
+    </div>
+
+    <div class="pr-row">
+      <label class="lbl">上传图片（可多选，最多 4 张）</label>
+      <label class="pr-drop" id="pr_images_drop">
+        <input type="file" id="pr_images" multiple accept="image/*">
+        <div class="plus">＋</div>
+        <div class="txt">上传图片</div>
+        <div class="count" id="pr_images_count"></div>
+      </label>
+    </div>
+
+    <!-- PayNow -->
+    <div class="pr-paynow">
+      <div class="pr-paynow-amount">PayNow S$10</div>
+      <div class="pr-qr" aria-label="PayNow QR Code">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><line x1="14" y1="14" x2="14" y2="21"/><line x1="18" y1="14" x2="18" y2="21"/><line x1="21" y1="18" x2="14" y2="18"/></svg>
+      </div>
+      <div class="pr-note" style="margin-top:.6rem;">完成付款后，请上传付款截图</div>
+      <label class="pr-drop" style="margin-top:.6rem;" id="pr_paynow_drop">
+        <input type="file" id="pr_paynow" accept="image/*">
+        <div class="plus">＋</div>
+        <div class="txt">上传 PayNow 付款截图</div>
+        <div class="count" id="pr_paynow_count"></div>
+      </label>
+    </div>
+
+    <div class="pr-row">
+      <label class="lbl" for="pr_remark">备注（可选 · 填写你的基础需求：仅限光影、调色、构图、背景清理）</label>
+      <textarea class="pr-textarea" id="pr_remark" placeholder="希望重点优化哪里？"></textarea>
+    </div>
+
+    <button type="button" class="pr-submit" onclick="submitPhotoRetouch()">提交精修申请 →</button>
+  </div>
+</div>
+
+<script>
+  const modal = document.getElementById('photoRetouchModal');
+
+  function openPhotoRetouchModal(){
+    modal.classList.add('show');
+    document.body.style.overflow = 'hidden';
+  }
+  function closePhotoRetouchModal(){
+    modal.classList.remove('show');
+    document.body.style.overflow = '';
+  }
+
+  // overlay click + ESC to close
+  modal.addEventListener('click', function(e){ if(e.target === modal) closePhotoRetouchModal(); });
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closePhotoRetouchModal(); });
+
+  // file selection feedback
+  function bindDrop(fileId, dropId, countId){
+    const input = document.getElementById(fileId);
+    const drop = document.getElementById(dropId);
+    const count = document.getElementById(countId);
+    input.addEventListener('change', function(){
+      const n = input.files ? input.files.length : 0;
+      if(n > 0){
+        drop.classList.add('has');
+        count.textContent = '已选择 ' + n + ' 个文件';
+      } else {
+        drop.classList.remove('has');
+        count.textContent = '';
+      }
+    });
+  }
+  bindDrop('pr_images','pr_images_drop','pr_images_count');
+  bindDrop('pr_paynow','pr_paynow_drop','pr_paynow_count');
+
+  // submit → WhatsApp deep link (stubbed; replace number with real platform WhatsApp)
+  function submitPhotoRetouch(){
+    const sid = document.getElementById('pr_seller_id').value.trim();
+    const wa  = document.getElementById('pr_whatsapp').value.trim();
+    const rk  = document.getElementById('pr_remark').value.trim();
+    const imgs = document.getElementById('pr_images').files;
+    const pay  = document.getElementById('pr_paynow').files;
+
+    if(!sid){ alert('请填写 Seller ID'); return; }
+    if(!wa){ alert('请填写 WhatsApp 联系方式'); return; }
+    if(!imgs || imgs.length === 0){ alert('请上传需要精修的图片'); return; }
+    if(!pay || pay.length === 0){ alert('请上传 PayNow 付款截图'); return; }
+
+    // enforce max 4 images
+    if(imgs.length > 4){ alert('一次精修最多上传 4 张图片'); return; }
+
+    const msg = '【图片精修申请】\n'
+      + 'Seller ID：' + sid + '\n'
+      + 'WhatsApp：' + wa + '\n'
+      + '图片数量：' + imgs.length + ' 张\n'
+      + '备注：' + (rk || '无') + '\n'
+      + '服务费 S$10，已附 PayNow 付款截图，请核验后安排精修。';
+
+    // TODO: replace 6591888952 with the real platform WhatsApp number (no +, digits only)
+    const platformWa = '6591888952';
+    window.open('https://wa.me/' + platformWa + '?text=' + encodeURIComponent(msg), '_blank');
+    closePhotoRetouchModal();
+  }
+</script>
+</body>
+</html>

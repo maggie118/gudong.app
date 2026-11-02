@@ -2033,7 +2033,9 @@
         .tick-row { font-size: .75rem; gap: .4rem; padding: .58rem .2rem; }
         .tick-place { font-size: .6rem; padding: .08rem .32rem; }
         .tick-ago { font-size: .6rem; }
-        .intel-card--compact { flex: 0 0 236px; }
+        /* 移动端：情报卡片纵向堆叠，时间标签完整可见（不再横向滚动裁掉右侧） */
+        .intel-scroll { flex-direction: column; overflow-x: visible; gap: .7rem; scroll-snap-type: none; }
+        .intel-card--compact { flex: 0 1 auto; width: 100%; }
     }
     /* 超窄屏（≤400px）：时间标签让位给正文，正文仍保持单行省略 */
     @media (max-width: 400px) {
@@ -2369,8 +2371,6 @@
             <div class="intel-editorial">
                 <div class="intel-editorial-head">
                     <span class="ie-title zh">编辑精选</span><span class="ie-title en">Editor's Picks</span>
-                    <a href="insights.html" class="ie-more zh">全部情报 →</a>
-                    <a href="insights.html" class="ie-more en">All insights →</a>
                 </div>
                 <div class="intel-scroll" id="intelScroll" aria-busy="true"></div>
             </div>

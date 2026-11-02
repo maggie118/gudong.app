@@ -65,10 +65,13 @@ const STATIC = [
 ];
 
 // ---------- Read the SSG snapshot for live item URLs ----------
-// 兼容两种运行时：Vercel 的 CJS 包装（有 __dirname）与原生 ESM（用 import.meta.url）。
+// 定位 data/listings.json 所在目录。关键约束：Vercel 会把本函数打包成 CJS 运行
+// （package.json 无 "type":"module"），此时 import.meta 是 ESM 专属语法，会被
+// 当成 SyntaxError 导致整个函数加载失败(500)——绝不能用 import.meta.url。
+// 正确做法：优先用 Vercel CJS 运行时提供的 __dirname，原生 ESM 下退回 process.cwd()。
 function snapshotDir() {
-  try { return path.dirname(new URL(import.meta.url).pathname); }
-  catch (e) { return process.cwd(); }
+  if (typeof __dirname !== 'undefined') return __dirname;
+  return process.cwd();
 }
 function readSnapshot() {
   const here = snapshotDir();

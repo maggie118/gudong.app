@@ -29,7 +29,7 @@ const QR = require('qrcode');
 
 const ROOT = path.resolve(__dirname, '..');
 const DATA_FILE = path.join(ROOT, 'data', 'listings.json');
-const SEED_FILE = path.join(__dirname, 'templates', 'seller-gallery-seed.html');
+const SEED_FILE = path.join(__dirname, 'seller-gallery-seed.html');
 const SELLERS_DIR = path.join(ROOT, 'sellers');
 const INDEX_FILE = path.join(SELLERS_DIR, 'index.html');
 const QR_DIR = path.join(ROOT, 'assets', 'qr');

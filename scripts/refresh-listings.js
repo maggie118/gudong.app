@@ -108,6 +108,11 @@ const WA_PHONE_KEYS = [
   'wa_phone', 'waPhone', 'WA_Phone',
   'whatsapp_phone', 'whatsappPhone', 'WhatsApp Phone', 'WhatsApp phone',
   'whatsapp_number', 'whatsappNumber', 'WhatsApp Number', 'WhatsApp number',
+  // Airtable sellers 表实际字段名（中英混合 / 英文变体）
+  'WhatsApp 联络号码 / WhatsApp Contact Number',
+  'WhatsApp Contact Number',
+  'WhatsApp 联络号码',
+  'Contact Number',
   'phone', 'Phone', 'mobile', 'Mobile',
 ];
 const PHONE_ISH = /^[+\d\s()\-]+$/;

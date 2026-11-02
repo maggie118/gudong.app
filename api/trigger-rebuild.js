@@ -18,13 +18,21 @@ function json(res, status, body) {
 }
 
 export default function handler(req, res) {
-  // Vercel Cron 调用会带 CRON_SECRET 的 Bearer；若设置了则强制校验
+  // 鉴权：Vercel Cron 请求自带自动注入的 CRONS_AUTH_TOKEN（或 x-vercel-cron 标记），
+  // 用户可另设 CRON_SECRET 供手动 curl 触发。三者任一匹配即放行；都未配置则开放。
+  const auth = req.headers['authorization'] || '';
+  const isVercelCron =
+    req.headers['x-vercel-cron'] === 'true' ||
+    String(req.headers['user-agent'] || '').toLowerCase().includes('vercel-cron');
+  const cronToken = process.env.CRONS_AUTH_TOKEN;
   const secret = process.env.CRON_SECRET;
-  if (secret) {
-    const auth = req.headers['authorization'] || '';
-    if (auth !== `Bearer ${secret}`) {
-      return json(res, 403, { ok: false, error: 'unauthorized' });
-    }
+  const allowed =
+    isVercelCron ||
+    (cronToken && auth === `Bearer ${cronToken}`) ||
+    (secret && auth === `Bearer ${secret}`) ||
+    (!cronToken && !secret);
+  if (!allowed) {
+    return json(res, 403, { ok: false, error: 'unauthorized' });
   }
 
   const hook = process.env.REBUILD_HOOK_URL;

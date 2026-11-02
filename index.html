@@ -2037,9 +2037,8 @@
         .intel-scroll { flex-direction: column; overflow-x: visible; gap: .7rem; scroll-snap-type: none; }
         .intel-card--compact { flex: 0 1 auto; width: 100%; }
     }
-    /* 超窄屏（≤400px）：时间标签让位给正文，正文仍保持单行省略 */
+    /* 超窄屏（≤400px）：时间标签始终显示；正文保持单行省略不溢出 */
     @media (max-width: 400px) {
-        .tick-ago { display: none; }
         .tick-row { gap: .35rem; }
     }
     @media (prefers-reduced-motion: reduce) {

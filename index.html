@@ -1933,8 +1933,8 @@
         mask-image: linear-gradient(180deg, transparent 0, #000 9%, #000 91%, transparent 100%);
     }
     .intel-ticker { animation: tickScroll var(--tick-duration, 38s) linear infinite; }
-    .intel-liveboard:hover .intel-ticker,
-    .intel-liveboard:focus-within .intel-ticker { animation-play-state: paused; }
+    /* 仅桌面悬停时暂停以便阅读；移除 focus-within 暂停（移动端点一下会触发 focus 导致滚动停止） */
+    .intel-liveboard:hover .intel-ticker { animation-play-state: paused; }
     @keyframes tickScroll {
         from { transform: translateY(0); }
         to   { transform: translateY(-50%); }
@@ -1946,7 +1946,10 @@
         border-bottom: 1px dashed rgba(217, 182, 121, .1);
         font-size: .8rem;
         line-height: 1.5;
+        text-decoration: none;
+        color: inherit;
     }
+    a.tick-row:hover { background: rgba(217, 182, 121, .07); }
     .tick-dot {
         width: 6px; height: 6px; flex-shrink: 0;
         border-radius: 50%;
@@ -3373,19 +3376,22 @@
             recent.forEach(x => {
                 const f = x.f;
                 rowsArr.push({
-                    badge: { zh: f.category || '藏品', en: f.category || 'Item' },
+                    link: f.item_id ? ('/item?id=' + encodeURIComponent(f.item_id)) : '',
                     zh: '新释出：' + (f.title_zh || f.title_en || ''),
                     en: 'Released: ' + (f.title_en || f.title_zh || ''),
                     ago: relTime(x.ts)
                 });
             });
-            const rows = rowsArr.map(it => `
-                <div class="tick-row${it.hot ? ' tick-row--hot' : ''}">
+            const rows = rowsArr.map(it => {
+                const cls = 'tick-row' + (it.hot ? ' tick-row--hot' : '');
+                const inner = `
                     <span class="tick-dot" aria-hidden="true"></span>
-                    <span class="tick-place"><span class="zh">${esc(it.badge.zh)}</span><span class="en">${esc(it.badge.en)}</span></span>
                     <span class="tick-text"><span class="zh">${esc(it.zh)}</span><span class="en">${esc(it.en)}</span></span>
-                    <span class="tick-ago"><span class="zh">${esc(it.ago.zh)}</span><span class="en">${esc(it.ago.en)}</span></span>
-                </div>`).join('');
+                    <span class="tick-ago"><span class="zh">${esc(it.ago.zh)}</span><span class="en">${esc(it.ago.en)}</span></span>`;
+                return it.link
+                    ? `<a class="${cls}" href="${esc(it.link)}">${inner}</a>`
+                    : `<div class="${cls}">${inner}</div>`;
+            }).join('');
             box.innerHTML = `<div class="tick-set">${rows}</div><div class="tick-set" aria-hidden="true">${rows}</div>`;
             box.style.setProperty('--tick-duration', (rowsArr.length * 4.6) + 's');
         }

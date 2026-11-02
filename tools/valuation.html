@@ -29,14 +29,24 @@
 <meta name="twitter:image" content="https://www.gudong.app/og-cover.png">
 <script type="application/ld+json">
 {
-  "@context":"https://schema.org",
-  "@type":"WebApplication",
-  "name":"Antique Market Valuation Reference | 简易估值参考",
-  "description":"按品类、年代、完整度与工艺级别给出参考市场区间与行情趋势的免费中英双语工具。仅市场参考，不构成鉴定、估价或法律依据。",
-  "url":"https://www.gudong.app/tools/valuation",
-  "applicationCategory":"UtilitiesApplication",
-  "operatingSystem":"All (Web App)",
-  "publisher":{"@id":"https://www.gudong.app/#organization"}
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Antique Market Valuation Reference | 简易估值参考",
+  "description": "按品类、年代、完整度与工艺级别给出参考市场区间与行情趋势的免费中英双语工具。仅市场参考，不构成鉴定、估价或法律依据。",
+  "url": "https://www.gudong.app/tools/valuation",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "All (Web App)",
+  "featureList": [
+    "Set a reference price band by category, era, condition and craft level 按四维度得出参考区间",
+    "Ten categories including SEA bronze Buddha, Nyonya ware and Majapahit/Srivijaya 东南亚佛像、娘惹瓷、满者伯夷",
+    "Auction hammer comparables converted HKD to SGD 历史拍场落槌价参照",
+    "Factor-by-factor breakdown and trend notes 逐项系数拆解与行情趋势",
+    "Provenance and condition caveats 来源与品相提示",
+    "For reference only, no authentication 仅供参考，不构成鉴定或估价"
+  ],
+  "publisher": {
+    "@id": "https://www.gudong.app/#organization"
+  }
 }
 </script>
 <link rel="icon" type="image/png" sizes="16x16" href="../assets/icons/favicon-16x16.png">
@@ -126,8 +136,8 @@ header{background:rgba(255,255,255,.96);backdrop-filter:blur(6px);-webkit-backdr
 .breadcrumb a:hover{text-decoration:underline}
 .breadcrumb .current{color:var(--color-text-muted)}
 .hero-clean{text-align:center;max-width:640px;margin:0 auto 1.6rem;padding:1.4rem 0 .5rem}
-.hero-eyebrow{font-family:Georgia,"Songti SC","STSong",serif;font-style:italic;font-size:.92rem;color:var(--color-bronze-muted);letter-spacing:.01em;margin-bottom:.9rem}
-.hero-title-main{font-family:Georgia,"Songti SC","STSong",serif;font-size:clamp(1.7rem,4.2vw,2.5rem);font-weight:600;color:var(--color-text);line-height:1.35;margin-bottom:1rem}
+.hero-eyebrow{font-family:var(--font-serif);font-style:italic;font-size:.92rem;color:var(--color-bronze-muted);letter-spacing:.01em;margin-bottom:.9rem}
+.hero-title-main{font-family:var(--font-serif);font-size:clamp(1.7rem,4.2vw,2.5rem);font-weight:600;color:var(--color-text);line-height:1.35;margin-bottom:1rem}
 .hero-desc{font-size:.95rem;color:var(--color-text-secondary);margin-bottom:1.5rem;line-height:1.6}
 
 .notice{max-width:680px;margin:0 auto 1.5rem;padding:1.05rem 1.2rem;border-left:4px solid var(--color-gold);border-radius:0 10px 10px 0;background:var(--color-primary-light);color:var(--color-text-secondary);font-size:.88rem;line-height:1.72}
@@ -389,7 +399,7 @@ footer{text-align:center;padding:2.2rem 5% 1.8rem;background:var(--color-white);
         .footer-brand { font-weight: 700; font-size: .84rem; color: #5c564f; margin-bottom: .35rem; }
         .footer-disclaimer { max-width: 680px; margin: 0 auto 1.1rem; font-size: .78rem; line-height: 1.65; color: #8a8178; }
         .footer-copyright { margin-bottom: .3rem; }
-        .mark-badge { font-family: Georgia,"Songti SC","STSong",serif; font-size: clamp(1.6rem,5vw,2.2rem); letter-spacing:.04em; color:#5C3A26; background:#F1E8DF; border:1px solid #E4DED5; border-radius:10px; padding:.8rem 1rem; margin:.9rem 0; text-align:center; font-weight:600; }
+        .mark-badge { font-family: var(--font-serif); font-size: clamp(1.6rem,5vw,2.2rem); letter-spacing:.04em; color:#5C3A26; background:#F1E8DF; border:1px solid #E4DED5; border-radius:10px; padding:.8rem 1rem; margin:.9rem 0; text-align:center; font-weight:600; }
         .mark-fake { background:#FBF3EC; border-left:3px solid #9C7A3A; padding:.6rem .8rem; border-radius:0 8px 8px 0; font-size:.86rem; color:#5C564F; margin-top:.6rem; }
         .result p { margin:.45rem 0; font-size:.92rem; color:#3d3833; line-height:1.6; }
         .visually-hidden { position:absolute !important; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
@@ -811,5 +821,12 @@ window.gdSharePage = function () {
 </script>
 
 <script src="/gd-install.js" defer></script>
+
+<link rel="stylesheet" href="../assets/css/gudong-chatbot.css">
+<div id="gudong-chatbot" data-assets="../assets/"></div>
+<script src="../assets/js/gudong-chatbot.js" defer></script>
+
+<link rel="stylesheet" href="../assets/css/gudong-contact.css">
+<script src="../assets/js/gudong-contact.js" defer></script>
 </body>
 </html>

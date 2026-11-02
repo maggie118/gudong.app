@@ -29,14 +29,24 @@
 <meta name="twitter:image" content="https://www.gudong.app/og-cover.png">
 <script type="application/ld+json">
 {
-  "@context":"https://schema.org",
-  "@type":"WebApplication",
-  "name":"Porcelain Mark & Seal Lookup | 瓷器底款快查",
-  "description":"按明清年号检索标准款识文字、款识形态、发色釉性与伪款避坑提示的免费中英双语工具。仅供鉴赏参考，不构成鉴定或估价。",
-  "url":"https://www.gudong.app/tools/mark-lookup",
-  "applicationCategory":"UtilitiesApplication",
-  "operatingSystem":"All (Web App)",
-  "publisher":{"@id":"https://www.gudong.app/#organization"}
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Porcelain Mark & Seal Lookup | 瓷器底款快查",
+  "description": "按明清年号检索标准款识文字、款识形态、发色釉性与伪款避坑提示的免费中英双语工具。仅供鉴赏参考，不构成鉴定或估价。",
+  "url": "https://www.gudong.app/tools/mark-lookup",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "All (Web App)",
+  "featureList": [
+    "Look up Ming-Qing reign-mark text by era 按顺治至道光及明代官窑年号检索标准款识",
+    "Identify mark scripts: six-character kaishu/zhuanshu, four-character hall marks, huaya and jito marks",
+    "Glaze color and underglaze/overglaze notes 发色与釉上釉下特征",
+    "Common forgery tips and jito/reused-mark warnings 伪款与寄托款避坑",
+    "HD reference photos of Kangxi, Yongzheng, Qianlong and Xuande marks",
+    "Free, bilingual and client-side only 中英双语纯前端，仅供鉴赏参考"
+  ],
+  "publisher": {
+    "@id": "https://www.gudong.app/#organization"
+  }
 }
 </script>
 <link rel="icon" type="image/png" sizes="16x16" href="../assets/icons/favicon-16x16.png">
@@ -126,8 +136,8 @@ header{background:rgba(255,255,255,.96);backdrop-filter:blur(6px);-webkit-backdr
 .breadcrumb a:hover{text-decoration:underline}
 .breadcrumb .current{color:var(--color-text-muted)}
 .hero-clean{text-align:center;max-width:640px;margin:0 auto 1.6rem;padding:1.4rem 0 .5rem}
-.hero-eyebrow{font-family:Georgia,"Songti SC","STSong",serif;font-style:italic;font-size:.92rem;color:var(--color-bronze-muted);letter-spacing:.01em;margin-bottom:.9rem}
-.hero-title-main{font-family:Georgia,"Songti SC","STSong",serif;font-size:clamp(1.7rem,4.2vw,2.5rem);font-weight:600;color:var(--color-text);line-height:1.35;margin-bottom:1rem}
+.hero-eyebrow{font-family:var(--font-serif);font-style:italic;font-size:.92rem;color:var(--color-bronze-muted);letter-spacing:.01em;margin-bottom:.9rem}
+.hero-title-main{font-family:var(--font-serif);font-size:clamp(1.7rem,4.2vw,2.5rem);font-weight:600;color:var(--color-text);line-height:1.35;margin-bottom:1rem}
 .hero-desc{font-size:.95rem;color:var(--color-text-secondary);margin-bottom:1.5rem;line-height:1.6}
 
 .notice{max-width:680px;margin:0 auto 1.5rem;padding:1.05rem 1.2rem;border-left:4px solid var(--color-gold);border-radius:0 10px 10px 0;background:var(--color-primary-light);color:var(--color-text-secondary);font-size:.88rem;line-height:1.72}
@@ -353,7 +363,7 @@ footer{text-align:center;padding:2.2rem 5% 1.8rem;background:var(--color-white);
         .footer-brand { font-weight: 700; font-size: .84rem; color: #5c564f; margin-bottom: .35rem; }
         .footer-disclaimer { max-width: 680px; margin: 0 auto 1.1rem; font-size: .78rem; line-height: 1.65; color: #8a8178; }
         .footer-copyright { margin-bottom: .3rem; }
-        .mark-badge { font-family: Georgia,"Songti SC","STSong",serif; font-size: clamp(1.7rem,5.4vw,2.5rem); letter-spacing:.14em; color:#5C3A26; background:#fff; border:1px solid #E4DED5; border-radius:10px; padding:.75rem 1rem; margin:.85rem auto 1rem; text-align:center; max-width:28rem; }
+        .mark-badge { font-family: var(--font-serif); font-size: clamp(1.7rem,5.4vw,2.5rem); letter-spacing:.14em; color:#5C3A26; background:#fff; border:1px solid #E4DED5; border-radius:10px; padding:.75rem 1rem; margin:.85rem auto 1rem; text-align:center; max-width:28rem; }
         .mark-gallery { display:grid; grid-template-columns:1fr; gap:.85rem; margin:0 0 1.1rem; }
         .mark-gallery[hidden]{display:none}
         .mark-gallery figure { margin:0; background:#fff; border:1px solid #E4DED5; border-radius:12px; overflow:hidden; }
@@ -931,5 +941,12 @@ window.gdSharePage = function () {
 </script>
 
 <script src="/gd-install.js" defer></script>
+
+<link rel="stylesheet" href="../assets/css/gudong-chatbot.css">
+<div id="gudong-chatbot" data-assets="../assets/"></div>
+<script src="../assets/js/gudong-chatbot.js" defer></script>
+
+<link rel="stylesheet" href="../assets/css/gudong-contact.css">
+<script src="../assets/js/gudong-contact.js" defer></script>
 </body>
 </html>

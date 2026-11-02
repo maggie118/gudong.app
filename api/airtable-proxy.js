@@ -16,6 +16,14 @@
 // 2026-10-05 v5
 //  - CORS ���£�����������Դ���� file:// �� localhost����
 //    ���ڱ���Ԥ���뿪�����ԡ�����ֻ�� API�����ݱ����ǹ����ġ�
+//
+// 2026-11-01 v6 (snapshot-first)
+//  - ��ֻ���ļ��� proxy: �� Airtable API ��Ϊ��ȡ Vercel build ʱ���ɵ� data/listings.json��
+//    ��ǰ�ˡ�proxy ���Ƕ���ʱ�� Airtable ��Ϊ 0 �Ρ�
+//  - ���� q(����)/cat(����) ���ˣ�debug ��Ϊ�����ļ�ժҪ��
+
+import fs from 'fs';
+import path from 'path';
 
 const BASE           = process.env.AIRTABLE_BASE_ID;
 const TABLE          = process.env.AIRTABLE_TABLE;
@@ -163,33 +171,6 @@ const META_EN_7D       = 'Market snapshot \u00b7 7 days';
 const META_EN_WEEK     = 'Collector activity \u00b7 this week';
 const META_EN_COMPARE  = 'Comparable reference \u00b7 for reference only';
 const META_EN_PLATFORM = 'Platform notice';
-
-// ---------- Airtable fetch ----------
-async function fetchAllRecords(table) {
-  const records = [];
-  let offset = null;
-  do {
-    const url = new URL(`https://api.airtable.com/v0/${BASE}/${encodeURIComponent(table)}`);
-    url.searchParams.set('pageSize', '100');
-    if (offset) url.searchParams.set('offset', offset);
-    const ctl = new AbortController();
-    const timer = setTimeout(() => ctl.abort(), 8000);
-    let r;
-    try {
-      r = await fetch(url.toString(), { headers: { Authorization: `Bearer ${TOKEN}` }, signal: ctl.signal });
-    } finally {
-      clearTimeout(timer);
-    }
-    if (!r.ok) {
-      const txt = await r.text();
-      throw new Error(`airtable ${r.status}: ${txt.slice(0, 200)}`);
-    }
-    const j = await r.json();
-    records.push(...(j.records || []));
-    offset = j.offset || null;
-  } while (offset);
-  return records;
-}
 
 // ---------- Sanitize items ----------
 function toPublicItems(rawRecords) {
@@ -444,119 +425,25 @@ function pageOfCategory(c) {
   return { page: CAT_MISC, standard: false };
 }
 
-async function debugReport() {
-  const raw = await fetchAllRecords(TABLE);
-  const byPage = {};
-  const records = raw.map(rec => {
-    const f = rec.fields || {};
-    const status = String(f.status || '').trim().toLowerCase();
-    const isPublic = PUBLIC_STATUSES.includes(status);
-    const problems = [];
-    const notes = [];
-    if (!isPublic) problems.push(status ? 'status=' + f.status + ' \u2192 \u4e0d\u516c\u5f00' : 'status \u7a7a \u2192 \u4e0d\u516c\u5f00');
-    if (!f.title_zh && !f.title_en) problems.push('title_zh / title_en \u90fd\u7a7a \u2192 \u524d\u7aef\u4e22\u5f03');
-    if (!f.item_id) notes.push('item_id \u7a7a \u2192 \u94fe\u63a5 404');
-    const cat = pageOfCategory(f.category);
-    if (f.category && !cat.standard) notes.push('\u5206\u7c7b\u975e\u6807\u51c6 \u2192 \u5f52\u5165 ' + cat.page);
-    if (!f.img_file) notes.push('img_file \u7a7a \u2192 \u5360\u4f4d\u56fe');
-    if (!f.reason_zh && !f.reason_en) notes.push('reason_zh/en \u7a7a \u2192 \u65e0\u60c5\u62a5\u7406\u7531\u884c');
-    if (!f.listed_at) notes.push('listed_at \u7a7a \u2192 \u65e0\u4e0a\u67b6\u65f6\u95f4');
-    if (!f.previous_price) notes.push('previous_price \u7a7a \u2192 \u4e0d\u53c2\u4e0e\u964d\u4ef7\u60c5\u62a5');
-    const shown = isPublic && (f.title_zh || f.title_en);
-    if (shown) byPage[cat.page] = (byPage[cat.page] || 0) + 1;
-    return {
-      record_id: rec.id, item_id: normHyphen(f.item_id || ''),
-      title: f.title_zh || f.title_en || '(\u65e0\u6807\u9898)',
-      status: f.status || '', category: f.category || '',
-      shows_on_page: shown ? cat.page : null, public: !!shown, problems, notes,
-    };
-  });
-
-  let sellers = null;
-  if (SELLERS_TABLE) {
-    const rawS = await fetchAllRecords(SELLERS_TABLE);
-    const ok = toPublicSellers(rawS);
-    sellers = { rows: rawS.length, public_rows: ok.length };
-  }
-
-  let intel = null;
-  if (INTEL_TABLE) {
+// ---------- Snapshot file read (v6, snapshot-first) ----------
+// �Ķ� Vercel build ʱ�� refresh-listings.js ���ɵ� data/listings.json��
+// ��ȫ���������⣺�� 0 �� Airtable ���á����ɹ���ϳ��ö��·������
+function readSnapshot() {
+  const candidates = [
+    path.join(process.cwd(), 'data', 'listings.json'),
+    path.join(__dirname, '..', 'data', 'listings.json'),
+    path.join(__dirname, 'data', 'listings.json'),
+    'data/listings.json',
+    './data/listings.json',
+  ];
+  for (const p of candidates) {
     try {
-      const rawI = await fetchAllRecords(INTEL_TABLE);
-      const ok = toPublicIntel(rawI);
-      intel = {
-        rows: rawI.length, public_rows: ok.length,
-        note: 'Intel \u8868\u662f\u4eba\u5de5\u8986\u76d6\uff1b\u4e0d\u586b\u7684 type \u7531\u4ee3\u7406\u81ea\u52a8\u751f\u6210',
-        types_in_use: [...new Set(ok.map(r => r.type))],
-      };
-    } catch (e) {
-      intel = { error: 'Intel \u8868\u8bfb\u53d6\u5931\u8d25: ' + e.message };
-    }
+      const raw = fs.readFileSync(p, 'utf8');
+      const j = JSON.parse(raw);
+      if (j && Array.isArray(j.newListing)) return { ok: true, data: j, file: p };
+    } catch (e) { /* try next candidate */ }
   }
-
-  const publicItems = toPublicItems(raw);
-  const autoIntel = buildAutoIntel(publicItems);
-
-  return {
-    generated_at: new Date().toISOString(),
-    summary: { total_records: records.length, public_records: records.filter(r => r.public).length, by_category_page: byPage },
-    auto_intel_preview: autoIntel,
-    hint: 'auto_intel_preview = \u4ee3\u7406\u81ea\u52a8\u751f\u6210\u7684\u60c5\u62a5\uff1bIntel \u8868\u540c type \u7684\u4eba\u5de5\u8bb0\u5f55\u4f1a\u8986\u76d6\u5b83\u3002',
-    records, sellers, intel,
-  };
-}
-
-// ---------- Cache ----------
-const FRESH_MS = 30 * 1000;
-const STALE_MS = 60 * 60 * 1000;
-let cache = { items: null, sellers: [], intel: [], founderCount: 0, at: 0 };
-
-async function getData() {
-  const now = Date.now();
-  if (cache.items && now - cache.at < FRESH_MS) {
-    return { items: cache.items, sellers: cache.sellers, intel: cache.intel, founderCount: cache.founderCount, stale: false };
-  }
-  try {
-    const items = toPublicItems(await fetchAllRecords(TABLE));
-
-    let sellers = cache.sellers;
-    let founderCount = cache.founderCount || 0;
-    if (SELLERS_TABLE) {
-      try {
-        const rawSellers = await fetchAllRecords(SELLERS_TABLE);
-        sellers = toPublicSellers(rawSellers);
-        founderCount = rawSellers.filter(r => {
-          const f = r.fields || {};
-          const isSeed = f.is_seed_member === true || String(f.is_seed_member).toLowerCase() === 'true';
-          const status = String(f.status || '').trim().toLowerCase();
-          return isSeed && status === 'active';
-        }).length;
-      }
-      catch (e) { console.warn('[airtable-proxy] sellers table read failed:', e.message); }
-    } else {
-      sellers = [];
-    }
-
-    let intel = cache.intel;
-    if (INTEL_TABLE) {
-      try { intel = toPublicIntel(await fetchAllRecords(INTEL_TABLE)); }
-      catch (e) { console.warn('[airtable-proxy] intel table read failed:', e.message); }
-    } else {
-      intel = [];
-    }
-
-    const autoIntel = buildAutoIntel(items);
-    const mergedIntel = mergeIntel(autoIntel, intel);
-
-    cache = { items, sellers, intel: mergedIntel, founderCount, at: Date.now() };
-    return { items, sellers, intel: mergedIntel, founderCount, stale: false };
-  } catch (e) {
-    if (cache.items && now - cache.at < STALE_MS) {
-      console.warn('[airtable-proxy] upstream failed, using cache:', e.message);
-      return { items: cache.items, sellers: cache.sellers, intel: cache.intel, founderCount: cache.founderCount, stale: true };
-    }
-    throw e;
-  }
+  return { ok: false, error: 'data/listings.json not found in function runtime' };
 }
 
 // ---------- Handler ----------
@@ -583,23 +470,35 @@ export default async function handler(req, res) {
   }
 
   if (DEBUG_KEY && req.query.debug && String(req.query.debug) === DEBUG_KEY) {
-    try {
-      const report = await debugReport();
-      res.setHeader('Cache-Control', 'no-store');
-      res.setHeader('X-Robots-Tag', 'noindex');
-      return res.status(200).json(report);
-    } catch (e) {
-      console.error('[airtable-proxy][debug]', e.message);
-      res.setHeader('Cache-Control', 'no-store');
-      return res.status(502).json({ error: 'Upstream failed', detail: e.message });
-    }
+    const snap = readSnapshot();
+    res.setHeader('Cache-Control', 'no-store');
+    res.setHeader('X-Robots-Tag', 'noindex');
+    if (!snap.ok) return res.status(502).json({ error: 'Snapshot not found', detail: snap.error });
+    const d = snap.data || {};
+    return res.status(200).json({
+      generated_at: new Date().toISOString(),
+      source: 'data/listings.json (static snapshot, 0 Airtable)',
+      summary: {
+        new_listing: Array.isArray(d.newListing) ? d.newListing.length : 0,
+        today_finds: Array.isArray(d.todayFinds) ? d.todayFinds.length : 0,
+        editor_picks: Array.isArray(d.editorPicks) ? d.editorPicks.length : 0,
+        sellers: Array.isArray(d.sellers) ? d.sellers.length : 0,
+        intel: Array.isArray(d.intel) ? d.intel.length : 0,
+        total: Number(d.total) || 0,
+      },
+      keys: Object.keys(d),
+      file: snap.file,
+    });
   }
 
   const q   = String(req.query.q || '').trim().toLowerCase().slice(0, 60);
   const cat = String(req.query.cat || 'all').trim();
 
   try {
-    const { items: all, sellers, intel, founderCount, stale } = await getData();
+    const snap = readSnapshot();
+    if (!snap.ok) throw new Error(snap.error || 'snapshot missing');
+    const base = snap.data || {};
+    const all = Array.isArray(base.newListing) ? base.newListing : [];
     let items = all;
 
     if (q) {
@@ -616,21 +515,22 @@ export default async function handler(req, res) {
       items = items.filter(f => pageOfCategory(f.category).page === target);
     }
 
-    res.setHeader('Cache-Control', stale ? 'public, s-maxage=10' : 's-maxage=30, stale-while-revalidate=60');
-    if (stale) res.setHeader('X-Data-Stale', '1');
+    // 有筛选时重新派生 today/editor；无筛选时直接返回快照里的现成数组（更省）
+    const filtered = !!(q || cat !== 'all');
+    res.setHeader('Cache-Control', 'public, s-maxage=300, stale-while-revalidate=600');
     return res.status(200).json({
-      todayFinds:  items.filter(f => f.is_today_finds),
-      editorPicks: items.filter(f => f.is_editor_picks),
+      todayFinds:  filtered ? items.filter(f => f.is_today_finds) : (Array.isArray(base.todayFinds) ? base.todayFinds : []),
+      editorPicks: filtered ? items.filter(f => f.is_editor_picks) : (Array.isArray(base.editorPicks) ? base.editorPicks : []),
       newListing:  items,
-      sellers,
-      intel,
-      founderCount: founderCount || 0,
+      sellers:     Array.isArray(base.sellers) ? base.sellers : [],
+      intel:       Array.isArray(base.intel) ? base.intel : [],
+      founderCount: base.founderCount || 0,
       total:       items.length,
     });
 
   } catch (e) {
-    console.error('[airtable-proxy]', e.message);
+    console.error('[airtable-proxy][snapshot]', e.message);
     res.setHeader('Cache-Control', 'no-store');
-    return res.status(502).json({ error: 'Upstream failed' });
+    return res.status(502).json({ error: 'Upstream failed', detail: e.message });
   }
 }

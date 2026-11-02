@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>Antique Porcelain Age Calculator & Reign Mark Date｜明清年号年份对照计算器｜Gudong.app</title>
+<title>Antique Porcelain Age Calculator｜明清年号年份对照计算器｜Gudong.app</title>
 <meta name="description" content="免费古董年份计算器（Antique Chinese Porcelain Age Calculator）：输入公元年份或选择明清年号，快速算出年份对照多少年，辅助判断瓷器款识与 reign mark 年代。仅时间数学参考，不做古董鉴定，不构成估价建议。">
 <meta name="keywords" content="antique porcelain age calculator,reign mark date calculator,明清年号年份对照多少年,年份对照计算器,years since year calculator,Qing dynasty year converter,古玩年份计算器">
 <meta name="robots" content="index,follow,max-image-preview:large">
@@ -29,12 +29,24 @@
 <meta name="twitter:image" content="https://www.gudong.app/og-cover.png">
 <script type="application/ld+json">
 {
-  "@context":"https://schema.org",
-  "@type":"WebPage",
-  "name":"年份对照计算器 | Years-since-year Calculator",
-  "description":"免费在线年份对照计算器，输入公元年份或选择明清年号快速计算距离现在多少年。仅时间数学参考，不做古董鉴定，不构成估价建议。",
-  "url":"https://www.gudong.app/tools/year-since",
-  "publisher":{"@id":"https://www.gudong.app/#organization"}
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "年份对照计算器 | Years-since-year Calculator",
+  "description": "免费在线年份对照计算器，输入公元年份或选择明清年号快速计算距离现在多少年。仅时间数学参考，不做古董鉴定，不构成估价建议。",
+  "url": "https://www.gudong.app/tools/year-since",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "All (Web App)",
+  "featureList": [
+    "Calculate years ago from a Gregorian or BCE year 公元/公元前年份计算年份对照",
+    "Quick-fill Ming-Qing reign titles 明清年号快速填充",
+    "Astronomical numbering: no year zero 公元前按天文纪年折算，不存在公元 0 年",
+    "Simple time math, no calendar conversion 仅时间数学参考",
+    "Free, bilingual and client-side only 中英双语纯前端",
+    "Not for antique authentication or appraisal 不做古董鉴定与估价"
+  ],
+  "publisher": {
+    "@id": "https://www.gudong.app/#organization"
+  }
 }
 </script>
 <link rel="icon" type="image/png" sizes="16x16" href="../assets/icons/favicon-16x16.png">
@@ -124,8 +136,8 @@ header{background:rgba(255,255,255,.96);backdrop-filter:blur(6px);-webkit-backdr
 .breadcrumb a:hover{text-decoration:underline}
 .breadcrumb .current{color:var(--color-text-muted)}
 .hero-clean{text-align:center;max-width:640px;margin:0 auto 1.6rem;padding:1.4rem 0 .5rem}
-.hero-eyebrow{font-family:Georgia,"Songti SC","STSong",serif;font-style:italic;font-size:.92rem;color:var(--color-bronze-muted);letter-spacing:.01em;margin-bottom:.9rem}
-.hero-title-main{font-family:Georgia,"Songti SC","STSong",serif;font-size:clamp(1.7rem,4.2vw,2.5rem);font-weight:600;color:var(--color-text);line-height:1.35;margin-bottom:1rem}
+.hero-eyebrow{font-family:var(--font-serif);font-style:italic;font-size:.92rem;color:var(--color-bronze-muted);letter-spacing:.01em;margin-bottom:.9rem}
+.hero-title-main{font-family:var(--font-serif);font-size:clamp(1.7rem,4.2vw,2.5rem);font-weight:600;color:var(--color-text);line-height:1.35;margin-bottom:1rem}
 .hero-desc{font-size:.95rem;color:var(--color-text-secondary);margin-bottom:1.5rem;line-height:1.6}
 
 .panel{background:var(--color-surface);border:1px solid var(--color-border);border-radius:16px;box-shadow:0 4px 16px rgba(36,31,26,.06);padding:clamp(1.5rem,4vw,2.1rem);max-width:680px;margin:0 auto 1.5rem}
@@ -660,5 +672,12 @@ window.gdSharePage = function () {
 </script>
 
 <script src="/gd-install.js" defer></script>
+
+<link rel="stylesheet" href="../assets/css/gudong-chatbot.css">
+<div id="gudong-chatbot" data-assets="../assets/"></div>
+<script src="../assets/js/gudong-chatbot.js" defer></script>
+
+<link rel="stylesheet" href="../assets/css/gudong-contact.css">
+<script src="../assets/js/gudong-contact.js" defer></script>
 </body>
 </html>

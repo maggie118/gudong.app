@@ -1,51 +1,46 @@
 // /api/sitemap.xml.js
-// Dynamic sitemap — static pages hardcoded, /items/ pulled live from Airtable.
+// Dynamic sitemap — static pages hardcoded, /items/ pulled from the SSG snapshot.
 // Route: vercel.json rewrites /sitemap.xml -> /api/sitemap.xml
 //
-// Behavior:
-//  - Static pages (about/categories/insights/tools/sellers/etc.) are listed below.
-//  - /items/<item_id> URLs are fetched from Airtable every request (edge-cached 1h).
-//  - If Airtable is unreachable, falls back to the known 15 seed item IDs so
-//    Google always receives a valid, non-empty sitemap.
-//
-// Env: reuses AIRTABLE_BASE_ID / AIRTABLE_TABLE / AIRTABLE_TOKEN (same as airtable-proxy.js).
-
-const BASE  = process.env.AIRTABLE_BASE_ID;
-const TABLE = process.env.AIRTABLE_TABLE;
-const TOKEN = process.env.AIRTABLE_TOKEN;
+// v2 (2026-11-01, snapshot-first):
+//  - No longer calls Airtable. Items are read from the static data/listings.json
+//    that refresh-listings.js generates at build time, so sitemap generation is
+//    always 0-cost and never 504s on a dead Airtable.
+//  - lastmod updated for the launch-ready content refresh.
+import fs from 'fs';
+import path from 'path';
 
 const SITE = 'https://www.gudong.app';
+const LAUNCH = '2026-11-01';
 
-// ---------- Static pages (no Airtable dependency) ----------
-// lastmod format: YYYY-MM-DD. Update when a static page's content changes.
+// ---------- Static pages (no data dependency) ----------
+// lastmod format: YYYY-MM-DD.
 const STATIC = [
-  { loc: '/',                       lastmod: '2026-10-14' },
-  { loc: '/about',                  lastmod: '2026-10-15' },
-  { loc: '/collection',             lastmod: '2026-10-15' },
-  { loc: '/insights',                lastmod: '2026-10-15' },
-  { loc: '/pricing',                 lastmod: '2026-10-15' },
-  { loc: '/privacy',                lastmod: '2026-10-15' },
-  { loc: '/terms',                  lastmod: '2026-10-15' },
-  { loc: '/sellers/',                lastmod: '2026-10-15' },
-  { loc: '/tools/',                 lastmod: '2026-10-15' },
-  { loc: '/tools/era-lookup',        lastmod: '2026-10-15' },
-  { loc: '/tools/ganzhi',            lastmod: '2026-10-15' },
-  { loc: '/tools/year-since',        lastmod: '2026-10-15' },
-  { loc: '/tools/mark-lookup',       lastmod: '2026-10-23' },
-  { loc: '/tools/valuation',         lastmod: '2026-10-23' },
-  { loc: '/tools/contract',          lastmod: '2026-10-23' },
+  { loc: '/',                       lastmod: LAUNCH },
+  { loc: '/about',                  lastmod: LAUNCH },
+  { loc: '/collection',             lastmod: LAUNCH },
+  { loc: '/insights',                lastmod: LAUNCH },
+  { loc: '/pricing',                 lastmod: LAUNCH },
+  { loc: '/privacy',                lastmod: LAUNCH },
+  { loc: '/terms',                  lastmod: LAUNCH },
+  { loc: '/sellers/',                lastmod: LAUNCH },
+  { loc: '/tools/',                 lastmod: LAUNCH },
+  // Collector utility tools
+  { loc: '/tools/era-lookup',        lastmod: LAUNCH },
+  { loc: '/tools/ganzhi',            lastmod: LAUNCH },
+  { loc: '/tools/year-since',        lastmod: LAUNCH },
+  { loc: '/tools/mark-lookup',       lastmod: LAUNCH },
+  { loc: '/tools/valuation',         lastmod: LAUNCH },
+  { loc: '/tools/contract',          lastmod: LAUNCH },
   // Categories
-  { loc: '/categories/bronze',     lastmod: '2026-10-15' },
-  { loc: '/categories/coins',       lastmod: '2026-10-15' },
-  { loc: '/categories/jade',         lastmod: '2026-10-15' },
-  { loc: '/categories/misc',        lastmod: '2026-10-15' },
-  { loc: '/categories/paintings',   lastmod: '2026-10-15' },
-  { loc: '/categories/porcelain',   lastmod: '2026-10-15' },
-  // Sellers
-  { loc: '/sellers/seller-lim-kw-antiques',  lastmod: '2026-10-15' },
-  { loc: '/sellers/seller-ng-cy-antiques',   lastmod: '2026-10-15' },
-  { loc: '/sellers/seller-ng-lk-antiques',   lastmod: '2026-10-15' },
-  { loc: '/sellers/seller-yak-bc-antiques',  lastmod: '2026-10-15' },
+  { loc: '/categories/bronze',     lastmod: LAUNCH },
+  { loc: '/categories/coins',       lastmod: LAUNCH },
+  { loc: '/categories/jade',         lastmod: LAUNCH },
+  { loc: '/categories/misc',        lastmod: LAUNCH },
+  { loc: '/categories/paintings',   lastmod: LAUNCH },
+  { loc: '/categories/porcelain',   lastmod: LAUNCH },
+  // Legacy / orphan gallery page (not in listings.json sellers)
+  { loc: '/sellers/seller-lim-ck',  lastmod: LAUNCH },
   // Insights articles (static slugs)
   ...[
     'amber-baked-vs-natural','ancient-jade-stains','antique-shipping','auction-house-watch',
@@ -66,77 +61,36 @@ const STATIC = [
     'song-five-kilns','storage-mistakes','sumali-cobalt-origin','sumali-cobalt-zhenghe',
     'tang-ceramics-trade','what-is-jianlou','woodware-oil-damage','xuande-censer-legacy',
     'yangtze-kilns','zhushan-eight-friends',
-  ].map(slug => ({ loc: `/insights/${slug}`, lastmod: '2026-10-15' })),
+  ].map(slug => ({ loc: `/insights/${slug}`, lastmod: LAUNCH })),
 ];
 
-// Fallback item IDs used when Airtable is unreachable.
-const FALLBACK_ITEM_IDS = [
-  'item-lim-01','item-lim-02','item-lim-03','item-lim-04',
-  'item-ng-01','item-ng-02','item-ng-03',
-  'item-ngcy-01','item-ngcy-02','item-ngcy-03','item-ngcy-04','item-ngcy-05',
-  'item-yak-01','item-yak-02','item-yak-03',
-];
-
-const HYPHEN_VARIANTS = /[‐‑‒–—―−﹘－]/g;
-function normHyphen(v) {
-  if (typeof v !== 'string') return v;
-  return v.replace(HYPHEN_VARIANTS, '-').trim();
+// ---------- Read the SSG snapshot for live item URLs ----------
+// 兼容两种运行时：Vercel 的 CJS 包装（有 __dirname）与原生 ESM（用 import.meta.url）。
+function snapshotDir() {
+  try { return path.dirname(new URL(import.meta.url).pathname); }
+  catch (e) { return process.cwd(); }
+}
+function readSnapshot() {
+  const here = snapshotDir();
+  const candidates = [
+    path.join(process.cwd(), 'data', 'listings.json'),
+    path.join(here, '..', 'data', 'listings.json'),
+    path.join(here, 'data', 'listings.json'),
+    'data/listings.json',
+    './data/listings.json',
+  ];
+  for (const p of candidates) {
+    try {
+      const j = JSON.parse(fs.readFileSync(p, 'utf8'));
+      if (j && Array.isArray(j.newListing)) return { ok: true, data: j };
+    } catch (e) { /* try next */ }
+  }
+  return { ok: false };
 }
 
 function toDateStr(v) {
   if (!v) return '';
-  // Airtable dates come as YYYY-MM-DD or ISO datetime; take first 10 chars.
   return String(v).slice(0, 10);
-}
-
-// Hard budget for the whole Airtable pull. We must respond well under Vercel's
-// function timeout so a slow/dead Airtable never surfaces as a 504 to Google
-// (this was the root cause of GSC "无法抓取" on first cold fetch).
-const UPSTREAM_BUDGET_MS = 4000;
-const PER_PAGE_TIMEOUT_MS = 2500;
-const MAX_PAGES = 5; // 5 x 100 = 500 records is plenty for this catalog.
-
-async function fetchActiveItemIds() {
-  if (!BASE || !TABLE || !TOKEN) return null; // signal "upstream unavailable"
-  const startedAt = Date.now();
-  const records = [];
-  let offset = null;
-  let pages = 0;
-  do {
-    // Stop early if we are running out of budget — partial results are fine,
-    // the caller merges with the seed fallback below.
-    if (Date.now() - startedAt > UPSTREAM_BUDGET_MS) break;
-    const url = new URL(`https://api.airtable.com/v0/${BASE}/${encodeURIComponent(TABLE)}`);
-    url.searchParams.set('pageSize', '100');
-    if (offset) url.searchParams.set('offset', offset);
-    const ctl = new AbortController();
-    const timer = setTimeout(() => ctl.abort(), PER_PAGE_TIMEOUT_MS);
-    let r;
-    try {
-      r = await fetch(url.toString(), { headers: { Authorization: `Bearer ${TOKEN}` }, signal: ctl.signal });
-    } finally {
-      clearTimeout(timer);
-    }
-    if (!r.ok) throw new Error(`airtable ${r.status}`);
-    const j = await r.json();
-    records.push(...(j.records || []));
-    offset = j.offset || null;
-    pages += 1;
-  } while (offset && pages < MAX_PAGES);
-
-  // Keep only active items with a non-empty item_id; dedupe.
-  const seen = new Set();
-  const out = [];
-  for (const rec of records) {
-    const f = rec.fields || {};
-    const status = String(f.status || '').trim().toLowerCase();
-    if (status !== 'active') continue;
-    const id = normHyphen(f.item_id || '');
-    if (!id || seen.has(id)) continue;
-    seen.add(id);
-    out.push({ item_id: id, lastmod: toDateStr(f.listed_at || rec.createdTime) });
-  }
-  return out;
 }
 
 function esc(s) {
@@ -145,7 +99,7 @@ function esc(s) {
     .replace(/"/g, '&quot;').replace(/'/g, '&apos;');
 }
 
-function buildXml(staticUrls, items) {
+function buildXml(staticUrls, items, sellers) {
   const parts = ['<?xml version="1.0" encoding="UTF-8"?>'];
   parts.push('<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">');
   for (const u of staticUrls) {
@@ -154,12 +108,16 @@ function buildXml(staticUrls, items) {
     if (u.lastmod) parts.push(`    <lastmod>${esc(u.lastmod)}</lastmod>`);
     parts.push(`  </url>`);
   }
+  for (const s of sellers) {
+    parts.push(`  <url>`);
+    parts.push(`    <loc>${esc(SITE + s.loc)}</loc>`);
+    if (s.lastmod) parts.push(`    <lastmod>${esc(s.lastmod)}</lastmod>`);
+    parts.push(`  </url>`);
+  }
   for (const it of items) {
     parts.push(`  <url>`);
-    // Use the live SPA route /item?id=<id>. The /items/<id> pretty URL only
-    // works for pre-rendered static pages in /items/*; brand-new Airtable items
-    // have no static html yet and 404 there. Since this sitemap pulls items
-    // LIVE from Airtable, every item must point to the route that always resolves.
+    // Use the always-resolvable SPA route. Brand-new Airtable items have no
+    // pre-rendered /items/<id>.html yet, so /item?id=<id> is the safe choice.
     parts.push(`    <loc>${esc(SITE + '/item?id=' + it.item_id)}</loc>`);
     if (it.lastmod) parts.push(`    <lastmod>${esc(it.lastmod)}</lastmod>`);
     parts.push(`  </url>`);
@@ -168,25 +126,35 @@ function buildXml(staticUrls, items) {
   return parts.join('\n');
 }
 
-export default async function handler(req, res) {
+export default function handler(req, res) {
   res.setHeader('Content-Type', 'application/xml; charset=utf-8');
-  // Edge-cached 1h; serve stale for 1 day while revalidating.
   res.setHeader('Cache-Control', 'public, s-maxage=3600, stale-while-revalidate=86400');
   res.setHeader('X-Content-Type-Options', 'nosniff');
 
-  let items = null;
-  let upstreamFailed = false;
-  try {
-    items = await fetchActiveItemIds();
-  } catch (e) {
-    upstreamFailed = true;
-    console.warn('[sitemap] airtable fetch failed, using fallback:', e.message);
-  }
-  if (!items) {
-    upstreamFailed = true;
-    items = FALLBACK_ITEM_IDS.map(id => ({ item_id: id, lastmod: '' }));
-  }
+  const snap = readSnapshot();
+  const items = (snap.ok && Array.isArray(snap.data.newListing))
+    ? snap.data.newListing
+        .map(it => ({ item_id: String(it.item_id || ''), lastmod: toDateStr(it._createdTime || it.listed_at || '') }))
+        .filter(it => it.item_id)
+    : [];
 
-  const xml = buildXml(STATIC, items);
+  // 卖家（专属藏馆）：从 SSG 快照 data/listings.json.sellers 自动生成，
+  // 新卖家开馆后无需再手工加链接；page_url 去 .html 即干净路由（cleanUrls）。
+  const sellers = (snap.ok && Array.isArray(snap.data.sellers))
+    ? snap.data.sellers
+        .filter(s => s && s.seller_id)
+        .map(s => {
+          const raw = String(s.page_url || '');
+          const clean = raw.replace(/\.html$/, '').replace(/\/+$/g, '') || `/sellers/seller-${slugify(s.seller_id)}-antiques`;
+          return { loc: clean, lastmod: toDateStr(s.since_year ? `${s.since_year}-01-01` : '') || LAUNCH };
+        })
+        .filter(s => s.loc.startsWith('/sellers/'))
+    : [];
+
+  const xml = buildXml(STATIC, items, sellers);
   res.status(200).send(xml);
+}
+
+function slugify(id) {
+  return String(id == null ? '' : id).trim().toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
 }

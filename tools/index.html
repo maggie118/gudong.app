@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>工具｜古董圈收藏参考工具合集 | Tools｜Gudong.app</title>
-    <meta name="description" content="古董圈免费收藏参考工具合集：年份对照计算器、干支公历换算器、古文化朝代年代速查。仅供收藏学习参考，不做古董鉴定与估价。">
+    <meta name="description" content="古董圈免费藏家工具合集：瓷器底款快查、在线简易估值参考、买卖契约生成器、干支公历换算、古文化朝代年表速查与年份对照计算器。中英双语纯前端，仅供学习参考，不做古董鉴定与估价。">
     <meta name="keywords" content="古董工具,干支换算,年份对照计算器,朝代年代速查,Chinese antiques reference tools">
     <meta property="og:site_name" content="古董圈 Gudong.app">
     <meta property="og:title" content="工具｜古董圈收藏参考工具合集 | Tools｜Gudong.app">
-    <meta property="og:description" content="免费收藏参考工具合集：年份对照计算器、干支公历换算器、朝代年代速查。仅供学习参考，不做古董鉴定估价。">
+    <meta property="og:description" content="免费藏家工具合集：瓷器底款快查、简易估值参考、买卖契约生成器、干支换算、朝代年表速查与年份对照计算器。仅供学习参考。">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://www.gudong.app/tools/">
     <meta property="og:image" content="https://www.gudong.app/og-cover.png">
@@ -358,7 +358,7 @@
         }
 
         .hero-eyebrow {
-            font-family: Georgia, "Songti SC", "STSong", serif;
+            font-family: var(--font-serif);
             font-style: italic;
             font-size: .92rem;
             color: var(--color-bronze-muted);
@@ -367,7 +367,7 @@
         }
 
         .hero-title-main {
-            font-family: Georgia, "Songti SC", "STSong", serif;
+            font-family: var(--font-serif);
             font-size: clamp(1.7rem, 4.2vw, 2.5rem);
             font-weight: 600;
             color: var(--color-text);
@@ -489,7 +489,26 @@
             .container { padding: 2rem 4.5% 3rem; }
         }
     </style>
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"工具 | Tools｜Gudong.app","description":"古董圈免费收藏参考工具合集：年份对照计算器、干支公历换算器、古文化朝代年代速查。仅供收藏学习参考，不做古董鉴定与估价。","url":"https://www.gudong.app/tools/","publisher":{"@id":"https://www.gudong.app/#organization"}}</script>
+    <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Gudong.app Collector's Toolkit | 藏家工具包",
+  "description": "古董圈免费藏家工具合集：瓷器底款快查、在线简易估值参考、买卖契约生成器、干支公历换算、古文化朝代年表速查与年份对照计算器。中英双语纯前端，仅供学习参考。",
+  "url": "https://www.gudong.app/tools/",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "All (Web App)",
+  "featureList": [
+    "Porcelain Mark & Seal Lookup 瓷器底款快查",
+    "Market Valuation Reference 简易估值参考",
+    "Contract & Endorsement Generator 买卖契约生成器",
+    "Sexagenary-Gregorian Converter 干支公历换算器",
+    "Culture & Dynasty Era Lookup 古文化朝代年表速查",
+    "Years-since-year Calculator 年份对照计算器"
+  ],
+  "publisher": {
+    "@id": "https://www.gudong.app/#organization"
+  }
+}</script>
 
     <meta name="apple-mobile-web-app-title" content="古董圈">
 </head>
@@ -946,11 +965,18 @@ window.gdSharePage = function () {
     window.gdShare({
         title: lang === "zh" ? "收藏参考工具合集｜古董圈Gudong.app" : "Collecting Reference Tools｜Gudong.app",
         text: lang === "zh"
-            ? "古董圈 3 个免费收藏工具：年份对照、干支换算、朝代年代速查。仅供学习参考，不做古董鉴定。"
-            : "Three free antiques-collecting reference tools: years-since-year, ganzhi converter, dynasty era lookup. Educational reference only."
+            ? "古董圈 6 个免费收藏工具：瓷器底款快查、简易估值、买卖契约生成器、干支换算、朝代年表与年份对照。仅供学习参考，不做古董鉴定。"
+            : "Six free antiques-collecting tools: porcelain mark lookup, valuation reference, contract generator, ganzhi and dynasty era converters. Educational reference only."
     });
 };
 </script>
 <script src="/gd-install.js" defer></script>
+
+<link rel="stylesheet" href="../assets/css/gudong-chatbot.css">
+<div id="gudong-chatbot" data-assets="../assets/"></div>
+<script src="../assets/js/gudong-chatbot.js" defer></script>
+
+<link rel="stylesheet" href="../assets/css/gudong-contact.css">
+<script src="../assets/js/gudong-contact.js" defer></script>
 </body>
 </html>

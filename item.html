@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>藏品详情 | Singapore antiques | Singapore | Gudong.app</title>
-    <meta name="description" content="「藏品详情」藏品由藏家发布，面向新加坡、东南亚及海外藏家。古董圈仅展示信息；平台不提供古董鉴定，不参与藏品交易。 Gudong.app listing; seller-provided, does not authenticate antiques or participate in transactions. For Singapore collectors.">
+    <title>藏品详情 | Antique Item Detail | Gudong.app</title>
+    <meta name="description" content="Antique item detail page on Gudong.app. Seller-provided listing; advisory reference only. Gudong.app does not authenticate items or handle transactions.">
     <meta name="keywords" content="Singapore antiques, 新加坡古董, Chinese porcelain, 中国古瓷, antique listing, Singapore collectors">
     <link rel="canonical" href="https://www.gudong.app/item.html">
-    <meta property="og:type" content="item">
+    <meta property="og:type" content="product">
     <meta property="og:site_name" content="古董圈 Gudong">
-    <meta property="og:title" content="藏品详情 | Singapore antiques | Singapore | Gudong.app">
-    <meta property="og:description" content="「藏品详情」藏品由藏家发布，面向新加坡、东南亚及海外藏家。古董圈仅展示信息；平台不提供古董鉴定，不参与藏品交易。 Gudong.app listing; seller-provided, does not authenticate antiques or participate in transactions. For Singapore collectors.">
+    <meta property="og:title" content="藏品详情 | Antique Item Detail | Gudong.app">
+    <meta property="og:description" content="Antique item detail page on Gudong.app. Seller-provided listing; advisory reference only. Gudong.app does not authenticate items or handle transactions.">
     <meta property="og:url" content="https://www.gudong.app/item.html">
     <meta property="og:image" content="https://www.gudong.app/assets/images/placeholder.jpg">
     <link rel="icon" type="image/png" sizes="16x16" href="assets/icons/favicon-16x16.png">
@@ -253,7 +253,7 @@ header {
 }
 
 .item-detail-meta { font-size: .88rem; color: var(--color-text-secondary); margin-bottom: .5rem; }
-.item-detail-title { font-family: Georgia, "Songti SC", "STSong", serif; font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 600; margin-bottom: .7rem; }
+.item-detail-title { font-family: var(--font-serif); font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 600; margin-bottom: .7rem; }
 .item-detail-price {
     font-size: 1.4rem; font-weight: 700; color: var(--color-primary);
     margin-bottom: 1.2rem; display: flex; flex-direction: column; gap: .15rem;
@@ -526,14 +526,15 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
     </style>
     <script type="application/ld+json" id="product-jsonld">{"image":["https://www.gudong.app/assets/images/placeholder.jpg"],"@type":"Product","name":"藏品详情 / Item Detail","description":"藏品详情 / Item Detail. Seller-provided listing information. Gudong.app does not authenticate the item or participate in a sale.","inLanguage":["zh-SG","en-SG"],"url":"https://www.gudong.app/item.html","@context":"https://schema.org"}</script>
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="藏品详情 | Singapore antiques | Singapore | Gudong.app">
-    <meta name="twitter:description" content="「藏品详情」藏品由藏家发布，面向新加坡、东南亚及海外藏家。古董圈仅展示信息；平台不提供古董鉴定，不参与藏品交易。 Gudong.app listing; seller-provided, does not authenticate antiques or participate in transactions. For Singapore collectors.">
+    <meta name="twitter:title" content="藏品详情 | Antique Item Detail | Gudong.app">
+    <meta name="twitter:description" content="Antique item detail page on Gudong.app. Seller-provided listing; advisory reference only. Gudong.app does not authenticate items or handle transactions.">
     <meta name="twitter:image" content="https://www.gudong.app/assets/images/placeholder.jpg">
     <meta property="og:locale" content="zh_SG">
     <meta property="og:locale:alternate" content="en_SG">
     <meta name="apple-mobile-web-app-title" content="古董圈">
 </head>
-<header>
+    <body data-lang="zh">
+    <header>
         <div style="display:flex; align-items:center; gap:.9rem; min-width:0;">
             <button class="menu-toggle" onclick="openSidebar()" aria-label="menu" aria-expanded="false" id="menuToggle">☰</button>
             <a href="index.html" class="brand" aria-label="古董圈 Gudong 首页">
@@ -1235,15 +1236,15 @@ function setSellerCard(f, data) {
             return fetch(API_BASE + '/api/airtable-proxy', { cache: 'no-store', signal: ctl.signal, headers: { 'Accept': 'application/json' } })
                 .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); });
         }
-        // gd-snapshot-fallback-2026-10-24：Airtable 额度耗尽期间的临时方案 —— 接口不可用时回退 data/listings.json 快照
+        // gd-snapshot-first-2026-11-01：默认优先读 data/listings.json 静态快照（0 Airtable 消耗），失败才走实时接口
         // 注意：rewrite 后 URL 可能是 /items/<id>，此时相对路径要回上一级
         var GD_SNAP_URL = (location.pathname.indexOf('/items/') === 0 ? '../' : '') + 'data/listings.json';
         function gdFetchSnapshot(prevErr) {
             return fetch(GD_SNAP_URL, { cache: 'no-store' })
-                .then(function (r) { if (!r.ok) throw new Error(prevErr.message + ' / 快照 HTTP ' + r.status); return r.json(); })
+                .then(function (r) { if (!r.ok) throw new Error((prevErr ? prevErr.message + ' / ' : '') + '快照 HTTP ' + r.status); return r.json(); })
                 .then(function (d) { d.__gdSnapshot = true; return d; });
         }
-        gdFetchProxy().catch(gdFetchSnapshot)
+        gdFetchSnapshot().catch(gdFetchProxy)
             .then(function (data) {
                 var list = data && (data.newListing || data.todayFinds || data.editorPicks);
                 if (!Array.isArray(list)) throw new Error('响应缺少 newListing');
@@ -1291,7 +1292,14 @@ function setSellerCard(f, data) {
                     mdSeo.setAttribute('content', mdText.slice(0, 165));
                 }
                 var canSeo = document.querySelector('link[rel="canonical"]');
-                if (canSeo) canSeo.setAttribute('href', 'https://www.gudong.app/item?id=' + encodeURIComponent(ID));
+                var cleanUrl = location.origin + location.pathname;
+                if (canSeo) canSeo.setAttribute('href', cleanUrl);
+                var ogUrl = document.querySelector('meta[property="og:url"]');
+                if (ogUrl) ogUrl.setAttribute('content', cleanUrl);
+                var ogTitle = document.querySelector('meta[property="og:title"]');
+                if (ogTitle) ogTitle.setAttribute('content', document.title);
+                var ogDesc = document.querySelector('meta[property="og:description"]');
+                if (ogDesc) ogDesc.setAttribute('content', mdSeo ? mdSeo.getAttribute('content') : '');
                 document.documentElement.dataset.source = data.__gdSnapshot ? 'snapshot' : 'airtable';
                 badge((data.__gdSnapshot ? '\u26a0 \u5feb\u7167 data/listings.json\uff08\u975e\u5b9e\u65f6\uff09\u00b7 ' : '\u2714 Airtable \u00b7 ') + ID + '\n' + (changes.length ? changes.join('\n') : '\u4e0e\u9759\u6001\u9875\u4e00\u81f4'), !data.__gdSnapshot);
             })
@@ -1602,6 +1610,13 @@ window.gdSharePage = function () {
 </script>
 <script src="assets/js/item-chat.js" defer></script>
 <script src="/gd-install.js" defer></script>
+
+<link rel="stylesheet" href="assets/css/gudong-chatbot.css">
+<div id="gudong-chatbot" data-assets="assets/"></div>
+<script src="assets/js/gudong-chatbot.js" defer></script>
+
+<link rel="stylesheet" href="assets/css/gudong-contact.css">
+<script src="assets/js/gudong-contact.js" defer></script>
 </body>
 </html>
 

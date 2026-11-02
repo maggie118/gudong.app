@@ -2,6 +2,9 @@
   "version": 2,
   "outputDirectory": ".",
   "cleanUrls": true,
+  "crons": [
+    { "path": "/api/trigger-rebuild", "schedule": "0 8 * * *" }
+  ],
   "rewrites": [
     { "source": "/sitemap.xml", "destination": "/api/sitemap.xml" },
     { "source": "/items/:id", "destination": "/item.html?id=:id" }

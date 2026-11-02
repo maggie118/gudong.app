@@ -39,3 +39,28 @@ docs/
 .DS_Store
 Thumbs.db
 *.log
+
+# 2026-11-01 上线前补漏 —— 以下为本地素材/临时文件，不应上 CDN
+# 上传暂存目录（手动整理的图片源）
+_upload-*/
+# 本地素材：logo 预览与徽章原图（线上用 /assets/icons/ 下正式图标）
+logo_preview*.png
+badge_raw*.png
+# 临时诊断产物
+*.tmp
+*.tmp.html
+nav-report.tmp
+_live-*.tmp.html
+# sitemap 静态备份（线上走 /api/sitemap.xml 动态路由）
+sitemap.xml.static-backup
+# scripts/ 下的临时诊断文件（scripts/ 目录本身保留，因为 Vercel build 要跑 refresh-listings.js）
+scripts/_tmp-*
+scripts/_footer-*
+scripts/_*scan*
+# 编辑器 / IDE 工作目录
+.trae/
+.trae-html-share-packages/
+# 本地截图工作目录
+.screenshots/
+# 本地手动部署脚本（含 deploy-hook secret）
+一键部署.cmd

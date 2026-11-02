@@ -3,6 +3,9 @@
   "private": true,
   "version": "1.0.0",
   "scripts": {
-    "build": "node scripts/refresh-listings.js"
+    "build": "node scripts/refresh-listings.js && node scripts/build-sellers.js"
+  },
+  "dependencies": {
+    "qrcode": "^1.5.4"
   }
 }

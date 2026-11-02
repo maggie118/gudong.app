@@ -1,5 +1,6 @@
 .vercel
 .env*
+node_modules/
 # Trae IDE share packages (large zips, not part of the site)
 .trae-html-share-packages/
 *.zip
@@ -9,3 +10,5 @@
 *.tmp
 *.tmp.html
 sitemap.xml.static-backup
+# local manual deploy trigger (contains deploy-hook secret URL)
+一键部署.cmd

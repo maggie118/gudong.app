@@ -1,4 +1,13 @@
 /* 古董圈 Gudong · Service Worker
+ * 2026-11-01：v49 → v50（新增社区引导员智能客服）
+ * - 全站注入智能客服机器人（资讯检索/发布向导/合规拦截/双语菜单），
+ *   新增聊天组件预缓存：gudong-chatbot.css/js + chat-index.json
+ * 2026-11-01：v48 → v49（上线前全站优化）
+ * - 全站 118 个页面统一优化：布局/排版、中英语术口语化、字体字号；
+ * - SEO 深度优化：70 篇 insights 修复截断 title/description、补 Article JSON-LD；
+ *   17 单品页修复 canonical/JSON-LD/data-item-id 错指 bug、og:type 修正、Product schema 补全；
+ *   分类/卖家页补 CollectionPage/Organization 结构化数据；新增 404.html 与 Lim-CK 卖家页；
+ * - 提升缓存版本，强制已安装 PWA 拉取全新页面与元数据
  * 2026-10-23：v41 → v42
  * - 修复 iOS PWA 安装引导：index.html 安装按钮触控目标提升至 44×44px；
  *   新增已安装 PWA 状态检测（自动隐藏安装按钮）、iOS 应用内浏览器检测与 Safari 跳转提示、
@@ -56,8 +65,8 @@
  *   seller 徽章/标签字号提升
  * - v8 → v9：配合首页改版提升缓存版本号
  */
-const CACHE_NAME = 'antique-collection-v47';
-// 预缓存清单：核心页面 + 常用图标 + 占位图
+const CACHE_NAME = 'antique-collection-v50';
+// 预缓存清单：核心页面 + 常用图标 + 占位图 + 工具页（离线可用）
 // 注意：改用逐个 cache.add，单个 404 不会导致整个 install 失败
 const PRECACHE_ASSETS = [
   '/',
@@ -83,12 +92,24 @@ const PRECACHE_ASSETS = [
   '/items/item-yak-01.html',
   '/items/item-yak-02.html',
   '/items/item-yak-03.html',
+  '/items/item-limck-01.html',
+  '/items/item-limck-02.html',
+  '/tools/index.html',
+  '/tools/era-lookup.html',
+  '/tools/ganzhi.html',
+  '/tools/year-since.html',
+  '/tools/mark-lookup.html',
+  '/tools/valuation.html',
+  '/tools/contract.html',
   '/manifest.json',
   '/assets/icons/favicon-32x32.png',
   '/assets/icons/icon-192.png',
   '/assets/icons/icon-512.png',
   '/assets/icons/logo-mark.png',
-  '/assets/images/placeholder.jpg'
+  '/assets/images/placeholder.jpg',
+  '/assets/css/gudong-chatbot.css',
+  '/assets/js/gudong-chatbot.js',
+  '/assets/data/chat-index.json'
 ];
 // ---- install：预缓存核心资源（逐个 add，容错） ----
 self.addEventListener('install', (event) => {

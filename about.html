@@ -3,20 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>关于我们｜古董圈 Gudong.app｜新加坡高端古董藏家网络 | About Gudong.app</title>
-    <meta name="description" content="古董圈 Gudong.app，总部位于新加坡的高端中国古董发现平台与藏家网络。立足新加坡，连接全球华人圈与欧美收藏界，恪守行规，中立透明。">
+    <title>About Gudong.app | Singapore Chinese Antiques Collector Network</title>
+    <meta name="description" content="Singapore Chinese antiques network for global Chinese and international collectors. No authentication, no brokering, no escrow — buyers and sellers talk direct.">
     <meta name="keywords" content="Gudong.app,新加坡古董平台,古董圈,中国古董,明清瓷器,藏家网络,Singapore Antiques">
     <meta property="og:site_name" content="古董圈 Gudong.app">
-    <meta property="og:title" content="关于我们｜古董圈 Gudong.app｜新加坡古董藏家网络 | About Gudong.app">
-    <meta property="og:description" content="总部位于新加坡的高端中国古董发现平台，立足新加坡，连接全球华人圈与欧美收藏界，恪守行规，中立透明。">
+    <meta property="og:title" content="About Gudong.app | Singapore Chinese Antiques Collector Network">
+    <meta property="og:description" content="Singapore Chinese antiques network for global Chinese and international collectors. No authentication, no brokering, no escrow — buyers and sellers talk direct.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://www.gudong.app/about">
     <meta property="og:image" content="https://www.gudong.app/og-cover.png">
     <meta property="og:locale" content="zh_SG">
     <meta property="og:locale:alternate" content="en_SG">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="About｜Gudong.app Singapore Antiques Collector Network">
-    <meta name="twitter:description" content="Singapore-based premium discovery network for Chinese antiques, bridging global Chinese and international collectors.">
+    <meta name="twitter:title" content="About Gudong.app | Singapore Chinese Antiques Collector Network">
+    <meta name="twitter:description" content="Singapore Chinese antiques network for global Chinese and international collectors. No authentication, no brokering, no escrow — buyers and sellers talk direct.">
     <meta name="twitter:image" content="https://www.gudong.app/og-cover.png">
 
     <link rel="canonical" href="https://www.gudong.app/about">
@@ -266,16 +266,45 @@
 /*<<</gd-header-logo-fit-2026-10-16>>>*/
 </style>
 
-    <script type="application/ld+json">
+    <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
     {
-      "@context": "https://schema.org",
       "@type": "AboutPage",
-      "name": "关于我们 | About Gudong.app",
-      "description": "总部位于新加坡的高端中国古董发现平台与藏家网络，立足新加坡，连接全球华人圈与欧美收藏界。",
+      "name": "About Gudong.app",
+      "description": "Singapore Chinese antiques network for global Chinese and international collectors. No authentication, no brokering, no escrow — buyers and sellers talk direct.",
       "url": "https://www.gudong.app/about",
-      "publisher": { "@id": "https://www.gudong.app/#organization" }
+      "inLanguage": [
+        "zh-SG",
+        "en-SG"
+      ],
+      "isPartOf": {
+        "@id": "https://www.gudong.app/#website"
+      },
+      "about": {
+        "@id": "https://www.gudong.app/#organization"
+      }
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://www.gudong.app/#organization",
+      "name": "Gudong.app",
+      "alternateName": "古董圈",
+      "url": "https://www.gudong.app/",
+      "email": "contact@gudong.app",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Singapore",
+        "addressCountry": "SG"
+      },
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://www.gudong.app/assets/icons/apple-touch-icon-180x180.png"
+      },
+      "description": "Singapore-based discovery network for Chinese antiques. We do not authenticate, broker, or escrow transactions."
     }
-    </script>
+  ]
+}</script>
     <meta name="apple-mobile-web-app-title" content="古董圈">
 </head>
 <body data-lang="zh">
@@ -503,5 +532,12 @@
         applyLang();
     </script>
 <script src="/gd-install.js" defer></script>
+
+<link rel="stylesheet" href="assets/css/gudong-chatbot.css">
+<div id="gudong-chatbot" data-assets="assets/"></div>
+<script src="assets/js/gudong-chatbot.js" defer></script>
+
+<link rel="stylesheet" href="assets/css/gudong-contact.css">
+<script src="assets/js/gudong-contact.js" defer></script>
 </body>
 </html>

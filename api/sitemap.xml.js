@@ -147,9 +147,13 @@ export default function handler(req, res) {
     ? snap.data.sellers
         .filter(s => s && s.seller_id)
         .map(s => {
-          const raw = String(s.page_url || '');
-          const clean = raw.replace(/\.html$/, '').replace(/\/+$/g, '') || `/sellers/seller-${slugify(s.seller_id)}-antiques`;
-          return { loc: clean, lastmod: toDateStr(s.since_year ? `${s.since_year}-01-01` : '') || LAUNCH };
+          // page_url 在 Airtable 里可能存为相对路径（如 "../sellers/seller-xxx.html"）。
+          // 统一规范为绝对路由：去 "../"、去 .html、去末尾斜杠，缺 "/" 前缀则补上。
+          const raw = String(s.page_url || '').trim().replace(/^\.\.\//, '');
+          const clean = raw.replace(/\.html$/, '').replace(/\/+$/g, '');
+          const loc = (clean.startsWith('/') ? clean : '/' + clean)
+            || `/sellers/seller-${slugify(s.seller_id)}-antiques`;
+          return { loc, lastmod: toDateStr(s.since_year ? `${s.since_year}-01-01` : '') || LAUNCH };
         })
         .filter(s => s.loc.startsWith('/sellers/'))
     : [];

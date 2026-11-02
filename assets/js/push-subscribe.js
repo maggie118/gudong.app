@@ -40,7 +40,7 @@
     wrap.id = 'gudong-push-wrap';
     wrap.setAttribute('aria-live', 'polite');
     wrap.style.cssText =
-      'position:fixed;right:16px;bottom:16px;z-index:9999;font-family:inherit;';
+      'position:fixed;left:16px;bottom:16px;z-index:9999;font-family:inherit;';
     var btn = document.createElement('button');
     btn.type = 'button';
     btn.id = 'gudong-push-btn';

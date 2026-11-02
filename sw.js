@@ -1,4 +1,8 @@
 /* 古董圈 Gudong · Service Worker
+ * 2026-11-02：v50 → v51（Web Push 新藏品上架通知）
+ * - 新增 push 事件：收到服务器推送即展示"上新"通知（title/body/icon/跳转 URL 由 payload 指定）；
+ * - 新增 notificationclick 事件：点击通知跳转到新藏品页；
+ * - 提升缓存版本，强制已安装 PWA 拉取新的 sw.js 与页面
  * 2026-11-01：v49 → v50（新增社区引导员智能客服）
  * - 全站注入智能客服机器人（资讯检索/发布向导/合规拦截/双语菜单），
  *   新增聊天组件预缓存：gudong-chatbot.css/js + chat-index.json
@@ -65,7 +69,7 @@
  *   seller 徽章/标签字号提升
  * - v8 → v9：配合首页改版提升缓存版本号
  */
-const CACHE_NAME = 'antique-collection-v50';
+const CACHE_NAME = 'antique-collection-v51';
 // 预缓存清单：核心页面 + 常用图标 + 占位图 + 工具页（离线可用）
 // 注意：改用逐个 cache.add，单个 404 不会导致整个 install 失败
 const PRECACHE_ASSETS = [
@@ -109,7 +113,8 @@ const PRECACHE_ASSETS = [
   '/assets/images/placeholder.jpg',
   '/assets/css/gudong-chatbot.css',
   '/assets/js/gudong-chatbot.js',
-  '/assets/data/chat-index.json'
+  '/assets/data/chat-index.json',
+  '/assets/js/push-subscribe.js'
 ];
 // ---- install：预缓存核心资源（逐个 add，容错） ----
 self.addEventListener('install', (event) => {
@@ -133,6 +138,49 @@ self.addEventListener('activate', (event) => {
       names.filter(n => n !== CACHE_NAME).map(n => caches.delete(n))
     );
     await self.clients.claim();
+  })());
+});
+// ---- push：新藏品上架通知 ----
+self.addEventListener('push', (event) => {
+  let payload = {
+    title: 'gudong.app 上新',
+    body: '有新的古董藏品发布',
+    url: '/',
+    icon: '/assets/icons/icon-192.png',
+    badge: '/assets/icons/favicon-32x32.png',
+  };
+  try {
+    const data = event.data ? event.data.json() : null;
+    if (data) {
+      if (data.title) payload.title = data.title;
+      if (data.body) payload.body = data.body;
+      if (data.url) payload.url = data.url;
+      if (data.icon) payload.icon = data.icon;
+      if (data.badge) payload.badge = data.badge;
+    }
+  } catch (e) { /* 非 JSON payload：使用默认文案 */ }
+  event.waitUntil(self.registration.showNotification(payload.title, {
+    body: payload.body,
+    icon: payload.icon,
+    badge: payload.badge,
+    data: { url: payload.url },
+    tag: 'gudong-new-item',
+  }));
+});
+// ---- notificationclick：点击通知跳转到新藏品页 ----
+self.addEventListener('notificationclick', (event) => {
+  event.notification.close();
+  const target = (event.notification.data && event.notification.data.url) || '/';
+  event.waitUntil((async () => {
+    const url = new URL(target, self.location.origin).href;
+    const windowClients = await clients.matchAll({ type: 'window', includeUncontrolled: true });
+    for (const client of windowClients) {
+      if (client.url.startsWith(self.location.origin)) {
+        if ('focus' in client) client.focus();
+        if ('navigate' in client) { try { await client.navigate(url); return; } catch (e) {} }
+      }
+    }
+    if (clients.openWindow) await clients.openWindow(url);
   })());
 });
 // ---- fetch：按请求类型分类处理 ----

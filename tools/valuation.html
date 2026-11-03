@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <title>Chinese Antique Valuation Estimate Tool｜古董在线简易估值参考｜Gudong.app</title>
-<meta name="description" content="Chinese antique valuation estimate tool 与古董在线简易估值：按品类、年代、完整度与工艺级别选择，得出藏家心理预期的参考市场区间与行情趋势说明，附历史拍场落槌价参照与逐项系数拆解。中英双语，纯前端；仅市场参考，不作为鉴定、估价或法律依据。">
+<meta name="description" content="Chinese antique valuation estimate tool：古董在线简易估值，按品类、年代、完整度与工艺级别给出参考市场区间与行情趋势，附拍场落槌价参照，并可预约顾问视频参考意见。中英双语纯前端，仅供市场参考，不构成鉴定或估价。">
 <meta name="keywords" content="chinese antique valuation estimate tool,antique valuation reference,chinese antique price guide,antique market value estimator,古董在线简易估值,瓷器估值参考,古董价格区间,明清瓷器估价,古玩心理价位,auction price reference singapore">
 <meta name="robots" content="index,follow,max-image-preview:large">
 <link rel="canonical" href="https://www.gudong.app/tools/valuation">
@@ -195,6 +195,36 @@ footer{text-align:center;padding:2.2rem 5% 1.8rem;background:var(--color-white);
 @media (max-width:560px){.brand-zh { font-size: 1.15rem; font-family: var(--font-serif); }
         .brand-en { font-size: 1.15rem; font-family: var(--font-sans); font-weight: 600; letter-spacing: -.012em; }.container{padding:2rem 4.5% 3rem}}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;scroll-behavior:auto!important;animation:none!important}}
+
+/* 顾问意见 CTA + 预约弹窗（与藏品页「预约顾问连线」同款流程） */
+.advisor-cta{max-width:680px;margin:1.6rem auto 1rem;padding:1.15rem 1.25rem;border:1px solid var(--color-border);border-radius:12px;background:var(--color-white);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.9rem}
+.advisor-cta-text{flex:1 1 320px;min-width:0}
+.advisor-cta-text b{display:block;font-size:.92rem;color:var(--color-text);margin-bottom:.25rem}
+.advisor-cta-text span{display:block;font-size:.82rem;line-height:1.65;color:var(--color-text-secondary)}
+.advisor-btn{flex:0 0 auto;min-height:46px;padding:.7rem 1.25rem;border-radius:999px;border:1px solid transparent;background:var(--color-primary-dark);color:#fff;font-size:.86rem;font-weight:600;cursor:pointer;transition:background var(--dur) var(--ease)}
+.advisor-btn:hover{background:var(--color-primary)}
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.58);z-index:120;display:none;align-items:center;justify-content:center;padding:1rem}
+.modal-overlay.show{display:flex}
+.modal-box{background:#fff;border-radius:12px;max-width:540px;width:100%;padding:1.8rem;position:relative;max-height:88vh;overflow-y:auto;box-shadow:0 18px 48px rgba(37,34,30,.28)}
+.modal-box h3{font-family:var(--font-serif);font-size:1.15rem;line-height:1.45;margin:0 2rem .55rem 0;color:var(--color-text)}
+.modal-close{position:absolute;top:.7rem;right:.9rem;width:40px;height:40px;border:none;background:none;font-size:1.5rem;line-height:1;cursor:pointer;color:var(--color-text-secondary);border-radius:8px}
+.modal-close:hover{color:var(--color-primary);background:var(--color-primary-light)}
+.modal-intro{font-size:.85rem;color:var(--color-text-secondary);line-height:1.7}
+.form-row{margin-top:1rem}
+.form-row label{display:block;font-size:.82rem;font-weight:500;margin-bottom:.4rem;color:var(--color-text-secondary)}
+.expert-input,.expert-textarea{width:100%;padding:.7rem .8rem;border:1px solid var(--color-border);border-radius:8px;background:#fff;font-size:.85rem;color:var(--color-text)}
+.expert-input:focus,.expert-textarea:focus{outline:none;border-color:var(--color-primary)}
+.expert-textarea{min-height:96px;resize:vertical}
+.payment-note{margin-top:1rem;padding:.9rem 1rem;border-radius:10px;background:var(--color-primary-light)}
+.payment-title{font-weight:600;font-size:.85rem;color:var(--color-text);margin-bottom:.35rem}
+.payment-desc{font-size:.78rem;line-height:1.7;color:var(--color-text-secondary)}
+.modal-buttons{display:flex;gap:.7rem;justify-content:flex-end;flex-wrap:wrap;margin-top:1.2rem}
+.btn-cancel{padding:.65rem 1.2rem;min-height:44px;border:1px solid var(--color-border);background:#fff;border-radius:8px;cursor:pointer;font-size:.85rem;color:var(--color-text-secondary)}
+.btn-cancel:hover{border-color:var(--color-primary);color:var(--color-primary)}
+.btn-submit{padding:.65rem 1.2rem;min-height:44px;background:var(--color-primary);color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:.85rem;font-weight:600}
+.btn-submit:hover{background:var(--color-primary-dark)}
+.modal-note{margin-top:1rem;font-size:.75rem;color:var(--color-text-muted);line-height:1.65}
+@media(max-width:600px){.advisor-cta{flex-direction:column;align-items:stretch}.advisor-btn{width:100%}.modal-box{padding:1.35rem 1.15rem;max-height:92vh}.modal-buttons .btn-cancel,.modal-buttons .btn-submit{flex:1 1 100%}}
 </style>
 <style>
 /* gudong header mobile fix */
@@ -266,6 +296,7 @@ footer{text-align:center;padding:2.2rem 5% 1.8rem;background:var(--color-white);
             <a href="../tools/mark-lookup.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 瓷器底款快查</span><span class="en">· Porcelain Mark Lookup</span></a>
             <a href="../tools/valuation.html" class="sidebar-sub active" onclick="closeSidebar()"><span class="zh">· 简易估值参考</span><span class="en">· Market Valuation Reference</span></a>
             <a href="../tools/contract.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 买卖契约生成器</span><span class="en">· Contract &amp; Endorsement Generator</span></a>
+            <a href="../tools/authenticity-check.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 仿品与断代自查</span><span class="en">· Fake &amp; Dating Self-Check</span></a>
             <a href="../about.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">关于我们</span><span class="en">About</span></a>
             <button type="button" class="sidebar-lang-btn" onclick="toggleLang()" aria-label="Switch language"><span class="zh">🌐 English</span><span class="en">🌐 中文</span></button>
         </nav>
@@ -412,6 +443,134 @@ footer{text-align:center;padding:2.2rem 5% 1.8rem;background:var(--color-white);
     <span class="zh">引用提示：欢迎引用并链接本工具：<a href="https://www.gudong.app/tools/valuation">gudong.app/tools/valuation</a>。</span>
     <span class="en">Citation: If you reference this tool, please link to <a href="https://www.gudong.app/tools/valuation">gudong.app/tools/valuation</a>.</span>
   </div>
+
+  <section class="advisor-cta" aria-label="Advisor opinion">
+    <div class="advisor-cta-text">
+      <b><span class="zh">想要行家给一句参考意见？</span><span class="en">Want an expert reference opinion?</span></b>
+      <span class="zh">估值模型只能给区间，价格还取决于真伪、品相与来源。可预约顾问语音/视频连线，把照片和估值结果一起发给顾问。</span>
+      <span class="en">A model can only give a range; price also depends on authenticity, condition and provenance. Book a voice/video call and send photos plus your valuation result.</span>
+    </div>
+    <button type="button" class="advisor-btn" onclick="gdAdvisorOpen()"><span class="zh">📞 寻求顾问意见（参考意见）</span><span class="en">📞 Ask an Advisor (Advisory Opinion)</span></button>
+  </section>
+
+  <div class="modal-overlay" id="advisor-modal" role="dialog" aria-modal="true" aria-label="预约顾问连线 / Book an advisor consultation">
+    <div class="modal-box">
+      <button type="button" class="modal-close" onclick="gdAdvisorClose()" aria-label="关闭">×</button>
+      <h3 class="zh">预约顾问语音/视频连线</h3>
+      <h3 class="en">Book Advisor Voice / Video Consultation</h3>
+
+      <p class="modal-intro zh">填写信息提交预约，提交后跳转 WhatsApp，客服将发送 PayNow 付款二维码。完成S$188付款后平台才会匹配顾问、发送视频通话链接。<br>⚠️顾问意见仅为参考，不属于法定鉴定，不能用于交易、诉讼依据。<br>你从「简易估值参考」进入，提交时会带上估值输入与参考区间。</p>
+      <p class="modal-intro en">Fill in the form. You will be directed to WhatsApp, our support will send you a PayNow QR code. Advisor will be assigned after S$188 payment confirmed.<br>⚠️Advisor feedback is advisory only, not formal authentication, cannot be used for legal or sales purposes.<br>You came from the valuation tool, so your inputs and reference range will be included.</p>
+
+      <div class="form-row">
+        <label class="zh">希望连线时段（新加坡时间）<span style="color:#9A554B">*</span></label>
+        <label class="en">Preferred time slot (SGT) <span style="color:#9A554B">*</span></label>
+        <input class="expert-input zh" id="adv_timeslot_zh" placeholder="例如：周三晚间 20:00-21:30">
+        <input class="expert-input en" id="adv_timeslot_en" placeholder="e.g. Wed 20:00-21:30">
+      </div>
+
+      <div class="form-row">
+        <label class="zh">主要咨询问题<span style="color:#9A554B">*</span></label>
+        <label class="en">Your main questions <span style="color:#9A554B">*</span></label>
+        <textarea class="expert-textarea zh" id="adv_question_zh" placeholder="描述藏品关注点：年代、纹饰、品相、价格疑问…"></textarea>
+        <textarea class="expert-textarea en" id="adv_question_en" placeholder="Questions regarding age, decoration, condition or price…"></textarea>
+      </div>
+
+      <div class="form-row">
+        <label class="zh">你的 WhatsApp 用户名或手机号<span style="color:#9A554B">*</span></label>
+        <label class="en">Your WhatsApp username or phone <span style="color:#9A554B">*</span></label>
+        <input class="expert-input zh" id="adv_whatsapp_zh" placeholder="例如：username 或 +65 xxxxxxxx">
+        <input class="expert-input en" id="adv_whatsapp_en" placeholder="e.g. username or +65 xxxxxxxx">
+      </div>
+
+      <div class="payment-note">
+        <div class="payment-title zh">服务费用：S$188 / 单次顾问视频连线</div>
+        <div class="payment-title en">Service Fee: S$188 per video consultation</div>
+        <div class="payment-desc zh">
+          • 付款方式：WhatsApp 内接收 PayNow 二维码扫码付款<br>
+          • 远程视频参考意见，不提供纸质鉴定证书<br>
+          • 平台根据客户要求完成并部署上线后（如完成顾问匹配、发送视频通话链接），费用不予退款
+        </div>
+        <div class="payment-desc en">
+          • Payment: PayNow QR code will be sent via WhatsApp<br>
+          • Remote advisory opinion only, no formal certificate<br>
+          • Non-refundable once the platform has completed and delivered the requested service (e.g. advisor matched and video-call link sent)
+        </div>
+      </div>
+
+      <div class="modal-buttons">
+        <button type="button" class="btn-cancel zh" onclick="gdAdvisorClose()">取消</button>
+        <button type="button" class="btn-cancel en" onclick="gdAdvisorClose()">Cancel</button>
+        <button type="button" class="btn-submit zh" onclick="gdAdvisorSubmit()">提交预约，跳转 WhatsApp 获取 PayNow</button>
+        <button type="button" class="btn-submit en" onclick="gdAdvisorSubmit()">Submit &amp; open WhatsApp for PayNow</button>
+      </div>
+
+      <div class="modal-note zh">
+        温馨提示：顾问通过照片、视频远程观察有局限，<strong>无法替代实物上手鉴定</strong>；Gudong平台不担保顾问观点，交易务必实物当面核验。付费服务仅提供远程参考意见。
+      </div>
+      <div class="modal-note en">
+        Note: Remote video review has limitations and cannot replace physical inspection. Gudong does not guarantee advisor views; always inspect items in-person before purchase. Paid service provides remote advisory opinion only.
+      </div>
+    </div>
+  </div>
+
+  <script>
+  (function(){
+  function el(id){return document.getElementById(id);}
+  window.gdAdvisorContext=function(){
+    var r=el('valRange');
+    if(!r||!r.textContent.trim())return null;
+    function pick(id,full){
+      var s=el(id);if(!s||!s.options[s.selectedIndex])return '';
+      var t=s.options[s.selectedIndex].text;
+      return full?t:t.split(' · ')[0];
+    }
+    var inp=pick('catSel',false)+' / '+pick('eraSel',false)+' / '+pick('condSel',false)+' / '+pick('craftSel',false);
+    return {
+      zh:'估值输入：'+inp+'；工具参考区间：'+r.textContent.trim()+'。想请顾问复核这个区间的依据，并给出参考意见。',
+      en:'Valuation inputs: '+pick('catSel',true)+' / '+pick('eraSel',true)+' / '+pick('condSel',true)+' / '+pick('craftSel',true)+'; tool range: '+r.textContent.trim()+'. Please review the basis of this range and give an advisory opinion.'
+    };
+  };
+  window.gdAdvisorOpen=function(){
+    var m=el('advisor-modal');if(!m)return;
+    var qz=el('adv_question_zh'),qe=el('adv_question_en');
+    if(qz&&qe&&!qz.value&&!qe.value){
+      var ctx=window.gdAdvisorContext&&window.gdAdvisorContext();
+      if(ctx){qz.value=ctx.zh;qe.value=ctx.en;}
+    }
+    m.classList.add('show');
+    document.body.style.overflow='hidden';
+    var f=el('adv_timeslot_zh');if(f)setTimeout(function(){f.focus();},50);
+  };
+  window.gdAdvisorClose=function(){
+    var m=el('advisor-modal');if(m)m.classList.remove('show');
+    document.body.style.overflow='';
+  };
+  window.gdAdvisorSubmit=function(){
+    var isZh=document.body.dataset.lang==='zh';
+    var sfx=isZh?'_zh':'_en';
+    var timeslot=((el('adv_timeslot'+sfx)||{}).value||'').trim();
+    var question=((el('adv_question'+sfx)||{}).value||'').trim();
+    var wa=((el('adv_whatsapp'+sfx)||{}).value||'').trim();
+    if(!timeslot){alert(isZh?'请填写希望连线时段':'Please fill in your preferred time slot');return;}
+    if(!question){alert(isZh?'请填写主要咨询问题':'Please fill in your main questions');return;}
+    if(!wa){alert(isZh?'请填写你的 WhatsApp 用户名或手机号':'Please fill in your WhatsApp username or phone number');return;}
+    var msg;
+    if(isZh){
+      msg='【顾问预约申请】\n来源：简易估值参考（gudong.app/tools/valuation）\n藏品ID：GD-VALUATION\n期望时段：'+timeslot+'\n咨询问题：'+question+'\n用户WhatsApp（用户名/手机号）：'+wa+'\n服务费S$188，请发送 PayNow 付款二维码，办理付款及预约安排。';
+    }else{
+      msg='【Advisor Booking Request】\nSource: Market Valuation Reference (gudong.app/tools/valuation)\nItem ID: GD-VALUATION\nPreferred slot: '+timeslot+'\nQuestions: '+question+'\nUser WhatsApp (username/phone): '+wa+'\nService fee S$188, please send PayNow QR for payment and booking arrangement.';
+    }
+    window.open('https://wa.me/gudong.app?text='+encodeURIComponent(msg),'_blank');
+    window.gdAdvisorClose();
+  };
+  document.addEventListener('DOMContentLoaded',function(){
+    var m=el('advisor-modal');if(!m)return;
+    m.addEventListener('click',function(e){if(e.target===m)window.gdAdvisorClose();});
+    document.addEventListener('keydown',function(e){if(e.key==='Escape'&&m.classList.contains('show'))window.gdAdvisorClose();});
+  });
+  })();
+  </script>
 </main>
 
 <style>

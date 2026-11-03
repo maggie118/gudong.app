@@ -1,0 +1,1394 @@
+<!DOCTYPE html>
+<html lang="zh-SG">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>仿品与断代自查｜古董真伪风险自查清单 | Fake &amp; Dating Self-Check｜Gudong.app</title>
+<meta name="description" content="Fake &amp; dating self-check tool：免费古董仿品与断代自查，按瓷器、玉器、铜器佛像、钱币银元四类，用 9–13 个问题排查仿品疑点与断代矛盾，输出目视倾向、命中项与核验顺序，并可预约顾问视频参考意见。仅供收藏学习参考，不构成鉴定或断代。">
+<meta name="keywords" content="古董真伪自查,仿品鉴定自查,古董断代自查,瓷器辨伪,玉器工痕,铜器锈色,银元边齿,antique authenticity self-check,Chinese antique fake check">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<link rel="canonical" href="https://www.gudong.app/tools/authenticity-check">
+<link rel="alternate" hreflang="zh-SG" href="https://www.gudong.app/tools/authenticity-check" />
+<link rel="alternate" hreflang="en-SG" href="https://www.gudong.app/tools/authenticity-check" />
+<link rel="alternate" hreflang="x-default" href="https://www.gudong.app/tools/authenticity-check" />
+<meta property="og:site_name" content="古董圈 Gudong.app">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.gudong.app/tools/authenticity-check">
+<meta property="og:title" content="仿品与断代自查｜Fake &amp; Dating Self-Check">
+<meta property="og:description" content="按瓷器、玉器、铜器佛像、钱币银元四类逐项自查，找出可疑点与断代矛盾。仅供学习参考，不构成鉴定。">
+<meta property="og:image" content="https://www.gudong.app/og-cover.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta property="og:locale" content="zh_SG">
+<meta property="og:locale:alternate" content="en_SG">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Fake &amp; Dating Self-Check | Gudong.app">
+<meta name="twitter:description" content="A checklist-style self-check for porcelain, jade, bronzes and coins. For study reference only, not authentication.">
+<meta name="twitter:image" content="https://www.gudong.app/og-cover.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "仿品与断代自查 | Fake & Dating Self-Check",
+  "description": "按品类逐项排查古董仿品疑点与断代矛盾的自查清单工具。仅供收藏学习参考，不构成鉴定、断代或估价意见。",
+  "url": "https://www.gudong.app/tools/authenticity-check",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "All (Web App)",
+  "featureList": [
+    "Porcelain, jade, bronze and coin self-check paths 瓷器、玉器、铜器与钱币自查路径",
+    "Red-flag scoring with cautions 红旗加权与待核实项",
+    "Findings linked to related guides 命中项对应阅读",
+    "Bilingual and client-side only 中英双语纯前端",
+    "Not an authentication verdict 不构成鉴定结论"
+  ],
+  "publisher": { "@id": "https://www.gudong.app/#organization" }
+}
+</script>
+<link rel="icon" type="image/png" sizes="16x16" href="../assets/icons/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/icons/favicon-32x32.png">
+<link rel="manifest" href="../manifest.json">
+<meta name="theme-color" content="#7A4E33">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="古董圈">
+<link rel="apple-touch-icon" href="../assets/icons/icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Noto+Serif+SC:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --color-bg:#F5F2EC; --color-surface:#FFFFFF; --color-white:#FFFFFF;
+  --color-border:#E4DED5; --color-primary:#7A4E33; --color-primary-dark:#5C3A26;
+  --color-primary-light:#F1E8DF; --color-text:#25221E; --color-text-secondary:#5C564F;
+  --color-text-muted:#A49D94; --color-gold:#9C7A3A; --color-gold-soft:rgba(156,122,58,.10);
+  --color-bronze-muted:#9C8558; --color-qianjinzong:#948268;
+  --color-success:#526657; --color-danger:#9A554B;
+  --card-radius:12px; --btn-radius:8px; --dur:.26s; --ease:cubic-bezier(.25,.1,.25,1);
+  --font-serif:"Playfair Display","Noto Serif SC","Songti SC","STSong",Georgia,serif;
+  --font-sans:"Inter","Geist","Inter Display","Microsoft YaHei","PingFang SC","Helvetica Neue",Helvetica,Arial,sans-serif;
+  --font-display:"Inter","Geist","Inter Display","Microsoft YaHei","PingFang SC","Helvetica Neue",Helvetica,Arial,sans-serif;
+  --font-zh-sans:"Microsoft YaHei","PingFang SC","Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+h1,h2,h3{font-family:var(--font-serif)}
+*{margin:0;padding:0;box-sizing:border-box;font-family:"PingFang SC","Microsoft YaHei","Helvetica Neue",Helvetica,Arial,sans-serif}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--color-bg);color:var(--color-text);line-height:1.65;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+a{color:var(--color-primary);text-decoration:none}
+a:hover{text-decoration:underline;text-underline-offset:3px}
+button,input,select{font:inherit;color:inherit}
+[data-lang="en"] .zh{display:none}
+[data-lang="zh"] .en{display:none}
+
+/* ---------- Header ---------- */
+header{background:rgba(255,255,255,.96);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);color:var(--color-text);padding:0 5%;height:68px;display:flex;align-items:center;justify-content:space-between;gap:1.5rem;border-bottom:1px solid var(--color-border);position:sticky;top:0;z-index:50}
+.brand{display:flex;flex-direction:row;align-items:center;gap:.7rem;line-height:1;flex-shrink:1;text-decoration:none;color:inherit;min-width:0}
+.brand:hover{text-decoration:none}
+.brand-logo-img{height:38px;width:auto;display:block;object-fit:contain;flex-shrink:0}
+.brand-line1{display:flex;align-items:baseline;gap:.32rem}
+.brand-text{display:flex;flex-direction:column;justify-content:center;min-width:0;line-height:1.15;letter-spacing:-.005em;overflow:hidden;white-space:nowrap}
+.brand-zh{font-size:1.4rem;font-weight:700;letter-spacing:.02em;line-height:1.15;color:var(--color-primary-dark);white-space:nowrap;font-family:var(--font-serif)}
+.brand-en{font-size:1.4rem;font-weight:600;letter-spacing:-.012em;line-height:1.15;color:var(--color-primary-dark);white-space:nowrap;font-family:var(--font-sans)}
+.brand-zh{font-family:var(--font-zh-sans);font-weight:700}
+.sidebar-brand .logo-zh{font-family:var(--font-zh-sans);font-weight:700}
+.brand-en{font-family:var(--font-display);font-weight:600;letter-spacing:normal}
+.sidebar-brand .logo-en{font-family:var(--font-display);font-weight:600;letter-spacing:normal}
+.brand-text small{display:block;color:var(--color-qianjinzong);font-family:var(--font-sans);font-weight:500;font-size:.68rem;letter-spacing:.14em;margin-top:2px;text-transform:uppercase}
+.brand-text small{font-family:var(--font-display);font-style:normal}
+.sidebar-brand .logo-tagline{font-family:var(--font-display);font-style:normal}
+.header-right{display:flex;align-items:center;gap:.8rem;flex-shrink:0}
+.lang-btn{border:1px solid var(--color-border);background:transparent;color:var(--color-text-secondary);padding:.55rem .85rem;min-height:44px;border-radius:6px;cursor:pointer;font-size:.75rem;letter-spacing:.04em;transition:.4s var(--ease)}
+.lang-btn:hover{border-color:var(--color-primary);color:var(--color-primary);background:var(--color-primary-light)}
+.menu-toggle{width:44px;height:44px;border:1px solid var(--color-border);background:transparent;border-radius:8px;font-size:1.05rem;color:var(--color-text);cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:.4s var(--ease)}
+.menu-toggle:hover{border-color:var(--color-primary);color:var(--color-primary);background:var(--color-primary-light)}
+
+/* ---------- Sidebar ---------- */
+.sidebar-overlay{position:fixed;inset:0;background:rgba(20,17,14,.4);opacity:0;pointer-events:none;transition:opacity .25s ease;z-index:90}
+.sidebar-overlay.show{opacity:1;pointer-events:auto}
+.sidebar{position:fixed;top:0;left:0;height:100vh;height:100dvh;width:264px;max-width:78vw;background:var(--color-white);box-shadow:4px 0 24px rgba(37,34,30,.18);transform:translateX(-100%);transition:transform .3s ease;z-index:95;overflow-y:auto;-webkit-overflow-scrolling:touch;padding-bottom:2rem}
+.sidebar.open{transform:translateX(0)}
+.sidebar-toggle-inner{display:block;width:100%;padding:.9rem 0;background:transparent;border:none;border-bottom:1px solid var(--color-border);font-size:1.15rem;color:var(--color-text-secondary);cursor:pointer;text-align:center}
+.sidebar-toggle-inner:hover{color:var(--color-primary)}
+.sidebar-brand{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.1rem;padding:1.1rem 0;font-weight:700;color:var(--color-text);border-bottom:1px solid var(--color-border)}
+.sidebar-brand .logo-zh{font-size:1.05rem}
+.sidebar-brand .logo-en{font-size:1.05rem;letter-spacing:normal}
+.sidebar-brand .logo-tagline{font-size:.62rem;letter-spacing:.16em;color:var(--color-qianjinzong);text-transform:uppercase}
+.sidebar-nav{display:flex;flex-direction:column;padding:.3rem 0}
+.sidebar-link{padding:.85rem 1.4rem;color:var(--color-text);text-decoration:none;font-size:.95rem;transition:.4s var(--ease)}
+.sidebar-link:hover{background:var(--color-primary-light);color:var(--color-primary);text-decoration:none!important}
+.sidebar-link.active{background:var(--color-primary-light);color:var(--color-primary);font-weight:600;text-decoration:none!important}
+.sidebar-sub{display:block;padding:.55rem 1.4rem .55rem 2.2rem;color:var(--color-text-secondary);text-decoration:none;font-size:.88rem;transition:.4s var(--ease)}
+.sidebar-sub:hover{color:var(--color-primary);background:var(--color-primary-light);text-decoration:none!important}
+.sidebar-sub.active{color:var(--color-primary);font-weight:600;background:var(--color-primary-light);text-decoration:none!important}
+.sidebar-lang-btn{display:flex;align-items:center;justify-content:center;gap:.4rem;width:calc(100% - 2.8rem);margin:1rem 1.4rem .8rem;padding:.62rem .9rem;border:1px solid var(--color-border);border-radius:12px;background:var(--color-white);color:var(--color-text-secondary);font-family:inherit;font-size:.9rem;font-weight:600;cursor:pointer;transition:.4s var(--ease)}
+.sidebar-lang-btn:hover{border-color:var(--color-primary);color:var(--color-primary);background:var(--color-primary-light)}
+
+/* ---------- Page ---------- */
+.container{max-width:820px;margin:0 auto;padding:3.2rem 5% 4rem;background:transparent;min-height:80vh}
+.breadcrumb{font-size:.82rem;color:var(--color-text-secondary);margin-bottom:1.4rem}
+.breadcrumb a{color:var(--color-primary);text-decoration:none}
+.breadcrumb a:hover{text-decoration:underline}
+.breadcrumb .current{color:var(--color-text-muted)}
+.hero-clean{text-align:center;max-width:640px;margin:0 auto 1.6rem;padding:1.4rem 0 .5rem}
+.hero-eyebrow{font-family:var(--font-serif);font-style:italic;font-size:.92rem;color:var(--color-bronze-muted);letter-spacing:.01em;margin-bottom:.9rem}
+.hero-title-main{font-family:var(--font-serif);font-size:clamp(1.7rem,4.2vw,2.5rem);font-weight:600;color:var(--color-text);line-height:1.35;margin-bottom:1rem}
+.hero-desc{font-size:.95rem;color:var(--color-text-secondary);margin-bottom:1.5rem;line-height:1.6}
+
+.notice{max-width:680px;margin:0 auto 1.5rem;padding:1.05rem 1.2rem;border-left:4px solid var(--color-gold);border-radius:0 10px 10px 0;background:var(--color-primary-light);color:var(--color-text-secondary);font-size:.88rem;line-height:1.72}
+.notice b{display:block;color:var(--color-primary-dark);margin-bottom:.3rem;font-size:.92rem;font-weight:600}
+.notice strong{color:var(--color-primary-dark);font-weight:600}
+
+.panel{background:var(--color-surface);border:1px solid var(--color-border);border-radius:16px;box-shadow:0 4px 16px rgba(36,31,26,.06);padding:clamp(1.35rem,4vw,2rem);max-width:680px;margin:0 auto 1.5rem}
+.panel h2{font-size:1.18rem;margin:0 0 1.15rem;color:var(--color-primary-dark);letter-spacing:-.012em}
+
+/* 品类选择 */
+.cat-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.9rem}
+.cat-card{display:block;text-align:left;width:100%;background:#fff;border:1px solid var(--color-border);border-radius:12px;padding:1.15rem 1.05rem;cursor:pointer;transition:border-color var(--dur) var(--ease),box-shadow var(--dur) var(--ease)}
+.cat-card:hover{border-color:var(--color-gold);box-shadow:0 4px 16px rgba(37,34,30,.09)}
+.cat-num{font-family:var(--font-serif);font-size:.8rem;color:var(--color-text-muted);letter-spacing:.08em;display:block;margin-bottom:.35rem}
+.cat-card h3{font-size:1.05rem;color:var(--color-primary-dark);margin-bottom:.3rem}
+.cat-card p{font-size:.82rem;color:var(--color-text-secondary);line-height:1.55}
+.cat-card .cat-count{display:block;margin-top:.55rem;font-size:.75rem;color:var(--color-text-muted)}
+
+/* 问答 */
+.quiz-top{display:flex;align-items:center;justify-content:space-between;gap:.8rem;margin-bottom:.7rem}
+.quiz-step{font-size:.8rem;color:var(--color-text-muted);font-variant-numeric:tabular-nums}
+.quiz-cat{font-size:.8rem;color:var(--color-primary);font-weight:600}
+.progress-track{height:4px;background:#EDE7DE;border-radius:999px;overflow:hidden;margin-bottom:1.5rem}
+.progress-bar{height:100%;background:var(--color-gold);border-radius:999px;width:0;transition:width .3s var(--ease)}
+.q-title{font-family:var(--font-serif);font-size:1.16rem;line-height:1.5;color:var(--color-text);margin-bottom:.5rem;font-weight:600}
+.q-help{font-size:.83rem;color:var(--color-text-secondary);line-height:1.65;margin-bottom:1.2rem}
+.opt-list{display:flex;flex-direction:column;gap:.6rem}
+.opt-btn{display:flex;align-items:flex-start;gap:.7rem;width:100%;min-height:52px;padding:.8rem .95rem;border:1px solid var(--color-border);border-radius:10px;background:#fff;text-align:left;font-size:.9rem;line-height:1.55;cursor:pointer;transition:border-color var(--dur) var(--ease),background var(--dur) var(--ease)}
+.opt-btn:hover{border-color:var(--color-gold);background:#FCFAF7}
+.opt-btn:focus-visible{outline:2px solid var(--color-gold);outline-offset:2px}
+.opt-dot{width:9px;height:9px;border-radius:50%;margin-top:.42rem;flex-shrink:0;display:block}
+.opt-dot[data-lv="red"]{background:var(--color-danger)}
+.opt-dot[data-lv="amber"]{background:var(--color-gold)}
+.opt-dot[data-lv="ok"]{background:var(--color-success)}
+.quiz-nav{display:flex;justify-content:space-between;align-items:center;gap:.8rem;margin-top:1.25rem}
+.back-btn{border:1px solid var(--color-border);background:transparent;color:var(--color-text-secondary);border-radius:var(--btn-radius);padding:.65rem 1.1rem;min-height:44px;font-size:.85rem;cursor:pointer;transition:.4s var(--ease)}
+.back-btn:hover{border-color:var(--color-primary);color:var(--color-primary);background:var(--color-primary-light)}
+.quiz-tip{font-size:.75rem;color:var(--color-text-muted);line-height:1.5;flex:1}
+
+/* 结果 */
+.result[hidden]{display:none}
+.result-head{display:flex;align-items:center;gap:.85rem;margin-bottom:1.15rem;flex-wrap:wrap}
+.risk-badge{display:inline-flex;align-items:center;gap:.45rem;padding:.5rem 1rem;border-radius:999px;font-size:.88rem;font-weight:700;color:#fff;letter-spacing:.01em}
+.risk-badge[data-risk="low"]{background:var(--color-success)}
+.risk-badge[data-risk="mid"]{background:var(--color-gold)}
+.risk-badge[data-risk="high"]{background:var(--color-danger)}
+.result-score{font-size:.82rem;color:var(--color-text-secondary);line-height:1.55}
+.result-score b{color:var(--color-text);font-weight:600}
+.result-title{font-family:var(--font-serif);font-size:1.3rem;color:var(--color-primary-dark);margin-bottom:.4rem;font-weight:600}
+.result-lead{font-size:.9rem;color:var(--color-text-secondary);line-height:1.7;margin-bottom:1.3rem}
+
+.findings{margin-bottom:1.3rem}
+.findings h3{font-size:.95rem;color:var(--color-primary-dark);margin-bottom:.7rem;font-weight:600}
+.finding{border:1px solid var(--color-border);border-left:3px solid var(--color-danger);border-radius:0 10px 10px 0;padding:.85rem .95rem;margin-bottom:.6rem;background:#FCFAF7}
+.finding-tag{display:inline-block;font-size:.72rem;letter-spacing:.04em;padding:.12rem .5rem;border-radius:999px;background:var(--color-primary-light);color:var(--color-primary);margin-bottom:.45rem;font-weight:600}
+.finding-title{display:block;font-size:.92rem;font-weight:600;color:var(--color-text);line-height:1.55;margin-bottom:.28rem}
+.finding-why{display:block;font-size:.81rem;color:var(--color-text-secondary);line-height:1.65}
+.finding-link{display:inline-block;margin-top:.45rem;font-size:.79rem;color:var(--color-primary);font-weight:600}
+
+.amber-box{border:1px solid var(--color-border);border-left:3px solid var(--color-gold);border-radius:0 10px 10px 0;padding:.85rem .95rem;background:#FCFAF7;margin-bottom:1.1rem}
+.amber-box h3{font-size:.92rem;color:var(--color-primary-dark);margin-bottom:.5rem;font-weight:600}
+.amber-box ul{list-style:none;padding:0;margin:0}
+.amber-box li{font-size:.83rem;color:var(--color-text-secondary);line-height:1.6;padding-left:.9rem;position:relative;margin-bottom:.3rem}
+.amber-box li:before{content:"·";position:absolute;left:.2rem;color:var(--color-gold)}
+
+.clean-box{border:1px solid var(--color-border);border-left:3px solid var(--color-success);border-radius:0 10px 10px 0;padding:.9rem 1rem;background:#FCFAF7;margin-bottom:1.1rem}
+.clean-box .strong{display:block;font-size:.92rem;font-weight:600;color:var(--color-success);margin-bottom:.25rem}
+.clean-box p{font-size:.82rem;color:var(--color-text-secondary);line-height:1.65}
+
+.advice{border-top:1px dashed rgba(92,58,38,.2);padding-top:1.05rem;margin-bottom:1.2rem}
+.advice h3{font-size:.92rem;color:var(--color-primary-dark);margin-bottom:.45rem;font-weight:600}
+.advice p{font-size:.85rem;color:var(--color-text-secondary);line-height:1.72}
+
+/* 诊断报告 */
+.diag{border:1px solid var(--color-border);border-left:4px solid var(--color-gold);border-radius:0 12px 12px 0;background:#FBF7F1;padding:1rem 1.15rem;margin-bottom:1.25rem}
+.diag h3{font-size:.94rem;color:var(--color-primary-dark);margin-bottom:.55rem;font-weight:600}
+.diag ul{list-style:none;padding:0;margin:0}
+.diag li{position:relative;padding-left:1.05rem;font-size:.87rem;color:var(--color-text-secondary);line-height:1.7;margin-bottom:.4rem}
+.diag li:before{content:"→";position:absolute;left:0;color:var(--color-gold);font-weight:700}
+.diag li:last-child{margin-bottom:0}
+
+.block{margin-bottom:1.3rem}
+.block h3{font-size:.94rem;color:var(--color-primary-dark);margin-bottom:.6rem;font-weight:600}
+.block-note{font-size:.78rem;color:var(--color-text-muted);line-height:1.6;margin-top:.45rem}
+
+.record-row{display:flex;align-items:flex-start;gap:.55rem;padding:.4rem 0;border-bottom:1px solid #F0EBE3}
+.record-dot{width:8px;height:8px;border-radius:50%;margin-top:.42rem;flex-shrink:0}
+.record-dot[data-lv="red"]{background:var(--color-danger)}
+.record-dot[data-lv="amber"]{background:var(--color-gold)}
+.record-dot[data-lv="ok"]{background:var(--color-success)}
+.record-q{flex:1;font-size:.81rem;color:var(--color-text-secondary);line-height:1.55}
+.record-lv{font-size:.73rem;font-weight:600;white-space:nowrap;line-height:1.6}
+.record-lv[data-lv="red"]{color:var(--color-danger)}
+.record-lv[data-lv="amber"]{color:var(--color-gold)}
+.record-lv[data-lv="ok"]{color:var(--color-success)}
+
+.checklist{list-style:none;counter-reset:ck;padding:0;margin:0}
+.checklist li{counter-increment:ck;position:relative;padding:.55rem 0 .55rem 2rem;border-bottom:1px solid #F0EBE3;font-size:.85rem;color:var(--color-text-secondary);line-height:1.65}
+.checklist li:last-child{border-bottom:none}
+.checklist li:before{content:counter(ck);position:absolute;left:0;top:.6rem;width:1.35rem;height:1.35rem;border-radius:50%;background:var(--color-primary-light);color:var(--color-primary);font-size:.72rem;font-weight:700;display:flex;align-items:center;justify-content:center}
+
+.factlist{list-style:none;padding:0;margin:0}
+.factlist li{position:relative;padding:.5rem 0 .5rem 1rem;border-bottom:1px solid #F0EBE3;font-size:.84rem;color:var(--color-text-secondary);line-height:1.68}
+.factlist li:last-child{border-bottom:none}
+.factlist li:before{content:"";position:absolute;left:0;top:.95rem;width:4px;height:4px;border-radius:50%;background:var(--color-gold)}
+
+.dealbox{border:1px solid var(--color-border);border-radius:10px;background:#fff;padding:.9rem 1rem;margin-bottom:1.3rem}
+.dealbox h3{font-size:.9rem;color:var(--color-primary-dark);margin-bottom:.35rem;font-weight:600}
+.dealbox p{font-size:.84rem;color:var(--color-text-secondary);line-height:1.7}
+
+/* 时代对标 */
+.period-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.55rem;margin-bottom:.3rem}
+.period-btn{text-align:left;background:#fff;border:1px solid var(--color-border);border-radius:10px;padding:.8rem .9rem;min-height:52px;font-size:.9rem;color:var(--color-text);cursor:pointer;transition:border-color var(--dur) var(--ease),background var(--dur) var(--ease)}
+.period-btn:hover{border-color:var(--color-gold);background:#FCFAF7}
+.period-btn b{font-weight:600}
+
+/* 目视倾向 */
+.lean{border:1px solid var(--color-border);border-left:4px solid var(--color-gold);border-radius:0 12px 12px 0;padding:.95rem 1.1rem;margin-bottom:1.25rem;background:#fff}
+.lean .lean-label{display:block;font-size:.73rem;letter-spacing:.06em;color:var(--color-text-muted);margin-bottom:.2rem}
+.lean .lean-title{display:block;font-family:var(--font-serif);font-size:1.05rem;font-weight:600;line-height:1.45;margin-bottom:.3rem}
+.lean p{font-size:.83rem;color:var(--color-text-secondary);line-height:1.7}
+.lean[data-lean="low"]{border-left-color:var(--color-success)}
+.lean[data-lean="low"] .lean-title{color:var(--color-success)}
+.lean[data-lean="mid"]{border-left-color:var(--color-gold)}
+.lean[data-lean="mid"] .lean-title{color:var(--color-gold)}
+.lean[data-lean="high"]{border-left-color:var(--color-danger)}
+.lean[data-lean="high"] .lean-title{color:var(--color-danger)}
+
+.result-actions{display:flex;flex-wrap:wrap;gap:.6rem}
+.btn-primary,.btn-ghost{display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:.7rem 1.25rem;border-radius:999px;font-size:.88rem;font-weight:600;cursor:pointer;text-decoration:none;transition:.4s var(--ease);border:1px solid transparent}
+.btn-primary{background:var(--color-primary);color:#fff}
+.btn-primary:hover{background:var(--color-primary-dark);text-decoration:none}
+.btn-ghost{border-color:var(--color-border);background:transparent;color:var(--color-text-secondary)}
+.btn-ghost:hover{border-color:var(--color-primary);color:var(--color-primary);background:var(--color-primary-light);text-decoration:none}
+
+/* 顾问意见弹窗（与藏品页「预约顾问连线」同款流程） */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.58);z-index:120;display:none;align-items:center;justify-content:center;padding:1rem}
+.modal-overlay.show{display:flex}
+.modal-box{background:var(--color-white);border-radius:12px;max-width:540px;width:100%;padding:1.8rem;position:relative;max-height:88vh;overflow-y:auto;box-shadow:0 18px 48px rgba(37,34,30,.28)}
+.modal-box h3{font-family:var(--font-serif);font-size:1.15rem;line-height:1.45;margin:0 2rem .55rem 0;color:var(--color-text)}
+.modal-close{position:absolute;top:.7rem;right:.9rem;width:40px;height:40px;border:none;background:none;font-size:1.5rem;line-height:1;cursor:pointer;color:var(--color-text-secondary);border-radius:8px}
+.modal-close:hover{color:var(--color-primary);background:var(--color-primary-light)}
+.modal-intro{font-size:.85rem;color:var(--color-text-secondary);line-height:1.7}
+.form-row{margin-top:1rem}
+.form-row label{display:block;font-size:.82rem;font-weight:500;margin-bottom:.4rem;color:var(--color-text-secondary)}
+.expert-input,.expert-textarea{width:100%;padding:.7rem .8rem;border:1px solid var(--color-border);border-radius:8px;background:var(--color-white);font-size:.85rem;color:var(--color-text)}
+.expert-input:focus,.expert-textarea:focus{outline:none;border-color:var(--color-primary)}
+.expert-textarea{min-height:96px;resize:vertical}
+.payment-note{margin-top:1rem;padding:.9rem 1rem;border-radius:10px;background:var(--color-primary-light)}
+.payment-title{font-weight:600;font-size:.85rem;color:var(--color-text);margin-bottom:.35rem}
+.payment-desc{font-size:.78rem;line-height:1.7;color:var(--color-text-secondary)}
+.modal-buttons{display:flex;gap:.7rem;justify-content:flex-end;flex-wrap:wrap;margin-top:1.2rem}
+.btn-cancel{padding:.65rem 1.2rem;min-height:44px;border:1px solid var(--color-border);background:var(--color-white);border-radius:8px;cursor:pointer;font-size:.85rem;color:var(--color-text-secondary)}
+.btn-cancel:hover{border-color:var(--color-primary);color:var(--color-primary)}
+.btn-submit{padding:.65rem 1.2rem;min-height:44px;background:var(--color-primary);color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:.85rem;font-weight:600}
+.btn-submit:hover{background:var(--color-primary-dark)}
+.modal-note{margin-top:1rem;font-size:.75rem;color:var(--color-text-muted);line-height:1.65}
+
+.disclaimer{max-width:680px;margin:1.4rem auto;padding:1.05rem 1.2rem;border-left:4px solid var(--color-gold);border-radius:0 10px 10px 0;background:var(--color-primary-light);color:var(--color-text-secondary);font-size:.86rem;line-height:1.72}
+.disclaimer b{display:block;color:var(--color-text);margin-bottom:.5rem;font-size:.9rem;font-weight:600}
+.disclaimer ol{margin:0;padding-left:1.2rem}
+.disclaimer li{margin:.25rem 0}
+.disclaimer strong{color:var(--color-text);font-weight:600}
+
+.related{max-width:680px;margin:2rem auto;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.85rem}
+.related a{display:block;padding:1.1rem 1.15rem;border:1px solid var(--color-border);border-radius:12px;background:#fff;text-decoration:none;color:var(--color-text);font-weight:600;font-size:.95rem;letter-spacing:-.005em;transition:all var(--dur) var(--ease)}
+.related a:hover{border-color:var(--color-gold);background:#FCFAF7;text-decoration:none}
+.related small{display:block;font-weight:400;color:var(--color-text-secondary);margin-top:.25rem;font-size:.8rem;line-height:1.55}
+
+footer{text-align:center;padding:2.2rem 5% 1.8rem;background:var(--color-white);color:var(--color-text-secondary);margin-top:1rem;font-size:.78rem;border-top:1px solid var(--color-border)}
+.footer-nav{display:flex;flex-wrap:wrap;justify-content:center;gap:1.3rem;margin-bottom:1.2rem}
+.footer-nav a{color:var(--color-text-secondary);text-decoration:none;font-size:.82rem}
+.footer-nav a:hover{color:var(--color-primary)}
+.footer-brand{font-weight:700;font-size:.84rem;color:#5c564f;margin-bottom:.35rem}
+.footer-disclaimer{max-width:680px;margin:0 auto 1.1rem;font-size:.78rem;line-height:1.65;color:#8a8178}
+.footer-copyright{margin-bottom:.3rem}
+.app-install-btn{display:inline-flex;align-items:center;gap:.3rem;margin-left:.6rem;padding:.3rem .7rem;border:1px solid #e3d9cf;border-radius:999px;color:#7a6a5c;font-size:.78rem;text-decoration:none;vertical-align:middle;transition:.4s cubic-bezier(.25,.1,.25,1)}
+.app-install-btn:hover{border-color:#7A4E33;color:#7A4E33;background:#f0e4d8;text-decoration:none}
+.app-install-btn svg{width:12px;height:12px;flex-shrink:0;fill:currentColor}
+
+@media (max-width:820px){header{height:62px;gap:.6rem}.container{padding-top:2.4rem}}
+@media (max-width:640px){.brand-logo-img{height:30px;width:auto;display:block;object-fit:contain;flex-shrink:0}}
+@media (max-width:600px){
+  .cat-grid{grid-template-columns:1fr;gap:.65rem}
+  .related{grid-template-columns:1fr;gap:.65rem}
+  .result-actions .btn-primary,.result-actions .btn-ghost{width:100%}
+  .quiz-tip{display:none}
+  .modal-box{padding:1.35rem 1.15rem;max-height:92vh}
+  .modal-buttons .btn-cancel,.modal-buttons .btn-submit{flex:1 1 100%}
+}
+@media (max-width:560px){
+  .brand-zh{font-size:1.15rem;font-family:var(--font-serif)}
+  .brand-en{font-size:1.15rem;font-family:var(--font-sans);font-weight:600;letter-spacing:-.012em}
+  .container{padding:2rem 4.5% 3rem}
+}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;scroll-behavior:auto!important;animation:none!important}}
+</style>
+<style>
+/* gudong header mobile fix */
+@media (max-width:560px){
+  .menu-toggle{width:30px!important;height:30px!important}
+  .gd-share-btn{min-height:30px!important;min-width:30px!important;padding:.1rem .18rem!important}
+  .gd-share-btn svg{width:15px!important;height:15px!important}
+  .lang-btn{min-height:30px!important;min-width:30px!important;padding:.1rem .28rem!important;font-size:.72rem!important}
+  .brand-zh,.brand-en{font-size:1rem!important;white-space:nowrap!important}
+  .brand{gap:.45rem!important}
+  .header-right{gap:.35rem!important}
+  .brand-text small{white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important;max-width:100%!important}
+}
+@media (max-width:360px){.brand-en{display:none!important}.brand-line1{gap:0!important}}
+/*<<<gd-mobile-header-fix-2026-10-16>>>*/
+:root{--gd-header-h-m:58px;--gd-safe-top:env(safe-area-inset-top,0px);--gd-header-total-m:calc(var(--gd-header-h-m) + var(--gd-safe-top))}
+@media (max-width:767px){
+  html,body{scroll-padding-top:calc(var(--gd-header-total-m) + 12px)}
+  body>header{position:fixed!important;top:0!important;left:0!important;right:0!important;width:100%!important;height:var(--gd-header-total-m)!important;min-height:var(--gd-header-total-m)!important;max-height:var(--gd-header-total-m)!important;padding:var(--gd-safe-top) 5% 0!important;margin:0!important;align-items:center!important;z-index:80!important}
+  body>header .brand-logo-img{height:30px!important;width:auto!important;max-width:76px!important}
+  body>header ~ main{padding-top:calc(var(--gd-header-total-m) + 12px)!important}
+}
+/*<<</gd-mobile-header-fix-2026-10-16>>>*/
+@media (max-width:480px){
+  body>header{padding-left:3%!important;padding-right:3%!important;gap:.45rem!important}
+  body>header>div:first-child{gap:.45rem!important}
+  body>header .brand-logo-img{height:28px!important}
+  .brand-zh,.brand-en{font-size:min(1.05rem,4.2vw)!important}
+  .brand-text small{font-size:.58rem!important;letter-spacing:.05em!important}
+  .header-right{gap:.4rem!important}
+}
+@media (max-width:360px){
+  body>header{padding-left:2%!important;padding-right:2%!important;gap:.35rem!important}
+  .brand{gap:.35rem!important}
+  .brand-en{display:none!important}
+  .brand-text small{display:none!important}
+}
+</style>
+</head>
+<body data-lang="zh">
+
+<header>
+  <div style="display:flex;align-items:center;gap:.9rem;min-width:0;">
+    <button class="menu-toggle" onclick="openSidebar()" aria-label="menu" aria-expanded="false" id="menuToggle">☰</button>
+    <a href="../index.html" class="brand" aria-label="古董圈 Gudong 首页">
+      <img src="../assets/icons/logo-mark.png" alt="古董圈 Gudong" class="brand-logo-img" onerror="this.style.display='none'">
+      <span class="brand-text">
+        <span class="brand-line1"><span class="brand-zh">古董圈</span> <span class="brand-en">Gudong</span></span>
+        <small>Collectors' Network</small>
+      </span>
+    </a>
+  </div>
+  <div class="header-right">
+    <button type="button" class="gd-share-btn" onclick="gdSharePage()" aria-label="分享 / Share" title="分享 / Share"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92-1.31-2.92-2.92-2.92z"/></svg></button>
+    <button class="lang-btn" onclick="toggleLang()">EN</button>
+  </div>
+</header>
+
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+<aside class="sidebar" id="sidebar">
+  <button class="sidebar-toggle-inner" onclick="closeSidebar()" aria-label="close menu">☰</button>
+  <div class="sidebar-brand">
+    <span class="logo-zh">古董圈 <span class="logo-en">Gudong</span></span>
+    <span class="logo-tagline">Collectors' Network</span>
+  </div>
+  <nav class="sidebar-nav">
+    <a href="../index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">首页</span><span class="en">Home</span></a>
+    <a href="../my/saved.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">我的收藏 · 关注</span><span class="en">Saved &amp; Followed</span></a>
+    <a href="../my/briefing.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">今日简报</span><span class="en">Today's Brief</span></a>
+    <a href="../index.html#daily-intel" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 实时动态</span><span class="en">· Live Pulse</span></a>
+    <a href="../index.html#today-finds" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 今日发现</span><span class="en">· Today's Curated Finds</span></a>
+    <a href="../index.html#new-listings" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 近期释出</span><span class="en">· Recently Released</span></a>
+    <a href="../insights.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">情报 / 科普</span><span class="en">Insights</span></a>
+    <a href="../collection.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">藏品库</span><span class="en">Collection</span></a>
+    <a href="../categories/porcelain.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 瓷器</span><span class="en">· Porcelain</span></a>
+    <a href="../categories/jade.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 玉器</span><span class="en">· Jade</span></a>
+    <a href="../categories/bronze.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 铜器</span><span class="en">· Bronzes</span></a>
+    <a href="../categories/coins.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 钱币</span><span class="en">· Coins</span></a>
+    <a href="../categories/paintings.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 书画</span><span class="en">· Paintings &amp; Calligraphy</span></a>
+    <a href="../categories/misc.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 杂项</span><span class="en">· Miscellaneous</span></a>
+    <a href="../sellers/index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">私家藏馆</span><span class="en">Private Gallery</span></a>
+    <a href="../tools/index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">藏家工具包</span><span class="en">Collector's Toolkit</span></a>
+    <a href="../tools/year-since.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 年份对照计算器</span><span class="en">· Years-since-year Calculator</span></a>
+    <a href="../tools/ganzhi.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 干支公历换算器</span><span class="en">· Sexagenary-Gregorian Converter</span></a>
+    <a href="../tools/era-lookup.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 古文化朝代年代速查</span><span class="en">· Culture &amp; Dynasty Era Lookup</span></a>
+    <a href="../tools/mark-lookup.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 瓷器底款快查</span><span class="en">· Porcelain Mark Lookup</span></a>
+    <a href="../tools/valuation.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 简易估值参考</span><span class="en">· Market Valuation Reference</span></a>
+    <a href="../tools/contract.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 买卖契约生成器</span><span class="en">· Contract &amp; Endorsement Generator</span></a>
+    <a href="../tools/authenticity-check.html" class="sidebar-sub active" onclick="closeSidebar()"><span class="zh">· 仿品与断代自查</span><span class="en">· Fake &amp; Dating Self-Check</span></a>
+    <a href="../about.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">关于我们</span><span class="en">About</span></a>
+    <button type="button" class="sidebar-lang-btn" onclick="toggleLang()" aria-label="Switch language"><span class="zh">🌐 English</span><span class="en">🌐 中文</span></button>
+  </nav>
+</aside>
+
+<main class="container">
+  <nav class="breadcrumb" aria-label="breadcrumb">
+    <a href="../index.html"><span class="zh">首页</span><span class="en">Home</span></a>
+    <span> / </span>
+    <a href="../tools/index.html"><span class="zh">藏家工具包</span><span class="en">Collector's Toolkit</span></a>
+    <span> / </span>
+    <span class="current"><span class="zh">仿品与断代自查</span><span class="en">Fake &amp; Dating Self-Check</span></span>
+  </nav>
+
+  <section class="hero-clean">
+    <div class="hero-eyebrow"><span class="zh">自查清单，不是鉴定</span><span class="en">A checklist, not a verdict</span></div>
+    <div class="hero-title-main">
+      <span class="zh">仿品与断代自查</span>
+      <span class="en">Fake &amp; Dating Self-Check</span>
+    </div>
+    <div class="hero-desc">
+      <span class="zh">选一个品类，回答 9–13 个问题。结果给出目视倾向、矛盾组合说明什么、按顺序怎么核实、可对照的参考数据，以及成交前该写进合同的条款。</span>
+      <span class="en">Pick a category and answer 9-13 questions. You get a visual lean, what the pattern suggests, an ordered verification list, reference data to compare against, and terms to put in writing.</span>
+    </div>
+  </section>
+
+  <aside class="notice" aria-label="Scope notice">
+    <b><span class="zh">先读这一句</span><span class="en">Read this first</span></b>
+    <span class="zh">这是<strong>排除式自查</strong>：只帮你发现明显不对劲的地方，不给真伪结论。任何一项命中都不足以定案，任何一项未命中也不代表是真品。</span>
+    <span class="en">This is an <strong>elimination-style self-check</strong>: it helps you spot obvious warning signs, not reach a verdict. One hit never settles a case; one clean answer never proves authenticity.</span>
+  </aside>
+
+  <section class="panel">
+    <div id="stage"></div>
+  </section>
+
+  <aside class="disclaimer">
+    <b><span class="zh">免责声明</span><span class="en">Disclaimer</span></b>
+    <span class="zh">
+      <ol>
+        <li>本工具只根据你勾选的描述做<strong>逻辑汇总</strong>，看不到实物，<strong>不判断真伪，也不给出年代结论</strong>。</li>
+        <li>任何单项都不能作为购买依据。真伪与断代需要<strong>上手观察、标准器比对，必要时做科学检测</strong>。</li>
+        <li>结果仅供收藏学习参考，<strong>不构成鉴定、估价、投资或法律意见</strong>。重大交易请咨询可核验的独立专业人士。</li>
+      </ol>
+    </span>
+    <span class="en">
+      <ol>
+        <li>This tool only aggregates the answers you select. It cannot see the object and <strong>does not determine authenticity or date</strong>.</li>
+        <li>No single answer is a basis for purchase. Real-versus-fake and dating require <strong>hands-on inspection, comparison with reference pieces, and scientific testing where needed</strong>.</li>
+        <li>Results are for study and reference only and <strong>do not constitute authentication, appraisal, investment or legal advice</strong>. For significant transactions, consult a verifiable independent specialist.</li>
+      </ol>
+    </span>
+  </aside>
+
+  <nav class="related" aria-label="Related links">
+    <a href="../insights/porcelain-aging-tricks.html"><span class="zh">瓷器做旧手法 →</span><span class="en">Porcelain aging tricks →</span><small><span class="zh">酸咬、贼光与人工磨损</span><span class="en">Acid, glare and artificial wear</span></small></a>
+    <a href="../insights/jade-tool-marks.html"><span class="zh">玉器工痕 →</span><span class="en">Jade tool marks →</span><small><span class="zh">手工砣痕与机雕的差别</span><span class="en">Hand tools versus machine carving</span></small></a>
+    <a href="../insights/silver-dollar-edges.html"><span class="zh">银元边齿 →</span><span class="en">Silver dollar edges →</span><small><span class="zh">边齿、重量与翻砂</span><span class="en">Edges, weight and cast copies</span></small></a>
+    <a href="../tools/mark-lookup.html"><span class="zh">瓷器底款快查 →</span><span class="en">Porcelain mark lookup →</span><small><span class="zh">按年号核对款识写法</span><span class="en">Reign-mark text and style</span></small></a>
+    <a href="../tools/index.html"><span class="zh">返回藏家工具包 →</span><span class="en">Back to Collector's Toolkit →</span><small><span class="zh">全部收藏参考工具</span><span class="en">All collecting reference tools</span></small></a>
+  </nav>
+
+  <div class="modal-overlay" id="advisor-modal" role="dialog" aria-modal="true" aria-label="预约顾问连线 / Book an advisor consultation">
+    <div class="modal-box">
+      <button type="button" class="modal-close" onclick="gdAdvisorClose()" aria-label="关闭">×</button>
+      <h3 id="advisor-modal-title" class="zh">预约顾问语音/视频连线</h3>
+      <h3 id="advisor-modal-title-en" class="en">Book Advisor Voice / Video Consultation</h3>
+
+      <p class="modal-intro zh">填写信息提交预约，提交后跳转 WhatsApp，客服将发送 PayNow 付款二维码。完成S$188付款后平台才会匹配顾问、发送视频通话链接。<br>⚠️顾问意见仅为参考，不属于法定鉴定，不能用于交易、诉讼依据。<br>你从「仿品与断代自查」进入，提交时会把自查品类、风险结论与目视倾向一并带给顾问。</p>
+      <p class="modal-intro en">Fill in the form. You will be directed to WhatsApp, our support will send you a PayNow QR code. Advisor will be assigned after S$188 payment confirmed.<br>⚠️Advisor feedback is advisory only, not formal authentication, cannot be used for legal or sales purposes.<br>You came from the self-check tool, so your category, result level and visual lean will be passed to the advisor.</p>
+
+      <div class="form-row">
+        <label class="zh">希望连线时段（新加坡时间）<span style="color:#9A554B">*</span></label>
+        <label class="en">Preferred time slot (SGT) <span style="color:#9A554B">*</span></label>
+        <input class="expert-input zh" id="adv_timeslot_zh" placeholder="例如：周三晚间 20:00-21:30">
+        <input class="expert-input en" id="adv_timeslot_en" placeholder="e.g. Wed 20:00-21:30">
+      </div>
+
+      <div class="form-row">
+        <label class="zh">主要咨询问题<span style="color:#9A554B">*</span></label>
+        <label class="en">Your main questions <span style="color:#9A554B">*</span></label>
+        <textarea class="expert-textarea zh" id="adv_question_zh" placeholder="描述藏品关注点：年代、纹饰、品相、收藏疑问…"></textarea>
+        <textarea class="expert-textarea en" id="adv_question_en" placeholder="Questions regarding age, decoration, condition…"></textarea>
+      </div>
+
+      <div class="form-row">
+        <label class="zh">你的 WhatsApp 用户名或手机号<span style="color:#9A554B">*</span></label>
+        <label class="en">Your WhatsApp username or phone <span style="color:#9A554B">*</span></label>
+        <input class="expert-input zh" id="adv_whatsapp_zh" placeholder="例如：username 或 +65 xxxxxxxx">
+        <input class="expert-input en" id="adv_whatsapp_en" placeholder="e.g. username or +65 xxxxxxxx">
+      </div>
+
+      <div class="payment-note">
+        <div class="payment-title zh">服务费用：S$188 / 单次顾问视频连线</div>
+        <div class="payment-title en">Service Fee: S$188 per video consultation</div>
+        <div class="payment-desc zh">
+          • 付款方式：WhatsApp 内接收 PayNow 二维码扫码付款<br>
+          • 远程视频参考意见，不提供纸质鉴定证书<br>
+          • 平台根据客户要求完成并部署上线后（如完成顾问匹配、发送视频通话链接），费用不予退款
+        </div>
+        <div class="payment-desc en">
+          • Payment: PayNow QR code will be sent via WhatsApp<br>
+          • Remote advisory opinion only, no formal certificate<br>
+          • Non-refundable once the platform has completed and delivered the requested service (e.g. advisor matched and video-call link sent)
+        </div>
+      </div>
+
+      <div class="modal-buttons">
+        <button type="button" class="btn-cancel zh" onclick="gdAdvisorClose()">取消</button>
+        <button type="button" class="btn-cancel en" onclick="gdAdvisorClose()">Cancel</button>
+        <button type="button" class="btn-submit zh" onclick="gdAdvisorSubmit()">提交预约，跳转 WhatsApp 获取 PayNow</button>
+        <button type="button" class="btn-submit en" onclick="gdAdvisorSubmit()">Submit &amp; open WhatsApp for PayNow</button>
+      </div>
+
+      <div class="modal-note zh">
+        温馨提示：顾问通过照片、视频远程观察有局限，<strong>无法替代实物上手鉴定</strong>；Gudong平台不担保顾问观点，交易务必实物当面核验。付费服务仅提供远程参考意见。
+      </div>
+      <div class="modal-note en">
+        Note: Remote video review has limitations and cannot replace physical inspection. Gudong does not guarantee advisor views; always inspect items in-person before purchase. Paid service provides remote advisory opinion only.
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="footer-nav">
+    <a href="../about.html" class="zh">联系我们</a><a href="../about.html" class="en">Contact</a>
+    <a href="../pricing.html#founding" class="zh">创始藏家</a><a href="../pricing.html#founding" class="en">Founding Plan</a>
+    <a href="../pricing.html#listing-plans" class="zh">发布服务</a><a href="../pricing.html#listing-plans" class="en">Listing Services</a>
+    <a href="../pricing.html#private-gallery" class="zh">专属藏馆</a><a href="../pricing.html#private-gallery" class="en">Private Gallery</a>
+    <a href="../pricing.html#add-ons" class="zh">附加服务</a><a href="../pricing.html#add-ons" class="en">Add-ons</a>
+    <a href="../privacy.html" class="zh">隐私政策</a><a href="../privacy.html" class="en">Privacy</a>
+    <a href="../terms.html" class="zh">用户条款</a><a href="../terms.html" class="en">Terms</a>
+  </div>
+  <p class="footer-brand"><span class="zh">gudong.app — 高端古董发现平台与藏家网络</span><span class="en">gudong.app — Premium antiques discovery platform &amp; collector network</span></p>
+  <p class="footer-disclaimer"><span class="zh">平台仅提供藏品信息展示与藏家连接服务，不参与任何买卖交易，真伪、品相及价格由双方自行判断。</span><span class="en">The platform provides item display and collector connection services only and does not participate in any transaction; authenticity, condition and pricing are to be judged solely by the buyer and seller.</span></p>
+  <p class="footer-copyright"><span class="zh">© 2026 gudong.app 版权所有 · <a href="javascript:void(0)" class="app-install-btn" onclick="event.preventDefault();"><svg viewBox="0 0 24 24" aria-hidden="true" width="12" height="12"><path d="M5 20h14v-2H5v2zM19 9h-4V3H9v6H5l7 7 7-7z"/></svg>安装古董.app</a></span><span class="en">© 2026 gudong.app All rights reserved · <a href="javascript:void(0)" class="app-install-btn" onclick="event.preventDefault();"><svg viewBox="0 0 24 24" aria-hidden="true" width="12" height="12"><path d="M5 20h14v-2H5v2zM19 9h-4V3H9v6H5l7 7 7-7z"/></svg>Install gudong.app</a></span></p>
+</footer>
+
+<script>
+function openSidebar(){document.getElementById('sidebar').classList.add('open');document.getElementById('sidebarOverlay').classList.add('show');document.body.style.overflow='hidden';var t=document.getElementById('menuToggle');if(t)t.setAttribute('aria-expanded','true');}
+function closeSidebar(){document.getElementById('sidebar').classList.remove('open');document.getElementById('sidebarOverlay').classList.remove('show');document.body.style.overflow='';var t=document.getElementById('menuToggle');if(t)t.setAttribute('aria-expanded','false');}
+let currentLang=(function(){try{return localStorage.getItem('gudong_lang')==='en'?'en':'zh';}catch(e){return 'zh';}})();
+function applyLang(){document.body.dataset.lang=currentLang;document.documentElement.lang=currentLang==='en'?'en-SG':'zh-SG';var b=document.querySelector('.lang-btn');if(b)b.textContent=currentLang==='zh'?'EN':'中';}
+function toggleLang(){currentLang=currentLang==='zh'?'en':'zh';applyLang();try{localStorage.setItem('gudong_lang',currentLang);}catch(e){}}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeSidebar();});
+window.addEventListener('resize',function(){if(window.innerWidth>900)closeSidebar();});
+applyLang();
+if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('../sw.js').catch(function(){});});}
+</script>
+
+<script>
+/* 顾问意见弹窗：沿用藏品页「📞预约顾问连线（参考意见）」的预约流程 */
+(function(){
+function el(id){return document.getElementById(id);}
+function modalEl(){return el('advisor-modal');}
+window.gdAdvisorOpen=function(){
+  var m=modalEl();if(!m)return;
+  var sum=window.gdSelfCheckSummary;
+  if(sum){
+    var qz=el('adv_question_zh'),qe=el('adv_question_en');
+    if(qz&&!qz.value)qz.value='自查品类：'+sum.cat.zh+'；结论：'+sum.risk.zh+'；目视倾向：'+sum.lean.zh+'；'+sum.hits.zh+'。';
+    if(qe&&!qe.value)qe.value='Category: '+sum.cat.en+'; Result: '+sum.risk.en+'; Visual lean: '+sum.lean.en+'; '+sum.hits.en+'.';
+  }
+  m.classList.add('show');
+  document.body.style.overflow='hidden';
+  var f=el('adv_timeslot_zh');
+  if(f)setTimeout(function(){f.focus();},50);
+};
+window.gdAdvisorClose=function(){
+  var m=modalEl();if(m)m.classList.remove('show');
+  document.body.style.overflow='';
+};
+window.gdAdvisorSubmit=function(){
+  var isZh=document.body.dataset.lang==='zh';
+  var sfx=isZh?'_zh':'_en';
+  var timeslot=((el('adv_timeslot'+sfx)||{}).value||'').trim();
+  var question=((el('adv_question'+sfx)||{}).value||'').trim();
+  var wa=((el('adv_whatsapp'+sfx)||{}).value||'').trim();
+  if(!timeslot){alert(isZh?'请填写希望连线时段':'Please fill in your preferred time slot');return;}
+  if(!question){alert(isZh?'请填写主要咨询问题':'Please fill in your main questions');return;}
+  if(!wa){alert(isZh?'请填写你的 WhatsApp 用户名或手机号':'Please fill in your WhatsApp username or phone number');return;}
+  var msg;
+  if(isZh){
+    msg='【顾问预约申请】\n来源：仿品与断代自查（gudong.app/tools/authenticity-check）\n藏品ID：GD-SELFCHECK\n期望时段：'+timeslot+'\n咨询问题：'+question+'\n用户WhatsApp（用户名/手机号）：'+wa+'\n服务费S$188，请发送 PayNow 付款二维码，办理付款及预约安排。';
+  }else{
+    msg='【Advisor Booking Request】\nSource: Fake & Dating Self-Check (gudong.app/tools/authenticity-check)\nItem ID: GD-SELFCHECK\nPreferred slot: '+timeslot+'\nQuestions: '+question+'\nUser WhatsApp (username/phone): '+wa+'\nService fee S$188, please send PayNow QR for payment and booking arrangement.';
+  }
+  window.open('https://wa.me/gudong.app?text='+encodeURIComponent(msg),'_blank');
+  window.gdAdvisorClose();
+};
+document.addEventListener('DOMContentLoaded',function(){
+  var m=modalEl();if(!m)return;
+  m.addEventListener('click',function(e){if(e.target===m)window.gdAdvisorClose();});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&m.classList.contains('show'))window.gdAdvisorClose();});
+});
+})();
+</script>
+
+<script>
+(function(){
+'use strict';
+var stage=document.getElementById('stage');
+var CATS=[
+{
+  id:'porcelain', zh:'瓷器', en:'Porcelain',
+  sub:{zh:'明清官窑、民窑、外销瓷',en:'Ming-Qing, kiln wares, export porcelain'},
+  qs:[
+    {kind:'fake',
+     zh:'卖家开价明显低于同类器物的常见行情？',
+     en:'Is the asking price far below the usual range for comparable pieces?',
+     opts:[
+       {lv:'red',zh:'明显偏低，还强调是「捡漏」机会',en:'Much lower, and pitched as a bargain of a lifetime',
+        why:{zh:'低于行情太多的「漏」通常不是运气，而是诱饵。仿品商常用低价快速促成交易，压缩你核实的时间。',en:'A price far below market is usually bait, not luck; it compresses the time you have to verify.'},
+        href:'../insights/how-to-negotiate.html',read:{zh:'议价与捡漏',en:'Negotiation and bargains'}},
+       {lv:'amber',zh:'说不清行情，也没做过横向比较',en:'I have not compared comparable pieces'},
+       {lv:'ok',zh:'与行情接近，卖家能说明价格构成',en:'In line with the market, and the seller can explain the pricing'}
+     ]},
+    {kind:'date',
+     zh:'底足的修足、圈足与磨损是否自然？',
+     en:'Do the foot rim, trimming and wear look natural?',
+     opts:[
+       {lv:'red',zh:'底足过于干净规整，几乎没有使用痕迹，或糊底、粘砂整齐得像新做',en:'The foot is too clean and regular, with almost no wear; or the kiln marks look freshly made',
+        why:{zh:'现代仿品常把底足修得过于规整。真品的修足刀痕、垫烧痕与足沿磨损会不规则且位置合理。',en:'Modern copies often over-trim the foot. Genuine pieces show irregular knife marks, kiln-set traces and plausible rim wear.'},
+        href:'../insights/qing-porcelain-dating.html',read:{zh:'清代瓷器断代',en:'Dating Qing porcelain'}},
+       {lv:'amber',zh:'只有正面照片，看不到底足细节',en:'Only a front photo; no foot details'},
+       {lv:'ok',zh:'修足刀痕自然，足沿磨损位置合理',en:'Natural trimming marks and plausible rim wear'}
+     ]},
+    {kind:'fake',
+     zh:'釉面光泽是否自然？',
+     en:'Does the glaze surface look natural?',
+     opts:[
+       {lv:'red',zh:'釉面刺眼「贼光」，或通体均匀哑光、像被酸洗过',en:'Harsh glare, or a uniformly dull surface that looks acid-etched',
+        why:{zh:'老釉的光泽内敛、随角度变化；酸咬做旧会呈现均匀发闷的哑光，贼光则是新釉尚未老化。',en:'Old glaze has restrained, angle-dependent sheen. Acid aging leaves a uniform dead matte; harsh glare suggests fresh, unaged glaze.'},
+        href:'../insights/porcelain-aging-tricks.html',read:{zh:'瓷器做旧手法',en:'Porcelain aging tricks'}},
+       {lv:'amber',zh:'照片反光看不清釉面质感',en:'Reflections make the glaze hard to judge'},
+       {lv:'ok',zh:'光泽柔和有层次，局部有自然磨损',en:'Soft, layered sheen with natural local wear'}
+     ]},
+    {kind:'fake',
+     zh:'口沿、足沿与凸起处的磨损是否合逻辑？',
+     en:'Is the wear on the rim, foot and high points logically placed?',
+     opts:[
+       {lv:'red',zh:'磨损位置不合常理，或全器布满均匀的「做旧」痕迹',en:'Wear in implausible places, or uniform artificial aging across the piece',
+        why:{zh:'自然磨损集中在口沿、足沿、把手等受力处，深浅不一；人为做旧往往均匀、刻意。',en:'Natural wear concentrates on rims, feet and handles, with uneven depth; artificial aging tends to be uniform and deliberate.'},
+        href:'../insights/porcelain-aging-tricks.html',read:{zh:'瓷器做旧手法',en:'Porcelain aging tricks'}},
+       {lv:'amber',zh:'没有细看，只凭整体印象',en:'I only glanced at the overall impression'},
+       {lv:'ok',zh:'磨损集中且深浅自然',en:'Wear is concentrated and uneven in a natural way'}
+     ]},
+    {kind:'date',
+     zh:'底款的字体、写法与发色是否与所标年代相符？',
+     en:'Do the reign mark characters, style and cobalt tone match the stated period?',
+     opts:[
+       {lv:'red',zh:'款字过于端正像印刷体，或款识与器型、釉色时代不符',en:'Characters look printed or too rigid, or the mark conflicts with the form and glaze',
+        why:{zh:'款识是最容易露出破绽的部位：字体结构、笔顺、青花发色、款外底釉都要对得上。',en:'Marks are where copies fail most often: character structure, stroke order, cobalt tone and the glaze around the mark must all align.'},
+        href:'../insights/porcelain-marks.html',read:{zh:'瓷器底款',en:'Porcelain marks'}},
+       {lv:'amber',zh:'没有底款照片，或照片模糊',en:'No clear photo of the base or mark'},
+       {lv:'ok',zh:'款识写法、发色与款外底釉一致',en:'Character style, cobalt tone and surrounding glaze agree'}
+     ]},
+    {kind:'date',
+     zh:'胎质、重量与透光度是否与年代相称？',
+     en:'Do the body, weight and translucency suit the stated period?',
+     opts:[
+       {lv:'red',zh:'胎体过白过细、手感明显偏重或偏轻，断面像现代瓷',en:'Body too white or too fine, clearly too heavy or too light, fracture like modern porcelain',
+        why:{zh:'不同年代的胎土配方与烧成条件不同，胎质的粗细、色泽、重量区间是断代的重要旁证。',en:'Clay recipes and firing differ by period; body texture, colour and weight ranges are key dating evidence.'},
+        href:'../insights/qing-porcelain-dating.html',read:{zh:'清代瓷器断代',en:'Dating Qing porcelain'}},
+       {lv:'amber',zh:'无法上手，只能看照片',en:'I cannot handle it, only photos'},
+       {lv:'ok',zh:'胎质粗细、重量、透光度在合理范围',en:'Body texture, weight and translucency are within a plausible range'}
+     ]},
+    {kind:'fake',
+     zh:'器身、底足、口沿是否可能来自不同器物？',
+     en:'Could the body, foot and rim come from different pieces?',
+     opts:[
+       {lv:'red',zh:'有接缝、色差或修补痕迹，器型比例也别扭',en:'Visible seams, colour mismatch or repairs; proportions feel off',
+        why:{zh:'拼配与修补是最常见的「整容」手法：单独看每一部分都真，合起来不是一件东西。',en:'Marrying and repair are the commonest cosmetic fixes: each part may be genuine, but the object is not.'},
+        href:'../insights/porcelain-crack-repair.html',read:{zh:'瓷器修补',en:'Porcelain repair'}},
+       {lv:'amber',zh:'只看了一个角度，没有检查内壁和底',en:'One angle only; I have not checked the interior or base'},
+       {lv:'ok',zh:'通体一气，未见拼配或修补',en:'Consistent throughout; no marriage or repair seen'}
+     ]},
+    {kind:'date',
+     zh:'纹饰线条是否自然、有书写性？',
+     en:'Do the painted lines feel natural and hand-drawn?',
+     opts:[
+       {lv:'red',zh:'线条迟疑、反复描摹，或图案机械，疑似贴花、印花冒手绘',en:'Hesitant, retraced lines, or mechanical motifs suggesting transfer printing',
+        why:{zh:'手绘线条有轻重与速度变化；贴花、印花与喷绘在放大后能看出网点或均匀重复。',en:'Hand-painted lines vary in pressure and speed; transfers and printed decoration show dots or exact repetition under magnification.'},
+        href:'../insights/ming-porcelain-dating.html',read:{zh:'明代瓷器断代',en:'Dating Ming porcelain'}},
+       {lv:'amber',zh:'分不清手绘与印花',en:'I cannot tell hand-painting from printing'},
+       {lv:'ok',zh:'笔意连贯，线条有轻重变化',en:'Coherent brushwork with varied pressure'}
+     ]},
+    {kind:'fake',
+     zh:'来源故事是否有可核对的凭证？',
+     en:'Is there verifiable documentation behind the provenance story?',
+     opts:[
+       {lv:'red',zh:'只有家传、老宅出土一类口头故事，没有任何单据或旧照',en:'Only an oral family or excavation story, with no documents or old photos',
+        why:{zh:'来源不是装饰性故事，而是可以核对的链条：旧藏标签、拍卖记录、家族照片、出入境文件。',en:'Provenance is a checkable chain: old collection labels, auction records, family photographs, import-export papers.'},
+        href:'../insights/provenance-basics.html',read:{zh:'来源与传承',en:'Provenance basics'}},
+       {lv:'amber',zh:'有故事，但凭证不完整',en:'There is a story, but the documents are incomplete'},
+       {lv:'ok',zh:'有可核对的旧藏或交易记录',en:'Verifiable collection or transaction records exist'}
+     ]},
+    {kind:'fake',
+     zh:'卖家是否回避上手与验货？',
+     en:'Does the seller avoid handling or inspection?',
+     opts:[
+       {lv:'red',zh:'拒绝上手或当面验看，只发视频，并催促尽快付定金',en:'Refuses handling or inspection, sends video only, and pushes for a deposit',
+        why:{zh:'真正的好货不怕看。拒绝上手、限制提问、催促付款，是交易风险而不是器物风险。',en:'Good pieces stand up to inspection. Refusing handling, limiting questions and pushing payment is a transaction risk, not an object risk.'},
+        href:'../insights/what-is-jianlou.html',read:{zh:'什么是捡漏',en:'What is a bargain?'}},
+       {lv:'amber',zh:'只肯视频看货，不愿约见面',en:'Video only; no in-person viewing'},
+       {lv:'ok',zh:'允许上手，可当面验看，不催单',en:'Inspection allowed, no pressure to close'}
+     ]},
+    {kind:'date',
+     zh:'青花发色与所标年代是否相符？',
+     en:'Does the underglaze blue match the stated period?',
+     opts:[
+       {lv:'red',zh:'颜色平板呆板，黑斑浮在釉面，或蓝得过于鲜艳（洋蓝感）',en:'Flat colour, spots sitting on the glaze, or a harsh modern blue',
+        why:{zh:'钴料随时代变化：苏麻离青浓艳带铁锈斑、平等青淡雅、回青泛紫、洋蓝偏艳。发色是最直观的断代线索。',en:'Cobalt changed by period: Sumali is rich with iron spots, Pingdeng is pale, Huiqing leans purple, and modern imported blue is harsh.'},
+        href:'../insights/qinghua-cobalt.html',read:{zh:'青花钴料',en:'Cobalt in blue-and-white'}},
+       {lv:'amber',zh:'看不出钴料差别',en:'I cannot judge the cobalt type'},
+       {lv:'ok',zh:'发色有层次，铁锈斑或晕散符合所标年代',en:'Layered tone with period-appropriate iron spots or bleeding'}
+     ]},
+    {kind:'fake',
+     zh:'冲线、开片与沁色是否自然？',
+     en:'Do cracks, crazing and staining look natural?',
+     opts:[
+       {lv:'red',zh:'裂口锋利新鲜，染色只浮在缝隙表层，或开片纹路过于均匀',en:'Sharp fresh cracks, dye sitting in the crack mouth, or overly even crazing',
+        why:{zh:'老裂纹断面圆润、沁色由缝向内渗透；新裂锋利，做旧染料停在缝口。',en:'Old cracks have softened edges and stain that penetrates inward; fresh cracks are sharp and dye stops at the opening.'},
+        href:'../insights/porcelain-aging-tricks.html',read:{zh:'瓷器做旧手法',en:'Porcelain aging tricks'}},
+       {lv:'amber',zh:'没有细看裂纹或开片',en:'I have not examined cracks or crazing'},
+       {lv:'ok',zh:'裂纹边缘圆润，沁色有向内过渡',en:'Softened crack edges with stain penetrating inward'}
+     ]},
+    {kind:'date',
+     zh:'器型比例是否有该时代的舒展感？',
+     en:'Do proportions have the ease of the stated period?',
+     opts:[
+       {lv:'red',zh:'比例别扭、转折生硬，像按照片放大复刻',en:'Awkward proportions and stiff transitions, like a copy scaled from a photo',
+        why:{zh:'仿品常按图片复刻，忽略重心与转折，比例总会差一点。与同类标准器并排看最有效。',en:'Copies are often traced from photos, losing weight and transitions, so proportions are slightly off. Compare side by side with a reference.'},
+        href:'../insights/qing-porcelain-dating.html',read:{zh:'清代瓷器断代',en:'Dating Qing porcelain'}},
+       {lv:'amber',zh:'没有同类标准器可比',en:'No comparable reference piece'},
+       {lv:'ok',zh:'比例舒展，转折自然',en:'Balanced proportions with natural transitions'}
+     ]}
+  ],
+  visual:[1,2,3,4,5,6,7,10,11,12],
+  periods:[
+    {id:'song',zh:'宋代',en:'Song',cue:{zh:'器型秀挺、胎体偏薄，釉光温润；影青以刻划流畅、积釉处偏青见长。',en:'Refined forms, thinner bodies and quiet glaze; Yingqing is known for fluent carving and blue pooling.'}},
+    {id:'yuan',zh:'元代',en:'Yuan',cue:{zh:'大件厚重、胎体粗犷；至正型青花发色浓艳，常见铁锈斑与晕散。',en:'Large, heavy forms with coarse bodies; Zhizheng blue is rich with iron spots and bleeding.'}},
+    {id:'mingearly',zh:'明早期',en:'Early Ming',cue:{zh:'永乐宣德胎细、白釉肥润；青花多用苏麻离青，铁锈斑明显。',en:'Fine Yongle-Xuande bodies, rich white glaze; Sumali cobalt with obvious iron spots.'}},
+    {id:'mingmid',zh:'明中期',en:'Mid Ming',cue:{zh:'成化弘治胎薄通透、平等青淡雅；斗彩精细，器型小巧。',en:'Thin, translucent Chenghua-Hongzhi bodies, pale Pingdeng cobalt; fine doucai and small forms.'}},
+    {id:'minglate',zh:'明晚期',en:'Late Ming',cue:{zh:'嘉靖万历大件多，回青或石子青发色浓艳泛紫，纹饰繁密。',en:'Jiajing-Wanli favors large pieces; Huiqing or Shizi cobalt runs rich and purplish, with dense decoration.'}},
+    {id:'qingearly',zh:'清早期',en:'Early Qing',cue:{zh:'康熙胎体紧实、青花翠蓝有层次；双圈款与寄托款常见。',en:'Dense Kangxi bodies, layered vivid blue; double-circle and homage marks are common.'}},
+    {id:'qingmid',zh:'清中期',en:'Mid Qing',cue:{zh:'乾隆器型规整、装饰繁缛；粉彩与篆书款增多。',en:'Qianlong forms are regular and decoration dense; famille rose and seal-script marks increase.'}},
+    {id:'qinglate',zh:'晚清 / 民国',en:'Late Qing / Republic',cue:{zh:'胎质渐粗、洋蓝发色偏艳；批量外销器修足较粗。',en:'Coarser bodies and brighter imported blue; export wares show rougher foot work.'}},
+    {id:'modern',zh:'现代仿古',en:'Modern replica',cue:{zh:'胎白而均、釉面贼光或酸洗哑光、机械修足、贴花印花。',en:'Uniform white body, harsh or acid-dulled glaze, machine-trimmed feet, transfers and printed decoration.'}}
+  ],
+  facts:[
+    {zh:'永宣青花常见铁锈斑（苏麻离青），成化青花偏淡雅（平等青）；发色差异是断代的第一眼线索。',en:'Yongle-Xuande blue-and-white often shows iron-oxide spots (Sumali cobalt), while Chenghua is paler; cobalt tone is a first-glance dating cue.'},
+    {zh:'清三代胎体手感不同：康熙紧实厚重、雍正精细、乾隆规整；同尺寸的重量差异可作旁证。',en:'High-Qing bodies feel different: Kangxi dense and heavy, Yongzheng refined, Qianlong regular. Weight at the same size is useful corroboration.'},
+    {zh:'真品圈足修足留有刀痕，足内常见垫烧痕或跳刀痕，足沿磨损从容；机械修足往往过于圆滑规整。',en:'Genuine feet show knife marks, kiln-set or chatter traces inside, and relaxed rim wear; machine-trimmed feet look too smooth and even.'},
+    {zh:'官窑款以青花双圈六字楷款为常见，乾隆以后篆书款增多；款字笔顺、发色要与款外底釉一起看。',en:'Official marks are often six-character kaishu in double blue circles; seal-script marks increase after Qianlong. Read stroke order, cobalt tone and surrounding glaze together.'}
+  ],
+  checks:[
+    {zh:'让卖家补拍：圈足内侧、底款、口沿、内壁、局部釉面微距；自然光、不开美颜。',en:'Ask for close-ups of the foot interior, base mark, rim, interior and glaze in natural light, with no filters.'},
+    {zh:'用 10 倍放大看画工线条与釉面：手绘有轻重变化，贴花能看到网点或均匀重复。',en:'Use 10x magnification on brushwork and glaze: hand-painting varies in pressure, transfers show dots or exact repetition.'},
+    {zh:'用 365nm 紫光灯照口沿、底足与接缝：胶粘和后补会发荧光。',en:'Use a 365nm UV light on the rim, foot and seams; glue and later repairs fluoresce.'},
+    {zh:'量口径、底径、高度和重量，按同类器的比例与重量区间核对。',en:'Measure mouth, foot, height and weight, then compare proportions and weight ranges with similar pieces.'},
+    {zh:'索要来源凭证，核对旧藏标签、拍卖记录编号或家族照片，而不是只听故事。',en:'Ask for provenance documents and check labels, auction lot numbers or family photos rather than stories.'}
+  ],
+  deal:{zh:'书面写明「包老包真」或「按现状 As-Is」，并把底款、尺寸、修补情况写进描述。',en:'Put guarantee or As-Is terms in writing, and record the mark, dimensions and any repairs in the description.'},
+  rules:[
+    {ids:[0,8],zh:'低价 + 来源无凭证，是典型的「故事型漏」。先按仿品假设，再找反证，而不是反过来。',en:'Low price plus undocumented provenance is the classic story-driven bargain. Assume a copy first and look for counter-evidence.'},
+    {ids:[2,3],zh:'釉面与磨损同时异常，更像整体化学做旧，而不是某一处的自然瑕疵。',en:'Abnormal glaze and wear together point to overall chemical aging rather than one natural flaw.'},
+    {ids:[1,4],zh:'底足与款识同时不对，常见于后加款、换底或拼配。',en:'A wrong foot plus a wrong mark often means an added mark, a replaced base or a married piece.'},
+    {ids:[5,6],zh:'胎质与器身、底足不匹配时，优先排查拼配与现代胎。',en:'When body material does not match the form or foot, check for marriage and modern body first.'},
+    {ids:[9],zh:'对方拒绝验货时，器物判断已经没有意义，先解决验货权。',en:'If inspection is refused, judging the object is pointless; secure inspection first.'},
+    {ids:[4,10],zh:'发色与款识同时不符，常见于按图配款的现代仿品。',en:'Wrong cobalt tone plus a wrong mark often means a modern copy matched to a photo.'},
+    {ids:[1,12],zh:'器型与底足都生硬，像按照片放大复刻，优先怀疑现代仿。',en:'Stiff form and foot together suggest a copy scaled from a photo; suspect a modern fake first.'}
+  ]
+},
+{
+  id:'jade', zh:'玉器', en:'Jade',
+  sub:{zh:'高古玉、和田玉、翡翠',en:'Ancient jade, Hetian nephrite, jadeite'},
+  qs:[
+    {kind:'fake',
+     zh:'价格与玉质、工艺是否匹配？',
+     en:'Does the price match the material and workmanship?',
+     opts:[
+       {lv:'red',zh:'高古玉价格低得反常，卖家以「急用钱」解释',en:'An implausibly low price for ancient jade, explained as a cash emergency',
+        why:{zh:'高古玉的价格有基本盘；低得反常通常意味着材质、工痕或年代有问题。',en:'Ancient jade has a price floor; an abnormally low price usually signals problems with material, tool marks or dating.'},
+        href:'../insights/jade-buyer-pitfalls.html',read:{zh:'玉器买家避坑',en:'Jade buyer pitfalls'}},
+       {lv:'amber',zh:'不了解行情，没有比较',en:'I do not know the market and have not compared'},
+       {lv:'ok',zh:'价格与材质、工艺大致相符',en:'Price broadly matches material and workmanship'}
+     ]},
+    {kind:'date',
+     zh:'阴线、钻孔与抛光留下的是手工砣痕还是机械痕迹？',
+     en:'Do the incisions, drilled holes and polish show hand tools or machines?',
+     opts:[
+       {lv:'red',zh:'阴线平行等距、崩口整齐，或钻孔内壁留有螺旋机钻痕',en:'Parallel, evenly spaced lines with clean chipping, or spiral drill marks',
+        why:{zh:'手工砣具是间歇式的，线条深浅不一、有接刀；高速机具留下的痕迹等距、规整、崩口锋利。',en:'Hand tools work intermittently, leaving uneven depth and overlap; high-speed tools leave regular spacing and sharp chipping.'},
+        href:'../insights/jade-tool-marks.html',read:{zh:'玉器工痕',en:'Jade tool marks'}},
+       {lv:'amber',zh:'照片放大不够，看不清工痕',en:'Photos are not close enough to see tool marks'},
+       {lv:'ok',zh:'砣痕深浅不一，可见接刀与解玉砂痕迹',en:'Uneven tool marks with overlap and abrasive traces'}
+     ]},
+    {kind:'date',
+     zh:'沁色是否从外向内自然过渡？',
+     en:'Do the stain colours transition naturally from the surface inward?',
+     opts:[
+       {lv:'red',zh:'颜色浮在表面，沿裂隙生硬分布，或颜色过于鲜艳统一',en:'Colour sitting on the surface, harsh along cracks, or too bright and uniform',
+        why:{zh:'天然沁色由表及里、深浅有致，常沿裂隙与结构薄弱处进入；染色沁浮于表面，颜色齐整。',en:'Natural staining penetrates gradually and varies in depth; dyed colour sits on the surface and looks uniform.'},
+        href:'../insights/ancient-jade-stains.html',read:{zh:'古玉沁色',en:'Stains on ancient jade'}},
+       {lv:'amber',zh:'看不出是天然沁还是染色',en:'I cannot tell natural from dyed'},
+       {lv:'ok',zh:'沁色有层次，过渡自然',en:'Layered staining with natural transitions'}
+     ]},
+    {kind:'fake',
+     zh:'是否用山料、俄料或青海料冒充和田籽料？',
+     en:'Could mountain, Russian or Qinghai jade be sold as Hetian seed jade?',
+     opts:[
+       {lv:'red',zh:'结构粗、水线明显、油性不足，却按籽料价格出售',en:'Coarse structure, obvious water lines, low oiliness, yet priced as seed jade',
+        why:{zh:'籽料与山料的质地、油性、结构不同；产地溢价很大，也是话术最集中的地方。',en:'Seed and mountain jade differ in texture, oiliness and structure; origin premiums make this a hotspot for sales talk.'},
+        href:'../insights/hetian-seeds-vs-mountain.html',read:{zh:'籽料与山料',en:'Seed versus mountain jade'}},
+       {lv:'amber',zh:'无法判断产地',en:'I cannot judge the origin'},
+       {lv:'ok',zh:'质地细腻油润，具备籽料特征',en:'Fine, oily texture consistent with seed jade'}
+     ]},
+    {kind:'fake',
+     zh:'皮色与毛孔是否经过人工处理？',
+     en:'Have the skin colour and pores been artificially treated?',
+     opts:[
+       {lv:'red',zh:'皮色均匀死板、颜色只停在表面，毛孔规则得像喷砂',en:'Uniform, lifeless colour only on the surface; pores as regular as sandblasting',
+        why:{zh:'天然皮色深浅不一、与玉质结合紧密；人工染色与喷砂毛孔过于整齐。',en:'Natural skin varies in depth and binds to the stone; dyed colour and sandblasted pores look too even.'},
+        href:'../insights/hetian-seeds-vs-mountain.html',read:{zh:'籽料与山料',en:'Seed versus mountain jade'}},
+       {lv:'amber',zh:'不确定是否天然',en:'I am unsure whether it is natural'},
+       {lv:'ok',zh:'皮色深浅自然，毛孔大小不一',en:'Natural colour variation and irregular pores'}
+     ]},
+    {kind:'fake',
+     zh:'若为翡翠，是否可能经过酸洗注胶或染色？',
+     en:'If jadeite, could it be acid-washed, polymer-filled or dyed?',
+     opts:[
+       {lv:'red',zh:'表面有酸蚀网纹、颜色沿裂隙堆积，敲击声音发闷',en:'Acid-etched surface, colour concentrated in cracks, dull sound when tapped',
+        why:{zh:'B 货酸洗注胶会破坏结构，C 货染色颜色沿裂隙富集；两者都严重影响价值。',en:'Acid washing and polymer filling damage structure; dye collects in cracks. Both greatly reduce value.'},
+        href:'../insights/jadeite-abc.html',read:{zh:'翡翠 A/B/C 货',en:'Jadeite A, B and C'}},
+       {lv:'amber',zh:'没有可核验的权威证书',en:'No verifiable authoritative certificate'},
+       {lv:'ok',zh:'有可官网核验的证书，实物与证书一致',en:'A certificate verifiable online, matching the object'}
+     ]},
+    {kind:'date',
+     zh:'器型比例与纹饰是否符合所标年代？',
+     en:'Do proportions and motifs match the stated period?',
+     opts:[
+       {lv:'red',zh:'器型臆造、比例怪异，或把不同时代的纹饰拼在一起',en:'Invented forms, odd proportions, or motifs from different periods combined',
+        why:{zh:'每个时代有稳定的形制与纹饰组合；臆造品往往「什么都像，又什么都不对」。',en:'Each period has stable form-and-motif combinations; invented pieces look vaguely like everything and right about nothing.'},
+        href:'../insights/jade-tool-marks.html',read:{zh:'玉器工痕与断代',en:'Jade tool marks and dating'}},
+       {lv:'amber',zh:'没有同类标准器可比对',en:'No comparable reference piece'},
+       {lv:'ok',zh:'与同类标准器形制接近',en:'Close to comparable reference pieces'}
+     ]},
+    {kind:'fake',
+     zh:'是否有断粘、补配或改件？',
+     en:'Are there repairs, replacements or recarving?',
+     opts:[
+       {lv:'red',zh:'有明显胶线、颜色断层，或后配底座、后刻纹饰',en:'Visible glue lines, colour breaks, later bases or recarved decoration',
+        why:{zh:'拼接与改件会让一件残器看起来完整，价值与断代判断都会失真。',en:'Joining and recarving make a damaged piece look complete and distort both value and dating.'},
+        href:'../insights/jade-buyer-pitfalls.html',read:{zh:'玉器买家避坑',en:'Jade buyer pitfalls'}},
+       {lv:'amber',zh:'没有检查背面与穿孔',en:'I have not checked the back or the holes'},
+       {lv:'ok',zh:'完整无拼补，或修复已如实说明',en:'Intact, or repairs honestly disclosed'}
+     ]},
+    {kind:'fake',
+     zh:'证书与来源是否可核验？',
+     en:'Are the certificate and provenance verifiable?',
+     opts:[
+       {lv:'red',zh:'证书是商家自制，机构名称查不到，来源也说不清',en:'A shop-made certificate, an untraceable lab, and unclear provenance',
+        why:{zh:'证书的价值在于可核验；查不到的「证书」只是印刷品。',en:'A certificate is only worth something if it can be verified; an untraceable one is just print.'},
+        href:'../insights/jade-buyer-pitfalls.html',read:{zh:'玉器买家避坑',en:'Jade buyer pitfalls'}},
+       {lv:'amber',zh:'有证书但没有核验',en:'A certificate exists but was not verified'},
+       {lv:'ok',zh:'证书可查，来源交代清楚',en:'Certificate verifiable and provenance clear'}
+     ]}
+  ],
+  visual:[1,2,3,4,5,6,7],
+  facts:[
+    {zh:'和田籽料呈油脂光泽、结构细腻，常见水线；山料结构偏粗、油性弱，这是产地判断的基础。',en:'Hetian seed jade has an oily lustre and fine structure with water lines; mountain material is coarser and less oily.'},
+    {zh:'古玉工痕是砣具加解玉砂，阴线深浅不一、有接刀；高速机雕等距规整、崩口整齐。',en:'Ancient jade was worked with rotary tools and abrasives, leaving uneven incisions and overlap; high-speed carving is evenly spaced with clean chipping.'},
+    {zh:'天然沁色由表及里，沿裂隙与结构薄弱处进入；染色沁浮在表面、颜色齐整。',en:'Natural staining penetrates from the surface along cracks and weak structure; dyed colour sits on top and looks uniform.'},
+    {zh:'翡翠 A 货为天然，B 货酸洗注胶，C 货染色；证书编号必须能在机构官网查到。',en:'Jadeite A is natural, B is acid-washed and polymer-filled, C is dyed; the certificate number must be verifiable on the lab website.'}
+  ],
+  checks:[
+    {zh:'用 10–20 倍放大看阴线底部与钻孔内壁：找螺旋纹、等距崩口和机雕痕迹。',en:'Use 10-20x magnification inside incisions and drilled holes to look for spiral marks, even chipping and machine cuts.'},
+    {zh:'强光手电侧打光，看结构粗细、水线、棉絮与油性。',en:'Side-light with a torch to judge structure, water lines, inclusions and oiliness.'},
+    {zh:'用 365nm 紫外灯看注胶荧光与染色分布是否沿裂隙堆积。',en:'Use 365nm UV to check polymer fluorescence and whether dye collects in cracks.'},
+    {zh:'查证书编号、重量、尺寸和照片是否与实物一致，机构名称能否在官网找到。',en:'Verify certificate number, weight, dimensions and photos against the object, and confirm the lab on its official site.'},
+    {zh:'上手感受比重、油性与温度回升速度，照片无法替代。',en:'Handle it to judge density, oiliness and how quickly it warms; photos cannot replace this.'}
+  ],
+  deal:{zh:'合同写明证书编号、重量尺寸、是否 A 货、是否拼补改件；处理过的按处理价谈。',en:'Record the certificate number, weight and size, A-grade status and any repairs; negotiate treated material at treated prices.'},
+  rules:[
+    {ids:[0,8],zh:'低价 + 证书不可查，先按「材质或年代有问题」处理，不要被故事带节奏。',en:'Low price plus an unverifiable certificate: assume a problem with material or dating before believing the story.'},
+    {ids:[1,6],zh:'工痕与器型同时不符，是机雕仿古的典型组合。',en:'Wrong tool marks plus wrong form is the typical machine-carved fake combination.'},
+    {ids:[2,4],zh:'沁色与皮色都可疑时，人工染色或烤色的可能性明显上升。',en:'Suspicious staining and skin together raise the likelihood of dyeing or heat treatment.'},
+    {ids:[5],zh:'翡翠疑似 B/C 货时，直接按处理过的价格谈，不要按 A 货买。',en:'If jadeite looks B or C, negotiate as treated material rather than paying A-grade prices.'},
+    {ids:[7],zh:'有拼补或改件时，价值应按残器计算，并要求书面修复说明。',en:'With repairs or recarving, value it as a damaged piece and require written repair disclosure.'}
+  ]
+},
+{
+  id:'bronze', zh:'铜器 / 佛像', en:'Bronzes & Buddhist figures',
+  sub:{zh:'香炉、礼器、造像',en:'Censers, ritual vessels, figures'},
+  qs:[
+    {kind:'fake',
+     zh:'锈色是否自然、贴骨？',
+     en:'Is the patina natural and bonded to the metal?',
+     opts:[
+       {lv:'red',zh:'粉末状浮锈、胶粘的锈皮，颜色单一，或明显用酸咬出的绿',en:'Powdery loose rust, glued crusts, flat colour, or acid-induced green',
+        why:{zh:'真锈由铜体自然氧化生成，层次分明、贴骨不脱落；假锈多为表面附着。',en:'Real patina grows from the metal in layers and stays bonded; fake patina usually sits on the surface.'},
+        href:'../insights/bronze-censer-patina.html',read:{zh:'铜炉皮壳',en:'Bronze censer patina'}},
+       {lv:'amber',zh:'照片看不出锈层层次',en:'Photos do not show the patina layers'},
+       {lv:'ok',zh:'锈层有层次，贴骨牢固',en:'Layered, firmly bonded patina'}
+     ]},
+    {kind:'date',
+     zh:'铜质、重量与声音是否与年代相称？',
+     en:'Do the alloy, weight and sound suit the period?',
+     opts:[
+       {lv:'red',zh:'手感过轻或过重，声音清脆得像新铜',en:'Clearly too light or heavy; sound rings like new copper',
+        why:{zh:'早期铜器合金配比不同，声音、重量、断面色泽都有差异；新铸铜往往声音尖锐。',en:'Early bronzes used different alloys; sound, weight and fracture colour differ. Newly cast copper tends to ring sharply.'},
+        href:'../insights/bronze-age-copper.html',read:{zh:'铜器合金',en:'Bronze alloys'}},
+       {lv:'amber',zh:'无法上手',en:'I cannot handle it'},
+       {lv:'ok',zh:'铜质厚重，声音沉，重量合理',en:'Substantial metal, dull sound, plausible weight'}
+     ]},
+    {kind:'date',
+     zh:'范线、垫片与壁厚是否留有手工铸造痕迹？',
+     en:'Do mould lines, spacers and wall thickness show hand casting?',
+     opts:[
+       {lv:'red',zh:'现代砂型铸造痕迹、壁厚机械均匀、范线生硬',en:'Modern sand-cast marks, mechanically even walls, stiff mould lines',
+        why:{zh:'传统范铸会留下自然的范线、垫片痕与不均匀壁厚；现代批量铸造过于规整。',en:'Traditional piece-mould casting leaves natural seams, spacer marks and uneven walls; industrial casting is too regular.'},
+        href:'../insights/bronze-age-copper.html',read:{zh:'铜器合金与铸造',en:'Alloys and casting'}},
+       {lv:'amber',zh:'没看到内壁与底部',en:'I have not seen the interior or base'},
+       {lv:'ok',zh:'范线自然，壁厚有手工差异',en:'Natural mould lines and hand-made wall variation'}
+     ]},
+    {kind:'date',
+     zh:'铭文的字口与字体是否自然？',
+     en:'Do the inscription strokes and script look natural?',
+     opts:[
+       {lv:'red',zh:'字口边缘锋利如电刻、机雕，字体不合时代',en:'Edges sharp as engraving or machining; script wrong for the period',
+        why:{zh:'铸造铭文有金属流动感，字口圆润；电刻与机雕字口锋利、深浅一致。',en:'Cast inscriptions show metal flow and rounded edges; electric or machine engraving cuts sharp, even strokes.'},
+        href:'../insights/xuande-censer-legacy.html',read:{zh:'宣德炉',en:'Xuande censers'}},
+       {lv:'amber',zh:'无铭文或照片看不清',en:'No inscription, or too blurry to read'},
+       {lv:'ok',zh:'字口有铸造感，字体合于时代',en:'Cast texture and period-appropriate script'}
+     ]},
+    {kind:'date',
+     zh:'器型与纹饰是否合于所标年代？',
+     en:'Do form and decoration fit the stated period?',
+     opts:[
+       {lv:'red',zh:'器型臆造，或纹饰把不同时代的元素拼在一起',en:'Invented form, or motifs from different periods combined',
+        why:{zh:'器型与纹饰的组合关系是断代的基本依据，混搭即为破绽。',en:'The pairing of form and motif is basic dating evidence; mismatches are the giveaway.'},
+        href:'../insights/xuande-censer-legacy.html',read:{zh:'宣德炉',en:'Xuande censers'}},
+       {lv:'amber',zh:'缺少可比标准器',en:'No comparable reference piece'},
+       {lv:'ok',zh:'形制接近同类标准器',en:'Close to comparable reference pieces'}
+     ]},
+    {kind:'fake',
+     zh:'是否有后补、焊接或拼接？',
+     en:'Are there later repairs, welds or joins?',
+     opts:[
+       {lv:'red',zh:'明显焊补痕迹、颜色断层，或补配的耳、足、底座',en:'Obvious welds, colour breaks, or replaced handles, legs or base',
+        why:{zh:'铜器修补常用焊接与补配，肉眼可见颜色与质感差异。',en:'Bronze repair often uses welding and replacement parts; colour and texture breaks are visible.'},
+        href:'../insights/bronze-censer-patina.html',read:{zh:'铜炉皮壳',en:'Bronze censer patina'}},
+       {lv:'amber',zh:'未细看接缝与内壁',en:'I have not examined seams or the interior'},
+       {lv:'ok',zh:'通体完整，修补已说明',en:'Complete, with repairs disclosed'}
+     ]},
+    {kind:'fake',
+     zh:'若为佛像，开脸、衣纹、鎏金与封底是否符合时代？',
+     en:'For figures: do the face, robes, gilding and sealed base fit the period?',
+     opts:[
+       {lv:'red',zh:'开脸现代感强、鎏金过亮均匀，或封底是新做的',en:'Modern-looking face, overly bright even gilding, or a newly sealed base',
+        why:{zh:'佛像的时代特征集中在开脸、衣纹、台座与鎏金工艺；新封底常被用来掩盖内部。',en:'Period features concentrate in the face, robes, pedestal and gilding; new seals often hide the interior.'},
+        href:'../insights/bronze-age-copper.html',read:{zh:'铜器合金与工艺',en:'Alloys and techniques'}},
+       {lv:'amber',zh:'没有底座与细节照片',en:'No base or detail photos'},
+       {lv:'ok',zh:'开脸、衣纹、鎏金层次符合时代',en:'Face, robes and gilding consistent with the period'}
+     ]},
+    {kind:'fake',
+     zh:'价格与来源故事是否合理？',
+     en:'Are the price and provenance story plausible?',
+     opts:[
+       {lv:'red',zh:'价格偏低，配一个「村里挖出」的传奇故事，却无任何凭证',en:'A low price plus a dramatic discovery story, without any documents',
+        why:{zh:'来源故事越传奇，越需要凭证；否则它只是降低你警惕的工具。',en:'The more dramatic the story, the more documentation it needs; otherwise it only lowers your guard.'},
+        href:'../insights/provenance-basics.html',read:{zh:'来源与传承',en:'Provenance basics'}},
+       {lv:'amber',zh:'凭证不完整',en:'Documents are incomplete'},
+       {lv:'ok',zh:'价格合理，来源有据',en:'Price plausible and provenance supported'}
+     ]},
+    {kind:'fake',
+     zh:'卖家是否回避上手与验货？',
+     en:'Does the seller avoid handling or inspection?',
+     opts:[
+       {lv:'red',zh:'拒绝上手或当面验看，只发视频，并催促付款',en:'Refuses handling or inspection, sends video only, and pushes payment',
+        why:{zh:'拒绝验货是交易风险信号，与器物本身无关。',en:'Refusing inspection is a transaction-risk signal, independent of the object.'},
+        href:'../insights/what-is-jianlou.html',read:{zh:'什么是捡漏',en:'What is a bargain?'}},
+       {lv:'amber',zh:'只肯视频看货',en:'Video only'},
+       {lv:'ok',zh:'允许上手，可当面验看',en:'Inspection allowed in person'}
+     ]}
+  ],
+  visual:[0,1,2,3,4,5,6],
+  facts:[
+    {zh:'真锈由铜体自然氧化生成，贴骨、分层、颜色有过渡；假锈浮于表面、胶粘、颜色单一。',en:'Real patina grows from the metal, bonded, layered and varied; fake patina sits on top, is glued on and flat in colour.'},
+    {zh:'传统范铸会留下范线、垫片痕与不均匀壁厚；现代砂型铸造过于规整。',en:'Traditional piece-mould casting leaves seams, spacer marks and uneven walls; modern sand casting is too regular.'},
+    {zh:'铸造铭文字口圆润、有金属流动感；电刻或机雕字口锋利、深浅一致。',en:'Cast inscriptions have rounded edges and metal flow; electric or machine engraving cuts sharp, even strokes.'},
+    {zh:'佛像的时代特征集中在开脸、衣纹、台座与鎏金层，封底也常被用来掩盖内部。',en:'Period features of Buddhist figures concentrate in the face, robes, pedestal and gilding; sealed bases can hide the interior.'}
+  ],
+  checks:[
+    {zh:'拍内壁、底部、耳足接缝与锈层剖面，重点看锈是否分层、是否成片脱落。',en:'Photograph the interior, base, handle and leg joints and a patina cross-section, checking layering and flaking.'},
+    {zh:'轻刮锈层边缘：真锈与铜体咬合，假锈容易整片剥落。',en:'Lightly probe the patina edge: real patina binds to the metal, fake crust often flakes off.'},
+    {zh:'用紫外灯看胶粘、补色和后做鎏金，这些地方通常有荧光或色差。',en:'Use UV to spot glue, retouching and later gilding, which often fluoresce or show colour mismatch.'},
+    {zh:'称重、听声、看断口铜色，判断合金与铸造方式是否合时代。',en:'Weigh, listen and examine fracture colour to judge alloy and casting method.'},
+    {zh:'对铭文做拓片或微距照，逐字比对字口、字体与时代写法。',en:'Make a rubbing or macro photo of the inscription and compare stroke edges and script character by character.'}
+  ],
+  deal:{zh:'合同写明锈色是否原皮、有无修补补配、是否后鎏金；修补件按修补价谈。',en:'State whether patina is original, whether there are repairs or replacements and whether gilding is later; price repaired pieces accordingly.'},
+  rules:[
+    {ids:[0,5],zh:'皮壳与修补同时可疑，常见于「做旧 + 补配」的组合。',en:'Suspicious patina plus repairs often means artificial aging combined with replacement parts.'},
+    {ids:[2,3],zh:'铸造与铭文都不自然时，现代仿铸的可能性最高。',en:'Unnatural casting and inscription together point strongly to a modern copy.'},
+    {ids:[6],zh:'佛像开脸、鎏金或封底现代感强时，优先查封底与新鎏金。',en:'If the face, gilding or base seal looks modern, check the seal and gilding first.'},
+    {ids:[7],zh:'传奇来源搭配低价时，先要求书面凭证；给不出就按无来源处理。',en:'A dramatic story with a low price needs written documents; without them, treat it as no provenance.'},
+    {ids:[8],zh:'拒绝验货属于交易风险，优先级高于器物判断。',en:'Refused inspection is a transaction risk that outranks judging the object.'}
+  ]
+},
+{
+  id:'coin', zh:'钱币 / 银元', en:'Coins & Silver dollars',
+  sub:{zh:'机制银元、古钱、铜元',en:'Machine-struck silver, cash coins, copper coins'},
+  qs:[
+    {kind:'fake',
+     zh:'开价是否明显低于同类行情？',
+     en:'Is the asking price far below the market?',
+     opts:[
+       {lv:'red',zh:'明显偏低，卖家强调「急出」「批量走」',en:'Much lower, with talk of urgent sale or bulk deals',
+        why:{zh:'低价与急售组合，常用来看似合理地压缩你的核实时间。',en:'Low price plus urgency is a common way to compress your verification time.'},
+        href:'../insights/coin-aging-tricks.html',read:{zh:'钱币做旧手法',en:'Coin aging tricks'}},
+       {lv:'amber',zh:'不了解行情',en:'I do not know the market'},
+       {lv:'ok',zh:'与行情接近',en:'In line with the market'}
+     ]},
+    {kind:'fake',
+     zh:'包浆是否自然、有层次？',
+     en:'Is the toning natural and layered?',
+     opts:[
+       {lv:'red',zh:'颜色统一死板、浮在表面，或明显化学做旧',en:'Uniform dead colour on the surface, or clearly chemically aged',
+        why:{zh:'自然包浆由氧化与手触累积，高点磨损、低点积垢；化学做旧颜色均匀、无层次。',en:'Natural toning builds from oxidation and handling, worn at high points and settled in recesses; chemical aging is even and flat.'},
+        href:'../insights/coin-patina-types.html',read:{zh:'钱包浆类型',en:'Coin toning types'}},
+       {lv:'amber',zh:'照片色差大，看不清',en:'Colour shift in photos makes it unclear'},
+       {lv:'ok',zh:'包浆有层次，高点磨损自然',en:'Layered toning and natural high-point wear'}
+     ]},
+    {kind:'fake',
+     zh:'银元边齿是否规整、自然？',
+     en:'Are the silver dollar edge teeth regular and natural?',
+     opts:[
+       {lv:'red',zh:'边齿模糊、粘连，齿距不均，或带翻砂气孔',en:'Blurred, merged or uneven teeth, or casting porosity',
+        why:{zh:'机制币边齿由机器滚压，规整但有自然磨损；翻砂仿品边齿模糊、带气孔。',en:'Machine-struck edges are regular yet naturally worn; cast copies show blurred teeth and porosity.'},
+        href:'../insights/silver-dollar-edges.html',read:{zh:'银元边齿',en:'Silver dollar edges'}},
+       {lv:'amber',zh:'没有提供边齿图',en:'No edge photo provided'},
+       {lv:'ok',zh:'边齿清晰均匀，有自然磨损',en:'Clear, even teeth with natural wear'}
+     ]},
+    {kind:'fake',
+     zh:'重量与直径是否落在标准区间？',
+     en:'Are weight and diameter within the standard range?',
+     opts:[
+       {lv:'red',zh:'明显偏轻或偏小，例如袁大头不足 26 克',en:'Clearly light or small — e.g. a Yuan Shikai dollar under 26 g',
+        why:{zh:'重量与直径是机制银元最直接的门槛，偏轻偏小往往意味着材质或减重。',en:'Weight and diameter are the first hard test for machine-struck silver; light or small pieces suggest wrong metal or reduction.'},
+        href:'../insights/coin-casting-dating.html',read:{zh:'铸造与断代',en:'Casting and dating'}},
+       {lv:'amber',zh:'没有称重、量径',en:'I have not weighed or measured it'},
+       {lv:'ok',zh:'重量与直径在常见标准区间',en:'Weight and diameter within common standards'}
+     ]},
+    {kind:'date',
+     zh:'字口与图案是否清晰、有神？',
+     en:'Are the lettering and design crisp and well struck?',
+     opts:[
+       {lv:'red',zh:'字口软弱、笔画粘连，或有明显翻砂气孔',en:'Soft lettering, merged strokes, or visible casting pores',
+        why:{zh:'真币压印清晰、字口深峻；翻砂仿品字口软、细节糊。',en:'Genuine coins are crisply struck with deep lettering; cast copies look soft and mushy.'},
+        href:'../insights/coin-casting-dating.html',read:{zh:'铸造与断代',en:'Casting and dating'}},
+       {lv:'amber',zh:'图片模糊',en:'The photo is blurry'},
+       {lv:'ok',zh:'字口深峻，图案细节清楚',en:'Deep lettering and clear details'}
+     ]},
+    {kind:'fake',
+     zh:'材质是否相符（磁吸、比重、色泽）？',
+     en:'Does the material match — magnet, density, colour?',
+     opts:[
+       {lv:'red',zh:'能被强磁吸附，或色泽明显不对',en:'Strongly attracted to a magnet, or clearly wrong colour',
+        why:{zh:'银元不被磁吸；磁吸往往说明含铁或镀层作假。',en:'Silver dollars are not magnetic; attraction usually means iron content or plating.'},
+        href:'../insights/coin-aging-tricks.html',read:{zh:'钱币做旧与作假',en:'Coin aging and fakes'}},
+       {lv:'amber',zh:'没有做过简单测试',en:'I have not run a simple test'},
+       {lv:'ok',zh:'无磁，比重与色泽相符',en:'Non-magnetic, with plausible density and colour'}
+     ]},
+    {kind:'fake',
+     zh:'是否被强酸洗过或打磨过？',
+     en:'Has it been acid-dipped or polished?',
+     opts:[
+       {lv:'red',zh:'表面失去原光，字口被磨圆，或有酸洗后的发白',en:'Lost original lustre, rounded lettering, or acid-bleached whiteness',
+        why:{zh:'强酸清洗会破坏原光与包浆，打磨会磨圆字口，都会显著影响价值。',en:'Acid stripping destroys lustre and toning; polishing rounds the lettering. Both hit value hard.'},
+        href:'../insights/coin-cleaning.html',read:{zh:'钱币清洗',en:'Coin cleaning'}},
+       {lv:'amber',zh:'不确定是否处理过',en:'I am unsure whether it was treated'},
+       {lv:'ok',zh:'保留原光，无酸洗痕迹',en:'Original lustre retained; no acid traces'}
+     ]},
+    {kind:'fake',
+     zh:'是否整批同模、同包浆？',
+     en:'Are multiple pieces identical in detail and toning?',
+     opts:[
+       {lv:'red',zh:'多枚细节完全一致，包浆颜色也一模一样',en:'Several pieces identical in detail and toning',
+        why:{zh:'真币即使同版也有流通差异；同模同浆的批量货多为一次翻铸。',en:'Even same-die genuine coins differ through circulation; batches with identical detail and toning are often cast together.'},
+        href:'../insights/coin-aging-tricks.html',read:{zh:'钱币做旧与作假',en:'Coin aging and fakes'}},
+       {lv:'amber',zh:'只看到单枚',en:'Only one piece seen'},
+       {lv:'ok',zh:'细节有自然差异',en:'Natural variation in details'}
+     ]},
+    {kind:'fake',
+     zh:'来源与交易方式是否可靠？',
+     en:'Are the provenance and transaction method sound?',
+     opts:[
+       {lv:'red',zh:'拒绝上手验货，只发视频，催促付款',en:'Refuses inspection, video only, pushes payment',
+        why:{zh:'钱币尤其适合当面验看：称重、量径、看边齿都能当场完成。',en:'Coins are easy to inspect in person: weighing, measuring and checking edges can all be done on the spot.'},
+        href:'../insights/what-is-jianlou.html',read:{zh:'什么是捡漏',en:'What is a bargain?'}},
+       {lv:'amber',zh:'只肯视频看货',en:'Video only'},
+       {lv:'ok',zh:'可当面验看，支持复检',en:'In-person inspection and re-check allowed'}
+     ]}
+  ],
+  visual:[1,2,3,4,5,6,7],
+  facts:[
+    {zh:'袁大头常见标准约 26.6–26.9 g、直径约 39 mm；不同版别与磨损会有小幅差异。',en:'Common Yuan Shikai dollars weigh about 26.6-26.9 g and measure about 39 mm, with small variation by die and wear.'},
+    {zh:'孙小头、船洋等机制银元多在 26.6–27.0 g、39 mm 左右，具体仍以版别为准。',en:'Sun Yat-sen and junk silver dollars mostly fall around 26.6-27.0 g and 39 mm, depending on type.'},
+    {zh:'自然包浆高点磨损、低点积垢，颜色有层次；化学做旧颜色均匀、没有过渡。',en:'Natural toning is worn at high points, settled in recesses and varied in colour; chemical aging is even and flat.'},
+    {zh:'机制币边齿由机器滚压，规整但有自然磨损；翻砂仿品边齿模糊、粘连、带气孔。',en:'Machine-struck edges are regular yet naturally worn; cast copies have blurred, merged teeth and porosity.'}
+  ],
+  checks:[
+    {zh:'用 0.01 g 电子秤和卡尺记录重量、直径、厚度，先过数据这一关。',en:'Record weight, diameter and thickness with a 0.01 g scale and calipers; pass the numbers first.'},
+    {zh:'做磁铁测试：银元不应被强磁吸附。',en:'Run a magnet test: a silver dollar should not be strongly attracted.'},
+    {zh:'用 30 倍放大看边齿、字口底部与地章，找翻砂气孔和机雕痕迹。',en:'Use 30x magnification on the edge, lettering and field to find casting pores and tool marks.'},
+    {zh:'找同版已知真品比对重量、边齿形态和字口细节，不要只看图录照片。',en:'Compare against a known genuine coin of the same type for weight, edge and lettering.'},
+    {zh:'多枚同批并排比对：细节完全一致、包浆一模一样时，按同模批量货处理。',en:'Line up several pieces from the same batch; identical detail and toning means a batch cast from one mould.'}
+  ],
+  deal:{zh:'合同写明重量、直径、是否清洗、是否支持复检与退货；保留称重照片。',en:'Record weight, diameter and cleaning status, and agree on re-check and return terms; keep photos of the weighing.'},
+  rules:[
+    {ids:[3,2],zh:'重量或直径异常，同时边齿可疑，优先怀疑材质或翻砂，而不是磨损。',en:'Abnormal weight or diameter plus suspicious edges points to wrong metal or casting, not wear.'},
+    {ids:[4,7],zh:'字口软、细节又整批一致，是批量翻铸的典型组合。',en:'Soft lettering plus identical details across a batch is the classic sign of batch casting.'},
+    {ids:[1,6],zh:'包浆和清洗痕迹同时出现，人工处理过的可能性很高。',en:'Toning problems plus cleaning traces strongly suggest artificial treatment.'},
+    {ids:[0,8],zh:'低价急售又拒绝验货，先当作诱饵处理，不要先谈价。',en:'A low urgent price with refused inspection should be treated as bait; do not start with price.'},
+    {ids:[5],zh:'能被强磁吸附或色泽明显异常时，直接排除，不必再谈价。',en:'If it is magnetic or clearly the wrong colour, rule it out and do not negotiate.'}
+  ]
+}
+];
+
+function L(zh,en){return '<span class="zh">'+zh+'</span><span class="en">'+en+'</span>';}
+var state={cat:null,index:0,ans:[],period:null};
+
+function renderCats(){
+  var html='<h2>'+L('① 选择品类','① Choose a category')+'</h2>';
+  html+='<div class="cat-grid">';
+  CATS.forEach(function(c,i){
+    html+='<button type="button" class="cat-card" data-cat="'+c.id+'">'+
+      '<span class="cat-num">0'+(i+1)+'</span>'+
+      '<h3>'+L(c.zh,c.en)+'</h3>'+
+      '<p>'+L(c.sub.zh,c.sub.en)+'</p>'+
+      '<span class="cat-count">'+L(c.qs.length+' 个问题',''+c.qs.length+' questions')+'</span>'+
+    '</button>';
+  });
+  html+='</div>';
+  html+='<div class="quiz-nav"><span class="quiz-tip">'+L('大约 2–3 分钟。按你实际看到的情况选，不必猜。','About 2-3 minutes. Answer from what you actually observed; do not guess.')+'</span></div>';
+  stage.innerHTML=html;
+  stage.querySelectorAll('.cat-card').forEach(function(b){
+    b.addEventListener('click',function(){startCat(b.getAttribute('data-cat'));});
+  });
+}
+
+function startCat(id){
+  state.cat=CATS.filter(function(c){return c.id===id;})[0];
+  state.index=0;state.ans=[];state.period=null;
+  if(state.cat.periods){renderPeriod();}
+  else{renderQ();}
+}
+
+function renderPeriod(){
+  var cat=state.cat;
+  var html='<h2>'+L('② 对标年代','② Compare with a period')+'</h2>'+
+    '<p class="block-note" style="margin:-.4rem 0 1rem">'+L('选一个你认为的年代。报告会给出该时代的对照要点，方便逐项目视比对。','Choose the period you think it belongs to. The report will show what to look for in that period.')+'</p>'+
+    '<div class="period-grid">';
+  cat.periods.forEach(function(p){
+    html+='<button type="button" class="period-btn" data-p="'+p.id+'"><b>'+L(p.zh,p.en)+'</b></button>';
+  });
+  html+='</div><div class="quiz-nav"><button type="button" class="back-btn" id="periodBack">'+L('← 返回品类','← Back to categories')+'</button></div>';
+  stage.innerHTML=html;
+  stage.querySelectorAll('.period-btn').forEach(function(b){
+    b.addEventListener('click',function(){
+      state.period=b.getAttribute('data-p');
+      renderQ();
+    });
+  });
+  document.getElementById('periodBack').addEventListener('click',function(){state.cat=null;renderCats();});
+}
+
+function renderQ(){
+  var cat=state.cat,q=cat.qs[state.index],total=cat.qs.length;
+  var pct=Math.round(((state.index+1)/total)*100);
+  var catTxt=L(cat.zh,cat.en);
+  if(state.period){
+    var per=cat.periods.filter(function(p){return p.id===state.period;})[0];
+    catTxt=L(cat.zh+' · 对标'+per.zh,cat.en+' · vs '+per.en);
+  }
+  var html='<div class="quiz-top"><div class="quiz-cat">'+catTxt+'</div><div class="quiz-step">'+L('第 '+(state.index+1)+' / '+total+' 题','Question '+(state.index+1)+' of '+total)+'</div></div>'+
+    '<div class="progress-track"><div class="progress-bar" style="width:'+pct+'%"></div></div>'+
+    '<div class="q-title">'+L(q.zh,q.en)+'</div>'+
+    '<div class="opt-list">';
+  q.opts.forEach(function(o){
+    html+='<button type="button" class="opt-btn" data-lv="'+o.lv+'"><span class="opt-dot" data-lv="'+o.lv+'"></span><span>'+L(o.zh,o.en)+'</span></button>';
+  });
+  html+='</div><div class="quiz-nav"><button type="button" class="back-btn" id="backBtn">'+L('← 返回','← Back')+'</button><span class="quiz-tip">'+L('不确定就选中间项，别勉强判断。','If unsure, pick the middle option. Do not force a judgement.')+'</span></div>';
+  stage.innerHTML=html;
+  stage.querySelectorAll('.opt-btn').forEach(function(b){
+    b.addEventListener('click',function(){choose(b.getAttribute('data-lv'));});
+  });
+  document.getElementById('backBtn').addEventListener('click',goBack);
+}
+
+function choose(lv){
+  state.ans[state.index]=lv;
+  if(state.index<state.cat.qs.length-1){state.index++;renderQ();}
+  else renderResult();
+}
+
+function goBack(){
+  if(state.index>0){state.index--;renderQ();}
+  else renderCats();
+}
+
+function riskOf(reds,ambers){
+  var score=reds.length*3+ambers.length;
+  if(reds.length>=3||score>=9)return 'high';
+  if(score>=4)return 'mid';
+  return 'low';
+}
+
+function renderResult(){
+  var cat=state.cat,qs=cat.qs;
+  var reds=[],ambers=[];
+  qs.forEach(function(q,i){
+    var lv=state.ans[i];
+    if(lv==='red'){reds.push({q:q,o:q.opts.filter(function(o){return o.lv==='red';})[0]});}
+    else if(lv==='amber'){ambers.push(q);}
+  });
+  var risk=riskOf(reds,ambers);
+  var riskLabel={low:{zh:'低风险',en:'Low concern'},mid:{zh:'需谨慎',en:'Caution'},high:{zh:'高风险',en:'High concern'}}[risk];
+  var lead={
+    low:{zh:'目前勾选中没有命中明显红旗。这只说明表面没有明显疑点，不等于真品。',en:'No obvious red flags in your answers. That means no visible warning sign — not proof of authenticity.'},
+    mid:{zh:'有几处需要补证。在核实之前，不要付定金，也不要把卖家说法当作结论。',en:'Several points need verification. Do not pay a deposit, and do not treat the seller account as a conclusion.'},
+    high:{zh:'命中多项红旗。建议暂停交易，先把疑点逐条核实；已付款的请保留全部沟通与付款记录。',en:'Multiple red flags. Pause the deal and verify each point; if you have paid, keep all messages and payment records.'}
+  }[risk];
+
+  var matched=cat.rules.filter(function(r){
+    return r.ids.every(function(i){return state.ans[i]==='red';});
+  });
+  var diag=matched.slice(0,2);
+  if(!diag.length){
+    diag.push(reds.length?
+      {zh:'你的疑点是单点的，还没有形成成组矛盾。先按下面清单把最便宜的两项排掉，再决定要不要继续。',en:'Your concerns are isolated rather than a cluster. Clear the cheapest two checks below before deciding whether to go on.'}:
+      {zh:'你的描述里没有出现成组矛盾，这是可以继续了解的前提，不是真品结论。先把下面的核验做完，再谈价格。',en:'No cluster of conflicts appeared. That is a precondition for looking further, not proof of authenticity. Finish the checks below before discussing price.'});
+  }
+
+  var lvText={red:{zh:'红旗',en:'Red flag'},amber:{zh:'待核实',en:'Verify'},ok:{zh:'未见异常',en:'No issue'}};
+
+  var vis=cat.visual||[];
+  var visReds=reds.filter(function(r){return vis.indexOf(qs.indexOf(r.q))>-1;}).length;
+  var visAmbers=ambers.filter(function(q){return vis.indexOf(qs.indexOf(q))>-1;}).length;
+  var leanLevel=visReds>=4?'high':(visReds>=2?'mid':(visReds===1?'mid':'low'));
+  var leanTitle=visReds>=4?{zh:'目视特征高度集中，偏向现代仿古',en:'Strong visual cluster, leaning modern replica'}:
+    (visReds>=2?{zh:'多处目视不符，偏向后期仿制或拼配',en:'Multiple visual mismatches, leaning later copy or marriage'}:
+    (visReds===1?{zh:'单点目视不符，证据还不足',en:'One visual mismatch, not enough evidence'}:
+    {zh:'目视未见仿品信号',en:'No visual fake signals'}));
+  var leanText=visReds>=4?{zh:'四个以上目视项同时不对，通常不是单点瑕疵。建议暂停交易，除非能拿到可核验的专业复核。',en:'Four or more visual checks fail at once, which is rarely a single flaw. Pause the deal unless you can obtain verifiable professional review.'}:
+    (visReds>=2?{zh:'多处目视特征不符，倾向后仿、拼配或做过处理；不建议按真品价格交易。',en:'Several visual features do not fit; this leans toward a later copy, a marriage or treatment. Do not pay authentic prices.'}:
+    (visReds===1?{zh:'只有一处目视不符，单点不足以定案。先把这一项按下面的核验清单排掉。',en:'Only one visual mismatch, which cannot settle the case. Clear it using the checklist below.'}:
+    {zh:'目视项里没有出现仿品信号。这只说明表面特征顺，不等于真品；价格、来源与交易方式仍要单独核实。',en:'No visual fake signals appeared. That means the surface reads well, not that it is genuine; price, provenance and transaction terms still need separate checks.'}));
+  var html='<div class="result" aria-live="polite">'+
+    '<div class="result-head"><span class="risk-badge" data-risk="'+risk+'">'+L(riskLabel.zh,riskLabel.en)+'</span>'+
+    '<span class="result-score">'+L('命中 <b>'+reds.length+'</b> 项红旗 · <b>'+ambers.length+'</b> 项待核实','<b>'+reds.length+'</b> red flags · <b>'+ambers.length+'</b> to verify')+'</span></div>'+
+    '<div class="result-title">'+L(risk==='low'?'未见明显红旗':(risk==='mid'?'有疑点，先别急':'多项红旗，建议暂停'),risk==='low'?'No obvious red flags':(risk==='mid'?'Warning signs found':'Multiple red flags'))+'</div>'+
+    '<div class="result-lead">'+L(lead.zh,lead.en)+'</div>'+
+    '<div class="lean" data-lean="'+leanLevel+'"><span class="lean-label">'+L('目视倾向 · 非结论','Visual lean · not a verdict')+'</span>'+
+      '<span class="lean-title">'+L(leanTitle.zh,leanTitle.en)+'</span><p>'+L(leanText.zh,leanText.en)+'</p>'+
+      '<p class="block-note" style="margin-top:.4rem">'+L('只统计目视项（釉面、胎足、画工、发色、裂纹、器型、款识等），不含价格、来源与交易方式。目视命中 '+visReds+' 项红旗、'+visAmbers+' 项待核实。','Only visual items are counted (glaze, body and foot, brushwork, cobalt, cracks, form, mark), excluding price, provenance and transaction. Visual hits: '+visReds+' red, '+visAmbers+' to verify.')+'</p></div>'+
+    (cat.periods&&state.period?
+      '<div class="block"><h3>'+L('对标：'+cat.periods.filter(function(p){return p.id===state.period;})[0].zh,'Compared with '+cat.periods.filter(function(p){return p.id===state.period;})[0].en)+'</h3><ul class="factlist"><li>'+L(cat.periods.filter(function(p){return p.id===state.period;})[0].cue.zh,cat.periods.filter(function(p){return p.id===state.period;})[0].cue.en)+'</li></ul><p class="block-note">'+L('这是该时代的目视对照要点，不是对你的器物的判定。','These are visual cues for that period, not a judgement of your piece.')+'</p></div>':'')+
+    '<div class="diag"><h3>'+L('诊断结论','What this pattern suggests')+'</h3><ul>';
+  diag.forEach(function(d){html+='<li>'+L(d.zh,d.en)+'</li>';});
+  html+='</ul></div>';
+
+  if(reds.length){
+    html+='<div class="findings"><h3>'+L('自查命中项','What your answers flagged')+'</h3>';
+    reds.forEach(function(r){
+      var tag=r.q.kind==='date'?{zh:'断代',en:'Dating'}:(r.q.kind==='fake'?{zh:'仿品',en:'Fake risk'}:{zh:'仿品 / 断代',en:'Fake & dating'});
+      html+='<div class="finding">'+
+        '<span class="finding-tag">'+L(tag.zh,tag.en)+'</span>'+
+        '<span class="finding-title">'+L(r.o.zh,r.o.en)+'</span>'+
+        '<span class="finding-why">'+L(r.o.why.zh,r.o.why.en)+'</span>'+
+        '<a class="finding-link" href="'+r.o.href+'">'+L('→ '+r.o.read.zh,'→ '+r.o.read.en)+'</a>'+
+      '</div>';
+    });
+    html+='</div>';
+  }else{
+    html+='<div class="clean-box"><span class="strong">'+L('未命中红旗','No red flags')+'</span><p>'+L('这不构成真品判断。仍建议补齐底、边、内壁等细节照片，并在成交前书面约定真伪责任。','This is not proof of authenticity. Still ask for base, edge and interior photos, and put authenticity terms in writing.')+'</p></div>';
+  }
+
+  if(ambers.length){
+    html+='<div class="amber-box"><h3>'+L('建议补查','Still to verify')+'</h3><ul>';
+    ambers.forEach(function(q){html+='<li>'+L(q.zh,q.en)+'</li>';});
+    html+='</ul></div>';
+  }
+
+  html+='<div class="block"><h3>'+L('你的自查记录','Your answers')+'</h3>';
+  qs.forEach(function(q,i){
+    var lv=state.ans[i];
+    html+='<div class="record-row"><span class="record-dot" data-lv="'+lv+'"></span><span class="record-q">'+L(q.zh,q.en)+'</span><span class="record-lv" data-lv="'+lv+'">'+L(lvText[lv].zh,lvText[lv].en)+'</span></div>';
+  });
+  html+='</div>';
+
+  html+='<div class="block"><h3>'+L('按这个顺序核实','Verify in this order')+'</h3><ol class="checklist">';
+  cat.checks.forEach(function(c){html+='<li>'+L(c.zh,c.en)+'</li>';});
+  html+='</ol>';
+  if(reds.length){html+='<p class="block-note">'+L('先做第 1、2 项：最容易证伪，也最省钱。','Do items 1 and 2 first: they are the cheapest and fastest ways to disprove the piece.')+'</p>';}
+  html+='</div>';
+
+  html+='<div class="block"><h3>'+L('参考数据（用于比对，不是结论）','Reference data (for comparison, not a verdict)')+'</h3><ul class="factlist">';
+  cat.facts.forEach(function(f){html+='<li>'+L(f.zh,f.en)+'</li>';});
+  html+='</ul></div>';
+
+  var dateHits=reds.filter(function(r){return r.q.kind==='date';}).length;
+  html+='<div class="advice"><h3>'+L('关于断代','On dating')+'</h3><p>'+
+    (dateHits?L('有 '+dateHits+' 项断代特征对不上。年代不能按卖家说法认定，需要与同类标准器逐项比对，必要时请人上手。',''+dateHits+' dating signals do not match. The period cannot rest on the seller account; compare against reference pieces and have someone handle it.'):
+      L('断代项未见明显矛盾，但照片与描述都无法替代上手。年代判断仍应以标准器比对为准。','No clear dating conflict, but photos and descriptions cannot replace handling. Dating still depends on comparison with reference pieces.'))+
+    '</p></div>';
+
+  var advice={
+    low:{zh:'保留交易记录，索要清晰细节图，书面约定真伪责任与退货条件。',en:'Keep records, request clear detail photos, and agree authenticity and return terms in writing.'},
+    mid:{zh:'先补齐缺失细节，再请第三方或行家上手复核；未核实前不付定金。',en:'Fill the gaps, then have a third party or experienced dealer inspect it. No deposit before verification.'},
+    high:{zh:'暂停交易。若已付款，保存聊天、转账与物流记录；如需继续，先做可核验的专业复核。',en:'Pause the deal. If paid, keep messages, transfer and shipping records; get verifiable professional review before proceeding.'}
+  }[risk];
+  html+='<div class="advice"><h3>'+L('下一步','Next step')+'</h3><p>'+L(advice.zh,advice.en)+'</p></div>';
+
+  html+='<div class="dealbox"><h3>'+L('成交前写进书面条件','Put this in writing before you deal')+'</h3><p>'+L(cat.deal.zh,cat.deal.en)+'</p></div>';
+
+  window.gdSelfCheckSummary={
+    cat:{zh:cat.zh,en:cat.en},
+    risk:{zh:riskLabel.zh,en:riskLabel.en},
+    lean:{zh:leanTitle.zh,en:leanTitle.en},
+    hits:{zh:'命中 '+reds.length+' 项红旗、'+ambers.length+' 项待核实',en:reds.length+' red flags, '+ambers.length+' to verify'}
+  };
+
+  html+='<div class="result-actions">'+
+    '<button type="button" class="btn-primary" id="againBtn">'+L('重新自查','Start over')+'</button>'+
+    '<button type="button" class="btn-ghost" id="switchBtn">'+L('换个品类','Switch category')+'</button>'+
+    '<button type="button" class="btn-ghost" id="advisorBtn">'+L('寻求顾问意见','Ask an advisor')+'</button>'+
+  '</div>'+
+  '<p class="quiz-tip" style="margin-top:.9rem">'+L('结果只在你当前的浏览器里计算，不会被保存。','Results are calculated in your browser and are not saved.')+'</p>'+
+  '</div>';
+
+  stage.innerHTML=html;
+  document.getElementById('againBtn').addEventListener('click',function(){startCat(state.cat.id);});
+  document.getElementById('switchBtn').addEventListener('click',function(){state.cat=null;renderCats();});
+  var advBtn=document.getElementById('advisorBtn');
+  if(advBtn)advBtn.addEventListener('click',function(){if(window.gdAdvisorOpen)window.gdAdvisorOpen();});
+}
+
+renderCats();
+})();
+</script>
+
+<!-- 分享 -->
+<style>
+.gd-share-btn{border:1px solid var(--color-border);background:transparent;color:var(--color-text-secondary);padding:.55rem .7rem;min-height:44px;min-width:44px;border-radius:var(--btn-radius);cursor:pointer;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;transition:all var(--dur) var(--ease)}
+.gd-share-btn:hover{border-color:var(--color-primary);color:var(--color-primary);background:var(--color-primary-light)}
+.gd-share-btn svg{width:16px;height:16px;fill:currentColor;display:block}
+.gd-toast{position:fixed;left:50%;bottom:30px;transform:translateX(-50%) translateY(10px);background:rgba(36,31,26,.92);color:#fff;font-size:.85rem;padding:.62rem 1.15rem;border-radius:999px;z-index:10000;opacity:0;pointer-events:none;transition:opacity .3s ease,transform .3s ease;box-shadow:0 8px 24px rgba(36,31,26,.25);white-space:nowrap;max-width:88vw;overflow:hidden;text-overflow:ellipsis}
+.gd-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+</style>
+<script>
+(function(){var toastEl=null,toastTimer=null;
+function gdToast(msg){if(!toastEl){toastEl=document.createElement('div');toastEl.className='gd-toast';document.body.appendChild(toastEl);}toastEl.textContent=msg;toastEl.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(function(){toastEl.classList.remove('show');},2200);}
+function gdCopyText(text,done,fail){function legacy(){var ta=document.createElement('textarea');ta.value=text;ta.setAttribute('readonly','');ta.style.cssText='position:fixed;left:-9999px;top:0;opacity:0;';document.body.appendChild(ta);ta.select();if(ta.setSelectionRange)ta.setSelectionRange(0,text.length);var ok=false;try{ok=document.execCommand('copy');}catch(e){}document.body.removeChild(ta);if(ok){done();}else if(fail){fail();}}
+if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(text).then(done,function(){legacy();});}else{legacy();}}
+window.gdShare=function(opts){opts=opts||{};var can=document.querySelector('link[rel="canonical"]');var url=opts.url||(can?can.href:location.href);var lang=(document.body.dataset&&document.body.dataset.lang)||'zh';var title=opts.title||document.title;var text=opts.text||'';if(navigator.share){navigator.share({title:title,text:text,url:url}).then(function(){},function(){});return;}gdCopyText(url,function(){gdToast(lang==='zh'?'链接已复制，去分享给朋友吧':'Link copied — share it with friends');},function(){gdToast(lang==='zh'?'复制失败，请手动复制地址栏链接':'Copy failed — please copy the URL from the address bar');});};})();
+window.gdSharePage=function(){var lang=(document.body.dataset&&document.body.dataset.lang)||'zh';window.gdShare({title:lang==='zh'?'仿品与断代自查｜古董圈Gudong.app':'Fake & Dating Self-Check｜Gudong.app',text:lang==='zh'?'买前把可疑点过一遍：瓷器、玉器、铜器、钱币四类自查清单。':'A pre-purchase checklist for porcelain, jade, bronzes and coins.'});};
+</script>
+
+</body>
+</html>

@@ -1,4 +1,23 @@
 /* 古董圈 Gudong · Service Worker
+ * 2026-11-04：v57 → v58（自查工具页 SEO 元描述更新）
+ * - 修正题量区间为 9–13，补入目视倾向与顾问预约信息
+ * 2026-11-04：v56 → v57（估值、底款工具页 SEO 元描述更新）
+ * - 精简 description 长度，补入「可预约顾问视频参考意见」入口信息
+ * 2026-11-04：v55 → v56（估值、底款工具加入「寻求顾问意见」）
+ * - tools/valuation.html、tools/mark-lookup.html 末尾新增顾问 CTA 与预约弹窗，
+ *   自动带入估值输入/参考区间、所查年号与标准款识；
+ * - 提升缓存版本，强制已安装 PWA 拉取更新的工具页
+ * 2026-11-04：v54 → v55（自查结果页「联系我们」改为「寻求顾问意见」弹窗）
+ * - 结果页末按钮改为打开顾问预约弹窗（与藏品页「📞预约顾问连线（参考意见）」同款流程：
+ *   时段/问题/WhatsApp、S$188 服务费说明、跳转 WhatsApp 获取 PayNow），
+ *   并自动带入自查品类、风险结论与目视倾向；
+ * - 提升缓存版本，强制已安装 PWA 拉取新的工具页
+ * 2026-11-03：v53 → v54（自查工具加入目视倾向与瓷器时代对标）
+ * 2026-11-03：v52 → v53（自查工具结果升级：矛盾组合、核验顺序、参考数据、合同条款）
+ * 2026-11-03：v51 → v52（新增仿品与断代自查工具）
+ * - 新增 tools/authenticity-check.html：瓷器/玉器/铜器佛像/钱币银元四类自查向导；
+ * - 全站 117 页侧栏加入该工具链接；工具合集页新增卡片；
+ * - 提升缓存版本，强制已安装 PWA 拉取新的页面与导航
  * 2026-11-02：v50 → v51（Web Push 新藏品上架通知）
  * - 新增 push 事件：收到服务器推送即展示"上新"通知（title/body/icon/跳转 URL 由 payload 指定）；
  * - 新增 notificationclick 事件：点击通知跳转到新藏品页；
@@ -69,7 +88,7 @@
  *   seller 徽章/标签字号提升
  * - v8 → v9：配合首页改版提升缓存版本号
  */
-const CACHE_NAME = 'antique-collection-v51';
+const CACHE_NAME = 'antique-collection-v58';
 // 预缓存清单：核心页面 + 常用图标 + 占位图 + 工具页（离线可用）
 // 注意：改用逐个 cache.add，单个 404 不会导致整个 install 失败
 const PRECACHE_ASSETS = [
@@ -105,6 +124,7 @@ const PRECACHE_ASSETS = [
   '/tools/mark-lookup.html',
   '/tools/valuation.html',
   '/tools/contract.html',
+  '/tools/authenticity-check.html',
   '/manifest.json',
   '/assets/icons/favicon-32x32.png',
   '/assets/icons/icon-192.png',

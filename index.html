@@ -1548,11 +1548,19 @@
         @media (max-width: 560px) {
             body { font-size: 15px; }
             .brand-logo-img { height: 30px; }
-            .brand-zh, .brand-en { font-size: 1.08rem; }
+            .brand-zh, .brand-en { font-size: 1rem; }
             .brand-text small { font-size: .55rem; letter-spacing: .1em; margin-top: 1px; }
-            .brand { gap: .5rem; }
-            .header-left { gap: .6rem; }
-            .header-right { gap: .4rem; }
+            .brand { gap: .45rem; }
+            .header-left { gap: .55rem; }
+            .header-right { gap: .35rem; }
+            /* 顶部导航紧凑化：避免分享+EN+铃铛 3 个按钮挤压品牌 LOGO 文字错乱 */
+            .menu-toggle { width: 34px; height: 34px; }
+            .gd-share-btn { min-height: 32px; min-width: 32px; padding: .16rem .28rem; }
+            .gd-share-btn svg { width: 15px; height: 15px; }
+            .gd-push-bell svg { width: 18px; height: 18px; } /* 铃铛放大一号 */
+            .lang-btn { min-height: 32px; min-width: 32px; padding: .16rem .42rem; font-size: .72rem; }
+            .brand-line1 { white-space: nowrap; }
+            .brand-text small { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }
             .btn-publish-text { display: none; }
             .container { padding: 2rem 4.5% 3rem; }
             section { margin-bottom: 4rem; }
@@ -1578,6 +1586,11 @@
             .seller-cta .desc { font-size: .88rem; margin-bottom: 1.6rem; }
             .seller-cta .btn-publish { font-size: .88rem; padding: .8rem 1.6rem; }
             .trust-tagline { font-size: .84rem; padding: 1.3rem 1.25rem 1.2rem; }
+        }
+
+        @media (max-width: 360px) {
+            .brand-en { display: none; } /* 极窄屏省略英文品牌，避免挤压错乱 */
+            .brand-line1 { gap: 0; }
         }
     </style>
     <script src="assets/js/gudong-follow.js"></script>

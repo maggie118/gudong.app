@@ -53,7 +53,10 @@
     bell.setAttribute('aria-label', '上新通知 / New-item notifications');
     bell.style.cssText = 'position:relative;';
     bell.addEventListener('click', onBellClick);
-    hr.appendChild(bell);
+    // 置于分享与 EN 之间
+    var lang = hr.querySelector('.lang-btn');
+    if (lang) hr.insertBefore(bell, lang);
+    else hr.appendChild(bell);
 
     // 已订阅展开的退订菜单
     menu = document.createElement('div');

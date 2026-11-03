@@ -5,8 +5,9 @@ name: Auto-deploy on Airtable change
 
 on:
   schedule:
-    # 每 15 分钟检测一次。改这里可调频率（Airtable 免费 API 有月额度，频率越高越耗额度）。
-    - cron: '*/15 * * * *'
+    # 每晚本地(新加坡 UTC+8)午夜 00:00 检测一次。cron 用 UTC：0 16 = 新加坡 00:00。
+    # Airtable 免费 API 有月额度，低频轮询以尽量省额度。
+    - cron: '0 16 * * *'
   workflow_dispatch: {}
 
 concurrency:

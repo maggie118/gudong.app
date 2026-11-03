@@ -170,7 +170,8 @@
   function init() {
     createUI();
     if (!bell) return;
-    // 已订阅用户：加载时同步铃铛为实心高亮
+    // 默认显示未订阅描边铃铛；再异步同步为已订阅实心
+    setIdle();
     registerSW().then(function () {
       return getSubscription();
     }).then(function (sub) {

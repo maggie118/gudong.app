@@ -168,16 +168,16 @@ function injectQrSection(h, v) {
 }
 .qr-eyebrow { font-size: .72rem; letter-spacing: .22em; text-transform: uppercase; color: var(--color-gold); font-weight: 700; }
 .qr-title { font-size: 1.05rem; font-weight: 700; color: var(--color-text); }
-.qr-img { width: 188px; height: 188px; border: 1px solid var(--color-border); border-radius: 8px; padding: 6px; background: #fff; }
+.qr-img { width: min(188px, 100%); height: auto; max-width: 100%; border: 1px solid var(--color-border); border-radius: 8px; padding: 6px; background: #fff; }
 .qr-url { font-size: .82rem; color: var(--color-text-secondary); word-break: break-all; }
 .qr-note { font-size: .76rem; color: var(--color-text-muted); line-height: 1.6; max-width: 480px; }
-@media (max-width: 560px) { .qr-img { width: 168px; height: 168px; } }
+@media (max-width: 560px) { .qr-img { width: min(168px, 100%); height: auto; } }
 </style>
 <section class="museum-qr">
   <div class="qr-card">
     <span class="qr-eyebrow">Scan to open</span>
     <div class="qr-title"><span class="zh">专属网址 · 扫码直达本藏馆</span><span class="en">Your gallery · scan to open</span></div>
-    ${svg}
+    ${svg.replace(/<svg/, '<svg class="qr-img"')}
     <div class="qr-url">${escHtml(v.canon)}</div>
     <div class="qr-note"><span class="zh">将此二维码印在名片、展柜或展签上，买家扫码即可直达您的专属藏馆。</span><span class="en">Print this QR on your card, case or label — collectors scan to open your private gallery instantly.</span></div>
   </div>

@@ -1,0 +1,63 @@
+# Auto-deploy when Airtable data changes
+# 免费版 Airtable 没有官方 webhook，改用「定时轮询检测变化 → 有变化才触发 Vercel 部署」。
+# 检测方式：拉取 antiques 表关键字段算 hash，与上次（GitHub Actions cache）比较，不同才触发 deploy。
+name: Auto-deploy on Airtable change
+
+on:
+  schedule:
+    # 每 15 分钟检测一次。改这里可调频率（Airtable 免费 API 有月额度，频率越高越耗额度）。
+    - cron: '*/15 * * * *'
+  workflow_dispatch: {}
+
+concurrency:
+  group: airtable-auto-deploy
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  check-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Restore last Airtable hash
+        id: hash-restore
+        uses: actions/cache/restore@v4
+        with:
+          path: .airtable-hash
+          key: airtable-hash-v1
+
+      - name: Fetch Airtable snapshot
+        id: fetch
+        env:
+          AT_TOKEN: ${{ secrets.AIRTABLE_TOKEN }}
+        run: |
+          curl -s -G "https://api.airtable.com/v0/apprn6XDQnAm8bkaT/antiques" \
+            -H "Authorization: Bearer $AT_TOKEN" \
+            --data-urlencode "fields[]=item_id" \
+            --data-urlencode "fields[]=title_zh" \
+            --data-urlencode "fields[]=fixed_price" \
+            --data-urlencode "fields[]=price_zh" \
+            --data-urlencode "fields[]=status" \
+            --data-urlencode "pageSize=100" > /tmp/at.json
+          sha256sum /tmp/at.json | cut -d' ' -f1 > /tmp/current.hash
+          echo "hash=$(cat /tmp/current.hash)"
+
+      - name: Compare and deploy if changed
+        env:
+          DEPLOY_HOOK: ${{ secrets.VERCEL_DEPLOY_HOOK }}
+        run: |
+          if [ ! -f .airtable-hash ] || ! cmp -s .airtable-hash /tmp/current.hash; then
+            cp /tmp/current.hash .airtable-hash
+            echo "Airtable changed -> triggering Vercel deploy"
+            curl -s -o /tmp/deploy.json -w "deploy_status=%{http_code}\n" -X POST "$DEPLOY_HOOK"
+            cat /tmp/deploy.json
+          else
+            echo "No Airtable change -> skip deploy"
+          fi
+
+      - name: Save hash cache
+        uses: actions/cache/save@v4
+        with:
+          path: .airtable-hash
+          key: airtable-hash-v1

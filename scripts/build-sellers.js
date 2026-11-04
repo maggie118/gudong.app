@@ -56,6 +56,14 @@ function replaceAll(h, oldStr, newStr) {
   if (oldStr === newStr) return h;
   return h.split(oldStr).join(newStr);
 }
+// 换行无关替换：锚点里字面 \r\n 转为 \r?\n，兼容 git/Vercel 检出后 LF 与本地 CRLF 两种行尾，
+// 避免 FOUNDER_BADGE/FOUNDER_META 这类含 \r\n 的锚点在 LF 环境失配、导致占位号漏到所有页面。
+function replaceCRLF(h, oldStr, newStr) {
+  if (oldStr === newStr) return h;
+  const esc = oldStr.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const pat = esc.replace(/\r\n/g, '\\r?\\n');
+  return h.replace(new RegExp(pat, 'g'), newStr);
+}
 
 /* ---------- 藏馆展示期（与 refresh-listings.js 一致） ---------- */
 const GALLERY_DISPLAY_MONTHS = 12;
@@ -155,11 +163,11 @@ function buildPage(seller, seedHtml) {
   // 创始藏家编号：按卖家数据注入（未分配则整段移除，避免所有卖家都显示占位号）
   const foundingNo = String(seller.founding_no == null ? '' : seller.founding_no).trim();
   if (foundingNo) {
-    h = replaceAll(h, SEED.FOUNDER_BADGE, `                    <!-- 创始藏家编号：${escHtml(foundingNo)} -->\r\n                    <span class="badge-num">${escHtml(foundingNo)}</span>`);
-    h = replaceAll(h, SEED.FOUNDER_META, `                <span><span class="zh">创始藏家编号</span><span class="en">Founding No.</span>：<b id="founderNo">${escHtml(foundingNo)}</b></span>`);
+    h = replaceCRLF(h, SEED.FOUNDER_BADGE, `                    <!-- 创始藏家编号：${escHtml(foundingNo)} -->\r\n                    <span class="badge-num">${escHtml(foundingNo)}</span>`);
+    h = replaceCRLF(h, SEED.FOUNDER_META, `                <span><span class="zh">创始藏家编号</span><span class="en">Founding No.</span>：<b id="founderNo">${escHtml(foundingNo)}</b></span>`);
   } else {
-    h = replaceAll(h, SEED.FOUNDER_BADGE, '');
-    h = replaceAll(h, SEED.FOUNDER_META, '');
+    h = replaceCRLF(h, SEED.FOUNDER_BADGE, '');
+    h = replaceCRLF(h, SEED.FOUNDER_META, '');
   }
 
   // 注入「专属网址 + 二维码」区块

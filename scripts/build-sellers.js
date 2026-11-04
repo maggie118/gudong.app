@@ -213,7 +213,7 @@ function buildIndex(seedIndex, enabled, items) {
                 <div class="gallery-name">
                     <span class="zh">${escHtml(v.nameZh)}</span><span class="en">${escHtml(v.nameEn)}</span>
                     <span class="founder-badge" title="创始藏家 · ${escHtml(String(v.since))}" aria-label="Founding Collector ${escHtml(String(v.since))}">
-                        <img class="founder-badge-icon" src="../assets/images/foundingcollector.webp" alt="创始藏家 Founder Collector">
+                        <img class="founder-badge-icon" src="../assets/images/founder-crown-badge.webp" alt="创始藏家 Founder Collector">
 ${founderBadge}
                     </span>
                 </div>

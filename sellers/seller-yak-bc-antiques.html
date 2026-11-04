@@ -204,9 +204,14 @@ header {
     padding: 0; border: 0; border-radius: 0;
     white-space: nowrap; vertical-align: middle;
     box-shadow: none;
+    position: relative;
 }
-.founder-badge-icon { display: block; width: 42px; height: 53px; object-fit: contain; flex: 0 0 auto; }
-.founder-badge .badge-num { font-weight: 800; font-size: .82rem; letter-spacing: 0; color: #D4AF6A; }
+.founder-badge-icon { display: block; width: 60px; height: 30px; object-fit: contain; flex: 0 0 auto; }
+.founder-badge .badge-num {
+    position: absolute; right: 6px; top: 50%; transform: translateY(-50%);
+    font-weight: 800; font-size: .8rem; letter-spacing: .02em; line-height: 1;
+    color: #FFFFFF; text-shadow: 0 0 2px rgba(0,0,0,.3);
+}
 
 /* 简介 + 联系方式 */
 .museum-info {
@@ -435,7 +440,7 @@ footer {
                 <span class="zh" id="sellerNameZh">古韵斋</span>
                 <span class="en" id="sellerNameEn">Yak BC Antiques</span>
                 <span class="founder-badge" id="founderBadge" title="创始藏家 · 2026（限量 88 席）" aria-label="Founding Collector 2026">
-                    <img class="founder-badge-icon" src="../assets/images/foundingcollector.webp" alt="创始藏家 Founder Collector">
+                    <img class="founder-badge-icon" src="../assets/images/founder-crown-badge.webp" alt="创始藏家 Founder Collector">
 
                     </span>
             </div>

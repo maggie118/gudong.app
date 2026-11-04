@@ -10,7 +10,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="https://gudong.app/assets/icons/favicon-16x16.png">
     <link rel="icon" type="image/png" sizes="32x32" href="https://gudong.app/assets/icons/favicon-32x32.png">
     <link rel="manifest" href="../manifest.json">
-    <meta name="theme-color" content="#7A4E33">
+    <meta name="theme-color" content="#8A5A3B">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -24,14 +24,14 @@
             --color-surface: #FFFFFF;
             --color-white: #FFFFFF;
             --color-border: #E4DED5;
-            --color-primary: #7A4E33;
-            --color-primary-dark: #5C3A26;
+            --color-primary: #8A5A3B;
+            --color-primary-dark: #68432D;
             --color-primary-light: #F1E8DF;
             --color-text: #25221E;
             --color-text-secondary: #5C564F;
             --color-text-muted: #A49D94;
-            --color-gold: #9C7A3A;
-            --color-gold-soft: rgba(156,122,58,.10);
+            --color-gold: #B08A45;
+            --color-gold-soft: rgba(176, 138, 69, .10);
             --color-success: #526657;
             --color-danger: #9A554B;
             --color-bg-alt: #F5F2EC;
@@ -62,7 +62,7 @@
         .brand-line1 { display: flex; align-items: baseline; gap: .32rem; }
         .brand-zh { font-size: 1.4rem; font-weight: 700; letter-spacing: .02em; line-height: 1.15; color: var(--color-primary-dark); font-family: var(--font-serif); }
         .brand-en { font-size: 1.4rem; font-weight: 600; letter-spacing: -.012em; line-height: 1.15; color: var(--color-primary-dark); font-family: var(--font-sans); }
-        .brand-text small { display: block; color: var(--color-qianjinzong); font-family: var(--font-sans); font-weight: 500; font-size: .68rem; letter-spacing: .14em; margin-top: 2px; text-transform: uppercase; }
+        .brand-text small { display: block; color: var(--color-text-muted); font-family: var(--font-sans); font-weight: 500; font-size: .68rem; letter-spacing: .14em; margin-top: 2px; text-transform: uppercase; }
         .header-right { display: flex; align-items: center; gap: .8rem; flex-shrink: 0; }
         .lang-btn {
             border: 1px solid var(--color-border); background: transparent;
@@ -100,7 +100,7 @@
         }
         .sidebar-brand .logo-zh { font-size: 1.05rem; font-family: var(--font-serif); font-weight: 700; color: var(--color-primary-dark); letter-spacing: .005em; }
         .sidebar-brand .logo-en { font-size: 1.05rem; letter-spacing: normal; font-family: var(--font-sans); font-weight: 600; color: var(--color-primary-dark); }
-        .sidebar-brand .logo-tagline { font-size: .62rem; letter-spacing: .16em; color: var(--color-qianjinzong); text-transform: uppercase; font-family: var(--font-sans); font-weight: 500; }
+        .sidebar-brand .logo-tagline { font-size: .62rem; letter-spacing: .16em; color: var(--color-text-muted); text-transform: uppercase; font-family: var(--font-sans); font-weight: 500; }
         .sidebar-nav { display: flex; flex-direction: column; padding: .3rem 0; }
         .sidebar-link { padding: .85rem 1.4rem; color: var(--color-text); text-decoration: none; font-size: .95rem; transition: .4s var(--ease); }
         .sidebar-link:hover { background: var(--color-primary-light); color: var(--color-primary); }
@@ -224,6 +224,54 @@
             .finds-price { font-size: .84rem; }
         }
     </style>
+<style>
+/* 2026-11-04 UI/UX micro-polish（个人页·简报） */
+/* 简报区块标题层级：h2 已用 primary-dark；计数徽标 brief-cnt 保持弱底 */
+.brief-h { letter-spacing: .005em; }
+.brief-cnt { font-variant-numeric: tabular-nums; }
+
+/* 空状态标题层级 */
+.empty-state strong { color: var(--color-text); font-weight: 700; }
+.empty-state .hint { line-height: 1.7; }
+
+/* 键盘焦点可见性 */
+a:focus-visible,
+button:focus-visible,
+.lang-btn:focus-visible,
+.menu-toggle:focus-visible,
+.gd-share-btn:focus-visible,
+.app-install-btn:focus-visible,
+.gd-install-close:focus-visible,
+.sidebar-link:focus-visible,
+.sidebar-sub:focus-visible,
+.sidebar-lang-btn:focus-visible,
+.breadcrumb a:focus-visible,
+.footer-nav a:focus-visible,
+.alert-banner a:focus-visible,
+.finds-card:focus-visible,
+#quickChips .gf-chip:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+/* 按钮按压反馈 */
+.lang-btn:active,
+.menu-toggle:active,
+.gd-share-btn:active,
+.app-install-btn:active,
+.gd-install-close:active,
+.sidebar-lang-btn:active,
+#quickChips .gf-chip:active { transform: scale(.98); }
+
+/* 简报 chips：hover/on 对齐迁移后主色 */
+#quickChips .gf-chip { transition: .25s var(--ease); }
+#quickChips .gf-chip:hover { border-color: var(--color-primary); color: var(--color-primary); background: var(--color-primary-light); }
+#quickChips .gf-chip.on { background: var(--color-primary); border-color: var(--color-primary); color: #fff; }
+
+/* 卡片聚焦时不位移 */
+.finds-card:focus-visible { outline-offset: 4px; }
+</style>
 <style>
 /* gudong header mobile fix */
 @media (max-width: 560px) {
@@ -357,7 +405,7 @@
             display: inline-flex; align-items: center; gap: .3rem;
             margin-left: .6rem; padding: .5rem .85rem; min-height: 40px;
             border: 1px solid var(--color-border); border-radius: 999px;
-            color: var(--color-qianjinzong); font-size: .76rem; text-decoration: none;
+            color: var(--color-text-secondary); font-size: .76rem; text-decoration: none;
             vertical-align: middle; transition: all var(--dur, .3s) var(--ease, ease);
         }
         .app-install-btn:hover { border-color: var(--color-primary); color: var(--color-primary); background: var(--color-primary-light); }
@@ -623,10 +671,10 @@
 .gd-share-btn svg { width: 16px; height: 16px; fill: currentColor; display: block; }
 .gd-toast {
     position: fixed; left: 50%; bottom: 30px; transform: translateX(-50%) translateY(10px);
-    background: rgba(36,31,26,.92); color: #fff; font-size: .85rem;
+    background: rgba(37, 34, 30, .92); color: #fff; font-size: .85rem;
     padding: .62rem 1.15rem; border-radius: 999px; z-index: 10000;
     opacity: 0; pointer-events: none; transition: opacity .3s ease, transform .3s ease;
-    box-shadow: 0 8px 24px rgba(36,31,26,.25); white-space: nowrap;
+    box-shadow: 0 8px 24px rgba(37, 34, 30, .25); white-space: nowrap;
     max-width: 88vw; overflow: hidden; text-overflow: ellipsis;
 }
 .gd-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
@@ -697,11 +745,11 @@ window.gdSharePage = function () {
     .gd-install-modal.open { display: flex; }
     .gd-install-card { background: #fff; border-radius: 16px; max-width: 360px; width: 100%; padding: 1.8rem 1.5rem 1.3rem; text-align: center; box-shadow: 0 24px 60px rgba(0,0,0,.28); position: relative; }
     .gd-install-close { position: absolute; top: .5rem; right: .7rem; border: 0; background: none; font-size: 1.4rem; color: #A49D94; cursor: pointer; padding: .5rem; min-width: 44px; min-height: 44px; display: inline-flex; align-items: center; justify-content: center; line-height: 1; border-radius: 8px; transition: .3s; }
-    .gd-install-close:hover { color: #7A4E33; background: #F3EAE0; }
+    .gd-install-close:hover { color: #8A5A3B; background: #F1E8DF; }
     .gd-install-title { font-size: 1.1rem; font-weight: 700; color: #3d2b1f; margin: .2rem 0 1.1rem; font-family: var(--font-serif); }
     .gd-install-steps { text-align: left; margin: 0 auto 1rem; max-width: 296px; }
     .gd-install-step { display: flex; align-items: flex-start; gap: .65rem; padding: .5rem 0; color: #5a4636; font-size: .9rem; line-height: 1.55; }
-    .gd-install-step .n { flex-shrink: 0; width: 22px; height: 22px; border-radius: 50%; background: #F3EAE0; color: #7A4E33; font-weight: 700; font-size: .76rem; display: flex; align-items: center; justify-content: center; margin-top: .1rem; }
+    .gd-install-step .n { flex-shrink: 0; width: 22px; height: 22px; border-radius: 50%; background: #F1E8DF; color: #8A5A3B; font-weight: 700; font-size: .76rem; display: flex; align-items: center; justify-content: center; margin-top: .1rem; }
     .gd-install-step svg { flex-shrink: 0; width: 22px; height: 22px; fill: #007AFF; margin-top: .1rem; }
     .gd-install-note { font-size: .78rem; color: #9a8d80; margin-top: .5rem; line-height: 1.55; }
     body[data-lang="en"] .gd-install-modal .zh { display: none; }

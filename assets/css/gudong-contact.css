@@ -10,8 +10,11 @@
 .gd-contact-field{margin-bottom:13px}
 .gd-contact-field label{display:block;font-size:12px;color:#7a5a3a;margin-bottom:4px}
 .gd-contact-field input,.gd-contact-field textarea{width:100%;box-sizing:border-box;border:1px solid #d8c6a8;border-radius:8px;padding:9px 11px;font-size:14px;background:#fff;color:#3a2a1c;font-family:inherit}
-.gd-contact-field input:focus,.gd-contact-field textarea:focus{outline:none;border-color:#7a4e33}
+.gd-contact-field input:focus,.gd-contact-field textarea:focus{outline:none;border-color:#8A5A3B}
 .gd-contact-field textarea{resize:vertical;min-height:92px}
-.gd-contact-submit{width:100%;background:#7a4e33;color:#fff;border:none;border-radius:8px;padding:11px;font-size:15px;cursor:pointer;font-weight:600}
-.gd-contact-submit:hover{background:#6a4126}
+.gd-contact-submit{width:100%;background:#8A5A3B;color:#fff;border:none;border-radius:8px;padding:11px;font-size:15px;cursor:pointer;font-weight:600;transition:background .15s ease,transform .12s ease}
+.gd-contact-submit:hover{background:#68432D}
+.gd-contact-submit:active{transform:scale(.98)}
+.gd-contact-submit:focus-visible{outline:2px solid #B08A45;outline-offset:2px}
+.gd-contact-close:focus-visible{outline:2px solid #B08A45;outline-offset:2px;border-radius:4px}
 .gd-contact-note{font-size:11px;color:#a08460;margin-top:10px;text-align:center;line-height:1.5}

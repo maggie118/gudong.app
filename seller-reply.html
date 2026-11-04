@@ -5,10 +5,10 @@
   <meta name="robots" content="noindex,nofollow"><meta name="referrer" content="no-referrer">
   <title>古董圈 · 私密咨询回复</title>
   <style>
-    :root{color-scheme:light;--ink:#241f1a;--muted:#766c60;--paper:#f7f4ef;--line:#e7e1d8;--brown:#7a4e33}
+    :root{color-scheme:light;--ink:#25221E;--muted:#766c60;--paper:#F5F2EC;--line:#E4DED5;--brown:#8A5A3B}
     *{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.55 Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
-    .page{max-width:760px;margin:0 auto;padding:24px 16px}.card{background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:0 12px 30px #241f1a12;overflow:hidden}
-    header{padding:20px 22px;background:#fff;border-bottom:1px solid var(--line)}h1{font-size:1.25rem;margin:0 0 4px;color:#5c3a26}header p,.meta{margin:0;color:var(--muted);font-size:.9rem}
+    .page{max-width:760px;margin:0 auto;padding:24px 16px}.card{background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:0 12px 30px #25221E12;overflow:hidden}
+    header{padding:20px 22px;background:#fff;border-bottom:1px solid var(--line)}h1{font-size:1.25rem;margin:0 0 4px;color:#68432D}header p,.meta{margin:0;color:var(--muted);font-size:.9rem}
     .info{padding:14px 22px;border-bottom:1px solid var(--line);background:#fbfaf8}.info strong{display:block}.messages{list-style:none;padding:18px;margin:0;min-height:170px;max-height:52vh;overflow:auto;display:flex;flex-direction:column;gap:10px}
     .msg{align-self:flex-start;max-width:90%;padding:10px 13px;background:#f1ece4;border-radius:12px;white-space:pre-wrap;overflow-wrap:anywhere}.msg.seller{align-self:flex-end;background:var(--brown);color:white}.time{display:block;font-size:.7rem;opacity:.72;margin-top:4px}
     form{padding:16px 18px;border-top:1px solid var(--line);display:grid;grid-template-columns:1fr auto;gap:10px}textarea{min-height:48px;max-height:150px;resize:vertical;border:1px solid #d8d0c5;border-radius:8px;padding:11px;font:inherit}button{border:0;border-radius:8px;background:var(--brown);color:#fff;padding:0 18px;min-height:46px;font:inherit;font-weight:600;cursor:pointer}button:disabled{opacity:.6;cursor:wait}#status{padding:0 20px 14px;color:var(--muted);font-size:.85rem}.warning{padding:12px 20px;color:#72542b;background:#fff8e9;font-size:.82rem}
@@ -76,6 +76,20 @@
   .lang-btn { min-width: 40px !important; min-height: 40px !important; padding: .35rem .5rem !important; }
 }
 /*<<</gd-header-logo-fit-2026-10-16>>>*/
+
+/* <<<gd-ui-polish-2026-11-04>>> 信息页 UI/UX 细节微调 */
+form textarea { transition: border-color .2s ease, box-shadow .2s ease; }
+form textarea:focus { outline: none; border-color: var(--brown); box-shadow: 0 0 0 3px rgba(138,90,59,.14); }
+form button { transition: background-color .2s ease, transform .15s ease; min-height:46px; }
+form button:hover { background:#68432D; }
+form button:active { transform: scale(.98); }
+form textarea:focus-visible, form button:focus-visible {
+  outline: 2px solid var(--brown);
+  outline-offset: 2px;
+}
+.msg { transition: opacity .2s ease; }
+.warning { border-left: 3px solid #B08A45; }
+#status { min-height: 1.4em; }
 </style>
 <style>
 /* gudong header mobile fix */

@@ -117,6 +117,13 @@ const WA_PHONE_KEYS = [
 ];
 const PHONE_ISH = /^[+\d\s()\-]+$/;
 
+// 创始藏家编号字段（Airtable sellers 表可能的命名变体）
+const FOUNDING_NO_KEYS = [
+  'founding_no', 'foundingNo', 'founding_number',
+  'Founding No', 'Founding Number',
+  '创始编号', '创始藏家编号',
+];
+
 function pickStr(f, keys) {
   for (const k of keys) {
     const v = f[k];
@@ -152,6 +159,7 @@ function mapSeller(rec) {
     gallery: f.gallery === true || f.gallery === 'true' || f.gallery === 1,
     gallery_started_at: f.gallery_started_at || '', // 开馆日期 → 默认展示期 1 年
     gallery_expires_at: f.gallery_expires_at || '', // 可选显式到期日，优先于 started+1年
+    founding_no: pickStr(f, FOUNDING_NO_KEYS),      // 创始藏家编号（如 001；未分配则空）
     page_url: f.page_url || `/sellers/seller-${slugify(id)}-antiques.html`,
   }, wa);
 }

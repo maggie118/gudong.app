@@ -23,7 +23,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="assets/icons/favicon-16x16.png">
     <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32x32.png">
     <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#7A4E33">
+    <meta name="theme-color" content="#8A5A3B">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -40,14 +40,14 @@
             --color-surface: #FFFFFF;
             --color-white: #FFFFFF;
             --color-border: #E4DED5;
-            --color-primary: #7A4E33;
-            --color-primary-dark: #5C3A26;
+            --color-primary: #8A5A3B;
+            --color-primary-dark: #68432D;
             --color-primary-light: #F1E8DF;
             --color-text: #25221E;
             --color-text-secondary: #5C564F;
             --color-text-muted: #A49D94;
-            --color-gold: #9C7A3A;
-            --color-gold-soft: rgba(156,122,58,.10);
+            --color-gold: #B08A45;
+            --color-gold-soft: rgba(176, 138, 69, .10);
             --color-bronze-muted: #9C8558;
             --color-qianjinzong: #948268;
             --color-success: #526657;
@@ -138,7 +138,7 @@
         /* ---------- Value Cards (3 Columns) ---------- */
         .value-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; margin-top: 1.5rem; }
         .value-card { background: var(--color-white); border: 1px solid var(--color-border); border-radius: 8px; padding: 1.5rem 1.3rem; transition: .3s ease; }
-        .value-card:hover { border-color: var(--color-primary); box-shadow: 0 6px 18px rgba(122,78,51,.08); transform: translateY(-2px); }
+        .value-card:hover { border-color: var(--color-primary); box-shadow: 0 6px 18px rgba(138, 90, 59, .08); transform: translateY(-2px); }
         .value-card .icon { font-size: 1.5rem; margin-bottom: .7rem; }
         .value-card h4 { font-size: 1.05rem; color: var(--color-text); margin-bottom: .5rem; font-weight: 600; }
         .value-card p { font-size: .88rem; color: var(--color-text-secondary); line-height: 1.65; }
@@ -264,6 +264,29 @@
   .lang-btn { min-width: 40px !important; min-height: 40px !important; padding: .35rem .5rem !important; }
 }
 /*<<</gd-header-logo-fit-2026-10-16>>>*/
+
+/* <<<gd-ui-polish-2026-11-04>>> 信息页 UI/UX 细节微调：focus-visible / active / 间距 */
+.hero-btn, .contact-strip a, .footer-nav a, .brand,
+.sidebar-link, .sidebar-sub, .sidebar-toggle-inner, .sidebar-lang-btn,
+.lang-btn, .menu-toggle, .gd-share-btn, .app-install-btn {
+    transition: background-color .25s ease, border-color .25s ease, color .25s ease, box-shadow .25s ease, transform .2s ease;
+}
+.hero-btn:focus-visible, .contact-strip a:focus-visible, .footer-nav a:focus-visible,
+.brand:focus-visible, .sidebar-link:focus-visible, .sidebar-sub:focus-visible,
+.sidebar-toggle-inner:focus-visible, .sidebar-lang-btn:focus-visible,
+.lang-btn:focus-visible, .menu-toggle:focus-visible,
+.gd-share-btn:focus-visible, .app-install-btn:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+}
+.hero-btn { box-shadow: 0 2px 6px rgba(138, 90, 59, .18); }
+.hero-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 14px rgba(138, 90, 59, .28); }
+.hero-btn:active { transform: scale(.98); }
+.intro-block p { max-width: 68ch; }
+.conduct-panel { padding: 1.8rem 2rem; }
+.contact-strip { padding: 2.2rem 2rem; }
+.value-card { transition: border-color .25s ease, box-shadow .25s ease, transform .25s ease; }
+.value-card:active { transform: translateY(-1px) scale(.99); }
 </style>
 
     <script type="application/ld+json">{

@@ -16,7 +16,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="assets/icons/favicon-16x16.png">
     <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32x32.png">
     <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#7A4E33">
+    <meta name="theme-color" content="#8A5A3B">
 	<meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -32,14 +32,14 @@
             --color-surface: #FFFFFF;
             --color-white: #FFFFFF;
             --color-border: #E4DED5;
-            --color-primary: #7A4E33;
-            --color-primary-dark: #5C3A26;
+            --color-primary: #8A5A3B;
+            --color-primary-dark: #68432D;
             --color-primary-light: #F1E8DF;
             --color-text: #25221E;
-            --color-text-secondary: #5C564F;
+            --color-text-secondary: #716B63;
             --color-text-muted: #A49D94;
-            --color-gold: #9C7A3A;
-            --color-gold-soft: rgba(156,122,58,.10);
+            --color-gold: #B08A45;
+            --color-gold-soft: rgba(176, 138, 69, .10);
             --color-bronze-muted: #9C8558;
             --color-qianjinzong: #948268;
             --color-success: #526657;
@@ -352,7 +352,7 @@ header {
 .seller-card-link:hover { background: rgba(255,255,255,.25); }
 .founder-badge {
     display: inline-flex; align-items: center; gap: .28rem;
-    background: linear-gradient(135deg, #9C7A3A 0%, #D4AF6A 50%, #9C7A3A 100%);
+    background: linear-gradient(135deg, #B08A45 0%, #D4AF6A 50%, #B08A45 100%);
     color: #FFFFFF; font-size: .75rem; font-weight: 700;
     letter-spacing: .08em;
     padding: .25rem .55rem .25rem .42rem; border-radius: 20px;
@@ -523,6 +523,53 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
     }
     .image-thumb { flex: 0 0 50px; width: 50px; height: 50px; }
 }
+
+/* ============================================================
+   A11Y FOCUS + ACTIVE PRESS (2026-11 微调)
+   ============================================================ */
+.btn-publish:focus-visible,
+.btn-publish-text:focus-visible,
+.lang-btn:focus-visible,
+.menu-toggle:focus-visible,
+.gd-share-btn:focus-visible,
+.app-install-btn:focus-visible,
+.gd-install-close:focus-visible,
+.announce-close:focus-visible,
+.modal-close:focus-visible,
+.back-link:focus-visible,
+.seller-card-link:focus-visible,
+.contact-btn:focus-visible,
+.btn-cancel:focus-visible,
+.btn-submit:focus-visible,
+.image-nav:focus-visible,
+.image-thumb:focus-visible,
+.sidebar-link:focus-visible,
+.sidebar-sub:focus-visible,
+.footer-nav a:focus-visible,
+.expert-input:focus-visible,
+.expert-textarea:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+}
+.btn-publish:active,
+.btn-publish-text:active,
+.lang-btn:active,
+.menu-toggle:active,
+.gd-share-btn:active,
+.app-install-btn:active,
+.btn-cancel:active,
+.btn-submit:active,
+.contact-btn:active,
+.seller-card-link:active,
+.image-thumb:active {
+    transform: scale(.98);
+}
+.expert-input:focus,
+.expert-textarea:focus {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 1px;
+    border-color: var(--color-primary);
+}
     </style>
     <script type="application/ld+json" id="product-jsonld">{"image":["https://www.gudong.app/assets/images/placeholder.jpg"],"@type":"Product","name":"藏品详情 / Item Detail","description":"藏品详情 / Item Detail. Seller-provided listing information. Gudong.app does not authenticate the item or participate in a sale.","inLanguage":["zh-SG","en-SG"],"url":"https://www.gudong.app/item.html","@context":"https://schema.org"}</script>
     <meta name="twitter:card" content="summary_large_image">
@@ -668,7 +715,7 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
                                 <circle cx="12" cy="6" r="1.4" fill="currentColor" />
                                 <circle cx="21" cy="8" r="1.4" fill="currentColor" />
                             </svg>
-                            <span class="badge-num">18</span>
+                            <span class="badge-num" id="sellerFoundingNo">18</span>
                         </span>
                     </div>
                     <div class="seller-card-id">Seller ID: <span id="sellerId"></span></div>
@@ -755,8 +802,8 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
                 <div class="disclaimer-box zh"><strong>请注意：</strong>Gudong 仅提供藏品信息展示与联系引荐，不鉴定真伪、不担保成交、不代收款项。请务必当面核验实物后再行交易。</div>
                 <div class="disclaimer-box en"><strong>Please note:</strong> Gudong only displays item information and facilitates contact — we do not authenticate items, guarantee sales, or process payments. Always inspect items in person before dealing.</div>
 
-                <div class="disclaimer-box zh" style="border-left:3px solid #9C7A3A;background:#FBF3EC;">💡 <strong>温馨提示：</strong>古玩交易存在鉴赏门槛。线上沟通后，建议买卖双方线下看实物，并使用本站的<a href="./tools/contract.html" style="color:#7A4E33;font-weight:600;">《买卖契约生成工具》</a>签署书面协议，明确卖家是否承诺"包老包真"或"按现状（As-Is）交割"，把责任归属写在纸面上。</div>
-                <div class="disclaimer-box en" style="border-left:3px solid #9C7A3A;background:#FBF3EC;">💡 <strong>Tip:</strong> Antique dealing has a steep learning curve. After chatting online, inspect in person, then use our <a href="./tools/contract.html" style="color:#7A4E33;font-weight:600;">Contract Generator</a> to sign a written agreement — stating clearly whether the seller guarantees age/authenticity or sells As-Is — and put liability on paper.</div>
+                <div class="disclaimer-box zh" style="border-left:3px solid var(--color-gold);background:var(--color-primary-light);">💡 <strong>温馨提示：</strong>古玩交易存在鉴赏门槛。线上沟通后，建议买卖双方线下看实物，并使用本站的<a href="./tools/contract.html" style="color:var(--color-primary);font-weight:600;">《买卖契约生成工具》</a>签署书面协议，明确卖家是否承诺"包老包真"或"按现状（As-Is）交割"，把责任归属写在纸面上。</div>
+                <div class="disclaimer-box en" style="border-left:3px solid var(--color-gold);background:var(--color-primary-light);">💡 <strong>Tip:</strong> Antique dealing has a steep learning curve. After chatting online, inspect in person, then use our <a href="./tools/contract.html" style="color:var(--color-primary);font-weight:600;">Contract Generator</a> to sign a written agreement — stating clearly whether the seller guarantees age/authenticity or sells As-Is — and put liability on paper.</div>
             </div>
         </div>
 
@@ -769,7 +816,7 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
     </main>
         <style>
         /* 2026-10-09：footer 品牌区/免责声明/版权（全站统一·精简版） */
-        .footer-brand { font-weight: 700; font-size: .84rem; color: #5c564f; margin-bottom: .35rem; }
+        .footer-brand { font-weight: 700; font-size: .84rem; color: var(--color-text-secondary); margin-bottom: .35rem; }
         .footer-disclaimer { max-width: 600px; margin: 0 auto 1.1rem; font-size: .73rem; line-height: 1.75; color: var(--color-text-muted); letter-spacing: .02em; }
         .footer-copyright { margin-bottom: .3rem; }
         </style>
@@ -1226,6 +1273,10 @@ function setSellerCard(f, data) {
                 var en = clean(first(sl.display_en) || first(sl.display_zh));
                 if (zh) setText('#sellerNameZh', zh, 'seller.zh');
                 if (en) setText('#sellerNameEn', en, 'seller.en');
+                // 创始藏家编号：按卖家 founding_no 注入徽章（未分配则保留默认 18）
+                var fNo = clean(first(sl.founding_no));
+                var fNoEl = document.getElementById('sellerFoundingNo');
+                if (fNoEl && fNo) fNoEl.textContent = fNo;
                 var link = document.getElementById('sellerLink');
                 if (link) {
                     var fallback = 'collection.html';
@@ -1340,13 +1391,13 @@ function setSellerCard(f, data) {
 .gd-install-title { font-size: 1.08rem; font-weight: 700; color: #3d2b1f; margin: .2rem 0 1rem; }
 .gd-install-steps { text-align: left; margin: 0 auto 1rem; max-width: 290px; }
 .gd-install-step { display: flex; align-items: flex-start; gap: .6rem; padding: .5rem 0; color: #5a4636; font-size: .9rem; line-height: 1.5; }
-.gd-install-step .n { flex-shrink: 0; width: 22px; height: 22px; border-radius: 50%; background: #f0e4d8; color: #7A4E33; font-weight: 700; font-size: .78rem; display: flex; align-items: center; justify-content: center; margin-top: .1rem; }
+.gd-install-step .n { flex-shrink: 0; width: 22px; height: 22px; border-radius: 50%; background: #f0e4d8; color: #8A5A3B; font-weight: 700; font-size: .78rem; display: flex; align-items: center; justify-content: center; margin-top: .1rem; }
 .gd-install-step svg { flex-shrink: 0; width: 22px; height: 22px; fill: #007AFF; margin-top: .1rem; }
 .gd-install-note { font-size: .78rem; color: #9a8d80; margin-top: .5rem; line-height: 1.5; }
 .gd-install-modal [data-lang="en"] .zh, body[data-lang="en"] .gd-install-modal .zh { display: none; }
 .gd-install-modal [data-lang="zh"] .en, body[data-lang="zh"] .gd-install-modal .en { display: none; }
-.app-install-btn { display: inline-flex; align-items: center; gap: .3rem; margin-left: .6rem; padding: .3rem .7rem; border: 1px solid #e3d9cf; border-radius: 999px; color: #7a6a5c; font-size: .78rem; text-decoration: none; vertical-align: middle; transition: .4s cubic-bezier(.25,.1,.25,1); }
-.app-install-btn:hover { border-color: #7A4E33; color: #7A4E33; background: #f0e4d8; }
+.app-install-btn { display: inline-flex; align-items: center; gap: .3rem; margin-left: .6rem; padding: .3rem .7rem; border: 1px solid var(--color-border); border-radius: 999px; color: var(--color-qianjinzong); font-size: .78rem; text-decoration: none; vertical-align: middle; transition: .4s cubic-bezier(.25,.1,.25,1); }
+.app-install-btn:hover { border-color: var(--color-primary); color: var(--color-primary); background: var(--color-primary-light); }
 .app-install-btn svg { width: 12px; height: 12px; flex-shrink: 0; fill: currentColor; }
 </style>
 <div class="gd-install-modal" id="gdInstallModal" role="dialog" aria-modal="true" aria-label="Install guide">
@@ -1492,10 +1543,10 @@ function setSellerCard(f, data) {
 .gd-share-btn svg { width: 16px; height: 16px; fill: currentColor; display: block; }
 .gd-toast {
     position: fixed; left: 50%; bottom: 30px; transform: translateX(-50%) translateY(10px);
-    background: rgba(36,31,26,.92); color: #fff; font-size: .85rem;
+    background: rgba(37, 34, 30, .92); color: #fff; font-size: .85rem;
     padding: .62rem 1.15rem; border-radius: 999px; z-index: 10000;
     opacity: 0; pointer-events: none; transition: opacity .3s ease, transform .3s ease;
-    box-shadow: 0 8px 24px rgba(36,31,26,.25); white-space: nowrap;
+    box-shadow: 0 8px 24px rgba(37, 34, 30, .25); white-space: nowrap;
     max-width: 88vw; overflow: hidden; text-overflow: ellipsis;
 }
 .gd-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }

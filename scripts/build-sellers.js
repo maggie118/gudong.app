@@ -95,6 +95,9 @@ const SEED = {
   CONST_SID: "const SELLER_ID = 'Lim-KW';",
   CONST_SINCE: "let SELLER_SINCE = '2026';",
   CONST_IMG: "const SELLER_IMG_DIR = 'lim-kw';",
+  // 创始藏家编号占位（seed 中两处，均以 001 为占位；生成时按卖家 founding_no 注入或整段移除。注意 seed 为 CRLF 行尾）
+  FOUNDER_BADGE: '                    <!-- 创始藏家编号：按分配表填该藏家的号，如 001/002/003…（全局唯一，勿与他人重复） -->\r\n                    <span class="badge-num">001</span>',
+  FOUNDER_META: '                <!-- 创始藏家编号：与上方徽章同号 -->\r\n                <span><span class="zh">创始藏家编号</span><span class="en">Founding No.</span>：<b id="founderNo">001</b></span>',
 };
 
 // 每家卖家的替换值（基于数据计算）
@@ -149,6 +152,16 @@ function buildPage(seller, seedHtml) {
   h = replaceAll(h, SEED.CONST_SINCE, `let SELLER_SINCE = '${v.since}';`);
   h = replaceAll(h, SEED.CONST_IMG, `const SELLER_IMG_DIR = '${v.slug}';`);
 
+  // 创始藏家编号：按卖家数据注入（未分配则整段移除，避免所有卖家都显示占位号）
+  const foundingNo = String(seller.founding_no == null ? '' : seller.founding_no).trim();
+  if (foundingNo) {
+    h = replaceAll(h, SEED.FOUNDER_BADGE, `                    <!-- 创始藏家编号：${escHtml(foundingNo)} -->\r\n                    <span class="badge-num">${escHtml(foundingNo)}</span>`);
+    h = replaceAll(h, SEED.FOUNDER_META, `                <span><span class="zh">创始藏家编号</span><span class="en">Founding No.</span>：<b id="founderNo">${escHtml(foundingNo)}</b></span>`);
+  } else {
+    h = replaceAll(h, SEED.FOUNDER_BADGE, '');
+    h = replaceAll(h, SEED.FOUNDER_META, '');
+  }
+
   // 注入「专属网址 + 二维码」区块
   h = injectQrSection(h, v);
   return h;
@@ -193,12 +206,15 @@ function buildIndex(seedIndex, enabled, items) {
       const sid = String(f.seller_id || '').replace(/[^A-Za-z0-9-]/g, '-');
       return slugify(sid) === v.slug || sid === s.seller_id;
     }).length;
+    const foundingNo = String(s.founding_no == null ? '' : s.founding_no).trim();
+    const founderBadge = foundingNo ? `                        <span class="badge-num">${escHtml(foundingNo)}</span>` : '';
     return `            <a href="${v.canon}" class="gallery-card" data-seller-id="${escHtml(s.seller_id)}">
                 <div class="gallery-badge zh">新入驻</div><div class="gallery-badge en">New</div>
                 <div class="gallery-name">
                     <span class="zh">${escHtml(v.nameZh)}</span><span class="en">${escHtml(v.nameEn)}</span>
                     <span class="founder-badge" title="创始藏家 · ${escHtml(String(v.since))}" aria-label="Founding Collector ${escHtml(String(v.since))}">
                         <img class="founder-badge-icon" src="../assets/images/foundingcollector.webp" alt="创始藏家 Founder Collector">
+${founderBadge}
                     </span>
                 </div>
                 <div class="gallery-desc zh">${escHtml(v.introZh)}</div>

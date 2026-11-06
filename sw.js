@@ -87,8 +87,12 @@
  *   item 主图 object-fit 改 contain 不裁切、全站小字号提升至 ≥12px、
  *   seller 徽章/标签字号提升
  * - v8 → v9：配合首页改版提升缓存版本号
+ * 2026-11-06：v58 → v59（移除全站智能客服组件）
+ * - 删除 gudong-chatbot（小顾·社区引导员/AI 智能客服）：120 个页面移除 CSS/容器/脚本注入；
+ * - 预缓存清单移除 gudong-chatbot.css/js 与 chat-index.json，并删除对应文件；
+ * - 提升缓存版本，强制已安装 PWA 刷新页面
  */
-const CACHE_NAME = 'antique-collection-v58';
+const CACHE_NAME = 'antique-collection-v59';
 // 预缓存清单：核心页面 + 常用图标 + 占位图 + 工具页（离线可用）
 // 注意：改用逐个 cache.add，单个 404 不会导致整个 install 失败
 const PRECACHE_ASSETS = [
@@ -131,9 +135,6 @@ const PRECACHE_ASSETS = [
   '/assets/icons/icon-512.png',
   '/assets/icons/logo-mark.png',
   '/assets/images/placeholder.jpg',
-  '/assets/css/gudong-chatbot.css',
-  '/assets/js/gudong-chatbot.js',
-  '/assets/data/chat-index.json',
   '/assets/js/push-subscribe.js'
 ];
 // ---- install：预缓存核心资源（逐个 add，容错） ----

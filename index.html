@@ -1786,71 +1786,6 @@
        ============================================================ */
     #hero { margin-bottom: .9rem; }
 
-    /* ---------- 首屏信任保障带 ---------- */
-    .assurance-band {
-        max-width: 1020px;
-        margin: .2rem auto 2.4rem;
-        padding: 1.4rem 1.35rem 1.2rem;
-        background: linear-gradient(180deg, #FFFDF8 0%, #FAF5EA 100%);
-        border: 1px solid var(--color-border);
-        border-radius: 16px;
-        box-shadow: 0 8px 26px rgba(138, 90, 59, .06);
-        position: relative;
-        overflow: hidden;
-    }
-    .assurance-band::before {
-        content: '';
-        position: absolute;
-        inset: 0 0 auto 0;
-        height: 2px;
-        background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
-    }
-    .ab-intro { text-align: center; margin-bottom: 1.15rem; }
-    .ab-kicker {
-        display: block;
-        font-size: .61rem; font-weight: 700;
-        letter-spacing: .26em; text-transform: uppercase;
-        color: var(--color-gold);
-    }
-    .ab-title {
-        display: block;
-        margin-top: .4rem;
-        font-family: var(--font-serif);
-        font-size: 1.04rem; font-weight: 700;
-        letter-spacing: .06em;
-        color: var(--color-primary-dark);
-    }
-    .ab-grid {
-        display: grid;
-        grid-template-columns: repeat(4, minmax(0, 1fr));
-        gap: .55rem;
-    }
-    .ab-item {
-        padding: .15rem .8rem;
-        border-left: 1px solid rgba(176, 138, 69, .16);
-    }
-    .ab-item:first-child { border-left: none; }
-    .ab-icon {
-        display: inline-flex; align-items: center; justify-content: center;
-        width: 27px; height: 27px;
-        border-radius: 50%;
-        background: var(--color-gold-soft);
-        color: var(--color-gold);
-        margin-bottom: .45rem;
-    }
-    .ab-icon svg { width: 14px; height: 14px; fill: currentColor; display: block; }
-    .ab-name {
-        font-size: .84rem; font-weight: 700;
-        color: var(--color-text);
-        line-height: 1.45;
-        margin-bottom: .22rem;
-    }
-    .ab-desc {
-        font-size: .74rem;
-        color: var(--color-text-secondary);
-        line-height: 1.65;
-    }
-
     /* ---------- 情报台：上浮 + 视觉加权 ---------- */
     #insights {
         background: linear-gradient(180deg, #FFFDF8 0%, #FBF6EC 100%);
@@ -2032,14 +1967,9 @@
     }
 
     @media (max-width: 860px) {
-        .ab-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem .6rem; }
-        .ab-item { border-left: none; padding: 0 .15rem; }
         .intel-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
     @media (max-width: 640px) {
-        .assurance-band { padding: 1.15rem 1rem 1.05rem; margin-bottom: 1.8rem; }
-        .ab-title { font-size: .95rem; }
-        .ab-desc { font-size: .71rem; }
         #insights { padding: 1.2rem 1rem 1.05rem; margin-bottom: 3.4rem; }
         #insights .section-head2 .title { font-size: 1.3rem; }
         #insights .insight-grid { grid-template-columns: 1fr; }
@@ -2178,45 +2108,6 @@
                     <span class="hero-stat hero-stat--accent"><b>直连</b><span class="zh">买家直连藏家 · 不收佣金</span><span class="en">Buyers direct · No commission</span></span>
                 </div>
                 <a href="#today-finds" class="hero-btn"><span class="zh">开始浏览</span><span class="en">Explore the Collection</span></a>
-            </div>
-        </section>
-
-        <!-- ============ 首屏信任保障带（懂行 · 私密 · 安全 · 有审美） ============ -->
-        <section class="assurance-band" aria-label="隐私与信任保障">
-            <div class="ab-intro">
-                <span class="ab-kicker">Singapore · Private Collectors' Network</span>
-                <span class="ab-title zh">懂行 · 私密 · 安全 · 有审美</span>
-                <span class="ab-title en">Expert. Private. Secure. Curated.</span>
-            </div>
-            <div class="ab-grid">
-                <div class="ab-item">
-                    <span class="ab-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2 4 5.5V11c0 5 3.6 9.6 8 11 4.4-1.4 8-6 8-11V5.5L12 2z"/></svg></span>
-                    <div class="ab-name zh">端到端私密直连</div>
-                    <div class="ab-name en">End-to-End Private</div>
-                    <div class="ab-desc zh">免注册浏览，WhatsApp 加密直连藏家，平台不留存对话。</div>
-                    <div class="ab-desc en">Browse without sign-up; encrypted WhatsApp lines to collectors. No conversation stored.</div>
-                </div>
-                <div class="ab-item">
-                    <span class="ab-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16zm1-13h-2v1.2c-1.7.3-3 1.4-3 3.1 0 1.9 1.5 3 3.4 3.4 1.4.3 2 .7 2 1.4 0 .8-.8 1.3-1.9 1.3-1.2 0-2.1-.5-2.8-1.2l-1.3 1.6c.8.8 2 1.4 3.6 1.6V21h2v-1.6c1.8-.3 3.1-1.5 3.1-3.3 0-2-1.5-3-3.6-3.5-1.3-.3-1.9-.7-1.9-1.3 0-.7.7-1.2 1.8-1.2 1 0 1.8.4 2.4 1l1.2-1.5c-.8-.8-1.8-1.3-3-1.5V7z"/></svg></span>
-                    <div class="ab-name zh">现阶段不参与交易、不收佣金</div>
-                    <div class="ab-name en">No transactions at this stage · no commission</div>
-                    <div class="ab-desc zh">买卖双方自行议价与结算，平台只提供信息与连接。</div>
-                    <div class="ab-desc en">Buyers and sellers negotiate and settle directly — the platform only lists and connects.</div>
-                </div>
-                <div class="ab-item">
-                    <span class="ab-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M21 4H7a3 3 0 0 0-3 3v13a3 3 0 0 1 3-3h14V4zM7 19h14v2H7a1 1 0 0 1 0-2z"/></svg></span>
-                    <div class="ab-name zh">行家编辑团队 · 断代工具</div>
-                    <div class="ab-name en">Specialist Editors · Dating Tools</div>
-                    <div class="ab-desc zh">年代、窑口、款识工具一触即得；情报由编辑与本地行家共同整理。</div>
-                    <div class="ab-desc en">Period, kiln and mark tools at a touch; insights compiled with local specialists.</div>
-                </div>
-                <div class="ab-item">
-                    <span class="ab-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2 2 9l10 13L22 9 12 2z"/></svg></span>
-                    <div class="ab-name zh">南洋臻藏 · 人工过目</div>
-                    <div class="ab-name en">Curated in Nanyang</div>
-                    <div class="ab-desc zh">每件上架藏品经人工过目，宁少勿滥，守住藏家圈的审美与秩序。</div>
-                    <div class="ab-desc en">Every listed piece is reviewed by hand — fewer, better, in keeping with the circle.</div>
-                </div>
             </div>
         </section>
 
@@ -2400,15 +2291,15 @@
                         <div class="how-num">02</div>
                         <div class="how-title zh">直接连接真正的藏家</div>
                         <div class="how-title en">Connect directly with genuine collectors.</div>
-                        <div class="how-desc zh">不绕平台、不经过中间层，直接与藏家沟通。</div>
-                        <div class="how-desc en">No platform mediation, no middlemen. Communicate directly with collectors.</div>
+                        <div class="how-desc zh">不绕平台、不经过中间层，直接与藏家沟通；WhatsApp 加密直连，平台不留存对话。</div>
+                        <div class="how-desc en">No platform mediation, no middlemen. Encrypted WhatsApp lines straight to the collector — no conversation stored.</div>
                     </div>
                     <div class="how-card">
                         <div class="how-num">03</div>
                         <div class="how-title zh">信息透明，自己判断</div>
                         <div class="how-title en">Transparent information. Make your own judgment.</div>
-                        <div class="how-desc zh">价格由卖家设定，资料来自卖家；平台提供信息与发现，不替你做鉴定决定。</div>
-                        <div class="how-desc en">Prices set by sellers, information provided by sellers. The platform offers listings and discoveries, and does not make appraisal decisions on your behalf.</div>
+                        <div class="how-desc zh">价格由卖家设定，资料来自卖家；平台提供信息与发现，不替你做鉴定决定。上架藏品均经人工过目，宁少勿滥。</div>
+                        <div class="how-desc en">Prices and information come from sellers. The platform offers listings and discoveries and does not appraise on your behalf. Every listed piece is reviewed by hand — fewer, better.</div>
                     </div>
                 </div>
 

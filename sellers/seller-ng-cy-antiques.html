@@ -468,10 +468,9 @@ footer {
             </div>
         </section>
 
-                <!-- 买家名单 · 关注此藏家（2026-11-07） -->
         <div id="gdBuyerPanel" style="margin:1.1rem 0 1.4rem;"></div>
 
-<!-- 筛选栏 -->
+        <!-- 筛选栏 -->
         <div class="filter-bar">
             <span class="label zh">类别</span><span class="label en">Category</span>
             <a href="#" class="filter-chip active" data-cat="all" onclick="setCat(event,'all')"><span class="zh">全部</span><span class="en">All</span></a>
@@ -1001,25 +1000,25 @@ window.gdSharePage = function () {
 <link rel="stylesheet" href="../assets/css/gudong-contact.css">
 <script src="../assets/js/gudong-contact.js" defer></script>
 <script src="/assets/js/push-subscribe.js" defer></script>
-<script src="../assets/js/buyer-list.js"></script>
-<script>
-/* 买家名单 · 关注此藏家（2026-11-07） */
-(function () {
-  function boot() {
-    var box = document.getElementById('gdBuyerPanel');
-    if (!box || !window.GudongBuyer) return;
-    function txt(id) { var el = document.getElementById(id); return el ? (el.textContent || '').trim() : ''; }
-    GudongBuyer.mount(box, {
-      seller: function () { return txt('sellerId'); },
-      sellerNameZh: txt('sellerNameZh'),
-      sellerNameEn: txt('sellerNameEn'),
-      source: 'item-page'
-    });
-  }
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
-  else boot();
-})();
-</script>
+<script src="../assets/js/buyer-list.js"></script>
+<script>
+/* 买家名单面板：留 WhatsApp / 邮箱 + 关注此藏家（新上架先通知） */
+(function () {
+  function boot() {
+    var box = document.getElementById('gdBuyerPanel');
+    if (!box || !window.GudongBuyer) return;
+    function txt(id) { var el = document.getElementById(id); return el ? (el.textContent || '').trim() : ''; }
+    GudongBuyer.mount(box, {
+      seller: typeof SELLER_ID === 'undefined' ? '' : SELLER_ID,
+      sellerNameZh: txt('sellerNameZh'),
+      sellerNameEn: txt('sellerNameEn'),
+      source: 'seller-page'
+    });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
+  else boot();
+})();
+</script>
 </body>
 </html>
 

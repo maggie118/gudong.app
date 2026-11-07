@@ -206,6 +206,26 @@ function injectQrSection(h, v) {
   return h.replace('</main>', style + '\n    </main>');
 }
 
+/* ---------- 目录页的买家名单区块（每次重建都必须保留，别放进 seed） ---------- */
+const BUYER_LIST_SECTION = `
+        <!-- 买家名单 · 关注藏家与品类（2026-11-07） -->
+        <section id="buyer-list" style="margin:3rem 0 0;">
+            <div style="max-width:1040px;margin:0 auto;display:grid;grid-template-columns:1.05fr .95fr;gap:2rem;align-items:center;border-top:1px solid rgba(176,138,69,.22);padding-top:2rem;">
+                <div>
+                    <div style="font-size:.62rem;letter-spacing:.24em;text-transform:uppercase;color:#9A7635;font-weight:700;">Buyer list · 买家名单</div>
+                    <h2 style="font-family:'Playfair Display','Noto Serif SC','Songti SC',serif;font-weight:500;font-size:1.5rem;letter-spacing:.04em;color:#2A2621;margin:.5rem 0 .6rem;line-height:1.5;">
+                        <span class="zh">关注藏家，新上架先通知你</span>
+                        <span class="en">Follow the collectors you like</span>
+                    </h2>
+                    <p style="font-size:.86rem;line-height:1.9;color:#6E665C;max-width:46ch;">
+                        <span class="zh">留 WhatsApp 或邮箱，选你想跟的藏家与品类。有新的合眼藏品上架，我们第一时间告诉你——不发广告，随时可退订。</span>
+                        <span class="en">Leave a WhatsApp number or email and pick the collectors and categories you care about. We'll tell you the moment something new arrives — no ads, unsubscribe anytime.</span>
+                    </p>
+                </div>
+                <div id="gdBuyerPanel"></div>
+            </div>
+        </section>`;
+
 /* ---------- 生成卖家目录页 index.html ---------- */
 function buildIndex(seedIndex, enabled, items) {
   const cards = enabled.map(s => {
@@ -241,7 +261,7 @@ ${founderBadge}
   const end = seedIndex.indexOf('</main>', start);
   if (end < 0) throw new Error('index.html 中找不到 </main>');
   const rebuilt =
-    '        <div class="gallery-grid">\n' + cards + '\n        </div>\n    </main>';
+    '        <div class="gallery-grid">\n' + cards + '\n        </div>\n' + BUYER_LIST_SECTION + '\n    </main>';
   return seedIndex.slice(0, start) + rebuilt + seedIndex.slice(end + '</main>'.length);
 }
 

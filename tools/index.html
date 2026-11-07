@@ -584,6 +584,7 @@
             <a href="../tools/era-lookup.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 古文化朝代年代速查</span><span class="en">· Culture &amp; Dynasty Era Lookup</span></a>
             <a href="../tools/mark-lookup.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 瓷器底款快查</span><span class="en">· Porcelain Mark Lookup</span></a>
             <a href="../tools/valuation.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 简易估值参考</span><span class="en">· Market Valuation Reference</span></a>
+            <a href="../tools/checklist.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 验货清单（可打印）</span><span class="en">· Inspection Checklist</span></a>
             <a href="../tools/contract.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 买卖契约生成器</span><span class="en">· Contract &amp; Endorsement Generator</span></a>
             <a href="../tools/authenticity-check.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 仿品与断代自查</span><span class="en">· Fake &amp; Dating Self-Check</span></a>
             <a href="../about.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">关于我们</span><span class="en">About</span></a>
@@ -616,14 +617,14 @@
                 <div class="en">⚠️ Disclaimer: All tools perform calendar-math or historical reference only. <strong>Must not be used for antique dating, authentication or appraisal. Consult independent experts for critical decisions.</strong></div>
             </div>
 
-            <!-- 2026-11-07：买家入口（先自查、再签约） -->
+            <!-- 2026-11-07：买家入口（先自查 → 再带清单验货 → 成交落纸） -->
             <div class="buyer-entry">
                 <div class="be-head">
                     <span class="be-kicker">For buyers · 买 家 先 看</span>
-                    <span class="be-title zh">买之前，先过这两步</span>
-                    <span class="be-title en">Two steps before you buy</span>
-                    <span class="be-sub zh">免费、不用注册。先自查疑点，再带着清单去验货，成交时用规范契约写清条件。</span>
-                    <span class="be-sub en">Free, no sign-up. Screen the red flags first, take the checklist to inspection, then put the terms in writing.</span>
+                    <span class="be-title zh">买之前，就这三步</span>
+                    <span class="be-title en">Three steps before you buy</span>
+                    <span class="be-sub zh">免费、不用注册。先自查疑点，再打印清单带去现场逐项核对，成交时用规范契约把条件写清楚。</span>
+                    <span class="be-sub en">Free, no sign-up. Screen the red flags first, print the checklist for the inspection, then put the terms in writing.</span>
                 </div>
                 <div class="be-grid">
                     <a class="be-card" href="authenticity-check.html">
@@ -634,12 +635,20 @@
                         <span class="be-card-desc en">Category-by-category red flags: visual lean, conflicting signals, verification order and suggested clauses.</span>
                         <span class="be-card-more zh">先做自查 →</span><span class="be-card-more en">Run the check →</span>
                     </a>
-                    <a class="be-card" href="contract.html">
+                    <a class="be-card" href="checklist.html">
                         <span class="be-no">02</span>
-                        <span class="be-card-title zh">验货清单 + 买卖契约</span>
-                        <span class="be-card-title en">Inspection checklist &amp; contract</span>
-                        <span class="be-card-desc zh">打印清单逐项核对品相、款识、尺寸与瑕疵；明确「包老包真」或「按现状 As-Is」。</span>
-                        <span class="be-card-desc en">Print the checklist for condition, marks, dimensions and flaws; state "guaranteed authentic" or "as-is".</span>
+                        <span class="be-card-title zh">验货清单（可打印）</span>
+                        <span class="be-card-title en">Inspection checklist</span>
+                        <span class="be-card-desc zh">打印带去现场：尺寸重量、款识工艺、冲线修补后配、来源文件、现场动作逐项勾选。</span>
+                        <span class="be-card-desc en">Take it on site: dimensions, marks, hairlines and repairs, provenance, and what to check with your own hands.</span>
+                        <span class="be-card-more zh">打开清单 →</span><span class="be-card-more en">Open checklist →</span>
+                    </a>
+                    <a class="be-card" href="contract.html">
+                        <span class="be-no">03</span>
+                        <span class="be-card-title zh">买卖契约生成器</span>
+                        <span class="be-card-title en">Sales contract generator</span>
+                        <span class="be-card-desc zh">明确「包老包真」或「按现状 As-Is」，写清付款、交割与跨境风险分配。</span>
+                        <span class="be-card-desc en">State guaranteed authenticity or as-is, with payment, delivery and cross-border risk allocation.</span>
                         <span class="be-card-more zh">生成契约 →</span><span class="be-card-more en">Generate contract →</span>
                     </a>
                 </div>
@@ -653,7 +662,7 @@
             .be-title { display: block; font-family: "Playfair Display","Noto Serif SC","Songti SC",serif; font-weight: 500;
                 font-size: 1.35rem; letter-spacing: .03em; color: #2A2621; margin: .4rem 0 .45rem; }
             .be-sub { display: block; font-size: .8rem; line-height: 1.85; color: #6E665C; max-width: 62ch; }
-            .be-grid { display: grid; grid-template-columns: 1fr 1fr; gap: .9rem; margin: 1.1rem 0 .9rem; }
+            .be-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: .8rem; margin: 1.1rem 0 .9rem; }
             .be-card { display: block; padding: 1.2rem 1.3rem; border: 1px solid #E8E2D6; background: #FFFDF9; text-decoration: none;
                 transition: .3s cubic-bezier(.25,.1,.25,1); }
             .be-card:hover { border-color: #B08A45; background: #fff; box-shadow: 0 8px 22px rgba(37,34,30,.07); transform: translateY(-2px); }
@@ -662,6 +671,7 @@
             .be-card-desc { display: block; font-size: .78rem; line-height: 1.8; color: #6E665C; }
             .be-card-more { display: inline-block; margin-top: .8rem; font-size: .75rem; font-weight: 600; color: #6F4A31; letter-spacing: .04em; }
             .be-note { font-size: .7rem; line-height: 1.8; color: #9A938A; margin-bottom: 1.6rem; }
+            @media (max-width: 900px) { .be-grid { grid-template-columns: 1fr 1fr; } }
             @media (max-width: 720px) { .be-grid { grid-template-columns: 1fr; } }
             </style>
 

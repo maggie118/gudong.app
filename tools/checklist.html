@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="zh-SG">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Antique Inspection Checklist｜古董验货清单（可打印）｜Gudong.app</title>
+<meta name="description" content="可打印的古董验货清单：尺寸、重量、款识、品相、修补、后配、来源与现场核验动作逐项核对，中英双语。只做记录与核对，不构成鉴定意见。">
+<meta name="keywords" content="古董验货清单,antique inspection checklist,古玩看货清单,瓷器品相核对,冲线修补后配,provenance checklist,singapore antique inspection">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<link rel="canonical" href="https://www.gudong.app/tools/checklist">
+<meta property="og:site_name" content="Gudong.app">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.gudong.app/tools/checklist">
+<meta property="og:title" content="古董验货清单（可打印）｜Inspection Checklist">
+<meta property="og:description" content="打印带去现场逐项核对：外观、品相、修补后配、款识工艺、来源文件、现场动作。只做记录，不构成鉴定意见。">
+<meta property="og:image" content="https://www.gudong.app/og-cover.png">
+<meta name="twitter:card" content="summary_large_image">
+<style>
+:root {
+  --ink: #2A2621;
+  --ink-2: #5C554C;
+  --ink-3: #8B8378;
+  --gold: #B08A45;
+  --gold-deep: #6F4A31;
+  --line: #D8CEBC;
+  --bg: #FBF8F2;
+  --paper: #FFFFFF;
+}
+* { box-sizing: border-box; }
+body[data-lang="en"] .zh { display: none; }
+body[data-lang="zh"] .en { display: none; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", system-ui, -apple-system, sans-serif;
+  font-size: 15px;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+.serif { font-family: "Playfair Display", "Noto Serif SC", "Songti SC", "STSong", serif; }
+
+/* ---------- 顶部工具栏（打印时隐藏） ---------- */
+.toolbar {
+  position: sticky; top: 0; z-index: 10;
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  padding: .7rem 1.2rem;
+  background: rgba(251,248,242,.94);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line);
+}
+.toolbar a.back, .toolbar button {
+  font: inherit; font-size: .82rem; font-weight: 600;
+  color: var(--gold-deep); background: none;
+  border: 1px solid var(--line); border-radius: 6px;
+  padding: .45rem .8rem; cursor: pointer; text-decoration: none;
+  transition: border-color .2s, background .2s;
+}
+.toolbar a.back:hover, .toolbar button:hover { border-color: var(--gold); background: #fff; }
+.toolbar .tb-right { display: flex; gap: .5rem; }
+.toolbar button.primary { background: var(--gold-deep); color: #fff; border-color: var(--gold-deep); }
+.toolbar button.primary:hover { background: #5C3B26; }
+
+/* ---------- 纸张 ---------- */
+.sheet {
+  max-width: 860px;
+  margin: 1.6rem auto 3rem;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  padding: 2.2rem 2.4rem 2.4rem;
+  box-shadow: 0 14px 40px -28px rgba(42,38,33,.5);
+}
+.head-rule { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; border-bottom: 1px solid var(--line); padding-bottom: .7rem; }
+.brand { font-size: .66rem; letter-spacing: .26em; text-transform: uppercase; color: var(--gold); font-weight: 700; }
+.title { font-size: 1.75rem; font-weight: 500; letter-spacing: .02em; margin: .7rem 0 .25rem; }
+.subtitle { font-size: .84rem; color: var(--ink-2); margin: 0 0 .2rem; }
+.meta {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: .3rem 1.6rem;
+  margin: 1.15rem 0 1.4rem; font-size: .82rem; color: var(--ink-2);
+}
+.meta .field { display: flex; align-items: baseline; gap: .5rem; }
+.meta .field span { white-space: nowrap; color: var(--ink-3); font-size: .74rem; letter-spacing: .04em; }
+.meta .field em { flex: 1; border-bottom: 1px dotted var(--line); height: 1.15rem; }
+
+.sec { margin: 1.35rem 0 0; break-inside: avoid; }
+.sec-head { display: flex; align-items: baseline; gap: .55rem; margin-bottom: .45rem; }
+.sec-no { font-family: "Playfair Display", serif; font-size: .74rem; letter-spacing: .16em; color: var(--gold); }
+.sec-title { font-size: 1rem; font-weight: 600; letter-spacing: .02em; }
+.sec-title-en { font-size: .74rem; color: var(--ink-3); font-weight: 400; letter-spacing: .02em; }
+
+.rows { border-top: 1px solid #EFE9DD; }
+.row { display: flex; align-items: flex-start; gap: .6rem; padding: .38rem 0 .42rem; border-bottom: 1px solid #F2EDE3; }
+.cb { flex: 0 0 15px; width: 15px; height: 15px; border: 1px solid #C6BBA7; border-radius: 2px; margin-top: .28rem; }
+.row-label { font-size: .82rem; color: var(--ink); line-height: 1.6; }
+.row-note { margin-left: auto; flex: 0 0 34%; border-bottom: 1px dotted var(--line); height: 1.1rem; }
+
+.blank { margin-top: .55rem; }
+.blank .lines { border-bottom: 1px dotted var(--line); height: 1.6rem; }
+
+.concl { display: flex; flex-wrap: wrap; gap: 1.2rem 2rem; margin: .5rem 0 .2rem; font-size: .82rem; }
+.concl label { display: inline-flex; align-items: center; gap: .45rem; cursor: default; }
+
+.sign { display: grid; grid-template-columns: 1fr 1fr; gap: 1.4rem; margin-top: 1.6rem; padding-top: 1.1rem; border-top: 1px solid var(--line); }
+.sign .sig { font-size: .78rem; color: var(--ink-3); }
+.sign .sig .line { display: block; border-bottom: 1px solid var(--ink-3); height: 2.2rem; margin-bottom: .35rem; }
+
+.note {
+  margin-top: 1.5rem; padding: .9rem 1rem; background: #FBF7EE; border-left: 3px solid var(--gold);
+  font-size: .76rem; line-height: 1.8; color: var(--ink-2);
+}
+.next { display: flex; flex-wrap: wrap; align-items: center; gap: .6rem 1rem; margin-top: 1.1rem; font-size: .82rem; color: var(--ink-2); }
+.next a { color: var(--gold-deep); font-weight: 700; text-decoration: underline; }
+
+@media (max-width: 640px) {
+  .sheet { padding: 1.4rem 1.1rem 1.6rem; margin: 1rem .7rem 2rem; }
+  .meta { grid-template-columns: 1fr; }
+  .row-note { flex-basis: 26%; }
+  .sign { grid-template-columns: 1fr; }
+  .title { font-size: 1.45rem; }
+}
+
+/* ---------- 打印 ---------- */
+@page { size: A4; margin: 14mm 12mm; }
+@media print {
+  body { background: #fff; font-size: 10.5pt; }
+  .toolbar, .next, .toolbar a.back { display: none !important; }
+  .sheet { max-width: none; margin: 0; padding: 0; border: none; box-shadow: none; }
+  .title { font-size: 16pt; }
+  .sec { margin-top: 10pt; }
+  .row { padding: 2.2pt 0; }
+  .row-note { flex-basis: 30%; height: 10pt; }
+  .note { background: #fff; border-left: 2px solid #999; }
+  a { color: #000; text-decoration: none; }
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+</style>
+</head>
+<body data-lang="zh">
+
+<div class="toolbar">
+  <a class="back" href="./index.html"><span class="zh">← 返回工具中心</span><span class="en">← All tools</span></a>
+  <div class="tb-right">
+    <button type="button" onclick="toggleLang()" id="langBtn">EN</button>
+    <button type="button" class="primary" onclick="window.print()"><span class="zh">打印 / 存为 PDF</span><span class="en">Print / Save PDF</span></button>
+  </div>
+</div>
+
+<div class="sheet">
+  <div class="head-rule">
+    <div class="brand">Gudong.app · Buyer tools</div>
+  </div>
+  <h1 class="title serif"><span class="zh">古董验货清单</span><span class="en">Antique Inspection Checklist</span></h1>
+  <p class="subtitle"><span class="zh">打印后带去现场，对着实物逐项核对、随手记录。这不是鉴定，是把「我看到了什么」写下来。</span><span class="en">Print it and take it on site. Tick and note as you look. This is not authentication — it is a record of what you actually saw.</span></p>
+
+  <div class="meta">
+    <div class="field"><span><span class="zh">藏品名称</span><span class="en">Item</span></span><em></em></div>
+    <div class="field"><span><span class="zh">品类 / 年代</span><span class="en">Category / period</span></span><em></em></div>
+    <div class="field"><span><span class="zh">卖家 / 编号</span><span class="en">Seller / ref</span></span><em></em></div>
+    <div class="field"><span><span class="zh">看货地点</span><span class="en">Where</span></span><em></em></div>
+    <div class="field"><span><span class="zh">看货日期</span><span class="en">Date</span></span><em></em></div>
+    <div class="field"><span><span class="zh">报价</span><span class="en">Asking price</span></span><em></em></div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-head"><span class="sec-no">01</span><span class="sec-title"><span class="zh">基础与外观</span><span class="en">Form &amp; surface</span></span></div>
+    <div class="rows">
+      <div class="row"><span class="cb"></span><span class="row-label"><span class="zh">器型、比例与图片一致</span><span class="en">Form and proportion match the photos</span></span><span class="row-note"></span></div>
+      <div class="row"><span class="cb"></span><span class="row-label"><span class="zh">尺寸已实测：长 × 宽 × 高 · 口径 · 底径</span><span class="en">Dimensions measured: L × W × H · mouth · base</span></span><span class="row-note"></span></div>
+      <div class="row"><span class="cb"></span><span class="row-label"><span class="zh">重量已实测（克）</span><span class="en">Weight measured (g)</span></span><span class="row-note"></span></div>
+      <div class="row"><span class="cb"></span><span class="row-label"><span class="zh">釉色 / 材质与照片一致，无明显色差</span><span class="en">Glaze or material matches photos, no obvious colour shift</span></span><span class="row-note"></span></div>
+      <div class="row"><span class="cb"></span><span class="row-label"><span class="zh">纹饰清晰可辨，无刻意遮挡的角度</span><span class="en">Decoration legible; no angles deliberately hidden</span></span><span class="row-note"></span></div>
+      <div class="row"><span class="cb"></span><span class="row-label"><span class="zh">底部、底足与照片一致</span><span class="en">Base and foot match the photos</span></span><span class="row-note"></span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-head"><span class="sec-no">02</span><span class="sec-title"><span class="zh">品相与修复</span><span class="en">Condition &amp; repairs</span></span></div>
+    <div class="rows">
+      <div class="row"><span class="cb"></span><span class="row-label"><span class="zh">无冲线（沿口、腹部、底足逐处看）</span><span class="en">No hairlines (check rim, body, foot)</span></span><span class="row-note"></span></div>
+      <div class="row"><span class="cb"></span><span class="row-label"><span class="zh">无裂纹、无贯穿伤</span><span class="en">No cracks, nothing through the body</span></span><span class="row-note"></span></div>
+      <div class="row"><span class="cb"></span><span class="row-label"><span class="zh">无崩口、磕碰、缺肉</span><span class="en">No chips, dings or missing glaze</span></span><span class="row-note"></span></div>
+      <div class="row"><span class="cb"></span><span class="row-label"><span class="zh">无修补、无接底、无拼补</span><span class="en">No restoration, joined base or assembly</span></span><span class="row-note"></span></div>
+      <div class="row"><span class="cb"></span><span class="row-label"><span class="zh">无后配部件（盖 · 座 · 柄 · 流 · 环）</span><span class="en">No replaced parts (lid · stand · handle · spout · ring)</span></span><span class="row-note"></span></div>
+      <div class="row"><span class="cb"></span><span class="row-label"><span class="zh">无补彩、描金、补釉、做旧</span><span class="en">No repainting, re-gilding, reglazing or artificial ageing</span></span><span class="row-note"></span></div>
+      <div class="row"><span class="cb"></span><span class="row-label"><span class="zh">有正常使用痕迹（磨损、划痕属正常）</span><span class="en">Normal wear and scratches only</span></span><span class="row-note"></span></div>
+      <div class="row"><span class="cb"></span><span class="row-label"><span class="zh">有旧伤 → 记入第 06 节，作为议价依据</span><span class="en">Old damage → record in section 06 for negotiation</span></span><span class="row-note"></span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-head"><span class="sec-no">03</span><span class="sec-title"><span class="zh">款识与工艺</span><span class="en">Marks &amp; technique</span></span></div>
+    <div class="rows">
+      <div class="row"><span class="cb"></span><span class="row-label"><span class="zh">款识清楚，书写自然不板滞</span><span class="en">Mark clear and naturally written</span></span><span class="row-note"></span></div>
+      <div class="row"><span class="cb"></span><span class="row-label"><span class="zh">胎质、胎骨手感与所述年代相符</span><span class="en">Body and paste feel consistent with the claimed period</span></span><span class="row-note"></span></div>
+      <div class="row"><span class="cb"></span><span class="row-label"><span class="zh">圈足修整、垫烧痕迹自然</span><span class="en">Foot finishing and firing supports look natural</span></span><span class="row-note"></span></div>
+      <div class="row"><span class="cb"></span><span class="row-label"><span class="zh">目视异常点（写下位置，例如「底足左侧一圈补釉」）</span><span class="en">Visual anomalies — note where, e.g. "reglazed ring at left foot"</span></span><span class="row-note"></span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-head"><span class="sec-no">04</span><span class="sec-title"><span class="zh">来源与文件</span><span class="en">Provenance &amp; papers</span></span></div>
+    <div class="rows">
+      <div class="row"><span class="cb"></span><span class="row-label"><span class="zh">卖家口述来源已记录（何人、何时、何地）</span><span class="en">Seller's stated provenance recorded (who, when, where)</span></span><span class="row-note"></span></div>
+      <div class="row"><span class="cb"></span><span class="row-label"><span class="zh">旧藏记录、老照片或拍卖纪录</span><span class="en">Old collection records, photos or auction history</span></span><span class="row-note"></span></div>
+      <div class="row"><span class="cb"></span><span class="row-label"><span class="zh">证书 / 发票（写明出具方）</span><span class="en">Certificate or invoice (issuer noted)</span></span><span class="row-note"></span></div>
+      <div class="row"><span class="cb"></span><span class="row-label"><span class="zh">涉象牙、珊瑚、沉香等，需出口许可（CITES）</span><span class="en">Ivory, coral, agarwood etc. require a CITES export permit</span></span><span class="row-note"></span></div>
+      <div class="row"><span class="cb"></span><span class="row-label"><span class="zh">来源不清 → 请卖家书面说明并签字</span><span class="en">Unclear provenance → ask for a signed written statement</span></span><span class="row-note"></span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-head"><span class="sec-no">05</span><span class="sec-title"><span class="zh">现场动作</span><span class="en">Do this on site</span></span></div>
+    <div class="rows">
+      <div class="row"><span class="cb"></span><span class="row-label"><span class="zh">自然光下整体看一遍，再用侧光看反光是否均匀</span><span class="en">Daylight overall, then raking light for evenness of reflection</span></span><span class="row-note"></span></div>
+      <div class="row"><span class="cb"></span><span class="row-label"><span class="zh">紫外灯照修补、补彩（异常处会发暗或发亮）</span><span class="en">UV lamp on repairs and repaint</span></span><span class="row-note"></span></div>
+      <div class="row"><span class="cb"></span><span class="row-label"><span class="zh">10 倍放大镜看款识与釉面气泡</span><span class="en">10× loupe on the mark and glaze bubbles</span></span><span class="row-note"></span></div>
+      <div class="row"><span class="cb"></span><span class="row-label"><span class="zh">卡尺与电子秤实测，数字写进第 01 节</span><span class="en">Calipers and scale — write the numbers into section 01</span></span><span class="row-note"></span></div>
+      <div class="row"><span class="cb"></span><span class="row-label"><span class="zh">轻敲听声，注意有无哑音（暗示裂纹）</span><span class="en">Tap lightly; listen for a dead note (suggests a crack)</span></span><span class="row-note"></span></div>
+      <div class="row"><span class="cb"></span><span class="row-label"><span class="zh">六面 + 底款 + 瑕疵特写各拍一张，当场留存</span><span class="en">Shoot six sides plus mark and flaw close-ups, keep them</span></span><span class="row-note"></span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-head"><span class="sec-no">06</span><span class="sec-title"><span class="zh">记录与结论</span><span class="en">Record &amp; decision</span></span></div>
+    <div class="blank">
+      <div class="row-label"><span class="zh">与描述不符之处（逐条写）</span><span class="en">Deviations from the description (list each)</span></div>
+      <div class="lines"></div><div class="lines"></div><div class="lines"></div>
+      <div class="row-label" style="margin-top:.7rem;"><span class="zh">议价点与幅度</span><span class="en">Negotiation points and amounts</span></div>
+      <div class="lines"></div><div class="lines"></div>
+    </div>
+    <div class="concl">
+      <label><span class="cb"></span><span><span class="zh">按现状接受 As-Is</span><span class="en">Accept as-is</span></span></label>
+      <label><span class="cb"></span><span><span class="zh">需卖家书面担保后成交</span><span class="en">Require a written seller guarantee</span></span></label>
+      <label><span class="cb"></span><span><span class="zh">放弃</span><span class="en">Walk away</span></span></label>
+    </div>
+  </div>
+
+  <div class="sign">
+    <div class="sig"><span class="line"></span><span><span class="zh">卖家签字 / 日期</span><span class="en">Seller signature / date</span></span></div>
+    <div class="sig"><span class="line"></span><span><span class="zh">买家签字 / 日期</span><span class="en">Buyer signature / date</span></span></div>
+  </div>
+
+  <div class="note">
+    <span class="zh"><b>关于本清单：</b>本清单只用于现场核对与记录，不构成鉴定意见，也不代替专业顾问的实物上手判断。Gudong 仅提供信息展示与藏家联络，不参与交易、不收取佣金、不对真伪与纠纷承担责任。真伪判断与交易决策由买卖双方自行负责。</span>
+    <span class="en"><b>About this checklist:</b> For on-site checking and record-keeping only. It is not an authentication opinion and does not replace an expert's hands-on assessment. Gudong provides information and collector contact only — it does not take part in transactions, charge commission, or bear responsibility for authenticity or disputes. Judgement and transaction decisions remain with the parties.</span>
+  </div>
+
+  <div class="next">
+    <span><span class="zh">核对完，把条件写进书面协议：</span><span class="en">Once you have checked, put the terms in writing:</span></span>
+    <a href="./contract.html"><span class="zh">打开买卖契约生成器 →</span><span class="en">Open the contract generator →</span></a>
+    <span><span class="zh">仍有疑点：</span><span class="en">Still unsure?</span></span>
+    <a href="./authenticity-check.html"><span class="zh">先做仿品与断代自查 →</span><span class="en">Run the authenticity self-check →</span></a>
+  </div>
+</div>
+
+<script>
+(function () {
+  var lang = 'zh';
+  try { lang = localStorage.getItem('gudong_lang') === 'en' ? 'en' : 'zh'; } catch (e) {}
+  function apply() {
+    document.body.dataset.lang = lang;
+    document.documentElement.lang = lang === 'en' ? 'en-SG' : 'zh-SG';
+    var btn = document.getElementById('langBtn');
+    if (btn) btn.textContent = lang === 'zh' ? 'EN' : '中';
+    document.title = lang === 'zh'
+      ? 'Antique Inspection Checklist｜古董验货清单（可打印）｜Gudong.app'
+      : 'Antique Inspection Checklist｜古董验货清单（可打印）｜Gudong.app';
+  }
+  window.toggleLang = function () {
+    lang = lang === 'zh' ? 'en' : 'zh';
+    try { localStorage.setItem('gudong_lang', lang); } catch (e) {}
+    apply();
+  };
+  apply();
+})();
+</script>
+</body>
+</html>
+</content>
+</inline>
+</invoke>

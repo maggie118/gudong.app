@@ -816,6 +816,52 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
             <p class="item-desc-text zh" id="itemDescZh"></p>
             <p class="item-desc-text en" id="itemDescEn"></p>
         </section>
+
+        <!-- 2026-11-08：看完一件，下一步是核对与落纸 -->
+        <style>
+        .item-tools { margin: 2.4rem 0 .4rem; padding-top: 1.4rem; border-top: 1px solid rgba(176,138,69,.22); }
+        .it-kicker { display: block; font-size: .62rem; letter-spacing: .24em; text-transform: uppercase; color: #9A7635; font-weight: 700; }
+        .it-title { display: block; font-family: var(--font-serif); font-weight: 500; font-size: 1.25rem; letter-spacing: .03em;
+            color: var(--color-text); margin: .45rem 0 .4rem; line-height: 1.5; }
+        .it-sub { display: block; font-size: .79rem; line-height: 1.8; color: var(--color-text-secondary); max-width: 66ch; }
+        .it-grid { display: grid; grid-template-columns: 1fr 1fr; gap: .9rem; margin: 1rem 0 .8rem; }
+        .it-card { display: block; padding: 1.1rem 1.2rem; border: 1px solid #E8E2D6; background: #FFFDF9;
+            text-decoration: none; transition: .3s cubic-bezier(.25,.1,.25,1); }
+        .it-card:hover { border-color: #B08A45; background: #fff; box-shadow: 0 8px 22px rgba(37,34,30,.07); transform: translateY(-2px); }
+        .it-no { display: block; font-family: var(--font-serif); font-size: .7rem; letter-spacing: .18em; color: #B08A45; }
+        .it-card-title { display: block; font-size: .96rem; font-weight: 600; color: var(--color-text); margin: .4rem 0 .45rem; }
+        .it-card-desc { display: block; font-size: .77rem; line-height: 1.8; color: var(--color-text-secondary); }
+        .it-card-more { display: inline-block; margin-top: .75rem; font-size: .75rem; font-weight: 600; color: #6F4A31; letter-spacing: .04em; }
+        .it-note { font-size: .71rem; line-height: 1.8; color: var(--color-text-muted); }
+        @media (max-width: 720px) { .it-grid { grid-template-columns: 1fr; } }
+        </style>
+        <section class="item-tools" aria-label="买家工具 Buyer tools">
+            <span class="it-kicker">Before you deal · 看 货 之 前</span>
+            <h2 class="it-title zh">看上了，就带着这两样去</h2>
+            <h2 class="it-title en">If it is worth pursuing, take these with you</h2>
+            <p class="it-sub zh">一件藏品从「想买」到「成交」，中间隔着一份核对和一份书面协议。清单打印后带进现场逐项勾选，契约把是否「包老包真」写清楚。</p>
+            <p class="it-sub en">Between "I want it" and "it is mine" sit a checklist and a written agreement. Print the checklist for the inspection, and state in the contract whether age and authenticity are guaranteed.</p>
+            <div class="it-grid">
+                <a class="it-card" href="./tools/checklist.html">
+                    <span class="it-no">01</span>
+                    <span class="it-card-title zh">验货清单（可打印）</span>
+                    <span class="it-card-title en">Inspection checklist (printable)</span>
+                    <span class="it-card-desc zh">尺寸、重量、款识、冲线、修补、后配、来源与现场动作，逐项勾选并留白记档。</span>
+                    <span class="it-card-desc en">Dimensions, weight, mark, hairlines, repairs, replaced parts, provenance and on-site steps — tick and note.</span>
+                    <span class="it-card-more zh">打开清单 →</span><span class="it-card-more en">Open checklist →</span>
+                </a>
+                <a class="it-card" href="./tools/contract.html">
+                    <span class="it-no">02</span>
+                    <span class="it-card-title zh">买卖契约生成器</span>
+                    <span class="it-card-title en">Sales contract generator</span>
+                    <span class="it-card-desc zh">明确「包老包真」或「按现状 As-Is」、付款与交割方式，生成可打印的双语协议。</span>
+                    <span class="it-card-desc en">State guaranteed authenticity or as-is, plus payment and delivery terms, in a printable bilingual agreement.</span>
+                    <span class="it-card-more zh">生成契约 →</span><span class="it-card-more en">Generate contract →</span>
+                </a>
+            </div>
+            <p class="it-note zh">两个工具都免费、不用注册；只做核对与记录，不构成鉴定意见，真伪判断由买卖双方自行负责。</p>
+            <p class="it-note en">Both are free, no sign-up. They support checking and record-keeping only — not an authentication opinion; authenticity judgement remains with the parties.</p>
+        </section>
     </main>
         <style>
         /* 2026-10-09：footer 品牌区/免责声明/版权（全站统一·精简版） */
@@ -1691,25 +1737,25 @@ window.gdSharePage = function () {
 <script src="assets/js/gudong-contact.js" defer></script>
 <script src="/assets/js/push-subscribe.js" defer></script>
 <script src="../assets/js/gudong-follow.js"></script>
-<script src="../assets/js/buyer-list.js"></script>
-<script>
-/* 买家名单 · 关注此藏家（2026-11-07） */
-(function () {
-  function boot() {
-    var box = document.getElementById('gdBuyerPanel');
-    if (!box || !window.GudongBuyer) return;
-    function txt(id) { var el = document.getElementById(id); return el ? (el.textContent || '').trim() : ''; }
-    GudongBuyer.mount(box, {
-      seller: function () { return txt('sellerId'); },
-      sellerNameZh: txt('sellerNameZh'),
-      sellerNameEn: txt('sellerNameEn'),
-      source: 'item-page'
-    });
-  }
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
-  else boot();
-})();
-</script>
+<script src="../assets/js/buyer-list.js"></script>
+<script>
+/* 买家名单 · 关注此藏家（2026-11-07） */
+(function () {
+  function boot() {
+    var box = document.getElementById('gdBuyerPanel');
+    if (!box || !window.GudongBuyer) return;
+    function txt(id) { var el = document.getElementById(id); return el ? (el.textContent || '').trim() : ''; }
+    GudongBuyer.mount(box, {
+      seller: function () { return txt('sellerId'); },
+      sellerNameZh: txt('sellerNameZh'),
+      sellerNameEn: txt('sellerNameEn'),
+      source: 'item-page'
+    });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
+  else boot();
+})();
+</script>
 </body>
 </html>
 

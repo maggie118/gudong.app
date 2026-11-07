@@ -91,8 +91,12 @@
  * - 删除 gudong-chatbot（小顾·社区引导员/AI 智能客服）：120 个页面移除 CSS/容器/脚本注入；
  * - 预缓存清单移除 gudong-chatbot.css/js 与 chat-index.json，并删除对应文件；
  * - 提升缓存版本，强制已安装 PWA 刷新页面
+ * 2026-11-08：v59 → v60
+ * - 新增 tools/checklist.html（古董验货清单，可打印 A4），加入预缓存清单；
+ * - 首页撤除买家工具区块、item.html 底部新增买家工具条、pricing 买家工具行改指向清单；
+ * - 提升缓存版本，强制已安装 PWA 刷新页面
  */
-const CACHE_NAME = 'antique-collection-v59';
+const CACHE_NAME = 'antique-collection-v60';
 // 预缓存清单：核心页面 + 常用图标 + 占位图 + 工具页（离线可用）
 // 注意：改用逐个 cache.add，单个 404 不会导致整个 install 失败
 const PRECACHE_ASSETS = [
@@ -127,6 +131,7 @@ const PRECACHE_ASSETS = [
   '/tools/year-since.html',
   '/tools/mark-lookup.html',
   '/tools/valuation.html',
+  '/tools/checklist.html',
   '/tools/contract.html',
   '/tools/authenticity-check.html',
   '/manifest.json',

@@ -150,8 +150,8 @@
           '<span class="en">' + esc(headEn) + '</span>' +
         '</div>' +
         '<div class="gbx-desc">' +
-          '<span class="zh">留 WhatsApp 或邮箱即可。只推新上架与所关注品类，不发广告，随时可退订。</span>' +
-          '<span class="en">Leave a WhatsApp number or email. Only new listings and the categories you follow — no ads, unsubscribe anytime.</span>' +
+          '<span class="zh">留 WhatsApp 或邮箱即可。我们只在你关注的门类上新时通知你——不发广告，随时退订。</span>' +
+          '<span class="en">Leave a WhatsApp number or email. We write only when your categories gain a new piece — no ads, unsubscribe anytime.</span>' +
         '</div>' +
         '<form class="gbx-form" novalidate>' +
           '<input class="gbx-input" type="text" name="contact" autocomplete="email" ' +

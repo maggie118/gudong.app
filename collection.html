@@ -1133,6 +1133,41 @@
             <span class="zh">该类别暂无藏品<span class="empty-hint">换个类别看看，或回到全部藏品</span></span>
             <span class="en">No pieces in this category yet<span class="empty-hint">Try another category, or view all listings</span></span>
         </div>
+
+        <style>
+        /* 2026-11-08：买家名单 · 上新提醒（由首页移至藏品库页最下方） */
+        .buyer-band { max-width: 1080px; margin: 3.4rem auto 0; display: grid; grid-template-columns: 1.02fr .98fr; gap: 2.4rem;
+            align-items: center; border-top: 1px solid rgba(176,138,69,.22); border-bottom: 1px solid #EDE7DC; padding: 2.4rem 0; }
+        .buyer-band-kicker { font-size: .62rem; letter-spacing: .26em; text-transform: uppercase; color: #9A7635; font-weight: 700; }
+        .buyer-band-title { font-family: var(--font-serif); font-weight: 500; font-size: 1.5rem; letter-spacing: .03em;
+            color: var(--color-text); margin: .5rem 0 .7rem; line-height: 1.45; }
+        .buyer-band-desc { font-size: .85rem; line-height: 1.95; color: var(--color-text-secondary); max-width: 46ch; }
+        .buyer-band-points { list-style: none; padding: 0; margin: 1rem 0 0; display: flex; flex-wrap: wrap; gap: .4rem .9rem; }
+        .buyer-band-points li { font-size: .72rem; color: var(--color-text-muted); position: relative; padding-left: .85rem; }
+        .buyer-band-points li::before { content: "◆"; position: absolute; left: 0; top: .12rem; color: #B08A45; font-size: .58rem; }
+        @media (max-width: 860px) {
+            .buyer-band { grid-template-columns: 1fr; gap: 1.4rem; }
+        }
+        </style>
+
+        <!-- ============ 买家名单 · 上新提醒 ============ -->
+        <section id="buyer-list" aria-label="买家名单 Buyer list">
+            <div class="buyer-band">
+                <div class="buyer-band-copy">
+                    <div class="buyer-band-kicker">New-listing alerts · 上 新 提 醒</div>
+                    <h2 class="buyer-band-title zh">下一件合眼的，先发给你</h2>
+                    <h2 class="buyer-band-title en">The next piece you'll love, sent to you first</h2>
+                    <p class="buyer-band-desc zh">留下 WhatsApp 或邮箱，订阅你关注的藏家与门类。只有这些门类有新藏品上架时，我们才会写信给你：不群发、不推销、随时退订；联系方式不公开、不转卖。</p>
+                    <p class="buyer-band-desc en">Leave a WhatsApp number or email and subscribe to the collectors and categories you follow. We write only when something in those lines is newly listed — no broadcasts, no marketing, unsubscribe anytime. Your contact is never published or resold.</p>
+                    <ul class="buyer-band-points">
+                        <li><span class="zh">只推你关注的门类与藏家</span><span class="en">Only your categories and collectors</span></li>
+                        <li><span class="zh">上架即通知，不掺广告</span><span class="en">Alerted on listing, never ads</span></li>
+                        <li><span class="zh">号码仅作提醒用途，不公开、不转卖</span><span class="en">Used for alerts only — never published or sold</span></li>
+                    </ul>
+                </div>
+                <div class="buyer-band-form" id="gdBuyerPanelCollection"></div>
+            </div>
+        </section>
     </main>
 
     <!-- ============ 图片精修弹窗 ============ -->
@@ -1695,5 +1730,18 @@ window.gdSharePage = function () {
 <link rel="stylesheet" href="assets/css/gudong-contact.css">
 <script src="assets/js/gudong-contact.js" defer></script>
 <script src="/assets/js/push-subscribe.js" defer></script>
+<script src="assets/js/buyer-list.js"></script>
+<script>
+/* 买家名单 · 上新提醒（2026-11-08，自首页移至藏品库页最下方） */
+(function () {
+  function boot() {
+    var box = document.getElementById('gdBuyerPanelCollection');
+    if (!box || !window.GudongBuyer) return;
+    GudongBuyer.mount(box, { seller: '', sellerNameZh: '', sellerNameEn: '', source: 'collection' });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
+  else boot();
+})();
+</script>
 </body>
 </html>

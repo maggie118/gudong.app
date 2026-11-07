@@ -31,6 +31,7 @@ const STATIC = [
   { loc: '/tools/year-since',        lastmod: LAUNCH },
   { loc: '/tools/mark-lookup',       lastmod: LAUNCH },
   { loc: '/tools/valuation',         lastmod: LAUNCH },
+  { loc: '/tools/checklist',         lastmod: LAUNCH },
   { loc: '/tools/contract',          lastmod: LAUNCH },
   // Categories
   { loc: '/categories/bronze',     lastmod: LAUNCH },

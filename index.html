@@ -2157,6 +2157,7 @@
             <a href="tools/era-lookup.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 古文化朝代年代速查</span><span class="en">· Culture &amp; Dynasty Era Lookup</span></a>
             <a href="tools/mark-lookup.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 瓷器底款快查</span><span class="en">· Porcelain Mark Lookup</span></a>
             <a href="tools/valuation.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 简易估值参考</span><span class="en">· Market Valuation Reference</span></a>
+            <a href="tools/checklist.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 验货清单（可打印）</span><span class="en">· Inspection Checklist</span></a>
             <a href="tools/contract.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 买卖契约生成器</span><span class="en">· Contract &amp; Endorsement Generator</span></a>
             <a href="tools/authenticity-check.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 仿品与断代自查</span><span class="en">· Fake &amp; Dating Self-Check</span></a>
             <a href="about.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">关于我们</span><span class="en">About</span></a>
@@ -2537,80 +2538,6 @@
                 </div>
         </section>
 
-        <style>
-        /* ---------- 2026-11-07：买家名单 + 买家工具入口 ---------- */
-        .buyer-band { max-width: 1080px; margin: 3.4rem auto 0; display: grid; grid-template-columns: 1.02fr .98fr; gap: 2.4rem;
-            align-items: center; border-top: 1px solid rgba(176,138,69,.22); border-bottom: 1px solid #EDE7DC; padding: 2.4rem 0; }
-        .buyer-band-kicker { font-size: .62rem; letter-spacing: .26em; text-transform: uppercase; color: #9A7635; font-weight: 700; }
-        .buyer-band-title { font-family: var(--font-serif); font-weight: 500; font-size: 1.5rem; letter-spacing: .03em;
-            color: var(--color-text); margin: .5rem 0 .7rem; line-height: 1.45; }
-        .buyer-band-desc { font-size: .85rem; line-height: 1.95; color: var(--color-text-secondary); max-width: 46ch; }
-        .buyer-band-points { list-style: none; padding: 0; margin: 1rem 0 0; display: flex; flex-wrap: wrap; gap: .4rem .9rem; }
-        .buyer-band-points li { font-size: .72rem; color: var(--color-text-muted); position: relative; padding-left: .85rem; }
-        .buyer-band-points li::before { content: "◆"; position: absolute; left: 0; top: .12rem; color: #B08A45; font-size: .58rem; }
-        .buyer-tools-head { max-width: 1080px; margin: 3rem auto 1.2rem; }
-        .buyer-tools-grid { max-width: 1080px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-        .buyer-tool { display: block; border: 1px solid #E8E2D6; background: #FFFDF9; padding: 1.4rem 1.5rem;
-            text-decoration: none; transition: .3s cubic-bezier(.25,.1,.25,1); }
-        .buyer-tool:hover { border-color: #B08A45; background: #fff; box-shadow: 0 8px 22px rgba(37,34,30,.07); transform: translateY(-2px); }
-        .bt-no { display: block; font-family: var(--font-serif); font-size: .72rem; letter-spacing: .18em; color: #B08A45; }
-        .bt-title { display: block; font-size: 1rem; font-weight: 600; color: var(--color-text); margin: .45rem 0 .5rem; letter-spacing: .02em; }
-        .bt-desc { display: block; font-size: .79rem; line-height: 1.85; color: var(--color-text-secondary); }
-        .bt-more { display: inline-block; margin-top: .85rem; font-size: .76rem; font-weight: 600; color: #6F4A31; letter-spacing: .04em; }
-        .buyer-tools-note { max-width: 1080px; margin: 1rem auto 3rem; font-size: .71rem; line-height: 1.8; color: var(--color-text-muted); }
-        @media (max-width: 860px) {
-            .buyer-band { grid-template-columns: 1fr; gap: 1.4rem; }
-            .buyer-tools-grid { grid-template-columns: 1fr; }
-        }
-        </style>
-
-        <!-- ============ 买家名单 · 关注藏家与品类（2026-11-07） ============ -->
-        <section id="buyer-list" aria-label="买家名单 Buyer list">
-            <div class="buyer-band">
-                <div class="buyer-band-copy">
-                    <div class="buyer-band-kicker">Buyer list · 买 家 名 单</div>
-                    <h2 class="buyer-band-title zh">新上架，先通知你</h2>
-                    <h2 class="buyer-band-title en">Hear about new pieces first</h2>
-                    <p class="buyer-band-desc zh">留 WhatsApp 或邮箱，关注你喜欢的藏家与品类。有新的合眼藏品上架，我们第一时间告诉你——不发广告，随时可退订。</p>
-                    <p class="buyer-band-desc en">Leave a WhatsApp number or email and follow the collectors and categories you care about. We'll tell you the moment a new piece arrives — no ads, unsubscribe anytime.</p>
-                    <ul class="buyer-band-points">
-                        <li><span class="zh">只看你关注的藏家与品类</span><span class="en">Only what you follow</span></li>
-                        <li><span class="zh">新上架第一时间提醒</span><span class="en">First alert on new listings</span></li>
-                        <li><span class="zh">联系方式不公开、不转卖</span><span class="en">Never published or resold</span></li>
-                    </ul>
-                </div>
-                <div class="buyer-band-form" id="gdBuyerPanelHome"></div>
-            </div>
-        </section>
-
-        <!-- ============ 买家工具入口（验货清单 / 契约 · 仿品自查） ============ -->
-        <section id="buyer-tools" aria-label="买家工具 Buyer tools">
-            <div class="buyer-tools-head">
-                <div class="buyer-band-kicker">Buyer toolkit · 买 家 工 具</div>
-                <h2 class="buyer-band-title zh">去验货之前，先把这两件事做好</h2>
-                <h2 class="buyer-band-title en">Two things to settle before you inspect</h2>
-            </div>
-            <div class="buyer-tools-grid">
-                <a class="buyer-tool" href="tools/contract.html">
-                    <span class="bt-no">01</span>
-                    <span class="bt-title zh">验货清单 + 买卖契约</span>
-                    <span class="bt-title en">Inspection checklist &amp; sale contract</span>
-                    <span class="bt-desc zh">打印出来逐项核对品相、款识、尺寸与瑕疵，成交时用规范化契约写清「包老包真」或「按现状 As-Is」。</span>
-                    <span class="bt-desc en">Print it and check condition, marks, dimensions and flaws; formalise "guaranteed authentic" or "as-is" in a standard contract.</span>
-                    <span class="bt-more zh">打开工具 →</span><span class="bt-more en">Open tool →</span>
-                </a>
-                <a class="buyer-tool" href="tools/authenticity-check.html">
-                    <span class="bt-no">02</span>
-                    <span class="bt-title zh">仿品与断代自查</span>
-                    <span class="bt-title en">Fake &amp; dating self-check</span>
-                    <span class="bt-desc zh">按品类逐项排查仿品疑点与断代矛盾，拿到目视倾向与核验顺序，再决定要不要请第三方顾问。</span>
-                    <span class="bt-desc en">Work through category-specific red flags and dating conflicts, get a visual lean and a verification order before paying for advice.</span>
-                    <span class="bt-more zh">打开自查 →</span><span class="bt-more en">Run the check →</span>
-                </a>
-            </div>
-            <p class="buyer-tools-note zh">两个工具都免费，不需要注册。工具只做检查与记录，不构成鉴定意见。</p>
-            <p class="buyer-tools-note en">Both tools are free, no sign-up required. They support inspection and record-keeping only — not an authentication opinion.</p>
-        </section>
     </main>
 
         <style>
@@ -3908,18 +3835,5 @@ window.gdSharePage = function () {
 <link rel="stylesheet" href="assets/css/gudong-contact.css">
 <script src="assets/js/gudong-contact.js" defer></script>
 <script src="/assets/js/push-subscribe.js" defer></script>
-<script src="assets/js/buyer-list.js"></script>
-<script>
-/* 买家名单 · 关注藏家与品类（2026-11-07） */
-(function () {
-  function boot() {
-    var box = document.getElementById('gdBuyerPanelHome');
-    if (!box || !window.GudongBuyer) return;
-    GudongBuyer.mount(box, { seller: '', sellerNameZh: '', sellerNameEn: '', source: 'home' });
-  }
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
-  else boot();
-})();
-</script>
 </body>
 </html>

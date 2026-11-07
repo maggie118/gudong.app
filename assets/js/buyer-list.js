@@ -137,18 +137,18 @@
     var generic = !sellerNameZh;
     var minimal = !!opts.minimal;
     var headZh = generic
-      ? '登记买家名单，新上架先通知你'
+      ? '请留下联系方式，新上架会先通知您'
       : '关注「' + titleZh + '」，新上架先通知你';
     var headEn = generic
-      ? 'Join the buyer list — hear about new listings first'
+      ? 'Leave your contact and hear about new listings first'
       : 'Follow ' + titleEn + ' — hear about new listings first';
     /* minimal：嵌在已讲完承诺的区块里，卡片只留操作指引，避免与左侧文案重复 */
     var descZh = minimal
       ? '填好后即加入提醒名单，可随时改选品类或一键退订。'
-      : '留下 WhatsApp 或邮箱即可。只在关注的门类上新时通知你——不发广告，随时退订。';
+      : 'WhatsApp 或邮箱即可。只在关注的门类上新时通知您——不发广告，随时退订。';
     var descEn = minimal
       ? 'You will be added to the alert list — change categories or unsubscribe anytime.'
-      : 'Leave a WhatsApp number or email. We write only when your categories gain a new piece — no ads, unsubscribe anytime.';
+      : 'A WhatsApp number or email is enough. We write only when a category you follow gains a new piece — no ads, unsubscribe anytime.';
 
     el.innerHTML =
       '<div class="gbx">' +

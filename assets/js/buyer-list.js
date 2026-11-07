@@ -135,23 +135,32 @@
     var titleEn = sellerNameEn || 'this collector';
     var titleZh = sellerNameZh || '这位藏家';
     var generic = !sellerNameZh;
+    var minimal = !!opts.minimal;
     var headZh = generic
       ? '登记买家名单，新上架先通知你'
       : '关注「' + titleZh + '」，新上架先通知你';
     var headEn = generic
       ? 'Join the buyer list — hear about new listings first'
       : 'Follow ' + titleEn + ' — hear about new listings first';
+    /* minimal：嵌在已讲完承诺的区块里，卡片只留操作指引，避免与左侧文案重复 */
+    var descZh = minimal
+      ? '填好后即加入提醒名单，可随时改选品类或一键退订。'
+      : '留下 WhatsApp 或邮箱即可。只在关注的门类上新时通知你——不发广告，随时退订。';
+    var descEn = minimal
+      ? 'You will be added to the alert list — change categories or unsubscribe anytime.'
+      : 'Leave a WhatsApp number or email. We write only when your categories gain a new piece — no ads, unsubscribe anytime.';
 
     el.innerHTML =
       '<div class="gbx">' +
-        '<div class="gbx-kicker">New-listing alerts · 上新提醒</div>' +
-        '<div class="gbx-title">' +
-          '<span class="zh">' + esc(headZh) + '</span>' +
-          '<span class="en">' + esc(headEn) + '</span>' +
-        '</div>' +
-        '<div class="gbx-desc">' +
-          '<span class="zh">留 WhatsApp 或邮箱即可。我们只在你关注的门类上新时通知你——不发广告，随时退订。</span>' +
-          '<span class="en">Leave a WhatsApp number or email. We write only when your categories gain a new piece — no ads, unsubscribe anytime.</span>' +
+        (minimal ? '' :
+          '<div class="gbx-kicker">New-listing alerts · 上新提醒</div>' +
+          '<div class="gbx-title">' +
+            '<span class="zh">' + esc(headZh) + '</span>' +
+            '<span class="en">' + esc(headEn) + '</span>' +
+          '</div>') +
+        '<div class="gbx-desc"' + (minimal ? ' style="margin-top:0;"' : '') + '>' +
+          '<span class="zh">' + descZh + '</span>' +
+          '<span class="en">' + descEn + '</span>' +
         '</div>' +
         '<form class="gbx-form" novalidate>' +
           '<input class="gbx-input" type="text" name="contact" autocomplete="email" ' +
@@ -171,8 +180,11 @@
         '</label>' +
         '<div class="gbx-ok" role="status"></div>' +
         '<div class="gbx-note">' +
-          '<span class="zh">仅用于上新提醒，不公开、不转卖。详见<a href="/privacy.html">隐私政策</a>。</span>' +
-          '<span class="en">Used only for new-listing alerts. Never published or resold. See our <a href="/privacy.html">Privacy Policy</a>.</span>' +
+          (minimal
+            ? '<span class="zh">详见<a href="/privacy.html">隐私政策</a>。</span>' +
+              '<span class="en">See our <a href="/privacy.html">Privacy Policy</a>.</span>'
+            : '<span class="zh">仅用于上新提醒，不公开、不转卖。详见<a href="/privacy.html">隐私政策</a>。</span>' +
+              '<span class="en">Used only for new-listing alerts. Never published or resold. See our <a href="/privacy.html">Privacy Policy</a>.</span>') +
         '</div>' +
       '</div>';
 

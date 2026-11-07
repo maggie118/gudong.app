@@ -1155,14 +1155,14 @@
             <div class="buyer-band">
                 <div class="buyer-band-copy">
                     <div class="buyer-band-kicker">New-listing alerts · 上 新 提 醒</div>
-                    <h2 class="buyer-band-title zh">下一件合眼的，先发给你</h2>
-                    <h2 class="buyer-band-title en">The next piece you'll love, sent to you first</h2>
-                    <p class="buyer-band-desc zh">留下 WhatsApp 或邮箱，订阅你关注的藏家与门类。只有这些门类有新藏品上架时，我们才会写信给你：不群发、不推销、随时退订；联系方式不公开、不转卖。</p>
-                    <p class="buyer-band-desc en">Leave a WhatsApp number or email and subscribe to the collectors and categories you follow. We write only when something in those lines is newly listed — no broadcasts, no marketing, unsubscribe anytime. Your contact is never published or resold.</p>
+                    <h2 class="buyer-band-title zh">下一件您感兴趣的藏品，将为您优先推送。</h2>
+                    <h2 class="buyer-band-title en">The pieces you care about, sent to you first</h2>
+                    <p class="buyer-band-desc zh">留下联系方式，告诉我们您关注的藏家与品类。相符的新藏品上架时，我们第一时间告知。</p>
+                    <p class="buyer-band-desc en">Leave a contact and tell us the collectors and categories you follow. When a matching piece is listed, we will let you know first.</p>
                     <ul class="buyer-band-points">
-                        <li><span class="zh">只推你关注的门类与藏家</span><span class="en">Only your categories and collectors</span></li>
-                        <li><span class="zh">上架即通知，不掺广告</span><span class="en">Alerted on listing, never ads</span></li>
-                        <li><span class="zh">号码仅作提醒用途，不公开、不转卖</span><span class="en">Used for alerts only — never published or sold</span></li>
+                        <li><span class="zh">只看您关注的品类</span><span class="en">Only the categories you follow</span></li>
+                        <li><span class="zh">不群发、不推销、随时退订</span><span class="en">No broadcasts, no marketing, unsubscribe anytime</span></li>
+                        <li><span class="zh">联系方式不公开、不转卖</span><span class="en">Details never published or sold</span></li>
                     </ul>
                 </div>
                 <div class="buyer-band-form" id="gdBuyerPanelCollection"></div>
@@ -1737,7 +1737,7 @@ window.gdSharePage = function () {
   function boot() {
     var box = document.getElementById('gdBuyerPanelCollection');
     if (!box || !window.GudongBuyer) return;
-    GudongBuyer.mount(box, { seller: '', sellerNameZh: '', sellerNameEn: '', source: 'collection' });
+    GudongBuyer.mount(box, { seller: '', sellerNameZh: '', sellerNameEn: '', source: 'collection', minimal: true });
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
   else boot();

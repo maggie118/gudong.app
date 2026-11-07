@@ -1,7 +1,8 @@
 # 买家名单（Buyer List）— 上线说明
 
 > 2026-11-07 新增。目标：把「逛一次就走」的买家，变成**可再次触达的名单资产**。
-> 前端已全站接好，后端只差一张 Airtable 表。
+> 前端已全站接好；`buyer_leads` 表已在 base `apprn6XDQnAm8bkaT` 建好（9 个字段全部就位，0 条记录）。
+> 仍差一步：`AIRTABLE_TOKEN` 需要 **data.records:write** 权限（当前 Token 只能读，写入会 403）。
 
 ## 1. 已经做了什么
 
@@ -18,9 +19,9 @@
 
 **降级策略**：表没建、字段对不上、额度受限时，`/api/lead` 返回 `202 {ok:false, code:'table_missing'}`，前端仍然显示「已加入名单（名单同步稍后完成，本机提醒已生效）」，不会把买家挡在门外。
 
-## 2. 上线前必须做的一步：建表
+## 2. 建表（已完成）与权限
 
-Airtable → 当前 base（`apprn6XDQnAm8bkaT`）→ 新建表 **`buyer_leads`**，字段：
+`buyer_leads` 表已于 2026-11-07 在 base `apprn6XDQnAm8bkaT` 建好，字段如下（一字不差，代码按名读写）：
 
 | 字段名（必须一字不差） | 类型 | 说明 |
 |---|---|---|
@@ -35,6 +36,10 @@ Airtable → 当前 base（`apprn6XDQnAm8bkaT`）→ 新建表 **`buyer_leads`**
 | `status` | Single line text | `active` / `unsubscribed` |
 
 可选环境变量：`BUYER_LEADS_TABLE`（默认就是 `buyer_leads`）。已有的 `AIRTABLE_BASE_ID`、`AIRTABLE_TOKEN` 直接复用。
+
+**Token 权限（关键）**：`AIRTABLE_TOKEN` 必须带 `data.records:write`（同时通常需要 `data.records:read`，退订按 `contact` 反查要用）。2026-11-07 实测：现有 Token 能读 `buyer_leads`（GET 200），但 POST 返回
+`403 INVALID_PERMISSIONS_OR_MODEL_NOT_FOUND` —— 这是**只读** Token。修复：Airtable → Developer hub → Personal access tokens → 新建/改权限，勾上 `data.records:write`，Access 里选 base「Gudong」(`apprn6XDQnAm8bkaT`) → 把新值写进 Vercel 的 `AIRTABLE_TOKEN` → 重新部署。改完前后端代码一行都不用动。
+
 `push_subs` 表如想记录「这条订阅关注了哪个藏家」，可加 `seller`、`contact`、`contact_type` 三个字段；不加也能正常订阅（`api/subscribe.js` 会自动退回最小字段集）。
 
 ## 3. 验证
@@ -49,6 +54,7 @@ curl -X POST https://www.gudong.app/api/lead \
 - `{"ok":false,"code":"store_unconfigured"}` → Vercel 没配 `AIRTABLE_BASE_ID` / `AIRTABLE_TOKEN`。
 - `{"ok":false,"code":"table_missing"}` → 表名不对，或表还没建。
 - `{"ok":false,"code":"field_mismatch"}` → 字段名和上表不一致（大小写也算）。
+- `{"ok":false,"code":"store_error"}` → 表在、字段对，但 Token 没写权限（或额度受限）。见上一节。
 
 ## 4. 边界（写清楚，别对外夸大）
 

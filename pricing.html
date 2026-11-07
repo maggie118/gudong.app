@@ -351,6 +351,8 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
 .publish-input, .publish-textarea { width: 100%; padding: .8rem .9rem; border: 1px solid var(--color-border); border-radius: 8px; font-size: 1rem; font-family: inherit; color: var(--color-text); background: #fff; transition: all .3s; min-height: 48px; }
 .publish-input:focus, .publish-textarea:focus { outline: none; border-color: var(--color-gold); box-shadow: 0 0 0 4px rgba(176, 138, 69, .14); }
 .publish-textarea { min-height: 72px; resize: vertical; }
+.cond-hint { font-size: .78rem; color: var(--color-text-secondary); line-height: 1.6; margin: 0 0 .45rem; }
+.cond-tags { margin-top: .4rem; font-size: .76rem; color: var(--color-text-muted); line-height: 1.6; }
 
 .form-hint { font-size: .84rem; color: var(--color-text-secondary); line-height: 1.7; margin-bottom: .75rem; }
 .form-hint a { color: var(--color-primary-dark); font-weight: 600; text-decoration: underline; }
@@ -651,15 +653,26 @@ footer { background: #FBF8F2; border-top: 1px solid var(--hairline); }
 .compare-table .no-trade { font-size: .8rem; letter-spacing: .03em; }
 .compare-wrap { box-shadow: inset -18px 0 18px -18px rgba(74, 48, 33, .18); }
 
-/* 7. FAQ：问答层级 */
+/* 7. FAQ：折叠问答（2026-11-08 改为可折叠） */
 #faq .frame { border-radius: 2px; }
-#faq .frame > div > div > div:first-child {
-  font-family: "Noto Serif SC", "Songti SC", "STSong", serif !important;
-  font-weight: 600 !important; color: #2A2621 !important; letter-spacing: .02em;
-  font-size: 1rem !important; line-height: 1.65;
+#faq .faq-item { border-bottom: 1px solid rgba(176, 138, 69, .18); }
+#faq .faq-item:last-child { border-bottom: 0; }
+#faq .faq-item > summary {
+  list-style: none; -webkit-appearance: none; cursor: pointer; position: relative;
+  padding: 1.1rem 2.6rem .55rem 0; outline: none;
+  font-family: "Noto Serif SC", "Songti SC", "STSong", serif;
+  font-weight: 600; color: #2A2621; letter-spacing: .02em;
+  font-size: 1rem; line-height: 1.65; transition: color .25s;
 }
-#faq .frame > div > div > div:last-child { color: #5C554C !important; line-height: 1.9 !important; }
-#faq .frame hr { border-top: 1px solid rgba(176, 138, 69, .18) !important; }
+#faq .faq-item > summary::-webkit-details-marker { display: none; }
+#faq .faq-item > summary::after {
+  content: "+"; position: absolute; right: .2rem; top: 1.02rem;
+  font-family: "Noto Serif SC", "Songti SC", serif; font-size: 1.15rem; line-height: 1;
+  color: #B08A45; transition: transform .3s, color .3s;
+}
+#faq .faq-item[open] > summary::after { content: "—"; color: #6F4A31; }
+#faq .faq-item > summary:hover { color: #6F4A31; }
+#faq .faq-a { color: #5C554C; line-height: 1.9; font-size: .9rem; padding: .35rem 2.2rem 1.15rem 0; }
 
 /* 8. 买家服务区：更轻的书目式排版 */
 #buyer-services .row-title { letter-spacing: .02em; }
@@ -952,75 +965,67 @@ footer { background: #FBF8F2; border-top: 1px solid var(--hairline); }
     </div>
 
     <div class="frame" style="max-width: 820px; margin: 0 auto; background: #fff; border-color: #EAE3D6;">
-      <div style="display:flex; flex-direction:column; gap:1.2rem;">
+      <div style="display:flex; flex-direction:column;">
         
         <!-- Q1 -->
-        <div>
-          <div style="font-weight:700; color:var(--color-primary-dark); margin-bottom:.3rem; font-size:1rem;">
+        <details class="faq-item">
+          <summary>
             <span class="zh">Q: 我该上传什么格式和尺寸的图片？文件不能超过多大？</span>
             <span class="en">Q: What image format and size should I upload? Is there a file size limit?</span>
-          </div>
-          <div style="font-size:.9rem; color:var(--color-text-secondary); line-height:1.7;">
+          </summary>
+          <div class="faq-a">
             <span class="zh">A: 请上传 <strong>JPG 或 PNG</strong> 格式的图片。请注意，平台系统要求<strong style="color:var(--color-danger);">单张图片大小不能超过 50KB</strong>。建议您在手机上选择“中等质量”或“压缩”后上传，以确保系统能顺利接收。</span>
             <span class="en">A: Please upload images in <strong>JPG or PNG</strong> format. Please note that the system requires <strong style="color:var(--color-danger);">each image to be strictly under 50KB</strong>. We recommend compressing the images on your phone before uploading to ensure successful submission.</span>
           </div>
-        </div>
-
-        <hr style="border:0; border-top:1px dashed var(--color-border);">
+        </details>
 
         <!-- Q2 -->
-        <div>
-          <div style="font-weight:700; color:var(--color-primary-dark); margin-bottom:.3rem; font-size:1rem;">
+        <details class="faq-item">
+          <summary>
             <span class="zh">Q: 为什么免费基础陈列只能传 3 张图，而专业上架能传 5 张？</span>
             <span class="en">Q: Why does Basic Display allow 3 photos, while Professional allows 5?</span>
-          </div>
-          <div style="font-size:.9rem; color:var(--color-text-secondary); line-height:1.7;">
+          </summary>
+          <div class="faq-a">
             <span class="zh">A: 中高端藏品的展示需要多角度呈现。专业上架提供的 5 张图（正面、背面、上面、底部、细节）是行家看货的基本标准。免费基础陈列作为体验，只提供 3 个基础展示位。</span>
             <span class="en">A: Showcasing mid-to-high-end antiques requires multiple angles. The 5 photos in Professional Listing (front, back, top, base, detail) represent the industry standard for serious buyers. Free Basic Display offers 3 slots as a trial.</span>
           </div>
-        </div>
-
-        <hr style="border:0; border-top:1px dashed var(--color-border);">
+        </details>
 
         <!-- Q3 -->
-        <div>
-          <div style="font-weight:700; color:var(--color-primary-dark); margin-bottom:.3rem; font-size:1rem;">
+        <details class="faq-item">
+          <summary>
             <span class="zh">Q: “早鸟价”和“全价”有什么区别？什么时候会涨价？</span>
             <span class="en">Q: What's the difference between "Early-bird" and "Full price"? When will prices increase?</span>
-          </div>
-          <div style="font-size:.9rem; color:var(--color-text-secondary); line-height:1.7;">
+          </summary>
+          <div class="faq-a">
             <span class="zh">A: S$288（专业上架）和 S$588（私家藏馆）是专门给新批次创始藏家的早鸟价。<strong>名额满 50 人或 2026 年 12 月 31 日后，将分别恢复至 S$488 和 S$1,288 的全价</strong>。现在申请可永久锁定折扣。</span>
             <span class="en">A: S$288 (Professional) and S$588 (Gallery) are early-bird rates for the new batch of Founding Collectors. <strong>After 50 slots are filled or by 31 Dec 2026, prices revert to S$488 and S$1,288</strong>. Apply now to lock in the discount permanently.</span>
           </div>
-        </div>
-
-        <hr style="border:0; border-top:1px dashed var(--color-border);">
+        </details>
 
         <!-- Q4 -->
-        <div>
-          <div style="font-weight:700; color:var(--color-primary-dark); margin-bottom:.3rem; font-size:1rem;">
+        <details class="faq-item">
+          <summary>
             <span class="zh">Q: 平台会提供鉴定证书吗？会帮我看真假吗？</span>
             <span class="en">Q: Does the platform provide authentication certificates or verify authenticity?</span>
-          </div>
-          <div style="font-size:.9rem; color:var(--color-text-secondary); line-height:1.7;">
+          </summary>
+          <div class="faq-a">
             <span class="zh">A: 平台<strong>不出具具有法律效力的“鉴定证书”</strong>，也不承担真伪担保责任。但我们的资深团队会在审核时，为您提供<strong>顾问个人意见</strong>（如断代参考、品相点评）。该意见仅供买卖双方交流参考，最终真伪判定与交易决策需由买家自行负责。</span>
             <span class="en">A: The platform <strong>does not issue legally binding "authentication certificates"</strong> and does not assume liability for authenticity. However, our senior team may provide <strong>personal advisory opinions</strong> (e.g., dating references, condition notes) during review. These opinions are for reference only; final judgment and transaction decisions rest with the buyer.</span>
           </div>
-        </div>
-
-        <hr style="border:0; border-top:1px dashed var(--color-border);">
+        </details>
 
         <!-- Q5 -->
-        <div>
-          <div style="font-weight:700; color:var(--color-primary-dark); margin-bottom:.3rem; font-size:1rem;">
+        <details class="faq-item">
+          <summary>
             <span class="zh">Q: 如果我有更多图片或需要实物摄影怎么办？</span>
             <span class="en">Q: What if I have more photos or need physical photography?</span>
-          </div>
-          <div style="font-size:.9rem; color:var(--color-text-secondary); line-height:1.7;">
+          </summary>
+          <div class="faq-a">
             <span class="zh">A: 基础套餐内已包含标准数量的图片优化。如果您有特殊需求（如增加瑕疵特写、底款特写，或需要专业摄影师上门拍摄），请直接点击 <a href="https://wa.me/6591888952" target="_blank" rel="noopener" style="color:var(--color-primary-dark); font-weight:700; text-decoration:underline;">WhatsApp 联系客服</a>，我们会按需报价。</span>
             <span class="en">A: Standard packages include the listed number of photo optimizations. For special requests (e.g., extra close-ups of flaws or marks, or on-site photography), please <a href="https://wa.me/6591888952" target="_blank" rel="noopener" style="color:var(--color-primary-dark); font-weight:700; text-decoration:underline;">contact us on WhatsApp</a> for a custom quote.</span>
           </div>
-        </div>
+        </details>
 
       </div>
     </div>
@@ -1211,10 +1216,23 @@ footer { background: #FBF8F2; border-top: 1px solid var(--hairline); }
         <span class="publish-file-text"><span class="zh">点击上传图片</span><span class="en">Click to upload</span></span>
         <span class="publish-file-count" id="serviceFileCount"></span>
       </label>
-      <p style="font-size:.78rem; color:var(--color-text-muted); margin-top:.4rem; line-height:1.5;">
+      <p id="servicePhotoNote" style="font-size:.78rem; color:var(--color-text-muted); margin-top:.4rem; line-height:1.5;">
         <span class="zh">※ 单张图片大小不能超过 50KB。如需上传底款特写、瑕疵特写等更多图片，请先上传这 5 张，并在提交后通过 WhatsApp 补发。</span>
         <span class="en">※ Max file size is 50KB. To add more photos, upload these 5 first and send the rest via WhatsApp after submitting.</span>
       </p>
+    </div>
+
+    <div class="publish-form-group">
+      <label for="serviceCondition"><span class="zh">品相披露 *</span><span class="en">Condition disclosure *</span></label>
+      <p class="cond-hint">
+        <span class="zh">请如实说明修补、冲线、后配、来源等情况。若确无明显问题，请写「无明显品相问题」。平台不鉴定真伪，此处仅记录藏家自述。</span>
+        <span class="en">Describe repairs, hairlines, replaced parts or provenance. If there are no known issues, write “No visible issues”. The platform does not authenticate — this records the collector's own statement.</span>
+      </p>
+      <textarea class="publish-textarea" id="serviceCondition" rows="3" maxlength="300" required></textarea>
+      <div class="cond-tags">
+        <span class="zh">常见项：修补 · 冲线 · 后配 · 来源递藏 · 出土出水</span>
+        <span class="en">Common items: repairs · hairlines · replaced parts · provenance · excavation</span>
+      </div>
     </div>
 
     <div class="publish-form-group agree-row">
@@ -1334,6 +1352,8 @@ footer { background: #FBF8F2; border-top: 1px solid var(--hairline); }
 
     var agreeBox = document.getElementById('agreeConsignor');
     if (agreeBox) agreeBox.checked = false;
+    var condInput = document.getElementById('serviceCondition');
+    if (condInput) condInput.value = '';
     var fileInput = document.getElementById('serviceImages');
     if (fileInput) fileInput.value = '';
     var fileWrap = document.getElementById('serviceFileWrap');
@@ -1350,6 +1370,13 @@ footer { background: #FBF8F2; border-top: 1px solid var(--hairline); }
     }).join('');
     note.innerHTML = '<span class="zh">' + cfg.note.zh + '</span><span class="en">' + cfg.note.en + '</span>';
     if (fileLabel) fileLabel.innerHTML = '<span class="zh">' + cfg.fileLabel.zh + '</span><span class="en">' + cfg.fileLabel.en + '</span>';
+    var photoNote = document.getElementById('servicePhotoNote');
+    if (photoNote) {
+      var maxN = cfg.maxPhotos || 5;
+      photoNote.innerHTML = '<span class="zh">※ 单张图片大小不能超过 50KB。如需上传底款特写、瑕疵特写等更多图片，请先上传这 ' + maxN +
+        ' 张，并在提交后通过 WhatsApp 补发。</span><span class="en">※ Max file size is 50KB. To add more photos, upload these ' + maxN +
+        ' first and send the rest via WhatsApp after submitting.</span>';
+    }
 
     renderWorkflowSteps(cfg);
 
@@ -1406,6 +1433,16 @@ footer { background: #FBF8F2; border-top: 1px solid var(--hairline); }
       return;
     }
 
+    var condInput = document.getElementById('serviceCondition');
+    var cond = condInput ? condInput.value.trim() : '';
+    if (!cond) {
+      alert(currentLang === 'zh'
+        ? '请填写「品相披露」。如无明显修补、冲线、后配等问题，请写「无明显品相问题」。'
+        : 'Please fill in the condition disclosure. If there are no known issues, write “No visible issues”.');
+      if (condInput) condInput.focus();
+      return;
+    }
+
     if (!agree) {
       alert(currentLang === 'zh'
         ? '请先勾选并同意《藏家背书与免责协议》方可提交。'
@@ -1418,7 +1455,9 @@ footer { background: #FBF8F2; border-top: 1px solid var(--hairline); }
       photosLine = n > 0 ? ('\n参考图片：' + n + ' 张（其余与客服后续沟通）') : '\n参考图片：后续与客服沟通';
     }
 
-    var msg = cfg.msgTitle + '\nWhatsApp：' + wa + photosLine +
+    var condLine = '\n品相披露：' + cond.replace(/\s*\n\s*/g, '；');
+
+    var msg = cfg.msgTitle + '\nWhatsApp：' + wa + photosLine + condLine +
               '\n\n[已确认同意《藏家背书与免责协议》]\n' + cfg.fee + '。';
     if (currentServiceType === 'basic') {
       msg += '请确认排队上架时间。';
@@ -1464,6 +1503,12 @@ footer { background: #FBF8F2; border-top: 1px solid var(--hairline); }
     var priceOriginal = document.getElementById('modalPriceOriginal');
     if (priceOriginal && cfg && cfg.original) {
       priceOriginal.textContent = currentLang === 'zh' ? '全价 ' + cfg.original : 'Full ' + cfg.original;
+    }
+    var condInput = document.getElementById('serviceCondition');
+    if (condInput) {
+      condInput.placeholder = currentLang === 'zh'
+        ? '例：口沿一处冲线约 3cm；底足后配；1980 年代新加坡旧藏，附旧照。若无上述问题请写「无明显品相问题」。'
+        : 'e.g. 3cm hairline at rim; replaced base; 1980s Singapore private collection. If none, write “No visible issues”.';
     }
   }
   function toggleLang() {

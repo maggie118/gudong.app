@@ -12,3 +12,6 @@ node_modules/
 sitemap.xml.static-backup
 # local manual deploy trigger (contains deploy-hook secret URL)
 一键部署.cmd
+# 本地验收截图与临时脚本（不入库）
+.screenshots/
+.tmp/

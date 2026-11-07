@@ -113,18 +113,56 @@
     return navigator.serviceWorker.register('/sw.js').catch(function () { return null; });
   }
 
-  function postSubscription(sub) {
+  function postSubscription(sub, opts) {
+    opts = opts || {};
+    var payload = {
+      endpoint: sub.endpoint,
+      auth: b64(sub.getKey('auth')),
+      p256dh: b64(sub.getKey('p256dh')),
+    };
+    // 关注维度：让"关注此藏家"与"上新提醒"绑到同一条订阅上
+    if (opts.seller) payload.seller = String(opts.seller).slice(0, 60);
+    if (opts.contact) payload.contact = String(opts.contact).slice(0, 120);
+    if (opts.type) payload.contact_type = opts.type === 'email' ? 'email' : 'whatsapp';
+    if (opts.source) payload.source = String(opts.source).slice(0, 40);
     return fetch('/api/subscribe', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        endpoint: sub.endpoint,
-        auth: b64(sub.getKey('auth')),
-        p256dh: b64(sub.getKey('p256dh')),
-      }),
+      body: JSON.stringify(payload),
     }).then(function (r) {
       if (!r.ok) throw new Error('save failed ' + r.status);
       return r;
+    });
+  }
+
+  // 订阅（可被"关注此藏家"组件复用）
+  function subscribe(opts) {
+    opts = opts || {};
+    if (!('Notification' in window)) return Promise.reject(new Error('no-notification'));
+    if (Notification.permission === 'denied') {
+      if (opts.silent !== true) {
+        alert('通知权限已被浏览器拒绝，请在浏览器设置中开启后再订阅。');
+      }
+      return Promise.reject(new Error('denied'));
+    }
+    return Notification.requestPermission().then(function (perm) {
+      if (perm !== 'granted') throw new Error('denied');
+      return registerSW().then(function () {
+        return navigator.serviceWorker.ready;
+      }).then(function (reg) {
+        return getSubscription().then(function (existing) {
+          if (existing) return existing;
+          return reg.pushManager.subscribe({
+            userVisibleOnly: true,
+            applicationServerKey: urlBase64ToUint8Array(VAPID_PUBLIC),
+          });
+        });
+      }).then(function (sub) {
+        return postSubscription(sub, opts);
+      }).then(function () {
+        if (bell) setActive();
+        return true;
+      });
     });
   }
 
@@ -132,25 +170,7 @@
   function onBellClick(e) {
     e.stopPropagation();
     if (subscribed) { showMenu(menu.style.display === 'none'); return; }
-    if ('Notification' in window && Notification.permission === 'denied') {
-      alert('通知权限已被浏览器拒绝，请在浏览器设置中开启后再订阅。');
-      return;
-    }
-    Notification.requestPermission().then(function (perm) {
-      if (perm !== 'granted') return;
-      registerSW().then(function () {
-        return navigator.serviceWorker.ready;
-      }).then(function (reg) {
-        return reg.pushManager.subscribe({
-          userVisibleOnly: true,
-          applicationServerKey: urlBase64ToUint8Array(VAPID_PUBLIC),
-        });
-      }).then(function (sub) {
-        return postSubscription(sub);
-      }).then(function () {
-        setActive();
-      }).catch(function () { /* 静默失败，保持未订阅态 */ });
-    });
+    subscribe({}).catch(function () { /* 静默失败，保持未订阅态 */ });
   }
 
   // 退订：浏览器解除 + 后端标记 inactive
@@ -187,4 +207,14 @@
   } else {
     init();
   }
+
+  // 对外接口：供「关注此藏家 / 买家名单」组件复用，避免重复申请权限与重复订阅
+  window.GudongPush = {
+    available: function () {
+      return 'Notification' in window && 'serviceWorker' in navigator && 'PushManager' in window;
+    },
+    subscribe: function (opts) { return subscribe(opts || {}); },
+    unsubscribe: onUnsub,
+    isSubscribed: function () { return subscribed; },
+  };
 })();

@@ -66,7 +66,7 @@ module.exports = async function handler(req, res) {
   try { body = typeof req.body === 'string' ? JSON.parse(req.body) : (req.body || {}); }
   catch (e) { return sendJson(res, 400, { ok: false, error: 'bad json' }); }
 
-  const { endpoint, auth, p256dh, action } = body;
+  const { endpoint, auth, p256dh, action, seller, contact, contact_type } = body;
   if (!endpoint || typeof endpoint !== 'string') {
     return sendJson(res, 400, { ok: false, error: 'endpoint required' });
   }
@@ -84,12 +84,32 @@ module.exports = async function handler(req, res) {
 
   if (!auth || !p256dh) return sendJson(res, 400, { ok: false, error: 'auth/p256dh required' });
 
+  // 关注维度是后来加的：push_subs 表里未必有这些字段。
+  // 先带上下文写一次，若 Airtable 报未知字段就退回最小字段集，绝不因为多传字段而丢掉订阅。
+  const extras = {};
+  if (seller) extras.seller = String(seller).slice(0, 60);
+  if (contact) extras.contact = String(contact).slice(0, 120);
+  if (contact_type) extras.contact_type = contact_type === 'email' ? 'email' : 'whatsapp';
+
+  async function writeFields(recId, base) {
+    const full = Object.assign({}, base, extras);
+    try {
+      if (recId) return await patch(recId, full);
+      return await create(full);
+    } catch (e) {
+      if (!Object.keys(extras).length) throw e;
+      if (recId) return await patch(recId, base);
+      return await create(base);
+    }
+  }
+
   try {
     const existing = await listByEndpoint(endpoint);
     if (existing.length) {
-      await patch(existing[0].id, { auth, p256dh, active: true });
+      await writeFields(existing[0].id, { auth, p256dh, active: true });
+      for (const extra of existing.slice(1)) await patch(extra.id, { active: false }).catch(() => {});
     } else {
-      await create({ endpoint, auth, p256dh, active: true });
+      await writeFields(null, { endpoint, auth, p256dh, active: true });
     }
     return sendJson(res, 200, { ok: true });
   } catch (e) {

@@ -15,3 +15,5 @@ sitemap.xml.static-backup
 # 本地验收截图与临时脚本（不入库）
 .screenshots/
 .tmp/
+# 买家名单归档（含 WhatsApp/邮箱，切勿提交）
+.archive/

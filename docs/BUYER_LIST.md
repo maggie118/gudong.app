@@ -68,3 +68,24 @@ curl -X POST https://www.gudong.app/api/lead \
 1. Airtable 视图按 `created_at` 倒序 → 每周看新增买家。
 2. 按 `follows` 里的品类分组，新上架时人工挑人发 WhatsApp（转化率最高的一步）。
 3. 满 100 条左右再接邮件服务商做自动化，别一上来就群发——名单小的时候，人工发更像藏家之间的介绍。
+
+## 6. 月度归档（导出 → 清理 → 再进新的）
+
+```powershell
+pwsh -File scripts/archive-buyer-leads.ps1          # 全量导出 + 去重 + 统计
+pwsh -File scripts/archive-buyer-leads.ps1 -KeepRaw # 额外保留未去重原始表，便于核对
+pwsh -File scripts/archive-buyer-leads.ps1 -SelfTest # 不联网，验证归并逻辑
+```
+
+- 只读：脚本只 `GET`，不写入不删除。
+- 输出到 `.archive/`（已 gitignore，含联系方式，**不要提交、不要公开发**）：`buyer-leads-YYYYMMDD-HHmm.csv` + 同名 `-summary.txt`，每次跑递增，不覆盖历史。
+- 去重规则：按 `contact` 归并（邮箱小写、手机只留数字）→ `created_at` 取最新、`status` 取最严重（`unsubscribed` 优先）、`follows` 取并集、`submissions` 记录提交次数。
+- `created_at` 存 UTC，CSV 里另给 `created_at_sgt`（+8，新加坡本地时间）。
+- 额度告警：原始记录 ≥800 提醒、≥960 危险（免费版单表约 1000 条上限）。
+
+清理顺序（先导出核对行数，再删）：
+
+1. **不能删**：`status = unsubscribed`（"别联系"压制名单，删了下次同一人再留邮箱会以 active 重新入表，属合规风险）。
+2. **不能删**：还在跟的 active 买家（`follows` 有内容），删了等于清空推送对象。
+3. 可删：已导出 + 已触达 + 非 unsubscribed + 非近期仍在跟的那批。
+4. 删完再点一次「关注此藏家」冒烟，确认写入仍通。

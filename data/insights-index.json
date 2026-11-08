@@ -1,0 +1,1832 @@
+{
+  "updated": "2026-11-08",
+  "count": 70,
+  "latest": [
+    "conservator-questions",
+    "restoration-process",
+    "antique-shipping",
+    "metal-jade-cleaning"
+  ],
+  "articles": [
+    {
+      "slug": "conservator-questions",
+      "kicker": {
+        "zh": "避坑手册 · 修复避坑",
+        "en": "PITFALLS · CONSERVATOR"
+      },
+      "title": {
+        "zh": "找古董修复师前，必须问清这10个问题，否则越修越不值钱",
+        "en": "Before hiring an antique conservator: 10 questions to ask"
+      },
+      "desc": {
+        "zh": "资质、案例、可逆材料、做旧程度、再交易影响、合同、报价、保险、周期、售后——找修复师前必问的 10 个问题。",
+        "en": "Qualifications, case studies, reversible materials, ageing, resale, contract, quote, insurance, timeline, aftercare — 10 questions before hiring a conservator."
+      },
+      "date": "2026-04-01",
+      "read": {
+        "zh": "6 分钟",
+        "en": "6 min"
+      },
+      "mark": "问",
+      "tone": "pitfall",
+      "series": {
+        "zh": "收藏、保存与修复",
+        "en": "Collection, Care & Restoration"
+      }
+    },
+    {
+      "slug": "restoration-process",
+      "kicker": {
+        "zh": "入门指南 · 修复案例",
+        "en": "GUIDE · RESTORATION"
+      },
+      "title": {
+        "zh": "从“废品”到“藏品”：一件残器的修复全过程，报价和风险都摊开讲",
+        "en": "From scrap to collection: the full restoration process, costs, and risks"
+      },
+      "desc": {
+        "zh": "清洗、拼对、补配、做色、做旧、可逆性检查——修复的 6 个标准步骤，以及报价逻辑、风险点与验收标准。",
+        "en": "Cleaning, joining, infill, tinting, ageing, reversibility — the 6 standard steps, plus pricing logic, risks, and acceptance criteria."
+      },
+      "date": "2026-03-31",
+      "read": {
+        "zh": "7 分钟",
+        "en": "7 min"
+      },
+      "mark": "修",
+      "tone": "guide",
+      "series": {
+        "zh": "收藏、保存与修复",
+        "en": "Collection, Care & Restoration"
+      }
+    },
+    {
+      "slug": "antique-shipping",
+      "kicker": {
+        "zh": "入门指南 · 运输包装",
+        "en": "GUIDE · SHIPPING"
+      },
+      "title": {
+        "zh": "快递摔碎一只乾隆碗？古董运输包装的8层防护法",
+        "en": "Smashed Qianlong bowl in transit? The 8-layer packing method for antiques"
+      },
+      "desc": {
+        "zh": "无酸纸、气泡膜、泡沫护角、悬浮包装、双箱、留证——瓷器、书画、木器运输的 8 层防护法。",
+        "en": "Acid-free paper, bubble wrap, foam corners, suspension packing, double boxes, records — the 8-layer method for shipping antiques."
+      },
+      "date": "2026-03-30",
+      "read": {
+        "zh": "6 分钟",
+        "en": "6 min"
+      },
+      "mark": "运",
+      "tone": "guide",
+      "series": {
+        "zh": "收藏、保存与修复",
+        "en": "Collection, Care & Restoration"
+      }
+    },
+    {
+      "slug": "metal-jade-cleaning",
+      "kicker": {
+        "zh": "避坑手册 · 材质清洁",
+        "en": "PITFALLS · CLEANING"
+      },
+      "title": {
+        "zh": "铜器、银器、玉器清洁黑名单：这5种“偏方”谁用谁后悔",
+        "en": "Bronze, silver, jade: 5 cleaning shortcuts that ruin antiques"
+      },
+      "desc": {
+        "zh": "醋、牙膏、钢丝球、超声波、强酸强碱——为什么这 5 种清洁偏方不能用。",
+        "en": "Vinegar, toothpaste, steel wool, ultrasonic, acids — why these 5 cleaning shortcuts ruin antiques."
+      },
+      "date": "2026-03-29",
+      "read": {
+        "zh": "5 分钟",
+        "en": "5 min"
+      },
+      "mark": "清",
+      "tone": "pitfall",
+      "series": {
+        "zh": "收藏、保存与修复",
+        "en": "Collection, Care & Restoration"
+      }
+    },
+    {
+      "slug": "painting-mold-rescue",
+      "kicker": {
+        "zh": "入门指南 · 书画急救",
+        "en": "GUIDE · FIRST AID"
+      },
+      "title": {
+        "zh": "书画发霉、虫蛀、发黄：先别水洗！家庭急救只有这4步",
+        "en": "Mould, insects, yellowing: don't wash it — only these 4 first-aid steps"
+      },
+      "desc": {
+        "zh": "隔离、控湿、记录、求助——书画发霉、虫蛀、发黄时的正确急救四步，以及为什么不能水洗。",
+        "en": "Isolate, stabilise, record, refer — the correct four-step first aid for mould, insects, and yellowing."
+      },
+      "date": "2026-03-28",
+      "read": {
+        "zh": "6 分钟",
+        "en": "6 min"
+      },
+      "mark": "画",
+      "tone": "guide",
+      "series": {
+        "zh": "收藏、保存与修复",
+        "en": "Collection, Care & Restoration"
+      }
+    },
+    {
+      "slug": "woodware-oil-damage",
+      "kicker": {
+        "zh": "避坑手册 · 木器保养",
+        "en": "PITFALLS · WOOD"
+      },
+      "title": {
+        "zh": "木器越擦越亮？你用的核桃油，可能正在毁掉包浆",
+        "en": "Shinier is not better: walnut oil may be ruining your wood's patina"
+      },
+      "desc": {
+        "zh": "上油、湿擦、暴晒、杀虫剂、汽车蜡——木器保养最常见的 5 个误区。",
+        "en": "Oiling, damp wiping, sunning, insecticide, car wax — 5 common wood-care mistakes."
+      },
+      "date": "2026-03-27",
+      "read": {
+        "zh": "5 分钟",
+        "en": "5 min"
+      },
+      "mark": "木",
+      "tone": "pitfall",
+      "series": {
+        "zh": "收藏、保存与修复",
+        "en": "Collection, Care & Restoration"
+      }
+    },
+    {
+      "slug": "porcelain-crack-repair",
+      "kicker": {
+        "zh": "入门指南 · 修复判断",
+        "en": "GUIDE · REPAIR"
+      },
+      "title": {
+        "zh": "瓷器裂了到底修不修？先看这3点，别花冤枉钱",
+        "en": "Should you repair a cracked porcelain? 3 checks before spending money"
+      },
+      "desc": {
+        "zh": "价值、结构、可逆性——瓷器裂纹、缺口、冲线，三个维度帮你判断该不该修。",
+        "en": "Value, structure, reversibility — three checks to decide whether to repair a cracked or chipped porcelain."
+      },
+      "date": "2026-03-26",
+      "read": {
+        "zh": "6 分钟",
+        "en": "6 min"
+      },
+      "mark": "瓷",
+      "tone": "guide",
+      "series": {
+        "zh": "收藏、保存与修复",
+        "en": "Collection, Care & Restoration"
+      }
+    },
+    {
+      "slug": "storage-mistakes",
+      "kicker": {
+        "zh": "避坑手册 · 保存养护",
+        "en": "PITFALLS · STORAGE"
+      },
+      "title": {
+        "zh": "传家宝不是毁在岁月，而是毁在这7个保存习惯",
+        "en": "Family heirlooms are not ruined by time — they are ruined by these 7 storage habits"
+      },
+      "desc": {
+        "zh": "光照、密封、樟脑丸、裸手、空调、不除尘、乱上油——7 个最常见的保存误区，一次讲清。",
+        "en": "Light, sealing, mothballs, bare hands, AC, dust, random oiling — 7 of the most common storage mistakes."
+      },
+      "date": "2026-03-25",
+      "read": {
+        "zh": "6 分钟",
+        "en": "6 min"
+      },
+      "mark": "藏",
+      "tone": "pitfall",
+      "series": {
+        "zh": "收藏、保存与修复",
+        "en": "Collection, Care & Restoration"
+      }
+    },
+    {
+      "slug": "bronze-patina-soil",
+      "kicker": {
+        "zh": "透过地理看古董",
+        "en": "GEOGRAPHY"
+      },
+      "title": {
+        "zh": "不同土壤的青铜锈色",
+        "en": "Bronze patina by soil type"
+      },
+      "desc": {
+        "zh": "红壤、黄壤、沙土、水坑——土壤化学决定了青铜器的锈色。",
+        "en": "Red soil, yellow soil, sand, water pits — soil chemistry decides the colour of bronze patina."
+      },
+      "date": "2026-03-24",
+      "read": {
+        "zh": "4 分钟",
+        "en": "4 min"
+      },
+      "mark": "锈",
+      "tone": "geography",
+      "series": {
+        "zh": "透过地理看古董",
+        "en": "Geography & Context"
+      }
+    },
+    {
+      "slug": "burial-climate-north-south",
+      "kicker": {
+        "zh": "透过地理看古董",
+        "en": "GEOGRAPHY"
+      },
+      "title": {
+        "zh": "南方潮湿 vs 北方干燥",
+        "en": "Humid south vs. dry north"
+      },
+      "desc": {
+        "zh": "同样的器物，埋在不同的气候里，出土后的样子完全不同。",
+        "en": "The same object, buried in different climates, comes out looking entirely different."
+      },
+      "date": "2026-03-23",
+      "read": {
+        "zh": "4 分钟",
+        "en": "4 min"
+      },
+      "mark": "埋",
+      "tone": "geography",
+      "series": {
+        "zh": "透过地理看古董",
+        "en": "Geography & Context"
+      }
+    },
+    {
+      "slug": "quanzhou-yuan-blue",
+      "kicker": {
+        "zh": "透过地理看古董",
+        "en": "GEOGRAPHY"
+      },
+      "title": {
+        "zh": "泉州与元代青花",
+        "en": "Quanzhou and Yuan blue-and-white"
+      },
+      "desc": {
+        "zh": "色目商人、伊斯兰贸易、波斯钴料——泉州港是元青花诞生的地理支点。",
+        "en": "Semu merchants, Islamic trade, Persian cobalt — Quanzhou was the geographic pivot for Yuan blue-and-white."
+      },
+      "date": "2026-03-22",
+      "read": {
+        "zh": "4 分钟",
+        "en": "4 min"
+      },
+      "mark": "泉",
+      "tone": "geography",
+      "series": {
+        "zh": "透过地理看古董",
+        "en": "Geography & Context"
+      }
+    },
+    {
+      "slug": "maritime-silk-road-ports",
+      "kicker": {
+        "zh": "透过地理看古董",
+        "en": "GEOGRAPHY"
+      },
+      "title": {
+        "zh": "海上丝绸之路的三大港口",
+        "en": "The three great ports of the Maritime Silk Road"
+      },
+      "desc": {
+        "zh": "泉州、广州、宁波——三座城市，三种贸易模式，三种瓷器风格。",
+        "en": "Quanzhou, Guangzhou, Ningbo — three cities, three trade patterns, three styles of porcelain."
+      },
+      "date": "2026-03-21",
+      "read": {
+        "zh": "4 分钟",
+        "en": "4 min"
+      },
+      "mark": "港",
+      "tone": "geography",
+      "series": {
+        "zh": "透过地理看古董",
+        "en": "Geography & Context"
+      }
+    },
+    {
+      "slug": "yangtze-kilns",
+      "kicker": {
+        "zh": "透过地理看古董",
+        "en": "GEOGRAPHY"
+      },
+      "title": {
+        "zh": "长江水系与窑口分布",
+        "en": "The Yangtze river system and the distribution of kilns"
+      },
+      "desc": {
+        "zh": "越窑、龙泉、景德镇——为什么中国最著名的窑口都沿着长江？",
+        "en": "Yue, Longquan, Jingdezhen — why were China's most famous kilns all along the Yangtze?"
+      },
+      "date": "2026-03-20",
+      "read": {
+        "zh": "4 分钟",
+        "en": "4 min"
+      },
+      "mark": "江",
+      "tone": "geography",
+      "series": {
+        "zh": "透过地理看古董",
+        "en": "Geography & Context"
+      }
+    },
+    {
+      "slug": "grand-canal-porcelain",
+      "kicker": {
+        "zh": "透过地理看古董",
+        "en": "GEOGRAPHY"
+      },
+      "title": {
+        "zh": "大运河如何改变了瓷器流通？",
+        "en": "How did the Grand Canal change porcelain distribution?"
+      },
+      "desc": {
+        "zh": "一条人工河道，把南方的瓷器运到北方，也把北方的订单带回南方。",
+        "en": "A man-made waterway carried southern porcelain north — and northern orders back south."
+      },
+      "date": "2026-03-19",
+      "read": {
+        "zh": "4 分钟",
+        "en": "4 min"
+      },
+      "mark": "运",
+      "tone": "geography",
+      "series": {
+        "zh": "透过地理看古董",
+        "en": "Geography & Context"
+      }
+    },
+    {
+      "slug": "bronze-age-copper",
+      "kicker": {
+        "zh": "透过地理看古董",
+        "en": "GEOGRAPHY"
+      },
+      "title": {
+        "zh": "铜矿与青铜时代",
+        "en": "Copper mines and the Bronze Age"
+      },
+      "desc": {
+        "zh": "长江中下游的铜矿带，决定了中国青铜文明的地理版图。",
+        "en": "The copper belt of the middle and lower Yangtze shaped the geographic map of Chinese bronze civilisation."
+      },
+      "date": "2026-03-18",
+      "read": {
+        "zh": "4 分钟",
+        "en": "4 min"
+      },
+      "mark": "铜",
+      "tone": "geography",
+      "series": {
+        "zh": "透过地理看古董",
+        "en": "Geography & Context"
+      }
+    },
+    {
+      "slug": "singapore-dealers-history",
+      "kicker": {
+        "zh": "透过历史看古董",
+        "en": "HISTORY"
+      },
+      "title": {
+        "zh": "二战前后的新加坡古董商",
+        "en": "Singapore antique dealers before and after WWII"
+      },
+      "desc": {
+        "zh": "从战前的贸易繁荣到战后的重建，新加坡古董商见证了这座城市的一段特殊历史。",
+        "en": "From pre-war trade prosperity to post-war rebuilding, Singapore dealers witnessed a particular slice of the city's history."
+      },
+      "date": "2026-03-17",
+      "read": {
+        "zh": "4 分钟",
+        "en": "4 min"
+      },
+      "mark": "商",
+      "tone": "history",
+      "series": {
+        "zh": "透过历史看古董",
+        "en": "History & Context"
+      }
+    },
+    {
+      "slug": "singapore-chinese-antiques",
+      "kicker": {
+        "zh": "透过历史看古董",
+        "en": "HISTORY"
+      },
+      "title": {
+        "zh": "新加坡为什么有这么多中国古董？",
+        "en": "Why does Singapore have so many Chinese antiques?"
+      },
+      "desc": {
+        "zh": "南洋华人移民、侨批、宗乡会馆——这些历史纽带，把中国古董带到了新加坡。",
+        "en": "Nanyang migration, remittance letters, clan associations — these historical links brought Chinese antiques to Singapore."
+      },
+      "date": "2026-03-16",
+      "read": {
+        "zh": "4 分钟",
+        "en": "4 min"
+      },
+      "mark": "侨",
+      "tone": "history",
+      "series": {
+        "zh": "透过历史看古董",
+        "en": "History & Context"
+      }
+    },
+    {
+      "slug": "zhushan-eight-friends",
+      "kicker": {
+        "zh": "透过历史看古董",
+        "en": "HISTORY"
+      },
+      "title": {
+        "zh": "“珠山八友”是怎么回事？",
+        "en": "Who were the Zhushan Eight Friends?"
+      },
+      "desc": {
+        "zh": "民国景德镇的一群文人瓷画家，把中国画搬上了瓷板，开创了浅绛彩之后的又一高峰。",
+        "en": "A group of literati porcelain painters in Republican Jingdezhen who put Chinese painting onto porcelain plaques."
+      },
+      "date": "2026-03-15",
+      "read": {
+        "zh": "4 分钟",
+        "en": "4 min"
+      },
+      "mark": "珠",
+      "tone": "history",
+      "series": {
+        "zh": "透过历史看古董",
+        "en": "History & Context"
+      }
+    },
+    {
+      "slug": "republic-antique-fakes",
+      "kicker": {
+        "zh": "透过历史看古董",
+        "en": "HISTORY"
+      },
+      "title": {
+        "zh": "民国仿古为什么这么厉害？",
+        "en": "Why was Republic-era antiquarianism so skilled?"
+      },
+      "desc": {
+        "zh": "上海开埠、古董商网络、宫廷匠人流入民间——民国仿品至今仍能骗过很多人。",
+        "en": "Shanghai's opening, dealer networks, imperial craftsmen entering the private market — Republic fakes still fool many people today."
+      },
+      "date": "2026-03-14",
+      "read": {
+        "zh": "4 分钟",
+        "en": "4 min"
+      },
+      "mark": "仿",
+      "tone": "history",
+      "series": {
+        "zh": "透过历史看古董",
+        "en": "History & Context"
+      }
+    },
+    {
+      "slug": "xuande-censer-legacy",
+      "kicker": {
+        "zh": "透过历史看古董",
+        "en": "HISTORY"
+      },
+      "title": {
+        "zh": "宣德炉为什么被仿了五百年？",
+        "en": "Why has the Xuande censer been copied for 500 years?"
+      },
+      "desc": {
+        "zh": "一批风磨铜、一份铸炉档案、一场大火——宣德炉的传说从诞生起就带着神秘。",
+        "en": "A batch of wind-milled copper, a casting record, a fire — the Xuande censer was mysterious from birth."
+      },
+      "date": "2026-03-13",
+      "read": {
+        "zh": "4 分钟",
+        "en": "4 min"
+      },
+      "mark": "炉",
+      "tone": "history",
+      "series": {
+        "zh": "透过历史看古董",
+        "en": "History & Context"
+      }
+    },
+    {
+      "slug": "ming-furniture-minimalism",
+      "kicker": {
+        "zh": "透过历史看古董",
+        "en": "HISTORY"
+      },
+      "title": {
+        "zh": "明代家具为什么简到极致？",
+        "en": "Why is Ming furniture so radically minimal?"
+      },
+      "desc": {
+        "zh": "文人审美、硬木进口、海禁政策——三个看似无关的因素，共同塑造了明式家具。",
+        "en": "Literati taste, imported hardwoods, and maritime prohibition — three seemingly unrelated factors shaped Ming furniture."
+      },
+      "date": "2026-03-12",
+      "read": {
+        "zh": "4 分钟",
+        "en": "4 min"
+      },
+      "mark": "明",
+      "tone": "history",
+      "series": {
+        "zh": "透过历史看古董",
+        "en": "History & Context"
+      }
+    },
+    {
+      "slug": "qing-three-reigns-porcelain",
+      "kicker": {
+        "zh": "透过历史看古董",
+        "en": "HISTORY"
+      },
+      "title": {
+        "zh": "康雍乾三朝为什么是瓷器巅峰？",
+        "en": "Why were the Kangxi-Yongzheng-Qianlong reigns the peak of porcelain?"
+      },
+      "desc": {
+        "zh": "一个半世纪的经济繁荣、皇帝本人的审美、督陶官制度——三者缺一不可。",
+        "en": "A century and a half of prosperity, imperial taste, and the supervisor-of-kilns system — all three were needed."
+      },
+      "date": "2026-03-11",
+      "read": {
+        "zh": "4 分钟",
+        "en": "4 min"
+      },
+      "mark": "清",
+      "tone": "history",
+      "series": {
+        "zh": "透过历史看古董",
+        "en": "History & Context"
+      }
+    },
+    {
+      "slug": "malacca-strait-antiques",
+      "kicker": {
+        "zh": "透过地理看古董",
+        "en": "GEOGRAPHY"
+      },
+      "title": {
+        "zh": "一条海峡，装下了半个亚洲的古董",
+        "en": "One strait, half of Asia's antiques"
+      },
+      "desc": {
+        "zh": "为什么新加坡的旧货铺里，什么都有？答案在六百年的转口贸易。",
+        "en": "Why can you find almost anything in a Singapore junk shop? Six hundred years of entrepôt trade."
+      },
+      "date": "2026-03-10",
+      "read": {
+        "zh": "4 分钟",
+        "en": "4 min"
+      },
+      "mark": "峡",
+      "tone": "geography",
+      "series": {
+        "zh": "透过地理看古董",
+        "en": "Geography & Context"
+      }
+    },
+    {
+      "slug": "nyonya-ware",
+      "kicker": {
+        "zh": "透过历史看古董",
+        "en": "HISTORY"
+      },
+      "title": {
+        "zh": "南洋最贵的那只碗",
+        "en": "The most expensive bowl in Nanyang"
+      },
+      "desc": {
+        "zh": "它不在景德镇烧，也不全是中国画的。",
+        "en": "Not fired in Jingdezhen — and not entirely painted in China."
+      },
+      "date": "2026-03-09",
+      "read": {
+        "zh": "4 分钟",
+        "en": "4 min"
+      },
+      "mark": "娘",
+      "tone": "history",
+      "series": {
+        "zh": "透过历史看古董",
+        "en": "History & Context"
+      }
+    },
+    {
+      "slug": "canton-thirteen-hongs",
+      "kicker": {
+        "zh": "透过地理看古董",
+        "en": "GEOGRAPHY"
+      },
+      "title": {
+        "zh": "广州十三行与外销瓷",
+        "en": "The Canton Thirteen Hongs and export porcelain"
+      },
+      "desc": {
+        "zh": "一口通商政策下，广州成为中西瓷器贸易的唯一出口。",
+        "en": "Under the single-port policy, Guangzhou became the only exit for Chinese-Western porcelain trade."
+      },
+      "date": "2026-03-08",
+      "read": {
+        "zh": "4 分钟",
+        "en": "4 min"
+      },
+      "mark": "粤",
+      "tone": "geography",
+      "series": {
+        "zh": "透过地理看古董",
+        "en": "Geography & Context"
+      }
+    },
+    {
+      "slug": "late-qing-outflow",
+      "kicker": {
+        "zh": "透过历史看古董",
+        "en": "HISTORY"
+      },
+      "title": {
+        "zh": "晚清文物为什么大量外流？",
+        "en": "Why did so many Chinese antiques leave the country in the late Qing?"
+      },
+      "desc": {
+        "zh": "鸦片战争、庚子赔款、外国博物馆的采购团——三重力量，把中国文物推向世界。",
+        "en": "The Opium Wars, the Boxer indemnity, and foreign museum buying trips — three forces pushed Chinese antiques out into the world."
+      },
+      "date": "2026-03-07",
+      "read": {
+        "zh": "4 分钟",
+        "en": "4 min"
+      },
+      "mark": "流",
+      "tone": "history",
+      "series": {
+        "zh": "透过历史看古董",
+        "en": "History & Context"
+      }
+    },
+    {
+      "slug": "sumali-cobalt-origin",
+      "kicker": {
+        "zh": "透过地理看古董",
+        "en": "GEOGRAPHY"
+      },
+      "title": {
+        "zh": "苏麻离青的产地在哪里？",
+        "en": "Where did Sumali cobalt actually come from?"
+      },
+      "desc": {
+        "zh": "波斯卡尚、伊斯法罕、霍尔木兹——沿着航线，追踪那一抹蓝的源头。",
+        "en": "Kashan, Isfahan, Hormuz — following the sea routes back to the source of that blue."
+      },
+      "date": "2026-03-06",
+      "read": {
+        "zh": "4 分钟",
+        "en": "4 min"
+      },
+      "mark": "矿",
+      "tone": "geography",
+      "series": {
+        "zh": "透过地理看古董",
+        "en": "Geography & Context"
+      }
+    },
+    {
+      "slug": "song-five-kilns",
+      "kicker": {
+        "zh": "透过历史看古董",
+        "en": "HISTORY"
+      },
+      "title": {
+        "zh": "宋代五大名窑为什么都在河南河北？",
+        "en": "Why were the Song's five great kilns all in the north?"
+      },
+      "desc": {
+        "zh": "汝、官、哥、钧、定——五个名字背后，是北宋定都开封的地理密码。",
+        "en": "Ru, Guan, Ge, Jun, Ding — five names, and the geographic logic of the Northern Song capital at Kaifeng."
+      },
+      "date": "2026-03-05",
+      "read": {
+        "zh": "4 分钟",
+        "en": "4 min"
+      },
+      "mark": "宋",
+      "tone": "history",
+      "series": {
+        "zh": "透过历史看古董",
+        "en": "History & Context"
+      }
+    },
+    {
+      "slug": "jade-road-hetian",
+      "kicker": {
+        "zh": "透过地理看古董",
+        "en": "GEOGRAPHY"
+      },
+      "title": {
+        "zh": "和田玉是怎么运到中原的？",
+        "en": "How did Hetian jade reach the Central Plains?"
+      },
+      "desc": {
+        "zh": "从于阗到长安，一条比丝绸之路更古老的玉石之路。",
+        "en": "From Khotan to Chang'an — a jade road older than the Silk Road itself."
+      },
+      "date": "2026-03-04",
+      "read": {
+        "zh": "4 分钟",
+        "en": "4 min"
+      },
+      "mark": "玉",
+      "tone": "geography",
+      "series": {
+        "zh": "透过地理看古董",
+        "en": "Geography & Context"
+      }
+    },
+    {
+      "slug": "tang-ceramics-trade",
+      "kicker": {
+        "zh": "透过历史看古董",
+        "en": "HISTORY"
+      },
+      "title": {
+        "zh": "唐代瓷器为什么突然变多？",
+        "en": "Why did Tang ceramics suddenly multiply?"
+      },
+      "desc": {
+        "zh": "安史之乱之后，中国的经济重心南移，瓷器第一次成为大众商品。",
+        "en": "After the An Lushan Rebellion, China's economic centre shifted south — and ceramics became mass-market for the first time."
+      },
+      "date": "2026-03-03",
+      "read": {
+        "zh": "4 分钟",
+        "en": "4 min"
+      },
+      "mark": "唐",
+      "tone": "history",
+      "series": {
+        "zh": "透过历史看古董",
+        "en": "History & Context"
+      }
+    },
+    {
+      "slug": "jingdezhen-geography",
+      "kicker": {
+        "zh": "透过地理看古董",
+        "en": "GEOGRAPHY"
+      },
+      "title": {
+        "zh": "景德镇为什么成为瓷都？",
+        "en": "Why did Jingdezhen become the porcelain capital?"
+      },
+      "desc": {
+        "zh": "高岭土、昌江水运、松柴燃料——三样东西，缺一不可。",
+        "en": "Kaolin clay, the Chang River, and pine firewood — all three were essential."
+      },
+      "date": "2026-03-02",
+      "read": {
+        "zh": "4 分钟",
+        "en": "4 min"
+      },
+      "mark": "瓷",
+      "tone": "geography",
+      "series": {
+        "zh": "透过地理看古董",
+        "en": "Geography & Context"
+      }
+    },
+    {
+      "slug": "sumali-cobalt-zhenghe",
+      "kicker": {
+        "zh": "透过历史看古董",
+        "en": "HISTORY"
+      },
+      "title": {
+        "zh": "苏麻离青：郑和船队带回的那一抹蓝",
+        "en": "Sumali Cobalt: the blue that came back with Zheng He's fleet"
+      },
+      "desc": {
+        "zh": "郑和下西洋带回的不只是香料。还有一批钴料，让永宣青花蓝得惊心动魄。",
+        "en": "Zheng He brought back more than spices — he brought back the cobalt that changed Chinese blue-and-white."
+      },
+      "date": "2026-03-01",
+      "read": {
+        "zh": "4 分钟",
+        "en": "4 min"
+      },
+      "mark": "青",
+      "tone": "history",
+      "series": {
+        "zh": "透过历史看古董",
+        "en": "History & Context"
+      }
+    },
+    {
+      "slug": "qing-porcelain-dating",
+      "kicker": {
+        "zh": "断代方法",
+        "en": "DATING"
+      },
+      "title": {
+        "zh": "清代民窑青花怎么分辨年代？3 个上手要点",
+        "en": "Dating Qing folk kiln blue-and-white: 3 hands-on signals"
+      },
+      "desc": {
+        "zh": "釉面、胎质、发色，三个最容易上手的判断维度。",
+        "en": "Glaze, body, and pigment tone — three of the easiest entry points."
+      },
+      "date": "2026-02-18",
+      "read": {
+        "zh": "6 分钟",
+        "en": "6 min"
+      },
+      "mark": "青",
+      "tone": "guide",
+      "series": {
+        "zh": "瓷器系列",
+        "en": "Porcelain"
+      }
+    },
+    {
+      "slug": "coin-cleaning",
+      "kicker": {
+        "zh": "避坑手册",
+        "en": "PITFALLS"
+      },
+      "title": {
+        "zh": "钱币“洗过”和“没洗过”，差多少价",
+        "en": "Cleaned vs. uncleaned coins — how much value is lost?"
+      },
+      "desc": {
+        "zh": "一次错误清洗，可能让一枚好钱币跌价一半以上。",
+        "en": "One bad cleaning can halve a coin's value."
+      },
+      "date": "2026-02-08",
+      "read": {
+        "zh": "5 分钟",
+        "en": "5 min"
+      },
+      "mark": "洗",
+      "tone": "pitfall",
+      "series": {
+        "zh": "钱币系列",
+        "en": "Coins"
+      }
+    },
+    {
+      "slug": "how-to-store-collection",
+      "kicker": {
+        "zh": "入门指南",
+        "en": "BEGINNER"
+      },
+      "title": {
+        "zh": "怎么保存藏品？六个环境要素决定藏品寿命",
+        "en": "How to store a collection: 6 environmental factors"
+      },
+      "desc": {
+        "zh": "温度、湿度、光照、灰尘、虫害、接触——六个要素，决定藏品能保存多久。",
+        "en": "Temperature, humidity, light, dust, pests, contact — six factors that decide how long a piece lasts."
+      },
+      "date": "2026-02-08",
+      "read": {
+        "zh": "6 分钟",
+        "en": "6 min"
+      },
+      "mark": "藏",
+      "tone": "guide",
+      "series": {
+        "zh": "收藏、保存与修复",
+        "en": "Collection, Care & Restoration"
+      }
+    },
+    {
+      "slug": "provenance-basics",
+      "kicker": {
+        "zh": "入门指南",
+        "en": "BEGINNER"
+      },
+      "title": {
+        "zh": "怎么看藏品“来源”？证据链比故事重要",
+        "en": "Reading provenance — evidence matters more than stories"
+      },
+      "desc": {
+        "zh": "来源不是一句话，而是一条证据链。看这四类证据就够了。",
+        "en": "Provenance is a chain of evidence, not a sentence. Four types to check."
+      },
+      "date": "2026-02-08",
+      "read": {
+        "zh": "6 分钟",
+        "en": "6 min"
+      },
+      "mark": "源",
+      "tone": "strategy",
+      "series": {
+        "zh": "传世与策略",
+        "en": "Strategy"
+      }
+    },
+    {
+      "slug": "what-is-jianlou",
+      "kicker": {
+        "zh": "入门指南",
+        "en": "BEGINNER"
+      },
+      "title": {
+        "zh": "旧藏寻珍：古董交易背后的 3 个真实逻辑",
+        "en": "Acquiring old treasures: 3 real dynamics behind a deal"
+      },
+      "desc": {
+        "zh": "信息差、时间差、认知差——识货是长期功力。",
+        "en": "Information, timing, and knowledge gaps — expertise is a long game."
+      },
+      "date": "2026-02-08",
+      "read": {
+        "zh": "5 分钟",
+        "en": "5 min"
+      },
+      "mark": "鉴",
+      "tone": "strategy",
+      "series": {
+        "zh": "传世与策略",
+        "en": "Strategy"
+      }
+    },
+    {
+      "slug": "bamboo-ivory-cracks",
+      "kicker": {
+        "zh": "避坑手册",
+        "en": "PITFALLS"
+      },
+      "title": {
+        "zh": "竹木牙角“笑纹”是天然还是裂",
+        "en": "Bamboo, wood, ivory cracks — natural or forced?"
+      },
+      "desc": {
+        "zh": "笑纹是天然老化，还是人工做裂？看这四点就分得清。",
+        "en": "Natural age or forced crack — four checks that tell them apart."
+      },
+      "date": "2026-02-06",
+      "read": {
+        "zh": "5 分钟",
+        "en": "5 min"
+      },
+      "mark": "裂",
+      "tone": "pitfall",
+      "series": {
+        "zh": "器物与杂项",
+        "en": "Objects & Misc"
+      }
+    },
+    {
+      "slug": "furniture-patina",
+      "kicker": {
+        "zh": "避坑手册",
+        "en": "PITFALLS"
+      },
+      "title": {
+        "zh": "老家具“包浆”是天然还是做旧",
+        "en": "Furniture patina — natural or faked?"
+      },
+      "desc": {
+        "zh": "天然包浆温润内敛，做旧包浆浮于表面。看这四点就分得清。",
+        "en": "Natural is warm and inward; faked sits on the surface. Four checks."
+      },
+      "date": "2026-02-06",
+      "read": {
+        "zh": "5 分钟",
+        "en": "5 min"
+      },
+      "mark": "木",
+      "tone": "pitfall",
+      "series": {
+        "zh": "器物与杂项",
+        "en": "Objects & Misc"
+      }
+    },
+    {
+      "slug": "painting-mounting",
+      "kicker": {
+        "zh": "避坑手册",
+        "en": "PITFALLS"
+      },
+      "title": {
+        "zh": "书画“揭裱”和“原裱”差在哪",
+        "en": "Re-mounted vs. original mounting"
+      },
+      "desc": {
+        "zh": "原裱保真、揭裱伤画。裱工对价格的影响，比你想的大。",
+        "en": "Original mounting preserves value; re-mounting damages it — and the price."
+      },
+      "date": "2026-02-06",
+      "read": {
+        "zh": "5 分钟",
+        "en": "5 min"
+      },
+      "mark": "裱",
+      "tone": "pitfall",
+      "series": {
+        "zh": "书画系列",
+        "en": "Paintings"
+      }
+    },
+    {
+      "slug": "coin-casting-dating",
+      "kicker": {
+        "zh": "断代方法",
+        "en": "DATING"
+      },
+      "title": {
+        "zh": "钱币断代：从“铸法”看年代",
+        "en": "Dating coins by casting method"
+      },
+      "desc": {
+        "zh": "范铸、翻砂、机制——三种铸法对应三个时代，看懂铸法就能缩小范围。",
+        "en": "Mould, sand, machine — three methods, three eras."
+      },
+      "date": "2026-02-04",
+      "read": {
+        "zh": "6 分钟",
+        "en": "6 min"
+      },
+      "mark": "铸",
+      "tone": "guide",
+      "series": {
+        "zh": "钱币系列",
+        "en": "Coins"
+      }
+    },
+    {
+      "slug": "furniture-joinery-dating",
+      "kicker": {
+        "zh": "断代方法",
+        "en": "DATING"
+      },
+      "title": {
+        "zh": "家具断代：从“榫卯”看年代",
+        "en": "Dating furniture by joinery"
+      },
+      "desc": {
+        "zh": "榫卯结构的变化，藏着家具断代的关键信息。",
+        "en": "Changes in joinery encode a piece's place in time."
+      },
+      "date": "2026-02-04",
+      "read": {
+        "zh": "6 分钟",
+        "en": "6 min"
+      },
+      "mark": "榫",
+      "tone": "guide",
+      "series": {
+        "zh": "器物与杂项",
+        "en": "Objects & Misc"
+      }
+    },
+    {
+      "slug": "glaze-crackle-basics",
+      "kicker": {
+        "zh": "避坑手册",
+        "en": "PITFALLS"
+      },
+      "title": {
+        "zh": "瓷器釉面开片怎么看？自然开片与人工开片的区别",
+        "en": "Reading glaze crackle: natural vs. forced"
+      },
+      "desc": {
+        "zh": "开片不是瑕疵代名词，它同时是断代与辨伪的重要线索。",
+        "en": "Crackle is not just a flaw — it is a key clue for dating and authentication."
+      },
+      "date": "2026-02-04",
+      "read": {
+        "zh": "6 分钟",
+        "en": "6 min"
+      },
+      "mark": "釉",
+      "tone": "pitfall",
+      "series": {
+        "zh": "瓷器系列",
+        "en": "Porcelain"
+      }
+    },
+    {
+      "slug": "jade-tool-marks",
+      "kicker": {
+        "zh": "断代方法",
+        "en": "DATING"
+      },
+      "title": {
+        "zh": "玉器断代：从“砣痕”看年代",
+        "en": "Dating jade by tool marks"
+      },
+      "desc": {
+        "zh": "砣痕是玉器加工留下的痕迹，不同时代工具不同，痕迹也不同。",
+        "en": "Wheel marks record how a piece was made — and when."
+      },
+      "date": "2026-02-04",
+      "read": {
+        "zh": "6 分钟",
+        "en": "6 min"
+      },
+      "mark": "砣",
+      "tone": "guide",
+      "series": {
+        "zh": "玉器系列",
+        "en": "Jade"
+      }
+    },
+    {
+      "slug": "ancient-jade-stains",
+      "kicker": {
+        "zh": "避坑手册",
+        "en": "PITFALLS"
+      },
+      "title": {
+        "zh": "古玉“沁色”是天然还是人工？看这 4 点",
+        "en": "Ancient jade stains — natural or artificial?"
+      },
+      "desc": {
+        "zh": "土沁、血沁、水银沁——天然沁和人工沁差在哪，一次讲清。",
+        "en": "Soil, blood, mercury — how natural and artificial stains differ."
+      },
+      "date": "2026-02-02",
+      "read": {
+        "zh": "6 分钟",
+        "en": "6 min"
+      },
+      "mark": "沁",
+      "tone": "pitfall",
+      "series": {
+        "zh": "玉器系列",
+        "en": "Jade"
+      }
+    },
+    {
+      "slug": "painting-prints-vs-hand",
+      "kicker": {
+        "zh": "避坑手册",
+        "en": "PITFALLS"
+      },
+      "title": {
+        "zh": "书画“印刷品”和“手绘”怎么分？放大镜看这 3 处",
+        "en": "Prints vs. hand-painted — 3 checks with a loupe"
+      },
+      "desc": {
+        "zh": "网点、墨色、笔触——三处放大看，印刷品和手绘立刻分。",
+        "en": "Halftone, ink, brushwork — three checks that separate prints from hand-painted."
+      },
+      "date": "2026-02-02",
+      "read": {
+        "zh": "5 分钟",
+        "en": "5 min"
+      },
+      "mark": "版",
+      "tone": "pitfall",
+      "series": {
+        "zh": "书画系列",
+        "en": "Paintings"
+      }
+    },
+    {
+      "slug": "singapore-painting-market",
+      "kicker": {
+        "zh": "行情观察",
+        "en": "MARKET"
+      },
+      "title": {
+        "zh": "新加坡书画市场：去哪看、怎么看",
+        "en": "Singapore painting market: where and how to look"
+      },
+      "desc": {
+        "zh": "从几百块到几十万，书画市场分层明显。这份本地地图帮你找对入口。",
+        "en": "From hundreds to hundreds of thousands — clearly tiered. Find the right entry."
+      },
+      "date": "2026-02-02",
+      "read": {
+        "zh": "6 分钟",
+        "en": "6 min"
+      },
+      "mark": "画",
+      "tone": "market",
+      "series": {
+        "zh": "新加坡本地",
+        "en": "Local Singapore"
+      }
+    },
+    {
+      "slug": "how-to-negotiate",
+      "kicker": {
+        "zh": "入门指南",
+        "en": "BEGINNER"
+      },
+      "title": {
+        "zh": "怎么和卖家谈价？老手不会明说的 6 条规则",
+        "en": "How to negotiate with a seller: 6 rules"
+      },
+      "desc": {
+        "zh": "谈价不是砍价。什么时候开口、怎么开口、什么时候走人，这篇讲透。",
+        "en": "Negotiating isn't haggling — when to speak, how, and when to walk away."
+      },
+      "date": "2026-01-30",
+      "read": {
+        "zh": "6 分钟",
+        "en": "6 min"
+      },
+      "mark": "谈",
+      "tone": "strategy",
+      "series": {
+        "zh": "传世与策略",
+        "en": "Strategy"
+      }
+    },
+    {
+      "slug": "republic-porcelain-dating",
+      "kicker": {
+        "zh": "断代方法",
+        "en": "DATING"
+      },
+      "title": {
+        "zh": "民国瓷器断代：从哪几个特征入手",
+        "en": "Dating Republic-era porcelain"
+      },
+      "desc": {
+        "zh": "民国瓷器夹在清晚和现代之间，风格混杂，最容易看走眼。",
+        "en": "Between late Qing and the modern era — a mixed style that's easy to misread."
+      },
+      "date": "2026-01-30",
+      "read": {
+        "zh": "6 分钟",
+        "en": "6 min"
+      },
+      "mark": "民",
+      "tone": "guide",
+      "series": {
+        "zh": "瓷器系列",
+        "en": "Porcelain"
+      }
+    },
+    {
+      "slug": "singapore-jade-market",
+      "kicker": {
+        "zh": "行情观察",
+        "en": "MARKET"
+      },
+      "title": {
+        "zh": "新加坡玉器市场：去哪看、怎么看",
+        "en": "Singapore jade market: where and how to look"
+      },
+      "desc": {
+        "zh": "玉器水深，渠道比瓷器更关键。这份本地地图帮你少踩坑。",
+        "en": "Jade is deep — channel matters more than with porcelain. A local map."
+      },
+      "date": "2026-01-30",
+      "read": {
+        "zh": "6 分钟",
+        "en": "6 min"
+      },
+      "mark": "翠",
+      "tone": "market",
+      "series": {
+        "zh": "新加坡本地",
+        "en": "Local Singapore"
+      }
+    },
+    {
+      "slug": "first-collection",
+      "kicker": {
+        "zh": "入门指南",
+        "en": "BEGINNER"
+      },
+      "title": {
+        "zh": "新手第一件藏品买什么？先想清楚这 5 件事",
+        "en": "Your first antique: 5 questions before you buy"
+      },
+      "desc": {
+        "zh": "别急着买，先回答五个问题。第一件藏品决定了你之后的收藏路径。",
+        "en": "Don't rush. Answer five questions — your first piece sets your path."
+      },
+      "date": "2026-01-28",
+      "read": {
+        "zh": "6 分钟",
+        "en": "6 min"
+      },
+      "mark": "初",
+      "tone": "guide",
+      "series": {
+        "zh": "收藏、保存与修复",
+        "en": "Collection, Care & Restoration"
+      }
+    },
+    {
+      "slug": "ming-porcelain-dating",
+      "kicker": {
+        "zh": "断代方法",
+        "en": "DATING"
+      },
+      "title": {
+        "zh": "明代瓷器断代：从哪几个特征入手",
+        "en": "Dating Ming porcelain: which features to look at"
+      },
+      "desc": {
+        "zh": "早明、中明、晚明——三个阶段的瓷器特征完全不同。",
+        "en": "Early, Middle, Late Ming — three phases, three distinct sets of features."
+      },
+      "date": "2026-01-28",
+      "read": {
+        "zh": "9 分钟",
+        "en": "9 min"
+      },
+      "mark": "明",
+      "tone": "guide",
+      "series": {
+        "zh": "瓷器系列",
+        "en": "Porcelain"
+      }
+    },
+    {
+      "slug": "singapore-coin-market",
+      "kicker": {
+        "zh": "行情观察",
+        "en": "MARKET"
+      },
+      "title": {
+        "zh": "新加坡钱币市场：去哪看、怎么看",
+        "en": "Singapore coin market: where and how to look"
+      },
+      "desc": {
+        "zh": "清钱、民国币、东南亚流通币的成交趋势与价格区间。",
+        "en": "Qing, Republican, and SE-Asian circulating coins — trends and price ranges."
+      },
+      "date": "2026-01-28",
+      "read": {
+        "zh": "7 分钟",
+        "en": "7 min"
+      },
+      "mark": "泉",
+      "tone": "market",
+      "series": {
+        "zh": "新加坡本地",
+        "en": "Local Singapore"
+      }
+    },
+    {
+      "slug": "singapore-flea-market-map",
+      "kicker": {
+        "zh": "行情观察",
+        "en": "MARKET"
+      },
+      "title": {
+        "zh": "新加坡跳蚤市场地图",
+        "en": "Singapore flea market map"
+      },
+      "desc": {
+        "zh": "从牛车水到加东，几个本地藏家常去的市集与摊位类型。",
+        "en": "From Chinatown to Katong — markets local collectors actually visit."
+      },
+      "date": "2026-01-28",
+      "read": {
+        "zh": "6 分钟",
+        "en": "6 min"
+      },
+      "mark": "市",
+      "tone": "market",
+      "series": {
+        "zh": "新加坡本地",
+        "en": "Local Singapore"
+      }
+    },
+    {
+      "slug": "singapore-porcelain-market",
+      "kicker": {
+        "zh": "行情观察",
+        "en": "MARKET"
+      },
+      "title": {
+        "zh": "新加坡瓷器市场：去哪看、怎么看",
+        "en": "Singapore porcelain market: where and how to look"
+      },
+      "desc": {
+        "zh": "从实体店到拍卖行，新加坡瓷器买家的实用地图。",
+        "en": "From shops to auctions — a practical map for Singapore porcelain buyers."
+      },
+      "date": "2026-01-28",
+      "read": {
+        "zh": "6 分钟",
+        "en": "6 min"
+      },
+      "mark": "瓷",
+      "tone": "market",
+      "series": {
+        "zh": "新加坡本地",
+        "en": "Local Singapore"
+      }
+    },
+    {
+      "slug": "coin-aging-tricks",
+      "kicker": {
+        "zh": "避坑手册",
+        "en": "PITFALLS"
+      },
+      "title": {
+        "zh": "钱币做旧手法图解：这几种包浆要小心",
+        "en": "Coin ageing tricks illustrated: patinas to be careful with"
+      },
+      "desc": {
+        "zh": "化学做旧、土埋、火烧——常见手法与肉眼识别要点。",
+        "en": "Chemical ageing, burying, torching — common methods and how to spot them."
+      },
+      "date": "2026-01-26",
+      "read": {
+        "zh": "6 分钟",
+        "en": "6 min"
+      },
+      "mark": "伪",
+      "tone": "pitfall",
+      "series": {
+        "zh": "钱币系列",
+        "en": "Coins"
+      }
+    },
+    {
+      "slug": "hetian-seeds-vs-mountain",
+      "kicker": {
+        "zh": "避坑手册",
+        "en": "PITFALLS"
+      },
+      "title": {
+        "zh": "和田玉“籽料”和“山料”，上手怎么分",
+        "en": "Hetian jade: seed vs. mountain material"
+      },
+      "desc": {
+        "zh": "皮色、毛孔、结构、手感——四点讲清籽料和山料的区别。",
+        "en": "Skin, pores, structure, feel — four checks to tell them apart."
+      },
+      "date": "2026-01-26",
+      "read": {
+        "zh": "6 分钟",
+        "en": "6 min"
+      },
+      "mark": "籽",
+      "tone": "pitfall",
+      "series": {
+        "zh": "玉器系列",
+        "en": "Jade"
+      }
+    },
+    {
+      "slug": "qinghua-cobalt",
+      "kicker": {
+        "zh": "避坑手册",
+        "en": "PITFALLS"
+      },
+      "title": {
+        "zh": "青花发色怎么看？苏料、平等青、浙料一张表讲清",
+        "en": "Reading blue-and-white: Su, Pingdeng, and Zhe cobalt"
+      },
+      "desc": {
+        "zh": "三种钴料，三种发色。看懂青花，先看懂它用的是什么料。",
+        "en": "Three cobalt sources, three tones. Read the pigment before the painting."
+      },
+      "date": "2026-01-26",
+      "read": {
+        "zh": "6 分钟",
+        "en": "6 min"
+      },
+      "mark": "料",
+      "tone": "guide",
+      "series": {
+        "zh": "瓷器系列",
+        "en": "Porcelain"
+      }
+    },
+    {
+      "slug": "silver-patina",
+      "kicker": {
+        "zh": "避坑手册",
+        "en": "PITFALLS"
+      },
+      "title": {
+        "zh": "老银器“黑包浆”是脏还是值钱",
+        "en": "Silver patina — dirt, or value?"
+      },
+      "desc": {
+        "zh": "天然黑包浆 vs 硫化银，看起来像，价值差很多。",
+        "en": "Natural patina vs. sulfide — similar look, very different value."
+      },
+      "date": "2026-01-26",
+      "read": {
+        "zh": "5 分钟",
+        "en": "5 min"
+      },
+      "mark": "银",
+      "tone": "guide",
+      "series": {
+        "zh": "钱币系列",
+        "en": "Coins"
+      }
+    },
+    {
+      "slug": "coin-patina-types",
+      "kicker": {
+        "zh": "避坑手册",
+        "en": "PITFALLS"
+      },
+      "title": {
+        "zh": "古钱“生坑”和“熟坑”哪个更值钱",
+        "en": "Buried vs. handed-down coins — which is worth more?"
+      },
+      "desc": {
+        "zh": "出土 vs 传世，包浆不一样，价格也不一样。一张表讲清。",
+        "en": "Excavated vs. inherited — different patinas, different prices."
+      },
+      "date": "2026-01-24",
+      "read": {
+        "zh": "5 分钟",
+        "en": "5 min"
+      },
+      "mark": "锈",
+      "tone": "guide",
+      "series": {
+        "zh": "钱币系列",
+        "en": "Coins"
+      }
+    },
+    {
+      "slug": "porcelain-marks",
+      "kicker": {
+        "zh": "避坑手册",
+        "en": "PITFALLS"
+      },
+      "title": {
+        "zh": "瓷器底款怎么看？底款对不上是不是一定假",
+        "en": "Reading porcelain marks — does a wrong mark mean a fake?"
+      },
+      "desc": {
+        "zh": "官窑、民窑、后朝仿前朝、后加款——底款里的信息比你想的多。",
+        "en": "Imperial, folk, later copies, added marks — there's more in a mark than you think."
+      },
+      "date": "2026-01-24",
+      "read": {
+        "zh": "6 分钟",
+        "en": "6 min"
+      },
+      "mark": "款",
+      "tone": "guide",
+      "series": {
+        "zh": "瓷器系列",
+        "en": "Porcelain"
+      }
+    },
+    {
+      "slug": "jadeite-abc",
+      "kicker": {
+        "zh": "避坑手册",
+        "en": "PITFALLS"
+      },
+      "title": {
+        "zh": "翡翠 A / B / C 货到底差在哪？一张表讲清",
+        "en": "Jadeite A / B / C — what the letters really mean"
+      },
+      "desc": {
+        "zh": "A 货天然，B 货酸洗注胶，C 货染色。看懂这三个字母，少花冤枉钱。",
+        "en": "Natural, acid-treated, dyed — understand the letters, save your money."
+      },
+      "date": "2026-01-22",
+      "read": {
+        "zh": "6 分钟",
+        "en": "6 min"
+      },
+      "mark": "翠",
+      "tone": "guide",
+      "series": {
+        "zh": "玉器系列",
+        "en": "Jade"
+      }
+    },
+    {
+      "slug": "painting-seals-signatures",
+      "kicker": {
+        "zh": "避坑手册",
+        "en": "PITFALLS"
+      },
+      "title": {
+        "zh": "书画落款与印章怎么看",
+        "en": "Reading seals and signatures on paintings"
+      },
+      "desc": {
+        "zh": "上款、下款、闲章、鉴藏印，落款是最容易被忽略的线索区。",
+        "en": "Dedications, signatures, leisure seals, collector seals — an overlooked clue zone."
+      },
+      "date": "2026-01-22",
+      "read": {
+        "zh": "6 分钟",
+        "en": "6 min"
+      },
+      "mark": "印",
+      "tone": "guide",
+      "series": {
+        "zh": "书画系列",
+        "en": "Paintings"
+      }
+    },
+    {
+      "slug": "silver-dollar-edges",
+      "kicker": {
+        "zh": "避坑手册",
+        "en": "PITFALLS"
+      },
+      "title": {
+        "zh": "银元边齿怎么看？一眼假的特征都在这",
+        "en": "Silver dollar edge reeding — how to spot a fake"
+      },
+      "desc": {
+        "zh": "边齿是银元最容易露出破绽的地方。",
+        "en": "The edge is where counterfeit silver dollars most often give themselves away."
+      },
+      "date": "2026-01-22",
+      "read": {
+        "zh": "5 分钟",
+        "en": "5 min"
+      },
+      "mark": "齿",
+      "tone": "pitfall",
+      "series": {
+        "zh": "钱币系列",
+        "en": "Coins"
+      }
+    },
+    {
+      "slug": "porcelain-aging-tricks",
+      "kicker": {
+        "zh": "避坑手册",
+        "en": "PITFALLS"
+      },
+      "title": {
+        "zh": "瓷器“做旧”的 5 种常见手法，看完少交学费",
+        "en": "5 common ways porcelain is artificially aged"
+      },
+      "desc": {
+        "zh": "酸洗、土沁、磨底、接底、后加彩——老瓷和新瓷差在哪，一次讲清。",
+        "en": "Acid, soil, ground feet, joined feet, repaint — how old and new porcelains differ."
+      },
+      "date": "2026-01-20",
+      "read": {
+        "zh": "6 分钟",
+        "en": "6 min"
+      },
+      "mark": "旧",
+      "tone": "pitfall",
+      "series": {
+        "zh": "瓷器系列",
+        "en": "Porcelain"
+      }
+    },
+    {
+      "slug": "amber-baked-vs-natural",
+      "kicker": {
+        "zh": "避坑手册",
+        "en": "PITFALLS"
+      },
+      "title": {
+        "zh": "老蜜蜡的“烤色”与天然氧化，怎么区分",
+        "en": "Baked amber vs. natural oxidation — how to tell"
+      },
+      "desc": {
+        "zh": "颜色深浅不等于年份长短，先看纹路再看光泽。",
+        "en": "Darker does not mean older — check the flow lines before the shine."
+      },
+      "date": "2026-01-18",
+      "read": {
+        "zh": "5 分钟",
+        "en": "5 min"
+      },
+      "mark": "蜡",
+      "tone": "pitfall",
+      "series": {
+        "zh": "器物与杂项",
+        "en": "Objects & Misc"
+      }
+    },
+    {
+      "slug": "jade-buyer-pitfalls",
+      "kicker": {
+        "zh": "避坑手册",
+        "en": "PITFALLS"
+      },
+      "title": {
+        "zh": "新手买玉器，最容易踩的 5 个坑",
+        "en": "5 pitfalls new jade buyers fall into"
+      },
+      "desc": {
+        "zh": "从「和田」二字说起，谈谈如何不被话术带走。",
+        "en": "Starting from the word \"Hetian\" — how not to be talked into it."
+      },
+      "date": "2026-01-16",
+      "read": {
+        "zh": "5 分钟",
+        "en": "5 min"
+      },
+      "mark": "玉",
+      "tone": "pitfall",
+      "series": {
+        "zh": "玉器系列",
+        "en": "Jade"
+      }
+    },
+    {
+      "slug": "bronze-censer-patina",
+      "kicker": {
+        "zh": "入门指南",
+        "en": "BEGINNER"
+      },
+      "title": {
+        "zh": "铜香炉的皮壳与包浆：从手感说起",
+        "en": "Bronze censers: patina and surface feel"
+      },
+      "desc": {
+        "zh": "铜质、铸痕、皮色、重量——四步建立基本判断。",
+        "en": "Alloy, casting marks, surface colour, weight — four steps to a basic read."
+      },
+      "date": "2026-01-14",
+      "read": {
+        "zh": "6 分钟",
+        "en": "6 min"
+      },
+      "mark": "炉",
+      "tone": "guide",
+      "series": {
+        "zh": "器物与杂项",
+        "en": "Objects & Misc"
+      }
+    },
+    {
+      "slug": "auction-house-watch",
+      "kicker": {
+        "zh": "行情观察",
+        "en": "MARKET"
+      },
+      "title": {
+        "zh": "新加坡拍卖行观察：本地成交价参考逻辑",
+        "en": "Singapore auction watch: how to read local hammer prices"
+      },
+      "desc": {
+        "zh": "成交价 ≠ 市场价，先弄懂佣金、品相与来源的加成。",
+        "en": "Hammer price is not market price — premiums, condition and provenance all count."
+      },
+      "date": "2026-01-09",
+      "read": {
+        "zh": "7 分钟",
+        "en": "7 min"
+      },
+      "mark": "拍",
+      "tone": "market",
+      "series": {
+        "zh": "新加坡本地",
+        "en": "Local Singapore"
+      }
+    },
+    {
+      "slug": "how-to-brief-a-sourcing",
+      "kicker": {
+        "zh": "入门指南",
+        "en": "BEGINNER"
+      },
+      "title": {
+        "zh": "委托找货：如何准确描述你想要的那件藏品",
+        "en": "Sourcing briefs: describing the piece you actually want"
+      },
+      "desc": {
+        "zh": "器型、尺寸、年代、预算、可接受瑕疵——写清楚，成交率翻倍。",
+        "en": "Form, size, period, budget, acceptable flaws — clarity doubles your hit rate."
+      },
+      "date": "2026-01-05",
+      "read": {
+        "zh": "5 分钟",
+        "en": "5 min"
+      },
+      "mark": "委",
+      "tone": "strategy",
+      "series": {
+        "zh": "传世与策略",
+        "en": "Strategy"
+      }
+    }
+  ]
+}

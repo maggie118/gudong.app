@@ -3,7 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "scripts": {
-    "build": "node scripts/refresh-listings.js && node scripts/build-sellers.js && node scripts/send-new-items-push.js"
+    "build": "node scripts/build-insights-index.js && node scripts/refresh-listings.js && node scripts/build-sellers.js && node scripts/send-new-items-push.js"
   },
   "dependencies": {
     "qrcode": "^1.5.4",

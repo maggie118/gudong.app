@@ -732,13 +732,13 @@
             margin: .4rem 0 .5rem;
         }
         .finds-reason::before {
-            content: "🔍";
+            /* 行家私语前的放大镜：线性 SVG（与搜索按钮同一套笔触），不用 emoji */
+            content: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='12' height='12'%3E%3Ccircle cx='10.5' cy='10.5' r='6.25' fill='none' stroke='%23B08A45' stroke-width='1.7'/%3E%3Cline x1='15.2' y1='15.2' x2='20.2' y2='20.2' stroke='%23B08A45' stroke-width='1.7' stroke-linecap='round'/%3E%3C/svg%3E");
             position: absolute;
             left: .5rem;
             top: .55rem;
-            font-size: .8rem;
+            line-height: 1;
             font-style: normal;
-            filter: grayscale(.25) sepia(.25);
         }
         .finds-reason::after {
             content: "行家私语";
@@ -2082,7 +2082,12 @@
                     <input type="text" id="searchInput"
                            placeholder="搜索藏品 / Search —「官窑」「娘惹瓷」「高古玉」…"
                            aria-label="搜索藏品" />
-                    <button type="button" onclick="doSearch()" aria-label="search">🔍</button>
+                    <button type="button" onclick="doSearch()" aria-label="搜索藏品 / Search">
+                        <svg class="search-glass" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false">
+                            <circle cx="10.5" cy="10.5" r="6.25" fill="none" stroke="currentColor" stroke-width="1.6"></circle>
+                            <line x1="15.2" y1="15.2" x2="20" y2="20" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></line>
+                        </svg>
+                    </button>
                 </div>
 
                 <!-- 热门标签：单排，首屏即可点选 -->
@@ -2158,7 +2163,7 @@
                 <div class="intel-stat"><b id="statToday">0</b><span class="zh">今日新释出</span><span class="en">New today</span></div>
                 <div class="intel-stat"><b id="statWeek">0</b><span class="zh">本周新释出</span><span class="en">New this week</span></div>
                 <div class="intel-stat"><b id="statTotal">0</b><span class="zh">在售藏品</span><span class="en">Active listings</span></div>
-                <div class="intel-stat intel-stat--muted"><b id="statSellers">0</b><span class="zh">入驻藏家</span><span class="en">Collectors</span></div>
+                <div class="intel-stat intel-stat--muted"><b id="statSellersLive">0</b><span class="zh">入驻藏家</span><span class="en">Collectors</span></div>
             </div>
 
             <!-- 实时动态：按真实上架时间生成，无时间戳数据时隐藏 -->
@@ -3236,7 +3241,7 @@
             setNum('statToday', todayN);
             setNum('statWeek', weekN);
             setNum('statTotal', allItems.length);
-            setNum('statSellers', sellers.size);
+            setNum('statSellersLive', sellers.size);
             if (statsBox) statsBox.hidden = false;
 
             // —— 动态流：最近上架的真实藏品（需带时间戳，不足 3 条则隐藏） ——
@@ -3749,6 +3754,15 @@
     }
     .search-box input:focus { box-shadow: var(--ring), 0 14px 34px rgba(176, 138, 69, .18); }
     .search-box button { right: .55rem; min-width: 46px; min-height: 46px; border-radius: 9px; }
+    /* 线性 SVG 放大镜（替掉 emoji）：描边跟随按钮颜色，hover 变金底白描边 */
+    .search-box .search-glass {
+        display: block;
+        width: 19px;
+        height: 19px;
+        opacity: .92;
+        transition: opacity var(--dur) var(--ease);
+    }
+    .search-box button:hover .search-glass { opacity: 1; }
     .hero-clean .hot-tags { margin: 0 auto 1.6rem; }
     .hero-clean .hero-stats { margin-top: .1rem; }
 
@@ -3995,5 +4009,46 @@ window.gdSharePage = function () {
 <link rel="stylesheet" href="assets/css/gudong-contact.css">
 <script src="assets/js/gudong-contact.js" defer></script>
 <script src="/assets/js/push-subscribe.js" defer></script>
+<script>
+/* 首页「收藏知识」：从站点文章索引 data/insights-index.json 取最新 4 篇。
+   索引由 scripts/build-insights-index.js 在每次 Vercel 构建时读 insights.html 的 SERIES 生成，
+   所以新文章进了文章索引后，首页这 4 张卡会自动换成最新的。
+   区块里静态写着的 4 篇只作兜底：索引缺失、离线或请求失败时保持原样，不做降级处理。 */
+(function () {
+    var grid = document.querySelector('#insights .insight-grid');
+    if (!grid || typeof fetch !== 'function') return;
+
+    var esc = function (v) {
+        return String(v == null ? '' : v).replace(/[&<>"']/g, function (c) {
+            return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+        });
+    };
+    var pair = function (o) {
+        o = o || {};
+        return { zh: esc(o.zh || ''), en: esc(o.en || '') };
+    };
+
+    fetch('data/insights-index.json', { cache: 'no-cache' })
+        .then(function (r) { return r.ok ? r.json() : null; })
+        .then(function (data) {
+            var arts = (data && data.articles) || [];
+            if (arts.length < 4) return;          // 索引不完整就不动静态 4 篇
+            arts.sort(function (a, b) {
+                var d = String(b.date || '').localeCompare(String(a.date || ''));
+                return d !== 0 ? d : String(a.slug || '').localeCompare(String(b.slug || ''));
+            });
+            grid.innerHTML = arts.slice(0, 4).map(function (a) {
+                var k = pair(a.kicker), t = pair(a.title), s = pair(a.desc);
+                return '<a class="insight-card" href="insights/' + esc(a.slug) + '.html">' +
+                    '<div class="insight-kicker zh">' + k.zh + '</div><div class="insight-kicker en">' + k.en + '</div>' +
+                    '<div class="insight-title zh">' + t.zh + '</div><div class="insight-title en">' + t.en + '</div>' +
+                    '<div class="insight-desc zh">' + s.zh + '</div><div class="insight-desc en">' + s.en + '</div>' +
+                    '<div class="insight-more zh">阅读文章 →</div><div class="insight-more en">Read article →</div>' +
+                    '</a>';
+            }).join('');
+        })
+        .catch(function () { /* 兜底：保留首页静态 4 篇 */ });
+})();
+</script>
 </body>
 </html>

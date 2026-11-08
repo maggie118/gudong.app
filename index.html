@@ -3844,7 +3844,8 @@
         border-radius: 0;
         padding: .05rem 0 .05rem .62rem;
         margin: .15rem 0 .1rem;
-        font-size: .76rem;
+        position: static;              /* 关键：不再当定位父级，否则下方小标绝对定位会压在正文上 */
+        font-size: .72rem;
         line-height: 1.62;
         color: var(--color-text-secondary);
         font-style: italic;
@@ -3854,15 +3855,19 @@
     #today-finds .finds-reason::before {
         content: "行家私语";
         display: inline;
+        position: static;              /* 清掉基样式里的 absolute/left/top，改随文内联 */
+        left: auto;
+        top: auto;
         font-style: normal;
         font-size: .6rem;
         font-weight: 700;
         letter-spacing: .14em;
         color: rgba(176, 138, 69, .95);
-        margin-right: .45em;
+        margin-right: .5em;
+        line-height: inherit;
     }
     body[data-lang="en"] #today-finds .finds-reason::before { content: "EXPERT NOTE"; }
-    #today-finds .finds-reason::after { display: none; }
+    #today-finds .finds-reason::after { display: none; content: none; }
 
     /* 关联科普：一行小链接，无图标无虚线 */
     #today-finds .finds-related {
@@ -3930,12 +3935,13 @@
             gap: .55rem .5rem;
         }
         #new-listings .goods-list .item-card:nth-child(n + 9) { display: none; }
+        /* 注意：标题元素带 .zh/.en 双语副本，这里绝对不能写 display，
+           否则 ID 特异性会压过 body[data-lang] 的隐藏规则、中英两行同时出现。
+           用 max-height 截到两行即可。 */
         #new-listings .item-card .item-title {
             font-size: .64rem;
             line-height: 1.35;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
+            max-height: 2.7em;
             overflow: hidden;
         }
         #new-listings .item-card .item-price { font-size: .6rem; }

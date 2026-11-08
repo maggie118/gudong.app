@@ -1,4 +1,7 @@
 /* 古董圈 Gudong · Service Worker
+ * 2026-11-09：v62 → v63（下架三款收藏参考工具）
+ * - 移除 tools/mark-lookup.html、tools/valuation.html、tools/authenticity-check.html
+ * - 全站侧栏、工具包、契约与验货清单页、定价页入口同步清理；预缓存列表精简
  * 2026-11-04：v57 → v58（自查工具页 SEO 元描述更新）
  * - 修正题量区间为 9–13，补入目视倾向与顾问预约信息
  * 2026-11-04：v56 → v57（估值、底款工具页 SEO 元描述更新）

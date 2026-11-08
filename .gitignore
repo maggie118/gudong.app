@@ -17,3 +17,6 @@ sitemap.xml.static-backup
 .tmp/
 # 买家名单归档（含 WhatsApp/邮箱，切勿提交）
 .archive/
+
+# 本地渲染核对用临时页
+_chk-*.html

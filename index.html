@@ -970,11 +970,11 @@
         }
         .intel-type {
             display: inline-block;
-            font-size: .63rem;
+            font-size: .58rem;
             font-weight: 600;
-            letter-spacing: .1em;
+            letter-spacing: .09em;
             text-transform: uppercase;
-            padding: .18rem .45rem;
+            padding: .12rem .38rem;
             border-radius: 4px;
             align-self: flex-start;
             background: rgba(217, 182, 121, .12);
@@ -1812,41 +1812,23 @@
     }
 
     /* ---------- 今日情报：实时看板 ---------- */
+    /* 实时概览压成一行细体：今日 0 · 本周 5 · 在售 24 · 藏家 8 */
     .intel-stats {
-        display: grid;
-        grid-template-columns: repeat(4, minmax(0, 1fr));
-        gap: .45rem;
-        margin-bottom: .7rem;
+        display: flex; flex-wrap: wrap; align-items: baseline;
+        margin: 0 0 .5rem;
+        font-size: .72rem; line-height: 1.5;
+        letter-spacing: .03em;
         position: relative;
     }
-    .intel-stat {
-        background: rgba(255, 255, 255, .045);
-        border: 1px solid rgba(217, 182, 121, .16);
-        border-radius: 9px;
-        padding: .38rem .6rem .42rem;
-        line-height: 1.2;
-    }
-    .intel-stat b {
-        display: block;
+    .is-item { display: inline-flex; align-items: baseline; gap: .22rem; }
+    .is-item + .is-item::before { content: '·'; margin: 0 .5rem; color: rgba(217, 182, 121, .45); }
+    .is-k { color: rgba(201, 182, 138, .7); font-weight: 400; }
+    .is-item b {
         font-family: var(--font-serif);
-        font-size: 1rem; font-weight: 700;
+        font-size: .9rem; font-weight: 600;
         color: #E8C87E;
         font-variant-numeric: tabular-nums;
     }
-    .intel-stat b small {
-        font-family: var(--font-sans);
-        font-size: .58em; font-weight: 500;
-        margin-left: .12rem;
-        color: rgba(201, 182, 138, .72);
-    }
-    .intel-stat span {
-        display: block;
-        margin-top: .1rem;
-        font-size: .62rem;
-        color: rgba(201, 182, 138, .72);
-        letter-spacing: .02em;
-    }
-    .intel-stat--muted b { color: #F1E8DF; }
 
     .intel-liveboard {
         position: relative;
@@ -1927,27 +1909,29 @@
     }
     .ie-more:hover { opacity: 1; }
     .intel-card--compact {
-        flex: 0 0 250px;
-        gap: .32rem;
-        padding: .58rem .74rem .6rem;
+        flex: 0 0 218px;
+        gap: .22rem;
+        padding: .48rem .66rem .46rem;
         text-decoration: none;
     }
     .intel-card--compact .intel-text {
-        font-size: .78rem;
+        font-size: .74rem;
+        line-height: 1.55;
         display: -webkit-box;
-        -webkit-line-clamp: 3;
+        -webkit-line-clamp: 2;
         -webkit-box-orient: vertical;
         overflow: hidden;
     }
     .intel-compact-meta {
-        margin-top: auto;
-        font-size: .64rem;
+        margin-top: .18rem;
+        font-size: .6rem;
         color: rgba(201, 182, 138, .55);
         letter-spacing: .02em;
     }
 
     @media (max-width: 860px) {
-        .intel-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        .is-item + .is-item::before { margin: 0 .38rem; }
+        .intel-stats { font-size: .68rem; }
     }
     @media (max-width: 640px) {
         #insights { padding: 1.2rem 1rem 1.05rem; margin-bottom: 3.4rem; }
@@ -2120,10 +2104,10 @@
 
             <!-- 实时数据概览：全部来自当前在售数据实时计算，无数据时整块隐藏 -->
             <div class="intel-stats" id="intelStats" hidden>
-                <div class="intel-stat"><b id="statToday">0</b><span class="zh">今日新释出</span><span class="en">New today</span></div>
-                <div class="intel-stat"><b id="statWeek">0</b><span class="zh">本周新释出</span><span class="en">New this week</span></div>
-                <div class="intel-stat"><b id="statTotal">0</b><span class="zh">在售藏品</span><span class="en">Active listings</span></div>
-                <div class="intel-stat intel-stat--muted"><b id="statSellersLive">0</b><span class="zh">入驻藏家</span><span class="en">Collectors</span></div>
+                <span class="is-item"><span class="is-k zh">今日</span><span class="is-k en">Today</span><b id="statToday">0</b></span>
+                <span class="is-item"><span class="is-k zh">本周</span><span class="is-k en">This week</span><b id="statWeek">0</b></span>
+                <span class="is-item"><span class="is-k zh">在售</span><span class="is-k en">Live</span><b id="statTotal">0</b></span>
+                <span class="is-item"><span class="is-k zh">藏家</span><span class="is-k en">Collectors</span><b id="statSellersLive">0</b></span>
             </div>
 
             <!-- 实时动态：按真实上架时间生成，无时间戳数据时隐藏 -->

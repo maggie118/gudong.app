@@ -29,8 +29,6 @@ const STATIC = [
   { loc: '/tools/era-lookup',        lastmod: LAUNCH },
   { loc: '/tools/ganzhi',            lastmod: LAUNCH },
   { loc: '/tools/year-since',        lastmod: LAUNCH },
-  { loc: '/tools/mark-lookup',       lastmod: LAUNCH },
-  { loc: '/tools/valuation',         lastmod: LAUNCH },
   { loc: '/tools/checklist',         lastmod: LAUNCH },
   { loc: '/tools/contract',          lastmod: LAUNCH },
   // Categories

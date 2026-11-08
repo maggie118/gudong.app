@@ -710,11 +710,46 @@ footer { background: #FBF8F2; border-top: 1px solid var(--hairline); }
   #buyer-services .bs-body .row-desc { font-size: .85rem; line-height: 1.9; }
   #buyer-services .bs-act { width: 100%; align-items: flex-start; padding: .55rem 0 0 2.3rem; }
 }
+/* 9. 「帮我找」弹窗：与页面同一套皮肤（暖纸 / 金发丝 / 宋体 / 青铜按钮） */
 @media (max-width: 560px) {
   .fact-strip li { min-width: 50%; flex: 1 1 50%; border-left: 0; border-top: 1px solid rgba(176,138,69,.14); }
   .fact-strip li:nth-child(odd) { border-right: 1px solid rgba(176,138,69,.14); }
   .fact-strip li:first-child, .fact-strip li:nth-child(2) { border-top: 0; }
 }
+#conciergeModal .publish-card {
+  border-radius: 3px; border: 1px solid rgba(176, 138, 69, .28); background: #FFFDF9;
+  box-shadow: 0 44px 90px -44px rgba(45, 30, 18, .55);
+}
+#conciergeModal .publish-close { border-radius: 1px; color: #8A6A38; background: transparent; }
+#conciergeModal .publish-close:hover { color: var(--bronze-deep); background: #F6EFE3; }
+#conciergeModal .cc-kicker {
+  display: block; font-size: .62rem; letter-spacing: .24em; color: #9A7635; font-weight: 600; margin-bottom: .5rem;
+}
+#conciergeModal .cc-head h3 {
+  font-size: 1.3rem; font-weight: 500; letter-spacing: .07em; color: var(--ink);
+  margin: 0 0 1.15rem; padding-bottom: .85rem; border-bottom: 1px solid rgba(176, 138, 69, .2);
+}
+#conciergeModal .cc-note {
+  border-left: 2px solid rgba(176, 138, 69, .55); background: #FBF6EC;
+  padding: .8rem 1rem; margin-bottom: 1.25rem;
+}
+#conciergeModal .cc-note-title {
+  font-family: "Noto Serif SC", "Songti SC", serif; font-size: .9rem;
+  color: #6B4A2E; letter-spacing: .04em; margin-bottom: .3rem; line-height: 1.6;
+}
+#conciergeModal .cc-note div:last-child span { font-size: .82rem; line-height: 1.9; color: #5C554C; }
+#conciergeModal .publish-form-group > label { font-size: .82rem; font-weight: 500; letter-spacing: .03em; color: #3A342C; }
+#conciergeModal .publish-input {
+  border-radius: 2px; border-color: rgba(176, 138, 69, .26); background: #FFFDFC;
+  font-size: .86rem; letter-spacing: .02em;
+}
+#conciergeModal .publish-input:focus { border-color: #B08A45; box-shadow: 0 0 0 3px rgba(176, 138, 69, .12); }
+#conciergeModal .submit-btn {
+  border-radius: 2px; letter-spacing: .07em; font-weight: 600;
+  background: linear-gradient(135deg, var(--bronze) 0%, var(--bronze-deep) 100%);
+  box-shadow: 0 14px 30px -16px rgba(74, 48, 33, .55);
+}
+#conciergeModal .submit-btn:hover { background: linear-gradient(135deg, #8A5A3B 0%, #563826 100%); }
 </style>
 </head>
 <body data-lang="zh">
@@ -1797,18 +1832,14 @@ body[data-lang="zh"] .gd-install-modal .en { display: none; }
   <div class="publish-card" style="max-width: 440px;">
     <button type="button" class="publish-close" onclick="closeConciergeModal()" aria-label="关闭">×</button>
 
-    <h3 style="font-family: var(--font-serif); font-size: 1.35rem; font-weight: 700; color: var(--color-far-mountain); margin-bottom: 1rem;">
-      <span class="zh">“帮我找” 专属寻宝</span>
-      <span class="en">Find It For Me</span>
-    </h3>
+    <div class="cc-head">
+      <span class="cc-kicker"><span class="zh">买 家 服 务</span><span class="en">BUYER SERVICE</span></span>
+      <h3><span class="zh">“帮我找” 专属寻宝</span><span class="en">Find It For Me</span></h3>
+    </div>
 
-    <div class="compact-warning" style="background:#F4F7F8; border-color:#D0E0E3; color:#2E4A52;">
-      <span>🔍</span>
-      <div>
-        <span class="cw-title" style="color:#2E4A52;"><span class="zh">免费登记您的求购需求</span><span class="en">Register your needs for free</span></span>
-        <span class="zh">留下您的需求，一旦有匹配的藏品释出，客服会第一时间通过 WhatsApp 联系您。</span>
-        <span class="en">Leave your requirements. If a matching piece is released, our team will contact you via WhatsApp.</span>
-      </div>
+    <div class="cc-note">
+      <div class="cc-note-title"><span class="zh">免费登记您的求购需求</span><span class="en">Register your needs for free</span></div>
+      <div><span class="zh">留下您的需求，一旦有匹配的藏品释出，客服会第一时间通过 WhatsApp 联系您。</span><span class="en">Leave your requirements. If a matching piece is released, our team will contact you via WhatsApp.</span></div>
     </div>
 
     <div class="publish-form-group">
@@ -1827,7 +1858,7 @@ body[data-lang="zh"] .gd-install-modal .en { display: none; }
     </div>
 
     <div class="submit-bar">
-      <button class="submit-btn" onclick="submitConcierge()" style="background: linear-gradient(135deg, #2E4A52 0%, #1A2E33 100%); box-shadow: 0 8px 22px rgba(46, 74, 82, .25);">
+      <button class="submit-btn" onclick="submitConcierge()">
         <span class="zh">提交并跳转 WhatsApp 确认 →</span>
         <span class="en">Submit &amp; Confirm via WhatsApp →</span>
       </button>

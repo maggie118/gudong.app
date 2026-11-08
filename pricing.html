@@ -710,23 +710,67 @@ footer { background: #FBF8F2; border-top: 1px solid var(--hairline); }
   #buyer-services .bs-body .row-desc { font-size: .85rem; line-height: 1.9; }
   #buyer-services .bs-act { width: 100%; align-items: flex-start; padding: .55rem 0 0 2.3rem; }
 }
-/* 9. 「帮我找」弹窗：与页面同一套皮肤（暖纸 / 金发丝 / 宋体 / 青铜按钮） */
+/* 9. 弹窗（帮我找 / 专业上架）：并入页面皮肤（暖纸 / 金发丝 / 宋体 / 青铜按钮） */
 @media (max-width: 560px) {
   .fact-strip li { min-width: 50%; flex: 1 1 50%; border-left: 0; border-top: 1px solid rgba(176,138,69,.14); }
   .fact-strip li:nth-child(odd) { border-right: 1px solid rgba(176,138,69,.14); }
   .fact-strip li:first-child, .fact-strip li:nth-child(2) { border-top: 0; }
 }
-#conciergeModal .publish-card {
+.publish-modal .publish-card {
   border-radius: 3px; border: 1px solid rgba(176, 138, 69, .28); background: #FFFDF9;
   box-shadow: 0 44px 90px -44px rgba(45, 30, 18, .55);
 }
-#conciergeModal .publish-close { border-radius: 1px; color: #8A6A38; background: transparent; }
-#conciergeModal .publish-close:hover { color: var(--bronze-deep); background: #F6EFE3; }
+.publish-modal .publish-close { border-radius: 1px; color: #8A6A38; background: transparent; }
+.publish-modal .publish-close:hover { color: var(--bronze-deep); background: #F6EFE3; }
+.publish-modal .publish-card h3 {
+  font-family: "Playfair Display", "Noto Serif SC", "Songti SC", serif;
+  font-size: 1.3rem; font-weight: 500; letter-spacing: .07em; color: var(--ink);
+}
+#serviceModal .publish-card h3 { margin: 0 0 1.1rem; padding-bottom: .85rem; border-bottom: 1px solid rgba(176, 138, 69, .2); }
+.publish-modal .publish-form-group > label { font-size: .82rem; font-weight: 500; letter-spacing: .03em; color: #3A342C; }
+.publish-modal .publish-input, .publish-modal .publish-textarea {
+  border-radius: 2px; border-color: rgba(176, 138, 69, .26); background: #FFFDFC;
+  font-size: .86rem; letter-spacing: .02em;
+}
+.publish-modal .publish-input:focus, .publish-modal .publish-textarea:focus {
+  border-color: #B08A45; box-shadow: 0 0 0 3px rgba(176, 138, 69, .12);
+}
+.publish-modal .submit-btn {
+  border-radius: 2px; letter-spacing: .07em; font-weight: 600;
+  background: linear-gradient(135deg, var(--bronze) 0%, var(--bronze-deep) 100%);
+  box-shadow: 0 14px 30px -16px rgba(74, 48, 33, .55);
+}
+.publish-modal .submit-btn:hover { background: linear-gradient(135deg, #8A5A3B 0%, #563826 100%); }
+.publish-modal .publish-file { border-radius: 2px; border: 1px dashed rgba(176, 138, 69, .38); background: #FFFDFC; }
+.publish-modal .publish-file:hover { border-color: rgba(176, 138, 69, .7); background: #FBF6EC; }
+.publish-modal .agree-row { background: #FBF7F0; border-radius: 2px; border: 1px solid rgba(176, 138, 69, .16); }
+.publish-modal .compact-warning {
+  display: block; border: 0; border-left: 2px solid rgba(176, 138, 69, .55);
+  background: #FBF6EC; border-radius: 0; padding: .8rem 1rem;
+}
+.publish-modal .compact-warning .cw-title {
+  display: block; font-family: "Noto Serif SC", "Songti SC", serif; font-size: .9rem;
+  color: #6B4A2E; letter-spacing: .04em; margin-bottom: .3rem; line-height: 1.6;
+}
+.publish-modal .compact-warning div span { font-size: .82rem; line-height: 1.9; color: #5C554C; }
+#serviceModal .price-box {
+  background: #FBF6EC; border: 1px solid rgba(176, 138, 69, .22); border-radius: 2px;
+  padding: 1rem 1.1rem .85rem; margin-bottom: 1.1rem;
+}
+#serviceModal .price-highlight { font-weight: 500; color: var(--bronze-deep); letter-spacing: .03em; }
+#serviceModal .price-unit-suffix { color: #6B645B; font-size: .84rem; }
+#serviceModal .service-list li + li { border-top: 1px solid rgba(176, 138, 69, .14); }
+#serviceModal .service-list li::before { background: rgba(176, 138, 69, .85); width: 4px; height: 4px; }
+#serviceModal .service-note { border-top: 1px solid rgba(176, 138, 69, .16); color: #8C847A; }
+#serviceModal .pn-note {
+  border-left: 2px solid rgba(176, 138, 69, .45); background: #FFFDFC;
+  padding: .7rem .9rem; margin-bottom: 1rem; font-size: .82rem; line-height: 1.8; color: #5C554C;
+}
+#serviceModal .pn-note a { color: var(--bronze); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
 #conciergeModal .cc-kicker {
   display: block; font-size: .62rem; letter-spacing: .24em; color: #9A7635; font-weight: 600; margin-bottom: .5rem;
 }
 #conciergeModal .cc-head h3 {
-  font-size: 1.3rem; font-weight: 500; letter-spacing: .07em; color: var(--ink);
   margin: 0 0 1.15rem; padding-bottom: .85rem; border-bottom: 1px solid rgba(176, 138, 69, .2);
 }
 #conciergeModal .cc-note {
@@ -738,18 +782,6 @@ footer { background: #FBF8F2; border-top: 1px solid var(--hairline); }
   color: #6B4A2E; letter-spacing: .04em; margin-bottom: .3rem; line-height: 1.6;
 }
 #conciergeModal .cc-note div:last-child span { font-size: .82rem; line-height: 1.9; color: #5C554C; }
-#conciergeModal .publish-form-group > label { font-size: .82rem; font-weight: 500; letter-spacing: .03em; color: #3A342C; }
-#conciergeModal .publish-input {
-  border-radius: 2px; border-color: rgba(176, 138, 69, .26); background: #FFFDFC;
-  font-size: .86rem; letter-spacing: .02em;
-}
-#conciergeModal .publish-input:focus { border-color: #B08A45; box-shadow: 0 0 0 3px rgba(176, 138, 69, .12); }
-#conciergeModal .submit-btn {
-  border-radius: 2px; letter-spacing: .07em; font-weight: 600;
-  background: linear-gradient(135deg, var(--bronze) 0%, var(--bronze-deep) 100%);
-  box-shadow: 0 14px 30px -16px rgba(74, 48, 33, .55);
-}
-#conciergeModal .submit-btn:hover { background: linear-gradient(135deg, #8A5A3B 0%, #563826 100%); }
 </style>
 </head>
 <body data-lang="zh">
@@ -1253,7 +1285,6 @@ footer { background: #FBF8F2; border-top: 1px solid var(--hairline); }
     </div>
 
     <div class="compact-warning">
-      <span>🪭</span>
       <div>
         <span class="cw-title"><span class="zh">藏家背书 · 诚意相交</span><span class="en">Collector's Endorsement · Sincere Exchange</span></span>
         <span class="zh">阁下上架之藏品须确保来源清晰合法。古董圈不鉴定真伪，真实品相由藏家自行背书，共同维护圈内高尚交流环境。</span>
@@ -1262,9 +1293,9 @@ footer { background: #FBF8F2; border-top: 1px solid var(--hairline); }
     </div>
 
     <!-- 实物摄影与加图引导 -->
-    <div style="background:#FDFBF7; border:1px dashed var(--color-gold); border-radius:8px; padding:.7rem .9rem; margin-bottom:1rem; font-size:.85rem; color:var(--color-text-secondary); line-height:1.6;">
-      <span class="zh">📷 需要 <strong>实物摄影</strong> 或 <strong>添加更多图片</strong>？<a href="https://wa.me/6591888952?text=%E6%88%91%E6%83%B3%E5%92%A8%E8%AF%A2%E5%AE%9E%E7%89%A9%E6%91%84%E5%BD%B1%E6%88%96%E5%8A%A0%E5%9B%BE%E6%9C%8D%E5%8A%A1" target="_blank" rel="noopener" style="color:var(--color-primary-dark); font-weight:700; text-decoration:underline;">点此直接联系客服</a>，我们按需为您安排。</span>
-      <span class="en">📷 Need <strong>physical photography</strong> or <strong>more photos</strong>? <a href="https://wa.me/6591888952?text=Hi%2C%20I%20need%20photography%20or%20more%20photos" target="_blank" rel="noopener" style="color:var(--color-primary-dark); font-weight:700; text-decoration:underline;">Contact support</a> to arrange.</span>
+    <div class="pn-note">
+      <span class="zh">需要 <strong>实物摄影</strong> 或 <strong>添加更多图片</strong>？<a href="https://wa.me/6591888952?text=%E6%88%91%E6%83%B3%E5%92%A8%E8%AF%A2%E5%AE%9E%E7%89%A9%E6%91%84%E5%BD%B1%E6%88%96%E5%8A%A0%E5%9B%BE%E6%9C%8D%E5%8A%A1" target="_blank" rel="noopener">点此直接联系客服</a>，我们按需为您安排。</span>
+      <span class="en">Need <strong>physical photography</strong> or <strong>more photos</strong>? <a href="https://wa.me/6591888952?text=Hi%2C%20I%20need%20photography%20or%20more%20photos" target="_blank" rel="noopener">Contact support</a> to arrange.</span>
     </div>
 
     <p class="form-hint">

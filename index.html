@@ -1678,33 +1678,6 @@
        —— 放在所有主样式之后，同优先级可覆盖；勿改，改请另起补丁块
        ============================================================ */
 
-    /* ---------- 首屏信任数据条 ---------- */
-    .hero-stats {
-        display: flex; flex-wrap: wrap; justify-content: center;
-        gap: .55rem; max-width: 680px;
-        margin: 0 auto 1.35rem;
-    }
-    .hero-stat {
-        display: inline-flex; flex-direction: column;
-        align-items: center; justify-content: center;
-        padding: .5rem .95rem; min-width: 92px;
-        border: 1px solid var(--color-border);
-        border-radius: 10px;
-        background: rgba(255, 255, 255, .74);
-        line-height: 1.25;
-        text-align: center;
-    }
-    .hero-stat b {
-        font-family: var(--font-serif);
-        font-size: 1.16rem; font-weight: 700;
-        color: var(--color-primary);
-        font-variant-numeric: tabular-nums;
-        line-height: 1.2;
-    }
-    .hero-stat span { font-size: .71rem; color: var(--color-text-muted); letter-spacing: .02em; }
-    .hero-stat--accent { border-color: rgba(82, 102, 87, .3); background: rgba(82, 102, 87, .06); }
-    .hero-stat--accent b { color: var(--color-success); }
-
     /* ---------- 行家术语标签 ---------- */
     .hot-tags--pro { margin-top: -.65rem; margin-bottom: 1.35rem; }
     .pro-tags-label {
@@ -1764,10 +1737,6 @@
     .seller-actions { display: flex; flex-direction: column; align-items: center; gap: .9rem; }
 
     @media (max-width: 560px) {
-        .hero-stats { gap: .4rem; }
-        .hero-stat { flex: 1 1 calc((100% - .8rem) / 3); min-width: 0; padding: .48rem .4rem; }
-        .hero-stat b { font-size: 1.04rem; }
-        .hero-stat span { font-size: .66rem; }
         .trust-strip { gap: .4rem; }
         .trust-chip { flex: 1 1 calc((100% - .8rem) / 2); justify-content: center; padding: .5rem .6rem; font-size: .76rem; }
         /* 行家私语：移动端第一眼可读 */
@@ -2101,12 +2070,6 @@
                     <span class="zh"></span><span class="en"></span>
                 </div>
 
-                <!-- 首屏信任数据条：真实数据驱动 -->
-                <div class="hero-stats" id="heroStats" aria-live="polite">
-                    <span class="hero-stat"><b id="statSellers">—</b><span class="zh">位藏家入驻</span><span class="en">Collectors</span></span>
-                    <span class="hero-stat"><b id="statItems">—</b><span class="zh">件在售重器</span><span class="en">Pieces listed</span></span>
-                    <span class="hero-stat hero-stat--accent"><b><span class="zh">直连</span><span class="en">Direct</span></b><span class="zh">买家直连藏家 · 不收佣金</span><span class="en">Buyers direct · No commission</span></span>
-                </div>
                 <a href="#today-finds" class="hero-btn"><span class="zh">开始浏览</span><span class="en">Explore the Collection</span></a>
             </div>
         </section>
@@ -3114,9 +3077,6 @@
             const setTxt = function (id, v) { const el = document.getElementById(id); if (el) el.textContent = String(v); };
             setTxt('seatsNum', left);
             setTxt('seatsNumEn', left);
-            /* 首屏信任数据条：真实藏馆数 / 在售件数 */
-            setTxt('statSellers', admitted);
-            setTxt('statItems', (listings || []).length);
 
             const fill = document.getElementById('seatsFill');
             if (fill) {
@@ -3761,7 +3721,6 @@
     }
     .search-box button:hover .search-glass { opacity: 1; }
     .hero-clean .hot-tags { margin: 0 auto 1.6rem; }
-    .hero-clean .hero-stats { margin-top: .1rem; }
 
     @media (max-width: 820px) {
         .hero-desc { font-size: .82rem; max-width: 100%; }

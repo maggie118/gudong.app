@@ -95,8 +95,14 @@
  * - 新增 tools/checklist.html（古董验货清单，可打印 A4），加入预缓存清单；
  * - 首页撤除买家工具区块、item.html 底部新增买家工具条、pricing 买家工具行改指向清单；
  * - 提升缓存版本，强制已安装 PWA 刷新页面
+ * 2026-11-08：v60 → v61
+ * - 首页删首屏隐私徽章与佣金披露行、删四卡保障带（保留「为什么是古董圈」三卡 + 金句）；
+ * - tools/index.html 补「验货清单（可打印）」第 8 卡，并修正 cleanUrls 下裸相对链接导致的 404；
+ * - 全站子目录页相关阅读、藏家名录返回等 152 处裸相对链接修正；
+ * - 藏品库订阅块手机端内收、站内第二人称统一为「您」；
+ * - 提升缓存版本，强制已安装 PWA 刷新页面
  */
-const CACHE_NAME = 'antique-collection-v60';
+const CACHE_NAME = 'antique-collection-v61';
 // 预缓存清单：核心页面 + 常用图标 + 占位图 + 工具页（离线可用）
 // 注意：改用逐个 cache.add，单个 404 不会导致整个 install 失败
 const PRECACHE_ASSETS = [

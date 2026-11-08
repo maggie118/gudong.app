@@ -2040,7 +2040,7 @@
             <a href="categories/paintings.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 书画</span><span class="en">· Paintings &amp; Calligraphy</span></a>
             <a href="categories/misc.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 杂项</span><span class="en">· Miscellaneous</span></a>
             <a href="sellers/index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">藏家展馆</span><span class="en">Collectors' Gallery</span></a>
-            <a href="index.html#daily-intel" class="sidebar-link" onclick="closeSidebar()"><span class="zh">实时动态</span><span class="en">Live Pulse</span></a>
+            <a href="#daily-intel" class="sidebar-link" onclick="closeSidebar()"><span class="zh">实时动态</span><span class="en">Live Pulse</span></a>
             <a href="insights.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">收藏知识</span><span class="en">Insights</span></a>
             <a href="tools/index.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">藏家工具包</span><span class="en">Collector's Toolkit</span></a>
             <a href="tools/year-since.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 年份对照计算器</span><span class="en">· Years-since-year Calculator</span></a>
@@ -4009,6 +4009,28 @@ window.gdSharePage = function () {
 <link rel="stylesheet" href="assets/css/gudong-contact.css">
 <script src="assets/js/gudong-contact.js" defer></script>
 <script src="/assets/js/push-subscribe.js" defer></script>
+<script>
+/* 侧栏跳转对齐：从子页或外链带 #daily-intel 等 hash 进入首页时，卡片与图片陆续落位
+   会让原生跳转位置偏移，这里在 load 后与 400ms 后各对齐一次；只处理首页自身区块 id。 */
+(function () {
+    var ids = ['today-finds', 'new-listings', 'daily-intel', 'browse', 'insights', 'services', 'faq', 'seller-cta'];
+    var HEADER_OFFSET = 96;   // 与 section{scroll-margin-top:96px} 保持一致
+
+    function align() {
+        var id = (location.hash || '').slice(1);
+        if (!id || ids.indexOf(id) === -1) return;
+        var el = document.getElementById(id);
+        if (!el) return;
+        var y = el.getBoundingClientRect().top + (window.pageYOffset || document.documentElement.scrollTop || 0);
+        window.scrollTo({ top: Math.max(0, y - HEADER_OFFSET), behavior: 'auto' });
+    }
+
+    window.addEventListener('load', function () {
+        align();
+        setTimeout(align, 400);
+    });
+})();
+</script>
 <script>
 /* 首页「收藏知识」：从站点文章索引 data/insights-index.json 取最新 4 篇。
    索引由 scripts/build-insights-index.js 在每次 Vercel 构建时读 insights.html 的 SERIES 生成，

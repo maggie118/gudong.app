@@ -879,9 +879,9 @@
             background: linear-gradient(140deg, #2B2620 0%, #38302A 100%);
             border: 1px solid rgba(217, 182, 121, .22);
             border-radius: var(--card-radius);
-            padding: 1.7rem 1.4rem 1.25rem;
+            padding: 1.3rem 1.25rem .95rem;
             color: #F1E8DF;
-            margin: -.7rem 0 4.5rem;
+            margin: -.7rem 0 3.4rem;
             box-shadow: 0 14px 40px rgba(20, 17, 14, .16);
             position: relative;
             overflow: hidden;
@@ -898,7 +898,7 @@
         .intel-head {
             display: flex; align-items: flex-end; justify-content: space-between;
             gap: 1rem; flex-wrap: wrap;
-            margin-bottom: 1.05rem;
+            margin-bottom: .7rem;
             position: relative;
         }
         .intel-head .title {
@@ -1024,8 +1024,8 @@
         .intel-note {
             font-size: .68rem;
             color: rgba(201, 182, 138, .5);
-            margin-top: .75rem;
-            line-height: 1.6;
+            margin-top: .5rem;
+            line-height: 1.55;
             position: relative;
         }
 
@@ -1580,7 +1580,7 @@
             .goods-list { grid-template-columns: repeat(4, 1fr); }
             .intel-card { flex: 0 0 204px; }
             .how-grid { grid-template-columns: repeat(2, 1fr); }
-            .intel-section { padding: 1.5rem 1.2rem 1.1rem; }
+            .intel-section { padding: 1.15rem 1.05rem .85rem; }
         }
 
         @media (max-width: 560px) {
@@ -1616,7 +1616,7 @@
             .item-card .price-tag { font-size: .7rem; padding: .1rem .3rem; }
             .finds-price { font-size: .84rem; }
             .how-grid { grid-template-columns: 1fr; }
-            .intel-section { padding: 1.25rem .95rem .95rem; margin-bottom: 3.5rem; }
+            .intel-section { padding: .95rem .8rem .75rem; margin-bottom: 2.8rem; }
             .intel-card { flex: 0 0 184px; padding: .78rem .82rem; }
             .intel-text { font-size: .78rem; }
             .seller-cta { padding: 2.2rem 1.3rem 2rem; }
@@ -1815,21 +1815,21 @@
     .intel-stats {
         display: grid;
         grid-template-columns: repeat(4, minmax(0, 1fr));
-        gap: .55rem;
-        margin-bottom: .95rem;
+        gap: .45rem;
+        margin-bottom: .7rem;
         position: relative;
     }
     .intel-stat {
         background: rgba(255, 255, 255, .045);
         border: 1px solid rgba(217, 182, 121, .16);
         border-radius: 9px;
-        padding: .55rem .7rem .6rem;
-        line-height: 1.25;
+        padding: .38rem .6rem .42rem;
+        line-height: 1.2;
     }
     .intel-stat b {
         display: block;
         font-family: var(--font-serif);
-        font-size: 1.18rem; font-weight: 700;
+        font-size: 1rem; font-weight: 700;
         color: #E8C87E;
         font-variant-numeric: tabular-nums;
     }
@@ -1841,8 +1841,8 @@
     }
     .intel-stat span {
         display: block;
-        margin-top: .2rem;
-        font-size: .65rem;
+        margin-top: .1rem;
+        font-size: .62rem;
         color: rgba(201, 182, 138, .72);
         letter-spacing: .02em;
     }
@@ -1850,9 +1850,9 @@
 
     .intel-liveboard {
         position: relative;
-        height: 13.2rem;
+        height: 8.2rem;
         overflow: hidden;
-        margin-bottom: 1rem;
+        margin-bottom: .75rem;
         border-top: 1px solid rgba(217, 182, 121, .16);
         border-bottom: 1px solid rgba(217, 182, 121, .16);
         -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 9%, #000 91%, transparent 100%);
@@ -1868,7 +1868,7 @@
     .tick-row {
         display: flex; align-items: center; gap: .6rem;
         flex-wrap: nowrap;
-        padding: .62rem .35rem;
+        padding: .46rem .35rem;
         border-bottom: 1px dashed rgba(217, 182, 121, .1);
         font-size: .8rem;
         line-height: 1.5;
@@ -1911,7 +1911,7 @@
     .intel-editorial-head {
         display: flex; align-items: center; justify-content: space-between;
         gap: 1rem;
-        margin-bottom: .6rem;
+        margin-bottom: .45rem;
     }
     .ie-title {
         font-size: .63rem; font-weight: 700;
@@ -1927,15 +1927,15 @@
     }
     .ie-more:hover { opacity: 1; }
     .intel-card--compact {
-        flex: 0 0 262px;
-        gap: .4rem;
-        padding: .72rem .82rem .75rem;
+        flex: 0 0 250px;
+        gap: .32rem;
+        padding: .58rem .74rem .6rem;
         text-decoration: none;
     }
     .intel-card--compact .intel-text {
         font-size: .78rem;
         display: -webkit-box;
-        -webkit-line-clamp: 4;
+        -webkit-line-clamp: 3;
         -webkit-box-orient: vertical;
         overflow: hidden;
     }
@@ -1953,8 +1953,8 @@
         #insights { padding: 1.2rem 1rem 1.05rem; margin-bottom: 3.4rem; }
         #insights .section-head2 .title { font-size: 1.3rem; }
         #insights .insight-grid { grid-template-columns: 1fr; }
-        .intel-liveboard { height: 11.6rem; }
-        .tick-row { font-size: .75rem; gap: .4rem; padding: .58rem .2rem; }
+        .intel-liveboard { height: 7rem; }
+        .tick-row { font-size: .75rem; gap: .4rem; padding: .42rem .2rem; }
         .tick-place { font-size: .6rem; padding: .08rem .32rem; }
         .tick-ago { font-size: .6rem; }
         /* 移动端：情报卡片纵向堆叠，时间标签完整可见（不再横向滚动裁掉右侧） */
@@ -1967,7 +1967,7 @@
     }
     @media (prefers-reduced-motion: reduce) {
         .intel-ticker { animation: none; }
-        .intel-liveboard { height: auto; max-height: 13.2rem; overflow-y: auto; }
+        .intel-liveboard { height: auto; max-height: 8.2rem; overflow-y: auto; }
         .tick-dot { animation: none; }
     }
     </style>
@@ -3201,12 +3201,12 @@
             setNum('statSellersLive', sellers.size);
             if (statsBox) statsBox.hidden = false;
 
-            // —— 动态流：最近上架的真实藏品（需带时间戳，不足 3 条则隐藏） ——
+            // —— 动态流：最近上架的真实藏品，取最新 4 条（需带时间戳，不足 3 条则隐藏） ——
             const recent = allItems
                 .map(f => ({ f, ts: listedTs(f) }))
                 .filter(x => x.ts != null)
                 .sort((a, b) => b.ts - a.ts)
-                .slice(0, 5);
+                .slice(0, 4);
             if (recent.length < 3) { if (board) board.hidden = true; return; }
             if (board) board.hidden = false;
             renderLiveTicker(recent, todayN);

@@ -674,9 +674,42 @@ footer { background: #FBF8F2; border-top: 1px solid var(--hairline); }
 #faq .faq-item > summary:hover { color: #6F4A31; }
 #faq .faq-a { color: #5C554C; line-height: 1.9; font-size: .9rem; padding: .35rem 2.2rem 1.15rem 0; }
 
-/* 8. 买家服务区：更轻的书目式排版 */
-#buyer-services .row-title { letter-spacing: .02em; }
-
+/* 8. 买家服务区：书目式三栏条目（序号 / 说明 / 细线链接） */
+#buyer-services .frame { max-width: 860px; margin: 0 auto; }
+#buyer-services .bs-row {
+  display: flex; align-items: flex-start; gap: 1.15rem;
+  padding: 1.75rem .3rem 1.7rem; border-bottom: 1px solid rgba(176, 138, 69, .15);
+}
+#buyer-services .bs-row:last-child { border-bottom: 0; }
+#buyer-services .bs-idx {
+  flex: 0 0 auto; min-width: 2.1rem; padding-top: .1rem;
+  font-family: "Playfair Display", "Noto Serif SC", "Songti SC", serif;
+  font-size: .78rem; font-weight: 600; letter-spacing: .14em; color: #B08A45;
+}
+#buyer-services .bs-body { flex: 1 1 auto; min-width: 0; }
+#buyer-services .bs-body .row-title {
+  font-size: 1.04rem; font-weight: 500; letter-spacing: .06em; color: var(--ink); margin-bottom: .5rem;
+}
+#buyer-services .bs-body .row-desc {
+  font-size: .88rem; line-height: 1.95; color: #5C554C; max-width: 54ch;
+}
+#buyer-services .bs-act { flex: 0 0 auto; display: flex; flex-direction: column; align-items: flex-end; padding-top: .12rem; }
+#buyer-services .bs-link {
+  display: inline-flex; align-items: baseline; gap: .35rem; white-space: nowrap;
+  font-size: .82rem; letter-spacing: .05em; color: var(--bronze); text-decoration: none;
+  border-bottom: 1px solid rgba(111, 74, 49, .28); padding-bottom: .22rem;
+  transition: color .25s, border-color .25s;
+}
+#buyer-services .bs-link:hover { color: var(--bronze-deep); border-bottom-color: rgba(111, 74, 49, .65); }
+#buyer-services .bs-link .arw { font-family: inherit; transition: transform .25s; }
+#buyer-services .bs-link:hover .arw { transform: translateX(3px); }
+@media (max-width: 640px) {
+  #buyer-services .bs-row { gap: .7rem; padding: 1.35rem .1rem 1.3rem; flex-wrap: wrap; }
+  #buyer-services .bs-idx { min-width: 1.6rem; }
+  #buyer-services .bs-body .row-title { font-size: .99rem; letter-spacing: .04em; }
+  #buyer-services .bs-body .row-desc { font-size: .85rem; line-height: 1.9; }
+  #buyer-services .bs-act { width: 100%; align-items: flex-start; padding: .55rem 0 0 2.3rem; }
+}
 @media (max-width: 560px) {
   .fact-strip li { min-width: 50%; flex: 1 1 50%; border-left: 0; border-top: 1px solid rgba(176,138,69,.14); }
   .fact-strip li:nth-child(odd) { border-right: 1px solid rgba(176,138,69,.14); }
@@ -1079,52 +1112,52 @@ footer { background: #FBF8F2; border-top: 1px solid var(--hairline); }
       <p class="sec-sub"><span class="zh">为什么您的藏品在这里更容易被认真对待？因为平台为买家提供了完善的保障与发现工具。买家买得放心，您的成交率才更高。</span><span class="en">Why are your items treated more seriously here? Because we provide buyers with robust tools and guarantees. Confident buyers mean higher conversion for you.</span></p>
     </div>
 
-    <div class="frame" style="max-width: 820px; margin: 0 auto; background: #FAFAF7; border-color: #E8E2D6;">
+    <div class="frame" style="max-width: 860px; margin: 0 auto;">
       <div class="rows">
         <!-- 买家工具 1 -->
-        <div class="row" style="align-items: center;">
-          <div>
+        <div class="row bs-row">
+          <div class="bs-idx">01</div>
+          <div class="bs-body">
             <div class="row-title">
-              <span style="color:var(--color-far-mountain); font-weight:700; margin-right:.3rem;">📋</span>
               <span class="zh">免费验货清单与交易契约</span><span class="en">Free Inspection Checklist &amp; Contract</span>
             </div>
             <div class="row-desc"><span class="zh">买家可免费打印验货清单带去现场逐项核对，成交时用契约生成器把「包老包真」或「按现状 As-Is」写清楚。</span><span class="en">Buyers can print the inspection checklist to use on site, and generate a standard contract stating "guaranteed authentic" or "as-is".</span></div>
           </div>
-          <div class="row-price">
-            <a href="tools/checklist.html" class="card-cta" style="padding:.5rem 1rem; font-size:.85rem; background:#fff; color:var(--color-far-mountain); border:1px solid var(--color-far-mountain); box-shadow:none;">
-              <span class="zh">打印验货清单 →</span><span class="en">Print checklist →</span>
+          <div class="bs-act">
+            <a href="tools/checklist.html" class="bs-link">
+              <span class="zh">打印验货清单</span><span class="en">Print checklist</span><span class="arw">→</span>
             </a>
           </div>
         </div>
 
         <!-- 买家工具 2 -->
-        <div class="row" style="align-items: center;">
-          <div>
+        <div class="row bs-row">
+          <div class="bs-idx">02</div>
+          <div class="bs-body">
             <div class="row-title">
-              <span style="color:var(--color-far-mountain); font-weight:700; margin-right:.3rem;">🔍</span>
               <span class="zh">“帮我找” 专属寻宝服务</span><span class="en">"Find It For Me" Concierge</span>
             </div>
             <div class="row-desc"><span class="zh">买家登记他们的预算与求购品类（如：清代青花），平台客服会优先将您的匹配藏品推送给这些高意向买家。上架即获客。</span><span class="en">Buyers register their budget and desired categories. Our team prioritizes matching your listings to these high-intent buyers.</span></div>
           </div>
-          <div class="row-price">
-            <a href="javascript:void(0)" onclick="openConciergeModal()" class="card-cta" style="padding:.5rem 1rem; font-size:.85rem; background:#fff; color:var(--color-far-mountain); border:1px solid var(--color-far-mountain); box-shadow:none;">
-  <span class="zh">了解寻宝服务 →</span><span class="en">Learn More →</span>
-</a>
+          <div class="bs-act">
+            <a href="javascript:void(0)" onclick="openConciergeModal()" class="bs-link">
+              <span class="zh">了解寻宝服务</span><span class="en">Learn more</span><span class="arw">→</span>
+            </a>
           </div>
         </div>
 
         <!-- 买家工具 3：自查（2026-11-07 新增买家入口） -->
-        <div class="row" style="align-items: center; border-bottom:none;">
-          <div>
+        <div class="row bs-row">
+          <div class="bs-idx">03</div>
+          <div class="bs-body">
             <div class="row-title">
-              <span style="color:var(--color-far-mountain); font-weight:700; margin-right:.3rem;">✓</span>
               <span class="zh">仿品与断代自查</span><span class="en">Fake &amp; Dating Self-Check</span>
             </div>
             <div class="row-desc"><span class="zh">买家看中一件之前，可先按品类排查仿品疑点与断代矛盾，拿到核验顺序再来问价。买家少踩坑，您的真品才更容易卖出应有的价。</span><span class="en">Before enquiring, buyers can screen category-specific red flags and dating conflicts, then follow a verification order. Fewer mistakes for buyers means your genuine pieces command the price they deserve.</span></div>
           </div>
-          <div class="row-price">
-            <a href="tools/authenticity-check.html" class="card-cta" style="padding:.5rem 1rem; font-size:.85rem; background:#fff; color:var(--color-far-mountain); border:1px solid var(--color-far-mountain); box-shadow:none;">
-              <span class="zh">先做自查 →</span><span class="en">Run the check →</span>
+          <div class="bs-act">
+            <a href="tools/authenticity-check.html" class="bs-link">
+              <span class="zh">先做自查</span><span class="en">Run the check</span><span class="arw">→</span>
             </a>
           </div>
         </div>

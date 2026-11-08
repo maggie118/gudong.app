@@ -214,7 +214,7 @@ const BUYER_LIST_SECTION = `
                 <div>
                     <div style="font-size:.62rem;letter-spacing:.24em;text-transform:uppercase;color:#9A7635;font-weight:700;">Buyer list · 买家名单</div>
                     <h2 style="font-family:'Playfair Display','Noto Serif SC','Songti SC',serif;font-weight:500;font-size:1.5rem;letter-spacing:.04em;color:#2A2621;margin:.5rem 0 .6rem;line-height:1.5;">
-                        <span class="zh">关注藏家，新上架先通知你</span>
+                        <span class="zh">关注藏家，新上架先通知您</span>
                         <span class="en">Follow the collectors you like</span>
                     </h2>
                     <p style="font-size:.86rem;line-height:1.9;color:#6E665C;max-width:46ch;">

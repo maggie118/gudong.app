@@ -138,7 +138,7 @@
     var minimal = !!opts.minimal;
     var headZh = generic
       ? '请留下联系方式，新上架会先通知您'
-      : '关注「' + titleZh + '」，新上架先通知你';
+      : '关注「' + titleZh + '」，新上架先通知您';
     var headEn = generic
       ? 'Leave your contact and hear about new listings first'
       : 'Follow ' + titleEn + ' — hear about new listings first';
@@ -265,7 +265,7 @@
         form.style.display = 'none';
         var whoZh = sellerNameZh ? '「' + sellerNameZh + '」' : '这些藏家';
         var whoEn = sellerNameEn || 'these collectors';
-        ok.innerHTML = '<span class="zh">✓ 已加入买家名单，并关注了' + esc(whoZh) + '。新上架我们会第一时间通知你。' +
+        ok.innerHTML = '<span class="zh">✓ 已加入买家名单，并关注了' + esc(whoZh) + '。新上架我们会第一时间通知您。' +
           (stored ? '' : '（名单同步稍后完成，本机提醒已生效）') + '</span>' +
           '<span class="en">✓ You are on the buyer list and now follow ' + esc(whoEn) + '. We will alert you when new pieces arrive.' +
           (stored ? '' : ' (List sync pending; this device already tracks it.)') + '</span>' +
@@ -288,7 +288,7 @@
           btn.disabled = false;
           toast(isEn() ? 'Unsubscribed.' : '已退订。');
         });
-        toast(isEn() ? 'Added — new listings will reach you first.' : '已加入名单，新上架第一时间通知你。');
+        toast(isEn() ? 'Added — new listings will reach you first.' : '已加入名单，新上架第一时间通知您。');
       }).catch(function () {
         btn.disabled = false;
       });

@@ -986,9 +986,9 @@ window.gdSharePage = function () {
         followZh: '关注此藏家', followEn: 'Follow',
         doneZh: '已关注', doneEn: 'Following',
         onToggle: function (on) {
-            btn.title = on ? '已关注，新上架会通知你' : '关注此藏家，新上架提醒';
+            btn.title = on ? '已关注，新上架会通知您' : '关注此藏家，新上架提醒';
             var lang = (document.body.dataset && document.body.dataset.lang) || 'zh';
-            showToast(on ? (lang === 'zh' ? '已关注此藏家，新上架会通知你' : 'Following this collector')
+            showToast(on ? (lang === 'zh' ? '已关注此藏家，新上架会通知您' : 'Following this collector')
                          : (lang === 'zh' ? '已取消关注' : 'Unfollowed'));
         }
     });

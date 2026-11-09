@@ -27,7 +27,7 @@ async function at(url, options) {
   const text = await response.text();
   let json = {};
   try { json = text ? JSON.parse(text) : {}; } catch (_) { json = {}; }
-  if (!response.ok) throw new Error('airtable ' + response.status);
+  if (!response.ok) throw new Error('airtable ' + response.status + ' ' + text.slice(0, 200));
   return json;
 }
 
@@ -90,6 +90,6 @@ module.exports = async function handler(req, res) {
     return sendJson(res, 200, { ok: true, saved: true });
   } catch (e) {
     const code = /TABLE_NOT_FOUND/.test(e.message) ? 'table_missing' : 'store_error';
-    return sendJson(res, 202, { ok: false, code });
+    return sendJson(res, 202, { ok: false, code, detail: String(e.message).slice(0, 220) });
   }
 };

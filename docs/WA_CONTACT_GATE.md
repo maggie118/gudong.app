@@ -40,17 +40,22 @@
 `follows` 长文本（`name:Maggie; intent:送礼; item:item-limck-01; consent:2026-…`），一条数据都不会丢。
 返回体里的 `stored` 字段会标明 `full` 或 `compact`。
 
-## 3. Google 登录开关（默认关闭）
+## 3. Google 登录开关（默认关闭 · 待办）
+
+> **状态：代码已就位，按钮默认隐藏。** 目前买家只能填邮箱或 WhatsApp 号码。
+> 等 Client ID 到手后按下面两步打开即可，不需要改业务代码。
 
 前端已写好，缺一个 Client ID 就自动隐藏按钮、只留邮箱表单：
 
 1. Google Cloud → APIs & Services → Credentials → 建 **OAuth client ID（Web application）**
    - Authorized JavaScript origins：`https://www.gudong.app`、`https://gudong.app`（本地调试再加 `http://localhost:PORT`）
    - OAuth 同意屏幕填应用名「Gudong 古董圈」、支持邮箱 `contact@gudong.app`
-2. 把 Client ID 写进 `assets/js/config`（页面 `<head>` 里一行即可）：
+2. 在 **18 个藏品页**（`item.html` + `items/*.html`）的 `<head>` 里、`wa-contact-gate.js` 之前加一行：
    ```html
    <script>window.GUDONG_GOOGLE_CLIENT_ID = 'xxxxx.apps.googleusercontent.com';</script>
    ```
+   弹层读的就是这个全局变量（`assets/js/wa-contact-gate.js` 第 406 行 `global.GUDONG_GOOGLE_CLIENT_ID`），
+   没设就整块 Google 按钮不渲染，邮箱路径不受影响。
 3. 同时在 Vercel 环境变量加 `GOOGLE_CLIENT_ID`（同一个值），`/api/lead` 用它校验 ID token。
 
 开启后流程：买家点「用 Google 继续」→ 前端拿到 ID token → `/api/lead` 用

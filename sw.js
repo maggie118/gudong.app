@@ -1,4 +1,5 @@
 /* 古董圈 Gudong · Service Worker
+ * 2026-11-09：v69 → v70（藏家询价收件箱：/api/enquiries + seller-inbox 顶部询价列表）
  * 2026-11-09：v68 → v69（买家名单表单在窄屏改整行：输入框上、按钮下）
  * 2026-11-09：v67 → v68（Google 登录改单一开关文件 + 藏家目录页手机端改单栏）
  * - 新增 /assets/js/google-client.js：18 个藏品页只读这一个 CLIENT_ID，填好即出现 Google 按钮
@@ -129,7 +130,7 @@
  * - 区块标题「今日情报」改为「掌握收藏动态」；
  * - 提升缓存版本，强制已安装 PWA 刷新页面
  */
-const CACHE_NAME = 'antique-collection-v69';
+const CACHE_NAME = 'antique-collection-v70';
 // 预缓存清单：核心页面 + 常用图标 + 占位图 + 工具页（离线可用）
 // 注意：改用逐个 cache.add，单个 404 不会导致整个 install 失败
 const PRECACHE_ASSETS = [

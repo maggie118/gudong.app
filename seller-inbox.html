@@ -118,6 +118,31 @@
 <body data-lang="zh">
   <main class="page">
     <div class="top"><div><h1><span class="zh">古董圈 · 藏家站内消息</span><span class="en">Gudong · Collector Inbox</span></h1><p><span class="zh">买家咨询会显示在这里，回复将回到买家的藏品聊天框。</span><span class="en">Buyer inquiries appear here. Replies return to the buyer's item chat.</span></p></div><button class="lang" id="lang-toggle" type="button">EN</button></div>
+    <style>
+    /* 询价收件箱（2026-11-09）：买家在藏品页留下的身份与意向 */
+    .enq-block { margin: 0 0 26px; border: 1px solid rgba(176,138,69,.28); background: linear-gradient(180deg,#FFFDF8 0%,#FBF6EC 100%); padding: 20px 22px; border-radius: 2px; }
+    .enq-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 14px; }
+    .enq-head h2 { margin: 0; font-family: 'Playfair Display','Noto Serif SC','Songti SC',serif; font-weight: 500; font-size: 1.02rem; letter-spacing: .04em; color: #2A2621; }
+    .enq-head small { font-size: .66rem; letter-spacing: .2em; text-transform: uppercase; color: #9A7635; font-weight: 700; }
+    .enq-list { display: grid; gap: 10px; }
+    .enq-card { border: 1px solid #EDE7DC; background: #fff; padding: 13px 15px; border-radius: 2px; }
+    .enq-top { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-size: .92rem; color: #2A2621; }
+    .enq-name { font-weight: 600; }
+    .enq-intent { font-size: .68rem; font-weight: 700; letter-spacing: .08em; color: #6F4A31; border: 1px solid rgba(176,138,69,.4); border-radius: 20px; padding: .16rem .6rem; }
+    .enq-item { font-size: .85rem; color: #6E665C; margin-top: 6px; line-height: 1.7; }
+    .enq-foot { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 9px; font-size: .8rem; }
+    .enq-foot a { color: #6F4A31; text-decoration: underline; text-underline-offset: 3px; word-break: break-all; }
+    .enq-foot time { color: #9A938A; }
+    .enq-empty { font-size: .88rem; color: #9A938A; padding: 6px 2px; }
+    @media (max-width: 560px) { .enq-block { padding: 16px 15px; } .enq-head { flex-wrap: wrap; } }
+    </style>
+    <section class="enq-block" id="enquiry-block" aria-label="Enquiries">
+      <div class="enq-head">
+        <h2><span class="zh">询价 / 买家留言</span><span class="en">Enquiries</span></h2>
+        <small><span class="zh">藏品页 · 身份已确认</span><span class="en">Verified at item page</span></small>
+      </div>
+      <div class="enq-list" id="enquiry-list"><div class="enq-empty"><span class="zh">正在加载…</span><span class="en">Loading…</span></div></div>
+    </section>
     <div class="layout">
       <aside class="threads"><div class="threads-head"><span class="zh">咨询列表</span><span class="en">Inquiries</span></div><div id="threads"><div class="empty"><span class="zh">正在加载…</span><span class="en">Loading…</span></div></div></aside>
       <section class="conversation" aria-label="Conversation">

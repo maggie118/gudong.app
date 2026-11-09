@@ -1,3 +1,4 @@
+const { createHmac } = require('node:crypto');
 // api/lead.js
 // 买家名单（buyer_list）写入：POST /api/lead
 //   { contact, contact_type, seller, source, follows:[{type,term}], lang, page,
@@ -14,6 +15,124 @@ const TOKEN = process.env.AIRTABLE_TOKEN;
 const TABLE = process.env.BUYER_LEADS_TABLE || 'buyer_leads';
 const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID || '';
 const INTENTS = { collection: '自用收藏', gift: '送礼', investment: '投资考量', ask: '只是询价' };
+
+/* ---------------- 卖家询价提醒（2026-11-09） ----------------
+ * 买家在藏品页留下身份与意向后，除了写库，还要让藏家知道"有人真的联系了"。
+ * 三种通道，按优先级自动选，全都不配置就静默跳过（绝不影响买家提交）：
+ *   1) 邮件：配 RESEND_API_KEY（发件地址 ENQUIRY_FROM_EMAIL，默认 notify@gudong.app）
+ *      → 发到 Sellers 表里该藏家的「邮箱 / Email Address」，没有邮箱就发平台代收箱
+ *   2) Webhook：配 CHAT_NOTIFY_WEBHOOK_URL → POST {event:'new_enquiry', ...}
+ *   3) 都不配 → 只在藏家专属收件箱里可见（/seller-inbox.html）
+ * ---------------------------------------------------------- */
+const SELLERS_TABLE = process.env.AIRTABLE_SELLERS_TABLE || 'sellers';
+const SELLER_EMAIL_FIELD = '邮箱 / Email Address';
+const CHAT_SECRET = process.env.CHAT_REPLY_SECRET || '';
+const RESEND_KEY = process.env.RESEND_API_KEY || '';
+const FROM_EMAIL = process.env.ENQUIRY_FROM_EMAIL || 'Gudong 古董圈 <notify@gudong.app>';
+const NOTIFY_WEBHOOK = process.env.CHAT_NOTIFY_WEBHOOK_URL || '';
+const PLATFORM_INBOX = process.env.ENQUIRY_PLATFORM_EMAIL || '';
+const SITE = (process.env.CHAT_PUBLIC_URL || 'https://www.gudong.app').replace(/\/+$/, '');
+
+function inboxToken(sellerId) {
+  if (!CHAT_SECRET || !sellerId) return '';
+  try {
+    const payload = Buffer.from(JSON.stringify({
+      scope: 'seller_inbox',
+      seller_id: sellerId,
+      exp: Date.now() + 365 * 24 * 60 * 60 * 1000
+    })).toString('base64url');
+    const signature = createHmac('sha256', CHAT_SECRET).update(payload).digest('base64url');
+    return payload + '.' + signature;
+  } catch (e) { return ''; }
+}
+function inboxLink(sellerId) {
+  const token = inboxToken(sellerId);
+  return token ? SITE + '/seller-inbox.html#token=' + encodeURIComponent(token) : '';
+}
+async function sellerEmail(sellerId) {
+  if (!BASE || !TOKEN || !sellerId) return '';
+  try {
+    const url = new URL('https://api.airtable.com/v0/' + encodeURIComponent(BASE) + '/' + encodeURIComponent(SELLERS_TABLE));
+    url.searchParams.set('filterByFormula', "{seller_id}='" + String(sellerId).replace(/'/g, "\\'") + "'");
+    url.searchParams.set('maxRecords', '1');
+    const r = await fetch(url.toString(), { headers: { Authorization: 'Bearer ' + TOKEN } });
+    if (!r.ok) return '';
+    const json = await r.json();
+    const f = json && json.records && json.records[0] && json.records[0].fields;
+    const v = f && f[SELLER_EMAIL_FIELD];
+    return typeof v === 'string' ? v.trim() : '';
+  } catch (e) { return ''; }
+}
+function esc(v) { return String(v == null ? '' : v).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c])); }
+function enquiryHtml(info) {
+  const link = inboxLink(info.seller);
+  const who = esc(info.name) || '（未留称呼）';
+  return '<div style="font-family:Georgia,\'Songti SC\',serif;max-width:560px;color:#2A2621">'
+    + '<p style="font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:#9A7635;margin:0 0 10px">New enquiry · 新询价</p>'
+    + '<h2 style="font-weight:500;font-size:1.05rem;margin:0 0 14px">有买家对「' + esc(info.itemTitle || info.itemId) + '」发起了询价</h2>'
+    + '<table style="font-size:.9rem;line-height:1.9;border-collapse:collapse">'
+    + '<tr><td style="color:#6E665C;padding-right:12px">称呼</td><td>' + who + '</td></tr>'
+    + '<tr><td style="color:#6E665C;padding-right:12px">联系方式</td><td>' + esc(info.contact) + '（' + (info.type === 'email' ? '邮箱' : 'WhatsApp') + '）</td></tr>'
+    + (info.intent ? '<tr><td style="color:#6E665C;padding-right:12px">意向</td><td>' + esc(info.intent) + '</td></tr>' : '')
+    + '<tr><td style="color:#6E665C;padding-right:12px">藏品</td><td>' + esc(info.itemTitle || info.itemId) + '</td></tr>'
+    + '<tr><td style="color:#6E665C;padding-right:12px">时间</td><td>' + esc(new Date().toISOString().replace('T', ' ').slice(0, 16)) + ' UTC</td></tr>'
+    + '</table>'
+    + (link ? '<p style="margin:20px 0"><a href="' + link + '" style="display:inline-block;padding:11px 22px;background:#6F4A31;color:#fff;text-decoration:none;border-radius:2px">打开询价收件箱</a></p>'
+      + '<p style="font-size:.76rem;color:#9A938A;line-height:1.8">此链接为您的专属私密入口，请勿转发。</p>'
+      : '')
+    + '<p style="font-size:.78rem;color:#9A938A;line-height:1.8">买家已同意《隐私政策》，联系方式仅用于本次询价与上新提醒，平台不会公开或转卖。</p>'
+    + '</div>';
+}
+async function notifyEnquiry(info) {
+  const tasks = [];
+  if (RESEND_KEY) {
+    tasks.push((async () => {
+      const to = (await sellerEmail(info.seller)) || PLATFORM_INBOX;
+      if (!to) return false;
+      const r = await fetch('https://api.resend.com/emails', {
+        method: 'POST',
+        headers: { Authorization: 'Bearer ' + RESEND_KEY, 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          from: FROM_EMAIL,
+          to: [to],
+          subject: '新询价：' + (info.itemTitle || info.itemId) + ' · ' + (info.name || '匿名买家'),
+          html: enquiryHtml(info)
+        })
+      });
+      return r.ok;
+    })());
+  }
+  if (NOTIFY_WEBHOOK) {
+    tasks.push((async () => {
+      const r = await fetch(NOTIFY_WEBHOOK, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          event: 'new_enquiry',
+          seller_id: info.seller,
+          name: info.name,
+          contact: info.contact,
+          contact_type: info.type,
+          intent: info.intent,
+          item_id: info.itemId,
+          item_title: info.itemTitle,
+          page: info.page,
+          inbox_url: inboxLink(info.seller),
+          created_at: new Date().toISOString()
+        })
+      });
+      return r.ok;
+    })());
+  }
+  if (!tasks.length) return false;
+  const guard = (p) => Promise.race([
+    p.catch(() => false),
+    new Promise((resolve) => setTimeout(() => resolve(false), 3000))
+  ]);
+  const results = await Promise.all(tasks.map(guard));
+  return results.some(Boolean);
+}
+
 
 function sendJson(res, code, obj) {
   res.statusCode = code;
@@ -245,6 +364,15 @@ module.exports = async function handler(req, res) {
     return obj;
   }
 
+  // 只有"藏品页询价"（source=wa-gate 且带藏家）才提醒卖家；纯订阅不上门打扰藏家
+  const isEnquiry = baseFields.source === 'wa-gate' && !!seller;
+  async function maybeAlertSeller() {
+    if (!isEnquiry) return false;
+    try {
+      return await notifyEnquiry({ seller, name, contact, type, intent, itemId, itemTitle, page: baseFields.page });
+    } catch (e) { return false; }
+  }
+
   try {
     const created = await atFetch(atUrl(), {
       method: 'POST',
@@ -252,6 +380,7 @@ module.exports = async function handler(req, res) {
       body: JSON.stringify({ records: [{ fields: unset(fullFields) }], typecast: true })
     });
     const id = created && created.records && created.records[0] && created.records[0].id;
+    await maybeAlertSeller();
     return sendJson(res, 200, { ok: true, id: id || '', stored: 'full' });
   } catch (e) {
     const missingField = e.type === 'UNKNOWN_FIELD_NAME' || e.status === 422;
@@ -263,6 +392,7 @@ module.exports = async function handler(req, res) {
           body: JSON.stringify({ records: [{ fields: unset(compactFields) }], typecast: true })
         });
         const id = created && created.records && created.records[0] && created.records[0].id;
+        await maybeAlertSeller();
         return sendJson(res, 200, { ok: true, id: id || '', stored: 'compact' });
       } catch (e2) {
         const code2 = e2.type === 'TABLE_NOT_FOUND' ? 'table_missing'

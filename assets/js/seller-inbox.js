@@ -12,6 +12,7 @@
   var selected = null;
   var busy = false;
   var refreshBusy = false;
+  var enqEl = document.getElementById('enquiry-list');
   var lang = localStorage.getItem('gudong.sellerInbox.lang') || 'zh';
   document.body.dataset.lang = lang;
   document.getElementById('lang-toggle').textContent = lang === 'zh' ? 'EN' : '中文';
@@ -55,6 +56,56 @@
     });
     if (atBottom) messagesEl.scrollTop = messagesEl.scrollHeight;
   }
+  /* ---- 询价（藏品页身份确认记录）---- */
+  var lastEnquiries = [];
+  function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
+  function contactHref(enq) {
+    var c = enq.contact || '';
+    if (!c) return '';
+    if (enq.contact_type === 'email' || c.indexOf('@') > 0) return 'mailto:' + c;
+    var digits = c.replace(/[^\d]/g, '');
+    return digits ? 'https://wa.me/' + digits : '';
+  }
+  function drawEnquiries(items) {
+    if (!enqEl) return;
+    enqEl.textContent = '';
+    if (!items.length) {
+      enqEl.appendChild(el('div', 'enq-empty', t('还没有买家询价。买家在藏品页点 WhatsApp 并确认身份后，会出现在这里。', 'No enquiries yet. They appear here once a buyer confirms identity before contacting you on WhatsApp.')));
+      return;
+    }
+    items.forEach(function (enq) {
+      var card = el('div', 'enq-card');
+      var top = el('div', 'enq-top');
+      top.appendChild(el('span', 'enq-name', enq.name || t('未留称呼', 'No name')));
+      if (enq.intent) top.appendChild(el('span', 'enq-intent', enq.intent));
+      card.appendChild(top);
+      card.appendChild(el('div', 'enq-item', '「' + (enq.item_title || enq.item_id || t('藏品', 'Item')) + '」'));
+      var foot = el('div', 'enq-foot');
+      var href = contactHref(enq);
+      if (href) {
+        var a = el('a', '', enq.contact);
+        a.href = href;
+        if (href.indexOf('http') === 0) { a.target = '_blank'; a.rel = 'noopener noreferrer'; }
+        foot.appendChild(a);
+      }
+      foot.appendChild(el('time', '', formatTime(enq.created_at)));
+      card.appendChild(foot);
+      enqEl.appendChild(card);
+    });
+  }
+  function loadEnquiries() {
+    if (!token || !enqEl) return Promise.resolve();
+    return api('/api/enquiries').then(function (data) {
+      lastEnquiries = data.enquiries || [];
+      drawEnquiries(lastEnquiries);
+    }).catch(function () {
+      if (!enqEl.querySelector('.enq-card')) {
+        enqEl.textContent = '';
+        enqEl.appendChild(el('div', 'enq-empty', t('暂时无法载入询价。', 'Could not load enquiries.')));
+      }
+    });
+  }
+
   function loadThreads() {
     if (!token || refreshBusy) return Promise.resolve();
     refreshBusy = true;
@@ -91,11 +142,14 @@
   });
   document.getElementById('lang-toggle').addEventListener('click', function () {
     lang = lang === 'zh' ? 'en' : 'zh'; document.body.dataset.lang = lang; localStorage.setItem('gudong.sellerInbox.lang', lang);
-    this.textContent = lang === 'zh' ? 'EN' : '中文'; if (selected) loadConversation(); else drawThreads([]);
+    this.textContent = lang === 'zh' ? 'EN' : '中文';
+    drawEnquiries(lastEnquiries);
+    if (selected) loadConversation(); else drawThreads([]);
   });
-  if (!token) { say(t('链接无效，请联系平台管理员获取藏家专属链接。','Invalid link. Ask the platform administrator for your private inbox link.')); threadsEl.textContent = ''; var empty = document.createElement('div'); empty.className = 'empty'; empty.textContent = t('需要使用藏家专属链接访问。','A private collector link is required.'); threadsEl.appendChild(empty); form.hidden = true; return; }
+  if (!token) { say(t('链接无效，请联系平台管理员获取藏家专属链接。','Invalid link. Ask the platform administrator for your private inbox link.')); threadsEl.textContent = ''; var empty = document.createElement('div'); empty.className = 'empty'; empty.textContent = t('需要使用藏家专属链接访问。','A private collector link is required.'); threadsEl.appendChild(empty); form.hidden = true; var eb = document.getElementById('enquiry-block'); if (eb) eb.hidden = true; return; }
+  loadEnquiries();
   loadThreads();
-  var poll = window.setInterval(function () { if (!document.hidden) loadThreads(); }, 5000);
-  document.addEventListener('visibilitychange', function () { if (!document.hidden) loadThreads(); });
+  var poll = window.setInterval(function () { if (!document.hidden) { loadThreads(); loadEnquiries(); } }, 5000);
+  document.addEventListener('visibilitychange', function () { if (!document.hidden) { loadThreads(); loadEnquiries(); } });
   window.addEventListener('pagehide', function () { clearInterval(poll); });
 })();

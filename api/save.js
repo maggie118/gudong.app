@@ -44,7 +44,7 @@ module.exports = async function handler(req, res) {
   const itemId = str(body.item_id, 80);
   const anon = str(body.anon, 64);
   const seller = str(body.seller, 80);
-  const action = body.action === 'unsave' ? 'unsave' : 'save';
+  const action = body.action === 'unsave' ? 'unsave' : (body.action === 'view' ? 'view' : 'save');
 
   if (!/^[a-z0-9._-]{2,80}$/i.test(itemId) || !/^[a-z0-9]{8,64}$/i.test(anon)) {
     return sendJson(res, 400, { ok: false, error: 'invalid_payload' });
@@ -61,7 +61,27 @@ module.exports = async function handler(req, res) {
     const found = await at(url.toString(), { headers });
     const rec = found.records && found.records[0];
 
+    if (action === 'view') {
+      // 浏览：同一浏览器同一藏品只留一条独立访客记录，不做每日累加
+      if (rec && rec.fields && rec.fields.Status === 'view') return sendJson(res, 200, { ok: true, view: true, dup: true });
+      if (rec) {
+        await at(root + '/' + rec.id, {
+          method: 'PATCH',
+          headers,
+          body: JSON.stringify({ fields: { Status: 'view', created_at: new Date().toISOString() }, typecast: true })
+        });
+        return sendJson(res, 200, { ok: true, view: true });
+      }
+      const viewFields = { item_id: itemId, anon, created_at: new Date().toISOString(), Status: 'view' };
+      if (seller) viewFields.seller = seller;
+      await at(root, { method: 'POST', headers, body: JSON.stringify({ records: [{ fields: viewFields }], typecast: true }) });
+      return sendJson(res, 200, { ok: true, view: true });
+    }
+
     if (action === 'unsave') {
+      if (rec && rec.fields && rec.fields.Status === 'view') {
+        return sendJson(res, 200, { ok: true, saved: false });
+      }
       if (rec && (!rec.fields || rec.fields.Status !== 'removed')) {
         await at(root + '/' + rec.id, {
           method: 'PATCH',
@@ -73,8 +93,8 @@ module.exports = async function handler(req, res) {
     }
 
     if (rec) {
-      // 已经收藏过：不重复计数，只在被取消过后恢复
-      if (rec.fields && rec.fields.Status === 'removed') {
+      // 已经收藏过：不重复计数；若之前只是浏览过（view）或被取消过（removed），升级为 active
+      if (!rec.fields || rec.fields.Status !== 'active') {
         await at(root + '/' + rec.id, {
           method: 'PATCH',
           headers,

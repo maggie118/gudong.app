@@ -32,10 +32,11 @@ function readEnv(key) {
   return line.slice(key.length + 1).trim().replace(/^["']|["']$/g, '');
 }
 
-function token(sellerId, secret) {
+function token(sellerId, secret, gallery) {
   const payload = Buffer.from(JSON.stringify({
     scope: 'seller_inbox',
     seller_id: sellerId,
+    gallery: gallery === true,
     exp: Date.now() + DAYS * 24 * 60 * 60 * 1000
   })).toString('base64url');
   const sig = createHmac('sha256', secret).update(payload).digest('base64url');
@@ -62,8 +63,11 @@ function main() {
   const expires = new Date(Date.now() + DAYS * 24 * 60 * 60 * 1000).toISOString().slice(0, 10);
   console.log('有效期至 ' + expires + '（' + DAYS + ' 天）\n');
   sellers.forEach((s) => {
-    const link = SITE + '/seller-inbox.html#token=' + encodeURIComponent(token(s.seller_id, secret));
+    // gallery=true（已付费开通私家藏馆）才在 token 里写入统计权益，
+    // 写进去之后该藏家的收件箱才会显示「近 30 天 N 人浏览 · M 人收藏」。
+    const link = SITE + '/seller-inbox.html#token=' + encodeURIComponent(token(s.seller_id, secret, s.gallery === true));
     console.log('【' + s.seller_id + '｜' + (s.display_zh || s.display_en || '') + '】');
+    if (s.gallery !== true) console.log('（未开通私家藏馆：不显示浏览 / 收藏统计）');
     console.log(link + '\n');
   });
   console.log('提醒：这条链接可读取该藏家的全部询价与站内消息，只能私下发给藏家本人。');

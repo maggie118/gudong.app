@@ -98,10 +98,15 @@
   /* ---- 收藏 / 关注汇总（只给数字，不给身份）---- */
   function drawInterest(data) {
     if (!interestEl) return;
-    var n = data && Number.isFinite(data.saves_30d) ? data.saves_30d : 0;
-    if (!n) { interestEl.hidden = true; interestEl.textContent = ''; return; }
+    if (!data || data.gallery === false) { interestEl.hidden = true; interestEl.textContent = ''; return; }
+    var views = Number.isFinite(data.views_30d) ? data.views_30d : 0;
+    var saves = Number.isFinite(data.saves_30d) ? data.saves_30d : 0;
+    if (!views && !saves) { interestEl.hidden = true; interestEl.textContent = ''; return; }
     interestEl.hidden = false;
-    interestEl.textContent = t('近 30 天 · ' + n + ' 人收藏 / 关注', 'Last 30 days · ' + n + (n === 1 ? ' save / follow' : ' saves / follows'));
+    interestEl.textContent = t(
+      '近 30 天 · ' + views + ' 人浏览 · ' + saves + ' 人收藏 / 关注',
+      'Last 30 days · ' + views + (views === 1 ? ' visitor' : ' visitors') + ' · ' + saves + (saves === 1 ? ' save / follow' : ' saves / follows')
+    );
   }
   function loadInterest() {
     if (!token || !interestEl) return Promise.resolve();

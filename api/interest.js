@@ -43,36 +43,52 @@ module.exports = async function handler(req, res) {
   }
   const session = verify(bearer(req));
   if (!session) return respond(res, 401, { error: 'Seller inbox link is invalid or expired' });
-  if (!BASE || !TOKEN) return respond(res, 200, { seller_id: session.seller_id, saves_30d: 0, saves_total: 0, tracked: false });
 
+  // 浏览 / 收藏这类受欢迎度统计是「私家藏馆」付费权益：
+  // 只有签发链接时带 gallery:true 的藏家才返回数字，其余一律安静隐藏。
   const sellerId = session.seller_id;
+  if (session.gallery !== true) {
+    return respond(res, 200, { seller_id: sellerId, gallery: false, saves_30d: 0, saves_total: 0, views_30d: 0, tracked: false });
+  }
+  if (!BASE || !TOKEN) return respond(res, 200, { seller_id: sellerId, gallery: true, saves_30d: 0, saves_total: 0, views_30d: 0, tracked: false });
+
   try {
-    const url = new URL('https://api.airtable.com/v0/' + encodeURIComponent(BASE) + '/' + encodeURIComponent(TABLE));
-    url.searchParams.set('filterByFormula', 'AND({seller}=' + fstr(sellerId) + ",{Status}='active')");
-    url.searchParams.set('pageSize', '100');
-    url.searchParams.set('fields[0]', 'anon');
-    url.searchParams.set('fields[1]', 'created_at');
-    const response = await fetch(url.toString(), { headers: { Authorization: 'Bearer ' + TOKEN } });
-    if (!response.ok) throw new Error('airtable ' + response.status);
-    const json = await response.json();
     const cutoff = Date.now() - 30 * DAY;
-    const all = new Set();
-    const recent = new Set();
-    (json.records || []).forEach((record) => {
-      const f = record.fields || {};
-      const who = f.anon || record.id;
-      all.add(who);
-      const at = Date.parse(f.created_at || record.createdTime || '');
-      if (Number.isFinite(at) && at >= cutoff) recent.add(who);
-    });
+    const viewAnon = new Set();
+    const saveAnon = new Set();
+    let offset = '';
+    for (let page = 0; page < 4; page++) {
+      const url = new URL('https://api.airtable.com/v0/' + encodeURIComponent(BASE) + '/' + encodeURIComponent(TABLE));
+      url.searchParams.set('filterByFormula', 'AND({seller}=' + fstr(sellerId) + ",OR({Status}='active',{Status}='view')})");
+      url.searchParams.set('pageSize', '100');
+      url.searchParams.set('fields[0]', 'anon');
+      url.searchParams.set('fields[1]', 'created_at');
+      url.searchParams.set('fields[2]', 'Status');
+      if (offset) url.searchParams.set('offset', offset);
+      const response = await fetch(url.toString(), { headers: { Authorization: 'Bearer ' + TOKEN } });
+      if (!response.ok) throw new Error('airtable ' + response.status);
+      const json = await response.json();
+      (json.records || []).forEach((record) => {
+        const f = record.fields || {};
+        const who = f.anon || record.id;
+        const at = Date.parse(f.created_at || record.createdTime || '');
+        if (!Number.isFinite(at) || at < cutoff) return;
+        if (f.Status === 'view') viewAnon.add(who);
+        else saveAnon.add(who);
+      });
+      offset = json.offset || '';
+      if (!offset) break;
+    }
     return respond(res, 200, {
       seller_id: sellerId,
-      saves_30d: recent.size,
-      saves_total: all.size,
+      gallery: true,
+      saves_30d: saveAnon.size,
+      saves_total: saveAnon.size,
+      views_30d: viewAnon.size,
       tracked: true
     });
   } catch (_) {
     // 表还没建或额度受限时安静降级：不给藏家看空数字
-    return respond(res, 200, { seller_id: sellerId, saves_30d: 0, saves_total: 0, tracked: false });
+    return respond(res, 200, { seller_id: sellerId, gallery: true, saves_30d: 0, saves_total: 0, views_30d: 0, tracked: false });
   }
 };

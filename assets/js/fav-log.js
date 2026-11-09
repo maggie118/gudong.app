@@ -45,11 +45,11 @@
         return el ? String(el.textContent || '').trim() : '';
     }
 
-    function ping(saving) {
+    function ping(action) {
         var id = itemId();
         var anon = anonId();
         if (!id || !anon) return;
-        var payload = JSON.stringify({ item_id: id, seller: sellerId(), anon: anon, action: saving ? 'save' : 'unsave' });
+        var payload = JSON.stringify({ item_id: id, seller: sellerId(), anon: anon, action: action });
         try {
             fetch(ENDPOINT, {
                 method: 'POST',
@@ -59,6 +59,18 @@
                 cache: 'no-store'
             }).catch(function () {});
         } catch (e) { /* 计数失败不影响收藏本身 */ }
+    }
+
+    // 浏览计数：同一标签页会话内只报一次，避免每次刷新都写一条
+    function logView() {
+        var id = itemId();
+        if (!id) return;
+        try {
+            var key = 'gudong_viewed_' + id;
+            if (sessionStorage.getItem(key)) return;
+            sessionStorage.setItem(key, '1');
+        } catch (e) { /* 隐私模式下照常上报，交给服务端去重 */ }
+        ping('view');
     }
 
     var before = readFav();
@@ -73,7 +85,13 @@
             var is = after.indexOf(id) !== -1;
             if (was === is) return;
             before = after;
-            ping(is);
+            ping(is ? 'save' : 'unsave');
         }, 0);
     }, true);
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', function () { window.setTimeout(logView, 1200); });
+    } else {
+        window.setTimeout(logView, 1200);
+    }
 })();

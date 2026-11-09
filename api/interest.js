@@ -48,7 +48,7 @@ module.exports = async function handler(req, res) {
   const sellerId = session.seller_id;
   try {
     const url = new URL('https://api.airtable.com/v0/' + encodeURIComponent(BASE) + '/' + encodeURIComponent(TABLE));
-    url.searchParams.set('filterByFormula', 'AND({seller}=' + fstr(sellerId) + ",{status}='active')");
+    url.searchParams.set('filterByFormula', 'AND({seller}=' + fstr(sellerId) + ",{Status}='active')");
     url.searchParams.set('pageSize', '100');
     url.searchParams.set('fields[0]', 'anon');
     url.searchParams.set('fields[1]', 'created_at');

@@ -62,11 +62,11 @@ module.exports = async function handler(req, res) {
     const rec = found.records && found.records[0];
 
     if (action === 'unsave') {
-      if (rec && (!rec.fields || rec.fields.status !== 'removed')) {
+      if (rec && (!rec.fields || rec.fields.Status !== 'removed')) {
         await at(root + '/' + rec.id, {
           method: 'PATCH',
           headers,
-          body: JSON.stringify({ fields: { status: 'removed' }, typecast: true })
+          body: JSON.stringify({ fields: { Status: 'removed' }, typecast: true })
         });
       }
       return sendJson(res, 200, { ok: true, saved: false });
@@ -74,17 +74,17 @@ module.exports = async function handler(req, res) {
 
     if (rec) {
       // 已经收藏过：不重复计数，只在被取消过后恢复
-      if (rec.fields && rec.fields.status === 'removed') {
+      if (rec.fields && rec.fields.Status === 'removed') {
         await at(root + '/' + rec.id, {
           method: 'PATCH',
           headers,
-          body: JSON.stringify({ fields: { status: 'active', created_at: new Date().toISOString() }, typecast: true })
+          body: JSON.stringify({ fields: { Status: 'active', created_at: new Date().toISOString() }, typecast: true })
         });
       }
       return sendJson(res, 200, { ok: true, saved: true, dup: true });
     }
 
-    const fields = { item_id: itemId, anon, created_at: new Date().toISOString(), status: 'active' };
+    const fields = { item_id: itemId, anon, created_at: new Date().toISOString(), Status: 'active' };
     if (seller) fields.seller = seller;
     await at(root, { method: 'POST', headers, body: JSON.stringify({ records: [{ fields }], typecast: true }) });
     return sendJson(res, 200, { ok: true, saved: true });

@@ -54,6 +54,18 @@ node scripts/generate-seller-inbox-links.js Lim-CK     # 只生成某一家
 - 卡片：买家称呼、意向标签、所询藏品、联系方式（可点）、时间。
 - 《隐私政策》第「藏品询价信息」与「使用目的」已写明：询价资料会在买家同意的范围内提供给该藏家。
 
+## 收藏 / 关注：只给数字，不给身份（2026-11-09）
+
+收藏按钮仍是纯本地（`localStorage: gudong_fav`），点一下不会泄露任何个人信息。为了给藏家一个“作品有人气”的可信数字，另加一条**匿名计数**：
+
+- 前端 `assets/js/fav-log.js`（19 个藏品页统一挂载）在收藏/取消收藏时 POST `{item_id, seller, anon}` 到 `/api/save`；`anon` 是浏览器本地随机 16 字节 id，与身份无关。
+- 后端 `api/save.js` 写 Airtable 表 `item_saves`（字段 `item_id / seller / anon / created_at / status`）。同一 anon 同一藏品只记一条，重复收藏不累加，取消时把 `status` 置为 `removed`。
+- `/api/interest`（同样走藏家签名链接）只返回 `saves_30d / saves_total` 两个数字，**不返回任何 anon 或时间明细**。
+- 藏家收件箱顶部因此多一行“近 30 天 · N 人收藏 / 关注”；为 0 时不显示，避免给新藏家看空场。
+- 《隐私政策》已补「收藏计数」条款，说明该记录不含任何可识别个人的信息。
+
+`item_saves` 的 `notes / assignee / attachments / attachment summary` 是 Airtable 建表自带字段，留空即可，可以按需隐藏。
+
 ## 部署
 
 `git push origin HEAD:main`；若线上没动，用 Deploy Hook：

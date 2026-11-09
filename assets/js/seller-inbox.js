@@ -13,6 +13,8 @@
   var busy = false;
   var refreshBusy = false;
   var enqEl = document.getElementById('enquiry-list');
+  var interestEl = document.getElementById('interest-line');
+  var interestData = null;
   var lang = localStorage.getItem('gudong.sellerInbox.lang') || 'zh';
   document.body.dataset.lang = lang;
   document.getElementById('lang-toggle').textContent = lang === 'zh' ? 'EN' : '中文';
@@ -93,6 +95,22 @@
       enqEl.appendChild(card);
     });
   }
+  /* ---- 收藏 / 关注汇总（只给数字，不给身份）---- */
+  function drawInterest(data) {
+    if (!interestEl) return;
+    var n = data && Number.isFinite(data.saves_30d) ? data.saves_30d : 0;
+    if (!n) { interestEl.hidden = true; interestEl.textContent = ''; return; }
+    interestEl.hidden = false;
+    interestEl.textContent = t('近 30 天 · ' + n + ' 人收藏 / 关注', 'Last 30 days · ' + n + (n === 1 ? ' save / follow' : ' saves / follows'));
+  }
+  function loadInterest() {
+    if (!token || !interestEl) return Promise.resolve();
+    return api('/api/interest').then(function (data) {
+      interestData = data;
+      drawInterest(data);
+    }).catch(function () { interestEl.hidden = true; });
+  }
+
   function loadEnquiries() {
     if (!token || !enqEl) return Promise.resolve();
     return api('/api/enquiries').then(function (data) {
@@ -144,12 +162,16 @@
     lang = lang === 'zh' ? 'en' : 'zh'; document.body.dataset.lang = lang; localStorage.setItem('gudong.sellerInbox.lang', lang);
     this.textContent = lang === 'zh' ? 'EN' : '中文';
     drawEnquiries(lastEnquiries);
+    if (interestData) drawInterest(interestData);
     if (selected) loadConversation(); else drawThreads([]);
   });
   if (!token) { say(t('链接无效，请联系平台管理员获取藏家专属链接。','Invalid link. Ask the platform administrator for your private inbox link.')); threadsEl.textContent = ''; var empty = document.createElement('div'); empty.className = 'empty'; empty.textContent = t('需要使用藏家专属链接访问。','A private collector link is required.'); threadsEl.appendChild(empty); form.hidden = true; var eb = document.getElementById('enquiry-block'); if (eb) eb.hidden = true; return; }
   loadEnquiries();
+  loadInterest();
   loadThreads();
   var poll = window.setInterval(function () { if (!document.hidden) { loadThreads(); loadEnquiries(); } }, 5000);
-  document.addEventListener('visibilitychange', function () { if (!document.hidden) { loadThreads(); loadEnquiries(); } });
+  var interestPoll = window.setInterval(function () { if (!document.hidden) loadInterest(); }, 60000);
+  document.addEventListener('visibilitychange', function () { if (!document.hidden) { loadThreads(); loadEnquiries(); loadInterest(); } });
+  window.addEventListener('pagehide', function () { clearInterval(poll); clearInterval(interestPoll); });
   window.addEventListener('pagehide', function () { clearInterval(poll); });
 })();

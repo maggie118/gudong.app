@@ -134,6 +134,8 @@
     .enq-foot a { color: #6F4A31; text-decoration: underline; text-underline-offset: 3px; word-break: break-all; }
     .enq-foot time { color: #9A938A; }
     .enq-empty { font-size: .88rem; color: #9A938A; padding: 6px 2px; }
+    .enq-stats { margin: -6px 0 13px; font-size: .8rem; letter-spacing: .02em; color: #6F4A31; }
+    .enq-stats b { font-weight: 700; }
     @media (max-width: 560px) { .enq-block { padding: 16px 15px; } .enq-head { flex-wrap: wrap; } }
     </style>
     <section class="enq-block" id="enquiry-block" aria-label="Enquiries">
@@ -141,6 +143,7 @@
         <h2><span class="zh">询价 / 买家留言</span><span class="en">Enquiries</span></h2>
         <small><span class="zh">藏品页 · 身份已确认</span><span class="en">Verified at item page</span></small>
       </div>
+      <p class="enq-stats" id="interest-line" hidden></p>
       <div class="enq-list" id="enquiry-list"><div class="enq-empty"><span class="zh">正在加载…</span><span class="en">Loading…</span></div></div>
     </section>
     <div class="layout">

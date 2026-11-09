@@ -1,4 +1,8 @@
 /* 古董圈 Gudong · Service Worker
+ * 2026-11-09：v65 → v66（藏品页多图只列真实存在的照片）
+ * - 17 个藏品页的 defaultImages 由「每页固定写 4 张」改为「按 assets/images 里实际存在的文件生成」
+ * - 修掉两处硬伤：item-limck-01 / item-limck-02 的图库误用了 lim-kw item-lim-04 的图（显示别人的藏品，
+ *   其中 3 张还是 404）；只有封面的藏品也不再挂 3 张 placeholder 充当「背面 / 底部 / 细节」
  * 2026-11-09：v64 → v65（Service Worker 注册路径统一为绝对 /sw.js）
  * - 100 个页面原先写 register('sw.js') 或 '../sw.js'，在 /items/ 等子目录下会去请求
  *   /items/sw.js 得到 404，老用户因此拿不到预缓存与推送；统一改为 register('/sw.js')
@@ -118,7 +122,7 @@
  * - 区块标题「今日情报」改为「掌握收藏动态」；
  * - 提升缓存版本，强制已安装 PWA 刷新页面
  */
-const CACHE_NAME = 'antique-collection-v65';
+const CACHE_NAME = 'antique-collection-v66';
 // 预缓存清单：核心页面 + 常用图标 + 占位图 + 工具页（离线可用）
 // 注意：改用逐个 cache.add，单个 404 不会导致整个 install 失败
 const PRECACHE_ASSETS = [

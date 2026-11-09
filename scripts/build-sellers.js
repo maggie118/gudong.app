@@ -208,16 +208,32 @@ function injectQrSection(h, v) {
 
 /* ---------- 目录页的买家名单区块（每次重建都必须保留，别放进 seed） ---------- */
 const BUYER_LIST_SECTION = `
-        <!-- 买家名单 · 关注藏家与品类（2026-11-07） -->
-        <section id="buyer-list" style="margin:3rem 0 0;">
-            <div style="max-width:1040px;margin:0 auto;display:grid;grid-template-columns:1.05fr .95fr;gap:2rem;align-items:center;border-top:1px solid rgba(176,138,69,.22);padding-top:2rem;">
+        <!-- 买家名单 · 关注藏家与品类（2026-11-07 / 2026-11-09 手机端改单栏） -->
+        <style>
+        .sidx-band { max-width:1040px; margin:3rem auto 0; display:grid; grid-template-columns:1.05fr .95fr; gap:2rem;
+            align-items:center; border-top:1px solid rgba(176,138,69,.22); padding-top:2rem; }
+        .sidx-band-kicker { font-size:.62rem; letter-spacing:.24em; text-transform:uppercase; color:#9A7635; font-weight:700; }
+        .sidx-band-title { font-family:'Playfair Display','Noto Serif SC','Songti SC',serif; font-weight:500; font-size:1.5rem;
+            letter-spacing:.04em; color:#2A2621; margin:.5rem 0 .6rem; line-height:1.5; }
+        .sidx-band-desc { font-size:.86rem; line-height:1.9; color:#6E665C; max-width:46ch; }
+        @media (max-width: 860px) {
+            .sidx-band { grid-template-columns:1fr; gap:1.3rem; }
+            .sidx-band-title { font-size:1.3rem; line-height:1.45; }
+        }
+        @media (max-width: 640px) {
+            .sidx-band { margin-top:2.2rem; padding-top:1.5rem; }
+            .sidx-band-desc { font-size:.82rem; line-height:1.85; }
+        }
+        </style>
+        <section id="buyer-list" aria-label="买家名单 Buyer list">
+            <div class="sidx-band">
                 <div>
-                    <div style="font-size:.62rem;letter-spacing:.24em;text-transform:uppercase;color:#9A7635;font-weight:700;">Buyer list · 买家名单</div>
-                    <h2 style="font-family:'Playfair Display','Noto Serif SC','Songti SC',serif;font-weight:500;font-size:1.5rem;letter-spacing:.04em;color:#2A2621;margin:.5rem 0 .6rem;line-height:1.5;">
+                    <div class="sidx-band-kicker">Buyer list · 买家名单</div>
+                    <h2 class="sidx-band-title">
                         <span class="zh">关注藏家，新上架先通知您</span>
                         <span class="en">Follow the collectors you like</span>
                     </h2>
-                    <p style="font-size:.86rem;line-height:1.9;color:#6E665C;max-width:46ch;">
+                    <p class="sidx-band-desc">
                         <span class="zh">留 WhatsApp 或邮箱，选你想跟的藏家与品类。有新的合眼藏品上架，我们第一时间告诉你——不发广告，随时可退订。</span>
                         <span class="en">Leave a WhatsApp number or email and pick the collectors and categories you care about. We'll tell you the moment something new arrives — no ads, unsubscribe anytime.</span>
                     </p>

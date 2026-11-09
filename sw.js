@@ -1,4 +1,7 @@
 /* 古董圈 Gudong · Service Worker
+ * 2026-11-09：v66 → v67（单图藏品页真正隐藏翻页控件）
+ * - 17 个藏品页里 .item-detail-image.single 的规则误把 .image-counter 的定位属性复制了进来，
+ *   导致只有一张图的藏品仍显示「1 / 4」和左右箭头；改为 display:none
  * 2026-11-09：v65 → v66（藏品页多图只列真实存在的照片）
  * - 17 个藏品页的 defaultImages 由「每页固定写 4 张」改为「按 assets/images 里实际存在的文件生成」
  * - 修掉两处硬伤：item-limck-01 / item-limck-02 的图库误用了 lim-kw item-lim-04 的图（显示别人的藏品，
@@ -122,7 +125,7 @@
  * - 区块标题「今日情报」改为「掌握收藏动态」；
  * - 提升缓存版本，强制已安装 PWA 刷新页面
  */
-const CACHE_NAME = 'antique-collection-v66';
+const CACHE_NAME = 'antique-collection-v67';
 // 预缓存清单：核心页面 + 常用图标 + 占位图 + 工具页（离线可用）
 // 注意：改用逐个 cache.add，单个 404 不会导致整个 install 失败
 const PRECACHE_ASSETS = [

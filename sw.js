@@ -1,4 +1,7 @@
 /* 古董圈 Gudong · Service Worker
+ * 2026-11-09：v63 → v64（藏品页 WhatsApp 询价前身份确认）
+ * - 18 个藏品页新增 /assets/js/wa-contact-gate.js：点藏家 WhatsApp 先留称呼 / 联系方式 / 意向
+ * - 预缓存列表加入该脚本，强制已安装 PWA 拿到新的藏品页与弹层
  * 2026-11-09：v62 → v63（下架三款收藏参考工具）
  * - 移除 tools/mark-lookup.html、tools/valuation.html、tools/authenticity-check.html
  * - 全站侧栏、工具包、契约与验货清单页、定价页入口同步清理；预缓存列表精简
@@ -112,7 +115,7 @@
  * - 区块标题「今日情报」改为「掌握收藏动态」；
  * - 提升缓存版本，强制已安装 PWA 刷新页面
  */
-const CACHE_NAME = 'antique-collection-v63';
+const CACHE_NAME = 'antique-collection-v64';
 // 预缓存清单：核心页面 + 常用图标 + 占位图 + 工具页（离线可用）
 // 注意：改用逐个 cache.add，单个 404 不会导致整个 install 失败
 const PRECACHE_ASSETS = [
@@ -124,6 +127,7 @@ const PRECACHE_ASSETS = [
   '/assets/js/item-chat.js',
   '/assets/js/seller-inbox.js',
   '/assets/js/gudong-data.js',
+  '/assets/js/wa-contact-gate.js',
   '/items/item-lim-01.html',
   '/items/item-lim-02.html',
   '/items/item-lim-03.html',

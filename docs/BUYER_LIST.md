@@ -34,6 +34,14 @@
 | `follows` | Long text | 形如 `seller:lim-kw; tag:瓷器` |
 | `created_at` | Single line text | ISO 时间（也可改 Date 类型） |
 | `status` | Single line text | `active` / `unsubscribed` |
+| `name` | Single line text | 称呼（2026-11-09 起，藏品页询价弹层必填） |
+| `intent` | Single line text | 意向：`自用收藏` / `送礼` / `投资考量` / `只是询价` |
+| `item_id` | Single line text | 所询藏品 ID（如 `item-limck-01`） |
+| `item_title` | Single line text | 所询藏品名（中文优先） |
+| `consent_at` | Single line text | 同意隐私政策的时间（ISO，UTC） |
+
+> 后 5 个字段是 2026-11-09 询价身份确认上线时加的；若没建好，`/api/lead` 会自动降级，把称呼/意向/藏品打包进 `follows`。
+
 
 可选环境变量：`BUYER_LEADS_TABLE`（默认就是 `buyer_leads`）。已有的 `AIRTABLE_BASE_ID`、`AIRTABLE_TOKEN` 直接复用。
 

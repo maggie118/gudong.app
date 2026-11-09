@@ -797,7 +797,7 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
         applyLang();
         try { if (localStorage.getItem('announceClosed') === 'yes') { var __ab = document.getElementById('announceBar'); if (__ab) __ab.style.display = 'none'; } } catch (e) {}
 
-        if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');
+        if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js');
 
         const expertCallModal = document.getElementById('expert-call-modal');
         document.querySelectorAll('.expert-call-btn').forEach(function (btn) {

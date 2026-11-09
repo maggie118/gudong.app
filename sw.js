@@ -1,4 +1,7 @@
 /* 古董圈 Gudong · Service Worker
+ * 2026-11-09：v64 → v65（Service Worker 注册路径统一为绝对 /sw.js）
+ * - 100 个页面原先写 register('sw.js') 或 '../sw.js'，在 /items/ 等子目录下会去请求
+ *   /items/sw.js 得到 404，老用户因此拿不到预缓存与推送；统一改为 register('/sw.js')
  * 2026-11-09：v63 → v64（藏品页 WhatsApp 询价前身份确认）
  * - 18 个藏品页新增 /assets/js/wa-contact-gate.js：点藏家 WhatsApp 先留称呼 / 联系方式 / 意向
  * - 预缓存列表加入该脚本，强制已安装 PWA 拿到新的藏品页与弹层
@@ -115,7 +118,7 @@
  * - 区块标题「今日情报」改为「掌握收藏动态」；
  * - 提升缓存版本，强制已安装 PWA 刷新页面
  */
-const CACHE_NAME = 'antique-collection-v64';
+const CACHE_NAME = 'antique-collection-v65';
 // 预缓存清单：核心页面 + 常用图标 + 占位图 + 工具页（离线可用）
 // 注意：改用逐个 cache.add，单个 404 不会导致整个 install 失败
 const PRECACHE_ASSETS = [

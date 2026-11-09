@@ -1017,7 +1017,7 @@
         try { if (localStorage.getItem('announceClosed') === 'yes') { var __ab = document.getElementById('announceBar'); if (__ab) __ab.style.display = 'none'; } } catch (e) {}
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', function () {
-                navigator.serviceWorker.register('../sw.js').catch(function () {});
+                navigator.serviceWorker.register('/sw.js').catch(function () {});
             });
         }
     </script>

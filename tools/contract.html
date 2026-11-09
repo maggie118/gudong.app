@@ -506,7 +506,7 @@ function toggleLang(){currentLang=currentLang==='zh'?'en':'zh';applyLang();try{l
 document.addEventListener('keydown',function(e){if(e.key==='Escape')closeSidebar();});
 window.addEventListener('resize',function(){if(window.innerWidth>900)closeSidebar();});
 applyLang();
-if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('../sw.js').catch(function(){});});}
+if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('/sw.js').catch(function(){});});}
 </script>
 
 <!-- 分享 -->

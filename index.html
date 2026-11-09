@@ -2549,7 +2549,7 @@
         if ('serviceWorker' in navigator && location.protocol !== 'file:') {
             let updateReady = false;
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('sw.js').then(reg => {
+                navigator.serviceWorker.register('/sw.js').then(reg => {
                     reg.addEventListener('updatefound', () => {
                         const newWorker = reg.installing;
                         if (!newWorker) return;

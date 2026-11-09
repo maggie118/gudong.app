@@ -800,7 +800,7 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
 
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', function () {
-                navigator.serviceWorker.register('sw.js').catch(function () {});
+                navigator.serviceWorker.register('/sw.js').catch(function () {});
             });
         }
 

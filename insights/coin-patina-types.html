@@ -897,7 +897,7 @@
         /* Service Worker：保持相对路径（同域，/insights/ → /sw.js） */
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', function () {
-                navigator.serviceWorker.register('../sw.js').catch(function () {});
+                navigator.serviceWorker.register('/sw.js').catch(function () {});
             });
         }
     </script>

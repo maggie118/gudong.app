@@ -137,3 +137,35 @@ Airtable 仍负责：藏品上架表（listings）、藏家表（sellers）、�
 - 不要再把 Airtable 当计数器用；新功能如果会产生高频读写，一律走 Worker + D1。
 - 改 Worker 后必须 `node cloudflare/deploy.mjs` 重新上传，改完用 `/health` 与 `/interest` 各打一次确认。
 - 数据备份：D1 控制台可 `SELECT` 导出；也可以用 `wrangler d1 export gudong-data --output backup.sql`。
+## 2026-11-10 买家身份：一步登录，之后点 WhatsApp 直接联系
+
+目标：买家不用每次询价都重填表单，平台也能攒下买家资料；藏家收到的永远是"有名字的人"。
+
+### 买家看到的流程（越短越好）
+
+1. 第一次点「通过 WhatsApp 咨询藏家」→ 弹一层：**用 Google 继续**（有 Client ID 才出现）/ 或**只填邮箱**点「继续 →」
+2. 立刻打开藏家的 WhatsApp（同步 `window.open`，不会被拦）
+3. 本机记住 365 天：之后再点任何藏家，**不再弹层**，直接跳 `wa.me`，后台只静默记一条询价
+
+不再要求称呼、意向、隐私勾选（改为"继续即表示同意《隐私政策》"的一行说明），做到"一次点击或一个邮箱"。
+
+### 数据落点
+
+- D1 `buyers` 表：`buyer_id`（`b_` + 20 位随机） / `email`（唯一） / `name` / `source`（google｜email） / `google_sub` / `first_item` / `consent_at` / `created_at` / `last_seen`
+- Airtable `buyer_leads`：仍照旧记录每次询价（含藏品、藏家、来源），人工名册不变
+- 同一买家再次询价：D1 只更新 `last_seen`，不新增行（`email` 唯一约束兜底）
+
+### 接口
+
+- `POST /api/buyer`（Vercel）
+  - `{ credential }`：Google ID token → 服务端调 `https://oauth2.googleapis.com/tokeninfo` 复核 `aud`、`email_verified`、`exp`，通过才入库；伪造 token 返回 400 `google_unverified`
+  - `{ email }`：无 Google 的买家，格式校验后入库
+  - 只留 WhatsApp 号码的买家：返回 `phone_only`，不写 `buyers`（号码照旧进 Airtable 名单）
+- Worker：`POST /buyer`（upsert）、`GET /buyer?limit=N`（列最近买家，带 `x-gudong-key`）
+
+### Google 开关（仍是唯一需要动的两个地方）
+
+1. `assets/js/google-client.js` 里 `CLIENT_ID = ''` 填上 `xxx.apps.googleusercontent.com`（一行改动，全站 18 个藏品页生效）
+2. Vercel 环境变量 `GOOGLE_CLIENT_ID` = 同一个值（服务端用它校验 `aud`）
+
+没有 Client ID 时：弹层不渲染 Google 按钮，只显示邮箱 + 继续，**整条链路照样可用**。

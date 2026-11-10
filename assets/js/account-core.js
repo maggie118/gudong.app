@@ -66,7 +66,7 @@
 
   function api(params) {
     var body = JSON.stringify(params || {});
-    return fetch('/api/account', {
+    return fetch('/api/buyer', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: body,
@@ -101,7 +101,7 @@
   function list() {
     return ensureKey().then(function (buyerKey) {
       if (!buyerKey) return { favorites: [], follows: [], key: '' };
-      return fetch('/api/account?buyer_key=' + encodeURIComponent(buyerKey), { cache: 'no-store' })
+      return fetch('/api/buyer?buyer_key=' + encodeURIComponent(buyerKey), { cache: 'no-store' })
         .then(function (r) { return r.json().catch(function () { return {}; }); })
         .then(function (res) {
           return {

@@ -246,30 +246,46 @@
      换过 VAPID 公钥后老订阅还会被推送服务拒发。所以进页面时做两件事：
      ① 公钥变了 → 静默重新订阅；② 订阅补登到服务器（按 endpoint 幂等 upsert）。 */
   var KEY_STORE = 'gudong_push_key';
+  /* 每次换钥匙就 +1。老设备看到版本号不对，会做一次彻底重置（连 SW 注册一起清），
+     否则 Chrome 会把旧钥匙签的订阅原样还给你，endpoint 还一样，服务端永远 403。 */
+  var REKEY_VERSION = '2';
 
-  function resyncSub(sub) {
-    var used = '';
-    try { used = localStorage.getItem(KEY_STORE) || ''; } catch (e) {}
-    /* 没记录过钥匙，或钥匙变了 → 一律退掉重订：
-       换 VAPID 公钥后老订阅会被推送服务 403 拒发，前端看不出来，只有重新订阅才能修好。 */
-    if (used !== VAPID_PUBLIC) {
-      /* 旧钥匙签的订阅发不出去，退掉重订 */
-      return sub.unsubscribe().then(function () {
-        return navigator.serviceWorker.ready;
-      }).then(function (reg) {
+  function hardResubscribe() {
+    return navigator.serviceWorker.getRegistrations()
+      .then(function (regs) {
+        return Promise.all(regs.map(function (r) { return r.unregister().catch(function () {}); }));
+      })
+      .then(function () { return registerSW(); })
+      .then(function () {
+        return navigator.serviceWorker.ready.catch(function () { return registerSW(); });
+      })
+      .then(function (reg) {
         return reg.pushManager.subscribe({
           userVisibleOnly: true,
           applicationServerKey: urlBase64ToUint8Array(VAPID_PUBLIC)
         });
-      }).then(function (fresh) {
-        return postSubscription(fresh, { source: 'resync' }).then(function () { return fresh; });
-      }).then(function (fresh) {
-        try { localStorage.setItem(KEY_STORE, VAPID_PUBLIC); } catch (e) {}
+      })
+      .then(function (fresh) {
+        return postSubscription(fresh, { source: 'rekey' }).then(function () { return fresh; });
+      })
+      .then(function (fresh) {
+        try {
+          localStorage.setItem(KEY_STORE, VAPID_PUBLIC);
+          localStorage.setItem('gudong_push_v', REKEY_VERSION);
+        } catch (e) {}
         return fresh;
       });
-    }
+  }
+
+  function resyncSub(sub) {
+    var used = '';
+    var ver = '';
+    try {
+      used = localStorage.getItem(KEY_STORE) || '';
+      ver = localStorage.getItem('gudong_push_v') || '';
+    } catch (e) {}
+    if (ver !== REKEY_VERSION || used !== VAPID_PUBLIC) return hardResubscribe();
     return postSubscription(sub, { source: 'resync' }).then(function () {
-      try { localStorage.setItem(KEY_STORE, VAPID_PUBLIC); } catch (e) {}
       return sub;
     });
   }

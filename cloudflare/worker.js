@@ -348,7 +348,227 @@ async function pushList(env, url) {
   return json({ subs: rows.results || [] });
 }
 
+/* ================= Web Push 发送（Cloudflare 定时任务） =================
+   2026-11-11：推送从 Vercel 构建阶段搬到这里。
+   - 订阅在 D1 push_subs，已发过的藏品在 D1 push_sent
+   - 新上架从站点 data/listings.json 读（不碰 Airtable，Airtable 侧 notified 那条链已断）
+   - 按 D1 follows 匹配：关注了该品类 / 该藏家的订阅才收；没身份的订阅（直接点铃铛）照收
+   - 加密按 RFC 8291 aes128gcm，签名按 RFC 8292 VAPID（纯 WebCrypto，无需 npm 包）
+*/
+const enc = new TextEncoder();
+
+function b64u(bytes) {
+  const b = typeof bytes === 'string' ? enc.encode(bytes) : new Uint8Array(bytes);
+  let s = '';
+  for (let i = 0; i < b.length; i++) s += String.fromCharCode(b[i]);
+  return btoa(s).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+}
+
+function unb64u(str) {
+  const s = String(str).replace(/-/g, '+').replace(/_/g, '/');
+  const pad = s.length % 4 ? '='.repeat(4 - (s.length % 4)) : '';
+  const bin = atob(s + pad);
+  const out = new Uint8Array(bin.length);
+  for (let i = 0; i < bin.length; i++) out[i] = bin.charCodeAt(i);
+  return out;
+}
+
+function concatBytes() {
+  let len = 0;
+  for (const a of arguments) len += a.length;
+  const out = new Uint8Array(len);
+  let off = 0;
+  for (const a of arguments) { out.set(a, off); off += a.length; }
+  return out;
+}
+
+async function hkdf(salt, ikm, info, bits) {
+  const key = await crypto.subtle.importKey('raw', ikm, 'HKDF', false, ['deriveBits']);
+  const buf = await crypto.subtle.deriveBits(
+    { name: 'HKDF', hash: 'SHA-256', salt, info }, key, bits
+  );
+  return new Uint8Array(buf);
+}
+
+/* 把 VAPID 私钥（base64url d）与公钥（base64url 65 字节）拼成 WebCrypto EC 私钥 */
+async function vapidKey(publicKey, privateKey) {
+  const pub = unb64u(publicKey);
+  const jwk = {
+    kty: 'EC', crv: 'P-256', ext: true,
+    d: b64u(unb64u(privateKey)),
+    x: b64u(pub.slice(1, 33)),
+    y: b64u(pub.slice(33, 65)),
+    key_ops: ['sign']
+  };
+  return crypto.subtle.importKey('jwk', jwk, { name: 'ECDSA', namedCurve: 'P-256' }, false, ['sign']);
+}
+
+function derToRaw(sig) {
+  const bytes = new Uint8Array(sig);
+  if (bytes.length === 64) return bytes;
+  /* DER: 30 len 02 rlen r 02 slen s */
+  let i = 2;
+  if (bytes[i] !== 0x02) return bytes;
+  const rlen = bytes[i + 1]; i += 2;
+  let r = bytes.slice(i, i + rlen); i += rlen;
+  if (bytes[i] !== 0x02) return bytes;
+  const slen = bytes[i + 1]; i += 2;
+  let s = bytes.slice(i, i + slen);
+  const rr = new Uint8Array(32), ss = new Uint8Array(32);
+  rr.set(r.slice(-32)); ss.set(s.slice(-32));
+  return concatBytes(rr, ss);
+}
+
+async function vapidHeaders(endpoint, env) {
+  const pub = env.VAPID_PUBLIC_KEY;
+  const priv = await vapidKey(env.VAPID_PUBLIC_KEY, env.VAPID_PRIVATE_KEY);
+  const sub = env.VAPID_SUBJECT || 'mailto:contact@gudong.app';
+  const now = Math.floor(Date.now() / 1000);
+  const head = b64u(JSON.stringify({ typ: 'JWT', alg: 'ES256' }));
+  const body = b64u(JSON.stringify({ aud: new URL(endpoint).origin, exp: now + 12 * 3600, sub }));
+  const unsigned = head + '.' + body;
+  const sig = await crypto.subtle.sign(
+    { name: 'ECDSA', hash: 'SHA-256' }, priv, enc.encode(unsigned)
+  );
+  return {
+    Authorization: 'vapid t=' + unsigned + '.' + b64u(derToRaw(sig)) + ', k=' + pub
+  };
+}
+
+/* RFC 8291：aes128gcm 单记录 */
+async function encryptPush(sub, payloadText) {
+  const uaPub = unb64u(sub.p256dh);
+  const uaKeys = await crypto.subtle.importKey(
+    'raw', uaPub, { name: 'ECDH', namedCurve: 'P-256' }, false, []
+  );
+  const pair = await crypto.subtle.generateKey(
+    { name: 'ECDH', namedCurve: 'P-256' }, true, ['deriveBits']
+  );
+  const asPubRaw = new Uint8Array(await crypto.subtle.exportKey('raw', pair.publicKey));
+  const secret = new Uint8Array(await crypto.subtle.deriveBits(
+    { name: 'ECDH', public: uaKeys }, pair.privateKey, 256
+  ));
+  const authSecret = unb64u(sub.auth);
+  const salt = new Uint8Array(16);
+  crypto.getRandomValues(salt);
+
+  /* 第一段 HKDF：用 auth 作为 salt，info 绑定双方公钥 */
+  const ikm = await hkdf(
+    authSecret, secret, concatBytes(enc.encode('WebPush: info'), new Uint8Array([0]), uaPub, asPubRaw), 256
+  );
+  const cek = await hkdf(salt, ikm, concatBytes(enc.encode('Content-Encoding: aes128gcm'), new Uint8Array([0])), 128);
+  const nonce = await hkdf(salt, ikm, concatBytes(enc.encode('Content-Encoding: nonce'), new Uint8Array([0])), 96);
+
+  /* 明文 + 0x02 分隔符（单记录不分包，rs=4096） */
+  const plain = concatBytes(enc.encode(payloadText), new Uint8Array([2]));
+  const aesKey = await crypto.subtle.importKey('raw', cek, 'AES-GCM', false, ['encrypt']);
+  const ct = new Uint8Array(await crypto.subtle.encrypt({ name: 'AES-GCM', iv: nonce, tagLength: 128 }, aesKey, plain));
+
+  const header = concatBytes(
+    salt,
+    new Uint8Array([0, 0, 0x10, 0]), /* rs = 4096 */
+    new Uint8Array([65]),           /* keyid 长度 65 = 未压缩 P-256 公钥 */
+    asPubRaw
+  );
+  return concatBytes(header, ct);
+}
+
+async function sendOne(env, sub, payload) {
+  const headers = await vapidHeaders(sub.endpoint, env);
+  const body = await encryptPush(sub, JSON.stringify(payload));
+  const r = await fetch(sub.endpoint, {
+    method: 'POST',
+    headers: Object.assign({
+      TTL: '86400',
+      'Content-Encoding': 'aes128gcm',
+      'Content-Type': 'application/octet-stream'
+    }, headers),
+    body
+  });
+  return { ok: r.ok || r.status === 201, status: r.status, text: r.ok ? '' : (await r.text()).slice(0, 120) };
+}
+
+async function pushJob(env, opts) {
+  if (!env.VAPID_PUBLIC_KEY || !env.VAPID_PRIVATE_KEY) return { skipped: 'no_vapid' };
+  const site = (env.SITE_URL || 'https://www.gudong.app').replace(/\/+$/, '');
+  const dry = !!(opts && opts.dry);
+
+  let listings;
+  try {
+    const r = await fetch(site + '/data/listings.json', { headers: { 'cache-control': 'no-cache' } });
+    if (!r.ok) return { skipped: 'listings_' + r.status };
+    listings = await r.json();
+  } catch (e) { return { skipped: 'listings_error' }; }
+
+  const items = (listings.newListing || []).map(it => ({
+    id: it.item_id || '',
+    title: it.title_zh || it.item_id || '',
+    seller: it.seller_id || '',
+    category: it.category || '',
+    url: site + '/items/' + encodeURIComponent(it.item_id || '') + '.html'
+  })).filter(it => it.id);
+
+  const sentRows = await env.DB.prepare('SELECT item_id FROM push_sent').all();
+  const sent = new Set((sentRows.results || []).map(r => r.item_id));
+
+  /* 首次运行：把现有藏品登记为已发，避免一上线就把库存全推一遍 */
+  if (!sent.size) {
+    const now = new Date().toISOString();
+    for (const it of items) {
+      await env.DB.prepare('INSERT INTO push_sent (item_id, sent_at) VALUES (?, ?) ON CONFLICT(item_id) DO NOTHING')
+        .bind(it.id, now).run();
+    }
+    return { bootstrapped: items.length };
+  }
+
+  const fresh = items.filter(it => !sent.has(it.id)).slice(0, 3);
+  if (!fresh.length) return { sent: 0, note: 'no_new_items' };
+  if (dry) return { dry: true, fresh };
+
+  const subs = (await env.DB.prepare(
+    'SELECT endpoint, p256dh, auth, buyer_key FROM push_subs LIMIT 1000'
+  ).all()).results || [];
+  const followsAll = (await env.DB.prepare(
+    'SELECT buyer_key, kind, target FROM follows LIMIT 5000'
+  ).all()).results || [];
+
+  let delivered = 0, gone = 0, matched = 0;
+  for (const it of fresh) {
+    const payload = {
+      title: 'gudong.app 上新 · ' + (it.category || '新藏品'),
+      body: it.title + (it.seller ? ' · ' + it.seller : ''),
+      url: it.url,
+      icon: site + '/assets/icons/icon-192.png',
+      tag: 'gd-' + it.id
+    };
+    for (const sub of subs) {
+      /* 有身份的按 follows 匹配；没身份的（只点了铃铛）照收 */
+      if (sub.buyer_key) {
+        const hit = followsAll.some(f => f.buyer_key === sub.buyer_key &&
+          ((f.kind === 'category' && it.category && String(f.target) === it.category) ||
+           (f.kind === 'seller' && it.seller && String(f.target).toLowerCase() === it.seller.toLowerCase())));
+        if (!hit) continue;
+      }
+      matched++;
+      try {
+        const res = await sendOne(env, sub, payload);
+        if (res.ok) delivered++;
+        else if (res.status === 404 || res.status === 410) {
+          await env.DB.prepare('DELETE FROM push_subs WHERE endpoint = ?').bind(sub.endpoint).run();
+          gone++;
+        }
+      } catch (e) { /* 单个失败不影响其它 */ }
+    }
+    await env.DB.prepare('INSERT INTO push_sent (item_id, sent_at) VALUES (?, ?) ON CONFLICT(item_id) DO NOTHING')
+      .bind(it.id, new Date().toISOString()).run();
+  }
+  return { items: fresh.length, matched, delivered, dropped: gone };
+}
+
 export default {
+  async scheduled(event, env, ctx) {
+    ctx.waitUntil(pushJob(env).catch(() => {}));
+  },
   async fetch(request, env) {
     const url = new URL(request.url);
     if (request.method === 'OPTIONS') {
@@ -383,6 +603,7 @@ export default {
         case '/follow': return await followUpsert(env, body);
         case '/account': return await accountPull(env, url);
         case '/push': return request.method === 'GET' ? await pushList(env, url) : await pushUpsert(env, body);
+        case '/push/run': return json(await pushJob(env, { dry: url.searchParams.get('dry') === '1' }));
         case '/health': return json({ ok: true });
         default: return json({ error: 'not_found' }, 404);
       }

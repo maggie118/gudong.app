@@ -1,5 +1,6 @@
 .vercel
 .env*
+.vapid.env
 node_modules/
 # Trae IDE share packages (large zips, not part of the site)
 .trae-html-share-packages/

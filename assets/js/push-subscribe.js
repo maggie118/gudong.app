@@ -12,8 +12,10 @@
   if (!('serviceWorker' in navigator) || !('PushManager' in window)) return;
   if (location.protocol !== 'https:' && location.hostname !== 'localhost') return;
 
+  /* 2026-11-11：改用发号器（Cloudflare Worker）这一对的公钥；
+     私钥只存在 Worker 机密里，浏览器不需要。换钥匙时必须两边一起换。 */
   var VAPID_PUBLIC =
-    'BOVxpgqq6eL3r9brj50YMwX6uPLvn4sRTbZCi7sSQLzNfM4YcoDGWLUenK_DWpJIDUeyryFWgo-JPXmvKcwp7qA';
+    'BGyPJ4U2OGXyvPxHN0X5DYjQMWmfjqEJTEyloSLv4SBT7H9z3uAlWLt3F0xO4X4mN_vb4r9NTipUy-7ddrtso_A';
 
   function urlBase64ToUint8Array(base64String) {
     var padding = '='.repeat((4 - (base64String.length % 4)) % 4);

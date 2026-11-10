@@ -35,6 +35,9 @@
 
   var bell, menu;
   var subscribed = false;
+  function isEn() {
+    return (document.body.dataset && document.body.dataset.lang === 'en');
+  }
 
   // 铃铛：未订阅为描边，已订阅为实心
   function svgBell(filled) {
@@ -178,7 +181,45 @@
   function onBellClick(e) {
     e.stopPropagation();
     if (subscribed) { showMenu(menu.style.display === 'none'); return; }
-    subscribe({}).catch(function () { /* 静默失败，保持未订阅态 */ });
+    if (!bell) return;
+    var done = false;
+    /* 2026-11-11：不再静默吞错。推送订阅经常在“浏览器连不上推送服务”时无限挂起，
+       所以 15 秒兜底并说明原因，让用户知道是浏览器限制而不是网站坏了。 */
+    var timer = setTimeout(function () {
+      if (done) return;
+      done = true;
+      setFailed(isEn() ? 'No reply from the browser push service — try Chrome, or add to Home Screen on iPhone.'
+                       : '浏览器推送服务没有响应 —— 换 Chrome 试试；iPhone 要先“添加到主屏幕”。');
+    }, 15000);
+    subscribe({}).then(function () {
+      if (done) return; done = true; clearTimeout(timer);
+    }).catch(function (err) {
+      if (done) return; done = true; clearTimeout(timer);
+      var msg = err && err.message;
+      if (msg === 'denied') {
+        setFailed(isEn() ? 'Notifications were blocked — allow them in the browser settings.' : '通知权限被拦了 —— 到浏览器设置里允许通知。');
+      } else {
+        setFailed((isEn() ? 'Push subscription failed: ' : '推送订阅没成功：') + (msg || 'unknown'));
+      }
+    });
+  }
+
+  function setFailed(text) {
+    if (!bell) return;
+    bell.setAttribute('title', text);
+    bell.dataset.pushState = 'failed';
+    var tip = document.getElementById('gdPushTip');
+    if (!tip) {
+      tip = document.createElement('div');
+      tip.id = 'gdPushTip';
+      tip.style.cssText = 'position:fixed;left:50%;bottom:24px;transform:translateX(-50%);max-width:86vw;' +
+        'background:rgba(42,38,33,.94);color:#fff;font-size:.8rem;line-height:1.6;padding:.6rem .9rem;' +
+        'border-radius:3px;z-index:9999;text-align:center';
+      document.body.appendChild(tip);
+    }
+    tip.textContent = text;
+    tip.style.display = '';
+    setTimeout(function () { if (tip) tip.style.display = 'none'; }, 6000);
   }
 
   // 退订：浏览器解除 + 后端标记 inactive

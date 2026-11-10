@@ -253,22 +253,25 @@
   var _p = null;
   function load() {
     if (_p) return _p;
-    diag.endpoint = API_BASE + '/api/airtable-proxy';
-    _p = fetchProxy(diag.endpoint).then(function (json) {
+    /* 2026-11-11：默认只读静态快照 data/listings.json。
+       以前每次页面访问都先打 /api/airtable-proxy，等于每来一个访客就烧一次 Airtable 免费额度，
+       额度耗尽后还会静默回落到快照 —— 数据没变，额度白花。现在快照优先，代理只作兜底。
+       data/listings.json 由 build（scripts/refresh-listings.js）从 Airtable 生成，每次部署只读 2 次 Airtable。 */
+    diag.endpoint = '/data/listings.json';
+    _p = fetchJson('/data/listings.json', 6000, 'snapshot').then(function (json) {
       var data = normalizePayload(json);
-      diag.source = 'airtable-proxy';
+      diag.source = 'local-snapshot';
       return { source: diag.source, data: data };
     }).catch(function (e) {
-      console.warn('[Gudong] api failed, falling back to snapshot:', e);
-      diag.errors.push('proxy: ' + e.message);
-      diag.skipped = 0;
-      // 2026-09-28：快照也使用相对路径
-      return fetchJson('/data/listings.json', 5000, 'snapshot').then(function (json) {
+      diag.errors.push('snapshot: ' + e.message);
+      var proxied = API_BASE + '/api/airtable-proxy';
+      diag.endpoint = proxied;
+      return fetchProxy(proxied).then(function (json) {
         var data = normalizePayload(json);
-        diag.source = 'local-snapshot';
+        diag.source = 'airtable-proxy';
         return { source: diag.source, data: data };
       }).catch(function (e2) {
-        diag.errors.push('snapshot: ' + e2.message);
+        diag.errors.push('proxy: ' + e2.message);
         diag.source = 'none';
         throw e2;
       });

@@ -54,6 +54,10 @@
     if (i === -1) { arr.push({ type: type, term: term }); now = true; }
     else { arr.splice(i, 1); now = false; }
     write(arr);
+    /* 有买家身份时同步进 D1（我的帐户里「我关注的」换设备也在） */
+    if (global.GudongAccount && global.GudongAccount.follow) {
+      try { global.GudongAccount.follow(type, term, term, now); } catch (e) { /* 本地已生效，落库失败不回滚 */ }
+    }
     return now;
   }
   function subsOf(type) {

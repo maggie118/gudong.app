@@ -210,10 +210,29 @@
   var state = { pendingHref: '' };
   var els = {};
 
+  /* 询价记录只留在本机：我的帐户「我的询价」用它，不上传任何内容 */
+  function logEnquiry(me) {
+    try {
+      var c = context();
+      var arr = JSON.parse(localStorage.getItem('gudong_enquiries') || '[]');
+      if (!Array.isArray(arr)) arr = [];
+      arr.unshift({
+        item_id: c.item_id || '',
+        title: c.item_title || c.item_title_en || '',
+        seller: c.seller_name || '',
+        seller_id: c.seller_id || '',
+        contact: me.contact || '',
+        ts: Date.now()
+      });
+      localStorage.setItem('gudong_enquiries', JSON.stringify(arr.slice(0, 60)));
+    } catch (e) { /* 记录失败不影响跳转 */ }
+  }
+
   /* 记住身份 + 打开 WhatsApp + 静默入库（邮箱路径与 Google 路径共用） */
   function finish(me, extra, href) {
     write(me);
     markPing(me.contact, context().item_id);
+    logEnquiry(me);
     if (els.submit) els.submit.disabled = true;
     if (els.err) { els.err.textContent = ''; els.err.style.display = 'none'; }
     openWa(href);
@@ -299,7 +318,15 @@
         source: 'wa-gate'
       };
       /* 身份先落 D1（不阻塞跳转），同时照旧写 Airtable 买家名单 */
-      postJson('/api/buyer', { email: type === 'email' ? contact : '', contact: contact, item_id: context().item_id });
+      postJson('/api/buyer', { email: type === 'email' ? contact : '', contact: contact, item_id: context().item_id })
+        .then(function (r) {
+          /* 拿到 D1 的 buyer_id 之后补写进本机身份，我的帐户用它做不可猜的键 */
+          if (r && r.ok && r.buyer_id) {
+            var cur = read() || me;
+            cur.buyer_id = r.buyer_id;
+            write(cur);
+          }
+        });
       finish(me, null, state.pendingHref);
     });
 

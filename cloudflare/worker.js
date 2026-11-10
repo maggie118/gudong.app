@@ -250,6 +250,69 @@ async function buyerList(env, url) {
   return json({ buyers: result.results || [] });
 }
 
+// ---- 买家帐户：收藏 / 关注（跟着身份走，换设备不丢）----
+// buyer_key = D1 buyers.buyer_id（Google/邮箱登录后拿到）；没有 buyer_id 的老身份退回用邮箱。
+function buyerKey(value) {
+  const key = typeof value === 'string' ? value.trim().toLowerCase().slice(0, 120) : '';
+  return /^[a-z0-9_@.\-]{4,120}$/.test(key) ? key : '';
+}
+
+async function favUpsert(env, body) {
+  const key = buyerKey(body.buyer_key);
+  const itemId = str(body.item_id, 80);
+  if (!key || !okId(itemId, /^item-[a-z0-9-]{1,70}$/i)) return json({ error: 'invalid_favorite' }, 400);
+  const now = new Date().toISOString();
+  if (body.action === 'unsave') {
+    await env.DB.prepare('DELETE FROM favorites WHERE buyer_key = ? AND item_id = ?').bind(key, itemId).run();
+    return json({ ok: true, saved: false });
+  }
+  const seller = str(body.seller, 80);
+  const title = str(body.title, 120);
+  await env.DB.prepare(
+    'INSERT INTO favorites (buyer_key, item_id, seller, title, created_at) VALUES (?, ?, ?, ?, ?) ' +
+    "ON CONFLICT(buyer_key, item_id) DO UPDATE SET " +
+    "seller = CASE WHEN excluded.seller <> '' THEN excluded.seller ELSE favorites.seller END, " +
+    "title = CASE WHEN excluded.title <> '' THEN excluded.title ELSE favorites.title END"
+  ).bind(key, itemId, seller, title, now).run();
+  return json({ ok: true, saved: true });
+}
+
+async function followUpsert(env, body) {
+  const key = buyerKey(body.buyer_key);
+  const kind = body.kind === 'category' ? 'category' : 'seller';
+  const target = str(body.target, 80).toLowerCase();
+  // 藏家 ID 是英文短横线串；品类是中文词（瓷器 / 玉器 …），两种都要放过
+  const targetOk = kind === 'category'
+    ? /^[\u4e00-\u9fa5a-z0-9 -]{1,40}$/.test(target)
+    : /^[a-z0-9-]{2,80}$/.test(target);
+  if (!key || !targetOk) return json({ error: 'invalid_follow' }, 400);
+  const now = new Date().toISOString();
+  if (body.action === 'off') {
+    await env.DB.prepare('DELETE FROM follows WHERE buyer_key = ? AND kind = ? AND target = ?')
+      .bind(key, kind, target).run();
+    return json({ ok: true, following: false });
+  }
+  const label = str(body.label, 80);
+  await env.DB.prepare(
+    'INSERT INTO follows (buyer_key, kind, target, label, created_at) VALUES (?, ?, ?, ?, ?) ' +
+    "ON CONFLICT(buyer_key, kind, target) DO UPDATE SET " +
+    "label = CASE WHEN excluded.label <> '' THEN excluded.label ELSE follows.label END"
+  ).bind(key, kind, target, label, now).run();
+  return json({ ok: true, following: true });
+}
+
+async function accountPull(env, url) {
+  const key = buyerKey(url.searchParams.get('buyer_key'));
+  if (!key) return json({ error: 'invalid_buyer' }, 400);
+  const favs = await env.DB.prepare(
+    'SELECT item_id, seller, title, created_at FROM favorites WHERE buyer_key = ? ORDER BY created_at DESC LIMIT 300'
+  ).bind(key).all();
+  const follows = await env.DB.prepare(
+    'SELECT kind, target, label, created_at FROM follows WHERE buyer_key = ? ORDER BY created_at DESC LIMIT 200'
+  ).bind(key).all();
+  return json({ favorites: favs.results || [], follows: follows.results || [] });
+}
+
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
@@ -281,6 +344,9 @@ export default {
         case '/conversation': return await sellerConversation(env, url);
         case '/reply': return await createSellerReply(env, body);
         case '/buyer': return request.method === 'GET' ? await buyerList(env, url) : await buyerUpsert(env, body);
+        case '/fav': return await favUpsert(env, body);
+        case '/follow': return await followUpsert(env, body);
+        case '/account': return await accountPull(env, url);
         case '/health': return json({ ok: true });
         default: return json({ error: 'not_found' }, 404);
       }

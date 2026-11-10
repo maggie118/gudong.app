@@ -78,6 +78,15 @@
             if (was === is) return;
             before = after;
             ping(is ? 'save' : 'unsave');
+            /* 有买家身份时，收藏同时写进 D1（换设备登录还在） */
+            if (window.GudongAccount) {
+                var meta = {
+                    seller: sellerId(),
+                    title: (document.querySelector('h1') ? document.querySelector('h1').textContent : '').trim().slice(0, 120)
+                };
+                if (is) window.GudongAccount.saveFav(id, meta);
+                else window.GudongAccount.removeFav(id);
+            }
         }, 0);
     }, true);
 

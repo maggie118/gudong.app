@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="zh-SG">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>我的帐户 · My Account | Gudong</title>
+<meta name="description" content="我的帐户：你的收藏、关注的藏家与品类、以及本机询价记录。 My account on gudong.app — saved items, followed collectors and categories, local enquiry history.">
+<link rel="canonical" href="https://gudong.app/my/account.html">
+<link rel="icon" type="image/png" sizes="16x16" href="https://gudong.app/assets/icons/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://gudong.app/assets/icons/favicon-32x32.png">
+<link rel="manifest" href="../manifest.json">
+<meta name="theme-color" content="#8A5A3B">
+<meta name="robots" content="noindex,follow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Noto+Serif+SC:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F5F2EC; --surface:#fff; --border:#E4DED5; --primary:#8A5A3B; --primary-dark:#68432D;
+    --primary-light:#F1E8DF; --text:#25221E; --muted:#A49D94; --gold:#B08A45;
+    --serif:"Playfair Display","Noto Serif SC","Songti SC",Georgia,serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;font-family:"PingFang SC","Microsoft YaHei","Helvetica Neue",Arial,sans-serif}
+  body{background:var(--bg);color:var(--text);line-height:1.65;-webkit-font-smoothing:antialiased}
+  .en{display:none}
+  body[data-lang="en"] .zh{display:none}
+  body[data-lang="en"] .en{display:inline}
+
+  header{background:rgba(255,255,255,.96);backdrop-filter:blur(6px);height:68px;padding:0 5%;
+    display:flex;align-items:center;justify-content:space-between;gap:1rem;border-bottom:1px solid var(--border);
+    position:sticky;top:0;z-index:50}
+  .left{display:flex;align-items:center;gap:.75rem}
+  .menu-toggle{width:44px;height:44px;border:1px solid var(--border);background:transparent;border-radius:8px;
+    font-size:1.05rem;cursor:pointer;color:var(--text);display:flex;align-items:center;justify-content:center}
+  .brand{display:flex;align-items:center;gap:.7rem;text-decoration:none;color:inherit;min-width:0}
+  .brand img{height:36px;width:auto;display:block}
+  .brand-txt{display:flex;flex-direction:column;line-height:1.15;min-width:0}
+  .brand-line1{font-family:var(--serif);font-weight:700;color:var(--primary-dark);font-size:1.3rem;white-space:nowrap}
+  .brand-line1 .en{font-family:inherit;font-weight:600}
+  .brand-txt small{font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+  .lang-btn{border:1px solid var(--border);background:transparent;color:#5C564F;padding:.55rem .9rem;min-height:44px;
+    border-radius:6px;cursor:pointer;font-size:.75rem;letter-spacing:.04em}
+
+  .sidebar-overlay{position:fixed;inset:0;background:rgba(20,17,14,.4);opacity:0;pointer-events:none;transition:opacity .25s;z-index:90}
+  .sidebar-overlay.show{opacity:1;pointer-events:auto}
+  .sidebar{position:fixed;top:0;left:0;height:100dvh;width:264px;max-width:78vw;background:#fff;
+    box-shadow:4px 0 24px rgba(37,34,30,.18);transform:translateX(-100%);transition:transform .3s;z-index:95;
+    overflow-y:auto;padding-bottom:2rem}
+  .sidebar.open{transform:translateX(0)}
+  .sidebar-toggle-inner{display:block;width:100%;padding:.9rem 0;background:transparent;border:none;
+    border-bottom:1px solid var(--border);font-size:1.15rem;color:#5C564F;cursor:pointer;text-align:center}
+  .sidebar-brand{display:flex;flex-direction:column;align-items:center;gap:.1rem;padding:1.1rem 0;
+    border-bottom:1px solid var(--border);color:var(--primary-dark)}
+  .sidebar-brand .logo-zh{font-family:var(--serif);font-weight:700;font-size:1.05rem}
+  .sidebar-brand .logo-tagline{font-size:.62rem;letter-spacing:.16em;color:var(--muted);text-transform:uppercase}
+  .sidebar-nav{display:flex;flex-direction:column;padding:.3rem 0}
+  .sidebar-link{padding:.85rem 1.4rem;color:var(--text);text-decoration:none;font-size:.95rem}
+  .sidebar-link:hover,.sidebar-link.active{background:var(--primary-light);color:var(--primary)}
+  .sidebar-sub{display:block;padding:.55rem 1.4rem .55rem 2.2rem;color:#5C564F;text-decoration:none;font-size:.88rem}
+  .sidebar-sub:hover{color:var(--primary);background:var(--primary-light)}
+  .sidebar-lang-btn{display:flex;align-items:center;justify-content:center;width:calc(100% - 2.8rem);
+    margin:1rem 1.4rem .8rem;padding:.62rem .9rem;border:1px solid var(--border);border-radius:12px;
+    background:#fff;color:#5C564F;font-size:.9rem;font-weight:600;cursor:pointer}
+
+  .container{max-width:920px;margin:0 auto;padding:2.2rem 5% 4rem}
+  .page-title{font-family:var(--serif);font-size:1.7rem;color:var(--primary-dark);letter-spacing:.02em}
+  .page-sub{color:#5C564F;font-size:.86rem;margin-top:.35rem}
+
+  .card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:1.1rem 1.2rem;margin-top:1.4rem;
+    box-shadow:0 1px 2px rgba(37,34,30,.05)}
+  .ident{display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+  .who{display:flex;align-items:center;gap:.75rem;min-width:0}
+  .avatar{width:40px;height:40px;border-radius:50%;background:var(--primary-light);color:var(--primary-dark);
+    display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-weight:600;flex-shrink:0}
+  .who-main{min-width:0}
+  .who-mail{font-weight:600;font-size:.95rem;word-break:break-all}
+  .who-tag{font-size:.74rem;color:var(--muted);letter-spacing:.03em}
+  .btns{display:flex;gap:.5rem;flex-wrap:wrap}
+  .btn{border:1px solid var(--border);background:#fff;color:var(--text);padding:.5rem .9rem;border-radius:8px;
+    font-size:.8rem;cursor:pointer;min-height:38px}
+  .btn:hover{border-color:var(--primary);color:var(--primary);background:var(--primary-light)}
+  .btn.primary{background:var(--primary);border-color:var(--primary);color:#fff}
+  .btn.primary:hover{background:var(--primary-dark);color:#fff}
+
+  .guest p{font-size:.88rem;color:#5C564F;margin-bottom:.9rem}
+  .login-row{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center}
+  .login-row input{flex:1 1 240px;min-width:0;padding:.7rem .85rem;border:1px solid var(--border);border-radius:8px;
+    font-size:.86rem;background:#fff}
+  .login-row input:focus{outline:none;border-color:var(--primary)}
+  #gbtnBox{display:flex;justify-content:flex-start}
+  .or-line{width:100%;display:flex;align-items:center;gap:.7rem;color:var(--muted);font-size:.76rem;margin:.2rem 0 .1rem}
+  .or-line::before,.or-line::after{content:"";flex:1;height:1px;background:var(--border)}
+  .err{color:#9A554B;font-size:.78rem;min-height:1.1rem;margin-top:.4rem}
+
+  .sec-head{display:flex;align-items:baseline;gap:.6rem;margin-top:2.2rem;padding-bottom:.5rem;
+    border-bottom:1px solid var(--border)}
+  .sec-head h2{font-family:var(--serif);font-size:1.1rem;color:var(--primary-dark);font-weight:600}
+  .sec-head .count{font-size:.76rem;color:var(--muted)}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:1rem;margin-top:1rem}
+  .item{background:#fff;border:1px solid var(--border);border-radius:10px;overflow:hidden;display:flex;flex-direction:column}
+  .item .thumb{aspect-ratio:4/3;background:#EFEAE2;display:block;overflow:hidden}
+  .item .thumb img{width:100%;height:100%;object-fit:cover;display:block}
+  .item .body{padding:.65rem .8rem .8rem}
+  .item .t{font-size:.86rem;font-weight:600;color:var(--text);text-decoration:none;display:block;
+    overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .item .m{font-size:.74rem;color:var(--muted);margin-top:.2rem}
+  .item .rm{margin-top:.5rem;font-size:.72rem;color:#9A554B;background:none;border:none;padding:0;cursor:pointer}
+  .chips{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.9rem}
+  .chip{display:inline-flex;align-items:center;gap:.45rem;border:1px solid var(--border);background:#fff;
+    border-radius:999px;padding:.42rem .8rem;font-size:.8rem;color:var(--text);text-decoration:none}
+  .chip b{font-weight:600}
+  .chip .x{border:none;background:none;color:var(--muted);cursor:pointer;font-size:.9rem;line-height:1}
+  .chip .x:hover{color:#9A554B}
+  .rows{margin-top:.9rem;display:flex;flex-direction:column}
+  .row{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.7rem 0;
+    border-bottom:1px dashed var(--border);font-size:.84rem}
+  .row:last-child{border-bottom:none}
+  .row a{color:var(--primary-dark);text-decoration:none;font-weight:600}
+  .row .when{color:var(--muted);font-size:.74rem;white-space:nowrap}
+  .empty{color:var(--muted);font-size:.84rem;margin-top:.8rem}
+  .foot{margin-top:2.4rem;font-size:.74rem;color:var(--muted);line-height:1.8}
+  .foot a{color:var(--primary-dark)}
+  @media (max-width:560px){
+    .container{padding:1.6rem 5% 3rem}
+    .grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:.75rem}
+    .page-title{font-size:1.4rem}
+    .login-row input{flex:1 1 100%}
+    .login-row .btn{width:100%}
+  }
+</style>
+</head>
+<body data-lang="zh">
+
+<header>
+  <div class="left">
+    <button class="menu-toggle" onclick="openSidebar()" aria-label="menu">☰</button>
+    <a href="../index.html" class="brand">
+      <img src="../assets/icons/logo-mark.png" alt="古董圈 Gudong" onerror="this.style.display='none'">
+      <span class="brand-txt">
+        <span class="brand-line1">古董圈 <span class="en">Gudong</span></span>
+        <small>Collectors' Network</small>
+      </span>
+    </a>
+  </div>
+  <button class="lang-btn" onclick="toggleLang()"><span class="zh">EN</span><span class="en">中文</span></button>
+</header>
+
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+<aside class="sidebar" id="sidebar">
+  <button class="sidebar-toggle-inner" onclick="closeSidebar()" aria-label="close menu">☰</button>
+  <div class="sidebar-brand">
+    <span class="logo-zh">古董圈 <span class="en">Gudong</span></span>
+    <span class="logo-tagline">Collectors' Network</span>
+  </div>
+  <nav class="sidebar-nav">
+    <a href="../index.html" class="sidebar-link"><span class="zh">首页</span><span class="en">Home</span></a>
+    <a href="../index.html#today-finds" class="sidebar-link"><span class="zh">今日发现</span><span class="en">Today's Finds</span></a>
+    <a href="../collection.html" class="sidebar-link"><span class="zh">藏品库</span><span class="en">Collection</span></a>
+    <a href="../categories/porcelain.html" class="sidebar-sub"><span class="zh">· 瓷器</span><span class="en">· Porcelain</span></a>
+    <a href="../categories/jade.html" class="sidebar-sub"><span class="zh">· 玉器</span><span class="en">· Jade</span></a>
+    <a href="../categories/bronze.html" class="sidebar-sub"><span class="zh">· 铜器</span><span class="en">· Bronzes</span></a>
+    <a href="../categories/coins.html" class="sidebar-sub"><span class="zh">· 钱币</span><span class="en">· Coins</span></a>
+    <a href="../categories/paintings.html" class="sidebar-sub"><span class="zh">· 书画</span><span class="en">· Paintings &amp; Calligraphy</span></a>
+    <a href="../categories/misc.html" class="sidebar-sub"><span class="zh">· 杂项</span><span class="en">· Miscellaneous</span></a>
+    <a href="../sellers/index.html" class="sidebar-link"><span class="zh">藏家展馆</span><span class="en">Collectors' Gallery</span></a>
+    <a href="/#daily-intel" class="sidebar-link"><span class="zh">实时动态</span><span class="en">Live Pulse</span></a>
+    <a href="../insights.html" class="sidebar-link"><span class="zh">收藏知识</span><span class="en">Insights</span></a>
+    <a href="../tools/index.html" class="sidebar-link"><span class="zh">藏家工具包</span><span class="en">Collector's Toolkit</span></a>
+    <a href="../my/account.html" class="sidebar-link active"><span class="zh">我的帐户</span><span class="en">My Account</span></a>
+    <a href="../my/account.html#saved" class="sidebar-sub"><span class="zh">· 我的收藏</span><span class="en">· Saved</span></a>
+    <a href="../my/account.html#follows" class="sidebar-sub"><span class="zh">· 我关注的</span><span class="en">· Following</span></a>
+    <a href="../my/account.html#enquiries" class="sidebar-sub"><span class="zh">· 我的询价</span><span class="en">· Enquiries</span></a>
+    <button type="button" class="sidebar-lang-btn" onclick="toggleLang()"><span class="zh">🌐 English</span><span class="en">🌐 中文</span></button>
+  </nav>
+</aside>
+
+<main class="container">
+  <h1 class="page-title"><span class="zh">我的帐户</span><span class="en">My Account</span></h1>
+  <p class="page-sub">
+    <span class="zh">收藏、关注的藏家与品类，跟着你的邮箱走 —— 换台手机登录同一个帐号，它们还在。</span>
+    <span class="en">Your saved items and followed collectors follow your email — sign in on another device and they are still here.</span>
+  </p>
+
+  <!-- 身份 -->
+  <div class="card" id="identCard">
+    <div class="guest" id="guestBox">
+      <p>
+        <span class="zh">还没有登录。用 Google 或邮箱登录后，收藏和关注会跟着你，换设备也不丢。</span>
+        <span class="en">Not signed in. Sign in with Google or your email and your saves and follows will follow you across devices.</span>
+      </p>
+      <div id="gbtnBox"></div>
+      <div class="or-line" id="orLine"><span class="zh">或只用邮箱</span><span class="en">or with your email</span></div>
+      <div class="login-row">
+        <input id="emailInput" type="email" autocomplete="email" placeholder="you@email.com">
+        <button class="btn primary" onclick="loginEmail()"><span class="zh">登录 / 继续</span><span class="en">Sign in</span></button>
+      </div>
+      <div class="err" id="loginErr"></div>
+      <p style="font-size:.74rem;color:var(--muted);margin-top:.2rem">
+        <span class="zh">继续即表示同意<a href="../privacy.html" target="_blank" rel="noopener" style="color:var(--primary-dark)">《隐私政策》</a>；只存邮箱与被收藏 / 关注的藏品，不公开不转卖。</span>
+        <span class="en">By continuing you agree to the <a href="../privacy.html" target="_blank" rel="noopener" style="color:var(--primary-dark)">Privacy Policy</a>; we store only your email and what you saved or followed.</span>
+      </p>
+    </div>
+
+    <div class="ident" id="meBox" style="display:none">
+      <div class="who">
+        <div class="avatar" id="avatar">G</div>
+        <div class="who-main">
+          <div class="who-mail" id="meMail">—</div>
+          <div class="who-tag" id="meTag">—</div>
+        </div>
+      </div>
+      <div class="btns">
+        <button class="btn" onclick="switchIdentity()"><span class="zh">换个帐号</span><span class="en">Switch account</span></button>
+        <button class="btn" onclick="logout()"><span class="zh">退出登录</span><span class="en">Sign out</span></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 收藏 -->
+  <div class="sec-head" id="saved">
+    <h2><span class="zh">我的收藏</span><span class="en">Saved items</span></h2>
+    <span class="count" id="cntSaved">—</span>
+  </div>
+  <div class="grid" id="favGrid"></div>
+  <p class="empty" id="favEmpty" style="display:none">
+    <span class="zh">还没有收藏。在藏品页点右上角的 ♥ 就会出现在这里。</span>
+    <span class="en">Nothing saved yet — tap ♥ on any item page.</span>
+  </p>
+
+  <!-- 关注 -->
+  <div class="sec-head" id="follows">
+    <h2><span class="zh">我关注的</span><span class="en">Following</span></h2>
+    <span class="count" id="cntFollows">—</span>
+  </div>
+  <div class="chips" id="followChips"></div>
+  <p class="empty" id="followEmpty" style="display:none">
+    <span class="zh">还没有关注任何藏家或品类。藏家页和上新提醒卡上都能一键关注。</span>
+    <span class="en">Not following anything yet — follow a collector or category from their page.</span>
+  </p>
+
+  <!-- 询价 -->
+  <div class="sec-head" id="enquiries">
+    <h2><span class="zh">我的询价</span><span class="en">My enquiries</span></h2>
+    <span class="count" id="cntEnq">—</span>
+  </div>
+  <div class="rows" id="enqRows"></div>
+  <p class="empty" id="enqEmpty" style="display:none">
+    <span class="zh">还没有询价记录。点藏品页的 WhatsApp 咨询后，这里会留下记录（只存本机）。</span>
+    <span class="en">No enquiries yet — the records stay on this device only.</span>
+  </p>
+
+  <div class="foot">
+    <span class="zh">这个页面上的收藏与关注是匿名汇总之外的私人数据，只有你自己看得到；藏家侧只会看到「近 30 天 N 人收藏 / 关注」这类数字，不会看到你的名字或联系方式。需要删除全部记录，写信给 <a href="mailto:contact@gudong.app">contact@gudong.app</a>。</span>
+    <span class="en">Your saves and follows are private to you. Collectors only see anonymous counts such as “N people saved / followed in the last 30 days”. To delete everything, email <a href="mailto:contact@gudong.app">contact@gudong.app</a>.</span>
+  </div>
+</main>
+
+<script src="../assets/js/gudong-follow.js" defer></script>
+<script src="../assets/js/account-core.js" defer></script>
+<script src="../assets/js/google-client.js" defer></script>
+<script>
+(function () {
+  'use strict';
+  var listings = null;
+
+  function isEn() { return document.body.dataset.lang === 'en'; }
+
+  function openSidebar() {
+    document.getElementById('sidebar').classList.add('open');
+    document.getElementById('sidebarOverlay').classList.add('show');
+  }
+  function closeSidebar() {
+    document.getElementById('sidebar').classList.remove('open');
+    document.getElementById('sidebarOverlay').classList.remove('show');
+  }
+  window.openSidebar = openSidebar;
+  window.closeSidebar = closeSidebar;
+
+  var savedLang = '';
+  try { savedLang = localStorage.getItem('gudong.savedLang') || ''; } catch (e) {}
+  if (savedLang === 'en' || savedLang === 'zh') document.body.dataset.lang = savedLang;
+  window.toggleLang = function () {
+    var next = document.body.dataset.lang === 'en' ? 'zh' : 'en';
+    document.body.dataset.lang = next;
+    try { localStorage.setItem('gudong.savedLang', next); } catch (e) {}
+  };
+
+  /* ---------- 藏品数据（本机静态 json，不调任何 API） ---------- */
+  function loadListings() {
+    if (listings) return Promise.resolve(listings);
+    return fetch('../data/listings.json', { cache: 'force-cache' })
+      .then(function (r) { return r.json(); })
+      .then(function (j) {
+        var map = {};
+        ['todayFinds', 'editorPicks', 'newListing'].forEach(function (k) {
+          (j[k] || []).forEach(function (it) { if (it && it.item_id) map[it.item_id] = it; });
+        });
+        listings = map;
+        return map;
+      })
+      .catch(function () { listings = {}; return {}; });
+  }
+
+  function itemMeta(id) {
+    var it = (listings || {})[id];
+    if (!it) return { title: id, seller: '', img: '', url: '../items/' + id + '.html' };
+    return {
+      title: isEn() ? (it.title_en || it.title_zh || id) : (it.title_zh || it.title_en || id),
+      seller: it.seller_name_en || it.seller_id || '',
+      img: it.img_file ? '../assets/images/' + it.img_file : '',
+      url: '../items/' + id + '.html'
+    };
+  }
+
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+
+  /* ---------- 身份 ---------- */
+  var A = window.GudongAccount;
+
+  function renderIdentity() {
+    var me = A && A.identity ? A.identity() : null;
+    var guestBox = document.getElementById('guestBox');
+    var meBox = document.getElementById('meBox');
+    if (!me) {
+      guestBox.style.display = '';
+      meBox.style.display = 'none';
+      mountGoogle();
+      return;
+    }
+    guestBox.style.display = 'none';
+    meBox.style.display = '';
+    document.getElementById('meMail').textContent = me.contact || me.email || '';
+    var src = me.source === 'google' ? (isEn() ? 'Signed in with Google' : '通过 Google 登录')
+      : (isEn() ? 'Signed in with email' : '通过邮箱登录');
+    document.getElementById('meTag').textContent = src + (me.buyer_id ? ' · ' + me.buyer_id.slice(0, 8) : '');
+    document.getElementById('avatar').textContent = String(me.contact || 'G').trim().charAt(0).toUpperCase();
+    var gbox = document.getElementById('gbtnBox');
+    if (gbox) gbox.innerHTML = '';
+  }
+
+  window.loginEmail = function () {
+    var input = document.getElementById('emailInput');
+    var err = document.getElementById('loginErr');
+    var email = String(input.value || '').trim().toLowerCase();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
+      err.textContent = isEn() ? 'Please enter a valid email.' : '请填一个有效的邮箱。';
+      return;
+    }
+    err.textContent = '';
+    fetch('/api/buyer', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: email, name: email.split('@')[0].slice(0, 40) })
+    }).then(function (r) { return r.json().catch(function () { return {}; }); })
+      .then(function (res) {
+        var me = {
+          contact: email,
+          type: 'email',
+          name: email.split('@')[0].slice(0, 40),
+          intent: 'ask',
+          ts: Date.now(),
+          source: 'account',
+          buyer_id: (res && res.buyer_id) || ''
+        };
+        try { localStorage.setItem('gudong_buyer', JSON.stringify(me)); } catch (e) {}
+        refresh();
+      })
+      .catch(function () {
+        err.textContent = isEn() ? 'Network hiccup — please retry.' : '网络不稳，请再试一次。';
+      });
+  };
+
+  window.switchIdentity = function () {
+    try { localStorage.removeItem('gudong_buyer'); } catch (e) {}
+    document.getElementById('emailInput').value = '';
+    refresh();
+  };
+  window.logout = window.switchIdentity;
+
+  var gLoaded = false;
+  function mountGoogle() {
+    var cid = window.GUDONG_GOOGLE_CLIENT_ID;
+    var box = document.getElementById('gbtnBox');
+    if (!cid || !box || gLoaded) return;
+    function draw() {
+      try {
+        window.google.accounts.id.initialize({
+          client_id: cid,
+          callback: function (resp) {
+            if (!resp || !resp.credential) return;
+            fetch('/api/buyer', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ credential: resp.credential })
+            }).then(function (r) { return r.json().catch(function () { return {}; }); })
+              .then(function (res) {
+                if (!res || !res.ok || !res.email) {
+                  document.getElementById('loginErr').textContent =
+                    isEn() ? 'Google sign-in failed — just use your email.' : 'Google 登录没验证过，改用邮箱就行。';
+                  return;
+                }
+                var me = {
+                  contact: res.email,
+                  type: 'email',
+                  name: (res.name || res.email.split('@')[0]).slice(0, 40),
+                  intent: 'ask',
+                  ts: Date.now(),
+                  source: 'google',
+                  buyer_id: res.buyer_id || ''
+                };
+                try { localStorage.setItem('gudong_buyer', JSON.stringify(me)); } catch (e) {}
+                refresh();
+              });
+          }
+        });
+        window.google.accounts.id.renderButton(box, {
+          theme: 'outline', size: 'large', text: 'continue_with', shape: 'rectangular',
+          logo_alignment: 'left', width: 260
+        });
+        gLoaded = true;
+      } catch (e) { /* 没有 GIS 就只留邮箱 */ }
+    }
+    if (window.google && window.google.accounts && window.google.accounts.id) draw();
+    else {
+      var s = document.createElement('script');
+      s.src = 'https://accounts.google.com/gsi/client';
+      s.async = true; s.defer = true; s.onload = draw;
+      document.head.appendChild(s);
+    }
+  }
+
+  /* ---------- 三块内容 ---------- */
+  var state = { favs: [], follows: [], enquiries: [] };
+
+  function readLocalFav() { return (A && A.readFav) ? A.readFav() : []; }
+  function readLocalFollow() { return (A && A.readFollow) ? A.readFollow() : []; }
+  function readEnq() {
+    try {
+      var arr = JSON.parse(localStorage.getItem('gudong_enquiries') || '[]');
+      return Array.isArray(arr) ? arr : [];
+    } catch (e) { return []; }
+  }
+
+  function renderFavs() {
+    var grid = document.getElementById('favGrid');
+    var empty = document.getElementById('favEmpty');
+    var cnt = document.getElementById('cntSaved');
+    var ids = state.favs.map(function (f) { return f.item_id; });
+    /* 本机有、库里还没有的也显示出来（离线收藏不会被吞掉） */
+    readLocalFav().forEach(function (id) { if (ids.indexOf(id) === -1) ids.push(id); });
+    cnt.textContent = ids.length ? ids.length + (isEn() ? ' items' : ' 件') : '';
+    if (!ids.length) { grid.innerHTML = ''; empty.style.display = ''; return; }
+    empty.style.display = 'none';
+    grid.innerHTML = ids.map(function (id) {
+      var m = itemMeta(id);
+      return '<div class="item">' +
+        '<a class="thumb" href="' + m.url + '">' + (m.img ? '<img src="' + esc(m.img) + '" alt="' + esc(m.title) + '" loading="lazy">' : '') + '</a>' +
+        '<div class="body">' +
+          '<a class="t" href="' + m.url + '">' + esc(m.title) + '</a>' +
+          '<div class="m">' + esc(m.seller) + '</div>' +
+          '<button class="rm" data-rm="' + esc(id) + '"><span class="zh">从这个清单移除</span><span class="en">Remove</span></button>' +
+        '</div></div>';
+    }).join('');
+    grid.querySelectorAll('[data-rm]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var id = btn.getAttribute('data-rm');
+        var f = readLocalFav();
+        var i = f.indexOf(id);
+        if (i !== -1) { f.splice(i, 1); try { localStorage.setItem('gudong_fav', JSON.stringify(f)); } catch (e) {} }
+        if (A && A.removeFav) A.removeFav(id);
+        state.favs = state.favs.filter(function (x) { return x.item_id !== id; });
+        renderFavs();
+      });
+    });
+  }
+
+  function renderFollows() {
+    var wrap = document.getElementById('followChips');
+    var empty = document.getElementById('followEmpty');
+    var cnt = document.getElementById('cntFollows');
+    var list = state.follows.slice();
+    readLocalFollow().forEach(function (s) {
+      if (!s || !s.term) return;
+      var kind = s.type === 'seller' ? 'seller' : 'category';
+      var hit = list.some(function (f) { return f.kind === kind && String(f.target).toLowerCase() === String(s.term).toLowerCase(); });
+      if (!hit) list.push({ kind: kind, target: s.term, label: s.term });
+    });
+    cnt.textContent = list.length ? list.length + (isEn() ? ' following' : ' 个关注') : '';
+    if (!list.length) { wrap.innerHTML = ''; empty.style.display = ''; return; }
+    empty.style.display = 'none';
+    wrap.innerHTML = list.map(function (f) {
+      var label = f.label || f.target;
+      var href = f.kind === 'seller'
+        ? '../sellers/index.html'
+        : '../collection.html';
+      return '<span class="chip">' +
+        '<a href="' + href + '" style="color:inherit;text-decoration:none">' +
+          (f.kind === 'seller' ? '<span class="zh">藏家</span><span class="en">Collector</span>' : '<span class="zh">品类</span><span class="en">Category</span>') +
+          ' <b>' + esc(label) + '</b></a>' +
+        '<button class="x" data-kind="' + esc(f.kind) + '" data-target="' + esc(f.target) + '" aria-label="unfollow">×</button>' +
+      '</span>';
+    }).join('');
+    wrap.querySelectorAll('.x').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var kind = btn.getAttribute('data-kind');
+        var target = btn.getAttribute('data-target');
+        if (window.GudongFollow) window.GudongFollow.toggle(kind === 'seller' ? 'seller' : 'tag', target);
+        if (A && A.follow) A.follow(kind, target, '', false);
+        state.follows = state.follows.filter(function (f) { return !(f.kind === kind && String(f.target) === String(target)); });
+        renderFollows();
+      });
+    });
+  }
+
+  function renderEnq() {
+    var rows = document.getElementById('enqRows');
+    var empty = document.getElementById('enqEmpty');
+    var cnt = document.getElementById('cntEnq');
+    var list = readEnq();
+    cnt.textContent = list.length ? list.length + (isEn() ? ' enquiries' : ' 次询价') : '';
+    if (!list.length) { rows.innerHTML = ''; empty.style.display = ''; return; }
+    empty.style.display = 'none';
+    rows.innerHTML = list.slice(0, 20).map(function (e) {
+      var m = itemMeta(e.item_id);
+      var t = new Date(e.ts || Date.now());
+      var when = t.getFullYear() + '-' + ('0' + (t.getMonth() + 1)).slice(-2) + '-' + ('0' + t.getDate()).slice(-2);
+      return '<div class="row"><div><a href="' + m.url + '">' + esc(m.title || m.item_id) + '</a>' +
+        '<div style="font-size:.74rem;color:var(--muted)">' + esc(e.seller || m.seller) + '</div></div>' +
+        '<span class="when">' + when + '</span></div>';
+    }).join('');
+  }
+
+  function refresh() {
+    renderIdentity();
+    Promise.all([loadListings()]).then(function () {
+      var me = A && A.identity ? A.identity() : null;
+      if (me && A.syncLocal) {
+        A.syncLocal().then(function (res) {
+          state.favs = (res && res.favorites) || [];
+          state.follows = (res && res.follows) || [];
+          renderFavs(); renderFollows(); renderEnq();
+        });
+      } else {
+        state.favs = []; state.follows = [];
+        renderFavs(); renderFollows(); renderEnq();
+      }
+    });
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', function () { setTimeout(refresh, 60); });
+  else setTimeout(refresh, 60);
+
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeSidebar(); });
+})();
+</script>
+</body>
+</html>

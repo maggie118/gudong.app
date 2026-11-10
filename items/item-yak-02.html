@@ -565,7 +565,10 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
             <a href="../tools/era-lookup.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 古文化朝代年代速查</span><span class="en">· Culture &amp; Dynasty Era Lookup</span></a>
             <a href="../tools/checklist.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 验货清单（可打印）</span><span class="en">· Inspection Checklist</span></a>
             <a href="../tools/contract.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 买卖契约生成器</span><span class="en">· Contract &amp; Endorsement Generator</span></a>
-            <a href="../my/saved.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">我的收藏</span><span class="en">My Saved</span></a>
+            <a href="../my/account.html" class="sidebar-link" onclick="closeSidebar()"><span class="zh">我的帐户</span><span class="en">My Account</span></a>
+            <a href="../my/saved.html" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 我的收藏</span><span class="en">· Saved</span></a>
+            <a href="../my/account.html#follows" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 我关注的</span><span class="en">· Following</span></a>
+            <a href="../my/account.html#enquiries" class="sidebar-sub" onclick="closeSidebar()"><span class="zh">· 我的询价</span><span class="en">· Enquiries</span></a>
             <button type="button" class="sidebar-lang-btn" onclick="toggleLang()" aria-label="Switch language"><span class="zh">🌐 English</span><span class="en">🌐 中文</span></button>
         </nav>
     </aside>
@@ -1520,25 +1523,44 @@ window.gdSharePage = function () {
 <script src="../assets/js/gudong-follow.js"></script>
 <script src="../assets/js/buyer-list.js"></script>
 <script src="/assets/js/google-client.js"></script>
-<script src="../assets/js/wa-contact-gate.js" defer></script>
-<script>
-/* 买家名单 · 关注此藏家（2026-11-07） */
-(function () {
-  function boot() {
-    var box = document.getElementById('gdBuyerPanel');
-    if (!box || !window.GudongBuyer) return;
-    function txt(id) { var el = document.getElementById(id); return el ? (el.textContent || '').trim() : ''; }
-    GudongBuyer.mount(box, {
-      seller: function () { return txt('sellerId'); },
-      sellerNameZh: txt('sellerNameZh'),
-      sellerNameEn: txt('sellerNameEn'),
-      source: 'item-page'
-    });
-  }
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
-  else boot();
-})();
-</script>
+<script src="../assets/js/wa-contact-gate.js" defer></script>
+
+<script>
+
+/* 买家名单 · 关注此藏家（2026-11-07） */
+
+(function () {
+
+  function boot() {
+
+    var box = document.getElementById('gdBuyerPanel');
+
+    if (!box || !window.GudongBuyer) return;
+
+    function txt(id) { var el = document.getElementById(id); return el ? (el.textContent || '').trim() : ''; }
+
+    GudongBuyer.mount(box, {
+
+      seller: function () { return txt('sellerId'); },
+
+      sellerNameZh: txt('sellerNameZh'),
+
+      sellerNameEn: txt('sellerNameEn'),
+
+      source: 'item-page'
+
+    });
+
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
+
+  else boot();
+
+})();
+
+</script>
+
 <script src="/assets/js/fav-log.js" defer></script>
 </body>
 </html>

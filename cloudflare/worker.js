@@ -618,6 +618,7 @@ async function pushJob(env, opts) {
   ).all()).results || [];
 
   let delivered = 0, gone = 0, matched = 0, mails = 0, mailFailed = 0;
+  const errs = [];
   let mailRows = [];
   if (env.RESEND_API_KEY) {
     mailRows = ((await env.DB.prepare('SELECT email, buyer_key FROM mail_subs WHERE active = 1 LIMIT 2000').all()).results) || [];
@@ -645,8 +646,18 @@ async function pushJob(env, opts) {
         else if (res.status === 404 || res.status === 410) {
           await env.DB.prepare('DELETE FROM push_subs WHERE endpoint = ?').bind(sub.endpoint).run();
           gone++;
+        } else {
+          const msg = String(res.text || '');
+          errs.push('http ' + res.status + ' ' + msg.slice(0, 160));
+          /* 403 且是 VAPID 对不上：这条订阅是用旧钥匙签的，留着永远发不出去，清掉让用户重订 */
+          if (res.status === 403 && /vapid/i.test(msg)) {
+            await env.DB.prepare('DELETE FROM push_subs WHERE endpoint = ?').bind(sub.endpoint).run();
+            gone++;
+          }
         }
-      } catch (e) { /* 单个失败不影响其它 */ }
+      } catch (e) {
+        errs.push(String((e && e.message) || e).slice(0, 200));
+      }
     }
     /* 邮件通道：同一套 follows 规则，没身份的邮箱照收 */
     for (const m of mailRows) {
@@ -664,7 +675,7 @@ async function pushJob(env, opts) {
     await env.DB.prepare('INSERT INTO push_sent (item_id, sent_at) VALUES (?, ?) ON CONFLICT(item_id) DO NOTHING')
       .bind(it.id, new Date().toISOString()).run();
   }
-  return { items: fresh.length, matched, delivered, dropped: gone, mails, mailFailed };
+  return { items: fresh.length, matched, delivered, dropped: gone, mails, mailFailed, errors: errs.slice(0, 5) };
 }
 
 export default {

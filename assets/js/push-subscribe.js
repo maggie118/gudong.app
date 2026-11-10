@@ -250,7 +250,9 @@
   function resyncSub(sub) {
     var used = '';
     try { used = localStorage.getItem(KEY_STORE) || ''; } catch (e) {}
-    if (used && used !== VAPID_PUBLIC) {
+    /* 没记录过钥匙，或钥匙变了 → 一律退掉重订：
+       换 VAPID 公钥后老订阅会被推送服务 403 拒发，前端看不出来，只有重新订阅才能修好。 */
+    if (used !== VAPID_PUBLIC) {
       /* 旧钥匙签的订阅发不出去，退掉重订 */
       return sub.unsubscribe().then(function () {
         return navigator.serviceWorker.ready;

@@ -213,6 +213,43 @@ async function createSellerReply(env, body) {
   return json({ message: normalize(row) }, 201);
 }
 
+// ---- 买家身份（Google 或邮箱，一次登记长期有效）----
+async function buyerUpsert(env, body) {
+  const email = str(body.email, 120).toLowerCase();
+  const name = str(body.name, 40);
+  const source = body.source === 'google' ? 'google' : 'email';
+  const googleSub = str(body.google_sub, 80);
+  const itemId = str(body.item_id, 80);
+  if (!okId(email, /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/)) return json({ error: 'invalid_email' }, 400);
+
+  const now = new Date().toISOString();
+  const prior = await env.DB.prepare('SELECT * FROM buyers WHERE email = ?').bind(email).first();
+  if (prior) {
+    await env.DB.prepare('UPDATE buyers SET last_seen = ?, name = ?, google_sub = ? WHERE email = ?')
+      .bind(now, name || prior.name || '', googleSub || prior.google_sub || '', email).run();
+    return json({
+      buyer_id: prior.buyer_id,
+      email: prior.email,
+      name: name || prior.name || '',
+      source: prior.source,
+      returning: true
+    });
+  }
+  const buyerId = 'b_' + crypto.randomUUID().replace(/-/g, '').slice(0, 20);
+  await env.DB.prepare(
+    'INSERT INTO buyers (buyer_id, email, name, source, google_sub, first_item, consent_at, created_at, last_seen) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)'
+  ).bind(buyerId, email, name, source, googleSub, itemId, now, now, now).run();
+  return json({ buyer_id: buyerId, email: email, name: name, source: source, returning: false });
+}
+
+async function buyerList(env, url) {
+  const limit = Math.min(Number(url.searchParams.get('limit')) || 50, 200);
+  const result = await env.DB.prepare(
+    'SELECT buyer_id, email, name, source, first_item, created_at, last_seen FROM buyers ORDER BY last_seen DESC LIMIT ?'
+  ).bind(limit).all();
+  return json({ buyers: result.results || [] });
+}
+
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
@@ -243,6 +280,7 @@ export default {
         case '/threads': return await sellerThreads(env, url);
         case '/conversation': return await sellerConversation(env, url);
         case '/reply': return await createSellerReply(env, body);
+        case '/buyer': return request.method === 'GET' ? await buyerList(env, url) : await buyerUpsert(env, body);
         case '/health': return json({ ok: true });
         default: return json({ error: 'not_found' }, 404);
       }

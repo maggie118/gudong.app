@@ -169,7 +169,10 @@
           });
         });
       }).then(function (sub) {
-        return postSubscription(sub, opts);
+        return postSubscription(sub, opts).then(function (r) {
+          try { localStorage.setItem(KEY_STORE, VAPID_PUBLIC); } catch (e) {}
+          return r;
+        });
       }).then(function () {
         if (bell) setActive();
         return true;
@@ -239,6 +242,36 @@
     });
   }
 
+  /* 2026-11-11：铃铛“实心”只代表这台浏览器里有订阅，不代表服务器收到了；
+     换过 VAPID 公钥后老订阅还会被推送服务拒发。所以进页面时做两件事：
+     ① 公钥变了 → 静默重新订阅；② 订阅补登到服务器（按 endpoint 幂等 upsert）。 */
+  var KEY_STORE = 'gudong_push_key';
+
+  function resyncSub(sub) {
+    var used = '';
+    try { used = localStorage.getItem(KEY_STORE) || ''; } catch (e) {}
+    if (used && used !== VAPID_PUBLIC) {
+      /* 旧钥匙签的订阅发不出去，退掉重订 */
+      return sub.unsubscribe().then(function () {
+        return navigator.serviceWorker.ready;
+      }).then(function (reg) {
+        return reg.pushManager.subscribe({
+          userVisibleOnly: true,
+          applicationServerKey: urlBase64ToUint8Array(VAPID_PUBLIC)
+        });
+      }).then(function (fresh) {
+        return postSubscription(fresh, { source: 'resync' }).then(function () { return fresh; });
+      }).then(function (fresh) {
+        try { localStorage.setItem(KEY_STORE, VAPID_PUBLIC); } catch (e) {}
+        return fresh;
+      });
+    }
+    return postSubscription(sub, { source: 'resync' }).then(function () {
+      try { localStorage.setItem(KEY_STORE, VAPID_PUBLIC); } catch (e) {}
+      return sub;
+    });
+  }
+
   function init() {
     createUI();
     if (!bell) return;
@@ -247,7 +280,9 @@
     registerSW().then(function () {
       return getSubscription();
     }).then(function (sub) {
-      if (sub) setActive();
+      if (!sub) return null;
+      setActive();
+      return resyncSub(sub).catch(function () { return null; });
     }).catch(function () {});
   }
 

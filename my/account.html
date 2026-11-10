@@ -124,6 +124,16 @@
   .cat-follow-chips button{font:inherit;font-size:.8rem;background:#fff;border:1px solid var(--border);
     color:var(--text);border-radius:999px;padding:.4rem .85rem;cursor:pointer;min-height:36px}
   .cat-follow-chips button.on{background:var(--primary);border-color:var(--primary);color:#fff}
+  .notify-prefs{margin-top:1.4rem;padding:1rem 1.05rem;border:1px solid var(--border);border-radius:10px;background:#FFFDF8}
+  .np-label{font-size:.78rem;letter-spacing:.05em;color:var(--muted);margin-bottom:.7rem}
+  .np-row{display:flex;flex-wrap:wrap;gap:.5rem}
+  .np-btn{font:inherit;font-size:.82rem;min-height:40px;padding:.45rem .95rem;border:1px solid var(--border);
+    background:#fff;color:var(--text);border-radius:8px;cursor:pointer}
+  .np-btn.on{background:var(--primary-light,#F1E8DF);border-color:var(--primary);color:var(--primary-dark)}
+  .np-btn.primary{background:var(--primary);border-color:var(--primary);color:#fff}
+  .np-mailbox{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.7rem}
+  .np-mailbox input{flex:1 1 220px;min-height:40px;border:1px solid var(--border);border-radius:8px;padding:.4rem .6rem;font:inherit;font-size:.85rem}
+  .np-hint{font-size:.72rem;line-height:1.75;color:var(--muted);margin-top:.7rem}
   .foot{margin-top:2.4rem;font-size:.74rem;color:var(--muted);line-height:1.8}
   .foot a{color:var(--primary-dark)}
   @media (max-width:560px){
@@ -256,6 +266,30 @@
       <span class="en">Follow categories · we tell you when matching pieces arrive</span>
     </div>
     <div class="cat-follow-chips" id="catChips"></div>
+  </div>
+
+  <!-- 上新通知：两种通道各自开关 -->
+  <div class="notify-prefs" id="notifyPrefs">
+    <div class="np-label">
+      <span class="zh">上新通知方式 · 选你方便的（可都开）</span>
+      <span class="en">How to reach you · pick one or both</span>
+    </div>
+    <div class="np-row">
+      <button type="button" id="npPush" class="np-btn">
+        <span class="zh">🔔 浏览器推送</span><span class="en">🔔 Browser push</span>
+      </button>
+      <button type="button" id="npMail" class="np-btn">
+        <span class="zh">✉️ 上新邮件</span><span class="en">✉️ Email alerts</span>
+      </button>
+    </div>
+    <div class="np-mailbox" id="npMailBox" style="display:none">
+      <input id="npEmail" type="email" autocomplete="email" placeholder="you@email.com">
+      <button type="button" class="np-btn primary" id="npMailSave"><span class="zh">订阅</span><span class="en">Subscribe</span></button>
+    </div>
+    <p class="np-hint" id="npHint">
+      <span class="zh">只在你关注了品类或藏家时才推；iPhone 需先“添加到主屏幕”才能收浏览器推送。</span>
+      <span class="en">Only sent when you follow a category or a collector. On iPhone, add to Home Screen for browser push.</span>
+    </p>
   </div>
 
   <!-- 询价 -->
@@ -586,6 +620,95 @@
     });
   }
 
+  /* 上新通知：浏览器推送 / 邮件 两个通道，各自开关 */
+  function notifyHint(text, bad) {
+    var el = document.getElementById('npHint');
+    if (!el) return;
+    el.textContent = text;
+    el.style.color = bad ? '#9A554B' : '';
+  }
+
+  function initNotify() {
+    var pushBtn = document.getElementById('npPush');
+    var mailBtn = document.getElementById('npMail');
+    var mailBox = document.getElementById('npMailBox');
+    var mailSave = document.getElementById('npMailSave');
+    if (!pushBtn || !mailBtn) return;
+
+    function setPushOn(on) {
+      pushBtn.classList.toggle('on', !!on);
+      pushBtn.textContent = on
+        ? (isEn() ? '🔔 Browser push · on' : '🔔 浏览器推送 · 已开')
+        : (isEn() ? '🔔 Browser push' : '🔔 浏览器推送');
+    }
+
+    if (window.GudongPush) setPushOn(window.GudongPush.isSubscribed());
+
+    pushBtn.addEventListener('click', function () {
+      if (!window.GudongPush || !window.GudongPush.available()) {
+        notifyHint(isEn() ? 'This browser does not support push.' : '这个浏览器不支持推送。', true);
+        return;
+      }
+      if (window.GudongPush.isSubscribed()) {
+        window.GudongPush.unsubscribe();
+        setPushOn(false);
+        notifyHint(isEn() ? 'Browser push turned off.' : '已关掉浏览器推送。');
+        return;
+      }
+      var me = A().identity ? A().identity() : null;
+      var key = A().key ? A().key() : '';
+      notifyHint(isEn() ? 'Asking the browser for permission…' : '正在向浏览器申请通知权限…');
+      window.GudongPush.subscribe({ source: 'account', buyer_key: key, contact: me && me.contact })
+        .then(function () {
+          setPushOn(true);
+          notifyHint(isEn() ? 'Browser push is on — only matching new pieces will be sent.' : '浏览器推送已开 —— 只推与你关注相符的新藏品。');
+        })
+        .catch(function (err) {
+          notifyHint((isEn() ? 'Push did not start: ' : '推送没开成：') + ((err && err.message) || 'unknown'), true);
+        });
+    });
+
+    mailBtn.addEventListener('click', function () {
+      var showing = mailBox.style.display !== 'none';
+      mailBox.style.display = showing ? 'none' : '';
+      if (!showing) {
+        var me = A().identity ? A().identity() : null;
+        var input = document.getElementById('npEmail');
+        if (me && me.contact && me.contact.indexOf('@') > 0) input.value = me.contact;
+        input.focus();
+      }
+    });
+
+    mailSave.addEventListener('click', function () {
+      var input = document.getElementById('npEmail');
+      var email = String(input.value || '').trim().toLowerCase();
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
+        notifyHint(isEn() ? 'Please enter a valid email.' : '请填一个有效的邮箱。', true);
+        return;
+      }
+      notifyHint(isEn() ? 'Saving…' : '正在保存…');
+      fetch('/api/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          channel: 'email',
+          email: email,
+          buyer_key: A().key ? A().key() : '',
+          source: 'account'
+        })
+      }).then(function (r) { return r.json().catch(function () { return {}; }); })
+        .then(function (res) {
+          if (!res || !res.ok) throw new Error((res && (res.code || res.error)) || 'failed');
+          mailBtn.classList.add('on');
+          mailBox.style.display = 'none';
+          notifyHint(isEn() ? 'Email alerts on — ' + email : '邮件上新通知已开：' + email);
+        })
+        .catch(function (err) {
+          notifyHint((isEn() ? 'Email alerts not saved: ' : '邮件没保存成功：') + ((err && err.message) || ''), true);
+        });
+    });
+  }
+
   function renderEnq() {
     var rows = document.getElementById('enqRows');
     var empty = document.getElementById('enqEmpty');
@@ -606,6 +729,7 @@
 
   function refresh() {
     renderIdentity();
+    initNotify();
     Promise.all([loadListings()]).then(function () {
       var me = A().identity ? A().identity() : null;
       if (me && A().syncLocal) {

@@ -36,6 +36,13 @@ function readVapid() {
 const vapid = readVapid();
 if (!vapid.VAPID_SUBJECT) vapid.VAPID_SUBJECT = 'mailto:contact@gudong.app';
 
+/* Resend（邮件通道）。没配也能部署，只是邮件那一段会跳过。 */
+const RESEND_KEY = (process.env.RESEND_API_KEY || '').trim();
+const MAIL_FROM = (process.env.MAIL_FROM || 'Gudong 古董圈 <notify@gudong.app>').trim();
+const optional = [];
+if (RESEND_KEY) optional.push({ type: 'secret_text', name: 'RESEND_API_KEY', text: RESEND_KEY });
+optional.push({ type: 'secret_text', name: 'MAIL_FROM', text: MAIL_FROM });
+
 const metadata = {
   main_module: 'worker.js',
   compatibility_date: '2026-11-01',
@@ -44,7 +51,8 @@ const metadata = {
     { type: 'secret_text', name: 'INTERNAL_KEY', text: key },
     { type: 'secret_text', name: 'VAPID_PUBLIC_KEY', text: vapid.VAPID_PUBLIC_KEY },
     { type: 'secret_text', name: 'VAPID_PRIVATE_KEY', text: vapid.VAPID_PRIVATE_KEY },
-    { type: 'secret_text', name: 'VAPID_SUBJECT', text: vapid.VAPID_SUBJECT }
+    { type: 'secret_text', name: 'VAPID_SUBJECT', text: vapid.VAPID_SUBJECT },
+    ...optional
   ]
 };
 

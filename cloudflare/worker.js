@@ -348,6 +348,91 @@ async function pushList(env, url) {
   return json({ subs: rows.results || [] });
 }
 
+/* ---- 邮件上新通知订阅（Resend 发信，免费额度够用） ---- */
+function mailOk(value) {
+  const s = typeof value === 'string' ? value.trim().toLowerCase().slice(0, 120) : '';
+  return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(s) ? s : '';
+}
+
+async function mailToken(email, env) {
+  const data = enc.encode(email + ':' + (env.INTERNAL_KEY || 'x'));
+  const digest = new Uint8Array(await crypto.subtle.digest('SHA-256', data));
+  return Array.from(digest).map(b => b.toString(16).padStart(2, '0')).join('').slice(0, 20);
+}
+
+async function mailUpsert(env, body) {
+  const email = mailOk(body.email);
+  if (!email) return json({ error: 'invalid_email' }, 400);
+  const now = new Date().toISOString();
+  if (body.action === 'off') {
+    await env.DB.prepare('UPDATE mail_subs SET active = 0 WHERE email = ?').bind(email).run();
+    return json({ ok: true, active: false });
+  }
+  const key = buyerKey(body.buyer_key);
+  await env.DB.prepare(
+    'INSERT INTO mail_subs (email, buyer_key, seller, source, active, created_at, last_seen) VALUES (?, ?, ?, ?, 1, ?, ?) ' +
+    'ON CONFLICT(email) DO UPDATE SET active = 1, last_seen = excluded.last_seen, ' +
+    "buyer_key = CASE WHEN excluded.buyer_key <> '' THEN excluded.buyer_key ELSE mail_subs.buyer_key END"
+  ).bind(email, key, str(body.seller, 60), str(body.source, 40), now, now).run();
+  return json({ ok: true, active: true });
+}
+
+async function mailList(env) {
+  const rows = await env.DB.prepare(
+    'SELECT email, buyer_key FROM mail_subs WHERE active = 1 LIMIT 2000'
+  ).all();
+  return json({ emails: rows.results || [] });
+}
+
+/* 邮件里的退订链接：公开访问，只凭 token 校验 */
+async function mailOffByLink(env, url) {
+  const email = mailOk(url.searchParams.get('e'));
+  const token = str(url.searchParams.get('t'), 40);
+  if (!email || !token) return json({ error: 'invalid_link' }, 400);
+  if (token !== await mailToken(email, env)) return json({ error: 'invalid_token' }, 403);
+  await env.DB.prepare('UPDATE mail_subs SET active = 0 WHERE email = ?').bind(email).run();
+  return new Response(
+    '<!doctype html><meta charset="utf-8"><style>body{font-family:system-ui;padding:40px;line-height:1.8}</style>' +
+    '<h2>已退订 Gudong 上新邮件</h2><p>以后不会再收到上新通知。想重新订阅，到「我的帐户 · 我关注的」再勾一次即可。</p>',
+    { status: 200, headers: { 'Content-Type': 'text/html; charset=utf-8' } }
+  );
+}
+
+async function sendMail(env, to, item, token) {
+  const apiKey = env.RESEND_API_KEY;
+  if (!apiKey) return { ok: false, skipped: true };
+  const from = env.MAIL_FROM || 'Gudong 古董圈 <notify@gudong.app>';
+  const site = (env.SITE_URL || 'https://www.gudong.app').replace(/\/+$/, '');
+  const off = site.replace('//www.', '//gudong-data-api.minqi118.workers.dev') +
+    '/mail/off?e=' + encodeURIComponent(to) + '&t=' + token;
+  const html =
+    '<div style="font-family:system-ui,-apple-system,sans-serif;max-width:520px;margin:0 auto;color:#25221E">' +
+    '<div style="font-size:12px;letter-spacing:.18em;color:#B08A45;text-transform:uppercase">Gudong · 上新</div>' +
+    '<h2 style="font-family:Georgia,serif;font-weight:500;margin:10px 0 6px">' + escHtml(item.title) + '</h2>' +
+    '<div style="color:#716B63;font-size:14px">' + escHtml(item.category || '') +
+    (item.seller ? ' · ' + escHtml(item.seller) : '') + '</div>' +
+    '<p style="margin:22px 0"><a href="' + item.url + '" style="display:inline-block;background:#6F4A31;color:#fff;' +
+    'padding:11px 22px;border-radius:3px;text-decoration:none">查看这件藏品 →</a></p>' +
+    '<p style="font-size:12px;color:#9A938A;line-height:1.8">你是因为关注了这个品类 / 藏家才收到这封信。' +
+    '<a href="' + off + '" style="color:#9A938A">退订上新邮件</a></p></div>';
+
+  const r = await fetch('https://api.resend.com/emails', {
+    method: 'POST',
+    headers: { Authorization: 'Bearer ' + apiKey, 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      from,
+      to: [to],
+      subject: '上新 · ' + item.title,
+      html
+    })
+  });
+  return { ok: r.ok, status: r.status };
+}
+
+function escHtml(s) {
+  return String(s == null ? '' : s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+}
+
 /* ================= Web Push 发送（Cloudflare 定时任务） =================
    2026-11-11：推送从 Vercel 构建阶段搬到这里。
    - 订阅在 D1 push_subs，已发过的藏品在 D1 push_sent
@@ -532,7 +617,11 @@ async function pushJob(env, opts) {
     'SELECT buyer_key, kind, target FROM follows LIMIT 5000'
   ).all()).results || [];
 
-  let delivered = 0, gone = 0, matched = 0;
+  let delivered = 0, gone = 0, matched = 0, mails = 0, mailFailed = 0;
+  let mailRows = [];
+  if (env.RESEND_API_KEY) {
+    mailRows = ((await env.DB.prepare('SELECT email, buyer_key FROM mail_subs WHERE active = 1 LIMIT 2000').all()).results) || [];
+  }
   for (const it of fresh) {
     const payload = {
       title: 'gudong.app 上新 · ' + (it.category || '新藏品'),
@@ -559,10 +648,23 @@ async function pushJob(env, opts) {
         }
       } catch (e) { /* 单个失败不影响其它 */ }
     }
+    /* 邮件通道：同一套 follows 规则，没身份的邮箱照收 */
+    for (const m of mailRows) {
+      if (m.buyer_key) {
+        const hit = followsAll.some(f => f.buyer_key === m.buyer_key &&
+          ((f.kind === 'category' && it.category && String(f.target) === it.category) ||
+           (f.kind === 'seller' && it.seller && String(f.target).toLowerCase() === it.seller.toLowerCase())));
+        if (!hit) continue;
+      }
+      try {
+        const res = await sendMail(env, m.email, it, await mailToken(m.email, env));
+        if (res.ok) mails++; else mailFailed++;
+      } catch (e) { mailFailed++; }
+    }
     await env.DB.prepare('INSERT INTO push_sent (item_id, sent_at) VALUES (?, ?) ON CONFLICT(item_id) DO NOTHING')
       .bind(it.id, new Date().toISOString()).run();
   }
-  return { items: fresh.length, matched, delivered, dropped: gone };
+  return { items: fresh.length, matched, delivered, dropped: gone, mails, mailFailed };
 }
 
 export default {
@@ -571,6 +673,8 @@ export default {
   },
   async fetch(request, env) {
     const url = new URL(request.url);
+    /* 邮件退订链接：不带 x-gudong-key，只凭链接里的 token */
+    if (url.pathname === '/mail/off') return mailOffByLink(env, url);
     if (request.method === 'OPTIONS') {
       return new Response(null, {
         status: 204,
@@ -604,6 +708,7 @@ export default {
         case '/account': return await accountPull(env, url);
         case '/push': return request.method === 'GET' ? await pushList(env, url) : await pushUpsert(env, body);
         case '/push/run': return json(await pushJob(env, { dry: url.searchParams.get('dry') === '1' }));
+        case '/mail': return request.method === 'GET' ? await mailList(env) : await mailUpsert(env, body);
         case '/health': return json({ ok: true });
         default: return json({ error: 'not_found' }, 404);
       }

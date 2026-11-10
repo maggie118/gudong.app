@@ -29,9 +29,32 @@ export default async function handler(req, res) {
   body = body || {};
 
   const endpoint = clamp(body.endpoint, 500);
-  if (!/^https:\/\//i.test(endpoint)) return sendJson(res, 400, { ok: false, error: 'invalid_endpoint' });
 
   if (!dataConfigured()) return sendJson(res, 202, { ok: false, code: 'store_unconfigured' });
+
+  /* 邮件通道：让人自己选「浏览器推送 / 邮件」，两个通道都挂同一套关注规则 */
+  if (body.channel === 'email') {
+    const email = clamp(body.email, 120).toLowerCase();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
+      return sendJson(res, 400, { ok: false, error: 'invalid_email' });
+    }
+    try {
+      await dataPost('/mail', {
+        email,
+        buyer_key: clamp(body.buyer_key, 120),
+        seller: clamp(body.seller, 60),
+        source: clamp(body.source, 40),
+        action: (body.action === 'unsubscribe' || body.action === 'off') ? 'off' : 'on'
+      });
+      return sendJson(res, 200, { ok: true, active: body.action !== 'off' });
+    } catch (error) {
+      return sendJson(res, 202, {
+        ok: false, code: 'store_error', detail: String(error && error.message || error).slice(0, 200)
+      });
+    }
+  }
+
+  if (!/^https:\/\//i.test(endpoint)) return sendJson(res, 400, { ok: false, error: 'invalid_endpoint' });
 
   try {
     if (body.action === 'unsubscribe' || body.action === 'off') {

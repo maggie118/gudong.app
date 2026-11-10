@@ -1,10 +1,13 @@
 import { createHmac } from 'node:crypto';
-// Anonymous item chat: localStorage identity + Airtable persistence + seller webhook alert.
-// Configure AIRTABLE_BASE_ID, CHAT_AIRTABLE_TOKEN (records:read/write), AIRTABLE_CHAT_TABLE,
-// CHAT_REPLY_SECRET (32+ random chars), and CHAT_NOTIFY_WEBHOOK_URL.
+// Anonymous item chat: localStorage identity + Cloudflare D1 persistence + seller webhook alert.
+// 消息本体存在 D1（Worker gudong-data-api → 表 messages），只有「这件藏品是否属于该藏家」
+// 这一步还会查一次 Airtable 上架表（每次发消息 1 次调用，数量很小）。
+// 需要的环境变量：AIRTABLE_BASE_ID / CHAT_AIRTABLE_TOKEN / AIRTABLE_TABLE / CHAT_REPLY_SECRET /
+//                 GUDONG_DATA_KEY /（可选）CHAT_NOTIFY_WEBHOOK_URL / CHAT_PUBLIC_URL
+import { dataConfigured, dataGet, dataPost } from './_data.js';
+
 const BASE = process.env.AIRTABLE_BASE_ID;
 const TOKEN = process.env.CHAT_AIRTABLE_TOKEN;
-const TABLE = process.env.AIRTABLE_CHAT_TABLE;
 const LISTINGS_TABLE = process.env.AIRTABLE_TABLE;
 const SECRET = process.env.CHAT_REPLY_SECRET;
 const WEBHOOK = process.env.CHAT_NOTIFY_WEBHOOK_URL;
@@ -18,26 +21,24 @@ function respond(res, code, data) {
   res.setHeader('X-Content-Type-Options', 'nosniff');
   return res.status(code).json(data);
 }
-function esc(value) { return String(value).replace(/\\/g, '\\\\').replace(/'/g, "\\'"); }
-function fstr(value) { return "'" + esc(value) + "'"; }
-function baseUrl() { return 'https://api.airtable.com/v0/' + encodeURIComponent(BASE) + '/' + encodeURIComponent(TABLE); }
-function listingsUrl() { return 'https://api.airtable.com/v0/' + encodeURIComponent(BASE) + '/' + encodeURIComponent(LISTINGS_TABLE); }
+function fstr(value) { return "'" + String(value).replace(/\\/g, '\\\\').replace(/'/g, "\\'") + "'"; }
 function validId(value, pattern) { return typeof value === 'string' && pattern.test(value); }
 function goodConversation(input) {
   return validId(input.item_id, /^item-[a-z0-9-]{1,70}$/i) &&
     validId(input.seller_id, /^[a-z0-9-]{2,80}$/i) &&
     validId(input.buyer_tmp_id, /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i);
 }
-async function airtable(url, options) {
-  const opts = Object.assign({}, options || {});
-  opts.headers = Object.assign({ Authorization: 'Bearer ' + TOKEN, 'Content-Type': 'application/json' }, opts.headers || {});
-  const response = await fetch(url, opts);
-  if (!response.ok) throw new Error('Airtable request failed (' + response.status + ')');
-  return response.json();
-}
-function normalize(record) {
-  const f = record.fields || {};
-  return { id: record.id, client_id: f.client_id || '', sender_type: f.sender_type || 'buyer', content: f.content || '', created_at: f.created_at || record.createdTime, buyer_tmp_id: f.buyer_tmp_id || '', buyer_label: f.buyer_label || '', item_title: f.item_title || '', item_id: f.item_id || '', seller_id: f.seller_id || '', is_read_by_seller: f.is_read_by_seller === true };
+async function belongsToSeller(input) {
+  const params = new URLSearchParams();
+  params.set('filterByFormula', 'AND({item_id}=' + fstr(input.item_id) + ',{seller_id}=' + fstr(input.seller_id) + ",{status}='active')");
+  params.set('maxRecords', '1');
+  const response = await fetch(
+    'https://api.airtable.com/v0/' + encodeURIComponent(BASE) + '/' + encodeURIComponent(LISTINGS_TABLE) + '?' + params.toString(),
+    { headers: { Authorization: 'Bearer ' + TOKEN } }
+  );
+  if (!response.ok) throw new Error('airtable ' + response.status);
+  const json = await response.json();
+  return !!(json.records && json.records.length);
 }
 function b64(value) { return Buffer.from(value).toString('base64url'); }
 function replyToken(input) {
@@ -46,13 +47,7 @@ function replyToken(input) {
   return payload + '.' + signature;
 }
 function replyUrl(token) { return SITE + '/seller-reply.html?token=' + encodeURIComponent(token); }
-async function belongsToSeller(input) {
-  const params = new URLSearchParams();
-  params.set('filterByFormula', 'AND({item_id}=' + fstr(input.item_id) + ',{seller_id}=' + fstr(input.seller_id) + ',{status}=' + fstr('active') + ')');
-  params.set('maxRecords', '1');
-  const result = await airtable(listingsUrl() + '?' + params.toString());
-  return !!(result.records && result.records.length);
-}async function notifySeller(message, token) {
+async function notifySeller(message, token) {
   if (!WEBHOOK) return false;
   const controller = new AbortController();
   const timer = setTimeout(function () { controller.abort(); }, 5000);
@@ -69,33 +64,24 @@ async function belongsToSeller(input) {
   } catch (_) { return false; }
   finally { clearTimeout(timer); }
 }
-async function markRead(records, field) {
-  const unread = records.filter(function (record) { return record.fields.sender_type !== (field === 'is_read_by_seller' ? 'seller' : 'buyer') && record.fields[field] !== true; });
-  for (let i = 0; i < unread.length; i += 10) {
-    await airtable(baseUrl(), { method: 'PATCH', body: JSON.stringify({ records: unread.slice(i, i + 10).map(function (r) { return { id: r.id, fields: { [field]: true } }; }) }) });
-  }
-}
 
 export default async function handler(req, res) {
   if (req.method !== 'GET' && req.method !== 'POST') {
     res.setHeader('Allow', 'GET, POST');
     return respond(res, 405, { error: 'Method not allowed' });
   }
-  if (!BASE || !TOKEN || !TABLE || !LISTINGS_TABLE || !SECRET || Buffer.byteLength(SECRET) < 32) return respond(res, 503, { error: 'Chat service is not configured' });
+  if (!BASE || !TOKEN || !LISTINGS_TABLE || !SECRET || Buffer.byteLength(SECRET) < 32 || !dataConfigured()) {
+    return respond(res, 503, { error: 'Chat service is not configured' });
+  }
   const input = req.method === 'GET' ? (req.query || {}) : (req.body || {});
   if (!goodConversation(input)) return respond(res, 400, { error: 'Invalid conversation' });
 
   if (req.method === 'GET') {
-    const params = new URLSearchParams();
-    params.set('filterByFormula', 'AND({item_id}=' + fstr(input.item_id) + ',{seller_id}=' + fstr(input.seller_id) + ',{buyer_tmp_id}=' + fstr(input.buyer_tmp_id) + ')');
-    params.set('maxRecords', '100');
-    params.set('sort[0][field]', 'created_at');
-    params.set('sort[0][direction]', 'desc');
     try {
-      const result = await airtable(baseUrl() + '?' + params.toString());
-      const records = result.records || [];
-      await markRead(records, 'is_read_by_buyer');
-      return respond(res, 200, { messages: records.map(normalize).reverse() });
+      const result = await dataGet('/chat', {
+        item_id: input.item_id, seller_id: input.seller_id, buyer_tmp_id: input.buyer_tmp_id
+      });
+      return respond(res, 200, { messages: result.messages || [] });
     } catch (_) { return respond(res, 503, { error: 'Could not load messages' }); }
   }
 
@@ -116,37 +102,13 @@ export default async function handler(req, res) {
   catch (_) { return respond(res, 503, { error: 'Could not verify this item' }); }
 
   try {
-    const dup = new URLSearchParams();
-    dup.set('filterByFormula', 'AND({buyer_tmp_id}=' + fstr(input.buyer_tmp_id) + ',{client_id}=' + fstr(clientId) + ')');
-    dup.set('maxRecords', '1');
-    const prior = await airtable(baseUrl() + '?' + dup.toString());
-    let record = prior.records && prior.records[0];
-    let notified = false;
-    if (!record) {
-      const createdAt = new Date().toISOString();
-      const fields = {
-        buyer_tmp_id: input.buyer_tmp_id, buyer_label: buyerLabel, seller_id: input.seller_id,
-        item_id: input.item_id, item_title: itemTitle, sender_type: 'buyer', content: content,
-        is_read_by_seller: false, is_read_by_buyer: true, notification_sent: false, client_id: clientId, created_at: createdAt
-      };
-      record = await airtable(baseUrl(), { method: 'POST', body: JSON.stringify({ fields: fields }) });
-    }
-    if (record.fields && record.fields.notification_sent === true) {
-      notified = true;
-    } else {
-      const message = normalize(record);
-      const token = replyToken(input);
-      notified = await notifySeller(message, token);
-      if (notified) record = await airtable(baseUrl() + '/' + record.id, { method: 'PATCH', body: JSON.stringify({ fields: { notification_sent: true } }) });
-    }
-    return respond(res, 201, { message: normalize(record), notification_sent: notified });
+    const result = await dataPost('/chat', {
+      item_id: input.item_id, seller_id: input.seller_id, buyer_tmp_id: input.buyer_tmp_id,
+      buyer_label: buyerLabel, item_title: itemTitle, content: content, client_id: clientId
+    });
+    const message = result.message;
+    if (result.duplicate) return respond(res, 201, { message: message, notification_sent: true });
+    const notified = await notifySeller(message, replyToken(input));
+    return respond(res, 201, { message: message, notification_sent: notified });
   } catch (_) { return respond(res, 503, { error: 'Could not save message' }); }
 }
-
-
-
-
-
-
-
-

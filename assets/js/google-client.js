@@ -15,8 +15,8 @@
  * ------------------------------------------------------------------ */
 (function () {
   'use strict';
-  // ← 唯一需要改动的值
-  var CLIENT_ID = '';
+  // ← 唯一需要改动的值（2026-11-10 已填入 Gudong 的 Web 客户端）
+  var CLIENT_ID = '875654202180-7k4kiojcjvlllqs736jsvvtok2csp7he.apps.googleusercontent.com';
 
   if (CLIENT_ID) {
     window.GUDONG_GOOGLE_CLIENT_ID = CLIENT_ID;

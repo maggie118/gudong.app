@@ -398,22 +398,36 @@ async function mailOffByLink(env, url) {
   );
 }
 
-async function sendMail(env, to, item, token) {
+async function sendMail(env, to, items, token) {
   const apiKey = env.RESEND_API_KEY;
   if (!apiKey) return { ok: false, skipped: true };
   const from = env.MAIL_FROM || 'Gudong 古董圈 <notify@gudong.app>';
   const site = (env.SITE_URL || 'https://www.gudong.app').replace(/\/+$/, '');
   const off = site.replace('//www.', '//gudong-data-api.minqi118.workers.dev') +
     '/mail/off?e=' + encodeURIComponent(to) + '&t=' + token;
+  const list = Array.isArray(items) ? items : [items];
+  const single = list.length === 1;
+  const rows = list.map(it =>
+    '<tr><td style="padding:14px 0;border-bottom:1px solid #EDE8E0">' +
+    '<a href="' + it.url + '" style="color:#25221E;text-decoration:none;font-family:Georgia,serif;font-size:17px">' +
+    escHtml(it.title) + '</a>' +
+    '<div style="color:#9A938A;font-size:12px;margin-top:4px">' + escHtml(it.category || '') +
+    (it.seller ? ' · ' + escHtml(it.seller) : '') + '</div></td></tr>').join('');
   const html =
     '<div style="font-family:system-ui,-apple-system,sans-serif;max-width:520px;margin:0 auto;color:#25221E">' +
-    '<div style="font-size:12px;letter-spacing:.18em;color:#B08A45;text-transform:uppercase">Gudong · 上新</div>' +
-    '<h2 style="font-family:Georgia,serif;font-weight:500;margin:10px 0 6px">' + escHtml(item.title) + '</h2>' +
-    '<div style="color:#716B63;font-size:14px">' + escHtml(item.category || '') +
-    (item.seller ? ' · ' + escHtml(item.seller) : '') + '</div>' +
-    '<p style="margin:22px 0"><a href="' + item.url + '" style="display:inline-block;background:#6F4A31;color:#fff;' +
-    'padding:11px 22px;border-radius:3px;text-decoration:none">查看这件藏品 →</a></p>' +
-    '<p style="font-size:12px;color:#9A938A;line-height:1.8">你是因为关注了这个品类 / 藏家才收到这封信。' +
+    '<div style="font-size:12px;letter-spacing:.18em;color:#B08A45;text-transform:uppercase">Gudong · 今日上新</div>' +
+    (single
+      ? '<h2 style="font-family:Georgia,serif;font-weight:500;margin:10px 0 6px">' + escHtml(list[0].title) + '</h2>' +
+        '<div style="color:#716B63;font-size:14px">' + escHtml(list[0].category || '') +
+        (list[0].seller ? ' · ' + escHtml(list[0].seller) : '') + '</div>' +
+        '<p style="margin:22px 0"><a href="' + list[0].url + '" style="display:inline-block;background:#6F4A31;color:#fff;' +
+        'padding:11px 22px;border-radius:3px;text-decoration:none">查看这件藏品 →</a></p>'
+      : '<h2 style="font-family:Georgia,serif;font-weight:500;margin:10px 0 4px">今天上新 ' + list.length + ' 件</h2>' +
+        '<div style="color:#716B63;font-size:14px">都是你关注的品类 / 藏家</div>' +
+        '<table style="width:100%;border-collapse:collapse;margin:18px 0">' + rows + '</table>' +
+        '<p style="margin:6px 0 20px"><a href="' + site + '/collection" style="display:inline-block;background:#6F4A31;color:#fff;' +
+        'padding:11px 22px;border-radius:3px;text-decoration:none">去藏品库看全部 →</a></p>') +
+    '<p style="font-size:12px;color:#9A938A;line-height:1.8">你是因为关注了这些品类 / 藏家才收到这封信。' +
     '<a href="' + off + '" style="color:#9A938A">退订上新邮件</a></p></div>';
 
   const r = await fetch('https://api.resend.com/emails', {
@@ -422,7 +436,7 @@ async function sendMail(env, to, item, token) {
     body: JSON.stringify({
       from,
       to: [to],
-      subject: '上新 · ' + item.title,
+      subject: single ? '上新 · ' + list[0].title : '今日上新 ' + list.length + ' 件 · Gudong',
       html
     })
   });
@@ -606,7 +620,11 @@ async function pushJob(env, opts) {
     return { bootstrapped: items.length };
   }
 
-  const fresh = items.filter(it => !sent.has(it.id)).slice(0, 3);
+  /* 2026-11-11：改成"每日摘要"。cron 一天只跑一次，所以一次运行就是一天的上新。
+     一个订阅者一天最多收 1 条推送 + 1 封邮件，里面按他关注的品类/藏家汇总；
+     以前是每件一条，3 件新品 = 3 条通知 + 3 封信。 */
+  const DIGEST_MAX = 12;
+  const fresh = items.filter(it => !sent.has(it.id)).slice(0, DIGEST_MAX);
   if (!fresh.length) return { sent: 0, note: 'no_new_items' };
   if (dry) return { dry: true, fresh };
 
@@ -616,64 +634,74 @@ async function pushJob(env, opts) {
   const followsAll = (await env.DB.prepare(
     'SELECT buyer_key, kind, target FROM follows LIMIT 5000'
   ).all()).results || [];
-
-  let delivered = 0, gone = 0, matched = 0, mails = 0, mailFailed = 0;
-  const errs = [];
   let mailRows = [];
   if (env.RESEND_API_KEY) {
     mailRows = ((await env.DB.prepare('SELECT email, buyer_key FROM mail_subs WHERE active = 1 LIMIT 2000').all()).results) || [];
   }
-  for (const it of fresh) {
-    const payload = {
-      title: 'gudong.app 上新 · ' + (it.category || '新藏品'),
-      body: it.title + (it.seller ? ' · ' + it.seller : ''),
-      url: it.url,
-      icon: site + '/assets/icons/icon-192.png',
-      tag: 'gd-' + it.id
+
+  /* 有身份的按 follows 匹配；没身份的（只点了铃铛 / 没登录的邮箱）照收全部 */
+  const hits = (buyerKey, it) => !buyerKey || followsAll.some(f => f.buyer_key === buyerKey &&
+    ((f.kind === 'category' && it.category && String(f.target) === it.category) ||
+     (f.kind === 'seller' && it.seller && String(f.target).toLowerCase() === it.seller.toLowerCase())));
+  const digestFor = buyerKey => fresh.filter(it => hits(buyerKey, it));
+
+  const day = new Date().toISOString().slice(0, 10);
+  const payloadFor = list => {
+    if (list.length === 1) {
+      const it = list[0];
+      return {
+        title: 'gudong.app 上新 · ' + (it.category || '新藏品'),
+        body: it.title + (it.seller ? ' · ' + it.seller : ''),
+        url: it.url, tag: 'gd-' + it.id, day, icon: site + '/assets/icons/icon-192.png'
+      };
+    }
+    return {
+      title: '今日上新 ' + list.length + ' 件',
+      body: list.slice(0, 2).map(it => it.title).join('、') + (list.length > 2 ? ' 等' : ''),
+      url: site + '/collection', tag: 'gd-digest-' + day, day, icon: site + '/assets/icons/icon-192.png'
     };
-    for (const sub of subs) {
-      /* 有身份的按 follows 匹配；没身份的（只点了铃铛）照收 */
-      if (sub.buyer_key) {
-        const hit = followsAll.some(f => f.buyer_key === sub.buyer_key &&
-          ((f.kind === 'category' && it.category && String(f.target) === it.category) ||
-           (f.kind === 'seller' && it.seller && String(f.target).toLowerCase() === it.seller.toLowerCase())));
-        if (!hit) continue;
-      }
-      matched++;
-      try {
-        const res = await sendOne(env, sub, payload);
-        if (res.ok) delivered++;
-        else if (res.status === 404 || res.status === 410) {
+  };
+
+  let delivered = 0, gone = 0, matched = 0, mails = 0, mailFailed = 0;
+  const errs = [];
+
+  for (const sub of subs) {
+    const list = digestFor(sub.buyer_key);
+    if (!list.length) continue;
+    matched++;
+    try {
+      const res = await sendOne(env, sub, payloadFor(list));
+      if (res.ok) delivered++;
+      else if (res.status === 404 || res.status === 410) {
+        await env.DB.prepare('DELETE FROM push_subs WHERE endpoint = ?').bind(sub.endpoint).run();
+        gone++;
+      } else {
+        const msg = String(res.text || '');
+        errs.push('http ' + res.status + ' ' + msg.slice(0, 160));
+        /* 403 且是 VAPID 对不上：这条订阅是用旧钥匙签的，留着永远发不出去，清掉让用户重订 */
+        if (res.status === 403 && /vapid/i.test(msg)) {
           await env.DB.prepare('DELETE FROM push_subs WHERE endpoint = ?').bind(sub.endpoint).run();
           gone++;
-        } else {
-          const msg = String(res.text || '');
-          errs.push('http ' + res.status + ' ' + msg.slice(0, 160));
-          /* 403 且是 VAPID 对不上：这条订阅是用旧钥匙签的，留着永远发不出去，清掉让用户重订 */
-          if (res.status === 403 && /vapid/i.test(msg)) {
-            await env.DB.prepare('DELETE FROM push_subs WHERE endpoint = ?').bind(sub.endpoint).run();
-            gone++;
-          }
         }
-      } catch (e) {
-        errs.push(String((e && e.message) || e).slice(0, 200));
       }
+    } catch (e) {
+      errs.push(String((e && e.message) || e).slice(0, 200));
     }
-    /* 邮件通道：同一套 follows 规则，没身份的邮箱照收 */
-    for (const m of mailRows) {
-      if (m.buyer_key) {
-        const hit = followsAll.some(f => f.buyer_key === m.buyer_key &&
-          ((f.kind === 'category' && it.category && String(f.target) === it.category) ||
-           (f.kind === 'seller' && it.seller && String(f.target).toLowerCase() === it.seller.toLowerCase())));
-        if (!hit) continue;
-      }
-      try {
-        const res = await sendMail(env, m.email, it, await mailToken(m.email, env));
-        if (res.ok) mails++; else mailFailed++;
-      } catch (e) { mailFailed++; }
-    }
+  }
+
+  for (const m of mailRows) {
+    const list = digestFor(m.buyer_key);
+    if (!list.length) continue;
+    try {
+      const res = await sendMail(env, m.email, list, await mailToken(m.email, env));
+      if (res.ok) mails++; else mailFailed++;
+    } catch (e) { mailFailed++; }
+  }
+
+  const now = new Date().toISOString();
+  for (const it of fresh) {
     await env.DB.prepare('INSERT INTO push_sent (item_id, sent_at) VALUES (?, ?) ON CONFLICT(item_id) DO NOTHING')
-      .bind(it.id, new Date().toISOString()).run();
+      .bind(it.id, now).run();
   }
   return { items: fresh.length, matched, delivered, dropped: gone, mails, mailFailed, errors: errs.slice(0, 5) };
 }

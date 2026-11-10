@@ -1155,24 +1155,7 @@
         }
         </style>
 
-        <!-- ============ 买家名单 · 上新提醒 ============ -->
-        <section id="buyer-list" aria-label="买家名单 Buyer list">
-            <div class="buyer-band">
-                <div class="buyer-band-copy">
-                    <div class="buyer-band-kicker">New-listing alerts · 上 新 提 醒</div>
-                    <h2 class="buyer-band-title zh">下一件您感兴趣的藏品，将为您优先推送。</h2>
-                    <h2 class="buyer-band-title en">The pieces you care about, sent to you first</h2>
-                    <p class="buyer-band-desc zh">留下联系方式，告诉我们您关注的藏家与品类。相符的新藏品上架时，我们第一时间告知。</p>
-                    <p class="buyer-band-desc en">Leave a contact and tell us the collectors and categories you follow. When a matching piece is listed, we will let you know first.</p>
-                    <ul class="buyer-band-points">
-                        <li><span class="zh">只看您关注的品类</span><span class="en">Only the categories you follow</span></li>
-                        <li><span class="zh">不群发、不推销、随时退订</span><span class="en">No broadcasts, no marketing, unsubscribe anytime</span></li>
-                        <li><span class="zh">联系方式不公开、不转卖</span><span class="en">Details never published or sold</span></li>
-                    </ul>
-                </div>
-                <div class="buyer-band-form" id="gdBuyerPanelCollection"></div>
-            </div>
-        </section>
+        <!-- 2026-11-11：「买家名单 · 上新提醒」整块撤掉，关注入口移到「我的帐户 · 我关注的」 -->
     </main>
 
     <!-- ============ 图片精修弹窗 ============ -->
@@ -1736,17 +1719,6 @@ window.gdSharePage = function () {
 <script src="assets/js/gudong-contact.js" defer></script>
 <script src="/assets/js/push-subscribe.js" defer></script>
 <script src="assets/js/buyer-list.js"></script>
-<script>
-/* 买家名单 · 上新提醒（2026-11-08，自首页移至藏品库页最下方） */
-(function () {
-  function boot() {
-    var box = document.getElementById('gdBuyerPanelCollection');
-    if (!box || !window.GudongBuyer) return;
-    GudongBuyer.mount(box, { seller: '', sellerNameZh: '', sellerNameEn: '', source: 'collection', minimal: true });
-  }
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
-  else boot();
-})();
-</script>
+<!-- 2026-11-11：藏品库页的上新提醒区块已撤，挂载脚本一并移除 -->
 </body>
 </html>

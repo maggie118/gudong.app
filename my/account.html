@@ -319,10 +319,11 @@
   }
 
   /* ---------- 身份 ---------- */
-  var A = window.GudongAccount;
+  /* account-core.js 是 defer 加载的，不能在解析时抓值，每次用时现取 */
+  function A() { return window.GudongAccount || {}; }
 
   function renderIdentity() {
-    var me = A && A.identity ? A.identity() : null;
+    var me = A().identity ? A().identity() : null;
     var guestBox = document.getElementById('guestBox');
     var meBox = document.getElementById('meBox');
     if (!me) {
@@ -436,8 +437,8 @@
   /* ---------- 三块内容 ---------- */
   var state = { favs: [], follows: [], enquiries: [] };
 
-  function readLocalFav() { return (A && A.readFav) ? A.readFav() : []; }
-  function readLocalFollow() { return (A && A.readFollow) ? A.readFollow() : []; }
+  function readLocalFav() { return A().readFav ? A().readFav() : []; }
+  function readLocalFollow() { return A().readFollow ? A().readFollow() : []; }
   function readEnq() {
     try {
       var arr = JSON.parse(localStorage.getItem('gudong_enquiries') || '[]');
@@ -471,7 +472,7 @@
         var f = readLocalFav();
         var i = f.indexOf(id);
         if (i !== -1) { f.splice(i, 1); try { localStorage.setItem('gudong_fav', JSON.stringify(f)); } catch (e) {} }
-        if (A && A.removeFav) A.removeFav(id);
+        if (A().removeFav) A().removeFav(id);
         state.favs = state.favs.filter(function (x) { return x.item_id !== id; });
         renderFavs();
       });
@@ -509,7 +510,7 @@
         var kind = btn.getAttribute('data-kind');
         var target = btn.getAttribute('data-target');
         if (window.GudongFollow) window.GudongFollow.toggle(kind === 'seller' ? 'seller' : 'tag', target);
-        if (A && A.follow) A.follow(kind, target, '', false);
+        if (A().follow) A().follow(kind, target, '', false);
         state.follows = state.follows.filter(function (f) { return !(f.kind === kind && String(f.target) === String(target)); });
         renderFollows();
       });
@@ -537,9 +538,9 @@
   function refresh() {
     renderIdentity();
     Promise.all([loadListings()]).then(function () {
-      var me = A && A.identity ? A.identity() : null;
-      if (me && A.syncLocal) {
-        A.syncLocal().then(function (res) {
+      var me = A().identity ? A().identity() : null;
+      if (me && A().syncLocal) {
+        A().syncLocal().then(function (res) {
           state.favs = (res && res.favorites) || [];
           state.follows = (res && res.follows) || [];
           renderFavs(); renderFollows(); renderEnq();

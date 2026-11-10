@@ -42,7 +42,7 @@
   function key() {
     var me = identity();
     if (!me) return '';
-    if (me.buyer_id && /^[a-z0-9]{4,40}$/i.test(me.buyer_id)) return String(me.buyer_id).toLowerCase();
+    if (me.buyer_id && /^[a-z0-9_]{4,40}$/i.test(me.buyer_id)) return String(me.buyer_id).toLowerCase();
     var email = String(me.contact || '').toLowerCase();
     return /^[a-z0-9_@.\-]{4,120}$/.test(email) ? email : '';
   }

@@ -313,6 +313,41 @@ async function accountPull(env, url) {
   return json({ favorites: favs.results || [], follows: follows.results || [] });
 }
 
+/* ---- Web Push 订阅（浏览器推送，不再是 Airtable push_subs）---- */
+async function pushUpsert(env, body) {
+  const endpoint = typeof body.endpoint === 'string' ? body.endpoint.trim().slice(0, 500) : '';
+  if (!/^https:\/\//i.test(endpoint)) return json({ error: 'invalid_endpoint' }, 400);
+  if (body.action === 'off') {
+    await env.DB.prepare('DELETE FROM push_subs WHERE endpoint = ?').bind(endpoint).run();
+    return json({ ok: true, active: false });
+  }
+  const p256dh = str(body.p256dh, 200);
+  const auth = str(body.auth, 100);
+  if (!p256dh || !auth) return json({ error: 'invalid_keys' }, 400);
+  const key = buyerKey(body.buyer_key);
+  const now = new Date().toISOString();
+  await env.DB.prepare(
+    'INSERT INTO push_subs (endpoint, p256dh, auth, buyer_key, contact, contact_type, seller, source, created_at, last_seen) ' +
+    'VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ' +
+    'ON CONFLICT(endpoint) DO UPDATE SET p256dh = excluded.p256dh, auth = excluded.auth, ' +
+    "buyer_key = CASE WHEN excluded.buyer_key <> '' THEN excluded.buyer_key ELSE push_subs.buyer_key END, " +
+    "contact = CASE WHEN excluded.contact <> '' THEN excluded.contact ELSE push_subs.contact END, " +
+    'last_seen = excluded.last_seen'
+  ).bind(
+    endpoint, p256dh, auth, key, str(body.contact, 120), str(body.contact_type, 20),
+    str(body.seller, 60), str(body.source, 40), now, now
+  ).run();
+  return json({ ok: true, active: true });
+}
+
+async function pushList(env, url) {
+  const limit = Math.min(Number(url.searchParams.get('limit')) || 2000, 5000);
+  const rows = await env.DB.prepare(
+    'SELECT endpoint, p256dh, auth, buyer_key, contact, contact_type, seller FROM push_subs ORDER BY last_seen DESC LIMIT ?'
+  ).bind(limit).all();
+  return json({ subs: rows.results || [] });
+}
+
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
@@ -347,6 +382,7 @@ export default {
         case '/fav': return await favUpsert(env, body);
         case '/follow': return await followUpsert(env, body);
         case '/account': return await accountPull(env, url);
+        case '/push': return request.method === 'GET' ? await pushList(env, url) : await pushUpsert(env, body);
         case '/health': return json({ ok: true });
         default: return json({ error: 'not_found' }, 404);
       }

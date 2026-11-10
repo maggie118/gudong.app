@@ -107,19 +107,30 @@ async function run() {
     return;
   }
 
-  // 4) 拉取有效订阅
+  // 4) 拉取有效订阅（2026-11-11 起订阅存 Cloudflare D1，Airtable push_subs 已停用）
+  const DATA_URL = (process.env.GUDONG_DATA_URL || 'https://gudong-data-api.minqi118.workers.dev').replace(/\/+$/, '');
+  const DATA_KEY = process.env.GUDONG_DATA_KEY || '';
+  if (!DATA_KEY) { log('GUDONG_DATA_KEY 未配置，跳过推送（订阅表在 D1）'); return; }
   let subs;
   try {
-    subs = await fetchAll(SUBS_TABLE);
+    const ctrl = new AbortController();
+    const timer = setTimeout(() => ctrl.abort(), 15000);
+    let r;
+    try {
+      r = await fetch(`${DATA_URL}/push?limit=5000`, {
+        headers: { 'x-gudong-key': DATA_KEY },
+        signal: ctrl.signal,
+      });
+    } finally { clearTimeout(timer); }
+    if (!r.ok) throw new Error(`push list ${r.status}`);
+    const j = await r.json();
+    subs = (j.subs || []).map(s => ({
+      endpoint: s.endpoint,
+      keys: { auth: s.auth, p256dh: s.p256dh },
+      buyer_key: s.buyer_key || '',
+    }));
   } catch (e) { log('subs fetch failed:', e.message); return; }
-  const activeSubs = subs
-    .filter(r => {
-      const f = r.fields || {};
-      const act = f.active;
-      const active = act === undefined || act === true || act === 'true' || act === 1;
-      return active && f.endpoint && f.auth && f.p256dh;
-    })
-    .map(r => ({ endpoint: r.fields.endpoint, keys: { auth: r.fields.auth, p256dh: r.fields.p256dh } }));
+  const activeSubs = subs.filter(s => s.endpoint && s.keys && s.keys.auth && s.keys.p256dh);
   if (!activeSubs.length) { log('no active subscriptions, mark new items notified'); }
   else {
     webpush.setVapidDetails(VAPID_SUBJECT, VAPID_PUBLIC, VAPID_PRIVATE);

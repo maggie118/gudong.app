@@ -41,7 +41,7 @@
 
   function key() {
     var me = identity();
-    if (!me) return '';
+    if (!me || !verified(me)) return '';
     if (me.buyer_id && /^[a-z0-9_]{4,40}$/i.test(me.buyer_id)) return String(me.buyer_id).toLowerCase();
     var email = String(me.contact || '').toLowerCase();
     return /^[a-z0-9_@.\-]{4,120}$/.test(email) ? email : '';
@@ -75,27 +75,19 @@
       .catch(function () { return {}; });
   }
 
-  /* 邮箱身份没有 buyer_id：先去 /api/buyer 换一个，之后关键器就不可猜了 */
+  /* 只有验证过的身份才允许跨设备读写 D1：
+     Google 登录（服务端已复核 token）= verified；
+     邮箱登录只当本机身份 —— 不占 buyer_key，避免"别人填你的邮箱就看到你的收藏"。 */
+  function verified(me) {
+    if (!me) return false;
+    if (me.source === 'google') return true;
+    return me.verified === true;
+  }
+
   function ensureKey() {
     var me = identity();
-    if (!me) return Promise.resolve('');
-    var existing = key();
-    if (me.buyer_id) return Promise.resolve(existing);
-    return fetch('/api/buyer', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email: String(me.contact || '').toLowerCase(), name: me.name || '' }),
-      cache: 'no-store'
-    }).then(function (r) { return r.json().catch(function () { return {}; }); })
-      .then(function (res) {
-        if (res && res.ok && res.buyer_id) {
-          me.buyer_id = res.buyer_id;
-          writeBuyer(me);
-          return String(res.buyer_id).toLowerCase();
-        }
-        return existing;
-      })
-      .catch(function () { return existing; });
+    if (!me || !verified(me)) return Promise.resolve('');
+    return Promise.resolve(key());
   }
 
   function list() {
@@ -177,6 +169,7 @@
   global.GudongAccount = {
     KEY: BUYER_KEY,
     identity: identity,
+    verified: verified,
     key: key,
     ensureKey: ensureKey,
     list: list,

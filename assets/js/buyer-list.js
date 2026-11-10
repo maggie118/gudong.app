@@ -124,7 +124,13 @@
 
   function mount(el, opts) {
     if (!el) return;
-    opts = opts || {};
+    /* 2026-11-11：全站「上新提醒」大卡片下线。
+       关注改由「我的帐户 · 我关注的」承载，页头铃铛负责浏览器推送订阅。
+       保留空实现是为了不惊动 100+ 页面里的 GudongBuyer.mount(...) 调用。 */
+    el.innerHTML = '';
+    el.style.display = 'none';
+    return;
+    opts = opts || {}
     injectCss();
 
     var sellerNameZh = pick(opts.sellerNameZh, '');

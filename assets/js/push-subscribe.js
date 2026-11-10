@@ -125,6 +125,12 @@
     if (opts.contact) payload.contact = String(opts.contact).slice(0, 120);
     if (opts.type) payload.contact_type = opts.type === 'email' ? 'email' : 'whatsapp';
     if (opts.source) payload.source = String(opts.source).slice(0, 40);
+    // 有钱包身份的，把订阅挂到 buyer_key 上，后面按 follows 精准推送
+    try {
+      var me = JSON.parse(localStorage.getItem('gudong_buyer') || 'null');
+      if (me && me.buyer_id) payload.buyer_key = String(me.buyer_id).toLowerCase().slice(0, 120);
+      else if (me && me.verified && me.contact) payload.buyer_key = String(me.contact).toLowerCase().slice(0, 120);
+    } catch (e) { /* 没身份也能订阅，只是推送按品类挑不到你 */ }
     return fetch('/api/subscribe', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },

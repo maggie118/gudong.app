@@ -118,6 +118,12 @@
   .row a{color:var(--primary-dark);text-decoration:none;font-weight:600}
   .row .when{color:var(--muted);font-size:.74rem;white-space:nowrap}
   .empty{color:var(--muted);font-size:.84rem;margin-top:.8rem}
+  .cat-follow{margin-top:1.2rem;padding-top:1rem;border-top:1px dashed var(--border)}
+  .cat-follow-label{font-size:.76rem;letter-spacing:.06em;color:var(--muted);margin-bottom:.6rem}
+  .cat-follow-chips{display:flex;flex-wrap:wrap;gap:.4rem}
+  .cat-follow-chips button{font:inherit;font-size:.8rem;background:#fff;border:1px solid var(--border);
+    color:var(--text);border-radius:999px;padding:.4rem .85rem;cursor:pointer;min-height:36px}
+  .cat-follow-chips button.on{background:var(--primary);border-color:var(--primary);color:#fff}
   .foot{margin-top:2.4rem;font-size:.74rem;color:var(--muted);line-height:1.8}
   .foot a{color:var(--primary-dark)}
   @media (max-width:560px){
@@ -177,19 +183,19 @@
 <main class="container">
   <h1 class="page-title"><span class="zh">我的帐户</span><span class="en">My Account</span></h1>
   <p class="page-sub">
-    <span class="zh">收藏、关注的藏家与品类，跟着你的邮箱走 —— 换台手机登录同一个帐号，它们还在。</span>
-    <span class="en">Your saved items and followed collectors follow your email — sign in on another device and they are still here.</span>
+    <span class="zh">收藏、关注的藏家与品类，都记在这个帐号下 —— 换台手机登录，它们还在。</span>
+    <span class="en">Your saved items and follows live with this account — sign in on another device and they are still here.</span>
   </p>
 
   <!-- 身份 -->
   <div class="card" id="identCard">
     <div class="guest" id="guestBox">
       <p>
-        <span class="zh">还没有登录。用 Google 或邮箱登录后，收藏和关注会跟着你，换设备也不丢。</span>
-        <span class="en">Not signed in. Sign in with Google or your email and your saves and follows will follow you across devices.</span>
+        <span class="zh">还没有登录。用 Google 登录，收藏和关注会跟着帐号走、换设备也在；只填邮箱也能当场用，但只存在这台设备。</span>
+        <span class="en">Not signed in. With Google your saves and follows travel across devices; an email alone works too, but only on this device.</span>
       </p>
       <div id="gbtnBox"></div>
-      <div class="or-line" id="orLine"><span class="zh">或只用邮箱</span><span class="en">or with your email</span></div>
+      <div class="or-line" id="orLine"><span class="zh">或只用邮箱（仅本机）</span><span class="en">or just your email (this device only)</span></div>
       <div class="login-row">
         <input id="emailInput" type="email" autocomplete="email" placeholder="you@email.com">
         <button class="btn primary" onclick="loginEmail()"><span class="zh">登录 / 继续</span><span class="en">Sign in</span></button>
@@ -213,6 +219,13 @@
         <button class="btn" onclick="switchIdentity()"><span class="zh">换个帐号</span><span class="en">Switch account</span></button>
         <button class="btn" onclick="logout()"><span class="zh">退出登录</span><span class="en">Sign out</span></button>
       </div>
+      <div id="upgradeBox" style="display:none;margin-top:1rem;padding-top:1rem;border-top:1px solid var(--line)">
+        <p style="font-size:.8rem;line-height:1.8;color:var(--muted);margin-bottom:.7rem">
+          <span class="zh">这是本机身份：收藏和关注只存在这台设备。想换手机也带走，用 Google 登录一次即可。</span>
+          <span class="en">This is a device-only identity: saves and follows stay on this device. Sign in with Google once to carry them across.</span>
+        </p>
+        <button class="btn primary" onclick="upgradeWithGoogle()"><span class="zh">用 Google 登录一次</span><span class="en">Sign in with Google</span></button>
+      </div>
     </div>
   </div>
 
@@ -234,9 +247,16 @@
   </div>
   <div class="chips" id="followChips"></div>
   <p class="empty" id="followEmpty" style="display:none">
-    <span class="zh">还没有关注任何藏家或品类。藏家页和上新提醒卡上都能一键关注。</span>
-    <span class="en">Not following anything yet — follow a collector or category from their page.</span>
+    <span class="zh">还没有关注任何藏家或品类。下面点一个品类，或在藏家页点「关注」。</span>
+    <span class="en">Nothing followed yet — pick a category below, or tap Follow on a collector page.</span>
   </p>
+  <div class="cat-follow" id="catFollow">
+    <div class="cat-follow-label">
+      <span class="zh">关注品类 · 有相符的新藏品上架就通知你</span>
+      <span class="en">Follow categories · we tell you when matching pieces arrive</span>
+    </div>
+    <div class="cat-follow-chips" id="catChips"></div>
+  </div>
 
   <!-- 询价 -->
   <div class="sec-head" id="enquiries">
@@ -336,14 +356,26 @@
     }
     guestBox.style.display = 'none';
     meBox.style.display = '';
+    var ok = A().verified ? A().verified(me) : false;
     document.getElementById('meMail').textContent = me.contact || me.email || '';
-    var src = me.source === 'google' ? (isEn() ? 'Signed in with Google' : '通过 Google 登录')
-      : (isEn() ? 'Signed in with email' : '通过邮箱登录');
-    document.getElementById('meTag').textContent = src + (me.buyer_id ? ' · ' + me.buyer_id.slice(0, 8) : '');
+    var src = !ok
+      ? (isEn() ? 'Device-only identity · this device' : '本机身份 · 仅这台设备')
+      : (me.source === 'google'
+        ? (isEn() ? 'Signed in with Google' : '通过 Google 登录')
+        : (isEn() ? 'Signed in' : '已登录'));
+    document.getElementById('meTag').textContent = src + (ok && me.buyer_id ? ' · ' + me.buyer_id.slice(0, 8) : '');
     document.getElementById('avatar').textContent = String(me.contact || 'G').trim().charAt(0).toUpperCase();
+    var up = document.getElementById('upgradeBox');
+    if (up) up.style.display = ok ? 'none' : '';
     var gbox = document.getElementById('gbtnBox');
     if (gbox) gbox.innerHTML = '';
   }
+
+  window.upgradeWithGoogle = function () {
+    /* 清掉本机身份 → 回到登录卡，Google 按钮就在那里；登录后身份带 verified，收藏开始跨设备 */
+    try { localStorage.removeItem('gudong_buyer'); } catch (e) {}
+    refresh();
+  };
 
   window.loginEmail = function () {
     var input = document.getElementById('emailInput');
@@ -367,6 +399,7 @@
           intent: 'ask',
           ts: Date.now(),
           source: 'account',
+          verified: false,
           buyer_id: (res && res.buyer_id) || ''
         };
         try { localStorage.setItem('gudong_buyer', JSON.stringify(me)); } catch (e) {}
@@ -413,6 +446,7 @@
                   intent: 'ask',
                   ts: Date.now(),
                   source: 'google',
+                  verified: true,
                   buyer_id: res.buyer_id || ''
                 };
                 try { localStorage.setItem('gudong_buyer', JSON.stringify(me)); } catch (e) {}
@@ -519,6 +553,39 @@
     });
   }
 
+  /* 品类关注：替代原来散落在每个页面底部的「上新提醒」大卡片 */
+  var CATS = [
+    { term: '瓷器', zh: '瓷器', en: 'Porcelain' },
+    { term: '玉器', zh: '玉器', en: 'Jade' },
+    { term: '铜器', zh: '铜器', en: 'Bronzes' },
+    { term: '钱币', zh: '钱币', en: 'Coins' },
+    { term: '书画', zh: '书画', en: 'Paintings' },
+    { term: '杂项', zh: '杂项', en: 'Misc.' }
+  ];
+
+  function renderCatChips() {
+    var wrap = document.getElementById('catChips');
+    if (!wrap) return;
+    var local = readLocalFollow();
+    wrap.innerHTML = '';
+    CATS.forEach(function (c) {
+      var on = state.follows.some(function (f) {
+        return f.kind === 'category' && String(f.target) === c.zh;
+      }) || local.some(function (s) { return s.type === 'tag' && String(s.term) === c.term; });
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = on ? 'on' : '';
+      b.setAttribute('aria-pressed', on ? 'true' : 'false');
+      b.innerHTML = '<span class="zh">' + c.zh + '</span><span class="en">' + c.en + '</span>';
+      b.addEventListener('click', function () {
+        if (window.GudongFollow) window.GudongFollow.toggle('tag', c.term);
+        renderFollows();
+        renderCatChips();
+      });
+      wrap.appendChild(b);
+    });
+  }
+
   function renderEnq() {
     var rows = document.getElementById('enqRows');
     var empty = document.getElementById('enqEmpty');
@@ -545,11 +612,11 @@
         A().syncLocal().then(function (res) {
           state.favs = (res && res.favorites) || [];
           state.follows = (res && res.follows) || [];
-          renderFavs(); renderFollows(); renderEnq();
+          renderFavs(); renderFollows(); renderCatChips(); renderEnq();
         });
       } else {
         state.favs = []; state.follows = [];
-        renderFavs(); renderFollows(); renderEnq();
+        renderFavs(); renderFollows(); renderCatChips(); renderEnq();
       }
     });
   }

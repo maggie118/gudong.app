@@ -67,6 +67,20 @@
 
     var before = readFav();
 
+    /* 有买家身份时，收藏同时写进 D1（换设备登录还在）。
+       藏品页不一定挂了 account-core.js，缺了就先补加载一次 */
+    var accLoading = false;
+    function withAccount(fn) {
+        if (window.GudongAccount) { fn(window.GudongAccount); return; }
+        if (accLoading) return;
+        accLoading = true;
+        var s = document.createElement('script');
+        s.src = '/assets/js/account-core.js';
+        s.onload = function () { accLoading = false; if (window.GudongAccount) fn(window.GudongAccount); };
+        s.onerror = function () { accLoading = false; };
+        document.head.appendChild(s);
+    }
+
     document.addEventListener('click', function (event) {
         var target = event.target;
         if (!target || !target.closest || !target.closest('#favBtn')) return;
@@ -78,15 +92,14 @@
             if (was === is) return;
             before = after;
             ping(is ? 'save' : 'unsave');
-            /* 有买家身份时，收藏同时写进 D1（换设备登录还在） */
-            if (window.GudongAccount) {
-                var meta = {
-                    seller: sellerId(),
-                    title: (document.querySelector('h1') ? document.querySelector('h1').textContent : '').trim().slice(0, 120)
-                };
-                if (is) window.GudongAccount.saveFav(id, meta);
-                else window.GudongAccount.removeFav(id);
-            }
+            var meta = {
+                seller: sellerId(),
+                title: (document.querySelector('h1') ? document.querySelector('h1').textContent : '').trim().slice(0, 120)
+            };
+            withAccount(function (acc) {
+                if (is) acc.saveFav(id, meta);
+                else acc.removeFav(id);
+            });
         }, 0);
     }, true);
 

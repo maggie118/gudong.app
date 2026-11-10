@@ -55,10 +55,25 @@
     else { arr.splice(i, 1); now = false; }
     write(arr);
     /* 有买家身份时同步进 D1（我的帐户里「我关注的」换设备也在） */
-    if (global.GudongAccount && global.GudongAccount.follow) {
-      try { global.GudongAccount.follow(type, term, term, now); } catch (e) { /* 本地已生效，落库失败不回滚 */ }
-    }
+    ensureAccount(function (acc) {
+      try { acc.follow(type, term, term, now); } catch (e) { /* 本地已生效，落库失败不回滚 */ }
+    });
     return now;
+  }
+  /* account-core.js 只在部分页面挂着，缺了就补加载一次 */
+  var accLoading = false;
+  function ensureAccount(cb) {
+    if (global.GudongAccount && global.GudongAccount.follow) { cb(global.GudongAccount); return; }
+    if (accLoading) return;
+    accLoading = true;
+    var s = document.createElement('script');
+    s.src = '/assets/js/account-core.js';
+    s.onload = function () {
+      accLoading = false;
+      if (global.GudongAccount && global.GudongAccount.follow) cb(global.GudongAccount);
+    };
+    s.onerror = function () { accLoading = false; };
+    document.head.appendChild(s);
   }
   function subsOf(type) {
     return read().filter(function (s) { return s.type === type; }).map(function (s) { return s.term; });
@@ -244,6 +259,8 @@
     isFollowing: isFollowing, toggle: toggle, subsOf: subsOf, count: count,
     matches: matches, injectCss: injectCss, mount: mount, mountChip: mountChip,
     getSeen: getSeen, markSeen: markSeen, beginSession: beginSession, sessionSeen: sessionSeen,
-    parsePrice: parsePrice, watchPrice: watchPrice, dropAlert: dropAlert, isNewSinceSeen: isNewSinceSeen
+    parsePrice: parsePrice, watchPrice: watchPrice, dropAlert: dropAlert, isNewSinceSeen: isNewSinceSeen,
+    ensureAccount: ensureAccount
   };
+  global.GudongEnsureAccount = ensureAccount;
 })(window);

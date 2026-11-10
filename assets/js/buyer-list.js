@@ -200,7 +200,8 @@
         b.addEventListener('click', function () {
           var on = global.GudongFollow.toggle('tag', c.term);
           b.classList.toggle('on', on);
-          if (global.GudongAccount) global.GudongAccount.follow('tag', c.term, c.zh, on);
+          if (global.GudongEnsureAccount) global.GudongEnsureAccount(function (acc) { acc.follow('tag', c.term, c.zh, on); });
+          else if (global.GudongAccount) global.GudongAccount.follow('tag', c.term, c.zh, on);
           if (on) toast(isEn() ? 'Following ' + c.en : '已关注「' + c.zh + '」');
         });
         if (global.GudongFollow.isFollowing('tag', c.term)) b.classList.add('on');
@@ -236,7 +237,6 @@
       var seller = followSeller();
       if (seller && global.GudongFollow && !global.GudongFollow.isFollowing('seller', seller)) {
         global.GudongFollow.toggle('seller', seller);
-        if (global.GudongAccount) global.GudongAccount.follow('seller', seller, seller, true);
       }
       var follows = global.GudongFollow ? global.GudongFollow.all() : [];
 

@@ -67,7 +67,7 @@
     if (accLoading) return;
     accLoading = true;
     var s = document.createElement('script');
-    s.src = '/assets/js/account-core.js';
+    s.src = '/assets/js/account-core.js?v=77';
     s.onload = function () {
       accLoading = false;
       if (global.GudongAccount && global.GudongAccount.follow) cb(global.GudongAccount);

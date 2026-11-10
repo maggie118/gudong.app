@@ -174,9 +174,10 @@
   loadEnquiries();
   loadInterest();
   loadThreads();
-  var poll = window.setInterval(function () { if (!document.hidden) { loadThreads(); loadEnquiries(); } }, 5000);
-  var interestPoll = window.setInterval(function () { if (!document.hidden) loadInterest(); }, 60000);
-  document.addEventListener('visibilitychange', function () { if (!document.hidden) { loadThreads(); loadEnquiries(); loadInterest(); } });
+  // Airtable 免费版每月仅 1,000 次 API 调用：轮询必须慢，且只在窗口真正被聚焦时轮询。
+  var FOCUSED = function () { return !document.hidden && (document.hasFocus ? document.hasFocus() : true); };
+  var poll = window.setInterval(function () { if (FOCUSED()) { loadThreads(); loadEnquiries(); } }, 45000);
+  var interestPoll = window.setInterval(function () { if (FOCUSED()) loadInterest(); }, 300000);
+  document.addEventListener('visibilitychange', function () { if (FOCUSED()) { loadThreads(); loadEnquiries(); loadInterest(); } });
   window.addEventListener('pagehide', function () { clearInterval(poll); clearInterval(interestPoll); });
-  window.addEventListener('pagehide', function () { clearInterval(poll); });
 })();

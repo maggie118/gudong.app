@@ -39,7 +39,7 @@
       .catch(function(){say('回复未能发送，请稍后重试。','Reply could not be sent. Please try again.');})
       .finally(function(){busy=false;form.querySelector('button').disabled=false;});
   });
-  load();poll=window.setInterval(function(){if(!document.hidden)load();},4000);
+  load();poll=window.setInterval(function(){if(!document.hidden)load();},15000);
   document.addEventListener('visibilitychange',function(){if(!document.hidden)load();});
   window.addEventListener('pagehide',function(){if(poll)clearInterval(poll);});
 })();

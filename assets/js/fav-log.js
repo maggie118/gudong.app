@@ -61,14 +61,15 @@
         } catch (e) { /* 计数失败不影响收藏本身 */ }
     }
 
-    // 浏览计数：同一标签页会话内只报一次，避免每次刷新都写一条
+    // 浏览计数：同一浏览器对同一藏品只报一次（跨会话不再重复），把 Airtable 调用压到最低
+    // Airtable 免费版每月仅 1,000 次调用，每多报一次浏览就是 2 次调用（查重 + 写入）
     function logView() {
         var id = itemId();
         if (!id) return;
         try {
             var key = 'gudong_viewed_' + id;
-            if (sessionStorage.getItem(key)) return;
-            sessionStorage.setItem(key, '1');
+            if (localStorage.getItem(key)) return;
+            localStorage.setItem(key, '1');
         } catch (e) { /* 隐私模式下照常上报，交给服务端去重 */ }
         ping('view');
     }

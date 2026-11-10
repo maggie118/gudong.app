@@ -304,10 +304,12 @@
   function itemMeta(id) {
     var it = (listings || {})[id];
     if (!it) return { title: id, seller: '', img: '', url: '../items/' + id + '.html' };
+    /* img_file 有时是多图拼成一串（生成脚本会把 gallery 合并），只取第一张 */
+    var f = String(it.img_file || '').trim().split(/\s+/)[0];
     return {
       title: isEn() ? (it.title_en || it.title_zh || id) : (it.title_zh || it.title_en || id),
       seller: it.seller_name_en || it.seller_id || '',
-      img: it.img_file ? '../assets/images/' + it.img_file : '',
+      img: f ? '../assets/images/' + f : '',
       url: '../items/' + id + '.html'
     };
   }

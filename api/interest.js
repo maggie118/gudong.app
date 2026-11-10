@@ -54,16 +54,14 @@ module.exports = async function handler(req, res) {
 
   try {
     const cutoff = Date.now() - 30 * DAY;
-    const viewAnon = new Set();
     const saveAnon = new Set();
     let offset = '';
-    for (let page = 0; page < 4; page++) {
+    for (let page = 0; page < 2; page++) {
       const url = new URL('https://api.airtable.com/v0/' + encodeURIComponent(BASE) + '/' + encodeURIComponent(TABLE));
-      url.searchParams.set('filterByFormula', 'AND({seller}=' + fstr(sellerId) + ",OR({Status}='active',{Status}='view'))");
+      url.searchParams.set('filterByFormula', 'AND({seller}=' + fstr(sellerId) + ",{Status}='active')");
       url.searchParams.set('pageSize', '100');
       url.searchParams.set('fields[0]', 'anon');
       url.searchParams.set('fields[1]', 'created_at');
-      url.searchParams.set('fields[2]', 'Status');
       if (offset) url.searchParams.set('offset', offset);
       const response = await fetch(url.toString(), { headers: { Authorization: 'Bearer ' + TOKEN } });
       if (!response.ok) throw new Error('airtable ' + response.status);
@@ -73,8 +71,7 @@ module.exports = async function handler(req, res) {
         const who = f.anon || record.id;
         const at = Date.parse(f.created_at || record.createdTime || '');
         if (!Number.isFinite(at) || at < cutoff) return;
-        if (f.Status === 'view') viewAnon.add(who);
-        else saveAnon.add(who);
+        saveAnon.add(who);
       });
       offset = json.offset || '';
       if (!offset) break;
@@ -84,7 +81,7 @@ module.exports = async function handler(req, res) {
       gallery: true,
       saves_30d: saveAnon.size,
       saves_total: saveAnon.size,
-      views_30d: viewAnon.size,
+      views_30d: 0,
       tracked: true
     });
   } catch (_) {

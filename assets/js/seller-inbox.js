@@ -99,13 +99,12 @@
   function drawInterest(data) {
     if (!interestEl) return;
     if (!data || data.gallery === false) { interestEl.hidden = true; interestEl.textContent = ''; return; }
-    var views = Number.isFinite(data.views_30d) ? data.views_30d : 0;
     var saves = Number.isFinite(data.saves_30d) ? data.saves_30d : 0;
-    if (!views && !saves) { interestEl.hidden = true; interestEl.textContent = ''; return; }
+    if (!saves) { interestEl.hidden = true; interestEl.textContent = ''; return; }
     interestEl.hidden = false;
     interestEl.textContent = t(
-      '近 30 天 · ' + views + ' 人浏览 · ' + saves + ' 人收藏 / 关注',
-      'Last 30 days · ' + views + (views === 1 ? ' visitor' : ' visitors') + ' · ' + saves + (saves === 1 ? ' save / follow' : ' saves / follows')
+      '近 30 天 · ' + saves + ' 人收藏 / 关注',
+      'Last 30 days · ' + saves + (saves === 1 ? ' save / follow' : ' saves / follows')
     );
   }
   function loadInterest() {
@@ -174,10 +173,16 @@
   loadEnquiries();
   loadInterest();
   loadThreads();
-  // Airtable 免费版每月仅 1,000 次 API 调用：轮询必须慢，且只在窗口真正被聚焦时轮询。
-  var FOCUSED = function () { return !document.hidden && (document.hasFocus ? document.hasFocus() : true); };
-  var poll = window.setInterval(function () { if (FOCUSED()) { loadThreads(); loadEnquiries(); } }, 45000);
-  var interestPoll = window.setInterval(function () { if (FOCUSED()) loadInterest(); }, 300000);
-  document.addEventListener('visibilitychange', function () { if (FOCUSED()) { loadThreads(); loadEnquiries(); loadInterest(); } });
-  window.addEventListener('pagehide', function () { clearInterval(poll); clearInterval(interestPoll); });
+  // Airtable 免费版每月只有 1,000 次 API 调用（≈每天 33 次），所以收件箱【不自动轮询】：
+  // 打开页面时取一次；之后切回窗口时最多每分钟刷新一次，避免挂机把额度烧光。
+  var lastRefresh = Date.now();
+  function refreshAll() {
+    if (document.hidden) return;
+    var now = Date.now();
+    if (now - lastRefresh < 60000) return;
+    lastRefresh = now;
+    loadThreads(); loadEnquiries(); loadInterest();
+  }
+  window.addEventListener('focus', refreshAll);
+  document.addEventListener('visibilitychange', function () { if (!document.hidden) refreshAll(); });
 })();

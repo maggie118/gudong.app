@@ -91,3 +91,49 @@
 - Airtable 后台 → Workspace 设置里可以看当月 API 用量；每月 1 号看一次。
 - 自测时**别把收件箱 / 私信页长期挂在后台**；测完关掉。
 - 部署构建本身消耗很小（每次 2 次），不用为省额度放弃部署。
+
+## 2026-11-10 落地：机器数据搬去 Cloudflare D1（一劳永逸）
+
+决定：Airtable 只保留「人手维护」的藏品表与藏家表；**收藏计数、站内私信**这两类机器产生的数据
+迁到 Cloudflare D1，由一个 Worker 读写。免费额度是 **每天 10 万行写入 / 500 万行读取 / 5 GB 存储**，
+按现在的用量相当于「不会再撞墙」，也不用升级 Airtable。
+
+### 现在的架构
+
+```
+浏览器 → /api/save、/api/interest、/api/chat、/api/seller-inbox、/api/chat-reply
+        （Vercel 函数：只做签名验权、限流、参数校验）
+        → Worker gudong-data-api（x-gudong-key 共享密钥）
+        → D1 数据库 gudong-data（表 saves / messages）
+Airtable 仍负责：藏品上架表（listings）、藏家表（sellers）、买家名单（buyer_leads）、询价记录
+```
+
+### 关键坐标
+
+- Cloudflare Account ID：`b1b46e9369291ee99b61663ff325785f`
+- D1 数据库 `gudong-data`：`e3a0fbe9-4844-4f48-9fae-4834dc23de5b`
+- Worker：`gudong-data-api` → `https://gudong-data-api.minqi118.workers.dev`
+- 表 `saves`：`item_id / seller / anon / status(active|removed) / created_at / updated_at`，主键 `(item_id, anon)`
+- 表 `messages`：`id / item_id / seller_id / buyer_tmp_id / buyer_label / item_title / sender_type / client_id(唯一) / content / created_at / read_by_seller / read_by_buyer / notification_sent`
+- Vercel 环境变量：`GUDONG_DATA_KEY`（= Worker 的 `INTERNAL_KEY`），`GUDONG_DATA_URL` 可省略（已内置默认）
+- Worker 源码：`cloudflare/worker.js`；重新部署：`CLOUDFLARE_API_TOKEN=... node cloudflare/deploy.mjs`
+
+### 每次交互的 Airtable 成本
+
+| 动作 | 迁移前 | 迁移后 |
+| --- | --- | --- |
+| 收藏 / 取消收藏 | 2 次（查重 + 写入） | 0 |
+| 收件箱打开看统计 | 1–4 次 | 0 |
+| 收件箱读私信线程 | 1 次 | 0 |
+| 买家私信面板取消息 | 1 次 | 0 |
+| 买家发一条消息 | 1 次（去重）/ 2 次 | 1 次（仅校验「这件藏品属于该藏家」） |
+| 构建刷新 listings | 2 次 / 天 | 不变 |
+
+结论：每月的 Airtable 调用量从「几十次交互就爆」降到**只有发消息与询价才会消耗**，
+1,000 次/月对早期流量已经完全够用。
+
+### 纪律
+
+- 不要再把 Airtable 当计数器用；新功能如果会产生高频读写，一律走 Worker + D1。
+- 改 Worker 后必须 `node cloudflare/deploy.mjs` 重新上传，改完用 `/health` 与 `/interest` 各打一次确认。
+- 数据备份：D1 控制台可 `SELECT` 导出；也可以用 `wrangler d1 export gudong-data --output backup.sql`。

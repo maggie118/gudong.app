@@ -587,17 +587,44 @@ async function sendOne(env, sub, payload) {
   return { ok: r.ok || r.status === 201, status: r.status, text: r.ok ? '' : (await r.text()).slice(0, 120) };
 }
 
+/* 2026-11-11：每次运行都留一条记录，避免"到底跑没跑"只能靠猜。
+   以前只能从 push_sent 的 sent_at 反推，没新品时一片空白，用户会以为系统坏了。 */
+async function logRun(env, row) {
+  try {
+    await env.DB.prepare(
+      'INSERT INTO push_runs (run_at, trigger, items, delivered, mails, note) VALUES (?, ?, ?, ?, ?, ?) ON CONFLICT(run_at) DO NOTHING'
+    ).bind(
+      new Date().toISOString(),
+      String((row && row.trigger) || ''),
+      Number((row && row.items) || 0),
+      Number((row && row.delivered) || 0),
+      Number((row && row.mails) || 0),
+      String((row && row.note) || '').slice(0, 160)
+    ).run();
+  } catch (e) {}
+}
+
 async function pushJob(env, opts) {
-  if (!env.VAPID_PUBLIC_KEY || !env.VAPID_PRIVATE_KEY) return { skipped: 'no_vapid' };
+  const trigger = (opts && opts.trigger) || 'cron';
+  if (!env.VAPID_PUBLIC_KEY || !env.VAPID_PRIVATE_KEY) {
+    await logRun(env, { trigger, note: 'skip: no_vapid' });
+    return { skipped: 'no_vapid' };
+  }
   const site = (env.SITE_URL || 'https://www.gudong.app').replace(/\/+$/, '');
   const dry = !!(opts && opts.dry);
 
   let listings;
   try {
     const r = await fetch(site + '/data/listings.json', { headers: { 'cache-control': 'no-cache' } });
-    if (!r.ok) return { skipped: 'listings_' + r.status };
+    if (!r.ok) {
+      await logRun(env, { trigger, note: 'skip: listings_' + r.status });
+      return { skipped: 'listings_' + r.status };
+    }
     listings = await r.json();
-  } catch (e) { return { skipped: 'listings_error' }; }
+  } catch (e) {
+    await logRun(env, { trigger, note: 'skip: listings_error' });
+    return { skipped: 'listings_error' };
+  }
 
   const items = (listings.newListing || []).map(it => ({
     id: it.item_id || '',
@@ -625,8 +652,14 @@ async function pushJob(env, opts) {
      以前是每件一条，3 件新品 = 3 条通知 + 3 封信。 */
   const DIGEST_MAX = 12;
   const fresh = items.filter(it => !sent.has(it.id)).slice(0, DIGEST_MAX);
-  if (!fresh.length) return { sent: 0, note: 'no_new_items' };
-  if (dry) return { dry: true, fresh };
+  if (!fresh.length) {
+    await logRun(env, { trigger, note: 'ok: no_new_items (total ' + items.length + ')' });
+    return { sent: 0, note: 'no_new_items' };
+  }
+  if (dry) {
+    await logRun(env, { trigger, items: fresh.length, note: 'dry: ' + fresh.map(it => it.id).join(',') });
+    return { dry: true, fresh };
+  }
 
   const subs = (await env.DB.prepare(
     'SELECT endpoint, p256dh, auth, buyer_key FROM push_subs LIMIT 1000'
@@ -703,12 +736,13 @@ async function pushJob(env, opts) {
     await env.DB.prepare('INSERT INTO push_sent (item_id, sent_at) VALUES (?, ?) ON CONFLICT(item_id) DO NOTHING')
       .bind(it.id, now).run();
   }
+  await logRun(env, { trigger, items: fresh.length, delivered, mails, note: 'ok: sent ' + fresh.map(it => it.id).join(',') });
   return { items: fresh.length, matched, delivered, dropped: gone, mails, mailFailed, errors: errs.slice(0, 5) };
 }
 
 export default {
   async scheduled(event, env, ctx) {
-    ctx.waitUntil(pushJob(env).catch(() => {}));
+    ctx.waitUntil(pushJob(env, { trigger: 'cron' }).catch(() => {}));
   },
   async fetch(request, env) {
     const url = new URL(request.url);
@@ -746,7 +780,10 @@ export default {
         case '/follow': return await followUpsert(env, body);
         case '/account': return await accountPull(env, url);
         case '/push': return request.method === 'GET' ? await pushList(env, url) : await pushUpsert(env, body);
-        case '/push/run': return json(await pushJob(env, { dry: url.searchParams.get('dry') === '1' }));
+        case '/push/run': return json(await pushJob(env, { dry: url.searchParams.get('dry') === '1', trigger: 'manual' }));
+        case '/push/runs': return json({ runs: (await env.DB.prepare(
+          'SELECT run_at, trigger, items, delivered, mails, note FROM push_runs ORDER BY run_at DESC LIMIT ?'
+        ).bind(Math.min(50, Math.max(1, Number(url.searchParams.get('limit')) || 20))).all()).results || [] });
         case '/mail': return request.method === 'GET' ? await mailList(env) : await mailUpsert(env, body);
         case '/health': return json({ ok: true });
         default: return json({ error: 'not_found' }, 404);

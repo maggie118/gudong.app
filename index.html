@@ -2990,7 +2990,7 @@
             if (!container) return;
             container.innerHTML = items.map(f => {
                 const imgSrc = imgPath(f);
-                const detailUrl = 'item.html?id=' + encodeURIComponent(normId(f.item_id));
+                const detailUrl = '/items/' + encodeURIComponent(normId(f.item_id));
                 const kw = attrKeywords(f);
                 const nz = f.title_zh || f.title_en || '';
                 return `

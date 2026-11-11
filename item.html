@@ -12,7 +12,7 @@
     <meta property="og:title" content="藏品详情 | Antique Item Detail | Gudong.app">
     <meta property="og:description" content="Antique item detail page on Gudong.app. Seller-provided listing; advisory reference only. Gudong.app does not authenticate items or handle transactions.">
     <meta property="og:url" content="https://www.gudong.app/item.html">
-    <meta property="og:image" content="https://www.gudong.app/assets/images/placeholder.jpg">
+    <meta property="og:image" content="https://www.gudong.app/og-cover-v2.jpg">
     <link rel="icon" type="image/png" sizes="16x16" href="assets/icons/favicon-16x16.png">
     <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32x32.png">
     <link rel="manifest" href="manifest.json">
@@ -571,11 +571,11 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
     border-color: var(--color-primary);
 }
     </style>
-    <script type="application/ld+json" id="product-jsonld">{"image":["https://www.gudong.app/assets/images/placeholder.jpg"],"@type":"Product","name":"藏品详情 / Item Detail","description":"藏品详情 / Item Detail. Seller-provided listing information. Gudong.app does not authenticate the item or participate in a sale.","inLanguage":["zh-SG","en-SG"],"url":"https://www.gudong.app/item.html","@context":"https://schema.org"}</script>
+    <script type="application/ld+json" id="product-jsonld">{"image":["https://www.gudong.app/og-cover-v2.jpg"],"@type":"Product","name":"藏品详情 / Item Detail","description":"藏品详情 / Item Detail. Seller-provided listing information. Gudong.app does not authenticate the item or participate in a sale.","inLanguage":["zh-SG","en-SG"],"url":"https://www.gudong.app/item.html","@context":"https://schema.org"}</script>
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="藏品详情 | Antique Item Detail | Gudong.app">
     <meta name="twitter:description" content="Antique item detail page on Gudong.app. Seller-provided listing; advisory reference only. Gudong.app does not authenticate items or handle transactions.">
-    <meta name="twitter:image" content="https://www.gudong.app/assets/images/placeholder.jpg">
+    <meta name="twitter:image" content="https://www.gudong.app/og-cover-v2.jpg">
     <meta property="og:locale" content="zh_SG">
     <meta property="og:locale:alternate" content="en_SG">
     <meta name="apple-mobile-web-app-title" content="古董圈">
@@ -1239,7 +1239,7 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
             if (!name) return;
             // 主图：第一张实际图片
             var imgs = parseImgFiles(f);
-            var image = imgs.length ? imgs : ['https://www.gudong.app/assets/images/placeholder.jpg'];
+            var image = imgs.length ? imgs : ['https://www.gudong.app/og-cover-v2.jpg'];
             var desc = clean(first(f.desc_zh) || first(f.desc_en) || first(f.description_zh) || first(f.description_en));
             // 价格：优先 fixed_price（数字），否则按 price_type 判断
             var priceNum = Number(f.fixed_price);
@@ -1723,7 +1723,7 @@ window.gdSharePage = function () {
     var lang = (document.body.dataset && document.body.dataset.lang) || "zh";
     window.gdShare({
         title: lang === "zh" ? "古董圈 Gudong.app · 新加坡古董释出动态站" : "Gudong.app · Singapore Antiques Daily Radar",
-        text: lang === "zh" ? "每天 5 分钟，看看今天有什么漏可捡" : "5 minutes a day. See what's undervalued today."
+        text: lang === "zh" ? "每天 5 分钟，看看藏家今天释出的新藏品" : "Five minutes a day - new pieces released by collectors today."
     });
 };
 </script>

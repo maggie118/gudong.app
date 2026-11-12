@@ -2071,6 +2071,13 @@
                 </div>
             </div>
             <div class="finds-grid" id="todayFindsGrid"></div>
+            <div class="finds-more">
+                <button type="button" class="tf-shuffle" id="tfShuffle">
+                    <span class="zh">换一批</span><span class="en">Shuffle</span>
+                </button>
+                <span class="tf-count zh">今日发现共 <em id="tfTotal">0</em> 件</span>
+                <span class="tf-count en"><em id="tfTotalEn">0</em> pieces in today's finds</span>
+            </div>
         </section>
 
         <!-- ============ 03 近期释出 · Recently Released ============ -->
@@ -3080,31 +3087,81 @@
              · 优先从 newListing 取前 4 条兜底
              · 若 newListing 也为空 → 显示友好空状态提示
            ============================================================ */
+        /* 「今日发现」轮播取样：
+           1) 只用 is_today_finds 勾选的藏品；
+           2) 每批 4 件，按卖家轮转取，避免某一家占满整屏；
+           3) 日期 + 批次做种子，刷新页面当天保持一致，点「换一批」换下一组，
+              被勾选的藏品（包括博古斋等老卖家）都有机会露脸。 */
+        const TF_SIZE = 4;
+        let tfAll = [];
+        let tfBatch = 0;
+
+        function tfSeed(str) {
+            let h = 0;
+            for (let i = 0; i < str.length; i++) h = (h * 31 + str.charCodeAt(i)) % 100000;
+            return h;
+        }
+
+        function pickTodayFinds(all, batch) {
+            const bySeller = new Map();
+            all.forEach((f) => {
+                const k = (window.GDNorm ? window.GDNorm(f.seller_id) : String(f.seller_id || '')) || '?';
+                if (!bySeller.has(k)) bySeller.set(k, []);
+                bySeller.get(k).push(f);
+            });
+            const sellers = [...bySeller.keys()].sort();
+            if (!sellers.length) return [];
+            const today = new Date().toISOString().slice(0, 10);
+            const start = (batch + tfSeed(today)) % sellers.length;
+            const out = [];
+            for (let pass = 0; pass < 30 && out.length < TF_SIZE; pass++) {
+                for (let i = 0; i < sellers.length && out.length < TF_SIZE; i++) {
+                    const list = bySeller.get(sellers[(start + i) % sellers.length]);
+                    if (list[pass]) out.push(list[pass]);
+                }
+            }
+            return out;
+        }
+
+        function renderTodayFinds() {
+            const tfgrid = document.getElementById('todayFindsGrid');
+            if (!tfgrid) return;
+            tfgrid.removeAttribute('aria-busy');
+            const pool = tfAll.length ? tfAll : [];
+            const tf = pool.length ? pickTodayFinds(pool, tfBatch) : [];
+            if (tf.length) {
+                tfgrid.innerHTML = tf.map(renderFindsCard).join('');
+            } else {
+                tfgrid.innerHTML = `
+                    <div class="no-result" style="flex:1 1 100%;padding:2.5rem 1rem;">
+                        <span class="zh">暂无今日精选，敬请期待明日更新</span>
+                        <span class="en">No featured picks today — check back tomorrow</span>
+                    </div>`;
+            }
+            const sec = tfgrid.closest('section');
+            if (sec) sec.hidden = false;
+            const total = document.getElementById('tfTotal');
+            const totalEn = document.getElementById('tfTotalEn');
+            if (total) total.textContent = String(pool.length);
+            if (totalEn) totalEn.textContent = String(pool.length);
+            const btn = document.getElementById('tfShuffle');
+            if (btn) btn.style.display = pool.length > TF_SIZE ? '' : 'none';
+        }
+
         function applyListingData(data) {
             renderSeats(data.newListing);
 
-            const tfgrid = document.getElementById('todayFindsGrid');
-            if (tfgrid) {
-                tfgrid.removeAttribute('aria-busy');
-                let tf = (data.todayFinds || []).slice(0, 4);
-                // 兜底：今日发现为空时，从 newListing 取前 4 条
-                if (!tf.length && (data.newListing || []).length) {
-                    tf = data.newListing.slice(0, 4);
-                }
-                if (tf.length) {
-                    tfgrid.innerHTML = tf.map(renderFindsCard).join('');
-                    const sec = tfgrid.closest('section');
-                    if (sec) sec.hidden = false;
-                } else {
-                    // 全部为空 → 显示友好空状态，不隐藏板块
-                    tfgrid.innerHTML = `
-                        <div class="no-result" style="flex:1 1 100%;padding:2.5rem 1rem;">
-                            <span class="zh">暂无今日精选，敬请期待明日更新</span>
-                            <span class="en">No featured picks today — check back tomorrow</span>
-                        </div>`;
-                    const sec = tfgrid.closest('section');
-                    if (sec) sec.hidden = false;
-                }
+            // 今日发现：勾选了 is_today_finds 的全部进池，默认按日期轮转展示 4 件
+            tfAll = (data.todayFinds && data.todayFinds.length ? data.todayFinds : (data.newListing || [])).slice();
+            tfBatch = 0;
+            renderTodayFinds();
+            const tfShuffleBtn = document.getElementById('tfShuffle');
+            if (tfShuffleBtn && !tfShuffleBtn.dataset.bound) {
+                tfShuffleBtn.dataset.bound = '1';
+                tfShuffleBtn.addEventListener('click', () => {
+                    tfBatch += 1;
+                    renderTodayFinds();
+                });
             }
 
             const list = document.getElementById('itemList');
@@ -3577,6 +3634,38 @@
     }
     #today-finds .finds-grid { gap: 1.5rem; }
     #today-finds .finds-card { padding: 0 0 1.5rem; }
+    .finds-more {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: .8rem;
+        margin: .2rem 0 .9rem;
+    }
+    .tf-shuffle {
+        font: inherit;
+        font-size: .8rem;
+        letter-spacing: .04em;
+        color: var(--color-primary, #7a4b2a);
+        background: transparent;
+        border: 1px solid rgba(176, 138, 69, .45);
+        border-radius: 999px;
+        padding: .34rem .85rem;
+        cursor: pointer;
+        transition: background .25s, color .25s, border-color .25s;
+    }
+    .tf-shuffle:hover,
+    .tf-shuffle:focus-visible {
+        background: var(--color-primary, #7a4b2a);
+        border-color: var(--color-primary, #7a4b2a);
+        color: #fff;
+        outline: none;
+    }
+    .tf-count {
+        font-size: .74rem;
+        color: var(--color-text-muted, #8b8272);
+        letter-spacing: .02em;
+    }
+    .tf-count em { font-style: normal; font-weight: 600; color: var(--color-text, #2f2a23); }
     #today-finds .finds-image {
         background: #FFFFFF;
         padding: .5rem;

@@ -767,6 +767,33 @@ footer { background: #FBF8F2; border-top: 1px solid var(--hairline); }
   padding: .7rem .9rem; margin-bottom: 1rem; font-size: .82rem; line-height: 1.8; color: #5C554C;
 }
 #serviceModal .pn-note a { color: var(--bronze); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+/* 专业上架 · 加项 */
+#pmAddons { margin: .2rem 0 1rem; padding: 1rem .9rem .85rem; background: #FBF7F0; border: 1px solid rgba(176, 138, 69, .18); border-radius: 3px; }
+#pmAddons .pm-addons-head { font-size: .78rem; font-weight: 600; letter-spacing: .06em; color: #8A6A38; margin-bottom: .7rem; }
+.pm-addon { display: flex; gap: .6rem; align-items: flex-start; padding: .55rem 0; cursor: pointer; border-top: 1px solid rgba(176, 138, 69, .12); }
+.pm-addon:first-of-type { border-top: 0; }
+.pm-addon input { margin-top: .18rem; width: 16px; height: 16px; accent-color: #8A5A3B; flex-shrink: 0; }
+.pm-addon-body { display: block; }
+.pm-addon-title { display: flex; align-items: baseline; gap: .5rem; flex-wrap: wrap; font-size: .9rem; font-weight: 600; color: #3A342C; }
+.pm-addon-title em { font-style: normal; font-size: .84rem; color: #7A4E30; font-weight: 600; }
+.pm-addon-desc { display: block; margin-top: .3rem; font-size: .8rem; line-height: 1.75; color: #6B645B; }
+.pm-addon-desc strong { color: #4A4038; font-weight: 600; }
+.pm-addon-desc.en, .pm-addon-title em .en { display: none; }
+body[data-lang="en"] .pm-addon-desc.zh, body[data-lang="en"] .pm-addon-title em .zh { display: none; }
+body[data-lang="en"] .pm-addon-desc.en, body[data-lang="en"] .pm-addon-title em .en { display: inline; }
+.pm-qty { display: flex; align-items: center; gap: .5rem; padding: .1rem 0 .55rem 1.6rem; font-size: .82rem; color: #5C554C; }
+.pm-qty select { font: inherit; padding: .22rem .4rem; border: 1px solid rgba(176, 138, 69, .35); border-radius: 2px; background: #fff; color: #3A342C; }
+.pm-qty[hidden] { display: none; }
+.pm-total { display: flex; align-items: baseline; justify-content: space-between; margin-top: .7rem; padding-top: .7rem; border-top: 1px solid rgba(176, 138, 69, .22); font-size: .86rem; color: #5C554C; }
+.pm-total b { font-size: 1.16rem; font-weight: 600; color: #7A4E30; letter-spacing: .02em; }
+.pm-cta-note { margin: .55rem 0 0; font-size: .78rem; line-height: 1.7; color: #8C847A; text-align: center; }
+.pm-cta-note .zh, .pm-cta-note .en { display: block; }
+.pm-service-line { margin-bottom: .7rem; padding: .6rem .7rem; background: #FFFDFC; border: 1px dashed rgba(176, 138, 69, .4); border-radius: 2px; font-size: .8rem; line-height: 1.7; color: #4A4038; text-align: left; }
+.pm-cta-row { display: flex; gap: .5rem; align-items: stretch; }
+.pm-cta-row .submit-btn { flex: 1; }
+.pm-copy-btn { flex: 0 0 auto; padding: .7rem .85rem; font: inherit; font-size: .78rem; font-weight: 600; color: #7A4E30; background: #FBF7F0; border: 1px solid rgba(176, 138, 69, .45); border-radius: 3px; cursor: pointer; white-space: nowrap; transition: background .2s, border-color .2s; }
+.pm-copy-btn:hover { background: #F6EFE3; border-color: rgba(176, 138, 69, .7); }
+.pm-copied { margin: .5rem 0 0; font-size: .78rem; color: #2E7D5B; text-align: center; }
 #conciergeModal .cc-kicker {
   display: block; font-size: .62rem; letter-spacing: .24em; color: #9A7635; font-weight: 600; margin-bottom: .5rem;
 }
@@ -1292,6 +1319,44 @@ footer { background: #FBF8F2; border-top: 1px solid var(--hairline); }
       </div>
     </div>
 
+    <!-- 专业上架：可选加项（资料由 Airtable 表单收集，此处只选服务） -->
+    <div class="pm-addons" id="pmAddons">
+      <div class="pm-addons-head">
+        <span class="zh">可选加项 · 按需勾选</span>
+        <span class="en">Optional add-ons — tick what you need</span>
+      </div>
+
+      <label class="pm-addon" for="addonPhoto">
+        <input type="checkbox" id="addonPhoto">
+        <span class="pm-addon-body">
+          <span class="pm-addon-title"><span class="zh">图片基础优化</span><span class="en">Photo optimization</span><em>S$25<span class="zh">/ 张</span><span class="en"> / photo</span></em></span>
+          <span class="pm-addon-desc zh">统一光线与色温、矫正透视与裁切、清除背景杂物、长边统一 1600px 并适度锐化。只让照片更接近实物，<strong>不改器物颜色、不修品相缺陷</strong>。</span>
+          <span class="pm-addon-desc en">Light and colour-temperature matching, perspective and crop correction, background clean-up, 1600px long edge with light sharpening. Photos are brought closer to the real object — <strong>no colour alteration, no retouching of flaws</strong>.</span>
+        </span>
+      </label>
+      <div class="pm-qty" id="pmPhotoQtyWrap">
+        <label for="addonPhotoQty"><span class="zh">优化张数</span><span class="en">Number of photos</span></label>
+        <select id="addonPhotoQty">
+          <option value="1">1</option><option value="2">2</option><option value="3">3</option>
+          <option value="4">4</option><option value="5">5</option>
+        </select>
+      </div>
+
+      <label class="pm-addon" for="addonResearch">
+        <input type="checkbox" id="addonResearch">
+        <span class="pm-addon-body">
+          <span class="pm-addon-title"><span class="zh">资料整理</span><span class="en">Catalogue research &amp; write-up</span><em>S$59<span class="zh">/ 件</span><span class="en"> / item</span></em></span>
+          <span class="pm-addon-desc zh">当资料零散或需要考据时：标题中英编排（年代＋品类＋工艺＋特征）、尺寸与重量规范化、材质与工艺术语核对、品相说明整理，并将您提供的来源与递藏资料编成一段可长期引用、可给买家看的藏品档案。</span>
+          <span class="pm-addon-desc en">For scattered or research-heavy material: bilingual title formatting (period, category, technique, features), standardized dimensions and weight, verified material and technique terms, edited condition statement, and your provenance turned into a durable, buyer-ready catalogue entry.</span>
+        </span>
+      </label>
+
+      <div class="pm-total">
+        <span class="zh">本次合计</span><span class="en">Total</span>
+        <b id="pmTotal">S$288</b>
+      </div>
+    </div>
+
     <div class="compact-warning">
       <div>
         <span class="cw-title"><span class="zh">藏家背书 · 诚意相交</span><span class="en">Collector's Endorsement · Sincere Exchange</span></span>
@@ -1306,11 +1371,12 @@ footer { background: #FBF8F2; border-top: 1px solid var(--hairline); }
       <span class="en">Need <strong>physical photography</strong> or <strong>more photos</strong>? <a href="https://wa.me/6591888952?text=Hi%2C%20I%20need%20photography%20or%20more%20photos" target="_blank" rel="noopener">Contact support</a> to arrange.</span>
     </div>
 
-    <p class="form-hint">
+    <p class="form-hint" id="pmFormHint">
       <span class="zh">不方便填表？<a href="https://wa.me/6591888952?text=%E6%88%91%E6%83%B3%E4%BA%86%E8%A7%A3%E4%B8%8A%E6%9E%B6%E6%9C%8D%E5%8A%A1%EF%BC%8C%E8%AF%B7%E5%B8%AE%E6%88%91" target="_blank" rel="noopener">发语音或预约电话</a>，我们帮您操作。</span>
       <span class="en">Not comfortable with forms? <a href="https://wa.me/6591888952?text=Hi%2C%20please%20help%20me%20list%20an%20item" target="_blank" rel="noopener">Send a voice note or book a call</a> — we'll do it for you.</span>
     </p>
 
+    <div id="pmLegacyFields">
     <div class="publish-form-group">
       <label><span class="zh">WhatsApp *</span><span class="en">WhatsApp *</span></label>
       <input type="text" class="publish-input" id="serviceWhatsapp" placeholder="+65 xxxxxxxx">
@@ -1350,10 +1416,37 @@ footer { background: #FBF8F2; border-top: 1px solid var(--hairline); }
         <span class="en">I agree to the <a href="terms.html" target="_blank">Collector's Endorsement Agreement</a></span>
       </label>
     </div>
+    </div>
 
     <div class="workflow-steps" id="workflowSteps" aria-label="Process steps"></div>
 
-    <div class="submit-bar">
+    <div class="submit-bar" id="pmProCta">
+      <div class="pm-service-line" id="pmServiceLine"></div>
+      <div class="pm-cta-row">
+        <button type="button" class="pm-copy-btn" onclick="copyServiceLine()">
+          <span class="zh">复制服务清单</span><span class="en">Copy service list</span>
+        </button>
+        <button class="submit-btn" onclick="openListingForm()">
+          <span class="zh">填写藏品资料 →</span>
+          <span class="en">Fill in item details →</span>
+        </button>
+      </div>
+      <p class="pm-cta-note">
+        <span class="zh">表单只收藏品资料，没有服务选项栏。打开表单后，把复制的服务清单贴在「藏品详细描述」开头，我们再按这条核对金额与排期。</span>
+        <span class="en">The form collects item details only. Paste the copied service list at the top of the description field so we can match it to your payment and schedule.</span>
+      </p>
+      <p class="pm-copied" id="pmCopied" hidden>
+        <span class="zh">已复制，去粘贴到表单的描述框即可。</span>
+        <span class="en">Copied — paste it into the description field.</span>
+      </p>
+    </div>
+      <p class="form-hint" style="margin-top:.6rem;">
+        <span class="zh">不方便填表？<a href="https://wa.me/6591888952?text=%E6%88%91%E6%83%B3%E4%BA%86%E8%A7%A3%E4%B8%93%E4%B8%9A%E4%B8%8A%E6%9E%B6%EF%BC%8C%E8%AF%B7%E5%B8%AE%E6%88%91" target="_blank" rel="noopener">发语音或预约电话</a>，我们帮您操作。</span>
+        <span class="en">Not comfortable with forms? <a href="https://wa.me/6591888952?text=Hi%2C%20please%20help%20me%20with%20a%20professional%20listing" target="_blank" rel="noopener">Send a voice note or book a call</a> — we'll do it for you.</span>
+      </p>
+    </div>
+
+    <div class="submit-bar" id="pmLegacyCta">
       <button class="submit-btn" onclick="submitServiceForm()">
         <span class="zh">提交审核，WhatsApp 联系我们 →</span>
         <span class="en">Submit for review — contact us on WhatsApp →</span>
@@ -1394,19 +1487,20 @@ footer { background: #FBF8F2; border-top: 1px solid var(--hairline); }
       title: { zh: '专业上架申请', en: 'Professional Listing' },
       unit: { zh: '/ 件 · 展示 12 个月 · 含首页精选 7 天', en: '/ item · 12-month display · incl. 7-day homepage feature' },
       list: [
-        { zh: '<strong>5 张</strong>图片优化（正面、背面、上面、底部、细节）+ 标题/描述/标签完整编排', en: '<strong>5</strong> photo optimizations (front, back, top, base, detail) + full title/description/tag curation' },
-        { zh: '<strong>优先审核</strong>，3 个工作日上架', en: '<strong>Priority review</strong>, live in 3 working days' },
-        { zh: '展示期 <strong>12 个月</strong>', en: '<strong>12-month</strong> display' },
-        { zh: '<strong>首页精选 7 天</strong>（独立精选位）', en: '<strong>7-day homepage feature</strong> (curated slot)' }
+        { zh: '<strong>优先审核</strong>，3 个工作日内上架', en: '<strong>Priority review</strong>, live within 3 working days' },
+        { zh: '展示期 <strong>12 个月</strong>，含<strong>首页精选 7 天</strong>（独立精选位）', en: '<strong>12-month</strong> display, incl. <strong>7-day homepage feature</strong> (curated slot)' },
+        { zh: '标题、描述、标签与图片排布由编辑完成，<strong>基于您在下方表单提交的资料</strong>', en: 'Title, description, tags and photo layout curated by our editor, <strong>based on the details you submit in the form</strong>' }
       ],
-      note: { zh: '不改变器物真实颜色、形状与品相。', en: "We never alter the item's true colour, shape or condition." },
+      note: { zh: '藏品名称、年代、品类、尺寸、重量、图片与报价，请在提交表单里填写，本弹窗不重复收集。不改变器物真实颜色、形状与品相。', en: 'Item name, period, category, dimensions, weight, photos and price are collected in the submission form — not duplicated here. We never alter the true colour, shape or condition.' },
       maxPhotos: 5,
+      addons: { photoUnit: 25, researchUnit: 59 },
+      formUrl: 'https://airtable.com/apprn6XDQnAm8bkaT/pagLlGrrcpRWrcaWM/form',
       fileLabel: { zh: '上传藏品图片（最多 5 张：正面、背面、上面、底部、细节）', en: 'Upload photos (max. 5: front, back, top, base, detail)' },
       fee: '专业上架（S$288 / 件 · 展示 12 个月 · 含首页精选 7 天；早鸟价，全价 S$488）',
       msgTitle: '【专业上架申请 - 古董圈】',
       steps: {
-        zh: ['提交审核', 'WhatsApp 付 PayNow', '3 个工作日上架'],
-        en: ['Submit', 'Pay via PayNow', 'Live in 3 days']
+        zh: ['填写藏品表单', '确认服务与付款', '3 个工作日上架'],
+        en: ['Submit item form', 'Confirm & pay', 'Live in 3 days']
       }
     },
     gallery: {
@@ -1489,8 +1583,112 @@ footer { background: #FBF8F2; border-top: 1px solid var(--hairline); }
 
     renderWorkflowSteps(cfg);
 
+    pmSyncForType(type);
+
     if (modal) modal.classList.add('open');
     document.body.style.overflow = 'hidden';
+  }
+
+  /* ===== 专业上架：加项与合计 ===== */
+  function pmSyncForType(type) {
+    var isPro = type === 'professional';
+    var addons = document.getElementById('pmAddons');
+    var legacy = document.getElementById('pmLegacyFields');
+    var proCta = document.getElementById('pmProCta');
+    var legacyCta = document.getElementById('pmLegacyCta');
+    var pnNote = document.querySelector('.pn-note');
+    if (addons) addons.style.display = isPro ? '' : 'none';
+    if (legacy) legacy.style.display = isPro ? 'none' : '';
+    if (proCta) proCta.style.display = isPro ? '' : 'none';
+    if (legacyCta) legacyCta.style.display = isPro ? 'none' : '';
+    if (pnNote) pnNote.style.display = isPro ? 'none' : '';
+    var formHint = document.getElementById('pmFormHint');
+    if (formHint) formHint.style.display = isPro ? 'none' : '';
+    if (isPro) {
+      var cbP = document.getElementById('addonPhoto');
+      var cbR = document.getElementById('addonResearch');
+      if (cbP) cbP.checked = false;
+      if (cbR) cbR.checked = false;
+      var qty = document.getElementById('addonPhotoQty');
+      if (qty) qty.value = '5';
+      pmRecalc();
+    }
+  }
+
+  function pmAddonSelection() {
+    var cfg = SERVICE_CONFIGS.professional;
+    var photo = document.getElementById('addonPhoto');
+    var research = document.getElementById('addonResearch');
+    var qtyEl = document.getElementById('addonPhotoQty');
+    var photoOn = !!(photo && photo.checked);
+    var researchOn = !!(research && research.checked);
+    var qty = qtyEl ? parseInt(qtyEl.value, 10) || 1 : 1;
+    var base = 288;
+    var photoSum = photoOn ? cfg.addons.photoUnit * qty : 0;
+    var researchSum = researchOn ? cfg.addons.researchUnit : 0;
+    return {
+      photoOn: photoOn, researchOn: researchOn, qty: qty,
+      photoSum: photoSum, researchSum: researchSum,
+      total: base + photoSum + researchSum
+    };
+  }
+
+  function pmServiceText() {
+    var sel = pmAddonSelection();
+    var parts = ['专业上架 S$288'];
+    if (sel.photoOn) parts.push('图片基础优化 ' + sel.qty + ' 张 S$' + sel.photoSum);
+    if (sel.researchOn) parts.push('资料整理 S$59');
+    return '【服务选项】' + parts.join(' + ') + ' = 合计 S$' + sel.total;
+  }
+
+  function pmRecalc() {
+    var qtyWrap = document.getElementById('pmPhotoQtyWrap');
+    var photo = document.getElementById('addonPhoto');
+    if (qtyWrap) qtyWrap.hidden = !(photo && photo.checked);
+    var sel = pmAddonSelection();
+    var t = document.getElementById('pmTotal');
+    if (t) t.textContent = 'S$' + sel.total;
+    var line = document.getElementById('pmServiceLine');
+    if (line) line.textContent = pmServiceText();
+    var copied = document.getElementById('pmCopied');
+    if (copied) copied.hidden = true;
+  }
+
+  (function bindAddons() {
+    var photo = document.getElementById('addonPhoto');
+    var research = document.getElementById('addonResearch');
+    var qty = document.getElementById('addonPhotoQty');
+    [photo, research, qty].forEach(function (el) { if (el) el.addEventListener('change', pmRecalc); });
+  })();
+
+  function copyServiceLine() {
+    var text = pmServiceText();
+    var done = function () {
+      var c = document.getElementById('pmCopied');
+      if (c) c.hidden = false;
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done, function () { pmFallbackCopy(text, done); });
+    } else {
+      pmFallbackCopy(text, done);
+    }
+  }
+
+  function pmFallbackCopy(text, done) {
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand('copy'); done(); } catch (e) {}
+    document.body.removeChild(ta);
+  }
+
+  function openListingForm() {
+    var cfg = SERVICE_CONFIGS.professional;
+    window.open(cfg.formUrl, '_blank', 'noopener');
+    closeServiceModal();
   }
 
   function closeServiceModal() {

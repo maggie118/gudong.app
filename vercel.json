@@ -7,7 +7,7 @@
   ],
   "rewrites": [
     { "source": "/sitemap.xml", "destination": "/api/sitemap.xml" },
-    { "source": "/items/:id", "destination": "/item.html?id=:id" }
+    { "source": "/items/:id", "destination": "/item?id=:id" }
   ],
   "headers": [
     {

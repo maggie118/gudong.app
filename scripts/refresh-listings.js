@@ -443,41 +443,11 @@ async function main() {
     process.exit(0);
   }
 
-  // 今日发现 = 付费曝光位。规则：
-  //   1) 必须勾了 is_today_finds（= 已付费买位），且曝光未过期；
-  //   2) 按档位从高到低排；同档位里先到期的先排前，保证每件付费藏品都能轮到首屏；
-  //   3) 同一卖家最多 2 件进队列前排，避免一家占满整屏。
-  const today = new Date().toISOString().slice(0, 10);
-  const paidActive = live.filter((i) => {
-    if (!i.is_today_finds) return false;
-    const until = String(i.exposure_until || '').slice(0, 10);
-    return !until || until >= today;
-  });
-  const tierOf = (i) => Number(i.exposure_tier) || 1;
-  const sortedPaid = paidActive.slice().sort((a, b) => {
-    const t = tierOf(b) - tierOf(a);
-    if (t) return t;
-    const ua = String(a.exposure_until || '9999-12-31').slice(0, 10);
-    const ub = String(b.exposure_until || '9999-12-31').slice(0, 10);
-    if (ua !== ub) return ua < ub ? -1 : 1;
-    return String(a.listed_at || '').localeCompare(String(b.listed_at || ''));
-  });
-  const perSeller = {};
-  const capPerSeller = Math.max(1, Math.floor(sortedPaid.length / 4));
-  const todayFinds = [];
-  const overflow = [];
-  for (const i of sortedPaid) {
-    const sid = String(i.seller_id || '').trim();
-    perSeller[sid] = perSeller[sid] || 0;
-    if (perSeller[sid] < capPerSeller) { perSeller[sid] += 1; todayFinds.push(i); } else { overflow.push(i); }
-  }
-  todayFinds.push(...overflow);
-
   const payload = {
-    todayFinds,
+    todayFinds: [],
     // 付费位不足 4 件时，用编辑精选（未买位的在售藏品）垫满，不抢付费位
-    editorPicks: paidActive.length < 4 ? live.filter((i) => !i.is_today_finds && i.status === 'active').slice(0, 4 - paidActive.length) : [],
-    paidFindsCount: paidActive.length,
+    editorPicks: [],
+    paidFindsCount: 0,
     newListing: live,
     sellers: [],
     intel: mergeIntel(buildAutoIntel(live)),
@@ -505,6 +475,69 @@ async function main() {
   } else if (old && Array.isArray(old.sellers) && old.sellers.length) {
     payload.sellers = old.sellers;
   }
+
+  // ---------- 今日发现 = 付费曝光位 ----------
+  // 规则（按业务口径）：
+  //   1) 私家藏馆付费开通后，店内藏品免费在「今日发现」展示 7 天，
+  //      窗口 = gallery_started_at 起算 7 天（含开通当天），到期自动退出；
+  //   2) 另外单独买曝光位的藏品（勾 is_today_finds）也在队列里，
+  //      若填了 exposure_until 则以该日期为准；
+  //   3) 排序：档位高者在前，同档位先到期者在前，让每件都能轮到首屏；
+  //   4) 同一卖家在队列前排设有上限，避免一家占满整屏。
+  const GALLERY_FREE_DAYS = 7;
+  const dayMs = 86400000;
+  const galleryWindows = new Map();
+  for (const s of payload.sellers) {
+    if (!s.gallery) continue;
+    const start = String(s.gallery_started_at || '').slice(0, 10);
+    if (!start) continue;
+    const end = new Date(new Date(start + 'T00:00:00Z').getTime() + GALLERY_FREE_DAYS * dayMs).toISOString().slice(0, 10);
+    galleryWindows.set(String(s.seller_id || '').trim(), { start, end });
+  }
+
+  const eligible = live.filter((i) => {
+    const w = galleryWindows.get(String(i.seller_id || '').trim());
+    if (w && todayStr >= w.start && todayStr < w.end) return true; // 开馆首 7 天免费曝光
+    const until = String(i.exposure_until || '').slice(0, 10);
+    if (i.is_today_finds && until && until >= todayStr) return true; // 另行买位且有到期日
+    return false;
+  });
+  const ignoredTicks = live.filter((i) => i.is_today_finds && !String(i.exposure_until || '').slice(0, 10)).length;
+  if (ignoredTicks) {
+    log(`[今日发现] 有 ${ignoredTicks} 件勾了 is_today_finds 但没填 exposure_until，已按「免费 7 天已过期」处理，未进入曝光位`);
+  }
+
+  const tierOf = (i) => Number(i.exposure_tier) || 1;
+  const sortedEligible = eligible.slice().sort((a, b) => {
+    const t = tierOf(b) - tierOf(a);
+    if (t) return t;
+    const ua = String(a.exposure_until || '9999-12-31').slice(0, 10);
+    const ub = String(b.exposure_until || '9999-12-31').slice(0, 10);
+    if (ua !== ub) return ua < ub ? -1 : 1;
+    return String(a.listed_at || '').localeCompare(String(b.listed_at || ''));
+  });
+
+  const perSeller = {};
+  const capPerSeller = Math.max(1, Math.ceil(sortedEligible.length / 4));
+  const todayFinds = [];
+  const overflow = [];
+  for (const i of sortedEligible) {
+    const sid = String(i.seller_id || '').trim();
+    perSeller[sid] = perSeller[sid] || 0;
+    if (perSeller[sid] < capPerSeller) { perSeller[sid] += 1; todayFinds.push(i); } else { overflow.push(i); }
+  }
+  todayFinds.push(...overflow);
+
+  payload.todayFinds = todayFinds;
+  payload.paidFindsCount = sortedEligible.length;
+  // 曝光位不足 4 件时，用编辑精选补位（不计入付费曝光）
+  payload.editorPicks = sortedEligible.length < 4
+    ? live.filter((i) => !eligible.includes(i) && i.status === 'active').slice(0, 4 - sortedEligible.length)
+    : [];
+  const freeWindowSellers = [...galleryWindows.entries()]
+    .filter(([, w]) => todayStr >= w.start && todayStr < w.end)
+    .map(([sid, w]) => `${sid}(${w.start}→${w.end})`);
+  log(`[今日发现] 曝光位 ${sortedEligible.length} 件；藏馆免费 7 天窗口生效中：${freeWindowSellers.join(', ') || '无'}`);
 
   // 到期提醒数据（写入 listings.json 供前端/后续通知器使用；同时落一份独立报告便于查看）
   const expiringGalleries = payload.sellers
@@ -540,10 +573,10 @@ async function main() {
     }
   } catch (e) { /* 报告非关键，失败不影响主流程 */ }
 
-  // editorPicks 现在只承担「付费位不足 4 件时补位」的角色：
-  // 付费位够用就不再沿用旧编辑精选，否则会悄悄挤进首页。
-  if (paidActive.length < 4 && old && Array.isArray(old.editorPicks) && old.editorPicks.length && !payload.editorPicks.length) {
-    payload.editorPicks = old.editorPicks.slice(0, 4 - paidActive.length);
+  // editorPicks 只承担「曝光位不足 4 件时补位」的角色：
+  // 曝光位够用就不再沿用旧编辑精选，否则会悄悄挤进首页。
+  if (payload.paidFindsCount < 4 && old && Array.isArray(old.editorPicks) && old.editorPicks.length && !payload.editorPicks.length) {
+    payload.editorPicks = old.editorPicks.slice(0, 4 - payload.paidFindsCount);
   }
 
   fs.writeFileSync(OUT_FILE, JSON.stringify(payload, null, 2), 'utf8');

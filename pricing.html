@@ -787,7 +787,9 @@ body[data-lang="en"] .pm-addon-desc.en, body[data-lang="en"] .pm-addon-title em 
 .pm-total { display: flex; align-items: baseline; justify-content: space-between; margin-top: .7rem; padding-top: .7rem; border-top: 1px solid rgba(176, 138, 69, .22); font-size: .86rem; color: #5C554C; }
 .pm-total b { font-size: 1.16rem; font-weight: 600; color: #7A4E30; letter-spacing: .02em; }
 .pm-cta-note { margin: .55rem 0 0; font-size: .78rem; line-height: 1.7; color: #8C847A; text-align: center; }
-.pm-cta-note .zh, .pm-cta-note .en { display: block; }
+.pm-cta-note .zh, .pm-cta-note .en { display: none; }
+[data-lang="zh"] .pm-cta-note .zh { display: block; }
+[data-lang="en"] .pm-cta-note .en { display: block; }
 .pm-service-line { margin-bottom: .7rem; padding: .6rem .7rem; background: #FFFDFC; border: 1px dashed rgba(176, 138, 69, .4); border-radius: 2px; font-size: .8rem; line-height: 1.7; color: #4A4038; text-align: left; }
 .pm-cta-row { display: flex; gap: .5rem; align-items: stretch; }
 .pm-cta-row .submit-btn { flex: 1; }

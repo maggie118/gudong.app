@@ -132,7 +132,7 @@
  * - 区块标题「今日情报」改为「掌握收藏动态」；
  * - 提升缓存版本，强制已安装 PWA 刷新页面
  */
-const CACHE_NAME = 'antique-collection-v107';
+const CACHE_NAME = 'antique-collection-v108';
 // 预缓存清单：核心页面 + 常用图标 + 占位图 + 工具页（离线可用）
 // 注意：改用逐个 cache.add，单个 404 不会导致整个 install 失败
 const PRECACHE_ASSETS = [
@@ -167,6 +167,13 @@ const PRECACHE_ASSETS = [
   '/items/item-yak-03.html',
   '/items/item-limck-01.html',
   '/items/item-limck-02.html',
+  '/items/item-limck-03.html',
+  '/items/item-sun-02.html',
+  '/items/item-sun-03.html',
+  '/items/item-sun-04.html',
+  '/items/item-chrysler-01.html',
+  '/items/item-chrysler-02.html',
+  '/items/item-raojr-01.html',
   '/tools/index.html',
   '/tools/era-lookup.html',
   '/tools/ganzhi.html',

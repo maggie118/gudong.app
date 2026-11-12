@@ -2966,6 +2966,12 @@
             const kw = attrKeywords(f);
             const metaZh = [f.era_zh, f.category].filter(Boolean).join(' · ');
             const metaEn = [f.era_en, f.category].filter(Boolean).join(' · ');
+            const seller = (window.__SELLER_META || {})[normId(f.seller_id)] || {};
+            const sellerZh = seller.display_zh || '';
+            const sellerEn = seller.display_en || '';
+            const sellerHtml = (sellerZh || sellerEn) ? `
+                <div class="finds-seller zh">${esc(sellerZh || sellerEn)}</div>
+                <div class="finds-seller en">${esc(sellerEn || sellerZh)}</div>` : '';
             const reason = reasonFor(f);
             const reasonHtml = reason ? `
                 <div class="finds-reason zh">${esc(reason.zh)}</div>
@@ -2983,6 +2989,7 @@
                   </button>
                 </div>
                 <div class="finds-title zh">${esc(f.title_zh)}</div><div class="finds-title en">${esc(f.title_en)}</div>
+                ${sellerHtml}
                 ${priceHtml(f, 'finds-price')}
                 ${reasonHtml}
                 ${gfAlertHtml(f)}
@@ -3150,6 +3157,13 @@
 
         function applyListingData(data) {
             renderSeats(data.newListing);
+
+            // 卖家名表：今日发现等卡片上标出「哪家藏馆的藏品」
+            window.__SELLER_META = {};
+            (data.sellers || []).forEach((s) => {
+                const k = normId(s.seller_id);
+                if (k) window.__SELLER_META[k] = { display_zh: s.display_zh, display_en: s.display_en, gallery: !!s.gallery };
+            });
 
             // 付费曝光位：只取 todayFinds（数据层已按付费与有效期过滤）
             tfAll = (data.todayFinds || []).slice();
@@ -3671,6 +3685,13 @@
         letter-spacing: .02em;
     }
     .tf-count em { font-style: normal; font-weight: 600; color: var(--color-text, #2f2a23); }
+    .finds-seller {
+        margin: -.2rem 0 .45rem;
+        font-size: .72rem;
+        letter-spacing: .04em;
+        color: var(--color-primary, #7a4b2a);
+        opacity: .8;
+    }
     #today-finds .finds-image {
         background: #FFFFFF;
         padding: .5rem;

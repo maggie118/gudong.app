@@ -832,6 +832,15 @@ body[data-lang="en"] .pm-addon-desc.en, body[data-lang="en"] .pm-addon-title em 
   color: #6B4A2E; letter-spacing: .04em; margin-bottom: .3rem; line-height: 1.6;
 }
 #conciergeModal .cc-note div:last-child span { font-size: .82rem; line-height: 1.9; color: #5C554C; }
+#conciergeModal .cc-fees { margin: 0 0 1.25rem; border-top: 1px solid rgba(176, 138, 69, .2); }
+#conciergeModal .cc-fees-head { font-size: .78rem; font-weight: 600; letter-spacing: .05em; color: #8A6A38; margin: .55rem 0 .2rem; }
+#conciergeModal .cc-fee { display: flex; align-items: flex-start; justify-content: space-between; gap: .8rem; padding: .5rem 0; border-bottom: 1px solid rgba(176, 138, 69, .13); }
+#conciergeModal .cc-fee-body { min-width: 0; }
+#conciergeModal .cc-fee-name { font-size: .85rem; font-weight: 600; color: #3A342C; }
+#conciergeModal .cc-fee-desc { margin-top: .2rem; font-size: .75rem; line-height: 1.65; color: #7C746A; }
+#conciergeModal .cc-fee-price { flex: 0 0 auto; font-size: .84rem; font-weight: 600; color: #7A4E30; white-space: nowrap; text-align: right; }
+#conciergeModal .cc-fee-price.free { color: #2E7D5B; }
+#conciergeModal .cc-fees-note { margin: .55rem 0 0; font-size: .74rem; line-height: 1.65; color: #9A9288; }
 </style>
 </head>
 <body data-lang="zh">
@@ -2219,6 +2228,36 @@ body[data-lang="zh"] .gd-install-modal .en { display: none; }
     <div class="cc-note">
       <div class="cc-note-title"><span class="zh">免费登记您的求购需求</span><span class="en">Register your needs for free</span></div>
       <div><span class="zh">留下您的需求，一旦有匹配的藏品释出，客服会第一时间通过 WhatsApp 联系您。</span><span class="en">Leave your requirements. If a matching piece is released, our team will contact you via WhatsApp.</span></div>
+    </div>
+
+    <div class="cc-fees">
+      <div class="cc-fees-head"><span class="zh">寻宝服务与收费</span><span class="en">Sourcing services &amp; fees</span></div>
+
+      <div class="cc-fee">
+        <div class="cc-fee-body">
+          <div class="cc-fee-name"><span class="zh">基础匹配</span><span class="en">Basic matching</span></div>
+          <div class="cc-fee-desc"><span class="zh">从平台藏家中筛选，遇到合适藏品并征得藏家同意后再牵线。</span><span class="en">We screen our collectors and only connect you once a matching piece appears and the collector agrees.</span></div>
+        </div>
+        <div class="cc-fee-price free"><span class="zh">免费</span><span class="en">Free</span></div>
+      </div>
+
+      <div class="cc-fee">
+        <div class="cc-fee-body">
+          <div class="cc-fee-name"><span class="zh">人工寻宝服务</span><span class="en">Assisted sourcing</span></div>
+          <div class="cc-fee-desc"><span class="zh">按您的具体要求人工检索、定向联系藏家，给出一份候选清单。</span><span class="en">Hand-searched against your brief, with collectors approached directly and a shortlist returned.</span></div>
+        </div>
+        <div class="cc-fee-price">S$99<span class="zh">／次</span><span class="en"> / request</span></div>
+      </div>
+
+      <div class="cc-fee">
+        <div class="cc-fee-body">
+          <div class="cc-fee-name"><span class="zh">深度寻宝顾问服务</span><span class="en">Deep sourcing advisory</span></div>
+          <div class="cc-fee-desc"><span class="zh">长线求购、多件或整套收藏、跨市场寻找与谈价建议。</span><span class="en">Long-term hunting, multi-piece or full-set collections, cross-market search and negotiation advice.</span></div>
+        </div>
+        <div class="cc-fee-price"><span class="zh">按实际要求收费</span><span class="en">Quoted per brief</span></div>
+      </div>
+
+      <p class="cc-fees-note"><span class="zh">不保证一定找到藏品；未经藏家同意，我们不会把卖家联系方式提供给任何人。</span><span class="en">We never guarantee a find, and seller contacts are never shared without the collector's consent.</span></p>
     </div>
 
     <div class="publish-form-group">

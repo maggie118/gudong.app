@@ -3123,10 +3123,24 @@
             const today = new Date().toISOString().slice(0, 10);
             const start = (batch + tfSeed(today)) % sellers.length;
             const out = [];
+            const used = new Set();
+            // 每换一批，各卖家都往后挪一件，所以内容会变（不只是位置轮换）
             for (let pass = 0; pass < 30 && out.length < TF_SIZE; pass++) {
                 for (let i = 0; i < sellers.length && out.length < TF_SIZE; i++) {
                     const list = bySeller.get(sellers[(start + i) % sellers.length]);
-                    if (list[pass]) out.push(list[pass]);
+                    const item = list[(batch + pass) % list.length];
+                    const key = item && item.item_id;
+                    if (item && !used.has(key)) {
+                        used.add(key);
+                        out.push(item);
+                    }
+                }
+            }
+            // 还不够 4 件（比如某家只有 1 件）时，用池里剩下的补齐
+            if (out.length < TF_SIZE) {
+                for (const f of all) {
+                    if (out.length >= TF_SIZE) break;
+                    if (!used.has(f.item_id)) { used.add(f.item_id); out.push(f); }
                 }
             }
             return out;

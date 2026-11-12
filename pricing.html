@@ -832,8 +832,12 @@ body[data-lang="en"] .pm-addon-desc.en, body[data-lang="en"] .pm-addon-title em 
   color: #6B4A2E; letter-spacing: .04em; margin-bottom: .3rem; line-height: 1.6;
 }
 #conciergeModal .cc-note div:last-child span { font-size: .82rem; line-height: 1.9; color: #5C554C; }
-#conciergeModal .cc-fees { margin: 0 0 1.25rem; border-top: 1px solid rgba(176, 138, 69, .2); }
-#conciergeModal .cc-fees-head { font-size: .78rem; font-weight: 600; letter-spacing: .05em; color: #8A6A38; margin: .55rem 0 .2rem; }
+#pmAddons .pm-select {
+  display: block; margin-top: .5rem; width: 100%; max-width: 260px;
+  padding: .42rem .5rem; font-size: .78rem; font-family: inherit; color: #3A342C;
+  border: 1px solid rgba(176, 138, 69, .38); border-radius: 4px; background: #FFFDF8;
+}
+#conciergeModal .cc-fees { margin: 0 0 1.25rem; border-top: 1px solid rgba(176, 138, 69, .2); }#conciergeModal .cc-fees-head { font-size: .78rem; font-weight: 600; letter-spacing: .05em; color: #8A6A38; margin: .55rem 0 .2rem; }
 #conciergeModal .cc-fee { display: flex; align-items: flex-start; justify-content: space-between; gap: .8rem; padding: .5rem 0; border-bottom: 1px solid rgba(176, 138, 69, .13); }
 #conciergeModal .cc-fee-body { min-width: 0; }
 #conciergeModal .cc-fee-name { font-size: .85rem; font-weight: 600; color: #3A342C; }
@@ -1428,9 +1432,17 @@ body[data-lang="en"] .pm-addon-desc.en, body[data-lang="en"] .pm-addon-title em 
           <div class="pm-group-title"><span class="zh">私家藏馆专属</span><span class="en">Private collection only</span></div>
           <label class="pm-addon pm-addon-sm" for="addonGalleryPdf">
             <input type="checkbox" id="addonGalleryPdf">
-            <span class="pm-addon-body"><span class="pm-addon-title"><span class="zh">藏馆藏品 PDF</span><span class="en">Collection PDF</span><em>S$39<span class="zh">/ 份</span><span class="en"> / copy</span></em></span>
-              <span class="pm-addon-desc zh">把您私家藏馆里的藏品做成一份精美 PDF，挂在藏馆页供买家直接下载：封面与藏家简介、专属 QR、逐件图版与规格（年代／尺寸／材质／工艺）、来源与品相说明。按份计费；藏馆换版或换季可再出一份。</span>
-              <span class="pm-addon-desc en">A beautifully laid-out PDF of your private collection, downloadable from your page: cover and collector profile, your QR, one plate per item with period, dimensions, material and technique, plus provenance and condition notes. Priced per copy; order a new one each season.</span>
+            <span class="pm-addon-body"><span class="pm-addon-title"><span class="zh">藏馆藏品 PDF</span><span class="en">Collection PDF</span><em id="galleryPdfPrice">S$39<span class="zh">/ 份</span><span class="en"> / copy</span></em></span>
+              <span class="pm-addon-desc zh">把您私家藏馆里的藏品做成一份精美 PDF，挂在藏馆页供买家直接下载：封面与藏家简介、专属 QR、逐件图版与规格（年代／尺寸／材质／工艺）、来源与品相说明。10 件以内 S$39，超出每 10 件加 S$20。</span>
+              <span class="pm-addon-desc en">A beautifully laid-out PDF of your private collection, downloadable from your page: cover and collector profile, your QR, one plate per item with period, dimensions, material and technique, plus provenance and condition notes. S$39 for up to 10 items, +S$20 per additional 10 items.</span>
+              <select id="addonGalleryPdfQty" class="pm-select" hidden>
+                <option value="39">1–10 件 · S$39</option>
+                <option value="59">11–20 件 · S$59</option>
+                <option value="79">21–30 件 · S$79</option>
+                <option value="99">31–40 件 · S$99</option>
+                <option value="119">41–50 件 · S$119</option>
+                <option value="0">50 件以上 · 另议</option>
+              </select>
             </span>
           </label>
           <label class="pm-addon pm-addon-sm" for="addonInterview">
@@ -1740,7 +1752,18 @@ body[data-lang="en"] .pm-addon-desc.en, body[data-lang="en"] .pm-addon-title em 
     addonInterview: { zh: '藏家专访·藏家故事', en: 'collector interview', price: 'S$99–199' }
   };
   var PM_PACK = 100;
-  var PM_GALLERY_PDF = 39;
+
+  function pmGalleryPdfSel() {
+    var el = document.getElementById('addonGalleryPdfQty');
+    if (!el) return { on: pmChecked('addonGalleryPdf'), price: 39, quote: false, label: '1–10 件' };
+    var v = parseInt(el.value, 10) || 0;
+    return {
+      on: pmChecked('addonGalleryPdf'),
+      price: v,
+      quote: v === 0,
+      label: el.options[el.selectedIndex] ? el.options[el.selectedIndex].text.split(' · ')[0] : ''
+    };
+  }
 
   function pmBasePrice() {
     return currentServiceType === 'gallery' ? 588 : 288;
@@ -1753,8 +1776,9 @@ body[data-lang="en"] .pm-addon-desc.en, body[data-lang="en"] .pm-addon-title em 
   function pmAddonSelection() {
     var packOn = pmChecked('addonPack');
     var packSum = packOn ? PM_PACK : 0;
-    var galleryPdfOn = pmChecked('addonGalleryPdf');
-    var galleryPdfSum = galleryPdfOn ? PM_GALLERY_PDF : 0;
+    var pdf = pmGalleryPdfSel();
+    var galleryPdfOn = pdf.on;
+    var galleryPdfSum = (pdf.on && !pdf.quote) ? pdf.price : 0;
 
     var exposure = [];
     var expSum = 0;
@@ -1769,7 +1793,7 @@ body[data-lang="en"] .pm-addon-desc.en, body[data-lang="en"] .pm-addon-title em 
 
     return {
       packOn: packOn, packSum: packSum,
-      galleryPdfOn: galleryPdfOn, galleryPdfSum: galleryPdfSum,
+      galleryPdfOn: galleryPdfOn, galleryPdfSum: galleryPdfSum, galleryPdfQuote: pdf.on && pdf.quote,
       exposure: exposure, expSum: expSum,
       ranges: ranges,
       total: pmBasePrice() + packSum + galleryPdfSum + expSum
@@ -1779,7 +1803,10 @@ body[data-lang="en"] .pm-addon-desc.en, body[data-lang="en"] .pm-addon-title em 
   function pmAddonParts(sel) {
     var parts = [];
     if (sel.packOn) parts.push('图片文字整理包（5 张图片优化 + 资料整理）S$' + PM_PACK);
-    if (sel.galleryPdfOn) parts.push('藏馆藏品 PDF S$' + PM_GALLERY_PDF + '/份');
+    if (sel.galleryPdfOn) {
+      var tier = pmGalleryPdfSel().label;
+      parts.push('藏馆藏品 PDF（' + tier + '）' + (sel.galleryPdfQuote ? '另议' : 'S$' + sel.galleryPdfSum));
+    }
     if (sel.exposure.length) {
       var labels = { addonExpCat: '分类页优先 7 天', addonExpHome7: '首页精选额外 7 天', addonExpHome14: '首页精选 14 天', addonExpTopic: '专题推荐' };
       sel.exposure.forEach(function (id) {
@@ -1804,14 +1831,23 @@ body[data-lang="en"] .pm-addon-desc.en, body[data-lang="en"] .pm-addon-title em 
     var t = document.getElementById('pmTotal');
     if (t) t.textContent = 'S$' + sel.total;
     var rangeNote = document.getElementById('pmRangeNote');
-    if (rangeNote) rangeNote.hidden = !sel.ranges.length;
+    if (rangeNote) rangeNote.hidden = !(sel.ranges.length || sel.galleryPdfQuote);
+    var qty = document.getElementById('addonGalleryPdfQty');
+    if (qty) qty.hidden = !sel.galleryPdfOn;
+    var price = document.getElementById('galleryPdfPrice');
+    if (price) {
+      var pdf = pmGalleryPdfSel();
+      price.innerHTML = pdf.quote
+        ? '<span class="zh">另议</span><span class="en">Quoted</span>'
+        : 'S$' + pdf.price + '<span class="zh">/ 份</span><span class="en"> / copy</span>';
+    }
     var copied = document.getElementById('pmCopied');
     if (copied) copied.hidden = true;
   }
 
   (function bindAddons() {
     var ids = ['addonPack', 'addonExpCat', 'addonExpHome7', 'addonExpHome14', 'addonExpTopic',
-      'addonCloseup', 'addonPhotoFull', 'addonCataloguePdf', 'addonCatalogueDeluxe', 'addonInterview', 'addonGalleryPdf'];
+      'addonCloseup', 'addonPhotoFull', 'addonCataloguePdf', 'addonCatalogueDeluxe', 'addonInterview', 'addonGalleryPdf', 'addonGalleryPdfQty'];
     ids.forEach(function (id) {
       var el = document.getElementById(id);
       if (el) el.addEventListener('change', pmRecalc);

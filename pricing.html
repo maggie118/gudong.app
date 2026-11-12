@@ -792,6 +792,8 @@ body[data-lang="en"] .pm-addon-desc.en, body[data-lang="en"] .pm-addon-title em 
 [data-lang="en"] .pm-cta-note .en { display: block; }
 .pm-service-line { margin-bottom: .7rem; padding: .6rem .7rem; background: #FFFDFC; border: 1px dashed rgba(176, 138, 69, .4); border-radius: 2px; font-size: .8rem; line-height: 1.7; color: #4A4038; text-align: left; }
 .pm-cta-row { display: flex; gap: .5rem; align-items: stretch; }
+#pmProCta { position: static; background: none; margin: 1rem 0 0; padding: 0; }
+#pmProCta .submit-btn { padding: .85rem 1rem; }
 .pm-cta-row .submit-btn { flex: 1; }
 .pm-copy-btn { flex: 0 0 auto; padding: .7rem .85rem; font: inherit; font-size: .78rem; font-weight: 600; color: #7A4E30; background: #FBF7F0; border: 1px solid rgba(176, 138, 69, .45); border-radius: 3px; cursor: pointer; white-space: nowrap; transition: background .2s, border-color .2s; }
 .pm-copy-btn:hover { background: #F6EFE3; border-color: rgba(176, 138, 69, .7); }
@@ -1616,8 +1618,6 @@ body[data-lang="en"] .pm-addon-desc.en, body[data-lang="en"] .pm-addon-title em 
       if (qty) qty.value = '5';
       pmRecalc();
     }
-    var scroller = addons ? addons.parentElement : null;
-    if (scroller) scroller.style.paddingBottom = isPro ? '165px' : '0';
   }
 
   function pmAddonSelection() {

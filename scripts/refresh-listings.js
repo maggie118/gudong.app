@@ -500,11 +500,14 @@ async function main() {
     if (w && todayStr >= w.start && todayStr < w.end) return true; // 开馆首 7 天免费曝光
     const until = String(i.exposure_until || '').slice(0, 10);
     if (i.is_today_finds && until && until >= todayStr) return true; // 另行买位且有到期日
+    // 样板藏馆 / 临时展示位：勾了 is_today_finds 但没填到期日，先保留在曝光位，
+    // 需要撤下时直接取消勾选即可（构建日志会列出这批手动位，便于日后清理）。
+    if (i.is_today_finds && !until) return true;
     return false;
   });
-  const ignoredTicks = live.filter((i) => i.is_today_finds && !String(i.exposure_until || '').slice(0, 10)).length;
-  if (ignoredTicks) {
-    log(`[今日发现] 有 ${ignoredTicks} 件勾了 is_today_finds 但没填 exposure_until，已按「免费 7 天已过期」处理，未进入曝光位`);
+  const manualSlots = live.filter((i) => i.is_today_finds && !String(i.exposure_until || '').slice(0, 10)).length;
+  if (manualSlots) {
+    log(`[今日发现] 含 ${manualSlots} 件手动/样板曝光位（勾了 is_today_finds 但无到期日），撤下时取消勾选即可`);
   }
 
   const tierOf = (i) => Number(i.exposure_tier) || 1;

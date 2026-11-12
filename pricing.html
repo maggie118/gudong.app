@@ -1423,7 +1423,6 @@ body[data-lang="en"] .pm-addon-desc.en, body[data-lang="en"] .pm-addon-title em 
     <div class="workflow-steps" id="workflowSteps" aria-label="Process steps"></div>
 
     <div class="submit-bar" id="pmProCta">
-      <div class="pm-service-line" id="pmServiceLine"></div>
       <div class="pm-cta-row">
         <button type="button" class="pm-copy-btn" onclick="copyServiceLine()">
           <span class="zh">复制服务清单</span><span class="en">Copy service list</span>
@@ -1606,6 +1605,8 @@ body[data-lang="en"] .pm-addon-desc.en, body[data-lang="en"] .pm-addon-title em 
     if (pnNote) pnNote.style.display = isPro ? 'none' : '';
     var formHint = document.getElementById('pmFormHint');
     if (formHint) formHint.style.display = isPro ? 'none' : '';
+    var warn = document.querySelector('#serviceModal .compact-warning');
+    if (warn) warn.style.display = isPro ? 'none' : '';
     if (isPro) {
       var cbP = document.getElementById('addonPhoto');
       var cbR = document.getElementById('addonResearch');
@@ -1615,6 +1616,8 @@ body[data-lang="en"] .pm-addon-desc.en, body[data-lang="en"] .pm-addon-title em 
       if (qty) qty.value = '5';
       pmRecalc();
     }
+    var scroller = addons ? addons.parentElement : null;
+    if (scroller) scroller.style.paddingBottom = isPro ? '165px' : '0';
   }
 
   function pmAddonSelection() {

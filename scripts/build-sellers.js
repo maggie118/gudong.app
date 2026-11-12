@@ -311,9 +311,13 @@ async function main() {
   fs.mkdirSync(QR_DIR, { recursive: true });
 
   const todayStr = new Date().toISOString().slice(0, 10);
-  // 有效卖家 slug 集合：展示期未到的全部卖家（含未标 gallery 的），用于孤儿页清理
+  // 有效卖家 slug 集合：只有 gallery 打勾（且展示期未到）的卖家才算「已开通私家藏馆」，
+  // 未打勾的卖家其旧藏馆页会被当作孤儿页清理
   const activeSlugs = new Set(
-    sellers.filter(s => !isGalleryExpired(s, todayStr)).map(s => slugify(s.seller_id))
+    sellers
+      .filter(s => !isGalleryExpired(s, todayStr))
+      .filter(s => s.gallery === true || s.gallery === 'true' || s.gallery === 1)
+      .map(s => slugify(s.seller_id))
   );
   const enabled = [];
   let built = 0;
@@ -322,14 +326,14 @@ async function main() {
     const slug = slugify(s.seller_id);
     const pageFile = path.join(SELLERS_DIR, `seller-${slug}-antiques.html`);
     const isFlagged = s.gallery === true || s.gallery === 'true' || s.gallery === 1;
-    const pageExists = fs.existsSync(pageFile);
     // 展示期已到的藏馆一律不再对外建馆（业务规则，优先于 --all/--seller）
     if (isGalleryExpired(s, todayStr)) {
       log(`藏馆展示期已到，跳过并待清理: ${s.seller_id}（${galleryExpiry(s)}）`);
       skippedExpired++;
       continue;
     }
-    const shouldBuild = forceAll || (only && only === slug) || isFlagged || pageExists;
+    // 只有 Airtable sellers 表里 gallery 打勾的卖家才建馆；页面存在不算数（未打勾即下架）
+    const shouldBuild = forceAll || (only && only === slug) || isFlagged;
     if (!shouldBuild) continue;
 
     // 生成二维码资产（SVG 内嵌用 + PNG 印制用）

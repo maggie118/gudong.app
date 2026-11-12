@@ -1133,6 +1133,13 @@ function setSellerCard(f, data) {
                 if (en) setText('#sellerNameEn', en, 'seller.en');
                 var link = document.getElementById('sellerLink');
                 if (link && sl.page_url) link.href = sl.page_url;
+                // gallery 未打勾 = 未开通私家藏馆：藏馆入口隐藏，不误导买家
+                var galleryOpen = sl.gallery === true || sl.gallery === 'true' || sl.gallery === 1;
+                if (!galleryOpen) {
+                    var bl = document.querySelector('.back-link');
+                    if (bl) bl.style.display = 'none';
+                    if (link) link.style.display = 'none';
+                }
             }
         }
         function showNotFound() {

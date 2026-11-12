@@ -20,6 +20,10 @@ const TABLE = process.env.AIRTABLE_TABLE;
 const TOKEN = process.env.AIRTABLE_TOKEN;
 const SELLERS_TABLE = process.env.AIRTABLE_SELLERS_TABLE;
 
+// Google Sheets 数据源（配置了 SHEET_ID 时优先于 Airtable 使用）
+// Airtable 免费版每月 1000 次 API 调用，部署两次就会耗尽；Sheets 走公开 CSV 导出，不受此限。
+const sheets = require('./sheets-source');
+
 function log(...args) {
   console.log('[refresh-listings]', ...args);
 }
@@ -164,6 +168,12 @@ function mapSeller(rec) {
   }, wa);
 }
 async function fetchSellers() {
+  if (sheets.isConfigured() || sheets.hasRepoCsv(sheets.TAB_SELLERS)) {
+    const records = await sheets.fetchTable(sheets.TAB_SELLERS);
+    return records
+      .filter(r => String((r.fields && r.fields.status) || '').trim().toLowerCase() === 'active')
+      .map(mapSeller);
+  }
   if (!SELLERS_TABLE) return null; // 未配置卖家表 → 保留旧数据
   const records = await fetchAll(SELLERS_TABLE);
   return records
@@ -381,16 +391,23 @@ function galleryExpiry(s) {
 }
 
 async function main() {
-  if (!BASE || !TABLE || !TOKEN) {
-    log('missing AIRTABLE_* env vars, keeping existing listings.json');
+  const sheetSource = sheets.isConfigured() || sheets.hasRepoCsv(sheets.TAB_ITEMS);
+  if (!sheetSource && (!BASE || !TABLE || !TOKEN)) {
+    log('missing AIRTABLE_* / SHEET_ID / data/items.csv, keeping existing listings.json');
     process.exit(0);
   }
 
   let records;
   try {
-    records = await fetchAll(TABLE);
+    records = sheetSource
+      ? await sheets.fetchTable(sheets.TAB_ITEMS)
+      : await fetchAll(TABLE);
+    if (sheetSource) {
+      const src = sheets.isConfigured() ? `Google 表格 ${sheets.SHEET_ID}` : '仓库 CSV data/items.csv';
+      log(`数据源：${src}（工作表 ${sheets.TAB_ITEMS}），${records.length} 行`);
+    }
   } catch (e) {
-    log('airtable fetch failed, keeping existing listings.json:', e.message);
+    log('数据源拉取失败，保留现有 listings.json:', e.message);
     process.exit(0);
   }
 

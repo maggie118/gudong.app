@@ -2787,7 +2787,10 @@
             });
             const out = {
                 todayFinds: clean(groups.todayFinds),
-                newListing: clean(groups.newListing)
+                newListing: clean(groups.newListing),
+                editorPicks: clean(pickList(json, 'editorPicks', 'editor_picks') || []),
+                sellers: Array.isArray(json.sellers) ? json.sellers : [],
+                paidFindsCount: Number(json.paidFindsCount) || 0
             };
             if (total > 0 && kept === 0) throw new Error('所有记录都缺少 item_id 或 title_zh/title_en，请检查字段名');
 

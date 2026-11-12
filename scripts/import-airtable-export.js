@@ -147,9 +147,8 @@ const sellerRows = sheets.toRecords(fs.readFileSync(sellersCsvPath, 'utf8')).map
   const id = String(f.seller_id || '').trim();
   const prev = oldSellers.get(id) || {};
   const slug = id.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+  // 私家藏馆只认导出的 gallery 勾选，不做任何强制开通
   const gallery = isChecked(f.gallery);
-  // 用户明确告知 Lim-CK 已勾选（导出快照里显示为空，按用户口径保留开通）
-  const galleryFinal = gallery || id === 'Lim-CK';
   return {
     seller_id: id,
     display_zh: f['展馆名（中文）'] || f.display_zh || prev.display_zh || id,
@@ -158,7 +157,7 @@ const sellerRows = sheets.toRecords(fs.readFileSync(sellersCsvPath, 'utf8')).map
     intro_zh: f.intro_zh || f['展馆简介 / Seller Biography'] || prev.intro_zh || '',
     intro_en: f.intro_en || prev.intro_en || '',
     title_focus: f.title_focus || prev.title_focus || '',
-    gallery: galleryFinal,
+    gallery,
     gallery_started_at: toIso(f.gallery_started_at) || '',
     gallery_expires_at: toIso(f.gallery_expires_at) || '',
     founding_no: String(f.founding_no == null ? '' : f.founding_no).trim(),

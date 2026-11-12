@@ -1796,7 +1796,7 @@
       "intro_zh": "专注收藏印尼满者伯夷王朝（Majapahit）、信诃沙里王朝（Singhasari Empire）佛教文物。",
       "intro_en": "A collector specializing in Buddhist artifacts of Indonesia’s Majapahit and Singhasari Empires.",
       "title_focus": "",
-      "gallery": true,
+      "gallery": false,
       "gallery_started_at": "",
       "gallery_expires_at": "",
       "founding_no": "",
@@ -1889,7 +1889,7 @@
   ],
   "total": 30,
   "expiry": {
-    "generated_at": "2026-11-12T13:57:12.905Z",
+    "generated_at": "2026-11-12T14:08:35.854Z",
     "item_period_months": 6,
     "gallery_period_months": 12,
     "removed_today": [],

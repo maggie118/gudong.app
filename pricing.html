@@ -1433,8 +1433,8 @@ body[data-lang="en"] .pm-addon-desc.en, body[data-lang="en"] .pm-addon-title em 
           <label class="pm-addon pm-addon-sm" for="addonGalleryPdf">
             <input type="checkbox" id="addonGalleryPdf">
             <span class="pm-addon-body"><span class="pm-addon-title"><span class="zh">藏馆藏品 PDF</span><span class="en">Collection PDF</span><em id="galleryPdfPrice">S$39<span class="zh">/ 份</span><span class="en"> / copy</span></em></span>
-              <span class="pm-addon-desc zh">把您私家藏馆里的藏品做成一份精美 PDF，挂在藏馆页供买家直接下载：封面与藏家简介、专属 QR、逐件图版与规格（年代／尺寸／材质／工艺）、来源与品相说明。10 件以内 S$39，超出每 10 件加 S$20；每个藏馆每 6 个月可出 1 份，按上述档位计费，同年内第二份（改版或换季更新）S$29。</span>
-              <span class="pm-addon-desc en">A beautifully laid-out PDF of your private collection, downloadable from your page: cover and collector profile, your QR, one plate per item with period, dimensions, material and technique, plus provenance and condition notes. S$39 for up to 10 items, +S$20 per additional 10 items. One PDF per collection every 6 months at that tier price; a second copy within the same calendar year (revision or seasonal update) is S$29.</span>
+              <span class="pm-addon-desc zh">把您私家藏馆里的藏品做成一份精美 PDF，挂在藏馆页供买家直接下载：封面与藏家简介、专属 QR、逐件图版与规格（年代／尺寸／材质／工艺）、来源与品相说明。10 件以内 S$39，超出每 10 件加 S$20；每个藏馆每 6 个月可出 1 份，按上述档位计费。</span>
+              <span class="pm-addon-desc en">A beautifully laid-out PDF of your private collection, downloadable from your page: cover and collector profile, your QR, one plate per item with period, dimensions, material and technique, plus provenance and condition notes. S$39 for up to 10 items, +S$20 per additional 10 items; one PDF per collection every 6 months at that tier price.</span>
               <select id="addonGalleryPdfQty" class="pm-select" hidden>
                 <option value="39">1–10 件 · S$39</option>
                 <option value="59">11–20 件 · S$59</option>
@@ -1443,6 +1443,13 @@ body[data-lang="en"] .pm-addon-desc.en, body[data-lang="en"] .pm-addon-title em 
                 <option value="119">41–50 件 · S$119</option>
                 <option value="0">50 件以上 · 另议</option>
               </select>
+            </span>
+          </label>
+          <label class="pm-addon pm-addon-sm" for="addonGalleryPdfRepeat">
+            <input type="checkbox" id="addonGalleryPdfRepeat">
+            <span class="pm-addon-body"><span class="pm-addon-title"><span class="zh">同年内第二份 PDF（改版／换季更新）</span><span class="en">Second PDF within the year (revision)</span><em>S$29<span class="zh">/ 份</span><span class="en"> / copy</span></em></span>
+              <span class="pm-addon-desc zh">同一藏馆在同一年内已出过一份 PDF，改版或换季时更新第二份，按 S$29 计；档位与第一份相同，内容按最新藏品更新。</span>
+              <span class="pm-addon-desc en">If your collection already had a PDF this year, a second revised or seasonal version is S$29 at the same tier, updated to your latest pieces.</span>
             </span>
           </label>
           <label class="pm-addon pm-addon-sm" for="addonInterview">
@@ -1780,6 +1787,9 @@ body[data-lang="en"] .pm-addon-desc.en, body[data-lang="en"] .pm-addon-title em 
     var galleryPdfOn = pdf.on;
     var galleryPdfSum = (pdf.on && !pdf.quote) ? pdf.price : 0;
 
+    var galleryPdfRepeatOn = pmChecked('addonGalleryPdfRepeat');
+    var galleryPdfRepeatSum = galleryPdfRepeatOn ? 29 : 0;
+
     var exposure = [];
     var expSum = 0;
     Object.keys(PM_EXPOSURE).forEach(function (id) {
@@ -1794,9 +1804,10 @@ body[data-lang="en"] .pm-addon-desc.en, body[data-lang="en"] .pm-addon-title em 
     return {
       packOn: packOn, packSum: packSum,
       galleryPdfOn: galleryPdfOn, galleryPdfSum: galleryPdfSum, galleryPdfQuote: pdf.on && pdf.quote,
+      galleryPdfRepeatOn: galleryPdfRepeatOn, galleryPdfRepeatSum: galleryPdfRepeatSum,
       exposure: exposure, expSum: expSum,
       ranges: ranges,
-      total: pmBasePrice() + packSum + galleryPdfSum + expSum
+      total: pmBasePrice() + packSum + galleryPdfSum + galleryPdfRepeatSum + expSum
     };
   }
 
@@ -1807,6 +1818,7 @@ body[data-lang="en"] .pm-addon-desc.en, body[data-lang="en"] .pm-addon-title em 
       var tier = pmGalleryPdfSel().label;
       parts.push('藏馆藏品 PDF（' + tier + '）' + (sel.galleryPdfQuote ? '另议' : 'S$' + sel.galleryPdfSum));
     }
+    if (sel.galleryPdfRepeatOn) parts.push('同年内第二份藏馆藏品 PDF S$' + sel.galleryPdfRepeatSum);
     if (sel.exposure.length) {
       var labels = { addonExpCat: '分类页优先 7 天', addonExpHome7: '首页精选额外 7 天', addonExpHome14: '首页精选 14 天', addonExpTopic: '专题推荐' };
       sel.exposure.forEach(function (id) {
@@ -1847,7 +1859,7 @@ body[data-lang="en"] .pm-addon-desc.en, body[data-lang="en"] .pm-addon-title em 
 
   (function bindAddons() {
     var ids = ['addonPack', 'addonExpCat', 'addonExpHome7', 'addonExpHome14', 'addonExpTopic',
-      'addonCloseup', 'addonPhotoFull', 'addonCataloguePdf', 'addonCatalogueDeluxe', 'addonInterview', 'addonGalleryPdf', 'addonGalleryPdfQty'];
+      'addonCloseup', 'addonPhotoFull', 'addonCataloguePdf', 'addonCatalogueDeluxe', 'addonInterview', 'addonGalleryPdf', 'addonGalleryPdfQty', 'addonGalleryPdfRepeat'];
     ids.forEach(function (id) {
       var el = document.getElementById(id);
       if (el) el.addEventListener('change', pmRecalc);

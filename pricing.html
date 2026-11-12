@@ -1425,7 +1425,14 @@ body[data-lang="en"] .pm-addon-desc.en, body[data-lang="en"] .pm-addon-title em 
         </div>
 
         <div class="pm-group" id="pmGalleryOnly" hidden>
-          <div class="pm-group-title"><span class="zh">私家藏馆专属（按区间报价，提交后确认）</span><span class="en">Private collection only (quoted by range)</span></div>
+          <div class="pm-group-title"><span class="zh">私家藏馆专属</span><span class="en">Private collection only</span></div>
+          <label class="pm-addon pm-addon-sm" for="addonGalleryPdf">
+            <input type="checkbox" id="addonGalleryPdf">
+            <span class="pm-addon-body"><span class="pm-addon-title"><span class="zh">藏馆藏品 PDF</span><span class="en">Collection PDF</span><em>S$39<span class="zh">/ 份</span><span class="en"> / copy</span></em></span>
+              <span class="pm-addon-desc zh">把您私家藏馆里的藏品做成一份精美 PDF，挂在藏馆页供买家直接下载：封面与藏家简介、专属 QR、逐件图版与规格（年代／尺寸／材质／工艺）、来源与品相说明。按份计费；藏馆换版或换季可再出一份。</span>
+              <span class="pm-addon-desc en">A beautifully laid-out PDF of your private collection, downloadable from your page: cover and collector profile, your QR, one plate per item with period, dimensions, material and technique, plus provenance and condition notes. Priced per copy; order a new one each season.</span>
+            </span>
+          </label>
           <label class="pm-addon pm-addon-sm" for="addonInterview">
             <input type="checkbox" id="addonInterview">
             <span class="pm-addon-body"><span class="pm-addon-title"><span class="zh">藏家专访 · 藏家故事</span><span class="en">Collector interview / story</span><em>S$99–199<span class="zh">/ 篇</span><span class="en"> / piece</span></em></span>
@@ -1433,6 +1440,7 @@ body[data-lang="en"] .pm-addon-desc.en, body[data-lang="en"] .pm-addon-title em 
               <span class="pm-addon-desc en">Our editor interviews and writes up your collecting journey, signature pieces and collecting philosophy, published on your page and social channels.</span>
             </span>
           </label>
+          <p class="pm-group-note"><span class="zh">藏家专访按区间报价，提交后确认。</span><span class="en">The interview is quoted by range and confirmed after submission.</span></p>
         </div>
 
         <div class="pm-total">
@@ -1699,7 +1707,7 @@ body[data-lang="en"] .pm-addon-desc.en, body[data-lang="en"] .pm-addon-title em 
     if (galleryOnly) galleryOnly.hidden = !isGallery;
     if (isPro || isGallery) {
       ['addonPack', 'addonExpCat', 'addonExpHome7', 'addonExpHome14', 'addonExpTopic',
-        'addonCloseup', 'addonPhotoFull', 'addonCataloguePdf', 'addonCatalogueDeluxe', 'addonInterview'].forEach(function (id) {
+        'addonCloseup', 'addonPhotoFull', 'addonCataloguePdf', 'addonCatalogueDeluxe', 'addonInterview', 'addonGalleryPdf'].forEach(function (id) {
         var el = document.getElementById(id);
         if (el) el.checked = false;
       });
@@ -1732,6 +1740,7 @@ body[data-lang="en"] .pm-addon-desc.en, body[data-lang="en"] .pm-addon-title em 
     addonInterview: { zh: '藏家专访·藏家故事', en: 'collector interview', price: 'S$99–199' }
   };
   var PM_PACK = 100;
+  var PM_GALLERY_PDF = 39;
 
   function pmBasePrice() {
     return currentServiceType === 'gallery' ? 588 : 288;
@@ -1744,6 +1753,8 @@ body[data-lang="en"] .pm-addon-desc.en, body[data-lang="en"] .pm-addon-title em 
   function pmAddonSelection() {
     var packOn = pmChecked('addonPack');
     var packSum = packOn ? PM_PACK : 0;
+    var galleryPdfOn = pmChecked('addonGalleryPdf');
+    var galleryPdfSum = galleryPdfOn ? PM_GALLERY_PDF : 0;
 
     var exposure = [];
     var expSum = 0;
@@ -1758,15 +1769,17 @@ body[data-lang="en"] .pm-addon-desc.en, body[data-lang="en"] .pm-addon-title em 
 
     return {
       packOn: packOn, packSum: packSum,
+      galleryPdfOn: galleryPdfOn, galleryPdfSum: galleryPdfSum,
       exposure: exposure, expSum: expSum,
       ranges: ranges,
-      total: pmBasePrice() + packSum + expSum
+      total: pmBasePrice() + packSum + galleryPdfSum + expSum
     };
   }
 
   function pmAddonParts(sel) {
     var parts = [];
     if (sel.packOn) parts.push('图片文字整理包（5 张图片优化 + 资料整理）S$' + PM_PACK);
+    if (sel.galleryPdfOn) parts.push('藏馆藏品 PDF S$' + PM_GALLERY_PDF + '/份');
     if (sel.exposure.length) {
       var labels = { addonExpCat: '分类页优先 7 天', addonExpHome7: '首页精选额外 7 天', addonExpHome14: '首页精选 14 天', addonExpTopic: '专题推荐' };
       sel.exposure.forEach(function (id) {
@@ -1798,7 +1811,7 @@ body[data-lang="en"] .pm-addon-desc.en, body[data-lang="en"] .pm-addon-title em 
 
   (function bindAddons() {
     var ids = ['addonPack', 'addonExpCat', 'addonExpHome7', 'addonExpHome14', 'addonExpTopic',
-      'addonCloseup', 'addonPhotoFull', 'addonCataloguePdf', 'addonCatalogueDeluxe', 'addonInterview'];
+      'addonCloseup', 'addonPhotoFull', 'addonCataloguePdf', 'addonCatalogueDeluxe', 'addonInterview', 'addonGalleryPdf'];
     ids.forEach(function (id) {
       var el = document.getElementById(id);
       if (el) el.addEventListener('change', pmRecalc);

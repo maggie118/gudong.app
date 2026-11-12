@@ -78,6 +78,19 @@ function loadListings(file) {
   return { items: [...uniq.values()], sellers };
 }
 
+// 创始卖家席号：唯一来源是 Airtable sellers 表的 founding_no（经 refresh-listings.js 带进 listings.json）
+// 页面里不再写死编号：填了号才显示徽章，没填就不显示，避免出现与 Airtable 不一致的席号
+function computeSeats(sellers) {
+  const seats = new Map();
+  for (const [sid, s] of sellers.entries()) {
+    const raw = String((s && s.founding_no) || '').trim();
+    if (!raw) continue;
+    const numeric = raw.replace(/[^0-9]/g, '');
+    seats.set(sid, numeric ? numeric.padStart(3, '0') : raw);
+  }
+  return seats;
+}
+
 function imagesOf(item) {
   return String(item.img_file || '')
     .split(/[\s,;]+/)
@@ -135,7 +148,7 @@ function removeFounderBadge(html) {
   return html;
 }
 
-function build(item, sellers, template) {
+function build(item, sellers, seats, template) {
   const id = String(item.item_id).trim();
   const titleZh = String(item.title_zh || id).trim();
   const titleEn = String(item.title_en || titleZh).trim();
@@ -246,8 +259,14 @@ function build(item, sellers, template) {
   html = html.replace(/<span class="image-counter" id="imageCounter">[\d\s/]+<\/span>/,
     `<span class="image-counter" id="imageCounter">1 / ${imgs.length || 1}</span>`);
 
-  // 5) 去掉「创始卖家 · 限量 88 席」徽章：不给自动生成的页面虚构席位编号
-  html = removeFounderBadge(html);
+  // 5) 创始卖家徽章：席号取自 listings 推导的 seats（按最早上架顺序编号），
+  //    查不到席号或超出 88 席时移除徽章，避免虚构编号
+  const seat = seats.get(sellerKey);
+  if (seat && Number(seat) <= 88) {
+    html = html.replace(/(<span class="badge-num">)[^<]*(<\/span>)/, `$1${seat}$2`);
+  } else {
+    html = removeFounderBadge(html);
+  }
 
   if (stats.missing.length) {
     return { html, missing: stats.missing, id };
@@ -257,15 +276,22 @@ function build(item, sellers, template) {
 
 function main() {
   const { items, sellers } = loadListings(SRC);
+  const seats = computeSeats(sellers);
   const template = fs.readFileSync(TEMPLATE, 'utf8');
   let created = 0;
   const createdIds = [];
   const warnings = [];
+  const skipped = [];
 
   for (const item of items) {
     const file = path.join(OUT_DIR, String(item.item_id).trim() + '.html');
     if (fs.existsSync(file) && !FORCE) continue;
-    const r = build(item, sellers, template);
+    // 没图就不生成：Airtable 未填 img_file 时生成出来的页面主图/og:image 会是空路径
+    if (!imagesOf(item).length) {
+      skipped.push(`${item.item_id}: 缺少 img_file，跳过（页面主图与 og:image 会为空）`);
+      continue;
+    }
+    const r = build(item, sellers, seats, template);
     if (r.missing.length) {
       warnings.push(`${item.item_id}: 模板片段缺失 → ${r.missing.join(' ; ')}`);
       // 缺失片段时不写文件，避免产出半成品页面
@@ -278,6 +304,7 @@ function main() {
 
   console.log(`build-item-pages: ${created} page(s) written from ${path.relative(ROOT, SRC)}`);
   if (createdIds.length) console.log('  ' + createdIds.join(', '));
+  if (skipped.length) console.log('SKIP:\n  ' + skipped.join('\n  '));
   if (warnings.length) {
     console.log('WARN:');
     warnings.forEach((w) => console.log('  ' + w));

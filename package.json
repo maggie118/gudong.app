@@ -3,7 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "scripts": {
-    "build": "node scripts/build-insights-index.js && node scripts/refresh-listings.js && node scripts/build-item-pages.js && node scripts/build-sellers.js"
+    "build": "node scripts/build-insights-index.js && node scripts/refresh-listings.js && node scripts/build-item-pages.js && node scripts/normalize-founder-seats.js && node scripts/build-sellers.js"
   },
   "dependencies": {
     "qrcode": "^1.5.4",

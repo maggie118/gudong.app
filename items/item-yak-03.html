@@ -908,14 +908,6 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
                 im.loading = 'lazy';
                 im.onerror = function () { this.onerror = null; this.src = PLACEHOLDER; };
                 b.appendChild(im);
-
-                var label = getLabel(img);
-                if (label) {
-                    var sp = document.createElement('span');
-                    sp.className = 'image-thumb-label';
-                    sp.textContent = label;
-                    b.appendChild(sp);
-                }
                 b.addEventListener('click', function () { goTo(i); });
                 thumbsWrap.appendChild(b);
             });

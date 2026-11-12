@@ -2075,8 +2075,8 @@
                 <button type="button" class="tf-shuffle" id="tfShuffle">
                     <span class="zh">换一批</span><span class="en">Shuffle</span>
                 </button>
-                <span class="tf-count zh">今日发现共 <em id="tfTotal">0</em> 件</span>
-                <span class="tf-count en"><em id="tfTotalEn">0</em> pieces in today's finds</span>
+                <span class="tf-count zh">付费曝光位 <em id="tfTotal">0</em> 件在展</span>
+                <span class="tf-count en"><em id="tfTotalEn">0</em> paid placements live</span>
             </div>
         </section>
 
@@ -3087,13 +3087,14 @@
              · 优先从 newListing 取前 4 条兜底
              · 若 newListing 也为空 → 显示友好空状态提示
            ============================================================ */
-        /* 「今日发现」轮播取样：
-           1) 只用 is_today_finds 勾选的藏品；
-           2) 每批 4 件，按卖家轮转取，避免某一家占满整屏；
-           3) 日期 + 批次做种子，刷新页面当天保持一致，点「换一批」换下一组，
-              被勾选的藏品（包括博古斋等老卖家）都有机会露脸。 */
+        /* 「今日发现」= 付费曝光位（卖家买位才有资格上首页）：
+           1) 数据层 todayFinds 只包含勾了 is_today_finds 且曝光未过期的藏品；
+           2) 每批 4 件按卖家轮转取样，同档位藏品在有效期内均分曝光，不会被一家占满；
+           3) 付费位不足 4 件时，用 editorPicks 垫满空格（不计入付费曝光）；
+           4) 起始位置按日期种子固定，同一天刷新看到同一组。 */
         const TF_SIZE = 4;
-        let tfAll = [];
+        let tfAll = [];        // 付费曝光位池
+        let tfEditor = [];     // 补位用编辑精选
         let tfBatch = 0;
 
         function tfSeed(str) {
@@ -3127,8 +3128,13 @@
             const tfgrid = document.getElementById('todayFindsGrid');
             if (!tfgrid) return;
             tfgrid.removeAttribute('aria-busy');
-            const pool = tfAll.length ? tfAll : [];
-            const tf = pool.length ? pickTodayFinds(pool, tfBatch) : [];
+            let tf = tfAll.length ? pickTodayFinds(tfAll, tfBatch) : [];
+            // 付费位不足 4 件 → 编辑精选补位
+            if (tf.length < TF_SIZE && tfEditor.length) {
+                const need = TF_SIZE - tf.length;
+                const used = new Set(tf.map((f) => f.item_id));
+                tf = tf.concat(tfEditor.filter((f) => !used.has(f.item_id)).slice(0, need));
+            }
             if (tf.length) {
                 tfgrid.innerHTML = tf.map(renderFindsCard).join('');
             } else {
@@ -3142,17 +3148,23 @@
             if (sec) sec.hidden = false;
             const total = document.getElementById('tfTotal');
             const totalEn = document.getElementById('tfTotalEn');
-            if (total) total.textContent = String(pool.length);
-            if (totalEn) totalEn.textContent = String(pool.length);
+            const paid = tfAll.length;
+            if (total) total.textContent = String(paid);
+            if (totalEn) totalEn.textContent = String(paid);
             const btn = document.getElementById('tfShuffle');
-            if (btn) btn.style.display = pool.length > TF_SIZE ? '' : 'none';
+            if (btn) btn.style.display = paid > TF_SIZE ? '' : 'none';
         }
 
         function applyListingData(data) {
             renderSeats(data.newListing);
 
-            // 今日发现：勾选了 is_today_finds 的全部进池，默认按日期轮转展示 4 件
-            tfAll = (data.todayFinds && data.todayFinds.length ? data.todayFinds : (data.newListing || [])).slice();
+            // 付费曝光位：只取 todayFinds（数据层已按付费与有效期过滤）
+            tfAll = (data.todayFinds || []).slice();
+            tfEditor = (data.editorPicks || []).slice();
+            // 完全没有付费位时，用「近期释出」前 4 件兜底，避免板块空白
+            if (!tfAll.length && !tfEditor.length && (data.newListing || []).length) {
+                tfEditor = data.newListing.slice(0, TF_SIZE);
+            }
             tfBatch = 0;
             renderTodayFinds();
             const tfShuffleBtn = document.getElementById('tfShuffle');

@@ -1350,8 +1350,8 @@ body[data-lang="en"] .pm-addon-desc.en, body[data-lang="en"] .pm-addon-title em 
           <span class="en">＋ Need more? Paid add-ons (not included in S$288)</span>
         </span>
         <span class="pm-toggle-sub">
-          <span class="zh">图片文字整理包 · 曝光推广 · 摄影图录</span>
-          <span class="en">Photo &amp; copy package · exposure · photography</span>
+          <span class="zh">图片文字整理包 · 曝光推广 · 摄影图录 · 藏家专访</span>
+          <span class="en">Photo &amp; copy package · exposure · photography · interview</span>
         </span>
       </button>
 
@@ -1413,6 +1413,17 @@ body[data-lang="en"] .pm-addon-desc.en, body[data-lang="en"] .pm-addon-title em 
             <span class="pm-addon-body"><span class="pm-addon-title"><span class="zh">高端藏品完整图录</span><span class="en">Deluxe complete catalogue</span><em>S$250–500</em></span></span>
           </label>
           <p class="pm-group-note"><span class="zh">资料编排不等于鉴定，也不把未经核实的年代、来源或真伪写成平台结论。</span><span class="en">Editing is not authentication; unverified dating, provenance or authenticity is never presented as our conclusion.</span></p>
+        </div>
+
+        <div class="pm-group" id="pmGalleryOnly" hidden>
+          <div class="pm-group-title"><span class="zh">私家藏馆专属（按区间报价，提交后确认）</span><span class="en">Private collection only (quoted by range)</span></div>
+          <label class="pm-addon pm-addon-sm" for="addonInterview">
+            <input type="checkbox" id="addonInterview">
+            <span class="pm-addon-body"><span class="pm-addon-title"><span class="zh">藏家专访 · 藏家故事</span><span class="en">Collector interview / story</span><em>S$99–199<span class="zh">/ 篇</span><span class="en"> / piece</span></em></span>
+              <span class="pm-addon-desc zh">由编辑访谈并成稿：您的收藏经历、代表藏品与收藏理念，可刊于站内藏家页与社媒。</span>
+              <span class="pm-addon-desc en">Our editor interviews and writes up your collecting journey, signature pieces and collecting philosophy, published on your page and social channels.</span>
+            </span>
+          </label>
         </div>
 
         <div class="pm-total">
@@ -1660,12 +1671,13 @@ body[data-lang="en"] .pm-addon-desc.en, body[data-lang="en"] .pm-addon-title em 
   /* ===== 专业上架：加项与合计 ===== */
   function pmSyncForType(type) {
     var isPro = type === 'professional';
+    var isGallery = type === 'gallery';
     var addons = document.getElementById('pmAddons');
     var legacy = document.getElementById('pmLegacyFields');
     var proCta = document.getElementById('pmProCta');
     var legacyCta = document.getElementById('pmLegacyCta');
     var pnNote = document.querySelector('.pn-note');
-    if (addons) addons.style.display = isPro ? '' : 'none';
+    if (addons) addons.style.display = (isPro || isGallery) ? '' : 'none';
     if (legacy) legacy.style.display = isPro ? 'none' : '';
     if (proCta) proCta.style.display = isPro ? '' : 'none';
     if (legacyCta) legacyCta.style.display = isPro ? 'none' : '';
@@ -1674,9 +1686,11 @@ body[data-lang="en"] .pm-addon-desc.en, body[data-lang="en"] .pm-addon-title em 
     if (formHint) formHint.style.display = isPro ? 'none' : '';
     var warn = document.querySelector('#serviceModal .compact-warning');
     if (warn) warn.style.display = isPro ? 'none' : '';
-    if (isPro) {
+    var galleryOnly = document.getElementById('pmGalleryOnly');
+    if (galleryOnly) galleryOnly.hidden = !isGallery;
+    if (isPro || isGallery) {
       ['addonPack', 'addonExpCat', 'addonExpHome7', 'addonExpHome14', 'addonExpTopic',
-        'addonCloseup', 'addonPhotoFull', 'addonCataloguePdf', 'addonCatalogueDeluxe'].forEach(function (id) {
+        'addonCloseup', 'addonPhotoFull', 'addonCataloguePdf', 'addonCatalogueDeluxe', 'addonInterview'].forEach(function (id) {
         var el = document.getElementById(id);
         if (el) el.checked = false;
       });
@@ -1705,9 +1719,18 @@ body[data-lang="en"] .pm-addon-desc.en, body[data-lang="en"] .pm-addon-title em 
     addonCloseup: { zh: '底款·款识·瑕疵特写整理', en: 'marks & flaw close-ups', price: 'S$30–60' },
     addonPhotoFull: { zh: '单件藏品完整摄影', en: 'full photo shoot', price: 'S$120–250' },
     addonCataloguePdf: { zh: '中英双语图录 PDF', en: 'bilingual catalogue PDF', price: 'S$129–199' },
-    addonCatalogueDeluxe: { zh: '高端藏品完整图录', en: 'deluxe catalogue', price: 'S$250–500' }
+    addonCatalogueDeluxe: { zh: '高端藏品完整图录', en: 'deluxe catalogue', price: 'S$250–500' },
+    addonInterview: { zh: '藏家专访·藏家故事', en: 'collector interview', price: 'S$99–199' }
   };
   var PM_PACK = 100;
+
+  function pmBasePrice() {
+    return currentServiceType === 'gallery' ? 588 : 288;
+  }
+
+  function pmBaseLabel() {
+    return currentServiceType === 'gallery' ? '私家藏馆 S$588/年' : '专业上架 S$288';
+  }
 
   function pmAddonSelection() {
     var packOn = pmChecked('addonPack');
@@ -1728,7 +1751,7 @@ body[data-lang="en"] .pm-addon-desc.en, body[data-lang="en"] .pm-addon-title em 
       packOn: packOn, packSum: packSum,
       exposure: exposure, expSum: expSum,
       ranges: ranges,
-      total: 288 + packSum + expSum
+      total: pmBasePrice() + packSum + expSum
     };
   }
 
@@ -1746,7 +1769,7 @@ body[data-lang="en"] .pm-addon-desc.en, body[data-lang="en"] .pm-addon-title em 
 
   function pmServiceText() {
     var sel = pmAddonSelection();
-    var parts = ['专业上架 S$288'].concat(pmAddonParts(sel));
+    var parts = [pmBaseLabel()].concat(pmAddonParts(sel));
     var line = '【服务选项】' + parts.join(' + ') + ' = 合计 S$' + sel.total;
     if (sel.ranges.length) {
       line += '；另议：' + sel.ranges.map(function (id) { return PM_RANGE[id].zh + ' ' + PM_RANGE[id].price; }).join('、');
@@ -1766,7 +1789,7 @@ body[data-lang="en"] .pm-addon-desc.en, body[data-lang="en"] .pm-addon-title em 
 
   (function bindAddons() {
     var ids = ['addonPack', 'addonExpCat', 'addonExpHome7', 'addonExpHome14', 'addonExpTopic',
-      'addonCloseup', 'addonPhotoFull', 'addonCataloguePdf', 'addonCatalogueDeluxe'];
+      'addonCloseup', 'addonPhotoFull', 'addonCataloguePdf', 'addonCatalogueDeluxe', 'addonInterview'];
     ids.forEach(function (id) {
       var el = document.getElementById(id);
       if (el) el.addEventListener('change', pmRecalc);
@@ -1878,6 +1901,12 @@ body[data-lang="en"] .pm-addon-desc.en, body[data-lang="en"] .pm-addon-title em 
 
     var msg = cfg.msgTitle + '\nWhatsApp：' + wa + photosLine + condLine +
               '\n\n[已确认同意《藏家背书与免责协议》]\n' + cfg.fee + '。';
+    if (currentServiceType === 'gallery' && typeof pmAddonSelection === 'function') {
+      var sel = pmAddonSelection();
+      if (sel.packOn || sel.exposure.length || sel.ranges.length) {
+        msg += '\n\n' + pmServiceText();
+      }
+    }
     if (currentServiceType === 'basic') {
       msg += '请确认排队上架时间。';
     } else {

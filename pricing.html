@@ -768,8 +768,27 @@ footer { background: #FBF8F2; border-top: 1px solid var(--hairline); }
 }
 #serviceModal .pn-note a { color: var(--bronze); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
 /* 专业上架 · 加项 */
-#pmAddons { margin: .2rem 0 1rem; padding: 1rem .9rem .85rem; background: #FBF7F0; border: 1px solid rgba(176, 138, 69, .18); border-radius: 3px; }
-#pmAddons .pm-addons-head { font-size: .78rem; font-weight: 600; letter-spacing: .06em; color: #8A6A38; margin-bottom: .7rem; }
+#pmAddons { margin: .2rem 0 1rem; padding: 0; background: transparent; border: 0; }
+.pm-addons-toggle { display: block; width: 100%; text-align: left; padding: .75rem .8rem; font: inherit; background: #FBF7F0; border: 1px solid rgba(176, 138, 69, .35); border-radius: 3px; cursor: pointer; }
+.pm-addons-toggle .pm-toggle-label { display: block; font-size: .86rem; font-weight: 600; color: #7A4E30; }
+.pm-addons-toggle .pm-toggle-sub { display: block; margin-top: .25rem; font-size: .74rem; color: #8C847A; }
+.pm-addons-toggle .pm-toggle-label .zh, .pm-addons-toggle .pm-toggle-label .en,
+.pm-addons-toggle .pm-toggle-sub .zh, .pm-addons-toggle .pm-toggle-sub .en { display: none; }
+[data-lang="zh"] .pm-addons-toggle .pm-toggle-label .zh, [data-lang="zh"] .pm-addons-toggle .pm-toggle-sub .zh { display: block; }
+[data-lang="en"] .pm-addons-toggle .pm-toggle-label .en, [data-lang="en"] .pm-addons-toggle .pm-toggle-sub .en { display: block; }
+.pm-addons-body { margin-top: .6rem; }
+.pm-addons-intro { font-size: .76rem; line-height: 1.7; color: #8C847A; margin: 0 0 .6rem; }
+.pm-addons-intro .zh, .pm-addons-intro .en, .pm-group-note .zh, .pm-group-note .en, .pm-bundle .zh, .pm-bundle .en, .pm-range-note .zh, .pm-range-note .en, .pm-group-title .zh, .pm-group-title .en { display: none; }
+[data-lang="zh"] .pm-addons-intro .zh, [data-lang="zh"] .pm-group-note .zh, [data-lang="zh"] .pm-bundle .zh, [data-lang="zh"] .pm-range-note .zh, [data-lang="zh"] .pm-group-title .zh { display: block; }
+[data-lang="en"] .pm-addons-intro .en, [data-lang="en"] .pm-group-note .en, [data-lang="en"] .pm-bundle .en, [data-lang="en"] .pm-range-note .en, [data-lang="en"] .pm-group-title .en { display: block; }
+.pm-group { margin-top: .9rem; padding-top: .7rem; border-top: 1px solid rgba(176, 138, 69, .16); }
+.pm-group-title { font-size: .78rem; font-weight: 600; color: #8A6A38; letter-spacing: .03em; margin-bottom: .35rem; }
+.pm-addon-sm { padding: .4rem 0; }
+.pm-addon-sm .pm-addon-title { font-size: .84rem; font-weight: 500; }
+.pm-group-note { margin: .4rem 0 0; font-size: .74rem; line-height: 1.65; color: #9A9288; }
+.pm-bundle { margin: .55rem 0 .2rem; padding: .5rem .6rem; font-size: .78rem; line-height: 1.6; color: #7A4E30; background: #FFF8EC; border: 1px dashed rgba(176, 138, 69, .45); border-radius: 2px; }
+.pm-bundle b { font-size: .95rem; }
+.pm-range-note { margin: .5rem 0 0; font-size: .74rem; line-height: 1.6; color: #8C847A; }
 .pm-addon { display: flex; gap: .6rem; align-items: flex-start; padding: .55rem 0; cursor: pointer; border-top: 1px solid rgba(176, 138, 69, .12); }
 .pm-addon:first-of-type { border-top: 0; }
 .pm-addon input { margin-top: .18rem; width: 16px; height: 16px; accent-color: #8A5A3B; flex-shrink: 0; }
@@ -1323,41 +1342,116 @@ body[data-lang="en"] .pm-addon-desc.en, body[data-lang="en"] .pm-addon-title em 
       </div>
     </div>
 
-    <!-- 专业上架：可选加项（资料由 Airtable 表单收集，此处只选服务） -->
+    <!-- 专业上架：另付费增值服务（默认收起，按需展开；资料仍由 Airtable 表单收集） -->
     <div class="pm-addons" id="pmAddons">
-      <div class="pm-addons-head">
-        <span class="zh">可选加项 · 按需勾选</span>
-        <span class="en">Optional add-ons — tick what you need</span>
-      </div>
-
-      <label class="pm-addon" for="addonPhoto">
-        <input type="checkbox" id="addonPhoto">
-        <span class="pm-addon-body">
-          <span class="pm-addon-title"><span class="zh">图片基础优化</span><span class="en">Photo optimization</span><em>S$25<span class="zh">/ 张</span><span class="en"> / photo</span></em></span>
-          <span class="pm-addon-desc zh">统一光线与色温、矫正透视与裁切、清除背景杂物、长边统一 1600px 并适度锐化。只让照片更接近实物，<strong>不改器物颜色、不修品相缺陷</strong>。</span>
-          <span class="pm-addon-desc en">Light and colour-temperature matching, perspective and crop correction, background clean-up, 1600px long edge with light sharpening. Photos are brought closer to the real object — <strong>no colour alteration, no retouching of flaws</strong>.</span>
+      <button type="button" class="pm-addons-toggle" id="pmAddonsToggle" onclick="pmToggleAddons()" aria-expanded="false">
+        <span class="pm-toggle-label">
+          <span class="zh">＋ 需要更多服务？另付费增值项（默认不含在 S$288 内）</span>
+          <span class="en">＋ Need more? Paid add-ons (not included in S$288)</span>
         </span>
-      </label>
-      <div class="pm-qty" id="pmPhotoQtyWrap">
-        <label for="addonPhotoQty"><span class="zh">优化张数</span><span class="en">Number of photos</span></label>
-        <select id="addonPhotoQty">
-          <option value="1">1</option><option value="2">2</option><option value="3">3</option>
-          <option value="4">4</option><option value="5">5</option>
-        </select>
-      </div>
-
-      <label class="pm-addon" for="addonResearch">
-        <input type="checkbox" id="addonResearch">
-        <span class="pm-addon-body">
-          <span class="pm-addon-title"><span class="zh">资料整理</span><span class="en">Catalogue research &amp; write-up</span><em>S$59<span class="zh">/ 件</span><span class="en"> / item</span></em></span>
-          <span class="pm-addon-desc zh">当资料零散或需要考据时：标题中英编排（年代＋品类＋工艺＋特征）、尺寸与重量规范化、材质与工艺术语核对、品相说明整理，并将您提供的来源与递藏资料编成一段可长期引用、可给买家看的藏品档案。</span>
-          <span class="pm-addon-desc en">For scattered or research-heavy material: bilingual title formatting (period, category, technique, features), standardized dimensions and weight, verified material and technique terms, edited condition statement, and your provenance turned into a durable, buyer-ready catalogue entry.</span>
+        <span class="pm-toggle-sub">
+          <span class="zh">图片优化 · 资料整理 · 曝光推广 · 摄影图录 · 买家寻宝</span>
+          <span class="en">Photos · research · exposure · photography · buyer sourcing</span>
         </span>
-      </label>
+      </button>
 
-      <div class="pm-total">
-        <span class="zh">本次合计</span><span class="en">Total</span>
-        <b id="pmTotal">S$288</b>
+      <div class="pm-addons-body" id="pmAddonsBody" hidden>
+        <p class="pm-addons-intro">
+          <span class="zh">以下服务单独收费，可选可不选；不在公开价目页列出，只在这里给有需要的藏家看。勾选后合计会实时更新。</span>
+          <span class="en">These services are priced separately and entirely optional. They are not listed on the public price page — only shown here to collectors who want them. The total updates as you tick.</span>
+        </p>
+
+        <div class="pm-group">
+          <div class="pm-group-title"><span class="zh">图片与资料（按件计，可同选）</span><span class="en">Photos &amp; research (per item)</span></div>
+
+          <label class="pm-addon" for="addonPhoto">
+            <input type="checkbox" id="addonPhoto">
+            <span class="pm-addon-body">
+              <span class="pm-addon-title"><span class="zh">图片基础优化</span><span class="en">Photo optimization</span><em>S$25<span class="zh">/ 张</span><span class="en"> / photo</span></em></span>
+              <span class="pm-addon-desc zh">统一光线与色温、矫正透视与裁切、清除背景杂物、长边统一 1600px 并适度锐化。只让照片更接近实物，<strong>不改器物颜色、不修品相缺陷</strong>。</span>
+              <span class="pm-addon-desc en">Light and colour-temperature matching, perspective and crop correction, background clean-up, 1600px long edge, light sharpening. Closer to the real object — <strong>no colour alteration, no retouching of flaws</strong>.</span>
+            </span>
+          </label>
+          <div class="pm-qty" id="pmPhotoQtyWrap" hidden>
+            <label for="addonPhotoQty"><span class="zh">优化张数</span><span class="en">Number of photos</span></label>
+            <select id="addonPhotoQty">
+              <option value="1">1</option><option value="2">2</option><option value="3">3</option>
+              <option value="4">4</option><option value="5">5</option>
+            </select>
+          </div>
+
+          <label class="pm-addon" for="addonResearch">
+            <input type="checkbox" id="addonResearch">
+            <span class="pm-addon-body">
+              <span class="pm-addon-title"><span class="zh">资料整理</span><span class="en">Catalogue research &amp; write-up</span><em>S$59<span class="zh">/ 件</span><span class="en"> / item</span></em></span>
+              <span class="pm-addon-desc zh">资料零散或需要考据时：标题中英编排（年代＋品类＋工艺＋特征）、尺寸与重量规范化、材质与工艺术语核对、品相说明整理，并把您给的来源与递藏资料编成一段可长期引用、可给买家看的藏品档案。</span>
+              <span class="pm-addon-desc en">For scattered or research-heavy material: bilingual title (period, category, technique, features), standardised dimensions and weight, verified material and technique terms, edited condition statement, and your provenance shaped into a durable, buyer-ready entry.</span>
+            </span>
+          </label>
+
+          <div class="pm-bundle" id="pmBundleNote" hidden>
+            <span class="zh">两项同选：优惠价 <b>S$62</b>／件（含最多 5 张图片优化＋资料整理），合计 S$350</span>
+            <span class="en">Both selected: <b>S$62</b> per item (up to 5 photos + research), total S$350</span>
+          </div>
+        </div>
+
+        <div class="pm-group">
+          <div class="pm-group-title"><span class="zh">曝光推广（卖家自愿购买，标明推广，不影响自然排序）</span><span class="en">Exposure (seller-paid, labelled as promoted, never alters organic order)</span></div>
+          <label class="pm-addon pm-addon-sm" for="addonExpCat">
+            <input type="checkbox" id="addonExpCat">
+            <span class="pm-addon-body"><span class="pm-addon-title"><span class="zh">分类页优先展示 7 天</span><span class="en">Category top placement, 7 days</span><em>S$39</em></span></span>
+          </label>
+          <label class="pm-addon pm-addon-sm" for="addonExpHome7">
+            <input type="checkbox" id="addonExpHome7">
+            <span class="pm-addon-body"><span class="pm-addon-title"><span class="zh">首页精选额外 7 天</span><span class="en">Extra 7 days on homepage feature</span><em>S$69</em></span></span>
+          </label>
+          <label class="pm-addon pm-addon-sm" for="addonExpHome14">
+            <input type="checkbox" id="addonExpHome14">
+            <span class="pm-addon-body"><span class="pm-addon-title"><span class="zh">首页精选 14 天</span><span class="en">Homepage feature, 14 days</span><em>S$119</em></span></span>
+          </label>
+          <label class="pm-addon pm-addon-sm" for="addonExpTopic">
+            <input type="checkbox" id="addonExpTopic">
+            <span class="pm-addon-body"><span class="pm-addon-title"><span class="zh">专题推荐曝光（瓷器／钱币／藏家展馆／编辑精选）</span><span class="en">Topical feature (porcelain / coins / collections / editor's picks)</span><em><span class="zh">S$149 起</span><span class="en">from S$149</span></em></span></span>
+          </label>
+        </div>
+
+        <div class="pm-group">
+          <div class="pm-group-title"><span class="zh">摄影与图录（按区间报价，提交后确认）</span><span class="en">Photography &amp; catalogues (quoted by range, confirmed after submission)</span></div>
+          <label class="pm-addon pm-addon-sm" for="addonCloseup">
+            <input type="checkbox" id="addonCloseup">
+            <span class="pm-addon-body"><span class="pm-addon-title"><span class="zh">底款 · 款识 · 瑕疵特写整理</span><span class="en">Marks &amp; flaw close-up set</span><em>S$30–60</em></span></span>
+          </label>
+          <label class="pm-addon pm-addon-sm" for="addonPhotoFull">
+            <input type="checkbox" id="addonPhotoFull">
+            <span class="pm-addon-body"><span class="pm-addon-title"><span class="zh">单件藏品完整摄影</span><span class="en">Full single-item photo shoot</span><em>S$120–250</em></span></span>
+          </label>
+          <label class="pm-addon pm-addon-sm" for="addonCataloguePdf">
+            <input type="checkbox" id="addonCataloguePdf">
+            <span class="pm-addon-body"><span class="pm-addon-title"><span class="zh">中英双语图录 PDF</span><span class="en">Bilingual catalogue PDF</span><em>S$129–199</em></span></span>
+          </label>
+          <label class="pm-addon pm-addon-sm" for="addonCatalogueDeluxe">
+            <input type="checkbox" id="addonCatalogueDeluxe">
+            <span class="pm-addon-body"><span class="pm-addon-title"><span class="zh">高端藏品完整图录</span><span class="en">Deluxe complete catalogue</span><em>S$250–500</em></span></span>
+          </label>
+          <p class="pm-group-note"><span class="zh">资料编排不等于鉴定，也不把未经核实的年代、来源或真伪写成平台结论。</span><span class="en">Editing is not authentication; unverified dating, provenance or authenticity is never presented as our conclusion.</span></p>
+        </div>
+
+        <div class="pm-group">
+          <div class="pm-group-title"><span class="zh">买家寻宝服务（买家专享，另行询价）</span><span class="en">Buyer sourcing (for buyers, quoted separately)</span></div>
+          <p class="pm-group-note">
+            <span class="zh">基础匹配 免费 · 人工寻宝 S$49–99／次 · 深度寻宝顾问 S$199–399／次。帮买家从平台藏品中筛选，并在藏家同意后才做匹配；不保证一定找到，也不向第三方提供卖家联系方式。</span>
+            <span class="en">Basic matching free · assisted sourcing S$49–99 per request · deep advisory S$199–399 per request. We screen our listings and only connect after the collector agrees; no guarantee of finding an item, and seller contacts are never shared.</span>
+          </p>
+        </div>
+
+        <div class="pm-total">
+          <span class="zh">本次合计</span><span class="en">Total</span>
+          <b id="pmTotal">S$288</b>
+        </div>
+        <p class="pm-range-note" id="pmRangeNote" hidden>
+          <span class="zh">另已勾选区间报价项，按实际工作量另行确认，不计入上方合计。</span>
+          <span class="en">Range-priced items are quoted after review and not included in the total above.</span>
+        </p>
       </div>
     </div>
 
@@ -1610,60 +1704,126 @@ body[data-lang="en"] .pm-addon-desc.en, body[data-lang="en"] .pm-addon-title em 
     var warn = document.querySelector('#serviceModal .compact-warning');
     if (warn) warn.style.display = isPro ? 'none' : '';
     if (isPro) {
-      var cbP = document.getElementById('addonPhoto');
-      var cbR = document.getElementById('addonResearch');
-      if (cbP) cbP.checked = false;
-      if (cbR) cbR.checked = false;
+      ['addonPhoto', 'addonResearch', 'addonExpCat', 'addonExpHome7', 'addonExpHome14', 'addonExpTopic',
+        'addonCloseup', 'addonPhotoFull', 'addonCataloguePdf', 'addonCatalogueDeluxe'].forEach(function (id) {
+        var el = document.getElementById(id);
+        if (el) el.checked = false;
+      });
       var qty = document.getElementById('addonPhotoQty');
       if (qty) qty.value = '5';
+      pmToggleAddons(false);
       pmRecalc();
     }
   }
 
+  function pmToggleAddons(force) {
+    var body = document.getElementById('pmAddonsBody');
+    var btn = document.getElementById('pmAddonsToggle');
+    if (!body) return;
+    var open = force === undefined ? body.hidden : force;
+    body.hidden = !open;
+    if (btn) btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  }
+
+  function pmChecked(id) {
+    var el = document.getElementById(id);
+    return !!(el && el.checked);
+  }
+
+  /* 固定价项参与合计；区间价项只记录为「另议」 */
+  var PM_EXPOSURE = { addonExpCat: 39, addonExpHome7: 69, addonExpHome14: 119, addonExpTopic: 149 };
+  var PM_RANGE = {
+    addonCloseup: { zh: '底款·款识·瑕疵特写整理', en: 'marks & flaw close-ups', price: 'S$30–60' },
+    addonPhotoFull: { zh: '单件藏品完整摄影', en: 'full photo shoot', price: 'S$120–250' },
+    addonCataloguePdf: { zh: '中英双语图录 PDF', en: 'bilingual catalogue PDF', price: 'S$129–199' },
+    addonCatalogueDeluxe: { zh: '高端藏品完整图录', en: 'deluxe catalogue', price: 'S$250–500' }
+  };
+  var PM_BUNDLE = 62;
+
   function pmAddonSelection() {
     var cfg = SERVICE_CONFIGS.professional;
-    var photo = document.getElementById('addonPhoto');
-    var research = document.getElementById('addonResearch');
+    var photoOn = pmChecked('addonPhoto');
+    var researchOn = pmChecked('addonResearch');
+    var bundle = photoOn && researchOn;
     var qtyEl = document.getElementById('addonPhotoQty');
-    var photoOn = !!(photo && photo.checked);
-    var researchOn = !!(research && research.checked);
     var qty = qtyEl ? parseInt(qtyEl.value, 10) || 1 : 1;
-    var base = 288;
-    var photoSum = photoOn ? cfg.addons.photoUnit * qty : 0;
-    var researchSum = researchOn ? cfg.addons.researchUnit : 0;
+
+    var photoSum = 0, researchSum = 0;
+    if (bundle) {
+      photoSum = PM_BUNDLE; // 两项同选的优惠价合计，含最多 5 张
+    } else if (photoOn) {
+      photoSum = cfg.addons.photoUnit * qty;
+    } else if (researchOn) {
+      researchSum = cfg.addons.researchUnit;
+    }
+
+    var exposure = [];
+    var expSum = 0;
+    Object.keys(PM_EXPOSURE).forEach(function (id) {
+      if (pmChecked(id)) { expSum += PM_EXPOSURE[id]; exposure.push(id); }
+    });
+
+    var ranges = [];
+    Object.keys(PM_RANGE).forEach(function (id) {
+      if (pmChecked(id)) ranges.push(id);
+    });
+
     return {
-      photoOn: photoOn, researchOn: researchOn, qty: qty,
-      photoSum: photoSum, researchSum: researchSum,
-      total: base + photoSum + researchSum
+      photoOn: photoOn, researchOn: researchOn, bundle: bundle, qty: qty,
+      photoSum: photoSum, researchSum: researchSum, exposure: exposure, expSum: expSum,
+      ranges: ranges,
+      total: 288 + photoSum + researchSum + expSum
     };
+  }
+
+  function pmAddonParts(sel) {
+    var parts = [];
+    if (sel.bundle) parts.push('图片基础优化＋资料整理（同选优惠）S$' + PM_BUNDLE);
+    else {
+      if (sel.photoOn) parts.push('图片基础优化 ' + sel.qty + ' 张 S$' + sel.photoSum);
+      if (sel.researchOn) parts.push('资料整理 S$' + sel.researchSum);
+    }
+    if (sel.exposure.length) {
+      var labels = { addonExpCat: '分类页优先 7 天', addonExpHome7: '首页精选额外 7 天', addonExpHome14: '首页精选 14 天', addonExpTopic: '专题推荐' };
+      sel.exposure.forEach(function (id) {
+        var p = PM_EXPOSURE[id];
+        parts.push(labels[id] + ' S$' + p + (id === 'addonExpTopic' ? ' 起' : ''));
+      });
+    }
+    return parts;
   }
 
   function pmServiceText() {
     var sel = pmAddonSelection();
-    var parts = ['专业上架 S$288'];
-    if (sel.photoOn) parts.push('图片基础优化 ' + sel.qty + ' 张 S$' + sel.photoSum);
-    if (sel.researchOn) parts.push('资料整理 S$59');
-    return '【服务选项】' + parts.join(' + ') + ' = 合计 S$' + sel.total;
+    var parts = ['专业上架 S$288'].concat(pmAddonParts(sel));
+    var line = '【服务选项】' + parts.join(' + ') + ' = 合计 S$' + sel.total;
+    if (sel.ranges.length) {
+      line += '；另议：' + sel.ranges.map(function (id) { return PM_RANGE[id].zh + ' ' + PM_RANGE[id].price; }).join('、');
+    }
+    return line;
   }
 
   function pmRecalc() {
     var qtyWrap = document.getElementById('pmPhotoQtyWrap');
-    var photo = document.getElementById('addonPhoto');
-    if (qtyWrap) qtyWrap.hidden = !(photo && photo.checked);
+    if (qtyWrap) qtyWrap.hidden = !pmChecked('addonPhoto');
     var sel = pmAddonSelection();
     var t = document.getElementById('pmTotal');
     if (t) t.textContent = 'S$' + sel.total;
-    var line = document.getElementById('pmServiceLine');
-    if (line) line.textContent = pmServiceText();
+    var bundleNote = document.getElementById('pmBundleNote');
+    if (bundleNote) bundleNote.hidden = !sel.bundle;
+    var rangeNote = document.getElementById('pmRangeNote');
+    if (rangeNote) rangeNote.hidden = !sel.ranges.length;
     var copied = document.getElementById('pmCopied');
     if (copied) copied.hidden = true;
   }
 
   (function bindAddons() {
-    var photo = document.getElementById('addonPhoto');
-    var research = document.getElementById('addonResearch');
-    var qty = document.getElementById('addonPhotoQty');
-    [photo, research, qty].forEach(function (el) { if (el) el.addEventListener('change', pmRecalc); });
+    var ids = ['addonPhoto', 'addonResearch', 'addonPhotoQty', 'addonExpCat', 'addonExpHome7', 'addonExpHome14', 'addonExpTopic',
+      'addonCloseup', 'addonPhotoFull', 'addonCataloguePdf', 'addonCatalogueDeluxe'];
+    ids.forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el) el.addEventListener('change', pmRecalc);
+    });
   })();
 
   function copyServiceLine() {

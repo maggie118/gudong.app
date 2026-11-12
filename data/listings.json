@@ -1257,36 +1257,42 @@
       "intro_zh": "",
       "intro_en": "",
       "whatsapp": "",
-      "gallery": true,
+      "gallery": false,
       "founding_no": "",
       "seller_id": "Sun",
       "display_zh": "Sun",
       "display_en": "Sun",
-      "page_url": "/sellers/seller-sun-antiques.html"
+      "page_url": "/sellers/seller-sun-antiques.html",
+      "gallery_expires_at": "",
+      "gallery_started_at": ""
     },
     {
       "since_year": 2026,
       "intro_zh": "",
       "intro_en": "",
       "whatsapp": "",
-      "gallery": true,
+      "gallery": false,
       "founding_no": "",
-      "seller_id": "Chrysler ",
+      "seller_id": "Chrysler",
       "display_zh": "Chrysler",
       "display_en": "Chrysler",
-      "page_url": "/sellers/seller-chrysler-antiques.html"
+      "page_url": "/sellers/seller-chrysler-antiques.html",
+      "gallery_expires_at": "",
+      "gallery_started_at": ""
     },
     {
       "since_year": 2026,
       "intro_zh": "",
       "intro_en": "",
       "whatsapp": "",
-      "gallery": true,
+      "gallery": false,
       "founding_no": "",
       "seller_id": "Rao-JR",
       "display_zh": "饶健荣",
       "display_en": "Manen Collection",
-      "page_url": "/sellers/seller-rao-jr-antiques.html"
+      "page_url": "/sellers/seller-rao-jr-antiques.html",
+      "gallery_expires_at": "",
+      "gallery_started_at": ""
     },
     {
       "since_year": 2026,

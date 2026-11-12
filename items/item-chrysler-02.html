@@ -573,8 +573,8 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
         </nav>
     </aside>
     <main class="container">
-        <a href="https://www.gudong.app/sellers/../sellers/seller-chrysler -antiques" class="back-link zh">← 返回 Chrysler 私家藏馆</a>
-        <a href="https://www.gudong.app/sellers/../sellers/seller-chrysler -antiques" class="back-link en">← Back to Chrysler</a>
+        <a href="https://www.gudong.app/sellers/../sellers/seller-chrysler-antiques" class="back-link zh" style="display:none">← 返回 Chrysler 私家藏馆</a>
+        <a href="https://www.gudong.app/sellers/../sellers/seller-chrysler-antiques" class="back-link en" style="display:none">← Back to Chrysler</a>
         <div class="item-detail">
             <div class="item-detail-image" id="imageGallery">
                 <div class="image-main">
@@ -632,7 +632,7 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
                         <span class="en" id="sellerNameEn">Chrysler</span>
                         </div>
                     <div class="seller-card-id">Seller ID: <span id="sellerId">Chrysler</span></div>
-                    <a href="https://www.gudong.app/sellers/../sellers/seller-chrysler -antiques" class="seller-card-link" id="sellerLink">
+                    <a href="https://www.gudong.app/sellers/../sellers/seller-chrysler-antiques" class="seller-card-link" id="sellerLink" style="display:none">
                         <span class="zh">查看全部藏品 →</span><span class="en">View all items →</span>
                     </a>
                 </div>
@@ -1135,6 +1135,11 @@ function setSellerCard(f, data) {
                     var bl = document.querySelector('.back-link');
                     if (bl) bl.style.display = 'none';
                     if (link) link.style.display = 'none';
+                }
+                else if (galleryOpen) {
+                    var bl2 = document.querySelector('.back-link');
+                    if (bl2) bl2.style.display = '';
+                    if (link) link.style.display = '';
                 }
             }
         }

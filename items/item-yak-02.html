@@ -1154,6 +1154,11 @@ function setSellerCard(f, data) {
                     if (bl) bl.style.display = 'none';
                     if (link) link.style.display = 'none';
                 }
+                else if (galleryOpen) {
+                    var bl2 = document.querySelector('.back-link');
+                    if (bl2) bl2.style.display = '';
+                    if (link) link.style.display = '';
+                }
             }
         }
         function showNotFound() {

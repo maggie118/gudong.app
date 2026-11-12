@@ -2075,8 +2075,6 @@
                 <button type="button" class="tf-shuffle" id="tfShuffle">
                     <span class="zh">换一批</span><span class="en">Shuffle</span>
                 </button>
-                <span class="tf-count zh">今日发现在展 <em id="tfTotal">0</em> 件</span>
-                <span class="tf-count en"><em id="tfTotalEn">0</em> pieces live in today's finds</span>
             </div>
         </section>
 
@@ -3146,13 +3144,8 @@
             }
             const sec = tfgrid.closest('section');
             if (sec) sec.hidden = false;
-            const total = document.getElementById('tfTotal');
-            const totalEn = document.getElementById('tfTotalEn');
-            const paid = tfAll.length;
-            if (total) total.textContent = String(paid);
-            if (totalEn) totalEn.textContent = String(paid);
             const btn = document.getElementById('tfShuffle');
-            if (btn) btn.style.display = paid > TF_SIZE ? '' : 'none';
+            if (btn) btn.style.display = tfAll.length > TF_SIZE ? '' : 'none';
         }
 
         function applyListingData(data) {

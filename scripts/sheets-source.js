@@ -15,7 +15,9 @@
 // 输出的记录形状与 Airtable 一致（{ id, fields, createdTime }），因此 refresh-listings.js
 // 里既有的 mapItem / mapSeller 无需改动。
 
-const SHEET_ID = process.env.SHEET_ID || '';
+// 默认指向站长自己的主数据表（items / sellers 两个工作表都在里面，另含两个表单的回复页）
+const DEFAULT_SHEET_ID = '1bXToBUVn9T1R6dcImOvQAlh2arXdDx4n1mtoYCDxV3U';
+const SHEET_ID = process.env.SHEET_ID || DEFAULT_SHEET_ID;
 const TAB_ITEMS = process.env.SHEET_TAB_ITEMS || 'items';
 const TAB_SELLERS = process.env.SHEET_TAB_SELLERS || 'sellers';
 

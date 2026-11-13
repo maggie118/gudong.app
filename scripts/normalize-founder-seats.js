@@ -48,7 +48,7 @@ function removeBadge(html) {
 
 const data = JSON.parse(fs.readFileSync(SRC, 'utf8'));
 const seats = seatsFromSellers(data.sellers);
-console.log('Airtable founding_no：');
+console.log('卖家 founding_no（来自 sellers 数据源）：');
 if (!seats.size) console.log('  （全部为空，暂无席号）');
 for (const [sid, seat] of seats) console.log(' ', seat, sid);
 
@@ -75,4 +75,4 @@ for (const f of fs.readdirSync(path.join(ROOT, 'items')).filter((x) => x.endsWit
 }
 console.log(`\n改了 ${changed} 个页面`);
 if (removed.length) console.log('移除未编号徽章：' + removed.join(', '));
-if (unnumbered.length) console.log('待你在 Airtable 填 founding_no：\n  ' + unnumbered.join('\n  '));
+if (unnumbered.length) console.log('待你在 sellers 表填 founding_no：\n  ' + unnumbered.join('\n  '));

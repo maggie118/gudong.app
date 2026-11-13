@@ -1250,7 +1250,7 @@ body[data-lang="en"] .pm-addon-desc.en, body[data-lang="en"] .pm-addon-title em 
           <span class="zh">※ 名额满或截止日期后，新申请的专业上架恢复 S$488/件、私家藏馆恢复 S$1,288/年。已在期限内开通的先锋藏家，此后续费仍按创始价（同一藏家、同一服务项）。</span>
           <span class="en">※ After the quota is filled or the deadline passes, new Professional listings revert to S$488/item and Gallery to S$1,288/year. Pioneer Members who joined before the deadline keep the founding rate on renewals (same collector, same service).</span>
         </div>
-        <a href="https://airtable.com/apprn6XDQnAm8bkaT/shrlQLTRfG5RlYjD4" target="_blank" rel="noopener noreferrer" style="display:inline-flex; align-items:center; justify-content:center; gap:.3rem; background:var(--color-primary-dark); color:#fff; padding:.65rem 1.4rem; border-radius:6px; font-weight:700; font-size:.95rem; text-decoration:none; transition:.2s; box-shadow:0 4px 12px rgba(104,67,45,.2);" onmouseover="this.style.background='var(--color-primary)'" onmouseout="this.style.background='var(--color-primary-dark)'">
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSeu3dk4sJ8dmJW1DQh-KC2dcm7GzN4zj2TnQGieo6S1USblrw/viewform" target="_blank" rel="noopener noreferrer" style="display:inline-flex; align-items:center; justify-content:center; gap:.3rem; background:var(--color-primary-dark); color:#fff; padding:.65rem 1.4rem; border-radius:6px; font-weight:700; font-size:.95rem; text-decoration:none; transition:.2s; box-shadow:0 4px 12px rgba(104,67,45,.2);" onmouseover="this.style.background='var(--color-primary)'" onmouseout="this.style.background='var(--color-primary-dark)'">
           <span class="zh">填写表单，申请新批次席位 →</span>
           <span class="en">Fill form to apply →</span>
         </a>
@@ -1603,7 +1603,7 @@ body[data-lang="en"] .pm-addon-desc.en, body[data-lang="en"] .pm-addon-title em 
       note: { zh: '藏品名称、年代、品类、尺寸、重量、图片与报价，请在提交表单里填写，本弹窗不重复收集。不改变器物真实颜色、形状与品相。', en: 'Item name, period, category, dimensions, weight, photos and price are collected in the submission form — not duplicated here. We never alter the true colour, shape or condition.' },
       maxPhotos: 5,
       addons: { photoUnit: 25, researchUnit: 59 },
-      formUrl: 'https://airtable.com/apprn6XDQnAm8bkaT/pagLlGrrcpRWrcaWM/form',
+      formUrl: 'https://docs.google.com/forms/d/e/1FAIpQLSeQOE9oBw3bleAwFcUZMA2IhiNrO3Ax8p7Iat1z8sgL4XZdiA/viewform',
       fileLabel: { zh: '上传藏品图片（最多 5 张：正面、背面、上面、底部、细节）', en: 'Upload photos (max. 5: front, back, top, base, detail)' },
       fee: '专业上架（S$288 / 件 · 展示 12 个月 · 含首页精选 7 天；早鸟价，全价 S$488）',
       msgTitle: '【专业上架申请 - 古董圈】',
@@ -1685,9 +1685,7 @@ body[data-lang="en"] .pm-addon-desc.en, body[data-lang="en"] .pm-addon-title em 
     var photoNote = document.getElementById('servicePhotoNote');
     if (photoNote) {
       var maxN = cfg.maxPhotos || 5;
-      photoNote.innerHTML = '<span class="zh">※ 单张图片大小不能超过 50KB。如需上传底款特写、瑕疵特写等更多图片，请先上传这 ' + maxN +
-        ' 张，并在提交后通过 WhatsApp 补发。</span><span class="en">※ Max file size is 50KB. To add more photos, upload these ' + maxN +
-        ' first and send the rest via WhatsApp after submitting.</span>';
+      photoNote.innerHTML = '<span class="zh">※ 图片不在此处上传：提交表单后通过 WhatsApp 发原图，或在表单里粘贴 Drive 链接。单张建议不小于 1600px 长边。</span><span class="en">※ Photos are not uploaded here: send originals via WhatsApp after submitting, or paste a Drive link in the form. Keep the long edge at 1600px or more.</span>';
     }
 
     renderWorkflowSteps(cfg);

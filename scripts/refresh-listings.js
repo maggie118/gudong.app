@@ -423,7 +423,7 @@ async function main() {
   const active = records
     .filter(r => String((r.fields && r.fields.status) || '').trim().toLowerCase() === 'active')
     .map(mapItem)
-    .sort((a, b) => String(b._createdTime || '').localeCompare(String(a._createdTime || '')));
+    .sort((a, b) => String(b.listed_at || b._createdTime || '').localeCompare(String(a.listed_at || a._createdTime || '')));
 
   // —— 展示期识别 + 到期自动下架（构建期只读过滤，不额外写 Airtable）——
   // 每条补 expiry_date；到期日 <= 今天 → 视为到期，移出公开列表（自动下架）。

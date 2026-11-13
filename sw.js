@@ -135,7 +135,7 @@
  * - 删 item.html 的 item-chat.js 引用、assets/js/item-chat.js 与 api/chat.js；
  * - 预缓存清单同步移除 item-chat.js，提升缓存版本；
  */
-const CACHE_NAME = 'antique-collection-v130';
+const CACHE_NAME = 'antique-collection-v131';
 // 预缓存清单：核心页面 + 常用图标 + 占位图 + 工具页（离线可用）
 // 注意：改用逐个 cache.add，单个 404 不会导致整个 install 失败
 const PRECACHE_ASSETS = [
@@ -283,11 +283,7 @@ self.addEventListener('fetch', (event) => {
     );
     return;
   }
-  // Reply links carry a bearer token in the query string; never store those URLs in Cache Storage.
-  if (url.pathname === '/seller-reply.html') {
-    event.respondWith(fetch(req).catch(() => new Response('Online connection required', { status: 503, statusText: 'Offline' })));
-    return;
-  }
+  // Private console links carry a bearer token; never store those URLs in Cache Storage.
   if (url.pathname === '/seller-inbox.html') {
     event.respondWith(fetch(req).catch(() => new Response('Online connection required', { status: 503, statusText: 'Offline' })));
     return;

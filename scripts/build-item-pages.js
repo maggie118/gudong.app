@@ -112,14 +112,34 @@ function conditionOf(item) {
   return { zh: '完整 · 未见明显问题', en: 'Intact · no visible issues' };
 }
 
+function priceNumber(v) {
+  if (v == null || v === '') return 0;
+  const n = Number(String(v).replace(/[S$\s,]/gi, ''));
+  return isFinite(n) && n > 0 ? n : 0;
+}
+
+/* 2026-11-14 价格口径：数字 + 类型，文案按语言自动生成（price_display_* 仅作兜底） */
 function priceOf(item) {
-  const fixed = Number(item.fixed_price);
-  if (fixed > 0) {
+  const type = String(item.price_type || '').trim();
+  const enquiry = { zh: '私聊询价', en: 'Enquire' };
+  if (/私聊|询价|面议|enquir|inquir|message/i.test(type)) return enquiry;
+  const fixed = priceNumber(item.fixed_price);
+  if (fixed && (!type || /一口价|fixed/i.test(type))) {
     return { zh: money(fixed), en: money(fixed) };
   }
-  const zh = item.price_display_zh || (item.price_zh ? 'S$' + item.price_zh : '') || '私聊询价';
-  const en = item.price_display_en || (item.price_en ? 'S$' + item.price_en : '') || 'Enquire';
-  return { zh, en };
+  const lo = priceNumber(item.price_min), hi = priceNumber(item.price_max);
+  if (lo && hi && lo !== hi) {
+    return {
+      zh: `估价区间：${money(lo)}–${money(hi)}`,
+      en: `Estimated range: ${money(lo)}–${money(hi)}`
+    };
+  }
+  if (lo) return { zh: `${money(lo)} 起`, en: `From ${money(lo)}` };
+  if (hi) return { zh: `至 ${money(hi)}`, en: `Up to ${money(hi)}` };
+  if (fixed) return { zh: money(fixed), en: money(fixed) };
+  const zh = item.price_display_zh || (item.price_zh ? 'S$' + item.price_zh : '');
+  const en = item.price_display_en || (item.price_en ? 'S$' + item.price_en : '');
+  return { zh: zh || enquiry.zh, en: en || zh || enquiry.en };
 }
 
 function removeFounderBadge(html) {

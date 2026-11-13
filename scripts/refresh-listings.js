@@ -80,6 +80,11 @@ function mapItem(rec) {
     has_surface_wear: !!f.has_surface_wear,
     has_surface_damage: !!f.has_surface_damage,
     price_type: f.price_type || '',
+    // 2026-11-14：价格改为「数字 + 类型」，文案由前端按语言生成
+    fixed_price: numOrNull(f.fixed_price),
+    price_min: numOrNull(f.price_min),
+    price_max: numOrNull(f.price_max),
+    // 旧文本字段仅作 Airtable / 旧 CSV 兜底
     price_display_zh: f.price_display_zh || f.price_zh || '',
     price_display_en: f.price_display_en || f.price_en || '',
     img_file: Array.isArray(f.img_file) ? f.img_file.join(' ') : (f.img_file || ''),
@@ -99,8 +104,14 @@ function mapItem(rec) {
     listed_at: f.listed_at || '',
     expiry_date: f.expiry_date || '', // 可选显式到期日；缺省由 listed_at/创建时间 +6 个月推导
     previous_price: f.previous_price != null ? Number(f.previous_price) : NaN,
-    fixed_price: f.fixed_price != null ? Number(f.fixed_price) : NaN,
   };
+}
+
+// 数字字段统一：空/0/非数字 → null（listings.json 里保持 null 而不是 NaN）
+function numOrNull(v) {
+  if (v == null || v === '') return null;
+  const n = Number(String(v).replace(/[S$\s,]/gi, ''));
+  return isFinite(n) && n > 0 ? n : null;
 }
 
 // ---------- 卖家（专属藏馆）映射 ----------
@@ -306,23 +317,30 @@ function buildAutoIntel(items) {
     });
   }
 
-  // (4) compare
-  const withPrice = items.filter(f => isFinite(f.fixed_price) && f.fixed_price > 0);
+  // (4) compare —— 代表价：一口价取 fixed_price，区间取中位数
+  const priceRef = f => {
+    if (isFinite(f.fixed_price) && f.fixed_price > 0) return f.fixed_price;
+    const lo = isFinite(f.price_min) && f.price_min > 0 ? f.price_min : 0;
+    const hi = isFinite(f.price_max) && f.price_max > 0 ? f.price_max : 0;
+    if (lo && hi) return (lo + hi) / 2;
+    return lo || hi || 0;
+  };
+  const withPrice = items.filter(f => priceRef(f) > 0);
   const byCat = {};
   withPrice.forEach(f => { const c = normCat(f.category); (byCat[c] = byCat[c] || []).push(f); });
   let bestPair = null;
   Object.entries(byCat).forEach(([cat, list]) => {
     if (list.length < 2) return;
-    const sorted = [...list].sort((a, b) => a.fixed_price - b.fixed_price);
+    const sorted = [...list].sort((a, b) => priceRef(a) - priceRef(b));
     const low = sorted[0];
     const high = sorted[sorted.length - 1];
-    const diff = (high.fixed_price - low.fixed_price) / high.fixed_price;
+    const diff = (priceRef(high) - priceRef(low)) / priceRef(high);
     if (!bestPair || diff > bestPair.diff) bestPair = { cat, low, high, diff };
   });
   if (bestPair && bestPair.diff > 0.2) {
     const { low, high } = bestPair;
-    const lowPrice = Number(low.fixed_price).toLocaleString('en-SG');
-    const highPrice = Number(high.fixed_price).toLocaleString('en-SG');
+    const lowPrice = Math.round(priceRef(low)).toLocaleString('en-SG');
+    const highPrice = Math.round(priceRef(high)).toLocaleString('en-SG');
     const pct = Math.round(bestPair.diff * 100);
     auto.push({
       type: 'compare',

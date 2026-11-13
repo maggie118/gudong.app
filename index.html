@@ -2821,12 +2821,25 @@
             }
             return str;
         }
+        function moneyLabel(v) {
+            v = Array.isArray(v) ? v[0] : v;
+            if (v == null || v === '') return '';
+            const n = Number(String(v).replace(/[S$\s,]/gi, ''));
+            if (!isFinite(n) || n <= 0) return '';
+            return 'S$' + new Intl.NumberFormat('en-SG', { maximumFractionDigits: 0 }).format(n);
+        }
+        /* 2026-11-14 价格口径：数字 + 类型（price_display_* 已从主表删除，仅作兜底） */
         function resolvePrice(f) {
             const type = String(getF(f, 'price_type', 'price type') || '').trim();
             const enquiry = { zh: '私聊询价', en: 'Enquire', enquiry: true };
-            if (/私聊|询价|enquir|inquir|message/i.test(type)) return enquiry;
+            if (/私聊|询价|面议|enquir|inquir|message/i.test(type)) return enquiry;
             const fixed = fmtMoney(getF(f, 'fixed_price'));
             if (fixed && (!type || /一口价|fixed/i.test(type))) return { zh: fixed, en: fixed };
+            const lo = moneyLabel(getF(f, 'price_min')), hi = moneyLabel(getF(f, 'price_max'));
+            if (lo && hi && lo !== hi) return { zh: '估价区间：' + lo + '–' + hi, en: 'Estimated range: ' + lo + '–' + hi };
+            if (lo) return { zh: lo + ' 起', en: 'From ' + lo };
+            if (hi) return { zh: '至 ' + hi, en: 'Up to ' + hi };
+            if (fixed) return { zh: fixed, en: fixed };
             const zh = joinPrice(getF(f, 'price_display_zh'), getF(f, 'price_zh')) || joinPrice(getF(f, 'price_display_en'), getF(f, 'price_en'));
             const en = joinPrice(getF(f, 'price_display_en'), getF(f, 'price_en')) || joinPrice(getF(f, 'price_display_zh'), getF(f, 'price_zh'));
             if (zh || en) return { zh: zh || en, en: en || zh };

@@ -194,12 +194,29 @@
     if (!amount || label.indexOf(amount) !== -1) return label;
     return /[:\uff1a]\s*$/.test(label) ? label + amount : label + ' ' + amount;
   }
+  /* 2026-11-14 价格口径：数字 + 类型，文案按语言自动生成
+     price_type=私聊/面议 → 询价；一口价 → fixed_price；价格区间 → price_min/price_max
+     price_display_zh/en 已从主表删除，仅作 Airtable / 旧 CSV 兜底 */
+  function moneyLabel(v) {
+    v = first(v);
+    if (v == null || v === '') return '';
+    var n = Number(String(v).replace(/[S$\s,]/gi, ''));
+    if (!isFinite(n) || n <= 0) return '';
+    return 'S$' + new Intl.NumberFormat('en-SG', { maximumFractionDigits: 0 }).format(n);
+  }
   function resolvePrice(f) {
     var type = String(first(f.price_type) || first(f['price type']) || '').trim();
     var enquiry = { zh: '\u79c1\u804a\u8be2\u4ef7', en: 'Enquire', enquiry: true };
-    if (/\u79c1\u804a|\u8be2\u4ef7|enquir|inquir|message/i.test(type)) return enquiry;
+    if (/\u79c1\u804a|\u8be2\u4ef7|\u9762\u8bae|enquir|inquir|message/i.test(type)) return enquiry;
     var fixed = fmtMoney(f.fixed_price);
     if (fixed && (!type || /\u4e00\u53e3\u4ef7|fixed/i.test(type))) return { zh: fixed, en: fixed, enquiry: false };
+    var lo = moneyLabel(f.price_min), hi = moneyLabel(f.price_max);
+    if (lo && hi && lo !== hi) {
+      return { zh: '\u4f30\u4ef7\u533a\u95f4\uff1a' + lo + '\u2013' + hi, en: 'Estimated range: ' + lo + '\u2013' + hi, enquiry: false };
+    }
+    if (lo) return { zh: lo + ' \u8d77', en: 'From ' + lo, enquiry: false };
+    if (hi) return { zh: '\u81f3 ' + hi, en: 'Up to ' + hi, enquiry: false };
+    if (fixed) return { zh: fixed, en: fixed, enquiry: false };
     var zh = joinPrice(f.price_display_zh, f.price_zh) || joinPrice(f.price_display_en, f.price_en);
     var en = joinPrice(f.price_display_en, f.price_en) || joinPrice(f.price_display_zh, f.price_zh);
     if (zh || en) return { zh: zh || en, en: en || zh, enquiry: false };

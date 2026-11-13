@@ -12,8 +12,11 @@
       "has_surface_wear": true,
       "has_surface_damage": false,
       "price_type": "私聊",
-      "price_display_zh": "价格面议",
-      "price_display_en": "Price on inquiry",
+      "fixed_price": 5000,
+      "price_min": null,
+      "price_max": null,
+      "price_display_zh": "",
+      "price_display_en": "",
       "img_file": "lim-kw/item-lim-01.jpg",
       "seller_id": "Lim-KW",
       "seller_name_en": "",
@@ -27,8 +30,7 @@
       "reason_en": "Xuande blue-and-gold; complete pieces rarely surface",
       "listed_at": "2026-09-12 16:54:00",
       "expiry_date": "2027-05-01",
-      "previous_price": null,
-      "fixed_price": 5000
+      "previous_price": null
     },
     {
       "item_id": "item-lim-02",
@@ -42,8 +44,11 @@
       "has_surface_wear": true,
       "has_surface_damage": false,
       "price_type": "私聊",
-      "price_display_zh": "价格面议",
-      "price_display_en": "Price on inquiry",
+      "fixed_price": 5000,
+      "price_min": null,
+      "price_max": null,
+      "price_display_zh": "",
+      "price_display_en": "",
       "img_file": "lim-kw/item-lim-02.jpg",
       "seller_id": "Lim-KW",
       "seller_name_en": "",
@@ -57,8 +62,7 @@
       "reason_en": "Intact gold-inlay; rare quadripod form for Warring-States bronzes",
       "listed_at": "2026-09-12 16:54:00",
       "expiry_date": "2027-05-01",
-      "previous_price": null,
-      "fixed_price": 5000
+      "previous_price": null
     },
     {
       "item_id": "item-yak-01",
@@ -72,8 +76,11 @@
       "has_surface_wear": true,
       "has_surface_damage": false,
       "price_type": "私聊",
-      "price_display_zh": "价格面议",
-      "price_display_en": "Price on inquiry",
+      "fixed_price": null,
+      "price_min": null,
+      "price_max": null,
+      "price_display_zh": "",
+      "price_display_en": "",
       "img_file": "yak-bc/item-yak-01.jpg",
       "seller_id": "Yak-BC",
       "seller_name_en": "",
@@ -87,8 +94,7 @@
       "reason_en": "Paired Tang sancai musicians — lively poses, uncommon",
       "listed_at": "2026-09-22 04:22:00",
       "expiry_date": "2027-05-01",
-      "previous_price": null,
-      "fixed_price": null
+      "previous_price": null
     },
     {
       "item_id": "item-ng-02",
@@ -102,8 +108,11 @@
       "has_surface_wear": true,
       "has_surface_damage": false,
       "price_type": "私聊",
-      "price_display_zh": "价格面议",
-      "price_display_en": "Price on inquiry",
+      "fixed_price": null,
+      "price_min": null,
+      "price_max": null,
+      "price_display_zh": "",
+      "price_display_en": "",
       "img_file": "ng-lk/item-ng-02.jpg",
       "seller_id": "Ng-LK",
       "seller_name_en": "",
@@ -117,8 +126,7 @@
       "reason_en": "Rare Han gilt mirror; clear immortal-chariot motif",
       "listed_at": "2026-09-23 04:05:00",
       "expiry_date": "2027-05-01",
-      "previous_price": null,
-      "fixed_price": null
+      "previous_price": null
     },
     {
       "item_id": "item-ngcy-01",
@@ -132,8 +140,11 @@
       "has_surface_wear": true,
       "has_surface_damage": false,
       "price_type": "私聊",
-      "price_display_zh": "价格面议",
-      "price_display_en": "Price on inquiry",
+      "fixed_price": null,
+      "price_min": null,
+      "price_max": null,
+      "price_display_zh": "",
+      "price_display_en": "",
       "img_file": "ng-cy/item-ngcy-01.jpg",
       "seller_id": "Ng-CY",
       "seller_name_en": "",
@@ -147,8 +158,7 @@
       "reason_en": "Fine Hotan jade vase; beast knob and double-ring handles intact",
       "listed_at": "2026-09-23 09:50:00",
       "expiry_date": "2027-11-11",
-      "previous_price": null,
-      "fixed_price": null
+      "previous_price": null
     },
     {
       "item_id": "item-ngcy-02",
@@ -162,8 +172,11 @@
       "has_surface_wear": true,
       "has_surface_damage": false,
       "price_type": "私聊",
-      "price_display_zh": "价格面议",
-      "price_display_en": "Price on inquiry",
+      "fixed_price": null,
+      "price_min": null,
+      "price_max": null,
+      "price_display_zh": "",
+      "price_display_en": "",
       "img_file": "ng-cy/item-ngcy-02.jpg ng-cy/item-ngcy-02b.jpg ng-cy/item-ngcy-02c.jpg ng-cy/item-ngcy-02d.jpg ng-cy/item-ngcy-02e.jpg",
       "seller_id": "Ng-CY",
       "seller_name_en": "",
@@ -177,8 +190,7 @@
       "reason_en": "Paired yellow-ground green-enameled plates; strong condition",
       "listed_at": "2026-09-23 10:15:00",
       "expiry_date": "2027-11-11",
-      "previous_price": null,
-      "fixed_price": null
+      "previous_price": null
     },
     {
       "item_id": "item-ngcy-03",
@@ -192,8 +204,11 @@
       "has_surface_wear": true,
       "has_surface_damage": false,
       "price_type": "私聊",
-      "price_display_zh": "价格面议",
-      "price_display_en": "Price on inquiry",
+      "fixed_price": null,
+      "price_min": null,
+      "price_max": null,
+      "price_display_zh": "",
+      "price_display_en": "",
       "img_file": "ng-cy/item-ngcy-03.jpg",
       "seller_id": "Ng-CY",
       "seller_name_en": "",
@@ -207,8 +222,7 @@
       "reason_en": "Natural Ge-glaze crackle; well-proportioned celestial globe form",
       "listed_at": "2026-09-23 10:23:00",
       "expiry_date": "2027-11-11",
-      "previous_price": null,
-      "fixed_price": null
+      "previous_price": null
     },
     {
       "item_id": "item-ngcy-04",
@@ -222,8 +236,11 @@
       "has_surface_wear": true,
       "has_surface_damage": false,
       "price_type": "私聊",
-      "price_display_zh": "价格面议",
-      "price_display_en": "Price on inquiry",
+      "fixed_price": null,
+      "price_min": null,
+      "price_max": null,
+      "price_display_zh": "",
+      "price_display_en": "",
       "img_file": "ng-cy/item-ngcy-04.jpg ng-cy/item-ngcy-04b.jpg ng-cy/item-ngcy-04c.jpg ng-cy/item-ngcy-04d.jpg",
       "seller_id": "Ng-CY",
       "seller_name_en": "",
@@ -237,8 +254,7 @@
       "reason_en": "Xuande-mark bronze censer; crisp bowstring pattern, warm patina",
       "listed_at": "2026-09-23 10:51:00",
       "expiry_date": "2027-05-01",
-      "previous_price": null,
-      "fixed_price": null
+      "previous_price": null
     },
     {
       "item_id": "item-yap-01",
@@ -252,8 +268,11 @@
       "has_surface_wear": true,
       "has_surface_damage": false,
       "price_type": "一口价",
-      "price_display_zh": "S$12000",
-      "price_display_en": "S$12,000",
+      "fixed_price": 12000,
+      "price_min": null,
+      "price_max": null,
+      "price_display_zh": "",
+      "price_display_en": "",
       "img_file": "yap-jm/item-yap-01.jpg yap-jm/item-yap-01b.jpg yap-jm/item-yap-01c.jpg",
       "seller_id": "Yap-JM",
       "seller_name_en": "",
@@ -267,8 +286,7 @@
       "reason_en": "",
       "listed_at": "2026-11-12 11:48:00",
       "expiry_date": "2027-11-11",
-      "previous_price": null,
-      "fixed_price": 12000
+      "previous_price": null
     },
     {
       "item_id": "item-yap-02",
@@ -282,8 +300,11 @@
       "has_surface_wear": true,
       "has_surface_damage": false,
       "price_type": "一口价",
-      "price_display_zh": "S$8500",
-      "price_display_en": "S$8,500",
+      "fixed_price": 8500,
+      "price_min": null,
+      "price_max": null,
+      "price_display_zh": "",
+      "price_display_en": "",
       "img_file": "yap-jm/item-yap-02.jpg yap-jm/item-yap-02b.jpg yap-jm/item-yap-02c.jpg",
       "seller_id": "Yap-JM",
       "seller_name_en": "",
@@ -297,8 +318,7 @@
       "reason_en": "",
       "listed_at": "2026-11-12 12:16:00",
       "expiry_date": "2027-11-11",
-      "previous_price": null,
-      "fixed_price": 8500
+      "previous_price": null
     },
     {
       "item_id": "item-yap-03",
@@ -312,8 +332,11 @@
       "has_surface_wear": true,
       "has_surface_damage": false,
       "price_type": "一口价",
-      "price_display_zh": "S$25000",
-      "price_display_en": "S$25,000",
+      "fixed_price": 25000,
+      "price_min": null,
+      "price_max": null,
+      "price_display_zh": "",
+      "price_display_en": "",
       "img_file": "yap-jm/item-yap-03.jpg yap-jm/item-yap-03b.jpg yap-jm/item-yap-03c.jpg yap-jm/item-yap-03d.jpg yap-jm/item-yap-03e.jpg",
       "seller_id": "Yap-JM",
       "seller_name_en": "",
@@ -327,8 +350,7 @@
       "reason_en": "",
       "listed_at": "2026-11-12 12:28:00",
       "expiry_date": "2027-11-11",
-      "previous_price": null,
-      "fixed_price": 25000
+      "previous_price": null
     },
     {
       "item_id": "item-yap-04",
@@ -342,8 +364,11 @@
       "has_surface_wear": true,
       "has_surface_damage": false,
       "price_type": "一口价",
-      "price_display_zh": "S$6000",
-      "price_display_en": "S$6,000",
+      "fixed_price": 6000,
+      "price_min": null,
+      "price_max": null,
+      "price_display_zh": "",
+      "price_display_en": "",
       "img_file": "yap-jm/item-yap-04.jpg yap-jm/item-yap-04b.jpg yap-jm/item-yap-04c.jpg",
       "seller_id": "Yap-JM",
       "seller_name_en": "",
@@ -357,8 +382,7 @@
       "reason_en": "",
       "listed_at": "2026-11-12 12:45:00",
       "expiry_date": "2027-11-11",
-      "previous_price": null,
-      "fixed_price": 6000
+      "previous_price": null
     },
     {
       "item_id": "item-ngcy-05",
@@ -372,8 +396,11 @@
       "has_surface_wear": true,
       "has_surface_damage": false,
       "price_type": "私聊",
-      "price_display_zh": "价格面议",
-      "price_display_en": "Price on inquiry",
+      "fixed_price": null,
+      "price_min": null,
+      "price_max": null,
+      "price_display_zh": "",
+      "price_display_en": "",
       "img_file": "ng-cy/item-ngcy-05.jpg ng-cy/item-ngcy-05b.jpg ng-cy/item-ngcy-05c.jpg ng-cy/item-ngcy-05d.jpg ng-cy/item-ngcy-05e.jpg",
       "seller_id": "Ng-CY",
       "seller_name_en": "",
@@ -387,8 +414,7 @@
       "reason_en": "7.8kg seed jade boulder with skin retained — rare size and carving",
       "listed_at": "2026-09-23 11:01:00",
       "expiry_date": "2027-05-01",
-      "previous_price": null,
-      "fixed_price": null
+      "previous_price": null
     },
     {
       "item_id": "item-yap-05",
@@ -402,8 +428,11 @@
       "has_surface_wear": true,
       "has_surface_damage": false,
       "price_type": "一口价",
-      "price_display_zh": "S$9888",
-      "price_display_en": "S$9,888",
+      "fixed_price": 9888,
+      "price_min": null,
+      "price_max": null,
+      "price_display_zh": "",
+      "price_display_en": "",
       "img_file": "yap-jm/item-yap-05.jpg yap-jm/item-yap-05b.jpg yap-jm/item-yap-05c.jpg",
       "seller_id": "Yap-JM",
       "seller_name_en": "",
@@ -417,8 +446,7 @@
       "reason_en": "",
       "listed_at": "2026-11-12 12:57:00",
       "expiry_date": "2027-11-11",
-      "previous_price": null,
-      "fixed_price": 9888
+      "previous_price": null
     },
     {
       "item_id": "item-yap-06",
@@ -432,8 +460,11 @@
       "has_surface_wear": true,
       "has_surface_damage": false,
       "price_type": "一口价",
-      "price_display_zh": "S$12000",
-      "price_display_en": "S$12,000",
+      "fixed_price": 12000,
+      "price_min": null,
+      "price_max": null,
+      "price_display_zh": "",
+      "price_display_en": "",
       "img_file": "yap-jm/item-yap-06.jpg yap-jm/item-yap-06b.jpg yap-jm/item-yap-06c.jpg",
       "seller_id": "Yap-JM",
       "seller_name_en": "",
@@ -447,8 +478,7 @@
       "reason_en": "",
       "listed_at": "2026-11-12 13:04:00",
       "expiry_date": "2027-11-11",
-      "previous_price": null,
-      "fixed_price": 12000
+      "previous_price": null
     }
   ],
   "editorPicks": [],
@@ -466,8 +496,11 @@
       "has_surface_wear": true,
       "has_surface_damage": false,
       "price_type": "一口价",
-      "price_display_zh": "S$12000",
-      "price_display_en": "S$12,000",
+      "fixed_price": 12000,
+      "price_min": null,
+      "price_max": null,
+      "price_display_zh": "",
+      "price_display_en": "",
       "img_file": "yap-jm/item-yap-06.jpg yap-jm/item-yap-06b.jpg yap-jm/item-yap-06c.jpg",
       "seller_id": "Yap-JM",
       "seller_name_en": "",
@@ -481,8 +514,7 @@
       "reason_en": "",
       "listed_at": "2026-11-12 13:04:00",
       "expiry_date": "2027-11-11",
-      "previous_price": null,
-      "fixed_price": 12000
+      "previous_price": null
     },
     {
       "item_id": "item-yap-05",
@@ -496,8 +528,11 @@
       "has_surface_wear": true,
       "has_surface_damage": false,
       "price_type": "一口价",
-      "price_display_zh": "S$9888",
-      "price_display_en": "S$9,888",
+      "fixed_price": 9888,
+      "price_min": null,
+      "price_max": null,
+      "price_display_zh": "",
+      "price_display_en": "",
       "img_file": "yap-jm/item-yap-05.jpg yap-jm/item-yap-05b.jpg yap-jm/item-yap-05c.jpg",
       "seller_id": "Yap-JM",
       "seller_name_en": "",
@@ -511,8 +546,7 @@
       "reason_en": "",
       "listed_at": "2026-11-12 12:57:00",
       "expiry_date": "2027-11-11",
-      "previous_price": null,
-      "fixed_price": 9888
+      "previous_price": null
     },
     {
       "item_id": "item-yap-04",
@@ -526,8 +560,11 @@
       "has_surface_wear": true,
       "has_surface_damage": false,
       "price_type": "一口价",
-      "price_display_zh": "S$6000",
-      "price_display_en": "S$6,000",
+      "fixed_price": 6000,
+      "price_min": null,
+      "price_max": null,
+      "price_display_zh": "",
+      "price_display_en": "",
       "img_file": "yap-jm/item-yap-04.jpg yap-jm/item-yap-04b.jpg yap-jm/item-yap-04c.jpg",
       "seller_id": "Yap-JM",
       "seller_name_en": "",
@@ -541,8 +578,7 @@
       "reason_en": "",
       "listed_at": "2026-11-12 12:45:00",
       "expiry_date": "2027-11-11",
-      "previous_price": null,
-      "fixed_price": 6000
+      "previous_price": null
     },
     {
       "item_id": "item-yap-03",
@@ -556,8 +592,11 @@
       "has_surface_wear": true,
       "has_surface_damage": false,
       "price_type": "一口价",
-      "price_display_zh": "S$25000",
-      "price_display_en": "S$25,000",
+      "fixed_price": 25000,
+      "price_min": null,
+      "price_max": null,
+      "price_display_zh": "",
+      "price_display_en": "",
       "img_file": "yap-jm/item-yap-03.jpg yap-jm/item-yap-03b.jpg yap-jm/item-yap-03c.jpg yap-jm/item-yap-03d.jpg yap-jm/item-yap-03e.jpg",
       "seller_id": "Yap-JM",
       "seller_name_en": "",
@@ -571,8 +610,7 @@
       "reason_en": "",
       "listed_at": "2026-11-12 12:28:00",
       "expiry_date": "2027-11-11",
-      "previous_price": null,
-      "fixed_price": 25000
+      "previous_price": null
     },
     {
       "item_id": "item-yap-02",
@@ -586,8 +624,11 @@
       "has_surface_wear": true,
       "has_surface_damage": false,
       "price_type": "一口价",
-      "price_display_zh": "S$8500",
-      "price_display_en": "S$8,500",
+      "fixed_price": 8500,
+      "price_min": null,
+      "price_max": null,
+      "price_display_zh": "",
+      "price_display_en": "",
       "img_file": "yap-jm/item-yap-02.jpg yap-jm/item-yap-02b.jpg yap-jm/item-yap-02c.jpg",
       "seller_id": "Yap-JM",
       "seller_name_en": "",
@@ -601,8 +642,7 @@
       "reason_en": "",
       "listed_at": "2026-11-12 12:16:00",
       "expiry_date": "2027-11-11",
-      "previous_price": null,
-      "fixed_price": 8500
+      "previous_price": null
     },
     {
       "item_id": "item-yap-01",
@@ -616,8 +656,11 @@
       "has_surface_wear": true,
       "has_surface_damage": false,
       "price_type": "一口价",
-      "price_display_zh": "S$12000",
-      "price_display_en": "S$12,000",
+      "fixed_price": 12000,
+      "price_min": null,
+      "price_max": null,
+      "price_display_zh": "",
+      "price_display_en": "",
       "img_file": "yap-jm/item-yap-01.jpg yap-jm/item-yap-01b.jpg yap-jm/item-yap-01c.jpg",
       "seller_id": "Yap-JM",
       "seller_name_en": "",
@@ -631,8 +674,7 @@
       "reason_en": "",
       "listed_at": "2026-11-12 11:48:00",
       "expiry_date": "2027-11-11",
-      "previous_price": null,
-      "fixed_price": 12000
+      "previous_price": null
     },
     {
       "item_id": "item-sun-04",
@@ -646,8 +688,11 @@
       "has_surface_wear": true,
       "has_surface_damage": false,
       "price_type": "价格区间（可议价）",
-      "price_display_zh": "估价区间：S$326000-S$489000",
-      "price_display_en": "Estimated range: S$326000-S$489000",
+      "fixed_price": null,
+      "price_min": 326000,
+      "price_max": 489000,
+      "price_display_zh": "",
+      "price_display_en": "",
       "img_file": "sun/item-sun-04.jpg sun/item-sun-04b.jpg sun/item-sun-04c.jpg sun/item-sun-04d.jpg",
       "seller_id": "Sun",
       "seller_name_en": "",
@@ -661,8 +706,7 @@
       "reason_en": "",
       "listed_at": "2026-11-03 13:13:00",
       "expiry_date": "2027-05-01",
-      "previous_price": null,
-      "fixed_price": null
+      "previous_price": null
     },
     {
       "item_id": "item-sun-03",
@@ -676,8 +720,11 @@
       "has_surface_wear": true,
       "has_surface_damage": false,
       "price_type": "价格区间（可议价）",
-      "price_display_zh": "估价区间：S$2500-S$4200",
-      "price_display_en": "Estimated range: S$2500-S$4200",
+      "fixed_price": null,
+      "price_min": 2500,
+      "price_max": 4200,
+      "price_display_zh": "",
+      "price_display_en": "",
       "img_file": "sun/item-sun-03.jpg sun/item-sun-03b.jpg sun/item-sun-03c.jpg",
       "seller_id": "Sun",
       "seller_name_en": "",
@@ -691,8 +738,7 @@
       "reason_en": "",
       "listed_at": "2026-11-02 12:52:00",
       "expiry_date": "2027-05-01",
-      "previous_price": null,
-      "fixed_price": null
+      "previous_price": null
     },
     {
       "item_id": "item-chrysler-02",
@@ -706,8 +752,11 @@
       "has_surface_wear": true,
       "has_surface_damage": false,
       "price_type": "价格区间（可议价）",
-      "price_display_zh": "估价区间：S$130000- S$200,000",
-      "price_display_en": "Estimated range: S$130000- S$200,000",
+      "fixed_price": null,
+      "price_min": 130000,
+      "price_max": 200000,
+      "price_display_zh": "",
+      "price_display_en": "",
       "img_file": "chrysler/item-chrysler-02.jpg chrysler/item-chrysler-02b.jpg chrysler/item-chrysler-02c.jpg chrysler/item-chrysler-02d.jpg",
       "seller_id": "Chrysler",
       "seller_name_en": "",
@@ -721,8 +770,7 @@
       "reason_en": "",
       "listed_at": "2026-11-02 12:39:00",
       "expiry_date": "2027-05-01",
-      "previous_price": null,
-      "fixed_price": null
+      "previous_price": null
     },
     {
       "item_id": "item-chrysler-01",
@@ -736,8 +784,11 @@
       "has_surface_wear": true,
       "has_surface_damage": false,
       "price_type": "价格区间（可议价）",
-      "price_display_zh": "估价区间：S$2500-S$4200",
-      "price_display_en": "Estimated range: S$2500-S$4200",
+      "fixed_price": null,
+      "price_min": 2500,
+      "price_max": 4200,
+      "price_display_zh": "",
+      "price_display_en": "",
       "img_file": "chrysler/item-chrysler-01.jpg chrysler/item-chrysler-01b.jpg chrysler/item-chrysler-01c.jpg",
       "seller_id": "Chrysler",
       "seller_name_en": "",
@@ -751,8 +802,7 @@
       "reason_en": "",
       "listed_at": "2026-11-02 12:30:00",
       "expiry_date": "2027-05-01",
-      "previous_price": null,
-      "fixed_price": null
+      "previous_price": null
     },
     {
       "item_id": "item-sun-02",
@@ -766,8 +816,11 @@
       "has_surface_wear": true,
       "has_surface_damage": false,
       "price_type": "价格区间（可议价）",
-      "price_display_zh": "估价区间：S$2500-S$4200",
-      "price_display_en": "Estimated range: S$2500-S$4200",
+      "fixed_price": null,
+      "price_min": 2500,
+      "price_max": 4200,
+      "price_display_zh": "",
+      "price_display_en": "",
       "img_file": "sun/item-sun-02.jpg sun/item-sun-02b.jpg sun/item-sun-02c.jpg",
       "seller_id": "Sun",
       "seller_name_en": "",
@@ -781,8 +834,7 @@
       "reason_en": "",
       "listed_at": "2026-11-02 12:29:00",
       "expiry_date": "2027-05-01",
-      "previous_price": null,
-      "fixed_price": null
+      "previous_price": null
     },
     {
       "item_id": "item-raojr-01",
@@ -796,8 +848,11 @@
       "has_surface_wear": true,
       "has_surface_damage": false,
       "price_type": "价格区间（可议价）",
-      "price_display_zh": "估价区间：S$800-S$1200",
-      "price_display_en": "Estimated range: S$800-S$1200",
+      "fixed_price": null,
+      "price_min": 800,
+      "price_max": 1200,
+      "price_display_zh": "",
+      "price_display_en": "",
       "img_file": "rao-jr/item-raojr-01.jpg rao-jr/item-raojr-01b.jpg rao-jr/item-raojr-01c.jpg rao-jr/item-raojr-01d.jpg",
       "seller_id": "Rao-JR",
       "seller_name_en": "",
@@ -811,8 +866,7 @@
       "reason_en": "",
       "listed_at": "2026-10-26 15:00:00",
       "expiry_date": "2027-05-01",
-      "previous_price": null,
-      "fixed_price": null
+      "previous_price": null
     },
     {
       "item_id": "item-limck-03",
@@ -826,8 +880,11 @@
       "has_surface_wear": true,
       "has_surface_damage": false,
       "price_type": "私聊",
-      "price_display_zh": "价格面议",
-      "price_display_en": "Price on inquiry",
+      "fixed_price": null,
+      "price_min": null,
+      "price_max": null,
+      "price_display_zh": "",
+      "price_display_en": "",
       "img_file": "lim-ck/item-limck-03.jpg lim-ck/item-limck-03b.jpg lim-ck/item-limck-03c.jpg",
       "seller_id": "Lim-CK",
       "seller_name_en": "",
@@ -841,8 +898,7 @@
       "reason_en": "",
       "listed_at": "2026-10-21 05:48:00",
       "expiry_date": "2027-05-01",
-      "previous_price": null,
-      "fixed_price": null
+      "previous_price": null
     },
     {
       "item_id": "item-limck-02",
@@ -856,8 +912,11 @@
       "has_surface_wear": true,
       "has_surface_damage": false,
       "price_type": "私聊",
-      "price_display_zh": "价格面议",
-      "price_display_en": "Price on inquiry",
+      "fixed_price": null,
+      "price_min": null,
+      "price_max": null,
+      "price_display_zh": "",
+      "price_display_en": "",
       "img_file": "lim-ck/item-limck-02.jpg lim-ck/item-limck-02b.jpg lim-ck/item-limck-02c.jpg lim-ck/item-limck-02d.jpg",
       "seller_id": "Lim-CK",
       "seller_name_en": "",
@@ -871,8 +930,7 @@
       "reason_en": "",
       "listed_at": "2026-10-21 03:33:00",
       "expiry_date": "2027-05-01",
-      "previous_price": null,
-      "fixed_price": null
+      "previous_price": null
     },
     {
       "item_id": "item-limck-01",
@@ -886,8 +944,11 @@
       "has_surface_wear": true,
       "has_surface_damage": false,
       "price_type": "私聊",
-      "price_display_zh": "价格面议",
-      "price_display_en": "Price on inquiry",
+      "fixed_price": null,
+      "price_min": null,
+      "price_max": null,
+      "price_display_zh": "",
+      "price_display_en": "",
       "img_file": "lim-ck/item-limck-01.jpg lim-ck/item-limck-01b.jpg lim-ck/item-limck-01c.jpg lim-ck/item-limck-01d.jpg",
       "seller_id": "Lim-CK",
       "seller_name_en": "",
@@ -901,8 +962,7 @@
       "reason_en": "t is a fine example of early Southeast Asian Buddhist art, possessing great historical and cultural value.",
       "listed_at": "2026-10-21 01:58:00",
       "expiry_date": "2027-05-01",
-      "previous_price": null,
-      "fixed_price": null
+      "previous_price": null
     },
     {
       "item_id": "item-ngcy-05",
@@ -916,8 +976,11 @@
       "has_surface_wear": true,
       "has_surface_damage": false,
       "price_type": "私聊",
-      "price_display_zh": "价格面议",
-      "price_display_en": "Price on inquiry",
+      "fixed_price": null,
+      "price_min": null,
+      "price_max": null,
+      "price_display_zh": "",
+      "price_display_en": "",
       "img_file": "ng-cy/item-ngcy-05.jpg ng-cy/item-ngcy-05b.jpg ng-cy/item-ngcy-05c.jpg ng-cy/item-ngcy-05d.jpg ng-cy/item-ngcy-05e.jpg",
       "seller_id": "Ng-CY",
       "seller_name_en": "",
@@ -931,8 +994,7 @@
       "reason_en": "7.8kg seed jade boulder with skin retained — rare size and carving",
       "listed_at": "2026-09-23 11:01:00",
       "expiry_date": "2027-05-01",
-      "previous_price": null,
-      "fixed_price": null
+      "previous_price": null
     },
     {
       "item_id": "item-ngcy-04",
@@ -946,8 +1008,11 @@
       "has_surface_wear": true,
       "has_surface_damage": false,
       "price_type": "私聊",
-      "price_display_zh": "价格面议",
-      "price_display_en": "Price on inquiry",
+      "fixed_price": null,
+      "price_min": null,
+      "price_max": null,
+      "price_display_zh": "",
+      "price_display_en": "",
       "img_file": "ng-cy/item-ngcy-04.jpg ng-cy/item-ngcy-04b.jpg ng-cy/item-ngcy-04c.jpg ng-cy/item-ngcy-04d.jpg",
       "seller_id": "Ng-CY",
       "seller_name_en": "",
@@ -961,8 +1026,7 @@
       "reason_en": "Xuande-mark bronze censer; crisp bowstring pattern, warm patina",
       "listed_at": "2026-09-23 10:51:00",
       "expiry_date": "2027-05-01",
-      "previous_price": null,
-      "fixed_price": null
+      "previous_price": null
     },
     {
       "item_id": "item-ngcy-03",
@@ -976,8 +1040,11 @@
       "has_surface_wear": true,
       "has_surface_damage": false,
       "price_type": "私聊",
-      "price_display_zh": "价格面议",
-      "price_display_en": "Price on inquiry",
+      "fixed_price": null,
+      "price_min": null,
+      "price_max": null,
+      "price_display_zh": "",
+      "price_display_en": "",
       "img_file": "ng-cy/item-ngcy-03.jpg",
       "seller_id": "Ng-CY",
       "seller_name_en": "",
@@ -991,8 +1058,7 @@
       "reason_en": "Natural Ge-glaze crackle; well-proportioned celestial globe form",
       "listed_at": "2026-09-23 10:23:00",
       "expiry_date": "2027-11-11",
-      "previous_price": null,
-      "fixed_price": null
+      "previous_price": null
     },
     {
       "item_id": "item-ngcy-02",
@@ -1006,8 +1072,11 @@
       "has_surface_wear": true,
       "has_surface_damage": false,
       "price_type": "私聊",
-      "price_display_zh": "价格面议",
-      "price_display_en": "Price on inquiry",
+      "fixed_price": null,
+      "price_min": null,
+      "price_max": null,
+      "price_display_zh": "",
+      "price_display_en": "",
       "img_file": "ng-cy/item-ngcy-02.jpg ng-cy/item-ngcy-02b.jpg ng-cy/item-ngcy-02c.jpg ng-cy/item-ngcy-02d.jpg ng-cy/item-ngcy-02e.jpg",
       "seller_id": "Ng-CY",
       "seller_name_en": "",
@@ -1021,8 +1090,7 @@
       "reason_en": "Paired yellow-ground green-enameled plates; strong condition",
       "listed_at": "2026-09-23 10:15:00",
       "expiry_date": "2027-11-11",
-      "previous_price": null,
-      "fixed_price": null
+      "previous_price": null
     },
     {
       "item_id": "item-ngcy-01",
@@ -1036,8 +1104,11 @@
       "has_surface_wear": true,
       "has_surface_damage": false,
       "price_type": "私聊",
-      "price_display_zh": "价格面议",
-      "price_display_en": "Price on inquiry",
+      "fixed_price": null,
+      "price_min": null,
+      "price_max": null,
+      "price_display_zh": "",
+      "price_display_en": "",
       "img_file": "ng-cy/item-ngcy-01.jpg",
       "seller_id": "Ng-CY",
       "seller_name_en": "",
@@ -1051,8 +1122,7 @@
       "reason_en": "Fine Hotan jade vase; beast knob and double-ring handles intact",
       "listed_at": "2026-09-23 09:50:00",
       "expiry_date": "2027-11-11",
-      "previous_price": null,
-      "fixed_price": null
+      "previous_price": null
     },
     {
       "item_id": "item-ng-03",
@@ -1066,8 +1136,11 @@
       "has_surface_wear": true,
       "has_surface_damage": false,
       "price_type": "私聊",
-      "price_display_zh": "价格面议",
-      "price_display_en": "Price on inquiry",
+      "fixed_price": null,
+      "price_min": null,
+      "price_max": null,
+      "price_display_zh": "",
+      "price_display_en": "",
       "img_file": "ng-lk/item-ng-03.jpg",
       "seller_id": "Ng-LK",
       "seller_name_en": "",
@@ -1081,8 +1154,7 @@
       "reason_en": "Qianlong yellow-ground famille rose; classic imperial pattern",
       "listed_at": "2026-09-23 04:12:00",
       "expiry_date": "2027-05-01",
-      "previous_price": null,
-      "fixed_price": null
+      "previous_price": null
     },
     {
       "item_id": "item-ng-02",
@@ -1096,8 +1168,11 @@
       "has_surface_wear": true,
       "has_surface_damage": false,
       "price_type": "私聊",
-      "price_display_zh": "价格面议",
-      "price_display_en": "Price on inquiry",
+      "fixed_price": null,
+      "price_min": null,
+      "price_max": null,
+      "price_display_zh": "",
+      "price_display_en": "",
       "img_file": "ng-lk/item-ng-02.jpg",
       "seller_id": "Ng-LK",
       "seller_name_en": "",
@@ -1111,8 +1186,7 @@
       "reason_en": "Rare Han gilt mirror; clear immortal-chariot motif",
       "listed_at": "2026-09-23 04:05:00",
       "expiry_date": "2027-05-01",
-      "previous_price": null,
-      "fixed_price": null
+      "previous_price": null
     },
     {
       "item_id": "item-ng-01",
@@ -1126,8 +1200,11 @@
       "has_surface_wear": true,
       "has_surface_damage": false,
       "price_type": "私聊",
-      "price_display_zh": "价格面议",
-      "price_display_en": "Price on inquiry",
+      "fixed_price": null,
+      "price_min": null,
+      "price_max": null,
+      "price_display_zh": "",
+      "price_display_en": "",
       "img_file": "ng-lk/item-ng-01.jpg",
       "seller_id": "Ng-LK",
       "seller_name_en": "",
@@ -1141,8 +1218,7 @@
       "reason_en": "Well-formed Shang-Zhou lei; complete taotie motif",
       "listed_at": "2026-09-23 03:26:00",
       "expiry_date": "2027-05-01",
-      "previous_price": null,
-      "fixed_price": null
+      "previous_price": null
     },
     {
       "item_id": "item-yak-03",
@@ -1156,8 +1232,11 @@
       "has_surface_wear": true,
       "has_surface_damage": false,
       "price_type": "私聊",
-      "price_display_zh": "价格面议",
-      "price_display_en": "Price on inquiry",
+      "fixed_price": null,
+      "price_min": null,
+      "price_max": null,
+      "price_display_zh": "",
+      "price_display_en": "",
       "img_file": "yak-bc/item-yak-03.jpg",
       "seller_id": "Yak-BC",
       "seller_name_en": "",
@@ -1171,8 +1250,7 @@
       "reason_en": "Clear Nei Fu mark; incised underglaze blue on sweet-white is rare",
       "listed_at": "2026-09-23 03:07:00",
       "expiry_date": "2027-05-01",
-      "previous_price": null,
-      "fixed_price": null
+      "previous_price": null
     },
     {
       "item_id": "item-yak-02",
@@ -1186,8 +1264,11 @@
       "has_surface_wear": true,
       "has_surface_damage": false,
       "price_type": "私聊",
-      "price_display_zh": "价格面议",
-      "price_display_en": "Price on inquiry",
+      "fixed_price": null,
+      "price_min": null,
+      "price_max": null,
+      "price_display_zh": "",
+      "price_display_en": "",
       "img_file": "yak-bc/item-yak-02.jpg yak-bc/item-yak-02-c.jpg",
       "seller_id": "Yak-BC",
       "seller_name_en": "",
@@ -1201,8 +1282,7 @@
       "reason_en": "Pure rouge-red glaze — signature Yongzheng palette",
       "listed_at": "2026-09-23 02:50:00",
       "expiry_date": "2027-05-01",
-      "previous_price": null,
-      "fixed_price": null
+      "previous_price": null
     },
     {
       "item_id": "item-yak-01",
@@ -1216,8 +1296,11 @@
       "has_surface_wear": true,
       "has_surface_damage": false,
       "price_type": "私聊",
-      "price_display_zh": "价格面议",
-      "price_display_en": "Price on inquiry",
+      "fixed_price": null,
+      "price_min": null,
+      "price_max": null,
+      "price_display_zh": "",
+      "price_display_en": "",
       "img_file": "yak-bc/item-yak-01.jpg",
       "seller_id": "Yak-BC",
       "seller_name_en": "",
@@ -1231,8 +1314,7 @@
       "reason_en": "Paired Tang sancai musicians — lively poses, uncommon",
       "listed_at": "2026-09-22 04:22:00",
       "expiry_date": "2027-05-01",
-      "previous_price": null,
-      "fixed_price": null
+      "previous_price": null
     },
     {
       "item_id": "item-lim-01",
@@ -1246,8 +1328,11 @@
       "has_surface_wear": true,
       "has_surface_damage": false,
       "price_type": "私聊",
-      "price_display_zh": "价格面议",
-      "price_display_en": "Price on inquiry",
+      "fixed_price": 5000,
+      "price_min": null,
+      "price_max": null,
+      "price_display_zh": "",
+      "price_display_en": "",
       "img_file": "lim-kw/item-lim-01.jpg",
       "seller_id": "Lim-KW",
       "seller_name_en": "",
@@ -1261,8 +1346,7 @@
       "reason_en": "Xuande blue-and-gold; complete pieces rarely surface",
       "listed_at": "2026-09-12 16:54:00",
       "expiry_date": "2027-05-01",
-      "previous_price": null,
-      "fixed_price": 5000
+      "previous_price": null
     },
     {
       "item_id": "item-lim-02",
@@ -1276,8 +1360,11 @@
       "has_surface_wear": true,
       "has_surface_damage": false,
       "price_type": "私聊",
-      "price_display_zh": "价格面议",
-      "price_display_en": "Price on inquiry",
+      "fixed_price": 5000,
+      "price_min": null,
+      "price_max": null,
+      "price_display_zh": "",
+      "price_display_en": "",
       "img_file": "lim-kw/item-lim-02.jpg",
       "seller_id": "Lim-KW",
       "seller_name_en": "",
@@ -1291,8 +1378,7 @@
       "reason_en": "Intact gold-inlay; rare quadripod form for Warring-States bronzes",
       "listed_at": "2026-09-12 16:54:00",
       "expiry_date": "2027-05-01",
-      "previous_price": null,
-      "fixed_price": 5000
+      "previous_price": null
     },
     {
       "item_id": "item-lim-03",
@@ -1306,8 +1392,11 @@
       "has_surface_wear": true,
       "has_surface_damage": false,
       "price_type": "私聊",
-      "price_display_zh": "价格面议",
-      "price_display_en": "Price on inquiry",
+      "fixed_price": 5000,
+      "price_min": null,
+      "price_max": null,
+      "price_display_zh": "",
+      "price_display_en": "",
       "img_file": "lim-kw/item-lim-03.jpg",
       "seller_id": "Lim-KW",
       "seller_name_en": "",
@@ -1321,8 +1410,7 @@
       "reason_en": "Gold-silver inlay beast; both tones well preserved",
       "listed_at": "2026-09-12 16:54:00",
       "expiry_date": "2027-05-01",
-      "previous_price": null,
-      "fixed_price": 5000
+      "previous_price": null
     },
     {
       "item_id": "item-lim-04",
@@ -1336,8 +1424,11 @@
       "has_surface_wear": true,
       "has_surface_damage": false,
       "price_type": "私聊",
-      "price_display_zh": "价格面议",
-      "price_display_en": "Price on inquiry",
+      "fixed_price": 5000,
+      "price_min": null,
+      "price_max": null,
+      "price_display_zh": "",
+      "price_display_en": "",
       "img_file": "lim-kw/item-lim-04.jpg",
       "seller_id": "Lim-KW",
       "seller_name_en": "",
@@ -1351,8 +1442,7 @@
       "reason_en": "Natural flambé glaze with clean Yongzheng mark",
       "listed_at": "2026-09-12 16:54:00",
       "expiry_date": "2027-05-01",
-      "previous_price": null,
-      "fixed_price": 5000
+      "previous_price": null
     }
   ],
   "sellers": [
@@ -1511,8 +1601,8 @@
     },
     {
       "type": "compare",
-      "zh": "📌 同类对比：同为瓷器，一件标价 S$5,000，另一件 S$25,000，价差约 80%。",
-      "en": "📍 Comparable: within 瓷器, one listed at S$5,000 vs S$25,000 — spread ~80%.",
+      "zh": "📌 同类对比：同为瓷器，一件标价 S$1,000，另一件 S$407,500，价差约 100%。",
+      "en": "📍 Comparable: within 瓷器, one listed at S$1,000 vs S$407,500 — spread ~100%.",
       "meta": "同类参照 · 仅供参考",
       "metaEn": "Comparable reference · for reference only"
     },
@@ -1542,7 +1632,7 @@
     }
   ],
   "expiry": {
-    "generated_at": "2026-11-13T17:49:03.500Z",
+    "generated_at": "2026-11-13T19:02:41.662Z",
     "item_period_months": 6,
     "gallery_period_months": 12,
     "removed_today": [],

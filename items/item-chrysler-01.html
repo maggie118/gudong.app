@@ -573,8 +573,8 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
         </nav>
     </aside>
     <main class="container">
-        <a href="https://www.gudong.app/sellers/../sellers/seller-chrysler-antiques" class="back-link zh" style="display:none">← 返回 Chrysler 私家藏馆</a>
-        <a href="https://www.gudong.app/sellers/../sellers/seller-chrysler-antiques" class="back-link en" style="display:none">← Back to Chrysler</a>
+        <a href="https://www.gudong.app/sellers/seller-chrysler-antiques" class="back-link zh">← 返回 Chrysler 私家藏馆</a>
+        <a href="https://www.gudong.app/sellers/seller-chrysler-antiques" class="back-link en">← Back to Chrysler</a>
         <div class="item-detail">
             <div class="item-detail-image" id="imageGallery">
                 <div class="image-main">
@@ -596,8 +596,8 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
                 <h1 class="item-detail-title zh">湖田窑款影青釉刻花婴戏莲纹斗笠碗</h1>
                 <h1 class="item-detail-title en">Hutian  Yingqing QingBai Bowl, Incised Boys &amp; Lotus</h1>
                 <div class="item-detail-price">
-                    <span class="zh">估价区间：S$2500-S$4200</span>
-                    <span class="en">Estimated range: S$2500-S$4200</span>
+                    <span class="zh">估价区间：S$2,500–S$4,200</span>
+                    <span class="en">Estimated range: S$2,500–S$4,200</span>
                 </div>
                 <p class="item-detail-desc zh"></p>
                 <p class="item-detail-desc en"></p>
@@ -632,7 +632,7 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
                         <span class="en" id="sellerNameEn">Chrysler</span>
                         </div>
                     <div class="seller-card-id">Seller ID: <span id="sellerId">Chrysler</span></div>
-                    <a href="https://www.gudong.app/sellers/../sellers/seller-chrysler-antiques" class="seller-card-link" id="sellerLink" style="display:none">
+                    <a href="https://www.gudong.app/sellers/seller-chrysler-antiques" class="seller-card-link" id="sellerLink">
                         <span class="zh">查看全部藏品 →</span><span class="en">View all items →</span>
                     </a>
                 </div>
@@ -999,22 +999,37 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
             }
             return str;
         }
+        function moneyLabel(v) {
+            v = first(v);
+            if (v == null || v === '') return '';
+            var n = Number(String(v).replace(/[S$\s,]/gi, ''));
+            if (!isFinite(n) || n <= 0) return '';
+            return 'S$' + new Intl.NumberFormat('en-SG', { maximumFractionDigits: 0 }).format(n);
+        }
+        /* 2026-11-14 价格口径：数字 + 类型（price_display_* 已从主表删除，仅作兜底） */
+        function resolvePrice(f) {
+            var type = String(first(f.price_type) || '').trim();
+            if (/私聊|询价|面议|enquir|inquir|message/i.test(type)) return { zh: '私聊询价', en: 'Enquire', enquiry: true };
+            var fixed = fmtMoney(f.fixed_price);
+            if (fixed && (!type || /一口价|fixed/i.test(type))) return { zh: fixed, en: fixed, enquiry: false };
+            var lo = moneyLabel(f.price_min), hi = moneyLabel(f.price_max);
+            if (lo && hi && lo !== hi) return { zh: '估价区间：' + lo + '–' + hi, en: 'Estimated range: ' + lo + '–' + hi, enquiry: false };
+            if (lo) return { zh: lo + ' 起', en: 'From ' + lo, enquiry: false };
+            if (hi) return { zh: '至 ' + hi, en: 'Up to ' + hi, enquiry: false };
+            if (fixed) return { zh: fixed, en: fixed, enquiry: false };
+            var zh = joinPrice(f.price_display_zh, f.price_zh) || joinPrice(f.price_display_en, f.price_en);
+            var en = joinPrice(f.price_display_en, f.price_en) || zh;
+            if (zh) return { zh: zh, en: en, enquiry: false };
+            return { zh: '私聊询价', en: 'Enquire', enquiry: true };
+        }
         function setPrice(f) {
             var el = $('.item-detail-price'); if (!el) return;
-            var type = String(first(f.price_type) || '').trim(), zh, en;
-            var fixed = fmtMoney(f.fixed_price);
-            if (/私聊|询价|enquir|inquir|message/i.test(type)) { zh = '私聊询价'; en = 'Enquire'; }
-            else if (fixed && (!type || /一口价|fixed/i.test(type))) { zh = en = fixed; }
-            else {
-                zh = joinPrice(f.price_display_zh, f.price_zh) || joinPrice(f.price_display_en, f.price_en);
-                en = joinPrice(f.price_display_en, f.price_en) || zh;
-                if (!zh) { zh = '私聊询价'; en = 'Enquire'; }
-            }
+            var p = resolvePrice(f);
             var old = el.textContent.trim();
-            if (old !== zh) changes.push('price: ' + old + ' → ' + zh);
+            if (old !== p.zh) changes.push('price: ' + old + ' → ' + p.zh);
             el.textContent = '';
-            [['zh', zh], ['en', en]].forEach(function (p) {
-                var s = document.createElement('span'); s.className = p[0]; s.textContent = p[1]; el.appendChild(s);
+            [['zh', p.zh], ['en', p.en]].forEach(function (k) {
+                var s = document.createElement('span'); s.className = k[0]; s.textContent = k[1]; el.appendChild(s);
             });
         }
         // ---- 图片：只读 img_file，多个文件名用逗号/空格/顿号分隔 ----

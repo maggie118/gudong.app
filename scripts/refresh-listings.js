@@ -166,6 +166,9 @@ function mapSeller(rec) {
     gallery: f.gallery === true || f.gallery === 'true' || f.gallery === 1,
     gallery_started_at: f.gallery_started_at || '', // 开馆日期 → 默认展示期 1 年
     gallery_expires_at: f.gallery_expires_at || '', // 可选显式到期日，优先于 started+1年
+    // 「今日发现」续费到期日（含当天）：开馆免费 7 天之外的付费曝光，续 7 天就把它改成新的结束日。
+    // 留空 = 只享受开馆免费 7 天窗口；到期后自动退出，不需要手动取消勾选。
+    finds_bonus_until: f.finds_bonus_until || '',
     founding_no: pickStr(f, FOUNDING_NO_KEYS),      // 创始藏家编号（如 001；未分配则空）
     page_url: f.page_url || `/sellers/seller-${slugify(id)}-antiques.html`,
   }, wa);
@@ -490,16 +493,23 @@ async function main() {
   for (const s of payload.sellers) {
     if (!s.gallery) continue;
     const start = String(s.gallery_started_at || '').slice(0, 10);
-    if (!start) continue;
-    const end = new Date(new Date(start + 'T00:00:00Z').getTime() + GALLERY_FREE_DAYS * dayMs).toISOString().slice(0, 10);
-    galleryWindows.set(String(s.seller_id || '').trim(), { start, end });
+    const bonusUntil = String(s.finds_bonus_until || '').slice(0, 10);
+    if (!start && !bonusUntil) continue;
+    const freeEnd = start
+      ? new Date(new Date(start + 'T00:00:00Z').getTime() + GALLERY_FREE_DAYS * dayMs).toISOString().slice(0, 10)
+      : '';
+    galleryWindows.set(String(s.seller_id || '').trim(), { start, end: freeEnd, bonusUntil });
   }
+
+  const inFreeWindow = (w) => !!w && !!w.start && todayStr >= w.start && todayStr < w.end;
+  const inPaidWindow = (w) => !!w && !!w.bonusUntil && todayStr <= w.bonusUntil;
 
   const eligible = live.filter((i) => {
     const w = galleryWindows.get(String(i.seller_id || '').trim());
-    if (w && todayStr >= w.start && todayStr < w.end) return true; // 开馆首 7 天免费曝光
+    if (inFreeWindow(w)) return true; // 开馆首 7 天免费曝光
+    if (inPaidWindow(w)) return true; // 续费后的付费曝光窗口仍在有效期
     const until = String(i.exposure_until || '').slice(0, 10);
-    if (i.is_today_finds && until && until >= todayStr) return true; // 另行买位且有到期日
+    if (i.is_today_finds && until && until >= todayStr) return true; // 单件买位且有到期日
     // 样板藏馆 / 临时展示位：勾了 is_today_finds 但没填到期日，先保留在曝光位，
     // 需要撤下时直接取消勾选即可（构建日志会列出这批手动位，便于日后清理）。
     if (i.is_today_finds && !until) return true;
@@ -533,19 +543,39 @@ async function main() {
 
   payload.todayFinds = todayFinds;
   payload.paidFindsCount = sortedEligible.length;
+  // 每家藏馆的曝光窗口（供前端/运营核对：免费窗口结束日、续费到期日）
+  payload.findsWindows = [...galleryWindows.entries()].map(([sid, w]) => ({
+    seller_id: sid,
+    free_from: w.start || '',
+    free_until: w.end ? new Date(new Date(w.end + 'T00:00:00Z').getTime() - dayMs).toISOString().slice(0, 10) : '', // 免费窗口最后一天（当天仍展示）
+    free_window_end: w.end || '',        // 次日开始退出（内部口径）
+    paid_until: w.bonusUntil || '',      // 续费到期日（含当天）
+  }));
   // 曝光位不足 4 件时，用编辑精选补位（不计入付费曝光）
   payload.editorPicks = sortedEligible.length < 4
     ? live.filter((i) => !eligible.includes(i) && i.status === 'active').slice(0, 4 - sortedEligible.length)
     : [];
   const freeWindowSellers = [...galleryWindows.entries()]
-    .filter(([, w]) => todayStr >= w.start && todayStr < w.end)
-    .map(([sid, w]) => `${sid}(${w.start}→${w.end})`);
-  log(`[今日发现] 曝光位 ${sortedEligible.length} 件；藏馆免费 7 天窗口生效中：${freeWindowSellers.join(', ') || '无'}`);
+    .filter(([, w]) => inFreeWindow(w))
+    .map(([sid, w]) => {
+      const last = new Date(new Date(w.end + 'T00:00:00Z').getTime() - dayMs).toISOString().slice(0, 10);
+      return `${sid}(免费 ${w.start}→${last}，次日起退出)`;
+    });
+  const paidWindowSellers = [...galleryWindows.entries()]
+    .filter(([, w]) => inPaidWindow(w))
+    .map(([sid, w]) => `${sid}(续费至 ${w.bonusUntil})`);
+  log(`[今日发现] 曝光位 ${sortedEligible.length} 件；开馆免费 7 天窗口：${freeWindowSellers.join(', ') || '无'}；续费窗口：${paidWindowSellers.join(', ') || '无'}`);
 
   // 到期提醒数据（写入 listings.json 供前端/后续通知器使用；同时落一份独立报告便于查看）
   const expiringGalleries = payload.sellers
     .filter(s => s.gallery && s.gallery_expires_at)
     .map(s => ({ seller_id: s.seller_id, display_zh: s.display_zh, display_en: s.display_en, expiry_date: s.gallery_expires_at, days_left: daysUntil(s.gallery_expires_at, now) }))
+    .filter(r => r.days_left >= 0 && r.days_left <= EXPIRY_WINDOW_DAYS)
+    .sort((a, b) => a.days_left - b.days_left);
+
+  const expiringFinds = payload.sellers
+    .filter(s => s.gallery && s.finds_bonus_until)
+    .map(s => ({ seller_id: s.seller_id, display_zh: s.display_zh, display_en: s.display_en, paid_until: s.finds_bonus_until, days_left: daysUntil(s.finds_bonus_until, now) }))
     .filter(r => r.days_left >= 0 && r.days_left <= EXPIRY_WINDOW_DAYS)
     .sort((a, b) => a.days_left - b.days_left);
 
@@ -557,6 +587,7 @@ async function main() {
     galleries_removed_today: 0,
     expiring_soon_items: expiringSoonItems,
     expiring_soon_galleries: expiringGalleries,
+    expiring_soon_finds: expiringFinds,
   };
   payload.expiry = expiryMeta;
 
@@ -564,13 +595,17 @@ async function main() {
   try {
     const report = {
       generated_at: expiryMeta.generated_at,
-      note: `普通藏品展示期 ${ITEM_DISPLAY_MONTHS} 个月，专属藏馆展示期 ${GALLERY_DISPLAY_MONTHS} 个月；到期自动下架，到期前 ${EXPIRY_WINDOW_DAYS} 天提示。`,
+      note: `普通藏品展示期 ${ITEM_DISPLAY_MONTHS} 个月，专属藏馆展示期 ${GALLERY_DISPLAY_MONTHS} 个月；到期自动下架，到期前 ${EXPIRY_WINDOW_DAYS} 天提示。私家藏馆「今日发现」免费 7 天按 gallery_started_at 起算，续费写 finds_bonus_until。`,
       expiring_soon_items: expiringSoonItems,
       expiring_soon_galleries: expiringGalleries,
+      expiring_soon_finds: expiringFinds,
       removed_today_items: expiryMeta.removed_today,
       removed_today_galleries: expiryMeta.galleries_removed_today,
     };
     fs.writeFileSync(path.join(path.dirname(OUT_FILE), 'expiry-report.json'), JSON.stringify(report, null, 2), 'utf8');
+    if (expiringFinds.length) {
+      log(`[今日发现] 续费到期提醒：${expiringFinds.map(r => `${r.seller_id}(${r.paid_until}，剩 ${r.days_left} 天)`).join(', ')}`);
+    }
     if (expiringSoonItems.length || expiringGalleries.length) {
       log(`[展示期] 即将到期提醒：${expiringSoonItems.length} 件藏品、${expiringGalleries.length} 家藏馆（${EXPIRY_WINDOW_DAYS} 天内）`);
     }

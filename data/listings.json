@@ -1367,6 +1367,7 @@
       "gallery": true,
       "gallery_started_at": "",
       "gallery_expires_at": "",
+      "finds_bonus_until": "",
       "founding_no": "",
       "page_url": "/sellers/seller-lim-kw-antiques.html",
       "wa_phone": "6589765832"
@@ -1382,6 +1383,7 @@
       "gallery": true,
       "gallery_started_at": "",
       "gallery_expires_at": "",
+      "finds_bonus_until": "",
       "founding_no": "",
       "page_url": "/sellers/seller-yak-bc-antiques.html",
       "wa_phone": "601114356891"
@@ -1397,6 +1399,7 @@
       "gallery": true,
       "gallery_started_at": "",
       "gallery_expires_at": "",
+      "finds_bonus_until": "",
       "founding_no": "",
       "page_url": "/sellers/seller-ng-lk-antiques.html",
       "wa_phone": "6580110225"
@@ -1412,6 +1415,7 @@
       "gallery": true,
       "gallery_started_at": "2026-11-12",
       "gallery_expires_at": "2027-11-11",
+      "finds_bonus_until": "",
       "founding_no": "1",
       "page_url": "/sellers/seller-ng-cy-antiques.html",
       "wa_phone": "6596269929"
@@ -1427,6 +1431,7 @@
       "gallery": false,
       "gallery_started_at": "",
       "gallery_expires_at": "",
+      "finds_bonus_until": "",
       "founding_no": "",
       "page_url": "/sellers/seller-lim-ck-antiques.html",
       "wa_phone": "6597831873"
@@ -1442,6 +1447,7 @@
       "gallery": false,
       "gallery_started_at": "",
       "gallery_expires_at": "",
+      "finds_bonus_until": "",
       "founding_no": "",
       "page_url": "/sellers/seller-rao-jr-antiques.html",
       "wa_phone": "6592719971"
@@ -1457,6 +1463,7 @@
       "gallery": false,
       "gallery_started_at": "",
       "gallery_expires_at": "",
+      "finds_bonus_until": "",
       "founding_no": "",
       "page_url": "/sellers/seller-chrysler-antiques.html",
       "wa_phone": "6287751280880"
@@ -1472,6 +1479,7 @@
       "gallery": false,
       "gallery_started_at": "",
       "gallery_expires_at": "",
+      "finds_bonus_until": "",
       "founding_no": "",
       "page_url": "/sellers/seller-sun-antiques.html",
       "wa_phone": "6587833766"
@@ -1487,6 +1495,7 @@
       "gallery": true,
       "gallery_started_at": "2026-11-12",
       "gallery_expires_at": "2027-11-11",
+      "finds_bonus_until": "",
       "founding_no": "",
       "page_url": "/sellers/seller-yap-jm-antiques.html",
       "wa_phone": "6596269929"
@@ -1509,13 +1518,30 @@
     }
   ],
   "total": 30,
+  "findsWindows": [
+    {
+      "seller_id": "Ng-CY",
+      "free_from": "2026-11-12",
+      "free_until": "2026-11-18",
+      "free_window_end": "2026-11-19",
+      "paid_until": ""
+    },
+    {
+      "seller_id": "Yap-JM",
+      "free_from": "2026-11-12",
+      "free_until": "2026-11-18",
+      "free_window_end": "2026-11-19",
+      "paid_until": ""
+    }
+  ],
   "expiry": {
-    "generated_at": "2026-11-13T12:26:39.547Z",
+    "generated_at": "2026-11-13T13:09:56.130Z",
     "item_period_months": 6,
     "gallery_period_months": 12,
     "removed_today": [],
     "galleries_removed_today": 0,
     "expiring_soon_items": [],
-    "expiring_soon_galleries": []
+    "expiring_soon_galleries": [],
+    "expiring_soon_finds": []
   }
 }

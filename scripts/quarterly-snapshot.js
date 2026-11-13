@@ -253,7 +253,7 @@ function md(snap, label, rev) {
     lines.push('');
     lines.push('| 藏馆 | 收藏次数 | 收藏买家 |');
     lines.push('|---|---|---|');
-    sellerRows.forEach((r) => lines.push(`| ${r.seller_id} | ${n(r.saves)} | ${n(r.savers)} |`));
+    sellerRows.forEach((r) => lines.push(`| ${r.seller_id || '（藏品未归属藏馆）'} | ${n(r.saves)} | ${n(r.savers)} |`));
     lines.push('');
   }
   lines.push('## 口径与限制（对外引用时请一并带上）');

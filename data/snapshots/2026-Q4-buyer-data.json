@@ -1,0 +1,82 @@
+{
+  "snapshot": {
+    "window": {
+      "from": "2026-10-01",
+      "to": "2026-12-31"
+    },
+    "generated_at": "2026-11-13T15:57:14.260Z",
+    "buyers": {
+      "total": 1,
+      "unique_emails": 1,
+      "consented": 1,
+      "by_source": [
+        {
+          "source": "google",
+          "n": 1
+        }
+      ],
+      "by_month": [
+        {
+          "month": "2026-11",
+          "n": 1
+        }
+      ]
+    },
+    "favorites": {
+      "total": 9,
+      "unique_buyers": 1,
+      "sellers": 2,
+      "by_month": [
+        {
+          "month": "2026-11",
+          "n": 9
+        }
+      ]
+    },
+    "follows": {
+      "total": 1,
+      "unique_buyers": 1,
+      "by_kind": [
+        {
+          "kind": "seller",
+          "n": 1
+        }
+      ]
+    },
+    "inquiries": {
+      "total": 0,
+      "unique_buyers": 0,
+      "sellers": 0,
+      "by_channel": [],
+      "by_status": [],
+      "by_contact_type": []
+    },
+    "clicks": {
+      "total": 1,
+      "anonymous": 1,
+      "unique_buyers": 1,
+      "by_month": [
+        {
+          "month": "2026-11",
+          "n": 1
+        }
+      ]
+    },
+    "per_seller": [
+      {
+        "seller_id": "",
+        "saves": 8,
+        "savers": 1
+      },
+      {
+        "seller_id": "ng-cy",
+        "saves": 1,
+        "savers": 1
+      }
+    ]
+  },
+  "revenue": {
+    "rows": [],
+    "skipped": false
+  }
+}

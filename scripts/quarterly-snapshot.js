@@ -27,6 +27,10 @@ const OUT_DIR = path.join(ROOT, 'data', 'snapshots');
 const BASE = (process.env.GUDONG_DATA_URL || 'https://gudong-data-api.minqi118.workers.dev').replace(/\/+$/, '');
 const KEY = process.env.GUDONG_DATA_KEY || '';
 
+// 收入表：主表 Google Sheets 的 revenue_monthly 页签（公开 CSV，不需要密钥）
+const SHEET_ID = process.env.GUDONG_SHEET_ID || '1bXToBUVn9T1R6dcImOvQAlh2arXdDx4n1mtoYCDxV3U';
+const REVENUE_CSV = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&sheet=revenue_monthly`;
+
 function arg(name) {
   const i = process.argv.indexOf('--' + name);
   return i > -1 ? String(process.argv[i + 1] || '') : '';
@@ -51,8 +55,76 @@ function currentQuarter() {
   return `${d.getUTCFullYear()}-Q${q}`;
 }
 
-async function fetchSnapshot(from, to) {
-  if (!KEY) throw new Error('缺少 GUDONG_DATA_KEY（生产环境变量）');
+// 极简 CSV 解析（支持双引号包裹与 "" 转义）
+function parseCsv(text) {
+  const rows = [];
+  let row = [], field = '', quoted = false;
+  for (let i = 0; i < text.length; i++) {
+    const c = text[i];
+    if (quoted) {
+      if (c === '"') {
+        if (text[i + 1] === '"') { field += '"'; i++; } else quoted = false;
+      } else field += c;
+      continue;
+    }
+    if (c === '"') { quoted = true; continue; }
+    if (c === ',') { row.push(field); field = ''; continue; }
+    if (c === '\n') { row.push(field); rows.push(row); row = []; field = ''; continue; }
+    if (c === '\r') continue;
+    field += c;
+  }
+  if (field.length || row.length) { row.push(field); rows.push(row); }
+  return rows.filter((r) => r.some((v) => String(v || '').trim() !== ''));
+}
+
+async function fetchRevenue(from, to) {
+  let text = '';
+  try {
+    const res = await fetch(REVENUE_CSV);
+    if (!res.ok) throw new Error(String(res.status));
+    text = await res.text();
+  } catch (e) {
+    return { rows: [], skipped: true, error: 'revenue sheet unreachable: ' + (e && e.message || e) };
+  }
+  const table = parseCsv(text);
+  if (!table.length) return { rows: [], skipped: true, error: 'empty sheet' };
+  const head = table[0].map((h) => String(h || '').trim().toLowerCase());
+  const idx = (names) => {
+    for (const n of names) { const i = head.indexOf(n); if (i > -1) return i; }
+    return -1;
+  };
+  const col = {
+    month: idx(['month']),
+    stream: idx(['stream']),
+    orders: idx(['orders']),
+    revenue: idx(['revenue']),
+    refunds: idx(['refunds']),
+    newc: idx(['new_customers', 'new-customers']),
+    repeat: idx(['repeat_customers', 'repeat-customers']),
+    seller: idx(['seller_id', 'seller']),
+    notes: idx(['notes'])
+  };
+  if (col.month < 0 || col.revenue < 0) return { rows: [], skipped: true, error: 'missing month/revenue column' };
+  const fromMonth = from.slice(0, 7), toMonth = to.slice(0, 7);
+  const numOr0 = (v) => {
+    const clean = String(v || '').replace(/[^0-9.\-]/g, '');
+    return clean === '' || clean === '-' ? 0 : Number(clean);
+  };
+  const rows = table.slice(1).map((r) => ({
+    month: String(r[col.month] || '').trim(),
+    stream: col.stream > -1 ? String(r[col.stream] || '').trim() : '',
+    orders: col.orders > -1 ? numOr0(r[col.orders]) : 0,
+    revenue: numOr0(r[col.revenue]),
+    refunds: col.refunds > -1 ? numOr0(r[col.refunds]) : 0,
+    new_customers: col.newc > -1 ? numOr0(r[col.newc]) : 0,
+    repeat_customers: col.repeat > -1 ? numOr0(r[col.repeat]) : 0,
+    seller_id: col.seller > -1 ? String(r[col.seller] || '').trim() : '',
+    notes: col.notes > -1 ? String(r[col.notes] || '').trim() : ''
+  })).filter((r) => /^[0-9]{4}-[0-9]{2}$/.test(r.month) && r.month >= fromMonth && r.month <= toMonth);
+  return { rows, skipped: false };
+}
+
+async function fetchSnapshot(from, to) {  if (!KEY) throw new Error('缺少 GUDONG_DATA_KEY（生产环境变量）');
   const url = `${BASE}/snapshot?from=${from}&to=${to}`;
   const res = await fetch(url, { headers: { 'x-gudong-key': KEY } });
   const text = await res.text();
@@ -67,7 +139,8 @@ function pct(part, whole) {
   return (Math.round((Number(part || 0) / Number(whole)) * 1000) / 10) + '%';
 }
 
-function md(snap, label) {
+function md(snap, label, rev) {
+  rev = rev || { rows: [], skipped: true };
   const b = snap.buyers, f = snap.favorites, fo = snap.follows, i = snap.inquiries, c = snap.clicks;
   const sellerRows = snap.per_seller || [];
   const totalBuyerish = Math.max(b.total, f.unique_buyers, i.unique_buyers, fo.unique_buyers);
@@ -98,7 +171,52 @@ function md(snap, label) {
   lines.push(`| WhatsApp 点击 | ${n(c.total)} | 点击即计数；匿名点击 ${n(c.anonymous)} 次 |`);
   lines.push(`| 最宽口径活跃买家 | ${n(totalBuyerish)} | 上面四个独立买家数的最大值，非相加 |`);
   lines.push('');
-  lines.push('## 分月走势');
+  lines.push('## 收入（内部口径，仅此报表使用）');
+  lines.push('');
+  if (!rev.rows.length) {
+    lines.push(rev.skipped ? `本期收入表暂无可读记录（${rev.error || '未填写'}）。` : '本期收入表无窗口内的记录。');
+    lines.push('');
+  } else {
+    const byMonth = new Map();
+    const byStream = new Map();
+    const bySeller = new Map();
+    let revenue = 0, refunds = 0, orders = 0, newC = 0, repeatC = 0;
+    rev.rows.forEach((r) => {
+      revenue += r.revenue; refunds += r.refunds; orders += r.orders;
+      newC += r.new_customers; repeatC += r.repeat_customers;
+      const m = byMonth.get(r.month) || { revenue: 0, refunds: 0, orders: 0, streams: new Set() };
+      m.revenue += r.revenue; m.refunds += r.refunds; m.orders += r.orders;
+      if (r.stream) m.streams.add(r.stream);
+      byMonth.set(r.month, m);
+      const s = byStream.get(r.stream || '未分类') || { revenue: 0, orders: 0, new_c: 0, repeat_c: 0 };
+      s.revenue += r.revenue; s.orders += r.orders; s.new_c += r.new_customers; s.repeat_c += r.repeat_customers;
+      byStream.set(r.stream || '未分类', s);
+      if (r.seller_id) bySeller.set(r.seller_id, (bySeller.get(r.seller_id) || 0) + r.revenue);
+    });
+    const asp = orders ? revenue / orders : 0;
+    lines.push(`本窗口确认收入 **S$${n(revenue)}**，${n(orders)} 单，客单价 S$${asp.toFixed(0)}；退款 S$${n(refunds)}（退款率 ${pct(refunds, revenue)}）；新增付费客户 ${n(newC)}、复购 ${n(repeatC)}。`);
+    lines.push('');
+    lines.push('| 月份 | 产品线 | 单数 | 收入 S$ | 退款 S$ |');
+    lines.push('|---|---|---|---|---|');
+    Array.from(byMonth.keys()).sort().forEach((m) => {
+      const v = byMonth.get(m);
+      lines.push(`| ${m} | ${Array.from(v.streams).join(' / ') || '—'} | ${n(v.orders)} | ${n(v.revenue)} | ${n(v.refunds)} |`);
+    });
+    lines.push('');
+    lines.push('| 产品线 | 收入 S$ | 占比 | 单数 | 新增客户 | 复购 |');
+    lines.push('|---|---|---|---|---|---|');
+    Array.from(byStream.keys()).sort((a, b) => byStream.get(b).revenue - byStream.get(a).revenue).forEach((k) => {
+      const v = byStream.get(k);
+      lines.push(`| ${k} | ${n(v.revenue)} | ${pct(v.revenue, revenue)} | ${n(v.orders)} | ${n(v.new_c)} | ${n(v.repeat_c)} |`);
+    });
+    lines.push('');
+    if (bySeller.size) {
+      lines.push('按藏馆拆分：' + Array.from(bySeller.keys()).map((k) => `${k} S$${n(bySeller.get(k))}`).join('｜'));
+      lines.push('');
+    }
+  }
+  lines.push('');
+  lines.push('## 分月走势（买家侧）');
   lines.push('');
   const months = Array.from(new Set([]
     .concat((b.by_month || []).map((r) => r.month))
@@ -151,7 +269,8 @@ function md(snap, label) {
   return lines.join('\n');
 }
 
-function csv(snap) {
+function csv(snap, rev) {
+  rev = rev || { rows: [] };
   const rows = [['section', 'metric', 'value']];
   const b = snap.buyers, f = snap.favorites, fo = snap.follows, i = snap.inquiries, c = snap.clicks;
   rows.push(['window', 'from', snap.window.from]);
@@ -178,6 +297,11 @@ function csv(snap) {
     rows.push(['per_seller_saves', r.seller_id, r.saves]);
     rows.push(['per_seller_savers', r.seller_id, r.savers]);
   });
+  (rev.rows || []).forEach((r) => {
+    rows.push(['revenue', `${r.month}|${r.stream || 'na'}|orders`, r.orders]);
+    rows.push(['revenue', `${r.month}|${r.stream || 'na'}|revenue`, r.revenue]);
+    rows.push(['revenue', `${r.month}|${r.stream || 'na'}|refunds`, r.refunds]);
+  });
   return rows.map((r) => r.map((v) => (/[",\n]/.test(String(v)) ? '"' + String(v).replace(/"/g, '""') + '"' : v)).join(',')).join('\n') + '\n';
 }
 
@@ -193,20 +317,23 @@ async function main() {
   let snap;
   const inputFile = arg('input');
   if (inputFile) {
-    snap = JSON.parse(fs.readFileSync(path.resolve(inputFile), 'utf8'));
+    const parsed = JSON.parse(fs.readFileSync(path.resolve(inputFile), 'utf8'));
+    snap = parsed.snapshot || parsed;
   } else {
     snap = await fetchSnapshot(window.from, window.to);
   }
+  const rev = await fetchRevenue(window.from, window.to);
 
   fs.mkdirSync(OUT_DIR, { recursive: true });
   const base = path.join(OUT_DIR, label + '-buyer-data');
-  fs.writeFileSync(base + '.json', JSON.stringify(snap, null, 2) + '\n', 'utf8');
-  fs.writeFileSync(base + '.md', md(snap, label) + '\n', 'utf8');
-  fs.writeFileSync(base + '.csv', csv(snap), 'utf8');
+  fs.writeFileSync(base + '.json', JSON.stringify({ snapshot: snap, revenue: rev }, null, 2) + '\n', 'utf8');
+  fs.writeFileSync(base + '.md', md(snap, label, rev) + '\n', 'utf8');
+  fs.writeFileSync(base + '.csv', csv(snap, rev), 'utf8');
   console.log('已生成：');
   ['json', 'md', 'csv'].forEach((ext) => console.log('  ' + base + '.' + ext));
   const b = snap.buyers, i = snap.inquiries, c = snap.clicks;
-  console.log(`窗口 ${snap.window.from} → ${snap.window.to}：买家 ${b.total}｜收藏 ${snap.favorites.total}｜询价 ${i.total}｜点击 ${c.total}`);
+  const revTotal = (rev.rows || []).reduce((sum, r) => sum + r.revenue, 0);
+  console.log(`窗口 ${snap.window.from} → ${snap.window.to}：买家 ${b.total}｜收藏 ${snap.favorites.total}｜询价 ${i.total}｜点击 ${c.total}｜收入 S$${revTotal}`);
 }
 
 main().catch((e) => { console.error('失败：' + (e && e.message || e)); process.exit(1); });

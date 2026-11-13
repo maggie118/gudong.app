@@ -1,76 +1,53 @@
 # revenue_monthly —— 收入追踪表（unit economics）
 
-Airtable base `apprn6XDQnAm8bkaT`（Gudong）里的第三张自建表，用于按月 × 产品线记录客单价与复购，融资尽调时直接导出成 unit economics 口径。
+**已从 Airtable 搬到主数据表**（Google Sheets `1bXToBUVn9T1R6dcImOvQAlh2arXdDx4n1mtoYCDxV3U`），页签名 `revenue_monthly`，gid `1586097435`。Airtable 那张老表不再维护，避免两处记账对不上。
 
-## 表结构（10 字段，已建好）
+## 为什么单独一张表
 
-| 字段 | 类型 | 说明 |
+收入不能从买家数据反推：询价、收藏、点击都不是成交，钱是通过 Stripe / 银行流水收到的。所以收入是独立账本，**只跟 `sellers` 在 `seller_id` 这一层做关联**，不往买家明细上挂——买家数据是个人数据、收入是财务数据，一旦按人绑定就是"谁买了什么"，PDPA 和融资尽调都会变麻烦。
+
+**藏家后台不显示付费**：藏家只看自己的关注 / 收藏 / 咨询和询价，看不到付款记录、年费到期日。付费信息仅内部可见。
+
+## 表结构（9 列）
+
+| 列 | 字段 | 说明 |
 | --- | --- | --- |
-| `month` | Single line text（主字段） | 月份，统一写 `YYYY-MM`，如 `2026-10`。写文本而非日期，是为了直接 group / pivot 不出时区偏差 |
-| `stream` | Single select | 五个选项，一字不差：`上架` / `藏馆` / `Signature` / `附加服务` / `续展` |
-| `orders` | Number | 当月该产品线的成交单数 |
-| `revenue` | Currency | 当月该产品线确认收入（SGD 金额，符号当前显示 `$`） |
-| `refunds` | Currency | 当月退款额。**单独记录，不冲减 `revenue`**，退款率 = refunds / revenue |
-| `new_customers` | Number | 当月该产品线的首次付费客户数 |
-| `repeat_customers` | Number | 当月该产品线的复购客户数 |
-| `asp` | Formula | 客单价：`IF({orders},{revenue}/{orders},0)` |
-| `repeat_rate` | Formula | 复购率：`IF({orders},{repeat_customers}/{orders},0)` |
-| `notes` | Long text | 口径说明、异常、渠道归因 |
+| A | `month` | 月份，统一写 `YYYY-MM`，如 `2026-11`。文本而非日期，避免时区偏差、方便 group |
+| B | `stream` | 产品线，一字不差用这五个：`上架` / `藏馆` / `Signature` / `附加服务` / `续展` |
+| C | `orders` | 当月该产品线成交单数（一份年度藏馆合同算一单） |
+| D | `revenue` | 当月该产品线确认收入，SGD 数字（只写数字，不写 `S$`、不带千分位） |
+| E | `refunds` | 当月退款额，单独记录，**不冲减 revenue**；退款率 = refunds / revenue |
+| F | `new_customers` | 当月该产品线首次付费客户数 |
+| G | `repeat_customers` | 当月该产品线复购客户数 |
+| H | `notes` | 口径说明、异常、渠道归因，例如 `Lim-KW 首次开馆，年付；含2件上架名额未单独收费` |
+| I | `seller_id` | **可选**，`藏馆` / `续展` / `附加服务` 这类能落到具体馆的行填上（如 `Ng-CY`）。用途：季度报表里把"这个馆收了多少"和"这个馆的关注/收藏/咨询"并排，续费谈判时直接看 |
 
-## 为什么是长表（一行 = 月份 × 产品线）
-
-- 加第六条产品线只需新增一个 select 选项，不用改 schema；
-- 各产品线的趋势、占比可以直接 pivot；
-- 一行一月 + 五列横向铺开的短表，一加线就整张表错位，且 pivot 不出来。
+`asp`（客单价 = revenue / orders）和 `repeat_rate` 不落到表里，由报表脚本算，避免手填公式出错。
 
 ## 每月怎么录
 
-一个月填 3–5 行（有几条线在跑就填几行，某条线当月为 0 可以空着不填）：
+一个月填 3–5 行（有几条线在跑就填几行，为 0 可以不填）。示例：
 
 ```
-2026-11 | 上架      | orders 12 | revenue 3456 | refunds 0    | new 9 | repeat 3
-2026-11 | 藏馆      | orders  2 | revenue 576  | refunds 0    | new 2 | repeat 0
-2026-11 | Signature | orders  1 | revenue 288  | refunds 0    | new 1 | repeat 0
+2026-11 | 上架      | 12 | 3456 | 0 | 9 | 3 | 批量上架包 | 
+2026-11 | 藏馆      |  2 | 1176 | 0 | 2 | 0 | Lim-KW / Ng-CY 开馆 | Ng-CY
+2026-11 | Signature |  1 |  288 | 0 | 1 | 0 |            |
 ```
 
-数据来源：收款渠道（Stripe / 银行流水）按产品线归并后的月度汇总，不是单笔明细。
+数据来源是收款渠道（Stripe / 银行流水）**按产品线归并后的月度汇总**，不是单笔明细。单笔流水留在收款渠道，这张表只放聚合。
 
-**边界：这张表只放月度聚合，不放单笔明细。** 单笔流水留在收款渠道里，Airtable 免费版单表约 1000 条上限要留给 `buyer_leads` 和 `antiques`。
+## 和报表的关系
 
-## 基建说明
+`scripts/quarterly-snapshot.js` 会自动读这个页签的公开 CSV（`gviz/tq?tqx=out:csv&sheet=revenue_monthly`，不需要密钥），把收入段并进季度快照：
 
-- 这张表不写代码、不接 API，纯手工按月录；不与 `sellers` 建 link（当前需求只要汇总，跨表联动等真有尽调问题再补）。
-- 已有 `buyer_leads`（买家名单）、`sellers`、`antiques` 在同一 base，同一个 PAT 可读全套，导出复用 `scripts/archive-buyer-leads.ps1` 的 Token 解析逻辑。
+```bash
+node scripts/quarterly-snapshot.js --quarter 2026-Q4
+```
 
-## 实录拆解：LIM-KW 交 S$588 开馆
+输出三份文件在 `data/snapshots/`：`.md`（人读，含收入 / 买家 / 询价三块口径）、`.csv`（可开 Excel）、`.json`（原始汇总）。收入段会给出：本期确认收入、单数、客单价、退款率、新增与复购客户、分月表、分产品线表、按 `seller_id` 的分馆收入。
 
-定价口径：私家藏馆 S$588/年（早鸟价，全价 S$1,288），**含 2 件专业上架名额（价值 S$576）**。
+## 边界
 
-填 1 行：
-
-| 字段 | 值 |
-| --- | --- |
-| `month` | 收款当月，如 `2026-11` |
-| `stream` | `藏馆` |
-| `orders` | `1`（一份年度藏馆合同算一单） |
-| `revenue` | `588` |
-| `refunds` | `0` |
-| `new_customers` | 首次付费则 `1`，否则 `0` |
-| `repeat_customers` | 此前付过款则 `1`，否则 `0` |
-| `notes` | `Lim-KW 首次开馆，年付；含2件专业上架名额未单独收费；MRR≈49` |
-
-三条硬规则：
-
-1. **套餐内含的 2 件专业上架不再计收入、不拆 orders。** 若另开 2 行按 S$288 记 revenue，收入虚增 S$576，asp 也会失真。
-2. **new / repeat 按"此前有没有付过钱"判**：从没付过 → `new_customers=1`；此前付过 288 上架 → `repeat_customers=1`，且那笔历史要补进表，否则复购率分母缺一块。
-3. **S$588 全额记入收款当月，不分摊 12 个月**（现金口径）；MRR 换算 `588/12≈49` 写进 `notes`，两套口径同时留痕。
-
-派生场景：
-
-- 次年再付 588 → `stream=续展`、`repeat_customers=1`、`new_customers=0`；`stream=续展` 那组即可算年度续展率 = 续展 orders / 去年同月藏馆 orders。
-- 同月另付 288 上架 → 另起一行 `stream=上架`、`revenue=288`，不与藏馆行混记（两个价格混一行会稀释客单价）。
-
-## 待办 / 未做
-
-- `revenue` / `refunds` 的币种符号仍是默认 `$`，未显式设成 `S$`（Airtable 的 currency symbol 下拉在本次会话里一直展开失败，不影响数值）。
-- `month` 为主字段且是文本类型；若之后要做时间轴图表，可改成 Date（空表状态下可直接改）。
+- 只放月度聚合，不放单笔明细；也不放买家身份。
+- 不与买家表做任何按人关联。
+- 以后若要迁到 D1（让藏家后台展示自己的付费状态、到期日），表结构不变，只换数据源；当前没有这个需求，不做。

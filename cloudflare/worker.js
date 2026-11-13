@@ -412,8 +412,97 @@ async function sellerAnalytics(env, url) {
   });
 }
 
-async function buyerList(env, url) {
-  const limit = Math.min(Number(url.searchParams.get('limit')) || 50, 200);
+/* 季度买家数据快照：只给匿名汇总口径，用于内部复盘 / 融资尽调。
+   永远不返回买家姓名、邮箱、号码、buyer_key 名单。 */
+async function snapshot(env, url) {
+  await ensureInquiries(env);
+  const fromDate = str(url.searchParams.get('from'), 10) || '';
+  const toDate = str(url.searchParams.get('to'), 10) || '';
+  if (!/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/.test(fromDate) || !/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/.test(toDate)) {
+    return json({ error: 'invalid_window', hint: 'from / to must be YYYY-MM-DD' }, 400);
+  }
+  const from = fromDate + 'T00:00:00.000Z';
+  const to = toDate + 'T23:59:59.999Z';
+  const one = async (sql, ...params) => (await env.DB.prepare(sql).bind(...params).first()) || {};
+  const all = async (sql, ...params) => (await env.DB.prepare(sql).bind(...params).all()).results || [];
+
+  const buyers = await one(
+    'SELECT COUNT(*) AS n, COUNT(DISTINCT lower(email)) AS uniq, SUM(CASE WHEN consent_at IS NOT NULL THEN 1 ELSE 0 END) AS consented FROM buyers WHERE created_at >= ? AND created_at <= ?',
+    from, to);
+  const buyersBySource = await all(
+    'SELECT COALESCE(NULLIF(source, \'\'), \'unknown\') AS source, COUNT(*) AS n FROM buyers WHERE created_at >= ? AND created_at <= ? GROUP BY source ORDER BY n DESC',
+    from, to);
+  const buyersByMonth = await all(
+    'SELECT substr(created_at, 1, 7) AS month, COUNT(*) AS n FROM buyers WHERE created_at >= ? AND created_at <= ? GROUP BY month ORDER BY month',
+    from, to);
+
+  const favs = await one(
+    'SELECT COUNT(*) AS n, COUNT(DISTINCT buyer_key) AS buyers, COUNT(DISTINCT lower(seller)) AS sellers FROM favorites WHERE created_at >= ? AND created_at <= ?',
+    from, to);
+  const favsByMonth = await all(
+    'SELECT substr(created_at, 1, 7) AS month, COUNT(*) AS n FROM favorites WHERE created_at >= ? AND created_at <= ? GROUP BY month ORDER BY month',
+    from, to);
+
+  const follows = await one(
+    'SELECT COUNT(*) AS n, COUNT(DISTINCT buyer_key) AS buyers FROM follows WHERE created_at >= ? AND created_at <= ?',
+    from, to);
+  const followsByKind = await all(
+    'SELECT kind, COUNT(*) AS n FROM follows WHERE created_at >= ? AND created_at <= ? GROUP BY kind ORDER BY n DESC',
+    from, to);
+
+  const inq = await one(
+    'SELECT COUNT(*) AS n, COUNT(DISTINCT buyer_key) AS buyers, COUNT(DISTINCT lower(seller)) AS sellers FROM inquiries WHERE created_at >= ? AND created_at <= ?',
+    from, to);
+  const inqByChannel = await all(
+    'SELECT COALESCE(NULLIF(channel, \'\'), \'unknown\') AS channel, COUNT(*) AS n FROM inquiries WHERE created_at >= ? AND created_at <= ? GROUP BY channel ORDER BY n DESC',
+    from, to);
+  const inqByStatus = await all(
+    'SELECT COALESCE(NULLIF(status, \'\'), \'new\') AS status, COUNT(*) AS n FROM inquiries WHERE created_at >= ? AND created_at <= ? GROUP BY status ORDER BY n DESC',
+    from, to);
+  const inqByContact = await all(
+    'SELECT COALESCE(NULLIF(contact_type, \'\'), \'unknown\') AS contact_type, COUNT(*) AS n FROM inquiries WHERE created_at >= ? AND created_at <= ? GROUP BY contact_type ORDER BY n DESC',
+    from, to);
+
+  const clicks = await one(
+    'SELECT COUNT(*) AS n, SUM(CASE WHEN buyer_key IS NULL OR buyer_key = \'\' THEN 1 ELSE 0 END) AS anonymous, COUNT(DISTINCT buyer_key) AS buyers FROM inquiry_clicks WHERE created_at >= ? AND created_at <= ?',
+    from, to);
+  const clicksByMonth = await all(
+    'SELECT substr(created_at, 1, 7) AS month, COUNT(*) AS n FROM inquiry_clicks WHERE created_at >= ? AND created_at <= ? GROUP BY month ORDER BY month',
+    from, to);
+
+  const perSeller = await all(
+    'SELECT lower(seller) AS seller_id, ' +
+    '  (SELECT COUNT(*) FROM favorites f2 WHERE lower(f2.seller) = lower(favorites.seller) AND f2.created_at >= ? AND f2.created_at <= ?) AS saves, ' +
+    '  (SELECT COUNT(DISTINCT f3.buyer_key) FROM favorites f3 WHERE lower(f3.seller) = lower(favorites.seller) AND f3.created_at >= ? AND f3.created_at <= ?) AS savers ' +
+    'FROM favorites WHERE created_at >= ? AND created_at <= ? GROUP BY lower(seller) ORDER BY saves DESC',
+    from, to, from, to, from, to);
+
+  return json({
+    window: { from: fromDate, to: toDate },
+    generated_at: new Date().toISOString(),
+    buyers: {
+      total: buyers.n || 0,
+      unique_emails: buyers.uniq || 0,
+      consented: buyers.consented || 0,
+      by_source: buyersBySource,
+      by_month: buyersByMonth
+    },
+    favorites: { total: favs.n || 0, unique_buyers: favs.buyers || 0, sellers: favs.sellers || 0, by_month: favsByMonth },
+    follows: { total: follows.n || 0, unique_buyers: follows.buyers || 0, by_kind: followsByKind },
+    inquiries: {
+      total: inq.n || 0,
+      unique_buyers: inq.buyers || 0,
+      sellers: inq.sellers || 0,
+      by_channel: inqByChannel,
+      by_status: inqByStatus,
+      by_contact_type: inqByContact
+    },
+    clicks: { total: clicks.n || 0, anonymous: clicks.anonymous || 0, unique_buyers: clicks.buyers || 0, by_month: clicksByMonth },
+    per_seller: perSeller
+  });
+}
+
+async function buyerList(env, url) {  const limit = Math.min(Number(url.searchParams.get('limit')) || 50, 200);
   const result = await env.DB.prepare(
     'SELECT buyer_id, email, name, source, first_item, created_at, last_seen FROM buyers ORDER BY last_seen DESC LIMIT ?'
   ).bind(limit).all();
@@ -959,6 +1048,7 @@ export default {
         case '/inquiries': return await inquiryList(env, url);
         case '/click': return await clickLog(env, body);
         case '/analytics': return await sellerAnalytics(env, url);
+        case '/snapshot': return await snapshot(env, url);
         case '/health': return json({ ok: true });
         default: return json({ error: 'not_found' }, 404);
       }

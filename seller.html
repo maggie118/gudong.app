@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh-SG">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="referrer" content="no-referrer">
+  <title>藏家后台 | Gudong</title>
+  <style>
+    body { margin: 0; min-height: 100vh; display: flex; align-items: center; justify-content: center;
+      background: #F5F2EC; color: #5C564F; font-family: system-ui, -apple-system, "Noto Serif SC", serif; }
+    .box { max-width: 420px; padding: 2rem 1.6rem; text-align: center; }
+    .box h1 { font-size: 1.1rem; letter-spacing: .04em; color: #2A2621; margin: 0 0 .9rem; }
+    .box p { font-size: .8rem; line-height: 1.8; margin: 0 0 1rem; }
+    .box a { color: #7A4E33; }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h1>正在打开藏家后台…</h1>
+    <p>藏馆数据与买家咨询在同一个页面：<a href="seller-inbox.html" id="fallback">seller-inbox.html</a></p>
+    <p style="font-size:.72rem;color:#9A938A">Sellers: this page opens your private console. Keep the link private.</p>
+  </div>
+  <script>
+    (function () {
+      var hash = location.hash || '';
+      var target = 'seller-inbox.html' + hash;
+      var link = document.getElementById('fallback');
+      if (link) link.href = target;
+      location.replace(target);
+    })();
+  </script>
+</body>
+</html>

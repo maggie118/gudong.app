@@ -65,7 +65,7 @@ function main() {
   sellers.forEach((s) => {
     // gallery=true（已付费开通私家藏馆）才在 token 里写入统计权益，
     // 写进去之后该藏家的收件箱才会显示「近 30 天 N 人浏览 · M 人收藏」。
-    const link = SITE + '/seller-inbox.html#token=' + encodeURIComponent(token(s.seller_id, secret, s.gallery === true));
+    const link = SITE + '/seller.html#token=' + encodeURIComponent(token(s.seller_id, secret, s.gallery === true));
     console.log('【' + s.seller_id + '｜' + (s.display_zh || s.display_en || '') + '】');
     if (s.gallery !== true) console.log('（未开通私家藏馆：不显示浏览 / 收藏统计）');
     console.log(link + '\n');

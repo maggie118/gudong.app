@@ -131,8 +131,11 @@
  * - 今日发现卡面收敛（桌面 4 列／手机 2 列、2:3 统一图框），手机端控长（情报 3–5 条、知识单列）；
  * - 区块标题「今日情报」改为「掌握收藏动态」；
  * - 提升缓存版本，强制已安装 PWA 刷新页面
+ * 2026-11-14：v129 → v130（移除已无入口的匿名私信组件）
+ * - 删 item.html 的 item-chat.js 引用、assets/js/item-chat.js 与 api/chat.js；
+ * - 预缓存清单同步移除 item-chat.js，提升缓存版本；
  */
-const CACHE_NAME = 'antique-collection-v129';
+const CACHE_NAME = 'antique-collection-v130';
 // 预缓存清单：核心页面 + 常用图标 + 占位图 + 工具页（离线可用）
 // 注意：改用逐个 cache.add，单个 404 不会导致整个 install 失败
 const PRECACHE_ASSETS = [
@@ -141,7 +144,6 @@ const PRECACHE_ASSETS = [
   '/item.html',
   '/collection.html',
   '/pricing.html',
-  '/assets/js/item-chat.js',
   '/assets/js/seller-inbox.js',
   '/assets/js/gudong-data.js',
   '/assets/js/google-client.js',

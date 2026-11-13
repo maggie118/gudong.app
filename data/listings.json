@@ -648,7 +648,7 @@
       "price_type": "价格区间（可议价）",
       "price_display_zh": "估价区间：S$326000-S$489000",
       "price_display_en": "Estimated range: S$326000-S$489000",
-      "img_file": "S$12,000",
+      "img_file": "sun/item-sun-04.jpg sun/item-sun-04b.jpg sun/item-sun-04c.jpg sun/item-sun-04d.jpg",
       "seller_id": "Sun",
       "seller_name_en": "",
       "seller_whatsapp": "",
@@ -1542,7 +1542,7 @@
     }
   ],
   "expiry": {
-    "generated_at": "2026-11-13T17:42:33.655Z",
+    "generated_at": "2026-11-13T17:49:03.500Z",
     "item_period_months": 6,
     "gallery_period_months": 12,
     "removed_today": [],

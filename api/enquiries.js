@@ -62,6 +62,18 @@ module.exports = async function handler(req, res) {
     }
   }
 
+  // 聚合看板：GET /api/enquiries?analytics=1&days=30
+  // 只回数字，永不回买家身份；数据来自 Worker /analytics（D1 favorites/follows/inquiries/inquiry_clicks）
+  if (req.method === 'GET' && req.query && String(req.query.analytics) === '1') {
+    const days = Math.min(Math.max(Number(req.query.days) || 30, 1), 365);
+    try {
+      const stats = await d1Get('/analytics', { seller: sellerId, days });
+      return respond(res, 200, { seller_id: sellerId, analytics: stats });
+    } catch (_) {
+      return respond(res, 503, { error: 'Could not load analytics' });
+    }
+  }
+
   try {
     const result = await d1Get('/inquiries', { seller: sellerId, limit: 100 });
     const enquiries = (result.enquiries || []).map((row) => ({

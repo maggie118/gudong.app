@@ -1,6 +1,21 @@
 (function () {
   'use strict';
   var token = new URLSearchParams((location.hash || '').replace(/^#/, '')).get('token') || '';
+
+  /* 收到私密链接即把令牌按 seller_id 缓存到本机，藏馆页据此显示数据看板。
+     令牌只在自己设备上，公开展馆页对无令牌访客不渲染任何数字。 */
+  (function rememberToken(tk) {
+    if (!tk || tk.indexOf('.') < 0) return;
+    try {
+      var part = tk.split('.')[0].replace(/-/g, '+').replace(/_/g, '/');
+      var payload = JSON.parse(atob(part));
+      if (!payload || !payload.seller_id) return;
+      var map = JSON.parse(localStorage.getItem('gudong.sellerTokens') || '{}') || {};
+      map[String(payload.seller_id)] = tk;
+      localStorage.setItem('gudong.sellerTokens', JSON.stringify(map));
+    } catch (e) { /* 令牌格式异常时静默跳过，不影响收件箱本身 */ }
+  })(token);
+
   var threadsEl = document.getElementById('threads');
   var messagesEl = document.getElementById('messages');
   var titleEl = document.getElementById('item-title');

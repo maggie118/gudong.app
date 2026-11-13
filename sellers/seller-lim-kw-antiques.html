@@ -311,6 +311,30 @@ header {
 }
 .disclaimer-box strong { color: var(--color-text); }
 
+/* 藏家数据看板（仅馆主可见；样式走全站米白书刊风） */
+.gd-analytics {
+    margin-top: 1.4rem; padding: 1.15rem 1.25rem 1rem;
+    background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 8px;
+}
+.gd-an-head { display: flex; align-items: baseline; justify-content: space-between; gap: .6rem; margin-bottom: .85rem; }
+.gd-an-head h3 { margin: 0; font-size: .95rem; font-weight: 600; letter-spacing: .04em; color: var(--color-text); }
+.gd-an-window { font-size: .66rem; letter-spacing: .14em; text-transform: uppercase; color: var(--color-text-muted); }
+.gd-an-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: .9rem; }
+.gd-an-cell { text-align: left; padding: .55rem .7rem; background: var(--color-primary-light); border-radius: 6px; }
+.gd-an-cell b { display: block; font-size: 1.5rem; line-height: 1.15; font-weight: 600; color: var(--color-primary-dark); font-variant-numeric: tabular-nums; }
+.gd-an-cell span { display: block; font-size: .7rem; color: var(--color-text-secondary); margin-top: .15rem; letter-spacing: .02em; }
+.gd-an-cell em { display: block; font-style: normal; font-size: .64rem; color: var(--color-text-muted); margin-top: .1rem; }
+.gd-an-top { margin-top: .9rem; padding-top: .8rem; border-top: 1px dashed var(--color-border); font-size: .72rem; color: var(--color-text-secondary); }
+.gd-an-top-label { display: inline-block; margin-right: .5rem; color: var(--color-text-muted); letter-spacing: .1em; font-size: .66rem; text-transform: uppercase; }
+.gd-an-chip { display: inline-flex; align-items: center; gap: .3rem; margin: .2rem .35rem .2rem 0; padding: .18rem .5rem;
+    background: var(--color-bg); border: 1px solid var(--color-border); border-radius: 999px; font-size: .7rem; }
+.gd-an-chip i { font-style: normal; color: var(--color-primary); font-weight: 600; }
+.gd-an-note { margin: .85rem 0 0; font-size: .68rem; line-height: 1.7; color: var(--color-text-muted); }
+@media (max-width: 560px) {
+    .gd-an-grid { grid-template-columns: 1fr 1fr; }
+    .gd-an-cell b { font-size: 1.3rem; }
+}
+
 footer {
     text-align: center; padding: 2.2rem 5% 1.8rem;
     background: var(--color-white); color: var(--color-text-secondary);
@@ -463,6 +487,38 @@ footer {
                     <span class="zh">关注此藏家</span><span class="en">Follow</span>
                                     </button>
             </div>
+        </section>
+
+        <!-- 藏家数据看板（仅 S$588 私家藏馆）：
+             公开访客永远看不到这块 —— 只有馆主在自己的设备上打开过询价收件箱私密链接，
+             令牌才会存在本地，这里才渲染真实数字。数字全部为匿名聚合，不含任何买家身份。 -->
+        <section class="gd-analytics" id="gdAnalytics" hidden>
+            <div class="gd-an-head">
+                <h3><span class="zh">藏馆数据</span><span class="en">Gallery analytics</span></h3>
+                <span class="gd-an-window"><span class="zh">近 30 天</span><span class="en">last 30 days</span></span>
+            </div>
+            <div class="gd-an-grid">
+                <div class="gd-an-cell">
+                    <b id="gdAnFollow">—</b>
+                    <span class="zh">位藏家关注</span><span class="en">collectors following</span>
+                    <em id="gdAnFollowNew"></em>
+                </div>
+                <div class="gd-an-cell">
+                    <b id="gdAnFav">—</b>
+                    <span class="zh">次收藏</span><span class="en">saves</span>
+                    <em id="gdAnFavNew"></em>
+                </div>
+                <div class="gd-an-cell">
+                    <b id="gdAnInq">—</b>
+                    <span class="zh">次咨询</span><span class="en">enquiries</span>
+                    <em id="gdAnInqNew"></em>
+                </div>
+            </div>
+            <div class="gd-an-top" id="gdAnTop" hidden></div>
+            <p class="gd-an-note">
+                <span class="zh">咨询次数＝买家点了 WhatsApp 的次数，实际成交平台看不到。数据为匿名汇总，不包含买家姓名、邮箱或号码。</span>
+                <span class="en">Enquiries count WhatsApp taps only — actual deals happen off-platform and are not visible here. All figures are anonymous aggregates; no buyer names, emails or numbers.</span>
+            </p>
         </section>
 
         <div id="gdBuyerPanel" style="margin:1.1rem 0 1.4rem;"></div>
@@ -685,8 +741,52 @@ footer {
             }
         }
 
-        function applySeller(sl) {
-            if (!sl) return;
+        /* 藏馆数据看板：令牌来自卖家打开询价收件箱时缓存的本地记录（seller-inbox.js 写入）。
+           没有令牌 = 什么都不渲染，公开访客看不到数字。 */
+        function sellerToken() {
+            try {
+                const map = JSON.parse(localStorage.getItem('gudong.sellerTokens') || '{}') || {};
+                const tk = map[SELLER_ID];
+                return typeof tk === 'string' && tk.indexOf('.') > 0 ? tk : '';
+            } catch (e) { return ''; }
+        }
+        function loadAnalytics() {
+            const box = document.getElementById('gdAnalytics');
+            const tk = sellerToken();
+            if (!box || !tk) return;
+            fetch('/api/enquiries?analytics=1&days=30', {
+                headers: { Authorization: 'Bearer ' + tk, Accept: 'application/json' },
+                cache: 'no-store'
+            }).then(r => r.ok ? r.json() : null).then(res => {
+                const a = res && res.analytics;
+                if (!a) return;
+                const num = v => Number(v || 0).toLocaleString();
+                document.getElementById('gdAnFollow').textContent = num(a.followers && a.followers.total);
+                document.getElementById('gdAnFav').textContent = num(a.favorites && a.favorites.total);
+                document.getElementById('gdAnInq').textContent = num(a.clicks && a.clicks.total);
+                const fNew = (a.followers && a.followers.recent) || 0;
+                const vNew = (a.favorites && a.favorites.recent) || 0;
+                const iNew = (a.clicks && a.clicks.recent) || 0;
+                if (fNew) document.getElementById('gdAnFollowNew').textContent = '+' + num(fNew) + ' · 30d';
+                if (vNew) document.getElementById('gdAnFavNew').textContent = '+' + num(vNew) + ' · 30d';
+                if (iNew) document.getElementById('gdAnInqNew').textContent = '+' + num(iNew) + ' · 30d';
+                const top = (a.favorites && a.favorites.top) || [];
+                const topEl = document.getElementById('gdAnTop');
+                if (top.length && topEl) {
+                    const titleMap = {};
+                    allItems.forEach(it => { titleMap[it.item_id] = it.title_zh || it.title_en || it.item_id; });
+                    topEl.innerHTML = '<span class="gd-an-top-label"><span class="zh">最常被收藏</span><span class="en">Most saved</span></span>' +
+                        top.slice(0, 5).map(t => {
+                            const label = titleMap[t.item_id] || t.title || t.item_id;
+                            return '<span class="gd-an-chip">' + String(label).replace(/[<>&]/g, '') + '<i>' + Number(t.saves || 0) + '</i></span>';
+                        }).join('');
+                    topEl.hidden = false;
+                }
+                box.hidden = false;
+            }).catch(() => {});
+        }
+
+        function applySeller(sl) {            if (!sl) return;
             const zh = sl.display_zh, en = sl.display_en;
             if (zh) document.getElementById('sellerNameZh').textContent = zh;
             if (en) document.getElementById('sellerNameEn').textContent = en;
@@ -749,6 +849,7 @@ footer {
                 document.getElementById('itemCount').textContent = allItems.length;
                 filteredItems = allItems.slice();
                 renderVisible();
+                loadAnalytics();
                 GD.renderDebug('本馆（' + SELLER_ID + '）藏品：' + allItems.length);
             }).catch(() => {
                 list.removeAttribute('aria-busy');

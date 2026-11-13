@@ -28,10 +28,15 @@ function verify(token) {
   if (actual.length !== expected.length || !timingSafeEqual(actual, expected)) return null;
   try {
     const data = JSON.parse(Buffer.from(parts[0], 'base64url').toString('utf8'));
-    if (data.scope !== 'seller_inbox') return null;
-    if (!/^[a-z0-9-]{2,80}$/i.test(data.seller_id || '')) return null;
     if (!Number.isFinite(data.exp) || data.exp < Date.now()) return null;
-    return data;
+    // 藏家收件箱链接：scope=seller_inbox，必须带合法 seller_id
+    if (data.scope === 'seller_inbox') {
+      if (!/^[a-z0-9-]{2,80}$/i.test(data.seller_id || '')) return null;
+      return data;
+    }
+    // 内部季度报表：scope=platform_snapshot，只能由持有签名密钥的一方签发，不含 seller_id
+    if (data.scope === 'platform_snapshot') return data;
+    return null;
   } catch (_) { return null; }
 }
 
@@ -44,7 +49,27 @@ module.exports = async function handler(req, res) {
     return respond(res, 503, { error: 'Enquiry inbox is not configured' });
   }
   const session = verify(bearer(req));
+
+  // 内部季度快照：GET /api/enquiries?snapshot=1&from=YYYY-MM-DD&to=YYYY-MM-DD
+  // 只接受 scope=platform_snapshot 的签名令牌（由 CHAT_REPLY_SECRET 签发），藏家令牌无效
+  if (req.method === 'GET' && req.query && String(req.query.snapshot) === '1') {
+    if (!session || session.scope !== 'platform_snapshot') {
+      return respond(res, 401, { error: 'Snapshot link is invalid or expired' });
+    }
+    const iso = (v) => (/^\d{4}-\d{2}-\d{2}$/.test(String(v || '')) ? String(v) : '');
+    const from = iso(req.query.from);
+    const to = iso(req.query.to);
+    if (!from || !to) return respond(res, 400, { error: 'from/to must be YYYY-MM-DD' });
+    try {
+      const stats = await d1Get('/snapshot', { from, to });
+      return respond(res, 200, stats);
+    } catch (_) {
+      return respond(res, 503, { error: 'Could not load snapshot' });
+    }
+  }
+
   if (!session) return respond(res, 401, { error: 'Seller inbox link is invalid or expired' });
+  if (session.scope !== 'seller_inbox') return respond(res, 403, { error: 'This token cannot read seller inbox' });
   const sellerId = session.seller_id;
 
   // 卖家侧只允许把一条询价标记为已联络/关闭，不能改内容

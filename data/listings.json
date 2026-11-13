@@ -253,7 +253,7 @@
       "has_surface_damage": false,
       "price_type": "一口价",
       "price_display_zh": "S$12000",
-      "price_display_en": "Price on inquiry",
+      "price_display_en": "S$12,000",
       "img_file": "yap-jm/item-yap-01.jpg yap-jm/item-yap-01b.jpg yap-jm/item-yap-01c.jpg",
       "seller_id": "Yap-JM",
       "seller_name_en": "",
@@ -268,7 +268,7 @@
       "listed_at": "2026-11-12 11:48:00",
       "expiry_date": "2027-11-11",
       "previous_price": null,
-      "fixed_price": null
+      "fixed_price": 12000
     },
     {
       "item_id": "item-yap-02",
@@ -283,7 +283,7 @@
       "has_surface_damage": false,
       "price_type": "一口价",
       "price_display_zh": "S$8500",
-      "price_display_en": "Price on inquiry",
+      "price_display_en": "S$8,500",
       "img_file": "yap-jm/item-yap-02.jpg yap-jm/item-yap-02b.jpg yap-jm/item-yap-02c.jpg",
       "seller_id": "Yap-JM",
       "seller_name_en": "",
@@ -298,7 +298,7 @@
       "listed_at": "2026-11-12 12:16:00",
       "expiry_date": "2027-11-11",
       "previous_price": null,
-      "fixed_price": null
+      "fixed_price": 8500
     },
     {
       "item_id": "item-yap-03",
@@ -313,7 +313,7 @@
       "has_surface_damage": false,
       "price_type": "一口价",
       "price_display_zh": "S$25000",
-      "price_display_en": "Price on inquiry",
+      "price_display_en": "S$25,000",
       "img_file": "yap-jm/item-yap-03.jpg yap-jm/item-yap-03b.jpg yap-jm/item-yap-03c.jpg yap-jm/item-yap-03d.jpg yap-jm/item-yap-03e.jpg",
       "seller_id": "Yap-JM",
       "seller_name_en": "",
@@ -328,7 +328,7 @@
       "listed_at": "2026-11-12 12:28:00",
       "expiry_date": "2027-11-11",
       "previous_price": null,
-      "fixed_price": null
+      "fixed_price": 25000
     },
     {
       "item_id": "item-yap-04",
@@ -343,7 +343,7 @@
       "has_surface_damage": false,
       "price_type": "一口价",
       "price_display_zh": "S$6000",
-      "price_display_en": "Price on inquiry",
+      "price_display_en": "S$6,000",
       "img_file": "yap-jm/item-yap-04.jpg yap-jm/item-yap-04b.jpg yap-jm/item-yap-04c.jpg",
       "seller_id": "Yap-JM",
       "seller_name_en": "",
@@ -358,7 +358,7 @@
       "listed_at": "2026-11-12 12:45:00",
       "expiry_date": "2027-11-11",
       "previous_price": null,
-      "fixed_price": null
+      "fixed_price": 6000
     },
     {
       "item_id": "item-ngcy-05",
@@ -403,7 +403,7 @@
       "has_surface_damage": false,
       "price_type": "一口价",
       "price_display_zh": "S$9888",
-      "price_display_en": "Price on inquiry",
+      "price_display_en": "S$9,888",
       "img_file": "yap-jm/item-yap-05.jpg yap-jm/item-yap-05b.jpg yap-jm/item-yap-05c.jpg",
       "seller_id": "Yap-JM",
       "seller_name_en": "",
@@ -418,7 +418,7 @@
       "listed_at": "2026-11-12 12:57:00",
       "expiry_date": "2027-11-11",
       "previous_price": null,
-      "fixed_price": null
+      "fixed_price": 9888
     },
     {
       "item_id": "item-yap-06",
@@ -433,7 +433,7 @@
       "has_surface_damage": false,
       "price_type": "一口价",
       "price_display_zh": "S$12000",
-      "price_display_en": "Price on inquiry",
+      "price_display_en": "S$12,000",
       "img_file": "yap-jm/item-yap-06.jpg yap-jm/item-yap-06b.jpg yap-jm/item-yap-06c.jpg",
       "seller_id": "Yap-JM",
       "seller_name_en": "",
@@ -448,7 +448,7 @@
       "listed_at": "2026-11-12 13:04:00",
       "expiry_date": "2027-11-11",
       "previous_price": null,
-      "fixed_price": null
+      "fixed_price": 12000
     }
   ],
   "editorPicks": [],
@@ -467,7 +467,7 @@
       "has_surface_damage": false,
       "price_type": "一口价",
       "price_display_zh": "S$12000",
-      "price_display_en": "Price on inquiry",
+      "price_display_en": "S$12,000",
       "img_file": "yap-jm/item-yap-06.jpg yap-jm/item-yap-06b.jpg yap-jm/item-yap-06c.jpg",
       "seller_id": "Yap-JM",
       "seller_name_en": "",
@@ -482,7 +482,7 @@
       "listed_at": "2026-11-12 13:04:00",
       "expiry_date": "2027-11-11",
       "previous_price": null,
-      "fixed_price": null
+      "fixed_price": 12000
     },
     {
       "item_id": "item-yap-05",
@@ -497,7 +497,7 @@
       "has_surface_damage": false,
       "price_type": "一口价",
       "price_display_zh": "S$9888",
-      "price_display_en": "Price on inquiry",
+      "price_display_en": "S$9,888",
       "img_file": "yap-jm/item-yap-05.jpg yap-jm/item-yap-05b.jpg yap-jm/item-yap-05c.jpg",
       "seller_id": "Yap-JM",
       "seller_name_en": "",
@@ -512,7 +512,7 @@
       "listed_at": "2026-11-12 12:57:00",
       "expiry_date": "2027-11-11",
       "previous_price": null,
-      "fixed_price": null
+      "fixed_price": 9888
     },
     {
       "item_id": "item-yap-04",
@@ -527,7 +527,7 @@
       "has_surface_damage": false,
       "price_type": "一口价",
       "price_display_zh": "S$6000",
-      "price_display_en": "Price on inquiry",
+      "price_display_en": "S$6,000",
       "img_file": "yap-jm/item-yap-04.jpg yap-jm/item-yap-04b.jpg yap-jm/item-yap-04c.jpg",
       "seller_id": "Yap-JM",
       "seller_name_en": "",
@@ -542,7 +542,7 @@
       "listed_at": "2026-11-12 12:45:00",
       "expiry_date": "2027-11-11",
       "previous_price": null,
-      "fixed_price": null
+      "fixed_price": 6000
     },
     {
       "item_id": "item-yap-03",
@@ -557,7 +557,7 @@
       "has_surface_damage": false,
       "price_type": "一口价",
       "price_display_zh": "S$25000",
-      "price_display_en": "Price on inquiry",
+      "price_display_en": "S$25,000",
       "img_file": "yap-jm/item-yap-03.jpg yap-jm/item-yap-03b.jpg yap-jm/item-yap-03c.jpg yap-jm/item-yap-03d.jpg yap-jm/item-yap-03e.jpg",
       "seller_id": "Yap-JM",
       "seller_name_en": "",
@@ -572,7 +572,7 @@
       "listed_at": "2026-11-12 12:28:00",
       "expiry_date": "2027-11-11",
       "previous_price": null,
-      "fixed_price": null
+      "fixed_price": 25000
     },
     {
       "item_id": "item-yap-02",
@@ -587,7 +587,7 @@
       "has_surface_damage": false,
       "price_type": "一口价",
       "price_display_zh": "S$8500",
-      "price_display_en": "Price on inquiry",
+      "price_display_en": "S$8,500",
       "img_file": "yap-jm/item-yap-02.jpg yap-jm/item-yap-02b.jpg yap-jm/item-yap-02c.jpg",
       "seller_id": "Yap-JM",
       "seller_name_en": "",
@@ -602,7 +602,7 @@
       "listed_at": "2026-11-12 12:16:00",
       "expiry_date": "2027-11-11",
       "previous_price": null,
-      "fixed_price": null
+      "fixed_price": 8500
     },
     {
       "item_id": "item-yap-01",
@@ -617,7 +617,7 @@
       "has_surface_damage": false,
       "price_type": "一口价",
       "price_display_zh": "S$12000",
-      "price_display_en": "Price on inquiry",
+      "price_display_en": "S$12,000",
       "img_file": "yap-jm/item-yap-01.jpg yap-jm/item-yap-01b.jpg yap-jm/item-yap-01c.jpg",
       "seller_id": "Yap-JM",
       "seller_name_en": "",
@@ -632,7 +632,7 @@
       "listed_at": "2026-11-12 11:48:00",
       "expiry_date": "2027-11-11",
       "previous_price": null,
-      "fixed_price": null
+      "fixed_price": 12000
     },
     {
       "item_id": "item-sun-04",
@@ -648,7 +648,7 @@
       "price_type": "价格区间（可议价）",
       "price_display_zh": "估价区间：S$326000-S$489000",
       "price_display_en": "Estimated range: S$326000-S$489000",
-      "img_file": "sun/item-sun-04.jpg sun/item-sun-04b.jpg sun/item-sun-04c.jpg sun/item-sun-04d.jpg",
+      "img_file": "S$12,000",
       "seller_id": "Sun",
       "seller_name_en": "",
       "seller_whatsapp": "",
@@ -1510,6 +1510,13 @@
       "metaEn": "Collector activity · this week"
     },
     {
+      "type": "compare",
+      "zh": "📌 同类对比：同为瓷器，一件标价 S$5,000，另一件 S$25,000，价差约 80%。",
+      "en": "📍 Comparable: within 瓷器, one listed at S$5,000 vs S$25,000 — spread ~80%.",
+      "meta": "同类参照 · 仅供参考",
+      "metaEn": "Comparable reference · for reference only"
+    },
+    {
       "type": "platform",
       "zh": "📌 平台快讯：“创始藏家”现开放第二批申请，仅限 50 位中高端藏家，截止至 2026 年 12 月 31 日。",
       "en": "📍 Platform note: Founding Collector intake opens for a second batch — limited to 50 mid-to-high-end collectors, closing 31 December 2026.",
@@ -1535,7 +1542,7 @@
     }
   ],
   "expiry": {
-    "generated_at": "2026-11-13T17:26:52.818Z",
+    "generated_at": "2026-11-13T17:42:33.655Z",
     "item_period_months": 6,
     "gallery_period_months": 12,
     "removed_today": [],

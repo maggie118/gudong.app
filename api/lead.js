@@ -5,11 +5,13 @@ const { createHmac } = require('node:crypto');
 //     name, intent, item_id, item_title, consent, google_credential }
 //   { action:'unsubscribe', contact, seller }
 //   { action:'verify_google', credential }
-// 存储：Airtable 表 buyer_leads（可用环境变量 BUYER_LEADS_TABLE 改名）
+// 存储：Cloudflare D1 表 inquiries（2026-11-13 起；原 Airtable buyer_leads 降为兜底）
 // 字段：contact / contact_type / seller / source / lang / page / follows / created_at / status
-//       询价身份（2026-11-09）：name / intent / item_id / item_title / consent_at
+//       询价身份：name / intent / item_id / item_title / consent_at / buyer_key
 // 设计原则：前端绝不能因为后端没配好就丢掉买家 —— 失败也返回 200 级状态，前端已有本地兜底。
 //           新增字段缺失时自动降级：把称呼/意向/藏品打包进 follows 长文本，一条不丢。
+const { d1Configured, d1Post } = require('./_d1');
+
 const BASE = process.env.AIRTABLE_BASE_ID;
 const TOKEN = process.env.AIRTABLE_TOKEN;
 const TABLE = process.env.BUYER_LEADS_TABLE || 'buyer_leads';
@@ -257,6 +259,25 @@ module.exports = async function handler(req, res) {
     return sendJson(res, 400, { ok: false, error: 'bad_json' });
   }
 
+  /* 咨询点击埋点：只记"点了 WhatsApp"，不带任何身份信息（有身份才有 buyer_key） */
+  if (body.action === 'click') {
+    if (!d1Configured()) return sendJson(res, 202, { ok: false, code: 'store_unconfigured' });
+    try {
+      const record = await d1Post('/click', {
+        buyer_key: clamp(body.buyer_key, 120),
+        seller: clamp(body.seller, 80),
+        item_id: clamp(body.item_id, 80),
+        item_title: clamp(body.item_title, 120),
+        channel: clamp(body.channel, 20) || 'whatsapp',
+        page: clamp(body.page, 120),
+        lang: body.lang === 'en' ? 'en' : 'zh'
+      });
+      return sendJson(res, 200, { ok: true, recorded: true, deduped: Boolean(record && record.deduped) });
+    } catch (e) {
+      return sendJson(res, 202, { ok: false, code: 'store_error' });
+    }
+  }
+
   const ip = (req.headers['x-forwarded-for'] || '').split(',')[0].trim() || 'unknown';
   if (rateLimited(ip)) return sendJson(res, 429, { ok: false, error: 'too_many_requests' });
 
@@ -293,7 +314,7 @@ module.exports = async function handler(req, res) {
   }
 
   if (!BASE || !TOKEN) {
-    return sendJson(res, 202, { ok: false, code: 'store_unconfigured' });
+    if (!d1Configured()) return sendJson(res, 202, { ok: false, code: 'store_unconfigured' });
   }
 
   const headers = { Authorization: 'Bearer ' + TOKEN, 'Content-Type': 'application/json' };
@@ -307,6 +328,14 @@ module.exports = async function handler(req, res) {
 
   // 退订：把该联系人的记录标为 unsubscribed
   if (body.action === 'unsubscribe') {
+    if (d1Configured()) {
+      try {
+        await d1Post('/inquiry', { action: 'unsubscribe', contact });
+        return sendJson(res, 200, { ok: true, action: 'unsubscribed' });
+      } catch (e) {
+        return sendJson(res, 202, { ok: false, code: 'store_error' });
+      }
+    }
     try {
       const url = new URL(atUrl());
       url.searchParams.set('filterByFormula', `{contact} = "${contact.replace(/"/g, '\\"')}"`);
@@ -371,6 +400,42 @@ module.exports = async function handler(req, res) {
     try {
       return await notifyEnquiry({ seller, name, contact, type, intent, itemId, itemTitle, page: baseFields.page });
     } catch (e) { return false; }
+  }
+
+  /* ---- 主路径：Cloudflare D1 inquiries（2026-11-13 起）---- */
+  if (d1Configured()) {
+    const payload = {
+      contact,
+      contact_type: type,
+      buyer_key: clamp(body.buyer_key, 120) || (google && google.email) || contact.toLowerCase(),
+      name,
+      seller,
+      item_id: itemId,
+      item_title: itemTitle,
+      intent: intentKey,
+      source: clamp(body.source, 40),
+      page: clamp(body.page, 120),
+      lang: baseFields.lang,
+      follows: flattenFollows(body.follows),
+      channel: clamp(body.channel, 20) || (isEnquiry ? 'wa-gate' : 'subscribe'),
+      client_id: clamp(body.client_id, 80),
+      consent: body.consent === 'yes' || body.consent === true ? 'yes' : '',
+      consent_at: consentAt
+    };
+    try {
+      const saved = await d1Post('/inquiry', payload);
+      await maybeAlertSeller();
+      return sendJson(res, 200, {
+        ok: true,
+        id: saved && saved.inquiry_id ? String(saved.inquiry_id) : '',
+        stored: 'd1',
+        deduped: Boolean(saved && saved.deduped)
+      });
+    } catch (e) {
+      // 落库失败也要先提醒藏家，线索至少不进黑洞
+      await maybeAlertSeller();
+      return sendJson(res, 202, { ok: false, code: e.status === 429 ? 'rate_limited' : 'store_error' });
+    }
   }
 
   try {

@@ -428,6 +428,32 @@
   /* ---------------- 拦截点击 ---------------- */
   var BIND_SEL = 'a[data-wa-bind="seller"]';
 
+  /* 咨询点击埋点（2026-11-13）：每次点 WhatsApp 都先记一条，有没有身份都记。
+   * 没身份的记成匿名点击 —— 这样卖家看板上的"咨询次数"不依赖买家是否留了邮箱。
+   * 后端按 身份+藏品+天 去重，连点不会把数字冲高。 */
+  function trackClick() {
+    try {
+      var ctx = context();
+      var me = read() || {};
+      var payload = {
+        action: 'click',
+        seller: ctx.seller,
+        item_id: ctx.item_id,
+        item_title: ctx.item_title || ctx.item_title_en,
+        buyer_key: me.buyer_id || me.contact || '',
+        page: location.pathname,
+        lang: isEn() ? 'en' : 'zh',
+        channel: 'whatsapp'
+      };
+      fetch('/api/lead', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+        keepalive: true
+      }).catch(function () {});
+    } catch (e) { /* 埋点失败绝不影响跳转 */ }
+  }
+
   function onClick(e) {
     var a = e.target && e.target.closest ? e.target.closest(BIND_SEL) : null;
     if (!a || a.hidden || a.getAttribute('aria-hidden') === 'true') return;
@@ -437,6 +463,7 @@
       toast(l('藏家联系方式还在加载，请稍候一秒。', 'Collector contact is still loading — one moment.'));
       return;
     }
+    trackClick();
     var me = identity();
     if (me) { pingSilently(me); return; }
     e.preventDefault();

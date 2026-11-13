@@ -242,6 +242,176 @@ async function buyerUpsert(env, body) {
   return json({ buyer_id: buyerId, email: email, name: name, source: source, returning: false });
 }
 
+/* ---- 买家线索（inquiries）与咨询点击（inquiry_clicks）----
+ * 2026-11-13：原 Airtable「buyer_leads」整体迁到 D1，Airtable 只作应急。
+ * 表在建首次写入时惰性创建（CREATE TABLE IF NOT EXISTS），因此部署 Worker 不需要单独跑迁移。
+ * 设计：一条 inquiries 记录 = 一次询价/留资；同一个人可以对同一件反复询价，各记一条。
+ *       client_id 用来去重（前端重试不会重复写）。
+ *       buyer_key 与 favorites/follows 一致：有买入 D1 buyers.buyer_id，没有就是邮箱。
+ */
+let inquiriesReady = false;
+async function ensureInquiries(env) {
+  if (inquiriesReady) return;
+  const statements = [
+    'CREATE TABLE IF NOT EXISTS inquiries (' +
+      'id INTEGER PRIMARY KEY AUTOINCREMENT, client_id TEXT, buyer_key TEXT, contact TEXT, contact_type TEXT, ' +
+      'name TEXT, seller TEXT, item_id TEXT, item_title TEXT, intent TEXT, source TEXT, page TEXT, lang TEXT, ' +
+      "follows TEXT, channel TEXT, status TEXT DEFAULT 'new', consent_at TEXT, created_at TEXT, updated_at TEXT)",
+    'CREATE UNIQUE INDEX IF NOT EXISTS idx_inquiries_client ON inquiries(client_id)',
+    'CREATE INDEX IF NOT EXISTS idx_inquiries_seller ON inquiries(seller, created_at)',
+    'CREATE INDEX IF NOT EXISTS idx_inquiries_buyer ON inquiries(buyer_key)',
+    'CREATE TABLE IF NOT EXISTS inquiry_clicks (' +
+      'id INTEGER PRIMARY KEY AUTOINCREMENT, buyer_key TEXT, seller TEXT, item_id TEXT, item_title TEXT, ' +
+      'channel TEXT, page TEXT, lang TEXT, created_at TEXT)',
+    'CREATE INDEX IF NOT EXISTS idx_clicks_seller ON inquiry_clicks(seller, created_at)',
+    'CREATE INDEX IF NOT EXISTS idx_clicks_item ON inquiry_clicks(item_id, created_at)'
+  ];
+  for (const sql of statements) await env.DB.prepare(sql).run();
+  inquiriesReady = true;
+}
+
+async function inquiryUpsert(env, body) {
+  await ensureInquiries(env);
+  const now = new Date().toISOString();
+
+  /* 退订：把该联系人的记录标成 unsubscribed（只改状态，不删数据） */
+  if (body.action === 'unsubscribe') {
+    const contact = str(body.contact, 120).toLowerCase();
+    if (!contact) return json({ error: 'contact_required' }, 400);
+    await env.DB.prepare('UPDATE inquiries SET status = ?, updated_at = ? WHERE lower(contact) = ?')
+      .bind('unsubscribed', now, contact).run();
+    return json({ ok: true, action: 'unsubscribed' });
+  }
+
+  /* 卖家改状态（已联络 / 关闭）。必须校验 seller，防止越权改别家的线 */
+  if (body.action === 'status') {
+    const id = Number(body.id);
+    const status = body.status === 'contacted' || body.status === 'closed' ? body.status : '';
+    const seller = str(body.seller, 80);
+    if (!status || !Number.isInteger(id) || id <= 0 || !seller) return json({ error: 'invalid_status' }, 400);
+    const prior = await env.DB.prepare('SELECT seller FROM inquiries WHERE id = ?').bind(id).first();
+    if (!prior || String(prior.seller || '').toLowerCase() !== seller.toLowerCase()) return json({ error: 'not_your_enquiry' }, 403);
+    await env.DB.prepare('UPDATE inquiries SET status = ?, updated_at = ? WHERE id = ?').bind(status, now, id).run();
+    return json({ ok: true, id: id, status: status });
+  }
+
+  const contact = str(body.contact, 120);
+  const type = body.contact_type === 'whatsapp' ? 'whatsapp' : 'email';
+  const name = str(body.name, 40);
+  const seller = str(body.seller, 80);
+  const itemId = str(body.item_id, 80);
+  const itemTitle = str(body.item_title, 120);
+  const intent = str(body.intent, 20);
+  const source = str(body.source, 40);
+  const page = str(body.page, 120);
+  const lang = body.lang === 'en' ? 'en' : 'zh';
+  const channel = str(body.channel, 20) || 'wa-gate';
+  const consentAt = (body.consent === 'yes' || body.consent === true) ? now : str(body.consent_at, 30);
+  const clientId = str(body.client_id, 80) || null;
+  const key = buyerKey(body.buyer_key) ||
+    (contact && /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(contact) ? contact.toLowerCase() : '');
+
+  if (!contact) return json({ error: 'contact_required' }, 400);
+  if (type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(contact)) return json({ error: 'invalid_contact' }, 400);
+  if (seller && !okId(seller, /^[a-z0-9&._ -]{2,80}$/i)) return json({ error: 'invalid_seller' }, 400);
+
+  if (clientId) {
+    const prior = await env.DB.prepare('SELECT * FROM inquiries WHERE client_id = ?').bind(clientId).first();
+    if (prior) return json({ ok: true, inquiry_id: prior.id, deduped: true });
+  }
+
+  const follows = str(body.follows, 400);
+  const result = await env.DB.prepare(
+    'INSERT INTO inquiries (client_id, buyer_key, contact, contact_type, name, seller, item_id, item_title, intent, ' +
+    'source, page, lang, follows, channel, status, consent_at, created_at, updated_at) ' +
+    'VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
+  ).bind(
+    clientId, key, type === 'email' ? contact.toLowerCase() : contact, type, name, seller, itemId, itemTitle, intent,
+    source, page, lang, follows, channel, 'new', consentAt, now, now
+  ).run();
+  return json({ ok: true, inquiry_id: result.meta.last_row_id }, 201);
+}
+
+async function inquiryList(env, url) {
+  await ensureInquiries(env);
+  const seller = str(url.searchParams.get('seller'), 80);
+  if (!okId(seller, /^[a-z0-9&._ -]{2,80}$/i)) return json({ error: 'invalid_seller' }, 400);
+  const limit = Math.min(Number(url.searchParams.get('limit')) || 100, 300);
+  const result = await env.DB.prepare(
+    'SELECT id, buyer_key, contact, contact_type, name, seller, item_id, item_title, intent, source, page, lang, ' +
+    'follows, channel, status, consent_at, created_at FROM inquiries ' +
+    'WHERE lower(seller) = lower(?) ORDER BY created_at DESC LIMIT ?'
+  ).bind(seller, limit).all();
+  return json({ seller_id: seller, enquiries: result.results || [] });
+}
+
+async function clickLog(env, body) {
+  await ensureInquiries(env);
+  const key = buyerKey(body.buyer_key);
+  const seller = str(body.seller, 80);
+  const itemId = str(body.item_id, 80);
+  const itemTitle = str(body.item_title, 120);
+  const channel = str(body.channel, 20) || 'whatsapp';
+  const page = str(body.page, 120);
+  const lang = body.lang === 'en' ? 'en' : 'zh';
+  const now = new Date().toISOString();
+
+  /* 同一身份 + 同一件 + 同一天只算一次，避免连点把数字冲高 */
+  if (key && itemId) {
+    const prior = await env.DB.prepare(
+      'SELECT id FROM inquiry_clicks WHERE buyer_key = ? AND item_id = ? AND substr(created_at, 1, 10) = ? LIMIT 1'
+    ).bind(key, itemId, now.slice(0, 10)).first();
+    if (prior) return json({ ok: true, deduped: true });
+  }
+  await env.DB.prepare(
+    'INSERT INTO inquiry_clicks (buyer_key, seller, item_id, item_title, channel, page, lang, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?)'
+  ).bind(key, seller, itemId, itemTitle, channel, page, lang, now).run();
+  return json({ ok: true, recorded: true });
+}
+
+/* 卖家聚合：只回数字，永不回买家身份（P1 看板的数据源） */
+async function sellerAnalytics(env, url) {
+  await ensureInquiries(env);
+  const seller = str(url.searchParams.get('seller'), 80);
+  if (!okId(seller, /^[a-z0-9&._ -]{2,80}$/i)) return json({ error: 'invalid_seller' }, 400);
+  const days = Math.min(Math.max(Number(url.searchParams.get('days')) || 30, 1), 365);
+  const since = new Date(Date.now() - days * 86400000).toISOString();
+  const one = async (sql, ...params) => (await env.DB.prepare(sql).bind(...params).first()) || {};
+
+  const followers = await one(
+    "SELECT COUNT(DISTINCT buyer_key) AS n FROM follows WHERE kind = 'seller' AND lower(target) = lower(?)", seller);
+  const followersNew = await one(
+    "SELECT COUNT(DISTINCT buyer_key) AS n FROM follows WHERE kind = 'seller' AND lower(target) = lower(?) AND created_at >= ?",
+    seller, since);
+  const favs = await one(
+    'SELECT COUNT(*) AS n, COUNT(DISTINCT buyer_key) AS buyers FROM favorites WHERE lower(seller) = lower(?)', seller);
+  const favsNew = await one(
+    'SELECT COUNT(*) AS n FROM favorites WHERE lower(seller) = lower(?) AND created_at >= ?', seller, since);
+  const inquiries = await one(
+    'SELECT COUNT(*) AS n, COUNT(DISTINCT buyer_key) AS buyers FROM inquiries WHERE lower(seller) = lower(?)', seller);
+  const inquiriesNew = await one(
+    'SELECT COUNT(*) AS n FROM inquiries WHERE lower(seller) = lower(?) AND created_at >= ?', seller, since);
+  const clicks = await one(
+    'SELECT COUNT(*) AS n FROM inquiry_clicks WHERE lower(seller) = lower(?)', seller);
+  const clicksNew = await one(
+    'SELECT COUNT(*) AS n FROM inquiry_clicks WHERE lower(seller) = lower(?) AND created_at >= ?', seller, since);
+  const topResult = await env.DB.prepare(
+    "SELECT item_id, title, COUNT(*) AS saves, MAX(created_at) AS last_at FROM favorites " +
+    "WHERE lower(seller) = lower(?) GROUP BY item_id ORDER BY saves DESC, last_at DESC LIMIT 5"
+  ).bind(seller).all();
+
+  return json({
+    seller_id: seller,
+    window_days: days,
+    since: since,
+    generated_at: new Date().toISOString(),
+    followers: { total: followers.n || 0, recent: followersNew.n || 0 },
+    favorites: { total: favs.n || 0, buyers: favs.buyers || 0, recent: favsNew.n || 0, top: topResult.results || [] },
+    inquiries: { total: inquiries.n || 0, buyers: inquiries.buyers || 0, recent: inquiriesNew.n || 0 },
+    clicks: { total: clicks.n || 0, recent: clicksNew.n || 0 }
+  });
+}
+
 async function buyerList(env, url) {
   const limit = Math.min(Number(url.searchParams.get('limit')) || 50, 200);
   const result = await env.DB.prepare(
@@ -785,6 +955,10 @@ export default {
           'SELECT run_at, trigger, items, delivered, mails, note FROM push_runs ORDER BY run_at DESC LIMIT ?'
         ).bind(Math.min(50, Math.max(1, Number(url.searchParams.get('limit')) || 20))).all()).results || [] });
         case '/mail': return request.method === 'GET' ? await mailList(env) : await mailUpsert(env, body);
+        case '/inquiry': return await inquiryUpsert(env, body);
+        case '/inquiries': return await inquiryList(env, url);
+        case '/click': return await clickLog(env, body);
+        case '/analytics': return await sellerAnalytics(env, url);
         case '/health': return json({ ok: true });
         default: return json({ error: 'not_found' }, 404);
       }

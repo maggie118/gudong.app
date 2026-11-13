@@ -1,6 +1,6 @@
 // api/enquiries.js
 // 藏家端「询价收件箱」数据接口：GET /api/enquiries
-// 鉴权：与 /api/seller-inbox 同一套签名链接（Bearer <payload>.<hmac>，scope=seller_inbox）
+// 鉴权：藏家后台同一套签名链接（Bearer <payload>.<hmac>，scope=seller_inbox）
 // 数据源：Cloudflare D1 表 inquiries（2026-11-13 起；原 Airtable buyer_leads 已迁走）
 // 返回：{ seller_id, enquiries: [{ id, buyer_key, name, contact, contact_type, intent, item_id, item_title,
 //                                 page, source, channel, follows, status, created_at }] }

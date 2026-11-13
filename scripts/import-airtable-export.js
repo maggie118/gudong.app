@@ -17,8 +17,9 @@ const ROOT = path.resolve(__dirname, '..');
 const IMG_DIR = path.join(ROOT, 'assets', 'images');
 
 const [itemsCsvPath, sellersCsvPath] = process.argv.slice(2);
-if (!itemsCsvPath || !sellersCsvPath) {
-  console.error('用法: node scripts/import-airtable-export.js <antiques.csv> <sellers.csv>');
+if (!itemsCsvPath) {
+  console.error('用法: node scripts/import-airtable-export.js <antiques.csv> [sellers.csv]');
+  console.error('只更新藏品时可省略 sellers.csv，此时保留仓库里现有的卖家数据');
   process.exit(1);
 }
 
@@ -31,6 +32,14 @@ const isChecked = (v) => {
   const s = String(v == null ? '' : v).trim().toLowerCase();
   return s === 'checked' || s === 'true' || s === '1' || s === 'yes';
 };
+
+// 复选框以本次导出为准：导出表头里存在该列时，按勾选结果覆盖（空白=取消勾选）；
+// 表头没有该列（很老的导出）才沿用旧数据。注意 toRecords 会丢掉空单元格，
+// 不能按「记录里有没有这个 key」判断，必须看表头。
+const itemsCsvRaw = fs.readFileSync(itemsCsvPath, 'utf8');
+const ITEM_HEADER = (itemsCsvRaw.split(/\r?\n/)[0] || '').split(',').map((s) => s.trim());
+const hasCol = (k) => ITEM_HEADER.includes(k);
+const flagOf = (f, k, prevVal) => (hasCol(k) ? isChecked(f[k]) : !!prevVal);
 
 // "9/12/2026 4:54pm" / "2026-09-12" → ISO 本地时间字符串
 function toIso(v) {
@@ -100,7 +109,7 @@ function normalizeSellerId(v) {
 }
 
 // ---------- items ----------
-const itemRows = sheets.toRecords(fs.readFileSync(itemsCsvPath, 'utf8')).map((r) => {
+const itemRows = sheets.toRecords(itemsCsvRaw).map((r) => {
   const f = r.fields;
   const itemId = String(f.item_id || '').trim();
   const prev = oldItems.get(itemId) || {};
@@ -118,8 +127,8 @@ const itemRows = sheets.toRecords(fs.readFileSync(itemsCsvPath, 'utf8')).map((r)
     era_en: f.era_en || prev.era_en || ERA_EN[f.era_zh] || '',
     category: f.category || prev.category || '',
     dimensions: f.dimensions || prev.dimensions || '',
-    has_surface_wear: isChecked(f.has_surface_wear) || !!prev.has_surface_wear,
-    has_surface_damage: isChecked(f.has_surface_damage) || !!prev.has_surface_damage,
+    has_surface_wear: flagOf(f, 'has_surface_wear', prev.has_surface_wear),
+    has_surface_damage: flagOf(f, 'has_surface_damage', prev.has_surface_damage),
     price_type: f.price_type || prev.price_type || '',
     price_display_zh: f.price_display_zh || f.price_zh || prev.price_display_zh || '',
     price_display_en: f.price_display_en || f.price_en || prev.price_display_en || '',
@@ -127,8 +136,8 @@ const itemRows = sheets.toRecords(fs.readFileSync(itemsCsvPath, 'utf8')).map((r)
     seller_id: sellerId,
     seller_name_en: f.seller_name_en || prev.seller_name_en || '',
     seller_whatsapp: f.seller_whatsapp || prev.seller_whatsapp || '',
-    is_today_finds: isChecked(f.is_today_finds) || !!prev.is_today_finds,
-    is_new_listing: isChecked(f.is_new_listing) || !!prev.is_new_listing,
+    is_today_finds: flagOf(f, 'is_today_finds', prev.is_today_finds),
+    is_new_listing: flagOf(f, 'is_new_listing', prev.is_new_listing),
     status: (f.status || prev.status || 'active').toLowerCase(),
     reason_zh: f.reason_zh || prev.reason_zh || '',
     reason_en: f.reason_en || prev.reason_en || '',
@@ -142,7 +151,7 @@ const itemRows = sheets.toRecords(fs.readFileSync(itemsCsvPath, 'utf8')).map((r)
 
 // ---------- sellers ----------
 const oldSellers = new Map((old.sellers || []).map((s) => [String(s.seller_id).trim(), s]));
-const sellerRows = sheets.toRecords(fs.readFileSync(sellersCsvPath, 'utf8')).map((r) => {
+const sellerRows = sellersCsvPath ? sheets.toRecords(fs.readFileSync(sellersCsvPath, 'utf8')).map((r) => {
   const f = r.fields;
   const id = String(f.seller_id || '').trim();
   const prev = oldSellers.get(id) || {};
@@ -166,7 +175,7 @@ const sellerRows = sheets.toRecords(fs.readFileSync(sellersCsvPath, 'utf8')).map
     wa_phone: (f['WhatsApp 联络号码 / WhatsApp Contact Number'] || f.wa_phone || '').replace(/[^0-9]/g, ''),
     status: (f.status || 'active').toLowerCase(),
   };
-});
+}) : [];
 
 // ---------- 写回仓库 CSV ----------
 const ITEM_COLS = ['item_id', 'title_zh', 'title_en', 'era_zh', 'era_en', 'category', 'dimensions',
@@ -192,7 +201,11 @@ function writeCsv(file, cols, rows) {
 }
 
 writeCsv(path.join(ROOT, 'data', 'items.csv'), ITEM_COLS, itemRows);
-writeCsv(path.join(ROOT, 'data', 'sellers.csv'), SELLER_COLS, sellerRows);
+if (sellersCsvPath) {
+  writeCsv(path.join(ROOT, 'data', 'sellers.csv'), SELLER_COLS, sellerRows);
+} else {
+  console.log('未提供 sellers.csv，卖家表保持原样');
+}
 
 // ---------- 摘要 ----------
 const prevIds = new Set((old.newListing || []).map((i) => i.item_id));
@@ -205,8 +218,10 @@ if (repaired.length) {
   console.log('\n图片名纠正', repaired.length, '处：');
   repaired.forEach((r) => console.log('  ' + r));
 }
-console.log('\n卖家：', sellerRows.length, '家 | 开通藏馆:', sellerRows.filter((s) => s.gallery).map((s) => s.seller_id).join(', '));
-console.log('创始卖家编号:', sellerRows.filter((s) => s.founding_no).map((s) => `${s.seller_id}=${s.founding_no}`).join(', ') || '(无)');
+if (sellersCsvPath) {
+  console.log('\n卖家：', sellerRows.length, '家 | 开通藏馆:', sellerRows.filter((s) => s.gallery).map((s) => s.seller_id).join(', '));
+  console.log('创始卖家编号:', sellerRows.filter((s) => s.founding_no).map((s) => `${s.seller_id}=${s.founding_no}`).join(', ') || '(无)');
+}
 const noDate = itemRows.filter((i) => !i.listed_at);
 if (noDate.length) console.log('缺少 listed_at:', noDate.map((i) => i.item_id).join(', '));
 const noImg = itemRows.filter((i) => !i.img_file);

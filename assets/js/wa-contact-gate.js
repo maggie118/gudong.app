@@ -109,6 +109,9 @@
       '.gdw-note{font-size:.66rem;line-height:1.65;color:#9A938A;margin:.7rem 0 0}',
       '.gdw-note a{color:#6F4A31;text-decoration:underline;text-underline-offset:2px}',
       '.gdw-err{display:none;font-size:.74rem;line-height:1.6;color:#9A554B;margin:0 0 .6rem}',
+      '.gdw-skip{display:block;width:100%;margin:.6rem 0 0;padding:.55rem 0;border:0;background:none;cursor:pointer;',
+      'font-family:inherit;font-size:.74rem;letter-spacing:.02em;color:#8A7A5F;text-decoration:underline;text-underline-offset:3px}',
+      '.gdw-skip:hover{color:#6F4A31}',
       '.gdw-ok{display:none;text-align:center;padding:1.2rem .2rem .5rem}',
       '.gdw-ok-mark{font-size:1.6rem;color:#526657;margin-bottom:.5rem}',
       '.gdw-ok p{font-size:.86rem;line-height:1.8;color:#526657;margin:0}',
@@ -257,8 +260,8 @@
           '<span class="en">Leave your email, then WhatsApp opens straight away</span>' +
         '</h3>' +
         '<p class="gdw-desc">' +
-          '<span class="zh">藏家会看到是谁在询价，你这次也不用再重复填写。以后回来看藏品，点 WhatsApp 直接就能联系。</span>' +
-          '<span class="en">The collector sees who is asking, and you never fill this in twice. Next time, WhatsApp just opens.</span>' +
+          '<span class="zh">留了邮箱，藏家知道是谁在问，回复会更快，你以后也不用再填。不填也能直接联系，只是藏家看不到你是谁。</span>' +
+          '<span class="en">Leave your email and the collector knows who is asking — faster reply, and you never fill this in again. You can skip it, but then they won\'t know who you are.</span>' +
         '</p>' +
         '<div class="gdw-ctx" id="gdwCtx"></div>' +
         '<div class="gdw-gbtn" id="gdwGoogle"></div>' +
@@ -277,6 +280,10 @@
           '<span class="zh">继续即表示同意<a href="/privacy.html" target="_blank" rel="noopener">《隐私政策》</a>：只记录邮箱、询价的藏品与时间，不公开、不转卖，可随时写信给 contact@gudong.app 删除。</span>' +
           '<span class="en">By continuing you agree to the <a href="/privacy.html" target="_blank" rel="noopener">Privacy Policy</a>: we store only your email, the item and the time. Never published or resold; email contact@gudong.app to remove it.</span>' +
         '</p>' +
+        '<button class="gdw-skip" type="button">' +
+          '<span class="zh">不用了，直接打开 WhatsApp →</span>' +
+          '<span class="en">Skip this — open WhatsApp →</span>' +
+        '</button>' +
         '<div class="gdw-ok">' +
           '<div class="gdw-ok-mark">✓</div>' +
           '<p><span class="zh">已记住你，正在打开 WhatsApp…</span><span class="en">Got it — opening WhatsApp…</span></p>' +
@@ -298,6 +305,17 @@
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape' && ov.classList.contains('on')) close();
     });
+
+    /* 跳过：不留身份也让他直接联系藏家。
+     * 只损失"卖家知道是谁"，点击仍会记一条匿名询价点击（onClick 里已经先埋过）。 */
+    var skipEl = ov.querySelector('.gdw-skip');
+    if (skipEl) {
+      skipEl.addEventListener('click', function () {
+        var href = state.pendingHref;
+        close();
+        openWa(href);
+      });
+    }
 
     form.addEventListener('submit', function (e) {
       e.preventDefault();

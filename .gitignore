@@ -21,3 +21,6 @@ sitemap.xml.static-backup
 
 # 本地渲染核对用临时页
 _chk-*.html
+
+# 藏家私密链接（含签名令牌，切勿提交）
+藏家收件箱链接*.txt

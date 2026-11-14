@@ -70,7 +70,6 @@ function mapItem(rec) {
   const first = (v) => (Array.isArray(v) ? v[0] : v);
   return {
     item_id: f.item_id || rec.id,
-    _createdTime: rec.createdTime,
     title_zh: f.title_zh || '',
     title_en: f.title_en || '',
     era_zh: f.era_zh || '',
@@ -84,13 +83,8 @@ function mapItem(rec) {
     fixed_price: numOrNull(f.fixed_price),
     price_min: numOrNull(f.price_min),
     price_max: numOrNull(f.price_max),
-    // 旧文本字段仅作 Airtable / 旧 CSV 兜底
-    price_display_zh: f.price_display_zh || f.price_zh || '',
-    price_display_en: f.price_display_en || f.price_en || '',
     img_file: Array.isArray(f.img_file) ? f.img_file.join(' ') : (f.img_file || ''),
     seller_id: f.seller_id || '',
-    seller_name_en: f.seller_name_en || '',
-    seller_whatsapp: f.seller_whatsapp || '',
     is_today_finds: !!f.is_today_finds,
     is_new_listing: !!f.is_new_listing,
     // 付费曝光位：Airtable/CSV 里没有这两列时，勾了 is_today_finds 即视为 1 档、长期有效
@@ -102,8 +96,7 @@ function mapItem(rec) {
     reason_en: f.reason_en || '',
     // 供情报(intel)自动生成使用的额外字段
     listed_at: f.listed_at || '',
-    expiry_date: f.expiry_date || '', // 可选显式到期日；缺省由 listed_at/创建时间 +6 个月推导
-    previous_price: f.previous_price != null ? Number(f.previous_price) : NaN,
+    expiry_date: f.expiry_date || '', // 可选显式到期日；缺省由 listed_at +6 个月推导
   };
 }
 

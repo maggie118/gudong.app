@@ -142,6 +142,25 @@ function priceOf(item) {
   return { zh: zh || enquiry.zh, en: en || zh || enquiry.en };
 }
 
+/* 2026-11-14 结构化数据价格：一口价给 Offer，区间价给 AggregateOffer，私聊不给价
+   （区间价无法用单个 price 表达，用 lowPrice/highPrice 才不会被 Google 判为无效） */
+function structuredOffer(item, id) {
+  const type = String(item.price_type || '').trim();
+  if (/私聊|询价|面议|enquir|inquir|message/i.test(type)) return null;
+  const url = `${SITE}/items/${id}`;
+  const fixed = priceNumber(item.fixed_price);
+  if (fixed && (!type || /一口价|fixed/i.test(type))) {
+    return { '@type': 'Offer', price: String(fixed), priceCurrency: 'SGD', availability: 'https://schema.org/InStock', url };
+  }
+  const lo = priceNumber(item.price_min), hi = priceNumber(item.price_max);
+  if (lo && hi && lo !== hi) {
+    return { '@type': 'AggregateOffer', lowPrice: String(lo), highPrice: String(hi), priceCurrency: 'SGD', offerCount: 1, url };
+  }
+  if (lo) return { '@type': 'Offer', price: String(lo), priceCurrency: 'SGD', availability: 'https://schema.org/InStock', url };
+  if (fixed) return { '@type': 'Offer', price: String(fixed), priceCurrency: 'SGD', availability: 'https://schema.org/InStock', url };
+  return null;
+}
+
 function removeFounderBadge(html) {
   const start = html.indexOf('<span class="founder-badge"');
   if (start < 0) return html;
@@ -226,7 +245,7 @@ function build(item, sellers, seats, template) {
     [/<meta property="og:description" content="[^"]*">/, `<meta property="og:description" content="${esc(descZh)}">`],
     [/<meta name="twitter:title" content="[^"]*">/, `<meta name="twitter:title" content="${esc(`${titleZh} | ${titleEn} | Singapore | Gudong.app`)}">`],
     [/<meta name="twitter:description" content="[^"]*">/, `<meta name="twitter:description" content="${esc(descZh)}">`],
-    [/<script type="application\/ld\+json">[\s\S]*?<\/script>/, `<script type="application/ld+json">${JSON.stringify({
+    [/<script type="application\/ld\+json">[\s\S]*?<\/script>/, `<script type="application/ld+json">${JSON.stringify(Object.assign({
       '@context': 'https://schema.org',
       '@type': 'Product',
       name: `${titleZh} / ${titleEn}`,
@@ -234,7 +253,7 @@ function build(item, sellers, seats, template) {
       url: `${SITE}/items/${id}`,
       description: `${titleZh} / ${titleEn}. Seller-provided listing; advisory reference only. Gudong.app does not authenticate the item or handle the transaction.`,
       inLanguage: ['zh-SG', 'en-SG']
-    })}</script>`]
+    }, (() => { const o = structuredOffer(item, id); return o ? { offers: o } : {}; })()))}</script>`]
   ];
   headRules.forEach(([re, rep]) => {
     if (!re.test(html)) { stats.missing.push(re.source.slice(0, 40)); return; }

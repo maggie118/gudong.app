@@ -5,6 +5,10 @@
   "crons": [
     { "path": "/api/trigger-rebuild", "schedule": "0 8 * * *" }
   ],
+  "redirects": [
+    { "source": "/items/_template", "destination": "/404.html", "permanent": true },
+    { "source": "/items/_template.html", "destination": "/404.html", "permanent": true }
+  ],
   "rewrites": [
     { "source": "/sitemap.xml", "destination": "/api/sitemap.xml" },
     { "source": "/items/:id", "destination": "/item?id=:id" }

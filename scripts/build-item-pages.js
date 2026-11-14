@@ -1,7 +1,7 @@
-// 为 data/listings.json 中尚未存在静态页的藏品，按 items/_template.html 模板生成独立静态页
+// 为 data/listings.json 中尚未存在静态页的藏品，按 templates/item-template.html 模板生成独立静态页
 // 用法：node scripts/build-item-pages.js [listings.json 路径] [--force]
 // 只补齐缺失文件，绝不覆盖手工维护的静态页（除非显式传 --force）
-// 模板单独存放（items/_template.html），不再借用某件藏品的页面，避免生成页反噬模板
+// 模板单独存放在 templates/（不在 items/ 下，避免被站点直接访问，也避免生成页反噬模板）
 
 const fs = require('fs');
 const path = require('path');
@@ -9,7 +9,7 @@ const path = require('path');
 const ROOT = path.resolve(__dirname, '..');
 const SRC = process.argv.find((a) => a.endsWith('.json')) || path.join(ROOT, 'data', 'listings.json');
 const FORCE = process.argv.includes('--force');
-const TEMPLATE = path.join(ROOT, 'items', '_template.html');
+const TEMPLATE = path.join(ROOT, 'templates', 'item-template.html');
 const OUT_DIR = path.join(ROOT, 'items');
 const SITE = 'https://www.gudong.app';
 

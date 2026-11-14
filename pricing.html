@@ -782,6 +782,11 @@ footer { background: #FBF8F2; border-top: 1px solid var(--hairline); }
 [data-lang="zh"] .pm-addons-intro .zh, [data-lang="zh"] .pm-group-note .zh, [data-lang="zh"] .pm-bundle .zh, [data-lang="zh"] .pm-range-note .zh, [data-lang="zh"] .pm-group-title .zh { display: block; }
 [data-lang="en"] .pm-addons-intro .en, [data-lang="en"] .pm-group-note .en, [data-lang="en"] .pm-bundle .en, [data-lang="en"] .pm-range-note .en, [data-lang="en"] .pm-group-title .en { display: block; }
 .pm-group { margin-top: .9rem; padding-top: .7rem; border-top: 1px solid rgba(176, 138, 69, .16); }
+/* 专业上架 · 同时开通私家藏馆（勾选项） */
+.pm-gallery-opt { margin: .1rem 0 1rem; padding: .65rem .75rem; background: #FBF7F0; border: 1px solid rgba(176, 138, 69, .28); border-radius: 2px; }
+.pm-gallery-opt:hover { border-color: rgba(176, 138, 69, .52); background: #FDFAF3; }
+.pm-gallery-opt .pm-addon-body { flex: 1; }
+.pm-gallery-opt[hidden] { display: none; }
 .pm-group-title { font-size: .78rem; font-weight: 600; color: #8A6A38; letter-spacing: .03em; margin-bottom: .35rem; }
 .pm-addon-sm { padding: .4rem 0; }
 .pm-addon-sm .pm-addon-title { font-size: .84rem; font-weight: 500; }
@@ -1356,6 +1361,20 @@ body[data-lang="en"] .pm-addon-desc.en, body[data-lang="en"] .pm-addon-title em 
       </div>
     </div>
 
+    <!-- 专业上架可选：同时开通私家藏馆（勾选后合计按藏馆年费计，本件不再重复收 288） -->
+    <label class="pm-addon pm-gallery-opt" id="pmGalleryOpt" for="pmAddGallery">
+      <input type="checkbox" id="pmAddGallery">
+      <span class="pm-addon-body">
+        <span class="pm-addon-title">
+          <span class="zh">同时开通私家藏馆</span>
+          <span class="en">Also open a Private Gallery</span>
+          <em>S$588<span class="zh">/ 年</span><span class="en"> / year</span></em>
+        </span>
+        <span class="pm-addon-desc zh">含 <strong>2 件专业上架名额</strong>，本件计入其中 1 个名额，不重复收费；其余藏品可无限基础展示，另含独立藏馆主页与 QR。勾选后下表合计改为按藏馆年费计算。</span>
+        <span class="pm-addon-desc en">Includes <strong>2 Professional Listing slots</strong>; this item takes one of them, so nothing is charged twice. Unlimited Basic Display for the rest, plus a dedicated gallery page and QR. When ticked, the total below switches to the annual gallery fee.</span>
+      </span>
+    </label>
+
     <!-- 专业上架：另付费增值服务（默认收起，按需展开；资料仍由 Airtable 表单收集） -->
     <div class="pm-addons" id="pmAddons">
       <button type="button" class="pm-addons-toggle" id="pmAddonsToggle" onclick="pmToggleAddons()" aria-expanded="false">
@@ -1716,7 +1735,11 @@ body[data-lang="en"] .pm-addon-desc.en, body[data-lang="en"] .pm-addon-title em 
     if (warn) warn.style.display = isPro ? 'none' : '';
     var galleryOnly = document.getElementById('pmGalleryOnly');
     if (galleryOnly) galleryOnly.hidden = !isGallery;
+    var gOpt = document.getElementById('pmGalleryOpt');
+    if (gOpt) gOpt.hidden = !isPro;
     if (isPro || isGallery) {
+      var gChk = document.getElementById('pmAddGallery');
+      if (gChk) gChk.checked = false;
       ['addonPack', 'addonExpCat', 'addonExpHome7', 'addonExpHome14', 'addonExpTopic',
         'addonCloseup', 'addonPhotoFull', 'addonCataloguePdf', 'addonCatalogueDeluxe', 'addonInterview', 'addonGalleryPdf'].forEach(function (id) {
         var el = document.getElementById(id);
@@ -1765,11 +1788,16 @@ body[data-lang="en"] .pm-addon-desc.en, body[data-lang="en"] .pm-addon-title em 
   }
 
   function pmBasePrice() {
-    return currentServiceType === 'gallery' ? 588 : 288;
+    if (currentServiceType === 'gallery') return 588;
+    /* 专业上架勾选「同时开通私家藏馆」：改按年费计，本件占藏馆 2 个专业上架名额中的 1 个，不再叠加 288 */
+    if (currentServiceType === 'professional' && pmChecked('pmAddGallery')) return 588;
+    return 288;
   }
 
   function pmBaseLabel() {
-    return currentServiceType === 'gallery' ? '私家藏馆 S$588/年' : '专业上架 S$288';
+    if (currentServiceType === 'gallery') return '私家藏馆 S$588/年';
+    if (pmChecked('pmAddGallery')) return '私家藏馆 S$588/年（含 2 件专业上架，本件占其中 1 个名额，专业上架费不另计）';
+    return '专业上架 S$288';
   }
 
   function pmAddonSelection() {
@@ -1846,7 +1874,7 @@ body[data-lang="en"] .pm-addon-desc.en, body[data-lang="en"] .pm-addon-title em 
 
   (function bindAddons() {
     var ids = ['addonPack', 'addonExpCat', 'addonExpHome7', 'addonExpHome14', 'addonExpTopic',
-      'addonCloseup', 'addonPhotoFull', 'addonCataloguePdf', 'addonCatalogueDeluxe', 'addonInterview', 'addonGalleryPdf', 'addonGalleryPdfQty'];
+      'addonCloseup', 'addonPhotoFull', 'addonCataloguePdf', 'addonCatalogueDeluxe', 'addonInterview', 'addonGalleryPdf', 'addonGalleryPdfQty', 'pmAddGallery'];
     ids.forEach(function (id) {
       var el = document.getElementById(id);
       if (el) el.addEventListener('change', pmRecalc);

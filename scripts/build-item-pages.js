@@ -1,6 +1,7 @@
-// 为 data/listings.json 中尚未存在静态页的藏品，按 items/item-ngcy-05.html 模板生成独立静态页
+// 为 data/listings.json 中尚未存在静态页的藏品，按 items/_template.html 模板生成独立静态页
 // 用法：node scripts/build-item-pages.js [listings.json 路径] [--force]
 // 只补齐缺失文件，绝不覆盖手工维护的静态页（除非显式传 --force）
+// 模板单独存放（items/_template.html），不再借用某件藏品的页面，避免生成页反噬模板
 
 const fs = require('fs');
 const path = require('path');
@@ -8,7 +9,7 @@ const path = require('path');
 const ROOT = path.resolve(__dirname, '..');
 const SRC = process.argv.find((a) => a.endsWith('.json')) || path.join(ROOT, 'data', 'listings.json');
 const FORCE = process.argv.includes('--force');
-const TEMPLATE = path.join(ROOT, 'items', 'item-ngcy-05.html');
+const TEMPLATE = path.join(ROOT, 'items', '_template.html');
 const OUT_DIR = path.join(ROOT, 'items');
 const SITE = 'https://www.gudong.app';
 
@@ -232,8 +233,12 @@ function build(item, sellers, seats, template) {
     stats.replaced += 1;
   };
 
-  // 1) id 与图片（先替换具体图名，避免 id 替换后残留）
-  html = html.split('ng-cy/item-ngcy-05.jpg').join(mainImg);
+  // 1) 图片占位符 & id（模板里主图写成 {{MAIN_IMAGE}} / {{MAIN_IMAGE_ABS}}，
+  //    不再靠猜某个藏品的文件名，换模板也不会静默丢图）
+  const needImage = html.includes('{{MAIN_IMAGE}}') || html.includes('{{MAIN_IMAGE_ABS}}');
+  if (!needImage) stats.missing.push('{{MAIN_IMAGE}}');
+  html = html.split('{{MAIN_IMAGE_ABS}}').join(mainUrl);
+  html = html.split('{{MAIN_IMAGE}}').join(mainImg);
   swap('item-ngcy-05', id);
 
   // 2) 先用正则整段替换 head 里的 title / description / og / twitter / JSON-LD，

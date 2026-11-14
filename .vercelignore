@@ -11,7 +11,8 @@ live-homepage-verify.png
 index.html.bak
 
 # 构建源文件（产物 insights/*.html 等已生成并提交）
-templates/
+# 注意：templates/ 不能排除 —— Vercel build 要读 templates/item-template.html 生成藏品页，
+# 排除会导致构建失败、线上停留在旧部署。公开访问由 vercel.json 的 redirects 挡到 404。
 content/
 build-insights.js
 generate.js

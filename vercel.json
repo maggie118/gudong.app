@@ -7,7 +7,8 @@
   ],
   "redirects": [
     { "source": "/items/_template", "destination": "/404.html", "permanent": true },
-    { "source": "/items/_template.html", "destination": "/404.html", "permanent": true }
+    { "source": "/items/_template.html", "destination": "/404.html", "permanent": true },
+    { "source": "/templates/(.*)", "destination": "/404.html", "permanent": true }
   ],
   "rewrites": [
     { "source": "/sitemap.xml", "destination": "/api/sitemap.xml" },

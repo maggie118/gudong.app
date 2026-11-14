@@ -5,11 +5,13 @@
   "crons": [
     { "path": "/api/trigger-rebuild", "schedule": "0 8 * * *" }
   ],
+  "redirects": [
+    { "source": "/templates/(.*)", "destination": "/_not_found", "permanent": true }
+  ],
   "rewrites": [
     { "source": "/sitemap.xml", "destination": "/api/sitemap.xml" },
     { "source": "/items/_template", "destination": "/_not_found" },
     { "source": "/items/_template.html", "destination": "/_not_found" },
-    { "source": "/templates/(.*)", "destination": "/_not_found" },
     { "source": "/items/:id", "destination": "/item?id=:id" }
   ],
   "headers": [

@@ -713,7 +713,7 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
                                 <circle cx="12" cy="6" r="1.4" fill="currentColor" />
                                 <circle cx="21" cy="8" r="1.4" fill="currentColor" />
                             </svg>
-                            <span class="badge-num" id="sellerFoundingNo">18</span>
+                            <span class="badge-num" id="sellerFoundingNo"></span>
                         </span>
                     </div>
                     <div class="seller-card-id">Seller ID: <span id="sellerId"></span></div>
@@ -1361,10 +1361,20 @@ function setSellerCard(f, data) {
                 var en = clean(first(sl.display_en) || first(sl.display_zh));
                 if (zh) setText('#sellerNameZh', zh, 'seller.zh');
                 if (en) setText('#sellerNameEn', en, 'seller.en');
-                // 创始藏家编号：按卖家 founding_no 注入徽章（未分配则保留默认 18）
+                // 创始藏家编号：按卖家 founding_no 注入徽章（补齐三位，如 1 → 001；未分配则隐藏整块徽章）
                 var fNo = clean(first(sl.founding_no));
                 var fNoEl = document.getElementById('sellerFoundingNo');
-                if (fNoEl && fNo) fNoEl.textContent = fNo;
+                var fBadgeEl = fNoEl ? fNoEl.closest('.founder-badge') : null;
+                if (fNoEl) {
+                    var fDigits = fNo.replace(/[^0-9]/g, '');
+                    var fSeat = fDigits ? ('000' + fDigits).slice(-3) : fNo;
+                    if (fSeat) {
+                        fNoEl.textContent = fSeat;
+                        if (fBadgeEl) fBadgeEl.style.display = '';
+                    } else if (fBadgeEl) {
+                        fBadgeEl.style.display = 'none';
+                    }
+                }
                 var link = document.getElementById('sellerLink');
                 if (link) {
                     var fallback = 'collection.html';

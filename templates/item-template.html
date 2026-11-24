@@ -1180,6 +1180,20 @@ function setSellerCard(f, data) {
                 if (en) setText('#sellerNameEn', en, 'seller.en');
                 var link = document.getElementById('sellerLink');
                 if (link && sl.page_url) link.href = sl.page_url;
+                // 创始藏家编号：表里有值就显示在藏家名旁（补齐三位，如 1 → 001），没值就把徽章整块隐掉
+                var fbadge = document.querySelector('.seller-card .founder-badge');
+                if (fbadge) {
+                    var fno = clean(first(sl.founding_no));
+                    var digits = fno.replace(/[^0-9]/g, '');
+                    var seat = digits ? ('000' + digits).slice(-3) : fno;
+                    var fnum = fbadge.querySelector('.badge-num');
+                    if (seat) {
+                        if (fnum) fnum.textContent = seat;
+                        fbadge.style.display = '';
+                    } else {
+                        fbadge.style.display = 'none';
+                    }
+                }
                 // gallery 未打勾 = 未开通私家藏馆：藏馆入口隐藏，不误导买家
                 var galleryOpen = sl.gallery === true || sl.gallery === 'true' || sl.gallery === 1;
                 if (!galleryOpen) {

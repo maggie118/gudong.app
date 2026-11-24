@@ -2990,9 +2990,17 @@
             const seller = (window.__SELLER_META || {})[normId(f.seller_id)] || {};
             const sellerZh = seller.display_zh || '';
             const sellerEn = seller.display_en || '';
+            // 创始藏家编号：卖家表填了号就跟着卖家名一起显示（001 这类三位号）
+            const founderNo = (() => {
+                const raw = String(seller.founding_no == null ? '' : seller.founding_no).trim();
+                if (!raw) return '';
+                const digits = raw.replace(/[^0-9]/g, '');
+                return digits ? digits.padStart(3, '0') : raw;
+            })();
+            const chip = founderNo ? `<span class="founding-chip" title="创始藏家 Founding Collector">${esc(founderNo)}</span>` : '';
             const sellerHtml = (sellerZh || sellerEn) ? `
-                <div class="finds-seller zh">${esc(sellerZh || sellerEn)}</div>
-                <div class="finds-seller en">${esc(sellerEn || sellerZh)}</div>` : '';
+                <div class="finds-seller zh"><span>${esc(sellerZh || sellerEn)}</span>${chip}</div>
+                <div class="finds-seller en"><span>${esc(sellerEn || sellerZh)}</span>${chip}</div>` : '';
             const reason = reasonFor(f);
             const reasonHtml = reason ? `
                 <div class="finds-reason zh">${esc(reason.zh)}</div>
@@ -3197,7 +3205,7 @@
             window.__SELLER_META = {};
             (data.sellers || []).forEach((s) => {
                 const k = normId(s.seller_id);
-                if (k) window.__SELLER_META[k] = { display_zh: s.display_zh, display_en: s.display_en, gallery: !!s.gallery };
+                if (k) window.__SELLER_META[k] = { display_zh: s.display_zh, display_en: s.display_en, gallery: !!s.gallery, founding_no: s.founding_no };
             });
 
             // 付费曝光位：只取 todayFinds（数据层已按付费与有效期过滤）
@@ -3726,6 +3734,22 @@
         letter-spacing: .04em;
         color: var(--color-primary, #7a4b2a);
         opacity: .8;
+        display: inline-flex;
+        align-items: center;
+        gap: .35rem;
+    }
+    .finds-seller .founding-chip {
+        display: inline-flex;
+        align-items: center;
+        background: linear-gradient(135deg, #B08A45 0%, #D4AF6A 50%, #B08A45 100%);
+        color: #FFFFFF;
+        font-size: .62rem;
+        font-weight: 800;
+        letter-spacing: .06em;
+        padding: .1rem .4rem;
+        border-radius: 999px;
+        box-shadow: 0 1px 2px rgba(0,0,0,.18), inset 0 1px 0 rgba(255,255,255,.3);
+        opacity: .95;
     }
     #today-finds .finds-image {
         background: #FFFFFF;

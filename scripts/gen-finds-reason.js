@@ -96,10 +96,11 @@ const LOOK_ZH = {
     '瓷器看釉面有无桔皮与缩釉点，老釉的温润感仿不出来',
   ],
   coin: [
-    '银币看点集中在字口、齿边与重量，三者对得上才谈品相',
+    '银币看字口、齿边与重量三者是否互相对得上',
     '钱币先看字口深浅与齿边规整，再看包浆是否贴骨',
     '钱币看地章是否平整、字口是否锋利，边齿的规律性最关键',
     '钱币看包浆层次是否自然，擦痕与流通痕要分得清',
+    '银币看龙鳞与文字的压印深浅，边齿的均匀度最易被忽略',
   ],
   jade: [
     '玉器看玉质细度与绺裂，自然光下最清楚；工艺看收刀是否利落',
@@ -177,18 +178,28 @@ function sealEn(title) {
 
 function fmt(n) { return Number(n).toLocaleString('en-SG', { maximumFractionDigits: 0 }); }
 
-function build(f) {
+// 同材质挑一句尚未用过的，避免一页看到三张卡片都写同一句话；用完一轮再从头轮换
+function pickFresh(arr, seed, used) {
+  const start = seed % arr.length;
+  for (let k = 0; k < arr.length; k++) {
+    const cand = arr[(start + k) % arr.length];
+    if (!used.has(cand)) { used.add(cand); return cand; }
+  }
+  return arr[start];
+}
+
+function build(f, usedZh, usedEn) {
   const seed = seedOf(String(f.item_id || f.title_zh || '').replace(/[^a-zA-Z0-9-]/g, '') || 'x');
   const cat = catOf(f.category);
   const mat = materialZh(cat, f.title_zh); // 中英都用中文标题判材质，英文标题常缺工艺词
 
   // 只写一句话，只讲这件东西该看什么（工艺/釉色/字口等），
   // 不写品相套话、不写价格（卖家已在规格区标明，私语里重复只会显得敷衍）。
-  const zhBody = pick(LOOK_ZH[mat] || LOOK_ZH.misc, seed);
+  const zhBody = pickFresh(LOOK_ZH[mat] || LOOK_ZH.misc, seed, usedZh);
   const seal = sealZh(f.title_zh);
   const zh = zhBody + (seal ? `，${seal}` : '') + '。';
 
-  const enBody = pick(LOOK_EN[mat] || LOOK_EN.misc, seed);
+  const enBody = pickFresh(LOOK_EN[mat] || LOOK_EN.misc, seed, usedEn);
   const sealE = sealEn(f.title_zh);
   const en = enBody + (sealE ? `; ${sealE}` : '') + '.';
 
@@ -207,6 +218,7 @@ function main() {
     if (Array.isArray(db[key])) all.push(...db[key]);
   }
   const cache = new Map();
+  const usedZh = new Set(), usedEn = new Set();
   let filled = 0, kept = 0;
   for (const f of all) {
     const hasZh = String(f.reason_zh || '').trim();
@@ -214,7 +226,7 @@ function main() {
     if (hasZh && hasEn) { kept++; continue; }
     const id = String(f.item_id || '');
     let r = cache.get(id);
-    if (!r) { r = build(f); cache.set(id, r); }
+    if (!r) { r = build(f, usedZh, usedEn); cache.set(id, r); }
     if (!hasZh) f.reason_zh = r.zh;
     if (!hasEn) f.reason_en = r.en;
     filled++;

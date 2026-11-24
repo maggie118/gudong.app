@@ -277,12 +277,14 @@ function build(item, sellers, seats, template) {
   swap('data-spec="era_en">Ming<', `data-spec="era_en">${esc(eraEn)}<`);
   swap('data-spec="category">玉器<', `data-spec="category">${esc(catZh)}<`);
   swap('data-spec="category_en">Jade<', `data-spec="category_en">${esc(catEn)}<`);
-  swap('data-spec="dimensions">重量：7.8kg · 高度：28cm<', `data-spec="dimensions">${esc(dims)}<`);
-  swap('data-spec="dimensions_en">Weight 7.8kg · Height 28cm<', `data-spec="dimensions_en">${esc(dims)}<`);
-  // 规格行标签：只填了重量、没有长宽高时，标签改成「重量 / Weight」，避免「尺寸」下面写着重量
+  // 规格行标签：只填了重量、没有长宽高时，标签改成「重量 / Weight」，值里不再重复「重量：」
   const dimHasSize = /(高度|高|口径|底径|直径|长度|长|宽度|宽|深度|深)\s*[:：]/.test(dims) ||
     /(^|[\s·])(H|D|W|L)\s*[:：]/i.test(dims);
-  if (/重量|Weight/i.test(dims) && !dimHasSize) {
+  const dimOnlyWeight = /重量|Weight/i.test(dims) && !dimHasSize;
+  const dimText = dimOnlyWeight ? dims.replace(/^\s*重量\s*[:：]?\s*/, '').trim() : dims;
+  swap('data-spec="dimensions">重量：7.8kg · 高度：28cm<', `data-spec="dimensions">${esc(dimText)}<`);
+  swap('data-spec="dimensions_en">Weight 7.8kg · Height 28cm<', `data-spec="dimensions_en">${esc(dimText)}<`);
+  if (dimOnlyWeight) {
     swap('<span class="spec-label zh">尺寸</span><span class="spec-label en">Dimensions</span>',
       '<span class="spec-label zh">重量</span><span class="spec-label en">Weight</span>');
   }

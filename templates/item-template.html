@@ -977,8 +977,19 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
             while ((m = re.exec(s))) out.push([DIM_ZH[m[1]], m[2].replace(/\s*[X×x]\s*/g, ' × ').replace(/\s+/g, ' ').trim()]);
             return { pairs: out, raw: s };
         }
-        function dimZh(s) { var d = dimPairs(s); return d.pairs.length ? d.pairs.map(function (p) { return p[0] + '：' + p[1]; }).join(' · ') : d.raw; }
-        function dimEn(s) { var d = dimPairs(s); return d.pairs.length ? d.pairs.map(function (p) { return DIM_EN[p[0]] + ' ' + p[1]; }).join(' · ') : d.raw; }
+        function dimZh(s) {
+            var d = dimPairs(s);
+            if (!d.pairs.length) return d.raw;
+            // 只填了重量：标签已经是「重量」，值里就不再重复写「重量：」
+            if (d.pairs.every(function (p) { return p[0] === '重量'; })) return d.pairs.map(function (p) { return p[1]; }).join(' · ');
+            return d.pairs.map(function (p) { return p[0] + '：' + p[1]; }).join(' · ');
+        }
+        function dimEn(s) {
+            var d = dimPairs(s);
+            if (!d.pairs.length) return d.raw;
+            if (d.pairs.every(function (p) { return p[0] === '重量'; })) return d.pairs.map(function (p) { return p[1]; }).join(' · ');
+            return d.pairs.map(function (p) { return DIM_EN[p[0]] + ' ' + p[1]; }).join(' · ');
+        }
         var changes = [];
         function $(s) { return document.querySelector(s); }
         function setText(sel, v, label) {

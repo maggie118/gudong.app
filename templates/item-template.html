@@ -1083,6 +1083,20 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
             if (damage)         return { zh: '表面有破损', en: 'Surface damage' };
             return { zh: '完整', en: 'Intact' };
         }
+        // 尺寸行标签：只填了重量、没有长宽高时，标签改为「重量 / Weight」，避免「尺寸」下面写着重量
+        function setDimLabel(s) {
+            var val = document.querySelector('[data-spec="dimensions"]');
+            var box = val ? val.parentNode : null;
+            if (!box) return;
+            var txt = clean(first(s));
+            var hasSize = /(高度|高|口径|底径|直径|长度|长|宽度|宽|深度|深)\s*[:：]/.test(txt) ||
+                /(^|[\s·])(H|D|W|L)\s*[:：]/i.test(txt);
+            if (hasSize || !/重量|Weight/i.test(txt)) return;
+            var zhEl = box.querySelector('.spec-label.zh');
+            var enEl = box.querySelector('.spec-label.en');
+            if (zhEl && zhEl.textContent.trim() !== '重量') zhEl.textContent = '重量';
+            if (enEl && enEl.textContent.trim() !== 'Weight') enEl.textContent = 'Weight';
+        }
         function setSpec(f) {
             var cond = computeCondition(f);
             var map = {
@@ -1096,6 +1110,7 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
                 var el = document.querySelector('[data-spec="' + key + '"]');
                 if (el && el.textContent.trim() !== v) { el.textContent = v; changes.push('spec.' + key + ' → ' + v.slice(0, 20)); }
             });
+            setDimLabel(f.dimensions);
         }
                 /* gd-wa-username-2026-10-18 · gd-wa-bind-v3 —— 卖家 WhatsApp 动态绑定：优先用户名，未填用户名则回退手机号；点击附带 gudong.app 藏品咨询话术 */
         function setWaContact(sl, item) {

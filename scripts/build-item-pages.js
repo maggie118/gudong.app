@@ -279,6 +279,13 @@ function build(item, sellers, seats, template) {
   swap('data-spec="category_en">Jade<', `data-spec="category_en">${esc(catEn)}<`);
   swap('data-spec="dimensions">重量：7.8kg · 高度：28cm<', `data-spec="dimensions">${esc(dims)}<`);
   swap('data-spec="dimensions_en">Weight 7.8kg · Height 28cm<', `data-spec="dimensions_en">${esc(dims)}<`);
+  // 规格行标签：只填了重量、没有长宽高时，标签改成「重量 / Weight」，避免「尺寸」下面写着重量
+  const dimHasSize = /(高度|高|口径|底径|直径|长度|长|宽度|宽|深度|深)\s*[:：]/.test(dims) ||
+    /(^|[\s·])(H|D|W|L)\s*[:：]/i.test(dims);
+  if (/重量|Weight/i.test(dims) && !dimHasSize) {
+    swap('<span class="spec-label zh">尺寸</span><span class="spec-label en">Dimensions</span>',
+      '<span class="spec-label zh">重量</span><span class="spec-label en">Weight</span>');
+  }
   swap('data-spec="condition_zh">完整 · 表面有轻微磨损<', `data-spec="condition_zh">${esc(cond.zh)}<`);
   swap('data-spec="condition_en">Intact · minor surface wear<', `data-spec="condition_en">${esc(cond.en)}<`);
 

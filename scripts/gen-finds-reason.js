@@ -61,46 +61,64 @@ const LOOK_ZH = {
     '青花看发色是否沉、笔意是否连贯，釉面别浮亮',
     '青花先看钴料发色，再看笔触有没有停顿与交代',
     '青花的层次靠分水，深浅过渡顺不顺一眼能看出',
+    '青花看青白交界是否干净，留白处的釉最见功底',
+    '青花纹饰看构图疏密，主次交代清楚才耐看',
   ],
   blueRed: [
     '青花釉里红难点在两种温度，红发得稳不稳是重点',
     '釉里红看红色是否沉得住，青花与红的呼应是否自然',
+    '青花釉里红看红彩有无泛紫发黑，这是火候的直接证据',
   ],
   familleRose: [
     '粉彩看彩料堆叠与过渡，彩面应有柔和的蛤蜊光',
     '粉彩先看彩料厚薄，再看花瓣枝叶的晕染是否自然',
+    '粉彩看雪白底的净度与彩料的粉质感，轧道工艺另说',
   ],
   polychrome: [
     '彩瓷看色料的层次与衔接，边线是否利落',
     '五彩斗彩看填彩是否压线，色与线交代得清不清',
+    '彩瓷看釉上彩有无磨损脱彩，最容易在口沿与折角处先掉',
   ],
-  ironRed: ['矾红看红色是否沉实，细笔处有没有发灰'],
+  ironRed: ['矾红看红色是否沉实，细笔处有没有发灰', '矾红看红彩薄厚是否均匀，过薄处容易见底'],
   flambe: [
     '窑变看釉色流动是否自然，红蓝交界处最见功夫',
     '红釉看口沿是否自然脱釉、釉面光泽是否内敛',
+    '窑变看铜红发色是否沉稳，流纹是否顺器型而下',
   ],
   blue: ['霁蓝看釉色是否匀净，口沿与积釉处最易露破绽'],
-  celadon: ['青釉看釉质肥厚度与开片，光泽宜温润不刺眼'],
+  celadon: ['青釉看釉质肥厚度与开片，光泽宜温润不刺眼', '青釉看开片是否自然、釉层是否通透', '哥釉看开片的疏密与深浅，铁线金丝要交代得清', '青釉看积釉处是否泛水光，釉薄处露出胎色才自然'],
   ground: ['色地看地色是否均匀，彩绘处与地色的交界最考工艺'],
   sancai: ['三彩看釉面流动与开片，釉与胎的结合处要自然'],
   porcelain: [
     '瓷器看胎釉、纹饰与圈足修整，三处能互相印证',
     '瓷器先看釉面与圈足，再看纹饰的画工与布局',
+    '瓷器看器型线条是否挺拔，肩腹转折处最见修坯功夫',
+    '瓷器看釉面有无桔皮与缩釉点，老釉的温润感仿不出来',
   ],
   coin: [
     '银币看点集中在字口、齿边与重量，三者对得上才谈品相',
     '钱币先看字口深浅与齿边规整，再看包浆是否贴骨',
+    '钱币看地章是否平整、字口是否锋利，边齿的规律性最关键',
+    '钱币看包浆层次是否自然，擦痕与流通痕要分得清',
   ],
   jade: [
     '玉器看玉质细度与绺裂，自然光下最清楚；工艺看收刀是否利落',
     '玉器先看玉质与沁色，再看打磨抛光是否一致',
+    '玉器看阴线是否一刀到底，转弯处的接刀最能看出工手',
   ],
   bronze: [
     '铜器看皮壳、铸痕与重量，三者对照；敲击声宜沉稳不尖',
     '铜器先看皮壳层次，再看范线与垫片痕迹是否自然',
+    '铜器看铭文与纹饰的铸造痕迹，范缝位置最能说明做法',
   ],
-  painting: ['书画看纸绢、墨色与款识递藏，三处对照再谈时代'],
-  misc: ['杂项看材质与工艺细节，图上看不出的一定要上手'],
+  painting: [
+    '书画看纸绢、墨色与款识递藏，三处对照再谈时代',
+    '书画看用笔的起收与墨色层次，装裱与纸绢年份也要对上',
+  ],
+  misc: [
+    '杂项看材质与工艺细节，图上看不出的一定要上手',
+    '杂项看做工的收口与打磨，细节处理得干不干净最能说明水准',
+  ],
 };
 
 const LOOK_EN = {
@@ -157,45 +175,6 @@ function sealEn(title) {
   return hit ? `marked “${hit[1]}”` : '';
 }
 
-function condZh(f, seed) {
-  const wear = f.has_surface_wear === true;
-  const dmg = f.has_surface_damage === true;
-  if (wear && dmg) return '卖家如实标注表面有磨损及破损，按品相议价更合适';
-  if (wear) return pick(['卖家标注表面轻微磨损', '品相按卖家标注：表面有轻微磨损', '表面轻微磨损已由卖家标注'], seed);
-  if (dmg) return pick(['卖家标注表面有破损', '品相按卖家标注：表面有破损'], seed);
-  return pick(['卖家标注品相完整', '品相按卖家标注为完整', '卖家自述品相完整'], seed);
-}
-function condEn(f, seed) {
-  const wear = f.has_surface_wear === true;
-  const dmg = f.has_surface_damage === true;
-  if (wear && dmg) return 'seller notes surface wear and damage — price accordingly';
-  if (wear) return 'seller notes minor surface wear';
-  if (dmg) return 'seller notes surface damage';
-  return 'seller notes it as intact';
-}
-
-function priceZh(f, seed) {
-  const type = String(f.price_type || '').trim();
-  if (/私聊|询价|面议|enquir|inquir|message/i.test(type)) return pick(['价格私聊', '价格私聊，欢迎直接问'], seed);
-  const fixed = Number(f.fixed_price);
-  if (isFinite(fixed) && fixed > 0) {
-    return pick([`一口价 S$${fmt(fixed)}，可与同类横向比`, `标价 S$${fmt(fixed)}，可对比同类再谈`], seed);
-  }
-  const lo = Number(f.price_min), hi = Number(f.price_max);
-  if (isFinite(lo) && lo > 0 && isFinite(hi) && hi > 0) return `报价区间 S$${fmt(lo)}–${fmt(hi)}`;
-  if (isFinite(lo) && lo > 0) return `S$${fmt(lo)} 起`;
-  return '';
-}
-function priceEn(f, seed) {
-  const type = String(f.price_type || '').trim();
-  if (/私聊|询价|面议|enquir|inquir|message/i.test(type)) return 'price on enquiry';
-  const fixed = Number(f.fixed_price);
-  if (isFinite(fixed) && fixed > 0) return `fixed at S$${fmt(fixed)} — worth comparing with peers`;
-  const lo = Number(f.price_min), hi = Number(f.price_max);
-  if (isFinite(lo) && lo > 0 && isFinite(hi) && hi > 0) return `range S$${fmt(lo)}–${fmt(hi)}`;
-  if (isFinite(lo) && lo > 0) return `from S$${fmt(lo)}`;
-  return '';
-}
 function fmt(n) { return Number(n).toLocaleString('en-SG', { maximumFractionDigits: 0 }); }
 
 function build(f) {
@@ -203,17 +182,15 @@ function build(f) {
   const cat = catOf(f.category);
   const mat = materialZh(cat, f.title_zh); // 中英都用中文标题判材质，英文标题常缺工艺词
 
-  const zh = [pick(LOOK_ZH[mat] || LOOK_ZH.misc, seed)]
-    .concat(sealZh(f.title_zh) ? [sealZh(f.title_zh)] : [])
-    .concat([condZh(f, seed)])
-    .concat(priceZh(f, seed) ? [priceZh(f, seed)] : [])
-    .join('；') + '。';
+  // 只写一句话，只讲这件东西该看什么（工艺/釉色/字口等），
+  // 不写品相套话、不写价格（卖家已在规格区标明，私语里重复只会显得敷衍）。
+  const zhBody = pick(LOOK_ZH[mat] || LOOK_ZH.misc, seed);
+  const seal = sealZh(f.title_zh);
+  const zh = zhBody + (seal ? `，${seal}` : '') + '。';
 
-  const en = [pick(LOOK_EN[mat] || LOOK_EN.misc, seed)]
-    .concat(sealEn(f.title_zh) ? [sealEn(f.title_zh)] : [])
-    .concat([condEn(f, seed)])
-    .concat(priceEn(f, seed) ? [priceEn(f, seed)] : [])
-    .join('; ') + '.';
+  const enBody = pick(LOOK_EN[mat] || LOOK_EN.misc, seed);
+  const sealE = sealEn(f.title_zh);
+  const en = enBody + (sealE ? `; ${sealE}` : '') + '.';
 
   return { zh, en };
 }

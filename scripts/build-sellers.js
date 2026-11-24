@@ -65,8 +65,16 @@ function replaceCRLF(h, oldStr, newStr) {
   return h.replace(new RegExp(pat, 'g'), newStr);
 }
 
-/* ---------- 藏馆展示期（与 refresh-listings.js 一致） ---------- */
-const GALLERY_DISPLAY_MONTHS = 12;
+// 创始藏家编号统一三位数：表里写 1 / 2 / 5 也显示 001 / 002 / 005
+function padFoundingNo(v) {
+  const raw = String(v == null ? '' : v).trim();
+  if (!raw) return '';
+  const numeric = raw.replace(/[^0-9]/g, '');
+  if (!numeric) return raw;
+  return numeric.padStart(3, '0');
+}
+
+/* ---------- 藏馆展示期（与 refresh-listings.js 一致） ---------- */const GALLERY_DISPLAY_MONTHS = 12;
 function addMonths(d, n) {
   const x = new Date(d);
   x.setMonth(x.getMonth() + n);
@@ -161,7 +169,7 @@ function buildPage(seller, seedHtml) {
   h = replaceAll(h, SEED.CONST_IMG, `const SELLER_IMG_DIR = '${v.slug}';`);
 
   // 创始藏家编号：按卖家数据注入（未分配则整段移除，避免所有卖家都显示占位号）
-  const foundingNo = String(seller.founding_no == null ? '' : seller.founding_no).trim();
+  const foundingNo = padFoundingNo(seller.founding_no);
   if (foundingNo) {
     h = replaceCRLF(h, SEED.FOUNDER_BADGE, `                    <!-- 创始藏家编号：${escHtml(foundingNo)} -->\r\n                    <span class="badge-num">${escHtml(foundingNo)}</span>`);
     h = replaceCRLF(h, SEED.FOUNDER_META, `                <span><span class="zh">创始藏家编号</span><span class="en">Founding No.</span>：<b id="founderNo">${escHtml(foundingNo)}</b></span>`);
@@ -250,7 +258,7 @@ function buildIndex(seedIndex, enabled, items) {
       const sid = String(f.seller_id || '').replace(/[^A-Za-z0-9-]/g, '-');
       return slugify(sid) === v.slug || sid === s.seller_id;
     }).length;
-    const foundingNo = String(s.founding_no == null ? '' : s.founding_no).trim();
+    const foundingNo = padFoundingNo(s.founding_no);
     const founderBadge = foundingNo ? `                        <span class="badge-num">${escHtml(foundingNo)}</span>` : '';
     return `            <a href="${v.canon}" class="gallery-card" data-seller-id="${escHtml(s.seller_id)}">
                 <div class="gallery-badge zh">新入驻</div><div class="gallery-badge en">New</div>

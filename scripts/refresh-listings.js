@@ -155,6 +155,14 @@ function pickWa(f) {
 function slugify(id) {
   return String(id == null ? '' : id).trim().toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
 }
+// 创始藏家编号统一三位数：表里写 1 / 2 / 5 也输出 001 / 002 / 005
+function padFoundingNo(v) {
+  const raw = String(v == null ? '' : v).trim();
+  if (!raw) return '';
+  const numeric = raw.replace(/[^0-9]/g, '');
+  if (!numeric) return raw;
+  return numeric.padStart(3, '0');
+}
 function mapSeller(rec) {
   const f = rec.fields || {};
   const id = f.seller_id || rec.id;
@@ -173,7 +181,7 @@ function mapSeller(rec) {
     // 「今日发现」续费到期日（含当天）：开馆免费 7 天之外的付费曝光，续 7 天就把它改成新的结束日。
     // 留空 = 只享受开馆免费 7 天窗口；到期后自动退出，不需要手动取消勾选。
     finds_bonus_until: f.finds_bonus_until || '',
-    founding_no: pickStr(f, FOUNDING_NO_KEYS),      // 创始藏家编号（如 001；未分配则空）
+    founding_no: padFoundingNo(pickStr(f, FOUNDING_NO_KEYS)),      // 创始藏家编号（统一三位，如 001；未分配则空）
     page_url: f.page_url || `/sellers/seller-${slugify(id)}-antiques.html`,
   }, wa);
 }

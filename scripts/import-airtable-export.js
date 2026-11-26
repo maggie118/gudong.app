@@ -170,7 +170,7 @@ const sellerRows = sellersCsvPath ? sheets.toRecords(fs.readFileSync(sellersCsvP
     gallery_started_at: toIso(f.gallery_started_at) || '',
     gallery_expires_at: toIso(f.gallery_expires_at) || '',
     founding_no: String(f.founding_no == null ? '' : f.founding_no).trim(),
-    page_url: `/sellers/seller-${slug}-antiques.html`,
+    page_url: `/sellers/seller-${slug}-antiques`,
     wa_username: f.wa_username || '',
     wa_phone: (f['WhatsApp 联络号码 / WhatsApp Contact Number'] || f.wa_phone || '').replace(/[^0-9]/g, ''),
     status: (f.status || 'active').toLowerCase(),

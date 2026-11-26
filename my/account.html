@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>我的帐户 · My Account | Gudong</title>
 <meta name="description" content="我的帐户：你的收藏、关注的藏家与品类、以及本机询价记录。 My account on gudong.app — saved items, followed collectors and categories, local enquiry history.">
-<link rel="canonical" href="https://gudong.app/my/account.html">
+<link rel="canonical" href="https://gudong.app/my/account">
 <link rel="icon" type="image/png" sizes="16x16" href="https://gudong.app/assets/icons/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://gudong.app/assets/icons/favicon-32x32.png">
 <link rel="manifest" href="../manifest.json">
@@ -150,7 +150,7 @@
 <header>
   <div class="left">
     <button class="menu-toggle" onclick="openSidebar()" aria-label="menu">☰</button>
-    <a href="../index.html" class="brand">
+    <a href="../" class="brand">
       <img src="../assets/icons/logo-mark.png" alt="古董圈 Gudong" onerror="this.style.display='none'">
       <span class="brand-txt">
         <span class="brand-line1">古董圈 <span class="en">Gudong</span></span>
@@ -169,23 +169,23 @@
     <span class="logo-tagline">Collectors' Network</span>
   </div>
   <nav class="sidebar-nav">
-    <a href="../index.html" class="sidebar-link"><span class="zh">首页</span><span class="en">Home</span></a>
-    <a href="../index.html#today-finds" class="sidebar-link"><span class="zh">今日发现</span><span class="en">Today's Finds</span></a>
-    <a href="../collection.html" class="sidebar-link"><span class="zh">藏品库</span><span class="en">Collection</span></a>
-    <a href="../categories/porcelain.html" class="sidebar-sub"><span class="zh">· 瓷器</span><span class="en">· Porcelain</span></a>
-    <a href="../categories/jade.html" class="sidebar-sub"><span class="zh">· 玉器</span><span class="en">· Jade</span></a>
-    <a href="../categories/bronze.html" class="sidebar-sub"><span class="zh">· 铜器</span><span class="en">· Bronzes</span></a>
-    <a href="../categories/coins.html" class="sidebar-sub"><span class="zh">· 钱币</span><span class="en">· Coins</span></a>
-    <a href="../categories/paintings.html" class="sidebar-sub"><span class="zh">· 书画</span><span class="en">· Paintings &amp; Calligraphy</span></a>
-    <a href="../categories/misc.html" class="sidebar-sub"><span class="zh">· 杂项</span><span class="en">· Miscellaneous</span></a>
-    <a href="../sellers/index.html" class="sidebar-link"><span class="zh">私家藏馆</span><span class="en">Private Collections</span></a>
+    <a href="../" class="sidebar-link"><span class="zh">首页</span><span class="en">Home</span></a>
+    <a href="../#today-finds" class="sidebar-link"><span class="zh">今日发现</span><span class="en">Today's Finds</span></a>
+    <a href="../collection" class="sidebar-link"><span class="zh">藏品库</span><span class="en">Collection</span></a>
+    <a href="../categories/porcelain" class="sidebar-sub"><span class="zh">· 瓷器</span><span class="en">· Porcelain</span></a>
+    <a href="../categories/jade" class="sidebar-sub"><span class="zh">· 玉器</span><span class="en">· Jade</span></a>
+    <a href="../categories/bronze" class="sidebar-sub"><span class="zh">· 铜器</span><span class="en">· Bronzes</span></a>
+    <a href="../categories/coins" class="sidebar-sub"><span class="zh">· 钱币</span><span class="en">· Coins</span></a>
+    <a href="../categories/paintings" class="sidebar-sub"><span class="zh">· 书画</span><span class="en">· Paintings &amp; Calligraphy</span></a>
+    <a href="../categories/misc" class="sidebar-sub"><span class="zh">· 杂项</span><span class="en">· Miscellaneous</span></a>
+    <a href="../sellers/index" class="sidebar-link"><span class="zh">私家藏馆</span><span class="en">Private Collections</span></a>
     <a href="/#daily-intel" class="sidebar-link"><span class="zh">实时动态</span><span class="en">Live Pulse</span></a>
-    <a href="../insights.html" class="sidebar-link"><span class="zh">收藏知识</span><span class="en">Insights</span></a>
-    <a href="../tools/index.html" class="sidebar-link"><span class="zh">藏家工具包</span><span class="en">Collector's Toolkit</span></a>
-    <a href="../my/account.html" class="sidebar-link active"><span class="zh">我的帐户</span><span class="en">My Account</span></a>
-    <a href="../my/account.html#saved" class="sidebar-sub"><span class="zh">· 我的收藏</span><span class="en">· Saved</span></a>
-    <a href="../my/account.html#follows" class="sidebar-sub"><span class="zh">· 我关注的</span><span class="en">· Following</span></a>
-    <a href="../my/account.html#enquiries" class="sidebar-sub"><span class="zh">· 我的询价</span><span class="en">· Enquiries</span></a>
+    <a href="../insights" class="sidebar-link"><span class="zh">收藏知识</span><span class="en">Insights</span></a>
+    <a href="../tools/index" class="sidebar-link"><span class="zh">藏家工具包</span><span class="en">Collector's Toolkit</span></a>
+    <a href="../my/account" class="sidebar-link active"><span class="zh">我的帐户</span><span class="en">My Account</span></a>
+    <a href="../my/account#saved" class="sidebar-sub"><span class="zh">· 我的收藏</span><span class="en">· Saved</span></a>
+    <a href="../my/account#follows" class="sidebar-sub"><span class="zh">· 我关注的</span><span class="en">· Following</span></a>
+    <a href="../my/account#enquiries" class="sidebar-sub"><span class="zh">· 我的询价</span><span class="en">· Enquiries</span></a>
     <button type="button" class="sidebar-lang-btn" onclick="toggleLang()"><span class="zh">🌐 English</span><span class="en">🌐 中文</span></button>
   </nav>
 </aside>
@@ -212,8 +212,8 @@
       </div>
       <div class="err" id="loginErr"></div>
       <p style="font-size:.74rem;color:var(--muted);margin-top:.2rem">
-        <span class="zh">继续即表示同意<a href="../privacy.html" target="_blank" rel="noopener" style="color:var(--primary-dark)">《隐私政策》</a>；只存邮箱与被收藏 / 关注的藏品，不公开不转卖。</span>
-        <span class="en">By continuing you agree to the <a href="../privacy.html" target="_blank" rel="noopener" style="color:var(--primary-dark)">Privacy Policy</a>; we store only your email and what you saved or followed.</span>
+        <span class="zh">继续即表示同意<a href="../privacy" target="_blank" rel="noopener" style="color:var(--primary-dark)">《隐私政策》</a>；只存邮箱与被收藏 / 关注的藏品，不公开不转卖。</span>
+        <span class="en">By continuing you agree to the <a href="../privacy" target="_blank" rel="noopener" style="color:var(--primary-dark)">Privacy Policy</a>; we store only your email and what you saved or followed.</span>
       </p>
     </div>
 
@@ -566,8 +566,8 @@
     wrap.innerHTML = list.map(function (f) {
       var label = f.label || f.target;
       var href = f.kind === 'seller'
-        ? '../sellers/index.html'
-        : '../collection.html';
+        ? '../sellers/index'
+        : '../collection';
       return '<span class="chip">' +
         '<a href="' + href + '" style="color:inherit;text-decoration:none">' +
           (f.kind === 'seller' ? '<span class="zh">藏家</span><span class="en">Collector</span>' : '<span class="zh">品类</span><span class="en">Category</span>') +

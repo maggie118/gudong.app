@@ -890,7 +890,7 @@ async function pushJob(env, opts) {
     title: it.title_zh || it.item_id || '',
     seller: it.seller_id || '',
     category: it.category || '',
-    url: site + '/items/' + encodeURIComponent(it.item_id || '') + '.html'
+    url: site + '/items/' + encodeURIComponent(it.item_id || '')
   })).filter(it => it.id);
 
   const sentRows = await env.DB.prepare('SELECT item_id FROM push_sent').all();

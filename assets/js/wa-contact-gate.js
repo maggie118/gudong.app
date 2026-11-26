@@ -277,8 +277,8 @@
           '<div class="gdw-err"></div>' +
         '</form>' +
         '<p class="gdw-note">' +
-          '<span class="zh">继续即表示同意<a href="/privacy.html" target="_blank" rel="noopener">《隐私政策》</a>：只记录邮箱、询价的藏品与时间，不公开、不转卖，可随时写信给 contact@gudong.app 删除。</span>' +
-          '<span class="en">By continuing you agree to the <a href="/privacy.html" target="_blank" rel="noopener">Privacy Policy</a>: we store only your email, the item and the time. Never published or resold; email contact@gudong.app to remove it.</span>' +
+          '<span class="zh">继续即表示同意<a href="/privacy" target="_blank" rel="noopener">《隐私政策》</a>：只记录邮箱、询价的藏品与时间，不公开、不转卖，可随时写信给 contact@gudong.app 删除。</span>' +
+          '<span class="en">By continuing you agree to the <a href="/privacy" target="_blank" rel="noopener">Privacy Policy</a>: we store only your email, the item and the time. Never published or resold; email contact@gudong.app to remove it.</span>' +
         '</p>' +
         '<button class="gdw-skip" type="button">' +
           '<span class="zh">不用了，直接打开 WhatsApp →</span>' +

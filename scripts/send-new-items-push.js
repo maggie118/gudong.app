@@ -143,7 +143,7 @@ async function run() {
       const payload = {
         title: 'gudong.app 上新',
         body: `${titleZh}${seller ? ' · ' + seller : ''}`,
-        url: `${SITE}/items/${encodeURIComponent(it.item_id)}.html`,
+        url: `${SITE}/items/${encodeURIComponent(it.item_id)}`,
         icon: `${SITE}/assets/icons/icon-192.png`,
         badge: `${SITE}/assets/icons/favicon-32x32.png`,
       };

@@ -122,7 +122,7 @@ function buildXml(staticUrls, items, sellers) {
     // /item?id=<id> 是 SPA 兜底路由，它的 canonical 会指向另一个地址，放进 sitemap 只会在
     // Search Console 里换来「网页会自动重定向 / 重复网页，未编入索引」，所以仅用于没有预渲染
     // 页面的新条目（例如刚上架、图片还没处理完的）。
-    parts.push(`    <loc>${esc(SITE + (it.prerendered ? '/items/' + encodeURIComponent(it.item_id) : '/item?id=' + encodeURIComponent(it.item_id)))}</loc>`);
+    parts.push(`    <loc>${esc(SITE + '/items/' + encodeURIComponent(it.item_id))}</loc>`);
     if (it.lastmod) parts.push(`    <lastmod>${esc(it.lastmod)}</lastmod>`);
     parts.push(`  </url>`);
   }
@@ -148,12 +148,13 @@ export default function handler(req, res) {
     : [];
 
   // 卖家（专属藏馆）：从 SSG 快照 data/listings.json.sellers 自动生成，
-  // 新卖家开馆后无需再手工加链接；page_url 去 .html 即干净路由（cleanUrls）。
+  // 只收录真正建馆的卖家（gallery=TRUE，与 build-sellers.js 建页判据一致），
+  // 否则 page_url 指向的藏馆页并不存在，sitemap 里会出现 404。
   const sellers = (snap.ok && Array.isArray(snap.data.sellers))
     ? snap.data.sellers
-        .filter(s => s && s.seller_id)
+        .filter(s => s && s.seller_id && (s.gallery === true || s.gallery === 'true' || s.gallery === 1))
         .map(s => {
-          // page_url 在 Airtable 里可能存为相对路径（如 "../sellers/seller-xxx.html"）。
+          // page_url 在 Airtable 里可能存为相对路径（如 "../sellers/seller-xxx"）。
           // 统一规范为绝对路由：去 "../"、去 .html、去末尾斜杠，缺 "/" 前缀则补上。
           const raw = String(s.page_url || '').trim().replace(/^\.\.\//, '');
           const clean = raw.replace(/\.html$/, '').replace(/\/+$/g, '');

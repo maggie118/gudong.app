@@ -187,10 +187,10 @@
         '<div class="gbx-ok" role="status"></div>' +
         '<div class="gbx-note">' +
           (minimal
-            ? '<span class="zh">详见<a href="/privacy.html">隐私政策</a>。</span>' +
-              '<span class="en">See our <a href="/privacy.html">Privacy Policy</a>.</span>'
-            : '<span class="zh">仅用于上新提醒，不公开、不转卖。详见<a href="/privacy.html">隐私政策</a>。</span>' +
-              '<span class="en">Used only for new-listing alerts. Never published or resold. See our <a href="/privacy.html">Privacy Policy</a>.</span>') +
+            ? '<span class="zh">详见<a href="/privacy">隐私政策</a>。</span>' +
+              '<span class="en">See our <a href="/privacy">Privacy Policy</a>.</span>'
+            : '<span class="zh">仅用于上新提醒，不公开、不转卖。详见<a href="/privacy">隐私政策</a>。</span>' +
+              '<span class="en">Used only for new-listing alerts. Never published or resold. See our <a href="/privacy">Privacy Policy</a>.</span>') +
         '</div>' +
       '</div>';
 

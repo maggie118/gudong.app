@@ -49,7 +49,7 @@ function inboxToken(sellerId) {
 }
 function inboxLink(sellerId) {
   const token = inboxToken(sellerId);
-  return token ? SITE + '/seller-inbox.html#token=' + encodeURIComponent(token) : '';
+  return token ? SITE + '/seller-inbox#token=' + encodeURIComponent(token) : '';
 }
 async function sellerEmail(sellerId) {
   if (!BASE || !TOKEN || !sellerId) return '';

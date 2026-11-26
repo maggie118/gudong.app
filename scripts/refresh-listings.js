@@ -182,7 +182,7 @@ function mapSeller(rec) {
     // 留空 = 只享受开馆免费 7 天窗口；到期后自动退出，不需要手动取消勾选。
     finds_bonus_until: f.finds_bonus_until || '',
     founding_no: padFoundingNo(pickStr(f, FOUNDING_NO_KEYS)),      // 创始藏家编号（统一三位，如 001；未分配则空）
-    page_url: f.page_url || `/sellers/seller-${slugify(id)}-antiques.html`,
+    page_url: f.page_url || `/sellers/seller-${slugify(id)}-antiques`,
   }, wa);
 }
 async function fetchSellers() {

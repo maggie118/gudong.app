@@ -140,48 +140,48 @@ const CACHE_NAME = 'antique-collection-v131';
 // 注意：改用逐个 cache.add，单个 404 不会导致整个 install 失败
 const PRECACHE_ASSETS = [
   '/',
-  '/index.html',
-  '/item.html',
-  '/collection.html',
-  '/pricing.html',
+  '/',
+  '/item',
+  '/collection',
+  '/pricing',
   '/assets/js/seller-inbox.js',
   '/assets/js/gudong-data.js',
   '/assets/js/google-client.js',
   '/assets/js/fav-log.js',
   '/assets/js/wa-contact-gate.js',
   '/assets/js/account-core.js',
-  '/my/account.html',
-  '/my/saved.html',
-  '/items/item-lim-01.html',
-  '/items/item-lim-02.html',
-  '/items/item-lim-03.html',
-  '/items/item-lim-04.html',
-  '/items/item-ng-01.html',
-  '/items/item-ng-02.html',
-  '/items/item-ng-03.html',
-  '/items/item-ngcy-01.html',
-  '/items/item-ngcy-02.html',
-  '/items/item-ngcy-03.html',
-  '/items/item-ngcy-04.html',
-  '/items/item-ngcy-05.html',
-  '/items/item-yak-01.html',
-  '/items/item-yak-02.html',
-  '/items/item-yak-03.html',
-  '/items/item-limck-01.html',
-  '/items/item-limck-02.html',
-  '/items/item-limck-03.html',
-  '/items/item-sun-02.html',
-  '/items/item-sun-03.html',
-  '/items/item-sun-04.html',
-  '/items/item-chrysler-01.html',
-  '/items/item-chrysler-02.html',
-  '/items/item-raojr-01.html',
-  '/tools/index.html',
-  '/tools/era-lookup.html',
-  '/tools/ganzhi.html',
-  '/tools/year-since.html',
-  '/tools/checklist.html',
-  '/tools/contract.html',
+  '/my/account',
+  '/my/saved',
+  '/items/item-lim-01',
+  '/items/item-lim-02',
+  '/items/item-lim-03',
+  '/items/item-lim-04',
+  '/items/item-ng-01',
+  '/items/item-ng-02',
+  '/items/item-ng-03',
+  '/items/item-ngcy-01',
+  '/items/item-ngcy-02',
+  '/items/item-ngcy-03',
+  '/items/item-ngcy-04',
+  '/items/item-ngcy-05',
+  '/items/item-yak-01',
+  '/items/item-yak-02',
+  '/items/item-yak-03',
+  '/items/item-limck-01',
+  '/items/item-limck-02',
+  '/items/item-limck-03',
+  '/items/item-sun-02',
+  '/items/item-sun-03',
+  '/items/item-sun-04',
+  '/items/item-chrysler-01',
+  '/items/item-chrysler-02',
+  '/items/item-raojr-01',
+  '/tools/index',
+  '/tools/era-lookup',
+  '/tools/ganzhi',
+  '/tools/year-since',
+  '/tools/checklist',
+  '/tools/contract',
   '/manifest.json',
   '/assets/icons/favicon-32x32.png',
   '/assets/icons/icon-192.png',
@@ -284,7 +284,7 @@ self.addEventListener('fetch', (event) => {
     return;
   }
   // Private console links carry a bearer token; never store those URLs in Cache Storage.
-  if (url.pathname === '/seller-inbox.html') {
+  if (url.pathname === '/seller-inbox') {
     event.respondWith(fetch(req).catch(() => new Response('Online connection required', { status: 503, statusText: 'Offline' })));
     return;
   }
@@ -305,7 +305,7 @@ self.addEventListener('fetch', (event) => {
         const cached = await caches.match(req);
         if (cached) return cached;
         const home =
-          (await caches.match('/index.html')) ||
+          (await caches.match('/')) ||
           (await caches.match('/'));
         if (home) return home;
         return new Response('Offline', { status: 503, statusText: 'Offline' });

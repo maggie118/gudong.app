@@ -1,13 +1,91 @@
 {
-  "updated": "2026-11-14",
-  "count": 70,
+  "updated": "2026-11-26",
+  "count": 73,
   "latest": [
-    "conservator-questions",
-    "restoration-process",
-    "antique-shipping",
-    "metal-jade-cleaning"
+    "antique-terms-glossary",
+    "how-to-value-antique-singapore",
+    "singapore-antique-export-cites",
+    "conservator-questions"
   ],
   "articles": [
+    {
+      "slug": "antique-terms-glossary",
+      "kicker": {
+        "zh": "入门指南 · 术语",
+        "en": "BEGINNER · GLOSSARY"
+      },
+      "title": {
+        "zh": "古董行话对照表：看货最常听到的 30 个词",
+        "en": "Antique trade vocabulary: 30 terms you will hear at a viewing"
+      },
+      "desc": {
+        "zh": "包浆、冲线、后加彩、二层台、开门——看货与谈价最常用的术语，中英对照加实际含义。",
+        "en": "Patina, hairline, added enamel, two-tier foot, textbook — the terms that decide a viewing."
+      },
+      "date": "2026-11-26",
+      "read": {
+        "zh": "7 分钟",
+        "en": "7 min"
+      },
+      "mark": "辞",
+      "tone": "guide",
+      "series": {
+        "zh": "器物与杂项",
+        "en": "Objects & Misc"
+      }
+    },
+    {
+      "slug": "how-to-value-antique-singapore",
+      "kicker": {
+        "zh": "行情观察 · 估价",
+        "en": "MARKET · VALUATION"
+      },
+      "title": {
+        "zh": "家里老物件值多少钱？新加坡估价的 5 条途径与收费逻辑",
+        "en": "What is it worth? Three prices, five valuation routes in Singapore"
+      },
+      "desc": {
+        "zh": "拍卖行估价、独立鉴定师、dealer 出价、线上平台、保险估值——先弄清“为什么估”。",
+        "en": "Auction appraisal, independent appraiser, dealer offer, online platforms, insurance valuation."
+      },
+      "date": "2026-11-26",
+      "read": {
+        "zh": "8 分钟",
+        "en": "8 min"
+      },
+      "mark": "价",
+      "tone": "market",
+      "series": {
+        "zh": "新加坡本地",
+        "en": "Local Singapore"
+      }
+    },
+    {
+      "slug": "singapore-antique-export-cites",
+      "kicker": {
+        "zh": "本地指南 · 出境合规",
+        "en": "LOCAL · EXPORT"
+      },
+      "title": {
+        "zh": "新加坡买了古董能带出境吗？出口许可、CITES 与材质清单三步核对",
+        "en": "Taking an antique out of Singapore: permits, CITES, and the material checklist"
+      },
+      "desc": {
+        "zh": "新加坡对古董本身没有文物出境审核，但象牙、玳瑁、紫檀、沉香等材质受 CITES 管控。",
+        "en": "No relic export review for antiques — but ivory, tortoiseshell, rosewood and agarwood fall under CITES."
+      },
+      "date": "2026-11-26",
+      "read": {
+        "zh": "8 分钟",
+        "en": "8 min"
+      },
+      "mark": "境",
+      "tone": "guide",
+      "series": {
+        "zh": "新加坡本地",
+        "en": "Local Singapore"
+      }
+    },
     {
       "slug": "conservator-questions",
       "kicker": {

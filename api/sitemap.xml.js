@@ -42,12 +42,12 @@ const STATIC = [
   { loc: '/sellers/seller-lim-ck',  lastmod: LAUNCH },
   // Insights articles (static slugs)
   ...[
-    'amber-baked-vs-natural','ancient-jade-stains','antique-shipping','auction-house-watch',
+    'amber-baked-vs-natural','ancient-jade-stains','antique-shipping','antique-terms-glossary','auction-house-watch',
     'bamboo-ivory-cracks','bronze-age-copper','bronze-censer-patina','bronze-patina-soil',
     'burial-climate-north-south','canton-thirteen-hongs','coin-aging-tricks','coin-casting-dating',
     'coin-cleaning','coin-patina-types','conservator-questions','first-collection',
     'furniture-joinery-dating','furniture-patina','glaze-crackle-basics','grand-canal-porcelain',
-    'hetian-seeds-vs-mountain','how-to-brief-a-sourcing','how-to-negotiate','how-to-store-collection',
+    'hetian-seeds-vs-mountain','how-to-brief-a-sourcing','how-to-negotiate','how-to-store-collection','how-to-value-antique-singapore',
     'jade-buyer-pitfalls','jade-road-hetian','jade-tool-marks','jadeite-abc',
     'jingdezhen-geography','late-qing-outflow','malacca-strait-antiques','maritime-silk-road-ports',
     'metal-jade-cleaning','ming-furniture-minimalism','ming-porcelain-dating','nyonya-ware',
@@ -55,7 +55,7 @@ const STATIC = [
     'porcelain-aging-tricks','porcelain-crack-repair','porcelain-marks','provenance-basics',
     'qing-porcelain-dating','qing-three-reigns-porcelain','qinghua-cobalt','quanzhou-yuan-blue',
     'republic-antique-fakes','republic-porcelain-dating','restoration-process','silver-dollar-edges',
-    'silver-patina','singapore-chinese-antiques','singapore-coin-market','singapore-dealers-history',
+    'silver-patina','singapore-antique-export-cites','singapore-chinese-antiques','singapore-coin-market','singapore-dealers-history',
     'singapore-flea-market-map','singapore-jade-market','singapore-painting-market','singapore-porcelain-market',
     'song-five-kilns','storage-mistakes','sumali-cobalt-origin','sumali-cobalt-zhenghe',
     'tang-ceramics-trade','what-is-jianlou','woodware-oil-damage','xuande-censer-legacy',

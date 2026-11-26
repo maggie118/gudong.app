@@ -783,7 +783,7 @@
 
         try { if (localStorage.getItem('announceClosed') === 'yes') { var __ab = document.getElementById('announceBar'); if (__ab) __ab.style.display = 'none'; } } catch (e) {}
 
-        /* ============ 数据：10 大系列，共 73 篇 ============ */
+        /* ============ 数据：10 大系列，共 83 篇 ============ */
         const SERIES = [
             {
                 id: 'porcelain',
@@ -818,7 +818,15 @@
                     { slug: 'porcelain-aging-tricks', tone: 'pitfall', mark: '旧', kicker: { zh: '避坑手册', en: 'PITFALLS' },
                       title: { zh: '瓷器“做旧”的 5 种常见手法，看完少交学费', en: '5 common ways porcelain is artificially aged' },
                       desc: { zh: '酸洗、土沁、磨底、接底、后加彩——老瓷和新瓷差在哪，一次讲清。', en: 'Acid, soil, ground feet, joined feet, repaint — how old and new porcelains differ.' },
-                      tags: '瓷器 做旧 酸洗 接底 porcelain ageing', date: '2026-01-20', read: { zh: '6 分钟', en: '6 min' } }
+                      tags: '瓷器 做旧 酸洗 接底 porcelain ageing', date: '2026-01-20', read: { zh: '6 分钟', en: '6 min' } },
+                    { slug: 'nyonya-porcelain-collecting', tone: 'guide', mark: '娘', kicker: { zh: '断代方法 · 娘惹瓷', en: 'DATING · NYONYA WARE' },
+                      title: { zh: '娘惹瓷（Peranakan Porcelain）收藏入门：怎么看清代与民国粉彩外销瓷的品相与落款？', en: 'Collecting Peranakan porcelain: condition and marks on Qing and Republican famille-rose' },
+                      desc: { zh: '凤凰牡丹、底足火石红、釉面蛤蜊光——品相判断、落款习惯与现代仿品的破口。', en: 'Phoenix and peony, fire-red foot, clam-shell sheen — condition, marks, and how copies fail.' },
+                      tags: '娘惹瓷收藏 土生华人瓷器 Peranakan porcelain 鉴定 娘惹瓷 粉彩 nyonya ware', date: '2026-11-26', read: { zh: '7 分钟', en: '7 min' } },
+                    { slug: 'song-yuan-monochrome-appeal', tone: 'guide', mark: '釉', kicker: { zh: '入门指南 · 单色釉', en: 'BEGINNER · MONOCHROME' },
+                      title: { zh: '宋元单色釉为何越来越受新加坡新一代藏家青睐？浅谈影青釉与龙泉青瓷的极简美学', en: 'Why Song and Yuan monochromes appeal to a new generation: Yingqing and Longquan' },
+                      desc: { zh: '影青的“积釉显青”、龙泉的粉青与梅子青，四个判断要点与三个陷阱。', en: 'Glaze pooling in Yingqing, powder blue and plum green in Longquan — four checks, three traps.' },
+                      tags: '影青釉鉴赏 龙泉青瓷收藏 宋元单色釉 湖田窑 斗笠碗 longquan celadon', date: '2026-11-26', read: { zh: '7 分钟', en: '7 min' } }
                 ]
             },
             {
@@ -965,7 +973,15 @@
                     { slug: 'how-to-value-antique-singapore', tone: 'market', mark: '价', kicker: { zh: '行情观察 · 估价', en: 'MARKET · VALUATION' },
                       title: { zh: '家里老物件值多少钱？新加坡估价的 5 条途径与收费逻辑', en: 'What is it worth? Three prices, five valuation routes in Singapore' },
                       desc: { zh: '拍卖行估价、独立鉴定师、dealer 出价、线上平台、保险估值——先弄清“为什么估”。', en: 'Auction appraisal, independent appraiser, dealer offer, online platforms, insurance valuation.' },
-                      tags: '新加坡古董估价 老物件值多少钱 古董鉴定收费 antique valuation singapore', date: '2026-11-26', read: { zh: '8 分钟', en: '8 min' } }
+                      tags: '新加坡古董估价 老物件值多少钱 古董鉴定收费 antique valuation singapore', date: '2026-11-26', read: { zh: '8 分钟', en: '8 min' } },
+                    { slug: 'singapore-where-to-buy-antiques', tone: 'market', mark: '淘', kicker: { zh: '行情观察 · 淘宝地图', en: 'MARKET · WHERE TO BUY' },
+                      title: { zh: '新加坡哪里买古董？本地资深藏家常去的 5 个淘宝地标与跳蚤市场盘点', en: 'Where to buy antiques in Singapore: 5 spots local collectors actually visit' },
+                      desc: { zh: '荷顿路、东陵购物中心周边、牛车水、周末复古市集与线上直连——各买什么、避什么。', en: 'Havelock Road, Tanglin, Chinatown, weekend markets and direct online — what each is good for.' },
+                      tags: '新加坡哪里买古董 新加坡古董店 新加坡跳蚤市场 古董 singapore antique shops', date: '2026-11-26', read: { zh: '7 分钟', en: '7 min' } },
+                    { slug: 'antique-customs-gst-singapore', tone: 'guide', mark: '关', kicker: { zh: '本地指南 · 通关纳税', en: 'LOCAL · CUSTOMS & GST' },
+                      title: { zh: '从海外买古董寄回新加坡，或带藏品出国需要申报吗？新加坡海关通关与 GST 指南', en: 'Importing antiques into Singapore: customs, 9% GST, and CITES in practice' },
+                      desc: { zh: '新加坡没有古董关税，但有 9% 进口 GST；象牙、玳瑁、红木、沉香走 CITES 许可。', en: 'No duty on antiques, but 9% import GST and CITES permits for restricted materials.' },
+                      tags: '古董寄新加坡 关税 新加坡古董出入境 古董带出国 规定 GST 9% CITES NParks', date: '2026-11-26', read: { zh: '7 分钟', en: '7 min' } }
                 ]
             },
             {
@@ -1012,7 +1028,11 @@
                     { slug: 'conservator-questions', tone: 'pitfall', mark: '问', kicker: { zh: '避坑手册 · 修复避坑', en: 'PITFALLS · CONSERVATOR' },
                       title: { zh: '找古董修复师前，必须问清这10个问题，否则越修越不值钱', en: 'Before hiring an antique conservator: 10 questions to ask' },
                       desc: { zh: '资质、案例、可逆材料、做旧程度、再交易影响、合同、报价、保险、周期、售后——找修复师前必问的 10 个问题。', en: 'Qualifications, case studies, reversible materials, ageing, resale, contract, quote, insurance, timeline, aftercare — 10 questions before hiring a conservator.' },
-                      tags: '古董修复师 修复师资质 修复避坑 修复师必问 conservator questions', date: '2026-04-01', read: { zh: '6 分钟', en: '6 min' } }
+                      tags: '古董修复师 修复师资质 修复避坑 修复师必问 conservator questions', date: '2026-04-01', read: { zh: '6 分钟', en: '6 min' } },
+                    { slug: 'singapore-humidity-art-storage', tone: 'pitfall', mark: '湿', kicker: { zh: '避坑手册 · 保存养护', en: 'PITFALLS · STORAGE' },
+                      title: { zh: '新加坡常年湿度 80% 以上，中国字画、古籍与老柚木家具怎么防霉防虫？', en: 'Keeping art, books and old teak in the 80% humidity of Singapore' },
+                      desc: { zh: '目标区间 50%–60%、无酸纸与防潮箱的正确用法，以及为什么樟脑丸要慎用。', en: 'Target 50–60%, acid-free paper and desiccant cabinets, and why mothballs are a bad trade.' },
+                      tags: '新加坡字画防霉 高湿度古董保养 老柚木家具保养 art storage humidity singapore', date: '2026-11-26', read: { zh: '7 分钟', en: '7 min' } }
                 ]
             },
             {
@@ -1035,7 +1055,19 @@
                     { slug: 'provenance-basics', tone: 'strategy', mark: '源', kicker: { zh: '入门指南', en: 'BEGINNER' },
                       title: { zh: '怎么看藏品“来源”？证据链比故事重要', en: 'Reading provenance — evidence matters more than stories' },
                       desc: { zh: '来源不是一句话，而是一条证据链。看这四类证据就够了。', en: 'Provenance is a chain of evidence, not a sentence. Four types to check.' },
-                      tags: '藏品 来源 传承 证据 出处 provenance antiques', date: '2026-02-08', read: { zh: '6 分钟', en: '6 min' } }
+                      tags: '藏品 来源 传承 证据 出处 provenance antiques', date: '2026-02-08', read: { zh: '6 分钟', en: '6 min' } },
+                    { slug: 'selling-antiques-in-singapore', tone: 'market', mark: '出', kicker: { zh: '行情观察 · 出手', en: 'MARKET · SELLING' },
+                      title: { zh: '家里的老物件想出手：新加坡私人古董转让有哪些渠道？拍卖行 vs 藏家直连对比', en: 'Selling an antique in Singapore: auction house versus dealer versus collector-to-collector' },
+                      desc: { zh: '拍卖行、古董店收货、点对点平台三条路径的真实成本：佣金、周期、压价幅度与风险。', en: 'Real costs of three routes — commission, cycle, discount and risk.' },
+                      tags: '新加坡古董转让 新加坡老物件出售 私人古董交易 sell antiques singapore auction commission', date: '2026-11-26', read: { zh: '7 分钟', en: '7 min' } },
+                    { slug: 'family-provenance-record', tone: 'guide', mark: '承', kicker: { zh: '入门指南 · 来源文档', en: 'BEGINNER · PROVENANCE' },
+                      title: { zh: '如何为家传古董撰写一份有说服力的“藏家自述与传承”记录？', en: 'Writing a provenance record for a family heirloom: a practical template' },
+                      desc: { zh: '器物基本卡、三条证据链、写作规范与可直接套用的模板。', en: 'Data sheet, three evidence chains, writing rules, and a template you can copy.' },
+                      tags: '古董传承记录 藏品来源证明 家传古董整理 provenance record template family heirloom', date: '2026-11-26', read: { zh: '7 分钟', en: '7 min' } },
+                    { slug: 'first-1000-budget-antiques', tone: 'guide', mark: '初', kicker: { zh: '入门指南 · 预算篇', en: 'BEGINNER · ON A BUDGET' },
+                      title: { zh: '新手花 500–2000 新币入门中国古玩，新加坡本地藏家最推荐从哪 3 类小件入手？', en: 'Starting with S$500–2,000: three small categories local collectors recommend' },
+                      desc: { zh: '明清民窑小件、文房杂项、民国老银饰——门槛适中、真伪易辨、适合日常把玩。', en: 'Folk porcelain, scholar-desk objects and older silver — accessible, legible and usable.' },
+                      tags: '新手古董收藏预算 新加坡古玩入门 明清小件瓷器 beginner antiques budget singapore', date: '2026-11-26', read: { zh: '7 分钟', en: '7 min' } }
                 ]
             },
             {
@@ -1090,7 +1122,15 @@
                     { slug: 'singapore-dealers-history', tone: 'history', mark: '商', kicker: { zh: '透过历史看古董', en: 'HISTORY' },
                       title: { zh: '二战前后的新加坡古董商', en: 'Singapore antique dealers before and after WWII' },
                       desc: { zh: '从战前的贸易繁荣到战后的重建，新加坡古董商见证了这座城市的一段特殊历史。', en: 'From pre-war trade prosperity to post-war rebuilding, Singapore dealers witnessed a particular slice of the city\'s history.' },
-                      tags: '新加坡 古董商 二战 老店 singapore dealers history', date: '2026-03-17', read: { zh: '4 分钟', en: '4 min' } }
+                      tags: '新加坡 古董商 二战 老店 singapore dealers history', date: '2026-03-17', read: { zh: '4 分钟', en: '4 min' } },
+                    { slug: 'nanyang-collectors-legends', tone: 'history', mark: '斋', kicker: { zh: '透过历史看古董 · 藏家史', en: 'HISTORY · COLLECTORS' },
+                      title: { zh: '南洋四大藏家传奇：从陈之初“香雪庄”到刘作筹“虚白斋”，老一辈新加坡华人的收藏雅集', en: 'The four great Nanyang collectors: Xiangxue Zhuang, Xubaizhai and the old Singapore salons' },
+                      desc: { zh: '黄曼士百扇斋、刘作筹虚白斋、陈之初香雪庄、杨启霖袖海楼——四个斋号背后的收藏史。', en: 'Baishan Zhai, Xubaizhai, Xiangxue Zhuang and Xiuhai Lou — four studios, one collecting history.' },
+                      tags: '新加坡四大收藏家 陈之初 香雪庄 刘作筹 虚白斋 黄曼士 百扇斋 nanyang collectors', date: '2026-11-26', read: { zh: '7 分钟', en: '7 min' } },
+                    { slug: 'southeast-asia-trade-ceramics', tone: 'history', mark: '海', kicker: { zh: '透过历史看古董 · 外销瓷', en: 'HISTORY · EXPORT WARES' },
+                      title: { zh: '东南亚海捞瓷与外销瓷鉴赏：明清民窑青花在南洋的流传脉络', en: 'Shipwreck and export porcelain in Southeast Asia: Ming blue-and-white in the Nanyang trade' },
+                      desc: { zh: '克拉克瓷与漳州窑（汕头器）的器型、胎釉与海捞痕迹怎么认。', en: 'Kraak and Zhangzhou wares — forms, body, glaze, and how to read shipwreck condition.' },
+                      tags: '东南亚外销瓷 明清民窑青花 海捞瓷收藏 Kraak porcelain 漳州窑 汕头器', date: '2026-11-26', read: { zh: '7 分钟', en: '7 min' } }
                 ]
             },
             {

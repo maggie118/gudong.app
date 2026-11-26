@@ -60,6 +60,11 @@ const STATIC = [
     'song-five-kilns','storage-mistakes','sumali-cobalt-origin','sumali-cobalt-zhenghe',
     'tang-ceramics-trade','what-is-jianlou','woodware-oil-damage','xuande-censer-legacy',
     'yangtze-kilns','zhushan-eight-friends',
+    // 2026-11-26 第二批长尾文章
+    'singapore-where-to-buy-antiques','nyonya-porcelain-collecting','southeast-asia-trade-ceramics',
+    'selling-antiques-in-singapore','antique-customs-gst-singapore','family-provenance-record',
+    'singapore-humidity-art-storage','nanyang-collectors-legends','song-yuan-monochrome-appeal',
+    'first-1000-budget-antiques',
   ].map(slug => ({ loc: `/insights/${slug}`, lastmod: LAUNCH })),
 ];
 

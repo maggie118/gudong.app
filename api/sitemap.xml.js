@@ -118,9 +118,11 @@ function buildXml(staticUrls, items, sellers) {
   }
   for (const it of items) {
     parts.push(`  <url>`);
-    // Use the always-resolvable SPA route. Brand-new Airtable items have no
-    // pre-rendered /items/<id>.html yet, so /item?id=<id> is the safe choice.
-    parts.push(`    <loc>${esc(SITE + '/item?id=' + it.item_id)}</loc>`);
+    // 优先用预渲染的 /items/<id>（有独立 title、canonical、JSON-LD，Google 能直接收录）。
+    // /item?id=<id> 是 SPA 兜底路由，它的 canonical 会指向另一个地址，放进 sitemap 只会在
+    // Search Console 里换来「网页会自动重定向 / 重复网页，未编入索引」，所以仅用于没有预渲染
+    // 页面的新条目（例如刚上架、图片还没处理完的）。
+    parts.push(`    <loc>${esc(SITE + (it.prerendered ? '/items/' + encodeURIComponent(it.item_id) : '/item?id=' + encodeURIComponent(it.item_id)))}</loc>`);
     if (it.lastmod) parts.push(`    <lastmod>${esc(it.lastmod)}</lastmod>`);
     parts.push(`  </url>`);
   }
@@ -136,7 +138,12 @@ export default function handler(req, res) {
   const snap = readSnapshot();
   const items = (snap.ok && Array.isArray(snap.data.newListing))
     ? snap.data.newListing
-        .map(it => ({ item_id: String(it.item_id || ''), lastmod: toDateStr(it._createdTime || it.listed_at || '') }))
+        .map(it => ({
+          item_id: String(it.item_id || ''),
+          lastmod: toDateStr(it._createdTime || it.listed_at || ''),
+          // build-item-pages.js 只给有图的条目生成页面，这里用同一条判据
+          prerendered: !!String(it.img_file || '').trim(),
+        }))
         .filter(it => it.item_id)
     : [];
 

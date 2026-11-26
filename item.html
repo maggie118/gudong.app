@@ -6,7 +6,7 @@
     <title>藏品详情 | Antique Item Detail | Gudong.app</title>
     <meta name="description" content="Antique item detail page on Gudong.app. Seller-provided listing; advisory reference only. Gudong.app does not authenticate items or handle transactions.">
     <meta name="keywords" content="Singapore antiques, 新加坡古董, Chinese porcelain, 中国古瓷, antique listing, Singapore collectors">
-    <link rel="canonical" href="https://www.gudong.app/item.html">
+    <link rel="canonical" href="https://www.gudong.app/item">
     <meta property="og:type" content="product">
     <meta property="og:site_name" content="古董圈 Gudong">
     <meta property="og:title" content="藏品详情 | Antique Item Detail | Gudong.app">
@@ -1462,7 +1462,9 @@ function setSellerCard(f, data) {
                     mdSeo.setAttribute('content', mdText.slice(0, 165));
                 }
                 var canSeo = document.querySelector('link[rel="canonical"]');
-                var cleanUrl = location.origin + location.pathname;
+                // SPA 页只在没有预渲染页时兜底：canonical 指向预渲染的 /items/<id>，
+                // 让 Google 把带 ?id= 的这个地址并到正式物品页，避免「自动重定向」判定
+                var cleanUrl = ID ? (location.origin + '/items/' + encodeURIComponent(ID)) : (location.origin + location.pathname);
                 if (canSeo) canSeo.setAttribute('href', cleanUrl);
                 var ogUrl = document.querySelector('meta[property="og:url"]');
                 if (ogUrl) ogUrl.setAttribute('content', cleanUrl);

@@ -178,10 +178,10 @@
     <a href="../categories/coins" class="sidebar-sub"><span class="zh">· 钱币</span><span class="en">· Coins</span></a>
     <a href="../categories/paintings" class="sidebar-sub"><span class="zh">· 书画</span><span class="en">· Paintings &amp; Calligraphy</span></a>
     <a href="../categories/misc" class="sidebar-sub"><span class="zh">· 杂项</span><span class="en">· Miscellaneous</span></a>
-    <a href="../sellers/index" class="sidebar-link"><span class="zh">私家藏馆</span><span class="en">Private Collections</span></a>
+    <a href="../sellers/" class="sidebar-link"><span class="zh">私家藏馆</span><span class="en">Private Collections</span></a>
     <a href="/#daily-intel" class="sidebar-link"><span class="zh">实时动态</span><span class="en">Live Pulse</span></a>
     <a href="../insights" class="sidebar-link"><span class="zh">收藏知识</span><span class="en">Insights</span></a>
-    <a href="../tools/index" class="sidebar-link"><span class="zh">藏家工具包</span><span class="en">Collector's Toolkit</span></a>
+    <a href="../tools/" class="sidebar-link"><span class="zh">藏家工具包</span><span class="en">Collector's Toolkit</span></a>
     <a href="../my/account" class="sidebar-link active"><span class="zh">我的帐户</span><span class="en">My Account</span></a>
     <a href="../my/account#saved" class="sidebar-sub"><span class="zh">· 我的收藏</span><span class="en">· Saved</span></a>
     <a href="../my/account#follows" class="sidebar-sub"><span class="zh">· 我关注的</span><span class="en">· Following</span></a>
@@ -566,7 +566,7 @@
     wrap.innerHTML = list.map(function (f) {
       var label = f.label || f.target;
       var href = f.kind === 'seller'
-        ? '../sellers/index'
+        ? '../sellers/'
         : '../collection';
       return '<span class="chip">' +
         '<a href="' + href + '" style="color:inherit;text-decoration:none">' +

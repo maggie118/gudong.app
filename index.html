@@ -2936,37 +2936,37 @@
         /* ============ 今日发现 × 情报/科普：按藏品内容关键词关联对应科普 ============ */
         /* 高优先级规则在前，命中即返回；匹配藏品标题/时代/类目关键词 */
         const RELATED_RULES = [
-            { keys: ['唐三彩', '三彩', 'sancai', 'tang sancai'], url: 'insights/tang-ceramics-trade.html', zh: '唐代陶瓷与唐三彩', en: 'Tang ceramics & sancai' },
-            { keys: ['娘惹', 'nyonya', 'peranakan', '海峡', '珠娘'], url: 'insights/nyonya-ware.html', zh: '娘惹瓷入门', en: 'Nyonya ware basics' },
-            { keys: ['宣德', 'xuande'], url: 'insights/ming-porcelain-dating.html', zh: '明代青花怎么断代', en: 'Dating Ming blue-and-white' },
-            { keys: ['民国', 'republic'], url: 'insights/republic-porcelain-dating.html', zh: '民国瓷怎么断代', en: 'Dating Republican porcelain' },
-            { keys: ['开片', '冰裂', 'crackle'], url: 'insights/glaze-crackle-basics.html', zh: '开片与裂纹入门', en: 'Glaze crackle basics' },
-            { keys: ['底款', '款识', 'mark'], url: 'insights/porcelain-marks.html', zh: '读懂瓷器底款', en: 'Reading porcelain marks' },
-            { keys: ['籽料', '留皮', 'seed', 'boulder'], url: 'insights/hetian-seeds-vs-mountain.html', zh: '籽料与山料怎么分', en: 'Seed vs mountain jade' },
-            { keys: ['沁色', '沁', 'stain'], url: 'insights/ancient-jade-stains.html', zh: '古玉沁色怎么看', en: 'Reading jade stains' },
-            { keys: ['翡翠', 'jadeite', 'fei cui'], url: 'insights/jadeite-abc.html', zh: '翡翠入门 A/B/C', en: 'Jadeite basics' },
-            { keys: ['银元', 'silver dollar', '龙洋', '鹰洋'], url: 'insights/silver-dollar-edges.html', zh: '银元边齿辨伪', en: 'Silver dollar edges' },
-            { keys: ['香炉', '宣德炉', 'censer', '炉'], url: 'insights/xuande-censer-legacy.html', zh: '宣德炉与铜炉', en: 'Xuande censer legacy' },
-            { keys: ['铜镜', '青铜镜', 'mirror'], url: 'insights/bronze-age-copper.html', zh: '青铜器怎么入门', en: 'Bronze age copper' },
-            { keys: ['青铜', '鼎', '尊', '戈', '戟', 'bronze'], url: 'insights/bronze-age-copper.html', zh: '青铜器怎么入门', en: 'Bronze age copper' },
-            { keys: ['唐代', 'tang'], url: 'insights/tang-ceramics-trade.html', zh: '唐代陶瓷贸易', en: 'Tang ceramics trade' },
-            { keys: ['青花', 'qinghua', 'blue-and-white'], url: 'insights/qinghua-cobalt.html', zh: '青花钴料怎么看', en: 'Qinghua cobalt' },
-            { keys: ['银', 'silver'], url: 'insights/silver-patina.html', zh: '银器包浆与保养', en: 'Silver patina' },
-            { keys: ['家具', 'furniture', '几', '案', '柜'], url: 'insights/furniture-patina.html', zh: '家具包浆与木纹', en: 'Furniture patina' },
-            { keys: ['琥珀', 'amber'], url: 'insights/amber-baked-vs-natural.html', zh: '天然琥珀 vs 烤色', en: 'Amber baked vs natural' },
-            { keys: ['竹', '牙雕', '象牙', 'bamboo', 'ivory'], url: 'insights/bamboo-ivory-cracks.html', zh: '竹木牙角开裂怎么办', en: 'Bamboo & ivory cracks' },
-            { keys: ['印章', '款识', 'seal', 'signature'], url: 'insights/painting-seals-signatures.html', zh: '书画印章与款识', en: 'Painting seals & signatures' },
-            { keys: ['书画', 'painting', '手卷', '立轴', '镜心'], url: 'insights/painting-prints-vs-hand.html', zh: '版画 vs 手绘怎么分', en: 'Prints vs hand-painted' },
-            { keys: ['钱', '币', 'coin', '制钱', '铜钱', '古钱'], url: 'insights/singapore-coin-market.html', zh: '钱币行情简析', en: 'Coin market snapshot' }
+            { keys: ['唐三彩', '三彩', 'sancai', 'tang sancai'], url: 'insights/tang-ceramics-trade', zh: '唐代陶瓷与唐三彩', en: 'Tang ceramics & sancai' },
+            { keys: ['娘惹', 'nyonya', 'peranakan', '海峡', '珠娘'], url: 'insights/nyonya-ware', zh: '娘惹瓷入门', en: 'Nyonya ware basics' },
+            { keys: ['宣德', 'xuande'], url: 'insights/ming-porcelain-dating', zh: '明代青花怎么断代', en: 'Dating Ming blue-and-white' },
+            { keys: ['民国', 'republic'], url: 'insights/republic-porcelain-dating', zh: '民国瓷怎么断代', en: 'Dating Republican porcelain' },
+            { keys: ['开片', '冰裂', 'crackle'], url: 'insights/glaze-crackle-basics', zh: '开片与裂纹入门', en: 'Glaze crackle basics' },
+            { keys: ['底款', '款识', 'mark'], url: 'insights/porcelain-marks', zh: '读懂瓷器底款', en: 'Reading porcelain marks' },
+            { keys: ['籽料', '留皮', 'seed', 'boulder'], url: 'insights/hetian-seeds-vs-mountain', zh: '籽料与山料怎么分', en: 'Seed vs mountain jade' },
+            { keys: ['沁色', '沁', 'stain'], url: 'insights/ancient-jade-stains', zh: '古玉沁色怎么看', en: 'Reading jade stains' },
+            { keys: ['翡翠', 'jadeite', 'fei cui'], url: 'insights/jadeite-abc', zh: '翡翠入门 A/B/C', en: 'Jadeite basics' },
+            { keys: ['银元', 'silver dollar', '龙洋', '鹰洋'], url: 'insights/silver-dollar-edges', zh: '银元边齿辨伪', en: 'Silver dollar edges' },
+            { keys: ['香炉', '宣德炉', 'censer', '炉'], url: 'insights/xuande-censer-legacy', zh: '宣德炉与铜炉', en: 'Xuande censer legacy' },
+            { keys: ['铜镜', '青铜镜', 'mirror'], url: 'insights/bronze-age-copper', zh: '青铜器怎么入门', en: 'Bronze age copper' },
+            { keys: ['青铜', '鼎', '尊', '戈', '戟', 'bronze'], url: 'insights/bronze-age-copper', zh: '青铜器怎么入门', en: 'Bronze age copper' },
+            { keys: ['唐代', 'tang'], url: 'insights/tang-ceramics-trade', zh: '唐代陶瓷贸易', en: 'Tang ceramics trade' },
+            { keys: ['青花', 'qinghua', 'blue-and-white'], url: 'insights/qinghua-cobalt', zh: '青花钴料怎么看', en: 'Qinghua cobalt' },
+            { keys: ['银', 'silver'], url: 'insights/silver-patina', zh: '银器包浆与保养', en: 'Silver patina' },
+            { keys: ['家具', 'furniture', '几', '案', '柜'], url: 'insights/furniture-patina', zh: '家具包浆与木纹', en: 'Furniture patina' },
+            { keys: ['琥珀', 'amber'], url: 'insights/amber-baked-vs-natural', zh: '天然琥珀 vs 烤色', en: 'Amber baked vs natural' },
+            { keys: ['竹', '牙雕', '象牙', 'bamboo', 'ivory'], url: 'insights/bamboo-ivory-cracks', zh: '竹木牙角开裂怎么办', en: 'Bamboo & ivory cracks' },
+            { keys: ['印章', '款识', 'seal', 'signature'], url: 'insights/painting-seals-signatures', zh: '书画印章与款识', en: 'Painting seals & signatures' },
+            { keys: ['书画', 'painting', '手卷', '立轴', '镜心'], url: 'insights/painting-prints-vs-hand', zh: '版画 vs 手绘怎么分', en: 'Prints vs hand-painted' },
+            { keys: ['钱', '币', 'coin', '制钱', '铜钱', '古钱'], url: 'insights/singapore-coin-market', zh: '钱币行情简析', en: 'Coin market snapshot' }
         ];
         /* 兜底：未命中关键词时，按类目给一篇通用科普 */
         const RELATED_FALLBACK_CAT = {
-            '瓷器': { url: 'insights/qing-porcelain-dating.html', zh: '清代青花怎么断代', en: 'Dating Qing blue-and-white' },
-            '玉器': { url: 'insights/jade-buyer-pitfalls.html', zh: '新手买玉的 5 个坑', en: '5 jade buyer pitfalls' },
-            '钱币': { url: 'insights/singapore-coin-market.html', zh: '钱币行情半年简析', en: 'Coin market snapshot' },
-            '书画': { url: 'insights/painting-seals-signatures.html', zh: '读懂书画的印章款识', en: 'Reading painting seals' },
-            '铜器': { url: 'insights/bronze-age-copper.html', zh: '青铜器入门', en: 'Bronze age copper' },
-            '杂项': { url: 'insights/provenance-basics.html', zh: '读懂藏品的传世脉络', en: 'Reading provenance' }
+            '瓷器': { url: 'insights/qing-porcelain-dating', zh: '清代青花怎么断代', en: 'Dating Qing blue-and-white' },
+            '玉器': { url: 'insights/jade-buyer-pitfalls', zh: '新手买玉的 5 个坑', en: '5 jade buyer pitfalls' },
+            '钱币': { url: 'insights/singapore-coin-market', zh: '钱币行情半年简析', en: 'Coin market snapshot' },
+            '书画': { url: 'insights/painting-seals-signatures', zh: '读懂书画的印章款识', en: 'Reading painting seals' },
+            '铜器': { url: 'insights/bronze-age-copper', zh: '青铜器入门', en: 'Bronze age copper' },
+            '杂项': { url: 'insights/provenance-basics', zh: '读懂藏品的传世脉络', en: 'Reading provenance' }
         };
         function relatedHtmlFor(f) {
             const cat = String(f.category || '').trim();
@@ -3380,7 +3380,7 @@
                 const metaEn = esc(it.metaEn || it.meta_en || 'Editorial');
                 const timeZh = esc(it.time || it.time_zh || '');
                 const timeEn = esc(it.timeEn || it.time_en || timeZh);
-                const link = esc(it.link || 'insights.html');
+                const link = esc(it.link || 'insights');
                 const metaLine = [metaZh, timeZh].filter(Boolean).join(' · ');
                 const metaLineEn = [metaEn, timeEn].filter(Boolean).join(' · ');
                 return `
@@ -4185,7 +4185,7 @@ window.gdSharePage = function () {
             });
             grid.innerHTML = arts.slice(0, 4).map(function (a) {
                 var k = pair(a.kicker), t = pair(a.title), s = pair(a.desc);
-                return '<a class="insight-card" href="insights/' + esc(a.slug) + '.html">' +
+                return '<a class="insight-card" href="insights/' + esc(a.slug) + '">' +
                     '<div class="insight-kicker zh">' + k.zh + '</div><div class="insight-kicker en">' + k.en + '</div>' +
                     '<div class="insight-title zh">' + t.zh + '</div><div class="insight-title en">' + t.en + '</div>' +
                     '<div class="insight-desc zh">' + s.zh + '</div><div class="insight-desc en">' + s.en + '</div>' +

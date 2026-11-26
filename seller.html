@@ -24,7 +24,7 @@
   <script>
     (function () {
       var hash = location.hash || '';
-      var target = 'seller-inbox.html' + hash;
+      var target = 'seller-inbox' + hash;
       var link = document.getElementById('fallback');
       if (link) link.href = target;
       location.replace(target);

@@ -134,12 +134,13 @@
  * 2026-11-14：v129 → v130（移除已无入口的匿名私信组件）
  * - 删 item.html 的 item-chat.js 引用、assets/js/item-chat.js 与 api/chat.js；
  * - 预缓存清单同步移除 item-chat.js，提升缓存版本；
+ * 2026-11-26：v131 → v132（全站内部链接统一为 clean URL）
+ * - 预缓存清单里的 .html 地址改为无扩展名的 clean 路由，离线命中不再走 308；
  */
-const CACHE_NAME = 'antique-collection-v131';
+const CACHE_NAME = 'antique-collection-v132';
 // 预缓存清单：核心页面 + 常用图标 + 占位图 + 工具页（离线可用）
 // 注意：改用逐个 cache.add，单个 404 不会导致整个 install 失败
 const PRECACHE_ASSETS = [
-  '/',
   '/',
   '/item',
   '/collection',
@@ -176,7 +177,7 @@ const PRECACHE_ASSETS = [
   '/items/item-chrysler-01',
   '/items/item-chrysler-02',
   '/items/item-raojr-01',
-  '/tools/index',
+  '/tools/',
   '/tools/era-lookup',
   '/tools/ganzhi',
   '/tools/year-since',

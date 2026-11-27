@@ -252,13 +252,13 @@ function build(item, sellers, seats, template) {
     [/<meta name="twitter:description" content="[^"]*">/, `<meta name="twitter:description" content="${esc(descZh)}">`],
     [/<script type="application\/ld\+json">[\s\S]*?<\/script>/, `<script type="application/ld+json">${JSON.stringify(Object.assign({
       '@context': 'https://schema.org',
-      '@type': 'Product',
+      '@type': 'CreativeWork',
       name: `${titleZh} / ${titleEn}`,
       image: mainUrl,
       url: `${SITE}/items/${id}`,
       description: `${titleZh} / ${titleEn}. Seller-provided listing; advisory reference only. Gudong.app does not authenticate the item or handle the transaction.`,
       inLanguage: ['zh-SG', 'en-SG']
-    }, (() => { const o = structuredOffer(item, id); return o ? { offers: o } : {}; })()))}</script>`]
+    }))}</script>`]
   ];
   headRules.forEach(([re, rep]) => {
     if (!re.test(html)) { stats.missing.push(re.source.slice(0, 40)); return; }

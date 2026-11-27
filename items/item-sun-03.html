@@ -492,7 +492,7 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
 }
     </style>
     <link rel="apple-touch-icon" href="../assets/icons/icon-192.png">
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Product","name":"湖田窑影青釉印花婴戏卷草纹斗笠碗 / Hutian Kiln Yingqing Qingbai Conical Bowl, Moulded Boys & Scroll Foliage","image":"https://www.gudong.app/assets/images/sun/item-sun-03.jpg","url":"https://www.gudong.app/items/item-sun-03","description":"湖田窑影青釉印花婴戏卷草纹斗笠碗 / Hutian Kiln Yingqing Qingbai Conical Bowl, Moulded Boys & Scroll Foliage. Seller-provided listing; advisory reference only. Gudong.app does not authenticate the item or handle the transaction.","inLanguage":["zh-SG","en-SG"],"offers":{"@type":"AggregateOffer","lowPrice":"2500","highPrice":"4200","priceCurrency":"SGD","offerCount":1,"url":"https://www.gudong.app/items/item-sun-03"}}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"CreativeWork","name":"湖田窑影青釉印花婴戏卷草纹斗笠碗 / Hutian Kiln Yingqing Qingbai Conical Bowl, Moulded Boys & Scroll Foliage","image":"https://www.gudong.app/assets/images/sun/item-sun-03.jpg","url":"https://www.gudong.app/items/item-sun-03","description":"湖田窑影青釉印花婴戏卷草纹斗笠碗 / Hutian Kiln Yingqing Qingbai Conical Bowl, Moulded Boys & Scroll Foliage. Seller-provided listing; advisory reference only. Gudong.app does not authenticate the item or handle the transaction.","inLanguage":["zh-SG","en-SG"]}</script>
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="湖田窑影青釉印花婴戏卷草纹斗笠碗 | Hutian Kiln Yingqing Qingbai Conical Bowl, Moulded Boys &amp; Scroll Foliage | Singapore | Gudong.app">
     <meta name="twitter:description" content="「湖田窑影青釉印花婴戏卷草纹斗笠碗」南宋·瓷器，藏家直供新加坡。Hutian Kiln Yingqing Qingbai Conical Bowl, Moulded Boys &amp; Scroll Foliage。Seller-provided; advisory reference only — no authentication, no transaction.">
@@ -966,8 +966,19 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
             while ((m = re.exec(s))) out.push([DIM_ZH[m[1]], m[2].replace(/\s*[X×x]\s*/g, ' × ').replace(/\s+/g, ' ').trim()]);
             return { pairs: out, raw: s };
         }
-        function dimZh(s) { var d = dimPairs(s); return d.pairs.length ? d.pairs.map(function (p) { return p[0] + '：' + p[1]; }).join(' · ') : d.raw; }
-        function dimEn(s) { var d = dimPairs(s); return d.pairs.length ? d.pairs.map(function (p) { return DIM_EN[p[0]] + ' ' + p[1]; }).join(' · ') : d.raw; }
+        function dimZh(s) {
+            var d = dimPairs(s);
+            if (!d.pairs.length) return d.raw;
+            // 只填了重量：标签已经是「重量」，值里就不再重复写「重量：」
+            if (d.pairs.every(function (p) { return p[0] === '重量'; })) return d.pairs.map(function (p) { return p[1]; }).join(' · ');
+            return d.pairs.map(function (p) { return p[0] + '：' + p[1]; }).join(' · ');
+        }
+        function dimEn(s) {
+            var d = dimPairs(s);
+            if (!d.pairs.length) return d.raw;
+            if (d.pairs.every(function (p) { return p[0] === '重量'; })) return d.pairs.map(function (p) { return p[1]; }).join(' · ');
+            return d.pairs.map(function (p) { return DIM_EN[p[0]] + ' ' + p[1]; }).join(' · ');
+        }
         var changes = [];
         function $(s) { return document.querySelector(s); }
         function setText(sel, v, label) {
@@ -1072,6 +1083,20 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
             if (damage)         return { zh: '表面有破损', en: 'Surface damage' };
             return { zh: '完整', en: 'Intact' };
         }
+        // 尺寸行标签：只填了重量、没有长宽高时，标签改为「重量 / Weight」，避免「尺寸」下面写着重量
+        function setDimLabel(s) {
+            var val = document.querySelector('[data-spec="dimensions"]');
+            var box = val ? val.parentNode : null;
+            if (!box) return;
+            var txt = clean(first(s));
+            var hasSize = /(高度|高|口径|底径|直径|长度|长|宽度|宽|深度|深)\s*[:：]/.test(txt) ||
+                /(^|[\s·])(H|D|W|L)\s*[:：]/i.test(txt);
+            if (hasSize || !/重量|Weight/i.test(txt)) return;
+            var zhEl = box.querySelector('.spec-label.zh');
+            var enEl = box.querySelector('.spec-label.en');
+            if (zhEl && zhEl.textContent.trim() !== '重量') zhEl.textContent = '重量';
+            if (enEl && enEl.textContent.trim() !== 'Weight') enEl.textContent = 'Weight';
+        }
         function setSpec(f) {
             var cond = computeCondition(f);
             var map = {
@@ -1085,6 +1110,7 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
                 var el = document.querySelector('[data-spec="' + key + '"]');
                 if (el && el.textContent.trim() !== v) { el.textContent = v; changes.push('spec.' + key + ' → ' + v.slice(0, 20)); }
             });
+            setDimLabel(f.dimensions);
         }
                 /* gd-wa-username-2026-10-18 · gd-wa-bind-v3 —— 卖家 WhatsApp 动态绑定：优先用户名，未填用户名则回退手机号；点击附带 gudong.app 藏品咨询话术 */
         function setWaContact(sl, item) {
@@ -1143,6 +1169,20 @@ function setSellerCard(f, data) {
                 if (en) setText('#sellerNameEn', en, 'seller.en');
                 var link = document.getElementById('sellerLink');
                 if (link && sl.page_url) link.href = sl.page_url;
+                // 创始藏家编号：表里有值就显示在藏家名旁（补齐三位，如 1 → 001），没值就把徽章整块隐掉
+                var fbadge = document.querySelector('.seller-card .founder-badge');
+                if (fbadge) {
+                    var fno = clean(first(sl.founding_no));
+                    var digits = fno.replace(/[^0-9]/g, '');
+                    var seat = digits ? ('000' + digits).slice(-3) : fno;
+                    var fnum = fbadge.querySelector('.badge-num');
+                    if (seat) {
+                        if (fnum) fnum.textContent = seat;
+                        fbadge.style.display = '';
+                    } else {
+                        fbadge.style.display = 'none';
+                    }
+                }
                 // gallery 未打勾 = 未开通私家藏馆：藏馆入口隐藏，不误导买家
                 var galleryOpen = sl.gallery === true || sl.gallery === 'true' || sl.gallery === 1;
                 if (!galleryOpen) {

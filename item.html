@@ -571,7 +571,7 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
     border-color: var(--color-primary);
 }
     </style>
-    <script type="application/ld+json" id="product-jsonld">{"image":["https://www.gudong.app/og-cover-v2.jpg"],"@type":"Product","name":"藏品详情 / Item Detail","description":"藏品详情 / Item Detail. Seller-provided listing information. Gudong.app does not authenticate the item or participate in a sale.","inLanguage":["zh-SG","en-SG"],"url":"https://www.gudong.app/item","@context":"https://schema.org"}</script>
+    <script type="application/ld+json" id="product-jsonld">{"image":["https://www.gudong.app/og-cover-v2.jpg"],"@type":"CreativeWork","name":"藏品详情 / Item Detail","description":"藏品详情 / Item Detail. Seller-provided listing information. Gudong.app does not authenticate the item or participate in a sale.","inLanguage":["zh-SG","en-SG"],"url":"https://www.gudong.app/item","@context":"https://schema.org"}</script>
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="藏品详情 | Antique Item Detail | Gudong.app">
     <meta name="twitter:description" content="Antique item detail page on Gudong.app. Seller-provided listing; advisory reference only. Gudong.app does not authenticate items or handle transactions.">
@@ -1272,7 +1272,7 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
             });
             setDimLabel(f.dimensions);
         }
-        // ---- Product JSON-LD: rebuild with real data + offers after Airtable loads ----
+        // ---- Item JSON-LD: rebuild with real data after Airtable loads (CreativeWork, no offers) ----
         function setProductJsonLd(f) {
             var el = document.getElementById('product-jsonld');
             if (!el) return;
@@ -1282,29 +1282,17 @@ footer { text-align: center; padding: 2.2rem 5% 1.8rem; background: var(--color-
             var imgs = parseImgFiles(f);
             var image = imgs.length ? imgs : ['https://www.gudong.app/og-cover-v2.jpg'];
             var desc = clean(first(f.desc_zh) || first(f.desc_en) || first(f.description_zh) || first(f.description_en));
-            // 价格：优先 fixed_price（数字），否则按 price_type 判断
-            var priceNum = Number(f.fixed_price);
-            var priceType = String(first(f.price_type) || '').trim();
-            var isEnquire = /私聊|询价|enquir|inquir|message/i.test(priceType);
-            var offers = null;
-            if (!isEnquire && isFinite(priceNum) && priceNum > 0) {
-                offers = {
-                    '@type': 'Offer',
-                    'price': String(priceNum),
-                    'priceCurrency': 'SGD',
-                    'availability': 'https://schema.org/InStock'
-                };
-            }
+            // 藏品页是可收藏物件信息页，不是可结算商品：用 CreativeWork，
+            // 不写 offers / review / aggregateRating，避免产生不实的评分或价格结构化数据
             var ld = {
                 '@context': 'https://schema.org',
-                '@type': 'Product',
+                '@type': 'CreativeWork',
                 'name': name,
                 'image': image,
                 'url': 'https://www.gudong.app/items/' + ID,
                 'inLanguage': ['zh-SG', 'en-SG']
             };
             if (desc) ld.description = desc;
-            if (offers) ld.offers = offers;
             try { el.textContent = JSON.stringify(ld); } catch (e) {}
         }
                 /* gd-wa-username-2026-10-18 · gd-wa-bind-v3 —— 卖家 WhatsApp 动态绑定：优先用户名，未填用户名则回退手机号；点击时附带 gudong.app 藏品咨询话术 */

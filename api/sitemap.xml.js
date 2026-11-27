@@ -65,6 +65,8 @@ const STATIC = [
     'selling-antiques-in-singapore','antique-customs-gst-singapore','family-provenance-record',
     'singapore-humidity-art-storage','nanyang-collectors-legends','song-yuan-monochrome-appeal',
     'first-1000-budget-antiques',
+    // 2026-11-27 第三批长尾文章
+    'ming-qing-small-porcelain-price-bands','judging-porcelain-from-photos','seals-collecting-guide',
   ].map(slug => ({ loc: `/insights/${slug}`, lastmod: LAUNCH })),
 ];
 

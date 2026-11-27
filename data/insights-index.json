@@ -1,13 +1,91 @@
 {
-  "updated": "2026-11-26",
-  "count": 83,
+  "updated": "2026-11-27",
+  "count": 86,
   "latest": [
-    "antique-customs-gst-singapore",
-    "antique-terms-glossary",
-    "family-provenance-record",
-    "first-1000-budget-antiques"
+    "judging-porcelain-from-photos",
+    "ming-qing-small-porcelain-price-bands",
+    "seals-collecting-guide",
+    "antique-customs-gst-singapore"
   ],
   "articles": [
+    {
+      "slug": "judging-porcelain-from-photos",
+      "kicker": {
+        "zh": "避坑手册 · 看图",
+        "en": "PITFALLS · READING PHOTOS"
+      },
+      "title": {
+        "zh": "从照片判断一件瓷器：卖家图里该看哪 6 个角度？",
+        "en": "Judging porcelain from photographs: the six views that actually matter"
+      },
+      "desc": {
+        "zh": "自然光全身、口沿内侧、底足、侧逆光、微距、紫光——六个必看角度与六个警惕信号。",
+        "en": "Daylight, rim, foot, side-backlight, macro, UV — six views and six warning signs."
+      },
+      "date": "2026-11-27",
+      "read": {
+        "zh": "7 分钟",
+        "en": "7 min"
+      },
+      "mark": "图",
+      "tone": "pitfall",
+      "series": {
+        "zh": "瓷器系列",
+        "en": "Porcelain"
+      }
+    },
+    {
+      "slug": "ming-qing-small-porcelain-price-bands",
+      "kicker": {
+        "zh": "行情观察 · 价格带",
+        "en": "MARKET · PRICE BANDS"
+      },
+      "title": {
+        "zh": "明清小件瓷器的价格带：S$300 到 S$3000 差在哪？",
+        "en": "Small Ming and Qing porcelain: what separates S$300 from S$3,000"
+      },
+      "desc": {
+        "zh": "品相、配套、画工、发色、器型、来源——六个变量决定差价，附四个价格错觉。",
+        "en": "Condition, sets, painting, tone, form, provenance — six variables, four illusions."
+      },
+      "date": "2026-11-27",
+      "read": {
+        "zh": "7 分钟",
+        "en": "7 min"
+      },
+      "mark": "价",
+      "tone": "market",
+      "series": {
+        "zh": "瓷器系列",
+        "en": "Porcelain"
+      }
+    },
+    {
+      "slug": "seals-collecting-guide",
+      "kicker": {
+        "zh": "入门指南 · 文房印章",
+        "en": "BEGINNER · SEALS"
+      },
+      "title": {
+        "zh": "老印章值不值得收：石材、印文、边款三项判断",
+        "en": "Are old seals worth collecting? Stone, seal face and side inscription"
+      },
+      "desc": {
+        "zh": "寿山、青田、巴林怎么分；篆法与刀法看什么；单刀与双刀边款如何断代，附五条常见陷阱。",
+        "en": "Shoushan, Qingtian, Balin; composition and knife work; single- vs double-knife inscriptions."
+      },
+      "date": "2026-11-27",
+      "read": {
+        "zh": "7 分钟",
+        "en": "7 min"
+      },
+      "mark": "印",
+      "tone": "guide",
+      "series": {
+        "zh": "器物与杂项",
+        "en": "Objects & Misc"
+      }
+    },
     {
       "slug": "antique-customs-gst-singapore",
       "kicker": {
